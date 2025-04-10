@@ -1,0 +1,104 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import VAG45Modal from '../components/VAG45Modal.astro';
+import PrivacyPolicyModal from '../components/PrivacyPolicyModal.astro';
+import TermsOfServiceModal from '../components/TermsOfServiceModal.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  type?: string;
+  image?: string;
+  canonicalURL?: string;
+}
+
+const { 
+  title, 
+  description, 
+  type = "website",
+  image = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp",
+  canonicalURL = Astro.url.href
+} = Astro.props;
+
+// Define CDN URLs
+const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";
+const logoLight = `${cdnBaseUrl}image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg`;
+const logoDark = `${cdnBaseUrl}image/upload/v1740080077/logoexpatsavvy_sykutm.svg`;
+const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
+---
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href={favicon} sizes="32x32" />
+    <link rel="icon" type="image/png" href={favicon} sizes="16x16" />
+    <link rel="apple-touch-icon" href={favicon} />
+    
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content="Expat Savvy" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="Expat Savvy" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- Bing IndexNow -->
+    <meta name="msvalidate.01" content="e8c7f852a41b4f2d9c5e6b3a7d8f9g0h" />
+    
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href={logoDark} fetchpriority="high" />
+    <link rel="preload" as="image" href={logoLight} fetchpriority="high" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href={cdnBaseUrl} crossorigin />
+    <link rel="preconnect" href="https://app.cal.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-gray-50 overflow-x-hidden">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <VAG45Modal />
+    <PrivacyPolicyModal />
+    <TermsOfServiceModal />
+    <ConsultationModal />
+  </body>
+</html>

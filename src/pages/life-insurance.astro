@@ -1,0 +1,326 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const insuranceTypes = [
+  {
+    title: "Term Life Insurance",
+    description: "Coverage for a specific period",
+    features: [
+      "Lower premiums",
+      "Fixed coverage period",
+      "Death benefit only",
+      "No investment component"
+    ],
+    bestFor: [
+      "Young families",
+      "Mortgage protection",
+      "Temporary coverage needs",
+      "Budget-conscious individuals"
+    ],
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>`
+  },
+  {
+    title: "Whole Life Insurance",
+    description: "Lifelong coverage with savings component",
+    features: [
+      "Permanent coverage",
+      "Builds cash value",
+      "Fixed premiums",
+      "Investment component"
+    ],
+    bestFor: [
+      "Long-term planning",
+      "Estate planning",
+      "Business succession",
+      "Wealth transfer"
+    ],
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  },
+  {
+    title: "Risk Life Insurance",
+    description: "Pure death benefit coverage",
+    features: [
+      "Death benefit only",
+      "No savings component",
+      "Flexible coverage amount",
+      "Simple structure"
+    ],
+    bestFor: [
+      "Income replacement",
+      "Debt protection",
+      "Family security",
+      "Business protection"
+    ],
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>`
+  }
+];
+
+const coverageOptions = [
+  {
+    title: "Death Benefit",
+    description: "Lump sum payment to beneficiaries",
+    amount: "Flexible (typically 3-10x annual income)",
+    considerations: [
+      "Family needs",
+      "Outstanding debts",
+      "Future expenses",
+      "Income replacement period"
+    ]
+  },
+  {
+    title: "Disability Coverage",
+    description: "Protection against inability to work",
+    amount: "Based on income and occupation",
+    considerations: [
+      "Current income",
+      "Occupation risk level",
+      "Living expenses",
+      "Other disability coverage"
+    ]
+  },
+  {
+    title: "Critical Illness",
+    description: "Coverage for serious health conditions",
+    amount: "Fixed sum or multiple payments",
+    considerations: [
+      "Medical history",
+      "Family health history",
+      "Treatment costs",
+      "Recovery period needs"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "How much life insurance do I need?",
+    answer: "The amount depends on your specific situation. Common recommendations include 5-10 times your annual income, plus any outstanding debts and future expenses (e.g., children's education). Consider your family's needs, mortgage, and other financial obligations."
+  },
+  {
+    question: "What's the difference between term and whole life insurance?",
+    answer: "Term life insurance provides coverage for a specific period (e.g., 10, 20, or 30 years) with lower premiums but no cash value. Whole life insurance offers lifetime coverage with a savings component but higher premiums."
+  },
+  {
+    question: "Can I have multiple life insurance policies?",
+    answer: "Yes, you can have multiple policies from different insurers. This strategy might be useful for different purposes (e.g., one for mortgage protection, another for family income replacement)."
+  },
+  {
+    question: "Are life insurance premiums tax-deductible in Switzerland?",
+    answer: "Premiums for risk life insurance (pure death benefit) are generally tax-deductible within certain limits. Policies with savings components may have different tax treatment."
+  },
+  {
+    question: "What happens to my life insurance if I leave Switzerland?",
+    answer: "Most policies can continue if you move abroad, but terms may change. Some insurers offer international coverage. Always inform your insurer about relocation plans to understand your options."
+  }
+];
+---
+
+<Layout
+  title="Life Insurance Switzerland | Risk Coverage Guide 2024"
+  description="Expert guide to life insurance and risk coverage in Switzerland. Compare options, understand benefits, and find the right protection for your needs."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Life Insurance and Risk Coverage Guide Switzerland 2024",
+      "description": "Comprehensive guide to life insurance options and risk coverage in Switzerland.",
+      "datePublished": "2024-01-15",
+      "dateModified": "2024-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Expat Savvy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+        }
+      },
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much life insurance do I need?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The amount depends on your specific situation. Common recommendations include 5-10 times your annual income, plus any outstanding debts and future expenses (e.g., children's education). Consider your family's needs, mortgage, and other financial obligations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the difference between term and whole life insurance?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Term life insurance provides coverage for a specific period (e.g., 10, 20, or 30 years) with lower premiums but no cash value. Whole life insurance offers lifetime coverage with a savings component but higher premiums."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Life Insurance</span>
+          <span class="block mt-2">and <span class="text-primary-500">Risk Coverage</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Protect what matters most. Understanding your life insurance options and finding the right coverage for your needs.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#compare"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Options
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Types -->
+  <div id="compare" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Types of Life Insurance</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {insuranceTypes.map(type => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <div class="text-primary-500 mb-4">
+              <Fragment set:html={type.icon} />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{type.title}</h3>
+            <p class="text-gray-600 mb-4">{type.description}</p>
+            
+            <h4 class="font-medium text-gray-900 mb-2">Key Features:</h4>
+            <ul class="space-y-2 mb-4">
+              {type.features.map(feature => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <h4 class="font-medium text-gray-900 mb-2">Best For:</h4>
+            <ul class="space-y-2">
+              {type.bestFor.map(item => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Coverage Options -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Coverage Options</h2>
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-8">
+          {coverageOptions.map(option => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{option.title}</h3>
+              <p class="text-gray-600 mb-2">{option.description}</p>
+              <p class="text-primary-600 font-medium mb-4">Typical Amount: {option.amount}</p>
+              
+              <h4 class="font-medium text-gray-900 mb-2">Key Considerations:</h4>
+              <ul class="space-y-2">
+                {option.considerations.map(item => (
+                  <li class="flex items-center text-sm text-gray-500">
+                    <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))} </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to protect your family's future?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to find the right life insurance coverage
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

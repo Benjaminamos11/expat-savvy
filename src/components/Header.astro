@@ -1,0 +1,354 @@
+---
+const mainNavItems = [
+  { name: "About", href: "/about" },
+  {
+    name: "Insurance",
+    megaMenu: true,
+    sections: [
+      {
+        title: "Health Insurance",
+        items: [
+          { name: "Basic Insurance Guide", href: "/healthcare/glossary/basic-health-insurance" },
+          { name: "Compare Providers", href: "/compare-providers" },
+          { name: "New Insurance Setup", href: "/healthcare/new-health-insurance" },
+          { name: "Switch Insurance", href: "/news/switching-health-insurance-in-switzerland" }
+        ]
+      },
+      {
+        title: "Other Insurance",
+        items: [
+          { name: "Personal Liability", href: "/insurance/personal-liability-insurance" },
+          { name: "Household Insurance", href: "/insurance/household-insurance" },
+          { name: "Legal Protection", href: "/insurance/legal-protection-insurance" }
+        ]
+      },
+      {
+        title: "Pension & Savings",
+        items: [
+          { name: "3rd Pillar Guide", href: "/3rd-pillar" },
+          { name: "Pension Planning", href: "/pension-planning" },
+          { name: "Life Insurance (Risk)", href: "/life-insurance" }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Providers",
+    dropdown: true,
+    items: [
+      { name: "Assura", href: "/healthcare/all-insurances/assura" },
+      { name: "Atupri", href: "/healthcare/all-insurances/atupri" },
+      { name: "Concordia", href: "/healthcare/all-insurances/concordia" },
+      { name: "CSS", href: "/healthcare/all-insurances/css" },
+      { name: "Groupe Mutuel", href: "/healthcare/all-insurances/groupe-mutuel" },
+      { name: "Helsana", href: "/healthcare/all-insurances/helsana" },
+      { name: "KPT", href: "/healthcare/all-insurances/kpt" },
+      { name: "Sanitas", href: "/healthcare/all-insurances/sanitas" },
+      { name: "Swica", href: "/healthcare/all-insurances/swica" },
+      { name: "Sympany", href: "/healthcare/all-insurances/sympany" },
+      { name: "Visana", href: "/healthcare/all-insurances/visana" }
+    ]
+  },
+  {
+    name: "News & Guides",
+    megaMenu: true,
+    sections: [
+      {
+        title: "Latest Updates",
+        items: [
+          { name: "Latest News", href: "/news" },
+          { name: "Insurance Guides", href: "/insurance-guides" },
+          { name: "Living in Switzerland", href: "/living-in-switzerland" },
+          { name: "Healthcare System", href: "/healthcare-system" }
+        ]
+      },
+      {
+        title: "Regional Guides",
+        items: [
+          { name: "Zurich", href: "/news/regional-guides/zurich" },
+          { name: "Basel", href: "/news/regional-guides/basel" },
+          { name: "Geneva", href: "/news/regional-guides/geneva" },
+          { name: "Lausanne", href: "/news/regional-guides/lausanne" },
+          { name: "Bern", href: "/news/regional-guides/bern" },
+          { name: "Zug", href: "/news/regional-guides/zug" },
+          { name: "Lugano", href: "/news/regional-guides/lugano" }
+        ]
+      }
+    ]
+  }
+];
+---
+
+<header class="bg-white shadow-sm relative z-50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-20">
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/" class="flex items-center">
+          <img 
+            src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg" 
+            alt="Expat Savvy" 
+            class="h-12" 
+            width="180" 
+            height="48"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex md:items-center md:space-x-8">
+        {mainNavItems.map(item => (
+          <div class="relative group">
+            {item.href ? (
+              <a href={item.href} class="text-gray-700 hover:text-primary-500 py-2 px-2">
+                {item.name}
+              </a>
+            ) : (
+              <button class="text-gray-700 hover:text-primary-500 flex items-center py-2 px-2">
+                {item.name}
+                <svg class="ml-2 h-5 w-5 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            )}
+
+            {/* Mega Menu */}
+            {item.megaMenu && (
+              <div class="absolute left-1/2 -translate-x-1/2 pt-4 w-[800px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="bg-white rounded-xl shadow-2xl p-6 border border-gray-100">
+                  <div class="grid grid-cols-3 gap-8">
+                    {item.sections.map(section => (
+                      <div>
+                        <h3 class="text-sm font-bold text-gray-900 mb-3 pb-2 border-b border-gray-100">
+                          {section.title}
+                        </h3>
+                        <ul class="space-y-2">
+                          {section.items.map(subItem => (
+                            <li>
+                              <a 
+                                href={subItem.href} 
+                                class="group/item flex items-center text-sm text-gray-600 hover:text-primary-500"
+                              >
+                                <span class="relative">
+                                  {subItem.name}
+                                  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary-500 transform scale-x-0 transition-transform duration-200 group-hover/item:scale-x-100"></span>
+                                </span>
+                                <svg class="ml-1.5 h-3.5 w-3.5 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Simple Dropdown */}
+            {item.dropdown && (
+              <div class="absolute left-0 pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                  {item.items.map(subItem => (
+                    <a 
+                      href={subItem.href} 
+                      class="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors"
+                    >
+                      {subItem.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+
+        <!-- Super Dropdown -->
+        <div class="relative group">
+          <button class="bg-[#cc242c] text-white px-4 py-2 rounded-md hover:bg-[#b91c1c] transition-colors flex items-center">
+            Free Consultation
+            <svg class="ml-2 h-5 w-5 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute right-0 pt-2 w-[500px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-white rounded-xl shadow-2xl p-5 border border-gray-100 grid grid-cols-2 gap-3">
+              <!-- Schedule Meeting -->
+              <div class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <button
+                  onclick="showConsultationModal()"
+                  class="w-full text-left"
+                >
+                  <div class="flex items-center mb-2">
+                    <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h3 class="text-lg font-semibold text-gray-900">Schedule Meeting</h3>
+                  </div>
+                  <p class="text-gray-600">Book a free consultation with our insurance experts</p>
+                </button>
+              </div>
+
+              <!-- AI Premium Calculator -->
+              <a 
+                href="/ai-chat"
+                class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <div class="flex items-center mb-2">
+                  <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                  </svg>
+                  <h3 class="text-lg font-semibold text-gray-900">AI Premium Calculator</h3>
+                </div>
+                <p class="text-gray-600">Get instant premium calculations and comparisons</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button 
+          id="mobile-menu-button" 
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" class="hidden fixed inset-0 z-50 md:hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    
+    <div class="absolute right-0 top-0 w-full max-w-sm h-full bg-white shadow-xl overflow-y-auto">
+      <div class="flex items-center justify-between p-4 border-b">
+        <h2 class="text-lg font-semibold text-gray-900">Menu</h2>
+        <button id="mobile-menu-close" class="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="px-2 py-3">
+        <!-- AI Chat Link -->
+        <a
+          href="/ai-chat"
+          class="block w-full text-left px-3 py-2 text-base font-medium text-primary-600 bg-primary-50 rounded-md mb-2"
+        >
+          <div class="flex items-center">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            AI Assistant
+          </div>
+        </a>
+
+        {mainNavItems.map(item => (
+          <div class="space-y-1">
+            {item.href ? (
+              <a href={item.href} class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50">
+                {item.name}
+              </a>
+            ) : (
+              <>
+                <button class="mobile-submenu-button w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50 flex justify-between items-center">
+                  {item.name}
+                  <svg class="h-5 w-5 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                <div class="mobile-submenu hidden">
+                  {item.megaMenu && item.sections.map(section => (
+                    <div class="space-y-1">
+                      <div class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50">
+                        {section.title}
+                      </div>
+                      {section.items.map(subItem => (
+                        <a href={subItem.href} class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary-500 hover:bg-gray-50">
+                          {subItem.name}
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+
+                  {item.dropdown && item.items.map(subItem => (
+                    <a href={subItem.href} class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50">
+                      {subItem.name}
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+
+        <div class="pt-4 px-3">
+          <button
+            onclick="showConsultationModal()"
+            class="block w-full text-center bg-[#cc242c] text-white px-4 py-2 rounded-md hover:bg-[#b91c1c] transition-colors"
+          >
+            Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const body = document.body;
+
+  // Mobile menu toggle
+  function openMenu() {
+    mobileMenu.classList.remove('hidden');
+    body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.add('hidden');
+    body.style.overflow = '';
+  }
+
+  mobileMenuButton.addEventListener('click', openMenu);
+  mobileMenuClose.addEventListener('click', closeMenu);
+
+  // Close menu when clicking outside
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMenu();
+    }
+  });
+
+  // Mobile submenu toggles
+  const mobileSubmenuButtons = document.querySelectorAll('.mobile-submenu-button');
+  mobileSubmenuButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const submenu = button.nextElementSibling;
+      const icon = button.querySelector('svg');
+      
+      submenu.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    });
+  });
+</script>

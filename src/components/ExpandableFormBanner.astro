@@ -1,0 +1,71 @@
+---
+import SmartInsuranceForm from './SmartInsuranceForm.astro';
+
+interface Props {
+  provider?: string;
+}
+
+const { provider = "insurance" } = Astro.props;
+---
+
+<div class="max-w-3xl mx-auto">
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+    <!-- Banner Buttons -->
+    <div class="grid grid-cols-2 divide-x">
+      <button
+        id="get-rate-btn"
+        class="p-6 text-center hover:bg-gray-50 transition-colors relative overflow-hidden group"
+      >
+        <div class="relative z-10">
+          <h3 class="text-lg font-semibold text-gray-900">Get Your Rate</h3>
+          <p class="mt-1 text-sm text-gray-500">Compare insurance options and prices</p>
+        </div>
+        <div class="absolute inset-0 bg-primary-50 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+      </button>
+      
+      <button
+        onclick="showConsultationModal()"
+        class="p-6 text-center hover:bg-gray-50 transition-colors relative overflow-hidden group"
+      >
+        <div class="relative z-10">
+          <h3 class="text-lg font-semibold text-gray-900">Schedule Meeting</h3>
+          <p class="mt-1 text-sm text-gray-500">Free consultation with our experts</p>
+        </div>
+        <div class="absolute inset-0 bg-primary-50 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+      </button>
+    </div>
+
+    <!-- Form Section (Initially Hidden) -->
+    <div id="smart-form-section" class="hidden border-t">
+      <div class="p-6 relative">
+        <button id="close-form" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <SmartInsuranceForm provider={provider} />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const getRateBtn = document.getElementById('get-rate-btn');
+  const formSection = document.getElementById('smart-form-section');
+  const closeFormBtn = document.getElementById('close-form');
+
+  // Toggle form visibility
+  getRateBtn?.addEventListener('click', () => {
+    formSection?.classList.remove('hidden');
+  });
+
+  closeFormBtn?.addEventListener('click', () => {
+    formSection?.classList.add('hidden');
+  });
+</script>
+
+<style>
+  .group:hover .group-hover\:scale-x-100 {
+    transform: scaleX(1);
+  }
+</style>

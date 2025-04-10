@@ -1,0 +1,14 @@
+---
+const { src, alt, width, height, loading = "lazy" } = Astro.props;
+---
+
+<img
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  decoding="async"
+  class="w-full h-full object-cover"
+  onerror="this.onerror=null; this.src='/fallback.jpg';"
+/>

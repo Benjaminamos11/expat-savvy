@@ -1,0 +1,360 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/ConsultationModal.astro';
+
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "Insurance Guides", href: "/insurance-guides" },
+  { name: "Self-Employed Insurance", href: "/insurance-guides/self-employed-insurance" }
+];
+
+const quickStats = [
+  { label: "Self-Employed", value: "590,000+" },
+  { label: "Accident Coverage", value: "Optional" },
+  { label: "Premium Range", value: "CHF 300-600" },
+  { label: "Pension Options", value: "Flexible" }
+];
+
+const mandatoryInsurance = {
+  basic: [
+    {
+      title: "Health Insurance (KVG/LAMal)",
+      description: "Mandatory basic health insurance with accident coverage",
+      requirements: [
+        "Must include accident coverage if not covered by employer",
+        "Higher premiums due to accident inclusion",
+        "Can choose any insurance provider",
+        "Same coverage as regular basic insurance"
+      ],
+      icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>`
+    },
+    {
+      title: "Accident Insurance (UVG/LAA)",
+      description: "Mandatory if working more than 8 hours per week",
+      requirements: [
+        "Coverage for work-related accidents",
+        "Coverage for non-work accidents",
+        "Daily allowance in case of disability",
+        "Long-term disability coverage"
+      ],
+      icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>`
+    }
+  ],
+  recommended: [
+    {
+      title: "Loss of Earnings Insurance",
+      description: "Protection against income loss due to illness/accident",
+      benefits: [
+        "Coverage from day 1 or after waiting period",
+        "Flexible coverage amount (50-80% of income)",
+        "Choice of waiting periods to adjust premiums",
+        "Tax-deductible premiums"
+      ]
+    },
+    {
+      title: "Business Liability Insurance",
+      description: "Protection against third-party claims",
+      benefits: [
+        "Coverage for business-related damages",
+        "Legal protection in liability cases",
+        "Professional negligence coverage",
+        "Product liability coverage"
+      ]
+    },
+    {
+      title: "Legal Protection Insurance",
+      description: "Coverage for legal disputes",
+      benefits: [
+        "Contract dispute coverage",
+        "Employment law protection",
+        "Debt collection assistance",
+        "Legal consultation services"
+      ]
+    }
+  ]
+};
+
+const pensionOptions = [
+  {
+    title: "Pillar 3a",
+    description: "Tax-privileged retirement savings",
+    benefits: [
+      "Higher contribution limits (up to CHF 34,128)",
+      "Tax deductions on contributions",
+      "Flexible investment options",
+      "Can be used for business investment"
+    ]
+  },
+  {
+    title: "BVG/LPP (Optional)",
+    description: "Voluntary occupational pension",
+    benefits: [
+      "Similar benefits to employed persons",
+      "Tax advantages on contributions",
+      "Death and disability coverage",
+      "Flexible contribution options"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "Do I need accident insurance if I'm self-employed?",
+    answer: "If you're self-employed and work more than 8 hours per week, you should either include accident coverage in your basic health insurance or take out separate accident insurance (UVG/LAA). The choice depends on your risk profile and premium considerations."
+  },
+  {
+    question: "How does loss of earnings insurance work for self-employed?",
+    answer: "Loss of earnings insurance replaces your income if you can't work due to illness or accident. You can choose the coverage amount (typically 50-80% of income) and waiting period. Longer waiting periods mean lower premiums. The premiums are tax-deductible as business expenses."
+  },
+  {
+    question: "What pension options do I have as a self-employed person?",
+    answer: "As a self-employed person, you have access to enhanced Pillar 3a contributions (up to CHF 34,128 annually) and can voluntarily join a Pillar 2 pension fund. Both options offer tax advantages and flexibility in contribution amounts."
+  },
+  {
+    question: "Can I get premium reduction for health insurance?",
+    answer: "Yes, self-employed individuals can apply for premium reduction based on their taxable income. The calculation may consider business losses and actual income rather than revenue. Each canton has different thresholds and processes."
+  },
+  {
+    question: "What insurance do I need when hiring employees?",
+    answer: "When hiring employees, you must provide accident insurance (UVG/LAA), contribute to their pension fund (BVG/LPP), and ensure other social security coverage. Consider employer's liability insurance and review your business liability coverage."
+  }
+];
+---
+
+<Layout
+  title="Self-Employed Insurance Guide Switzerland | Expert Advice 2024"
+  description="Complete guide to insurance requirements for self-employed in Switzerland. Learn about mandatory coverage, recommended protection, and pension options."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Self-Employed Insurance Guide Switzerland 2024",
+      "description": "Comprehensive guide to insurance requirements and options for self-employed individuals in Switzerland.",
+      "datePublished": "2024-01-15",
+      "dateModified": "2024-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Expat Savvy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+        }
+      },
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need accident insurance if I'm self-employed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you're self-employed and work more than 8 hours per week, you should either include accident coverage in your basic health insurance or take out separate accident insurance (UVG/LAA). The choice depends on your risk profile and premium considerations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does loss of earnings insurance work for self-employed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Loss of earnings insurance replaces your income if you can't work due to illness or accident. You can choose the coverage amount (typically 50-80% of income) and waiting period. Longer waiting periods mean lower premiums. The premiums are tax-deductible as business expenses."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-4">
+        {breadcrumbs.map((item, index) => (
+          <li class="flex items-center">
+            {index > 0 && (
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            )}
+            <a
+              href={item.href}
+              class={`ml-4 text-sm font-medium ${
+                index === breadcrumbs.length - 1
+                  ? 'text-gray-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block">Self-Employed</span>
+          <span class="block text-primary-600">Insurance Guide</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Understanding your insurance requirements and options as a self-employed person in Switzerland. From mandatory coverage to recommended protection.
+        </p>
+
+        <!-- Quick Stats -->
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {quickStats.map(stat => (
+            <div class="bg-gray-50 rounded-lg p-4">
+              <dt class="text-base font-medium text-gray-500">{stat.label}</dt>
+              <dd class="mt-1 text-2xl font-semibold text-gray-900">{stat.value}</dd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mandatory Insurance -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Mandatory Insurance</h2>
+        <div class="space-y-8">
+          {mandatoryInsurance.basic.map(insurance => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
+                    <Fragment set:html={insurance.icon} />
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-lg font-medium text-gray-900">{insurance.title}</h3>
+                  <p class="mt-2 text-gray-600">{insurance.description}</p>
+                  <ul class="mt-4 space-y-3">
+                    {insurance.requirements.map(req => (
+                      <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-gray-600">{req}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommended Insurance -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Recommended Coverage</h2>
+        <div class="grid gap-8">
+          {mandatoryInsurance.recommended.map(insurance => (
+            <div class="bg-gray-50 rounded-lg p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{insurance.title}</h3>
+              <p class="text-gray-600 mb-4">{insurance.description}</p>
+              <ul class="space-y-3">
+                {insurance.benefits.map(benefit => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pension Options -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Pension Options</h2>
+        <div class="grid gap-8 md:grid-cols-2">
+          {pensionOptions.map(option => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{option.title}</h3>
+              <p class="text-gray-600 mb-4">{option.description}</p>
+              <ul class="space-y-3">
+                {option.benefits.map(benefit => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help with self-employed insurance?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to protect your business and yourself
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

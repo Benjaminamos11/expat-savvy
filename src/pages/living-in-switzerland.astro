@@ -1,0 +1,250 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const cityGuides = [
+  {
+    name: "Zurich",
+    description: "Switzerland's largest city and financial hub",
+    href: "/news/regional-guides/zurich",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+  },
+  {
+    name: "Geneva",
+    description: "International city on Lake Geneva",
+    href: "/news/regional-guides/geneva",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740625024/visualsoflukas-AWjVCFcUIbY-unsplash_myddnf.webp"
+  },
+  {
+    name: "Basel",
+    description: "Cultural capital and pharmaceutical center",
+    href: "/news/regional-guides/basel",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740599993/vincent-ghilione-z54zUmYA9f8-unsplash_c9aip7.webp"
+  },
+  {
+    name: "Lausanne",
+    description: "Olympic Capital on Lake Geneva",
+    href: "/news/regional-guides/lausanne",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740626508/djib-djib-nFvDgJdOwEU-unsplash_ejvm2a.webp"
+  },
+  {
+    name: "Bern",
+    description: "Switzerland's capital city",
+    href: "/news/regional-guides/bern",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740632517/andreas-fischinger-xosBoKRT0qE-unsplash_elwrpw.webp"
+  },
+  {
+    name: "Zug",
+    description: "Business hub with lowest taxes",
+    href: "/news/regional-guides/zug",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740632342/timon-stalder-EqUuS4jcQ48-unsplash_1_yc59xd.webp"
+  },
+  {
+    name: "Lugano",
+    description: "Italian-speaking Switzerland's largest city",
+    href: "/news/regional-guides/lugano",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740633094/fabrice-villard-WFg8pqktB_A-unsplash_plzqhh.webp"
+  }
+];
+
+const essentialGuides = [
+  {
+    title: "Housing",
+    items: [
+      {
+        name: "Finding Accommodation",
+        description: "Guide to Swiss rental market",
+        href: "/living/housing"
+      },
+      {
+        name: "Household Insurance",
+        description: "Protecting your home and belongings",
+        href: "/insurance/household-insurance"
+      }
+    ]
+  },
+  {
+    title: "Healthcare",
+    items: [
+      {
+        name: "Health Insurance",
+        description: "Understanding Swiss healthcare",
+        href: "/health-insurance"
+      },
+      {
+        name: "Finding Doctors",
+        description: "Medical care in Switzerland",
+        href: "/healthcare/glossary/free-choice-of-medical-doctors"
+      }
+    ]
+  },
+  {
+    title: "Daily Life",
+    items: [
+      {
+        name: "Public Transport",
+        description: "Getting around in Switzerland",
+        href: "/living/transport"
+      },
+      {
+        name: "Banking & Finance",
+        description: "Swiss financial system",
+        href: "/living/banking"
+      }
+    ]
+  }
+];
+
+const quickLinks = [
+  {
+    name: "Health Insurance",
+    description: "Essential coverage information",
+    href: "/health-insurance"
+  },
+  {
+    name: "Property Insurance",
+    description: "Protect your home and belongings",
+    href: "/insurance/household-insurance"
+  },
+  {
+    name: "Legal Protection",
+    description: "Understanding legal insurance",
+    href: "/insurance/legal-protection-insurance"
+  },
+  {
+    name: "3rd Pillar",
+    description: "Swiss pension system",
+    href: "/3rd-pillar"
+  }
+];
+---
+
+<Layout
+  title="Living in Switzerland Guide 2024 | Expert Advice for Expats"
+  description="Complete guide to living in Switzerland. Expert advice on housing, healthcare, insurance, and daily life. Updated for 2024 with current insights."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Living in Switzerland</span>
+          <span class="block mt-2">Complete Guide for <span class="text-primary-500">Expats</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Your comprehensive guide to life in Switzerland. From housing to healthcare, discover everything you need to know.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {quickLinks.map(link => (
+          <a 
+            href={link.href}
+            class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+          >
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{link.name}</h3>
+            <p class="text-gray-600">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- City Guides -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12">City Guides</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {cityGuides.map(city => (
+          <a 
+            href={city.href}
+            class="relative rounded-lg overflow-hidden group"
+          >
+            <div class="aspect-w-16 aspect-h-9">
+              <img 
+                src={city.image}
+                alt={city.name}
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 p-6">
+                <h3 class="text-xl font-bold text-white mb-2">{city.name}</h3>
+                <p class="text-gray-200">{city.description}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Essential Guides -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Essential Guides</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {essentialGuides.map(section => (
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">{section.title}</h3>
+            <div class="space-y-6">
+              {section.items.map(guide => (
+                <a 
+                  href={guide.href}
+                  class="block bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+                >
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">{guide.name}</h4>
+                  <p class="text-gray-600">{guide.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter Signup -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900">Stay Updated</h2>
+        <p class="mt-4 text-lg text-gray-500">
+          Subscribe to our newsletter to receive the latest guides and tips for living in Switzerland.
+        </p>
+        <form class="mt-8 sm:flex justify-center">
+          <label for="email-address" class="sr-only">Email address</label>
+          <input
+            id="email-address"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:max-w-xs rounded-md"
+            placeholder="Enter your email"
+          />
+          <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+            <button
+              type="submit"
+              class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
+              Subscribe
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</Layout>

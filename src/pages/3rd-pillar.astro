@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const features = [
+  {
+    title: "Tax Benefits",
+    description: "Significant tax deductions on contributions",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
+    </svg>`
+  },
+  {
+    title: "Flexible Investment",
+    description: "Choose between bank and insurance solutions",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>`
+  },
+  {
+    title: "Early Withdrawal",
+    description: "Access funds for property purchase or business",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+    </svg>`
+  }
+];
+
+const pillarTypes = [
+  {
+    name: "Pillar 3a",
+    description: "Restricted retirement savings with tax benefits",
+    features: [
+      "Annual contribution limits",
+      "Tax-deductible contributions",
+      "Restricted withdrawal conditions",
+      "Government regulated"
+    ]
+  },
+  {
+    name: "Pillar 3b",
+    description: "Flexible private savings without restrictions",
+    features: [
+      "No contribution limits",
+      "Flexible withdrawals",
+      "Various investment options",
+      "No tax benefits"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "What is the 3rd pillar and why do I need it?",
+    answer: "The 3rd pillar is a voluntary private pension scheme in Switzerland that complements the mandatory 1st and 2nd pillars. It helps you save additional money for retirement while offering significant tax advantages. It's particularly important for expats who may have gaps in their Swiss pension contributions."
+  },
+  {
+    question: "What's the difference between Pillar 3a and 3b?",
+    answer: "Pillar 3a is a restricted pension plan with tax benefits and annual contribution limits (6,826 CHF for employed persons, 34,128 CHF for self-employed). Pillar 3b is unrestricted private savings with no limits but fewer tax advantages."
+  },
+  {
+    question: "How do I start a 3rd pillar account?",
+    answer: "You can open a 3rd pillar account with any Swiss bank or insurance company. We recommend comparing different providers to find the best solution for your needs. Our experts can help you understand the options and set up your account."
+  },
+  {
+    question: "When can I withdraw my 3rd pillar funds?",
+    answer: "Regular withdrawal is possible 5 years before reaching AHV retirement age. Early withdrawal is allowed for: buying property, starting a business, moving abroad permanently, or switching to self-employment."
+  },
+  {
+    question: "How much should I contribute to my 3rd pillar?",
+    answer: "For employed persons, the maximum tax-deductible amount in 2024 is 7,056 CHF. For self-employed persons without a 2nd pillar, it's up to 20% of net income or maximum 35,280 CHF. Contributing the maximum amount optimizes tax benefits."
+  }
+];
+---
+
+<Layout
+  title="3rd Pillar Pension Guide Switzerland | Expert Advice 2024"
+  description="Complete guide to 3rd pillar pension planning in Switzerland. Learn about tax benefits, investment options, and how to optimize your retirement savings."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Understanding the Swiss 3rd Pillar Pension System",
+  "description": "Comprehensive guide to the Swiss 3rd pillar pension system, including tax benefits, investment options, and retirement planning strategies.",
+  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp",
+  "datePublished": "2024-01-15",
+  "dateModified": "2024-01-15",
+  "author": {
+    "@type": "Organization",
+    "name": "Expat Savvy"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+    }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "3rd Pillar",
+        "item": "https://expat-savvy.ch/3rd-pillar"
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the 3rd pillar and why do I need it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 3rd pillar is a voluntary private pension scheme in Switzerland that complements the mandatory 1st and 2nd pillars. It helps you save additional money for retirement while offering significant tax advantages. It's particularly important for expats who may have gaps in their Swiss pension contributions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between Pillar 3a and 3b?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pillar 3a is a restricted pension plan with tax benefits and annual contribution limits (6,826 CHF for employed persons, 34,128 CHF for self-employed). Pillar 3b is unrestricted private savings with no limits but fewer tax advantages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I start a 3rd pillar account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can open a 3rd pillar account with any Swiss bank or insurance company. We recommend comparing different providers to find the best solution for your needs. Our experts can help you understand the options and set up your account."
+        }
+      }
+    ]
+  }
+}
+</script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">3rd Pillar Pension</span>
+          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Optimize your retirement savings with Switzerland's voluntary pension system. Learn about tax benefits and investment options.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#compare"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Options
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {features.map(feature => (
+          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
+            <div class="text-primary-500 mb-4">
+              <Fragment set:html={feature.icon} />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+            <p class="text-gray-600">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Pillar Types -->
+  <div id="compare" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Types of 3rd Pillar</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {pillarTypes.map(type => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{type.name}</h3>
+            <p class="text-gray-600 mb-4">{type.description}</p>
+            <ul class="space-y-2">
+              {type.features.map(feature => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to optimize your retirement savings?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to make the most of your 3rd pillar
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

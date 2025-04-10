@@ -1,0 +1,475 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const stats = [
+  { number: "1000+", label: "Happy Clients" },
+  { number: "100%", label: "English Support" },
+  { number: "Independent", label: "Insurance Broker" },
+  { number: "11+", label: "Years Experience" }
+];
+
+const valuePoints = [
+  {
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`,
+    title: "Experience That Matters",
+    description: "With over a decade of specialized experience serving expatriates in Switzerland, we understand your unique needs. Our advisors are FINMA-certified experts who combine deep knowledge of Swiss insurance with an international perspective, making complex insurance decisions clear and straightforward for you."
+  },
+  {
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+    </svg>`,
+    title: "Independent Products & Solutions",
+    description: "As a fully independent broker, we're free to choose what's best for you. We carefully select insurance solutions from the entire Swiss market, focusing solely on your needs and circumstances. Our recommendations are based on your interests, not insurance companies' preferences."
+  },
+  {
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    </svg>`,
+    title: "Trust & Ongoing Support",
+    description: "We believe in building lasting relationships, not just selling policies. Count on us to actively monitor your coverage, reach out when better options arise, and be there whenever you need support. Your peace of mind is our priority - from your first consultation through every life change ahead."
+  }
+];
+
+const reviews = [
+  {
+    text: "Moving to Switzerland was overwhelming, but Expat Savvy made insurance so simple. They saved me over 2000 CHF annually!",
+    author: "Sarah Thompson",
+    role: "Software Engineer from UK"
+  },
+  {
+    text: "Their holistic approach helped me understand exactly what coverage I needed. Best decision I made after moving to Zürich.",
+    author: "Marco Rossi",
+    role: "Finance Professional from Italy"
+  },
+  {
+    text: "As a family of four, we needed comprehensive coverage. They found us the perfect balance of protection and cost.",
+    author: "Jennifer Chen",
+    role: "Research Scientist from Singapore"
+  }
+];
+
+const premiumPartners = [
+  {
+    name: "Prime Relocation",
+    logo: "https://cdn.prod.website-files.com/6718b88a9ad8ce0f3ec5e7a6/672df357ed71370900ec04cb_output-onlinepngtools-p-800.png",
+    url: "https://www.primerelocation.ch",
+    description: "Expert relocation services for expats moving to Switzerland"
+  }
+];
+---
+
+<Layout
+  title="Expert Insurance Advice for Expats in Switzerland | Expat Savvy"
+  description="Get personalized insurance guidance from Switzerland's most trusted expat insurance advisors. Free consultation, English-speaking experts, and FINMA registered."
+>
+  <!-- Hero Section -->
+  <div class="relative min-h-[90vh] flex items-center">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1743659933/a-photograph-of-a-luxury-mahogany-wooden_dfcZJIlGTdmJa1Tx-UxE0g_8SYYTQnvQR-LKxxWXfpIkQ_fk6qpf.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
+      <div class="text-left max-w-xl md:max-w-2xl">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow">
+          <span class="block">Have Peace of Mind</span>
+          <span class="block mt-2">with <span class="text-primary-500">Expat Savvy</span></span>
+        </h1>
+        <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
+          Your trusted partner for all your insurance needs in Switzerland. Expert guidance in English, tailored to expats like you.
+        </p>
+        <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
+          <button
+            onclick="showConsultationModal()" 
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Book Free Consultation
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <div class="flex items-center text-sm text-white">
+            <svg class="h-4 w-4 text-green-400 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="booking-count">8 people booked a consultation in the last 24 hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Indicators -->
+  <div class="bg-white py-12 trust-indicators">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
+        {stats.map(stat => (
+          <div class="flex flex-col items-center">
+            <span class="text-3xl md:text-4xl font-bold text-primary-600">{stat.number}</span>
+            <span class="mt-2 text-gray-600 stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Values Section -->
+  <div class="bg-gray-50 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
+        <h2 class="mt-2 text-5xl font-extrabold text-gray-900 leading-tight">
+          Switzerland's Most Trusted<br/>Insurance Advisor
+        </h2>
+        <div class="mt-4 max-w-3xl mx-auto">
+          <p class="text-xl text-gray-500">Combining Swiss precision with international understanding to deliver exceptional insurance guidance for expats.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="space-y-10">
+          {valuePoints.map(point => (
+            <div class="flex gap-6">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 text-primary-600">
+                  <Fragment set:html={point.icon} />
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{point.title}</h3>
+                <p class="text-gray-600 leading-relaxed">{point.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="relative lg:mt-0 mt-10">
+          <div class="relative">
+            <img 
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740112521/profilebild2_tar0si.jpg"
+              alt="Benjamin Wagner - Insurance Expert"
+              class="w-full max-w-lg mx-auto rounded-2xl shadow-2xl"
+            />
+            <div class="absolute -bottom-6 -right-6 bg-white text-gray-900 px-8 py-4 rounded-xl shadow-xl">
+              <div class="flex items-center gap-3">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-bold text-lg">Benjamin Wagner</p>
+                  <p class="text-sm text-gray-600">Platform Development & Innovation Lead</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -z-10 inset-0 bg-gradient-to-r from-primary-100 to-primary-50 transform rotate-3 rounded-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Solutions Section -->
+  <div class="relative bg-white py-24">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute inset-0 opacity-[0.03]" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23cc242c' stroke-width='2'%3E%3Cpath d='M30 5v50M5 30h50'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px',
+          maskImage: 'linear-gradient(to bottom, transparent, black, transparent)'
+        }} 
+      />
+    </div>
+
+    <!-- Content Container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Our Insurance Solutions</span>
+        <h2 class="mt-2 text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+          Expert Guidance for Your<br class="hidden sm:block"/>Life in Switzerland
+        </h2>
+        <div class="mt-4 max-w-3xl mx-auto">
+          <p class="text-lg md:text-xl text-gray-500">Comprehensive insurance solutions tailored to your unique needs as an expat in Switzerland.</p>
+        </div>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 group/bento">
+        <!-- Health Insurance Box -->
+        <div class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:scale-[1.02] group-hover/bento:opacity-50 hover:!opacity-100 hover:z-10 md:row-span-2">
+          <div class="p-6 md:p-8 h-full flex flex-col">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 md:h-14 md:w-14 rounded-full bg-gray-100">
+                  <svg class="h-6 w-6 md:h-8 md:w-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-gray-900">Health Insurance</h3>
+            </div>
+            <p class="text-sm md:text-base text-gray-600 leading-relaxed">Navigate Swiss healthcare with confidence. We help you understand and compare basic and supplementary health insurance options to find your perfect coverage.</p>
+            
+            <div class="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a 
+                href="/healthcare/new-health-insurance"
+                class="bg-gray-50 rounded-xl p-4 md:p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-100"
+              >
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-100 text-primary-600">
+                      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="text-lg font-medium text-gray-900">Setting Up Insurance</h3>
+                    <p class="mt-1 text-gray-600">New to Switzerland? We guide you through mandatory insurance setup.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a 
+                href="/news/switching-health-insurance-in-switzerland"
+                class="bg-gray-50 rounded-xl p-4 md:p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-100"
+              >
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-100 text-primary-600">
+                      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="text-lg font-medium text-gray-900">Switch & Save</h3>
+                    <p class="mt-1 text-gray-600">Already insured? Compare options and find better rates.</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="mt-6 md:mt-auto pt-4 md:pt-8 flex flex-col sm:flex-row gap-3 md:gap-4">
+              <a href="/compare-providers" class="flex-1 inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 border border-transparent text-sm md:text-base font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 transition-all duration-300 shadow-sm hover:shadow-md">
+                Compare Providers
+              </a>
+              <a href="/ai-chat" class="flex-1 inline-flex items-center justify-center px-4 md:px-6 py-2 md:py-3 border border-gray-300 text-sm md:text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md">
+                Calculate Premium
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special Situations Box -->
+        <div class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:scale-[1.02] group-hover/bento:opacity-50 hover:!opacity-100 hover:z-10">
+          <div class="p-6 md:p-8 h-full flex flex-col">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 md:h-14 md:w-14 rounded-full bg-gray-100">
+                  <svg class="h-6 w-6 md:h-8 md:w-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-gray-900">Special Situations</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <a href="/insurance-guides/cross-border-insurance" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Cross-Border Workers</h4>
+                <p class="text-sm text-gray-600 mt-1">Insurance for international commuters</p>
+              </a>
+              <a href="/insurance-guides/student-insurance" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Students</h4>
+                <p class="text-sm text-gray-600 mt-1">Special coverage for studies</p>
+              </a>
+              <a href="/insurance-guides/self-employed-insurance" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Self-Employed</h4>
+                <p class="text-sm text-gray-600 mt-1">Business protection needs</p>
+              </a>
+              <a href="/insurance-guides/family-insurance-planning" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Families</h4>
+                <p class="text-sm text-gray-600 mt-1">Coverage for the whole family</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Assistant Box -->
+        <div class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:scale-[1.02] group-hover/bento:opacity-50 hover:!opacity-100 hover:z-10">
+          <div class="p-6 md:p-8 h-full flex flex-col">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 md:h-14 md:w-14 rounded-full bg-gray-100">
+                  <svg class="h-6 w-6 md:h-8 md:w-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-gray-900">AI Assistant</h3>
+            </div>
+            
+            <p class="text-gray-600 mb-6">Get instant answers to your insurance questions, calculate premiums, and compare coverage options 24/7.</p>
+            
+            <div class="mt-auto">
+              <a 
+                href="/ai-chat"
+                class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+              >
+                Chat with AI Assistant
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Coverage Box -->
+        <div class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:scale-[1.02] group-hover/bento:opacity-50 hover:!opacity-100 hover:z-10 col-span-1 md:col-span-2">
+          <div class="p-6 md:p-8 h-full flex flex-col">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 md:h-14 md:w-14 rounded-full bg-gray-100">
+                  <svg class="h-6 w-6 md:h-8 md:w-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-gray-900">Additional Coverage</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <a href="/insurance/household-insurance" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Household</h4>
+                <p class="text-sm text-gray-600 mt-1">Protect your belongings</p>
+              </a>
+              <a href="/insurance/personal-liability-insurance" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Liability</h4>
+                <p class="text-sm text-gray-600 mt-1">Personal protection</p>
+              </a>
+              <a href="/life-insurance" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">Life Insurance</h4>
+                <p class="text-sm text-gray-600 mt-1">Family security</p>
+              </a>
+              <a href="/3rd-pillar" class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                <h4 class="font-medium text-gray-900">3rd Pillar</h4>
+                <p class="text-sm text-gray-600 mt-1">Retirement planning</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="bg-gray-50 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-extrabold text-gray-900">What Our Clients Say</h2>
+        <p class="mt-4 text-xl text-gray-500">Trusted by expats across Switzerland</p>
+        <div class="mt-6">
+          <a 
+            href="https://g.page/r/CYpve4Tr8JfoEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            <svg class="h-5 w-5 mr-2 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm0 4.92c1.658 0 3.152.674 4.285 1.808l-1.857 1.857C13.669 7.827 12.866 7.5 12 7.5c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5c2.153 0 3.978- 1.527 4.402-3.537l1.098.998C16.93 15.831 14.702 17.5 12 17.5c-3.038 0-5.5-2.462-5.5-5.5s2.462-5.5 5.5-5.5z"/>
+            </svg>
+            Write a Review
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {reviews.map(review => (
+          <div class="bg-white rounded-xl shadow-lg p-8 relative">
+            <div class="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-primary-500 text-white p-2 sm:p-3 rounded-full shadow-lg">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/>
+              </svg>
+            </div>
+            <div class="flex items-center mb-6">
+              <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600 font-semibold text-lg">
+                {review.author.split(' ').map(word => word[0]).join('')}
+              </div>
+              <div class="ml-4">
+                <h3 class="font-semibold text-gray-900">{review.author}</h3>
+                <p class="text-sm text-gray-500">{review.role}</p>
+              </div>
+            </div>
+            <p class="text-gray-600 break-words">{review.text}</p>
+           </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="bg-white py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-8">Get Started Today</h2>
+        <p class="text-xl text-gray-500 mb-8">
+          Ready to simplify your insurance journey? Schedule your free consultation or chat with us on WhatsApp.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+          >
+            Schedule Free Consultation
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </button>
+          
+          <a
+            href="https://wa.me/41791552570"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#25D366] hover:bg-[#22c35e] transition-colors"
+          >
+            <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
+
+<script>
+  // Update booking count every 10 minutes
+  function updateBookingCount() {
+    const countElement = document.getElementById('booking-count');
+    if (countElement) {
+      const randomCount = Math.floor(Math.random() * (11 - 3 + 1)) + 3; // Random number between 3-11
+      countElement.textContent = `${randomCount} people booked a consultation in the last 24 hours`;
+    }
+  }
+
+  // Initial update
+  updateBookingCount();
+
+  // Update every 10 minutes
+  setInterval(updateBookingCount, 10 * 60 * 1000);
+</script>

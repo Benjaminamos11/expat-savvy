@@ -1,0 +1,282 @@
+---
+---
+<div id="ai-chat-modal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+  
+  <div class="fixed inset-0 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col modal-frame relative">
+      <!-- Add border glow effect -->
+      <div class="absolute inset-0 rounded-2xl" style="background: linear-gradient(45deg, #cc242c, #ff6b6b, #4a90e2, #cc242c); background-size: 200% 200%; animation: borderGlow 3s linear infinite; z-index: -1;"></div>
+      
+      <!-- Content -->
+      <div class="relative bg-white rounded-2xl flex flex-col h-full overflow-hidden">
+        <!-- Loading State -->
+        <div id="loading-state" class="p-8">
+          <div class="flex justify-between items-start mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">AI Insurance Assistant</h2>
+            <button 
+              id="close-ai-modal" 
+              class="text-gray-400 hover:text-gray-500 transition-colors"
+              aria-label="Close modal"
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="space-y-6">
+            <div class="relative pt-1">
+              <div class="flex mb-2 items-center justify-between">
+                <div>
+                  <span id="loading-text" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary-600 bg-primary-200">
+                    Loading AI capabilities...
+                  </span>
+                </div>
+                <div class="text-right">
+                  <span id="loading-percentage" class="text-xs font-semibold inline-block text-primary-600">
+                    0%
+                  </span>
+                </div>
+              </div>
+              <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary-200">
+                <div id="loading-bar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <h3 class="font-semibold text-gray-900">What I can help you with:</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Calculate premiums for Swiss basic insurance</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Send personalized insurance comparisons via email</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Answer questions about relocating to Switzerland</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Provide guidance on Swiss insurance system</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-center text-sm text-gray-500 mt-8">
+              Powered by insurance-guide.ch
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div id="chat-interface" class="hidden flex-1">
+          <iframe 
+            src="https://avaia.io/chat/authorize-chat/139287ff-da65-4f07-b6a2-d54e99feb019/"
+            class="w-full h-full"
+            frameborder="0"
+            title="Insurance AI Chat"
+            allow="microphone"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .modal-frame {
+    position: relative;
+  }
+
+  .modal-frame::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      45deg,
+      #cc242c,
+      #ff6b6b,
+      #4a90e2,
+      #cc242c
+    );
+    border-radius: 16px;
+    z-index: -1;
+    animation: borderGlow 3s linear infinite;
+    background-size: 200% 200%;
+  }
+</style>
+
+<script>
+  interface LoadingStep {
+    progress: number;
+    text: string;
+  }
+
+  class CustomError extends Error {
+    constructor(message: string) {
+      super(message);
+      this.name = 'CustomError';
+    }
+  }
+
+  class AIChatModal {
+    private modal: HTMLElement | null;
+    private closeBtn: HTMLElement | null;
+    private loadingState: HTMLElement | null;
+    private chatInterface: HTMLElement | null;
+    private loadingBar: HTMLElement | null;
+    private loadingPercentage: HTMLElement | null;
+    private loadingText: HTMLElement | null;
+    private modalContent: HTMLElement | null;
+
+    constructor() {
+      this.modal = document.getElementById('ai-chat-modal');
+      this.closeBtn = document.getElementById('close-ai-modal');
+      this.loadingState = document.getElementById('loading-state');
+      this.chatInterface = document.getElementById('chat-interface');
+      this.loadingBar = document.getElementById('loading-bar');
+      this.loadingPercentage = document.getElementById('loading-percentage');
+      this.loadingText = document.getElementById('loading-text');
+      this.modalContent = document.querySelector('.modal-frame');
+
+      this.initializeEventListeners();
+    }
+
+    private initializeEventListeners(): void {
+      try {
+        // Show modal
+        window.showAIChatModal = () => {
+          if (!this.modal) throw new CustomError('Modal element not found');
+          this.modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          this.startLoading();
+        };
+
+        // Close button click
+        this.closeBtn?.addEventListener('click', () => this.closeModal());
+
+        // Outside click
+        this.modal?.addEventListener('click', (e: MouseEvent) => {
+          const target = e.target as HTMLElement;
+          if (!this.modalContent?.contains(target) || target === this.modal) {
+            this.closeModal();
+          }
+        });
+
+        // Escape key
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
+          if (e.key === 'Escape') {
+            this.closeModal();
+          }
+        });
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Error initializing event listeners:', error.message);
+        }
+      }
+    }
+
+    private closeModal(): void {
+      try {
+        if (!this.modal) throw new CustomError('Modal element not found');
+        this.modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        this.resetLoading();
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Error closing modal:', error.message);
+        }
+      }
+    }
+
+    private startLoading(): void {
+      try {
+        let progress = 0;
+        const loadingSteps: LoadingStep[] = [
+          { progress: 20, text: "Initializing AI..." },
+          { progress: 40, text: "Loading knowledge base..." },
+          { progress: 60, text: "Connecting to premium calculator..." },
+          { progress: 80, text: "Preparing chat interface..." },
+          { progress: 100, text: "Ready!" }
+        ];
+
+        const interval = setInterval(() => {
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              if (!this.loadingState || !this.chatInterface) {
+                throw new CustomError('Required elements not found');
+              }
+              this.loadingState.style.display = 'none';
+              this.chatInterface.style.display = 'block';
+              const iframe = this.chatInterface.querySelector('iframe');
+              if (iframe) {
+                iframe.src = iframe.src;
+              }
+            }, 500);
+            return;
+          }
+
+          const step = loadingSteps.find(step => step.progress > progress);
+          if (step && this.loadingText) {
+            this.loadingText.textContent = step.text;
+          }
+
+          progress += 1;
+          if (this.loadingBar) this.loadingBar.style.width = `${progress}%`;
+          if (this.loadingPercentage) this.loadingPercentage.textContent = `${progress}%`;
+        }, 30);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Error during loading:', error.message);
+        }
+      }
+    }
+
+    private resetLoading(): void {
+      try {
+        if (!this.loadingBar || !this.loadingPercentage || !this.loadingText || !this.loadingState || !this.chatInterface) {
+          throw new CustomError('Required elements not found');
+        }
+        this.loadingBar.style.width = '0%';
+        this.loadingPercentage.textContent = '0%';
+        this.loadingText.textContent = 'Loading AI capabilities...';
+        this.loadingState.style.display = 'block';
+        this.chatInterface.style.display = 'none';
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Error resetting loading state:', error.message);
+        }
+      }
+    }
+  }
+
+  // Initialize modal
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      new AIChatModal();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error initializing AIChatModal:', error.message);
+      }
+    }
+  });
+</script>

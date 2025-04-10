@@ -1,0 +1,250 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/ConsultationModal.astro';
+
+const guides = {
+  core: {
+    title: "Core Insurance Requirements",
+    description: "Essential guides for understanding Swiss insurance requirements",
+    items: [
+      {
+        name: "Who Needs Health Insurance?",
+        description: "Understanding mandatory insurance requirements",
+        href: "/healthcare/glossary/who-needs-health-insurance",
+        status: "published"
+      },
+      {
+        name: "Premium Reduction Guide",
+        description: "How to reduce your insurance costs",
+        href: "/healthcare/glossary/premium-reduction",
+        status: "published"
+      },
+      {
+        name: "New Arrivals Checklist",
+        description: "Essential steps for newcomers",
+        href: "/insurance-guides/new-arrivals-checklist",
+        status: "published"
+      },
+      {
+        name: "Family Insurance Planning",
+        description: "Insurance solutions for families",
+        href: "/insurance-guides/family-insurance-planning",
+        status: "published"
+      }
+    ]
+  },
+  special: {
+    title: "Special Situations",
+    description: "Guides for specific insurance scenarios",
+    items: [
+      {
+        name: "Cross-Border Insurance",
+        description: "Insurance for cross-border workers",
+        href: "/insurance-guides/cross-border-insurance",
+        status: "published"
+      },
+      {
+        name: "Student Insurance",
+        description: "Insurance options for students",
+        href: "/insurance-guides/student-insurance",
+        status: "published"
+      },
+      {
+        name: "Self-Employed Insurance",
+        description: "Insurance for freelancers and business owners",
+        href: "/insurance-guides/self-employed-insurance",
+        status: "published"
+      },
+      {
+        name: "International Insurance",
+        description: "Coverage for international travel and stays",
+        href: "/insurance-guides/international-insurance",
+        status: "coming-soon"
+      }
+    ]
+  },
+  optimization: {
+    title: "Cost Optimization",
+    description: "Guides to help you save on insurance",
+    items: [
+      {
+        name: "Smart Insurance Bundling",
+        description: "Combining policies for better rates",
+        href: "/insurance-guides/smart-bundling",
+        status: "coming-soon"
+      },
+      {
+        name: "Premium Comparison",
+        description: "How to compare insurance options",
+        href: "/insurance-guides/premium-comparison",
+        status: "coming-soon"
+      },
+      {
+        name: "Coverage Timeline",
+        description: "When to review and update coverage",
+        href: "/insurance-guides/coverage-timeline",
+        status: "coming-soon"
+      },
+      {
+        name: "Optimizing Deductibles",
+        description: "Choosing the right deductible level",
+        href: "/healthcare/glossary/annual-deductible",
+        status: "published"
+      }
+    ]
+  }
+};
+
+const insuranceProviders = [
+  {
+    name: "Assura",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406940/assura-logo-png_seeklogo-462524_zlvevx.png",
+    link: "/healthcare/all-insurances/assura",
+    description: "Known for competitive premiums"
+  },
+  {
+    name: "CSS",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740414664/css-logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/css",
+    description: "Switzerland's largest health insurer"
+  },
+  {
+    name: "Groupe Mutuel",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/gm-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/groupe-mutuel",
+    description: "Comprehensive coverage options"
+  },
+  {
+    name: "Helsana",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp",
+    link: "/healthcare/all-insurances/helsana",
+    description: "Digital innovation leader"
+  },
+  {
+    name: "Swica",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/swica_logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/swica",
+    description: "Top-rated customer service"
+  },
+  {
+    name: "Sanitas",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/sanitas_logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/sanitas",
+    description: "Modern insurance solutions"
+  }
+];
+---
+
+<Layout
+  title="Insurance Guides Switzerland | Expert Advice for Expats"
+  description="Comprehensive insurance guides for expats in Switzerland. Expert advice on health, property, and liability insurance. Updated for 2024."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Insurance Guides</span>
+          <span class="block mt-2">Switzerland</span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Expert guides to help you navigate Swiss insurance. Clear, comprehensive advice for every situation.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guide Sections -->
+  {Object.entries(guides).map(([key, section]) => (
+    <div class={`${key === 'core' ? 'bg-white' : key === 'special' ? 'bg-gray-50' : 'bg-white'} py-16`}>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">{section.title}</h2>
+          <p class="mt-4 text-xl text-gray-500">{section.description}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {section.items.map(guide => (
+            <div class={`bg-white rounded-lg shadow-md p-6 border ${guide.status === 'published' ? 'border-gray-200 hover:border-primary-500' : 'border-gray-200'} transition-colors relative`}>
+              {guide.status === 'coming-soon' && (
+                <div class="absolute top-4 right-4">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    Coming Soon
+                  </span>
+                </div>
+              )}
+              {guide.status === 'published' ? (
+                <a href={guide.href} class="block">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">{guide.name}</h3>
+                  <p class="text-gray-600">{guide.description}</p>
+                </a>
+              ) : (
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">{guide.name}</h3>
+                  <p class="text-gray-600">{guide.description}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <!-- Insurance Providers -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Compare Insurance Providers</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        {insuranceProviders.map(provider => (
+          <a 
+            href={provider.link}
+            class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
+          >
+            <div class="h-12 flex items-center justify-center mb-4">
+              <img 
+                src={provider.logo} 
+                alt={`${provider.name} logo`}
+                class="h-8 object-contain"
+              />
+            </div>
+            <h3 class="text-center text-sm font-medium text-gray-900">{provider.name}</h3>
+            <p class="mt-2 text-xs text-center text-gray-500">{provider.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help with insurance?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to find the right coverage
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

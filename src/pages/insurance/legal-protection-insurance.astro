@@ -1,0 +1,314 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/ConsultationModal.astro';
+
+const features = [
+  {
+    title: "Legal Expenses Coverage",
+    description: "Protection for lawyer fees, court costs, and expert opinions",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+    </svg>`
+  },
+  {
+    title: "Legal Advice",
+    description: "Access to legal experts and advice hotlines",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+    </svg>`
+  },
+  {
+    title: "Worldwide Coverage",
+    description: "Protection for legal issues abroad",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+    </svg>`
+  }
+];
+
+const coverageTypes = [
+  {
+    name: "Private Legal Protection",
+    description: "Coverage for personal legal matters",
+    included: [
+      "Contract disputes",
+      "Consumer rights",
+      "Rental issues",
+      "Employment law",
+      "Internet law"
+    ]
+  },
+  {
+    name: "Traffic Legal Protection",
+    description: "Coverage for traffic-related legal issues",
+    included: [
+      "Traffic accidents",
+      "License disputes",
+      "Vehicle contracts",
+      "Insurance disputes",
+      "Criminal defense"
+    ]
+  },
+  {
+    name: "Combined Coverage",
+    description: "Comprehensive protection package",
+    included: [
+      "All private coverage",
+      "All traffic coverage",
+      "Better value",
+      "Single policy",
+      "Simplified claims"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "What is legal protection insurance and why do I need it in Switzerland?",
+    answer: "Legal protection insurance covers legal costs including lawyer fees, court costs, and expert opinions. In Switzerland, where legal proceedings can be expensive, it provides financial security and access to legal expertise for various situations like rental disputes, employment issues, or traffic accidents."
+  },
+  {
+    question: "How much does legal protection insurance cost in Switzerland?",
+    answer: "Annual premiums typically range from 200-500 CHF, depending on the coverage type and provider. Combined packages (private + traffic) often offer better value. Some insurers offer discounts when bundled with other insurance products."
+  },
+  {
+    question: "What does legal protection insurance typically cover?",
+    answer: "Coverage typically includes private legal matters (contracts, consumer rights), traffic-related issues, rental disputes, employment law, and internet legal protection. Most policies cover lawyer fees, court costs, expert opinions, and provide access to legal advice hotlines."
+  },
+  {
+    question: "Are there any waiting periods?",
+    answer: "Yes, most policies have a waiting period of 3-6 months for new cases. However, coverage for accidents and criminal defense usually starts immediately. The waiting period helps prevent people from taking out insurance only when they already have a legal issue."
+  },
+  {
+    question: "Can I choose my own lawyer?",
+    answer: "This depends on the policy. Some insurers allow free choice of lawyer, while others work with a network of preferred legal partners. In court proceedings, you usually have the right to choose your lawyer, but for other matters, the insurer may assign one."
+  }
+];
+---
+
+<Layout
+  title="Legal Protection Insurance Switzerland | Expert Guide 2024"
+  description="Complete guide to legal protection insurance in Switzerland. Learn about coverage options, costs, and how to choose the right policy for your needs."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+{
+  "@context": "https://schema.org",
+  "@type": "InsuranceProduct",
+  "name": "Legal Protection Insurance Switzerland",
+  "description": "Comprehensive legal protection insurance coverage for residents in Switzerland",
+  "insuranceType": "LEGAL_EXPENSES",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "CHF",
+    "priceRange": "200-500"
+  },
+  "termsOfService": {
+    "@type": "WebContent",
+    "name": "Coverage Terms",
+    "text": "Protection for legal expenses including lawyer fees, court costs, and expert opinions"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Switzerland"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Expats and residents in Switzerland"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "url": "https://expat-savvy.ch"
+  },
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue ",
+      "name": "Coverage Amount",
+      "value": "Up to 1,000,000 CHF"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Coverage Type",
+      "value": "Private, traffic, internet, and rental legal protection"
+    }
+  ],
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Insurance",
+        "item": "https://expat-savvy.ch/insurance"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Legal Protection Insurance",
+        "item": "https://expat-savvy.ch/insurance/legal-protection-insurance"
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is legal protection insurance and why do I need it in Switzerland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Legal protection insurance covers legal costs including lawyer fees, court costs, and expert opinions. In Switzerland, where legal proceedings can be expensive, it provides financial security and access to legal expertise for various situations like rental disputes, employment issues, or traffic accidents."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does legal protection insurance cost in Switzerland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Annual premiums typically range from 200-500 CHF, depending on the coverage type and provider. Combined packages (private + traffic) often offer better value. Some insurers offer discounts when bundled with other insurance products."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does legal protection insurance typically cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Coverage typically includes private legal matters (contracts, consumer rights), traffic-related issues, rental disputes, employment law, and internet legal protection. Most policies cover lawyer fees, court costs, expert opinions, and provide access to legal advice hotlines."
+        }
+      }
+    ]
+  }
+}
+</script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Legal Protection Insurance</span>
+          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Protect yourself against legal expenses with comprehensive coverage. Understand your options and find the right protection for your needs.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#compare"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Options
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {features.map(feature => (
+          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
+            <div class="text-primary-500 mb-4">
+              <Fragment set:html={feature.icon} />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+            <p class="text-gray-600">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Coverage Types -->
+  <div id="compare" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Coverage Options</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {coverageTypes.map(type => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{type.name}</h3>
+            <p class="text-gray-600 mb-4">{type.description}</p>
+            <ul class="space-y-2">
+              {type.included.map(item => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to protect your legal rights?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to find the right coverage
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

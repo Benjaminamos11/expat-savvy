@@ -1,0 +1,345 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "News & Guides", href: "/news" },
+  { name: "Regional Guides", href: "/news/regional-guides" },
+  { name: "Lausanne", href: "/news/regional-guides/lausanne" }
+];
+
+const quickStats = [
+  { label: "Population", value: "139,000+" },
+  { label: "Expats", value: "42%" },
+  { label: "Official Language", value: "French" },
+  { label: "Quality of Life", value: "#5 in CH" }
+];
+
+const insuranceProviders = [
+  {
+    name: "Groupe Mutuel",
+    description: "Strong presence in French-speaking Switzerland",
+    monthlyPremium: "From CHF 350",
+    features: ["Local offices", "French/English service", "Digital platform"],
+    link: "/healthcare/all-insurances/groupe-mutuel"
+  },
+  {
+    name: "CSS",
+    description: "Extensive network in Lausanne region",
+    monthlyPremium: "From CHF 360",
+    features: ["Many service points", "Digital claims", "Family discounts"],
+    link: "/healthcare/all-insurances/css"
+  },
+  {
+    name: "Assura",
+    description: "Headquartered in Pully, Lausanne",
+    monthlyPremium: "From CHF 340",
+    features: ["Local support", "Cost-effective", "Online services"],
+    link: "/healthcare/all-insurances/assura"
+  },
+  {
+    name: "Swica",
+    description: "Comprehensive coverage options",
+    monthlyPremium: "From CHF 355",
+    features: ["English support", "Digital services", "Wide network"],
+    link: "/healthcare/all-insurances/swica"
+  }
+];
+
+const neighborhoodGuide = [
+  {
+    name: "Ouchy",
+    description: "Lakeside district with stunning views",
+    highlights: ["Lake Geneva", "Parks", "Restaurants"],
+    type: "Waterfront"
+  },
+  {
+    name: "Centre-Ville",
+    description: "Historic city center with shopping",
+    highlights: ["Shopping", "Culture", "Nightlife"],
+    type: "Urban"
+  },
+  {
+    name: "Pully",
+    description: "Upscale suburb with lake views",
+    highlights: ["Exclusive housing", "Schools", "Nature"],
+    type: "Premium"
+  },
+  {
+    name: "Chailly",
+    description: "Family-friendly residential area",
+    highlights: ["Parks", "Schools", "Community"],
+    type: "Residential"
+  }
+];
+
+const faqs = [
+  {
+    question: "How much does health insurance cost in Lausanne?",
+    answer: "Health insurance premiums in Lausanne are high but typically lower than Geneva, ranging from CHF 350-480 per month for adults. The exact cost depends on your chosen model, deductible, and insurance provider."
+  },
+  {
+    question: "What's the best area to live in Lausanne?",
+    answer: "Popular areas include Ouchy (lakeside), Centre-Ville (city center), and Pully (upscale suburb). Each area offers different advantages - Ouchy for lake views and recreation, Centre-Ville for urban lifestyle, and Pully for more exclusive residential options."
+  },
+  {
+    question: "Is English widely spoken in Lausanne?",
+    answer: "While French is the primary language, English is widely spoken in business, tourism, and international organizations. Many services offer English support, especially in areas frequented by expats."
+  },
+  {
+    question: "What's the average rent in Lausanne?",
+    answer: "Rental prices in Lausanne are high but generally lower than Geneva. A 1-bedroom apartment in the city center typically costs CHF 1,600-2,200 per month, while outside the center it's CHF 1,300-1,800. 3-bedroom apartments range from CHF 2,500-3,800."
+  },
+  {
+    question: "How is the job market in Lausanne?",
+    answer: "Lausanne offers strong opportunities in education, research, healthcare, and international sports organizations. The EPFL and UNIL universities are major employers, along with numerous startups and tech companies."
+  }
+];
+---
+
+<Layout
+  title="Living in Lausanne Guide 2024 | Essential Tips for Expats"
+  description="Complete guide to living in Lausanne for expats. Expert advice on housing, healthcare, neighborhoods, and more. Updated for 2024 with current insights and tips."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740626508/djib-djib-nFvDgJdOwEU-unsplash_ejvm2a.webp"
+        alt="Lausanne cityscape with Lake Geneva"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Living in Lausanne</span>
+          <span class="block mt-2">Complete Guide for <span class="text-primary-500">Expats</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Your comprehensive guide to life in Switzerland's Olympic Capital. From housing to healthcare, discover everything you need to know about Lausanne.
+        </p>
+        
+        <!-- Quick Stats -->
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {quickStats.map(stat => (
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <dt class="text-gray-300 text-sm">{stat.label}</dt>
+              <dd class="text-white font-bold text-xl">{stat.value}</dd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Living in Lausanne -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Living in Lausanne</h2>
+        
+        <!-- PrimeRelocation.ch Highlight Box -->
+        <div class="bg-primary-50 rounded-xl p-6 mb-8 border-2 border-primary-200">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-semibold text-primary-900">Expert Tip: Use PrimeRelocation.ch</h3>
+              <p class="mt-1 text-primary-700">
+                For hassle-free housing search in Lausanne, we recommend <a href="https://www.primerelocation.ch" class="text-primary-600 hover:text-primary-800 font-medium">PrimeRelocation.ch</a>. Their specialized service for expats includes:
+              </p>
+              <ul class="mt-2 space-y-1">
+                <li class="flex items-center text-primary-700">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Premium property listings
+                </li>
+                <li class="flex items-center text-primary-700">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  English-speaking support
+                </li>
+                <li class="flex items-center text-primary-700">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Full relocation assistance
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Neighborhood Guide -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Neighborhoods Overview</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {neighborhoodGuide.map(neighborhood => (
+            <div class="bg-gray-50 rounded-lg p-6">
+              <h4 class="text-lg font-semibold text-gray-900 mb-2">{neighborhood.name}</h4>
+              <p class="text-gray-600 mb-3">{neighborhood.description}</p>
+              <div class="space-y-2">
+                {neighborhood.highlights.map(highlight => (
+                  <div class="flex items-center">
+                    <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-sm text-gray-600">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-3">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                  {neighborhood.type}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Insurance Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Health Insurance in Lausanne</h2>
+        
+        <div class="prose prose-lg mb-8">
+          <p>
+            Lausanne offers excellent healthcare facilities and services, with premiums generally lower than Geneva. Here's what you need to know:
+          </p>
+        </div>
+
+        <!-- Insurance Providers -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {insuranceProviders.map(provider => (
+            <a href={provider.link} class="block">
+              <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{provider.name}</h3>
+                <p class="text-gray-600 mb-2">{provider.description}</p>
+                <div class="text-primary-600 font-medium mb-3">{provider.monthlyPremium}</div>
+                <ul class="space-y-2">
+                  {provider.features.map(feature => (
+                    <li class="flex items-center text-sm text-gray-500">
+                      <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- Insurance Setup Links -->
+        <div class="bg-gray-50 rounded-lg p-8 mb-12">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Setting Up Your Insurance</h3>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <svg class="h-6 w-6 text-primary-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              <div>
+                <h4 class="font-medium text-gray-900">New to Switzerland?</h4>
+                <p class="text-gray-600 mt-1">Visit our <a href="/healthcare/new-health-insurance" class="text-primary-600 hover:text-primary-800">guide to setting up health insurance</a> for the first time.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg class="h-6 w-6 text-primary-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+              <div>
+                <h4 class="font-medium text-gray-900">Already Insured?</h4>
+                <p class="text-gray-600 mt-1">Learn about <a href="/news/switching-health-insurance-in-switzerland" class="text-primary-600 hover:text-primary-800">switching health insurance providers</a> to get better rates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help settling in Lausanne?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance for all your insurance needs
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
+
+<script>
+  // Add scroll animation
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElems = document.querySelectorAll('.fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    fadeElems.forEach(elem => observer.observe(elem));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
+</script>

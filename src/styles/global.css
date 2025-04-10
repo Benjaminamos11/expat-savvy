@@ -1,0 +1,121 @@
+/* Global styles */
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #25D366;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-button svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+}
+
+/* Mega menu styles */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+  z-index: 50;
+}
+
+.group:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 16rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+  z-index: 50;
+}
+
+.group:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.mobile-menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 20rem;
+  height: 100%;
+  background: white;
+  overflow-y: auto;
+}
+
+.mobile-submenu {
+  padding-left: 1rem;
+  border-left: 2px solid #e5e7eb;
+  margin-left: 1rem;
+}
+
+/* Ensure proper scrolling on mobile */
+@media (max-width: 768px) {
+  .mobile-menu-panel {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Text shadow for better readability on hero sections */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure dropdown menus don't overflow viewport */
+@media (min-width: 768px) {
+  .group:hover .group-hover\:visible {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+}

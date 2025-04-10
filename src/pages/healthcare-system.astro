@@ -1,0 +1,228 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const sections = [
+  {
+    title: "Basic Healthcare",
+    description: "Understanding the Swiss healthcare system",
+    items: [
+      {
+        name: "Mandatory Insurance",
+        description: "Basic health insurance requirements",
+        href: "/healthcare/glossary/compulsory-health-insurance"
+      },
+      {
+        name: "Who Needs Insurance",
+        description: "Requirements and exemptions",
+        href: "/healthcare/glossary/who-needs-health-insurance"
+      },
+      {
+        name: "Insurance Models",
+        description: "Different coverage options",
+        href: "/healthcare/glossary/gp-model"
+      }
+    ]
+  },
+  {
+    title: "Medical Care",
+    description: "Accessing healthcare services",
+    items: [
+      {
+        name: "Finding Doctors",
+        description: "Choosing medical providers",
+        href: "/healthcare/glossary/free-choice-of-medical-doctors"
+      },
+      {
+        name: "Hospital Care",
+        description: "Understanding hospital coverage",
+        href: "/healthcare/glossary/private-insurance"
+      },
+      {
+        name: "Emergency Care",
+        description: "What to do in emergencies",
+        href: "/healthcare/emergency-care"
+      }
+    ]
+  },
+  {
+    title: "Insurance Coverage",
+    description: "Types of health insurance",
+    items: [
+      {
+        name: "Basic Insurance",
+        description: "Mandatory coverage explained",
+        href: "/healthcare/glossary/basic-health-insurance"
+      },
+      {
+        name: "Supplementary Insurance",
+        description: "Additional coverage options",
+        href: "/healthcare/glossary/private-insurance"
+      },
+      {
+        name: "Dental Coverage",
+        description: "Understanding dental care",
+        href: "/healthcare/glossary/dental-hygiene"
+      }
+    ]
+  }
+];
+
+const keyFeatures = [
+  {
+    title: "Universal Coverage",
+    description: "Mandatory health insurance ensures everyone has access to quality healthcare",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  },
+  {
+    title: "Free Choice of Doctors",
+    description: "Choose your preferred healthcare providers with standard insurance",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+    </svg>`
+  },
+  {
+    title: "High Quality Care",
+    description: "Access to world-class medical facilities and treatments",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>`
+  },
+  {
+    title: "Preventive Care",
+    description: "Strong focus on prevention and health promotion",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  }
+];
+
+const faqs = [
+  {
+    question: "How does the Swiss healthcare system work?",
+    answer: "The Swiss healthcare system is based on mandatory private insurance. Everyone residing in Switzerland must have basic health insurance (KVG/LAMal) which covers essential medical services. Insurance is provided by private companies but regulated by the government."
+  },
+  {
+    question: "What's covered by basic health insurance?",
+    answer: "Basic insurance covers most essential medical services including doctor visits, hospital stays, prescription medications, and some preventive care. Additional services like dental care or private hospital rooms require supplementary insurance."
+  },
+  {
+    question: "How do I choose a doctor in Switzerland?",
+    answer: "With standard insurance, you can choose any doctor. However, alternative insurance models (like family doctor or HMO) may restrict your choice in exchange for lower premiums. Most doctors speak English, especially in urban areas."
+  },
+  {
+    question: "What happens in a medical emergency?",
+    answer: "Switzerland has an excellent emergency response system. Call 144 for ambulance services. Emergency rooms are available 24/7, and basic insurance covers emergency treatment. Keep your insurance card with you at all times."
+  }
+];
+---
+
+<Layout
+  title="Swiss Healthcare System Guide 2024 | Expert Overview"
+  description="Understanding the Swiss healthcare system. Learn about insurance requirements, finding doctors, and accessing medical care in Switzerland."
+>
+  <!-- Hero Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block">Swiss Healthcare System</span>
+          <span class="block text-primary-600">Complete Guide</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Understanding one of the world's best healthcare systems. Your guide to medical care in Switzerland.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Features -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Key Features</h2>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {keyFeatures.map(feature => (
+          <div class="bg-white overflow-hidden shadow rounded-lg border border-gray-200 hover:border-primary-500 transition-colors">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="text-primary-600 mb-4">
+                <Fragment set:html={feature.icon} />
+              </div>
+              <h3 class="text-lg font-medium text-gray-900">{feature.title}</h3>
+              <p class="mt-2 text-base text-gray-500">{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Sections -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-12">
+        {sections.map(section => (
+          <div>
+            <div class="mb-8">
+              <h2 class="text-3xl font-bold text-gray-900">{section.title}</h2>
+              <p class="mt-2 text-lg text-gray-600">{section.description}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {section.items.map(item => (
+                <a 
+                  href={item.href}
+                  class="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+                >
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">{item.name}</h3>
+                  <p class="text-gray-600">{item.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help understanding Swiss healthcare?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance from our insurance specialists
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

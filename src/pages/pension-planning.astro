@@ -1,0 +1,305 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const pillars = [
+  {
+    name: "1st Pillar (AHV/AVS)",
+    description: "State pension system",
+    features: [
+      "Mandatory contributions",
+      "Based on income",
+      "Universal coverage",
+      "Minimum subsistence"
+    ],
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>`
+  },
+  {
+    name: "2nd Pillar (BVG/LPP)",
+    description: "Occupational pension",
+    features: [
+      "Employer contributions",
+      "Income-based",
+      "Investment options",
+      "Early withdrawal possible"
+    ],
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
+    </svg>`
+  },
+  {
+    name: "3rd Pillar",
+    description: "Private pension",
+    features: [
+      "Voluntary savings",
+      "Tax benefits",
+      "Flexible options",
+      "Personal choice"
+    ],
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>`
+  }
+];
+
+const planningSteps = [
+  {
+    title: "Assess Current Situation",
+    description: "Review your existing pension provisions and coverage gaps",
+    tasks: [
+      "Check AHV/AVS contributions",
+      "Review pension fund statements",
+      "Evaluate 3rd pillar savings",
+      "Calculate expected benefits"
+    ]
+  },
+  {
+    title: "Define Goals",
+    description: "Set clear retirement objectives and timeline",
+    tasks: [
+      "Determine retirement age",
+      "Calculate needed income",
+      "Consider lifestyle goals",
+      "Plan for dependents"
+    ]
+  },
+  {
+    title: "Implement Strategy",
+    description: "Take action to achieve your pension goals",
+    tasks: [
+      "Optimize contributions",
+      "Choose investment strategy",
+      "Consider voluntary payments",
+      "Review regularly"
+    ]
+  }
+];
+
+const optimizationTips = [
+  {
+    title: "Voluntary Contributions",
+    description: "Make additional payments to your pension fund",
+    benefits: [
+      "Tax advantages",
+      "Higher retirement capital",
+      "Better insurance coverage",
+      "Flexible timing"
+    ]
+  },
+  {
+    title: "Investment Strategy",
+    description: "Choose appropriate investment options",
+    benefits: [
+      "Risk-adjusted returns",
+      "Portfolio diversification",
+      "Long-term growth",
+      "Professional management"
+    ]
+  },
+  {
+    title: "Tax Planning",
+    description: "Optimize tax benefits through pension contributions",
+    benefits: [
+      "Reduce taxable income",
+      "Save on taxes",
+      "Build retirement capital",
+      "Annual flexibility"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "When should I start pension planning?",
+    answer: "The earlier you start pension planning, the better. Ideally, begin as soon as you start working in Switzerland. Early planning allows you to maximize tax benefits and build a more substantial retirement fund."
+  },
+  {
+    question: "How much should I save for retirement?",
+    answer: "A general rule is to aim for 60-70% of your last income. The Swiss pension system (all three pillars combined) is designed to provide this level of replacement income if properly utilized."
+  },
+  {
+    question: "Can I withdraw my pension early?",
+    answer: "Early withdrawal is possible under certain conditions, such as buying property, starting a business, or leaving Switzerland permanently. However, this can significantly impact your retirement benefits."
+  },
+  {
+    question: "What happens to my pension if I leave Switzerland?",
+    answer: "You can withdraw your 2nd pillar when leaving Switzerland permanently (with some restrictions for EU/EFTA countries). The 1st pillar can be claimed as a pension or lump sum when reaching retirement age."
+  },
+  {
+    question: "How do I optimize my pension contributions?",
+    answer: "Consider making voluntary contributions to your pension fund, maximizing 3rd pillar contributions for tax benefits, and choosing appropriate investment strategies based on your age and risk tolerance."
+  }
+];
+---
+
+<Layout
+  title="Pension Planning Switzerland | Expert Guide 2024"
+  description="Complete guide to pension planning in Switzerland. Learn about the three-pillar system, optimization strategies, and how to secure your retirement."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Pension Planning</span>
+          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Secure your future with expert pension planning guidance. Understand the Swiss pension system and optimize your retirement savings.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#compare"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Pillars
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three Pillars Section -->
+  <div id="compare" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">The Three Pillars System</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {pillars.map(pillar => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <div class="text-primary-500 mb-4">
+              <Fragment set:html={pillar.icon} />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{pillar.name}</h3>
+            <p class="text-gray-600 mb-4">{pillar.description}</p>
+            <ul class="space-y-2">
+              {pillar.features.map(feature => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Planning Steps -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Planning Your Pension</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {planningSteps.map((step, index) => (
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+              <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 mr-3">
+                {index + 1}
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900">{step.title}</h3>
+            </div>
+            <p class="text-gray-600 mb-4">{step.description}</p>
+            <ul class="space-y-2">
+              {step.tasks.map(task => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {task}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Optimization Tips -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Optimization Strategies</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {optimizationTips.map(tip => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{tip.title}</h3>
+            <p class="text-gray-600 mb-4">{tip.description}</p>
+            <ul class="space-y-2">
+              {tip.benefits.map(benefit => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to optimize your pension planning?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to secure your retirement
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

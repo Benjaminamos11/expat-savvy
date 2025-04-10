@@ -1,0 +1,366 @@
+---
+interface Props {
+  provider?: string;
+}
+
+const { provider = "insurance" } = Astro.props;
+
+const insuranceStatus = [
+  { id: "new", label: "I need new insurance", description: "First time getting Swiss health insurance" },
+  { id: "switch", label: "I want to switch", description: "Currently have insurance but looking for better options" }
+];
+
+const insuranceTypes = [
+  { 
+    id: "basic", 
+    label: "Basic Insurance", 
+    description: "Mandatory health insurance (KVG/LAMal)",
+    tooltip: "Required by law for all residents in Switzerland"
+  },
+  { 
+    id: "supplementary", 
+    label: "Supplementary Insurance", 
+    description: "Additional coverage for enhanced protection",
+    tooltip: "Optional coverage for services not included in basic insurance like private hospital rooms, dental care, etc."
+  },
+  { 
+    id: "both", 
+    label: "Both Basic & Supplementary", 
+    description: "Complete coverage package",
+    recommended: true
+  }
+];
+
+const priorities = [
+  { id: "cost", label: "Lower Premiums", description: "Find the most cost-effective options" },
+  { id: "coverage", label: "Better Coverage", description: "Comprehensive protection and benefits" },
+  { id: "english", label: "English Service", description: "English-speaking customer support", recommended: true },
+  { id: "digital", label: "Digital Services", description: "Modern app and online services" },
+  { id: "choice", label: "Free Doctor Choice", description: "Choose any doctor you prefer" },
+  { id: "worldwide", label: "Worldwide Coverage", description: "Protection while traveling abroad" }
+];
+---
+
+<div class="bg-white rounded-xl shadow-lg overflow-hidden">
+  <div class="p-4 sm:p-8">
+    <!-- Header section - Optimized padding for mobile -->
+    <div class="text-center mb-6 sm:mb-8">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Get Your Personalized {provider} Quote</h2>
+      <p class="mt-2 text-sm sm:text-base text-gray-600">Tell us about your needs for a tailored recommendation</p>
+      <div class="mt-2 sm:mt-3 flex items-center justify-center text-xs sm:text-sm text-primary-600">
+        <svg class="h-3 w-3 sm:h-4 sm:w-4 text-green-400 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span id="form-active-users">7 people are comparing options right now</span>
+      </div>
+    </div>
+
+    <form id="smart-insurance-form" action="https://formspree.io/f/mrbewjlr" method="POST" class="space-y-6 sm:space-y-8">
+      <!-- Hidden fields for form metadata -->
+      <input type="hidden" name="provider" value={provider} />
+      <input type="hidden" name="form_type" value="smart_insurance" />
+
+      <!-- Form steps - Optimize spacing and sizing for mobile -->
+      <div class="form-steps-container min-h-[300px] sm:min-h-[400px] relative">
+        <!-- Each form step gets absolute positioning to maintain consistent height -->
+        <div class="form-step absolute inset-0" data-step="1">
+          <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">What's your current situation?</h3>
+          <div class="space-y-2 sm:space-y-3">
+            {insuranceStatus.map(status => (
+              <label class="flex items-start p-3 sm:p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                <input
+                  type="radio"
+                  name="insurance_status"
+                  value={status.id}
+                  class="h-4 w-4 mt-1 text-primary-600 focus:ring-primary-500 border-gray-300"
+                />
+                <div class="ml-3">
+                  <span class="block text-sm sm:text-base font-medium text-gray-900">{status.label}</span>
+                  <span class="block text-xs sm:text-sm text-gray-500">{status.description}</span>
+                </div>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Step 2: Start Date -->
+        <div class="form-step hidden absolute inset-0" data-step="2" id="start-date-step">
+          <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">When do you need the insurance to start?</h3>
+          <div class="space-y-4">
+            <div>
+              <label for="start-date" class="block text-sm font-medium text-gray-700">Start Date</label>
+              <input 
+                type="date" 
+                id="start-date" 
+                name="start_date" 
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                min={new Date().toISOString().split('T')[0]}
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Insurance Type -->
+        <div class="form-step hidden absolute inset-0" data-step="3">
+          <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">What type of insurance are you looking for?</h3>
+          <div class="space-y-2 sm:space-y-3">
+            {insuranceTypes.map(type => (
+              <label class="relative flex items-start p-3 sm:p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                <input
+                  type="radio"
+                  name="insurance_type"
+                  value={type.id}
+                  class="h-4 w-4 mt-1 text-primary-600 focus:ring-primary-500 border-gray-300"
+                />
+                <div class="ml-3">
+                  <span class="block text-sm sm:text-base font-medium text-gray-900">
+                    {type.label}
+                    {type.recommended && (
+                      <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary-100 text-primary-800">
+                        Recommended
+                      </span>
+                    )}
+                  </span>
+                  <span class="block text-xs sm:text-sm text-gray-500">{type.description}</span>
+                </div>
+                {type.tooltip && (
+                  <div class="group relative ml-2">
+                    <button type="button" class="text-gray-400 hover:text-gray-500">
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 px-2 py-1 bg-gray-900 rounded text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      {type.tooltip}
+                    </div>
+                  </div>
+                )}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Step 4: Priorities -->
+        <div class="form-step hidden absolute inset-0" data-step="4">
+          <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">What matters most to you? (Choose up to 3)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
+            {priorities.map(priority => (
+              <label class="flex items-start p-3 sm:p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                <input
+                  type="checkbox"
+                  name="priorities"
+                  value={priority.id}
+                  class="h-4 w-4 mt-1 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                />
+                <div class="ml-3">
+                  <span class="block text-sm sm:text-base font-medium text-gray-900">
+                    {priority.label}
+                    {priority.recommended && (
+                      <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary-100 text-primary-800">
+                        Recommended
+                      </span>
+                    )}
+                  </span>
+                  <span class="block text-xs sm:text-sm text-gray-500">{priority.description}</span>
+                </div>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Step 5: Contact Info -->
+        <div class="form-step hidden absolute inset-0" data-step="5">
+          <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">Your Contact Information</h3>
+          <div class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+              <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" required />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" required />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" />
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700">Additional Information (optional)</label>
+              <textarea id="message" name="message" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Submit -->
+        <div class="form-step hidden absolute inset-0" data-step="6">
+          <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">Submit Your Request</h3>
+          <p class="text-sm sm:text-base text-gray-600 mb-6">Click submit to send your request and we'll get back to you shortly.</p>
+          <button
+            type="submit"
+            class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+          >
+            Submit Request
+            <svg class="ml-2 h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons - Optimized for mobile -->
+      <div class="flex justify-between mt-6 sm:mt-8 sticky bottom-0 bg-white py-2 border-t sm:border-t-0">
+        <button
+          type="button"
+          id="prev-step"
+          class="hidden px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          id="next-step"
+          class="ml-auto px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+        >
+          Next
+        </button>
+      </div>
+
+      <!-- Progress Indicator - Fixed to bottom on mobile -->
+      <div class="mt-4 sticky -bottom-4 bg-white pt-2 pb-4">
+        <div class="flex justify-between mb-1 sm:mb-2">
+          <span class="text-xs font-medium text-gray-500">Progress</span>
+          <span class="text-xs font-medium text-primary-600" id="progress-text">Step 1 of 6</span>
+        </div>
+        <div class="h-1 sm:h-2 bg-gray-200 rounded-full">
+          <div class="h-1 sm:h-2 bg-primary-600 rounded-full transition-all duration-300" style="width: 16.67%" id="progress-bar"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Add styles for form step transitions */
+  .form-steps-container {
+    position: relative;
+  }
+
+  .form-step {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  .form-step.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Mobile-specific styles */
+  @media (max-width: 640px) {
+    .form-steps-container {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Optimize form elements for touch */
+    input[type="radio"],
+    input[type="checkbox"] {
+      min-width: 20px;
+      min-height: 20px;
+    }
+
+    /* Reduce padding and margins for mobile */
+    .form-step label {
+      padding: 0.75rem;
+    }
+  }
+
+  /* Tooltip styles remain the same */
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 6;
+  let skipStartDateStep = false;
+
+  function updateActiveUsers() {
+    const element = document.getElementById('form-active-users');
+    if (element) {
+      const count = Math.floor(Math.random() * (9 - 4 + 1)) + 4;
+      element.textContent = `${count} people are comparing options right now`;
+    }
+  }
+
+  function updateProgress() {
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const progress = (currentStep / totalSteps) * 100;
+    
+    if (progressBar) progressBar.style.width = `${progress}%`;
+    if (progressText) progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
+  }
+
+  function showStep(step) {
+    // Handle start date step visibility
+    if (step === 2 && skipStartDateStep) {
+      step = 3;
+    }
+
+    document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
+    document.querySelector(`[data-step="${step}"]`).classList.remove('hidden');
+    
+    const prevButton = document.getElementById('prev-step');
+    const nextButton = document.getElementById('next-step');
+    
+    prevButton.classList.toggle('hidden', step === 1);
+    nextButton.textContent = step === totalSteps ? 'Submit' : 'Next';
+    nextButton.type = step === totalSteps ? 'submit' : 'button';
+    
+    currentStep = step;
+    updateProgress();
+  }
+
+  // Handle insurance status selection
+  document.querySelectorAll('input[name="insurance_status"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      skipStartDateStep = e.target.value === 'switch';
+    });
+  });
+
+  // Handle priorities selection limit
+  document.querySelectorAll('input[name="priorities"]').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const checked = document.querySelectorAll('input[name="priorities"]:checked');
+      if (checked.length > 3) {
+        e.target.checked = false;
+      }
+    });
+  });
+
+  document.getElementById('prev-step')?.addEventListener('click', () => {
+    if (currentStep > 1) {
+      let prevStep = currentStep - 1;
+      if (prevStep === 2 && skipStartDateStep) {
+        prevStep = 1;
+      }
+      showStep(prevStep);
+    }
+  });
+
+  document.getElementById('next-step')?.addEventListener('click', () => {
+    if (currentStep < totalSteps) {
+      let nextStep = currentStep + 1;
+      if (nextStep === 2 && skipStartDateStep) {
+        nextStep = 3;
+      }
+      showStep(nextStep);
+    }
+  });
+
+  // Initialize
+  updateActiveUsers();
+  setInterval(updateActiveUsers, 30000); // Update every 30 seconds
+</script>

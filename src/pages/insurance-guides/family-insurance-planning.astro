@@ -1,0 +1,446 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/ConsultationModal.astro';
+
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "Insurance Guides", href: "/insurance-guides" },
+  { name: "Family Insurance Planning", href: "/insurance-guides/family-insurance-planning" }
+];
+
+const pregnancyCoverage = {
+  basic: [
+    {
+      title: "Check-ups & Screenings",
+      items: [
+        "7 routine check-ups during normal pregnancy",
+        "2 ultrasound examinations",
+        "First trimester screening",
+        "Prenatal diagnostics for high-risk pregnancies",
+        "Blood tests and screenings"
+      ]
+    },
+    {
+      title: "Birth & Delivery",
+      items: [
+        "All delivery costs (hospital or birthing center)",
+        "Midwife services during pregnancy and birth",
+        "Anesthesia if medically necessary",
+        "Cesarean section when indicated",
+        "Postnatal care in hospital"
+      ]
+    },
+    {
+      title: "Postpartum Care",
+      items: [
+        "3 breastfeeding consultations",
+        "1 postpartum check-up",
+        "Midwife home visits (up to 10)",
+        "Additional visits if medically necessary",
+        "Basic newborn care"
+      ]
+    }
+  ],
+  supplementary: [
+    {
+      title: "Enhanced Comfort",
+      items: [
+        "Private or semi-private room",
+        "Choice of hospital anywhere in Switzerland",
+        "Extended hospital stay",
+        "Family room options",
+        "Additional amenities"
+      ]
+    },
+    {
+      title: "Additional Services",
+      items: [
+        "Extra ultrasound examinations",
+        "Birth preparation classes",
+        "Alternative medicine treatments",
+        "Extended breastfeeding support",
+        "Postnatal fitness classes"
+      ]
+    },
+    {
+      title: "Family Benefits",
+      items: [
+        "Rooming-in coverage",
+        "Extended family room stay",
+        "Additional midwife visits",
+        "Home help services",
+        "Child care support"
+      ]
+    }
+  ]
+};
+
+const newbornInsurance = {
+  whyRegister: [
+    {
+      title: "Guaranteed Acceptance",
+      description: "Pre-register to ensure acceptance without health checks",
+      icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>`
+    },
+    {
+      title: "No Waiting Periods",
+      description: "Immediate coverage for supplementary insurance from birth",
+      icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>`
+    },
+    {
+      title: "Better Coverage Options",
+      description: "Access to comprehensive supplementary insurance packages",
+      icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>`
+    }
+  ],
+  packages: [
+    {
+      name: "Basic Coverage",
+      description: "Mandatory health insurance for newborns",
+      features: [
+        "Doctor visits and vaccinations",
+        "Hospital stays if needed",
+        "Prescription medications",
+        "Emergency care",
+        "Preventive care"
+      ],
+      deadline: "Within 3 months of birth"
+    },
+    {
+      name: "Hospital Insurance",
+      description: "Enhanced hospital care options",
+      features: [
+        "Private or semi-private ward",
+        "Free choice of hospital",
+        "Rooming-in coverage",
+        "Extended stay options",
+        "Specialist care"
+      ],
+      deadline: "Before birth for guaranteed acceptance"
+    },
+    {
+      name: "Dental Coverage",
+      description: "Early dental care protection",
+      features: [
+        "Regular check-ups",
+        "Orthodontic treatment",
+        "Accident coverage",
+        "Preventive care",
+        "Major dental work"
+      ],
+      deadline: "Before birth recommended"
+    }
+  ],
+  timeline: [
+    {
+      when: "During Pregnancy",
+      what: "Research and compare insurance options",
+      why: "Best time for supplementary insurance acceptance"
+    },
+    {
+      when: "Before Birth",
+      what: "Pre-register for chosen supplementary coverage",
+      why: "Guaranteed acceptance without health checks"
+    },
+    {
+      when: "After Birth",
+      what: "Complete basic insurance registration",
+      why: "Required within 3 months of birth"
+    }
+  ]
+};
+
+const faqs = [
+  {
+    question: "When should I register my baby for health insurance?",
+    answer: "For basic insurance, you have 3 months after birth to register your baby. However, for supplementary insurance, it's recommended to pre-register during pregnancy to ensure acceptance without health checks and immediate coverage from birth."
+  },
+  {
+    question: "What pregnancy costs are covered by basic insurance?",
+    answer: "Basic insurance covers all essential pregnancy care including check-ups, ultrasounds, birth, and postpartum care. This includes 7 routine check-ups, 2 ultrasounds, delivery costs, and up to 10 midwife visits after birth."
+  },
+  {
+    question: "Can I choose any insurance provider for my baby?",
+    answer: "Yes, you can choose any provider for your baby's basic insurance, regardless of your own provider. For supplementary insurance, pre-registering during pregnancy often offers better acceptance chances and terms."
+  },
+  {
+    question: "What additional coverage should I consider for my baby?",
+    answer: "Consider supplementary insurance for enhanced hospital care (private/semi-private), comprehensive dental coverage, and alternative medicine. Pre-registering during pregnancy ensures acceptance without health checks."
+  },
+  {
+    question: "Do I pay deductibles for pregnancy care?",
+    answer: "No, pregnancy-related care from the 13th week of pregnancy until 8 weeks after birth is exempt from deductibles and co-payments under basic insurance."
+  }
+];
+---
+
+<Layout
+  title="Family Insurance Planning Switzerland | Pregnancy & Newborn Guide 2024"
+  description="Complete guide to pregnancy insurance and newborn coverage in Switzerland. Learn about pre-registration benefits, coverage options, and important deadlines."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Family Insurance Planning Guide Switzerland 2024",
+      "description": "Comprehensive guide to pregnancy and newborn insurance coverage in Switzerland, including pre-registration benefits and deadlines.",
+      "datePublished": "2024-01-15",
+      "dateModified": "2024-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Expat Savvy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+        }
+      },
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "When should I register my baby for health insurance?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For basic insurance, you have 3 months after birth to register your baby. However, for supplementary insurance, it's recommended to pre-register during pregnancy to ensure acceptance without health checks and immediate coverage from birth."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What pregnancy costs are covered by basic insurance?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Basic insurance covers all essential pregnancy care including check-ups, ultrasounds, birth, and postpartum care. This includes 7 routine check-ups, 2 ultrasounds, delivery costs, and up to 10 midwife visits after birth."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-4">
+        {breadcrumbs.map((item, index) => (
+          <li class="flex items-center">
+            {index > 0 && (
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            )}
+            <a
+              href={item.href}
+              class={`ml-4 text-sm font-medium ${
+                index === breadcrumbs.length - 1
+                  ? 'text-gray-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block">Family Insurance</span>
+          <span class="block text-primary-600">Planning Guide</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Everything you need to know about pregnancy coverage and newborn insurance in Switzerland. Learn why pre-registration matters and how to secure the best coverage for your growing family.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pregnancy Coverage Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Pregnancy Coverage</h2>
+        
+        <!-- Basic Coverage -->
+        <div class="space-y-8 mb-12">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6">Basic Insurance Coverage</h3>
+            <div class="grid gap-8">
+              {pregnancyCoverage.basic.map(section => (
+                <div>
+                  <h4 class="text-lg font-medium text-gray-900 mb-4">{section.title}</h4>
+                  <ul class="space-y-3">
+                    {section.items.map(item => (
+                      <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-gray-600">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Supplementary Coverage -->
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Supplementary Insurance Options</h3>
+        <div class="grid gap-6">
+          {pregnancyCoverage.supplementary.map(section => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h4 class="text-lg font-medium text-gray-900 mb-4">{section.title}</h4>
+              <ul class="space-y-3">
+                {section.items.map(item => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newborn Insurance Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Newborn Insurance</h2>
+
+        <!-- Why Pre-register -->
+        <div class="bg-primary-50 rounded-xl p-8 mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Why Pre-register Your Baby?</h3>
+          <div class="grid gap-6">
+            {newbornInsurance.whyRegister.map(reason => (
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white">
+                    <Fragment set:html={reason.icon} />
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-lg font-medium text-gray-900">{reason.title}</h4>
+                  <p class="mt-2 text-gray-600">{reason.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Insurance Packages -->
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Available Insurance Packages</h3>
+        <div class="grid gap-6 mb-12">
+          {newbornInsurance.packages.map(pkg => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="text-lg font-medium text-gray-900">{pkg.name}</h4>
+                  <p class="text-gray-600 mt-1">{pkg.description}</p>
+                </div>
+                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
+                  {pkg.deadline}
+                </span>
+              </div>
+              <ul class="mt-4 space-y-3">
+                {pkg.features.map(feature => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <!-- Registration Timeline -->
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Registration Timeline</h3>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="space-y-8">
+            {newbornInsurance.timeline.map((item, index) => (
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-semibold">
+                    {index + 1}
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-lg font-medium text-gray-900">{item.when}</h4>
+                  <p class="text-gray-600">{item.what}</p>
+                  <p class="text-sm text-primary-600 mt-1">{item.why}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Planning for your family's future?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance on pregnancy and newborn insurance
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

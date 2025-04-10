@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const providers = [
+  {
+    name: "Assura",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406940/assura-logo-png_seeklogo-462524_zlvevx.png",
+    link: "/healthcare/all-insurances/assura",
+    description: "Known for competitive premiums and innovative insurance solutions in Switzerland."
+  },
+  {
+    name: "CSS",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740414664/css-logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/css",
+    description: "Switzerland's largest health insurer with comprehensive coverage options."
+  },
+  {
+    name: "Groupe Mutuel",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/gm-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/groupe-mutuel",
+    description: "Comprehensive coverage options with strong presence in French-speaking Switzerland."
+  },
+  {
+    name: "Helsana",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp",
+    link: "/healthcare/all-insurances/helsana",
+    description: "Leading provider with extensive supplementary insurance options and digital innovation."
+  },
+  {
+    name: "KPT",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/kpt-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/kpt",
+    description: "Known for competitive rates and efficient claims processing."
+  },
+  {
+    name: "Sanitas",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/sanitas_logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/sanitas",
+    description: "Offers international coverage and digital innovation."
+  },
+  {
+    name: "Swica",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/swica_logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/swica",
+    description: "Emphasizes health promotion and alternative medicine."
+  },
+  {
+    name: "Sympany",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/sympany-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/sympany",
+    description: "Focuses on customer-centric insurance solutions with competitive premiums."
+  },
+  {
+    name: "Visana",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/visana-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/visana",
+    description: "Provides flexible insurance models with prevention focus."
+  },
+  {
+    name: "Concordia",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/concordia-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/concordia",
+    description: "Focuses on family-friendly insurance solutions and preventive care."
+  },
+  {
+    name: "Atupri",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/atupri-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/atupri",
+    description: "Modern health insurance with digital-first approach and competitive rates."
+  }
+];
+
+const categories = [
+  {
+    title: "Basic Insurance",
+    description: "Mandatory health insurance providers",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  },
+  {
+    title: "Supplementary Insurance",
+    description: "Additional coverage options",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>`
+  },
+  {
+    title: "Specialized Coverage",
+    description: "Tailored insurance solutions",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+    </svg>`
+  }
+];
+---
+
+<Layout
+  title="Insurance Providers in Switzerland | Expat Savvy"
+  description="Compare Swiss health insurance providers. Find detailed information about coverage, premiums, and special features of major Swiss insurance companies."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Organization",
+            "name": "Assura",
+            "url": "https://expat-savvy.ch/healthcare/all-insurances/assura",
+            "description": "Known for competitive premiums and innovative insurance solutions in Switzerland."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Organization",
+            "name": "CSS",
+            "url": "https://expat-savvy.ch/healthcare/all-insurances/css",
+            "description": "Switzerland's largest health insurer with comprehensive coverage options."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Organization",
+            "name": "Groupe Mutuel",
+            "url": "https://expat-savvy.ch/healthcare/all-insurances/groupe-mutuel",
+            "description": "Comprehensive coverage options with strong presence in French-speaking Switzerland."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">Insurance Providers in Switzerland</h1>
+        <p class="mt-4 text-xl text-gray-500 max-w-3xl mx-auto">Compare Switzerland's leading health insurance providers and find the perfect coverage for your needs.</p>
+      </div>
+
+      <!-- Categories Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        {categories.map(category => (
+          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
+            <div class="text-primary-500 mb-4">
+              <Fragment set:html={category.icon} />
+            </div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">{category.title}</h2>
+            <p class="text-gray-600">{category.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Providers Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {providers.map((provider) => (
+          <a href={provider.link} class="block">
+            <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow p-6 border border-gray-200">
+              <div class="h-16 mb-4 flex items-center">
+                <img src={provider.logo} alt={`${provider.name} logo`} class="h-12 w-auto object-contain" />
+              </div>
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">{provider.name}</h2>
+              <p class="text-gray-600 mb-4">{provider.description}</p>
+              <div class="text-primary-600 font-medium flex items-center">
+                Learn more
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA Section -->
+      <div class="mt-16 bg-primary-50 rounded-xl p-8 shadow-sm">
+        <div class="text-center">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Need help choosing the right provider?</h2>
+          <p class="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+            Our insurance experts can help you navigate the Swiss insurance landscape and find the perfect coverage for your specific needs.
+          </p>
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

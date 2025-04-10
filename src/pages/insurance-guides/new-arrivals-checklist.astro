@@ -1,0 +1,410 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/ConsultationModal.astro';
+
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "Insurance Guides", href: "/insurance-guides" },
+  { name: "New Arrivals Checklist", href: "/insurance-guides/new-arrivals-checklist" }
+];
+
+const checklist = {
+  beforeArrival: [
+    {
+      title: "Research Insurance Options",
+      items: [
+        "Compare basic insurance providers",
+        "Understand supplementary insurance options",
+        "Check cantonal premium differences",
+        "Review deductible options"
+      ],
+      timeframe: "2-3 months before arrival",
+      priority: "High"
+    },
+    {
+      title: "Gather Required Documents",
+      items: [
+        "Residence permit or application confirmation",
+        "Passport copies",
+        "Employment contract (if applicable)",
+        "Previous insurance certificates"
+      ],
+      timeframe: "1-2 months before arrival",
+      priority: "High"
+    }
+  ],
+  uponArrival: [
+    {
+      title: "Register with Authorities",
+      items: [
+        "Register with local commune within 14 days",
+        "Obtain residence permit",
+        "Get Swiss address documentation"
+      ],
+      timeframe: "First 2 weeks",
+      priority: "Urgent"
+    },
+    {
+      title: "Set Up Insurance",
+      items: [
+        "Choose and apply for basic insurance",
+        "Consider supplementary insurance needs",
+        "Submit all required documentation",
+        "Set up premium payments"
+      ],
+      timeframe: "Within 3 months",
+      priority: "Urgent"
+    }
+  ],
+  afterSetup: [
+    {
+      title: "Additional Considerations",
+      items: [
+        "Check premium reduction eligibility",
+        "Set up accident insurance if not employed",
+        "Consider dental insurance options",
+        "Review travel insurance needs"
+      ],
+      timeframe: "First 3-6 months",
+      priority: "Medium"
+    },
+    {
+      title: "Regular Reviews",
+      items: [
+        "Annual premium comparison",
+        "Coverage assessment",
+        "Update personal information",
+        "Review supplementary needs"
+      ],
+      timeframe: "Ongoing",
+      priority: "Medium"
+    }
+  ]
+};
+
+const importantDates = [
+  {
+    date: "Within 14 days of arrival",
+    task: "Register with local authorities",
+    description: "Required for residence permit and insurance setup"
+  },
+  {
+    date: "Within 3 months of arrival",
+    task: "Obtain health insurance",
+    description: "Mandatory basic insurance coverage required"
+  },
+  {
+    date: "November 30 (annually)",
+    task: "Insurance switching deadline",
+    description: "Last day to change basic insurance provider for next year"
+  },
+  {
+    date: "December 31 (annually)",
+    task: "Premium reduction application",
+    description: "Deadline for most cantons' premium reduction applications"
+  }
+];
+
+const faqs = [
+  {
+    question: "When do I need to get health insurance after arriving in Switzerland?",
+    answer: "You must obtain health insurance within 3 months of arrival. Coverage is retroactive to your arrival date, ensuring you're protected during the selection period."
+  },
+  {
+    question: "What happens if I miss the 3-month deadline?",
+    answer: "Missing the deadline can result in being automatically assigned to an insurer by your canton, potentially with higher premiums. You may also face penalties."
+  },
+  {
+    question: "Can I use my existing international health insurance?",
+    answer: "Generally no. Swiss law requires residents to have Swiss health insurance. Some exceptions exist for temporary residents and cross-border workers."
+  },
+  {
+    question: "How do I choose between different insurance models?",
+    answer: "Consider factors like premium costs, preferred doctors, and flexibility needs. Standard models offer full choice but cost more, while restricted models (family doctor, telemedicine) offer savings."
+  },
+  {
+    question: "What documents do I need to apply for health insurance?",
+    answer: "You'll need your residence permit (or application confirmation), passport, Swiss address documentation, and potentially employment contract or study confirmation."
+  }
+];
+---
+
+<Layout
+  title="New Arrivals Insurance Checklist Switzerland | Expert Guide 2024"
+  description="Essential insurance checklist for newcomers to Switzerland. Step-by-step guide to setting up health insurance and meeting legal requirements. Updated for 2024."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Insurance Setup Checklist for New Arrivals in Switzerland",
+      "description": "Step-by-step guide for setting up insurance as a newcomer to Switzerland",
+      "totalTime": "P3M",
+      "step": [
+        {
+          "@type": "HowToSection",
+          "name": "Before Arrival",
+          "itemListElement": [
+            {
+              "@type": "HowToStep",
+              "name": "Research Insurance Options",
+              "text": "Compare basic insurance providers and understand supplementary insurance options"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Gather Required Documents",
+              "text": "Prepare necessary documentation including passport, residence permit, and previous insurance certificates"
+            }
+          ]
+        },
+        {
+          "@type": "HowToSection",
+          "name": "Upon Arrival",
+          "itemListElement": [
+            {
+              "@type": "HowToStep",
+              "name": "Register with Authorities",
+              "text": "Register with local commune and obtain residence permit"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Set Up Insurance",
+              "text": "Choose and apply for basic insurance within 3 months"
+            }
+          ]
+        }
+      ],
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "When do I need to get health insurance after arriving in Switzerland?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You must obtain health insurance within 3 months of arrival. Coverage is retroactive to your arrival date, ensuring you're protected during the selection period."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I miss the 3-month deadline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Missing the deadline can result in being automatically assigned to an insurer by your canton, potentially with higher premiums. You may also face penalties."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-4">
+        {breadcrumbs.map((item, index) => (
+          <li class="flex items-center">
+            {index > 0 && (
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            )}
+            <a
+              href={item.href}
+              class={`ml-4 text-sm font-medium ${
+                index === breadcrumbs.length - 1
+                  ? 'text-gray-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block">New Arrivals</span>
+          <span class="block text-primary-600">Insurance Checklist</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Your comprehensive guide to setting up insurance as a newcomer to Switzerland. Follow our checklist to ensure you meet all requirements and deadlines.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Important Dates -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Key Deadlines</h2>
+        <div class="space-y-6">
+          {importantDates.map(date => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-100 text-primary-600">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-lg font-medium text-gray-900">{date.date}</h3>
+                  <h4 class="text-base font-medium text-primary-600">{date.task}</h4>
+                  <p class="mt-2 text-gray-600">{date.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Before Arrival Checklist -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Before Arrival Checklist</h2>
+        <div class="space-y-8">
+          {checklist.beforeArrival.map(section => (
+            <div class="bg-gray-50 rounded-lg p-6">
+              <div class="flex items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">{section.title}</h3>
+                <span class="ml-4 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
+                  {section.priority}
+                </span>
+              </div>
+              <p class="text-sm text-gray-500 mb-4">{section.timeframe}</p>
+              <ul class="space-y-3">
+                {section.items.map(item => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upon Arrival Checklist -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Upon Arrival Checklist</h2>
+        <div class="space-y-8">
+          {checklist.uponArrival.map(section => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">{section.title}</h3>
+                <span class="ml-4 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                  {section.priority}
+                </span>
+              </div>
+              <p class="text-sm text-gray-500 mb-4">{section.timeframe}</p>
+              <ul class="space-y-3">
+                {section.items.map(item => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- After Setup Checklist -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">After Setup Checklist</h2>
+        <div class="space-y-8">
+          {checklist.afterSetup.map(section => (
+            <div class="bg-gray-50 rounded-lg p-6">
+              <div class="flex items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">{section.title}</h3>
+                <span class="ml-4 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                  {section.priority}
+                </span>
+              </div>
+              <p class="text-sm text-gray-500 mb-4">{section.timeframe}</p>
+              <ul class="space-y-3">
+                {section.items.map(item => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help with your insurance setup?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance for a smooth transition
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

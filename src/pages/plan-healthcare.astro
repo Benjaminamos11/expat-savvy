@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const benefits = [
+  {
+    title: "Expert Guidance",
+    description: "Get personalized advice from licensed and registered brokers with deep knowledge of Swiss insurance.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  },
+  {
+    title: "Personalized Analysis",
+    description: "We'll review your current situation and budget to recommend coverage that matches your unique needs.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    </svg>`
+  },
+  {
+    title: "Clear Communication",
+    description: "We explain Swiss insurance essentials in plain English—no jargon, no confusion.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+    </svg>`
+  },
+  {
+    title: "Tailored Recommendations",
+    description: "After our call, receive individualized insurer and premium options to compare at a glance.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>`
+  }
+];
+
+const steps = [
+  {
+    number: 1,
+    title: "Schedule Your Call",
+    description: "Choose a convenient date and time for your free consultation.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>`
+  },
+  {
+    number: 2,
+    title: "Meet Online",
+    description: "Join our secure video call for a personal consultation.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>`
+  },
+  {
+    number: 3,
+    title: "Get Recommendations",
+    description: "Receive personalized insurance options and clear next steps.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>`
+  }
+];
+---
+
+<Layout
+  title="Book Your Free Insurance Consultation | Expat Savvy"
+  description="Schedule a free consultation with our Swiss insurance experts. Get personalized advice and find the perfect coverage for your needs."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white">
+    <div class="absolute inset-0">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+        <div class="max-w-lg mx-auto">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Book Your Free Insurance Consultation
+          </h1>
+          <p class="mt-6 text-xl text-gray-500">
+            Get expert guidance on your Swiss insurance options—completely free. Our online consultation helps you clarify coverage, understand costs, and feel confident in your decisions.
+          </p>
+          <div class="mt-8">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Schedule Your Free Call
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+        <div class="max-w-lg mx-auto">
+          <h2 class="text-3xl font-extrabold text-white">Why choose our consultation?</h2>
+          <div class="mt-8 space-y-6">
+            {benefits.map(benefit => (
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                    <Fragment set:html={benefit.icon} />
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-medium text-white">{benefit.title}</h3>
+                  <p class="mt-2 text-base text-primary-100">{benefit.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works Section -->
+  <div class="bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900">How It Works</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+          Three simple steps to get personalized insurance guidance
+        </p>
+      </div>
+
+      <div class="mt-16">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {steps.map((step) => (
+            <div class="relative">
+              <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white">
+                <Fragment set:html={step.icon} />
+              </div>
+              <div class="ml-16 pt-1">
+                <p class="text-xl font-bold text-gray-900">Step {step.number}</p>
+                <h3 class="mt-2 text-xl font-medium text-gray-900">{step.title}</h3>
+                <p class="mt-2 text-base text-gray-500">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Service is Free Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900">Our Service is Free</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+          We're compensated by insurance providers when you choose to sign up through us, ensuring you get unbiased advice at no cost to you.
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Book Your Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>

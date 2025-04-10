@@ -1,0 +1,505 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+const insuranceModels = [
+  {
+    name: "Standard Model",
+    description: "Free choice of doctors throughout Switzerland",
+    savings: "0%",
+    features: [
+      "Choose any doctor in Switzerland",
+      "Direct specialist access",
+      "No restrictions on medical providers",
+      "Maximum flexibility"
+    ]
+  },
+  {
+    name: "Family Doctor",
+    description: "Designated family doctor as first point of contact",
+    savings: "Up to 15%",
+    features: [
+      "Personal relationship with doctor",
+      "Coordinated care",
+      "Specialist referrals when needed",
+      "Lower premiums"
+    ]
+  },
+  {
+    name: "HMO",
+    description: "Health Maintenance Organization model",
+    savings: "Up to 20%",
+    features: [
+      "Care through group practice",
+      "Integrated healthcare",
+      "Significant premium savings",
+      "Coordinated specialist care"
+    ]
+  },
+  {
+    name: "Telmed",
+    description: "Initial consultation via phone/video",
+    savings: "Up to 15%",
+    features: [
+      "24/7 medical advice",
+      "Convenient access",
+      "Professional triage",
+      "Lower premiums"
+    ]
+  }
+];
+
+const deductibleOptions = [
+  {
+    type: "Adults",
+    options: [
+      { amount: 300, savings: "0%" },
+      { amount: 500, savings: "8%" },
+      { amount: 1000, savings: "12%" },
+      { amount: 1500, savings: "16%" },
+      { amount: 2000, savings: "20%" },
+      { amount: 2500, savings: "25%" }
+    ]
+  },
+  {
+    type: "Children",
+    options: [
+      { amount: 0, savings: "0%" },
+      { amount: 100, savings: "5%" },
+      { amount: 200, savings: "8%" },
+      { amount: 300, savings: "10%" },
+      { amount: 400, savings: "12%" },
+      { amount: 500, savings: "15%" },
+      { amount: 600, savings: "18%" }
+    ]
+  }
+];
+
+const premiumRanges = {
+  regions: [
+    { 
+      name: "Region 1", 
+      range: "380-550", 
+      examples: "Urban centers like Zurich, Geneva, Basel",
+      description: "Major cities and metropolitan areas with highest healthcare costs"
+    },
+    { 
+      name: "Region 2", 
+      range: "340-480", 
+      examples: "Mid-sized cities, suburban areas",
+      description: "Medium population density areas with moderate healthcare costs"
+    },
+    { 
+      name: "Region 3", 
+      range: "300-420", 
+      examples: "Rural areas, smaller towns",
+      description: "Lower population density areas with lower healthcare costs"
+    }
+  ],
+  ageGroups: [
+    { group: "Children (0-18)", range: "90-140", notes: "No deductible required" },
+    { group: "Young Adults (19-25)", range: "250-380", notes: "Special reduced rates" },
+    { group: "Adults (26+)", range: "300-550", notes: "Standard adult rates" }
+  ]
+};
+
+const coverage = {
+  included: [
+    "Doctor visits and treatments",
+    "Hospital stays (general ward)",
+    "Emergency treatment",
+    "Prescription medications",
+    "Pregnancy and childbirth",
+    "Preventive care",
+    "Vaccinations",
+    "Mental health care",
+    "Rehabilitation"
+  ],
+  notIncluded: [
+    "Dental care (except accidents)",
+    "Vision care (glasses/contacts)",
+    "Alternative medicine",
+    "Private hospital rooms",
+    "Cosmetic surgery",
+    "Non-prescription medications"
+  ]
+};
+
+const accidentCoverage = {
+  needCoverage: [
+    "Self-employed individuals",
+    "Part-time workers (< 8 hours/week)",
+    "Unemployed persons",
+    "Retired persons",
+    "Students without employment"
+  ],
+  alreadyCovered: [
+    "Full-time employees (via employer)",
+    "Part-time workers (≥ 8 hours/week)",
+    "Unemployment insurance recipients",
+    "Disability insurance recipients"
+  ]
+};
+
+const regionExplanation = {
+  title: "Understanding Premium Regions",
+  content: `Premium regions in Switzerland are determined by healthcare costs in different areas. The Federal Office of Public Health (FOPH) defines three premium regions:
+
+  Region 1: Areas with highest healthcare costs, typically major cities
+  Region 2: Areas with moderate healthcare costs, usually mid-sized cities
+  Region 3: Areas with lower healthcare costs, typically rural regions
+
+  Your premium is primarily determined by your canton of residence and the specific region within that canton. Some cantons use all three regions, while others may only use one or two regions depending on their healthcare cost structure.`,
+  factors: [
+    "Population density",
+    "Number of healthcare providers",
+    "Healthcare infrastructure",
+    "Average treatment costs"
+  ]
+};
+
+const faqs = [
+  {
+    question: "When do I need to get basic health insurance?",
+    answer: "You must obtain basic health insurance within 3 months of arrival in Switzerland or birth. Coverage is retroactive to the arrival/birth date."
+  },
+  {
+    question: "Can I be rejected for basic insurance?",
+    answer: "No, insurers must accept everyone for basic insurance regardless of age, health status, or pre-existing conditions. This is mandated by Swiss law."
+  },
+  {
+    question: "How do I choose between different insurance models?",
+    answer: "Consider factors like premium savings, preferred doctors, and flexibility needs. Standard models offer full choice but cost more, while restricted models (family doctor, telemedicine) offer savings."
+  },
+  {
+    question: "What happens if I don't pay my premiums?",
+    answer: "Unpaid premiums can lead to debt collection and your canton may restrict you to emergency-only care. It's important to contact your insurer immediately if you have payment difficulties."
+  },
+  {
+    question: "Can I switch insurance providers?",
+    answer: "Yes, you can switch basic insurance providers by giving notice by November 30th for changes effective January 1st. Special termination rights exist when premiums increase."
+  }
+];
+---
+
+<Layout
+  title="Basic Health Insurance Switzerland | Complete Guide 2024"
+  description="Comprehensive guide to basic health insurance (KVG/LAMal) in Switzerland. Learn about coverage, costs, models, and how to choose the right insurance."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
+        alt="Swiss mountains"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Basic Health Insurance</span>
+          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Understanding mandatory health insurance (KVG/LAMal) in Switzerland. Learn about coverage, costs, and choosing the right insurance model.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#compare"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Models
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding Basic Insurance</h2>
+        <div class="prose prose-lg">
+          <p>
+            Basic health insurance (KVG/LAMal) is mandatory for everyone living in Switzerland. This requirement ensures that all residents have access to high-quality healthcare without facing excessive financial burdens.
+          </p>
+          <p>
+            The basic insurance package is standardized across all insurance providers, meaning the coverage is identical regardless of which insurer you choose. What differs are the service quality, premium costs, and available insurance models.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coverage Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">What's Covered?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Included Coverage -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              <span class="text-primary-600">✓</span> Included in Basic Insurance
+            </h3>
+            <ul class="space-y-3">
+              {coverage.included.map(item => (
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Not Included -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              <span class="text-red-500">✗</span> Not Included
+            </h3>
+            <ul class="space-y-3">
+              {coverage.notIncluded.map(item => (
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-red-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span class="text-gray-600">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Models -->
+  <div id="compare" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Insurance Models</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {insuranceModels.map(model => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{model.name}</h3>
+            <p class="text-gray-600 mb-4">{model.description}</p>
+            <div class="inline-block px-3 py-1 mb-4 text-sm font-semibold text-primary-700 bg-primary-100 rounded-full">
+              Premium Savings: {model.savings}
+            </div>
+            <ul class="space-y-2">
+              {model.features.map(feature => (
+                <li class="flex items-center text-sm text-gray-500">
+                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Deductibles Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Deductibles & Cost Sharing</h2>
+        
+        <div class="prose prose-lg mb-8">
+          <p>
+            Your deductible (franchise) is the amount you pay for medical expenses before insurance coverage begins. Higher deductibles mean lower monthly premiums.
+          </p>
+        </div>
+
+        <div class="grid gap-8">
+          {deductibleOptions.map(option => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">{option.type}</h3>
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deductible (CHF)</th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium Savings</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    {option.options.map(opt => (
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{opt.amount}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{opt.savings}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Regional Premiums -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Premium Ranges</h2>
+        
+        <div class="space-y-8">
+          <!-- Regional Differences -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">By Region</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Premium (CHF)</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Example Areas</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  {premiumRanges.regions.map(region => (
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{region.name}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{region.range}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{region.examples}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Age Groups -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">By Age Group</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age Group</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Premium Range (CHF)</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  {premiumRanges.ageGroups.map(group => (
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{group.group}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.range}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accident Coverage -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Accident Coverage</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Need Coverage -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Who Needs Accident Coverage?
+            </h3>
+            <ul class="space-y-3">
+              {accidentCoverage.needCoverage.map(item => (
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Already Covered -->
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Who's Already Covered?
+            </h3>
+            <ul class="space-y-3">
+              {accidentCoverage.alreadyCovered.map(item => (
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help choosing your insurance?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Get expert guidance to find the right coverage
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
