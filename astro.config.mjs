@@ -3,7 +3,6 @@ import tailwind from '@astrojs/tailwind';
 import react from "@astrojs/react";
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import { onBuildComplete } from './src/scripts/build-hooks.js';
 
 export default defineConfig({
   integrations: [
@@ -14,19 +13,14 @@ export default defineConfig({
   ],
   site: 'https://expat-savvy.ch',
   compressHTML: true,
-  build: {
-    inlineStylesheets: 'always'
-  },
   vite: {
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,
+      inlineStylesheets: 'always',
     },
     ssr: {
-      noExternal: ['@fontsource/inter']
+        noExternal: ['@fontsource/inter']
     }
-  },
-  hooks: {
-    'astro:build:done': onBuildComplete
   }
 });
