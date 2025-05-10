@@ -76,62 +76,92 @@ const neighborhoodGuide = [
 
 const faqs = [
   {
-    question: "How much does health insurance cost in Zurich?",
-    answer: "Health insurance premiums in Zurich typically range from CHF 300-500 per month for adults, depending on the model and deductible chosen. Zurich has higher average premiums compared to other cantons due to its extensive healthcare infrastructure."
+    question: "What insurance is mandatory in Zurich for expats?",
+    answer: "Health insurance (KVG/LAMal) is mandatory for all residents in Zurich and throughout Switzerland. You must obtain coverage within three months of arrival, and it's retroactive to your arrival date. For employed individuals, accident insurance is typically provided by your employer. If you own a car, motor vehicle insurance is also mandatory."
   },
   {
-    question: "What's the best area to live in Zurich?",
-    answer: "Popular expat areas include Kreis 2 (family-friendly), Kreis 6 (near universities), and Kreis 7 (upscale). Each district offers different advantages - Kreis 2 has excellent schools and lake access, Kreis 6 offers a vibrant atmosphere, while Kreis 7 provides prestigious addresses with great views."
+    question: "How much does health insurance cost in Zurich for a foreigner?",
+    answer: "Health insurance premiums in Zurich typically range from CHF 300-500 per month for adults, depending on the model and deductible chosen. Zurich has higher average premiums compared to other cantons due to its extensive healthcare infrastructure. Choosing a higher deductible (up to CHF 2,500) or restricted model (HMO, Family Doctor, Telmed) can lower your monthly premium."
+  },
+  {
+    question: "Can I use my existing health insurance in Zurich?",
+    answer: "If you're from an EU/EFTA country, you may be able to keep your existing health insurance temporarily under certain conditions, but you'll need to apply for exemption. For most expats, especially those from non-EU countries, you'll need to take out Swiss health insurance within three months of arrival. International health insurance plans generally don't satisfy the legal requirement for basic coverage in Switzerland."
+  },
+  {
+    question: "What's the best area to live in Zurich for expats?",
+    answer: "Popular expat areas include Kreis 2 (family-friendly), Kreis 6 (near universities), and Kreis 7 (upscale). Each district offers different advantages - Kreis 2 has excellent schools and lake access, Kreis 6 offers a vibrant atmosphere, while Kreis 7 provides prestigious addresses with great views. Your choice should depend on your lifestyle, budget, and proximity to work or schools."
   },
   {
     question: "Is English widely spoken in Zurich?",
-    answer: "Yes, English is widely spoken in Zurich, especially in business and tourism. Many services, including healthcare and government offices, offer English support. However, learning basic German is recommended for better integration."
-  },
-  {
-    question: "What's the average rent in Zurich?",
-    answer: "Zurich has Switzerland's highest rental prices. A 1-bedroom apartment in the city center typically costs CHF 2,000-2,800 per month, while outside the center it's CHF 1,600-2,200. 3-bedroom apartments range from CHF 3,000-4,500."
-  },
-  {
-    question: "How is the job market in Zurich?",
-    answer: "Zurich offers excellent job opportunities, particularly in finance, IT, and professional services. The city hosts many multinational companies and startups. English-speaking jobs are common, especially in larger companies and the tech sector."
+    answer: "Yes, English is widely spoken in Zurich, especially in business and tourism. Many services, including healthcare and government offices, offer English support. However, learning basic German is recommended for better integration and daily interactions, as not all service providers may speak fluent English, especially outside central areas."
   }
 ];
 
-const additionalFaqs = [
-    {
-        question: "Why is health insurance in Zurich so expensive?",
-        answer: "Health insurance in Zurich is among the most expensive in Switzerland due to a combination of factors. These include the high quality and availability of healthcare services, extensive medical infrastructure, and higher average incomes leading to increased healthcare utilization. Additionally, the mandatory basic insurance (KVG/AOK) covers a broad range of treatments, contributing to the overall cost."
-    },
-    {
-        question: "What does basic health insurance cover in Zurich?",
-        answer: "Basic health insurance (KVG/AOK) in Zurich, as in all of Switzerland, covers a wide range of essential medical services. This includes consultations with doctors, treatments by registered healthcare professionals, hospital stays in a general ward, prescribed medications, and contributions to the costs of certain preventative care measures. It ensures access to necessary medical care, but may not cover all types of treatments or the full cost of specialized or non-essential services."
-    },
-    {
-        question: "What other insurances should I consider as an expat in Zurich?",
-        answer: "As an expat in Zurich, beyond health insurance, you should consider several other essential insurances. These include personal liability insurance (Haftpflichtversicherung) to cover accidental damage or injury to others, household contents insurance (Hausratversicherung) for your belongings against theft, fire, or water damage, and potentially legal protection insurance (Rechtsschutzversicherung) for legal disputes. Depending on your circumstances, you might also need life insurance (Lebensversicherung), accident insurance (Unfallversicherung), travel insurance (Reiseversicherung), car insurance (Autoversicherung), or even pet insurance (Tierversicherung)."
-    },
-    {
-        question: "What are the popular health insurance providers for expats in Zurich?",
-        answer: "While individual needs vary, Helsana and Swica are often cited as popular choices among expats in Zurich. They both have a strong presence in the Zurich region and offer comprehensive coverage options, including English-speaking services and support. Other notable providers with a good reputation and services tailored for expats include CSS, Concordia, and Sanitas. It's advisable to compare their offerings and find a plan that suits your specific requirements."
-    },
-    {
-        question: "Should I use an insurance broker in Zurich?",
-        answer: "Yes, using an insurance broker in Zurich can be beneficial, especially for expats unfamiliar with the Swiss insurance landscape. Brokers can provide personalized advice, compare different insurance policies from various providers, and help you find the best coverage at the most competitive price. They can also assist with the administrative aspects and offer ongoing support. Look for reputable brokers with experience assisting expats."
-    }
-
+const insurance_categories = [
+  {
+    title: "Mandatory Insurance",
+    items: [
+      {
+        name: "Health Insurance (KVG/LAMal)",
+        description: "Coverage for essential medical services",
+        features: ["Doctor visits", "Hospital care", "Prescribed medications"],
+        link: "/health-insurance"
+      },
+      {
+        name: "Accident Insurance (UVG/LAA)",
+        description: "Coverage for accidents if not provided by employer",
+        features: ["Medical costs", "Rehabilitation", "Wage replacement"],
+        link: "/blog/accident-insurance-switzerland-uvg-laa"
+      }
+    ]
+  },
+  {
+    title: "Essential Voluntary Insurance",
+    items: [
+      {
+        name: "Personal Liability Insurance",
+        description: "Protection for damages to others or their property",
+        features: ["Rental damage", "Personal injuries", "Legal defense"],
+        link: "/insurance/personal-liability-insurance"
+      },
+      {
+        name: "Household Contents Insurance",
+        description: "Protection for your belongings against theft, fire, water damage",
+        features: ["Furniture", "Electronics", "Personal items"],
+        link: "/insurance/household-insurance"
+      }
+    ]
+  },
+  {
+    title: "Recommended Additional Coverage",
+    items: [
+      {
+        name: "Supplementary Health Insurance",
+        description: "Enhanced medical coverage beyond basic insurance",
+        features: ["Private/semi-private rooms", "Dental care", "Alternative therapies"],
+        link: "/health-insurance"
+      },
+      {
+        name: "Legal Protection Insurance",
+        description: "Coverage for legal disputes and associated costs",
+        features: ["Rental disputes", "Employment issues", "Contract disagreements"],
+        link: "/insurance/legal-protection-insurance"
+      }
+    ]
+  }
 ];
 ---
 
 <Layout
-  title="Living in Zurich Guide 2024 | Essential Tips for Expats"
-  description="Complete guide to living in Zurich for expats. Expert advice on housing, healthcare, neighborhoods, and more. Updated for 2024 with current insights and tips."
+  title="Expat Insurance & Living in Zurich Guide 2025: Health, Liability & Essential Tips"
+  description="Comprehensive Zurich guide for expats with essential insurance information, neighborhood insights, and living tips. Find the best health insurance, housing, and more."
 >
   <!-- Hero Section -->
   <div class="relative bg-white overflow-hidden">
     <div class="absolute inset-0">
       <img 
       src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740598472/henrique-ferreira-6v-K4PpCHVw-unsplash_1_zkpj2a.webp"
-      alt="Zurich cityscape with lake"
+      alt="Zurich cityscape with lake and mountains"
       class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40" />
@@ -140,11 +170,11 @@ const additionalFaqs = [
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
       <div class="text-center">
         <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-          <span class="block">Living in Zurich</span>
-          <span class="block mt-2">Complete Guide for <span class="text-primary-500">Expats</span></span>
+          <span class="block">Expat Insurance & Living in</span>
+          <span class="block mt-2">Zurich Guide <span class="text-primary-500">2025</span></span>
         </h1>
         <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
-          Your comprehensive guide to life in Switzerland's largest city. From housing to healthcare, discover everything you need to know about Zurich.
+          Your essential companion for navigating insurance, housing, and daily life in Switzerland's largest city.
         </p>
         
         <!-- Quick Stats -->
@@ -164,80 +194,421 @@ const additionalFaqs = [
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Introduction to Zurich</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Introduction: Living in Zurich as an Expat</h2>
         <div class="prose prose-lg">
         <p>
           Zurich, Switzerland's largest city and financial capital, consistently ranks among the world's most livable cities. With its stunning location on Lake Zurich, surrounded by the Alps, the city offers an exceptional quality of life, combining urban sophistication with natural beauty.
         </p>
         <p>
-          Home to numerous multinational companies, leading universities, and a thriving startup scene, Zurich attracts professionals from around the globe. The city's efficient public transport, excellent healthcare system, and high standard of living make it particularly attractive to expats.
+          Home to numerous multinational companies, leading universities, and a thriving startup scene, Zurich attracts professionals from around the globe. While the city's efficient public transport, excellent healthcare, and high standard of living are major draws, understanding the Swiss insurance system is crucial for a smooth transition and comfortable life in Zurich.
         </p>
-        <h3 class="text-2xl font-bold text-gray-900 mt-8">Why Zurich is Attractive for Expats</h3>
-        <ul>
-          <li>
-            <strong>High Quality of Life:</strong> Zurich consistently ranks high in global quality of life surveys, offering a safe, clean, and well-organized environment.
-          </li>
-          <li>
-            <strong>Economic Opportunities:</strong> As a major financial center, Zurich provides numerous job opportunities, particularly in finance, technology, and consulting.
-          </li>
-          <li>
-            <strong>Excellent Infrastructure:</strong> The city boasts a well-developed public transportation system, making it easy to get around.
-          </li>
-          <li>
-            <strong>Healthcare System:</strong> Zurich has a world-class healthcare system, though understanding insurance is crucial for expats.
-          </li>
-        </ul>
+        <p>
+          This comprehensive guide will help you navigate both the essentials of living in Zurich and its specific insurance requirements. Whether you're planning your move or already settling in, we'll provide the information you need to make informed decisions about health insurance, housing, and other practical aspects of expat life in Zurich.
+        </p>
+        </div>
       </div>
-      </div>
-
     </div>
   </div>
 
-  <!-- Living in Zurich -->
+  <!-- Understanding Mandatory Insurance Section -->
   <div class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Living in Zurich</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Understanding Mandatory Insurance in Zurich for Expats</h2>
         
-        <!-- PrimeRelocation.ch Highlight Box -->
-        <div class="bg-primary-50 rounded-xl p-6 mb-8 border-2 border-primary-200">
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-              </svg>
-            </div>
-            <div class="ml-4">
-              <h3 class="text-lg font-semibold text-primary-900">Expert Tip: Use PrimeRelocation.ch</h3>
-              <p class="mt-1 text-primary-700">
-                For hassle-free housing search in Zurich, we recommend <a href="https://www.primerelocation.ch" class="text-primary-600 hover:text-primary-800 font-medium">PrimeRelocation.ch</a>. Their specialized service for expats includes:
-              </p>
-              <ul class="mt-2 space-y-1">
-                <li class="flex items-center text-primary-700">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  Premium property listings
-                </li>
-                <li class="flex items-center text-primary-700">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  English-speaking support
-                </li>
-                <li class="flex items-center text-primary-700">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  Full relocation assistance
-                </li>
-              </ul>
-            </div>
+        <!-- Health Insurance Subsection -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Swiss Health Insurance (KVG/LAMal) in Zurich: A Must-Have</h3>
+        <div class="prose prose-lg mb-8">
+          <p>
+            Health insurance (Krankenversicherung/Assurance-maladie) is mandatory for all residents in Zurich. You must obtain coverage within three months of arrival, and it's retroactive to your arrival date.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">Key Facts About Swiss Health Insurance in Zurich</h4>
+            <ul>
+              <li><strong>Registration Deadline:</strong> Within 3 months of arrival</li>
+              <li><strong>Basic Coverage:</strong> Identical across all insurers (legally defined)</li>
+              <li><strong>Average Monthly Premium:</strong> CHF 300-500 (among the highest in Switzerland)</li>
+              <li><strong>Deductible Options:</strong> CHF 300-2,500 annually (higher deductible = lower premium)</li>
+              <li><strong>Co-payment:</strong> 10% of costs above your deductible (up to CHF 700 annually)</li>
+            </ul>
+          </div>
+          
+          <h4 class="text-xl font-semibold text-gray-900 mb-4">Insurance Models Available in Zurich</h4>
+          <p>Zurich offers several insurance models, each with different premium levels:</p>
+          
+          <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-md">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="py-3 px-4 text-left">Model</th>
+                  <th class="py-3 px-4 text-left">Description</th>
+                  <th class="py-3 px-4 text-left">Cost Level</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="py-3 px-4"><strong>Standard</strong></td>
+                  <td class="py-3 px-4">Free choice of doctors throughout Switzerland</td>
+                  <td class="py-3 px-4">Highest premiums</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><strong>Family Doctor</strong></td>
+                  <td class="py-3 px-4">First consult your chosen general practitioner</td>
+                  <td class="py-3 px-4">10-15% lower premiums</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><strong>HMO</strong></td>
+                  <td class="py-3 px-4">Use specific health centers as first point of contact</td>
+                  <td class="py-3 px-4">15-20% lower premiums</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><strong>Telmed</strong></td>
+                  <td class="py-3 px-4">Call medical hotline before seeing a doctor</td>
+                  <td class="py-3 px-4">15-20% lower premiums</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <p class="mt-6">
+            Zurich has excellent medical facilities, with many healthcare providers offering English-speaking services. While premiums are higher than in most Swiss cantons, the quality of care is exceptional.
+          </p>
+          
+          <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mt-6">
+            <p class="text-primary-800 font-medium">
+              <strong>Expat Tip:</strong> Consider an HMO or Telmed model if you're comfortable with these restrictions. The savings can be substantial, and many HMO centers in Zurich offer services in English.
+            </p>
           </div>
         </div>
         
-        <!-- Neighborhood Guide -->
-        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Neighborhoods Overview</h3>
+        <div class="mb-12 text-center">
+          <a href="/blog/health-insurance-models-switzerland" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+            Learn More About Insurance Models
+          </a>
+        </div>
+        
+        <!-- Accident Insurance Subsection -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Accident Insurance (UVG/LAA) in Zurich: Workplace & Leisure Coverage</h3>
+        <div class="prose prose-lg mb-12">
+          <p>
+            Accident insurance in Switzerland is divided into two components:
+          </p>
+          
+          <ul>
+            <li><strong>Occupational Accident Insurance (BU):</strong> Covers accidents that occur during work hours</li>
+            <li><strong>Non-occupational Accident Insurance (NBU):</strong> Covers accidents during leisure time</li>
+          </ul>
+          
+          <p>
+            If you work at least 8 hours per week for the same employer in Zurich, your employer must provide both occupational and non-occupational accident insurance. If you work fewer hours or are self-employed, you need to ensure accident coverage through your health insurance.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">Why Accident Insurance is Crucial in Zurich</h4>
+            <p>
+              Zurich offers numerous outdoor activities given its proximity to mountains and lakes. Whether you're skiing in the nearby Alps, hiking, or cycling around Lake Zurich, having proper accident coverage is essential for enjoying Zurich's active lifestyle safely.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mb-12 text-center">
+          <a href="/blog/accident-insurance-switzerland-uvg-laa" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+            Explore Accident Insurance Details
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Essential Voluntary Insurance Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Essential Voluntary Insurance for Comfortable Living in Zurich</h2>
+        
+        <!-- Personal Liability Subsection -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Personal Liability Insurance: Protecting You in Zurich</h3>
+        <div class="prose prose-lg mb-8">
+          <p>
+            While not legally mandatory, personal liability insurance (Privathaftpflichtversicherung) is highly recommended in Switzerland and often expected by landlords in Zurich.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">What Personal Liability Insurance Covers</h4>
+            <ul>
+              <li>Damage to your rental property (e.g., broken fixtures, water damage)</li>
+              <li>Accidental harm to other people</li>
+              <li>Damage to others' property</li>
+              <li>Legal defense costs if you're sued for damages</li>
+            </ul>
+            <p class="mt-4">
+              In Zurich's high-cost environment, liability claims can be substantial. Most policies provide coverage of at least CHF 3-5 million, with annual premiums typically ranging from CHF 100-200.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mb-12 text-center">
+          <a href="/insurance/personal-liability-insurance" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+            Learn More About Liability Insurance
+          </a>
+        </div>
+        
+        <!-- Household Contents Subsection -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Household Contents Insurance: Securing Your Zurich Home</h3>
+        <div class="prose prose-lg mb-8">
+          <p>
+            Household contents insurance (Hausratversicherung) protects your personal belongings against risks like theft, fire, and water damage. In Zurich's expensive housing market, furnishing a home represents a significant investment that deserves protection.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">What Household Contents Insurance Covers in Zurich</h4>
+            <ul>
+              <li>Furniture and home furnishings</li>
+              <li>Electronics and appliances</li>
+              <li>Clothing and personal items</li>
+              <li>Valuable items (with potential limits or special conditions)</li>
+            </ul>
+            <p class="mt-4">
+              Premiums are based on the total value of your belongings and the size of your home. For a typical 2-bedroom apartment in Zurich with contents worth CHF 50,000, expect to pay around CHF 150-300 annually.
+            </p>
+          </div>
+          
+          <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mt-6">
+            <p class="text-primary-800 font-medium">
+              <strong>Expat Tip:</strong> Many insurance companies offer combined packages for personal liability and household contents insurance at competitive rates. This is often the most cost-effective option for expats in Zurich.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mb-12 text-center">
+          <a href="/insurance/household-insurance" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+            Explore Household Insurance Options
+          </a>
+        </div>
+        
+        <!-- Supplementary Health Insurance -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Supplementary Health Insurance Options for Expats in Zurich</h3>
+        <div class="prose prose-lg mb-8">
+          <p>
+            While basic health insurance covers essential medical needs, many expats in Zurich opt for supplementary health insurance (Zusatzversicherung) to enhance their coverage and comfort.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">Popular Supplementary Coverage in Zurich</h4>
+            <ul>
+              <li><strong>Hospital Insurance:</strong> Access to private or semi-private rooms in Zurich's top hospitals</li>
+              <li><strong>Dental Care:</strong> Coverage for dental treatments not included in basic insurance</li>
+              <li><strong>Alternative Therapies:</strong> Coverage for treatments like osteopathy, acupuncture, or homeopathy</li>
+              <li><strong>Vision Care:</strong> Contributions to eyeglasses or contact lenses</li>
+              <li><strong>International Coverage:</strong> Extended coverage when traveling outside Switzerland</li>
+            </ul>
+          </div>
+          
+          <p>
+            Unlike basic insurance, supplementary coverage is not guaranteed. Insurers can reject applications based on medical history or impose waiting periods or exclusions for pre-existing conditions.
+          </p>
+          
+          <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mt-6">
+            <p class="text-primary-800 font-medium">
+              <strong>Expat Tip:</strong> Apply for supplementary insurance when you're in good health, as the approval process involves medical underwriting. If you have pre-existing conditions, work with a broker who can help find the best options.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Legal Protection Insurance -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Legal Protection Insurance in Zurich</h3>
+        <div class="prose prose-lg mb-12">
+          <p>
+            Legal protection insurance (Rechtsschutzversicherung) covers legal costs for certain types of disputes. For expats navigating Zurich's complex legal and administrative landscape, this can provide valuable peace of mind.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">Common Situations Where Legal Protection Helps</h4>
+            <ul>
+              <li>Rental disputes with landlords (common in Zurich's competitive housing market)</li>
+              <li>Employment conflicts</li>
+              <li>Consumer protection issues</li>
+              <li>Contract disagreements</li>
+            </ul>
+            <p class="mt-4">
+              Annual premiums typically range from CHF 200-400, depending on the scope of coverage. Given the high cost of legal services in Zurich, this insurance can be a worthwhile investment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Providers Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Top Insurance Providers in Zurich</h2>
+        <div class="prose prose-lg mb-8">
+          <p>
+            Zurich hosts offices for most major Swiss insurance companies. Here are some popular providers among expats:
+          </p>
+        </div>
+
+        <!-- Insurance Providers Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {insuranceProviders.map(provider => (
+            <a href={provider.link} class="block">
+              <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{provider.name}</h3>
+                <p class="text-gray-600 mb-2">{provider.description}</p>
+                <div class="text-primary-600 font-medium mb-3">{provider.monthlyPremium}</div>
+                <ul class="space-y-2 ">
+                  {provider.features.map(feature => (
+                    <li class="flex items-center text-sm text-gray-500">
+                      <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </a>
+          ))}
+        </div>
+        
+        <div class="mb-12 text-center">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+          >
+            Get Personalized Insurance Recommendations
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigating the Insurance Process Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Navigating the Insurance Process in Zurich: Practical Tips</h2>
+        
+        <div class="prose prose-lg mb-8">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Finding an English-speaking Insurance Advisor</h3>
+          <p>
+            Working with an insurance advisor who understands expat needs can simplify your insurance journey in Zurich. Look for advisors who:
+          </p>
+          <ul>
+            <li>Specialize in working with international clients</li>
+            <li>Speak fluent English</li>
+            <li>Understand the unique needs of expats</li>
+            <li>Can explain Swiss insurance terminology clearly</li>
+            <li>Provide comprehensive comparisons of different options</li>
+          </ul>
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Understanding Swiss Insurance Documents</h3>
+          <p>
+            Insurance documents in Switzerland can be complex, especially in German. Key terms to look for include:
+          </p>
+          <ul>
+            <li><strong>Versicherungspolice/Police d'assurance:</strong> Insurance policy</li>
+            <li><strong>Prämie/Prime:</strong> Premium</li>
+            <li><strong>Franchise/Franchise:</strong> Deductible</li>
+            <li><strong>Selbstbehalt/Quote-part:</strong> Co-payment</li>
+            <li><strong>Deckung/Couverture:</strong> Coverage</li>
+            <li><strong>Leistungen/Prestations:</strong> Benefits</li>
+            <li><strong>Ausschlüsse/Exclusions:</strong> Exclusions</li>
+          </ul>
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">The Process of Making a Claim in Zurich</h3>
+          <p>
+            If you need to make an insurance claim in Zurich, follow these steps:
+          </p>
+          <ol>
+            <li>Contact your insurance provider as soon as possible after the incident</li>
+            <li>Follow their specific claim submission process (online portal, email, or paper form)</li>
+            <li>Provide all required documentation (medical reports, receipts, photos, police reports)</li>
+            <li>Keep copies of everything you submit</li>
+            <li>Follow up regularly if the process takes time</li>
+          </ol>
+          <p>
+            Most major insurers in Zurich now offer English-language claim services and digital claim submission options, making the process more accessible for expats.
+          </p>
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Tips for Comparing Insurance Quotes</h3>
+          <p>
+            When comparing insurance options in Zurich, consider these factors:
+          </p>
+          <ul>
+            <li><strong>Coverage details:</strong> Ensure you're comparing policies with similar coverage</li>
+            <li><strong>Deductibles and co-payments:</strong> Lower premiums often mean higher out-of-pocket costs</li>
+            <li><strong>Service quality:</strong> Research customer reviews and satisfaction ratings</li>
+            <li><strong>Digital services:</strong> Check if the insurer offers apps or online portals in English</li>
+            <li><strong>Bundle discounts:</strong> Many insurers offer discounts when you combine multiple policies</li>
+          </ul>
+        </div>
+        
+        <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mb-12">
+          <h3 class="text-xl font-semibold text-primary-800 mb-4">How Expat Savvy Can Help</h3>
+          <p class="text-primary-800">
+            We specialize in helping expats navigate Zurich's insurance landscape. Our services include:
+          </p>
+          <ul class="mt-4 space-y-2">
+            <li class="flex items-center text-primary-800">
+              <svg class="h-5 w-5 text-primary-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Personalized insurance consultations
+            </li>
+            <li class="flex items-center text-primary-800">
+              <svg class="h-5 w-5 text-primary-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Impartial provider comparisons
+            </li>
+            <li class="flex items-center text-primary-800">
+              <svg class="h-5 w-5 text-primary-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              English-language support throughout the process
+            </li>
+            <li class="flex items-center text-primary-800">
+              <svg class="h-5 w-5 text-primary-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Assistance with application and claims
+            </li>
+          </ul>
+        </div>
+        
+        <div class="text-center mb-12">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+          >
+            Schedule a Free Insurance Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Beyond Insurance Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Beyond Insurance: Essential Aspects of Living in Zurich</h2>
+        
+        <!-- Housing & Accommodation -->
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Housing & Accommodation in Zurich</h3>
+        <div class="prose prose-lg mb-8">
+          <p>
+            Zurich's housing market is competitive and expensive, with some of the highest rental prices in Europe. Understanding neighborhoods and having proper insurance protection is essential.
+          </p>
+          
+          <!-- Neighborhood Guide -->
+          <h4 class="text-xl font-semibold text-gray-900 mb-4">Popular Expat Neighborhoods</h4>
+        </div>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {neighborhoodGuide.map(neighborhood => (
             <div class="bg-white rounded-lg p-6 shadow-md">
@@ -261,275 +632,71 @@ const additionalFaqs = [
             </div>
           ))}
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Health Insurance Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Health Insurance in Zurich</h2>
         
-        <div class="prose prose-lg mb-8">
-          <p>
-            Zurich has some of Switzerland's highest health insurance premiums, but also offers excellent healthcare facilities and services. Here's what you need to know:
-          </p>
-          <div class="bg-white p-6 rounded-lg shadow-md"><h3 class="text-2xl font-semibold text-gray-900 mt-6">Why is Health Insurance Expensive in Zurich?</h3>
-          <p>
-            Health insurance premiums in Zurich are among the highest in Switzerland due to several factors:
-          </p>
-          <ul>
-            <li><strong>High Quality of Care:</strong> Zurich boasts world-class medical facilities and highly trained professionals.</li>
-            <li><strong>Extensive Infrastructure:</strong> The canton has a well-developed healthcare system with numerous hospitals, clinics, and specialists.</li>
-            <li><strong>Mandatory Basic Insurance:</strong> The Swiss system requires everyone to have basic health insurance, which covers a broad range of treatments.</li>
-          </ul>
-          <p>
-            While the cost may seem high, it reflects the excellent standard of care and wide range of services available.
-          </p></div>
-          
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-2xl font-semibold text-gray-900 mt-6">Understanding Basic Health Insurance</h3>
-            <p>
-              In Switzerland, basic health insurance (Grundversicherung or assurance de base) is mandatory for all residents. This insurance covers a range of essential medical services, including:
+        <div class="prose prose-lg mb-12">
+          <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mb-6">
+            <p class="text-primary-800 font-medium">
+              <strong>Insurance Connection:</strong> Once you've found housing in Zurich, remember to obtain household contents and personal liability insurance. Many landlords require proof of liability insurance when signing a rental agreement.
             </p>
+          </div>
+          
+          <!-- Transportation -->
+          <h3 class="text-2xl font-semibold text-gray-900 mt-12 mb-6">Transportation in Zurich</h3>
+          <p>
+            Zurich boasts an excellent public transportation system, combining trams, buses, trains, and boats into a seamless network. The ZVV (Zürcher Verkehrsverbund) operates the integrated system.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">Public Transport Options</h4>
             <ul>
-              <li>Consultations with general practitioners and specialists</li>
-              <li>Hospital stays (in a general ward)</li>
-              <li>Prescribed medications</li>
-              <li>Certain preventative care measures</li>
-              <li>Treatment in case of illness or accident (if not covered by accident insurance through your employer)</li>
+              <li><strong>Annual Pass (GA/AG):</strong> Unlimited travel throughout Switzerland (CHF 3,860 for 2nd class)</li>
+              <li><strong>Zurich City Pass (ZVV):</strong> For regular travel within Zurich (zones 110 and 120, CHF 782 annually)</li>
+              <li><strong>Half-Fare Card:</strong> 50% discount on all public transport (CHF 185 annually)</li>
+              <li><strong>Individual Tickets:</strong> Available for occasional travel (from CHF 4.40 for short trips)</li>
             </ul>
-            <p>
-              However, basic insurance has limitations. It typically doesn't cover dental care (except in cases of serious illness), alternative therapies, or private or semi-private hospital wards. For more comprehensive coverage, supplemental insurance (Zusatzversicherung or assurance complémentaire) is available.
-            </p>
           </div>
-            <ConsultationModal />
           
-
-
-        <!-- Insurance Providers -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {insuranceProviders.map(provider => (
-            <a href={provider.link} class="block">
-              <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">{provider.name}</h3>
-                <p class="text-gray-600 mb-2">{provider.description}</p>
-                <div class="text-primary-600 font-medium mb-3">{provider.monthlyPremium}</div>
-                <ul class="space-y-2 ">
-                  {provider.features.map(feature => (
-                    <li class="flex items-center text-sm text-gray-500">
-                      <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </a>
-          ))}
-        </div>
-        
-
-        <!-- Insurance Setup Links -->
-        <div class="bg-gray-50 rounded-lg p-8 mb-12">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Setting Up Your Insurance</h3>
-          <div class="space-y-4">
-            <div class="flex items-start">
-              <svg class="h-6 w-6 text-primary-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-              <div>
-                <h4 class="font-medium text-gray-900">New to Switzerland?</h4>
-                <p class="text-gray-600 mt-1">Visit our <a href="/healthcare/new-health-insurance" class="text-primary-600 hover:text-primary-800">guide to setting up health insurance</a> for the first time.</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-6 w-6 text-primary-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-              </svg>
-              <div>
-                <h4 class="font-medium text-gray-900">Already Insured?</h4>
-                <p class="text-gray-600 mt-1">Learn about <a href="/news/switching-health-insurance-in-switzerland" class="text-primary-600 hover:text-primary-800">switching health insurance providers</a> to get better rates.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="text-center mt-8">
-          <button
-            onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
-          >
-            Compare Health Insurance Options
-          </button>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {/* Other Essential Insurances Section */}
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Other Essential Insurances</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Personal Liability Insurance */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">1. Personal Liability Insurance</h3>
-            <p class="text-gray-600">
-              Personal liability insurance (Haftpflichtversicherung) is essential as it covers damages you may cause to other people or their property. This includes accidental damage in your home or injuries caused to others. Many landlords in Zurich require tenants to have liability insurance.
+          <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mb-6">
+            <p class="text-primary-800 font-medium">
+              <strong>Insurance Connection:</strong> If you own a car in Zurich, motor vehicle insurance is mandatory. Basic third-party liability coverage is required by law, while comprehensive coverage is optional but recommended.
             </p>
           </div>
-
-          {/* Household Contents Insurance */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">2. Household Contents Insurance</h3>
-            <p class="text-gray-600">
-              Household contents insurance (Hausratversicherung) protects your belongings within your home against risks such as theft, fire, water damage, and natural events. It covers furniture, electronics, clothing, and other personal items.
+          
+          <!-- Banking & Finances -->
+          <h3 class="text-2xl font-semibold text-gray-900 mt-12 mb-6">Banking & Finances for Expats in Zurich</h3>
+          <p>
+            As a global financial center, Zurich offers excellent banking services. Most banks provide English-language services and specialized expat accounts.
+          </p>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h4 class="text-xl font-semibold text-gray-900 mb-4">Popular Banks for Expats</h4>
+            <ul>
+              <li><strong>UBS:</strong> Comprehensive expat services and international network</li>
+              <li><strong>Credit Suisse:</strong> Specialized expat banking solutions</li>
+              <li><strong>PostFinance:</strong> More affordable option with basic services</li>
+              <li><strong>Migros Bank:</strong> Good value banking with lower fees</li>
+              <li><strong>Digital Options:</strong> Neon, Revolut, and other fintech solutions gaining popularity</li>
+            </ul>
+          </div>
+          
+          <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary-500 mb-12">
+            <p class="text-primary-800 font-medium">
+              <strong>Insurance Connection:</strong> Many banks in Zurich offer insurance products or partnerships with insurance providers. While convenient, these bundled offers may not always provide the best value. Compare options before committing.
             </p>
           </div>
-
-          {/* Legal Protection Insurance */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">3. Legal Protection Insurance</h3>
-            <p class="text-gray-600">
-              Legal protection insurance (Rechtsschutzversicherung) can cover legal costs in case of disputes, such as employment issues, contract disagreements, or property disputes. While not mandatory, it can provide peace of mind and financial protection against potential legal expenses.
-            </p>
-          </div>
-        </div>
-
-        {/* Other Insurances to Consider */}
-        <div class="mt-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">4. Other Insurances to Consider</h3>
-          <p class="text-gray-700 mb-4">Depending on your individual circumstances, you might also want to consider:</p>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <li class="flex items-center text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              Life Insurance (Lebensversicherung): Provides financial security for your family in case of your death.
-            </li>
-            <li class="flex items-center text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              Accident Insurance (Unfallversicherung): Covers costs related to accidents, especially if your employer's insurance doesn't cover non-work-related accidents.
-            </li>
-            <li class="flex items-center text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              Travel Insurance (Reiseversicherung): Covers medical expenses, cancellations, and other issues during international travel.
-            </li>
-            <li class="flex items-center text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              Car Insurance (Autoversicherung): Mandatory if you own a vehicle, covering liability and potentially damage to your own car.
-            </li>
-            <li class="flex items-center text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-              Pet Insurance (Tierversicherung): Covers veterinary costs for your pets.
-            </li>
-          </ul>
-        </div>
-
-        <div class="text-center mt-8">
-          <button
-            onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
-          >
-            Get a Quote for Other Insurances
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {/* Insurance Brokers and Agencies Section */}
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">Insurance Brokers and Agencies in Zurich</h2>
-          <div class="prose prose-lg">
-            <p>
-              Navigating the Swiss insurance market can be complex, especially for expats. Insurance brokers and agencies can provide valuable assistance in finding the right coverage.
-            </p>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-2xl font-semibold text-gray-900 mt-6">What Insurance Brokers Do</h3>
-              <ul>
-                <li>Assess your needs and risk profile</li>
-                <li>Compare policies from various insurance companies</li>
-                <li>Provide unbiased advice and recommendations</li>
-                <li>Assist with the application process</li>
-                <li>Offer ongoing support and answer your questions</li>
-              </ul>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-2xl font-semibold text-gray-900 mt-6">Benefits of Using a Broker</h3>
-              <ul>
-                <li><strong>Expert Guidance:</strong> Brokers have in-depth knowledge of the insurance market and can help you understand complex policies.</li>
-                <li><strong>Time-Saving:</strong> They handle the research and comparison process, saving you time and effort.</li>
-                <li><strong>Cost-Effective:</strong> Brokers can often find better deals and discounts than you might find on your own.</li>
-                <li><strong>Personalized Solutions:</strong> They tailor insurance recommendations to your specific needs and budget.</li>
-                <li><strong>Ongoing Support:</strong> Brokers can assist with claims, policy changes, and any other insurance-related matters.</li>
-              </ul>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-              <h3 class="text-2xl font-semibold text-gray-900 mt-6">Finding a Reputable Broker</h3>
-              <p>When choosing an insurance broker in Zurich, consider the following:</p>
-              <ul>
-                <li><strong>Experience:</strong> Look for brokers with experience working with expats and understanding their unique needs.</li>
-                <li><strong>Reputation:</strong> Check online reviews and ask for referrals from other expats.</li>
-                <li><strong>Qualifications:</strong> Ensure the broker is properly licensed and registered.</li>
-                <li><strong>Language Skills:</strong> If you're not fluent in German, choose a broker who can communicate effectively in English.</li>
-                <li><strong>Range of Services:</strong> A good broker should offer a comprehensive range of insurance solutions, including health, liability, household, and other types of coverage.</li>
-              </ul>
-              <p>
-                We work with a network of trusted insurance brokers who specialize in assisting expats in Zurich. Contact us for a recommendation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  {/* CTA Section */}
-  <div class="bg-primary-600">
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Need help settling in Zurich?
-        </h2>
-        <p class="mt-4 text-xl text-primary-100">
-          Get expert guidance for all your insurance needs
-        </p>
-        <div class="mt-8">
-          <button
-            onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
-          >
-            Schedule Free Consultation
-          </button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- FAQ Section -->
-  <div class="bg-gray-50 py-16">
+  <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions - Insurance for Expats in Zurich</h2>
       <div class="max-w-3xl mx-auto">
         <dl class="space-y-8">
           {faqs.map(faq => (
             <div class="bg-white rounded-lg shadow-md p-6">
-            <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-            <dd class="text-gray-600">{faq.answer}</dd>
-          </div>
-          ))}
-          {additionalFaqs.map(faq => (
-          <div class="bg-white rounded-lg shadow-md p-6">
             <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
             <dd class="text-gray-600">{faq.answer}</dd>
           </div>
@@ -539,15 +706,15 @@ const additionalFaqs = [
     </div>
   </div>
 
-  <!-- CTA Section -->
-  <div class="bg-primary-600">
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  <!-- Need Help with Your Zurich Insurance Section -->
+  <div class="bg-primary-600 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Need help settling in Zurich?
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+          Need Help with Your Zurich Insurance?
         </h2>
-        <p class="mt-4 text-xl text-primary-100">
-          Get expert guidance for all your insurance needs
+        <p class="mt-4 text-xl text-primary-100 max-w-2xl mx-auto mb-8">
+          Our team of experts specializes in helping expats navigate Zurich's insurance landscape. We provide personalized recommendations based on your specific needs and circumstances.
         </p>
         <div class="mt-8">
           <button
@@ -566,31 +733,19 @@ const additionalFaqs = [
 
 <script>
   // Add scroll animation
-  // document.addEventListener('DOMContentLoaded', () => {
-  //   const fadeElems = document.querySelectorAll('.fade-in');
-  //   
-  //   const observer = new IntersectionObserver((entries) => {
-  //     entries.forEach(entry => {
-  //       if (entry.isIntersecting) {
-  //         entry.target.classList.add('visible');
-  //       }
-  //     });
-  //   });
-
-  //   fadeElems.forEach(elem => observer.observe(elem));
-
-  //   // Smooth scroll for anchor links
-  //   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  //     anchor.addEventListener('click', (e) => {
-  //       e.preventDefault();
-  //       const target = document.querySelector(anchor.getAttribute('href'));
-  //       if (target) {
-  //         target.scrollIntoView({
-  //           behavior: 'smooth',
-  //           block: 'start'
-  //         });
-  //       }
-  //     });
-  //   });
-  // });
+  document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
 </script>
