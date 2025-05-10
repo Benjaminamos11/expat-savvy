@@ -181,7 +181,49 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
 
   <ConsultationModal />
 
-  <!-- FAQPage Schema Markup -->
+  <!-- BlogPosting Schema Markup -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      'headline': frontmatter.title,
+      'description': frontmatter.description,
+      'datePublished': frontmatter.date ? new Date(frontmatter.date).toISOString() : new Date().toISOString(),
+      'dateModified': new Date().toISOString(),
+      'author': {
+        '@type': 'Person',
+        'name': frontmatter.author || 'Benjamin Amos Wagner',
+        'url': 'https://expat-savvy.ch/about'
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'Expat Savvy',
+        'logo': {
+          '@type': 'ImageObject',
+          'url': 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg'
+        }
+      },
+      'mainEntityOfPage': {
+        '@type': 'WebPage',
+        '@id': Astro.url.href
+      },
+      'image': {
+        '@type': 'ImageObject',
+        'url': frontmatter.image || 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp',
+        'width': 1200,
+        'height': 630
+      },
+      'url': Astro.url.href,
+      'isPartOf': {
+        '@type': 'Blog',
+        'name': 'Expat Savvy Blog',
+        'url': 'https://expat-savvy.ch/blog'
+      },
+      'keywords': frontmatter.tags ? frontmatter.tags.join(',') : 'swiss insurance, expat, switzerland'
+    }, null, 2)}
+  </script>
+
+  <!-- Gym-specific FAQ Schema Markup -->
   {frontmatter.title.toLowerCase().includes("gym") && (
     <script type="application/ld+json">
       {JSON.stringify({
@@ -241,30 +283,41 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     </script>
   )}
 
-  <!-- BlogPosting Schema Markup -->
-  <script type="application/ld+json">
-    {JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      'headline': frontmatter.title,
-      'description': frontmatter.description,
-      'datePublished': frontmatter.date?.toISOString(),
-      'author': {
-        '@type': 'Person',
-        'name': frontmatter.author || 'Benjamin Amos Wagner'
-      },
-      'publisher': {
-        '@type': 'Organization',
-        'name': 'Expat Savvy',
-        'logo': {
-          '@type': 'ImageObject',
-          'url': 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg'
-        }
-      },
-      'image': frontmatter.image || 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp',
-      'url': Astro.url.href
-    }, null, 2)}
-  </script>
+  <!-- Dynamic FAQ Schema for better SEO for all non-gym posts -->
+  {!frontmatter.title.toLowerCase().includes("gym") && (
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+          {
+            '@type': 'Question',
+            'name': `What should expats know about ${frontmatter.title.split(':')[0]}?`,
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': frontmatter.description || `Learn everything about ${frontmatter.title} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'How can expats get personal insurance advice in Switzerland?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Expats can get personalized insurance advice through a free consultation with our experts who specialize in expat insurance needs in Switzerland. Visit https://expat-savvy.ch/free-consultation for more information.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Is insurance mandatory for expats in Switzerland?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Yes, health insurance (KVG/LAMal) is mandatory for all residents in Switzerland, including expats. You must obtain coverage within three months of arrival, and it's retroactive to your arrival date.'
+            }
+          }
+        ]
+      }, null, 2)}
+    </script>
+  )}
 </BaseLayout>
 
 <script>
