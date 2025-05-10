@@ -5,11 +5,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const posts = await getCollection('blog');
 // Safe sort that handles missing or invalid dates
 const sortedPosts = posts.sort((a, b) => {
-  const dateA = a.data.date instanceof Date ? a.data.date.valueOf() : 
-               (typeof a.data.date === 'string' ? new Date(a.data.date).valueOf() : 0);
-  const dateB = b.data.date instanceof Date ? b.data.date.valueOf() : 
-               (typeof b.data.date === 'string' ? new Date(b.data.date).valueOf() : 0);
-  return dateB - dateA;
+  try {
+    // Handle a.data.date
+    let dateAValue = 0;
+    if (a.data.date instanceof Date) {
+      dateAValue = a.data.date.valueOf();
+    } else if (typeof a.data.date === 'string') {
+      const parsedDate = new Date(a.data.date);
+      dateAValue = isNaN(parsedDate.valueOf()) ? 0 : parsedDate.valueOf();
+    }
+    
+    // Handle b.data.date
+    let dateBValue = 0;
+    if (b.data.date instanceof Date) {
+      dateBValue = b.data.date.valueOf();
+    } else if (typeof b.data.date === 'string') {
+      const parsedDate = new Date(b.data.date);
+      dateBValue = isNaN(parsedDate.valueOf()) ? 0 : parsedDate.valueOf();
+    }
+    
+    return dateBValue - dateAValue;
+  } catch (error) {
+    console.error('Error sorting posts by date:', error);
+    return 0;
+  }
 });
 
 // Default image if none is specified
@@ -19,16 +38,21 @@ const defaultImage = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849
 const formatDate = (date: Date | string | undefined | null): string => {
   if (!date) return '';
   
-  const dateObj = date instanceof Date ? date : 
-                (typeof date === 'string' ? new Date(date) : null);
-  
-  if (!dateObj || isNaN(dateObj.valueOf())) return '';
-  
-  return dateObj.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  try {
+    const dateObj = date instanceof Date ? date : 
+                  (typeof date === 'string' ? new Date(date) : null);
+    
+    if (!dateObj || isNaN(dateObj.valueOf())) return '';
+    
+    return dateObj.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return '';
+  }
 };
 ---
 

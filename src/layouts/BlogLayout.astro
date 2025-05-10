@@ -209,11 +209,16 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       '@type': 'BlogPosting',
       'headline': frontmatter.title || 'Expat Savvy Article',
       'description': frontmatter.description || '',
-      'datePublished': frontmatter.date instanceof Date 
-        ? frontmatter.date.toISOString() 
-        : (typeof frontmatter.date === 'string' 
-            ? new Date(frontmatter.date).toISOString() 
-            : new Date().toISOString()),
+      'datePublished': (() => {
+        if (frontmatter.date instanceof Date) {
+          return frontmatter.date.toISOString();
+        } else if (typeof frontmatter.date === 'string') {
+          const parsedDate = new Date(frontmatter.date);
+          return isNaN(parsedDate.getTime()) ? new Date().toISOString() : parsedDate.toISOString();
+        } else {
+          return new Date().toISOString();
+        }
+      })(),
       'dateModified': new Date().toISOString(),
       'author': {
         '@type': 'Person',
@@ -244,9 +249,12 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         'name': 'Expat Savvy Blog',
         'url': 'https://expat-savvy.ch/blog'
       },
-      'keywords': frontmatter.tags && Array.isArray(frontmatter.tags) 
-        ? frontmatter.tags.join(',') 
-        : 'swiss insurance, expat, switzerland'
+      'keywords': (() => {
+        if (frontmatter.tags && Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0) {
+          return frontmatter.tags.join(',');
+        }
+        return 'swiss insurance, expat, switzerland';
+      })()
     })}
   </script>
 
@@ -319,7 +327,11 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         'mainEntity': [
           {
             '@type': 'Question',
-            'name': `What should expats know about ${(frontmatter.title || '').split(':')[0]}?`,
+            'name': (() => {
+              const title = frontmatter.title || '';
+              const firstPart = title.split(':')[0] || '';
+              return `What should expats know about ${firstPart.trim()}?`;
+            })(),
             'acceptedAnswer': {
               '@type': 'Answer',
               'text': frontmatter.description || `Learn everything about ${frontmatter.title || 'insurance topics'} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
@@ -380,8 +392,12 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     // Find the BlogPosting schema
     schemas.forEach(schema => {
       try {
-        const data = JSON.parse(schema.textContent || '{}');
-        if (data['@type'] === 'BlogPosting') {
+        // Skip if content is empty
+        const content = schema.textContent || '{}';
+        if (!content.trim()) return;
+        
+        const data = JSON.parse(content);
+        if (data && data['@type'] === 'BlogPosting') {
           data.aggregateRating = {
             '@type': 'AggregateRating',
             ratingValue: rating,
