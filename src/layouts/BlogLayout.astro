@@ -203,159 +203,141 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   <ConsultationModal />
 
   <!-- BlogPosting Schema Markup -->
-  <script type="application/ld+json">
-    {JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      'headline': frontmatter.title || 'Expat Savvy Article',
-      'description': frontmatter.description || '',
-      'datePublished': (() => {
-        if (frontmatter.date instanceof Date) {
-          return frontmatter.date.toISOString();
-        } else if (typeof frontmatter.date === 'string') {
-          const parsedDate = new Date(frontmatter.date);
-          return isNaN(parsedDate.getTime()) ? new Date().toISOString() : parsedDate.toISOString();
-        } else {
-          return new Date().toISOString();
-        }
-      })(),
-      'dateModified': new Date().toISOString(),
-      'author': {
-        '@type': 'Person',
-        'name': frontmatter.author || 'Benjamin Amos Wagner',
-        'url': 'https://expat-savvy.ch/about'
-      },
-      'publisher': {
-        '@type': 'Organization',
-        'name': 'Expat Savvy',
-        'logo': {
-          '@type': 'ImageObject',
-          'url': 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg'
-        }
-      },
-      'mainEntityOfPage': {
-        '@type': 'WebPage',
-        '@id': Astro.url.href
-      },
-      'image': {
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    'headline': frontmatter.title || 'Expat Savvy Article',
+    'description': frontmatter.description || '',
+    'datePublished': typeof frontmatter.date === 'string' 
+      ? new Date(frontmatter.date).toISOString() 
+      : frontmatter.date instanceof Date 
+        ? frontmatter.date.toISOString() 
+        : new Date().toISOString(),
+    'dateModified': new Date().toISOString(),
+    'author': {
+      '@type': 'Person',
+      'name': frontmatter.author || 'Benjamin Amos Wagner',
+      'url': 'https://expat-savvy.ch/about'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Expat Savvy',
+      'logo': {
         '@type': 'ImageObject',
-        'url': frontmatter.image || 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp',
-        'width': 1200,
-        'height': 630
-      },
-      'url': Astro.url.href,
-      'isPartOf': {
-        '@type': 'Blog',
-        'name': 'Expat Savvy Blog',
-        'url': 'https://expat-savvy.ch/blog'
-      },
-      'keywords': (() => {
-        if (frontmatter.tags && Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0) {
-          return frontmatter.tags.join(',');
-        }
-        return 'swiss insurance, expat, switzerland';
-      })()
-    })}
-  </script>
+        'url': 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg'
+      }
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': Astro.url.href
+    },
+    'image': {
+      '@type': 'ImageObject',
+      'url': frontmatter.image || 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp',
+      'width': 1200,
+      'height': 630
+    },
+    'url': Astro.url.href,
+    'isPartOf': {
+      '@type': 'Blog',
+      'name': 'Expat Savvy Blog',
+      'url': 'https://expat-savvy.ch/blog'
+    },
+    'keywords': frontmatter.tags && Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0 
+      ? frontmatter.tags.join(',') 
+      : 'swiss insurance, expat, switzerland'
+  }, null, 2)} />
 
   <!-- Gym-specific FAQ Schema Markup -->
   {frontmatter.title && frontmatter.title.toLowerCase().includes("gym") && (
-    <script type="application/ld+json">
-      {JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        'mainEntity': [
-          {
-            '@type': 'Question',
-            'name': 'What insurance pays the most for the gym?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. See https://expat-savvy.ch/healthcare/all-insurances/swica for details.'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'How much does a gym membership cost in Switzerland?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'Which Swiss health insurance covers fitness activities?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'Do I need a doctor\'s prescription for gym coverage?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'What types of fitness activities are covered by Swiss insurance?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'How do I claim gym reimbursement from my Swiss insurance?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
-            }
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'What insurance pays the most for the gym?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. See https://expat-savvy.ch/healthcare/all-insurances/swica for details.'
           }
-        ]
-      })}
-    </script>
+        },
+        {
+          '@type': 'Question',
+          'name': 'How much does a gym membership cost in Switzerland?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'Which Swiss health insurance covers fitness activities?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'Do I need a doctor\'s prescription for gym coverage?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'What types of fitness activities are covered by Swiss insurance?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'How do I claim gym reimbursement from my Swiss insurance?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
+          }
+        }
+      ]
+    }, null, 2)} />
   )}
 
   <!-- Dynamic FAQ Schema for better SEO for all non-gym posts -->
   {frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && (
-    <script type="application/ld+json">
-      {JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        'mainEntity': [
-          {
-            '@type': 'Question',
-            'name': (() => {
-              const title = frontmatter.title || '';
-              const firstPart = title.split(':')[0] || '';
-              return `What should expats know about ${firstPart.trim()}?`;
-            })(),
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': frontmatter.description || `Learn everything about ${frontmatter.title || 'insurance topics'} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'How can expats get personal insurance advice in Switzerland?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'Expats can get personalized insurance advice through a free consultation with our experts who specialize in expat insurance needs in Switzerland. Visit https://expat-savvy.ch/free-consultation for more information.'
-            }
-          },
-          {
-            '@type': 'Question',
-            'name': 'Is insurance mandatory for expats in Switzerland?',
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': 'Yes, health insurance (KVG/LAMal) is mandatory for all residents in Switzerland, including expats. You must obtain coverage within three months of arrival, and it's retroactive to your arrival date.'
-            }
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': `What should expats know about ${(frontmatter.title || '').split(':')[0] || ''}?`,
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': frontmatter.description || `Learn everything about ${frontmatter.title || 'insurance topics'} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
           }
-        ]
-      })}
-    </script>
+        },
+        {
+          '@type': 'Question',
+          'name': 'How can expats get personal insurance advice in Switzerland?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Expats can get personalized insurance advice through a free consultation with our experts who specialize in expat insurance needs in Switzerland. Visit https://expat-savvy.ch/free-consultation for more information.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'Is insurance mandatory for expats in Switzerland?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Yes, health insurance (KVG/LAMal) is mandatory for all residents in Switzerland, including expats. You must obtain coverage within three months of arrival, and it is retroactive to your arrival date.'
+          }
+        }
+      ]
+    }, null, 2)} />
   )}
 </BaseLayout>
 
@@ -392,12 +374,12 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     // Find the BlogPosting schema
     schemas.forEach(schema => {
       try {
-        // Skip if content is empty
         const content = schema.textContent || '{}';
         if (!content.trim()) return;
         
         const data = JSON.parse(content);
         if (data && data['@type'] === 'BlogPosting') {
+          // Add or update aggregateRating
           data.aggregateRating = {
             '@type': 'AggregateRating',
             ratingValue: rating,
@@ -405,7 +387,10 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
             worstRating: 1,
             ratingCount: 1
           };
-          schema.textContent = JSON.stringify(data, null, 2);
+          
+          // Replace the content with the updated JSON
+          const updatedContent = JSON.stringify(data, null, 2);
+          schema.textContent = updatedContent;
         }
       } catch (error) {
         console.error('Error updating schema rating:', error);

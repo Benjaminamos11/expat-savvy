@@ -21,12 +21,12 @@ const providers = defineCollection({
 const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string().optional(),
-    date: z.date().optional(),
-    description: z.string().optional(),
-    author: z.string().optional(),
-    image: z.string().optional(),
-    tags: z.array(z.string()).optional(),
+    title: z.string().optional().nullable(),
+    date: z.union([z.date(), z.string(), z.null()]).optional(),
+    description: z.string().optional().nullable(),
+    author: z.string().optional().nullable(),
+    image: z.string().optional().nullable(),
+    tags: z.array(z.string()).optional().nullable(),
   }),
 });
 
