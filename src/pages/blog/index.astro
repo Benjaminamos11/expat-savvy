@@ -3,10 +3,33 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Safe sort that handles missing or invalid dates
+const sortedPosts = posts.sort((a, b) => {
+  const dateA = a.data.date instanceof Date ? a.data.date.valueOf() : 
+               (typeof a.data.date === 'string' ? new Date(a.data.date).valueOf() : 0);
+  const dateB = b.data.date instanceof Date ? b.data.date.valueOf() : 
+               (typeof b.data.date === 'string' ? new Date(b.data.date).valueOf() : 0);
+  return dateB - dateA;
+});
 
 // Default image if none is specified
 const defaultImage = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
+
+// Helper function to format dates safely
+const formatDate = (date: Date | string | undefined | null): string => {
+  if (!date) return '';
+  
+  const dateObj = date instanceof Date ? date : 
+                (typeof date === 'string' ? new Date(date) : null);
+  
+  if (!dateObj || isNaN(dateObj.valueOf())) return '';
+  
+  return dateObj.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
 ---
 
 <BaseLayout 
@@ -29,21 +52,20 @@ const defaultImage = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849
               <div class="aspect-w-16 aspect-h-9 bg-gray-100">
                 <img 
                   src={post.data.image || defaultImage} 
-                  alt={`Illustration for ${post.data.title}`}
+                  alt={`Illustration for ${post.data.title || 'Expat Savvy Article'}`}
                   class="w-full h-48 object-cover"
                   width="640"
                   height="360"
+                  loading="lazy"
                 />
               </div>
               <div class="p-6">
-                <div class="text-sm text-gray-500 mb-2">
-                  {post.data.date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long', 
-                    day: 'numeric'
-                  })}
-                </div>
-                <h2 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{post.data.title}</h2>
+                {post.data.date && (
+                  <div class="text-sm text-gray-500 mb-2">
+                    {formatDate(post.data.date)}
+                  </div>
+                )}
+                <h2 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{post.data.title || 'Expat Savvy Article'}</h2>
                 {post.data.description && (
                   <p class="text-gray-600 line-clamp-3">{post.data.description}</p>
                 )}

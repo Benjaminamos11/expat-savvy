@@ -35,14 +35,35 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     </div>
 
     <header class="mb-8">
-      <h1 class="text-4xl font-bold mb-4 text-gray-900">{frontmatter.title}</h1>
+      <h1 class="text-4xl font-bold mb-4 text-gray-900">{frontmatter.title || 'Expat Savvy Article'}</h1>
       {frontmatter.date && (
-        <time datetime={frontmatter.date.toISOString()} class="text-gray-600">
-          {frontmatter.date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
+        <time datetime={
+          frontmatter.date instanceof Date 
+            ? frontmatter.date.toISOString() 
+            : (typeof frontmatter.date === 'string'
+                ? new Date(frontmatter.date).toISOString()
+                : new Date().toISOString())
+        } class="text-gray-600">
+          {
+            frontmatter.date instanceof Date 
+              ? frontmatter.date.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })
+              : (typeof frontmatter.date === 'string'
+                  ? new Date(frontmatter.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
+                  : new Date().toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long', 
+                      day: 'numeric'
+                    })
+                )
+          }
         </time>
       )}
     </header>
@@ -52,7 +73,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     </div>
     
     <!-- FAQ Section - only show for gym-related articles -->
-    {frontmatter.title.toLowerCase().includes("gym") && (
+    {frontmatter.title && frontmatter.title.toLowerCase().includes("gym") && (
       <div class="mt-12 pt-8 border-t border-gray-200">
         <FAQ 
           items={[
@@ -186,9 +207,13 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     {JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
-      'headline': frontmatter.title,
-      'description': frontmatter.description,
-      'datePublished': frontmatter.date ? new Date(frontmatter.date).toISOString() : new Date().toISOString(),
+      'headline': frontmatter.title || 'Expat Savvy Article',
+      'description': frontmatter.description || '',
+      'datePublished': frontmatter.date instanceof Date 
+        ? frontmatter.date.toISOString() 
+        : (typeof frontmatter.date === 'string' 
+            ? new Date(frontmatter.date).toISOString() 
+            : new Date().toISOString()),
       'dateModified': new Date().toISOString(),
       'author': {
         '@type': 'Person',
@@ -219,12 +244,14 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         'name': 'Expat Savvy Blog',
         'url': 'https://expat-savvy.ch/blog'
       },
-      'keywords': frontmatter.tags ? frontmatter.tags.join(',') : 'swiss insurance, expat, switzerland'
-    }, null, 2)}
+      'keywords': frontmatter.tags && Array.isArray(frontmatter.tags) 
+        ? frontmatter.tags.join(',') 
+        : 'swiss insurance, expat, switzerland'
+    })}
   </script>
 
   <!-- Gym-specific FAQ Schema Markup -->
-  {frontmatter.title.toLowerCase().includes("gym") && (
+  {frontmatter.title && frontmatter.title.toLowerCase().includes("gym") && (
     <script type="application/ld+json">
       {JSON.stringify({
         '@context': 'https://schema.org',
@@ -279,12 +306,12 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
             }
           }
         ]
-      }, null, 2)}
+      })}
     </script>
   )}
 
   <!-- Dynamic FAQ Schema for better SEO for all non-gym posts -->
-  {!frontmatter.title.toLowerCase().includes("gym") && (
+  {frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && (
     <script type="application/ld+json">
       {JSON.stringify({
         '@context': 'https://schema.org',
@@ -292,10 +319,10 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         'mainEntity': [
           {
             '@type': 'Question',
-            'name': `What should expats know about ${frontmatter.title.split(':')[0]}?`,
+            'name': `What should expats know about ${(frontmatter.title || '').split(':')[0]}?`,
             'acceptedAnswer': {
               '@type': 'Answer',
-              'text': frontmatter.description || `Learn everything about ${frontmatter.title} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
+              'text': frontmatter.description || `Learn everything about ${frontmatter.title || 'insurance topics'} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
             }
           },
           {
@@ -315,7 +342,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
             }
           }
         ]
-      }, null, 2)}
+      })}
     </script>
   )}
 </BaseLayout>
