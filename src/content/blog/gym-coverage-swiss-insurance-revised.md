@@ -4,7 +4,7 @@ description: "Your detailed 2025 guide to Swiss supplementary health insurance g
 author: "Benjamin Amos Wagner"
 date: 2025-05-09
 tags: ["health insurance", "expat", "switzerland", "gym", "fitness", "savings", "Qualitop", "Qualicert", "CSS", "Sanitas", "Helsana", "Swica", "Atupri", "AXA", "Groupe Mutuel", "Visana"]
-image: "/images/gym-insurance-switzerland-2025.jpg"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"
 ---
 
 ## Introduction: Staying Active and Healthy as an Expat in Switzerland

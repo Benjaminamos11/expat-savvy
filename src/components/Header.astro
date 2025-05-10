@@ -9,9 +9,15 @@ const mainNavItems = [
         title: "Health Insurance",
         items: [
           { name: "Basic Insurance Guide", href: "/healthcare/glossary/basic-health-insurance" },
+          { name: "Best Health Insurance", href: "/blog/best-health-insurance-switzerland-expats" },
+          { name: "Insurance Models", href: "/blog/health-insurance-models-switzerland" },
           { name: "Compare Providers", href: "/compare-providers" },
           { name: "New Insurance Setup", href: "/healthcare/new-health-insurance" },
-          { name: "Switch Insurance", href: "/news/switching-health-insurance-in-switzerland" }
+          { name: "Switch Insurance", href: "/news/switching-health-insurance-in-switzerland" },
+          { name: "Maternity & Newborn", href: "/blog/maternity-newborn-insurance-switzerland" },
+          { name: "Mental Health Coverage", href: "/blog/mental-health-services-switzerland" },
+          { name: "Pre-existing Conditions", href: "/blog/revised-pre-existing-conditions-article" },
+          { name: "Dental Coverage", href: "/blog/dental-insurance-expats-switzerland" }
         ]
       },
       {
@@ -19,6 +25,8 @@ const mainNavItems = [
         items: [
           { name: "Personal Liability", href: "/insurance/personal-liability-insurance" },
           { name: "Household Insurance", href: "/insurance/household-insurance" },
+          { name: "Accident Insurance", href: "/blog/accident-insurance-switzerland-uvg-laa" },
+          { name: "Dental Insurance", href: "/blog/dental-insurance-expats-switzerland" },
           { name: "Legal Protection", href: "/insurance/legal-protection-insurance" }
         ]
       },
@@ -26,6 +34,7 @@ const mainNavItems = [
         title: "Pension & Savings",
         items: [
           { name: "3rd Pillar Guide", href: "/3rd-pillar" },
+          { name: "Swiss Pension System", href: "/blog/understanding-swiss-3-pillar-pension-system" },
           { name: "Pension Planning", href: "/pension-planning" },
           { name: "Life Insurance (Risk)", href: "/life-insurance" }
         ]
@@ -59,13 +68,24 @@ const mainNavItems = [
           { name: "Latest News", href: "/news" },
           { name: "Insurance Guides", href: "/insurance-guides" },
           { name: "Living in Switzerland", href: "/living-in-switzerland" },
-          { name: "Healthcare System", href: "/healthcare-system" }
+          { name: "Healthcare System", href: "/healthcare-system" },
+          { name: "All Blog Posts", href: "/blog" }
         ]
       },
       {
         title: "Guides",
         items: [
+          { name: "Best Health Insurance", href: "/blog/best-health-insurance-switzerland-expats" },
+          { name: "Health Insurance Models", href: "/blog/health-insurance-models-switzerland" },
+          { name: "Pre-Existing Conditions", href: "/blog/revised-pre-existing-conditions-article" },
           { name: "Gym Coverage Guide", href: "/blog/gym-coverage-swiss-insurance-revised" },
+          { name: "Accident Insurance", href: "/blog/accident-insurance-switzerland-uvg-laa" },
+          { name: "Choosing an Advisor", href: "/blog/choosing-quality-insurance-consultant" },
+          { name: "Relocating Checklist", href: "/blog/relocating-to-switzerland-checklist" },
+          { name: "Swiss Pension System", href: "/blog/understanding-swiss-3-pillar-pension-system" },
+          { name: "Dental Coverage", href: "/blog/dental-insurance-expats-switzerland" },
+          { name: "Maternity Insurance", href: "/blog/maternity-newborn-insurance-switzerland" },
+          { name: "Mental Health Services", href: "/blog/mental-health-services-switzerland" },
           { name: "Insurance Glossary", href: "/healthcare/glossary/basic-health-insurance" },
           { name: "New Arrivals Guide", href: "/insurance-guides/new-arrivals-checklist" },
           { name: "Family Insurance", href: "/insurance-guides/family-insurance-planning" }
@@ -323,24 +343,35 @@ const mainNavItems = [
 
   // Mobile menu toggle
   function openMenu() {
-    mobileMenu.classList.remove('hidden');
-    body.style.overflow = 'hidden';
+    if (mobileMenu) {
+      mobileMenu.classList.remove('hidden');
+      body.style.overflow = 'hidden';
+    }
   }
 
   function closeMenu() {
-    mobileMenu.classList.add('hidden');
-    body.style.overflow = '';
+    if (mobileMenu) {
+      mobileMenu.classList.add('hidden');
+      body.style.overflow = '';
+    }
   }
 
-  mobileMenuButton.addEventListener('click', openMenu);
-  mobileMenuClose.addEventListener('click', closeMenu);
+  if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', openMenu);
+  }
+  
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', closeMenu);
+  }
 
   // Close menu when clicking outside
-  mobileMenu.addEventListener('click', (e) => {
-    if (e.target === mobileMenu) {
-      closeMenu();
-    }
-  });
+  if (mobileMenu) {
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        closeMenu();
+      }
+    });
+  }
 
   // Close menu on escape key
   document.addEventListener('keydown', (e) => {
@@ -356,8 +387,13 @@ const mainNavItems = [
       const submenu = button.nextElementSibling;
       const icon = button.querySelector('svg');
       
-      submenu.classList.toggle('hidden');
-      icon.classList.toggle('rotate-180');
+      if (submenu) {
+        submenu.classList.toggle('hidden');
+      }
+      
+      if (icon) {
+        icon.classList.toggle('rotate-180');
+      }
     });
   });
 </script>

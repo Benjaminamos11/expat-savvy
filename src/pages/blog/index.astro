@@ -4,31 +4,89 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Default image if none is specified
+const defaultImage = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
 ---
 
-<BaseLayout title="Blog">
-  <div class="max-w-3xl mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8">Blog</h1>
-    <div class="space-y-8">
-      {sortedPosts.map((post) => (
-        <article class="border-b pb-8">
-          <h2 class="text-2xl font-bold mb-2">
-            <a href={`/blog/${post.slug}`} class="hover:text-blue-600">
-              {post.data.title}
+<BaseLayout 
+  title="Blog & Articles | Expat Savvy"
+  description="Read our latest articles about insurance, expat life, and healthcare in Switzerland. Get expert advice from Expat Savvy."
+>
+  <main class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">Articles & Guides</h1>
+        <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500">
+          Expert insights about insurance, healthcare, and expat life in Switzerland
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map((post) => (
+          <article class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+            <a href={`/blog/${post.slug}`} class="block">
+              <div class="aspect-w-16 aspect-h-9 bg-gray-100">
+                <img 
+                  src={post.data.image || defaultImage} 
+                  alt={`Illustration for ${post.data.title}`}
+                  class="w-full h-48 object-cover"
+                  width="640"
+                  height="360"
+                />
+              </div>
+              <div class="p-6">
+                <div class="text-sm text-gray-500 mb-2">
+                  {post.data.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long', 
+                    day: 'numeric'
+                  })}
+                </div>
+                <h2 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{post.data.title}</h2>
+                {post.data.description && (
+                  <p class="text-gray-600 line-clamp-3">{post.data.description}</p>
+                )}
+                <div class="mt-4 flex items-center text-primary-500 font-medium">
+                  Read more
+                  <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </div>
             </a>
-          </h2>
-          <time datetime={post.data.date.toISOString()} class="text-gray-600">
-            {post.data.date.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </time>
-          {post.data.description && (
-            <p class="mt-2 text-gray-700">{post.data.description}</p>
-          )}
-        </article>
-      ))}
+          </article>
+        ))}
+      </div>
     </div>
-  </div>
-</BaseLayout> 
+  </main>
+</BaseLayout>
+
+<style>
+  .aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+  .aspect-w-16 > img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    object-fit: cover;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style> 

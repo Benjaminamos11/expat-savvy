@@ -3,7 +3,7 @@ title: "Welcome to Expat Savvy"
 date: 2024-03-20
 description: "Welcome to our blog where we share insights about expat life and living abroad."
 author: "Benjamin Amos Wagner"
-image: "/images/blog/welcome.jpg"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
 ---
 
 # Welcome to Expat Savvy

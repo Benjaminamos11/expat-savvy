@@ -26,8 +26,8 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     <!-- Hero Image -->
     <div class="relative w-full aspect-[16/9] mb-12 bg-white flex items-center justify-center hero-image-container">
       <img 
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp" 
-        alt="Hand-drawn Swiss gym and insurance illustration" 
+        src={frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"} 
+        alt={`Illustration for ${frontmatter.title}`} 
         class="w-full h-full object-contain object-center hero-img"
         width="1600" height="400"
       />
@@ -51,35 +51,40 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       <slot />
     </div>
     
-    <!-- FAQ Section -->
-    <div class="mt-12 pt-8 border-t border-gray-200">
-      <FAQ items={[
-        {
-          question: 'What insurance pays the most for the gym?',
-          answer: 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. <a href="/healthcare/all-insurances/swica" class="text-primary-500 hover:text-primary-600 underline">Learn more about SWICA coverage</a>.'
-        },
-        {
-          question: 'How much does a gym membership cost in Switzerland?',
-          answer: 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
-        },
-        {
-          question: 'Which Swiss health insurance covers fitness activities?',
-          answer: 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
-        },
-        {
-          question: 'Do I need a doctor\'s prescription for gym coverage?',
-          answer: 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
-        },
-        {
-          question: 'What types of fitness activities are covered by Swiss insurance?',
-          answer: 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
-        },
-        {
-          question: 'How do I claim gym reimbursement from my Swiss insurance?',
-          answer: 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
-        }
-      ]} />
-    </div>
+    <!-- FAQ Section - only show for gym-related articles -->
+    {frontmatter.title.toLowerCase().includes("gym") && (
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <FAQ 
+          items={[
+            {
+              question: 'What insurance pays the most for the gym?',
+              answer: 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. <a href="/healthcare/all-insurances/swica" class="text-primary-500 hover:text-primary-600 underline">Learn more about SWICA coverage</a>.'
+            },
+            {
+              question: 'How much does a gym membership cost in Switzerland?',
+              answer: 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
+            },
+            {
+              question: 'Which Swiss health insurance covers fitness activities?',
+              answer: 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
+            },
+            {
+              question: 'Do I need a doctor\'s prescription for gym coverage?',
+              answer: 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
+            },
+            {
+              question: 'What types of fitness activities are covered by Swiss insurance?',
+              answer: 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
+            },
+            {
+              question: 'How do I claim gym reimbursement from my Swiss insurance?',
+              answer: 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
+            }
+          ]} 
+          showHeading={true}
+        />
+      </div>
+    )}
 
     <!-- Rating System -->
     <div class="mt-12 pt-8 border-t border-gray-200">
@@ -151,23 +156,23 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     <div class="mt-12 pt-8 border-t border-gray-200">
       <div class="flex items-center space-x-4">
         <img 
-          src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740112521/profilbild_o8hffb.jpg" 
+          src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746901773/profilbild_o8hffb_1_b9n3xx.webp" 
           alt="Benjamin Amos Wagner" 
           class="w-16 h-16 rounded-full object-cover"
         />
         <div>
           <h3 class="font-bold text-lg text-gray-900">Benjamin Amos Wagner</h3>
-          <p class="text-gray-600">Expat Consultant & Founder of Expat Savvy</p>
+          <p class="text-gray-600">Founder of Expat Savvy</p>
         </div>
       </div>
     </div>
 
     <!-- Floating CTA Banner -->
-    <div id="floating-cta" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary-500 text-white px-8 py-4 rounded-full shadow-lg flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 transition-all w-[90%] sm:w-auto max-w-2xl md:py-4 md:px-8 sm:py-2 sm:px-4 py-2 px-3 text-base sm:text-lg" style="max-height:64px;">
+    <div id="floating-cta" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-lg shadow-xl flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4 transition-all w-full max-w-5xl border border-primary-400/20 backdrop-blur-sm">
       <span class="font-semibold text-center sm:text-left">Need help choosing insurance?</span>
       <button
         onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
-        class="bg-white text-primary-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base sm:text-lg"
+        class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base"
       >
         Free Consultation
       </button>
@@ -177,60 +182,87 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   <ConsultationModal />
 
   <!-- FAQPage Schema Markup -->
+  {frontmatter.title.toLowerCase().includes("gym") && (
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+          {
+            '@type': 'Question',
+            'name': 'What insurance pays the most for the gym?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. See https://expat-savvy.ch/healthcare/all-insurances/swica for details.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'How much does a gym membership cost in Switzerland?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Which Swiss health insurance covers fitness activities?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Do I need a doctor\'s prescription for gym coverage?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'What types of fitness activities are covered by Swiss insurance?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'How do I claim gym reimbursement from my Swiss insurance?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
+            }
+          }
+        ]
+      }, null, 2)}
+    </script>
+  )}
+
+  <!-- BlogPosting Schema Markup -->
   <script type="application/ld+json">
     {JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      'mainEntity': [
-        {
-          '@type': 'Question',
-          'name': 'What insurance pays the most for the gym?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. See https://expat-savvy.ch/healthcare/all-insurances/swica for details.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'How much does a gym membership cost in Switzerland?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'Which Swiss health insurance covers fitness activities?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'Do I need a doctor\'s prescription for gym coverage?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'What types of fitness activities are covered by Swiss insurance?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'How do I claim gym reimbursement from my Swiss insurance?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
-          }
+      '@type': 'BlogPosting',
+      'headline': frontmatter.title,
+      'description': frontmatter.description,
+      'datePublished': frontmatter.date?.toISOString(),
+      'author': {
+        '@type': 'Person',
+        'name': frontmatter.author || 'Benjamin Amos Wagner'
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'Expat Savvy',
+        'logo': {
+          '@type': 'ImageObject',
+          'url': 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg'
         }
-      ]
+      },
+      'image': frontmatter.image || 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp',
+      'url': Astro.url.href
     }, null, 2)}
   </script>
 </BaseLayout>
@@ -262,20 +294,27 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   });
 
   function updateSchemaRating(rating: number) {
-    const schema = document.querySelector('script[type="application/ld+json"]');
-    if (schema) {
-      const data = JSON.parse(schema.textContent || '{}');
-      if (data['@type'] === 'BlogPosting') {
-        data.aggregateRating = {
-          '@type': 'AggregateRating',
-          ratingValue: rating,
-          bestRating: 5,
-          worstRating: 1,
-          ratingCount: 1
-        };
-        schema.textContent = JSON.stringify(data, null, 2);
+    // Get all JSON-LD scripts
+    const schemas = document.querySelectorAll('script[type="application/ld+json"]');
+    
+    // Find the BlogPosting schema
+    schemas.forEach(schema => {
+      try {
+        const data = JSON.parse(schema.textContent || '{}');
+        if (data['@type'] === 'BlogPosting') {
+          data.aggregateRating = {
+            '@type': 'AggregateRating',
+            ratingValue: rating,
+            bestRating: 5,
+            worstRating: 1,
+            ratingCount: 1
+          };
+          schema.textContent = JSON.stringify(data, null, 2);
+        }
+      } catch (error) {
+        console.error('Error updating schema rating:', error);
       }
-    }
+    });
   }
 </script>
 
@@ -299,16 +338,13 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       margin: 0 auto;
     }
     #floating-cta {
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      min-height: 40px !important;
-      max-height: 56px !important;
-      font-size: 1rem !important;
+      padding: 0.75rem 1rem !important;
+      width: 90% !important;
+      font-size: 0.9rem !important;
     }
     #floating-cta button {
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      font-size: 1rem !important;
+      padding: 0.5rem 1rem !important;
+      font-size: 0.9rem !important;
     }
   }
 </style> 
