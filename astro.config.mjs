@@ -22,8 +22,5 @@ export default defineConfig({
     ssr: {
       noExternal: ['@fontsource/inter']
     }
-  },
-  experimental: {
-    contentCollectionCache: true
   }
 });
