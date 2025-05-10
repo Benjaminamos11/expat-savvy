@@ -1,0 +1,92 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+  author?: {
+    name: string;
+    url?: string;
+  };
+}
+
+const {
+  title,
+  description = "Expat Savvy - Your guide to living abroad successfully",
+  image = "/images/og-image.jpg",
+  type = "website",
+  publishDate,
+  author = {
+    name: "Benjamin Amos Wagner",
+    url: "https://expat-savvy.ch"
+  }
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title} | Expat Savvy</title>
+    <meta name="title" content={`${title} | Expat Savvy`} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Expat Savvy`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | Expat Savvy`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": type === "article" ? "BlogPosting" : "WebSite",
+      "name": title,
+      "description": description,
+      "url": canonicalURL,
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "url": Astro.site
+      },
+      ...(type === "article" && publishDate && {
+        "datePublished": publishDate.toISOString(),
+        "author": {
+          "@type": "Person",
+          "name": author.name,
+          "url": author.url
+        }
+      })
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html> 

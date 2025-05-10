@@ -1,194 +1,102 @@
 ---
 ---
-<div id="consultation-modal" class="fixed inset-0 z-50 hidden">
-  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-  
-  <!-- Modal container - Updated for better mobile scrolling -->
-  <div class="fixed inset-0 flex items-start justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg my-8">
-      <!-- Modal content -->
-      <div class="p-8">
-        <div class="flex justify-between items-start mb-6">
-          <h2 class="text-2xl font-bold text-gray-900">Get Expert Insurance Advice</h2>
-          <button id="close-consultation-modal" class="text-gray-400 hover:text-gray-500 transition-colors">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+<div id="consultation-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+  <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-4 sm:p-8 relative shadow-xl modal-content">
+      <!-- Close button -->
+      <button
+        onclick="document.getElementById('consultation-modal').classList.add('hidden')"
+        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600"
+        aria-label="Close"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
 
-        <!-- Who is this for section -->
-        <div class="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 class="font-medium text-gray-900 mb-3">Who is this meeting for?</h3>
-          <ul class="space-y-2">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-gray-600">New residents needing to set up health insurance</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-gray-600">Current residents looking to optimize coverage and reduce premiums</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-gray-600">Anyone planning retirement with 3rd pillar options</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-gray-600">Families seeking life insurance protection</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-gray-600">Self-employed needing comprehensive insurance review</span>
-            </li>
-          </ul>
-        </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">Get Expert Insurance Advice</h2>
 
-        <!-- What to expect section -->
-        <div class="bg-gray-50 rounded-lg p-4 mb-8">
-          <h3 class="font-medium text-gray-900 mb-3">What to expect:</h3>
-          <ul class="space-y-2">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">30-60 minute consultation</span>
-                <p class="text-sm text-gray-500">Personal video call with our insurance expert</p>
-              </div>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">Comprehensive Analysis</span>
-                <p class="text-sm text-gray-500">Review of all insurance needs (health, life, pension, etc.)</p>
-              </div>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">Tailored Solutions</span>
-                <p class="text-sm text-gray-500">Personalized recommendations for your situation</p>
-              </div>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">Clear Next Steps</span>
-                <p class="text-sm text-gray-500">Written summary and action plan after the call</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="space-y-4">
-          <a
-            href="https://cal.com/robertkolar/consultation"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
-          >
-            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            Book Free Consultation
-          </a>
-          
-          <a
-            href="https://wa.me/41791552570"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#25D366] hover:bg-[#22c35e] transition-colors"
-          >
-            <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Chat on WhatsApp
-          </a>
-        </div>
-
-        <p class="mt-6 text-sm text-center text-gray-500">
-          Our service is free - we're compensated by insurance providers when you choose to sign up through us.
-        </p>
+      <div class="bg-gray-50 rounded-xl p-4 sm:p-5 mb-6">
+        <h3 class="font-semibold text-gray-900 mb-3 text-lg">Who is this meeting for?</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg></span> New residents needing to set up health insurance</li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg></span> Current residents looking to optimize coverage and reduce premiums</li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg></span> Anyone planning retirement with 3rd pillar options</li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg></span> Families seeking life insurance protection</li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/></svg></span> Self-employed needing comprehensive insurance review</li>
+        </ul>
       </div>
+
+      <div class="bg-gray-50 rounded-xl p-4 sm:p-5 mb-6">
+        <h3 class="font-semibold text-gray-900 mb-3 text-lg">What to expect:</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 6v6l4 2"/></svg></span> <span><b>30-60 minute consultation</b><br><span class="text-gray-500">Personal video call with our insurance expert</span></span></li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span> <span><b>Comprehensive Analysis</b><br><span class="text-gray-500">Review of all insurance needs (health, life, pension, etc.)</span></span></li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> <span><b>Tailored Solutions</b><br><span class="text-gray-500">Personalized recommendations for your situation</span></span></li>
+          <li class="flex items-start"><span class="mr-2 mt-1"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M9 12l2 2l4-4"/></svg></span> <span><b>Clear Next Steps</b><br><span class="text-gray-500">Written summary and action plan after the call</span></span></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-3 mb-4">
+        <button
+          onclick="window.open('https://cal.com/benjamin-wagner', '_blank'); document.getElementById('consultation-modal').classList.add('hidden');"
+          class="w-full flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="24" height="24" fill="none"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Book Free Consultation
+        </button>
+        <button
+          onclick="window.open('https://wa.me/41791552570', '_blank'); document.getElementById('consultation-modal').classList.add('hidden');"
+          class="w-full flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </button>
+      </div>
+      <p class="text-xs text-gray-500 text-center mt-2">Our service is free - we're compensated by insurance providers when you choose to sign up through us.</p>
     </div>
   </div>
 </div>
 
 <script>
-  // Define showConsultationModal globally
-  window.showConsultationModal = () => {
-    const modal = document.getElementById('consultation-modal');
-    if (modal) {
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-  };
-
-  // Initialize modal functionality
-  const modal = document.getElementById('consultation-modal');
-  const closeBtn = document.getElementById('close-consultation-modal');
-  const modalContent = modal?.querySelector('.bg-white');
-
-  // Close modal
-  const closeModal = () => {
-    if (modal) {
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-  };
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
-
-  // Close on outside click - Updated to check if click is outside modal content
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      const clickedElement = e.target as HTMLElement;
-      // Check if the click is outside the modal content
-      if (!modalContent?.contains(clickedElement) || clickedElement === modal) {
-        closeModal();
-      }
-    });
-  }
-
-  // Handle escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
+  // Close modal when clicking outside
+  document.getElementById('consultation-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      e.currentTarget.classList.add('hidden');
     }
   });
+  // Function to show the modal globally
+  window.showConsultationModal = function() {
+    document.getElementById('consultation-modal')?.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  };
 </script>
 
 <style>
-  /* Ensure proper scrolling on mobile */
+  .modal-content {
+    box-sizing: border-box;
+  }
   @media (max-width: 640px) {
     .modal-content {
-      margin: 1rem;
-      max-height: calc(100vh - 2rem);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      margin: 0.5rem;
+      max-height: calc(100vh - 1rem);
+      padding: 1rem !important;
+      font-size: 1rem;
+    }
+    .modal-content h2 {
+      font-size: 1.25rem;
+    }
+    .modal-content h3 {
+      font-size: 1rem;
+    }
+    .modal-content ul {
+      font-size: 0.95rem;
+    }
+    .modal-content button {
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
     }
   }
-
-  /* Prevent background scroll when modal is open */
   body.modal-open {
     overflow: hidden;
     position: fixed;

@@ -20,7 +20,10 @@ export default defineConfig({
       inlineStylesheets: 'always',
     },
     ssr: {
-        noExternal: ['@fontsource/inter']
+      noExternal: ['@fontsource/inter']
     }
+  },
+  experimental: {
+    contentCollectionCache: true
   }
 });
