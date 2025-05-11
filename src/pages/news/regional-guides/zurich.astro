@@ -1,5 +1,4 @@
----
-import Layout from '../../../layouts/Layout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ConsultationModal from '../../../components/ConsultationModal.astro';
 
 const breadcrumbs = [
@@ -150,11 +149,61 @@ const insurance_categories = [
     ]
   }
 ];
+
+const faqEntities = faqs.map(faq => ({
+  "@type": "Question",
+  "name": faq.question,
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": faq.answer
+  }
+}));
+
+// Prepare JSON strings manually
+const articleSchemaString = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Expat Insurance & Living in Zurich Guide 2025: Health, Liability & Essential Tips",
+  "description": "Comprehensive Zurich guide for expats with essential insurance information, neighborhood insights, and living tips. Find the best health insurance, housing, and more.",
+  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740598472/henrique-ferreira-6v-K4PpCHVw-unsplash_1_zkpj2a.webp",
+  "author": {
+    "@type": "Person",
+    "name": "Benjamin Amos Wagner",
+    "url": "https://expat-savvy.ch/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+    }
+  },
+  "datePublished": "2023-06-01T00:00:00Z",
+  "dateModified": "2023-06-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://expat-savvy.ch/news/regional-guides/zurich"
+  }
+}, null, 2);
+
+const faqSchemaString = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqEntities
+}, null, 2);
 ---
 
-<Layout
+<BaseLayout 
   title="Expat Insurance & Living in Zurich Guide 2025: Health, Liability & Essential Tips"
   description="Comprehensive Zurich guide for expats with essential insurance information, neighborhood insights, and living tips. Find the best health insurance, housing, and more."
+  type="article"
+  publishDate={new Date("2023-06-01")}
+  author={{
+    name: "Benjamin Amos Wagner",
+    url: "https://expat-savvy.ch/about"
+  }}
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740598472/henrique-ferreira-6v-K4PpCHVw-unsplash_1_zkpj2a.webp"
 >
   <!-- Hero Section -->
   <div class="relative bg-white overflow-hidden">
@@ -729,7 +778,7 @@ const insurance_categories = [
   </div>
 
   <ConsultationModal />
-</Layout>
+</BaseLayout>
 
 <script>
   // Add scroll animation
