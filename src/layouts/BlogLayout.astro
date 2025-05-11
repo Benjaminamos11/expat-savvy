@@ -28,10 +28,10 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       <img 
         src={frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"} 
         alt={`Illustration for ${frontmatter.title}`} 
-        class="w-full h-full object-contain object-center hero-img"
+        class="w-full h-full object-contain object-center hero-img rounded-lg"
         width="1600" height="400"
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 pointer-events-none rounded-lg"></div>
     </div>
 
     <header class="mb-8">
@@ -417,6 +417,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       max-height: 240px !important;
       display: block;
       margin: 0 auto;
+      border-radius: 1rem !important;
     }
     #floating-cta {
       padding: 0.75rem 1rem !important;
@@ -427,5 +428,10 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       padding: 0.5rem 1rem !important;
       font-size: 0.9rem !important;
     }
+  }
+  
+  /* Add rounded corners to all images in blog content */
+  :global(.prose img) {
+    border-radius: 0.5rem;
   }
 </style> 
