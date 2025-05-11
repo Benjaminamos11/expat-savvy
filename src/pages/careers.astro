@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
+
+const jobPositions = [
+  {
+    title: "Insurance Consultant",
+    description: "We're looking for English-speaking insurance consultants who already have a strong network in Switzerland. We provide the necessary education and FINMA licenses to help you succeed.",
+    responsibilities: [
+      "Advise clients on insurance options tailored to their needs",
+      "Build and maintain relationships with expat communities",
+      "Stay up-to-date with Swiss insurance regulations and offerings",
+      "Provide exceptional client service throughout the insurance journey"
+    ],
+    qualifications: [
+      "Strong existing network in Switzerland",
+      "Excellent communication skills in English (additional languages are a plus)",
+      "Passion for helping expats navigate their insurance needs",
+      "Self-motivated with strong interpersonal skills"
+    ]
+  },
+  {
+    title: "Sales Professional",
+    description: "We're constantly seeking strong sales people for Expat Savvy, insurance-guide.ch, and new projects. If you have a talent for connecting with people and understanding their needs, we want to hear from you.",
+    responsibilities: [
+      "Develop new business opportunities with expats in Switzerland",
+      "Manage and grow your client portfolio",
+      "Collaborate with our insurance consultants to ensure client needs are met",
+      "Represent our brand and values in all client interactions"
+    ],
+    qualifications: [
+      "Proven sales track record",
+      "Excellent communication and negotiation skills",
+      "Understanding of the expat market in Switzerland",
+      "Results-oriented with strong networking abilities"
+    ]
+  },
+  {
+    title: "Web Developer",
+    description: "Join our tech team to help build and improve our digital platforms. We're looking for both frontend and backend developers experienced with Astro.js, React, and modern web development practices.",
+    responsibilities: [
+      "Develop and maintain our website and web applications",
+      "Implement new features and improve existing functionality",
+      "Ensure responsiveness and compatibility across devices and browsers",
+      "Collaborate with designers and other team members"
+    ],
+    qualifications: [
+      "Experience with Astro.js and React",
+      "Strong HTML, CSS, and JavaScript skills",
+      "Understanding of modern web development practices",
+      "Ability to work independently and as part of a team"
+    ]
+  }
+];
+---
+
+<Layout
+  title="Careers at Expat Savvy | Join Our Team"
+  description="Join the Expat Savvy team and help expats navigate insurance in Switzerland. We're looking for consultants, sales professionals, and developers who share our vision."
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746955727/a-photograph-of-a-pair-of-weathered-hand_VtrAh5xzQTyf2G3A5waPuw_JX12TClHSTyC9fW-makmfw_jutsp1.webp"
+        alt="Swiss landscape"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Join Our Team</span>
+          <span class="block mt-2">Shape the <span class="text-primary-500">Expat Experience</span></span>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Philosophy Section -->
+  <div class="bg-white py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Our Work Philosophy</h2>
+        
+        <div class="bg-white p-8 rounded-lg shadow-lg border border-primary-400/30 mb-12">
+          <p class="text-lg text-gray-700 mb-6">
+            At Expat Savvy, we believe that work should be more than just a job. It's about making a meaningful difference in people's lives. We're passionate about helping expats navigate the complexities of Swiss insurance and find the right solutions for their unique needs.
+          </p>
+          
+          <p class="text-lg text-gray-700 mb-6">
+            Our team is built on values of transparency, empathy, and expertise. We foster an environment where everyone's voice is heard, where innovation is encouraged, and where we celebrate our successes together. We're not just colleagues – we're a community dedicated to supporting each other and growing together.
+          </p>
+          
+          <p class="text-lg text-gray-700 mb-6">
+            We understand that the best results come from people who are passionate about what they do. That's why we invest in our team members' growth and development, providing the resources, training, and support needed to excel in their roles and advance their careers.
+          </p>
+          
+          <p class="text-lg text-gray-700">
+            If you're someone who shares our vision and values, who thrives in a collaborative and dynamic environment, and who is excited about making a real impact on expats' lives in Switzerland, we'd love to hear from you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job Positions Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Open Positions</h2>
+      
+      <div class="space-y-12 max-w-4xl mx-auto">
+        {jobPositions.map((job, index) => (
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">{job.title}</h3>
+              <p class="text-gray-600 mb-6">{job.description}</p>
+              
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-semibold text-gray-900 text-lg mb-3">Responsibilities:</h4>
+                  <ul class="space-y-2">
+                    {job.responsibilities.map(responsibility => (
+                      <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-gray-600">{responsibility}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 text-lg mb-3">Qualifications:</h4>
+                  <ul class="space-y-2">
+                    {job.qualifications.map(qualification => (
+                      <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-gray-600">{qualification}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="mt-8">
+                <a 
+                  href="mailto:bw@expat-savvy.ch?subject=Job Application: {job.title}"
+                  class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 shadow-md transition-colors"
+                >
+                  Apply for this Position
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Opportunities Section -->
+  <div class="bg-white py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Don't See Your Perfect Role?</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          We're always on the lookout for talented individuals who can add value to our team. If you see something that could fit with Expat Savvy, don't hesitate to get in touch. We'd love to hear about your skills and how you think you could contribute to our mission.
+        </p>
+        <a 
+          href="mailto:bw@expat-savvy.ch?subject=Career Inquiry"
+          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 shadow-md transition-colors"
+        >
+          Send Us Your Resume
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Ready to Join Our Team?</h2>
+        <p class="text-lg text-gray-700 mb-8">
+          Send your resume and a brief cover letter explaining why you're interested in joining Expat Savvy to <a href="mailto:bw@expat-savvy.ch" class="text-primary-600 hover:text-primary-700 font-medium">bw@expat-savvy.ch</a>. We look forward to hearing from you!
+        </p>
+        <p class="text-gray-500 italic">
+          Expat Savvy is committed to creating a diverse and inclusive workplace. We consider all qualified applicants regardless of race, color, religion, gender, sexual orientation, gender identity, national origin, or disability status.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
+
+<style>
+  /* Fix container alignment issue */
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style> 
