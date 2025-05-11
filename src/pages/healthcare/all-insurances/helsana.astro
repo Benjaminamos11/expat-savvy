@@ -6,112 +6,161 @@ import ExpandableFormBanner from '../../../components/ExpandableFormBanner.astro
 const features = [
   {
     title: "Basic Insurance",
-    description: "Multiple models including BASIS, BeneFit PLUS, and Telmed options with up to 15% savings",
+    description: "Multiple models including Standard, BeneFit PLUS Family Doctor/HMO, and Telmed options offering premium savings",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>`
   },
   {
     title: "Supplementary Insurance",
-    description: "Wide range of supplementary plans including TOP, COMPLETA, PRIMEO, and specialized dental coverage",
+    description: "Comprehensive range including COMPLETA, TOP, SANA, hospital plans, and specialized dental coverage",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
     </svg>`
   },
   {
-    title: "Nationwide Coverage",
-    description: "60+ local branches throughout Switzerland for personalized service",
+    title: "International Coverage",
+    description: "Enhanced coverage for medical emergencies when traveling abroad, ideal for expats who travel frequently",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>`
+  }
+];
+
+const basicInsuranceModels = [
+  {
+    name: "Standard Model (Free Choice of Doctor)",
+    description: "Complete freedom to consult any doctor or specialist directly without referral",
+    benefits: [
+      "Direct specialist access",
+      "Maximum flexibility",
+      "No gatekeeper requirements",
+      "Freedom to choose any doctor",
+      "Higher premiums for greater choice"
+    ]
+  },
+  {
+    name: "BeneFit PLUS (Family Doctor/HMO)",
+    description: "Consult your chosen family doctor or HMO group practice for all health issues initially",
+    benefits: [
+      "Significant premium reductions",
+      "Coordinated care approach",
+      "Consistent medical history",
+      "Emergency exceptions",
+      "Direct access for eye/gyn care"
+    ]
+  },
+  {
+    name: "BeneFit PLUS Telmed",
+    description: "Call a telemedicine center for initial consultation before visiting a doctor",
+    benefits: [
+      "Lowest premium rates",
+      "English support available",
+      "Remote consultation convenience",
+      "Health professional guidance",
+      "Referred care when needed"
+    ]
+  },
+  {
+    name: "PREMED-24",
+    description: "Similar to Telmed, requiring initial telemedicine consultation",
+    benefits: [
+      "Balance of cost savings",
+      "Guided healthcare access",
+      "Less restrictive than HMO",
+      "24/7 medical advice",
+      "Premium discounts"
+    ]
   }
 ];
 
 const supplementaryPlans = [
   {
-    name: "TOP",
-    description: "Outpatient insurance for international coverage",
-    benefits: [
-      "International coverage",
-      "Vision care",
-      "Non-prescription drugs",
-      "Psychotherapy",
-      "Travel medical coverage"
-    ]
-  },
-  {
     name: "COMPLETA",
-    description: "Comprehensive plan combining TOP and SANA benefits",
+    description: "Comprehensive outpatient supplementary insurance",
     benefits: [
-      "Complete coverage",
-      "Alternative medicine",
-      "Preventive care",
-      "Enhanced benefits",
-      "Comprehensive protection"
+      "Alternative therapies coverage",
+      "Preventive measures & health checks",
+      "Gym membership contributions",
+      "Enhanced emergency treatment abroad",
+      "Medical aids and appliances"
     ]
   },
   {
-    name: "PRIMEO",
-    description: "Premium outpatient surgery coverage",
+    name: "TOP and SANA",
+    description: "Varied outpatient coverage for specific needs",
     benefits: [
-      "Free doctor choice",
-      "Maximum comfort",
-      "Priority treatment",
-      "Premium facilities",
-      "Enhanced privacy"
+      "Dental treatments (minor)",
+      "Psychotherapy",
+      "Health promotion measures",
+      "Alternative medicine options",
+      "Outpatient specialists"
+    ]
+  },
+  {
+    name: "HOSPITAL Options",
+    description: "Enhanced hospital coverage and comfort",
+    benefits: [
+      "Choice of ward (ECO, Semi-Private, Private)",
+      "Free doctor selection (tier dependent)",
+      "Enhanced privacy and comfort",
+      "International hospital coverage",
+      "HOSPITAL FLEX option available"
     ]
   },
   {
     name: "DENTAplus",
-    description: "Comprehensive dental coverage",
+    description: "Comprehensive dental care coverage",
     benefits: [
-      "75% cost coverage",
-      "Up to 3000 CHF/year",
-      "Dental checks",
-      "Root canal treatments",
-      "Orthodontic treatments"
+      "Percentage of costs covered",
+      "Dental checkups",
+      "Root canals and fillings",
+      "Crowns and orthodontics",
+      "Annual maximum benefits"
     ]
   }
 ];
 
 const faqs = [
   {
-    question: "What makes Helsana different from other Swiss health insurers?",
-    answer: "Helsana stands out as Switzerland's largest health insurer with over 1.9 million policyholders. They offer innovative digital services, a comprehensive rewards program, and extensive coverage options including specialized plans like PRIMEO for premium outpatient care."
+    question: "Is Helsana a good choice for expats in Switzerland?",
+    answer: "Helsana is one of the largest and most reputable health insurers in Switzerland, offering a wide range of plans and good multilingual support, making them a strong contender for expats. Their supplementary plans often include benefits like international coverage and gym contributions that appeal to the expat community."
   },
   {
-    question: "How much can I save with Helsana's alternative insurance models?",
-    answer: "With Helsana's alternative models, you can save up to 15% with the BeneFit PLUS family doctor model and up to 12% with the Telmed model, while maintaining high-quality healthcare coverage."
+    question: "How do I sign up for Helsana insurance as a newcomer?",
+    answer: "You can sign up directly via Helsana's website, by phone, or through an independent insurance broker like Expat Savvy. You will need to provide personal details, your Swiss address, and your permit status. Remember the three-month deadline from your arrival date."
   },
   {
-    question: "What supplementary insurance options does Helsana offer?",
-    answer: "Helsana offers various supplementary insurance options including TOP for outpatient care, COMPLETA for comprehensive coverage, PRIMEO for premium services, and DENTAplus for dental care. Each plan can be customized to your specific needs."
+    question: "Can Helsana deny my application for basic health insurance?",
+    answer: "No, insurers cannot deny applications for compulsory basic health insurance, regardless of age or health status."
   },
   {
-    question: "Does Helsana offer English-speaking customer service?",
-    answer: "Yes, Helsana provides multilingual customer service, including English support, through their 60+ local branches across Switzerland and their digital platforms."
+    question: "What is the difference between basic and supplementary insurance with Helsana?",
+    answer: "Basic insurance (Grundversicherung) is mandatory and covers essential medical care as defined by Swiss law. Supplementary insurance (Zusatzversicherung) is voluntary and covers additional benefits like private hospital rooms, alternative therapies, extensive dental care, and more. Helsana offers a variety of both."
   },
   {
-    question: "How does Helsana's rewards program work?",
-    answer: "Helsana's rewards program offers points for healthy activities and preventive measures. These points can be converted into cash rewards, helping you save money while maintaining a healthy lifestyle."
+    question: "Does Helsana offer support in English?",
+    answer: "Yes, Helsana generally provides customer service, policy documents, and online resources in English, which is very helpful for expats."
+  },
+  {
+    question: "What are the advantages of Helsana's COMPLETA supplementary plan for expats?",
+    answer: "The COMPLETA plan often includes benefits such as contributions to gym memberships, coverage for alternative therapies, and enhanced medical coverage when traveling abroad, which are popular among expats."
   }
 ];
 ---
 
 <Layout
-  title="Helsana Health Insurance Switzerland | Expert Guide 2025"
-  description="Compare Helsana health insurance plans in Switzerland. Learn about their innovative digital services, comprehensive coverage options, and exclusive benefits. Updated for 2025."
+  title="Helsana Health Insurance Switzerland: A Comprehensive Guide for Expats (2025)"
+  description="Explore Helsana health insurance options for expats in Switzerland. Understand basic and supplementary plans, benefits, and how to choose the best coverage with Expat Savvy."
 >
   <!-- Enhanced Schema.org markup -->
   <script type="application/ld+json" slot="head">
     {
       "@context": "https://schema.org",
-      "@type": "InsuranceAgency",
+      "@type": ["InsuranceAgency", "LocalBusiness"],
       "name": "Helsana Insurance",
-      "description": "Switzerland's largest health insurance provider serving over 1.9 million policyholders with comprehensive insurance solutions.",
+      "description": "Leading Swiss health insurance provider offering comprehensive coverage options for expats in Switzerland.",
       "url": "https://expat-savvy.ch/healthcare/all-insurances/helsana",
-      "logo": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Zürichstrasse 130",
@@ -119,7 +168,13 @@ const faqs = [
         "postalCode": "8600",
         "addressCountry": "CH"
       },
-      "areaServed": "CH",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Switzerland"
+      },
+      "telephone": "+41 58 340 18 80",
+      "openingHours": "Mo,Tu,We,Th,Fr 08:00-17:00",
+      "priceRange": "$$",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Insurance Products",
@@ -129,7 +184,7 @@ const faqs = [
             "itemOffered": {
               "@type": "Service",
               "name": "Basic Insurance",
-              "description": "Multiple models including BASIS, BeneFit PLUS, and Telmed options"
+              "description": "Multiple models including Standard, BeneFit PLUS, and Telmed options"
             }
           },
           {
@@ -137,10 +192,15 @@ const faqs = [
             "itemOffered": {
               "@type": "Service",
               "name": "Supplementary Insurance",
-              "description": "Additional coverage including TOP, COMPLETA, PRIMEO, and specialized dental plans"
+              "description": "Additional coverage including COMPLETA, TOP, SANA, hospital plans, and dental coverage"
             }
           }
         ]
+      },
+      "isPartOf": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "url": "https://expat-savvy.ch"
       },
       "breadcrumb": {
         "@type": "BreadcrumbList",
@@ -165,35 +225,98 @@ const faqs = [
           }
         ]
       },
-      "faqPage": {
+      "mainEntity": {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How do I get a quote from Helsana?",
+            "name": "Is Helsana a good choice for expats in Switzerland?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can get a quote from Helsana through their online premium calculator, by booking a free consultation with our experts, or visiting one of Helsana's 60+ local branches. We recommend comparing multiple offers to find the best coverage for your needs."
+              "text": "Helsana is one of the largest and most reputable health insurers in Switzerland, offering a wide range of plans and good multilingual support, making them a strong contender for expats. Their supplementary plans often include benefits like international coverage and gym contributions that appeal to the expat community."
             }
           },
           {
             "@type": "Question",
-            "name": "What makes Helsana different from other Swiss insurers?",
+            "name": "How do I sign up for Helsana insurance as a newcomer?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Helsana stands out as Switzerland's largest health insurer with over 1.9 million policyholders. They offer innovative digital services, a comprehensive rewards program, and extensive coverage options including specialized plans like PRIMEO for premium outpatient care."
+              "text": "You can sign up directly via Helsana's website, by phone, or through an independent insurance broker like Expat Savvy. You will need to provide personal details, your Swiss address, and your permit status. Remember the three-month deadline from your arrival date."
             }
           },
           {
             "@type": "Question",
-            "name": "What supplementary insurance options does Helsana offer?",
+            "name": "Can Helsana deny my application for basic health insurance?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Helsana offers various supplementary plans including TOP for outpatient care, COMPLETA for comprehensive coverage, PRIMEO for premium services, and DENTAplus for dental care. Each plan can be customized to your specific needs."
+              "text": "No, insurers cannot deny applications for compulsory basic health insurance, regardless of age or health status."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between basic and supplementary insurance with Helsana?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Basic insurance (Grundversicherung) is mandatory and covers essential medical care as defined by Swiss law. Supplementary insurance (Zusatzversicherung) is voluntary and covers additional benefits like private hospital rooms, alternative therapies, extensive dental care, and more. Helsana offers a variety of both."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Helsana offer support in English?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, Helsana generally provides customer service, policy documents, and online resources in English, which is very helpful for expats."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the advantages of Helsana's COMPLETA supplementary plan for expats?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The COMPLETA plan often includes benefits such as contributions to gym memberships, coverage for alternative therapies, and enhanced medical coverage when traveling abroad, which are popular among expats."
             }
           }
         ]
-      }
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Benjamin Amos Wagner",
+        "url": "https://expat-savvy.ch/about"
+      },
+      "datePublished": "2025-05-11"
+    }
+  </script>
+  
+  <!-- Article Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Helsana Health Insurance Switzerland: A Comprehensive Guide for Expats (2025)",
+      "description": "Explore Helsana health insurance options for expats in Switzerland. Understand basic and supplementary plans, benefits, and how to choose the best coverage with Expat Savvy.",
+      "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+      "datePublished": "2025-05-11",
+      "dateModified": "2025-05-11",
+      "author": {
+        "@type": "Person",
+        "name": "Benjamin Amos Wagner",
+        "url": "https://expat-savvy.ch/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+          "width": 600,
+          "height": 60
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://expat-savvy.ch/healthcare/all-insurances/helsana"
+      },
+      "keywords": ["Helsana", "health insurance", "Switzerland", "expat", "basic insurance", "supplementary insurance", "COMPLETA", "BeneFit PLUS"]
     }
   </script>
 
@@ -201,86 +324,175 @@ const faqs = [
   <div class="bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="text-center">
-        <img 
-          src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp" 
-          alt="Helsana Logo" 
-          class="h-24 mx-auto mb-8"
-          width="240"
-          height="96"
-        />
         <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
           <span class="block">Helsana Health Insurance</span>
+          <span class="block text-3xl sm:text-4xl text-primary-600 mt-3">Your In-Depth Guide for Expats in Switzerland (2025)</span>
         </h1>
-        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-          Switzerland's largest health insurance provider, serving over 1.9 million policyholders with annual revenues of 6.5 billion Swiss francs.
+        <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-600">
+          Expert guidance to help expats understand Helsana's health insurance options, benefits, and make informed decisions for your Swiss healthcare journey.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- About Section with Highlighted Expat Advantages -->
-  <div class="bg-gray-50 py-16">
+  <!-- Table of Contents -->
+  <div class="bg-gray-50 py-8 border-t border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Helsana</h2>
-        <p>
-          The Helsana health insurance provider is the result of the 1996 merger of Helvetia and Artisana, two health and accident insurance companies. With more than 1.9 million policy holders as well as annual revenues amounting to 6.5 billion Swiss francs, Helsana is Switzerland's largest health insurance provider. The insurer is headquartered in Dübendorf and has 60 local branches throughout Switzerland.
-        </p>
-        
-        <!-- Highlighted Expat Advantages -->
-        <div class="bg-white rounded-xl shadow-lg p-6 my-8">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Expat Advantages with Helsana</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Multilingual Support</span>
-                <p class="text-sm text-gray-600">Customer service in multiple languages</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Digital Services</span>
-                <p class="text-sm text-gray-600">Modern app and online platform</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Rewards Program</span>
-                <p class="text-sm text-gray-600">Points for healthy activities</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Nationwide Network</span>
-                <p class="text-sm text-gray-600">60+ local branches across Switzerland</p>
-              </div>
-            </div>
-          </div>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">In This Guide:</h2>
+        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
+          <ul class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+            <li>
+              <a href="#basics" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Swiss Health Insurance Basics
+              </a>
+            </li>
+            <li>
+              <a href="#models" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Basic Insurance Models
+              </a>
+            </li>
+            <li>
+              <a href="#features" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Key Features
+              </a>
+            </li>
+            <li>
+              <a href="#supplementary" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Supplementary Insurance
+              </a>
+            </li>
+            <li>
+              <a href="#expat-considerations" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Expat Considerations
+              </a>
+            </li>
+            <li>
+              <a href="#cantons" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Regional Differences
+              </a>
+            </li>
+            <li>
+              <a href="#expert-help" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                How We Can Help
+              </a>
+            </li>
+            <li>
+              <a href="#faq" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                FAQs
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Expandable Form Banner -->
-  <div class="bg-white py-16">
-    <ExpandableFormBanner provider="Helsana" />
+  <!-- Introduction Section -->
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <p class="lead text-lg text-gray-700">
+          Navigating the <a href="/blog/swiss-health-insurance-system-explained" class="text-primary-600 hover:underline">Swiss health insurance landscape</a> can feel complex, especially when you're new to the country. Helsana is one of Switzerland's leading health and accident insurers, offering a wide range of products and services tailored to different needs. This guide, brought to you by <a href="/about" class="text-primary-600 hover:underline">Expat Savvy</a>, will provide you with a comprehensive overview of Helsana's offerings, helping you understand your options and make informed decisions for your health and well-being in Switzerland.
+        </p>
+      </div>
+    </div>
   </div>
 
-  <!-- Features Section -->
-  <div class="bg-gray-50 py-16">
+  <!-- Understanding Swiss Health Insurance Section -->
+  <div class="bg-gray-50 py-16" id="basics">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Understanding Swiss Health Insurance: The Basics with Helsana</h2>
+        
+        <p>Before we explore Helsana's specific plans, it's crucial to understand the <a href="/blog/health-insurance-models-switzerland" class="text-primary-600 hover:underline">Swiss health insurance system</a>. Health insurance is <a href="/blog/mandatory-health-insurance-switzerland" class="text-primary-600 hover:underline">compulsory for everyone residing in Switzerland</a>. You must obtain basic health insurance (Grundversicherung / Assurance de base) within three months of your arrival. Helsana, like all Swiss insurers, offers this mandatory basic coverage, the benefits of which are defined by the <a href="/blog/kvg-lamal-insurance-law" class="text-primary-600 hover:underline">Swiss Federal Health Insurance Act (KVG/LAMal)</a> and are identical across all providers. For a deeper dive, see our <a href="/blog/swiss-health-insurance-system-explained" class="text-primary-600 hover:underline">Guide to the Swiss Health Insurance System</a>.</p>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 my-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Key aspects of basic insurance include:</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Uniform Benefits:</strong> Covers essential medical treatments, including illness, accidents (if not covered by an employer's <a href="/blog/accident-insurance-switzerland-uvg-laa" class="text-primary-600 hover:underline">accident insurance</a>), and <a href="/blog/maternity-newborn-insurance-switzerland" class="text-primary-600 hover:underline">maternity</a>.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Freedom of Choice (for basic):</strong> You can choose any health insurer for your basic coverage, regardless of your health status.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Premiums:</strong> These vary based on your canton of residence, age, and chosen insurance model and <a href="/blog/health-insurance-deductible-switzerland" class="text-primary-600 hover:underline">deductible</a>, but not on your income.</span>
+            </li>
+          </ul>
+          <p class="mt-4">Helsana offers various models for basic insurance, designed to provide flexibility and potential premium savings. These often involve choosing a specific network of doctors or a telemedicine-first approach.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Basic Insurance Models Section -->
+  <div class="bg-white py-16" id="models">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Helsana's Basic Health Insurance Models for Expats</h2>
+      <p class="text-lg text-gray-600 max-w-4xl mx-auto mb-10 text-center">
+        Choosing the right <a href="/blog/health-insurance-models-switzerland" class="text-primary-600 hover:underline">basic insurance model</a> is a key first step. Helsana provides several options to suit different preferences and needs, which can be particularly helpful for expats looking for flexibility or cost savings.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {basicInsuranceModels.map(model => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">{model.name}</h3>
+            <p class="text-gray-600 mb-4">{model.description}</p>
+            <ul class="space-y-2">
+              {model.benefits.map(benefit => (
+                <li class="flex items-center text-sm text-gray-600">
+                  <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Features Section -->
+  <div class="bg-gray-50 py-16" id="features">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Key Features of Helsana Insurance</h2>
+      
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         {features.map(feature => (
           <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
@@ -295,10 +507,26 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Supplementary Plans Section -->
-  <div class="bg-white py-16">
+  <!-- Get Quote Banner Section - Softer styling -->
+  <div class="bg-gradient-to-r from-primary-100 to-primary-200 py-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Supplementary Insurance Plans</h2>
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Compare Helsana Insurance Rates for Your Needs</h2>
+        <p class="mt-2 text-gray-700">Get personalized quotes and expert advice tailored to your situation</p>
+      </div>
+      <ExpandableFormBanner provider="Helsana" />
+    </div>
+  </div>
+
+  <!-- Supplementary Insurance Section -->
+  <div class="bg-white py-16" id="supplementary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Key Supplementary Insurance Options from Helsana</h2>
+      
+      <div class="prose prose-lg max-w-4xl mx-auto mb-12">
+        <p>While <a href="/blog/basic-vs-supplementary-health-insurance-switzerland" class="text-primary-600 hover:underline">basic insurance covers essential medical needs</a>, many residents in Switzerland, including expats, opt for <a href="/blog/supplementary-health-insurance-guide-switzerland" class="text-primary-600 hover:underline">supplementary insurance</a> (Zusatzversicherungen / Assurances complémentaires) to enhance their coverage. Helsana offers a range of supplementary plans that cover benefits not included or only partially covered by basic insurance. These are not compulsory and insurers can deny applications based on health status.</p>
+      </div>
+      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {supplementaryPlans.map(plan => (
           <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
@@ -306,8 +534,8 @@ const faqs = [
             <p class="text-gray-600 mb-4">{plan.description}</p>
             <ul class="space-y-2">
               {plan.benefits.map(benefit => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <li class="flex items-center text-sm text-gray-600">
+                  <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
                   {benefit}
@@ -317,19 +545,287 @@ const faqs = [
           </div>
         ))}
       </div>
+      
+      <div class="mt-12 text-center">
+        <button
+          onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+          class="inline-flex items-center px-6 py-3 border border-primary-500 text-base font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 shadow-md"
+        >
+          Explore Supplementary Options
+          <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Special Considerations for Expats -->
+  <div class="bg-gray-50 py-16" id="expat-considerations">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Special Considerations for Expats with Helsana</h2>
+        
+        <p>Understanding how Helsana caters to the international community is important for a smooth experience.</p>
+        
+        <div class="bg-white rounded-xl shadow-lg p-6 my-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <div>
+                <span class="font-medium">Multilingual Support</span>
+                <p class="text-sm text-gray-600">Helsana typically offers customer service and documentation in multiple languages, including English, which is a significant advantage for expats.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <div>
+                <span class="font-medium">Newcomer Information</span>
+                <p class="text-sm text-gray-600">Helsana provides dedicated information and resources for individuals new to Switzerland, explaining the system and their product offerings.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <div>
+                <span class="font-medium">International Coverage</span>
+                <p class="text-sm text-gray-600">Many of Helsana's supplementary plans offer enhanced coverage for medical emergencies when traveling or temporarily staying abroad.</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <div>
+                <span class="font-medium">Cross-Border Commuters</span>
+                <p class="text-sm text-gray-600">Helsana has provisions for cross-border commuters or those moving their residence to Switzerland after being a cross-border commuter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 class="text-2xl font-semibold text-gray-900 mt-10 mb-4">Choosing Your Helsana Plan: Key Factors for Expats</h3>
+        
+        <p>When selecting your Helsana insurance package, consider the following:</p>
+        
+        <ul>
+          <li><strong>Your Health Needs:</strong> Assess your current health status and anticipate future needs. Do you have pre-existing conditions? Do you require regular medication or therapy?</li>
+          <li><strong>Lifestyle:</strong> Are you an active individual who would benefit from gym contributions? Do you travel frequently?</li>
+          <li><strong>Budget:</strong> Determine how much you are willing to spend on premiums versus potential out-of-pocket costs (deductibles and co-payments).</li>
+          <li><strong>Preferred Level of Comfort:</strong> Especially for hospital stays, decide if a general ward is sufficient or if you prefer a semi-private or private room.</li>
+        </ul>
+        
+        <div class="bg-primary-50 border-l-4 border-primary-500 p-4 my-8">
+          <p class="font-medium text-primary-800">Understanding Deductibles and Co-payments: Swiss health insurance involves a deductible (Franchise) – a fixed amount you pay out-of-pocket each year before the insurer starts covering costs – and a co-payment (Selbstbehalt), typically 10% of costs after the deductible (up to an annual maximum).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Helsana in Swiss Cantons -->
+  <div class="bg-white py-16" id="cantons">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Helsana Across Swiss Cantons</h2>
+      
+      <div class="prose prose-lg max-w-4xl mx-auto mb-8">
+        <p>
+          Health insurance premiums in Switzerland vary significantly by canton due to regional healthcare costs. 
+          Helsana operates throughout Switzerland, with premium variations reflecting these regional differences. 
+          Below is an overview of Helsana's presence in key cantons popular among expats.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Zurich -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Zurich (ZH)</h3>
+          <p class="text-gray-600 mb-4">Zurich typically has higher premiums due to its extensive healthcare facilities and higher cost of living. Helsana offers special HMO options in Zurich with access to the city's premium healthcare network.</p>
+          <a href="/news/regional-guides/zurich" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+            Zurich Regional Guide
+            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Geneva -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Geneva (GE)</h3>
+          <p class="text-gray-600 mb-4">Geneva has some of the highest premiums in Switzerland. Helsana offers French-language services and partnerships with local healthcare providers catering to the international community.</p>
+          <a href="/blog/geneva-expat-guide" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+            Geneva Expat Insurance Guide
+            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Basel -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Basel (BS)</h3>
+          <p class="text-gray-600 mb-4">With its pharmaceutical industry and multicultural population, Basel has specialized Helsana services for international professionals. Features cross-border worker options for those commuting from France or Germany.</p>
+          <a href="/blog/swiss-healthcare-major-cities" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+            Basel Healthcare Overview
+            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Zug -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Zug (ZG)</h3>
+          <p class="text-gray-600 mb-4">Popular with expats for its tax benefits, Zug features Helsana plans tailored to international professionals. Premiums are moderate compared to Zurich despite the high standard of living.</p>
+          <a href="/blog/zug-expat-community-insurance" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+            Zug Expat Insurance Options
+            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Vaud -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Vaud (VD)</h3>
+          <p class="text-gray-600 mb-4">Home to Lausanne, this French-speaking canton has Helsana representatives specializing in academic and international organization employees. Strong partnerships with CHUV and other leading medical facilities.</p>
+          <a href="/blog/lausanne-healthcare-system" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+            Lausanne Healthcare Guide
+            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Ticino -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Ticino (TI)</h3>
+          <p class="text-gray-600 mb-4">The Italian-speaking region offers unique Helsana services with Italian language support. Lower premiums than German-speaking regions and special consideration for seasonal residents.</p>
+          <a href="/blog/swiss-regional-healthcare-differences" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+            Regional Healthcare Comparison
+            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="prose prose-lg max-w-4xl mx-auto mt-8">
+        <p class="bg-gray-50 p-4 rounded-lg">
+          <strong>Good to know:</strong> Premium differences between cantons can be substantial. For example, a basic Helsana plan might cost up to 30% more in Geneva than in some central Swiss cantons. If you're considering relocating within Switzerland, the impact on your insurance premiums is worth factoring into your decision. Learn more in our <a href="/blog/health-insurance-premiums-swiss-cantons" class="text-primary-600 hover:underline">canton premium comparison guide</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- How Expat Savvy Can Help -->
+  <div class="bg-primary-50 py-16" id="expert-help">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">How Expat Savvy Can Help</h2>
+        <p class="mt-4 text-xl text-gray-700 max-w-2xl mx-auto">
+          Choosing the right health insurance in Switzerland is a significant decision. At Expat Savvy, we specialize in helping expatriates navigate the complexities of the Swiss insurance system.
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-xl p-8 max-w-3xl mx-auto">
+        <div class="text-center mb-6">
+          <h3 class="text-2xl font-bold text-gray-900">Our Expert Services</h3>
+          <p class="text-gray-600 mt-2">We can provide:</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Personalized Advice</span>
+              <p class="text-sm text-gray-600">Tailored to your individual circumstances and needs</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Comprehensive Comparisons</span>
+              <p class="text-sm text-gray-600">Compare Helsana with other insurers objectively</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Simplified Application</span>
+              <p class="text-sm text-gray-600">Assistance with paperwork and enrollment</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Ongoing Support</span>
+              <p class="text-sm text-gray-600">Guidance throughout your Swiss insurance journey</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-8">
+          <button
+            onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+            class="inline-flex items-center px-6 py-3 border border-primary-500 text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-md"
+          >
+            Get Your Free Consultation Today
+            <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- FAQ Section -->
-  <div class="bg-gray-50 py-16">
+  <div class="bg-gray-50 py-16" id="faq">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions about Helsana for Expats</h2>
       <div class="max-w-3xl mx-auto">
         <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6" id={`faq-${index}`}>
               <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
+              <dd class="text-gray-600">
+                {faq.question.includes("Is Helsana a good choice") && (
+                  <p>Helsana is one of the largest and most reputable health insurers in Switzerland, offering a wide range of plans and good <a href="/blog/english-speaking-insurance-providers-switzerland" class="text-primary-600 hover:underline">multilingual support</a>, making them a strong contender for expats. Their supplementary plans often include benefits like <a href="/blog/travel-insurance-international-coverage" class="text-primary-600 hover:underline">international coverage</a> and <a href="/blog/gym-fitness-insurance-coverage-switzerland" class="text-primary-600 hover:underline">gym contributions</a> that appeal to the expat community.</p>
+                )}
+                
+                {faq.question.includes("How do I sign up") && (
+                  <p>You can sign up directly via <a href="https://www.helsana.ch/en/private.html" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">Helsana's website</a>, by phone, or through an independent insurance broker like <a href="/contact" class="text-primary-600 hover:underline">Expat Savvy</a>. You will need to provide personal details, your Swiss address, and your permit status. Remember the <a href="/blog/three-month-health-insurance-rule-switzerland" class="text-primary-600 hover:underline">three-month deadline</a> from your arrival date.</p>
+                )}
+                
+                {faq.question.includes("Can Helsana deny") && (
+                  <p>No, insurers cannot deny applications for compulsory <a href="/blog/basic-health-insurance-switzerland" class="text-primary-600 hover:underline">basic health insurance</a>, regardless of age or health status.</p>
+                )}
+                
+                {faq.question.includes("What is the difference between basic and supplementary") && (
+                  <p><a href="/blog/basic-health-insurance-switzerland" class="text-primary-600 hover:underline">Basic insurance</a> (Grundversicherung) is mandatory and covers essential medical care as defined by Swiss law. <a href="/blog/supplementary-health-insurance-guide-switzerland" class="text-primary-600 hover:underline">Supplementary insurance</a> (Zusatzversicherung) is voluntary and covers additional benefits like <a href="/blog/hospital-insurance-coverage-switzerland" class="text-primary-600 hover:underline">private hospital rooms</a>, <a href="/blog/alternative-medicine-coverage-switzerland" class="text-primary-600 hover:underline">alternative therapies</a>, <a href="/blog/dental-insurance-expats-switzerland" class="text-primary-600 hover:underline">extensive dental care</a>, and more. Helsana offers a variety of both.</p>
+                )}
+                
+                {faq.question.includes("Does Helsana offer support in English") && (
+                  <p>Yes, Helsana generally provides <a href="/blog/english-speaking-insurance-providers-switzerland" class="text-primary-600 hover:underline">customer service, policy documents, and online resources in English</a>, which is very helpful for expats.</p>
+                )}
+                
+                {faq.question.includes("What are the advantages of Helsana's COMPLETA") && (
+                  <p>The COMPLETA plan often includes benefits such as contributions to <a href="/blog/gym-fitness-insurance-coverage-switzerland" class="text-primary-600 hover:underline">gym memberships</a>, coverage for <a href="/blog/alternative-medicine-coverage-switzerland" class="text-primary-600 hover:underline">alternative therapies</a>, and enhanced <a href="/blog/travel-insurance-international-coverage" class="text-primary-600 hover:underline">medical coverage when traveling abroad</a>, which are popular among expats.</p>
+                )}
+              </dd>
             </div>
           ))}
         </dl>
@@ -337,17 +833,12 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Contact Information -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Contact Helsana</h2>
-        <address class="not-italic">
-          <p class="text-lg text-gray-600">Helsana Versicherungen</p>
-          <p class="text-lg text-gray-600">Zürichstrasse 130</p>
-          <p class="text-lg text-gray-600">8600 Dübendorf</p>
-        </address>
-      </div>
+  <!-- Disclaimer -->
+  <div class="bg-gray-50 py-6">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-sm text-gray-500 text-center">
+        <strong>Disclaimer:</strong> This article provides general information about Helsana health insurance and is not a substitute for personalized advice. Insurance plan details and premiums can change. Always consult with an insurance advisor or refer to official Helsana documentation for the most current information.
+      </p>
     </div>
   </div>
 
