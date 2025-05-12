@@ -9,7 +9,6 @@ const tableOfContents = [
   { id: "basic-insurance", title: "Basic Insurance Models" },
   { id: "supplementary", title: "Supplementary Insurance" },
   { id: "digital", title: "Digital Experience" },
-  { id: "expat-benefits", title: "Benefits for Expats" },
   { id: "expert-help", title: "How We Can Help" },
   { id: "faq", title: "FAQs" }
 ];
@@ -366,15 +365,6 @@ const faqs = [
 }
   </script>
 
-  <!-- Last Updated Banner -->
-  <div class="bg-primary-50 py-2">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-sm text-primary-700 text-center">
-        Last Updated: January 15, 2025
-      </p>
-    </div>
-  </div>
-
   <!-- Hero Section -->
   <div class="bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -416,62 +406,6 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Highlighted Benefits for Expats -->
-  <div class="bg-primary-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Popular with Expats</h2>
-        <p class="mt-4 text-xl text-gray-600">Why international residents choose Groupe Mutuel</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {expat_considerations.map(highlight => (
-          <div class="bg-white rounded-xl shadow-md p-6 transform transition-transform hover:scale-105 border border-gray-100">
-            <div class="text-primary-500 mb-4">
-              <Fragment set:html={highlight.icon} />
-            </div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">{highlight.title}</h3>
-            <p class="text-gray-600">{highlight.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  <!-- About Groupe Mutuel Section -->
-  <div class="bg-white py-16" id="about">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">About Groupe Mutuel Health Insurance</h2>
-        
-        <p>
-          Groupe Mutuel is one of Switzerland's leading health insurance providers, serving over 1.3 million privately insured individuals. Since 1988, they have expanded from their original base in the canton of Valais to become a nationwide provider with a particularly strong presence in French-speaking Switzerland. Their portfolio extends beyond basic health insurance to include a variety of supplementary health insurance options, life insurance, and other financial protection products.
-        </p>
-        
-        <p>
-          What sets Groupe Mutuel apart is their comprehensive range of insurance models and supplementary plans that can be tailored to meet diverse needs. Their alternative basic insurance models like PrimaFlex, OptiMed, SanaTel, and PrimaCare offer significant opportunities for premium savings while maintaining quality care. For supplementary insurance, their Global series provides flexible options for enhanced coverage, while plans like Mundo offer valuable international protection for expatriates who travel frequently.
-        </p>
-        
-        <p>
-          With a strong focus on digital services and multilingual support, Groupe Mutuel aims to make managing your health insurance as convenient as possible. Their online customer portal and mobile app allow for easy policy management, claims submission, and access to important documents, which is particularly beneficial for expatriates navigating the Swiss healthcare system.
-        </p>
-        
-        <div class="bg-white rounded-lg shadow-md p-6 my-8 border-l-4 border-primary-500">
-          <p class="text-gray-700 m-0">
-            <strong>Unsure if Groupe Mutuel aligns with your specific needs as an expat?</strong> Get a personalized consultation with Expat Savvy to compare your options and receive tailored advice.
-          </p>
-          <div class="mt-4">
-            <button
-              onclick="showConsultationModal()"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-sm"
-            >
-              Book Free Consultation
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Key Features Section -->
   <div id="features" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -498,11 +432,6 @@ const faqs = [
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Expandable Form Banner -->
-  <div class="bg-white py-16">
-    <ExpandableFormBanner provider="Groupe Mutuel" />
   </div>
 
   <!-- Basic Insurance Models Section -->
@@ -741,82 +670,6 @@ const faqs = [
     </div>
   </div>
 
-  <!-- For Expats Section -->
-  <div id="expats" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">For Expats</h2>
-        
-        <!-- Expat Benefits -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Why Expats Choose Groupe Mutuel</h3>
-          <ul class="space-y-3">
-            {expat_considerations.map(consideration => (
-              <li class="flex items-start">
-                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <div>
-                  <span class="font-medium text-gray-900">{consideration.title}</span>
-                  <p class="text-sm text-gray-600">{consideration.description}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <!-- Testimonials -->
-        <h3 class="text-2xl font-semibold text-gray-900 mb-6">What Expats Say About Groupe Mutuel</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex items-center mb-4">
-              <div class="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div class="ml-4">
-                <div class="font-medium text-gray-900">Michael Weber</div>
-                <div class="text-sm text-gray-500">IT Professional from Germany</div>
-              </div>
-            </div>
-            <p class="text-gray-600 italic">"Groupe Mutuel's digital services make managing my insurance so easy. Their app is fantastic!"</p>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex items-center mb-4">
-              <div class="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div class="ml-4">
-                <div class="font-medium text-gray-900">Emma Thompson</div>
-                <div class="text-sm text-gray-500">Teacher from UK</div>
-              </div>
-            </div>
-            <p class="text-gray-600 italic">"Their English support made everything clear and simple. Great service for expats."</p>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex items-center mb-4">
-              <div class="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <svg class="h-6 w-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div class="ml-4">
-                <div class="font-medium text-gray-900">David Chen</div>
-                <div class="text-sm text-gray-500">Engineer from Singapore</div>
-              </div>
-            </div>
-            <p class="text-gray-600 italic">"The Global series gives me complete peace of mind with worldwide coverage."</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Expert Help Section replacing How to Apply -->
   <div id="expert-help" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -936,35 +789,6 @@ const faqs = [
             </div>
           ))}
         </dl>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sticky CTA -->
-  <div class="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-50">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="p-2 rounded-lg bg-primary-600 shadow-lg sm:p-3">
-        <div class="flex items-center justify-between flex-wrap">
-          <div class="w-0 flex-1 flex items-center">
-            <span class="flex p-2 rounded-lg bg-primary-800">
-              <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-              </svg>
-            </span>
-            <p class="ml-3 font-medium text-white truncate">
-              <span class="md:hidden">Get your free quote today!</span>
-              <span class="hidden md:inline">Ready to get started? Get your personalized insurance quote now!</span>
-            </p>
-          </div>
-          <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-            <button
-              onclick="showConsultationModal()"
-              class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary-600 bg-white hover:bg-primary-50"
-            >
-              Get Free Quote
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </div>

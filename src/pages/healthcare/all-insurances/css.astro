@@ -4,457 +4,402 @@ import ConsultationModal from '../../../components/ConsultationModal.astro';
 import ExpandableFormBanner from '../../../components/ExpandableFormBanner.astro';
 
 const tableOfContents = [
-  { id: "overview", title: "Overview & Key Features" },
-  { id: "premiums", title: "Premium Structure" },
+  { id: "about", title: "About CSS" },
+  { id: "features", title: "Key Features" },
   { id: "basic-insurance", title: "Basic Insurance Models" },
   { id: "supplementary", title: "Supplementary Insurance" },
-  { id: "digital", title: "Digital Services" },
-  { id: "expats", title: "For Expats" },
-  { id: "apply", title: "How to Apply" },
-  { id: "faqs", title: "FAQs" }
+  { id: "considerations", title: "Expat Considerations" },
+  { id: "expert-help", title: "How We Can Help" },
+  { id: "faq", title: "FAQs" }
 ];
 
 const features = [
   {
-    title: "Basic Insurance Models",
-    description: "Four flexible models including standard, family doctor, HMO/GVP, and Telmed options",
+    title: "Premium Levels",
+    description: "Competitive premium options with potential savings through different models",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
+    </svg>`
+  },
+  {
+    title: "Variety of Insurance Models",
+    description: "Multiple basic insurance models including Standard, Family Doctor, HMO, and Telmed options",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>`
   },
   {
-    title: "myFlex Insurance Solutions",
-    description: "Comprehensive supplementary coverage with outpatient, hospitalization, and alternative medicine options",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-    </svg>`
-  },
-  {
     title: "Digital Services",
-    description: "Modern mobile app for policy management and invoice scanning",
+    description: "Modern myCSS portal and mobile app for policy management and claim submissions",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
     </svg>`
   }
 ];
 
-const supplementaryPlans = [
+const expat_considerations = [
   {
-    name: "myFlex Outpatient",
-    description: "Worldwide coverage for outpatient treatments",
-    benefits: [
-      "Eye laser surgery coverage",
-      "Dental insurance for children",
-      "Global coverage",
-      "Alternative medicine"
-    ],
-    highlight: true
+    title: "Language Support Considerations",
+    description: "CSS provides an English version of its main website and generally offers English customer service, making it accessible for expatriates new to Switzerland.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+    </svg>`
   },
   {
-    name: "myFlex Hospitalisation",
-    description: "Comprehensive hospital coverage across Switzerland",
+    title: "Company Background",
+    description: "Founded in 1899 as the Christian Social Health Insurance Fund of Switzerland, CSS is headquartered in Lucerne and insures roughly 1.34 million policyholders under basic insurance.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>`
+  },
+  {
+    title: "Digital Access",
+    description: "CSS has invested in digital platforms, including the myCSS portal and mobile app. These tools allow policy management and claim submissions, with English interface options available.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>`
+  }
+];
+
+const basicInsuranceModels = [
+  {
+    name: "Standard Model",
+    description: "Free choice of doctors throughout Switzerland with highest premium",
     benefits: [
-      "Free hospital choice",
-      "Private/semi-private ward",
-      "Nationwide coverage",
-      "Emergency abroad"
+      "Choose any doctor",
+      "Direct specialist access",
+      "Maximum flexibility",
+      "No restrictions"
     ]
   },
   {
-    name: "myFlex Alternative",
-    description: "Coverage for alternative medicine treatments",
+    name: "Family Doctor (Hausarzt)",
+    description: "Choose a designated family doctor as first point of contact",
     benefits: [
-      "Approved therapists",
-      "Various methods covered",
-      "Preventive care",
-      "Holistic approach"
+      "Lower premiums",
+      "Coordinated care",
+      "Personal doctor relationship",
+      "Specialist referrals"
     ]
   },
   {
-    name: "Health Account",
-    description: "Preventative health benefits",
+    name: "HMO",
+    description: "Health Maintenance Organization with network of doctors",
     benefits: [
-      "Sports club discounts",
-      "Yoga classes",
-      "Fitness programs",
-      "Wellness activities"
+      "Lower premiums",
+      "Coordinated care",
+      "Network of specialists",
+      "Quality oversight"
+    ]
+  },
+  {
+    name: "Telmed",
+    description: "Initial consultation via telephone or telemedicine",
+    benefits: [
+      "Significant premium savings",
+      "24/7 medical advice",
+      "Convenient access",
+      "Digital consultation"
     ]
   }
 ];
 
-const premiumComparison = {
-  ageGroups: [
-    {
-      group: "Adults (26+)",
-      css: "From CHF 310",
-      marketAvg: "CHF 320",
-      savings: "Up to 3%"
-    },
-    {
-      group: "Young Adults (19-25)",
-      css: "From CHF 230",
-      marketAvg: "CHF 240",
-      savings: "Up to 4%"
-    },
-    {
-      group: "Children (0-18)",
-      css: "From CHF 95",
-      marketAvg: "CHF 100",
-      savings: "Up to 5%"
-    }
-  ]
-};
+const supplementaryPlans = [
+  {
+    name: "LIVO SMART",
+    description: "Modern outpatient and preventive care coverage",
+    benefits: [
+      "Outpatient treatments",
+      "Preventive care",
+      "Alternative medicine",
+      "Health promotion"
+    ],
+    bestFor: "Those seeking flexible outpatient coverage"
+  },
+  {
+    name: "LIVO TOP",
+    description: "Comprehensive coverage including hospitalization",
+    benefits: [
+      "Hospital coverage",
+      "Worldwide treatment options",
+      "Alternative medicine",
+      "Latest healthcare developments"
+    ],
+    bestFor: "Expats needing comprehensive coverage"
+  },
+  {
+    name: "Dental Insurance",
+    description: "Coverage for dental care expenses",
+    benefits: [
+      "Check-ups",
+      "Fillings and treatments",
+      "Orthodontics for children",
+      "Professional cleaning"
+    ],
+    bestFor: "Families and those needing dental care"
+  },
+  {
+    name: "Travel and Holiday Insurance",
+    description: "Extended medical coverage abroad",
+    benefits: [
+      "International coverage",
+      "Emergency assistance",
+      "Medical evacuation",
+      "Treatment abroad"
+    ],
+    bestFor: "Frequent travelers and mobile expats"
+  }
+];
 
 const faqs = [
   {
-    question: "What makes CSS different from other Swiss insurers?",
-    answer: "As Switzerland's largest health insurer, CSS offers extensive coverage options, a comprehensive network of service points, and innovative digital solutions. Their myFlex insurance solutions provide flexible coverage that can be tailored to individual needs."
+    question: "Does CSS offer customer support and documentation in English for expats?",
+    answer: "Yes, CSS provides an English version of its main website and generally offers English customer service through various channels. This makes it accessible for expatriates who are not yet comfortable with the official Swiss languages. For complex matters, having some documentation in German, French, or Italian may still occur."
   },
   {
-    question: "How do I get a quote from CSS?",
-    answer: "You can get a personalized quote from CSS through their online premium calculator, by scheduling a free consultation with our experts, or visiting a local CSS office. We recommend comparing multiple offers to find the best coverage for your needs."
+    question: "I travel frequently. What are CSS's options for international health coverage?",
+    answer: "CSS offers supplementary insurance plans that include enhanced international coverage. Basic insurance provides mandatory coverage for emergency treatment worldwide (typically limited to twice the Swiss cost). For more comprehensive coverage, CSS's supplementary plans like Livo Top are designed to offer enhanced benefits, including for planned treatments abroad under certain conditions."
   },
   {
-    question: "What digital services does CSS offer?",
-    answer: "CSS provides a modern mobile app for policy management, digital insurance cards, online claims submission, and invoice scanning capabilities. Their digital platform makes insurance management simple and efficient."
+    question: "What are the main differences between CSS's basic health insurance models?",
+    answer: "CSS offers several models: Standard Model allows free doctor choice but has higher premiums; Family Doctor Model requires consulting your designated family doctor first, with lower premiums; HMO Model requires using doctors within a specific network, with lower premiums; and Telmed Model requires calling a telemedicine hotline first, often with the lowest premiums."
   },
   {
-    question: "Does CSS offer English-speaking customer service?",
-    answer: "Yes, CSS provides multilingual customer service, including English support, through their customer service centers and digital platforms."
+    question: "Can I manage my CSS health insurance policy and claims online?",
+    answer: "Yes, CSS emphasizes its digital tools, primarily the myCSS portal and mobile app. These platforms allow customers to manage their insurance policies, submit claims by photographing invoices, view documents, track reimbursements, and communicate with CSS digitally. For tech-savvy expats, this offers considerable convenience."
   },
   {
-    question: "How can I submit claims to CSS?",
-    answer: "CSS offers multiple ways to submit claims: through their mobile app, online portal, or by mail. The digital options allow for quick submission by simply photographing your medical bills and uploading them directly."
+    question: "How does CSS compare to other health insurance providers in Switzerland for expats?",
+    answer: "When comparing insurers, consider: premiums for your specific coverage needs, English language services, digital tools, supplementary options relevant to expats, and reputation. CSS is one of Switzerland's largest insurers with extensive resources, digital capabilities, and generally good English support. However, individual experiences can vary, and a personalized assessment is recommended."
   }
 ];
 
 ---
 
 <Layout
-  title="CSS Health Insurance Switzerland | 2025 Expert Guide for Expats"
-  description="Compare CSS health insurance plans in Switzerland. Learn about their innovative digital services, comprehensive coverage options, and exclusive benefits. Updated for 2025."
+  title="CSS Health Insurance Switzerland: Your 2025 Expat Guide"
+  description="Navigate the Swiss health insurance system with our factual guide to CSS health insurance, including basic coverage, supplementary options, and expert insights for expats."
 >
-  <!-- Schema.org markup -->
+  <!-- Enhanced Schema.org markup -->
   <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "InsuranceProduct",
-      "name": "CSS Health Insurance Switzerland",
-      "description": "Comprehensive health insurance coverage from CSS, Switzerland's largest health insurance provider",
-      "url": "https://expat-savvy.ch/healthcare/all-insurances/css",
-      "logo": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740414664/css-logo_yvxvxr.png",
-      "provider": {
-        "@type": "Organization",
-        "name": "CSS",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Tribschenstrasse 21",
-          "addressLocality": "Luzern",
-          "postalCode": "6005",
-          "addressCountry": "CH"
+{
+  "@context": "https://schema.org",
+  "@type": ["InsuranceAgency", "LocalBusiness"],
+  "name": "CSS Insurance",
+  "description": "Swiss health insurance provider founded in 1899 and headquartered in Lucerne, offering basic and supplementary insurance options.",
+  "url": "https://expat-savvy.ch/healthcare/all-insurances/css",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Tribschenstrasse 21",
+    "addressLocality": "Lucerne",
+    "postalCode": "6005",
+    "addressCountry": "CH"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Switzerland"
+  },
+  "telephone": "+41 58 277 91 91",
+  "openingHours": "Mo,Tu,We,Th,Fr 08:00-17:00",
+  "priceRange": "$$",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Insurance Products",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Basic Insurance",
+          "description": "Multiple models including Standard, Family Doctor, HMO, and Telmed options"
         }
       },
-      "areaServed": "CH",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Insurance Products",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Basic Insurance",
-              "description": "Multiple models including standard, family doctor, HMO/GVP, and Telmed options"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "myFlex Insurance",
-              "description": "Comprehensive supplementary coverage with outpatient, hospitalization, and alternative medicine options"
-            }
-          }
-        ]
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Supplementary Insurance",
+          "description": "Additional coverage including LIVO SMART, LIVO TOP, dental insurance, and travel coverage options"
+        }
       }
+    ]
+  },
+  "isPartOf": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "url": "https://expat-savvy.ch"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Insurance Providers",
+        "item": "https://expat-savvy.ch/healthcare/all-insurances"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "CSS",
+        "item": "https://expat-savvy.ch/healthcare/all-insurances/css"
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does CSS offer customer support and documentation in English for expats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, CSS provides an English version of its main website and generally offers English customer service through various channels. This makes it accessible for expatriates who are not yet comfortable with the official Swiss languages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I travel frequently. What are CSS's options for international health coverage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CSS offers supplementary insurance plans that include enhanced international coverage. Basic insurance provides mandatory coverage for emergency treatment worldwide (typically limited to twice the Swiss cost)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the main differences between CSS's basic health insurance models?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CSS offers several models: Standard Model allows free doctor choice but has higher premiums; Family Doctor Model requires consulting your designated family doctor first, with lower premiums; HMO Model requires using doctors within a specific network, with lower premiums; and Telmed Model requires calling a telemedicine hotline first, often with the lowest premiums."
+        }
+      }
+    ]
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Benjamin Amos Wagner",
+    "url": "https://expat-savvy.ch/about"
+  },
+  "datePublished": "2025-05-15"
+}
+  </script>
+  
+  <!-- Article Schema -->
+  <script type="application/ld+json" slot="head">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "CSS Health Insurance Switzerland: Your 2025 Expat Guide",
+  "description": "Navigate the Swiss health insurance system with our factual guide to CSS health insurance, including basic coverage, supplementary options, and expert insights for expats.",
+  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+  "datePublished": "2025-05-15",
+  "dateModified": "2025-05-15",
+  "author": {
+    "@type": "Person",
+    "name": "Benjamin Amos Wagner",
+    "url": "https://expat-savvy.ch/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+      "width": 600,
+      "height": 60
     }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://expat-savvy.ch/healthcare/all-insurances/css"
+  },
+  "keywords": ["CSS", "health insurance", "Switzerland", "expat", "basic insurance", "supplementary insurance", "CSS English support"]
+}
   </script>
 
-  <!-- Last Updated Banner -->
-  <div class="bg-primary-50 py-2">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-sm text-primary-700 text-center">
-        Last Updated: January 15, 2025
-      </p>
+  <!-- Hero Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block">CSS Health Insurance</span>
+          <span class="block text-3xl sm:text-4xl text-primary-600 mt-3">An Informative Guide for Expats in Switzerland</span>
+        </h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-600">
+          Navigating the Swiss health insurance system can be a complex undertaking, particularly for expatriates new to the country. This guide offers a neutral and factual overview of CSS Krankenkasse to assist you in making an informed decision regarding your healthcare coverage.
+        </p>
+      </div>
     </div>
   </div>
 
   <!-- Table of Contents -->
-  <div class="bg-white sticky top-0 z-10 border-b shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <nav class="flex items-center space-x-4 overflow-x-auto py-4">
-        {tableOfContents.map(item => (
-          <a 
-            href={`#${item.id}`}
-            class="text-sm text-gray-600 hover:text-primary-600 whitespace-nowrap"
-          >
-            {item.title}
-          </a>
-        ))}
-      </nav>
-    </div>
-  </div>
-
-  <!-- About Section with Highlighted Expat Advantages -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About CSS</h2>
-        <p>
-          The origins of CSS date back to 1899 when it was founded as the Christian Social Health Insurance Fund of Switzerland. Headquartered in Lucerne, CSS insures roughly 1.34 million policy holders under the compulsory basic insurance model. A mobile app provides fingertip access to policy information, and invoices can be scanned using the smartphone camera.
-        </p>
-        <p>
-          Encompassing all insurance offerings, CSS insures some 1.7 million persons with annual revenues of 6.17 billion Swiss francs. The CSS Group includes additional health insurance providers: Arcosana, Intras and Sanagate.
-        </p>
-        
-        <!-- Highlighted Expat Advantages -->
-        <div class="bg-white rounded-xl shadow-lg p-6 my-8">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Expat Advantages with CSS</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Multilingual Support</span>
-                <p class="text-sm text-gray-600">Customer service in multiple languages</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Digital Services</span>
-                <p class="text-sm text-gray-600">Modern app and online platform</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Nationwide Network</span>
-                <p class="text-sm text-gray-600">Extensive service points</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium">Comprehensive Coverage</span>
-                <p class="text-sm text-gray-600">Wide range of insurance options</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Expandable Form Banner -->
-  <div class="bg-white py-16">
-    <ExpandableFormBanner provider="CSS" />
-  </div>
-
-  <!-- Features Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {features.map(feature => (
-          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
-            <div class="text-primary-500 mb-4">
-              <Fragment set:html={feature.icon} />
-            </div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-            <p class="text-gray-600">{feature.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  <!-- Premium Structure -->
-  <div id="premiums" class="bg-white py-16">
+  <div class="bg-gray-50 py-8 border-t border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Premium Structure & Cost Advantages</h2>
-        
-        <!-- Premium Comparison Table -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age Group</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CSS Premium</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Market Average</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Potential Savings</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              {premiumComparison.ageGroups.map(group => (
-                <tr>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{group.group}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.css}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.marketAvg}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-primary-600 font-medium">{group.savings}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Supplementary Plans Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="supplementary">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Supplementary Insurance Plans</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {supplementaryPlans.map(plan => (
-          <div class={`bg-white rounded-lg shadow-md p-6 border ${plan.highlight ? 'border-primary-500' : 'border-gray-200'} hover:border-primary-500 transition-colors relative`}>
-            {plan.highlight && (
-              <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-                Popular Choice
-              </div>
-            )}
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">{plan.name}</h3>
-            <p class="text-gray-600 mb-4">{plan.description}</p>
-            <ul class="space-y-2">
-              {plan.benefits.map(benefit => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  <!-- Digital Services -->
-  <div id="digital" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Digital Services & Customer Experience</h2>
-        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-4">Mobile App Features</h3>
-              <ul class="space-y-3">
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Digital insurance card</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Submit claims with photo</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Track reimbursements</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Access policy documents</span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-4">Online Portal Benefits</h3>
-              <ul class="space-y-3">
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Manage coverage options</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">View and pay bills</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Download statements</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">Chat with support</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- For Expats Section -->
-  <div id="expats" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">For Expats</h2>
-        
-        <!-- Expat Benefits -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Why Expats Choose CSS</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">English-Speaking Support</span>
-                <p class="text-sm text-gray-600">Full service in English through all channels</p>
-              </div>
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">In This Guide:</h2>
+        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
+          <ul class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+            <li>
+              <a href="#about" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                About CSS
+              </a>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">Digital-First Experience</span>
-                <p class="text-sm text-gray-600">Manage everything online or through the app</p>
-              </div>
+            <li>
+              <a href="#features" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Key Features
+              </a>
             </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <div>
-                <span class="font-medium text-gray-900">International Coverage Options</span>
-                <p class="text-sm text-gray-600">Travel insurance and worldwide emergency coverage</p>
-              </div>
+            <li>
+              <a href="#basic-insurance" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Basic Insurance Models
+              </a>
+            </li>
+            <li>
+              <a href="#supplementary" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Supplementary Insurance
+              </a>
+            </li>
+            <li>
+              <a href="#considerations" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Expat Considerations
+              </a>
+            </li>
+            <li>
+              <a href="#expert-help" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                How We Can Help
+              </a>
+            </li>
+            <li>
+              <a href="#faq" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                FAQs
+              </a>
             </li>
           </ul>
         </div>
@@ -462,69 +407,357 @@ const faqs = [
     </div>
   </div>
 
-  <!-- How to Apply -->
-  <div id="apply" class="bg-white py-16">
+  <!-- About CSS Section -->
+  <div class="bg-white py-12" id="about">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">How to Apply</h2>
-        <div class="space-y-6">
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-semibold">
-                1
-              </div>
-            </div>
-            <div class="ml-4">
-              <h4 class="text-lg font-medium text-gray-900">Compare Plans</h4>
-              <p class="mt-1 text-gray-600">Review different insurance models and coverage options</p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-semibold">
-                2
-              </div>
-            </div>
-            <div class="ml-4">
-              <h4 class="text-lg font-medium text-gray-900">Choose Model</h4>
-              <p class="mt-1 text-gray-600">Select insurance model (standard, GP, or Telmed)</p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-semibold">
-                3
-              </div>
-            </div>
-            <div class="ml-4">
-              <h4 class="text-lg font-medium text-gray-900">Submit Application</h4>
-              <p class="mt-1 text-gray-600">Apply with chosen provider</p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-semibold">
-                4
-              </div>
-            </div>
-            <div class="ml-4">
-              <h4 class="text-lg font-medium text-gray-900">Set Up Payments</h4>
-              <p class="mt-1 text-gray-600">Arrange premium payments</p>
-            </div>
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">About CSS Health Insurance</h2>
+        
+        <p>
+          CSS Insurance (often referred to as CSS Versicherung or CSS Krankenkasse) stands as one of Switzerland's leading health insurance providers, with its headquarters in Lucerne. The origins of CSS date back to 1899 when it was founded as the Christian Social Health Insurance Fund of Switzerland.
+        </p>
+        
+        <p>
+          Today, CSS insures roughly 1.34 million policyholders under the compulsory basic insurance model, making it one of the largest health insurers in Switzerland. Encompassing all insurance offerings, CSS insures some 1.7 million persons with annual revenues of over 6 billion Swiss francs. The CSS Group includes additional health insurance providers: Arcosana, Intras and Sanagate.
+        </p>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 my-8 border-l-4 border-primary-500">
+          <p class="text-gray-700 m-0">
+            <strong>Unsure if CSS aligns with your specific needs as an expat?</strong> Get a personalized consultation with Expat Savvy to compare your options and receive tailored advice.
+          </p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-sm"
+            >
+              Book Free Consultation
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Key Features Section -->
+  <div id="features" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Key Features of CSS Health Insurance</h2>
+        
+        <p>When considering CSS Switzerland for your health insurance needs, several features are often noted:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {features.map(feature => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+              <div class="text-primary-500 mb-4">
+                <Fragment set:html={feature.icon} />
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+              <p class="text-sm text-gray-600">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div class="bg-primary-50 p-4 rounded-lg mt-8">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Considering CSS? Key Takeaways:</h3>
+          <ul>
+            <li>One of Switzerland's largest health insurers, established in 1899</li>
+            <li>Offers various basic insurance models (Standard, Family Doctor, HMO, Telmed)</li>
+            <li>Provides digital tools like "myCSS" for policy management and claim submissions</li>
+            <li>New supplementary Livo product line launching in 2025</li>
+            <li>English website and support services for the international community</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Basic Insurance Models Section -->
+  <div id="basic-insurance" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Understanding CSS Basic Health Insurance</h2>
+        
+        <p>
+          In Switzerland, basic health insurance (Grundversicherung) is mandatory for all residents, including expatriates who have been in the country for more than three months or who are working. This compulsory insurance ensures that everyone has access to essential medical care. CSS, like all Swiss health insurers, provides basic insurance coverage that adheres to the benefits stipulated by Swiss law.
+        </p>
+        
+        <p>
+          While CSS may not market plans exclusively labeled for "expats," their standard health insurance offerings are available to all individuals residing in Switzerland, including the international community. The core medical services covered are standardized across all providers, ensuring everyone receives essential care.
+        </p>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Basic Health Insurance Models (Grundversicherung)</h3>
+        
+        <p>
+          CSS offers several models for its basic health insurance, allowing individuals to choose a plan that best suits their preferences for accessing medical care and managing premiums:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          {basicInsuranceModels.map(model => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{model.name}</h3>
+              <p class="text-gray-600 mb-4">{model.description}</p>
+              <ul class="space-y-2">
+                {model.benefits.map(benefit => (
+                  <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-8">
+          <p class="text-yellow-800 m-0">
+            <strong>Important note:</strong> While CSS offers different models, the fundamental benefits covered under basic insurance remain the same. These include treatments for illness, accidents (if not covered by employer's accident insurance), and maternity care. The choice of model primarily affects how you access care and the cost of your monthly premium.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supplementary Insurance Section -->
+  <div id="supplementary" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Exploring CSS Supplementary Insurance</h2>
+        
+        <p>
+          While basic health insurance in Switzerland provides essential medical coverage, many residents, including expats, opt for supplementary insurance (Zusatzversicherung) to enhance their benefits and cover services not included in the mandatory plan. CSS Insurance offers a range of supplementary options designed to provide more comprehensive protection.
+        </p>
+        
+        <p>
+          Supplementary insurance plans are not standardized by law, meaning each insurer can offer different packages with varying levels of coverage and cost. It's crucial to carefully assess your personal needs, health status, and budget when considering these add-ons.
+        </p>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">The New Livo Product Line (from January 2025)</h3>
+        
+        <p>
+          CSS is introducing its Livo product line, which includes Livo Smart (focused on outpatient and preventive care) and Livo Top (a more comprehensive package including hospitalization). A key feature highlighted for Livo is its aim to provide access to the latest healthcare developments and offer comprehensive cover, with Livo Top explicitly mentioning coverage "no matter where you get treatment." This could be highly beneficial for expats who travel or require flexibility.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          {supplementaryPlans.map(plan => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{plan.name}</h3>
+              <p class="text-gray-600 mb-4">{plan.description}</p>
+              <ul class="space-y-2 mb-4">
+                {plan.benefits.map(benefit => (
+                  <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-4 text-sm text-primary-600 font-medium">
+                Best for: {plan.bestFor}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Key Areas Often Covered by CSS Supplementary Insurance:</h3>
+        
+        <ul>
+          <li><strong>Outpatient Insurance:</strong> Extended coverage for treatments received outside of a hospital, including contributions towards glasses, alternative medicine, and medications not covered by basic insurance.</li>
+          <li><strong>Hospitalization Insurance:</strong> Enhanced comfort and choice during hospital stays, including options for semi-private or private accommodation and free choice of doctor/surgeon.</li>
+          <li><strong>Dental Insurance:</strong> Coverage for dental care which is largely not covered by basic insurance, including check-ups, fillings, orthodontic treatments, and more.</li>
+          <li><strong>Travel and Holiday Insurance:</strong> Extended medical coverage abroad, which can be especially valuable for expats who travel frequently.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Get Quote Banner Section -->
+  <div class="bg-gradient-to-r from-primary-100 to-primary-200 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Compare Health Insurance Options in Switzerland</h2>
+        <p class="mt-2 text-gray-700">Get personalized quotes and expert advice tailored to your situation</p>
+      </div>
+      <ExpandableFormBanner provider="CSS" />
+    </div>
+  </div>
+
+  <!-- Expat Considerations Section -->
+  <div id="considerations" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Key Considerations for Expats: A Neutral Perspective</h2>
+        
+        <p>When evaluating CSS Health Insurance, expatriates should consider various factors from a balanced viewpoint. Here are some potential advantages and points to note, based on factual findings:</p>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          {expat_considerations.map(consideration => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 text-primary-500 mt-1 mr-3">
+                  <Fragment set:html={consideration.icon} />
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">{consideration.title}</h4>
+                  <p class="text-gray-600 mt-2 text-sm">{consideration.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Potential Advantages</h3>
+        
+        <ul>
+          <li><strong>Established Provider:</strong> As one of Switzerland's largest health insurers, CSS has a broad network of healthcare providers and a well-established presence across the country.</li>
+          <li><strong>Range of Choices:</strong> CSS offers a diverse selection of basic insurance models and supplementary plans, including innovative options like the Livo product line.</li>
+          <li><strong>English Resources:</strong> The availability of an English website and customer service in English is a clear benefit for the international community.</li>
+          <li><strong>Digital Tools:</strong> The myCSS portal and app offer modern, convenient ways to manage insurance matters, submit claims, and communicate with CSS.</li>
+          <li><strong>Focus on Comprehensive Coverage:</strong> Newer products like Livo are marketed with an emphasis on comprehensive benefits and access to modern healthcare solutions.</li>
+        </ul>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Points to Note</h3>
+        
+        <ul>
+          <li><strong>Complexity of Options:</strong> While choice is good, the sheer number of plans and models can be overwhelming, especially for expats unfamiliar with the Swiss system.</li>
+          <li><strong>Customer Reviews:</strong> Like many large service providers, online customer reviews for CSS can be mixed. It is advisable to consider a range of feedback and not rely on a single source.</li>
+          <li><strong>Cost Structure:</strong> CSS premiums depend on many factors (age, canton, deductible, chosen model). CSS may not always be the cheapest provider, so value should be assessed based on specific coverage versus premium paid.</li>
+          <li><strong>Language in Depth:</strong> While primary contact and website information are available in English, for very specific or complex issues, nuances or reliance on official language documents might still occur.</li>
+        </ul>
+        
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-8">
+          <p class="text-yellow-800 m-0">
+            <strong>Important note:</strong> CSS might be a good fit for expats who value a wide range of choices, appreciate digital service channels, and are looking for a large, established insurer. However, due to the complexity of the Swiss system and the variety of options, a thorough personal assessment and comparison are highly recommended.
+          </p>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4">CSS Premiums and Cost Factors</h3>
+        
+        <p>Understanding how health insurance premiums are calculated in Switzerland is key to managing costs. For CSS, as with all Swiss insurers, several factors influence your monthly premium:</p>
+        
+        <ul>
+          <li><strong>Age:</strong> Premiums can vary by age group.</li>
+          <li><strong>Canton of Residence:</strong> Healthcare costs differ significantly between Swiss cantons, and this is reflected in premiums.</li>
+          <li><strong>Deductible (Franchise):</strong> This is the amount you pay out-of-pocket before insurance starts covering costs. Higher deductibles lead to lower monthly premiums.</li>
+          <li><strong>Basic Insurance Model:</strong> Alternative models like Telmed, Family Doctor, or HMO generally have lower premiums than the Standard model.</li>
+        </ul>
+        
+        <h4 class="text-xl font-bold text-gray-900 mt-8 mb-4">Ways to Potentially Save on CSS Premiums:</h4>
+        
+        <ul>
+          <li>Select an Alternative Insurance Model: Opting for a Telmed, Family Doctor, or HMO model can significantly reduce your basic insurance premium.</li>
+          <li>Choose a Higher Deductible: If you are generally healthy and don't anticipate high medical expenses, a higher deductible can lower your monthly payments.</li>
+          <li>Accident Coverage Exclusion: If you're covered for accidents through your employer, you can exclude accident coverage from your health insurance.</li>
+          <li>Annual or Semi-Annual Payment: Some insurers, including potentially CSS, might offer a small discount for payments made in advance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- How Expat Savvy Can Help Section -->
+  <div id="expert-help" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">How Expat Savvy Can Help</h2>
+        <p class="mt-4 text-xl text-gray-700 max-w-2xl mx-auto">
+          Choosing the right health insurance in Switzerland, especially with a provider like CSS that offers numerous options, can be a daunting task for expats. We're here to simplify this process.
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-xl p-8 max-w-3xl mx-auto">
+        <div class="text-center mb-6">
+          <h3 class="text-2xl font-bold text-gray-900">Our Expert Services</h3>
+          <p class="text-gray-600 mt-2">Here's how we can assist you:</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Navigating Complexity</span>
+              <p class="text-sm text-gray-600">We explain CSS's various plans, including the new Livo offerings, in clear, simple terms</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Personalized Assessment</span>
+              <p class="text-sm text-gray-600">We understand your specific healthcare needs, lifestyle, and budget</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Objective Comparison</span>
+              <p class="text-sm text-gray-600">We provide unbiased comparison of CSS against other Swiss insurers</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Application Support</span>
+              <p class="text-sm text-gray-600">We guide you through the entire application process and paperwork</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">English-First Service</span>
+              <p class="text-sm text-gray-600">All communication in English, from consultation to setup</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Ongoing Support</span>
+              <p class="text-sm text-gray-600">Our service doesn't end once your policy is active</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-md"
+          >
+            Get Your Free Consultation Today
+            <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FAQ Section -->
-  <div class="bg-white py-16">
+  <div id="faq" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
       <div class="max-w-3xl mx-auto">
         <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6" id={`faq-${index}`}>
               <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
               <dd class="text-gray-600">{faq.answer}</dd>
             </div>
@@ -534,32 +767,49 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Sticky CTA -->
-  <div class="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-50">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="p-2 rounded-lg bg-primary-600 shadow-lg sm:p-3">
-        <div class="flex items-center justify-between flex-wrap">
-          <div class="w-0 flex-1 flex items-center">
-            <span class="flex p-2 rounded-lg bg-primary-800">
-              <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-              </svg>
-            </span>
-            <p class="ml-3 font-medium text-white truncate">
-              <span class="md:hidden">Get your free quote today!</span>
-              <span class="hidden md:inline">Ready to get started? Get your personalized insurance quote now!</span>
-            </p>
-          </div>
-          <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-            <button
-              onclick="showConsultationModal()"
-              class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary-600 bg-white hover:bg-primary-50"
-            >
-              Get Free Quote
-            </button>
-          </div>
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Considering Your Health Insurance Options in Switzerland?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Don't Navigate Alone. Let Our Experts Guide You.
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Conclusion -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Conclusion</h2>
+        <p>
+          CSS Insurance is a significant player in the Swiss health insurance market, offering a wide spectrum of basic and supplementary insurance solutions. With its English-language resources and digital tools, it presents several features that can appeal to expatriates. However, the variety of plans and the nuances of the Swiss system necessitate a careful and personalized assessment to ensure the chosen coverage truly meets your needs.
+        </p>
+        <p>
+          Choosing the right health insurance is a critical decision for your life in Switzerland. Don't navigate this complex landscape alone. The experts at Expat Savvy are dedicated to providing clear, unbiased advice tailored to your unique situation. We can help you understand if CSS is the best option for you, compare it with other leading providers, and guide you every step of the way.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-gray-50 py-6">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-sm text-gray-500 text-center">
+        <strong>Disclaimer:</strong> This information is for general guidance and is based on publicly available information. Health insurance offerings and conditions can change. Always seek personalized advice. Expat Savvy is an independent advisor.
+      </p>
     </div>
   </div>
 

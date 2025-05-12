@@ -3,179 +3,207 @@ import Layout from '../../../layouts/Layout.astro';
 import ConsultationModal from '../../../components/ConsultationModal.astro';
 import ExpandableFormBanner from '../../../components/ExpandableFormBanner.astro';
 
+const tableOfContents = [
+  { id: "about", title: "About SWICA" },
+  { id: "features", title: "Key Features" },
+  { id: "basic-insurance", title: "Basic Insurance Models" },
+  { id: "supplementary", title: "Supplementary Insurance" },
+  { id: "considerations", title: "Expat Considerations" },
+  { id: "expert-help", title: "How We Can Help" },
+  { id: "faq", title: "FAQs" }
+];
+
 const features = [
   {
-    title: "Customer Satisfaction",
-    description: "Top-rated health insurance provider in Switzerland according to comparis.ch and K-Tipp reviews",
+    title: "Exceptional Customer Service",
+    description: "Top-ranked in customer satisfaction with excellent English language support",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
     </svg>`
   },
   {
-    title: "Comprehensive Coverage",
-    description: "Complete portfolio including health, accident, hospital, and dental insurance options",
+    title: "Entry-Age Premium System",
+    description: "Unique long-term advantage with premiums based on age at joining for supplementary plans",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
     </svg>`
   },
   {
-    title: "Market Leader",
-    description: "Serving 1.3 million policyholders with annual premium revenues of 4.6 billion Swiss francs",
+    title: "Comprehensive Coverage",
+    description: "Extensive supplementary options and wellness benefits ideal for expats",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>`
+  }
+];
+
+const expat_considerations = [
+  {
+    title: "English Language Support",
+    description: "SWICA provides extensive support in English, including English-speaking customer service representatives and documentation available in English.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+    </svg>`
+  },
+  {
+    title: "Long-Term Financial Stability",
+    description: "The entry-age premium system offers remarkable stability in supplementary insurance costs, especially valuable for expats planning a longer stay in Switzerland.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>`
+  },
+  {
+    title: "Digital Convenience",
+    description: "SWICA's online portals and mySwica app allow for easy management of your policy, submission of claims, and access to health advice.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>`
+  },
+  {
+    title: "Fitness & Wellness Benefits",
+    description: "Up to CHF 1300 per year for gym memberships and wellness programs with COMPLETA FORTE, perfect for active expats.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h10M7 12h10M7 16h10M5 8a1 1 0 110-2 1 1 0 010 2zm0 8a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2z" />
+    </svg>`
+  }
+];
+
+const basicInsuranceModels = [
+  {
+    name: "Standard Model",
+    description: "Free choice of doctors throughout Switzerland with highest premium",
+    benefits: [
+      "Choose any doctor",
+      "Direct specialist access",
+      "Maximum flexibility",
+      "No restrictions"
+    ]
+  },
+  {
+    name: "Family Doctor (Hausarztmodell)",
+    description: "Choose a designated family doctor as first point of contact",
+    benefits: [
+      "Lower premiums",
+      "Coordinated care",
+      "Personal doctor relationship",
+      "Specialist referrals"
+    ]
+  },
+  {
+    name: "HMO",
+    description: "Health Maintenance Organization with network of doctors",
+    benefits: [
+      "Lower premiums",
+      "Coordinated care",
+      "Network of specialists",
+      "Quality oversight"
+    ]
+  },
+  {
+    name: "Telmed",
+    description: "Initial consultation via telephone or telemedicine",
+    benefits: [
+      "Significant premium savings",
+      "24/7 medical advice",
+      "Convenient access",
+      "Digital consultation"
+    ]
   }
 ];
 
 const supplementaryPlans = [
   {
+    name: "OPTIMA",
+    description: "Superior outpatient coverage for specialists and treatments",
+    benefits: [
+      "Extensive specialist coverage",
+      "Potentially unlimited check-ups",
+      "Alternative medicine",
+      "Preventive care"
+    ],
+    bestFor: "Those seeking top-tier outpatient care"
+  },
+  {
     name: "COMPLETA FORTE",
-    description: "Premium supplementary insurance with extensive fitness benefits",
+    description: "Exceptional fitness and wellness benefits",
     benefits: [
       "Up to 1300 CHF for gym memberships",
-      "Comprehensive health promotion",
-      "Alternative medicine coverage",
-      "Generous dental benefits",
-      "Worldwide coverage"
+      "Preventive health check-ups",
+      "Wellness programs",
+      "Health promotion activities"
     ],
+    bestFor: "Active individuals and fitness enthusiasts",
     highlight: true
   },
   {
-    name: "COMPLETA PRAEVENTA",
-    description: "Preventive care and wellness coverage",
+    name: "HOSPITA PRIVATE",
+    description: "Premium hospitalization coverage",
     benefits: [
-      "Vaccination coverage",
-      "Exercise programs",
-      "Preventive measures",
-      "Enhanced COMPLETA TOP benefits",
-      "Wellness programs"
-    ]
-  },
-  {
-    name: "OPTIMA",
-    description: "Extended healthcare coverage",
-    benefits: [
-      "Enhanced contributions",
-      "Worldwide outpatient treatments",
-      "Comprehensive care options",
-      "Extended health services",
-      "Global coverage"
-    ]
-  },
-  {
-    name: "SUPPLEMENTA",
-    description: "Additional coverage for specific needs",
-    benefits: [
-      "Higher contributions for glasses",
-      "Enhanced medical aids coverage",
-      "Extended transport coverage",
-      "International assistance",
-      "Supplementary benefits"
-    ]
-  }
-];
-
-const hospitalPlans = [
-  {
-    name: "HOSPITA General",
-    description: "Basic hospital coverage throughout Switzerland",
-    features: [
-      "Shared room accommodation",
-      "Free hospital choice",
-      "Vacanza travel insurance",
-      "Rooming-in after childbirth",
-      "Spa coverage"
-    ]
-  },
-  {
-    name: "HOSPITA Flex Semi-Private",
-    description: "Enhanced hospital comfort with twin room",
-    features: [
-      "Two-bed room",
-      "Free doctor choice",
-      "Outpatient birth allowance",
-      "Enhanced comfort",
-      "Flexible options"
-    ]
-  },
-  {
-    name: "HOSPITA PRIVATE WORLDWIDE",
-    description: "Premium global hospital coverage highly valued by expats",
-    features: [
-      "Single room worldwide",
-      "Free choice of hospitals globally",
-      "Priority treatment",
-      "Maximum privacy",
-      "Best medical care worldwide"
+      "Private room accommodation",
+      "Free choice of doctor/surgeon",
+      "Enhanced comfort services",
+      "Priority treatment"
     ],
+    bestFor: "Those wanting maximum hospital comfort"
+  },
+  {
+    name: "BestMed",
+    description: "Top-tier medical access and comprehensive coverage",
+    benefits: [
+      "Access to wide specialist network",
+      "Faster appointments",
+      "Premium healthcare experience",
+      "Global coverage options"
+    ],
+    bestFor: "Expats seeking premium medical care",
     highlight: true
-  }
-];
-
-const expatsHighlights = [
-  {
-    title: "Worldwide Hospital Coverage",
-    description: "HOSPITA PRIVATE WORLDWIDE offers complete freedom of choice for hospitals and doctors globally",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
-    </svg>`
-  },
-  {
-    title: "Fitness Benefits",
-    description: "COMPLETA FORTE provides up to 1300 CHF annually for gym memberships and fitness activities",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-    </svg>`
-  },
-  {
-    title: "English Support",
-    description: "Comprehensive English-speaking customer service through all channels",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-    </svg>`
-  },
-  {
-    title: "Digital Services",
-    description: "Modern app for claims, policy management, and digital insurance cards",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-    </svg>`
   }
 ];
 
 const faqs = [
   {
-    question: "What makes SWICA different from other Swiss health insurers?",
-    answer: "SWICA consistently ranks as Switzerland's top health insurer for customer satisfaction. They're known for their comprehensive fitness benefits (up to 1300 CHF with COMPLETA FORTE), worldwide hospital coverage through HOSPITA PRIVATE WORLDWIDE, and excellent customer service in multiple languages."
+    question: "Does SWICA offer customer support and documentation in English for expats?",
+    answer: "Yes, SWICA provides good customer service in English, and much of their important documentation and digital platforms (like the mySwica app) are available in English, making it accessible for expatriates."
   },
   {
-    question: "How does SWICA's gym membership benefit work?",
-    answer: "With COMPLETA FORTE supplementary insurance, SWICA contributes up to 1300 CHF annually towards gym memberships and other fitness activities. This is one of the most generous fitness benefits among Swiss insurers."
+    question: "How does SWICA's entry-age premium system work for supplementary insurance?",
+    answer: "For many supplementary insurance plans, SWICA calculates your premium based on your age when you join. This premium then typically remains stable for the life of the contract, meaning it doesn't increase simply because you get older. This can lead to significant long-term savings compared to insurers who regularly increase premiums with age."
   },
   {
-    question: "What makes SWICA's worldwide hospital coverage special?",
-    answer: "SWICA's HOSPITA PRIVATE WORLDWIDE provides complete freedom of choice for hospitals and doctors globally, making it particularly valuable for expats. It includes private room accommodation, priority treatment, and access to top medical facilities worldwide."
+    question: "What is the maximum gym contribution with SWICA Completa Forte?",
+    answer: "SWICA's Completa Forte supplementary plan is renowned for its generous fitness contributions, offering up to CHF 1300 per year towards gym memberships and other recognized fitness and health promotion activities, subject to specific conditions and limits per activity type."
   },
   {
-    question: "Does SWICA offer English-speaking customer service?",
-    answer: "Yes, SWICA provides comprehensive multilingual customer service, including English support, through their customer service centers, digital platforms, and local offices."
+    question: "Does SWICA offer worldwide hospital coverage?",
+    answer: "Yes, SWICA offers worldwide hospital coverage through plans like HOSPITA PRIVATE GLOBAL. This supplementary insurance provides coverage for private ward treatment in hospitals around the world, which is a significant benefit for expatriates who travel frequently or may wish to seek treatment outside Switzerland."
+  },
+  {
+    question: "What is the BestMed program with SWICA?",
+    answer: "BestMed is a premium offering from SWICA, often associated with their top-tier hospitalization plans like HOSPITA PRIVATE GLOBAL. It signifies access to a higher level of service, potentially including faster access to specialists, choice of leading doctors, and enhanced comfort and benefits during hospital stays. The 'BestMed black client card' is a symbol of this premium status."
+  },
+  {
+    question: "Are pre-existing conditions covered by SWICA?",
+    answer: "For basic health insurance, pre-existing conditions are always covered, and insurers cannot refuse anyone for mandatory coverage. For supplementary insurance, SWICA (like all insurers) will conduct a health assessment. They may accept you, accept you with an exclusion for specific pre-existing conditions, or decline the application for supplementary coverage based on your health status."
+  },
+  {
+    question: "How can I switch to SWICA health insurance?",
+    answer: "Switching health insurance in Switzerland typically involves adhering to notice periods for your current insurer (usually by the end of September for basic insurance, and as per your contract for supplementary). Expat Savvy can guide you through the entire switching process, from comparing SWICA's offerings to managing the cancellation of your old policy and the application for your new SWICA plan."
   }
 ];
 ---
 
 <Layout
-  title="SWICA Health Insurance Switzerland | Expert Guide 2025"
-  description="Compare SWICA health insurance plans in Switzerland. Learn about their unique gym benefits, worldwide hospital coverage, and comprehensive insurance solutions. Updated for 2025."
+  title="SWICA Health Insurance for Expats in Switzerland: A Comprehensive Guide"
+  description="Navigate the Swiss health insurance system with our factual guide to SWICA health insurance, including their unique entry-age premium system, exceptional customer service, and comprehensive coverage options for expats."
 >
   <!-- Enhanced Schema.org markup -->
   <script type="application/ld+json" slot="head">
 {
   "@context": "https://schema.org",
-  "@type": "InsuranceAgency",
+  "@type": ["InsuranceAgency", "LocalBusiness"],
   "name": "SWICA Insurance",
-  "description": "Leading Swiss health insurance provider known for customer satisfaction, fitness benefits, and worldwide coverage options.",
+  "description": "Swiss health insurance provider known for customer satisfaction, fitness benefits with up to CHF 1300 contribution, and their unique entry-age premium system.",
   "url": "https://expat-savvy.ch/healthcare/all-insurances/swica",
-  "logo": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/swica_logo_yvxvxr.png",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Römerstrasse 38",
@@ -183,7 +211,13 @@ const faqs = [
     "postalCode": "8400",
     "addressCountry": "CH"
   },
-  "areaServed": "CH",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Switzerland"
+  },
+  "telephone": "+41 800 80 90 80",
+  "openingHours": "Mo,Tu,We,Th,Fr 08:00-17:00",
+  "priceRange": "$$",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Insurance Products",
@@ -193,55 +227,23 @@ const faqs = [
         "itemOffered": {
           "@type": "Service",
           "name": "Basic Insurance",
-          "description": "Multiple models with savings up to 20%"
+          "description": "Multiple models including Standard, Family Doctor, HMO, and Telmed options"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "COMPLETA FORTE",
-          "description": "Premium supplementary insurance with up to 1300 CHF fitness benefits"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "HOSPITA PRIVATE WORLDWIDE",
-          "description": "Global hospital coverage with free choice of hospitals worldwide"
+          "name": "Supplementary Insurance",
+          "description": "Premium options including OPTIMA, COMPLETA FORTE, HOSPITA PRIVATE, and BestMed"
         }
       }
     ]
   },
-  "faqPage": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How do I get a quote from SWICA?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can get a quote from SWICA through their online premium calculator, by scheduling a free consultation with our experts, or visiting a SWICA service center. We recommend comparing multiple offers to find the best coverage for your needs."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What makes SWICA different from other Swiss insurers?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "SWICA consistently ranks as Switzerland's top health insurer for customer satisfaction. They're known for their comprehensive fitness benefits (up to 1300 CHF with COMPLETA FORTE), worldwide hospital coverage through HOSPITA PRIVATE WORLDWIDE, and excellent customer service in multiple languages."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does SWICA's gym membership benefit work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "With COMPLETA FORTE supplementary insurance, SWICA contributes up to 1300 CHF annually towards gym memberships and other fitness activities. This is one of the most generous fitness benefits among Swiss insurers."
-        }
-      }
-    ]
+  "isPartOf": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "url": "https://expat-savvy.ch"
   },
   "breadcrumb": {
     "@type": "BreadcrumbList",
@@ -265,7 +267,75 @@ const faqs = [
         "item": "https://expat-savvy.ch/healthcare/all-insurances/swica"
       }
     ]
-  }
+  },
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does SWICA offer customer support and documentation in English for expats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, SWICA provides good customer service in English, and much of their important documentation and digital platforms (like the mySwica app) are available in English, making it accessible for expatriates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does SWICA's entry-age premium system work for supplementary insurance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For many supplementary insurance plans, SWICA calculates your premium based on your age when you join. This premium then typically remains stable for the life of the contract, meaning it doesn't increase simply because you get older."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the maximum gym contribution with SWICA Completa Forte?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SWICA's Completa Forte supplementary plan is renowned for its generous fitness contributions, offering up to CHF 1300 per year towards gym memberships and other recognized fitness and health promotion activities."
+        }
+      }
+    ]
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Benjamin Amos Wagner",
+    "url": "https://expat-savvy.ch/about"
+  },
+  "datePublished": "2025-05-15"
+}
+  </script>
+  
+  <!-- Article Schema -->
+  <script type="application/ld+json" slot="head">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SWICA Health Insurance for Expats in Switzerland: A Comprehensive Guide",
+  "description": "Navigate the Swiss health insurance system with our factual guide to SWICA health insurance, including their unique entry-age premium system, exceptional customer service, and comprehensive coverage options for expats.",
+  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+  "datePublished": "2025-05-15",
+  "dateModified": "2025-05-15",
+  "author": {
+    "@type": "Person",
+    "name": "Benjamin Amos Wagner",
+    "url": "https://expat-savvy.ch/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+      "width": 600,
+      "height": 60
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://expat-savvy.ch/healthcare/all-insurances/swica"
+  },
+  "keywords": ["SWICA", "health insurance", "Switzerland", "expat", "entry-age premium", "COMPLETA FORTE", "gym membership", "BestMed"]
 }
   </script>
 
@@ -275,10 +345,80 @@ const faqs = [
       <div class="text-center">
         <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
           <span class="block">SWICA Health Insurance</span>
+          <span class="block text-3xl sm:text-4xl text-primary-600 mt-3">A Comprehensive Guide for Expats in Switzerland</span>
         </h1>
-        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-          Switzerland's top-rated health insurance provider for customer satisfaction, serving 1.3 million policyholders with comprehensive insurance solutions.
+        <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-600">
+          Navigating the Swiss health insurance system can be a complex undertaking, particularly for expatriates new to the country. This guide offers a neutral and factual overview of SWICA to assist you in making an informed decision regarding your healthcare coverage.
         </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="bg-gray-50 py-8 border-t border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">In This Guide:</h2>
+        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
+          <ul class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+            <li>
+              <a href="#about" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                About SWICA
+              </a>
+            </li>
+            <li>
+              <a href="#features" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Key Features
+              </a>
+            </li>
+            <li>
+              <a href="#basic-insurance" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Basic Insurance Models
+              </a>
+            </li>
+            <li>
+              <a href="#supplementary" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Supplementary Insurance
+              </a>
+            </li>
+            <li>
+              <a href="#considerations" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Expat Considerations
+              </a>
+            </li>
+            <li>
+              <a href="#expert-help" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                How We Can Help
+              </a>
+            </li>
+            <li>
+              <a href="#faq" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                FAQs
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -291,8 +431,8 @@ const faqs = [
         <p class="mt-4 text-xl text-gray-600">Why international residents choose SWICA</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {expatsHighlights.map(highlight => (
-          <div class="bg-white rounded-xl shadow-md p-6 transform transition-transform hover:scale-105">
+        {expat_considerations.map(highlight => (
+          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
             <div class="text-primary-500 mb-4">
               <Fragment set:html={highlight.icon} />
             </div>
@@ -304,111 +444,381 @@ const faqs = [
     </div>
   </div>
 
-  <!-- About Section -->
-  <div class="bg-white py-16">
+  <!-- About SWICA Section -->
+  <div class="bg-white py-12" id="about">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About SWICA</h2>
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">About SWICA Health Insurance</h2>
+        
         <p>
-          This Winterthur based health insurance provider is the result of a 1992 merger. In independent reviews by comparis.ch and K-Tipp, SWICA has been nominated as Switzerland's top health insurance company when it comes to customer satisfaction.
+          SWICA is more than just an insurance provider; it's a health partner dedicated to supporting your well-being. Among the leading Swiss health insurers, SWICA consistently stands out for its exceptional customer satisfaction, comprehensive coverage, and innovative solutions tailored to meet the diverse needs of the international community.
         </p>
+        
         <p>
-          The core business of SWICA is health and accident insurance, but the portfolio also includes hospital insurance, dental insurance and insurance covering a daily sickness allowance. Some 1.3 million persons have taken out health insurance with SWICA, with annual revenues from premiums of 4.6 billion Swiss francs.
+          With a strong focus on quality service and a deep understanding of the challenges expats face, SWICA aims to make your healthcare journey in Switzerland as smooth and reassuring as possible. From understanding your policy in English to accessing top-tier medical facilities, SWICA is equipped to meet your expectations. Key advantages, such as potentially significant long-term savings through its innovative premium model and generous contributions towards wellness activities, position SWICA as a provider that truly invests in your health.
         </p>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 my-8 border-l-4 border-primary-500">
+          <p class="text-gray-700 m-0">
+            <strong>Unsure if SWICA aligns with your specific needs as an expat?</strong> Get a personalized consultation with Expat Savvy to compare your options and receive tailored advice.
+          </p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-sm"
+            >
+              Book Free Consultation
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Expandable Form Banner -->
-  <div class="bg-gray-50 py-16">
-    <ExpandableFormBanner provider="SWICA" />
-  </div>
-
-  <!-- Features Section -->
-  <div class="bg-white py-16">
+  <!-- Key Features Section -->
+  <div id="features" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {features.map(feature => (
-          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
-            <div class="text-primary-500 mb-4">
-              <Fragment set:html={feature.icon} />
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Why SWICA Stands Out for Expatriates</h2>
+        
+        <p>Choosing a health insurance provider in a new country involves careful consideration of various factors. SWICA distinguishes itself in the Swiss market through several key attributes that are particularly beneficial for expatriates.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {features.map(feature => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+              <div class="text-primary-500 mb-4">
+                <Fragment set:html={feature.icon} />
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+              <p class="text-sm text-gray-600">{feature.description}</p>
             </div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-            <p class="text-gray-600">{feature.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
+        
+        <div class="bg-primary-50 p-4 rounded-lg mt-8">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">The Unique SWICA Entry-Age Premium System: A Long-Term Advantage</h3>
+          <p>One of SWICA's most significant and unique advantages, especially for expatriates planning a longer stay in Switzerland, is its entry-age premium system for many of its supplementary insurance plans. Unlike the common practice in the Swiss insurance market where premiums for supplementary coverage tend to increase noticeably every few years as you get older, SWICA's model offers remarkable stability.</p>
+          <p>When you take out a supplementary policy with SWICA, the premium is often calculated based on your age at the time of joining and is designed to remain stable for the life of that contract. This "loyalty bonus" system effectively rewards long-term policyholders by protecting them from age-related premium hikes that can become a significant financial burden over time.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Supplementary Plans Section -->
-  <div class="bg-gray-50 py-16">
+  <!-- Basic Insurance Models Section -->
+  <div id="basic-insurance" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Supplementary Insurance Plans</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {supplementaryPlans.map(plan => (
-          <div class={`bg-white rounded-lg shadow-md p-6 border ${plan.highlight ? 'border-primary-500' : 'border-gray-200'} hover:border-primary-500 transition-colors relative`}>
-            {plan.highlight && (
-              <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-                Popular Choice
-              </div>
-            )}
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">{plan.name}</h3>
-            <p class="text-gray-600 mb-4">{plan.description}</p>
-            <ul class="space-y-2">
-              {plan.benefits.map(benefit => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">SWICA Basic Health Insurance (Obligatorische Grundversicherung)</h2>
+        
+        <p>
+          In Switzerland, basic health insurance (Grundversicherung) is mandatory for all residents, including expatriates. This foundational coverage ensures access to essential medical services. SWICA, like other Swiss health insurers, provides basic health insurance plans that comply with federal regulations.
+        </p>
+        
+        <p>
+          While the scope of services under basic insurance is defined by law and is generally consistent across providers, SWICA offers various models to suit different needs and preferences.
+        </p>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Basic Health Insurance Models</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          {basicInsuranceModels.map(model => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{model.name}</h3>
+              <p class="text-gray-600 mb-4">{model.description}</p>
+              <ul class="space-y-2">
+                {model.benefits.map(benefit => (
+                  <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-8">
+          <p class="text-yellow-800 m-0">
+            <strong>Important note:</strong> When choosing a basic health insurance model with SWICA, it's important to consider factors such as your preferred level of flexibility in choosing healthcare providers, your budget, and your comfort with models like Telmed or HMO. Expat Savvy can provide guidance on which SWICA basic insurance model might best align with your individual circumstances.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Hospital Insurance -->
+  <!-- Supplementary Insurance Section -->
+  <div id="supplementary" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">Deep Dive into SWICA's Premium Supplementary Insurance Plans</h2>
+        
+        <p class="text-gray-600">
+          SWICA's supplementary insurance plans are where the provider truly shines, offering a range of options designed to elevate your health coverage far beyond the standard. These plans are crafted to provide enhanced comfort, greater choice, and access to specialized treatments and wellness benefits. For expatriates seeking comprehensive protection and premium healthcare experiences, SWICA's supplementary offerings are particularly compelling.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">OPTIMA</h3>
+            <p class="text-gray-600 mb-4">Superior outpatient coverage for specialists and treatments</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Extensive specialist coverage
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Potentially unlimited check-ups
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Alternative medicine
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Preventive care
+              </li>
+            </ul>
+            <div class="mt-4 text-sm text-primary-600 font-medium">
+              Best for: Those seeking top-tier outpatient care
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 border border-primary-500 hover:shadow-lg transition-shadow relative">
+            <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+              Popular Choice
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">COMPLETA FORTE</h3>
+            <p class="text-gray-600 mb-4">Exceptional fitness and wellness benefits</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <strong class="text-primary-700">Up to 1300 CHF for gym memberships</strong>
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Preventive health check-ups
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Wellness programs
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Health promotion activities
+              </li>
+            </ul>
+            <div class="mt-4 text-sm text-primary-600 font-medium">
+              Best for: Active individuals and fitness enthusiasts
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">HOSPITA PRIVATE</h3>
+            <p class="text-gray-600 mb-4">Premium hospitalization coverage</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Private room accommodation
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Free choice of doctor/surgeon
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Enhanced comfort services
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Priority treatment
+              </li>
+            </ul>
+            <div class="mt-4 text-sm text-primary-600 font-medium">
+              Best for: Those wanting maximum hospital comfort
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 border border-primary-500 hover:shadow-lg transition-shadow relative">
+            <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+              Popular Choice
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">BestMed</h3>
+            <p class="text-gray-600 mb-4">Top-tier medical access and comprehensive coverage</p>
+            <ul class="space-y-2 mb-4">
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <strong class="text-primary-700">Access to wide specialist network</strong>
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Faster appointments
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Premium healthcare experience
+              </li>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <strong class="text-primary-700">Global coverage options</strong>
+              </li>
+            </ul>
+            <div class="mt-4 text-sm text-primary-600 font-medium">
+              Best for: Expats seeking premium medical care
+            </div>
+          </div>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Entry-Age Premium System: Long-Term Financial Stability</h3>
+        
+        <p class="text-gray-600">
+          One of the most significant advantages of choosing SWICA, particularly for supplementary insurance, is the entry-age premium system. Unlike many other insurers where premiums increase as you get older, SWICA often calculates your premium based on your age when you first enroll in the plan. This means that your premium remains stable throughout the duration of your policy, protecting you from age-related increases.
+        </p>
+        
+        <p class="text-gray-600">
+          This system provides long-term financial predictability and can result in substantial savings over time, making SWICA an attractive option for expatriates planning to reside in Switzerland for an extended period.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ExpandableFormBanner placed after supplementary insurance section -->
+  <div class="bg-gradient-to-r from-primary-100 to-primary-200 py-10" id="quote-form">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Compare Health Insurance Options in Switzerland</h2>
+        <p class="mt-2 text-gray-700">Get personalized quotes and expert advice tailored to your situation</p>
+      </div>
+    <ExpandableFormBanner provider="SWICA" />
+    </div>
+  </div>
+
+  <!-- Key SWICA Advantages for Expats Section -->
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Hospital Insurance Options</h2>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Key SWICA Advantages for Expats</h2>
+        <p class="mt-4 text-lg text-gray-600">Why SWICA stands out for international residents</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Entry-Age Premium Highlight -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Entry-Age Premium System</h3>
+          <p class="text-gray-600 mb-4">SWICA's unique system calculates premiums based on your age when joining, not your current age. This creates remarkable stability in your supplementary insurance costs for years to come.</p>
+          <p class="text-gray-600">For expats planning to stay in Switzerland long-term, this can result in significant savings as you avoid age-related premium increases.</p>
+        </div>
+        
+        <!-- Gym Membership Benefit Highlight -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Generous Fitness Benefits</h3>
+          <p class="text-gray-600 mb-4">With up to CHF 1300 per year for gym memberships and wellness programs under COMPLETA FORTE, SWICA offers one of the most generous fitness contributions on the market.</p>
+          <p class="text-gray-600">Perfect for active expats who prioritize fitness and wellbeing as part of their lifestyle in Switzerland.</p>
+        </div>
+        
+        <!-- International Coverage Highlight -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Global Private Coverage</h3>
+          <p class="text-gray-600 mb-4">SWICA's HOSPITA PRIVATE GLOBAL provides worldwide hospitalization coverage, offering peace of mind for frequent travelers or those who may seek treatment outside Switzerland.</p>
+          <p class="text-gray-600">This international flexibility is especially valuable for expats maintaining connections to their home countries.</p>
+        </div>
+        
+        <!-- BestMed Highlight -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">BestMed Premium Program</h3>
+          <p class="text-gray-600 mb-4">SWICA's prestigious BestMed program offers enhanced benefits including faster specialist appointments, choice of leading doctors, and premium hospital accommodations.</p>
+          <p class="text-gray-600">The exclusive "BestMed black client card" provides access to premium healthcare experiences throughout Switzerland.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Helpful Resources Section with Internal Links -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900">Helpful Resources</h2>
+        <p class="mt-4 text-lg text-gray-600">Learn more about health insurance in Switzerland</p>
+      </div>
+      
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {hospitalPlans.map(plan => (
-          <div class={`bg-white rounded-lg shadow-md p-6 border ${plan.highlight ? 'border-primary-500' : 'border-gray-200'} hover:border-primary-500 transition-colors relative`}>
-            {plan.highlight && (
-              <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-                Expat Favorite
-              </div>
-            )}
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">{plan.name}</h3>
-            <p class="text-gray-600 mb-4">{plan.description}</p>
-            <ul class="space-y-2">
-              {plan.features.map(feature => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <a href="/healthcare/switching-health-insurance" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-primary-600 mb-3">Switching Health Insurance in Switzerland</h3>
+          <p class="text-gray-600 mb-4">Learn about the process, timing, and considerations when changing your health insurance provider.</p>
+          <span class="text-primary-600 font-medium flex items-center">
+            Read more
+            <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </span>
+        </a>
+        
+        <a href="/healthcare/health-insurance-for-new-arrivals" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-primary-600 mb-3">Health Insurance for New Arrivals</h3>
+          <p class="text-gray-600 mb-4">Everything you need to know about setting up health insurance when you first move to Switzerland.</p>
+          <span class="text-primary-600 font-medium flex items-center">
+            Read more
+            <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </span>
+        </a>
+        
+        <a href="/news/switching-health-insurance-in-switzerland" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold text-primary-600 mb-3">Swiss Health Insurance Deadlines</h3>
+          <p class="text-gray-600 mb-4">Important dates and deadlines for switching or modifying your health insurance coverage in Switzerland.</p>
+          <span class="text-primary-600 font-medium flex items-center">
+            Read more
+            <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </span>
+        </a>
       </div>
     </div>
   </div>
 
   <!-- FAQ Section -->
-  <div class="bg-gray-50 py-16">
+  <div id="faq" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
       <div class="max-w-3xl mx-auto">
         <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow" id={`faq-${index}`}>
               <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
               <dd class="text-gray-600">{faq.answer}</dd>
             </div>
@@ -418,17 +828,52 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Contact Information -->
-  <div class="bg-white py-16">
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Contact SWICA</h2>
-        <address class="not-italic">
-          <p class="text-lg text-gray-600">SWICA Winterthur</p>
-          <p class="text-lg text-gray-600">Römerstrasse 38</p>
-          <p class="text-lg text-gray-600">8400 Winterthur</p>
-        </address>
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Considering Your Health Insurance Options in Switzerland?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Don't Navigate Alone. Let Our Experts Guide You.
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors shadow-md hover:shadow-lg"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Conclusion -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 text-center">Conclusion</h2>
+        <p>
+          SWICA stands as a formidable choice for expatriates seeking health insurance in Switzerland, distinguished by its commitment to customer satisfaction, innovative premium structures like the entry-age system, and a comprehensive suite of products designed to meet high expectations. With strong English support, generous wellness benefits, and robust international coverage options, SWICA addresses many of the key concerns and desires of the global community residing in Switzerland.
+        </p>
+        <p>
+          While the Swiss healthcare system is renowned for its quality, navigating its insurance landscape can be intricate. SWICA's offerings, particularly its premium supplementary plans like Optima, COMPLETA FORTE, and HOSPITA PRIVATE with BestMed, provide a pathway to enhanced care and financial predictability. However, the optimal choice always depends on individual circumstances.
+        </p>
+        <p>
+          Expat Savvy is dedicated to providing you with the expert, unbiased advice needed to make an informed decision. We can help you explore SWICA's plans in detail, compare them with other leading providers, and ensure your chosen coverage is perfectly tailored to your life in Switzerland.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="bg-gray-50 py-6">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-sm text-gray-500 text-center">
+        <strong>Disclaimer:</strong> This information is intended as a general guide and is based on publicly available information about SWICA health insurance at the time of writing. Insurance plan details, benefits, and premiums can change. It is not a substitute for personalized advice from a qualified insurance advisor. Expat Savvy is an independent intermediary and does not represent SWICA or any single insurance provider exclusively.
+      </p>
     </div>
   </div>
 
