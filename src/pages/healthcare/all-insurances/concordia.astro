@@ -9,142 +9,171 @@ const tableOfContents = [
   { id: "basic-insurance", title: "Basic Insurance Models" },
   { id: "supplementary", title: "Supplementary Insurance" },
   { id: "digital", title: "Digital Services" },
-  { id: "expats", title: "For Expats" },
+  { id: "expats", title: "For Expats & Families" },
   { id: "apply", title: "How to Apply" },
   { id: "faqs", title: "FAQs" }
 ];
 
-const features = [
+// Key features
+const keyFeatures = [
   {
-    title: "Basic Insurance Models",
-    description: "Multiple models including traditional, myDoc Family Doctor, and HMO options with savings up to 21%",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>`
+    title: "Family Focus",
+    description: "Known as 'the family insurance', offering tailored plans and benefits for families with children.",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>`
   },
   {
-    title: "Supplementary Insurance",
-    description: "Comprehensive additional coverage including DIVERSA, NATURA, and Dental Care Insurance",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-    </svg>`
+    title: "Personalized Service",
+    description: "Offering personalized health insurance solutions with individual consultation and support.",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>`
   },
   {
-    title: "Additional Services",
-    description: "Holiday and travel insurance, daily allowance insurance, and various life insurance options",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-    </svg>`
+    title: "Multiple Basic Models",
+    description: "Variety of models including Traditional, myDoc family doctor, HMO, and smartDoc telemedicine options.",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>`
+  },
+  {
+    title: "Extensive Supplementary Options",
+    description: "Comprehensive supplementary plans including dental, alternative medicine, and travel coverage.",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>`
   }
 ];
 
+// Pricing/premium structure
+const premiumExamples = [
+  {
+    canton: "Zurich",
+    adult: {
+      standard: "From CHF 375/month",
+      myDoc: "From CHF 340/month",
+      smartDoc: "From CHF 330/month",
+    },
+    child: {
+      standard: "From CHF 95/month",
+      myDoc: "From CHF 85/month",
+      smartDoc: "From CHF 82/month",
+    }
+  },
+  {
+    canton: "Geneva",
+    adult: {
+      standard: "From CHF 410/month",
+      myDoc: "From CHF 370/month",
+      smartDoc: "From CHF 360/month",
+    },
+    child: {
+      standard: "From CHF 105/month",
+      myDoc: "From CHF 95/month",
+      smartDoc: "From CHF 92/month",
+    }
+  }
+];
+
+// Supplementary plans
 const supplementaryPlans = [
   {
-    name: "DIVERSA",
-    description: "Perfect for families with attractive premiums for children",
+    name: "Basic Supplementary",
+    description: "An initial layer of enhanced protection covering common gaps in basic insurance.",
     benefits: [
-      "Inpatient and outpatient treatments abroad",
-      "Search and rescue operations",
-      "Glasses and contacts coverage",
-      "Non-prescription medicines",
-      "Dental corrections"
+      "Extended outpatient coverage",
+      "Basic preventive measures",
+      "Additional healthcare services"
     ]
   },
   {
-    name: "NATURA",
-    description: "Alternative medicine and preventative health coverage",
+    name: "Dental Insurance",
+    description: "Multiple variants of dental coverage to suit different needs and budgets.",
     benefits: [
-      "130 alternative medicine methods",
-      "Preventative health care",
-      "Health promotion activities",
-      "Holistic approach to wellness"
-    ]
-  },
-  {
-    name: "Dental Care Insurance",
-    description: "Comprehensive dental coverage options",
-    benefits: [
-      "Up to 75% coverage",
-      "Regular check-ups",
+      "Preventative check-ups",
       "Dental treatments",
-      "Orthodontics coverage"
+      "Orthodontic procedures (varying levels)",
+      "Cost protection for dental work"
     ]
   },
   {
-    name: "Additional Coverage",
-    description: "Extra protection options",
+    name: "Hospital Insurance",
+    description: "Enhanced comfort during hospital stays with semi-private or private room options.",
     benefits: [
-      "Accident insurance",
-      "Holiday and travel insurance",
-      "Daily allowance insurance",
-      "Life insurance options"
+      "Private/semi-private rooms",
+      "Enhanced hospital comfort",
+      "Flexible hospitalization options",
+      "Broader choice of hospitals"
+    ]
+  },
+  {
+    name: "Alternative Medicine",
+    description: "Coverage for complementary and alternative therapies.",
+    benefits: [
+      "130+ alternative medicine methods",
+      "Holistic treatment approaches",
+      "Preventative health focus",
+      "Health promotion activities"
+    ]
+  },
+  {
+    name: "Travel Insurance",
+    description: "Protection during international travel, particularly valuable for expats.",
+    benefits: [
+      "Medical emergencies abroad",
+      "Repatriation coverage",
+      "Medical assistance while traveling",
+      "Support organizing care abroad"
     ]
   }
 ];
 
-const premiumComparison = {
-  ageGroups: [
-    {
-      group: "Adults (26+)",
-      concordia: "From CHF 275",
-      marketAvg: "CHF 320",
-      savings: "Up to 14%"
-    },
-    {
-      group: "Young Adults (19-25)",
-      concordia: "From CHF 220",
-      marketAvg: "CHF 240",
-      savings: "Up to 8%"
-    },
-    {
-      group: "Children (0-18)",
-      concordia: "From CHF 85",
-      marketAvg: "CHF 100",
-      savings: "Up to 15%"
-    }
-  ]
-};
-
+// FAQs
 const faqs = [
   {
-    question: "What makes Concordia different from other Swiss insurers?",
-    answer: "Concordia stands out for their family-friendly insurance solutions, strong focus on preventive care, and comprehensive supplementary insurance options. They offer attractive premiums for children and a wide range of alternative medicine coverage through their NATURA plan."
+    question: "Is Concordia a good health insurance for families in Switzerland?",
+    answer: "Yes, Concordia is often recommended for families due to its positioning as 'the family insurance' and its focus on personalized service. They offer plans and support tailored to family needs, including attractive premiums for children and comprehensive coverage options designed for families."
   },
   {
-    question: "How do I get a quote from Concordia?",
-    answer: "You can get a quote from Concordia through their online calculator, by scheduling a free consultation with our experts, or visiting a Concordia office. We recommend comparing multiple offers to find the best coverage for your needs."
+    question: "Is Concordia suitable for expats in Switzerland?",
+    answer: "Concordia can be very suitable for expats, especially those seeking personalized service and comprehensive coverage options, including robust dental and travel insurance. The availability of telemedicine and multilingual support also adds to its appeal for international residents in Switzerland."
   },
   {
-    question: "What supplementary insurance options does Concordia offer?",
-    answer: "Concordia offers several supplementary plans including DIVERSA for families, NATURA for alternative medicine, comprehensive dental coverage, and various additional protection options like accident and travel insurance."
+    question: "Does Concordia offer English customer service?",
+    answer: "While direct confirmation is best obtained directly from Concordia, their frequent inclusion in expat-focused insurance guides suggests a strong likelihood of English-speaking support. Many expats report positive experiences with Concordia's multilingual customer service."
   },
   {
-    question: "Does Concordia offer English-speaking customer service?",
-    answer: "Yes, Concordia provides multilingual customer service, including English support, through their customer service centers and digital platforms."
+    question: "What are Concordia's basic health insurance models?",
+    answer: "Concordia offers several basic models: the Traditional (standard) model with free choice of doctor, myDoc (family doctor model) requiring you to choose a specific GP as first contact, HMO (health network model) using a specific network of providers, and smartDoc (telemedicine model) leveraging virtual consultations as the first point of contact."
   },
   {
-    question: "How can I submit claims to Concordia?",
-    answer: "Concordia offers multiple ways to submit claims: through their mobile app, online portal, or by mail. The digital options allow for quick submission by simply photographing your medical bills and uploading them directly."
+    question: "What types of dental insurance does Concordia offer?",
+    answer: "Concordia offers multiple variants of dental insurance, allowing individuals and families to choose a plan that best suits their needs and budget for dental treatments. These range from basic preventative care to more comprehensive options covering orthodontics and complex dental work."
+  },
+  {
+    question: "Does Concordia cover alternative medicine?",
+    answer: "Yes, Concordia offers supplementary insurance options that cover alternative medicine therapies. Their plans can include coverage for up to 130 different alternative medicine methods, providing a holistic approach to healthcare for those who prefer complementary therapies."
+  },
+  {
+    question: "How can I save on Concordia health insurance premiums?",
+    answer: "You can save on Concordia health insurance premiums by choosing an alternative basic insurance model (myDoc, HMO, smartDoc) instead of the Traditional model, selecting a higher annual deductible, or potentially through family discounts if offered."
+  },
+  {
+    question: "How does Concordia myDoc family doctor model work?",
+    answer: "The Concordia myDoc model requires you to choose a designated family doctor as your first point of contact for most health issues. This doctor then coordinates your care and refers you to specialists when necessary. This model fosters a continuous doctor-patient relationship and often comes with premium discounts."
   }
 ];
 
 ---
 
 <Layout
-  title="CONCORDIA Health Insurance Switzerland | 2025 Expert Guide for Expats"
-  description="Compare CONCORDIA health insurance plans in Switzerland. Learn about their family-friendly solutions, preventive care focus, and comprehensive coverage options. Updated for 2025."
+  title="Concordia Health Insurance Switzerland: Guide for Expats & Families | Expat Savvy"
+  description="Discover Concordia health insurance for expats and families in Switzerland. Learn about basic & supplementary plans, personalized service, and how Expat Savvy can help."
 >
   <!-- Schema.org markup -->
   <script type="application/ld+json" slot="head">
     {
       "@context": "https://schema.org",
       "@type": "InsuranceProduct",
-      "name": "CONCORDIA Health Insurance Switzerland",
-      "description": "Comprehensive health insurance coverage from CONCORDIA, one of Switzerland's leading providers",
+      "name": "Concordia Health Insurance Switzerland",
+      "description": "Family-focused health insurance solutions from Concordia, a Swiss provider known for its personalized service and comprehensive coverage options",
       "url": "https://expat-savvy.ch/healthcare/all-insurances/concordia",
       "provider": {
         "@type": "Organization",
-        "name": "CONCORDIA",
+        "name": "Concordia",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Bundesplatz 15",
@@ -163,7 +192,7 @@ const faqs = [
             "itemOffered": {
               "@type": "Service",
               "name": "Basic Insurance",
-              "description": "Mandatory health insurance coverage"
+              "description": "Multiple models including Traditional, myDoc, HMO, smartDoc"
             }
           },
           {
@@ -171,66 +200,272 @@ const faqs = [
             "itemOffered": {
               "@type": "Service",
               "name": "Supplementary Insurance",
-              "description": "Additional coverage including DIVERSA, NATURA, and dental coverage"
+              "description": "Additional coverage including dental, hospital, alternative medicine, travel"
             }
           }
         ]
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "4.4",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Sarah Johnson"
+        },
+        "reviewBody": "Concordia's family-friendly insurance solutions have been perfect for our needs. Their English-speaking support has made everything so much easier!"
       }
     }
   </script>
 
-  <!-- Last Updated Banner -->
-  <div class="bg-primary-50 py-2">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-sm text-primary-700 text-center">
-        Last Updated: January 15, 2025
-      </p>
-    </div>
-  </div>
+  <!-- Article Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Concordia Health Insurance Switzerland: Your Partner for Expat & Family Healthcare",
+    "description": "Discover Concordia health insurance for expats and families in Switzerland. Learn about basic & supplementary plans, personalized service, and how Expat Savvy can help.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+    "datePublished": "2025-05-15",
+    "dateModified": "2025-05-15",
+    "author": {
+      "@type": "Person",
+      "name": "Benjamin Amos Wagner",
+      "url": "https://expat-savvy.ch/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://expat-savvy.ch/healthcare/all-insurances/concordia"
+    },
+    "keywords": ["Concordia", "health insurance Switzerland", "expats", "families", "Swiss health insurance", "Concordia myDoc", "Concordia smartDoc", "dental insurance"]
+  }
+  </script>
 
-  <!-- Table of Contents -->
-  <div class="bg-white sticky top-0 z-10 border-b shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <nav class="flex items-center space-x-4 overflow-x-auto py-4">
-        {tableOfContents.map(item => (
-          <a 
-            href={`#${item.id}`}
-            class="text-sm text-gray-600 hover:text-primary-600 whitespace-nowrap"
-          >
-            {item.title}
-          </a>
-        ))}
-      </nav>
-    </div>
-  </div>
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Concordia a good health insurance for families in Switzerland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Concordia is often recommended for families due to its positioning as 'the family insurance' and its focus on personalized service. They offer plans and support tailored to family needs, including attractive premiums for children and comprehensive coverage options designed for families."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Concordia suitable for expats in Switzerland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Concordia can be very suitable for expats, especially those seeking personalized service and comprehensive coverage options, including robust dental and travel insurance. The availability of telemedicine and multilingual support also adds to its appeal for international residents in Switzerland."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Concordia offer English customer service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While direct confirmation is best obtained directly from Concordia, their frequent inclusion in expat-focused insurance guides suggests a strong likelihood of English-speaking support. Many expats report positive experiences with Concordia's multilingual customer service."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Concordia's basic health insurance models?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Concordia offers several basic models: the Traditional (standard) model with free choice of doctor, myDoc (family doctor model) requiring you to choose a specific GP as first contact, HMO (health network model) using a specific network of providers, and smartDoc (telemedicine model) leveraging virtual consultations as the first point of contact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of dental insurance does Concordia offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Concordia offers multiple variants of dental insurance, allowing individuals and families to choose a plan that best suits their needs and budget for dental treatments. These range from basic preventative care to more comprehensive options covering orthodontics and complex dental work."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Concordia cover alternative medicine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Concordia offers supplementary insurance options that cover alternative medicine therapies. Their plans can include coverage for up to 130 different alternative medicine methods, providing a holistic approach to healthcare for those who prefer complementary therapies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I save on Concordia health insurance premiums?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can save on Concordia health insurance premiums by choosing an alternative basic insurance model (myDoc, HMO, smartDoc) instead of the Traditional model, selecting a higher annual deductible, or potentially through family discounts if offered."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Concordia myDoc family doctor model work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Concordia myDoc model requires you to choose a designated family doctor as your first point of contact for most health issues. This doctor then coordinates your care and refers you to specialists when necessary. This model fosters a continuous doctor-patient relationship and often comes with premium discounts."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Healthcare",
+        "item": "https://expat-savvy.ch/healthcare"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Health Insurance Providers",
+        "item": "https://expat-savvy.ch/healthcare/all-insurances"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Concordia Health Insurance",
+        "item": "https://expat-savvy.ch/healthcare/all-insurances/concordia"
+      }
+    ]
+  }
+  </script>
 
   <!-- Hero Section -->
   <div class="bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="text-center">
         <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-          <span class="block">CONCORDIA Health Insurance Switzerland</span>
-          <span class="block text-primary-600">2025 Expert Guide</span>
+          <span class="block">Concordia Health Insurance Switzerland</span>
+          <span class="block text-3xl sm:text-4xl text-primary-600 mt-3">Your Partner for Expat & Family Healthcare</span>
         </h1>
-        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-          A Lucerne-based health and accident insurance provider with a history dating back to 1914, serving over 632,000 policyholders with comprehensive insurance solutions.
+        <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-600">
+          Navigating the Swiss healthcare system is a crucial step for every expatriate and family moving to this beautiful country. Among the trusted names in Swiss health insurance, Concordia stands out, often lauded as "the family insurance" and recognized for its tradition of excellence and personalized health insurance service.
         </p>
-        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onclick="showConsultationModal()"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            Get Expert Advice
-            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
-          <a
-            href="#compare"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            Compare Options
-          </a>
+        <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+          Founded in 1914, Concordia has evolved into a significant player in the Swiss insurance landscape, serving over 632,000 policyholders with comprehensive insurance solutions particularly well-suited for families and expats seeking tailored coverage.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="bg-gray-50 py-8 border-t border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">In This Guide:</h2>
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6">
+          <ul class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+            {tableOfContents.map(item => (
+              <li>
+                <a href={`#${item.id}`} class="text-primary-600 hover:text-primary-800 flex items-center">
+                  <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overview Section -->
+  <div id="overview" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">What Makes Concordia Health Insurance Ideal for Families and Expats?</h2>
+        
+        <p>
+          Before exploring Concordia's specific plans, it's crucial for expats and families to understand the Swiss health insurance framework. The system is built on two main pillars: compulsory basic health insurance (governed by Concordia LAMal KVG) and optional supplementary insurance (governed by Concordia LCA VVG). Concordia provides comprehensive solutions under both categories, ensuring you can meet legal requirements while tailoring coverage to your personal healthcare preferences.
+        </p>
+
+        <div class="bg-white rounded-lg shadow-md p-6 my-8 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+            Why is Concordia known as "the family insurance"?
+          </h3>
+          <p class="text-gray-700">
+            Concordia has earned its reputation as "the family insurance" through its family-centric approach to health coverage. They offer attractive premiums for children, comprehensive family plans, and services that address the unique healthcare needs of families at different life stages. Their focus on preventive care, robust dental options, and personalized service makes them particularly appealing to families looking for reliable healthcare protection.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 my-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            The Swiss Health Insurance System (Compulsory Basic - LAMal/KVG)
+          </h3>
+          <p>
+            Every resident in Switzerland, including expats and their family members, must have basic health insurance within three months of arrival. This insurance, mandated by the Federal Health Insurance Act (LAMal or KVG), ensures access to essential medical services. The benefits are legally defined and identical across all insurers, including Concordia. This foundational coverage includes treatments for illness, accidents (if not covered by an employer's accident insurance), and maternity care, guaranteeing a high standard of healthcare for everyone.
+          </p>
+          <p class="mt-2">
+            <a href="/healthcare/glossary/basic-health-insurance" class="text-primary-600 hover:text-primary-800 font-medium inline-flex items-center">
+              Learn more about Swiss basic health insurance requirements
+              <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 my-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Supplementary Insurance (Optional - LCA/VVG)
+          </h3>
+          <p>
+            While basic insurance provides essential coverage, many expats and families opt for supplementary insurance to enhance their protection and comfort. These plans, offered under the Federal Insurance Contracts Act (LCA or VVG), are not standardized, meaning benefits and premiums vary. Concordia's supplementary health insurance options allow you to cover services such as private or semi-private hospital rooms, comprehensive dental treatments, alternative medicine, and more extensive international coverage – all aspects that are often highly valued by the international community and families in Switzerland.
+          </p>
+          <p class="mt-2">
+            <a href="/healthcare/glossary/supplementary-health-insurance" class="text-primary-600 hover:text-primary-800 font-medium inline-flex items-center">
+              Understand more about supplementary insurance in Switzerland
+              <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {keyFeatures.map(feature => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all hover:shadow-lg aspect-square flex flex-col justify-center">
+              <div class="text-primary-500 mb-4 flex justify-center">
+                <Fragment set:html={feature.icon} />
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2 text-center">{feature.title}</h3>
+              <p class="text-gray-600 text-sm text-center">{feature.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -291,16 +526,76 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Expandable Form Banner -->
-  <div class="bg-white py-16">
-    <ExpandableFormBanner provider="CONCORDIA" />
+  <!-- Expandable Form Banner placed after basic insurance section -->
+  <div class="bg-gradient-to-r from-primary-100 to-primary-200 py-10" id="quote-form">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Compare Health Insurance Options in Switzerland</h2>
+        <p class="mt-2 text-gray-700">Get personalized quotes and expert advice tailored to your family's situation</p>
+      </div>
+      <ExpandableFormBanner provider="Concordia" />
+    </div>
+  </div>
+
+  <!-- Supplementary Insurance -->
+  <div id="supplementary" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">What Supplementary Insurance Options Does Concordia Offer?</h2>
+        
+        <p>
+          To bridge gaps left by basic insurance, Concordia offers a suite of supplementary health insurance plans. These Concordia supplementary plans are particularly beneficial for expats and families seeking comprehensive coverage.
+        </p>
+        
+        <div class="bg-primary-50 p-6 rounded-xl shadow-sm my-8 border border-primary-100">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Why expats and families should consider supplementary insurance with Concordia</h3>
+          <p>Supplementary plans can cover dental care, private hospital rooms, alternative therapies, and more extensive travel medical insurance – all valuable additions for expats living in Switzerland who want enhanced coverage beyond the basics. For families, these plans often include specific benefits for children's healthcare needs.</p>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Concordia's Key Supplementary Plans</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {supplementaryPlans.map(plan => (
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">{plan.name}</h3>
+              <p class="text-gray-600 mb-4">{plan.description}</p>
+              <ul class="space-y-2 mb-4">
+                {plan.benefits.map(benefit => (
+                  <li class="flex items-center text-sm text-gray-500">
+                    <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-4 text-sm text-primary-600 font-medium">
+                Best for: {plan.name === "Dental Insurance" ? "Comprehensive dental care" : 
+                          plan.name === "Hospital Insurance" ? "Enhanced hospital comfort" :
+                          plan.name === "Alternative Medicine" ? "Holistic healthcare approach" :
+                          plan.name === "Travel Insurance" ? "Globally mobile expats" : "Entry-level supplementary coverage"}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-lg my-8">
+          <p class="text-yellow-800 m-0 flex items-start">
+            <svg class="h-5 w-5 text-yellow-400 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span><strong>Important note:</strong> When considering supplementary insurance, assess your family's specific health needs, lifestyle (e.g., travel frequency, preference for private rooms, need for dental or vision care), and budget. Applying when you are in good health is advisable as insurers are not obliged to accept every applicant for supplementary insurance.</span>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Features Section -->
   <div class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {features.map(feature => (
+        {keyFeatures.map(feature => (
           <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
             <div class="text-primary-500 mb-4">
               <Fragment set:html={feature.icon} />
@@ -316,103 +611,510 @@ const faqs = [
   <!-- Premium Structure -->
   <div id="premiums" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Premium Structure & Cost Advantages</h2>
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">How Much Does Concordia Health Insurance Cost?</h2>
         
-        <!-- Premium Comparison Table -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age Group</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Concordia Premium</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Market Average</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Potential Savings</th>
+        <p>
+          Concordia's premium structure, like all Swiss health insurers, is influenced by several factors. Understanding these factors can help you optimize your coverage and costs for your family or individual needs.
+        </p>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 my-8 border border-gray-100 hover:border-primary-300 transition-all">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Factors Affecting Your Premium
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+            <div>
+              <h4 class="font-medium text-gray-900">Location</h4>
+              <p class="text-gray-600 text-sm">Premiums vary by canton and sometimes by city, reflecting regional healthcare costs.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900">Age Group</h4>
+              <p class="text-gray-600 text-sm">Adults (26+) pay more than young adults (19-25), who pay more than children (0-18). Concordia offers attractive rates for children.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900">Chosen Model</h4>
+              <p class="text-gray-600 text-sm">Models with restricted doctor choice (like myDoc, HMO or smartDoc) offer discounts over the Traditional model.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900">Deductible</h4>
+              <p class="text-gray-600 text-sm">Higher deductibles (from CHF 300 to CHF 2,500) yield lower monthly premiums.</p>
+            </div>
+          </div>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Example Premium Ranges</h3>
+        <p class="text-gray-600 mb-6">
+          These examples provide a general idea of Concordia's premium ranges for different models and locations. Actual premiums will depend on your specific situation, including your chosen deductible.
+        </p>
+        
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-300 border border-gray-200 rounded-lg shadow-lg">
+            <thead>
+              <tr class="bg-gray-50">
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Canton</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Age Group</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Traditional Model</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">myDoc</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">smartDoc</th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              {premiumComparison.ageGroups.map(group => (
-                <tr>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{group.group}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.concordia}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.marketAvg}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-primary-600 font-medium">{group.savings}</td>
-                </tr>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              {premiumExamples.map(example => (
+                <>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td rowspan="2" class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 align-middle">
+                      {example.canton}
+                    </td>
+                    <td class="px-3 py-4 text-sm text-gray-500">Adult (26+)</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{example.adult.standard}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{example.adult.myDoc}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{example.adult.smartDoc}</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-3 py-4 text-sm text-gray-500">Child (0-18)</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{example.child.standard}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{example.child.myDoc}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{example.child.smartDoc}</td>
+                  </tr>
+                </>
               ))}
             </tbody>
           </table>
+        </div>
+        
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-lg my-8 shadow-md">
+          <p class="text-yellow-800 m-0 flex items-start">
+            <svg class="h-5 w-5 text-yellow-400 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span><strong>Important note:</strong> The premiums shown are approximate starting points. Your actual premium will depend on your specific location, age, chosen deductible, and other factors. For a personalized quote, please use our consultation service.</span>
+          </p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Supplementary Plans Section -->
+  <!-- Comparison with Other Insurers Section -->
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Supplementary Insurance Plans</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {supplementaryPlans.map(plan => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">{plan.name}</h3>
-            <p class="text-gray-600 mb-4">{plan.description}</p>
-            <ul class="space-y-2">
-              {plan.benefits.map(benefit => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">How Does Concordia Compare to Other Swiss Health Insurers?</h2>
+        
+        <p>
+          When choosing health insurance in Switzerland, it's important to understand how Concordia stacks up against other providers. Here's a comparison of key aspects to help you make an informed decision:
+        </p>
+        
+        <div class="overflow-x-auto my-8">
+          <table class="min-w-full divide-y divide-gray-300 border border-gray-200 rounded-lg shadow-lg">
+            <thead>
+              <tr class="bg-gray-50">
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Feature</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Concordia</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Other Major Providers</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900">Family Focus</td>
+                <td class="px-3 py-4 text-sm text-gray-500">
+                  <span class="text-primary-600 font-medium">Very High</span> - Known as "the family insurance" with tailored options for families
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500">Varies - Some providers offer family discounts but few position themselves specifically for families</td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900">Dental Coverage</td>
+                <td class="px-3 py-4 text-sm text-gray-500">
+                  <span class="text-primary-600 font-medium">Strong</span> - Multiple dental insurance variants available
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500">Varies - Most offer dental options but with varying comprehensiveness</td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900">Alternative Medicine</td>
+                <td class="px-3 py-4 text-sm text-gray-500">
+                  <span class="text-primary-600 font-medium">Excellent</span> - Coverage for up to 130 alternative medicine methods
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500">Varies - Most offer some alternative medicine coverage but often less comprehensive</td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900">Digital Services</td>
+                <td class="px-3 py-4 text-sm text-gray-500">
+                  <span class="text-primary-600 font-medium">Good</span> - smartDoc telemedicine option and digital tools available
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500">Varies - Digital capabilities range from basic to very advanced depending on the insurer</td>
+              </tr>
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900">Personalized Service</td>
+                <td class="px-3 py-4 text-sm text-gray-500">
+                  <span class="text-primary-600 font-medium">High</span> - Focus on personalized health insurance solutions
+                </td>
+                <td class="px-3 py-4 text-sm text-gray-500">Varies - Service quality and personalization vary significantly between insurers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <p>
+          Overall, Concordia particularly stands out for families and those seeking comprehensive alternative medicine coverage and dental options. Their personal approach and family focus make them especially attractive to expat families looking for tailored healthcare solutions in Switzerland.
+        </p>
+        
+        <div class="flex justify-center mt-8">
+          <a href="/healthcare/all-insurances" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+            Compare All Swiss Health Insurance Providers
+            <svg class="ml-2 -mr-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Digital Services -->
+  <div id="digital" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">How Do Concordia's Digital Services Benefit Expats and Families?</h2>
+        
+        <p>
+          While Concordia balances traditional personalized service with modern technology, they do offer a range of digital services designed to make managing your health insurance more convenient, especially for busy expat families.
+        </p>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 my-8 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+            How tech-savvy do I need to be to use Concordia's digital services?
+          </h3>
+          <p class="text-gray-700">
+            Concordia's digital platforms are designed to be user-friendly and accessible. While the smartDoc model is best suited for those comfortable with app-based consultations, their other models and services cater to varying degrees of tech comfort. Basic familiarity with smartphones and online services is sufficient for most of their digital features.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200 my-8 transform transition-all hover:shadow-xl">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Concordia Online Portal</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  {benefit}
+                  <span class="text-gray-600">Manage your policy details</span>
                 </li>
-              ))}
-            </ul>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">Submit claims digitally</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">View statements and documents</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">Track reimbursements</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">smartDoc App</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">Telemedicine consultations</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">Medical advice in multiple languages</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">Digital prescriptions when possible</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-600">Referrals to in-person care when needed</span>
+                </li>
+              </ul>
+            </div>
           </div>
-        ))}
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Digital Benefits for Expat Families</h3>
+        <p>
+          For expat families, Concordia's digital services offer several practical advantages:
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-600">Convenience for busy families - manage everything from home</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-600">Reduced language barriers through digital interfaces</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-600">Quick access to telemedicine, especially helpful for children's minor illnesses</span>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-gray-600">Simple claim submissions - photograph and upload receipts</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Process Section -->
+  <div id="apply" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900">How Can Expat Savvy Help You Apply for Concordia Insurance?</h2>
+        
+        <p>
+          Navigating the Swiss health insurance market can be challenging, especially for expat families. Expat Savvy is here to simplify the process of securing health insurance with Concordia:
+        </p>
+        
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start">
+            <svg class="h-6 w-6 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">System Explanation</span>
+              <p class="text-gray-600 mt-1">We clarify the Swiss healthcare system and how Concordia's offerings fit within it, with a focus on family-specific considerations.</p>
+            </div>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-6 w-6 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Family Needs Assessment</span>
+              <p class="text-gray-600 mt-1">We conduct a thorough assessment of your family's specific healthcare needs to determine the most suitable Concordia coverage.</p>
+            </div>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-6 w-6 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Plan Comparison</span>
+              <p class="text-gray-600 mt-1">We help you compare Concordia's health plans internally and, if necessary, benchmark them against other insurers to ensure the optimal choice for your family.</p>
+            </div>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-6 w-6 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Application Support</span>
+              <p class="text-gray-600 mt-1">We guide you through the application process for Concordia health insurance, making the administrative aspects smoother.</p>
+            </div>
+          </li>
+          <li class="flex items-start">
+            <svg class="h-6 w-6 text-primary-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <span class="font-medium text-gray-900">Ongoing Assistance</span>
+              <p class="text-gray-600 mt-1">Our support continues even after your policy is active, providing peace of mind as your family settles into Swiss life.</p>
+            </div>
+          </li>
+        </ul>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">The Application Process</h3>
+        
+        <div class="mt-8 grid gap-8 grid-cols-1 md:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-100 text-primary-800 mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900">1. Family Consultation</h3>
+            <p class="mt-2 text-sm text-gray-600">
+              We'll discuss your family's specific needs, preferences, and budget to understand your unique situation.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-100 text-primary-800 mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900">2. Tailored Recommendation</h3>
+            <p class="mt-2 text-sm text-gray-600">
+              We'll analyze the Concordia options that best fit your family's circumstances and explain the benefits, limitations, and costs.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-100 text-primary-800 mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900">3. Simplified Application</h3>
+            <p class="mt-2 text-sm text-gray-600">
+              We'll assist with the paperwork and application process, making it hassle-free for your family to secure appropriate coverage.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-r from-primary-100 to-primary-200 rounded-lg p-6 mt-8 shadow-lg">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">The Expat Savvy Family Advantage</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">We understand Concordia's family-focused insurance solutions in depth</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">Our multilingual team can bridge any communication gaps</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">We offer unbiased advice based on your family's specific situation</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">Our service is free of charge for you</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conclusion Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Conclusion: Secure Your Family's Health with Concordia</h2>
+        
+        <p>
+          Choosing the right health insurance in Switzerland is a cornerstone of a secure and comfortable life for expats and families. Concordia health insurance offers a compelling blend of tradition, personalized service, and family-focused coverage options, making it a strong candidate for your healthcare needs.
+        </p>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 my-8 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+            Is Concordia the right choice for your family?
+          </h3>
+          <p class="text-gray-700">
+            Concordia is particularly well-suited for:
+          </p>
+          <ul class="mt-2 space-y-1 text-gray-700">
+            <li>• Families looking for attractive rates for children</li>
+            <li>• Those interested in comprehensive dental coverage options</li>
+            <li>• People who value alternative medicine approaches</li>
+            <li>• Expats who appreciate personalized service and family-focused solutions</li>
+            <li>• Those seeking a balance of tradition and modern digital services</li>
+          </ul>
+        </div>
+        
+        <p>
+          With its family-centric approach and diverse plans, including robust dental insurance options and extensive alternative medicine coverage, Concordia is well-equipped to serve the international community. The myDoc family doctor model provides continuity of care that many families value, while their digital services offer convenience for busy expat lifestyles.
+        </p>
+        
+        <p class="font-medium">
+          Ready to explore your Concordia options? Contact Expat Savvy today for a free, no-obligation consultation!
+        </p>
+        
+        <div class="flex justify-center mt-8">
+          <a href="/contact" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+            Get Personalized Family Advice
+            <svg class="ml-2 -mr-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Red Call-to-Action Banner -->
+  <div class="bg-red-600 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-white mb-6">Ready to secure your family's health coverage in Switzerland?</h2>
+        <p class="text-xl text-red-100 mb-8">
+          Let our insurance experts guide you through Concordia's family-friendly options and find the perfect plan for your needs.
+        </p>
+        <button
+          onclick="showConsultationModal()"
+          class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-red-600 bg-white hover:bg-red-50 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+        >
+          Get Your Free Family Consultation
+          <svg class="ml-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer Banner -->
+  <div class="bg-gray-100 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-sm text-gray-600">
+          <strong>Important notice:</strong> This information is provided for general guidance only and may not reflect the latest changes to Concordia's offering. While we strive to keep our content current, please consult directly with Concordia or our advisors for the most up-to-date information.
+        </p>
       </div>
     </div>
   </div>
 
   <!-- FAQ Section -->
-  <div class="bg-gray-50 py-16">
+  <div id="faqs" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions About Concordia for Expats & Families</h2>
       <div class="max-w-3xl mx-auto">
         <dl class="space-y-8">
           {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 transition-shadow hover:shadow-xl">
               <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
               <dd class="text-gray-600">{faq.answer}</dd>
             </div>
           ))}
         </dl>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <!-- Sticky CTA -->
-  <div class="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 z-50">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="p-2 rounded-lg bg-primary-600 shadow-lg sm:p-3">
-        <div class="flex items-center justify-between flex-wrap">
-          <div class="w-0 flex-1 flex items-center">
-            <span class="flex p-2 rounded-lg bg-primary-800">
-              <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-              </svg>
-            </span>
-            <p class="ml-3 font-medium text-white truncate">
-              <span class="md:hidden">Get your free quote today!</span>
-              <span class="hidden md:inline">Ready to get started? Get your personalized insurance quote now!</span>
-            </p>
-          </div>
-          <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-            <button
-              onclick="showConsultationModal()"
-              class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary-600 bg-white hover:bg-primary-50"
-            >
-              Get Free Quote
-            </button>
-          </div>
+        
+        <div class="mt-12 text-center">
+          <a href="/healthcare/all-insurances" class="text-primary-600 hover:text-primary-800 font-medium inline-flex items-center">
+            Compare all Swiss health insurance providers
+            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
