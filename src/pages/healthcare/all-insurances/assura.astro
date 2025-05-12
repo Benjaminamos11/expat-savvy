@@ -141,6 +141,86 @@ const faqs = [
     answer: "Expat Savvy provides personalized, independent advice. We can help you understand if Assura genuinely fits your specific, limited profile or, more commonly, guide you towards other insurers that offer a better balance of cost, comprehensive coverage, and robust English-speaking support tailored for expats."
   }
 ];
+
+// Add the premium comparison data
+const premiumComparison = {
+  ageGroups: [
+    {
+      group: "Adults (26+)",
+      assura: "From 280 CHF",
+      marketAvg: "320 CHF",
+      savings: "Up to 12.5%"
+    },
+    {
+      group: "Young Adults (19-25)",
+      assura: "From 210 CHF",
+      marketAvg: "240 CHF",
+      savings: "Up to 12.5%"
+    },
+    {
+      group: "Children (0-18)",
+      assura: "From 85 CHF",
+      marketAvg: "100 CHF",
+      savings: "Up to 15%"
+    }
+  ],
+  deductibles: [
+    { amount: 300, discount: "0%" },
+    { amount: 500, discount: "8%" },
+    { amount: 1000, discount: "12%" },
+    { amount: 1500, discount: "16%" },
+    { amount: 2000, discount: "20%" },
+    { amount: 2500, discount: "25%" }
+  ]
+};
+
+// Add supplementary insurance plans data
+const supplementaryPlans = [
+  {
+    name: "COMPLEMENTA EXTRA",
+    description: "Extended basic coverage for comprehensive protection",
+    benefits: [
+      "Enhanced outpatient coverage",
+      "Additional treatments",
+      "Preventive care",
+      "Emergency transport"
+    ],
+    bestFor: "Those wanting extra coverage beyond basic insurance"
+  },
+  {
+    name: "NATURA & MEDNA",
+    description: "Alternative medicine coverage",
+    benefits: [
+      "Natural therapies",
+      "Homeopathy",
+      "Acupuncture",
+      "Herbal medicine"
+    ],
+    bestFor: "Natural medicine enthusiasts"
+  },
+  {
+    name: "MONDIA & MONDIA PLUS",
+    description: "Travel insurance coverage",
+    benefits: [
+      "Worldwide coverage",
+      "Emergency assistance",
+      "Medical evacuation",
+      "24/7 support"
+    ],
+    bestFor: "Frequent travelers and expats"
+  },
+  {
+    name: "DENTA PLUS",
+    description: "Comprehensive dental coverage",
+    benefits: [
+      "Regular check-ups",
+      "Dental treatments",
+      "Orthodontics",
+      "Preventive care"
+    ],
+    bestFor: "Families and those needing dental work"
+  }
+];
 ---
 
 <Layout
@@ -337,11 +417,27 @@ const faqs = [
               </a>
             </li>
             <li>
+              <a href="#premiums" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Premium Structure
+              </a>
+            </li>
+            <li>
               <a href="#models" class="text-primary-600 hover:text-primary-800 flex items-center">
                 <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
                 Basic Insurance Models
+              </a>
+            </li>
+            <li>
+              <a href="#supplementary" class="text-primary-600 hover:text-primary-800 flex items-center">
+                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                Supplementary Insurance
               </a>
             </li>
             <li>
@@ -424,6 +520,64 @@ const faqs = [
     </div>
   </div>
 
+  <!-- Premium Structure Section (New Addition) -->
+  <div id="premiums" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Premium Structure & Cost Advantages</h2>
+        
+        <!-- Premium Comparison Table -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-12">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age Group</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assura Premium</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Market Average</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Potential Savings</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              {premiumComparison.ageGroups.map(group => (
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{group.group}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.assura}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.marketAvg}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-primary-600 font-medium">{group.savings}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Deductible Options -->
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Deductible Options & Savings</h3>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deductible (CHF)</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium Discount</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              {premiumComparison.deductibles.map(option => (
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{option.amount}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{option.discount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+          <p class="text-yellow-800 m-0"><strong>Note:</strong> While Assura's premiums may appear competitive, we advise expats to carefully consider the total value proposition, including service quality, language support, and ease of claims processing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Basic Insurance Models Section -->
   <div class="bg-white py-16" id="models">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -444,6 +598,35 @@ const faqs = [
                 </li>
               ))}
             </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Supplementary Insurance Options (New Addition) -->
+  <div id="supplementary" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Supplementary Insurance Options</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {supplementaryPlans.map(plan => (
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{plan.name}</h3>
+            <p class="text-gray-600 mb-4">{plan.description}</p>
+            <ul class="space-y-2 mb-4">
+              {plan.benefits.map(benefit => (
+                <li class="flex items-center text-sm text-gray-600">
+                  <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-4 text-sm text-primary-600 font-medium">
+              Best for: {plan.bestFor}
+            </div>
           </div>
         ))}
       </div>
