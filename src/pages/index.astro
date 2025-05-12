@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ConsultationModal from '../components/ConsultationModal.astro';
+import Testimonials from '../components/Testimonials.astro';
 
 const stats = [
   { number: "1000+", label: "Happy Clients" },
@@ -521,51 +522,8 @@ const premiumPartners = [
     </div>
   </div>
 
-  <!-- Reviews Section -->
-  <div class="bg-gray-50 py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-extrabold text-gray-900">What Our Clients Say</h2>
-        <p class="mt-4 text-xl text-gray-500">Trusted by expats across Switzerland</p>
-        <div class="mt-6">
-          <a 
-            href="https://g.page/r/CYpve4Tr8JfoEBM/review"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            <svg class="h-5 w-5 mr-2 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm0 4.92c1.658 0 3.152.674 4.285 1.808l-1.857 1.857C13.669 7.827 12.866 7.5 12 7.5c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5c2.153 0 3.978- 1.527 4.402-3.537l1.098.998C16.93 15.831 14.702 17.5 12 17.5c-3.038 0-5.5-2.462-5.5-5.5s2.462-5.5 5.5-5.5z"/>
-            </svg>
-            Write a Review
-          </a>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {reviews.map(review => (
-          <div class="bg-white rounded-xl shadow-lg p-8 relative">
-            <div class="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-primary-500 text-white p-2 sm:p-3 rounded-full shadow-lg">
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/>
-              </svg>
-            </div>
-            <div class="flex items-center mb-6">
-              <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600 font-semibold text-lg">
-                {review.author.split(' ').map(word => word[0]).join('')}
-              </div>
-              <div class="ml-4">
-                <h3 class="font-semibold text-gray-900">{review.author}</h3>
-                <p class="text-sm text-gray-500">{review.role}</p>
-              </div>
-            </div>
-            <p class="text-gray-600 break-words">{review.text}</p>
-           </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Testimonials Section -->
+  <Testimonials />
 
   <!-- Contact Section -->
   <div class="bg-white py-24">
