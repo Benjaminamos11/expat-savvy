@@ -1,0 +1,626 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+// Define comparison data
+const tableData = [
+  {
+    feature: "Basic Insurance Models Offered",
+    swica: "Standard, Telmed (Medpharm), HMO (Santé), GP (Favorit Casa)",
+    sanitas: "Standard, Telmed (CallMed), HMO (CareMed), GP (Medbase MultiAccess)"
+  },
+  {
+    feature: "Typical Basic Premium Range",
+    swica: "Moderate to High (Varies by canton, age, deductible)",
+    sanitas: "Moderate (Varies by canton, age, deductible)"
+  },
+  {
+    feature: "Supplementary: Alternative Medicine",
+    swica: "Good coverage with Completa Top & Optima",
+    sanitas: "Strong focus, extensive coverage with Classic & Family plans"
+  },
+  {
+    feature: "Supplementary: Check-ups & Prevention",
+    swica: "Strong focus, contributions via Optima & other plans",
+    sanitas: "Good, various contributions for check-ups and prevention"
+  },
+  {
+    feature: "Supplementary: Intl. Private Hospital",
+    swica: "Excellent options (Hospita Global Private)",
+    sanitas: "Available (Hospital Extra Liberty, Hospital Top Liberty)"
+  },
+  {
+    feature: "Supplementary: Dental Insurance",
+    swica: "Available (Denta)",
+    sanitas: "Available (Dental Basic, Dental Plus)"
+  },
+  {
+    feature: "Supplementary: Gym & Health Promotion",
+    swica: "Generous contributions (up to CHF 800/year with Optima)",
+    sanitas: "Contributions via various plans (e.g., Sanitas Active App rewards)"
+  },
+  {
+    feature: "Handling Pre-existing Conditions (Suppl.)",
+    swica: "Health questionnaire; potential for exclusions or premium loading",
+    sanitas: "Health questionnaire; potential for exclusions or premium loading. Unique Individual Premium Supplement option for some conditions."
+  },
+  {
+    feature: "Expat-Friendliness: English Support",
+    swica: "Very good; English website, documents, dedicated English support line",
+    sanitas: "Very good; English website, comprehensive English documents, good English support"
+  },
+  {
+    feature: "Expat-Friendliness: Onboarding Support",
+    swica: "Good resources for new arrivals",
+    sanitas: "Good resources and clear information for expats"
+  },
+  {
+    feature: "Customer Satisfaction (e.g., Comparis)",
+    swica: "Consistently high ratings (e.g., 5.4/6 on Comparis 2023)",
+    sanitas: "Consistently good ratings (e.g., 5.2/6 on Comparis 2023)"
+  },
+  {
+    feature: "Digital Services (App/Portal Quality)",
+    swica: "Excellent, user-friendly mySwica app & portal",
+    sanitas: "Excellent, highly-rated Sanitas Portal app & online portal"
+  },
+  {
+    feature: "Claims Processing (Ease/Speed Summary)",
+    swica: "Generally efficient and straightforward via app/portal",
+    sanitas: "Very efficient, excellent digital submission options"
+  }
+];
+
+const swicaPros = [
+  "Top-rated customer service with excellent English support",
+  "Outstanding and intuitive mySwica digital platform",
+  "Generous wellness and gym contributions (up to CHF 800/year)",
+  "Strong international coverage options"
+];
+
+const swicaCons = [
+  "Can be one of the more expensive providers",
+  "Especially for comprehensive supplementary packages"
+];
+
+const sanitasPros = [
+  "Excellent and feature-rich Sanitas Portal app",
+  "Strong focus on alternative medicine",
+  "Comprehensive English resources",
+  "Potential for Individual Premium Supplement for some pre-existing conditions"
+];
+
+const sanitasCons = [
+  "While customer service is good, Swica often has a slight edge in personalized English support ratings",
+  "Some supplementary plans can be complex to combine for optimal coverage"
+];
+
+const faqs = [
+  {
+    question: "Which app is better, mySwica or Sanitas Portal?",
+    answer: "Both are excellent and highly rated. mySwica is often praised for its simplicity and ease of use, while Sanitas Portal is noted for its breadth of features and integrated digital health services. The preference can be subjective."
+  },
+  {
+    question: "Do Swica and Sanitas offer good support for expats new to Switzerland?",
+    answer: "Yes, both providers have experience with expatriates and offer good resources and support to help them navigate the Swiss health insurance system and set up their policies."
+  },
+  {
+    question: "How do their international health coverage options compare for expats who travel a lot?",
+    answer: "Both offer strong supplementary plans for international private hospital coverage. Swica's HOSPITA GLOBAL PRIVATE is particularly comprehensive. It's important to compare the specific terms and geographical coverage of their respective international plans."
+  },
+  {
+    question: "If I have a pre-existing condition, am I more likely to get supplementary coverage with Sanitas than Swica?",
+    answer: "It's case-dependent. Both will assess your health. Sanitas's option for an Individual Premium Supplement for some conditions on some plans may offer a path to coverage where others might decline, but this is not guaranteed. Full transparency with both insurers is key."
+  },
+  {
+    question: "How can Expat Savvy help me choose between Swica and Sanitas based on my digital and expat needs?",
+    answer: "Expat Savvy understands the nuances that matter to expats, from digital usability to English service quality and international benefits. We provide unbiased comparisons of specific plans from Swica, Sanitas, and others, tailored to your individual profile, ensuring you choose the insurer that best aligns with your preferences and requirements."
+  }
+];
+--- 
+
+<Layout
+  title="Swica vs. Sanitas: Focus on Digital & Expat Services (2025) | Expat Savvy"
+  description="Compare Swica and Sanitas health insurance for expats in Switzerland. Expert analysis of digital tools, English service, and expat-focused benefits."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Swica vs. Sanitas: Focus on Digital & Expat Services (2025)",
+    "description": "Compare Swica and Sanitas health insurance for expats in Switzerland. Expert analysis of digital tools, English service, and expat-focused benefits.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "author": {
+      "@type": "Person",
+      "name": "Benjamin Amos Wagner",
+      "url": "https://expat-savvy.ch/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://expat-savvy.ch/compare-providers/swica-vs-sanitas"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which app is better, mySwica or Sanitas Portal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both are excellent and highly rated. mySwica is often praised for its simplicity and ease of use, while Sanitas Portal is noted for its breadth of features and integrated digital health services. The preference can be subjective."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Swica and Sanitas offer good support for expats new to Switzerland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, both providers have experience with expatriates and offer good resources and support to help them navigate the Swiss health insurance system and set up their policies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do their international health coverage options compare for expats who travel a lot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both offer strong supplementary plans for international private hospital coverage. Swica's HOSPITA GLOBAL PRIVATE is particularly comprehensive. It's important to compare the specific terms and geographical coverage of their respective international plans."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "If I have a pre-existing condition, am I more likely to get supplementary coverage with Sanitas than Swica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It's case-dependent. Both will assess your health. Sanitas's option for an Individual Premium Supplement for some conditions on some plans may offer a path to coverage where others might decline, but this is not guaranteed. Full transparency with both insurers is key."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can Expat Savvy help me choose between Swica and Sanitas based on my digital and expat needs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Expat Savvy understands the nuances that matter to expats, from digital usability to English service quality and international benefits. We provide unbiased comparisons of specific plans from Swica, Sanitas, and others, tailored to your individual profile, ensuring you choose the insurer that best aligns with your preferences and requirements."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare Providers",
+        "item": "https://expat-savvy.ch/compare-providers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Swica vs. Sanitas",
+        "item": "https://expat-savvy.ch/compare-providers/swica-vs-sanitas"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white">
+    <div class="absolute inset-0">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+      <!-- Left Side - Main Heading -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+        <div class="max-w-lg mx-auto lg:max-w-none">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Swica vs. Sanitas:<br>
+            <span class="text-primary-600">Focus on Digital & Expat Services</span>
+          </h1>
+          <p class="mt-6 text-xl text-gray-500">
+            For expatriates in Switzerland who prioritize a seamless digital experience and robust services tailored to their needs, Swica and Sanitas often top the list of health insurance providers. Our comparison helps you decide which is the perfect match.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Get Personalized Advice
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+            <a 
+              href="/compare-providers"
+              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back to Comparison Hub
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side - Quick Links -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+        <div class="max-w-lg mx-auto">
+          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
+          <div class="mt-8 space-y-6">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
+                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Swica and Sanitas.</p>
+                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  Jump to comparison table
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
+                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
+                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  View pros and cons
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Common Questions</h3>
+                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
+                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  See all FAQs
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <p class="lead text-xl text-gray-600">
+          For expatriates in Switzerland who prioritize a seamless digital experience and robust services tailored to their needs, Swica and Sanitas often top the list of health insurance providers. Both are renowned for their strong digital platforms and customer-centric approaches, but they have nuances that might make one a better choice for your specific situation. This comparison focuses on their digital capabilities and overall expat-friendliness.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table Section -->
+  <div id="comparison-table" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Swica vs. Sanitas: At a Glance</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Swica and Sanitas compare, with a special focus on digital services and expat needs:</p>
+      </div>
+
+      <div class="overflow-x-auto shadow-xl rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200 bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Feature
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
+                Swica
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Sanitas
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {tableData.map((row, index) => (
+              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.swica}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.sanitas}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Breakdown Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Detailed Breakdown: Swica vs. Sanitas</h2>
+        <p>Let's dive into the specifics, particularly concerning their digital offerings and expat services:</p>
+
+        <h3>Basic Insurance & Premiums</h3>
+        <p>
+          Both Swica and Sanitas offer the standard suite of basic insurance models, allowing expats to choose based on their preferences for cost and access to care. Premium-wise, both are in the moderate to upper-moderate range, reflecting their quality of service and comprehensive offerings. Swica is often perceived as slightly more premium in its pricing but justifies this with exceptional service.
+        </p>
+
+        <h3>Digital Experience: mySwica vs. Sanitas Portal</h3>
+        <p>This is a key area where both insurers excel, making them attractive for tech-savvy expats.</p>
+        <ul>
+          <li>
+            <strong>Swica (mySwica app & portal):</strong> Swica's digital platform is consistently praised for its intuitive design, ease of use, and comprehensive features. Expats can easily submit claims by photo, view policy documents, manage personal details, find doctors, and access telemedicine services. The English version is well-maintained.
+          </li>
+          <li>
+            <strong>Sanitas (Sanitas Portal app & online portal):</strong> Sanitas also boasts an excellent digital offering. The Sanitas Portal app is highly rated for its functionality, allowing users to manage all aspects of their insurance, submit invoices, access digital health coaching, and utilize services like medication ordering or symptom checkers. Their English digital services are also very comprehensive.
+          </li>
+        </ul>
+
+        <p>While both are top-tier, some users might find the mySwica interface slightly more streamlined, whereas the Sanitas Portal might offer a broader range of integrated digital health services.</p>
+
+        <h3>Expat-Friendliness: Language, Support, and Onboarding</h3>
+        <ul>
+          <li>
+            <strong>English Language Support:</strong> Both Swica and Sanitas provide very good English language support. Swica has a dedicated English-speaking customer service line, and their website and documents are widely available in English. Sanitas also offers extensive English documentation and reliable English-speaking customer service agents.
+          </li>
+          <li>
+            <strong>Onboarding for New Arrivals:</strong> Both insurers have experience catering to expatriates and provide resources and information to help new arrivals understand the Swiss health system and get their insurance set up. Swica's proactive customer service is often highlighted by expats as particularly helpful during the initial phase.
+          </li>
+        </ul>
+
+        <h3>Supplementary Coverage Tailored for Expats</h3>
+        <ul>
+          <li>
+            <strong>International Coverage:</strong> Swica's HOSPITA GLOBAL PRIVATE is a standout option for comprehensive worldwide private hospital coverage. Sanitas also offers strong international hospital plans like Hospital Extra Liberty and Hospital Top Liberty.
+          </li>
+          <li>
+            <strong>Alternative Medicine & Wellness:</strong> Sanitas is well-regarded for its extensive supplementary coverage for alternative medicine. Swica also provides good options, especially with its Completa Top and Optima plans, the latter also offering significant contributions (up to CHF 800/year) to gym memberships and wellness activities. Sanitas encourages wellness through its Active App and various plan contributions.
+          </li>
+        </ul>
+
+        <h3>Handling of Pre-existing Conditions</h3>
+        <p>
+          For supplementary insurance, both require a health declaration. Swica is known for a thorough assessment. Sanitas also assesses health status but uniquely offers, in some cases, an "Individual Premium Supplement" for certain pre-existing conditions on some supplementary plans, which can be a valuable option for expats who might otherwise face exclusions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pros and Cons Section -->
+  <div id="pros-cons" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Swica vs. Sanitas for Digitally-Minded Expats</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Swica Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Swica</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {swicaPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {swicaCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sanitas Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Sanitas</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {sanitasPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {sanitasCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Helper Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
+        
+        <ul>
+          <li>
+            <strong>Choose Swica if:</strong> Your absolute priority is a seamless digital experience combined with top-tier, proactive English customer service and generous wellness benefits. You are willing to potentially pay a bit more for this premium experience.
+          </li>
+          <li>
+            <strong>Choose Sanitas if:</strong> You are looking for an excellent digital platform with a wide array of integrated health services, strong alternative medicine coverage, and potentially more flexible options for pre-existing conditions (case-dependent).
+          </li>
+        </ul>
+        
+        <p>
+          Both are excellent choices for expats who value digital convenience and good English support. The best fit depends on your specific priorities regarding service style, wellness benefits, and approach to pre-existing conditions. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice on Swica, Sanitas, and other options!
+        </p>
+        
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with Our AI Now!
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div id="faqs" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Swica vs. Sanitas (Expat Focus)</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Your Next Step with Expat Savvy
+        </h2>
+        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
+          Choosing between two digitally advanced and expat-friendly insurers like Swica and Sanitas comes down to fine-tuning based on your personal priorities. Expat Savvy is here to provide the expert, impartial advice you need.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with AI for Instant Answers
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation
+          </button>
+        </div>
+        
+        <div class="mt-6">
+          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
+            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Main Comparison Hub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout> 
