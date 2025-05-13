@@ -8,7 +8,12 @@ export default defineConfig({
   integrations: [
     tailwind(),
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/404'), // Exclude 404 page from sitemap
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date()
+    }),
     mdx()
   ],
   site: 'https://expat-savvy.ch',
