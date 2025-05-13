@@ -6,135 +6,131 @@ import ConsultationModal from '../../../components/ConsultationModal.astro';
 const tableData = [
   {
     feature: "Basic Insurance Models Offered",
-    swica: "Standard, Telmed (Medpharm), HMO (Santé), GP (Favorit Casa)",
-    helsana: "Standard, Telmed (Telmed), HMO (BeneFit PLUS), GP (BeneFit PLUS Hausarzt)"
+    css: "Standard, Telmed (Callmed), HMO (Gesundheits-Praxis), GP (Hausarzt)",
+    sanitas: "Standard, Telmed (CallMed), HMO (CareMed), GP (Medbase MultiAccess)"
   },
   {
     feature: "Typical Basic Premium Range",
-    swica: "Moderate to High (Varies by canton, age, deductible)",
-    helsana: "Moderate to High (Varies by canton, age, deductible)"
+    css: "Moderate (Varies by canton, age, deductible)",
+    sanitas: "Moderate (Varies by canton, age, deductible)"
   },
   {
     feature: "Supplementary: Alternative Medicine",
-    swica: "Good coverage with Completa Top & Optima",
-    helsana: "Good coverage with Completa & Top"
+    css: "Good coverage with various myCSS supplementary plans",
+    sanitas: "Strong focus, extensive coverage with Classic & Family plans"
   },
   {
     feature: "Supplementary: Check-ups & Prevention",
-    swica: "Strong focus, contributions via Optima & other plans",
-    helsana: "Good coverage, various contributions for prevention"
+    css: "Good, contributions for various preventative measures",
+    sanitas: "Good, various contributions for check-ups and prevention"
   },
   {
     feature: "Supplementary: Intl. Private Hospital",
-    swica: "Excellent options (Hospita Global Private)",
-    helsana: "Comprehensive options (Hospital Extra, Hospital Global)"
+    css: "Available (myCSS Hospital Insurance options)",
+    sanitas: "Available (Hospital Extra Liberty, Hospital Top Liberty)"
   },
   {
     feature: "Supplementary: Dental Insurance",
-    swica: "Available (Denta)",
-    helsana: "Available (Dental, Denta Plus)"
+    css: "Available (myCSS Dental Insurance)",
+    sanitas: "Available (Dental Basic, Dental Plus)"
   },
   {
     feature: "Supplementary: Gym & Health Promotion",
-    swica: "Generous contributions (up to CHF 800/year with Optima)",
-    helsana: "Significant contributions (e.g., up to CHF 200 from Completa, plus others)"
+    css: "Contributions via myCSS Health Account (up to CHF 500)",
+    sanitas: "Contributions via various plans (e.g., Sanitas Active App rewards)"
   },
   {
     feature: "Handling Pre-existing Conditions (Suppl.)",
-    swica: "Health questionnaire; potential for exclusions or premium loading",
-    helsana: "Health questionnaire; potential for exclusions or premium loading"
+    css: "Health questionnaire; potential for exclusions or premium loading",
+    sanitas: "Health questionnaire; potential for exclusions or premium loading. Unique Individual Premium Supplement option for some conditions."
   },
   {
     feature: "Expat-Friendliness: English Support",
-    swica: "Very good; English website, documents, dedicated English support line",
-    helsana: "Good; English website, documents, English-speaking customer service"
+    css: "Good; English website, some English documents, English-speaking support",
+    sanitas: "Very good; English website, comprehensive English documents, good English support"
   },
   {
     feature: "Expat-Friendliness: Onboarding Support",
-    swica: "Good resources for new arrivals",
-    helsana: "Good resources and information for expats"
+    css: "Good general support for new clients",
+    sanitas: "Good resources and clear information for expats"
   },
   {
     feature: "Customer Satisfaction (e.g., Comparis)",
-    swica: "Consistently high ratings (e.g., 5.4/6 on Comparis 2023)",
-    helsana: "Generally good ratings (e.g., 5.2/6 on Comparis 2023)"
+    css: "Generally good ratings (e.g., 5.1/6 on Comparis 2023)",
+    sanitas: "Consistently good ratings (e.g., 5.2/6 on Comparis 2023)"
   },
   {
     feature: "Digital Services (App/Portal Quality)",
-    swica: "Excellent, user-friendly app (mySwica) & portal",
-    helsana: "Very good app (Helsana+) & portal"
+    css: "Very good, user-friendly myCSS app & portal",
+    sanitas: "Excellent, highly-rated Sanitas Portal app & online portal"
   },
   {
     feature: "Claims Processing (Ease/Speed Summary)",
-    swica: "Generally efficient and straightforward via app/portal",
-    helsana: "Efficient, with good digital submission options"
+    css: "Efficient, especially via myCSS app/portal",
+    sanitas: "Very efficient, excellent digital submission options"
   }
 ];
 
-const swicaPros = [
-  "Excellent customer service (especially in English)",
-  "Top-tier digital platform (mySwica app)",
-  "Generous health promotion contributions",
-  "Strong focus on prevention",
-  "Consistently high customer satisfaction"
+const cssPros = [
+  "Strong digital platform (myCSS)",
+  "Good range of supplementary options",
+  "Health Account for wellness contributions",
+  "Established and reliable"
 ];
 
-const swicaCons = [
-  "Can be among the more expensive options for basic insurance",
-  "Some supplementary plans require combining multiple products for full benefits"
+const cssCons = [
+  "English support good but perhaps not as extensive as some competitors",
+  "Alternative medicine coverage might require specific plan combinations"
 ];
 
-const helsanaPros = [
-  "Extensive network of doctors and hospitals",
-  "Comprehensive range of supplementary plans",
-  "Good digital tools (Helsana+ app)",
-  "Strong offerings for international hospital coverage"
+const sanitasPros = [
+  "Excellent digital tools (Sanitas Portal app)",
+  "Strong focus on alternative medicine",
+  "Good English language resources",
+  "Potential for Individual Premium Supplement for pre-existing conditions on some plans",
+  "High customer satisfaction"
 ];
 
-const helsanaCons = [
-  "Customer service, while good, may not be as consistently praised as Swica's for English support",
-  "Some find their plan structure slightly complex"
+const sanitasCons = [
+  "Can sometimes be perceived as slightly more premium in price for certain supplementary packages",
+  "Range of basic models is standard but effective"
 ];
 
 const faqs = [
   {
-    question: "Is Swica generally cheaper than Helsana for basic insurance?",
-    answer: "This depends heavily on your canton, age, deductible, and chosen model. In some cases, Swica might be slightly more expensive, but it's essential to get personalized quotes."
+    question: "Is CSS or Sanitas more expensive for expats?",
+    answer: "Their basic insurance premiums are often comparable. Differences in cost usually arise from the specific supplementary plans chosen. It's best to get tailored quotes."
   },
   {
-    question: "Which offers better English customer service, Swica or Helsana?",
-    answer: "Both offer good English support, but Swica is often cited as having a slight edge with its dedicated English line and overall service quality for expats."
+    question: "Which has better digital tools, CSS or Sanitas?",
+    answer: "Both have excellent digital platforms. Sanitas's Portal app is often highlighted as exceptionally user-friendly and comprehensive, but the myCSS app is also very strong."
   },
   {
-    question: "How do Swica and Helsana compare for family coverage?",
-    answer: "Both have good options for families, including child discounts and maternity benefits. The specifics of their supplementary plans for children (e.g., orthodontics) would need careful comparison based on your family's needs."
+    question: "How do CSS and Sanitas handle claims for expats?",
+    answer: "Both offer efficient digital claims submission and processing, which is convenient for expats. Sanitas is often praised for its speed in this area."
   },
   {
-    question: "Can I easily switch between Swica and Helsana?",
-    answer: "You can switch your basic health insurance provider annually (notice by end of November). Supplementary insurance has different contract terms; Expat Savvy can help you navigate this."
+    question: "Which insurer is better for alternative medicine, CSS or Sanitas?",
+    answer: "Sanitas generally has a stronger emphasis and more extensive coverage options for alternative medicine within its core supplementary plans."
   },
   {
-    question: "What are the main complaints about Swica or Helsana from expats?",
-    answer: "Complaints are generally low for both. For Swica, it might occasionally be premium levels. For Helsana, some users might find the array of plans initially complex. Most expats report positive experiences with both."
-  },
-  {
-    question: "How can Expat Savvy help me choose between Swica and Helsana?",
-    answer: "Expat Savvy provides unbiased advice by comparing specific offers from both Swica and Helsana based on your individual profile and needs. We help you understand the fine print and choose the plan that offers the best value and coverage for you as an expat."
+    question: "How can Expat Savvy help me choose between CSS and Sanitas?",
+    answer: "Expat Savvy offers unbiased advice by comparing specific offers from CSS, Sanitas, and other insurers based on your unique expat profile and requirements. We help you understand the details and select the plan that provides the best value and coverage for your situation in Switzerland."
   }
 ];
 ---
 
 <Layout
-  title="Swica vs. Helsana: Which is Best for Expats in Switzerland (2025)? | Expat Savvy"
-  description="Compare Swica and Helsana health insurance for expats in Switzerland. Expert analysis of coverage, benefits, service and expat-friendliness for 2025."
+  title="CSS vs. Sanitas: Which is Best for Expats in Switzerland (2025)? | Expat Savvy"
+  description="Compare CSS and Sanitas health insurance for expats in Switzerland. Expert analysis of coverage, benefits, service and expat-friendliness for 2025."
 >
   <!-- Schema.org markup -->
   <script type="application/ld+json" slot="head">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Swica vs. Helsana: Which is Best for Expats in Switzerland (2025)?",
-    "description": "Compare Swica and Helsana health insurance for expats in Switzerland. Expert analysis of coverage, benefits, service and expat-friendliness for 2025.",
+    "headline": "CSS vs. Sanitas: Which is Best for Expats in Switzerland (2025)?",
+    "description": "Compare CSS and Sanitas health insurance for expats in Switzerland. Expert analysis of coverage, benefits, service and expat-friendliness for 2025.",
     "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
     "datePublished": "2025-01-15",
     "dateModified": "2025-01-15",
@@ -155,7 +151,7 @@ const faqs = [
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://expat-savvy.ch/compare-providers/swica-vs-helsana"
+      "@id": "https://expat-savvy.ch/compare-providers/css-vs-sanitas"
     }
   }
   </script>
@@ -168,50 +164,42 @@ const faqs = [
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is Swica generally cheaper than Helsana for basic insurance?",
+        "name": "Is CSS or Sanitas more expensive for expats?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "This depends heavily on your canton, age, deductible, and chosen model. In some cases, Swica might be slightly more expensive, but it's essential to get personalized quotes."
+          "text": "Their basic insurance premiums are often comparable. Differences in cost usually arise from the specific supplementary plans chosen. It's best to get tailored quotes."
         }
       },
       {
         "@type": "Question",
-        "name": "Which offers better English customer service, Swica or Helsana?",
+        "name": "Which has better digital tools, CSS or Sanitas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Both offer good English support, but Swica is often cited as having a slight edge with its dedicated English line and overall service quality for expats."
+          "text": "Both have excellent digital platforms. Sanitas's Portal app is often highlighted as exceptionally user-friendly and comprehensive, but the myCSS app is also very strong."
         }
       },
       {
         "@type": "Question",
-        "name": "How do Swica and Helsana compare for family coverage?",
+        "name": "How do CSS and Sanitas handle claims for expats?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Both have good options for families, including child discounts and maternity benefits. The specifics of their supplementary plans for children (e.g., orthodontics) would need careful comparison based on your family's needs."
+          "text": "Both offer efficient digital claims submission and processing, which is convenient for expats. Sanitas is often praised for its speed in this area."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I easily switch between Swica and Helsana?",
+        "name": "Which insurer is better for alternative medicine, CSS or Sanitas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can switch your basic health insurance provider annually (notice by end of November). Supplementary insurance has different contract terms; Expat Savvy can help you navigate this."
+          "text": "Sanitas generally has a stronger emphasis and more extensive coverage options for alternative medicine within its core supplementary plans."
         }
       },
       {
         "@type": "Question",
-        "name": "What are the main complaints about Swica or Helsana from expats?",
+        "name": "How can Expat Savvy help me choose between CSS and Sanitas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Complaints are generally low for both. For Swica, it might occasionally be premium levels. For Helsana, some users might find the array of plans initially complex. Most expats report positive experiences with both."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can Expat Savvy help me choose between Swica and Helsana?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Expat Savvy provides unbiased advice by comparing specific offers from both Swica and Helsana based on your individual profile and needs. We help you understand the fine print and choose the plan that offers the best value and coverage for you as an expat."
+          "text": "Expat Savvy offers unbiased advice by comparing specific offers from CSS, Sanitas, and other insurers based on your unique expat profile and requirements. We help you understand the details and select the plan that provides the best value and coverage for your situation in Switzerland."
         }
       }
     ]
@@ -239,8 +227,8 @@ const faqs = [
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Swica vs. Helsana",
-        "item": "https://expat-savvy.ch/compare-providers/swica-vs-helsana"
+        "name": "CSS vs. Sanitas",
+        "item": "https://expat-savvy.ch/compare-providers/css-vs-sanitas"
       }
     ]
   }
@@ -256,11 +244,11 @@ const faqs = [
       <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
         <div class="max-w-lg mx-auto lg:max-w-none">
           <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            Swica vs. Helsana:<br>
+            CSS vs. Sanitas:<br>
             <span class="text-primary-600">Which is Best for Expats?</span>
           </h1>
           <p class="mt-6 text-xl text-gray-500">
-            Navigating the Swiss health insurance market can be daunting for expats. Both Swica and Helsana are well-established insurers, but which one truly caters best to expat needs? Our side-by-side comparison helps you decide.
+            Navigating the Swiss health insurance market can be daunting for expats. Both CSS and Sanitas are well-established insurers, but which one truly caters best to expat needs? Our side-by-side comparison helps you decide.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
             <button
@@ -300,7 +288,7 @@ const faqs = [
               </div>
               <div class="ml-4">
                 <h3 class="text-xl font-medium text-white">Compare Providers</h3>
-                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Swica and Helsana.</p>
+                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of CSS and Sanitas.</p>
                 <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
                   Jump to comparison table
                   <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -360,7 +348,7 @@ const faqs = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="prose prose-lg max-w-4xl mx-auto">
         <p class="lead text-xl text-gray-600">
-          Navigating the Swiss health insurance market can be a daunting task for expats. Among the top contenders, Swica and Helsana frequently emerge as popular choices. Both are well-established insurers with comprehensive offerings, but which one truly caters best to the needs of expatriates in Switzerland? This guide provides a direct comparison to help you decide, focusing on aspects crucial for those new to or living in the country.
+          For expatriates navigating the Swiss health insurance system, CSS and Sanitas stand out as two major players offering a wide range of products and services. Both are known for their broad appeal, but they have distinct strengths and focuses that can make one a better fit than the other depending on your individual needs as an expat in Switzerland. This comparison will break down their offerings to help you make an informed choice.
         </p>
       </div>
     </div>
@@ -370,8 +358,8 @@ const faqs = [
   <div id="comparison-table" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-gray-900">Swica vs. Helsana: At a Glance</h2>
-        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Swica and Helsana compare across key criteria important for expats:</p>
+        <h2 class="text-3xl font-extrabold text-gray-900">CSS vs. Sanitas: At a Glance</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how CSS and Sanitas compare across key criteria important for expats:</p>
       </div>
 
       <div class="overflow-x-auto shadow-xl rounded-lg">
@@ -382,10 +370,10 @@ const faqs = [
                 Feature
               </th>
               <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
-                Swica
+                CSS
               </th>
               <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Helsana
+                Sanitas
               </th>
             </tr>
           </thead>
@@ -393,8 +381,8 @@ const faqs = [
             {tableData.map((row, index) => (
               <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                 <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.swica}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.helsana}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.css}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.sanitas}</td>
               </tr>
             ))}
           </tbody>
@@ -407,43 +395,43 @@ const faqs = [
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Detailed Breakdown: Swica vs. Helsana</h2>
-        <p>Let's delve deeper into how Swica and Helsana compare on specific points:</p>
+        <h2>Detailed Breakdown: CSS vs. Sanitas</h2>
+        <p>Let's explore the nuances of how CSS and Sanitas stack up:</p>
 
         <h3>Basic Insurance & Premiums</h3>
         <p>
-          Both Swica and Helsana offer the standard range of basic insurance models (Standard, Telmed, HMO, GP). Premiums are generally in the moderate to high range for both, reflecting their comprehensive service and network quality. Your specific premium will depend heavily on your canton, age, and chosen deductible. Swica is often lauded for its customer service within these models, while Helsana provides a robust network of doctors and HMOs.
+          Both CSS and Sanitas offer the full suite of basic insurance models, providing flexibility for expats to choose based on their preferred level of access and cost. Their premium levels are generally comparable and fall within the moderate range for the Swiss market. As always, specific premiums will vary based on individual factors.
         </p>
 
         <h3>Supplementary Showdown: Coverage Highlights</h3>
         <ul>
           <li>
-            <strong>International Private Hospital Insurance:</strong> Both providers offer excellent supplementary plans for worldwide private hospital coverage. Swica's HOSPITA GLOBAL PRIVATE and Helsana's HOSPITAL GLOBAL are top-tier options for expats requiring global flexibility.
+            <strong>Alternative Medicine:</strong> Sanitas often stands out for its more extensive coverage and focus on alternative medicine within its supplementary plans like Classic and Family. CSS also offers good alternative medicine benefits through its myCSS supplementary insurance options.
           </li>
           <li>
-            <strong>Check-ups & Prevention:</strong> Swica, particularly with its Optima plan, places a strong emphasis on preventative care and check-ups, offering substantial contributions. Helsana also provides good coverage for preventative measures through various supplementary plans.
+            <strong>International Private Hospital Insurance:</strong> Both insurers provide options for international private hospital coverage, essential for expats who travel frequently or may seek treatment abroad. CSS has its myCSS Hospital Insurance suite, while Sanitas offers plans like Hospital Extra Liberty.
           </li>
           <li>
-            <strong>Gym & Health Promotion:</strong> Swica is well-known for its generous contributions to gym memberships and health promotion activities (up to CHF 800/year with Optima). Helsana also offers attractive contributions, often through a combination of basic and supplementary plans.
+            <strong>Gym & Health Promotion:</strong> CSS offers a Health Account within its supplementary plans, which can contribute up to CHF 500 towards gym memberships and other health activities. Sanitas encourages healthy living through various contributions and its Sanitas Active App, which can offer rewards.
           </li>
           <li>
-            <strong>Dental:</strong> Both offer dedicated dental insurance plans (Swica Denta, Helsana Dental/Denta Plus), which are crucial as dental care is not covered by basic insurance in Switzerland.
+            <strong>Dental:</strong> Both provide dedicated dental insurance plans, which are vital as dental care is largely uncovered by basic Swiss insurance.
           </li>
         </ul>
 
         <h3>Pre-existing Conditions: What Expats Need to Know</h3>
         <p>
-          For mandatory basic insurance, both Swica and Helsana must accept all applicants regardless of pre-existing conditions. However, for supplementary insurance, both will require a health questionnaire. Depending on your health status, this could lead to waiting periods, premium loadings, or exclusions for specific conditions. It's vital to be transparent during this process.
+          For mandatory basic insurance, acceptance is guaranteed by both CSS and Sanitas. For supplementary plans, both will use a health questionnaire. This can result in waiting periods, premium adjustments, or exclusions. A unique aspect of Sanitas is their occasional offer of an "Individual Premium Supplement" for certain pre-existing conditions on some supplementary plans, allowing coverage at an additional cost where other insurers might decline.
         </p>
 
         <h3>Expat Experience: Language, Support & Digital Tools</h3>
         <p>
-          Swica generally has a slight edge in overall expat-friendliness, with a dedicated English support line and consistently high praise for its English services. Their mySwica app is also highly rated for its ease of use. Helsana also offers good English support, English documentation, and a user-friendly app (Helsana+), making them a strong contender for expats.
+          Sanitas often receives high marks for its digital experience, with a highly-rated and comprehensive Sanitas Portal app. They also provide very good English language support and documentation. CSS also boasts a strong digital platform with its myCSS app and portal, and offers good English support, making it a solid choice for expats.
         </p>
 
         <h3>Customer Voice & Claims</h3>
         <p>
-          Swica consistently receives top marks in customer satisfaction surveys (e.g., from Comparis and K-Tipp). Helsana also scores well, though typically slightly behind Swica in overall satisfaction. Both providers offer efficient claims processing, especially through their digital platforms.
+          Both CSS and Sanitas generally receive good customer satisfaction ratings. Sanitas often edges slightly ahead in overall satisfaction and is particularly praised for its efficient digital claims processing. CSS also provides reliable and efficient claims handling, especially through its digital channels.
         </p>
       </div>
     </div>
@@ -452,13 +440,13 @@ const faqs = [
   <!-- Pros and Cons Section -->
   <div id="pros-cons" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Swica vs. Helsana for Expats</h2>
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: CSS vs. Sanitas for Expats</h2>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Swica Pros and Cons -->
+        <!-- CSS Pros and Cons -->
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-primary-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Swica</h3>
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">CSS</h3>
           </div>
           <div class="p-6">
             <div class="mb-6">
@@ -469,7 +457,7 @@ const faqs = [
                 Pros
               </h4>
               <ul class="space-y-2">
-                {swicaPros.map(pro => (
+                {cssPros.map(pro => (
                   <li class="flex items-start">
                     <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -487,7 +475,7 @@ const faqs = [
                 Cons
               </h4>
               <ul class="space-y-2">
-                {swicaCons.map(con => (
+                {cssCons.map(con => (
                   <li class="flex items-start">
                     <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -500,10 +488,10 @@ const faqs = [
           </div>
         </div>
 
-        <!-- Helsana Pros and Cons -->
+        <!-- Sanitas Pros and Cons -->
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
           <div class="bg-red-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Helsana</h3>
+            <h3 class="text-2xl font-bold text-white">Sanitas</h3>
           </div>
           <div class="p-6">
             <div class="mb-6">
@@ -514,7 +502,7 @@ const faqs = [
                 Pros
               </h4>
               <ul class="space-y-2">
-                {helsanaPros.map(pro => (
+                {sanitasPros.map(pro => (
                   <li class="flex items-start">
                     <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -532,7 +520,7 @@ const faqs = [
                 Cons
               </h4>
               <ul class="space-y-2">
-                {helsanaCons.map(con => (
+                {sanitasCons.map(con => (
                   <li class="flex items-start">
                     <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -556,15 +544,15 @@ const faqs = [
         
         <ul>
           <li>
-            <strong>Choose Swica if:</strong> Your top priorities are outstanding customer service in English, a seamless digital experience, and significant contributions to wellness and gym memberships. You value a provider known for high satisfaction and a proactive approach to health.
+            <strong>Choose CSS if:</strong> You value a well-rounded insurer with a strong digital presence, a Health Account feature for wellness, and a reliable reputation. You are comfortable with good, rather than exceptional, English support.
           </li>
           <li>
-            <strong>Choose Helsana if:</strong> You are looking for a provider with a very broad network, comprehensive supplementary options (especially for international hospital care), and robust digital services. You value a large, established insurer with a wide array of choices.
+            <strong>Choose Sanitas if:</strong> A top-tier digital experience is paramount, you have a strong interest in alternative medicine, or you are looking for potentially more flexible options regarding pre-existing conditions for supplementary insurance (though this is case-dependent). You appreciate comprehensive English resources.
           </li>
         </ul>
         
         <p>
-          Individual needs vary greatly. The best way to decide is to compare specific quotes and discuss your personal requirements. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice on Swica, Helsana, and other options!
+          Individual circumstances are key. The best approach is to compare personalized quotes and discuss your specific needs. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice on CSS, Sanitas, and other suitable options!
         </p>
         
         <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
@@ -582,7 +570,7 @@ const faqs = [
   <!-- FAQ Section -->
   <div id="faqs" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Swica vs. Helsana</h2>
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): CSS vs. Sanitas</h2>
       
       <div class="max-w-3xl mx-auto">
         <dl class="space-y-8">
@@ -605,7 +593,7 @@ const faqs = [
           Your Next Step with Expat Savvy
         </h2>
         <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
-          Choosing between excellent providers like Swica and Helsana requires careful consideration of your personal circumstances. Expat Savvy is here to provide expert, unbiased advice to help you make the best choice.
+          Making the right choice between reputable insurers like CSS and Sanitas depends on a detailed look at your personal needs and priorities. Expat Savvy is here to provide expert, impartial advice to ensure you find the best fit.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
           <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
