@@ -1,0 +1,620 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+// Define comparison data
+const tableData = [
+  {
+    feature: "Basic Insurance Models Offered",
+    groupeMutuel: "Standard, Telmed (PrimaTel), HMO (PrimaCare), GP (médecin de famille)",
+    assura: "Standard, Telmed (PharMed), HMO (QualiMed), GP (médecin de famille)"
+  },
+  {
+    feature: "Typical Basic Premium Range",
+    groupeMutuel: "Low to Moderate (Varies by canton, age, deductible)",
+    assura: "Generally Low (Varies by canton, age, deductible)"
+  },
+  {
+    feature: "Supplementary: Alternative Medicine",
+    groupeMutuel: "Available with various supplementary plans (e.g., Global Solution)",
+    assura: "More limited options; focus is on basic coverage"
+  },
+  {
+    feature: "Supplementary: Check-ups & Prevention",
+    groupeMutuel: "Contributions available via supplementary plans",
+    assura: "Limited focus; primarily basic coverage benefits"
+  },
+  {
+    feature: "Supplementary: Intl. Private Hospital",
+    groupeMutuel: "Available (e.g., H-Global, H-Privé)",
+    assura: "Limited options; primarily focuses on Swiss coverage"
+  },
+  {
+    feature: "Supplementary: Dental Insurance",
+    groupeMutuel: "Available (Dentaire Plus)",
+    assura: "Available, but often basic"
+  },
+  {
+    feature: "Supplementary: Gym & Health Promotion",
+    groupeMutuel: "Contributions available via some supplementary plans",
+    assura: "Limited or no specific contributions; focus on low premiums"
+  },
+  {
+    feature: "Handling Pre-existing Conditions (Suppl.)",
+    groupeMutuel: "Health questionnaire; potential for exclusions or premium loading",
+    assura: "Health questionnaire; stricter underwriting, higher chance of exclusion for supplementary"
+  },
+  {
+    feature: "Expat-Friendliness: English Support",
+    groupeMutuel: "Improving; website has English, some English-speaking support available",
+    assura: "Limited; primarily French/German/Italian. English support can be challenging."
+  },
+  {
+    feature: "Expat-Friendliness: Onboarding Support",
+    groupeMutuel: "Standard support for new clients",
+    assura: "Basic support; can be more challenging for non-native speakers"
+  },
+  {
+    feature: "Customer Satisfaction (e.g., Comparis)",
+    groupeMutuel: "Mixed; improving but historically lower than some competitors (e.g., 4.8/6)",
+    assura: "Often lower ratings, reflecting service trade-offs for price (e.g., 4.5/6)"
+  },
+  {
+    feature: "Digital Services (App/Portal Quality)",
+    groupeMutuel: "Good online portal and app (GMapp)",
+    assura: "Basic online portal; app functionality may be more limited"
+  },
+  {
+    feature: "Claims Processing (Ease/Speed Summary)",
+    groupeMutuel: "Generally standard; digital options improving",
+    assura: "Can be slower; more traditional processing, less digital focus"
+  }
+];
+
+const groupeMutuelPros = [
+  "Competitive basic insurance premiums",
+  "Wider range of supplementary insurance options than Assura",
+  "Improving English language support and digital tools"
+];
+
+const groupeMutuelCons = [
+  "Customer satisfaction historically mixed (though improving)",
+  "Supplementary plans can add up in cost",
+  "May not be as service-oriented as premium insurers"
+];
+
+const assuraPros = [
+  "Often among the cheapest basic insurance premiums available",
+  "Straightforward basic plans"
+];
+
+const assuraCons = [
+  "Very limited supplementary insurance options (especially for international coverage, dental, wellness)",
+  "Limited English language support",
+  "Lower customer satisfaction ratings",
+  "More traditional claims processing",
+  "Stricter underwriting for supplementary plans"
+];
+
+const faqs = [
+  {
+    question: "Is Assura always cheaper than Groupe Mutuel?",
+    answer: "For basic insurance, Assura often has some of the lowest premiums. However, if you add supplementary insurance, Groupe Mutuel might offer better overall value depending on the coverage needed."
+  },
+  {
+    question: "Which is better for expats who don't speak French, German, or Italian?",
+    answer: "Groupe Mutuel generally offers better English language support and resources compared to Assura, where it can be quite limited."
+  },
+  {
+    question: "How do Groupe Mutuel and Assura compare for international health coverage?",
+    answer: "Groupe Mutuel has more dedicated supplementary plans for international coverage (e.g., H-Global). Assura's international coverage options are very limited."
+  },
+  {
+    question: "Are their digital platforms user-friendly for expats?",
+    answer: "Groupe Mutuel's GMapp and online portal are generally considered more user-friendly and feature-rich than Assura's more basic digital offerings."
+  },
+  {
+    question: "How can Expat Savvy help me choose between Groupe Mutuel and Assura?",
+    answer: "Expat Savvy provides unbiased advice by comparing specific offers from Groupe Mutuel, Assura, and other insurers based on your unique expat profile, budget, and coverage requirements. We help you understand the crucial differences in service and supplementary options to ensure you make an informed choice."
+  }
+];
+---
+
+<Layout
+  title="Groupe Mutuel vs. Assura: Premium & Coverage Analysis for Expats (2025) | Expat Savvy"
+  description="Compare Groupe Mutuel and Assura health insurance for expats in Switzerland. Expert analysis of premiums, coverage options and service quality for 2025."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Groupe Mutuel vs. Assura: Premium & Coverage Analysis for Expats (2025)",
+    "description": "Compare Groupe Mutuel and Assura health insurance for expats in Switzerland. Expert analysis of premiums, coverage options and service quality for 2025.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "author": {
+      "@type": "Person",
+      "name": "Benjamin Amos Wagner",
+      "url": "https://expat-savvy.ch/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://expat-savvy.ch/compare-providers/groupe-mutuel-vs-assura"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Assura always cheaper than Groupe Mutuel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For basic insurance, Assura often has some of the lowest premiums. However, if you add supplementary insurance, Groupe Mutuel might offer better overall value depending on the coverage needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which is better for expats who don't speak French, German, or Italian?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Groupe Mutuel generally offers better English language support and resources compared to Assura, where it can be quite limited."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do Groupe Mutuel and Assura compare for international health coverage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Groupe Mutuel has more dedicated supplementary plans for international coverage (e.g., H-Global). Assura's international coverage options are very limited."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are their digital platforms user-friendly for expats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Groupe Mutuel's GMapp and online portal are generally considered more user-friendly and feature-rich than Assura's more basic digital offerings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can Expat Savvy help me choose between Groupe Mutuel and Assura?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Expat Savvy provides unbiased advice by comparing specific offers from Groupe Mutuel, Assura, and other insurers based on your unique expat profile, budget, and coverage requirements. We help you understand the crucial differences in service and supplementary options to ensure you make an informed choice."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare Providers",
+        "item": "https://expat-savvy.ch/compare-providers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Groupe Mutuel vs. Assura",
+        "item": "https://expat-savvy.ch/compare-providers/groupe-mutuel-vs-assura"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white">
+    <div class="absolute inset-0">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+      <!-- Left Side - Main Heading -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+        <div class="max-w-lg mx-auto lg:max-w-none">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Groupe Mutuel vs. Assura:<br>
+            <span class="text-primary-600">Premium & Coverage Analysis</span>
+          </h1>
+          <p class="mt-6 text-xl text-gray-500">
+            When it comes to finding cost-effective health insurance in Switzerland, expats often encounter Groupe Mutuel and Assura. Both offer competitive premiums, but which one truly caters best to expat needs? Our side-by-side comparison helps you decide.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Get Personalized Advice
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+            <a 
+              href="/compare-providers"
+              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back to Comparison Hub
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side - Quick Links -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+        <div class="max-w-lg mx-auto">
+          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
+          <div class="mt-8 space-y-6">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
+                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Groupe Mutuel and Assura.</p>
+                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  Jump to comparison table
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
+                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
+                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  View pros and cons
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Common Questions</h3>
+                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
+                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  See all FAQs
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <p class="lead text-xl text-gray-600">
+          When it comes to finding cost-effective health insurance in Switzerland, expats often encounter Groupe Mutuel and Assura. Both are known for their competitive basic insurance premiums, but they cater to slightly different needs and have varying approaches to supplementary coverage and customer service. This comparison will analyze their offerings to help expatriates in Switzerland understand which might be the better choice for their specific circumstances.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table Section -->
+  <div id="comparison-table" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Groupe Mutuel vs. Assura: At a Glance</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Groupe Mutuel and Assura compare across key criteria important for expats:</p>
+      </div>
+
+      <div class="overflow-x-auto shadow-xl rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200 bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Feature
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
+                Groupe Mutuel
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Assura
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {tableData.map((row, index) => (
+              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.groupeMutuel}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.assura}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Breakdown Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Detailed Breakdown: Groupe Mutuel vs. Assura</h2>
+        <p>Let's explore the specifics of how Groupe Mutuel and Assura differ:</p>
+
+        <h3>Basic Insurance & Premiums</h3>
+        <p>
+          Both Groupe Mutuel and Assura are strong contenders if your primary goal is to find some of the lowest basic health insurance premiums in Switzerland. Assura, in particular, has built its reputation on offering very competitive basic rates. Both provide the standard array of models (Standard, Telmed, HMO, GP), allowing for further cost optimization.
+        </p>
+
+        <h3>Supplementary Showdown: Coverage Highlights</h3>
+        <p>This is where the two providers diverge more significantly.</p>
+        <ul>
+          <li>
+            <strong>Groupe Mutuel</strong> offers a broader and more comprehensive range of supplementary insurance options. This includes more robust plans for alternative medicine, check-ups, international hospital coverage (H-Global), dental care (Dentaire Plus), and even some contributions to gym/health promotion.
+          </li>
+          <li>
+            <strong>Assura</strong> has a much more limited selection of supplementary plans. Their primary focus is on providing affordable basic coverage. While some supplementary options exist (e.g., for basic dental or semi-private hospital rooms in Switzerland), they are generally less extensive than those offered by Groupe Mutuel or other larger insurers. Expats seeking comprehensive international coverage or extensive wellness benefits will likely find Assura lacking.
+          </li>
+        </ul>
+
+        <h3>Pre-existing Conditions: What Expats Need to Know</h3>
+        <p>
+          Both insurers guarantee acceptance for basic mandatory insurance. For supplementary insurance, both require health questionnaires. Assura is known for having stricter underwriting for supplementary plans, meaning a higher likelihood of exclusions or denial if you have pre-existing conditions. Groupe Mutuel also assesses health status but may offer a slightly broader acceptance range for some supplementary products.
+        </p>
+
+        <h3>Expat Experience: Language, Support & Digital Tools</h3>
+        <ul>
+          <li>
+            <strong>Groupe Mutuel</strong> has been making efforts to improve its services for English speakers, with an English version of their website and increasing availability of English-speaking customer service. Their GMapp and online portal are quite functional.
+          </li>
+          <li>
+            <strong>Assura</strong> primarily operates in French, German, and Italian. Finding consistent English language support can be challenging, and their digital tools, while functional for basic tasks, are generally less advanced and less expat-friendly than many competitors.
+          </li>
+        </ul>
+
+        <h3>Customer Voice & Claims</h3>
+        <p>
+          Historically, both Groupe Mutuel and Assura have received lower customer satisfaction ratings compared to premium providers, often linked to customer service experiences or claims processing times. Groupe Mutuel has shown improvement in recent years. Assura's lower ratings often reflect the trade-off for their very low premiums – service levels may not be as high. Claims processing with Assura can sometimes be slower and more traditional.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pros and Cons Section -->
+  <div id="pros-cons" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Groupe Mutuel vs. Assura for Expats</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Groupe Mutuel Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Groupe Mutuel</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {groupeMutuelPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {groupeMutuelCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Assura Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Assura</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {assuraPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {assuraCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Helper Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
+        
+        <ul>
+          <li>
+            <strong>Choose Groupe Mutuel if:</strong> You are looking for a balance between competitive basic premiums and the option to add a reasonable range of supplementary insurances. You are comfortable with good, rather than top-tier, customer service and are seeing improving English support.
+          </li>
+          <li>
+            <strong>Choose Assura if:</strong> Your absolute top priority is the lowest possible premium for basic mandatory health insurance, and you have minimal need for supplementary coverage or English-language customer service. You are healthy and primarily need coverage for major medical events in Switzerland.
+          </li>
+        </ul>
+        
+        <p>
+          Understanding the trade-offs is crucial. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice on Groupe Mutuel, Assura, and other suitable options for your budget and needs!
+        </p>
+        
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with Our AI Now!
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div id="faqs" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Groupe Mutuel vs. Assura</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Your Next Step with Expat Savvy
+        </h2>
+        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
+          Choosing between budget-friendly options like Groupe Mutuel and Assura requires a clear understanding of what you're prioritizing – cost, service, or specific coverage. Expat Savvy is here to provide expert, impartial advice.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with AI for Instant Answers
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation
+          </button>
+        </div>
+        
+        <div class="mt-6">
+          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
+            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Main Comparison Hub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout> 
