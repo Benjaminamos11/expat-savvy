@@ -12,7 +12,8 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'), // Exclude 404 page from sitemap
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date()
+      lastmod: new Date(),
+      outFile: 'sitemap-auto.xml' // Generate to a different file
     }),
     mdx()
   ],

@@ -10,11 +10,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run generate-sitemap && npm run use-full-sitemap",
     "preview": "astro preview",
     "astro": "astro",
     "submit-urls": "node src/scripts/submit-to-indexnow.js",
-    "generate-sitemap": "node src/scripts/generate-full-sitemap.js"
+    "generate-sitemap": "node src/scripts/generate-full-sitemap.js",
+    "use-full-sitemap": "cp public/sitemap-full.xml public/sitemap.xml"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -30,7 +31,7 @@
     "astro": "5.7.12",
     "clsx": "2.1.0",
     "framer-motion": "10.18.0",
-    "globby": "13.2.2",
+    "globby": "^13.2.2",
     "lucide-react": "0.309.0",
     "node-fetch": "3.3.2",
     "react": "18.2.0",

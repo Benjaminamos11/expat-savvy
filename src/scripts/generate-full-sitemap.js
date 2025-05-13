@@ -9,8 +9,8 @@ const siteUrl = 'https://expat-savvy.ch';
 
 // Function to get the current date in YYYY-MM-DD format
 const formatDate = () => {
-  const date = new Date();
-  return date.toISOString().split('T')[0];
+  // Use a fixed date for all entries to maintain consistency
+  return '2025-05-13';
 };
 
 async function generateSitemap() {
@@ -28,10 +28,25 @@ async function generateSitemap() {
     '!../components/**/*',
     '!../layouts/**/*',
     '!**/node_modules/**',
-    '!**/_*.{js,jsx,ts,tsx,astro,md,mdx}' // Exclude files starting with underscore
+    '!**/_*.{js,jsx,ts,tsx,astro,md,mdx}', // Exclude files starting with underscore
+    '!**/draft*.{js,jsx,ts,tsx,astro,md,mdx}' // Exclude draft files
   ], {
     cwd: __dirname
   });
+
+  // Manually ensure blog posts are included by listing the directory
+  let blogPosts = [];
+  try {
+    const blogDir = path.join(__dirname, '../content/blog');
+    const entries = fs.readdirSync(blogDir);
+    
+    blogPosts = entries
+      .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
+      .filter(file => !file.startsWith('_') && !file.includes('draft'))
+      .map(file => `blog/${file.replace(/\.(md|mdx)$/, '')}`);
+  } catch (err) {
+    console.error('Error reading blog directory:', err);
+  }
 
   // Create sitemap entries for each page
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -83,6 +98,23 @@ ${pages
     <lastmod>${formatDate()}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
+  </url>`;
+  })
+  .filter(entry => entry) // Remove empty entries
+  .join('\n')}
+
+${blogPosts
+  .map(postPath => {
+    // Skip any paths containing 'draft' or starting with an underscore
+    if (postPath.includes('draft') || postPath.startsWith('_')) {
+      return '';
+    }
+
+    return `  <url>
+    <loc>${siteUrl}/${postPath}</loc>
+    <lastmod>${formatDate()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>`;
   })
   .filter(entry => entry) // Remove empty entries
