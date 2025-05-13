@@ -1,0 +1,621 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+// Define comparison data
+const tableData = [
+  {
+    feature: "Basic Insurance Models Offered",
+    swica: "Standard, Telmed (Medpharm), HMO (Santé), GP (Favorit Casa)",
+    css: "Standard, Telmed (Callmed), HMO (Gesundheits-Praxis), GP (Hausarzt)"
+  },
+  {
+    feature: "Typical Basic Premium Range",
+    swica: "Moderate to High",
+    css: "Moderate"
+  },
+  {
+    feature: "Supplementary: Alternative Medicine",
+    swica: "Good coverage (Completa Top & Optima)",
+    css: "Good coverage (myCSS supplementary plans)"
+  },
+  {
+    feature: "Supplementary: Check-ups & Prevention",
+    swica: "Strong focus, significant contributions (Optima)",
+    css: "Good contributions (myCSS Health Account)"
+  },
+  {
+    feature: "Supplementary: Intl. Private Hospital",
+    swica: "Excellent options (Hospita Global Private)",
+    css: "Available (myCSS Hospital Insurance options)"
+  },
+  {
+    feature: "Supplementary: Sports & Fitness",
+    swica: "Very generous gym/activity contributions (up to CHF 800/yr - Optima)",
+    css: "Good contributions via myCSS Health Account (up to CHF 500/yr)"
+  },
+  {
+    feature: "Supplementary: Specialized Sports Med.",
+    swica: "Good coverage for sports-related treatments with relevant plans",
+    css: "Coverage available, may depend on specific supplementary combination"
+  },
+  {
+    feature: "Handling Pre-existing Conditions (Suppl.)",
+    swica: "Health questionnaire; potential exclusions/loading",
+    css: "Health questionnaire; potential exclusions/loading"
+  },
+  {
+    feature: "Expat-Friendliness: English Support",
+    swica: "Very good; dedicated English line, extensive English resources",
+    css: "Good; English website, some English documents, English-speaking support"
+  },
+  {
+    feature: "Customer Satisfaction (e.g., Comparis)",
+    swica: "Consistently high (e.g., 5.4/6)",
+    css: "Generally good (e.g., 5.1/6)"
+  },
+  {
+    feature: "Digital Services (App/Portal Quality)",
+    swica: "Excellent (mySwica app & portal)",
+    css: "Very good (myCSS app & portal)"
+  },
+  {
+    feature: "Claims Processing (Ease/Speed Summary)",
+    swica: "Efficient, user-friendly via app/portal",
+    css: "Efficient, especially via myCSS app/portal"
+  }
+];
+
+const swicaPros = [
+  "Exceptional English customer service",
+  "Top-tier digital platform",
+  "Very generous contributions for gym/fitness (Optima)",
+  "Strong focus on prevention",
+  "High customer satisfaction",
+  "Excellent international hospital plans"
+];
+
+const swicaCons = [
+  "Often higher premiums",
+  "Comprehensive benefits may require higher-tier supplementary plans"
+];
+
+const cssPros = [
+  "Very good digital platform",
+  "Flexible myCSS Health Account for wellness contributions",
+  "Reliable service from a major insurer",
+  "Good range of supplementary options"
+];
+
+const cssCons = [
+  "Gym/fitness contributions generally lower than Swica's top offering",
+  "English support good but Swica often has the edge in proactive service for expats"
+];
+
+const faqs = [
+  {
+    question: "Is Swica's Optima plan worth the extra cost for its fitness benefits?",
+    answer: "If you actively use gym memberships or engage in paid fitness activities, the up to CHF 800 contribution from Optima can significantly offset the plan's cost, making it excellent value."
+  },
+  {
+    question: "How does the CSS Health Account compare to Swica's direct fitness contributions?",
+    answer: "The CSS Health Account offers more flexibility in what it covers (various wellness activities), while Swica's Optima offers a potentially higher direct sum specifically for fitness/gym. The better option depends on how you plan to use the benefits."
+  },
+  {
+    question: "Which insurer has better coverage for sports injuries?",
+    answer: "Both can offer good coverage through appropriate supplementary plans (accident insurance, plus specific hospital or treatment riders). The specifics would need to be compared based on the types of sports and potential risks."
+  },
+  {
+    question: "For an expat focused on premium service, is Swica the clear winner?",
+    answer: "Swica consistently scores higher in customer satisfaction and is renowned for its English service, often making it a preferred choice for those prioritizing a premium service experience."
+  },
+  {
+    question: "How can Expat Savvy help me compare Swica and CSS for my active lifestyle?",
+    answer: "Expat Savvy can analyze your specific fitness habits, healthcare priorities, and budget to compare relevant plans from Swica, CSS, and others. We help you understand which provider offers the best overall value and benefits to support your active expat life in Switzerland."
+  }
+];
+--- 
+
+<Layout
+  title="Swica vs. CSS: Premium Offerings & Active Lifestyle Benefits for Expats (2025) | Expat Savvy"
+  description="Compare Swica and CSS health insurance for expats in Switzerland. Expert analysis of premium offerings and active lifestyle benefits to help you decide."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Swica vs. CSS: Premium Offerings & Active Lifestyle Benefits for Expats (2025)",
+    "description": "Compare Swica and CSS health insurance for expats in Switzerland. Expert analysis of premium offerings and active lifestyle benefits to help you decide.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "author": {
+      "@type": "Person",
+      "name": "Benjamin Amos Wagner",
+      "url": "https://expat-savvy.ch/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://expat-savvy.ch/compare-providers/swica-vs-css"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Swica's Optima plan worth the extra cost for its fitness benefits?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you actively use gym memberships or engage in paid fitness activities, the up to CHF 800 contribution from Optima can significantly offset the plan's cost, making it excellent value."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the CSS Health Account compare to Swica's direct fitness contributions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The CSS Health Account offers more flexibility in what it covers (various wellness activities), while Swica's Optima offers a potentially higher direct sum specifically for fitness/gym. The better option depends on how you plan to use the benefits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which insurer has better coverage for sports injuries?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both can offer good coverage through appropriate supplementary plans (accident insurance, plus specific hospital or treatment riders). The specifics would need to be compared based on the types of sports and potential risks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "For an expat focused on premium service, is Swica the clear winner?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Swica consistently scores higher in customer satisfaction and is renowned for its English service, often making it a preferred choice for those prioritizing a premium service experience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can Expat Savvy help me compare Swica and CSS for my active lifestyle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Expat Savvy can analyze your specific fitness habits, healthcare priorities, and budget to compare relevant plans from Swica, CSS, and others. We help you understand which provider offers the best overall value and benefits to support your active expat life in Switzerland."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare Providers",
+        "item": "https://expat-savvy.ch/compare-providers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Swica vs. CSS",
+        "item": "https://expat-savvy.ch/compare-providers/swica-vs-css"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white">
+    <div class="absolute inset-0">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+      <!-- Left Side - Main Heading -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+        <div class="max-w-lg mx-auto lg:max-w-none">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Swica vs. CSS:<br>
+            <span class="text-primary-600">Premium Offerings & Active Lifestyle Benefits</span>
+          </h1>
+          <p class="mt-6 text-xl text-gray-500">
+            For expats in Switzerland who lead an active lifestyle or prioritize premium service and comprehensive benefits, Swica and CSS are often key contenders. Our comparison helps you navigate their offerings to find the best fit for your needs.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Get Personalized Advice
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+            <a 
+              href="/compare-providers"
+              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back to Comparison Hub
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side - Quick Links -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+        <div class="max-w-lg mx-auto">
+          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
+          <div class="mt-8 space-y-6">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
+                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Swica and CSS.</p>
+                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  Jump to comparison table
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
+                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
+                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  View pros and cons
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Common Questions</h3>
+                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
+                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  See all FAQs
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <p class="lead text-xl text-gray-600">
+          For expats in Switzerland who lead an active lifestyle or prioritize premium service and comprehensive benefits, Swica and CSS are often key contenders in the health insurance market. Both are major insurers with strong reputations, but they cater to these priorities in slightly different ways. This comparison will focus on their premium offerings, customer service, and benefits for active individuals to help you choose.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table Section -->
+  <div id="comparison-table" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Swica vs. CSS: At a Glance (Focus on Premium & Active Lifestyle)</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Swica and CSS compare across key criteria important for expats with active lifestyles:</p>
+      </div>
+
+      <div class="overflow-x-auto shadow-xl rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200 bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Feature
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
+                Swica
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                CSS
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {tableData.map((row, index) => (
+              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.swica}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.css}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Breakdown Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Detailed Breakdown: Swica vs. CSS (Premium & Active Focus)</h2>
+        <p>Let's explore the nuances of how these two insurers stack up, with a special focus on their premium offerings and support for active lifestyles:</p>
+
+        <h3>Premium Offerings & Service Quality</h3>
+        <ul>
+          <li>
+            <strong>Swica:</strong> Often regarded as a premium provider, Swica is known for its excellent customer service, particularly its proactive and helpful English support for expats. While their premiums can be higher, many feel it's justified by the service quality, comprehensive benefits (especially with plans like Optima), and high customer satisfaction ratings.
+          </li>
+          <li>
+            <strong>CSS:</strong> As one of the largest insurers, CSS offers a reliable and comprehensive service. Their customer service is generally good, and they provide solid support for expats. While not always positioned as overtly premium as Swica, their offerings are robust and cater well to those seeking quality and a wide range of options.
+          </li>
+        </ul>
+
+        <h3>Benefits for an Active Lifestyle</h3>
+        <p>
+          This is an area where both insurers offer attractive benefits, appealing to expats who prioritize health and fitness:
+        </p>
+        <ul>
+          <li>
+            <strong>Swica:</strong> Stands out with its Optima supplementary plan, which can contribute up to CHF 800 per year towards gym memberships, fitness classes, and other health promotion activities. They also have good coverage for sports-related medical needs and preventative health.
+          </li>
+          <li>
+            <strong>CSS:</strong> Features the myCSS Health Account, which allows policyholders to receive contributions (often up to CHF 500 per year, depending on the plan combination) for a variety of health and fitness expenses, including gym memberships, swimming pool entries, and more. This provides flexibility in how the wellness budget is used.
+          </li>
+        </ul>
+        <p>
+          While Swica's potential direct contribution for fitness is higher with Optima, CSS's Health Account offers a flexible way to get reimbursed for various wellness activities.
+        </p>
+
+        <h3>Supplementary Coverage for Comprehensive Care</h3>
+        <ul>
+          <li>
+            <strong>International Private Hospital:</strong> Swica's HOSPITA GLOBAL PRIVATE is a top-tier option for worldwide private hospital coverage. CSS also offers good international hospital plans through its myCSS suite, suitable for expats who travel or may seek care abroad.
+          </li>
+          <li>
+            <strong>Alternative Medicine & Prevention:</strong> Both provide good coverage. Swica's Completa Top and Optima plans are strong in these areas. CSS offers similar benefits through its various myCSS supplementary options, including contributions to preventative check-ups via the Health Account.
+          </li>
+        </ul>
+
+        <h3>Digital Experience</h3>
+        <p>
+          Both Swica (mySwica app) and CSS (myCSS app) offer excellent, user-friendly digital platforms for managing policies, submitting claims, and accessing services. This is a significant plus for expats accustomed to digital convenience.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pros and Cons Section -->
+  <div id="pros-cons" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Swica vs. CSS (Premium & Active Expat Focus)</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Swica Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Swica</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {swicaPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {swicaCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CSS Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">CSS</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {cssPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {cssCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Helper Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
+        
+        <ul>
+          <li>
+            <strong>Choose Swica if:</strong> You prioritize the absolute best in English customer service, a leading digital experience, and are looking for the most generous contributions towards an active lifestyle (and are willing to pay a premium for these benefits).
+          </li>
+          <li>
+            <strong>Choose CSS if:</strong> You want a strong, reliable insurer with a great digital platform and a flexible way to get contributions for your health and fitness activities through the Health Account, potentially at a slightly more moderate price point than Swica's top-tier plans.
+          </li>
+        </ul>
+        
+        <p>
+          Both are excellent choices for expats seeking quality and benefits that support an active life. The decision may come down to the specific level of wellness contribution you seek and your budget for premium service. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice!
+        </p>
+        
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with Our AI Now!
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div id="faqs" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Swica vs. CSS (Premium & Active Focus)</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Your Next Step with Expat Savvy
+        </h2>
+        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
+          For expats prioritizing premium service and benefits for an active lifestyle, both Swica and CSS offer compelling options. Expat Savvy is here to help you navigate the details.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with AI for Instant Answers
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation
+          </button>
+        </div>
+        
+        <div class="mt-6">
+          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
+            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Main Comparison Hub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout> 
