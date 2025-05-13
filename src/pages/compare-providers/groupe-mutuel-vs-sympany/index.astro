@@ -1,0 +1,621 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+// Define comparison data
+const tableData = [
+  {
+    feature: "Basic Insurance Models Offered",
+    groupeMutuel: "Standard, Telmed (PrimaTel), HMO (PrimaCare), GP (médecin de famille), Flex (PrimaFlex)",
+    sympany: "Standard, Telmed (CallDoc), HMO (Casamed HMO), GP (Casamed Hausarzt), Flex (Flexhelp24)"
+  },
+  {
+    feature: "Typical Basic Premium Range",
+    groupeMutuel: "Low to Moderate",
+    sympany: "Low to Moderate"
+  },
+  {
+    feature: "Supplementary: Alternative Medicine",
+    groupeMutuel: "Available (e.g., Global Solution)",
+    sympany: "Available (e.g., Plus, Premium)"
+  },
+  {
+    feature: "Supplementary: Check-ups & Prevention",
+    groupeMutuel: "Contributions via supplementary plans",
+    sympany: "Contributions via supplementary plans (e.g., Premium)"
+  },
+  {
+    feature: "Supplementary: Intl. Private Hospital",
+    groupeMutuel: "Available (e.g., H-Global, H-Privé)",
+    sympany: "Available (e.g., Hospital Private World)"
+  },
+  {
+    feature: "Supplementary: Dental Insurance",
+    groupeMutuel: "Available (Dentaire Plus)",
+    sympany: "Available (Dental)"
+  },
+  {
+    feature: "Supplementary: Gym & Health Promotion",
+    groupeMutuel: "Contributions via some supplementary plans",
+    sympany: "Contributions via some supplementary plans (e.g., Premium)"
+  },
+  {
+    feature: "Handling Pre-existing Conditions (Suppl.)",
+    groupeMutuel: "Health questionnaire; potential exclusions/loading",
+    sympany: "Health questionnaire; potential exclusions/loading"
+  },
+  {
+    feature: "Expat-Friendliness: English Support",
+    groupeMutuel: "Improving; English website, some English-speaking support",
+    sympany: "Good; English website, documents, and customer service often available"
+  },
+  {
+    feature: "Expat-Friendliness: Onboarding Support",
+    groupeMutuel: "Standard support",
+    sympany: "Good, clear information and straightforward processes"
+  },
+  {
+    feature: "Customer Satisfaction (e.g., Comparis)",
+    groupeMutuel: "Mixed; improving (e.g., 4.8/6)",
+    sympany: "Generally good, often praised for value (e.g., 5.0/6)"
+  },
+  {
+    feature: "Digital Services (App/Portal Quality)",
+    groupeMutuel: "Good (GMapp & portal)",
+    sympany: "Good (mySympany app & portal)"
+  },
+  {
+    feature: "Claims Processing (Ease/Speed Summary)",
+    groupeMutuel: "Standard; digital options improving",
+    sympany: "Efficient, good digital submission options"
+  }
+];
+
+const groupeMutuelPros = [
+  "Wide variety of basic insurance models including flexible options",
+  "Competitive basic premiums",
+  "Broad range of supplementary plans",
+  "Improving digital tools and English support"
+];
+
+const groupeMutuelCons = [
+  "Customer satisfaction historically not as high as some competitors (though improving)",
+  "English support may not be as consistently deep as Sympany's"
+];
+
+const sympanyPros = [
+  "Competitive premiums with a focus on value",
+  "Straightforward and easy-to-understand plan structures",
+  "Good English language support and resources",
+  "Good digital platform"
+];
+
+const sympanyCons = [
+  "Range of supplementary plans, while good, might be perceived as less extensive than Groupe Mutuel's in some niche areas",
+  "Not as large an insurer as Groupe Mutuel"
+];
+
+const faqs = [
+  {
+    question: "Which insurer is generally cheaper, Groupe Mutuel or Sympany?",
+    answer: "Both are known for competitive basic premiums. The cheapest option will depend on your specific profile (age, canton, deductible) and chosen model. It's essential to compare personalized quotes."
+  },
+  {
+    question: "How does their English customer service compare for expats?",
+    answer: "Sympany generally has a stronger reputation for consistent and readily available English customer service and documentation."
+  },
+  {
+    question: "Are their flexible insurance models (PrimaFlex and Flexhelp24) good for expats?",
+    answer: "These models can offer significant premium savings but usually come with restrictions, such as needing to contact a telemedicine service first or using a specific network. They can be good for expats who are comfortable with these conditions and prioritize lower costs."
+  },
+  {
+    question: "Which provider offers more comprehensive supplementary insurance?",
+    answer: "Groupe Mutuel has a very extensive list of supplementary plans. Sympany's offerings are also good and often more simply packaged. The \"better\" option depends on whether you prefer a wide array of individual choices or more bundled solutions."
+  },
+  {
+    question: "How can Expat Savvy help me choose between Groupe Mutuel and Sympany?",
+    answer: "Expat Savvy provides unbiased comparisons of specific plans from Groupe Mutuel, Sympany, and other insurers, tailored to your expat profile. We help you understand the differences in their model restrictions, supplementary benefits, and service levels, ensuring you choose the insurer that best fits your needs and budget in Switzerland."
+  }
+];
+--- 
+
+<Layout
+  title="Groupe Mutuel vs. Sympany: Value and Model Diversity for Expats (2025) | Expat Savvy"
+  description="Compare Groupe Mutuel and Sympany health insurance for expats in Switzerland. Expert analysis of value and model diversity to help you choose the right provider."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Groupe Mutuel vs. Sympany: Value and Model Diversity for Expats (2025)",
+    "description": "Compare Groupe Mutuel and Sympany health insurance for expats in Switzerland. Expert analysis of value and model diversity to help you choose the right provider.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "author": {
+      "@type": "Person",
+      "name": "Benjamin Amos Wagner",
+      "url": "https://expat-savvy.ch/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://expat-savvy.ch/compare-providers/groupe-mutuel-vs-sympany"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which insurer is generally cheaper, Groupe Mutuel or Sympany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both are known for competitive basic premiums. The cheapest option will depend on your specific profile (age, canton, deductible) and chosen model. It's essential to compare personalized quotes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does their English customer service compare for expats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sympany generally has a stronger reputation for consistent and readily available English customer service and documentation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are their flexible insurance models (PrimaFlex and Flexhelp24) good for expats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "These models can offer significant premium savings but usually come with restrictions, such as needing to contact a telemedicine service first or using a specific network. They can be good for expats who are comfortable with these conditions and prioritize lower costs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which provider offers more comprehensive supplementary insurance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Groupe Mutuel has a very extensive list of supplementary plans. Sympany's offerings are also good and often more simply packaged. The \"better\" option depends on whether you prefer a wide array of individual choices or more bundled solutions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can Expat Savvy help me choose between Groupe Mutuel and Sympany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Expat Savvy provides unbiased comparisons of specific plans from Groupe Mutuel, Sympany, and other insurers, tailored to your expat profile. We help you understand the differences in their model restrictions, supplementary benefits, and service levels, ensuring you choose the insurer that best fits your needs and budget in Switzerland."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare Providers",
+        "item": "https://expat-savvy.ch/compare-providers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Groupe Mutuel vs. Sympany",
+        "item": "https://expat-savvy.ch/compare-providers/groupe-mutuel-vs-sympany"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white">
+    <div class="absolute inset-0">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+      <!-- Left Side - Main Heading -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+        <div class="max-w-lg mx-auto lg:max-w-none">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Groupe Mutuel vs. Sympany:<br>
+            <span class="text-primary-600">Value and Model Diversity for Expats</span>
+          </h1>
+          <p class="mt-6 text-xl text-gray-500">
+            For expatriates in Switzerland seeking value for money and a diverse range of basic insurance models, Groupe Mutuel and Sympany offer compelling options. Our comparison helps you navigate their offerings.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Get Personalized Advice
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+            <a 
+              href="/compare-providers"
+              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back to Comparison Hub
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side - Quick Links -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+        <div class="max-w-lg mx-auto">
+          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
+          <div class="mt-8 space-y-6">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
+                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Groupe Mutuel and Sympany.</p>
+                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  Jump to comparison table
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
+                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
+                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  View pros and cons
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Common Questions</h3>
+                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
+                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  See all FAQs
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <p class="lead text-xl text-gray-600">
+          For expatriates in Switzerland seeking value for money and a diverse range of basic insurance models, Groupe Mutuel and Sympany often appear as compelling options. Groupe Mutuel is a large insurer known for its varied offerings and competitive pricing, while Sympany positions itself with straightforward, often budget-friendly plans. This comparison will analyze their services to help expats determine which provider might better suit their needs.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table Section -->
+  <div id="comparison-table" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Groupe Mutuel vs. Sympany: At a Glance</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Groupe Mutuel and Sympany compare across key criteria important for expats:</p>
+      </div>
+
+      <div class="overflow-x-auto shadow-xl rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200 bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Feature
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
+                Groupe Mutuel
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Sympany
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {tableData.map((row, index) => (
+              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.groupeMutuel}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.sympany}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Breakdown Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Detailed Breakdown: Groupe Mutuel vs. Sympany</h2>
+        <p>Let's explore the nuances of how these two insurers stack up for expats seeking value and diverse insurance options:</p>
+
+        <h3>Basic Insurance Models & Premiums</h3>
+        <p>
+          Both Groupe Mutuel and Sympany are strong contenders for expats looking for competitive premiums and a variety of basic insurance models. Both offer Standard, Telmed, HMO, and GP models. Additionally, both provide flexible or restricted choice models (Groupe Mutuel's PrimaFlex, Sympany's Flexhelp24) which can offer further savings by guiding policyholders to specific networks or requiring telemedicine contact first for certain situations. This diversity allows expats to tailor their basic coverage to their budget and healthcare access preferences.
+        </p>
+
+        <h3>Supplementary Showdown: Coverage Highlights</h3>
+        <ul>
+          <li>
+            <strong>Groupe Mutuel:</strong> Offers a broad array of supplementary plans under its "Global" branding, covering areas like alternative medicine, dental care (Dentaire Plus), and various levels of hospital coverage including international options (H-Global). They aim to provide a comprehensive suite to complement their basic plans.
+          </li>
+          <li>
+            <strong>Sympany:</strong> Also provides a good range of supplementary options, often bundled into straightforward packages like "Plus" and "Premium." These can cover alternative medicine, health promotion contributions, dental care, and hospital upgrades, including international private hospital coverage. Sympany's approach often emphasizes clarity and ease of understanding.
+          </li>
+        </ul>
+        <p>
+          While both offer similar types of supplementary coverage, the structure and specific benefits within these plans will need careful comparison based on individual needs.
+        </p>
+
+        <h3>Pre-existing Conditions: What Expats Need to Know</h3>
+        <p>
+          For mandatory basic insurance, acceptance is guaranteed by both. For supplementary insurance, both will require a health questionnaire. Based on the responses, waiting periods, premium loadings, or exclusions for specific conditions may apply. It's crucial to provide accurate health information to both insurers.
+        </p>
+
+        <h3>Expat Experience: Language, Support & Digital Tools</h3>
+        <ul>
+          <li>
+            <strong>English Language Support:</strong> Sympany generally has a good reputation for providing English language support, with an English website, clear documentation in English, and accessible English-speaking customer service. Groupe Mutuel has been improving its English resources, including an English website and some English-speaking support, but Sympany often feels more consistently geared towards English-speaking expats.
+          </li>
+          <li>
+            <strong>Digital Platforms:</strong> Both insurers offer good digital tools. Groupe Mutuel has its GMapp and online portal, while Sympany provides the mySympany app and portal. Both allow for claims submission, policy management, and access to information, catering to expats who prefer digital interaction.
+          </li>
+        </ul>
+
+        <h3>Customer Voice & Claims</h3>
+        <p>
+          Sympany generally receives good customer satisfaction ratings, often praised for its value for money and straightforward approach. Groupe Mutuel's satisfaction ratings have been more mixed historically but have shown improvement. Both providers offer reasonably efficient claims processing, with good digital submission options available.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pros and Cons Section -->
+  <div id="pros-cons" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Groupe Mutuel vs. Sympany for Expats</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Groupe Mutuel Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Groupe Mutuel</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {groupeMutuelPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {groupeMutuelCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sympany Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Sympany</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {sympanyPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {sympanyCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Helper Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
+        
+        <ul>
+          <li>
+            <strong>Choose Groupe Mutuel if:</strong> You want a wide selection of basic insurance models from a large insurer, including flexible options, and are looking for a broad choice of supplementary plans to customize your coverage. You are comfortable with improving, rather than top-tier, English support.
+          </li>
+          <li>
+            <strong>Choose Sympany if:</strong> You prioritize clear, straightforward insurance products with competitive premiums and good English language support. You value a good digital experience and a provider known for good value.
+          </li>
+        </ul>
+        
+        <p>
+          Both offer strong value propositions for expats. The choice may depend on your preference for plan structure, the depth of specific supplementary coverage needed, and the consistency of English support. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice!
+        </p>
+        
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with Our AI Now!
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div id="faqs" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Groupe Mutuel vs. Sympany</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Your Next Step with Expat Savvy
+        </h2>
+        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
+          For expats seeking value and model diversity, both Groupe Mutuel and Sympany present strong cases. Expat Savvy is here to help you navigate their offerings.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with AI for Instant Answers
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation
+          </button>
+        </div>
+        
+        <div class="mt-6">
+          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
+            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Main Comparison Hub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout> 
