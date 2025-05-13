@@ -9,36 +9,43 @@ const cityGuides = [
   {
     name: "Zurich",
     url: "/news/regional-guides/zurich",
+    insuranceUrl: "/news/regional-guides/zurich-insurance",
     description: "Switzerland's bustling financial heart and a global center for innovation, offering a dynamic urban lifestyle."
   },
   {
     name: "Geneva",
     url: "/news/regional-guides/geneva",
+    insuranceUrl: "/news/regional-guides/geneva-insurance",
     description: "A truly international city, home to numerous global organizations and known for its diplomatic and banking sectors."
   },
   {
     name: "Basel",
     url: "/news/regional-guides/basel",
+    insuranceUrl: "/news/regional-guides/basel-insurance",
     description: "A vibrant cultural hub, renowned for its art scene, pharmaceutical industry, and unique position at the border of three countries."
   },
   {
     name: "Bern",
     url: "/news/regional-guides/bern",
+    insuranceUrl: "/news/regional-guides/bern-insurance",
     description: "The picturesque capital of Switzerland, offering a relaxed atmosphere, rich history, and stunning medieval architecture."
   },
   {
     name: "Lausanne",
     url: "/news/regional-guides/lausanne",
+    insuranceUrl: "/news/regional-guides/lausanne-insurance",
     description: "Home to the Olympic movement, this lively city on Lake Geneva is known for its educational institutions and vibrant culture."
   },
   {
     name: "Zug",
     url: "/news/regional-guides/zug",
+    insuranceUrl: "/news/regional-guides/zug-insurance",
     description: "A prosperous canton famous for its business-friendly environment, low tax rates, and beautiful lakeside setting."
   },
   {
     name: "Lugano",
     url: "/news/regional-guides/lugano",
+    insuranceUrl: "/news/regional-guides/lugano-insurance",
     description: "The largest city in the Italian-speaking canton of Ticino, offering a unique blend of Swiss efficiency and Mediterranean lifestyle."
   }
 ];
@@ -284,24 +291,30 @@ const factors = [
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {cityGuides.map((city) => (
-          <a href={city.url} class="group">
-            <div class="bg-white rounded-xl p-6 transition-all duration-300 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] hover:shadow-[12px_12px_20px_#d1d1d1,-12px_-12px_20px_#ffffff] border border-gray-100">
-              <div class="flex flex-col h-full">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                  {city.name}
-                </h3>
-                <p class="text-gray-600 flex-grow text-lg">
-                  {city.description}
-                </p>
-                <div class="mt-4 text-primary-600 font-medium flex items-center">
-                  Read the guide
+          <div class="bg-white rounded-xl p-6 transition-all duration-300 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] hover:shadow-[12px_12px_20px_#d1d1d1,-12px_-12px_20px_#ffffff] border border-gray-100">
+            <div class="flex flex-col h-full">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-3">
+                {city.name}
+              </h3>
+              <p class="text-gray-600 flex-grow text-lg">
+                {city.description}
+              </p>
+              <div class="mt-4 flex flex-col gap-2">
+                <a href={city.url} class="text-primary-600 font-medium flex items-center hover:underline">
+                  City Guide
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
-                </div>
+                </a>
+                <a href={city.insuranceUrl} class="text-primary-600 font-medium flex items-center hover:underline">
+                  Insurance Guide
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
               </div>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>

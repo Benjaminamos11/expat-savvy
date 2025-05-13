@@ -1,0 +1,1277 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "News & Guides", href: "/news" },
+  { name: "Regional Guides", href: "/news/regional-guides" },
+  { name: "Basel Insurance Guide", href: "/news/regional-guides/basel-insurance" }
+];
+
+const quickStats = [
+  { label: "Population", value: "175,000+" },
+  { label: "Expats", value: "36%" },
+  { label: "Located at", value: "3 Country Border" },
+  { label: "Insurance Premium Region", value: "2" }
+];
+
+const insuranceTypes = [
+  {
+    id: "health-insurance",
+    title: "Health Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>`
+  },
+  {
+    id: "liability-insurance",
+    title: "Private Liability Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+  },
+  {
+    id: "household-insurance",
+    title: "Household Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>`
+  },
+  {
+    id: "legal-insurance",
+    title: "Legal Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>`
+  },
+  {
+    id: "3rd-pillar",
+    title: "3rd Pillar",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>`
+  }
+];
+
+const healthFAQs = [
+  {
+    question: "How much does health insurance cost in Basel?",
+    answer: "Health insurance premiums in Basel typically range from CHF 275-450 per month for adults, depending on the model and deductible chosen. Basel generally has slightly lower premiums than Zurich but higher than many other Swiss cantons."
+  },
+  {
+    question: "Are there special considerations for cross-border workers in Basel?",
+    answer: "Yes, cross-border workers (Grenzgänger) often have a choice (droit d'option) to be insured in Switzerland or their country of residence (France or Germany). This decision should be made carefully, considering factors like family situation and healthcare access preferences."
+  },
+  {
+    question: "Can I easily find English-speaking doctors in Basel?",
+    answer: "Yes, Basel has many English-speaking doctors and specialists. The city's international character, particularly due to the pharmaceutical industry, means that English is widely spoken in healthcare settings."
+  },
+  {
+    question: "What are the best health insurance options for families in Basel?",
+    answer: "For families in Basel, insurers like Concordia, Helsana, and Swica offer competitive family packages. Consider factors like pediatric coverage, maternity benefits, and family discounts when choosing."
+  }
+];
+
+const pillarFAQs = [
+  {
+    question: "How much can I save on taxes with Pillar 3a in Basel?",
+    answer: "The amount saved depends on your income, marginal tax rate in Basel-Stadt or Basel-Landschaft, and the amount contributed. For example, with a CHF 7,056 annual contribution, tax savings could be around CHF 1,700-2,000 depending on your income bracket."
+  },
+  {
+    question: "What are the best 3a account options in Basel?",
+    answer: "Bank 3a accounts with investment funds (e.g., VIAC, Finpension) are popular for their flexibility and potential returns. Insurance 3a products combine saving with risk coverage. The best option depends on your individual risk profile and needs."
+  },
+  {
+    question: "Are there specific 3rd pillar considerations for cross-border workers in Basel?",
+    answer: "Yes, the tax treatment of 3rd pillar contributions and benefits for Grenzgänger can be complex and depends on bilateral tax agreements. Professional advice is highly recommended for cross-border workers."
+  }
+];
+---
+
+<Layout
+  title="Basel Insurance Guide 2025 | Health, Liability & 3rd Pillar in English"
+  description="Your essential Basel insurance guide in English. Discover health (KVG), liability, household, legal, and 3rd pillar (3a/3b) options in Basel. Get local tips & advice from Expat Savvy."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Navigating Insurance in Basel: Your Complete English Guide",
+      "description": "Your essential Basel insurance guide in English. Discover health (KVG), liability, household, legal, and 3rd pillar (3a/3b) options in Basel. Get local tips & advice from Expat Savvy.",
+      "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740599993/vincent-ghilione-z54zUmYA9f8-unsplash_c9aip7.webp",
+      "datePublished": "2025-05-13",
+      "dateModified": "2025-05-13",
+      "author": {
+        "@type": "Organization",
+        "name": "Expat Savvy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+        }
+      },
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much does health insurance cost in Basel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Health insurance premiums in Basel typically range from CHF 275-450 per month for adults, depending on the model and deductible chosen. Basel generally has slightly lower premiums than Zurich but higher than many other Swiss cantons."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there special considerations for cross-border workers in Basel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, cross-border workers (Grenzgänger) often have a choice (droit d'option) to be insured in Switzerland or their country of residence (France or Germany). This decision should be made carefully, considering factors like family situation and healthcare access preferences."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-4">
+        {breadcrumbs.map((item, index) => (
+          <li class="flex items-center">
+            {index > 0 && (
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            )}
+            <a
+              href={item.href}
+              class={`ml-4 text-sm font-medium ${
+                index === breadcrumbs.length - 1
+                  ? 'text-gray-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740599993/vincent-ghilione-z54zUmYA9f8-unsplash_c9aip7.webp"
+        alt="Basel cityscape with Rhine river"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Navigating Insurance in Basel</span>
+          <span class="block mt-2">Your Complete <span class="text-primary-500">English Guide</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Everything you need to know about health, liability, household insurance and more in Basel, Switzerland's cultural capital at the intersection of three countries.
+        </p>
+        
+        <!-- Quick Stats -->
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {quickStats.map(stat => (
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <dt class="text-gray-300 text-sm">{stat.label}</dt>
+              <dd class="text-white font-bold text-xl">{stat.value}</dd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="bg-white py-8 border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center space-x-4 overflow-x-auto">
+        {insuranceTypes.map(item => (
+          <a 
+            href={`#${item.id}`}
+            class="text-sm text-gray-600 hover:text-primary-600 whitespace-nowrap py-2"
+          >
+            {item.title}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div id="introduction" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="prose prose-lg">
+          <p>
+            Welcome to Basel, Switzerland's cultural capital! Renowned as a major life sciences hub and uniquely positioned at the borders of France and Germany, Basel offers a rich and international living experience. To make the most of your time here, understanding the Swiss insurance system, with its specific nuances for Basel – including considerations for cross-border workers (Grenzgänger) – is essential.
+          </p>
+          <p>
+            Whether you are settling in Basel-Stadt or Basel-Landschaft, or perhaps commuting from a neighboring country, grasping your insurance obligations and options for health, liability, household, and pension planning is key. We aim to demystify these topics for you.
+          </p>
+          
+          <div class="bg-primary-50 border-l-4 border-primary-500 p-5 my-8 rounded-lg">
+            <p class="text-primary-800 m-0">
+              <strong>New to Basel and have quick insurance questions?</strong> <a href="/ai-chat" class="text-primary-600 font-medium hover:underline">Chat with our AI Insurance Assistant</a> for instant answers! For more personalized guidance, <a href="/free-consultation" class="text-primary-600 font-medium hover:underline">Schedule a Free Consultation</a> today!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Type Navigation Cards -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Essential Insurance Types in Basel</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {insuranceTypes.map((type) => (
+          <a href={`#${type.id}`} class="group">
+            <div class="bg-white rounded-xl p-6 h-full transition-all duration-300 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] hover:shadow-[12px_12px_20px_#d1d1d1,-12px_-12px_20px_#ffffff] border border-gray-100">
+              <div class="text-primary-500 mb-4 flex-shrink-0">
+                <Fragment set:html={type.icon} />
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                {type.title}
+              </h3>
+              <div class="mt-4 text-primary-600 font-medium flex items-center">
+                Learn more
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Insurance Section -->
+  <div id="health-insurance" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Health Insurance in Basel
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Navigate Basel's healthcare system with mandatory KVG/LAMal insurance and optional supplementary coverage.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Basic health insurance (KVG/LAMal) is mandatory for all residents in Switzerland, including those in Basel-Stadt and Basel-Landschaft. A crucial aspect for Basel is understanding the rules for <strong>cross-border commuters (Grenzgänger)</strong>, who may have options to be insured in their country of residence or in Switzerland.
+          </p>
+          <p>
+            Choosing the right insurance model (Standard, HMO, Telmed, Flexcare/PharMed) is also important. Basel, like other cantons, has specific premium regions that influence costs.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Healthcare Providers</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Popular Providers in Basel</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>Sympany:</strong> Basel-based insurer with strong local presence</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>Helsana:</strong> Large provider with comprehensive coverage</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>CSS:</strong> Extensive network in Basel region</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Healthcare Facilities</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">University Hospital Basel</h4>
+                    <p class="text-sm text-gray-500">Major hospital with all specialties and emergency services</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Children's Hospital</h4>
+                    <p class="text-sm text-gray-500">Specialized pediatric care (Universitäts-Kinderspital beider Basel)</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Merian Iselin Klinik</h4>
+                    <p class="text-sm text-gray-500">Private hospital with specialized surgeries and treatments</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Popular Supplementary Options</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Alternative Medicine</h4>
+                    <p class="text-sm text-gray-500">Popular in Basel with many practitioners available</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Cross-Border Care</h4>
+                    <p class="text-sm text-gray-500">Essential for Grenzgänger working in Basel</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Health Insurance FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Health Insurance in Basel</h3>
+          <div class="space-y-6">
+            {healthFAQs.map(faq => (
+              <div>
+                <h4 class="font-medium text-gray-900 mb-2">{faq.question}</h4>
+                <p class="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/blog/decoding-swiss-health-insurance-canton-region-premium" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about health insurance premium regions
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Private Liability Insurance Section -->
+  <div id="liability-insurance" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Private Liability Insurance in Basel
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Protect yourself from financial consequences if you accidentally damage property or injure others.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Private liability insurance is strongly recommended in Basel. It covers costs if you accidentally cause injury to someone or damage their property. In a densely populated city, and with many people cycling, the risk of such incidents can be higher.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Coverage & Scope</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">What's Typically Covered</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Damage to your rented apartment in Basel</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Injuries caused to third parties, including cycling accidents</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Damage to others' property, including expensive items</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Top Providers in Basel</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">AXA</h4>
+                    <p class="text-sm text-gray-500">Comprehensive coverage options</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Allianz</h4>
+                    <p class="text-sm text-gray-500">Strong international presence</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Baloise</h4>
+                    <p class="text-sm text-gray-500">Local Basel-based insurer</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Generali</h4>
+                    <p class="text-sm text-gray-500">Competitive rates for expats</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">What You Should Know</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Required for Rentals</h4>
+                    <p class="text-sm text-gray-500">Most Basel landlords require proof of liability insurance</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Coverage Amount</h4>
+                    <p class="text-sm text-gray-500">CHF 5 million is generally recommended in Basel</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Liability FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Private Liability Insurance</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Is liability insurance required to rent an apartment in Basel?</h4>
+              <p class="text-gray-600">Most landlords and rental agencies in Basel will require proof of private liability insurance before finalizing a rental contract.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Does my Basel liability insurance cover me if I travel to neighboring Germany or France?</h4>
+              <p class="text-gray-600">Yes, Swiss private liability insurance typically provides worldwide coverage, including short trips to neighboring countries.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">What are the typical costs for private liability insurance in Basel?</h4>
+              <p class="text-gray-600">Annual premiums for a family are usually in the range of CHF 100-250, depending on the provider and coverage.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/insurance/personal-liability-insurance" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about private liability insurance
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Household Insurance Section -->
+  <div id="household-insurance" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Household Insurance in Basel
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Protect your belongings against theft, fire, water damage, and other risks in your Basel home.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Household insurance (Hausratversicherung) covers the contents of your home – furniture, electronics, clothing, and other possessions – against risks like fire, water damage, and theft. For Basel residents, this is an essential protection, especially considering the value of the average household's possessions.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Basel-Specific Considerations</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Local Risk Factors</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Rhine flooding risk in certain neighborhoods</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Old plumbing in historic Basel buildings</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Higher theft risks in urban areas compared to rural Switzerland</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Recommended Coverage</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Water Damage</h4>
+                    <p class="text-sm text-gray-500">Essential for apartments in older Basel buildings</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Theft Protection</h4>
+                    <p class="text-sm text-gray-500">Important for urban Basel residents</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Valuable Items</h4>
+                    <p class="text-sm text-gray-500">Special coverage for art, watches, jewelry</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Popular Add-ons in Basel</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Glass Breakage</h4>
+                    <p class="text-sm text-gray-500">For windows and fixtures</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Bicycle Coverage</h4>
+                    <p class="text-sm text-gray-500">Popular in bike-friendly Basel</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Household Insurance FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Household Insurance</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">How do I determine the right coverage amount for my home in Basel?</h4>
+              <p class="text-gray-600">Take an inventory of your possessions, estimating their replacement value. The average Basel household has possessions worth between CHF 50,000 and CHF 100,000, but this varies significantly based on personal circumstances.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Are my valuable items automatically covered?</h4>
+              <p class="text-gray-600">High-value items usually need to be specifically declared. For extensive art collections, watches, or jewelry common in Basel, consider additional specific insurance.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Do I need special coverage if I live near the Rhine?</h4>
+              <p class="text-gray-600">If you live in Kleinbasel or areas near the Rhine that might be susceptible to flooding, discuss this with your insurer to ensure adequate coverage.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/insurance/household-insurance" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about household insurance
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal Insurance Section -->
+  <div id="legal-insurance" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Legal Insurance in Basel
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Protection for legal disputes related to employment, tenancy, and everyday life in Switzerland's border region.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Legal protection insurance (Rechtsschutzversicherung) is particularly valuable in Basel due to the region's unique position at the intersection of three countries. It covers legal fees, court costs, and expert opinions in case of disputes or legal issues.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Coverage Types</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">What Legal Insurance Covers</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Cross-border employment disputes (crucial for Grenzgänger)</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Rental and tenancy issues in Basel</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Insurance disputes with other insurers</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Consumer protection and purchase disputes</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Cross-Border Considerations</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Multi-Country Coverage</h4>
+                    <p class="text-sm text-gray-500">Important for those working or traveling between Switzerland, France, and Germany</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Language Support</h4>
+                    <p class="text-sm text-gray-500">Look for insurers offering legal support in multiple languages</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Top Legal Insurance Providers</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Protekta (Mobiliar)</h4>
+                    <p class="text-sm text-gray-500">Comprehensive coverage options</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">AXA-ARAG</h4>
+                    <p class="text-sm text-gray-500">Strong multi-country presence</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">CAP</h4>
+                    <p class="text-sm text-gray-500">Focus on expatriate needs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal Insurance FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Legal Insurance</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Does legal insurance cover disputes that began before I purchased the policy?</h4>
+              <p class="text-gray-600">No, most policies have a waiting period (typically 3 months) and won't cover pre-existing issues or disputes that began before the policy was in effect.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Is legal insurance necessary if I'm a cross-border worker in Basel?</h4>
+              <p class="text-gray-600">Yes, it's especially valuable for cross-border workers (Grenzgänger) as employment disputes can involve the legal systems of multiple countries, making them more complex and potentially costly to resolve.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">What types of legal issues are typically not covered by Swiss legal insurance?</h4>
+              <p class="text-gray-600">Most policies exclude intentional criminal offenses, disputes that existed before the policy started, family law matters (divorce, etc.), construction disputes if you're the builder, and certain business-related issues.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/insurance/legal-protection-insurance" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about legal protection insurance
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3rd Pillar Section -->
+  <div id="3rd-pillar" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          3rd Pillar Pensions in Basel
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Secure your financial future with tax-advantaged retirement savings tailored to expats in Basel.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-3xl font-bold text-gray-900">3rd Pillar in Basel</h2>
+                </div>
+              </div>
+              
+              <p class="mt-4 text-gray-600">
+                Building your private pension (3rd pillar) is especially important for expats in Basel, providing flexibility, tax advantages, and additional financial security. Switzerland's 3-pillar pension system offers significant benefits to those working in Basel's pharmaceutical, chemical, and banking sectors.
+              </p>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Key Considerations for Basel Residents</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Basel has many specialized financial advisors with experience helping pharmaceutical and life sciences professionals optimize their pension strategy</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Cross-border considerations are important for those working in Basel but living in France or Germany (Grenzgänger)</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Basel-based banks like UBS and Bank Cler offer English services specifically for expats</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Types of 3rd Pillar Options</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Pillar 3a (Restricted)</h4>
+                    <p class="text-sm text-gray-500">Tax-deductible retirement savings with annual contribution limits (CHF 7,056 for employed individuals in 2024)</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Pillar 3b (Flexible)</h4>
+                    <p class="text-sm text-gray-500">Unrestricted savings without tax deduction benefits but with more flexibility for withdrawals</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Banking Solutions</h4>
+                    <p class="text-sm text-gray-500">Interest-bearing 3a accounts with lower risk but also lower returns</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Securities-Based Solutions</h4>
+                    <p class="text-sm text-gray-500">Investment funds or ETF portfolios with higher potential returns but also higher risk</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Basel-Specific 3rd Pillar Providers</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Traditional Banks</h4>
+                    <p class="text-sm text-gray-500">UBS, Credit Suisse, Basler Kantonalbank (BKB), and Bank Cler offer comprehensive 3a services</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Digital Providers</h4>
+                    <p class="text-sm text-gray-500">VIAC, frankly, and finpension offer low-cost, app-based solutions popular with Basel's tech-savvy expats</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Insurance Solutions</h4>
+                    <p class="text-sm text-gray-500">Swiss Life, AXA, and Helvetia offer combined insurance and 3a options</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3rd Pillar FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: 3rd Pillar in Basel</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">As an expat in Basel, can I withdraw my 3rd pillar if I leave Switzerland?</h4>
+              <p class="text-gray-600">Yes, you can withdraw your 3rd pillar funds when permanently leaving Switzerland. This withdrawal is subject to a separate, often reduced tax rate. Basel-Stadt has specific tax rates for expatriation withdrawals that differ from other cantons.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">What are the tax benefits of 3rd pillar contributions in Basel-Stadt?</h4>
+              <p class="text-gray-600">In Basel-Stadt, 3a contributions can reduce your taxable income, potentially leading to significant tax savings. The progressive tax system in Basel means higher earners (common in the pharmaceutical industry) can benefit particularly from these deductions.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Should I open multiple 3a accounts in Basel?</h4>
+              <p class="text-gray-600">Having multiple 3a accounts can be beneficial for staggered withdrawals, optimizing taxes upon withdrawal. Many Basel-based financial advisors recommend this strategy, particularly for high-income professionals in the life sciences sector.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">As a cross-border worker living in France or Germany, can I still contribute to a Swiss 3rd pillar?</h4>
+              <p class="text-gray-600">Yes, Grenzgänger working in Basel can contribute to a Swiss 3rd pillar if they pay into the Swiss social security system. However, there may be additional tax considerations in your country of residence. Consulting with a tri-national financial advisor is recommended.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6 max-w-3xl mx-auto">
+          <div class="flex justify-center">
+            <a href="/finance/3rd-pillar-pension" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+              <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              Learn more about 3rd pillar pensions
+            </a>
+          </div>
+          
+          <div class="bg-primary-50 border-l-4 border-primary-500 p-5 rounded-lg">
+            <p class="text-primary-800 m-0 font-medium">
+              <strong>Plan for your future.</strong> Visit our main <a href="/insurance/3rd-pillar" class="text-primary-600 hover:underline">3rd Pillar in Switzerland</a> page and our blog on <a href="/blog/bank-vs-insurance-3a" class="text-primary-600 hover:underline">3rd Pillar Bank vs. Insurance Solutions</a>.
+            </p>
+            <div class="mt-3">
+              <a href="/free-consultation" class="inline-flex items-center text-primary-700 font-medium hover:text-primary-800">
+                Build your financial future in Basel. Discover Your 3rd Pillar Options!
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Takeaways and Help Section (Combined Bento Grid) -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Two-column bento grid layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Column 1: Key Takeaways -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Navigating Insurance in Basel: Key Takeaways</h2>
+          
+          <div class="prose prose-lg mb-6">
+            <p>
+              Basel's unique position at the intersection of three countries makes its insurance landscape particularly nuanced. As an expat in Basel, understanding your insurance options is crucial for protecting yourself, your family, and your assets.
+            </p>
+            <p>
+              For cross-border workers (Grenzgänger) commuting from France or Germany, insurance planning becomes even more complex, requiring careful consideration of which country's system will best serve your needs.
+            </p>
+          </div>
+          
+          <!-- Insurance Checklist Box -->
+          <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Basel Insurance Essentials Checklist</h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Health Insurance (KVG/LAMal)</h4>
+                  <p class="text-sm text-gray-600">Mandatory for all Basel residents; cross-border workers have special options</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Private Liability Insurance</h4>
+                  <p class="text-sm text-gray-600">Essential coverage most landlords require; protects against damages to others</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Household Insurance</h4>
+                  <p class="text-sm text-gray-600">Protects your belongings; consider Rhine-related risks and bicycle coverage</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Legal Insurance</h4>
+                  <p class="text-sm text-gray-600">Valuable for employment disputes in Basel's corporate environment</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">3rd Pillar Pension</h4>
+                  <p class="text-sm text-gray-600">Tax-advantaged retirement savings with Basel-specific tax benefits</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: How Expat Savvy Helps -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How Expat Savvy Helps You Navigate Insurance in Basel</h2>
+          
+          <p class="text-lg text-gray-600 mb-6">
+            Understanding the Basel insurance market, especially with its cross-border dimension, requires expertise. Expat Savvy provides clear, English-language guidance to help you:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-50 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+              <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 text-primary-600 mb-4">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Compare Insurance Offers</h3>
+              <p class="text-gray-600 text-sm">
+                Compare offers tailored to your needs in Basel, whether as a resident or a cross-border worker.
+              </p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+              <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 text-primary-600 mb-4">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Understand Policies</h3>
+              <p class="text-gray-600 text-sm">
+                Understand policies, especially if you are a cross-border worker with special considerations.
+              </p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+              <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 text-primary-600 mb-4">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Optimize Coverage</h3>
+              <p class="text-gray-600 text-sm">
+                Optimize your coverage for the best value and security in Basel's unique tri-national environment.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Conclusion Section (Inset Box) -->
+          <div class="bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl p-6 text-center border border-primary-200 shadow-md mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Conclusion: Your Insurance Ally in Basel</h3>
+            <p class="text-gray-800 mb-4">
+              Life in the dynamic and international city of Basel is full of opportunities. Having the right insurance tailored to your specific situation, whether as a resident or a Grenzgänger, is key to enjoying it with peace of mind. Expat Savvy is dedicated to helping English-speaking individuals understand and choose the best insurance solutions in Basel.
+            </p>
+            <p class="text-gray-800 font-medium">
+              Make smart insurance decisions for your Basel journey.
+            </p>
+          </div>
+          
+          <!-- CTA Box -->
+          <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl p-6 text-center text-white shadow-xl">
+            <p class="text-primary-100 mb-4">
+              Our team of experts specializes in helping expats navigate the Swiss insurance system, with particular expertise in Basel's unique cross-border environment.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+              <a href="/ai-chat" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-white text-primary-700 hover:bg-primary-50 transition-colors">
+                Chat with our AI Assistant
+              </a>
+              <a href="/free-consultation" class="inline-flex items-center justify-center px-4 py-2 border border-white text-base font-medium rounded-md text-white hover:bg-primary-500 transition-colors">
+                Book Your Free Consultation
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+</Layout> 

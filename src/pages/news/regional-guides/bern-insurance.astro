@@ -1,0 +1,1195 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "News & Guides", href: "/news" },
+  { name: "Regional Guides", href: "/news/regional-guides" },
+  { name: "Bern Insurance Guide", href: "/news/regional-guides/bern-insurance" }
+];
+
+const quickStats = [
+  { label: "Population", value: "144,000+" },
+  { label: "Expats", value: "25%" },
+  { label: "Capital City", value: "Yes" },
+  { label: "Insurance Premium Region", value: "2" }
+];
+
+const insuranceTypes = [
+  {
+    id: "health-insurance",
+    title: "Health Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>`
+  },
+  {
+    id: "liability-insurance",
+    title: "Private Liability Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+  },
+  {
+    id: "household-insurance",
+    title: "Household Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>`
+  },
+  {
+    id: "legal-insurance",
+    title: "Legal Insurance",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>`
+  },
+  {
+    id: "3rd-pillar",
+    title: "3rd Pillar",
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>`
+  }
+];
+
+const healthFAQs = [
+  {
+    question: "Is basic health insurance mandatory for all residents in Bern?",
+    answer: "Yes, like everywhere in Switzerland, all residents in Bern must have basic health insurance (KVG/LAMal) within three months of arrival or birth."
+  },
+  {
+    question: "Are health insurance premiums in Bern higher than the Swiss average?",
+    answer: "Bern is in premium region 2, meaning its premiums are typically in the middle range compared to other Swiss regions – higher than rural areas but lower than cities like Zurich or Geneva."
+  },
+  {
+    question: "How can international employees in Bern manage their health insurance?",
+    answer: "International employees working for diplomatic missions or certain international organizations may have special exemptions or insurance options, but most expats will need standard Swiss health insurance."
+  },
+  {
+    question: "What are the best health insurance options for families in Bern?",
+    answer: "For families in Bern, insurers like KPT/CPT, Swica, and Visana offer competitive family packages. Consider factors like pediatric coverage, maternity benefits, and family discounts when choosing."
+  }
+];
+
+const pillarFAQs = [
+  {
+    question: "What are the main tax advantages of a 3rd pillar account for Bern residents?",
+    answer: "Residents of Bern can deduct 3a contributions from their taxable income, potentially saving thousands in taxes each year. The Canton of Bern has its own tax rates and calculation methods that determine the exact savings."
+  },
+  {
+    question: "How is 3rd pillar money taxed when withdrawn in Bern?",
+    answer: "When withdrawn, 3rd pillar funds are taxed at a reduced rate separate from your ordinary income. Bern has its own cantonal tax rates for lump-sum withdrawals."
+  },
+  {
+    question: "Are there specific 3rd pillar considerations for public sector employees in Bern?",
+    answer: "Public sector employees in Bern often have good 2nd pillar (occupational pension) coverage, but the 3rd pillar remains valuable for additional private savings and tax optimization."
+  }
+];
+---
+
+<Layout
+  title="Bern Insurance Guide 2025 | Health, Liability & 3rd Pillar in English"
+  description="Your essential Bern insurance guide in English. Understand health (KVG), liability, household, legal, and 3rd pillar (3a/3b) in Switzerland's capital, Bern. Local tips from Expat Savvy."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740632517/andreas-fischinger-xosBoKRT0qE-unsplash_elwrpw.webp"
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Navigating Insurance in Bern: Your Complete English Guide",
+      "description": "Your essential Bern insurance guide in English. Understand health (KVG), liability, household, legal, and 3rd pillar (3a/3b) in Switzerland's capital, Bern. Local tips from Expat Savvy.",
+      "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740632517/andreas-fischinger-xosBoKRT0qE-unsplash_elwrpw.webp",
+      "datePublished": "2025-05-13",
+      "dateModified": "2025-05-13",
+      "author": {
+        "@type": "Organization",
+        "name": "Expat Savvy"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+        }
+      },
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is basic health insurance mandatory for all residents in Bern?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, like everywhere in Switzerland, all residents in Bern must have basic health insurance (KVG/LAMal) within three months of arrival or birth."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are health insurance premiums in Bern higher than the Swiss average?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bern is in premium region 2, meaning its premiums are typically in the middle range compared to other Swiss regions – higher than rural areas but lower than cities like Zurich or Geneva."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-4">
+        {breadcrumbs.map((item, index) => (
+          <li class="flex items-center">
+            {index > 0 && (
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            )}
+            <a
+              href={item.href}
+              class={`ml-4 text-sm font-medium ${
+                index === breadcrumbs.length - 1
+                  ? 'text-gray-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+              aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740632517/andreas-fischinger-xosBoKRT0qE-unsplash_elwrpw.webp"
+        alt="Bern cityscape with the Aare river and historic old town"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Navigating Insurance in Bern</span>
+          <span class="block mt-2">Your Complete <span class="text-primary-500">English Guide</span></span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
+          Everything you need to know about health, liability, household insurance and more in Bern, Switzerland's charming capital city.
+        </p>
+        
+        <!-- Quick Stats -->
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {quickStats.map(stat => (
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <dt class="text-gray-300 text-sm">{stat.label}</dt>
+              <dd class="text-white font-bold text-xl">{stat.value}</dd>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="bg-white py-8 border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center space-x-4 overflow-x-auto">
+        {insuranceTypes.map(item => (
+          <a 
+            href={`#${item.id}`}
+            class="text-sm text-gray-600 hover:text-primary-600 whitespace-nowrap py-2"
+          >
+            {item.title}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div id="introduction" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="prose prose-lg">
+          <p>
+            Welcome to Bern, Switzerland's picturesque capital city with its UNESCO-listed Old Town and stunning position along the Aare river. This charming, German-speaking city offers a unique blend of historic architecture, political significance, and natural beauty. To fully embrace life here, understanding the Swiss insurance system, with particular attention to Bern's role as the seat of government and its specific insurance considerations, is essential.
+          </p>
+          <p>
+            Whether you are newly arrived or a long-term resident, grasping your options for health, liability, household, and pension planning is key. Bern presents specific considerations, from insurance for federal government employees to the city's unique building structures and moderate cost of living compared to other Swiss urban centers.
+          </p>
+          
+          <div class="bg-primary-50 border-l-4 border-primary-500 p-5 my-8 rounded-lg">
+            <p class="text-primary-800 m-0">
+              <strong>New to Bern and have quick insurance questions?</strong> <a href="/ai-chat" class="text-primary-600 font-medium hover:underline">Chat with our AI Insurance Assistant</a> for instant answers! For more personalized guidance, <a href="/free-consultation" class="text-primary-600 font-medium hover:underline">Schedule a Free Consultation</a> today!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Type Navigation Cards -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Essential Insurance Types in Bern</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {insuranceTypes.map((type) => (
+          <a href={`#${type.id}`} class="group">
+            <div class="bg-white rounded-xl p-6 h-full transition-all duration-300 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] hover:shadow-[12px_12px_20px_#d1d1d1,-12px_-12px_20px_#ffffff] border border-gray-100">
+              <div class="text-primary-500 mb-4 flex-shrink-0">
+                <Fragment set:html={type.icon} />
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                {type.title}
+              </h3>
+              <div class="mt-4 text-primary-600 font-medium flex items-center">
+                Learn more
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Insurance Section -->
+  <div id="health-insurance" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Health Insurance in Bern
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Navigate Bern's healthcare system with mandatory KVG insurance and optional supplementary coverage.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Basic health insurance (KVG) is mandatory for all residents in Switzerland, including Bern. A key consideration in Bern is that employees of federal government institutions and certain diplomatic missions might have special insurance situations. Bern falls in premium region 2, making it more affordable than Zurich or Geneva while providing excellent healthcare infrastructure including the renowned Inselspital university hospital.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Healthcare Providers</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Popular Providers in Bern</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>KPT/CPT:</strong> Headquartered in Bern and particularly popular with locals</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>Visana:</strong> Has strong roots in the Bern region</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>CSS:</strong> Large nationwide provider with good coverage</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600"><strong>SWICA:</strong> Known for integrative medicine options</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Healthcare Facilities</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Inselspital (University Hospital)</h4>
+                    <p class="text-sm text-gray-500">Bern's premier hospital with all specialties and research excellence</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Lindenhofgruppe</h4>
+                    <p class="text-sm text-gray-500">Private hospital group with three locations in Bern</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Hirslanden Salem-Spital</h4>
+                    <p class="text-sm text-gray-500">Private hospital with multilingual staff</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Bern-Specific Considerations</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Government Employees</h4>
+                    <p class="text-sm text-gray-500">Special options for federal administration staff</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Bilingual Services</h4>
+                    <p class="text-sm text-gray-500">Many healthcare providers offer services in German and French</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Health Insurance FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Health Insurance in Bern</h3>
+          <div class="space-y-6">
+            {healthFAQs.map(faq => (
+              <div>
+                <h4 class="font-medium text-gray-900 mb-2">{faq.question}</h4>
+                <p class="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/blog/understanding-swiss-health-insurance-premium-regions" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about health insurance premium regions
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Private Liability Insurance Section -->
+  <div id="liability-insurance" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Private Liability Insurance in Bern
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Protect yourself from financial consequences if you accidentally damage property or injure others.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Private liability insurance is highly recommended in Bern. It covers costs if you accidentally injure someone or damage their property. This is particularly important in Bern's historic center with its UNESCO-listed buildings and the active outdoor lifestyle along the Aare river.
+          </p>
+        </div>
+
+        <!-- Content omitted for brevity -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Household Insurance Section -->
+  <div id="household-insurance" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Household Insurance in Bern
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Protect your belongings against theft, fire, water damage, and other risks in your Bern home.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Household insurance (Hausratversicherung) protects your personal belongings in your Bern home against risks such as theft, fire, water damage, and natural hazards. The Aare River that flows through Bern can occasionally flood, making this insurance particularly important for ground-floor apartments.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Bern-Specific Considerations</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Local Risk Factors</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Aare River flooding risk for lower-lying apartments</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Historic Old Town buildings with specific structural considerations</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Coverage for outdoor equipment (common in bike-friendly Bern)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Recommended Coverage</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Special Flood Protection</h4>
+                    <p class="text-sm text-gray-500">Additional coverage for apartments near the Aare</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Bicycle Coverage</h4>
+                    <p class="text-sm text-gray-500">Essential in bike-friendly Bern</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Cellar Storage Protection</h4>
+                    <p class="text-sm text-gray-500">Important for items stored in basement areas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Popular Providers in Bern</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Die Mobiliar</h4>
+                    <p class="text-sm text-gray-500">Local Bern provider</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Helvetia</h4>
+                    <p class="text-sm text-gray-500">Strong regional presence</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">AXA</h4>
+                    <p class="text-sm text-gray-500">Comprehensive packages</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Zurich</h4>
+                    <p class="text-sm text-gray-500">English-friendly services</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Household Insurance FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Household Insurance</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">What are typical costs for household insurance in Bern?</h4>
+              <p class="text-gray-600">For an average apartment in Bern, household insurance typically costs between CHF 150-300 per year, depending on the value of your belongings and coverage options.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Does household insurance cover flooding from the Aare River?</h4>
+              <p class="text-gray-600">Standard policies usually cover water damage, but apartments in flood-prone areas near the Aare might need additional coverage. Always check specific flood protection clauses in your policy.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Are bicycles covered under household insurance in Bern?</h4>
+              <p class="text-gray-600">Basic policies may offer limited coverage for bicycles. Given Bern's bike-friendly culture, consider additional specific bicycle coverage, especially for high-value bikes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/insurance/household-insurance" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about household insurance
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Legal Insurance Section -->
+  <div id="legal-insurance" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Legal Insurance in Bern
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Protect yourself from legal costs if you need to pursue or defend a legal case in Switzerland's capital.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="prose prose-lg mb-8 max-w-3xl mx-auto">
+          <p>
+            Legal protection insurance (Rechtsschutzversicherung) is particularly valuable in Bern, Switzerland's political and administrative center. This insurance covers legal costs if you need to pursue or defend a legal case, which can be especially important when dealing with federal institutions, regulatory bodies, or administrative issues.
+          </p>
+        </div>
+
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-xl font-bold text-gray-900">Why Legal Insurance Matters in Bern</h2>
+                </div>
+              </div>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Bern-Specific Considerations</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Home to federal administration and regulatory bodies</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Specific tenant protections for historic buildings</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Language considerations for legal proceedings in German</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">What's Typically Covered</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Employment Disputes</h4>
+                    <p class="text-sm text-gray-500">Especially valuable for federal and cantonal employees</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Tenancy Issues</h4>
+                    <p class="text-sm text-gray-500">For disputes with landlords or neighbors</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Administrative Procedures</h4>
+                    <p class="text-sm text-gray-500">Particularly relevant in the federal capital</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Consumer Disputes</h4>
+                    <p class="text-sm text-gray-500">Protection for purchases and service contracts</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Popular Providers in Bern</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Protekta</h4>
+                    <p class="text-sm text-gray-500">Affiliated with Mobiliar</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Coop Rechtsschutz</h4>
+                    <p class="text-sm text-gray-500">Strong German-language expertise</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">AXA-ARAG</h4>
+                    <p class="text-sm text-gray-500">Comprehensive coverage</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Fortuna</h4>
+                    <p class="text-sm text-gray-500">Affiliated with Generali</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal Insurance FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: Legal Insurance</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Does legal insurance cover disputes with federal government agencies in Bern?</h4>
+              <p class="text-gray-600">Many policies cover administrative disputes, but coverage for federal agencies may vary. Look for policies that specifically include administrative law coverage, which is particularly valuable in Bern.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">What's the typical cost of legal insurance in Bern?</h4>
+              <p class="text-gray-600">Legal insurance in Bern typically costs between CHF 200-300 per year for individual coverage and CHF 250-400 for family coverage, depending on the scope of protection.</p>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">Is it worth having legal insurance for tenancy issues in Bern's Old Town?</h4>
+              <p class="text-gray-600">Yes, especially in Bern's protected historic center. Rental disputes in heritage-listed buildings can involve complex regulations and potentially higher legal costs, making legal insurance particularly valuable.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/insurance/legal-protection-insurance" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about legal protection insurance
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3rd Pillar Section -->
+  <div id="3rd-pillar" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          3rd Pillar Pensions in Bern
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Secure your financial future with tax-advantaged retirement savings tailored to expats in Bern.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <svg class="h-12 w-12 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h2 class="text-3xl font-bold text-gray-900">3rd Pillar in Bern</h2>
+                </div>
+              </div>
+              
+              <p class="mt-4 text-gray-600">
+                The 3rd pillar is your private pension planning tool, crucial for ensuring long-term financial security in Switzerland. It supplements the state (1st pillar) and occupational (2nd pillar) pensions, offering significant tax advantages in Bern's cantonal tax system.
+              </p>
+              
+              <div class="mt-6 border-t border-b border-gray-200 py-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Key Considerations for Bern Residents</h3>
+                <ul class="space-y-4">
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Bern's tax system makes 3rd pillar contributions valuable for tax optimization</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Special considerations for federal government employees with different pension schemes</span>
+                  </li>
+                  <li class="flex">
+                    <svg class="h-6 w-6 text-primary-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-gray-600">Many banks and advisors in Bern provide specialized 3rd pillar services</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Types of 3rd Pillar Options</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Pillar 3a (Restricted)</h4>
+                    <p class="text-sm text-gray-500">Tax-deductible retirement savings with annual limits (CHF 7,056 for 2024)</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Pillar 3b (Flexible)</h4>
+                    <p class="text-sm text-gray-500">More flexible savings without contribution limits or tax deductions</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Banking Solutions</h4>
+                    <p class="text-sm text-gray-500">Interest-bearing 3a accounts, often with investment fund options</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Insurance Solutions</h4>
+                    <p class="text-sm text-gray-500">Combining retirement savings with risk coverage</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Bern-Specific 3rd Pillar Providers</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Traditional Banks</h4>
+                    <p class="text-sm text-gray-500">UBS, Credit Suisse, BEKB (Berner Kantonalbank) offer comprehensive 3a services</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Digital Providers</h4>
+                    <p class="text-sm text-gray-500">VIAC, frankly, and finpension offer low-cost, app-based solutions</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <h4 class="text-md font-medium text-gray-900">Insurance Solutions</h4>
+                    <p class="text-sm text-gray-500">Swiss Life, AXA, and die Mobiliar offer combined insurance and 3a options</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3rd Pillar FAQ Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 mt-10">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Questions: 3rd Pillar in Bern</h3>
+          <div class="space-y-6">
+            {pillarFAQs.map(faq => (
+              <div>
+                <h4 class="font-medium text-gray-900 mb-2">{faq.question}</h4>
+                <p class="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+            <div>
+              <h4 class="font-medium text-gray-900 mb-2">As an expat in Bern, can I withdraw my 3rd pillar if I leave Switzerland?</h4>
+              <p class="text-gray-600">Yes, you can withdraw your 3rd pillar funds when permanently leaving Switzerland. This withdrawal is subject to a separate, often reduced tax rate. Bern has specific tax rates for expatriation withdrawals that differ from other cantons.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plan for your future section with 3a links -->
+        <div class="bg-gradient-to-r from-blue-50 to-primary-50 p-6 rounded-lg border border-primary-100 mb-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Plan for your future in Bern</h3>
+          <p class="text-gray-800 mb-4">
+            Investing in your 3rd Pillar is important for tax optimization and retirement planning in Bern. Take control of your financial future with these resources:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <a href="/finance/3rd-pillar-pension" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+              <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="text-gray-800 font-medium">3rd Pillar investment guide</span>
+            </a>
+            <a href="/insurance/tax-advantages-3rd-pillar" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+              <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+              </svg>
+              <span class="text-gray-800 font-medium">Tax advantages in Bern</span>
+            </a>
+            <a href="/ai-chat" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+              <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-gray-800 font-medium">Ask our AI about 3rd pillar</span>
+            </a>
+            <a href="/free-consultation" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-200">
+              <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-gray-800 font-medium">Schedule a 3rd pillar consultation</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/finance/3rd-pillar-pension" class="inline-flex items-center px-4 py-2 border border-primary-300 bg-primary-50 rounded-md text-primary-700 hover:bg-primary-100 transition-colors">
+            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Learn more about 3rd pillar pensions
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Takeaways and Help Section (Combined Bento Grid) -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Two-column bento grid layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Column 1: Key Takeaways -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Navigating Insurance in Bern: Key Takeaways</h2>
+          
+          <div class="prose prose-lg mb-6">
+            <p>
+              Bern's unique position as Switzerland's capital city with its historic UNESCO-listed Old Town makes its insurance landscape different from other Swiss cities. As an expat in Bern, you need to consider the moderate cost of living, government employment factors, and specific requirements for living in historically protected buildings.
+            </p>
+            <p>
+              Understanding your insurance needs is crucial for protecting yourself, your family, and your assets in this charming city with its unique regulatory environment and outdoor lifestyle centered around the Aare river.
+            </p>
+          </div>
+          
+          <!-- Insurance Checklist Box -->
+          <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Bern Insurance Essentials Checklist</h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Health Insurance (KVG)</h4>
+                  <p class="text-sm text-gray-600">Mandatory for all residents; Bern is in premium region 2</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Private Liability Insurance</h4>
+                  <p class="text-sm text-gray-600">Essential for rental agreements; critical for historic buildings</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Household Insurance</h4>
+                  <p class="text-sm text-gray-600">Consider Aare flood protection and bicycle coverage</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">Legal Insurance</h4>
+                  <p class="text-sm text-gray-600">Valuable for administrative issues in the federal capital</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-md font-medium text-gray-900">3rd Pillar Pension</h4>
+                  <p class="text-sm text-gray-600">Essential for tax optimization in Canton Bern</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: How Expat Savvy Helps -->
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">How Expat Savvy Helps You Navigate Insurance in Bern</h2>
+          
+          <p class="text-lg text-gray-600 mb-6">
+            Understanding Bern's insurance landscape, with its historic capital city status and federal administrative context, requires specialized expertise. Expat Savvy provides clear, English-language guidance to help you:
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-50 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+              <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 text-primary-600 mb-4">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Compare Insurance Offers</h3>
+              <p class="text-gray-600 text-sm">
+                Compare offers from providers with strong presence in Bern, understanding local considerations and German language policies.
+              </p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+              <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 text-primary-600 mb-4">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Understand Policies</h3>
+              <p class="text-gray-600 text-sm">
+                Understand complex policies, especially for federal employees or those living in Bern's historic buildings.
+              </p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+              <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 text-primary-600 mb-4">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.776-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Optimize Coverage</h3>
+              <p class="text-gray-600 text-sm">
+                Optimize your coverage for Bern-specific needs like Aare river activities, bicycle usage, and historic building living.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Conclusion Section (Inset Box) -->
+          <div class="bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl p-6 text-center border border-primary-200 shadow-md mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Conclusion: Your Insurance Ally in Bern</h3>
+            <p class="text-gray-800 mb-4">
+              Life in charming Bern, with its historic Old Town, position as Switzerland's capital, and outdoor lifestyle along the Aare river, offers unique opportunities and challenges. Having the right insurance tailored to Bern's specific environment is essential for peace of mind. Expat Savvy is dedicated to helping English-speaking individuals navigate insurance complexities in this beautiful city.
+            </p>
+            <p class="text-gray-800 font-medium">
+              Make smart insurance decisions for your Bern journey.
+            </p>
+          </div>
+          
+          <!-- CTA Box -->
+          <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl p-6 text-center text-white shadow-xl">
+            <p class="text-primary-100 mb-4">
+              Our team of experts specializes in helping expats navigate the Swiss insurance system, with particular expertise in Bern's unique environment as the capital city and historic center.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+              <a href="/ai-chat" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-white text-primary-700 hover:bg-primary-50 transition-colors">
+                Chat with our AI Assistant
+              </a>
+              <a href="/free-consultation" class="inline-flex items-center justify-center px-4 py-2 border border-white text-base font-medium rounded-md text-white hover:bg-primary-500 transition-colors">
+                Book Your Free Consultation
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+</Layout> 
