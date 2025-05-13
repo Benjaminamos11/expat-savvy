@@ -1,0 +1,620 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+// Define comparison data
+const tableData = [
+  {
+    feature: "Basic Insurance Models Offered",
+    sanitas: "Standard, Telmed (CallMed), HMO (CareMed), GP (Medbase MultiAccess)",
+    helsana: "Standard, Telmed (Telmed), HMO (BeneFit PLUS), GP (BeneFit PLUS Hausarzt)"
+  },
+  {
+    feature: "Typical Basic Premium Range",
+    sanitas: "Moderate",
+    helsana: "Moderate to High"
+  },
+  {
+    feature: "Digital Portal/App Quality",
+    sanitas: "Excellent (Sanitas Portal app - highly rated, feature-rich)",
+    helsana: "Very good (Helsana+ app - user-friendly, comprehensive)"
+  },
+  {
+    feature: "Telemedicine Integration",
+    sanitas: "Strong (CallMed model, integrated digital health services)",
+    helsana: "Strong (Telmed model, Helsana+ app features)"
+  },
+  {
+    feature: "Digital Health Coaching/Programs",
+    sanitas: "Available (e.g., via Sanitas Active App, partnerships)",
+    helsana: "Available (e.g., Helsana Coach app, various programs)"
+  },
+  {
+    feature: "Symptom Checkers & AI Tools",
+    sanitas: "Integrated into digital offerings",
+    helsana: "Integrated into digital offerings"
+  },
+  {
+    feature: "Wearable Device Integration",
+    sanitas: "Good (e.g., Sanitas Active App rewards for activity)",
+    helsana: "Good (e.g., Helsana+ app can connect with some trackers)"
+  },
+  {
+    feature: "Online Appointment Booking",
+    sanitas: "Increasingly available through portal or partner networks",
+    helsana: "Available through portal or partner networks"
+  },
+  {
+    feature: "Supplementary: Alternative Medicine",
+    sanitas: "Strong focus, extensive coverage",
+    helsana: "Good coverage"
+  },
+  {
+    feature: "Supplementary: Intl. Private Hospital",
+    sanitas: "Available (Hospital Extra Liberty, Hospital Top Liberty)",
+    helsana: "Comprehensive options (Hospital Extra, Hospital Global)"
+  },
+  {
+    feature: "Expat-Friendliness: English Support",
+    sanitas: "Very good; comprehensive English resources",
+    helsana: "Good; English website, documents, English-speaking support"
+  },
+  {
+    feature: "Customer Satisfaction (e.g., Comparis)",
+    sanitas: "Consistently good (e.g., 5.2/6)",
+    helsana: "Generally good (e.g., 5.2/6)"
+  }
+];
+
+const sanitasPros = [
+  "Leading-edge digital platform (Sanitas Portal) with extensive integrated features",
+  "Strong focus on rewarding healthy lifestyles (Active App)",
+  "Excellent English digital resources",
+  "Innovative partnerships in digital health"
+];
+
+const sanitasCons = [
+  "Some advanced digital features might require specific supplementary plans",
+  "The sheer number of digital options could be overwhelming for some"
+];
+
+const helsanaPros = [
+  "Very good and user-friendly digital platform (Helsana+)",
+  "Specialized coaching apps (Helsana Coach)",
+  "Strong telemedicine integration",
+  "Comprehensive range of services from a major insurer"
+];
+
+const helsanaCons = [
+  "Digital health features sometimes spread across multiple apps rather than one central hub",
+  "Innovation may feel slightly less cutting-edge than Sanitas in certain niche digital health areas"
+];
+
+const faqs = [
+  {
+    question: "Which app is more user-friendly for expats, Sanitas Portal or Helsana+?",
+    answer: "Both are highly user-friendly and available in English. Sanitas Portal is often praised for its comprehensive integration of many services in one place, while Helsana+ is known for its clean design and ease of navigation."
+  },
+  {
+    question: "Do both insurers offer rewards for using fitness trackers?",
+    answer: "Sanitas, through its Active App, directly rewards activity that can be tracked by various devices. Helsana+ can connect with some trackers, and they encourage activity through various programs, but direct financial rewards for tracker use might be structured differently."
+  },
+  {
+    question: "How good is the English support for their digital health services?",
+    answer: "Both Sanitas and Helsana offer good to very good English support for their digital platforms and services, recognizing the needs of the expat community."
+  },
+  {
+    question: "Can I get online medical consultations in English with both?",
+    answer: "Yes, both insurers facilitate telemedicine services where consultations in English are generally available, either through their own platforms or partner services."
+  },
+  {
+    question: "How can Expat Savvy help me compare the digital health offerings of Sanitas and Helsana?",
+    answer: "Expat Savvy stays updated on the latest digital health innovations from Swiss insurers. We can help you compare the specific features, usability, and expat-friendliness of platforms from Sanitas, Helsana, and others, ensuring you choose an insurer whose digital services match your preferences and needs."
+  }
+];
+--- 
+
+<Layout
+  title="Sanitas vs. Helsana: Innovation in Digital Health Compared for Expats (2025) | Expat Savvy"
+  description="Compare Sanitas and Helsana health insurance for expats in Switzerland. Expert analysis of digital health innovation to help you choose the right provider."
+>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Sanitas vs. Helsana: Innovation in Digital Health Compared for Expats (2025)",
+    "description": "Compare Sanitas and Helsana health insurance for expats in Switzerland. Expert analysis of digital health innovation to help you choose the right provider.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "author": {
+      "@type": "Person",
+      "name": "Benjamin Amos Wagner",
+      "url": "https://expat-savvy.ch/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://expat-savvy.ch/compare-providers/sanitas-vs-helsana"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which app is more user-friendly for expats, Sanitas Portal or Helsana+?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both are highly user-friendly and available in English. Sanitas Portal is often praised for its comprehensive integration of many services in one place, while Helsana+ is known for its clean design and ease of navigation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do both insurers offer rewards for using fitness trackers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sanitas, through its Active App, directly rewards activity that can be tracked by various devices. Helsana+ can connect with some trackers, and they encourage activity through various programs, but direct financial rewards for tracker use might be structured differently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How good is the English support for their digital health services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both Sanitas and Helsana offer good to very good English support for their digital platforms and services, recognizing the needs of the expat community."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get online medical consultations in English with both?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, both insurers facilitate telemedicine services where consultations in English are generally available, either through their own platforms or partner services."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can Expat Savvy help me compare the digital health offerings of Sanitas and Helsana?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Expat Savvy stays updated on the latest digital health innovations from Swiss insurers. We can help you compare the specific features, usability, and expat-friendliness of platforms from Sanitas, Helsana, and others, ensuring you choose an insurer whose digital services match your preferences and needs."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Compare Providers",
+        "item": "https://expat-savvy.ch/compare-providers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Sanitas vs. Helsana",
+        "item": "https://expat-savvy.ch/compare-providers/sanitas-vs-helsana"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="relative bg-white">
+    <div class="absolute inset-0">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+      <!-- Left Side - Main Heading -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+        <div class="max-w-lg mx-auto lg:max-w-none">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Sanitas vs. Helsana:<br>
+            <span class="text-primary-600">Innovation in Digital Health Compared</span>
+          </h1>
+          <p class="mt-6 text-xl text-gray-500">
+            For expatriates in Switzerland who value innovation, particularly in digital health services, Sanitas and Helsana are two prominent providers with distinct approaches. Our comparison helps you navigate their digital offerings.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Get Personalized Advice
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+            <a 
+              href="/compare-providers"
+              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back to Comparison Hub
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side - Quick Links -->
+      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+        <div class="max-w-lg mx-auto">
+          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
+          <div class="mt-8 space-y-6">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
+                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Sanitas and Helsana.</p>
+                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  Jump to comparison table
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
+                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
+                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  View pros and cons
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-medium text-white">Common Questions</h3>
+                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
+                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
+                  See all FAQs
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <p class="lead text-xl text-gray-600">
+          For expatriates in Switzerland who value innovation, particularly in digital health services, Sanitas and Helsana are two prominent health insurance providers that consistently invest in technology to enhance member experience. Both offer comprehensive coverage and robust digital platforms, but their approaches to innovation and specific digital health features can differ. This comparison focuses on their digital health offerings and how they cater to the needs of tech-savvy expats.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table Section -->
+  <div id="comparison-table" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Sanitas vs. Helsana: At a Glance (Focus on Digital Health Innovation)</h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Sanitas and Helsana compare across key digital health criteria important for expats:</p>
+      </div>
+
+      <div class="overflow-x-auto shadow-xl rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200 bg-white">
+          <thead>
+            <tr class="bg-gray-50">
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Feature
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
+                Sanitas
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                Helsana
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {tableData.map((row, index) => (
+              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.sanitas}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.helsana}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Breakdown Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Detailed Breakdown: Sanitas vs. Helsana (Digital Health Focus)</h2>
+        <p>Let's explore the nuances of how these two insurers stack up in terms of digital innovation:</p>
+
+        <h3>Digital Platforms: Sanitas Portal vs. Helsana+</h3>
+        <p>
+          Both Sanitas and Helsana have invested significantly in their digital platforms, making them leaders in this space.
+        </p>
+        <ul>
+          <li>
+            <strong>Sanitas (Sanitas Portal app & online portal):</strong> The Sanitas Portal is often lauded for its comprehensive features, intuitive design, and integration of various digital health services. Users can manage policies, submit claims, access telemedicine, use symptom checkers, connect with health coaching, and even order medications. The app is highly rated by users.
+          </li>
+          <li>
+            <strong>Helsana (Helsana+ app & online portal):</strong> The Helsana+ app is also a very strong offering, providing a user-friendly interface for claims submission, policy management, access to telemedicine, and health information. Helsana has also developed specialized apps like the Helsana Coach for targeted health support.
+          </li>
+        </ul>
+
+        <p>
+          While both are excellent, Sanitas often has a slight edge in terms of the breadth of <em>integrated</em> digital health tools directly within its main portal, whereas Helsana sometimes offers specialized functionalities through separate, albeit connected, applications.
+        </p>
+
+        <h3>Innovation in Digital Health Services</h3>
+        <ul>
+          <li>
+            <strong>Sanitas:</strong> Actively promotes digital health through initiatives like the Sanitas Active App, which rewards users for physical activity. They also partner with various digital health startups and integrate innovative services like AI-powered symptom checkers and digital therapy options.
+          </li>
+          <li>
+            <strong>Helsana:</strong> Also a strong innovator, Helsana focuses on providing practical digital tools for everyday health management. Their Helsana Coach app, for example, offers personalized support for nutrition, exercise, and mindfulness. They continuously update their digital offerings to improve user experience and access to care.
+          </li>
+        </ul>
+
+        <h3>Telemedicine and Remote Care</h3>
+        <p>
+          Both insurers offer robust Telmed basic insurance models and integrate telemedicine services well into their digital platforms. This allows expats to conveniently access initial medical consultations remotely, often in English, which is a significant advantage.
+        </p>
+
+        <h3>Expat-Friendliness in the Digital Realm</h3>
+        <ul>
+          <li>
+            <strong>Sanitas:</strong> Provides comprehensive English versions of its digital platforms and documentation, making it very accessible for expats. Their digital tools are designed to be intuitive, reducing language barriers.
+          </li>
+          <li>
+            <strong>Helsana:</strong> Also offers good English support on its digital platforms and provides key documents in English. The user experience is generally smooth for English-speaking users.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pros and Cons Section -->
+  <div id="pros-cons" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Sanitas vs. Helsana (Digital Innovation Focus)</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Sanitas Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Sanitas</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {sanitasPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {sanitasCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Helsana Pros and Cons -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div class="bg-red-600 py-4 px-6">
+            <h3 class="text-2xl font-bold text-white">Helsana</h3>
+          </div>
+          <div class="p-6">
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Pros
+              </h4>
+              <ul class="space-y-2">
+                {helsanaPros.map(pro => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
+                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                Cons
+              </h4>
+              <ul class="space-y-2">
+                {helsanaCons.map(con => (
+                  <li class="flex items-start">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    <span>{con}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Helper Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-4xl mx-auto">
+        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
+        
+        <ul>
+          <li>
+            <strong>Choose Sanitas if:</strong> You are an expat who wants a top-tier, all-in-one digital health experience with a wide array of integrated tools, rewards for activity, and excellent English support. You are excited by innovative digital health solutions.
+          </li>
+          <li>
+            <strong>Choose Helsana if:</strong> You value a very user-friendly and reliable digital platform from a major insurer, with access to specialized coaching apps and strong telemedicine. You prefer a balance of digital convenience and established, comprehensive service.
+          </li>
+        </ul>
+        
+        <p>
+          Both are excellent choices for expats who prioritize digital health tools. The best fit may depend on your preference for an all-in-one platform versus specialized apps and the specific types of digital health services you value most. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice!
+        </p>
+        
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with Our AI Now!
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div id="faqs" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Sanitas vs. Helsana (Digital Health Focus)</h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <dl class="space-y-8">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
+              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
+              <dd class="text-gray-600">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-primary-600 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Your Next Step with Expat Savvy
+        </h2>
+        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
+          For expats keen on leveraging digital health innovations, both Sanitas and Helsana offer compelling solutions. Expat Savvy is here to help you delve into the details.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            Chat with AI for Instant Answers
+          </a>
+          <button onclick="showConsultationModal()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Book Your Free Consultation
+          </button>
+        </div>
+        
+        <div class="mt-6">
+          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
+            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Return to Main Comparison Hub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout> 
