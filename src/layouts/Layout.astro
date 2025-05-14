@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro';
 import VAG45Modal from '../components/VAG45Modal.astro';
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal.astro';
 import TermsOfServiceModal from '../components/TermsOfServiceModal.astro';
-import ConsultationModal from '../components/ConsultationModal.astro';
+import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 
 interface Props {
   title: string;
@@ -35,8 +35,17 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
+    <!-- Clean Modal Management -->
+    <script is:inline src="/scripts/modal-init.js"></script>
+    <script is:inline src="/scripts/button-fixer.js"></script>
+    <script is:inline src="/scripts/direct-modal-fix.js"></script>
+    <script is:inline src="/scripts/modal-debug.js"></script>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Modal styles -->
+    <link rel="stylesheet" href="/scripts/modal-styles.css" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href={favicon} sizes="32x32" />
@@ -104,8 +113,11 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <script type="text/javascript">
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
       Cal("init", "expat-savvy", {origin:"https://cal.com"});
-      Cal.ns["expat-savvy"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
+      Cal.ns["expat-savvy"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
     </script>
     <!-- Cal element-click embed code ends -->
+    
+    <!-- Component Helper - Helps with missing modals -->
+    <script is:inline src="/scripts/component-helper.js"></script>
   </body>
 </html>

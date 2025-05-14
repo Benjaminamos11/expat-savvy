@@ -1,0 +1,285 @@
+---
+// Define props
+export interface Props {
+  insuranceType: string;
+  recentBookings: {
+    last24h: number;
+    last7days: number;
+  };
+  contextTitle?: string; // Optional context-specific title
+}
+
+const { insuranceType, recentBookings, contextTitle } = Astro.props;
+
+// Customize heading and content based on insurance type
+let heading = "Personal Insurance Advice";
+let subheading = "Let's discuss your unique situation";
+let description = "We believe insurance is best understood through conversation. Every person's situation is unique, which is why we prefer to talk with you personally rather than just sending standard offers by email.";
+
+// Use contextTitle if provided
+if (contextTitle) {
+  heading = contextTitle;
+}
+
+switch (insuranceType) {
+  case 'health':
+    heading = "Personal Health Insurance Consultation";
+    subheading = "Navigate Swiss health insurance with confidence";
+    description = "Health insurance in Switzerland can be complex. We believe a personal conversation is the best way to understand your specific needs, explain your options clearly, and help you make confident decisions about your coverage.";
+    break;
+  case 'pension':
+    heading = "Pension & 3rd Pillar Planning";
+    subheading = "Secure your financial future in Switzerland";
+    description = "Pension planning is deeply personal and depends on your unique financial situation. Through conversation, we can understand your goals, explain complex pension options in simple terms, and create a tailored plan for your future.";
+    break;
+  case 'liability':
+    heading = "Liability Insurance Conversation";
+    subheading = "Protect yourself from unexpected risks";
+    description = "Understanding your personal liability needs requires a conversation about your lifestyle and activities. We take time to listen and recommend protection that's appropriate for your specific circumstances.";
+    break;
+  case 'household':
+    heading = "Household Insurance Discussion";
+    subheading = "Protect your home and belongings";
+    description = "Your home and possessions are unique to you. Through a personal conversation, we can understand what matters most to you and recommend coverage that provides the right protection at competitive rates.";
+    break;
+  case 'life':
+    heading = "Life Insurance Consultation";
+    subheading = "Protect what matters most";
+    description = "Life insurance is about protecting those you love. A personal conversation allows us to understand your family's needs and recommend solutions that provide true peace of mind for the future.";
+    break;
+  default:
+    // Use the default values defined above
+}
+
+// Consultants (could be dynamic in the future)
+const consultants = [
+  {
+    name: "Robert Kolar",
+    role: "Senior Insurance Advisor",
+    image: "https://cdn.prod.website-files.com/63e36fdb5030a728d3e0c59d/6758848048b5cdaf6ebe884f_WhatsApp%20Image%202024-12-11%20at%2001.55.01.jpeg",
+    languages: ["German", "English", "French", "Czech"]
+  }
+];
+
+// Create a random number for recent bookers (varies slightly for authenticity)
+const randomBookers = recentBookings.last24h + Math.floor(Math.random() * 3);
+
+// Define contextual consultation targets based on insurance type
+let consultationTargets = [
+  "New residents needing to set up insurance",
+  "Current residents looking to optimize coverage & premiums",
+  "Anyone planning retirement with 3rd pillar options",
+  "Families seeking complete insurance protection",
+  "Self-employed needing comprehensive insurance review",
+  "People who want more than just an offer by email"
+];
+
+// Customize the consultation targets based on insurance type
+switch (insuranceType) {
+  case 'health':
+    consultationTargets = [
+      "New residents setting up health insurance for the first time",
+      "People looking to reduce their health insurance premiums",
+      "Those wanting to understand supplemental health benefits",
+      "Families looking for the right model for their needs",
+      "Those confused by the Swiss healthcare system",
+      "Expats looking for English-friendly health insurance"
+    ];
+    break;
+  case 'pension':
+    consultationTargets = [
+      "People looking to optimize retirement savings",
+      "Those wanting to understand 3rd pillar tax benefits",
+      "Self-employed needing pension planning",
+      "Expats with questions about pension portability",
+      "Those looking for best 3rd pillar investment options",
+      "Anyone looking to secure their financial future"
+    ];
+    break;
+  case 'liability':
+    consultationTargets = [
+      "New residents setting up liability insurance",
+      "Those wanting to understand liability coverage limits",
+      "Homeowners with specific liability concerns",
+      "Families seeking comprehensive protection",
+      "People with cross-border liability questions",
+      "Anyone wanting to understand their legal protections"
+    ];
+    break;
+  case 'household':
+    consultationTargets = [
+      "New residents setting up household insurance",
+      "Homeowners looking to optimize coverage",
+      "Renters wanting to protect their belongings",
+      "People wanting to understand specific coverage exclusions",
+      "Those with high-value items needing coverage",
+      "Anyone wanting to compare household insurance options"
+    ];
+    break;
+  // More cases can be added as needed
+}
+---
+
+<div class="intro-step">
+  <div class="flex flex-col h-full">
+    <!-- Top section content -->
+    <div class="mb-7">
+      <!-- People booked notification at top with pill styling -->
+      <div class="inline-flex items-center mb-5 bg-green-50 py-1 px-3 rounded-full border border-green-100">
+        <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-sm text-green-800 font-medium">{randomBookers} people booked consultations in the last 24 hours</span>
+      </div>
+      
+      <!-- Headings with more space and hierarchy -->
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 text-gray-900">{heading}</h2>
+      <p class="text-lg font-medium text-red-600 mb-5">{subheading}</p>
+      
+      <!-- Description with better readability -->
+      <p class="text-gray-700 leading-relaxed">{description}</p>
+    </div>
+    
+    <!-- Card section with fixed heights -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
+      <!-- Left column - Who is this for -->
+      <div class="md:col-span-8">
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 shadow-sm h-full">
+          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Who is this consultation for?</h3>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3">
+            {consultationTargets.map((target) => (
+              <li class="flex items-start">
+                <span class="mr-2 mt-1 text-red-600 flex-shrink-0">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"/>
+                  </svg>
+                </span> 
+                <span class="text-gray-700">{target}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Right column - Consultant profile -->
+      <div class="md:col-span-4">
+        <!-- Consultant card with improved styling -->
+        {consultants.map((consultant) => (
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm h-full flex flex-col">
+            <div class="flex flex-col items-center">
+              <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-red-100 flex-shrink-0 mb-3">
+                <img 
+                  src={consultant.image} 
+                  alt={consultant.name} 
+                  class="w-full h-full object-cover" 
+                  onerror="this.src='/images/default-avatar.svg'" 
+                />
+              </div>
+              <div class="text-center">
+                <h4 class="font-semibold text-gray-900">{consultant.name}</h4>
+                <p class="text-sm text-gray-600">{consultant.role}</p>
+                <div class="flex items-center mt-2 justify-center gap-1">
+                  {consultant.languages.map((language) => {
+                    let code = "EN";
+                    if (language === "German") code = "DE";
+                    if (language === "English") code = "EN";
+                    if (language === "French") code = "FR";
+                    if (language === "Czech") code = "CZ";
+                    return (
+                      <span class="text-xs bg-gray-100 text-gray-800 rounded-full px-2 py-0.5">{code}</span>
+                    );
+                  })}
+                </div>
+                <p class="text-xs text-gray-500 mt-2">FINMA Nr: F01104300</p>
+                
+                <!-- Personal message -->
+                <div class="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-600 italic">
+                  "I enjoy getting to know each client's unique situation. I'm always happy to meet online to provide personalized advice that truly fits your needs."
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- What to expect section - full width in a new row -->
+    <div class="bg-gray-50 rounded-xl p-5 border border-gray-200 shadow-sm mb-6">
+      <h3 class="font-semibold text-gray-900 mb-3 text-lg">What to expect:</h3>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
+        <li class="flex items-start">
+          <span class="mr-3 mt-0.5 text-red-600 flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 6v6l4 2"/>
+            </svg>
+          </span> 
+          <div>
+            <p class="font-medium text-gray-800">30-60 minute conversation</p>
+            <p class="text-sm text-gray-500">Personal video call to understand your needs</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3 mt-0.5 text-red-600 flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+          </span> 
+          <div>
+            <p class="font-medium text-gray-800">Personalized Analysis</p>
+            <p class="text-sm text-gray-500">Focused on your individual situation</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3 mt-0.5 text-red-600 flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+          </span> 
+          <div>
+            <p class="font-medium text-gray-800">Tailored Solutions</p>
+            <p class="text-sm text-gray-500">Recommendations specific to your needs</p>
+          </div>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-3 mt-0.5 text-red-600 flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M9 12l2 2l4-4"/>
+            </svg>
+          </span> 
+          <div>
+            <p class="font-medium text-gray-800">Clear Next Steps</p>
+            <p class="text-sm text-gray-500">Action plan after our conversation</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Full width action buttons at the bottom -->
+    <div class="flex space-x-4 w-full mt-auto">
+      <button
+        type="button"
+        id="whatsapp-button"
+        class="whatsapp-btn flex-1 flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#128C7E] hover:bg-[#075E54] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#075E54] transition-colors shadow-sm"
+      >
+        <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Chat on WhatsApp
+      </button>
+      
+      <button 
+        type="button"
+        class="modal-next-btn flex-1 flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors shadow-sm"
+        data-current-step="1"
+      >
+        Schedule
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div> 

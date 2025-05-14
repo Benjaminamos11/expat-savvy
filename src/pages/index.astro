@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ConsultationModal from '../components/ConsultationModal.astro';
 import Testimonials from '../components/Testimonials.astro';
 
 const stats = [
@@ -89,19 +88,22 @@ const premiumPartners = [
         </p>
         <div class="mt-6 flex flex-col items-center gap-3 animate-slide-up">
           <button
-            onclick="showConsultationModal()" 
+            data-open-consultation="true" 
             class="inline-flex items-center px-5 py-2.5 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            onclick="event.preventDefault(); const modalEl1 = document.getElementById('consultation-modal'); if(modalEl1) { modalEl1.classList.remove('hidden'); document.body.classList.add('modal-open'); } else if(typeof window.showConsultationModal === 'function') { window.showConsultationModal(); } return false;"
           >
             Book Free Consultation
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
-          <div class="flex items-center text-sm text-white mt-2">
-            <svg class="h-4 w-4 text-green-400 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span id="booking-count">8 people booked a consultation in the last 24 hours</span>
+          <div class="flex items-center justify-center text-sm text-white mt-2 w-full">
+            <div class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm">
+              <svg class="h-4 w-4 text-green-400 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span id="booking-count" class="whitespace-nowrap">8 people booked a consultation in the last 24 hours</span>
+            </div>
           </div>
         </div>
       </div>
@@ -121,8 +123,9 @@ const premiumPartners = [
             </p>
             <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
               <button
-                onclick="showConsultationModal()" 
+                data-open-consultation="true" 
                 class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+                onclick="event.preventDefault(); const modalEl2 = document.getElementById('consultation-modal'); if(modalEl2) { modalEl2.classList.remove('hidden'); document.body.classList.add('modal-open'); } else if(typeof window.showConsultationModal === 'function') { window.showConsultationModal(); } return false;"
               >
                 Book Free Consultation
                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,10 +133,12 @@ const premiumPartners = [
                 </svg>
               </button>
               <div class="flex items-center text-sm text-white">
-                <svg class="h-4 w-4 text-green-400 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span id="booking-count-desktop">8 people booked a consultation in the last 24 hours</span>
+                <div class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm">
+                  <svg class="h-4 w-4 text-green-400 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span id="booking-count-desktop" class="whitespace-nowrap">8 people booked a consultation in the last 24 hours</span>
+                </div>
               </div>
             </div>
           </div>
@@ -535,8 +540,9 @@ const premiumPartners = [
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onclick="showConsultationModal()"
+            data-open-consultation="true"
             class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+            onclick="event.preventDefault(); const modalEl3 = document.getElementById('consultation-modal'); if(modalEl3) { modalEl3.classList.remove('hidden'); document.body.classList.add('modal-open'); } else if(typeof window.showConsultationModal === 'function') { window.showConsultationModal(); } return false;"
           >
             Schedule Free Consultation
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -556,11 +562,40 @@ const premiumPartners = [
             Chat on WhatsApp
           </a>
         </div>
+        
+        <!-- Test Button - Absolute Direct Approach for Debugging -->
+        <div class="mt-10 pt-10 border-t border-gray-200">
+          <button
+            id="test-modal-button"
+            style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer;"
+            onclick="(function() { 
+              console.log('Direct test button clicked');
+              
+              // Direct DOM manipulation - most reliable
+              var modal = document.getElementById('consultation-modal');
+              if (modal) {
+                console.log('Found modal, showing directly');
+                modal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+              } else {
+                console.log('Modal not found, trying function');
+                if (typeof window.showConsultationModal === 'function') {
+                  window.showConsultationModal();
+                } else {
+                  alert('Could not find modal or showConsultationModal function!');
+                }
+              }
+            })(); return false;"
+          >
+            TEST BUTTON - Open Consultation Modal
+          </button>
+          <p style="margin-top: 8px; font-size: 12px; color: #6b7280;">
+            This button uses a direct approach to test modal functionality
+          </p>
+        </div>
       </div>
     </div>
   </div>
-
-  <ConsultationModal />
 </Layout>
 
 <script>
@@ -668,3 +703,160 @@ const premiumPartners = [
     }
   }
 </style>
+
+<!-- Emergency Inline Button Fix -->
+<script is:inline>
+  // This script directly targets the problematic buttons on this page
+  // and fixes them with a direct approach bypassing all event systems
+  
+  console.log("[EMERGENCY] Loading inline button fix for homepage");
+  
+  function fixHomePageButtons() {
+    console.log("[EMERGENCY] Running homepage button fix");
+    
+    // Fix hero section button
+    const heroButtons = document.querySelectorAll('.hero-section button, .hero-section a');
+    heroButtons.forEach(button => {
+      const text = button.textContent?.trim();
+      if (!text) return;
+      
+      if (text.includes('Book Free') || text.includes('Consultation')) {
+        console.log(`[EMERGENCY] Found hero button with text: ${text}`);
+        
+        // Replace the entire button with a new one
+        const newButton = document.createElement('button');
+        newButton.innerHTML = button.innerHTML;
+        newButton.className = button.className;
+        newButton.style.cursor = 'pointer';
+        
+        // Copy attributes except for listeners
+        for (let i = 0; i < button.attributes.length; i++) {
+          const attr = button.attributes[i];
+          if (attr.name !== 'onclick' && attr.name !== 'data-open-consultation') {
+            newButton.setAttribute(attr.name, attr.value);
+          }
+        }
+        
+        // Add our own direct click handler
+        newButton.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log("[EMERGENCY] Hero button clicked");
+          
+          // Show the modal directly
+          const modal = document.getElementById('consultation-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+          } else if (typeof window.showConsultationModal === 'function') {
+            window.showConsultationModal();
+          }
+        };
+        
+        // Replace the original button with our new one
+        if (button.parentNode) {
+          button.parentNode.replaceChild(newButton, button);
+          console.log("[EMERGENCY] Successfully replaced hero button");
+        }
+      }
+    });
+    
+    // Fix the "Get Started Today" bottom section button
+    const allButtons = document.querySelectorAll('button, a');
+    allButtons.forEach(button => {
+      const text = button.textContent?.trim();
+      if (!text) return;
+      
+      if (text === "Schedule Free Consultation") {
+        console.log("[EMERGENCY] Found 'Get Started Today' button");
+        
+        // Replace with new button
+        const newButton = document.createElement('button');
+        newButton.innerHTML = button.innerHTML;
+        newButton.className = button.className;
+        newButton.style.cursor = 'pointer';
+        
+        // Copy attributes except for listeners
+        for (let i = 0; i < button.attributes.length; i++) {
+          const attr = button.attributes[i];
+          if (attr.name !== 'onclick' && attr.name !== 'data-open-consultation') {
+            newButton.setAttribute(attr.name, attr.value);
+          }
+        }
+        
+        // Add our own direct click handler
+        newButton.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log("[EMERGENCY] Get Started Today button clicked");
+          
+          // Show the modal directly
+          const modal = document.getElementById('consultation-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+          } else if (typeof window.showConsultationModal === 'function') {
+            window.showConsultationModal();
+          }
+        };
+        
+        // Replace the original button with our new one
+        if (button.parentNode) {
+          button.parentNode.replaceChild(newButton, button);
+          console.log("[EMERGENCY] Successfully replaced Get Started Today button");
+        }
+      }
+    });
+    
+    // Add global click handler for these specific buttons
+    document.addEventListener('click', function(e) {
+      // Look for clicks on or within consultation-related elements
+      let target = e.target;
+      let text = target.textContent?.trim();
+      
+      // Check if the click is on a button or within a button
+      if (text && (text.includes('Book Free') || text.includes('Consultation') || text.includes('Schedule'))) {
+        console.log(`[EMERGENCY] Click detected on text: ${text}`);
+        
+        // Find the closest button or link
+        const button = target.closest('button, a');
+        if (button) {
+          const buttonText = button.textContent?.trim();
+          console.log(`[EMERGENCY] Found button/link with text: ${buttonText}`);
+          
+          if (buttonText && (
+            buttonText.includes('Book Free Consultation') || 
+            buttonText.includes('Schedule Free Consultation')
+          )) {
+            console.log('[EMERGENCY] Intercepting button click');
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Show modal directly
+            const modal = document.getElementById('consultation-modal');
+            if (modal) {
+              modal.classList.remove('hidden');
+              document.body.classList.add('modal-open');
+            } else if (typeof window.showConsultationModal === 'function') {
+              window.showConsultationModal();
+            }
+            
+            return false;
+          }
+        }
+      }
+    }, true); // Use capturing phase for highest priority
+  }
+
+  // Run immediately and also after DOM is fully loaded
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(fixHomePageButtons, 1);
+  } else {
+    document.addEventListener('DOMContentLoaded', fixHomePageButtons);
+  }
+  
+  // Also run after full page load and with some delays
+  window.addEventListener('load', fixHomePageButtons);
+  setTimeout(fixHomePageButtons, 500);
+  setTimeout(fixHomePageButtons, 2000);
+</script>

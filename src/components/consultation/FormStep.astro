@@ -1,0 +1,253 @@
+---
+// Define props
+export interface Props {
+  insuranceType: string;
+}
+
+const { insuranceType } = Astro.props;
+
+// Set default selected topic based on page context
+let defaultTopic = 'general';
+switch (insuranceType) {
+  case 'health':
+    defaultTopic = 'health-insurance';
+    break;
+  case 'pension':
+    defaultTopic = '3rd-pillar';
+    break;
+  case 'liability':
+    defaultTopic = 'liability-insurance';
+    break;
+  case 'household':
+    defaultTopic = 'home-insurance';
+    break;
+  case 'life':
+    defaultTopic = 'life-insurance';
+    break;
+}
+
+// Customize form title based on insurance type
+let formTitle = "Tell us about your needs";
+switch (insuranceType) {
+  case 'health':
+    formTitle = "Your Health Insurance Needs";
+    break;
+  case 'pension':
+    formTitle = "Your Pension Planning Goals";
+    break;
+  case 'liability':
+    formTitle = "Your Liability Insurance Requirements";
+    break;
+  case 'household':
+    formTitle = "Your Household Insurance Details";
+    break;
+  case 'life':
+    formTitle = "Your Life Insurance Priorities";
+    break;
+}
+---
+
+<div class="form-step">
+  <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">{formTitle}</h2>
+  
+  <div class="max-w-2xl mx-auto">
+    <form 
+      id="consultation-form" 
+      class="space-y-6"
+      action="https://formspree.io/f/YOUR_FORMSPREE_ID" 
+      method="POST"
+    >
+      <!-- Personal details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="consultation-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
+          <input 
+            type="text" 
+            id="consultation-name" 
+            name="name" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
+            placeholder="Your name" 
+            required
+          />
+        </div>
+        <div>
+          <label for="consultation-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address*</label>
+          <input 
+            type="email" 
+            id="consultation-email" 
+            name="email" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
+            placeholder="Your email" 
+            required
+          />
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="consultation-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <input 
+            type="tel" 
+            id="consultation-phone" 
+            name="phone" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
+            placeholder="Your phone (optional)"
+          />
+        </div>
+        <div>
+          <label for="consultation-language" class="block text-sm font-medium text-gray-700 mb-1">Preferred Language</label>
+          <select 
+            id="consultation-language" 
+            name="language" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
+          >
+            <option value="en">English</option>
+            <option value="de">German</option>
+            <option value="fr">French</option>
+            <option value="it">Italian</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Topic selection -->
+      <div>
+        <label for="consultation-topic" class="block text-sm font-medium text-gray-700 mb-1">What would you like to discuss?*</label>
+        <select 
+          id="consultation-topic" 
+          name="topic" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
+          required
+        >
+          <option value="health-insurance" selected={defaultTopic === 'health-insurance'}>Health Insurance</option>
+          <option value="3rd-pillar" selected={defaultTopic === '3rd-pillar'}>3rd Pillar & Pension Planning</option>
+          <option value="liability-insurance" selected={defaultTopic === 'liability-insurance'}>Liability Insurance</option>
+          <option value="home-insurance" selected={defaultTopic === 'home-insurance'}>Household/Home Insurance</option>
+          <option value="life-insurance" selected={defaultTopic === 'life-insurance'}>Life Insurance</option>
+          <option value="all-insurance" selected={defaultTopic === 'all-insurance'}>Complete Insurance Review</option>
+        </select>
+      </div>
+      
+      <!-- Notes or specific questions -->
+      <div>
+        <label for="consultation-notes" class="block text-sm font-medium text-gray-700 mb-1">Additional information or questions (optional)</label>
+        <textarea 
+          id="consultation-notes" 
+          name="notes" 
+          rows="3" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
+          placeholder="Share any specific questions or details about your situation"
+        ></textarea>
+      </div>
+      
+      <!-- How they found us -->
+      <div>
+        <label for="consultation-source" class="block text-sm font-medium text-gray-700 mb-1">How did you hear about us?</label>
+        <select 
+          id="consultation-source" 
+          name="source" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
+        >
+          <option value="search">Google Search</option>
+          <option value="recommendation">Friend or Colleague</option>
+          <option value="social">Social Media</option>
+          <option value="blog">Blog Article</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <!-- Consent -->
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input 
+            id="consultation-consent" 
+            name="consent" 
+            type="checkbox" 
+            class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded" 
+            required
+          />
+        </div>
+        <div class="ml-3 text-sm">
+          <label for="consultation-consent" class="font-medium text-gray-700">I agree to be contacted about my insurance needs</label>
+          <p class="text-gray-500">We respect your privacy and will only use your information to schedule and prepare for your consultation.</p>
+        </div>
+      </div>
+      
+      <!-- Buttons -->
+      <div class="flex justify-between mt-8 space-x-4">
+        <button 
+          type="button" 
+          class="modal-prev-btn flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          data-current-step="2"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back
+        </button>
+        <button 
+          type="button" 
+          class="modal-next-btn flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" 
+          data-current-step="2"
+        >
+          Continue
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('consultation-form');
+    const nextBtn = document.querySelector('.modal-next-btn[data-current-step="2"]');
+    
+    if (form && nextBtn) {
+      // Store form data when next button is clicked
+      nextBtn.addEventListener('click', function(e) {
+        // Get form elements
+        const nameInput = document.getElementById('consultation-name') as HTMLInputElement;
+        const emailInput = document.getElementById('consultation-email') as HTMLInputElement;
+        const phoneInput = document.getElementById('consultation-phone') as HTMLInputElement;
+        const topicSelect = document.getElementById('consultation-topic') as HTMLSelectElement;
+        const preferredLanguage = document.querySelector('input[name="language"]:checked') as HTMLInputElement;
+        const notesInput = document.getElementById('consultation-notes') as HTMLTextAreaElement;
+        
+        // Basic validation
+        if (!nameInput?.value || !emailInput?.value) {
+          e.preventDefault(); // Don't proceed to next step
+          alert('Please fill in your name and email to continue.');
+          return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+          e.preventDefault(); // Don't proceed to next step
+          alert('Please enter a valid email address.');
+          return;
+        }
+        
+        // Collect form data
+        const formData = {
+          name: nameInput?.value || '',
+          email: emailInput?.value || '',
+          phone: phoneInput?.value || '',
+          topic: topicSelect?.value || '',
+          preferredLanguage: preferredLanguage?.value || 'en',
+          notes: notesInput?.value || '',
+          dateSubmitted: new Date().toISOString(),
+          insuranceType: document.querySelector('#consultation-modal')?.getAttribute('data-insurance-type') || 'health'
+        };
+        
+        // Store in sessionStorage for access in other steps
+        sessionStorage.setItem('consultationFormData', JSON.stringify(formData));
+        console.log('Form data stored in session:', formData);
+        
+        // Let the next button handler in ConsultationModal.astro handle the transition
+      });
+    }
+  });
+</script> 

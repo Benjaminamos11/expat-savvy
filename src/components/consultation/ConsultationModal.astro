@@ -1,0 +1,421 @@
+---
+import IntroStep from './IntroStep.astro';
+import FormStep from './FormStep.astro';
+import CalendarStep from './CalendarStep.astro';
+import ThankYouStep from './ThankYouStep.astro';
+
+// Get current page path to determine context
+const currentPath = Astro.url.pathname;
+
+// Determine what insurance type this page is about based on the URL path
+let insuranceType = 'health'; // default
+let contextTitle = 'Insurance Consultation'; // default title
+
+// First check for major sections
+if (currentPath.includes('/healthcare/')) {
+  if (currentPath.includes('new-health-insurance') || currentPath.includes('setup') || currentPath.includes('new-residents')) {
+    insuranceType = 'new-health';
+    contextTitle = 'Setting Up Health Insurance';
+  } else if (currentPath.includes('switch') || currentPath.includes('change') || currentPath.includes('switching')) {
+    insuranceType = 'change-health';
+    contextTitle = 'Changing Health Insurance';
+  } else {
+    insuranceType = 'health';
+    contextTitle = 'Health Insurance Consultation';
+  }
+} else if (currentPath.includes('/3rd-pillar/') || currentPath.includes('/pension/') || currentPath.includes('pension-planning')) {
+  insuranceType = 'pension';
+  contextTitle = '3rd Pillar & Pension Planning';
+} else if (currentPath.includes('/liability/') || currentPath.includes('personal-liability')) {
+  insuranceType = 'liability';
+  contextTitle = 'Liability Insurance Consultation';
+} else if (currentPath.includes('/household/') || currentPath.includes('household-insurance')) {
+  insuranceType = 'household';
+  contextTitle = 'Household Insurance Consultation';
+} else if (currentPath.includes('/life/') || currentPath.includes('life-insurance')) {
+  insuranceType = 'life';
+  contextTitle = 'Life Insurance Consultation';
+} else if (currentPath.includes('/legal/') || currentPath.includes('legal-protection')) {
+  insuranceType = 'legal';
+  contextTitle = 'Legal Protection Insurance';
+}
+
+// Check for insurance provider specific pages
+if (currentPath.includes('/healthcare/all-insurances/')) {
+  const providerMatch = currentPath.match(/\/healthcare\/all-insurances\/([^\/]+)/);
+  if (providerMatch && providerMatch[1]) {
+    const provider = providerMatch[1];
+    contextTitle = `${provider.charAt(0).toUpperCase() + provider.slice(1)} Insurance Consultation`;
+  }
+} 
+
+// Check for comparison pages
+if (currentPath.includes('/compare-providers/')) {
+  const compareMatch = currentPath.match(/\/compare-providers\/([^\/]+)/);
+  if (compareMatch && compareMatch[1]) {
+    const comparison = compareMatch[1].replace(/-vs-/g, ' vs ');
+    contextTitle = `${comparison.toUpperCase()} Comparison`;
+  } else {
+    contextTitle = 'Insurance Comparison';
+  }
+}
+
+// Recent bookings data
+const recentBookings = {
+  last24h: 7,
+  last7days: 28
+};
+
+// Props from parent component (can override defaults)
+const props = Astro.props;
+const finalInsuranceType = props.insuranceType || insuranceType;
+const finalContextTitle = props.contextTitle || contextTitle;
+---
+
+<div id="consultation-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50" data-insurance-type={finalInsuranceType} data-modal-backdrop="true">
+  <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh]">
+      <!-- Close button -->
+      <button
+        id="close-modal-btn"
+        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10"
+        aria-label="Close"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <!-- Modal step indicators -->
+      <div class="modal-step-indicator flex items-center justify-between mb-6">
+        <div class="step step-1 active flex-grow flex items-center space-x-1">
+          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs">1</div>
+          <div class="h-1 bg-red-600 flex-grow rounded-full"></div>
+        </div>
+        <div class="step step-2 flex-grow flex items-center space-x-1">
+          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">2</div>
+          <div class="h-1 bg-gray-300 flex-grow rounded-full"></div>
+        </div>
+        <div class="step step-3 flex-grow flex items-center">
+          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">3</div>
+        </div>
+      </div>
+      
+      <div class="modal-steps">
+        <!-- Step 1: Introduction -->
+        <div class="modal-step step-1 active" id="consultation-step-1">
+          <IntroStep insuranceType={finalInsuranceType} recentBookings={recentBookings} contextTitle={finalContextTitle} />
+        </div>
+        
+        <!-- Step 2: Form collection -->
+        <div class="modal-step step-2 hidden" id="consultation-step-2">
+          <FormStep insuranceType={finalInsuranceType} />
+        </div>
+        
+        <!-- Step 3: Calendar selection based on form input -->
+        <div class="modal-step step-3 hidden" id="consultation-step-3">
+          <CalendarStep insuranceType={finalInsuranceType} />
+        </div>
+      </div>
+      
+      <!-- Legal disclosure -->
+      <p class="text-xs text-gray-500 text-center mt-6">
+        As a registered broker, our consultations are free of charge. 
+        We receive commissions from insurance providers when you choose their services through us.
+        Your ongoing support and advice remain complimentary.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal initialization and navigation
+  document.addEventListener('DOMContentLoaded', function() {
+    // User data storage
+    const userData = {
+      name: '',
+      email: '',
+      phone: '',
+      topic: '',
+      insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health'
+    };
+    
+    // Step navigation function
+    function goToStep(stepNumber) {
+      // Hide all steps
+      document.querySelectorAll('.modal-step').forEach(step => {
+        step.classList.add('hidden');
+        step.classList.remove('active');
+      });
+      
+      // Show the requested step
+      const targetStep = document.getElementById(`consultation-step-${stepNumber}`);
+      if (targetStep) {
+        targetStep.classList.remove('hidden');
+        targetStep.classList.add('active');
+        
+        // Update step indicators
+        document.querySelectorAll('.modal-step-indicator .step').forEach((indicator, index) => {
+          const currentStep = index + 1;
+          const circle = indicator.querySelector('.w-4');
+          const line = indicator.querySelector('.h-1');
+          
+          if (currentStep < stepNumber) {
+            // Previous steps are completed
+            indicator.classList.add('completed');
+            indicator.classList.remove('active');
+            
+            if (circle) {
+              circle.classList.remove('bg-white', 'border-gray-300', 'text-gray-400');
+              circle.classList.add('bg-red-600', 'border-red-600', 'text-white');
+            }
+            
+            if (line) {
+              line.classList.remove('bg-gray-300');
+              line.classList.add('bg-red-600');
+            }
+          } 
+          else if (currentStep === stepNumber) {
+            // Current step
+            indicator.classList.add('active');
+            indicator.classList.remove('completed');
+            
+            if (circle) {
+              circle.classList.remove('bg-red-600', 'text-white');
+              circle.classList.add('bg-white', 'border-red-600', 'text-gray-400');
+            }
+            
+            if (line) {
+              line.classList.remove('bg-gray-300');
+              line.classList.add('bg-red-600');
+            }
+          } 
+          else {
+            // Future steps
+            indicator.classList.remove('active', 'completed');
+            
+            if (circle) {
+              circle.classList.remove('bg-red-600', 'border-red-600', 'text-white');
+              circle.classList.add('bg-white', 'border-gray-300', 'text-gray-400');
+            }
+            
+            if (line && currentStep < 3) {
+              line.classList.remove('bg-red-600');
+              line.classList.add('bg-gray-300');
+            }
+          }
+        });
+      }
+    }
+    
+    // Next buttons handler
+    document.querySelectorAll('.modal-next-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const currentStep = parseInt(this.getAttribute('data-current-step') || '1');
+        const nextStep = currentStep + 1;
+        
+        // If on form step, validate and collect data
+        if (currentStep === 2) {
+          const nameInput = document.getElementById('consultation-name') as HTMLInputElement;
+          const emailInput = document.getElementById('consultation-email') as HTMLInputElement;
+          const phoneInput = document.getElementById('consultation-phone') as HTMLInputElement;
+          const topicSelect = document.getElementById('consultation-topic') as HTMLSelectElement;
+          
+          // Validation
+          if (!nameInput?.value || !emailInput?.value) {
+            alert('Please fill in your name and email to continue.');
+            return;
+          }
+          
+          // Store data for Cal.com prefill
+          userData.name = nameInput?.value;
+          userData.email = emailInput?.value;
+          userData.phone = phoneInput?.value || '';
+          userData.topic = topicSelect?.value || '';
+          
+          // Update insurance type based on topic if needed
+          if (userData.topic === 'new-insurance') {
+            userData.insuranceType = 'new-health';
+          } else if (userData.topic === 'health-insurance') {
+            userData.insuranceType = 'health';
+          } else if (userData.topic === '3rd-pillar' || userData.topic === 'pension-planning') {
+            userData.insuranceType = 'pension';
+          } else if (userData.topic === 'liability-insurance' || userData.topic === 'legal-insurance') {
+            userData.insuranceType = 'liability';
+          }
+        }
+        
+        // Navigate to next step
+        goToStep(nextStep);
+      });
+    });
+    
+    // Previous buttons handler
+    document.querySelectorAll('.modal-prev-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const currentStep = parseInt(this.getAttribute('data-current-step') || '2');
+        const prevStep = currentStep - 1;
+        goToStep(prevStep);
+      });
+    });
+    
+    // Cal.com integration
+    document.querySelectorAll('.open-calendar-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const calType = this.getAttribute('data-calendar-type') || 'default';
+        
+        if (typeof window.Cal !== 'undefined' && window.Cal.ns && window.Cal.ns['expat-savvy']) {
+          try {
+            // Set Cal UI settings for desktop layout
+            window.Cal.ns['expat-savvy']('ui', {
+              theme: 'light',
+              styles: { branding: { brandColor: '#dc2626' } },
+              hideEventTypeDetails: false,
+              layout: window.innerWidth > 768 ? 'month_view' : 'mobile'
+            });
+            
+            // Determine the right calendar type based on context
+            let calendarSlug = 'consultation';
+            
+            if (calType === 'phone') {
+              calendarSlug = 'phone-consultation';
+            } else if (calType === 'video') {
+              calendarSlug = 'video-consultation';
+            } else if (userData.insuranceType === 'new-health') {
+              calendarSlug = 'health-insurance-setup';
+            } else if (userData.insuranceType === 'pension') {
+              calendarSlug = '3rd-pillar-consultation';
+            }
+            
+            // Initialize Cal with prefilled user data
+            window.Cal.ns['expat-savvy']('inline', {
+              calLink: `expat-savvy/${calendarSlug}`,
+              elementOrSelector: '#cal-booking-placeholder',
+              prefill: {
+                name: userData.name,
+                email: userData.email,
+                notes: `Topic: ${userData.topic}\nPhone: ${userData.phone}`,
+                guests: []
+              }
+            });
+            
+            // Listen for booking success
+            window.addEventListener('message', function(e) {
+              if (e.data?.type === 'CAL:BOOKING_COMPLETED') {
+                // Booking completed, close modal with success message after a short delay
+                setTimeout(function() {
+                  if (typeof window.closeConsultationModal === 'function') {
+                    window.closeConsultationModal();
+                  }
+                }, 3000);
+              }
+            });
+            
+            console.log('Opened calendar:', calendarSlug);
+          } catch(e) {
+            console.error('Error opening Cal:', e);
+          }
+        }
+      });
+    });
+    
+    // WhatsApp button handler
+    const whatsappButton = document.querySelector('.whatsapp-btn');
+    if (whatsappButton) {
+      whatsappButton.addEventListener('click', function() {
+        window.open('https://wa.me/41791552570', '_blank');
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Base modal styling */
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  
+  /* Progress indicator styling */
+  .modal-step-indicator .step.completed .h-1 {
+    background-color: #dc2626;
+  }
+  
+  .modal-step-indicator .step.completed .w-4 {
+    background-color: #dc2626;
+    border-color: #dc2626;
+    color: white;
+  }
+  
+  .modal-step-indicator .step.active .w-4 {
+    border-color: #dc2626;
+  }
+  
+  /* Step transitions */
+  .modal-step {
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal-step.active {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .modal-content {
+      max-height: 85vh;
+      padding: 1rem !important;
+    }
+    
+    .modal-step-indicator {
+      margin-bottom: 1rem;
+    }
+    
+    .modal-step-indicator .w-4 {
+      width: 0.875rem;
+      height: 0.875rem;
+      font-size: 0.625rem;
+    }
+    
+    .modal-step-indicator .h-1 {
+      height: 0.125rem;
+    }
+    
+    .modal-steps {
+      margin-top: 0.5rem;
+    }
+  }
+  
+  /* Fix for Cal.com calendar width */
+  :global(#cal-booking-placeholder) {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  :global(#cal-booking-placeholder iframe) {
+    width: 100% !important;
+    border: none !important;
+    min-height: 600px;
+  }
+</style>
+
+<script is:inline>
+  // Cal.com type definitions
+  if (typeof window !== 'undefined') {
+    window.Cal = window.Cal || {};
+    window.closeConsultationModal = window.closeConsultationModal || function() {};
+    window.openConsultationModal = window.openConsultationModal || function() {};
+  }
+</script> 

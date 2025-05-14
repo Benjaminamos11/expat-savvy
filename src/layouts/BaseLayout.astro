@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 
 interface Props {
   title: string;
@@ -33,10 +34,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Clean Modal Management -->
+    <script is:inline src="/scripts/modal-init.js"></script>
+    <script is:inline src="/scripts/button-fixer.js"></script>
+    <script is:inline src="/scripts/direct-modal-fix.js"></script>
+    <script is:inline src="/scripts/modal-debug.js"></script>
+    
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Modal styles -->
+    <link rel="stylesheet" href="/scripts/modal-styles.css" />
     
     <!-- Primary Meta Tags -->
     <title>{title} | Expat Savvy</title>
@@ -81,37 +91,36 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
       })
     })} />
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      if (f && f.parentNode) f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX'); // Replace with your GTM container ID
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
-    <!-- Google Tag Manager noscript snippet here if needed -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <Header />
     <main class="flex-grow">
       <slot />
     </main>
     <Footer />
-
-    <!-- Global scripts -->
-    <script>
-      // Make consultation modal available globally
-      // @ts-ignore
-      window.showConsultationModal = function() {
-        const modal = document.getElementById('consultation-modal');
-        if (modal) {
-          modal.classList.remove('hidden');
-        }
-      };
-      
-      // Handler for contact links
-      document.addEventListener('click', function(event) {
-        const target = event.target as Element;
-        const link = target?.closest('a');
-        if (link && (link.getAttribute('href') === '/contact' || link.textContent?.toLowerCase().includes('get in touch'))) {
-          event.preventDefault();
-          // @ts-ignore
-          window.showConsultationModal();
-        }
-      });
-    </script>
+    <ConsultationModal />
 
     <!-- Cal element-click embed code begins -->
     <script type="text/javascript">
@@ -120,5 +129,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       Cal.ns["expat-savvy"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
     </script>
     <!-- Cal element-click embed code ends -->
+
+    <!-- Analytics Tracking -->
+    <script is:inline src="/scripts/analytics-tracking.js" defer></script>
+    
+    <!-- Component Helper - Helps with missing modals -->
+    <script is:inline src="/scripts/component-helper.js"></script>
   </body>
 </html> 

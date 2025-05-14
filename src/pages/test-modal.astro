@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Test Modal">
+  <div class="container mx-auto py-16 px-4">
+    <h1 class="text-3xl font-bold mb-8">Modal Test Page</h1>
+    <p class="mb-8">Click the button below to test the consultation modal:</p>
+    
+    <button
+      id="directOpenBtn"
+      class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300"
+    >
+      Open Modal (Direct)
+    </button>
+    
+    <div class="mt-8">
+      <h2 class="text-xl font-bold mb-4">Alternative methods:</h2>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button
+          onclick="showConsultationModal()"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
+        >
+          Open Modal (onclick)
+        </button>
+        
+        <button
+          id="jsTestButton"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-300"
+        >
+          Open Modal (Event Listener)
+        </button>
+        
+        <button
+          id="manualOpenBtn"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 transition-colors duration-300"
+        >
+          Open Modal (Manual DOM)
+        </button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Define TypeScript interface for window object with our custom functions
+  interface Window {
+    showConsultationModal: () => void;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Direct approach
+    const directBtn = document.getElementById('directOpenBtn');
+    if (directBtn) {
+      directBtn.addEventListener('click', function() {
+        const modal = document.getElementById('consultation-modal');
+        if (modal) {
+          modal.classList.remove('hidden');
+          document.body.classList.add('modal-open');
+          console.log("Modal opened directly via DOM manipulation");
+        } else {
+          alert('Error: consultation-modal element not found!');
+        }
+      });
+    }
+    
+    // JS test button using window function
+    const jsButton = document.getElementById('jsTestButton');
+    if (jsButton) {
+      jsButton.addEventListener('click', function() {
+        if (typeof (window as any).showConsultationModal === 'function') {
+          console.log("Calling window.showConsultationModal()");
+          (window as any).showConsultationModal();
+        } else {
+          alert('Error: showConsultationModal function not found!');
+          console.error('showConsultationModal function is not defined on the window object');
+        }
+      });
+    }
+    
+    // Manual DOM manipulation
+    const manualBtn = document.getElementById('manualOpenBtn');
+    if (manualBtn) {
+      manualBtn.addEventListener('click', function() {
+        try {
+          // Fully manual approach as fallback
+          const modal = document.getElementById('consultation-modal');
+          if (!modal) {
+            throw new Error("Modal element not found");
+          }
+          
+          // Show modal
+          modal.classList.remove('hidden');
+          document.body.classList.add('modal-open');
+          
+          // Set insurance type
+          modal.setAttribute('data-insurance-type', 'health');
+          
+          // Reset to first step if needed
+          const steps = modal.querySelectorAll('.modal-step');
+          steps.forEach(step => {
+            step.classList.add('hidden');
+            step.classList.remove('active');
+          });
+          
+          // Show first step
+          const firstStep = modal.querySelector('.modal-step.step-1');
+          if (firstStep) {
+            firstStep.classList.remove('hidden');
+            firstStep.classList.add('active');
+          }
+          
+          console.log("Modal opened manually");
+        } catch (err) {
+          console.error("Error opening modal manually:", err);
+          alert("Error opening modal: " + (err as Error).message);
+        }
+      });
+    }
+  });
+</script> 

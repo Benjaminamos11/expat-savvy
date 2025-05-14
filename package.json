@@ -10,9 +10,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && npm run generate-sitemap && npm run use-full-sitemap",
+    "build": "npm run prebuild && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "clean-ports": "killall -9 node || true",
+    "dev-clean": "npm run clean-ports && astro dev --port 3000",
+    "prebuild": "npm run generate-sitemap && npm run use-full-sitemap",
     "submit-urls": "node src/scripts/submit-to-indexnow.js",
     "generate-sitemap": "node src/scripts/generate-full-sitemap.js",
     "use-full-sitemap": "cp public/sitemap-full.xml public/sitemap.xml"

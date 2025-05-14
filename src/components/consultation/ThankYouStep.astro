@@ -1,0 +1,164 @@
+---
+// Define props
+export interface Props {
+  insuranceType: string;
+}
+
+const { insuranceType } = Astro.props;
+
+// Customize content based on insurance type
+let guideTitle = "Swiss Insurance Essentials";
+let additionalResources = [
+  { title: "Understanding Swiss Insurance", url: "/blog/understanding-swiss-insurance-system" },
+  { title: "Insurance FAQ for Expats", url: "/faq" }
+];
+
+switch (insuranceType) {
+  case 'health':
+    guideTitle = "Complete Overview of Swiss Health Insurance Models";
+    additionalResources = [
+      { title: "Health Insurance Cost Calculator", url: "/health-insurance-calculator" },
+      { title: "Understanding Basic vs. Supplemental Coverage", url: "/blog/basic-vs-supplemental-health-insurance" }
+    ];
+    break;
+  case 'pension':
+    guideTitle = "Tax Optimization Strategies for 3rd Pillar";
+    additionalResources = [
+      { title: "Pension Contribution Calculator", url: "/pension-calculator" },
+      { title: "3rd Pillar Investment Options", url: "/blog/3rd-pillar-investment-options" }
+    ];
+    break;
+  case 'liability':
+    guideTitle = "Essential Liability Coverage for Expats";
+    additionalResources = [
+      { title: "Understanding Liability Insurance Limits", url: "/blog/liability-insurance-limits" },
+      { title: "Common Liability Claims in Switzerland", url: "/blog/common-liability-claims" }
+    ];
+    break;
+  case 'household':
+    guideTitle = "Comprehensive Guide to Home Insurance";
+    additionalResources = [
+      { title: "Home Inventory Checklist", url: "/home-inventory-checklist" },
+      { title: "Natural Disaster Coverage in Switzerland", url: "/blog/natural-disaster-coverage" }
+    ];
+    break;
+  case 'life':
+    guideTitle = "Family Protection: Guide to Swiss Life Insurance";
+    additionalResources = [
+      { title: "Life Insurance Needs Calculator", url: "/life-insurance-calculator" },
+      { title: "Term vs. Whole Life Insurance", url: "/blog/term-vs-whole-life-insurance" }
+    ];
+    break;
+}
+---
+
+<div class="thank-you-step">
+  <div class="text-center">
+    <div class="mb-6 inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">
+      <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 text-gray-900">Your Consultation is Scheduled!</h2>
+    <p class="text-lg text-gray-600 mb-6">Thank you for booking a consultation with our experts.</p>
+  </div>
+  
+  <div class="max-w-2xl mx-auto bg-gray-50 rounded-xl p-6 mb-8">
+    <h3 class="font-semibold text-gray-900 mb-4 text-lg">What happens next?</h3>
+    
+    <ol class="space-y-4">
+      <li class="flex">
+        <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 font-bold text-lg mr-3">
+          1
+        </div>
+        <div>
+          <p class="font-medium text-gray-800">Check your email</p>
+          <p class="text-gray-600">You'll receive a confirmation email with your appointment details and a calendar invitation.</p>
+        </div>
+      </li>
+      
+      <li class="flex">
+        <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 font-bold text-lg mr-3">
+          2
+        </div>
+        <div>
+          <p class="font-medium text-gray-800">Complete the pre-consultation questionnaire</p>
+          <p class="text-gray-600">We'll send a short questionnaire to help us prepare for your specific needs.</p>
+        </div>
+      </li>
+      
+      <li class="flex">
+        <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 font-bold text-lg mr-3">
+          3
+        </div>
+        <div>
+          <p class="font-medium text-gray-800">Join the video call</p>
+          <p class="text-gray-600">Click the link in your calendar invitation at the scheduled time. No downloads required!</p>
+        </div>
+      </li>
+      
+      <li class="flex">
+        <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 font-bold text-lg mr-3">
+          4
+        </div>
+        <div>
+          <p class="font-medium text-gray-800">Receive your personalized plan</p>
+          <p class="text-gray-600">After the call, we'll send you a summary and custom action plan based on our discussion.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+  
+  <!-- Free resource download section removed as guides are not available yet -->
+  
+  <!-- Additional resources -->
+  <div class="max-w-2xl mx-auto">
+    <h3 class="font-semibold text-gray-900 mb-4 text-lg">Additional Resources</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {additionalResources.map((resource) => (
+        <a 
+          href={resource.url} 
+          class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+        >
+          <svg class="w-5 h-5 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="text-gray-800">{resource.title}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+  
+  <!-- Close button -->
+  <div class="text-center mt-8">
+    <button 
+      type="button"
+      id="close-consultation-btn"
+      class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle close button
+    const closeBtn = document.getElementById('close-consultation-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        // Close the modal using the global function
+        if (typeof window.closeConsultationModal === 'function') {
+          window.closeConsultationModal();
+        } else {
+          // Fallback if the global function is not available
+          const modal = document.getElementById('consultation-modal');
+          if (modal) {
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+          }
+        }
+      });
+    }
+  });
+</script> 
