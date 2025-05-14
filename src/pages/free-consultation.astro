@@ -17,8 +17,14 @@ const insuranceType = searchParams.get('type') || 'health';
 const providerName = searchParams.get('provider') || '';
 const consultationType = searchParams.get('consultation') || '';
 
+// Validate insurance type before using as index
+const validTypes = ['health', 'new-health', 'pension', 'liability', 'household'] as const;
+type InsuranceType = typeof validTypes[number];
+
 // Determine the Cal.com link based on insurance type
-const calLink = calendarLinks[insuranceType] || calendarLinks.health;
+const calLink = validTypes.includes(insuranceType as InsuranceType) 
+  ? calendarLinks[insuranceType as InsuranceType] 
+  : calendarLinks.health;
 
 // Set appropriate page title based on parameters
 let pageTitle = "Book Your Free Insurance Consultation | Expat Savvy";
@@ -181,12 +187,19 @@ if (providerName) {
       
       <div class="calendar-container max-w-3xl mx-auto">
         <!-- Cal inline embed code -->
-        <div id="cal-inline-container" 
-            style="width:100%;height:800px;overflow:scroll;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);" 
-            data-cal-link={calLink}
-            data-cal-namespace="consultation-page"
-            data-cal-config='{"layout":"month_view","theme":"light","hideEventTypeDetails":false}'
-        ></div>
+        <div id="cal-inline-container" style="width:100%;height:750px;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <!-- Loading placeholder -->
+          <div class="flex flex-col items-center justify-center h-full bg-gray-50 p-8">
+            <div class="w-16 h-16 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin mb-4"></div>
+            <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
+            <p class="text-gray-500 text-center max-w-md">
+              {providerName ? 
+                `Setting up your consultation calendar for ${providerName} insurance` : 
+                `Setting up your ${insuranceType === 'pension' ? '3rd pillar' : insuranceType} insurance consultation calendar`
+              }
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -243,10 +256,11 @@ if (providerName) {
 </Layout>
 
 <!-- Cal.com embed script - only loaded on this page -->
-<script>
-  (function(C, A, L) { 
-    let p = function(a, ar) { a.q.push(ar); }; 
-    let d = C.document; 
+<script define:vars={{ calLink }}>
+  // Modern Cal.com embed code
+  (function (C, A, L) {
+    let p = function(a, ar) { a.q.push(ar); };
+    let d = C.document;
     C.Cal = C.Cal || function() { 
       let cal = C.Cal; 
       let ar = arguments; 
@@ -265,18 +279,98 @@ if (providerName) {
       } 
       p(cal, ar); 
     };
-  })(window, "https://app.cal.com/embed/embed.js", "init");
-
-  // Initialize Cal.com with our namespace
-  Cal("init", "consultation-page", {origin:"https://cal.com"});
-  
-  // Add smooth scroll to booking calendar links
-  document.querySelectorAll('a[href="#booking-calendar"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
+    
+    // Properly initialize Cal.com
+    document.addEventListener('DOMContentLoaded', function() {
+      // Make sure the Cal variable is available globally
+      window.Cal = window.Cal || C.Cal || function() {};
+      
+      // Initialize inline embed
+      window.Cal("init", "consultation-page", {origin: "https://cal.com"});
+      
+      // Show Cal with inline embed configuration
+      window.Cal("inline", {
+        elementOrSelector: "#cal-inline-container",
+        calLink: calLink,
+        layout: "month_view",
+        config: {
+          name: "",
+          email: "",
+          theme: "light",
+          hideEventTypeDetails: false,
+          hideBranding: true
+        }
+      });
+      
+      // Remove our placeholder once Cal iframe is loaded
+      const checkCalLoaded = setInterval(() => {
+        const container = document.getElementById('cal-inline-container');
+        if (container) {
+          const calIframe = container.querySelector('iframe');
+          const loadingPlaceholder = container.querySelector('.flex.flex-col.items-center.justify-center');
+          
+          if (calIframe && loadingPlaceholder) {
+            // Give the iframe a moment to fully render before removing placeholder
+            setTimeout(() => {
+              loadingPlaceholder.style.display = 'none';
+            }, 500);
+            clearInterval(checkCalLoaded);
+          }
+        }
+      }, 500);
+      
+      // Timeout after 20 seconds in case Cal never loads
+      setTimeout(() => {
+        clearInterval(checkCalLoaded);
+        const container = document.getElementById('cal-inline-container');
+        const loadingElement = container?.querySelector('.flex.flex-col.items-center.justify-center');
+        const spinnerElement = loadingElement?.querySelector('.animate-spin');
+        
+        if (loadingElement && spinnerElement) {
+          // Update loading message if Cal.com fails to load
+          spinnerElement.remove();
+          const messageElement = loadingElement.querySelector('h3');
+          if (messageElement) {
+            messageElement.textContent = 'Unable to load calendar';
+          }
+          const detailsElement = loadingElement.querySelector('p');
+          if (detailsElement) {
+            detailsElement.innerHTML = 'Please <a href="https://wa.me/41791552570" class="text-primary-600 underline">contact us via WhatsApp</a> to schedule your consultation.';
+          }
+        }
+      }, 20000);
+      
+      // Add smooth scroll to booking calendar links
+      document.querySelectorAll('a[href="#booking-calendar"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const element = document.querySelector(this.getAttribute('href'));
+          if (element) element.scrollIntoView({ behavior: 'smooth' });
+        });
       });
     });
-  });
+  })(window, "https://app.cal.com/embed/embed.js", "init");
 </script>
+
+<!-- Fix calendar styling -->
+<style>
+  #cal-inline-container {
+    width: 100%;
+    height: 750px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  #cal-inline-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+  }
+  
+  @media (max-width: 640px) {
+    #cal-inline-container {
+      height: 600px;
+    }
+  }
+</style>
