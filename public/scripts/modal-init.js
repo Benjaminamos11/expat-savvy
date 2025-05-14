@@ -42,51 +42,15 @@
     return false;
   }
   
-  // Define safer global modal functions
+  // Make show/close functions available globally
   window.showConsultationModal = function() {
-    console.log("Modal trigger attempted on: " + window.location.pathname);
-    
-    // For debugging, always allow modals during development
-    const isDevMode = window.location.port && (window.location.port !== '80' && window.location.port !== '443');
-    const allowModal = isDevMode || isModalAllowedOnCurrentPage();
-    
-    if (!allowModal) {
-      console.log("Modal prevented: Not allowed on this page");
-      return false;
-    }
-    
     const modal = document.getElementById('consultation-modal');
     if (modal) {
-      // Save current scroll position if needed
-      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Show the modal
       modal.classList.remove('hidden');
       document.body.classList.add('modal-open');
-      
-      // Set appropriate insurance type based on path
-      const path = window.location.pathname;
-      let insuranceType = 'health'; // default
-      
-      if (path.includes('3rd-pillar') || path.includes('pension')) {
-        insuranceType = 'pension';
-      } else if (path.includes('liability') || path.includes('legal-protection')) {
-        insuranceType = 'liability';
-      } else if (path.includes('household')) {
-        insuranceType = 'household';
-      } else if (path.includes('life')) {
-        insuranceType = 'life';
-      } else if (path.includes('/healthcare/new-health-insurance')) {
-        insuranceType = 'new-health';
-      }
-      
-      // Set the data attribute
-      modal.setAttribute('data-insurance-type', insuranceType);
-      console.log("Modal opened: " + insuranceType);
-      
       return true;
     }
-    
+    console.error('Modal not found - unable to show consultation modal');
     return false;
   };
   

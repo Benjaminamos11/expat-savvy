@@ -205,6 +205,11 @@ const finalContextTitle = props.contextTitle || contextTitle;
             }
           }
         });
+        
+        // If moving to step 3 (calendar), initialize Cal.com
+        if (stepNumber === 3 && typeof window.setupCalCom === 'function') {
+          window.setupCalCom();
+        }
       }
     }
     
@@ -317,6 +322,30 @@ const finalContextTitle = props.contextTitle || contextTitle;
           }
         }
       });
+    });
+    
+    // Set up modal open/close event listeners to manage Cal.com resources
+    document.addEventListener('modalOpened', function(e) {
+      // Load Cal.com when modal is opened
+      if (e.detail?.modalId === 'consultation-modal' && typeof window.setupCalCom === 'function') {
+        // Only preload Cal.com to have it ready for step 3
+        window.setupCalCom();
+      }
+    });
+    
+    document.addEventListener('modalClosed', function(e) {
+      // Clean up Cal.com resources when modal is closed to reduce memory usage
+      if (e.detail?.modalId === 'consultation-modal') {
+        try {
+          // Remove any Cal iframes to free up resources
+          const calIframes = document.querySelectorAll('iframe[src*="cal.com"]');
+          calIframes.forEach(iframe => {
+            iframe.remove();
+          });
+        } catch (e) {
+          console.error('Error cleaning up Cal resources:', e);
+        }
+      }
     });
     
     // WhatsApp button handler
