@@ -174,39 +174,10 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <ConsultationModal />
     <!-- Cal element-click embed code begins -->
     <script type="text/javascript">
-      // Completely defer Cal.com loading until explicitly requested
-      window.Cal = window.Cal || function() {
-        (window.Cal.q = window.Cal.q || []).push(arguments);
-      };
-      window.Cal.ns = window.Cal.ns || {};
-      
-      // Only initialize Cal when consultation modal is actually navigated to calendar step
-      window.setupCalCom = function() {
-        // Skip if already loaded
-        if (window.calLoaded) return;
-        
-        // Set a flag to prevent multiple loads
-        window.calLoading = true;
-        
-        // Use requestIdleCallback or setTimeout to wait for browser idle time
-        (window.requestIdleCallback || setTimeout)(function() {
-          const calScript = document.createElement('script');
-          calScript.src = "https://app.cal.com/embed/embed.js";
-          calScript.async = true;
-          calScript.defer = true;
-          calScript.onload = function() {
-            window.calLoaded = true;
-            window.calLoading = false;
-            // Only initialize if the modal is actually open
-            if (document.getElementById('consultation-modal') && 
-                !document.getElementById('consultation-modal').classList.contains('hidden')) {
-              Cal("init", "expat-savvy", {origin:"https://cal.com"});
-              Cal.ns["expat-savvy"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
-            }
-          };
-          document.head.appendChild(calScript);
-        }, 1000); // Wait minimum 1 second after user interaction
-      };
+      // Define empty function stubs for modals
+      window.Cal = window.Cal || {};
+      window.closeConsultationModal = window.closeConsultationModal || function() {};
+      window.openConsultationModal = window.openConsultationModal || function() {};
     </script>
     <!-- Cal element-click embed code ends -->
     

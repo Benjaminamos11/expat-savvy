@@ -29,30 +29,38 @@ switch(insuranceType) {
 ---
 
 <div class="calendar-step">
-  <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">Select a Convenient Time</h2>
+  <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">Book Your Consultation</h2>
   
-  <div class="text-center mb-6">
-    <p class="text-gray-600">Choose a time that works best for your schedule.</p>
-    <p class="text-gray-600">Our consultants are available 7 days a week, including evenings.</p>
+  <div class="text-center mb-8">
+    <p class="text-gray-600 mb-2">Our consultants are available 7 days a week, including evenings.</p>
+    <p class="text-gray-600">Choose the option that works best for you:</p>
   </div>
   
-  <div class="calendar-container mb-6 bg-gray-50 rounded-xl p-6 max-w-3xl mx-auto">
-    <!-- Cal.com embedded directly using the inline code -->
-    <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline"></div>
-  </div>
-  
-  <!-- Alternative contact option -->
-  <div class="my-6 max-w-xl mx-auto">
-    <div class="border-t border-gray-200 pt-4 text-center">
-      <p class="text-gray-600 mb-4">Prefer to chat first? Reach out directly:</p>
-      <button
-        type="button"
-        id="whatsapp-button"
-        class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#128C7E] hover:bg-[#075E54] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#075E54]"
-      >
-        <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+    <!-- Cal.com Button Option -->
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 text-center hover:shadow-lg transition-shadow">
+      <div class="w-16 h-16 mx-auto mb-4 bg-red-50 rounded-full flex items-center justify-center">
+        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold mb-2">Online Calendar</h3>
+      <p class="text-gray-600 mb-4">Book a specific time slot through our online calendar system.</p>
+      <button id="cal-button" class="cal-btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+        Open Calendar
+      </button>
+    </div>
+    
+    <!-- WhatsApp Option -->
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6 text-center hover:shadow-lg transition-shadow">
+      <div class="w-16 h-16 mx-auto mb-4 bg-green-50 rounded-full flex items-center justify-center">
+        <svg class="w-8 h-8 text-[#128C7E]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
+      </div>
+      <h3 class="text-lg font-semibold mb-2">WhatsApp Chat</h3>
+      <p class="text-gray-600 mb-4">Chat with us directly on WhatsApp for scheduling flexibility.</p>
+      <button id="whatsapp-button" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#128C7E] hover:bg-[#075E54] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#075E54]">
         Chat on WhatsApp
       </button>
     </div>
@@ -75,187 +83,77 @@ switch(insuranceType) {
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
-    // Don't initialize anything until this step is actually active
-    // This dramatically reduces initial page load time
+    // Get insurance type set in the parent container
+    const modalElement = document.getElementById('consultation-modal');
+    const insuranceType = modalElement?.getAttribute('data-insurance-type') || 'health';
     
-    // Create the loading indicator only - no script loading yet
-    const calContainer = document.getElementById('my-cal-inline');
-    if (calContainer) {
-      const loadingDiv = document.createElement('div');
-      loadingDiv.id = 'cal-loading-fallback';
-      loadingDiv.style.textAlign = 'center';
-      loadingDiv.style.padding = '40px';
-      loadingDiv.innerHTML = `
-        <div style="display: inline-block; border: 4px solid #f3f3f3; border-top: 4px solid #e11d48; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite;"></div>
-        <p style="margin-top: 16px; color: #666;">Calendar will load when needed...</p>
-        <style>
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        </style>
-      `;
-      calContainer.appendChild(loadingDiv);
+    // Determine which cal link to use based on insurance type
+    let calLink = "robertkolar/change-health-insurance"; // default to health
+    
+    if (insuranceType === 'new-health') {
+      calLink = "robertkolar/setting-up-health-insurance-in-switzerland";
+    } else if (insuranceType === 'pension') {
+      calLink = "robertkolar/third-pillar-pension-solutions";
+    } else if (insuranceType === 'liability' || insuranceType === 'household') {
+      calLink = "robertkolar/household-liability-insurance";
     }
     
-    // Set up a mutation observer to detect when this step becomes visible
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && 
-            mutation.attributeName === 'class' && 
-            !document.getElementById('consultation-step-3').classList.contains('hidden')) {
-          
-          // This step is now visible - initialize Cal.com
-          loadCalendar();
-          // Stop observing once we've triggered the load
-          observer.disconnect();
-        }
-      });
-    });
-    
-    // Start observing the step element for class changes
-    const stepElement = document.getElementById('consultation-step-3');
-    if (stepElement) {
-      observer.observe(stepElement, { attributes: true });
-    }
-    
-    // Function to load calendar when needed
-    function loadCalendar() {
-      // Skip if already loading or loaded
-      if (window.calLoading || window.calLoaded) return;
-      
-      console.log("CalendarStep: Step is visible, loading calendar");
-      // Get insurance type set in the parent container
-      const modalElement = document.getElementById('consultation-modal');
-      const insuranceType = modalElement?.getAttribute('data-insurance-type') || 'health';
-      
-      // Dynamically determine which cal link to use
-      let calLink = "robertkolar/change-health-insurance"; // default to health
-      
-      // This should match the server-side logic
-      if (insuranceType === 'new-health') {
-        calLink = "robertkolar/setting-up-health-insurance-in-switzerland";
-      } else if (insuranceType === 'pension') {
-        calLink = "robertkolar/third-pillar-pension-solutions";
-      } else if (insuranceType === 'liability' || insuranceType === 'household') {
-        calLink = "robertkolar/household-liability-insurance";
+    // Get form data if available
+    let userData = {};
+    try {
+      const storedData = sessionStorage.getItem('consultationFormData');
+      if (storedData) {
+        userData = JSON.parse(storedData);
       }
-      
-      try {
-        // Update the loading indicator text
-        const loadingDiv = document.getElementById('cal-loading-fallback');
-        if (loadingDiv) {
-          loadingDiv.querySelector('p').textContent = 'Loading calendar...';
-        }
-        
-        // Initialize Cal.com if needed
-        if (typeof window.setupCalCom === 'function') {
-          window.setupCalCom();
-        }
-        
-        // Wait for Cal to be loaded
-        const calCheckInterval = setInterval(() => {
-          if (window.calLoaded && typeof Cal === 'function') {
-            clearInterval(calCheckInterval);
-            
-            // Set up inline embed with the appropriate calLink
-            Cal.ns["change-health-insurance"] = Cal.ns["change-health-insurance"] || function() {
-              (Cal.ns["change-health-insurance"].q = Cal.ns["change-health-insurance"].q || []).push(arguments);
-            };
-            
-            Cal("init", "change-health-insurance", {origin:"https://cal.com"});
-            
-            Cal.ns["change-health-insurance"]("inline", {
-              elementOrSelector: "#my-cal-inline",
-              config: {"layout":"month_view","theme":"light"},
-              calLink: calLink,
-            });
-            
-            // Set UI configuration
-            Cal.ns["change-health-insurance"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
-            
-            // Watch for iframe to remove loading indicator
-            const iframeCheckInterval = setInterval(() => {
-              const iframe = calContainer?.querySelector('iframe');
-              if (iframe) {
-                const fallbackLoader = document.getElementById('cal-loading-fallback');
-                if (fallbackLoader) {
-                  fallbackLoader.remove();
-                }
-                clearInterval(iframeCheckInterval);
-              }
-            }, 500);
-          }
-        }, 500);
-        
-        // Add timeout for error handling
-        setTimeout(() => {
-          const fallbackLoader = document.getElementById('cal-loading-fallback');
-          if (fallbackLoader && calContainer && calContainer.contains(fallbackLoader)) {
-            if (!calContainer.querySelector('iframe')) {
-              fallbackLoader.innerHTML += `
-                <p style="margin-top: 16px; color: #e11d48;">
-                  Calendar is taking longer than expected. 
-                  <a href="#" class="whatsapp-btn" style="color: #e11d48; text-decoration: underline;">Continue with WhatsApp</a> instead.
-                </p>
-              `;
-              
-              // Add click handler to the WhatsApp fallback link
-              const whatsappLink = fallbackLoader.querySelector('.whatsapp-btn');
-              if (whatsappLink) {
-                whatsappLink.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  window.open('https://wa.me/41791552570', '_blank');
-                });
-              }
-            }
-          }
-        }, 10000);
-        
-      } catch (error) {
-        console.error("CalendarStep: Error initializing Cal.com:", error);
-        
-        // Show error message if Cal.com fails to initialize
-        if (calContainer) {
-          calContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; background-color: #fee2e2; border-radius: 8px;">
-              <p style="color: #b91c1c; margin-bottom: 16px;">Unable to load the calendar.</p>
-              <p style="color: #666;">Please try refreshing the page or contact us directly:</p>
-              <button id="whatsapp-error-button" style="background-color: #128C7E; color: white; padding: 8px 16px; border-radius: 6px; border: none; margin-top: 16px; cursor: pointer;">Chat on WhatsApp</button>
-            </div>
-          `;
-          
-          // Add event listener to the WhatsApp button in error message
-          const whatsappErrorBtn = document.getElementById('whatsapp-error-button');
-          if (whatsappErrorBtn) {
-            whatsappErrorBtn.addEventListener('click', function() {
-              window.open('https://wa.me/41791552570', '_blank');
-            });
-          }
-        }
-      }
+    } catch (e) {
+      console.error('Error reading form data:', e);
     }
     
-    // Listen for booking completion events from Cal.com
-    window.addEventListener('message', function(e) {
-      if (e.data?.type === 'CAL:BOOKING_COMPLETED') {
-        console.log("CalendarStep: Booking completed event received");
-        // Get stored form data
-        const formDataString = sessionStorage.getItem('consultationFormData');
-        if (formDataString) {
-          try {
-            // Parse the stored data
-            const formData = JSON.parse(formDataString);
+    // Set up Cal.com button with direct URL approach
+    const calButton = document.getElementById('cal-button');
+    if (calButton) {
+      calButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Create URL with prefill parameters
+        let calUrl = `https://cal.com/${calLink}?embed=false`;
+        
+        // Add name if available
+        if (userData.name) {
+          calUrl += `&name=${encodeURIComponent(userData.name)}`;
+        }
+        
+        // Add email if available
+        if (userData.email) {
+          calUrl += `&email=${encodeURIComponent(userData.email)}`;
+        }
+        
+        // Add notes if available
+        if (userData.topic || userData.phone) {
+          const notes = `Topic: ${userData.topic || 'Not specified'}\nPhone: ${userData.phone || 'Not provided'}`;
+          calUrl += `&notes=${encodeURIComponent(notes)}`;
+        }
+        
+        // Open Cal in a new window with specific dimensions
+        const calWindow = window.open(
+          calUrl,
+          'CalendarBooking',
+          'width=1000,height=700,top=100,left=100,resizable=yes'
+        );
+        
+        // Focus the new window
+        if (calWindow) calWindow.focus();
+        
+        // Set up a message listener for booking completion
+        window.addEventListener('message', function(msg) {
+          if (msg.data?.type === 'CAL:BOOKING_COMPLETED' || 
+              msg.data?.event === 'BOOKING_COMPLETED' || 
+              msg.data?.action === 'bookingSuccessful') {
             
-            // Add booking details
-            formData.bookingCompleted = true;
-            formData.bookingTime = new Date().toISOString();
-            formData.calEvent = e.data?.data; // Cal.com event data
+            // Close the Cal window
+            if (calWindow) calWindow.close();
             
-            // Store updated data
-            sessionStorage.setItem('consultationFormData', JSON.stringify(formData));
-            
-            // Move to the confirmation step
+            // Move to thank you step
             const nextStep = 4;
             const stepElements = document.querySelectorAll('.modal-step');
             stepElements.forEach(step => {
@@ -269,50 +167,50 @@ switch(insuranceType) {
               targetStep.classList.add('active');
               
               // Update progress indicators
-              const indicators = document.querySelectorAll('.modal-step-indicator .step');
-              indicators.forEach((indicator, index) => {
+              document.querySelectorAll('.modal-step-indicator .step').forEach((indicator, index) => {
                 const stepNum = index + 1;
-                const line = indicator.querySelector('.h-1');
-                const circle = indicator.querySelector('.w-4');
                 
-                if (stepNum < nextStep) {
-                  // Previous steps
-                  indicator.classList.add('completed');
-                  if (line) {
-                    line.classList.remove('bg-gray-300');
-                    line.classList.add('bg-red-600');
-                  }
-                  if (circle) {
-                    circle.classList.remove('bg-white', 'border-gray-300');
-                    circle.classList.add('bg-red-600', 'border-red-600', 'text-white');
-                  }
-                } else if (stepNum === nextStep) {
-                  // Current step
-                  indicator.classList.add('active');
-                  indicator.classList.remove('completed');
-                  if (line) {
-                    line.classList.remove('bg-gray-300');
-                    line.classList.add('bg-red-600');
-                  }
-                  if (circle) {
-                    circle.classList.remove('bg-white', 'border-gray-300');
-                    circle.classList.add('bg-white', 'border-red-600');
+                if (indicator.querySelector('.h-1')) {
+                  indicator.querySelector('.h-1').className = stepNum < nextStep ? 
+                    'h-1 bg-red-600 flex-grow rounded-full' : 
+                    'h-1 bg-gray-300 flex-grow rounded-full';
+                }
+                
+                if (indicator.querySelector('.w-4')) {
+                  if (stepNum < nextStep) {
+                    indicator.querySelector('.w-4').className = 'w-4 h-4 flex items-center justify-center rounded-full bg-red-600 border border-red-600 text-white text-xs';
+                  } else if (stepNum === nextStep) {
+                    indicator.querySelector('.w-4').className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs';
+                  } else {
+                    indicator.querySelector('.w-4').className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs';
                   }
                 }
               });
             }
-          } catch (error) {
-            console.error('Error processing form data after booking:', error);
           }
-        }
-      }
-    });
+        }, false);
+      });
+    }
     
     // WhatsApp button handler
     const whatsappButton = document.getElementById('whatsapp-button');
     if (whatsappButton) {
       whatsappButton.addEventListener('click', function() {
-        window.open('https://wa.me/41791552570', '_blank');
+        // Create WhatsApp message with user data
+        let message = "Hello, I'd like to schedule a consultation";
+        
+        if (userData.name) {
+          message += ` - my name is ${userData.name}`;
+        }
+        
+        if (userData.topic) {
+          message += `, regarding ${userData.topic}`;
+        }
+        
+        message += ". When would be a good time to talk?";
+        
+        // Open WhatsApp with pre-filled message
+        window.open(`https://wa.me/41791552570?text=${encodeURIComponent(message)}`, '_blank');
       });
     }
   });
