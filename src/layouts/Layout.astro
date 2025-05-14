@@ -183,5 +183,76 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     
     <!-- Component Helper - Helps with missing modals -->
     <script is:inline src="/scripts/component-helper.js"></script>
+    
+    <!-- Global consultation modal enhancer -->
+    <script is:inline>
+      // Modal enhancer - ensures all consultation buttons work
+      (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+          console.log("🔧 Setting up consultation modal enhancer");
+          
+          // Fix all possible consultation buttons  
+          const consultationButtons = document.querySelectorAll(
+            '[data-open-consultation], .consultation-button, .btn-consultation, ' +
+            'button, a.btn, a.button, .cta-button, .hero-cta, .safe-consultation-btn'
+          );
+          
+          consultationButtons.forEach(function(button) {
+            // Skip if already processed
+            if (button.hasAttribute('data-enhanced')) return;
+            
+            // Check button text
+            const buttonText = button.textContent?.toLowerCase().trim() || '';
+            const isConsultationButton = buttonText.includes('consultation') || 
+                                         buttonText.includes('contact us') ||
+                                         buttonText.includes('get advice') ||
+                                         buttonText.includes('book a call') ||
+                                         buttonText.includes('free advice') ||
+                                         buttonText.includes('get started') ||
+                                         button.classList.contains('consultation-button') ||
+                                         button.hasAttribute('data-open-consultation');
+                                         
+            // Skip if not a consultation-related button                             
+            if (!isConsultationButton) return;
+            
+            // Mark as processed
+            button.setAttribute('data-enhanced', 'true');
+            
+            // Add click handler with highest priority (using capture)
+            button.addEventListener('click', function(e) {
+              const modal = document.getElementById('consultation-modal');
+              if (modal) {
+                // Prevent default action for links
+                if (button.tagName === 'A') {
+                  e.preventDefault();
+                }
+                
+                // Show modal
+                modal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+                
+                // Reset to step 1
+                const allSteps = modal.querySelectorAll('.modal-step');
+                allSteps.forEach(step => {
+                  step.classList.add('hidden');
+                  step.classList.remove('active');
+                });
+                
+                const firstStep = modal.querySelector('.modal-step.step-1');
+                if (firstStep) {
+                  firstStep.classList.remove('hidden');
+                  firstStep.classList.add('active');
+                }
+                
+                // Notify other components
+                document.dispatchEvent(new CustomEvent('modalOpened', {
+                  detail: { modalId: 'consultation-modal' }
+                }));
+              }
+            }, true); // true = use capture phase for highest priority
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

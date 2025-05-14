@@ -173,6 +173,7 @@ const finalProviderName = props.providerName || providerName;
       email: '',
       phone: '',
       topic: '',
+      source: '',
       insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health',
       providerName: document.getElementById('consultation-modal')?.getAttribute('data-provider-name') || ''
     };
@@ -259,6 +260,7 @@ const finalProviderName = props.providerName || providerName;
           const emailInput = document.getElementById('consultation-email') as HTMLInputElement;
           const phoneInput = document.getElementById('consultation-phone') as HTMLInputElement;
           const topicSelect = document.getElementById('consultation-topic') as HTMLSelectElement;
+          const sourceSelect = document.getElementById('consultation-source') as HTMLSelectElement;
           
           // Validation
           if (!nameInput?.value || !emailInput?.value) {
@@ -272,6 +274,7 @@ const finalProviderName = props.providerName || providerName;
           userData.email = emailInput?.value;
           userData.phone = phoneInput?.value || '';
           userData.topic = topicSelect?.value || '';
+          userData.source = sourceSelect?.value || '';
           
           // Save in sessionStorage for persistence
           try {

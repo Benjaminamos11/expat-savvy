@@ -127,6 +127,26 @@ if (providerName) {
         </div>
       </div>
       
+      <!-- How did you hear about us? -->
+      <div>
+        <label for="consultation-source" class="block text-sm font-medium text-gray-700">
+          How did you hear about us?
+        </label>
+        <div class="mt-1">
+          <select
+            id="consultation-source"
+            name="source"
+            class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          >
+            <option value="google">Google Search</option>
+            <option value="social">Social Media</option>
+            <option value="friend">Friend/Colleague</option>
+            <option value="advertisement">Advertisement</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
       <!-- Security Note -->
       <div class="rounded-md bg-gray-50 p-4 border border-gray-200">
         <div class="flex">
@@ -184,6 +204,7 @@ if (providerName) {
         const emailInput = document.getElementById('consultation-email') as HTMLInputElement;
         const phoneInput = document.getElementById('consultation-phone') as HTMLInputElement;
         const topicSelect = document.getElementById('consultation-topic') as HTMLSelectElement;
+        const sourceSelect = document.getElementById('consultation-source') as HTMLSelectElement;
         const preferredLanguage = document.querySelector('input[name="language"]:checked') as HTMLInputElement;
         const notesInput = document.getElementById('consultation-notes') as HTMLTextAreaElement;
         
@@ -208,6 +229,7 @@ if (providerName) {
           email: emailInput?.value || '',
           phone: phoneInput?.value || '',
           topic: topicSelect?.value || '',
+          source: sourceSelect?.value || '',
           preferredLanguage: preferredLanguage?.value || 'en',
           notes: notesInput?.value || '',
           dateSubmitted: new Date().toISOString(),

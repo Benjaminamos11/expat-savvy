@@ -194,6 +194,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       <button
         class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base safe-consultation-btn"
         data-safe-btn="true"
+        data-open-consultation="true"
       >
         Free Consultation
       </button>
@@ -461,16 +462,27 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         button.addEventListener('click', function(e) {
           e.preventDefault();
           
-          // Try the standard way to show the modal
-          if (typeof window.showConsultationModal === 'function') {
-            window.showConsultationModal();
-          } else {
-            // Manual fallback if function not available
-            const modal = document.getElementById('consultation-modal');
-            if (modal) {
-              modal.classList.remove('hidden');
-              document.body.classList.add('modal-open');
+          const modal = document.getElementById('consultation-modal');
+          if (modal) {
+            // Remove hidden class and add modal-open class to body
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+            
+            // Properly reset modal to first step if needed
+            const firstStep = document.getElementById('consultation-step-1');
+            if (firstStep) {
+              document.querySelectorAll('.modal-step').forEach(step => {
+                step.classList.add('hidden');
+                step.classList.remove('active');
+              });
+              firstStep.classList.remove('hidden');
+              firstStep.classList.add('active');
             }
+            
+            // Dispatch the modalOpened event to properly initialize
+            document.dispatchEvent(new CustomEvent('modalOpened', {
+              detail: { modalId: 'consultation-modal' }
+            }));
           }
         });
       });
