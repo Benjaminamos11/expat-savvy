@@ -186,13 +186,16 @@ switch(insuranceType) {
           calUrl += `&email=${encodeURIComponent(userData.email)}`;
         }
         
-        // Add notes if available
+        // Create notes if available
         let notes = `Topic: ${userData.topic || topicText}`;
         if (userData.phone) {
           notes += `\nPhone: ${userData.phone}`;
         }
         if (providerName) {
           notes += `\nProvider: ${providerName}`;
+        }
+        if (userData.notes) {
+          notes += `\n\nAdditional Information:\n${userData.notes}`;
         }
         calUrl += `&notes=${encodeURIComponent(notes)}`;
         
@@ -274,6 +277,11 @@ switch(insuranceType) {
         }
         
         message += ". When would be a good time to talk?";
+        
+        // Add additional information if provided
+        if (userData.notes) {
+          message += `\n\nAdditional information: ${userData.notes}`;
+        }
         
         // Open WhatsApp with pre-filled message
         window.open(`https://wa.me/41791552570?text=${encodeURIComponent(message)}`, '_blank');
