@@ -2,6 +2,42 @@
 import Layout from '../layouts/Layout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 
+// Map insurance types to Cal.com links for direct embedding
+const calendarLinks = {
+  health: "robertkolar/change-health-insurance",
+  "new-health": "robertkolar/setting-up-health-insurance-in-switzerland",
+  pension: "robertkolar/third-pillar-pension-solutions",
+  liability: "robertkolar/household-liability-insurance",
+  household: "robertkolar/household-liability-insurance"
+};
+
+// Get the query parameters to determine the consultation type
+const searchParams = Astro.url.searchParams;
+const insuranceType = searchParams.get('type') || 'health';
+const providerName = searchParams.get('provider') || '';
+const consultationType = searchParams.get('consultation') || '';
+
+// Determine the Cal.com link based on insurance type
+const calLink = calendarLinks[insuranceType] || calendarLinks.health;
+
+// Set appropriate page title based on parameters
+let pageTitle = "Book Your Free Insurance Consultation | Expat Savvy";
+let pageDescription = "Schedule a free consultation with our Swiss insurance experts. Get personalized advice and find the perfect coverage for your needs.";
+
+if (providerName) {
+  pageTitle = `${providerName} Insurance Consultation | Expat Savvy`;
+  pageDescription = `Get expert advice about ${providerName} insurance options in Switzerland. Free consultation with our registered brokers.`;
+} else if (insuranceType === 'new-health') {
+  pageTitle = "Setting Up Health Insurance in Switzerland | Expat Savvy";
+  pageDescription = "Get expert guidance on setting up your first health insurance in Switzerland. Free consultation with our insurance specialists.";
+} else if (insuranceType === 'pension') {
+  pageTitle = "3rd Pillar Pension Consultation | Expat Savvy";
+  pageDescription = "Get expert advice on pension planning and 3rd pillar solutions in Switzerland. Free consultation with our specialists.";
+} else if (insuranceType === 'liability' || insuranceType === 'household') {
+  pageTitle = "Home & Liability Insurance Consultation | Expat Savvy";
+  pageDescription = "Get expert advice on household and liability insurance in Switzerland. Free consultation with our specialists.";
+}
+
 const benefits = [
   {
     title: "Expert Guidance",
@@ -59,11 +95,23 @@ const steps = [
     </svg>`
   }
 ];
+
+// Get consultation topic based on type
+let consultationTopic = "General Insurance Consultation";
+if (providerName) {
+  consultationTopic = `${providerName} Insurance Consultation`;
+} else if (insuranceType === 'new-health') {
+  consultationTopic = "Setting Up Health Insurance";
+} else if (insuranceType === 'pension') {
+  consultationTopic = "3rd Pillar & Pension Planning";
+} else if (insuranceType === 'liability' || insuranceType === 'household') {
+  consultationTopic = "Home & Liability Insurance";
+}
 ---
 
 <Layout
-  title="Book Your Free Insurance Consultation | Expat Savvy"
-  description="Schedule a free consultation with our Swiss insurance experts. Get personalized advice and find the perfect coverage for your needs."
+  title={pageTitle}
+  description={pageDescription}
 >
   <!-- Hero Section -->
   <div class="relative bg-white">
@@ -74,21 +122,27 @@ const steps = [
       <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
         <div class="max-w-lg mx-auto">
           <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            Book Your Free Insurance Consultation
+            {consultationTopic}
           </h1>
           <p class="mt-6 text-xl text-gray-500">
             Get expert guidance on your Swiss insurance options—completely free. Our online consultation helps you clarify coverage, understand costs, and feel confident in your decisions.
           </p>
-          <div class="mt-8">
-            <button
-              onclick="showConsultationModal()"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="#booking-calendar" 
+              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl">
               Schedule Your Free Call
               <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </button>
+            </a>
+            <a href="https://wa.me/41791552570?text=Hello%2C%20I'd%20like%20to%20schedule%20a%20consultation%20about%20{encodeURIComponent(consultationTopic)}" 
+              target="_blank"
+              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#128C7E] hover:bg-[#075E54] transition-colors duration-300 shadow-lg hover:shadow-xl">
+              Chat on WhatsApp
+              <svg class="ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
@@ -111,6 +165,28 @@ const steps = [
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar Section -->
+  <div id="booking-calendar" class="bg-white py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Schedule Your Free Consultation</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+          Choose a time that works for your schedule
+        </p>
+      </div>
+      
+      <div class="calendar-container max-w-3xl mx-auto">
+        <!-- Cal inline embed code -->
+        <div id="cal-inline-container" 
+            style="width:100%;height:800px;overflow:scroll;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);" 
+            data-cal-link={calLink}
+            data-cal-namespace="consultation-page"
+            data-cal-config='{"layout":"month_view","theme":"light","hideEventTypeDetails":false}'
+        ></div>
       </div>
     </div>
   </div>
@@ -153,12 +229,11 @@ const steps = [
           We're compensated by insurance providers when you choose to sign up through us, ensuring you get unbiased advice at no cost to you.
         </p>
         <div class="mt-8">
-          <button
-            onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          <a href="#booking-calendar"
+            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Book Your Free Consultation
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -166,3 +241,42 @@ const steps = [
 
   <ConsultationModal />
 </Layout>
+
+<!-- Cal.com embed script - only loaded on this page -->
+<script>
+  (function(C, A, L) { 
+    let p = function(a, ar) { a.q.push(ar); }; 
+    let d = C.document; 
+    C.Cal = C.Cal || function() { 
+      let cal = C.Cal; 
+      let ar = arguments; 
+      if (!cal.loaded) { 
+        cal.ns = {}; 
+        cal.q = cal.q || []; 
+        d.head.appendChild(d.createElement("script")).src = A; 
+        cal.loaded = true; 
+      } 
+      if (ar[0] === L) { 
+        const api = function() { p(api, arguments); }; 
+        const namespace = ar[1]; 
+        api.q = api.q || []; 
+        typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar); 
+        return; 
+      } 
+      p(cal, ar); 
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  // Initialize Cal.com with our namespace
+  Cal("init", "consultation-page", {origin:"https://cal.com"});
+  
+  // Add smooth scroll to booking calendar links
+  document.querySelectorAll('a[href="#booking-calendar"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>

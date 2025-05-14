@@ -1,201 +1,173 @@
 ---
 // Define props
-export interface Props {
+interface Props {
   insuranceType: string;
+  contextTitle?: string;
+  providerName?: string;
 }
 
-const { insuranceType } = Astro.props;
+const { insuranceType = 'health', contextTitle = 'Insurance Consultation', providerName = '' } = Astro.props;
 
-// Set default selected topic based on page context
-let defaultTopic = 'general';
-switch (insuranceType) {
-  case 'health':
-    defaultTopic = 'health-insurance';
-    break;
-  case 'pension':
-    defaultTopic = '3rd-pillar';
-    break;
-  case 'liability':
-    defaultTopic = 'liability-insurance';
-    break;
-  case 'household':
-    defaultTopic = 'home-insurance';
-    break;
-  case 'life':
-    defaultTopic = 'life-insurance';
-    break;
+// Generate appropriate topics based on insurance type
+let topicOptions = [
+  { value: "health-insurance", label: "Health Insurance" },
+  { value: "new-insurance", label: "Setting Up Health Insurance" },
+  { value: "3rd-pillar", label: "3rd Pillar & Pension" },
+  { value: "liability-insurance", label: "Household & Liability" },
+  { value: "life-insurance", label: "Life Insurance" },
+  { value: "legal-insurance", label: "Legal Protection" },
+  { value: "other", label: "Other Insurance Question" }
+];
+
+// Determine pre-selected topic based on insurance type
+let defaultTopic = "health-insurance";
+
+if (insuranceType === 'new-health') {
+  defaultTopic = "new-insurance";
+} else if (insuranceType === 'pension') {
+  defaultTopic = "3rd-pillar";
+} else if (insuranceType === 'liability' || insuranceType === 'household') {
+  defaultTopic = "liability-insurance";
+} else if (insuranceType === 'life') {
+  defaultTopic = "life-insurance";
+} else if (insuranceType === 'legal') {
+  defaultTopic = "legal-insurance";
 }
 
-// Customize form title based on insurance type
-let formTitle = "Tell us about your needs";
-switch (insuranceType) {
-  case 'health':
-    formTitle = "Your Health Insurance Needs";
-    break;
-  case 'pension':
-    formTitle = "Your Pension Planning Goals";
-    break;
-  case 'liability':
-    formTitle = "Your Liability Insurance Requirements";
-    break;
-  case 'household':
-    formTitle = "Your Household Insurance Details";
-    break;
-  case 'life':
-    formTitle = "Your Life Insurance Priorities";
-    break;
+// Generate title and description based on context
+let formTitle = "Tell us about yourself";
+let formDescription = "Share a few details so we can personalize your consultation.";
+
+if (providerName) {
+  formTitle = `Tell us about your ${providerName} insurance needs`;
+  formDescription = `Help us understand your situation to provide tailored advice about ${providerName} options.`;
+} else if (contextTitle) {
+  formTitle = "Tell us about yourself";
+  formDescription = `Share a few details so we can personalize your ${contextTitle.toLowerCase()}.`;
 }
 ---
 
 <div class="form-step">
-  <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">{formTitle}</h2>
+  <div class="text-center mb-8">
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">{formTitle}</h2>
+    <p class="mt-3 text-gray-600 max-w-2xl mx-auto">
+      {formDescription}
+    </p>
+  </div>
   
-  <div class="max-w-2xl mx-auto">
-    <form 
-      id="consultation-form" 
-      class="space-y-6"
-      action="https://formspree.io/f/YOUR_FORMSPREE_ID" 
-      method="POST"
-    >
-      <!-- Personal details -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="consultation-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
-          <input 
-            type="text" 
-            id="consultation-name" 
-            name="name" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
-            placeholder="Your name" 
-            required
-          />
-        </div>
-        <div>
-          <label for="consultation-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address*</label>
-          <input 
-            type="email" 
-            id="consultation-email" 
-            name="email" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
-            placeholder="Your email" 
+  <div class="max-w-xl mx-auto">
+    <form id="consultation-form" class="space-y-6">
+      <!-- Name -->
+      <div>
+        <label for="consultation-name" class="block text-sm font-medium text-gray-700">
+          Your Name
+        </label>
+        <div class="mt-1">
+          <input
+            type="text"
+            name="name"
+            id="consultation-name"
+            class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            placeholder="John Smith"
             required
           />
         </div>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label for="consultation-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-          <input 
-            type="tel" 
-            id="consultation-phone" 
-            name="phone" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
-            placeholder="Your phone (optional)"
+      <!-- Email -->
+      <div>
+        <label for="consultation-email" class="block text-sm font-medium text-gray-700">
+          Email Address
+        </label>
+        <div class="mt-1">
+          <input
+            type="email"
+            name="email"
+            id="consultation-email"
+            class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            placeholder="john@example.com"
+            required
           />
         </div>
-        <div>
-          <label for="consultation-language" class="block text-sm font-medium text-gray-700 mb-1">Preferred Language</label>
-          <select 
-            id="consultation-language" 
-            name="language" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
+        <p class="mt-1 text-xs text-gray-500">We'll send your appointment confirmation here</p>
+      </div>
+      
+      <!-- Phone (Optional) -->
+      <div>
+        <label for="consultation-phone" class="block text-sm font-medium text-gray-700">
+          Phone Number (Optional)
+        </label>
+        <div class="mt-1">
+          <input
+            type="tel"
+            name="phone"
+            id="consultation-phone"
+            class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            placeholder="+41 76 123 45 67"
+          />
+        </div>
+        <p class="mt-1 text-xs text-gray-500">For appointment reminders or if we need to reschedule</p>
+      </div>
+      
+      <!-- Topic Dropdown -->
+      <div>
+        <label for="consultation-topic" class="block text-sm font-medium text-gray-700">
+          What would you like to discuss?
+        </label>
+        <div class="mt-1">
+          <select
+            id="consultation-topic"
+            name="topic"
+            class="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md"
           >
-            <option value="en">English</option>
-            <option value="de">German</option>
-            <option value="fr">French</option>
-            <option value="it">Italian</option>
+            {topicOptions.map((option) => (
+              <option value={option.value} selected={option.value === defaultTopic}>{option.label}</option>
+            ))}
           </select>
         </div>
       </div>
       
-      <!-- Topic selection -->
-      <div>
-        <label for="consultation-topic" class="block text-sm font-medium text-gray-700 mb-1">What would you like to discuss?*</label>
-        <select 
-          id="consultation-topic" 
-          name="topic" 
-          class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
-          required
-        >
-          <option value="health-insurance" selected={defaultTopic === 'health-insurance'}>Health Insurance</option>
-          <option value="3rd-pillar" selected={defaultTopic === '3rd-pillar'}>3rd Pillar & Pension Planning</option>
-          <option value="liability-insurance" selected={defaultTopic === 'liability-insurance'}>Liability Insurance</option>
-          <option value="home-insurance" selected={defaultTopic === 'home-insurance'}>Household/Home Insurance</option>
-          <option value="life-insurance" selected={defaultTopic === 'life-insurance'}>Life Insurance</option>
-          <option value="all-insurance" selected={defaultTopic === 'all-insurance'}>Complete Insurance Review</option>
-        </select>
-      </div>
-      
-      <!-- Notes or specific questions -->
-      <div>
-        <label for="consultation-notes" class="block text-sm font-medium text-gray-700 mb-1">Additional information or questions (optional)</label>
-        <textarea 
-          id="consultation-notes" 
-          name="notes" 
-          rows="3" 
-          class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" 
-          placeholder="Share any specific questions or details about your situation"
-        ></textarea>
-      </div>
-      
-      <!-- How they found us -->
-      <div>
-        <label for="consultation-source" class="block text-sm font-medium text-gray-700 mb-1">How did you hear about us?</label>
-        <select 
-          id="consultation-source" 
-          name="source" 
-          class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"
-        >
-          <option value="search">Google Search</option>
-          <option value="recommendation">Friend or Colleague</option>
-          <option value="social">Social Media</option>
-          <option value="blog">Blog Article</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      
-      <!-- Consent -->
-      <div class="flex items-start">
-        <div class="flex items-center h-5">
-          <input 
-            id="consultation-consent" 
-            name="consent" 
-            type="checkbox" 
-            class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded" 
-            required
-          />
+      <!-- Security Note -->
+      <div class="rounded-md bg-gray-50 p-4 border border-gray-200">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3 flex-1 md:flex md:justify-between">
+            <p class="text-xs text-gray-500">
+              Your data is secure and will only be used to provide you with the requested consultation service. See our <a href="/privacy-policy" class="text-primary-600 hover:text-primary-500">privacy policy</a> for details.
+            </p>
+          </div>
         </div>
-        <div class="ml-3 text-sm">
-          <label for="consultation-consent" class="font-medium text-gray-700">I agree to be contacted about my insurance needs</label>
-          <p class="text-gray-500">We respect your privacy and will only use your information to schedule and prepare for your consultation.</p>
-        </div>
-      </div>
-      
-      <!-- Buttons -->
-      <div class="flex justify-between mt-8 space-x-4">
-        <button 
-          type="button" 
-          class="modal-prev-btn flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          data-current-step="2"
-        >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-          Back
-        </button>
-        <button 
-          type="button" 
-          class="modal-next-btn flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" 
-          data-current-step="2"
-        >
-          Continue
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
       </div>
     </form>
+    
+    <!-- Navigation Buttons -->
+    <div class="mt-8 flex justify-between">
+      <button 
+        type="button" 
+        class="modal-prev-btn flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        data-current-step="2"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back
+      </button>
+      
+      <button 
+        type="submit" 
+        class="modal-next-btn inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+        data-current-step="2"
+      >
+        Continue to Calendar
+        <svg class="ml-2 -mr-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </div>
 

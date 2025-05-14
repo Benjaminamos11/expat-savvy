@@ -7,9 +7,10 @@ export interface Props {
     last7days: number;
   };
   contextTitle?: string; // Optional context-specific title
+  providerName?: string;
 }
 
-const { insuranceType, recentBookings, contextTitle } = Astro.props;
+const { insuranceType = 'health', recentBookings, contextTitle = 'Insurance Consultation', providerName = '' } = Astro.props;
 
 // Customize heading and content based on insurance type
 let heading = "Personal Insurance Advice";
@@ -57,7 +58,8 @@ const consultants = [
     name: "Robert Kolar",
     role: "Senior Insurance Advisor",
     image: "https://cdn.prod.website-files.com/63e36fdb5030a728d3e0c59d/6758848048b5cdaf6ebe884f_WhatsApp%20Image%202024-12-11%20at%2001.55.01.jpeg",
-    languages: ["German", "English", "French", "Czech"]
+    languages: ["German", "English", "French", "Czech"],
+    description: 'Robert is a licensed insurance advisor with over 8 years of experience helping expats in Switzerland find the right coverage.'
   }
 ];
 
@@ -66,6 +68,11 @@ const randomBookers = recentBookings.last24h + Math.floor(Math.random() * 3);
 
 // Define contextual consultation targets based on insurance type
 let consultationTargets = [
+  "New arrivals setting up insurance",
+  "Expats looking to optimize coverage",
+  "Families seeking comprehensive protection",
+  "Individuals wanting to save on premiums",
+  "Those needing help with claims",
   "New residents needing to set up insurance",
   "Current residents looking to optimize coverage & premiums",
   "Anyone planning retirement with 3rd pillar options",

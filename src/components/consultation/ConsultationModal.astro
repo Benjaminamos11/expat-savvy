@@ -10,6 +10,8 @@ const currentPath = Astro.url.pathname;
 // Determine what insurance type this page is about based on the URL path
 let insuranceType = 'health'; // default
 let contextTitle = 'Insurance Consultation'; // default title
+let providerId = ''; // for insurance provider pages
+let providerName = ''; // for insurance provider pages
 
 // First check for major sections
 if (currentPath.includes('/healthcare/')) {
@@ -44,8 +46,10 @@ if (currentPath.includes('/healthcare/')) {
 if (currentPath.includes('/healthcare/all-insurances/')) {
   const providerMatch = currentPath.match(/\/healthcare\/all-insurances\/([^\/]+)/);
   if (providerMatch && providerMatch[1]) {
-    const provider = providerMatch[1];
-    contextTitle = `${provider.charAt(0).toUpperCase() + provider.slice(1)} Insurance Consultation`;
+    providerId = providerMatch[1];
+    // Format the provider name nicely with uppercase first letter
+    providerName = providerId.charAt(0).toUpperCase() + providerId.slice(1);
+    contextTitle = `${providerName} Insurance Consultation`;
   }
 } 
 
@@ -60,19 +64,41 @@ if (currentPath.includes('/compare-providers/')) {
   }
 }
 
-// Recent bookings data
+// Recent bookings data - social proof
 const recentBookings = {
   last24h: 7,
   last7days: 28
 };
 
+// If URL has special parameters, override the defaults
+const urlParams = new URL(Astro.request.url).searchParams;
+const urlInsuranceType = urlParams.get('type');
+const urlProviderName = urlParams.get('provider');
+
+if (urlInsuranceType && ['health', 'new-health', 'pension', 'liability', 'household', 'life', 'legal'].includes(urlInsuranceType)) {
+  insuranceType = urlInsuranceType;
+}
+
+if (urlProviderName) {
+  providerName = urlProviderName;
+  contextTitle = `${providerName} Insurance Consultation`;
+}
+
 // Props from parent component (can override defaults)
 const props = Astro.props;
 const finalInsuranceType = props.insuranceType || insuranceType;
 const finalContextTitle = props.contextTitle || contextTitle;
+const finalProviderId = props.providerId || providerId;
+const finalProviderName = props.providerName || providerName;
 ---
 
-<div id="consultation-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50" data-insurance-type={finalInsuranceType} data-modal-backdrop="true">
+<div id="consultation-modal" 
+    class="fixed inset-0 bg-black bg-opacity-70 hidden z-50" 
+    data-insurance-type={finalInsuranceType} 
+    data-provider-id={finalProviderId}
+    data-provider-name={finalProviderName}
+    data-context-title={finalContextTitle}
+    data-modal-backdrop="true">
   <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
     <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh]">
       <!-- Close button -->
@@ -80,6 +106,7 @@ const finalContextTitle = props.contextTitle || contextTitle;
         id="close-modal-btn"
         class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10"
         aria-label="Close"
+        data-close-modal="true"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -96,25 +123,34 @@ const finalContextTitle = props.contextTitle || contextTitle;
           <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">2</div>
           <div class="h-1 bg-gray-300 flex-grow rounded-full"></div>
         </div>
-        <div class="step step-3 flex-grow flex items-center">
+        <div class="step step-3 flex-grow flex items-center space-x-1">
           <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">3</div>
+          <div class="h-1 bg-gray-300 flex-grow rounded-full"></div>
+        </div>
+        <div class="step step-4 flex-grow flex items-center">
+          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">4</div>
         </div>
       </div>
       
       <div class="modal-steps">
         <!-- Step 1: Introduction -->
         <div class="modal-step step-1 active" id="consultation-step-1">
-          <IntroStep insuranceType={finalInsuranceType} recentBookings={recentBookings} contextTitle={finalContextTitle} />
+          <IntroStep insuranceType={finalInsuranceType} recentBookings={recentBookings} contextTitle={finalContextTitle} providerName={finalProviderName} />
         </div>
         
         <!-- Step 2: Form collection -->
         <div class="modal-step step-2 hidden" id="consultation-step-2">
-          <FormStep insuranceType={finalInsuranceType} />
+          <FormStep insuranceType={finalInsuranceType} contextTitle={finalContextTitle} providerName={finalProviderName} />
         </div>
         
         <!-- Step 3: Calendar selection based on form input -->
         <div class="modal-step step-3 hidden" id="consultation-step-3">
           <CalendarStep insuranceType={finalInsuranceType} />
+        </div>
+        
+        <!-- Step 4: Thank you message -->
+        <div class="modal-step step-4 hidden" id="consultation-step-4">
+          <ThankYouStep insuranceType={finalInsuranceType} contextTitle={finalContextTitle} providerName={finalProviderName} />
         </div>
       </div>
       
@@ -137,7 +173,8 @@ const finalContextTitle = props.contextTitle || contextTitle;
       email: '',
       phone: '',
       topic: '',
-      insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health'
+      insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health',
+      providerName: document.getElementById('consultation-modal')?.getAttribute('data-provider-name') || ''
     };
     
     // Step navigation function - optimized to reduce DOM operations
@@ -198,14 +235,11 @@ const finalContextTitle = props.contextTitle || contextTitle;
             circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs';
           }
           
-          if (line && currentStep < 3) {
+          if (line && currentStep < 4) {
             line.className = 'h-1 bg-gray-300 flex-grow rounded-full';
           }
         }
       });
-      
-      // Calendar step loading is now handled by the component itself
-      // This avoids loading Cal.com prematurely
     }
     
     // Next buttons handler - with debounce to prevent multiple clicks
@@ -297,10 +331,10 @@ const finalContextTitle = props.contextTitle || contextTitle;
     // Handle backdrop clicks
     const backdrop = document.querySelector('[data-modal-backdrop="true"]');
     if (backdrop) {
-      backdrop.addEventListener('click', function(event) {
+      backdrop.addEventListener('click', (event) => {
         // Only close if clicking directly on the backdrop
-        if (event.target === this) {
-          this.classList.add('hidden');
+        if (event.target === backdrop) {
+          backdrop.classList.add('hidden');
           document.body.classList.remove('modal-open');
           
           // Dispatch custom event for cleanup
@@ -391,14 +425,6 @@ const finalContextTitle = props.contextTitle || contextTitle;
         }
       }
     });
-    
-    // WhatsApp button handler
-    const whatsappButton = document.querySelector('.whatsapp-btn');
-    if (whatsappButton) {
-      whatsappButton.addEventListener('click', function() {
-        window.open('https://wa.me/41791552570', '_blank');
-      });
-    }
   });
 </script>
 

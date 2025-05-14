@@ -31,7 +31,7 @@ switch(insuranceType) {
 <div class="calendar-step">
   <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">Book Your Consultation</h2>
   
-  <div class="text-center mb-8">
+  <div class="text-center mb-6">
     <p class="text-gray-600 mb-2">Our consultants are available 7 days a week, including evenings.</p>
     <p class="text-gray-600">Choose the option that works best for you:</p>
   </div>
@@ -49,6 +49,9 @@ switch(insuranceType) {
       <button id="cal-button" class="cal-btn inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
         Open Calendar
       </button>
+      <p class="text-xs text-gray-500 mt-3">
+        Having trouble with popups? <a href="/free-consultation" target="_blank" class="text-primary-600 underline">Use our booking page</a>.
+      </p>
     </div>
     
     <!-- WhatsApp Option -->
@@ -63,11 +66,42 @@ switch(insuranceType) {
       <button id="whatsapp-button" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#128C7E] hover:bg-[#075E54] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#075E54]">
         Chat on WhatsApp
       </button>
+      <p class="text-xs text-gray-500 mt-3">
+        Quick response time: Usually within 30 minutes
+      </p>
+    </div>
+  </div>
+  
+  <!-- Trust indicators -->
+  <div class="flex flex-wrap justify-center items-center gap-4 mt-8 mb-4 text-gray-400">
+    <div class="flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span class="text-sm">Free service</span>
+    </div>
+    <div class="flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span class="text-sm">Registered broker</span>
+    </div>
+    <div class="flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span class="text-sm">Impartial advice</span>
+    </div>
+    <div class="flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span class="text-sm">English speaking</span>
     </div>
   </div>
   
   <!-- Back button -->
-  <div class="flex justify-start mt-8">
+  <div class="flex justify-start mt-6">
     <button 
       type="button" 
       class="modal-prev-btn flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -86,6 +120,8 @@ switch(insuranceType) {
     // Get insurance type set in the parent container
     const modalElement = document.getElementById('consultation-modal');
     const insuranceType = modalElement?.getAttribute('data-insurance-type') || 'health';
+    const providerId = modalElement?.getAttribute('data-provider-id') || '';
+    const providerName = modalElement?.getAttribute('data-provider-name') || '';
     
     // Determine which cal link to use based on insurance type
     let calLink = "robertkolar/change-health-insurance"; // default to health
@@ -96,6 +132,28 @@ switch(insuranceType) {
       calLink = "robertkolar/third-pillar-pension-solutions";
     } else if (insuranceType === 'liability' || insuranceType === 'household') {
       calLink = "robertkolar/household-liability-insurance";
+    }
+    
+    // Create topic text based on context
+    let topicText = "Insurance Consultation";
+    if (providerName) {
+      topicText = `${providerName} Insurance Consultation`;
+    } else if (insuranceType === 'new-health') {
+      topicText = "Setting Up Health Insurance";
+    } else if (insuranceType === 'pension') {
+      topicText = "3rd Pillar & Pension Planning";
+    } else if (insuranceType === 'liability' || insuranceType === 'household') {
+      topicText = "Home & Liability Insurance";
+    }
+    
+    // Update the free consultation link with the right parameters
+    const consultationLink = document.querySelector('a[href="/free-consultation"]');
+    if (consultationLink) {
+      let url = "/free-consultation?type=" + insuranceType;
+      if (providerName) {
+        url += "&provider=" + encodeURIComponent(providerName);
+      }
+      consultationLink.href = url;
     }
     
     // Get form data if available
@@ -129,10 +187,14 @@ switch(insuranceType) {
         }
         
         // Add notes if available
-        if (userData.topic || userData.phone) {
-          const notes = `Topic: ${userData.topic || 'Not specified'}\nPhone: ${userData.phone || 'Not provided'}`;
-          calUrl += `&notes=${encodeURIComponent(notes)}`;
+        let notes = `Topic: ${userData.topic || topicText}`;
+        if (userData.phone) {
+          notes += `\nPhone: ${userData.phone}`;
         }
+        if (providerName) {
+          notes += `\nProvider: ${providerName}`;
+        }
+        calUrl += `&notes=${encodeURIComponent(notes)}`;
         
         // Open Cal in a new window with specific dimensions
         const calWindow = window.open(
@@ -203,8 +265,12 @@ switch(insuranceType) {
           message += ` - my name is ${userData.name}`;
         }
         
-        if (userData.topic) {
-          message += `, regarding ${userData.topic}`;
+        if (userData.topic || topicText) {
+          message += `, regarding ${userData.topic || topicText}`;
+        }
+        
+        if (providerName) {
+          message += ` (${providerName})`;
         }
         
         message += ". When would be a good time to talk?";
