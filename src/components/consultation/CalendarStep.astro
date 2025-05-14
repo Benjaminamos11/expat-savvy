@@ -75,27 +75,10 @@ switch(insuranceType) {
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
-    console.log("CalendarStep: DOM loaded, initializing Cal.com");
+    // Don't initialize anything until this step is actually active
+    // This dramatically reduces initial page load time
     
-    // Get insurance type set in the parent container
-    const modalElement = document.getElementById('consultation-modal');
-    const insuranceType = modalElement?.getAttribute('data-insurance-type') || 'health';
-    console.log("CalendarStep: Insurance type detected:", insuranceType);
-    
-    // Dynamically determine which cal link to use
-    let calLink = "robertkolar/change-health-insurance"; // default to health
-    
-    // This should match the server-side logic
-    if (insuranceType === 'new-health') {
-      calLink = "robertkolar/setting-up-health-insurance-in-switzerland";
-    } else if (insuranceType === 'pension') {
-      calLink = "robertkolar/third-pillar-pension-solutions";
-    } else if (insuranceType === 'liability' || insuranceType === 'household') {
-      calLink = "robertkolar/household-liability-insurance";
-    }
-    console.log("CalendarStep: Using Cal.com link:", calLink);
-    
-    // Create a loading indicator immediately
+    // Create the loading indicator only - no script loading yet
     const calContainer = document.getElementById('my-cal-inline');
     if (calContainer) {
       const loadingDiv = document.createElement('div');
@@ -104,7 +87,7 @@ switch(insuranceType) {
       loadingDiv.style.padding = '40px';
       loadingDiv.innerHTML = `
         <div style="display: inline-block; border: 4px solid #f3f3f3; border-top: 4px solid #e11d48; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite;"></div>
-        <p style="margin-top: 16px; color: #666;">Loading calendar...</p>
+        <p style="margin-top: 16px; color: #666;">Calendar will load when needed...</p>
         <style>
           @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -115,34 +98,73 @@ switch(insuranceType) {
       calContainer.appendChild(loadingDiv);
     }
     
-    // Load Cal.com with a slight delay to prioritize UI rendering
-    setTimeout(() => {
+    // Set up a mutation observer to detect when this step becomes visible
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && 
+            mutation.attributeName === 'class' && 
+            !document.getElementById('consultation-step-3').classList.contains('hidden')) {
+          
+          // This step is now visible - initialize Cal.com
+          loadCalendar();
+          // Stop observing once we've triggered the load
+          observer.disconnect();
+        }
+      });
+    });
+    
+    // Start observing the step element for class changes
+    const stepElement = document.getElementById('consultation-step-3');
+    if (stepElement) {
+      observer.observe(stepElement, { attributes: true });
+    }
+    
+    // Function to load calendar when needed
+    function loadCalendar() {
+      // Skip if already loading or loaded
+      if (window.calLoading || window.calLoaded) return;
+      
+      console.log("CalendarStep: Step is visible, loading calendar");
+      // Get insurance type set in the parent container
+      const modalElement = document.getElementById('consultation-modal');
+      const insuranceType = modalElement?.getAttribute('data-insurance-type') || 'health';
+      
+      // Dynamically determine which cal link to use
+      let calLink = "robertkolar/change-health-insurance"; // default to health
+      
+      // This should match the server-side logic
+      if (insuranceType === 'new-health') {
+        calLink = "robertkolar/setting-up-health-insurance-in-switzerland";
+      } else if (insuranceType === 'pension') {
+        calLink = "robertkolar/third-pillar-pension-solutions";
+      } else if (insuranceType === 'liability' || insuranceType === 'household') {
+        calLink = "robertkolar/household-liability-insurance";
+      }
+      
       try {
-        // Setup Cal.com
-        window.Cal = window.Cal || {};
-        window.Cal.q = window.Cal.q || [];
-        
-        // Only load the script if it hasn't been loaded yet
-        if (!window.calScriptLoaded) {
-          const script = document.createElement('script');
-          script.src = "https://app.cal.com/embed/embed.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => {
-            window.calScriptLoaded = true;
-            initializeCalendar();
-          };
-          document.head.appendChild(script);
-        } else {
-          // Script already loaded, just initialize
-          initializeCalendar();
+        // Update the loading indicator text
+        const loadingDiv = document.getElementById('cal-loading-fallback');
+        if (loadingDiv) {
+          loadingDiv.querySelector('p').textContent = 'Loading calendar...';
         }
         
-        function initializeCalendar() {
-          if (typeof Cal === 'function') {
-            Cal("init", "change-health-insurance", {origin:"https://cal.com"});
+        // Initialize Cal.com if needed
+        if (typeof window.setupCalCom === 'function') {
+          window.setupCalCom();
+        }
+        
+        // Wait for Cal to be loaded
+        const calCheckInterval = setInterval(() => {
+          if (window.calLoaded && typeof Cal === 'function') {
+            clearInterval(calCheckInterval);
             
             // Set up inline embed with the appropriate calLink
+            Cal.ns["change-health-insurance"] = Cal.ns["change-health-insurance"] || function() {
+              (Cal.ns["change-health-insurance"].q = Cal.ns["change-health-insurance"].q || []).push(arguments);
+            };
+            
+            Cal("init", "change-health-insurance", {origin:"https://cal.com"});
+            
             Cal.ns["change-health-insurance"]("inline", {
               elementOrSelector: "#my-cal-inline",
               config: {"layout":"month_view","theme":"light"},
@@ -152,41 +174,40 @@ switch(insuranceType) {
             // Set UI configuration
             Cal.ns["change-health-insurance"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
             
-            // Listen for Cal.com iframe load to remove the loading indicator
-            const observer = new MutationObserver((mutations) => {
-              mutations.forEach((mutation) => {
-                if (mutation.type === 'childList' && calContainer) {
-                  const iframe = calContainer.querySelector('iframe');
-                  if (iframe) {
-                    const fallbackLoader = document.getElementById('cal-loading-fallback');
-                    if (fallbackLoader) {
-                      fallbackLoader.remove();
-                    }
-                    observer.disconnect();
-                  }
+            // Watch for iframe to remove loading indicator
+            const iframeCheckInterval = setInterval(() => {
+              const iframe = calContainer?.querySelector('iframe');
+              if (iframe) {
+                const fallbackLoader = document.getElementById('cal-loading-fallback');
+                if (fallbackLoader) {
+                  fallbackLoader.remove();
                 }
-              });
-            });
-            
-            if (calContainer) {
-              observer.observe(calContainer, { childList: true, subtree: true });
-            }
+                clearInterval(iframeCheckInterval);
+              }
+            }, 500);
           }
-        }
+        }, 500);
         
-        // Add timeout to handle cases where Cal.com takes too long to load
+        // Add timeout for error handling
         setTimeout(() => {
           const fallbackLoader = document.getElementById('cal-loading-fallback');
           if (fallbackLoader && calContainer && calContainer.contains(fallbackLoader)) {
-            if (calContainer.querySelector('iframe')) {
-              fallbackLoader.remove();
-            } else {
+            if (!calContainer.querySelector('iframe')) {
               fallbackLoader.innerHTML += `
                 <p style="margin-top: 16px; color: #e11d48;">
-                  Calendar is taking longer than expected to load. 
-                  <a href="#" onclick="window.location.reload(); return false;" style="color: #e11d48; text-decoration: underline;">Refresh the page</a> or continue with WhatsApp.
+                  Calendar is taking longer than expected. 
+                  <a href="#" class="whatsapp-btn" style="color: #e11d48; text-decoration: underline;">Continue with WhatsApp</a> instead.
                 </p>
               `;
+              
+              // Add click handler to the WhatsApp fallback link
+              const whatsappLink = fallbackLoader.querySelector('.whatsapp-btn');
+              if (whatsappLink) {
+                whatsappLink.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  window.open('https://wa.me/41791552570', '_blank');
+                });
+              }
             }
           }
         }, 10000);
@@ -195,7 +216,6 @@ switch(insuranceType) {
         console.error("CalendarStep: Error initializing Cal.com:", error);
         
         // Show error message if Cal.com fails to initialize
-        const calContainer = document.getElementById('my-cal-inline');
         if (calContainer) {
           calContainer.innerHTML = `
             <div style="text-align: center; padding: 40px; background-color: #fee2e2; border-radius: 8px;">
@@ -214,7 +234,7 @@ switch(insuranceType) {
           }
         }
       }
-    }, 100); // Small delay to prioritize UI rendering
+    }
     
     // Listen for booking completion events from Cal.com
     window.addEventListener('message', function(e) {
@@ -234,7 +254,6 @@ switch(insuranceType) {
             
             // Store updated data
             sessionStorage.setItem('consultationFormData', JSON.stringify(formData));
-            console.log("CalendarStep: Form data updated with booking details");
             
             // Move to the confirmation step
             const nextStep = 4;
@@ -281,15 +300,10 @@ switch(insuranceType) {
                   }
                 }
               });
-              console.log("CalendarStep: Moved to confirmation step");
-            } else {
-              console.error("CalendarStep: Could not find confirmation step element");
             }
           } catch (error) {
             console.error('Error processing form data after booking:', error);
           }
-        } else {
-          console.warn("CalendarStep: No form data found in sessionStorage");
         }
       }
     });

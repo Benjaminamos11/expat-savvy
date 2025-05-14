@@ -129,7 +129,7 @@ const finalContextTitle = props.contextTitle || contextTitle;
 </div>
 
 <script>
-  // Modal initialization and navigation
+  // Delay initialization until DOMContentLoaded to avoid blocking initial render
   document.addEventListener('DOMContentLoaded', function() {
     // User data storage
     const userData = {
@@ -140,82 +140,82 @@ const finalContextTitle = props.contextTitle || contextTitle;
       insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health'
     };
     
-    // Step navigation function
-    function goToStep(stepNumber) {
-      // Hide all steps
-      document.querySelectorAll('.modal-step').forEach(step => {
-        step.classList.add('hidden');
-        step.classList.remove('active');
+    // Step navigation function - optimized to reduce DOM operations
+    function goToStep(stepNumber: number): void {
+      // Only modify DOM if modal is actually visible
+      const modal = document.getElementById('consultation-modal');
+      if (!modal || modal.classList.contains('hidden')) {
+        return;
+      }
+      
+      // Cache DOM elements to avoid repetitive lookups
+      const steps = document.querySelectorAll('.modal-step');
+      const indicators = document.querySelectorAll('.modal-step-indicator .step');
+      
+      // Hide all steps at once with a single class toggle
+      steps.forEach(step => {
+        const isTargetStep = step.id === `consultation-step-${stepNumber}`;
+        step.classList.toggle('hidden', !isTargetStep);
+        step.classList.toggle('active', isTargetStep);
       });
       
-      // Show the requested step
-      const targetStep = document.getElementById(`consultation-step-${stepNumber}`);
-      if (targetStep) {
-        targetStep.classList.remove('hidden');
-        targetStep.classList.add('active');
+      // Update step indicators more efficiently
+      indicators.forEach((indicator, index) => {
+        const currentStep = index + 1;
+        const circle = indicator.querySelector('.w-4');
+        const line = indicator.querySelector('.h-1');
         
-        // Update step indicators
-        document.querySelectorAll('.modal-step-indicator .step').forEach((indicator, index) => {
-          const currentStep = index + 1;
-          const circle = indicator.querySelector('.w-4');
-          const line = indicator.querySelector('.h-1');
+        // Set appropriate classes in batch operations
+        if (currentStep < stepNumber) {
+          // Previous steps
+          indicator.className = indicator.className.replace(/active|completed/g, '') + ' completed';
           
-          if (currentStep < stepNumber) {
-            // Previous steps are completed
-            indicator.classList.add('completed');
-            indicator.classList.remove('active');
-            
-            if (circle) {
-              circle.classList.remove('bg-white', 'border-gray-300', 'text-gray-400');
-              circle.classList.add('bg-red-600', 'border-red-600', 'text-white');
-            }
-            
-            if (line) {
-              line.classList.remove('bg-gray-300');
-              line.classList.add('bg-red-600');
-            }
-          } 
-          else if (currentStep === stepNumber) {
-            // Current step
-            indicator.classList.add('active');
-            indicator.classList.remove('completed');
-            
-            if (circle) {
-              circle.classList.remove('bg-red-600', 'text-white');
-              circle.classList.add('bg-white', 'border-red-600', 'text-gray-400');
-            }
-            
-            if (line) {
-              line.classList.remove('bg-gray-300');
-              line.classList.add('bg-red-600');
-            }
-          } 
-          else {
-            // Future steps
-            indicator.classList.remove('active', 'completed');
-            
-            if (circle) {
-              circle.classList.remove('bg-red-600', 'border-red-600', 'text-white');
-              circle.classList.add('bg-white', 'border-gray-300', 'text-gray-400');
-            }
-            
-            if (line && currentStep < 3) {
-              line.classList.remove('bg-red-600');
-              line.classList.add('bg-gray-300');
-            }
+          if (circle) {
+            circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-red-600 border border-red-600 text-white text-xs';
           }
-        });
-        
-        // If moving to step 3 (calendar), initialize Cal.com
-        if (stepNumber === 3 && typeof window.setupCalCom === 'function') {
-          window.setupCalCom();
+          
+          if (line) {
+            line.className = 'h-1 bg-red-600 flex-grow rounded-full';
+          }
+        } 
+        else if (currentStep === stepNumber) {
+          // Current step
+          indicator.className = indicator.className.replace(/active|completed/g, '') + ' active';
+          
+          if (circle) {
+            circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs';
+          }
+          
+          if (line) {
+            line.className = 'h-1 bg-red-600 flex-grow rounded-full';
+          }
+        } 
+        else {
+          // Future steps
+          indicator.className = indicator.className.replace(/active|completed/g, '');
+          
+          if (circle) {
+            circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs';
+          }
+          
+          if (line && currentStep < 3) {
+            line.className = 'h-1 bg-gray-300 flex-grow rounded-full';
+          }
         }
-      }
+      });
+      
+      // Calendar step loading is now handled by the component itself
+      // This avoids loading Cal.com prematurely
     }
     
-    // Next buttons handler
+    // Next buttons handler - with debounce to prevent multiple clicks
+    let isProcessing = false;
     document.querySelectorAll('.modal-next-btn').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function(this: HTMLElement) {
+        // Prevent double-clicks
+        if (isProcessing) return;
+        isProcessing = true;
+        
         const currentStep = parseInt(this.getAttribute('data-current-step') || '1');
         const nextStep = currentStep + 1;
         
@@ -229,6 +229,7 @@ const finalContextTitle = props.contextTitle || contextTitle;
           // Validation
           if (!nameInput?.value || !emailInput?.value) {
             alert('Please fill in your name and email to continue.');
+            isProcessing = false;
             return;
           }
           
@@ -237,6 +238,13 @@ const finalContextTitle = props.contextTitle || contextTitle;
           userData.email = emailInput?.value;
           userData.phone = phoneInput?.value || '';
           userData.topic = topicSelect?.value || '';
+          
+          // Save in sessionStorage for persistence
+          try {
+            sessionStorage.setItem('consultationFormData', JSON.stringify(userData));
+          } catch (e) {
+            // Fail silently if sessionStorage is unavailable
+          }
           
           // Update insurance type based on topic if needed
           if (userData.topic === 'new-insurance') {
@@ -252,98 +260,134 @@ const finalContextTitle = props.contextTitle || contextTitle;
         
         // Navigate to next step
         goToStep(nextStep);
+        
+        // Reset processing flag after short delay
+        setTimeout(() => {
+          isProcessing = false;
+        }, 300);
       });
     });
     
     // Previous buttons handler
     document.querySelectorAll('.modal-prev-btn').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function(this: HTMLElement) {
         const currentStep = parseInt(this.getAttribute('data-current-step') || '2');
         const prevStep = currentStep - 1;
         goToStep(prevStep);
       });
     });
     
-    // Cal.com integration
-    document.querySelectorAll('.open-calendar-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        const calType = this.getAttribute('data-calendar-type') || 'default';
-        
-        if (typeof window.Cal !== 'undefined' && window.Cal.ns && window.Cal.ns['expat-savvy']) {
-          try {
-            // Set Cal UI settings for desktop layout
-            window.Cal.ns['expat-savvy']('ui', {
-              theme: 'light',
-              styles: { branding: { brandColor: '#dc2626' } },
-              hideEventTypeDetails: false,
-              layout: window.innerWidth > 768 ? 'month_view' : 'mobile'
-            });
-            
-            // Determine the right calendar type based on context
-            let calendarSlug = 'consultation';
-            
-            if (calType === 'phone') {
-              calendarSlug = 'phone-consultation';
-            } else if (calType === 'video') {
-              calendarSlug = 'video-consultation';
-            } else if (userData.insuranceType === 'new-health') {
-              calendarSlug = 'health-insurance-setup';
-            } else if (userData.insuranceType === 'pension') {
-              calendarSlug = '3rd-pillar-consultation';
-            }
-            
-            // Initialize Cal with prefilled user data
-            window.Cal.ns['expat-savvy']('inline', {
-              calLink: `expat-savvy/${calendarSlug}`,
-              elementOrSelector: '#cal-booking-placeholder',
-              prefill: {
-                name: userData.name,
-                email: userData.email,
-                notes: `Topic: ${userData.topic}\nPhone: ${userData.phone}`,
-                guests: []
-              }
-            });
-            
-            // Listen for booking success
-            window.addEventListener('message', function(e) {
-              if (e.data?.type === 'CAL:BOOKING_COMPLETED') {
-                // Booking completed, close modal with success message after a short delay
-                setTimeout(function() {
-                  if (typeof window.closeConsultationModal === 'function') {
-                    window.closeConsultationModal();
-                  }
-                }, 3000);
-              }
-            });
-            
-            console.log('Opened calendar:', calendarSlug);
-          } catch(e) {
-            console.error('Error opening Cal:', e);
-          }
+    // Set up modal open/close event listeners to manage resources
+    const closeButton = document.getElementById('close-modal-btn');
+    if (closeButton) {
+      closeButton.addEventListener('click', function() {
+        const modal = document.getElementById('consultation-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.classList.remove('modal-open');
+          
+          // Dispatch custom event for cleanup
+          document.dispatchEvent(new CustomEvent('modalClosed', {
+            detail: { modalId: 'consultation-modal' }
+          }));
         }
       });
-    });
+    }
     
-    // Set up modal open/close event listeners to manage Cal.com resources
-    document.addEventListener('modalOpened', function(e) {
-      // Load Cal.com when modal is opened
-      if (e.detail?.modalId === 'consultation-modal' && typeof window.setupCalCom === 'function') {
-        // Only preload Cal.com to have it ready for step 3
-        window.setupCalCom();
+    // Handle backdrop clicks
+    const backdrop = document.querySelector('[data-modal-backdrop="true"]');
+    if (backdrop) {
+      backdrop.addEventListener('click', function(event) {
+        // Only close if clicking directly on the backdrop
+        if (event.target === this) {
+          this.classList.add('hidden');
+          document.body.classList.remove('modal-open');
+          
+          // Dispatch custom event for cleanup
+          document.dispatchEvent(new CustomEvent('modalClosed', {
+            detail: { modalId: 'consultation-modal' }
+          }));
+        }
+      });
+    }
+    
+    // Listen for custom consultation modal open events
+    document.addEventListener('click', function(e) {
+      // Check if clicked element has data-open-consultation attribute
+      const target = e.target as HTMLElement;
+      if (target && (target.hasAttribute('data-open-consultation') || target.closest('[data-open-consultation]'))) {
+        e.preventDefault();
+        const modal = document.getElementById('consultation-modal');
+        if (modal) {
+          modal.classList.remove('hidden');
+          document.body.classList.add('modal-open');
+          
+          // Reset to first step
+          goToStep(1);
+          
+          // Dispatch custom event for setup
+          document.dispatchEvent(new CustomEvent('modalOpened', {
+            detail: { modalId: 'consultation-modal' }
+          }));
+        }
       }
     });
     
-    document.addEventListener('modalClosed', function(e) {
-      // Clean up Cal.com resources when modal is closed to reduce memory usage
-      if (e.detail?.modalId === 'consultation-modal') {
+    // Clean up Cal.com resources when modal is closed
+    document.addEventListener('modalClosed', function(e: Event) {
+      // Type assertion for custom event
+      const customEvent = e as CustomEvent<{modalId: string}>;
+      
+      if (customEvent.detail?.modalId === 'consultation-modal') {
         try {
           // Remove any Cal iframes to free up resources
           const calIframes = document.querySelectorAll('iframe[src*="cal.com"]');
           calIframes.forEach(iframe => {
             iframe.remove();
           });
+          
+          // Reset all steps to initial state
+          document.querySelectorAll('.modal-step').forEach((step, index) => {
+            if (index === 0) {
+              step.classList.remove('hidden');
+              step.classList.add('active');
+            } else {
+              step.classList.add('hidden');
+              step.classList.remove('active');
+            }
+          });
+          
+          // Reset indicators
+          document.querySelectorAll('.modal-step-indicator .step').forEach((indicator, index) => {
+            const currentStep = index + 1;
+            const circle = indicator.querySelector('.w-4');
+            const line = indicator.querySelector('.h-1');
+            
+            if (currentStep === 1) {
+              indicator.classList.add('active');
+              indicator.classList.remove('completed');
+              
+              if (circle) {
+                circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs';
+              }
+              
+              if (line) {
+                line.className = 'h-1 bg-red-600 flex-grow rounded-full';
+              }
+            } else {
+              indicator.classList.remove('active', 'completed');
+              
+              if (circle) {
+                circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs';
+              }
+              
+              if (line) {
+                line.className = 'h-1 bg-gray-300 flex-grow rounded-full';
+              }
+            }
+          });
         } catch (e) {
-          console.error('Error cleaning up Cal resources:', e);
+          // Silent fail
         }
       }
     });
