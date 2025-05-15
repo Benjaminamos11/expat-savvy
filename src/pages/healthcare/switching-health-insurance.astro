@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ConsultationModal from '../../components/consultation/ConsultationModal.astro';
+import HowToSchema from '../../components/schema/HowToSchema.astro';
 
 const reasons = [
   {
@@ -136,9 +137,62 @@ const steps = [
 ---
 
 <Layout
-  title="Switching Health Insurance in Switzerland 2025 | Complete Guide"
-  description="Expert guide on changing health insurance in Switzerland. Learn when and how to switch providers, compare options, and save on premiums. Free consultation available."
+  title="Switching Health Insurance in Switzerland: Your Step-by-Step Guide"
+  description="Learn when and how to switch health insurance providers in Switzerland to optimize your coverage and costs."
 >
+  <!-- Add HowTo Schema for switching health insurance -->
+  <HowToSchema
+    name="How to Switch Health Insurance in Switzerland"
+    description="A comprehensive guide to changing your health insurance provider in Switzerland, covering deadlines, requirements, and best practices."
+    totalTime="PT3H"
+    steps={[
+      {
+        name: "Check the deadlines and notice periods",
+        text: "Verify if you're within the window for basic insurance cancellation (by November 30 for January 1 changes) or supplementary insurance (check your policy for specific notice periods, typically 3-6 months)."
+      },
+      {
+        name: "Research and compare insurance providers",
+        text: "Compare premiums, service quality, and coverage options between different insurance companies to find the best fit for your needs and budget."
+      },
+      {
+        name: "Get quotes from selected insurers",
+        text: "Contact shortlisted insurance companies to receive personalized quotes based on your profile and preferences."
+      },
+      {
+        name: "Submit formal cancellation to current insurer",
+        text: "Send a registered letter (Einschreiben/recommandé) to your current insurance company before the deadline, clearly stating your intention to terminate the policy."
+      },
+      {
+        name: "Apply for new insurance",
+        text: "Complete and submit an application form to your chosen new insurance provider, including all required personal documentation."
+      },
+      {
+        name: "Wait for confirmation from both insurers",
+        text: "Receive confirmation of cancellation from your old insurer and acceptance from your new provider before considering the switch complete."
+      },
+      {
+        name: "Update payment information",
+        text: "Set up new payment arrangements with your new insurance provider and confirm cancellation of any automatic payments to your previous insurer."
+      }
+    ]}
+    tools={[
+      {
+        name: "Comparison website or broker service",
+        description: "A tool to compare multiple insurance options quickly"
+      },
+      {
+        name: "Registered mail service",
+        description: "For sending formal cancellation letters with proof of delivery"
+      }
+    ]}
+    supply={[
+      "Personal identification documents",
+      "Insurance policy details",
+      "Swiss residence permit",
+      "Bank account information"
+    ]}
+  />
+
   <!-- Hero Section -->
   <div class="relative bg-white overflow-hidden">
     <div class="absolute inset-0">
@@ -1341,13 +1395,13 @@ const steps = [
         "@type": "ListItem",
         "position": 2,
         "name": "Healthcare",
-        "item": "https://expat-savvy.ch/healthcare/"
+        "item": "https://expat-savvy.ch/healthcare"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Switching Health Insurance",
-        "item": Astro.url.href
+        "item": "https://expat-savvy.ch/healthcare/switching-health-insurance"
       }
     ]
   }, null, 2)} />

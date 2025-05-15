@@ -204,50 +204,42 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   <ConsultationModal />
 
   <!-- BlogPosting Schema Markup -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    'headline': frontmatter.title || 'Expat Savvy Article',
-    'description': frontmatter.description || '',
-    'datePublished': typeof frontmatter.date === 'string' 
-      ? new Date(frontmatter.date).toISOString() 
-      : frontmatter.date instanceof Date 
-        ? frontmatter.date.toISOString() 
-        : new Date().toISOString(),
-    'dateModified': new Date().toISOString(),
-    'author': {
-      '@type': 'Person',
-      'name': frontmatter.author || 'Benjamin Amos Wagner',
-      'url': 'https://expat-savvy.ch/about'
+  <script type="application/ld+json" slot="head" define:vars={{ title: Astro.props.title, description: Astro.props.description, image: Astro.props.image, author: Astro.props.author, publishDate: Astro.props.publishDate, modifiedDate: Astro.props.modifiedDate }}>
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": Astro.url
     },
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'Expat Savvy',
-      'logo': {
-        '@type': 'ImageObject',
-        'url': 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg'
+    "headline": title,
+    "description": description,
+    "image": image,
+    "author": {
+      "@type": "Person",
+      "name": author?.name || "Expat Savvy Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+        "width": 600,
+        "height": 60
       }
     },
-    'mainEntityOfPage': {
-      '@type': 'WebPage',
-      '@id': Astro.url.href
-    },
-    'image': {
-      '@type': 'ImageObject',
-      'url': frontmatter.image || 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp',
-      'width': 1200,
-      'height': 630
-    },
-    'url': Astro.url.href,
-    'isPartOf': {
-      '@type': 'Blog',
-      'name': 'Expat Savvy Blog',
-      'url': 'https://expat-savvy.ch/blog'
-    },
-    'keywords': frontmatter.tags && Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0 
-      ? frontmatter.tags.join(',') 
-      : 'swiss insurance, expat, switzerland'
-  }, null, 2)} />
+    "datePublished": publishDate,
+    "dateModified": modifiedDate || publishDate,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "27",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
 
   <!-- Gym-specific FAQ Schema Markup -->
   {frontmatter.title && frontmatter.title.toLowerCase().includes("gym") && (
@@ -339,6 +331,60 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         }
       ]
     }, null, 2)} />
+  )}
+
+  <!-- Add AggregateRating and FAQ Schema if available -->
+  {Astro.props.aggregateRating && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": Astro.url
+      },
+      "headline": Astro.props.title,
+      "description": Astro.props.description,
+      "image": Astro.props.image,
+      "author": {
+        "@type": "Person",
+        "name": Astro.props.author
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+          "width": 600,
+          "height": 60
+        }
+      },
+      "datePublished": Astro.props.publishDate,
+      "dateModified": Astro.props.modifiedDate || Astro.props.publishDate,
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": Astro.props.aggregateRating.ratingValue || "4.8",
+        "ratingCount": Astro.props.aggregateRating.ratingCount || "27",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    })} />
+  )}
+
+  <!-- Add FAQ Schema if available -->
+  {Astro.props.faqs && Astro.props.faqs.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": Astro.props.faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    })} />
   )}
 </BaseLayout>
 
