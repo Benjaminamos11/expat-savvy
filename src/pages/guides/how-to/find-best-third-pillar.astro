@@ -1,0 +1,609 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand the Swiss pension system",
+    text: "Learn about the three-pillar system in Switzerland and how the 3rd pillar (private pension) complements the mandatory state pension (1st pillar) and occupational pension (2nd pillar)."
+  },
+  {
+    name: "Determine your investment profile",
+    text: "Assess your risk tolerance, investment timeframe, and retirement goals to determine whether a conservative, balanced, or growth-oriented 3rd pillar strategy suits you best."
+  },
+  {
+    name: "Compare 3a pension accounts",
+    text: "Research and compare traditional 3a pension accounts from banks, which offer low risk and fixed or variable interest rates with capital protection but lower return potential."
+  },
+  {
+    name: "Evaluate 3a pension funds",
+    text: "Investigate 3a pension funds (or securities-based 3a) from insurance companies and banks that invest in financial markets for potentially higher returns but with greater risk."
+  },
+  {
+    name: "Consider digital solutions",
+    text: "Explore digital providers and robo-advisors with lower fees, greater transparency, and flexible investment strategies tailored to different risk profiles."
+  },
+  {
+    name: "Calculate tax benefits",
+    text: "Determine the tax advantages of investing in a 3rd pillar based on your income, canton of residence, and maximum annual contribution limits (CHF 7,056 for employed persons in 2025)."
+  },
+  {
+    name: "Open your 3rd pillar account",
+    text: "Complete the application process with your chosen provider, set up regular contributions, and consider diversifying across multiple 3rd pillar accounts for greater flexibility."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "What is the 3rd pillar in Switzerland?",
+    answer: "The 3rd pillar is Switzerland's private, voluntary pension system that complements the mandatory state pension (1st pillar) and occupational pension (2nd pillar). It consists of tax-privileged retirement savings (Pillar 3a) and other private investments (Pillar 3b). The 3a pillar offers significant tax advantages, allowing you to deduct contributions from your taxable income up to a yearly maximum (CHF 7,056 for employed persons and 20% of income up to CHF 35,280 for self-employed persons in 2025)."
+  },
+  {
+    question: "What's the difference between 3a accounts and 3a securities/funds?",
+    answer: "3a pension accounts (offered by banks) are similar to savings accounts with guaranteed capital and fixed or variable interest rates, typically offering low returns (0.05%-0.25% currently) but without investment risk. 3a securities/funds invest your contributions in financial markets (stocks, bonds, etc.) through predefined investment strategies with different risk levels. These offer higher potential returns (historically 2%-7% depending on strategy) but come with market risks and no capital guarantees."
+  },
+  {
+    question: "How do I choose between traditional and digital 3a providers?",
+    answer: "Traditional providers (banks and insurance companies) offer in-person service and often bundle 3a products with other financial services. Digital providers and robo-advisors typically offer lower fees (0.5%-0.75% vs 1.0%-1.5% for traditional providers), greater transparency, and more flexible investment options. Your choice should depend on your comfort with digital tools, the importance of personal consultation, fee sensitivity, and investment sophistication."
+  },
+  {
+    question: "Can I have multiple 3rd pillar accounts?",
+    answer: "Yes, you can have multiple 3a accounts with different providers. This strategy offers several advantages: diversifying investment risk, staggering withdrawal dates to avoid tax progression, taking advantage of specialized offers from different providers, and comparing performance. However, the total annual contribution across all accounts cannot exceed the maximum allowable deduction (CHF 7,056 for employed persons in 2025)."
+  },
+  {
+    question: "When and how can I withdraw my 3rd pillar funds?",
+    answer: "You can withdraw your 3a funds at regular retirement age (65 for men, 64 for women), up to 5 years before this age if you continue working, or when you leave Switzerland permanently. Early withdrawals are also possible for purchasing a primary residence, starting self-employment, or moving to another EU/EFTA country under certain conditions. Withdrawals are taxed separately from your income at a reduced rate, which varies by canton."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "3rd pillar comparison platforms",
+    description: "Online tools to compare different 3a providers and their offerings"
+  },
+  {
+    name: "Tax savings calculators",
+    description: "Tools to estimate the tax benefits of 3a contributions"
+  },
+  {
+    name: "Risk assessment questionnaires",
+    description: "Surveys to determine your investment risk profile"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Personal identification documents",
+  "Information about your current income and tax situation",
+  "Details of existing pension arrangements (1st and 2nd pillars)",
+  "Long-term financial and retirement goals",
+  "Risk tolerance assessment"
+];
+
+// Provider comparison data
+const providerComparison = [
+  {
+    type: "Traditional Bank 3a Accounts",
+    riskLevel: "Very Low",
+    expectedReturn: "0.05%-0.25%",
+    fees: "Minimal or none",
+    bestFor: "Very conservative investors prioritizing capital security above all"
+  },
+  {
+    type: "Bank 3a Investment Solutions",
+    riskLevel: "Low to Medium",
+    expectedReturn: "1%-4%",
+    fees: "0.8%-1.2% per year",
+    bestFor: "Balanced investors with 10+ year horizons seeking moderate growth"
+  },
+  {
+    type: "Insurance 3a Solutions",
+    riskLevel: "Low to Medium",
+    expectedReturn: "1%-3%",
+    fees: "1.0%-1.5% per year",
+    bestFor: "Investors wanting combination of investment and insurance protection"
+  },
+  {
+    type: "Digital/Robo-Advisor 3a",
+    riskLevel: "Low to High (customizable)",
+    expectedReturn: "2%-7% depending on risk level",
+    fees: "0.5%-0.75% per year",
+    bestFor: "Fee-conscious, digitally comfortable investors seeking higher returns"
+  },
+  {
+    type: "Self-Directed 3a Investment",
+    riskLevel: "Customizable (potentially high)",
+    expectedReturn: "Variable based on investment choices",
+    fees: "Trading fees plus 0.2%-0.5% product fees",
+    bestFor: "Experienced investors who want maximum control over their 3a investments"
+  }
+];
+
+// Common mistakes to avoid
+const commonMistakes = [
+  {
+    title: "Overlooking fees",
+    description: "Not considering the long-term impact of management fees, which can significantly reduce returns over decades"
+  },
+  {
+    title: "Choosing inappropriate risk levels",
+    description: "Selecting overly conservative strategies for long investment horizons or too aggressive for short timeframes"
+  },
+  {
+    title: "Not maximizing tax benefits",
+    description: "Failing to contribute the maximum allowable amount or not timing contributions optimally for tax purposes"
+  },
+  {
+    title: "Neglecting portfolio diversification",
+    description: "Concentrating all 3a savings with one provider or in one investment strategy"
+  },
+  {
+    title: "Forgetting withdrawal planning",
+    description: "Not developing a strategy for staged withdrawals to minimize the tax impact at retirement"
+  }
+];
+---
+
+<Layout
+  title="How to Find the Best 3rd Pillar Provider in Switzerland | Guide 2025"
+  description="Compare Switzerland's best 3rd pillar (pension pillar 3a) options to maximize returns and tax benefits. Expert guide for expats on private pension investments."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-stylized-hand-drawn-sketch-in-red-and-_0X-QLYauSvagbqHWT_YNQg_mxoIrEg6QS6ES0zn0FS9Qw_hlo3lx.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Find the Best 3rd Pillar Provider in Switzerland"
+    description="A comprehensive guide to comparing and selecting the optimal 3rd pillar option in Switzerland based on your investment goals, risk tolerance, and tax situation."
+    totalTime="PT3H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-stylized-hand-drawn-sketch-in-red-and-_0X-QLYauSvagbqHWT_YNQg_mxoIrEg6QS6ES0zn0FS9Qw_hlo3lx.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-stylized-hand-drawn-sketch-in-red-and-_0X-QLYauSvagbqHWT_YNQg_mxoIrEg6QS6ES0zn0FS9Qw_hlo3lx.webp"
+        alt="Finding the best third pillar provider in Switzerland"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Finding the Best</span>
+          <span class="block mt-2">3rd Pillar in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Optimize your retirement savings with the ideal private pension strategy for your needs, balancing returns, risk, and tax advantages.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Pension Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#comparison"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Providers
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding the Swiss Pension System</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          The Swiss pension system consists of three pillars, each serving a distinct purpose in ensuring financial security during retirement. The 3rd pillar is a voluntary, private pension scheme that complements the mandatory state pension (1st pillar) and occupational pension (2nd pillar).
+        </p>
+        <p class="text-lg text-gray-600">
+          Investing in a 3rd pillar account offers significant tax advantages while helping you build additional retirement savings. However, with numerous providers offering different products, fees, and investment strategies, finding the right option requires careful consideration of your financial goals, risk tolerance, and investment horizon.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">The Two Types of 3rd Pillar</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <span class="text-xl font-bold">3a</span>
+              </div>
+              <span class="text-gray-900 font-medium">Restricted Pension</span>
+              <p class="text-gray-600 text-sm mt-2">Tax-privileged with contribution limits and withdrawal restrictions but significant tax benefits</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <span class="text-xl font-bold">3b</span>
+              </div>
+              <span class="text-gray-900 font-medium">Unrestricted Savings</span>
+              <p class="text-gray-600 text-sm mt-2">Flexible private savings without tax deductions at contribution but greater access flexibility</p>
+            </div>
+          </div>
+          <div class="mt-6 bg-gray-50 p-4 rounded-lg">
+            <p class="text-sm text-gray-600">
+              <span class="font-medium">Note:</span> This guide focuses primarily on Pillar 3a options, as these offer the most significant tax advantages for Swiss residents.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Provider Comparison Section -->
+  <div id="comparison" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Comparing 3rd Pillar Options</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Understand the different types of 3rd pillar providers and their offerings to make an informed decision.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Provider Type</th>
+                <th class="py-3 px-4 text-left">Risk Level</th>
+                <th class="py-3 px-4 text-left">Expected Return</th>
+                <th class="py-3 px-4 text-left">Typical Fees</th>
+                <th class="py-3 px-4 text-left">Best For</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {providerComparison.map(provider => (
+                <tr class="hover:bg-gray-50">
+                  <td class="py-4 px-4 font-medium">{provider.type}</td>
+                  <td class="py-4 px-4">{provider.riskLevel}</td>
+                  <td class="py-4 px-4">{provider.expectedReturn}</td>
+                  <td class="py-4 px-4">{provider.fees}</td>
+                  <td class="py-4 px-4">{provider.bestFor}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-4 text-center text-sm text-gray-500">
+        Note: Returns are historical estimates and not guaranteed for future performance. Fees may vary by specific provider and product.
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Finding Your Ideal 3rd Pillar: Step-by-Step</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow this methodical approach to identify and select the 3rd pillar solution that best matches your retirement goals and risk profile.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">The Three Pillars of Swiss Pension System:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">1st Pillar (AHV/AVS):</span> The state pension providing basic subsistence needs in retirement. Mandatory for all residents and funded through salary deductions.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">2nd Pillar (BVG/LPP):</span> Occupational pension from your employer, helping to maintain your standard of living after retirement. Mandatory for employees earning over CHF 22,050 annually.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">3rd Pillar:</span> Voluntary private pension to fill any gaps and provide additional retirement income. Consists of restricted (3a) and unrestricted (3b) options.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 1 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Common Investment Profiles:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Conservative (Low Risk):</span> Priority on capital preservation with low volatility. Typically 0-20% stocks, remainder in bonds and money market instruments. Suitable for short investment horizons (less than 5 years) or very low risk tolerance.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Balanced (Medium Risk):</span> Seeks moderate growth with moderate volatility. Typically 20-50% stocks. Suitable for medium investment horizons (5-15 years) and average risk tolerance.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Growth (Higher Risk):</span> Prioritizes capital growth with higher volatility. Typically 50-80% stocks. Appropriate for long investment horizons (15+ years) and higher risk tolerance.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 5 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Tax Benefits Example:</h4>
+                    <p class="text-gray-600 mb-3">
+                      For an individual with a taxable income of CHF 100,000 in Zurich:
+                    </p>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Annual 3a Contribution</th>
+                            <th class="py-2 px-3 text-left">Tax Savings (Approximate)</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3">CHF 0</td>
+                            <td class="py-2 px-3">CHF 0</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">CHF 3,500</td>
+                            <td class="py-2 px-3">CHF 1,000</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">CHF 7,056 (Maximum 2025)</td>
+                            <td class="py-2 px-3">CHF 2,100</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Note: Tax savings vary by canton, commune, and individual tax situation. Always consult a tax professional for personalized advice.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help Selecting the Right 3rd Pillar?</h3>
+          <p class="text-gray-600 mb-8">Our financial advisors can analyze your situation and help you choose the optimal 3rd pillar solution based on your retirement goals and risk profile.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Pension Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your retirement planning needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Mistakes Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Common Mistakes to Avoid</h2>
+        
+        <div class="space-y-6">
+          {commonMistakes.map(mistake => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{mistake.title}</h3>
+              <p class="text-gray-600">{mistake.description}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-10 bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Important Reminder</h3>
+          <p class="text-gray-700">To maximize tax benefits, make your 3rd pillar contributions before the end of the calendar year. While most providers accept contributions until December 31st, it's advisable to make them by mid-December to ensure they're processed in time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about choosing the right 3rd pillar in Switzerland?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Pension Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about financial planning in Switzerland.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/swiss-pension-system" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Swiss Pension System Explained</h3>
+          </div>
+          <p class="text-gray-600">Comprehensive overview of all three pillars of the Swiss pension system.</p>
+        </a>
+        
+        <a href="/guides/retirement-planning-switzerland" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Retirement Planning in Switzerland</h3>
+          </div>
+          <p class="text-gray-600">Strategic approach to planning your retirement as an expat in Switzerland.</p>
+        </a>
+        
+        <a href="/guides/tax-optimization-switzerland" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Tax Optimization Strategies</h3>
+          </div>
+          <p class="text-gray-600">Learn how to legally minimize your tax burden in Switzerland, including with pension contributions.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to optimize your retirement savings?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts can help you select the best 3rd pillar solution for your financial goals
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Find Best Third Pillar",
+        "item": "https://expat-savvy.ch/guides/how-to/find-best-third-pillar"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

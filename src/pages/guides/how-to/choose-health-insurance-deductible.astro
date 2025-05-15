@@ -276,16 +276,453 @@ const supplies = [
     </div>
   </div>
 
-  <!-- Step by Step Guide - to be added in subsequent edit -->
+  <!-- Step by Step Guide Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Choosing Your Ideal Deductible: Step-by-Step</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these seven steps to select the deductible level that best matches your healthcare needs and financial situation.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">The Swiss Deductible System Explained:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Annual Reset:</span> Your deductible resets every January 1st, regardless of when you reached it in the previous year.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Co-Payment:</span> After reaching your deductible, you still pay 10% of costs up to an annual maximum of CHF 700 for adults or CHF 350 for children.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Children's Deductibles:</span> For those under 18, different deductible options and rates apply, with a standard deductible of only CHF 0 and maximum of CHF 600.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Excluded Services:</span> Some services bypass the deductible entirely, including maternity care, certain preventive services, and some accident-related treatments.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Breakeven Calculation Example:</h4>
+                    <p class="text-gray-600 mb-3">
+                      Let's say you're considering increasing your deductible from CHF 300 to CHF 2,500:
+                    </p>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Factor</th>
+                            <th class="py-2 px-3 text-left">Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3">Annual premium with CHF 300 deductible</td>
+                            <td class="py-2 px-3">CHF 4,800 (CHF 400/month)</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">Annual premium with CHF 2,500 deductible</td>
+                            <td class="py-2 px-3">CHF 3,600 (CHF 300/month)</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">Annual premium savings</td>
+                            <td class="py-2 px-3">CHF 1,200</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">Additional out-of-pocket maximum</td>
+                            <td class="py-2 px-3">CHF 2,200 (CHF 2,500 - CHF 300)</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Breakeven healthcare expenses</td>
+                            <td class="py-2 px-3 font-medium">CHF 1,500</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">
+                      In this example, if your annual healthcare expenses are below CHF 1,500, the higher deductible makes financial sense. If they exceed CHF 1,500, the lower deductible is more cost-effective.
+                    </p>
+                  </div>
+                )}
+                
+                {index === 4 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Special Circumstances to Consider:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Pregnancy:</span> If you're planning to become pregnant, consider a lower deductible since maternity-related costs are exempt from the deductible and co-payment once pregnancy is confirmed.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Planned Procedures:</span> If you have a scheduled surgery or other expensive treatment, calculate whether the lower deductible plus premium cost would be less than a higher deductible plus premium.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Chronic Conditions:</span> For ongoing treatments requiring regular care, a lower deductible is typically more cost-effective since you're likely to exceed it early in the year.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Family Planning:</span> When choosing deductibles for children, remember they generally have lower healthcare costs but may need more preventive care.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help Selecting the Right Deductible?</h3>
+          <p class="text-gray-600 mb-8">Our insurance experts can review your healthcare needs and financial situation to recommend the optimal deductible level for your circumstances.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Calculator/Interactive Section - to be added in subsequent edit -->
+  <!-- Calculator/Interactive Section -->
+  <div id="calculator" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Deductible Decision Tool</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Use this simplified guide to help determine which deductible level might be right for your situation.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-primary-600 text-white p-4">
+          <h3 class="text-xl font-bold">Which Deductible Might Be Right For You?</h3>
+        </div>
+        
+        <div class="p-6">
+          <div class="space-y-8">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-4">Low Deductible (CHF 300-500) May Be Best If:</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You visit doctors frequently (more than 4-5 times per year)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You have a chronic condition requiring regular treatment</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You take multiple prescription medications regularly</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You have planned medical procedures in the coming year</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You prefer predictable monthly costs over potentially high one-time expenses</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-4">Medium Deductible (CHF 1,000-1,500) May Be Best If:</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You visit doctors occasionally (2-3 times per year)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You take some medications but not on a continuous basis</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You have some savings to cover potential out-of-pocket costs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You're looking for a balance between monthly premiums and potential out-of-pocket expenses</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-4">High Deductible (CHF 2,000-2,500) May Be Best If:</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You rarely visit doctors (0-1 times per year)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You don't take any prescription medications regularly</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You have substantial savings to cover potential out-of-pocket costs</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You're comfortable with financial risk and prioritize lower monthly premiums</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>You're generally healthy with no anticipated medical procedures</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="mt-8">
+            <div class="bg-yellow-50 p-4 rounded-lg">
+              <p class="text-sm text-yellow-800">
+                <span class="font-bold">Important Note:</span> This is a general guide only. Your specific healthcare needs, financial situation, and risk tolerance should all be carefully considered when making this decision.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- FAQ Section - to be added in subsequent edit -->
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about choosing the right deductible?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Related Guides - to be added in subsequent edit -->
-
-  <!-- CTA Section - to be added in subsequent edit -->
+  <!-- Related Guides Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss health insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Change Insurance Models</h3>
+          </div>
+          <p class="text-gray-600">Learn how to save up to 20% by selecting the right insurance model for your healthcare needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/find-best-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Finding the Best Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Compare providers and plans to find the perfect coverage for your specific needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/apply-premium-subsidies" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Apply for Premium Subsidies</h3>
+          </div>
+          <p class="text-gray-600">Learn if you qualify for premium reductions and how to apply in your canton.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to optimize your health insurance deductible?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts can help you select the ideal deductible based on your healthcare needs and financial situation
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Consultation Modal -->
   <ConsultationModal />
-</Layout> 
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Choose Health Insurance Deductible",
+        "item": "https://expat-savvy.ch/guides/how-to/choose-health-insurance-deductible"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 
