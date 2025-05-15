@@ -286,6 +286,45 @@ const finalProviderName = props.providerName || providerName;
             // Fail silently if sessionStorage is unavailable
           }
           
+          // Submit lead data to Formspree
+          const currentPageUrl = window.location.href;
+          const pageTitle = document.title;
+          const formData = new FormData();
+          
+          // Add user data fields
+          formData.append('name', userData.name);
+          formData.append('email', userData.email);
+          formData.append('phone', userData.phone);
+          formData.append('topic', userData.topic);
+          formData.append('source', userData.source);
+          formData.append('notes', userData.notes);
+          formData.append('insurance_type', userData.insuranceType);
+          formData.append('provider_name', userData.providerName);
+          
+          // Add page context information
+          formData.append('page_url', currentPageUrl);
+          formData.append('page_title', pageTitle);
+          formData.append('date_submitted', new Date().toISOString());
+          
+          // Send data to Formspree (don't await to avoid blocking UI)
+          fetch('https://formspree.io/f/mrbewjlr', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              console.log('Form submission to Formspree successful');
+            } else {
+              console.error('Form submission to Formspree failed');
+            }
+          })
+          .catch(error => {
+            console.error('Error submitting to Formspree:', error);
+          });
+          
           // Update insurance type based on topic if needed
           if (userData.topic === 'new-insurance') {
             userData.insuranceType = 'new-health';
