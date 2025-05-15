@@ -1,0 +1,291 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand the Swiss deductible system",
+    text: "Learn about the available deductible levels in Switzerland (CHF 300, 500, 1000, 1500, 2000, 2500) and how they affect your monthly premiums and out-of-pocket costs."
+  },
+  {
+    name: "Calculate your expected annual healthcare usage",
+    text: "Estimate your yearly healthcare costs based on your medical history, planned treatments, regular medications, and typical doctor visits."
+  },
+  {
+    name: "Determine your breakeven point",
+    text: "Calculate the point at which a higher deductible saves you money, based on premium differences between deductible levels and your expected healthcare costs."
+  },
+  {
+    name: "Consider your financial situation",
+    text: "Assess your ability to pay the full deductible amount out-of-pocket at once if needed, and your comfort level with financial risk."
+  },
+  {
+    name: "Evaluate special circumstances",
+    text: "Factor in planned procedures, pregnancy, chronic conditions, or other special situations that might affect your healthcare needs in the coming year."
+  },
+  {
+    name: "Make your decision and apply",
+    text: "Select the appropriate deductible level when signing up for a new insurance plan or request a change with your current provider during the allowed period."
+  },
+  {
+    name: "Reassess annually",
+    text: "Review your choice each year before the November 30 deadline based on changes in your health status, financial situation, or premium rates."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "What is a deductible (franchise) in Swiss health insurance?",
+    answer: "A deductible (franchise in French/German) is the amount you pay out-of-pocket each year for healthcare services before your insurance begins to cover costs. In Switzerland, basic health insurance offers deductible options ranging from CHF 300 to CHF 2,500. The higher your deductible, the lower your monthly premiums, but the more you'll pay before insurance coverage kicks in."
+  },
+  {
+    question: "How much can I save with a higher deductible?",
+    answer: "The premium reduction depends on the deductible level chosen. Generally, each step up in deductible level reduces your monthly premium. For example, increasing from the standard CHF 300 deductible to the maximum CHF 2,500 deductible can save approximately 30-40% on monthly premiums, resulting in annual savings of CHF 1,000-1,500 for an average adult, though this varies by insurer and canton."
+  },
+  {
+    question: "When can I change my deductible?",
+    answer: "You can change your deductible for the following calendar year by notifying your insurance provider by November 30. Some insurers may allow you to increase your deductible mid-year, but decreasing it is only possible at the beginning of a new calendar year."
+  },
+  {
+    question: "Is a high deductible always better if I'm healthy?",
+    answer: "Not necessarily. While healthy individuals often benefit from higher deductibles, you should consider your financial reserves, risk tolerance, and potential for unexpected health issues. Remember that a CHF 2,500 deductible means you might need to pay this amount in full before receiving insurance benefits. Unexpected health issues can happen even to healthy people."
+  },
+  {
+    question: "Do deductibles apply to all healthcare services?",
+    answer: "Most medical services are subject to the deductible, including doctor visits, hospital stays, and medications. However, some preventive services are exempt, such as mammograms for breast cancer screening, certain prenatal care services, and some vaccinations. Additionally, maternity-related services are not subject to the deductible once pregnancy is confirmed."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Premium calculator",
+    description: "Online tools to calculate premium differences between deductible levels"
+  },
+  {
+    name: "Personal health expense tracker",
+    description: "Spreadsheet or app to track your healthcare expenses"
+  },
+  {
+    name: "Breakeven point calculator",
+    description: "Tool to determine at what point a higher deductible becomes financially beneficial"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Information about your current health insurance policy",
+  "Records of past healthcare expenses",
+  "List of regular medications and treatments",
+  "Details of planned medical procedures for the coming year",
+  "Information about your financial reserves"
+];
+---
+
+<Layout
+  title="How to Choose the Right Health Insurance Deductible in Switzerland | Guide"
+  description="Learn how to select the optimal health insurance deductible (franchise) for your situation. Compare options and calculate potential savings with our Swiss guide."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747142546/a-professional-illustration-showing-a-per_Zcwbn87dQoC2WxPyL-vJww_JdHEDYfkSdm1QFRwKA-j2Q_wjgf8p.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Choose the Right Health Insurance Deductible in Switzerland"
+    description="A comprehensive guide to selecting the optimal health insurance deductible based on your healthcare needs, financial situation, and risk tolerance."
+    totalTime="PT2H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747142546/a-professional-illustration-showing-a-per_Zcwbn87dQoC2WxPyL-vJww_JdHEDYfkSdm1QFRwKA-j2Q_wjgf8p.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747142546/a-professional-illustration-showing-a-per_Zcwbn87dQoC2WxPyL-vJww_JdHEDYfkSdm1QFRwKA-j2Q_wjgf8p.webp"
+        alt="Choosing the Right Health Insurance Deductible"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Choosing the Right</span>
+          <span class="block mt-2">Deductible in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Find the optimal balance between monthly premiums and out-of-pocket costs with our step-by-step guide to selecting your ideal franchise.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#calculator"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Deductible Calculator
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding the Swiss Deductible System</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          In Switzerland, the deductible (franchise) is a key component of the health insurance system that directly impacts both your monthly premiums and out-of-pocket expenses. It's the amount you must pay for healthcare services each year before your insurance begins to cover costs.
+        </p>
+        <p class="text-lg text-gray-600">
+          Choosing the right deductible requires balancing immediate monthly savings against potential healthcare costs. While a higher deductible means lower monthly premiums, it also means you'll pay more out-of-pocket if you need medical care.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Key Facts About Swiss Deductibles</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Six Levels Available</span>
+              <p class="text-gray-600 text-sm mt-2">CHF 300, 500, 1000, 1500, 2000, or 2500</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Annual Reset</span>
+              <p class="text-gray-600 text-sm mt-2">Deductibles reset every January 1st</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Change Deadline</span>
+              <p class="text-gray-600 text-sm mt-2">Must request changes by November 30th</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deductible Comparison -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Comparing Deductible Options</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">See how different deductible levels affect your premiums and potential savings.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Deductible Level</th>
+                <th class="py-3 px-4 text-left">Premium Reduction*</th>
+                <th class="py-3 px-4 text-left">Annual Premium Savings*</th>
+                <th class="py-3 px-4 text-left">Best For</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CHF 300 (Standard)</td>
+                <td class="py-4 px-4">Base rate</td>
+                <td class="py-4 px-4">None (reference)</td>
+                <td class="py-4 px-4">People with frequent healthcare needs or chronic conditions</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CHF 500</td>
+                <td class="py-4 px-4">Approx. 5-8%</td>
+                <td class="py-4 px-4">CHF 150-240</td>
+                <td class="py-4 px-4">People who visit doctors several times a year</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CHF 1,000</td>
+                <td class="py-4 px-4">Approx. 10-15%</td>
+                <td class="py-4 px-4">CHF 300-450</td>
+                <td class="py-4 px-4">People with occasional healthcare needs</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CHF 1,500</td>
+                <td class="py-4 px-4">Approx. 15-20%</td>
+                <td class="py-4 px-4">CHF 450-600</td>
+                <td class="py-4 px-4">Generally healthy people with rare doctor visits</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CHF 2,000</td>
+                <td class="py-4 px-4">Approx. 20-30%</td>
+                <td class="py-4 px-4">CHF 600-900</td>
+                <td class="py-4 px-4">Very healthy people with strong financial reserves</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CHF 2,500</td>
+                <td class="py-4 px-4">Approx. 30-40%</td>
+                <td class="py-4 px-4">CHF 900-1,200</td>
+                <td class="py-4 px-4">Rarely ill people with significant savings and high risk tolerance</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-4 text-center text-sm text-gray-500">
+        *Percentages and savings are approximate and vary by insurer, canton, and individual factors. Based on an average premium of CHF 300/month.
+      </div>
+      
+      <div class="mt-12 max-w-4xl mx-auto">
+        <div class="bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">The Breakeven Calculation</h3>
+          <p class="text-gray-700 mb-4">
+            To determine if a higher deductible makes financial sense, you need to calculate your breakeven point:
+          </p>
+          <div class="bg-white p-4 rounded-lg">
+            <p class="font-medium text-center">Annual Premium Savings + Current Deductible > New Higher Deductible</p>
+          </div>
+          <p class="text-gray-700 mt-4">
+            For example, if increasing your deductible from CHF 300 to CHF 2,500 saves you CHF 1,000 in annual premiums, your calculation would be: CHF 1,000 + CHF 300 = CHF 1,300, which is less than CHF 2,500. In this case, you would need to have healthcare costs below CHF 1,300 to benefit from the higher deductible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide - to be added in subsequent edit -->
+
+  <!-- Calculator/Interactive Section - to be added in subsequent edit -->
+
+  <!-- FAQ Section - to be added in subsequent edit -->
+
+  <!-- Related Guides - to be added in subsequent edit -->
+
+  <!-- CTA Section - to be added in subsequent edit -->
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+</Layout> 

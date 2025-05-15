@@ -1,0 +1,1054 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Check your supplementary insurance coverage",
+    text: "Review your current supplementary insurance (VVG/LCA) policy documents to determine if fitness or gym benefits are already included. Look for terms like 'fitness', 'prevention', 'wellness', or 'health promotion'."
+  },
+  {
+    name: "Identify insurance providers with gym benefits",
+    text: "Research which insurance companies offer the best gym reimbursement. SWICA offers up to 90% of costs (max CHF 500) per year with their COMPLETA FORTE plan, while CSS, Helsana, and Sanitas also provide competitive coverage options."
+  },
+  {
+    name: "Choose a certified gym or fitness center",
+    text: "Select a gym that is certified by QualiTop or QualiCert, as most insurers require this certification for reimbursement. These quality certifications ensure the facility meets specific standards required by insurance companies."
+  },
+  {
+    name: "Verify the membership type requirement",
+    text: "Check which subscription types your insurer covers. Most require either half-year or annual memberships, while some accept quarterly or even monthly memberships depending on your supplementary plan."
+  },
+  {
+    name: "Join the gym and keep documentation",
+    text: "Sign up for your membership and ensure you receive a detailed receipt that includes the facility name, your personal information, membership dates, and the full amount paid."
+  },
+  {
+    name: "Maintain proof of attendance",
+    text: "While not all insurers require attendance tracking, it's good practice to record your visits as some providers may request this information to verify regular use."
+  },
+  {
+    name: "Submit your claim correctly",
+    text: "Complete your insurer's reimbursement form, attaching your gym membership receipt and any other required documentation. Submit these documents according to your insurer's guidelines, which may be via app, online portal, or mail."
+  },
+  {
+    name: "Follow up on your claim",
+    text: "If you haven't received reimbursement within the expected timeframe (typically 2-4 weeks), contact your insurance provider to check the status of your claim."
+  }
+];
+
+// Define frequently asked questions related to gym coverage
+const faqs = [
+  {
+    question: "Which Swiss health insurance covers the most for gym memberships?",
+    answer: "SWICA currently offers among the most generous gym coverage in Switzerland, with reimbursements of up to 90% of costs (max CHF 500 per year) through their COMPLETA FORTE plan. Other providers with substantial gym benefits include CSS (up to CHF 800 annually with their health promotion supplementary insurance), Helsana (75% up to CHF 200 per year with SANA), and Sanitas (up to CHF 800 per calendar year with Vital Premium)."
+  },
+  {
+    question: "Does basic health insurance (KVG/LAMal) cover gym memberships in Switzerland?",
+    answer: "No, basic mandatory health insurance (KVG/LAMal) does not cover gym memberships. These benefits are exclusively available through supplementary insurance plans (VVG/LCA), which are optional policies that provide coverage beyond the basic requirements."
+  },
+  {
+    question: "Do I need a doctor's prescription for gym reimbursement?",
+    answer: "No, most Swiss health insurance providers do not require a doctor's prescription for gym membership reimbursement. Instead, they typically require that the gym or fitness center be certified by QualiTop or QualiCert. The key requirement is having the appropriate supplementary insurance plan that includes fitness benefits."
+  },
+  {
+    question: "How do I know if my gym is eligible for insurance reimbursement?",
+    answer: "Most Swiss insurers require that the gym or fitness center be certified by QualiTop or QualiCert quality assurance programs. These certifications ensure that the facility meets certain standards. You can usually find this information on the gym's website, at their reception, or by asking staff directly. Many fitness centers prominently display their certification logos."
+  },
+  {
+    question: "Can I get Pilates, yoga, or other fitness classes covered by Swiss health insurance?",
+    answer: "Yes, many supplementary insurance plans cover a variety of fitness activities beyond traditional gym memberships, including Pilates, yoga, swimming, and specialized fitness classes. However, coverage varies by provider and plan. Some insurers have specific lists of approved activities or may require that classes be conducted at certified facilities."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Gym comparison tool",
+    description: "Compare nearby gyms with QualiTop or QualiCert certification"
+  },
+  {
+    name: "Insurance reimbursement calculator",
+    description: "Calculate potential savings based on your supplementary plan"
+  },
+  {
+    name: "Insurance claim forms",
+    description: "The necessary paperwork for submission to your insurance provider"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Valid Swiss health insurance supplementary policy",
+  "Membership at a QualiTop or QualiCert certified gym",
+  "Gym membership contract and receipts"
+];
+---
+
+<Layout
+  title="How to Get Gym Memberships Covered by Swiss Health Insurance | Complete Guide"
+  description="Step-by-step instructions for getting your gym membership reimbursed by Swiss health insurance. Learn which providers offer the best coverage and how to properly submit claims."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"
+>
+  <!-- Add schema markup using our component -->
+  <HowToSchema
+    name="How to Get Gym Memberships Covered by Swiss Health Insurance"
+    description="A comprehensive guide to getting your fitness membership reimbursed by your supplementary health insurance in Switzerland."
+    totalTime="PT2H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"
+        alt="Person at a gym with insurance document"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Get Your Gym Membership</span>
+          <span class="block mt-2">Covered by <span class="text-primary-500">Swiss Insurance</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          A step-by-step guide to maximizing your fitness benefits and getting significant reimbursement from your health insurance.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#step-by-step"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            View Steps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">The Secret to Getting Your Gym Membership Reimbursed</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Did you know that the right Swiss health insurance can cover a significant portion of your annual gym membership costs? With healthcare costs in Switzerland among the highest in the world, taking advantage of fitness benefits can provide substantial savings while encouraging a healthier lifestyle.
+        </p>
+        <p class="text-lg text-gray-600">
+          This comprehensive guide walks you through the exact process of getting your fitness membership covered by your supplementary health insurance in Switzerland. We'll explore which providers offer the best coverage, the certification requirements, and the step-by-step process for submitting successful claims.
+        </p>
+        
+        <div class="mt-6 mb-8">
+          <a href="/blog/swiss-gym-insurance-coverage" class="inline-flex items-center text-primary-600 hover:text-primary-800">
+            <span>Read our detailed blog post about gym coverage options in Switzerland</span>
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Why This Matters</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Save Hundreds of Francs</span>
+              <p class="text-gray-600 text-sm mt-2">Significant financial benefits with the right insurance plan</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Improve Your Health</span>
+              <p class="text-gray-600 text-sm mt-2">Financial incentive to maintain fitness routine</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Maximize Benefits</span>
+              <p class="text-gray-600 text-sm mt-2">Get the most from your existing insurance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div id="step-by-step" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these eight steps to successfully get your gym membership covered by your Swiss health insurance.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Look for These Terms in Your Policy:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                      <li>Fitness (Fitness)</li>
+                      <li>Prevention (Prävention/Prévention)</li>
+                      <li>Health Promotion (Gesundheitsförderung/Promotion de la santé)</li>
+                      <li>Wellness (Wellness)</li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 1 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Top Insurers for Gym Coverage:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/swica" class="text-primary-600 hover:text-primary-800">SWICA</a>: 90% costs up to CHF 500 with COMPLETA FORTE
+                      </li>
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/css" class="text-primary-600 hover:text-primary-800">CSS</a>: Up to CHF 800 with their health promotion benefits
+                      </li>
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/helsana" class="text-primary-600 hover:text-primary-800">Helsana</a>: 75% costs up to CHF 200 with SANA
+                      </li>
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/sanitas" class="text-primary-600 hover:text-primary-800">Sanitas</a>: Up to CHF 800 with Vital Premium
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">About Quality Certifications:</h4>
+                    <p class="text-gray-600 mb-3">For an insurance company to reimburse gym costs, the fitness center must typically have one of these certifications:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                      <li><strong>QualiCert</strong>: A Swiss quality certification program specifically for fitness and wellness centers</li>
+                      <li><strong>QualiTop</strong>: A comprehensive quality management system for health-oriented fitness facilities</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3">Most reputable gyms and fitness centers in Switzerland have these certifications. Look for their logos displayed at the entrance or ask the staff.</p>
+                  </div>
+                )}
+                
+                {index === 3 && (
+                  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg mt-4">
+                    <p class="text-yellow-800">
+                      <strong>Important:</strong> Most insurance companies only cover specific membership durations. From the chart provided by QualiCert, many insurers require half-year or annual memberships, while some will accept quarterly or monthly subscriptions depending on your plan.
+                    </p>
+                  </div>
+                )}
+                
+                {index === 6 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Required Documentation for Claims:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                      <li>Completed reimbursement form (specific to your insurer)</li>
+                      <li>Original gym membership receipt or contract</li>
+                      <li>Proof that the gym is QualiTop or QualiCert certified (usually not needed as insurers have a database)</li>
+                      <li>Documentation showing the membership duration (must match insurer's requirements)</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Ready to Optimize Your Insurance Coverage?</h3>
+          <p class="text-gray-600 mb-8">Not sure if your current plan offers gym coverage? Want to switch to a provider with better fitness benefits?</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Comparison Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Swiss Insurers with the Best Gym Coverage</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Compare the top providers offering fitness reimbursement benefits.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Insurance Provider</th>
+                <th class="py-3 px-4 text-left">Supplementary Plan</th>
+                <th class="py-3 px-4 text-left">Max Annual Benefit</th>
+                <th class="py-3 px-4 text-left">Subscription Type</th>
+                <th class="py-3 px-4 text-left">Certification</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4"><a href="/healthcare/all-insurances/swica" class="text-primary-600 hover:text-primary-800 font-medium">SWICA</a></td>
+                <td class="py-4 px-4">COMPLETA FORTE</td>
+                <td class="py-4 px-4 font-semibold">90% up to CHF 500</td>
+                <td class="py-4 px-4">Half-year or annual</td>
+                <td class="py-4 px-4">QualiTop/QualiCert</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4"><a href="/healthcare/all-insurances/css" class="text-primary-600 hover:text-primary-800 font-medium">CSS</a></td>
+                <td class="py-4 px-4">Gesundheitskonto</td>
+                <td class="py-4 px-4 font-semibold">Up to CHF 800</td>
+                <td class="py-4 px-4">Monthly, half-year, annual</td>
+                <td class="py-4 px-4">QualiTop/QualiCert</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4"><a href="/healthcare/all-insurances/helsana" class="text-primary-600 hover:text-primary-800 font-medium">Helsana</a></td>
+                <td class="py-4 px-4">SANA/COMPLETA</td>
+                <td class="py-4 px-4 font-semibold">75% up to CHF 200</td>
+                <td class="py-4 px-4">Half-year, annual, monthly, 10-pack</td>
+                <td class="py-4 px-4">QualiTop/QualiCert</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4"><a href="/healthcare/all-insurances/sanitas" class="text-primary-600 hover:text-primary-800 font-medium">Sanitas</a></td>
+                <td class="py-4 px-4">Vital Premium</td>
+                <td class="py-4 px-4 font-semibold">80% up to CHF 800</td>
+                <td class="py-4 px-4">Various options</td>
+                <td class="py-4 px-4">QualiTop/QualiCert</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4"><a href="/healthcare/all-insurances/groupe-mutuel" class="text-primary-600 hover:text-primary-800 font-medium">Groupe Mutuel</a></td>
+                <td class="py-4 px-4">Global Solution</td>
+                <td class="py-4 px-4 font-semibold">50% up to CHF 200</td>
+                <td class="py-4 px-4">Half-year, annual</td>
+                <td class="py-4 px-4">QualiTop/QualiCert</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center text-sm text-gray-500">
+        <p>* Benefits and requirements may vary. Always check with the specific insurer for current terms.</p>
+        <p class="mt-2">Data source: QualiCert 2025 overview</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complete List of Health Insurance Gym Coverage Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Complete List of Swiss Health Insurance Gym Coverage (2025)</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Detailed information on all Swiss health insurers offering gym membership benefits.</p>
+      </div>
+      
+      <div class="max-w-6xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Insurance Provider</th>
+                <th class="py-3 px-4 text-left">Required Supplementary Plan</th>
+                <th class="py-3 px-4 text-left">Accepted Memberships</th>
+                <th class="py-3 px-4 text-left">Coverage Details</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <!-- ATUPRI -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">ATUPRI</td>
+                <td class="py-4 px-4">
+                  Diversa<br />
+                  Mivita<br />
+                  Basic<br />
+                  Intense
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>All memberships (Diversa)</li>
+                    <li>Season, half-year & yearly passes (Mivita)</li>
+                    <li>Memberships of 3+ months (Basic/Intense)</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>Diversa:</strong> 50% up to CHF 200 per year</li>
+                    <li><strong>Mivita (Reala):</strong> 50% up to CHF 200 per year</li>
+                    <li><strong>Mivita (Extensa):</strong> 50% up to CHF 300 per year</li>
+                    <li><strong>Basic:</strong> 75% up to CHF 200 per year</li>
+                    <li><strong>Intense:</strong> 75% up to CHF 500 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- AXA -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">AXA</td>
+                <td class="py-4 px-4">
+                  ACTIF<br />
+                  COMPLET
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Fitness memberships (min. half-year)</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>ACTIF:</strong> 75% up to CHF 200 per year</li>
+                    <li><strong>COMPLET:</strong> 75% up to CHF 300 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- CONCORDIA -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CONCORDIA</td>
+                <td class="py-4 px-4">
+                  NATURA<br />
+                  NATURA PLUS
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>NATURA/NATURA PLUS:</strong> 50% up to CHF 200 per category per year, max. CHF 500 total health promotion per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- CSS -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">CSS</td>
+                <td class="py-4 px-4">
+                  Gesundheitskonto<br />
+                  (component of supplementary insurance)
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Monthly memberships</li>
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li>Up to CHF 800 per year (Gesundheitskonto and Gesundheitskonto-Bonus)</li>
+                    <li>50% up to CHF 700 for all benefit categories (family, fitness, movement, etc.) per year</li>
+                    <li>50% up to CHF 500 per category per year</li>
+                    <li>Gesundheitskonto-Bonus: 50% up to CHF 100 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- EGK -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">EGK</td>
+                <td class="py-4 px-4">
+                  EGK-SUN
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>All membership types</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li>Max. CHF 360 per year, up to the amount paid</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- Glarner Krankenversicherung -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">Glarner Krankenversicherung</td>
+                <td class="py-4 px-4">
+                  Zusatz ALLGEMEIN<br />
+                  FAMILY<br />
+                  FAMILY FLEX<br />
+                  PREMIUM
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>ALLGEMEIN:</strong> 50% up to CHF 150 per year</li>
+                    <li><strong>FAMILY/FAMILY FLEX:</strong> 50% up to CHF 200 per category per year, max. CHF 500 total health promotion per year</li>
+                    <li><strong>PREMIUM:</strong> 50% up to CHF 300 per category per year, max. CHF 600 total health promotion per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- Groupe Mutuel -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">Groupe Mutuel</td>
+                <td class="py-4 px-4">
+                  GO / Global Solution<br />
+                  GX / Global Flex «Option Careflex»<br />
+                  GI / Global Classic «Option Plus»<br />
+                  SB GA / Krankenpflege<br />
+                  EG / Global School
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>GO / Global Solution:</strong> 50% max CHF 200 per year</li>
+                    <li><strong>GX / Global Flex:</strong> 50% max CHF 200 per year</li>
+                    <li><strong>GI / Global Classic:</strong> 50% max CHF 200 per year</li>
+                    <li><strong>SB GA / Krankenpflege:</strong> 50% max CHF 200 per year</li>
+                    <li><strong>EG / Global School:</strong> 50% max CHF 200 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- HELSANA -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">HELSANA</td>
+                <td class="py-4 px-4">
+                  SANA<br />
+                  COMPLETA<br />
+                  COMPLETA EXTRA<br />
+                  COMPLETA PLUS
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                    <li>Monthly memberships</li>
+                    <li>10-visit passes</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>SANA/COMPLETA/COMPLETA EXTRA/COMPLETA PLUS:</strong> 75% up to CHF 200 per category* per year</li>
+                    <li>*Maternity: 75% up to CHF 500 per year</li>
+                    <li>**COMPLETA EXTRA: In addition to COMPLETA, 60% up to CHF 800 per year for all categories</li>
+                    <li>**COMPLETA PLUS: In addition to COMPLETA, 75% up to CHF 200 per year for all categories</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- ÖKK -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">ÖKK</td>
+                <td class="py-4 px-4">
+                  FAMILY<br />
+                  FAMILY FLEX<br />
+                  OPTIMA<br />
+                  PREMIUM<br />
+                  PRÄVENTION
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>FAMILY / FAMILY FLEX:</strong> 50% up to CHF 200 per year</li>
+                    <li><strong>OPTIMA:</strong> 50% up to CHF 200 per year</li>
+                    <li><strong>PREMIUM:</strong> 50% up to CHF 300 per year</li>
+                    <li><strong>PRÄVENTION:</strong> 50% up to CHF 300 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- rhenusana -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">rhenusana</td>
+                <td class="py-4 px-4">
+                  rhenuPLUS Gold<br />
+                  rhenuPLUS Platin<br />
+                  rhenuPLUS «Lifecycle»
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>rhenuPLUS Gold:</strong> 75% max. CHF 200 per year</li>
+                    <li><strong>rhenuPLUS Platin:</strong> 75% max. CHF 400 per year</li>
+                    <li><strong>rhenuPLUS «Lifecycle»:</strong> 50% max. CHF 100 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- sana24 -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">sana24</td>
+                <td class="py-4 px-4">
+                  All insured in departments:<br />
+                  Ambulant<br />
+                  Managed-Care-Zusatzversicherung Ambulant<br />
+                  or Basic have right to wellness/fitness checks
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>Fitness Check Nr. 1:</strong></li>
+                    <li>Max. CHF 200 for annual membership</li>
+                    <li>Max. CHF 100 for half-year membership</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- SANITAS -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">SANITAS</td>
+                <td class="py-4 px-4">
+                  Vital Smart<br />
+                  Vital Premium<br /><br />
+                  CLASSIC/FAMILY/JUMP<br />
+                  NATURA BASIS<br />
+                  NATURA KOMFORT
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Vital: 1/4-year, 1/2-year, annual memberships, 10-pass</li>
+                    <li>Classic: 1/2-year, annual memberships, 10-pass</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>Vital Smart:</strong> 50% max. CHF 200 or CHF 300 for fitness centers and courses, max. CHF 400 or CHF 600 total health promotion per year</li>
+                    <li><strong>Vital Premium:</strong> 80% max. CHF 400 for fitness centers and courses, max. CHF 800 total health promotion per year</li>
+                    <li><strong>CLASSIC/FAMILY/JUMP:</strong> CHF 200 per year for half-year or annual memberships</li>
+                    <li><strong>NATURA BASIS/NATURA KOMFORT:</strong> 50% max. CHF 200 per category per year, max. CHF 500 total health promotion per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- SLKK -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">SLKK</td>
+                <td class="py-4 px-4">
+                  SLKK-QualiCare.basis<br />
+                  SLKK-QualiCare.comfort
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>SLKK-QualiCare.basis:</strong> 75% up to CHF 300 per year for fitness memberships; 75% max. CHF 200 per year per course, max. CHF 500 per year</li>
+                    <li><strong>SLKK-QualiCare.comfort:</strong> 75% max. CHF 200 per year per course, max. CHF 800 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- sodalis -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">sodalis</td>
+                <td class="py-4 px-4">
+                  Zusatzversicherung Sana or<br />
+                  Sana Plus + Spitalzusatzversicherung:<br />
+                  sodalis allgemein or halbprivat or<br />
+                  privat or flex
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li>50% up to CHF 200 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- Sumiswalder -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">Sumiswalder</td>
+                <td class="py-4 px-4">
+                  Kombi+ allgemein<br />
+                  Kombi+ halbprivat<br />
+                  Kombi+ privat<br />
+                  Komplementär
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships (for some)</li>
+                    <li>Annual memberships</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>Kombi+ allgemein:</strong> CHF 100 per year for fitness membership</li>
+                    <li><strong>Kombi+ halbprivat:</strong> CHF 200 per year for fitness membership</li>
+                    <li><strong>Kombi+ privat:</strong> CHF 300 per year for fitness membership</li>
+                    <li><strong>Komplementär:</strong> Max. CHF 200 per year for fitness memberships, recognized courses</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- SWICA -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">SWICA</td>
+                <td class="py-4 px-4">
+                  COMPLETA FORTE<br />
+                  COMPLETA PRAEVENTA<br />
+                  OPTIMA
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                    <li>(if the membership begins during the insured period)</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>COMPLETA FORTE:</strong> 90% of costs up to max. CHF 500 per year (max. CHF 300 per prevention area)</li>
+                    <li><strong>COMPLETA PRAEVENTA:</strong> 50% of costs not covered by COMPLETA FORTE, up to max. CHF 500 per year (max. CHF 300 per prevention area)</li>
+                    <li><strong>OPTIMA:</strong> 90% of costs not covered by COMPLETA FORTE and COMPLETA PRAEVENTA, up to max. CHF 300 per year</li>
+                    <li>Total up to max. CHF 1300 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- Sympany -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">Sympany</td>
+                <td class="py-4 px-4">
+                  Allgemeiner Zusatz<br />
+                  Privater Zusatz<br />
+                  Plus/plus natura<br />
+                  Premium/premium natura<br />
+                  salto<br />
+                  plus kolping (1 year waiting period)<br />
+                  praevention<br />
+                  light (1 year waiting period)
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Quarter-year memberships</li>
+                    <li>Half-year memberships</li>
+                    <li>Annual memberships</li>
+                    <li>(Start date is determining factor and must be during insured period)</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>Allgemeiner Zusatz, plus/plus natura, salto:</strong> Max. CHF 200 per year</li>
+                    <li><strong>Privater Zusatz, premium/premium natura:</strong> Max. CHF 300 per year</li>
+                    <li><strong>praevention, light, plus kolping:</strong> 50% up to max. CHF 250 per year</li>
+                  </ul>
+                </td>
+              </tr>
+              
+              <!-- Visana-Gruppe -->
+              <tr class="hover:bg-gray-50">
+                <td class="py-4 px-4 font-medium">Visana-Gruppe</td>
+                <td class="py-4 px-4">
+                  All insured in departments:<br />
+                  Ambulant<br />
+                  Managed-Care-Zusatzversicherung Ambulant<br />
+                  or Basic have right to wellness/fitness checks
+                </td>
+                <td class="py-4 px-4">
+                  <ul class="list-disc pl-5">
+                    <li>Half-year memberships (min. two 10-packs)</li>
+                    <li>Annual memberships (min. four 10-packs)</li>
+                  </ul>
+                </td>
+                <td class="py-4 px-4">
+                  <ul>
+                    <li><strong>Fitness Check Nr. 1:</strong></li>
+                    <li>Max. CHF 100 for half-year membership or min. two 10-packs</li>
+                    <li>Max. CHF 200 for annual membership or min. four 10-packs</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center text-sm text-gray-500">
+        <p>The above information is based on the QualiCert document for health insurance contributions for 2025.</p>
+        <p class="mt-2">Remember that for reimbursement, the fitness center must be QualiTop or QualiCert certified.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about getting your gym membership covered?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful insurance topics to maximize your coverage.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/compare-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Compare Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Framework for evaluating Swiss health insurance options to find the best fit.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Changing Insurance Models</h3>
+          </div>
+          <p class="text-gray-600">Save money by switching between standard, Telmed, HMO, and Family Doctor models.</p>
+        </a>
+        
+        <a href="/guides/how-to/alternative-therapies-coverage" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Alternative Therapy Coverage</h3>
+          </div>
+          <p class="text-gray-600">Guide to getting complementary and alternative medicine covered by Swiss insurance.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to maximize your insurance benefits?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts can help you find the right coverage for your fitness needs
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Gym Coverage",
+        "item": "https://expat-savvy.ch/guides/how-to/gym-coverage-health-insurance"
+      }
+    ]
+  }, null, 2)} />
+
+  <!-- Insurance Product Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "InsuranceProduct",
+    "name": "Health Insurance Gym Coverage",
+    "description": "Supplementary health insurance coverage for gym memberships and fitness activities in Switzerland",
+    "insuranceCompany": [
+      {
+        "@type": "Organization",
+        "name": "SWICA",
+        "url": "https://expat-savvy.ch/healthcare/all-insurances/swica"
+      },
+      {
+        "@type": "Organization",
+        "name": "CSS",
+        "url": "https://expat-savvy.ch/healthcare/all-insurances/css"
+      },
+      {
+        "@type": "Organization",
+        "name": "Helsana",
+        "url": "https://expat-savvy.ch/healthcare/all-insurances/helsana"
+      }
+    ],
+    "offeredBy": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "insurancePlan": "Supplementary insurance plans (VVG/LCA)",
+    "benefits": [
+      {
+        "@type": "Thing",
+        "name": "Gym membership reimbursement",
+        "description": "Annual financial contribution towards fitness center memberships"
+      },
+      {
+        "@type": "Thing",
+        "name": "Fitness class coverage",
+        "description": "Reimbursement for structured fitness activities like yoga, pilates, and swimming"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

@@ -1,0 +1,630 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Notify your current health insurer",
+    text: "Inform your health insurance provider about your move to a different canton at least 30 days in advance, including your new address and moving date."
+  },
+  {
+    name: "Research premium differences",
+    text: "Compare your current premium with the premium in your new canton, as rates can vary significantly between cantons for the same insurance provider."
+  },
+  {
+    name: "Check for special cantonal requirements",
+    text: "Investigate if your new canton has specific insurance regulations or requirements that differ from your current location."
+  },
+  {
+    name: "Consider switching providers",
+    text: "Evaluate whether it makes sense to change insurance providers during your move, as relocation to a new canton gives you the right to switch outside the usual annual window."
+  },
+  {
+    name: "Apply for premium subsidies if eligible",
+    text: "Research the premium subsidy system in your new canton, as eligibility criteria and application processes vary by location."
+  },
+  {
+    name: "Register with your new commune",
+    text: "Complete your registration at your new commune within 14 days of moving, which is required for health insurance administration."
+  },
+  {
+    name: "Update supplementary insurance details",
+    text: "Check if your supplementary insurance policies need adjustments based on regional healthcare networks in your new location."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "Do I need to change my health insurance when moving to a different canton?",
+    answer: "You don't necessarily need to change insurance providers when moving cantons, but you must notify your current insurer. Your premium will automatically adjust to reflect the rates in your new canton. However, moving to a new canton gives you a special right to switch providers regardless of the time of year, which might be beneficial if premiums are significantly different."
+  },
+  {
+    question: "How do health insurance premiums differ between Swiss cantons?",
+    answer: "Premium differences between cantons can be substantial - often 20-50% for the same coverage. Cantons like Basel-Stadt, Geneva, and Vaud typically have higher premiums, while cantons like Appenzell Innerrhoden, Nidwalden, and Uri tend to have lower rates. These variations occur because of differences in healthcare costs, cantonal subsidies, hospital networks, population health, and regulatory approaches."
+  },
+  {
+    question: "Will I lose my premium subsidies when moving cantons?",
+    answer: "Yes, you will need to reapply for premium subsidies in your new canton. Premium subsidy systems (Prämienverbilligung) are managed at the cantonal level, with different eligibility criteria, application processes, and subsidy amounts. Contact your new canton's social services or health department immediately after moving to understand the local subsidy system and avoid gaps in financial support."
+  },
+  {
+    question: "When should I notify my health insurer about moving cantons?",
+    answer: "You should notify your health insurer about your intercantonal move at least 30 days before your moving date, if possible. At minimum, inform them as soon as you know your new address. The notification must be in writing (letter or email) and should include your insurance number, new address, and effective date of the change."
+  },
+  {
+    question: "How does the registration process with my new commune affect my health insurance?",
+    answer: "Registering with your new commune within 14 days of arrival is legally required and directly impacts your health insurance administration. The commune will report your move to cantonal authorities who verify insurance coverage. Some communes automatically share your information with the cantonal health insurance office, which may contact you if you haven't updated your insurance. Failure to register can result in complications with insurance coverage and potential fines."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Premium comparison platforms",
+    description: "Online tools to compare premiums across cantons and providers"
+  },
+  {
+    name: "Cantonal health insurance offices",
+    description: "Official resources for canton-specific regulations"
+  },
+  {
+    name: "Change of address forms",
+    description: "Documentation for notifying insurance providers"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Current health insurance policy details",
+  "Proof of new address",
+  "Moving date confirmation",
+  "Personal identification documentation",
+  "Registration documents for new commune"
+];
+
+// Canton premium comparison
+const cantonPremiums = [
+  {
+    canton: "Geneva",
+    averagePremium: "High (CHF 450-550)",
+    subsidySystem: "Income-based with automatic notifications for many residents"
+  },
+  {
+    canton: "Zurich",
+    averagePremium: "Medium-High (CHF 380-480)",
+    subsidySystem: "Application required, based on taxable income thresholds"
+  },
+  {
+    canton: "Bern",
+    averagePremium: "Medium (CHF 350-450)",
+    subsidySystem: "Automatic for low incomes, others require application"
+  },
+  {
+    canton: "Basel-Stadt",
+    averagePremium: "High (CHF 420-520)",
+    subsidySystem: "Generous system with application required"
+  },
+  {
+    canton: "Vaud",
+    averagePremium: "High (CHF 400-500)",
+    subsidySystem: "Progressive system based on income, application required"
+  },
+  {
+    canton: "Ticino",
+    averagePremium: "Medium (CHF 360-460)",
+    subsidySystem: "Application required, income-based"
+  },
+  {
+    canton: "Appenzell I.",
+    averagePremium: "Low (CHF 280-370)",
+    subsidySystem: "Limited, application required"
+  }
+];
+
+// Timeline
+const timeline = [
+  {
+    period: "2-3 months before move",
+    tasks: "Research premium differences and providers in new canton; consider switching options"
+  },
+  {
+    period: "1 month before move",
+    tasks: "Notify current insurer in writing; prepare documents for commune registration"
+  },
+  {
+    period: "Within 14 days after move",
+    tasks: "Register with new commune; verify insurance changes have been processed"
+  },
+  {
+    period: "Within 30 days after move",
+    tasks: "Apply for premium subsidies in new canton if eligible; confirm new premiums"
+  },
+  {
+    period: "3 months after move",
+    tasks: "Check that all insurance documents reflect new address and correct premium amounts"
+  }
+];
+---
+
+<Layout
+  title="How to Navigate Health Insurance When Moving Cantons | Swiss Guide"
+  description="Step-by-step instructions for managing health insurance when relocating to a different canton in Switzerland. Premium changes, subsidies, and special regulations explained."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747152698/an-illustration-of-a-swiss-map-with-cant_Vp6j-cT9QHSk4DgNHScn9w_J_8lm0SLQnyt6dn-9kf0yQ_s4ylby.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Navigate Health Insurance When Moving Cantons in Switzerland"
+    description="A comprehensive guide to managing health insurance changes, requirements, and opportunities when relocating between Swiss cantons."
+    totalTime="PT4H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747152698/an-illustration-of-a-swiss-map-with-cant_Vp6j-cT9QHSk4DgNHScn9w_J_8lm0SLQnyt6dn-9kf0yQ_s4ylby.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747152698/an-illustration-of-a-swiss-map-with-cant_Vp6j-cT9QHSk4DgNHScn9w_J_8lm0SLQnyt6dn-9kf0yQ_s4ylby.webp"
+        alt="Swiss map showing cantons with insurance information"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Moving Cantons and</span>
+          <span class="block mt-2">Health Insurance in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Everything you need to know about handling health insurance when relocating to a different Swiss canton, including premium changes and special opportunities.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Guidance
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#canton-comparison"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Premium Comparison
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding Health Insurance When Moving Cantons</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Moving to a different canton in Switzerland brings significant changes to your health insurance situation. Unlike moving within the same canton, an intercantonal move affects your premiums, subsidy eligibility, and can create opportunities to optimize your coverage.
+        </p>
+        <p class="text-lg text-gray-600">
+          Switzerland's decentralized healthcare system means that each canton has its own healthcare infrastructure, cost structures, and subsidy systems. This guide will help you navigate these differences and ensure a smooth insurance transition when relocating.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Key Facts About Moving Cantons</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Premium Differences</span>
+              <p class="text-gray-600 text-sm mt-2">Up to 50% variation between cantons for identical coverage</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Special Switching Right</span>
+              <p class="text-gray-600 text-sm mt-2">Moving cantons allows changing providers outside annual window</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Reapply for Subsidies</span>
+              <p class="text-gray-600 text-sm mt-2">Cantonal subsidy systems are independent and require new applications</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canton Comparison Section -->
+  <div id="canton-comparison" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Canton Premium Comparison</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Health insurance premiums can vary significantly between cantons. Here's how major cantons compare.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Canton</th>
+                <th class="py-3 px-4 text-left">Average Premium Range</th>
+                <th class="py-3 px-4 text-left">Subsidy System</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {cantonPremiums.map(canton => (
+                <tr class="hover:bg-gray-50">
+                  <td class="py-4 px-4 font-medium">{canton.canton}</td>
+                  <td class="py-4 px-4">{canton.averagePremium}</td>
+                  <td class="py-4 px-4">{canton.subsidySystem}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center text-sm text-gray-600">
+        Note: Premium ranges are approximate for an adult with standard coverage (CHF 300 deductible) and may change annually.
+      </div>
+      
+      <div class="mt-12 max-w-4xl mx-auto">
+        <div class="bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Why Do Premiums Vary Between Cantons?</h3>
+          <div class="space-y-3">
+            <p class="text-gray-700">
+              <span class="font-medium">Healthcare Infrastructure:</span> Cantons with more hospitals and specialists typically have higher costs.
+            </p>
+            <p class="text-gray-700">
+              <span class="font-medium">Population Demographics:</span> Areas with older or less healthy populations face higher collective healthcare expenses.
+            </p>
+            <p class="text-gray-700">
+              <span class="font-medium">Cantonal Subsidies:</span> Some cantons contribute more to hospital financing, reducing the burden on insurance.
+            </p>
+            <p class="text-gray-700">
+              <span class="font-medium">Regional Cost of Living:</span> Healthcare provider costs reflect the general cost of living in the region.
+            </p>
+            <p class="text-gray-700">
+              <span class="font-medium">Healthcare Utilization:</span> Cultural differences in how frequently people seek medical care affect overall costs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Timeline for Insurance Changes When Moving</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow this timeline to ensure a smooth transition for your health insurance when relocating between cantons.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto relative">
+        <!-- Timeline Line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary-200"></div>
+        
+        <!-- Timeline Items -->
+        {timeline.map((item, index) => (
+          <div class="relative mb-16 last:mb-0">
+            <!-- Timeline Point -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary-500 z-10"></div>
+            
+            <!-- Timeline Content -->
+            <div class={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+              <!-- Date -->
+              <div class={`w-1/2 px-6 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                <div class="bg-primary-100 inline-block px-4 py-2 rounded-lg text-primary-700 font-semibold mb-2">
+                  {item.period}
+                </div>
+              </div>
+              
+              <!-- Content -->
+              <div class={`w-1/2 px-6 ${index % 2 === 0 ? 'text-left' : 'text-right'}`}>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <p class="text-gray-700">{item.tasks}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these seven steps to manage your health insurance when moving between Swiss cantons.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Notification Template:</h4>
+                    <div class="border border-gray-200 p-4 rounded bg-white">
+                      <p class="text-gray-700 mb-2">[Your Name]<br/>[Current Address]<br/>[Insurance Number]<br/>[Date]</p>
+                      <p class="text-gray-700 mb-2">Subject: Change of Address - Move to Another Canton</p>
+                      <p class="text-gray-700 mb-2">Dear Sir or Madam,</p>
+                      <p class="text-gray-700 mb-4">I am writing to inform you that I will be moving from [current canton] to [new canton] on [moving date]. My new address will be:</p>
+                      <p class="text-gray-700 mb-4">[New Address]<br/>[Postal Code] [City]<br/>[New Canton]</p>
+                      <p class="text-gray-700 mb-2">Please adjust my insurance policy accordingly. I understand this may affect my premium amount.</p>
+                      <p class="text-gray-700">Sincerely,<br/>[Your Signature]<br/>[Your Name]</p>
+                    </div>
+                  </div>
+                )}
+                
+                {index === 3 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Special Switching Right:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>When moving to a new canton, you can terminate your basic insurance with one month's notice, regardless of the time of year.</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>This special right allows you to optimize your coverage by switching to a provider with more competitive rates in your new canton.</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Note that supplementary insurance policies may have different termination conditions - check your policy details.</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 4 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Subsidy Application Process Comparison:</h4>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Canton Type</th>
+                            <th class="py-2 px-3 text-left">Application Method</th>
+                            <th class="py-2 px-3 text-left">Typical Timeline</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3">Automatic Assessment<br/>(e.g., Geneva)</td>
+                            <td class="py-2 px-3">Registration with commune triggers assessment</td>
+                            <td class="py-2 px-3">1-3 months after registration</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">Application Required<br/>(e.g., Zurich)</td>
+                            <td class="py-2 px-3">Submit application form to cantonal office</td>
+                            <td class="py-2 px-3">Processing takes 1-2 months</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">Mixed Systems<br/>(e.g., Bern)</td>
+                            <td class="py-2 px-3">Low incomes automatic, others apply</td>
+                            <td class="py-2 px-3">Varies by income category</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help with Your Intercantonal Move?</h3>
+          <p class="text-gray-600 mb-8">Our experts can guide you through the process and help you optimize your insurance when moving cantons.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about moving cantons and health insurance?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss health insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/apply-premium-subsidies" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Apply for Premium Subsidies</h3>
+          </div>
+          <p class="text-gray-600">Learn if you qualify for cantonal premium subsidies and how to apply in your canton.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Change Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Learn when and how to switch providers to optimize your coverage and save money.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Change Insurance Models</h3>
+          </div>
+          <p class="text-gray-600">Save up to 20% by choosing the right insurance model for your healthcare needs.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Moving to a new canton?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Let our experts help you navigate the insurance transition and find the best options
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Insurance When Moving Cantons",
+        "item": "https://expat-savvy.ch/guides/how-to/insurance-when-moving-cantons"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

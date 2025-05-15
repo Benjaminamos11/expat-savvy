@@ -1,0 +1,797 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand covered alternative therapies in Switzerland",
+    text: "Learn which complementary medicine disciplines are officially recognized by Swiss health insurance, including traditional Chinese medicine, homeopathy, anthroposophic medicine, phytotherapy, and osteopathy."
+  },
+  {
+    name: "Check your current insurance coverage",
+    text: "Review your basic and supplementary insurance policies to determine what alternative therapies are already covered and to what extent."
+  },
+  {
+    name: "Research therapist qualifications",
+    text: "Ensure your practitioner is certified by recognized Swiss professional bodies and has the proper registration for insurance reimbursement."
+  },
+  {
+    name: "Compare supplementary insurance options",
+    text: "Analyze different insurers' complementary medicine packages to find the best coverage for your preferred therapies."
+  },
+  {
+    name: "Obtain a referral if necessary",
+    text: "Some insurance models require referrals from general practitioners before consulting alternative practitioners."
+  },
+  {
+    name: "Collect proper documentation",
+    text: "Gather detailed invoices and medical certificates required for successful reimbursement claims."
+  },
+  {
+    name: "Submit claims correctly",
+    text: "Follow the proper procedure for submitting expenses to your insurance provider and track your reimbursements."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "Which alternative therapies are covered by basic Swiss health insurance?",
+    answer: "Since 2017, basic health insurance (KVG/LAMal) in Switzerland covers five complementary therapies when performed by certified medical doctors: acupuncture and Traditional Chinese Medicine (TCM), anthroposophic medicine, homeopathy, neural therapy, and herbal medicine (phytotherapy). Other therapies like osteopathy, naturopathy, and kinesiology are typically not covered by basic insurance but may be included in supplementary insurance packages."
+  },
+  {
+    question: "What's the difference between getting alternative treatments from a doctor versus a non-medical therapist?",
+    answer: "When alternative treatments are administered by doctors with recognized additional qualifications in these disciplines, they are typically covered by basic insurance. However, the same treatments from non-medical practitioners (therapists without medical degrees) are only covered if you have appropriate supplementary insurance. The extent of coverage, waiting periods, and annual limits for non-medical practitioners vary significantly between insurance providers and supplementary packages."
+  },
+  {
+    question: "How do I know if my alternative medicine practitioner is recognized by insurance companies?",
+    answer: "For insurance recognition, therapists should be registered with official Swiss bodies like ASCA (Swiss Foundation for Complementary and Alternative Medicine) or RME (Register of Empirical Medicine). Before booking appointments, you can verify a therapist's registration status by checking these organizations' websites or asking the practitioner directly for their registration numbers. Additionally, confirm with your insurance provider that they accept the specific registrations your therapist holds."
+  },
+  {
+    question: "Are there limits to how much alternative therapy is covered by insurance?",
+    answer: "Yes, most insurers impose annual limits on alternative therapy coverage. Basic insurance follows the general rules of franchise (deductible) and co-pay but doesn't have specific limits for recognized therapies performed by doctors. Supplementary insurance typically sets annual maximums either as a monetary amount (e.g., CHF 1,000 per year) or as a number of sessions (e.g., 12 treatments annually). Some policies also specify maximum rates per session or require minimum qualifications for practitioners."
+  },
+  {
+    question: "Can I add supplementary insurance for alternative medicine if I already have a health condition?",
+    answer: "Unlike basic health insurance, supplementary insurance providers can reject applications based on pre-existing conditions or impose waiting periods before coverage begins for certain treatments. If you already have health issues you want to treat with alternative medicine, you might face restrictions or exclusions when applying for new supplementary coverage. It's best to explore options before developing conditions requiring treatment. Existing supplementary insurance will generally continue to cover new conditions that develop after the policy starts."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "ASCA/RME online directories",
+    description: "Databases to find certified alternative medicine practitioners"
+  },
+  {
+    name: "Insurance comparison tools",
+    description: "Online resources to compare supplementary insurance offerings"
+  },
+  {
+    name: "Reimbursement claim forms",
+    description: "Documentation needed for insurance claims"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Current insurance policy documentation",
+  "List of preferred alternative therapies",
+  "Medical referrals (if required by your insurance model)",
+  "Practitioner certifications and registrations",
+  "Detailed invoices for treatments"
+];
+
+// Alternative therapy comparison
+const therapyComparison = [
+  {
+    therapy: "Acupuncture/TCM",
+    basicCoverage: "Yes (when performed by medical doctors with TCM certification)",
+    supplementaryCoverage: "Widely available across most insurers",
+    conditions: "Often effective for pain management, migraines, allergies"
+  },
+  {
+    therapy: "Homeopathy",
+    basicCoverage: "Yes (when performed by medical doctors with homeopathy certification)",
+    supplementaryCoverage: "Available in most supplementary packages",
+    conditions: "Various chronic and acute conditions"
+  },
+  {
+    therapy: "Osteopathy",
+    basicCoverage: "No",
+    supplementaryCoverage: "Widely covered in mid to premium supplementary packages",
+    conditions: "Musculoskeletal issues, back pain, sports injuries"
+  },
+  {
+    therapy: "Naturopathy",
+    basicCoverage: "No (except phytotherapy by certified doctors)",
+    supplementaryCoverage: "Varies by insurer and specific package",
+    conditions: "Digestive issues, stress-related conditions, immune support"
+  },
+  {
+    therapy: "Massage Therapy",
+    basicCoverage: "No",
+    supplementaryCoverage: "Often covered with limits on sessions",
+    conditions: "Muscle tension, stress, recovery from injury"
+  },
+  {
+    therapy: "Reflexology",
+    basicCoverage: "No",
+    supplementaryCoverage: "Available in mid to premium packages",
+    conditions: "Stress reduction, circulation issues, pain management"
+  }
+];
+
+// Insurer comparison
+const insurerComparison = [
+  {
+    insurer: "CSS",
+    alternativePackage: "Alternative Insurance/myFlex",
+    coverage: "Comprehensive coverage with high annual limits for recognized therapists",
+    specialNotes: "Offers one of the broadest ranges of recognized therapies and practitioners"
+  },
+  {
+    insurer: "Helsana",
+    alternativePackage: "SANA/COMPLETA",
+    coverage: "Generous coverage for ASCA/EMR registered therapists",
+    specialNotes: "Offers preventative treatment coverage in addition to therapeutic"
+  },
+  {
+    insurer: "Swica",
+    alternativePackage: "COMPLETA TOP",
+    coverage: "High contribution limits with minimal restrictions",
+    specialNotes: "Known for particularly good alternative medicine coverage"
+  },
+  {
+    insurer: "Sanitas",
+    alternativePackage: "Classic/Family",
+    coverage: "Solid mid-range coverage with reasonable annual limits",
+    specialNotes: "Good balance of coverage and premium costs"
+  },
+  {
+    insurer: "Sympany",
+    alternativePackage: "Plus/Premium",
+    coverage: "Various coverage levels based on supplementary package",
+    specialNotes: "Flexible options depending on needs and budget"
+  }
+];
+---
+
+<Layout
+  title="How to Get Alternative Therapies Covered by Insurance in Switzerland | Guide"
+  description="Guide to insurance coverage for complementary medicine in Switzerland. Learn which alternative therapies are covered, how to compare plans, and claim reimbursement."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379142/an-illustration-of-alternative-medicine-_kKxolZtMQWWs2qZCwJYVNw_pjdKgPBvRd-1-HZR4bE02Q_xnqqn7.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Get Alternative Therapies Covered by Insurance in Switzerland"
+    description="A comprehensive guide to understanding, selecting, and using health insurance coverage for complementary and alternative medicine in Switzerland."
+    totalTime="PT2H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379142/an-illustration-of-alternative-medicine-_kKxolZtMQWWs2qZCwJYVNw_pjdKgPBvRd-1-HZR4bE02Q_xnqqn7.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379142/an-illustration-of-alternative-medicine-_kKxolZtMQWWs2qZCwJYVNw_pjdKgPBvRd-1-HZR4bE02Q_xnqqn7.webp"
+        alt="Alternative medicine and therapies in Switzerland"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Alternative Therapies</span>
+          <span class="block mt-2">Covered by Insurance in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Your guide to navigating complementary medicine coverage, from acupuncture to osteopathy, through basic and supplementary insurance.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Explore Your Coverage Options
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#therapy-comparison"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Therapies
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Alternative Medicine in the Swiss Healthcare System</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Switzerland stands out globally for its progressive approach to complementary and alternative medicine. In 2009, Swiss citizens voted to include certain alternative therapies in the nation's constitution, leading to their integration into the basic health insurance system by 2017.
+        </p>
+        <p class="text-lg text-gray-600">
+          This unique recognition reflects Switzerland's holistic approach to healthcare, where conventional and alternative treatments often work in harmony. However, navigating the specifics of coverage can be complex, especially for expats unfamiliar with the Swiss system.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Key Points About Alternative Medicine Coverage</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Officially Recognized</span>
+              <p class="text-gray-600 text-sm mt-2">Five therapies covered by basic insurance when provided by certified doctors</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Supplementary Options</span>
+              <p class="text-gray-600 text-sm mt-2">Wide range of additional therapies available through complementary insurance</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Practitioner Credentials</span>
+              <p class="text-gray-600 text-sm mt-2">Certification and registration requirements for insurance reimbursement</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-8 bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Understanding the Two-Tier Coverage System</h3>
+          <div class="space-y-4">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <h4 class="font-medium text-primary-600 mb-2">Basic Insurance (KVG/LAMal)</h4>
+              <p class="text-gray-700">
+                Covers five specific complementary medicine disciplines only when performed by physicians with additional certifications in these areas. Subject to your annual deductible (franchise) and 10% co-pay.
+              </p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <h4 class="font-medium text-primary-600 mb-2">Supplementary Insurance (VVG/LCA)</h4>
+              <p class="text-gray-700">
+                Provides coverage for a much wider range of alternative therapies performed by non-physician practitioners. Coverage varies significantly between insurers and specific packages.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Therapy Comparison Section -->
+  <div id="therapy-comparison" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Alternative Therapies Coverage Comparison</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Different complementary therapies have varying levels of coverage in the Swiss insurance system.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Therapy</th>
+                <th class="py-3 px-4 text-left">Basic Insurance Coverage</th>
+                <th class="py-3 px-4 text-left">Supplementary Insurance</th>
+                <th class="py-3 px-4 text-left">Common Conditions Treated</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {therapyComparison.map(therapy => (
+                <tr class="hover:bg-gray-50">
+                  <td class="py-4 px-4 font-medium">{therapy.therapy}</td>
+                  <td class="py-4 px-4">{therapy.basicCoverage}</td>
+                  <td class="py-4 px-4">{therapy.supplementaryCoverage}</td>
+                  <td class="py-4 px-4">{therapy.conditions}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-12 max-w-4xl mx-auto">
+        <div class="bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">The Practitioner Difference</h3>
+          <div class="bg-white p-4 rounded-lg">
+            <div class="md:flex">
+              <div class="md:w-1/2 mb-4 md:mb-0 md:border-r border-gray-200 md:pr-4">
+                <div class="flex items-center mb-2">
+                  <div class="bg-green-100 p-1.5 rounded-full text-green-600 mr-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <h4 class="font-medium text-gray-900">Medical Doctor with Additional Certification</h4>
+                </div>
+                <ul class="text-gray-700 space-y-1 ml-8">
+                  <li>• Covered by basic insurance</li>
+                  <li>• Subject to your franchise and 10% co-pay</li>
+                  <li>• No annual limit on number of sessions</li>
+                  <li>• Can prescribe conventional medicine if needed</li>
+                  <li>• Often requires longer wait times for appointments</li>
+                </ul>
+              </div>
+              <div class="md:w-1/2 md:pl-4">
+                <div class="flex items-center mb-2">
+                  <div class="bg-blue-100 p-1.5 rounded-full text-blue-600 mr-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <h4 class="font-medium text-gray-900">Non-Medical Certified Therapist</h4>
+                </div>
+                <ul class="text-gray-700 space-y-1 ml-8">
+                  <li>• Only covered by supplementary insurance</li>
+                  <li>• Subject to specific annual limits</li>
+                  <li>• Typically 80-90% of costs covered</li>
+                  <li>• Must have recognized certifications (ASCA/RME)</li>
+                  <li>• Usually more appointment availability</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Insurer Comparison for Alternative Medicine</h3>
+        
+        <div class="overflow-hidden shadow-md rounded-lg">
+          <div class="overflow-x-auto">
+            <table class="min-w-full bg-white">
+              <thead>
+                <tr class="bg-primary-600 text-white uppercase text-sm">
+                  <th class="py-3 px-4 text-left">Insurance Provider</th>
+                  <th class="py-3 px-4 text-left">Alternative Package</th>
+                  <th class="py-3 px-4 text-left">Coverage Level</th>
+                  <th class="py-3 px-4 text-left">Special Features</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                {insurerComparison.map(insurer => (
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-4 px-4 font-medium">{insurer.insurer}</td>
+                    <td class="py-4 px-4">{insurer.alternativePackage}</td>
+                    <td class="py-4 px-4">{insurer.coverage}</td>
+                    <td class="py-4 px-4">{insurer.specialNotes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="mt-4 text-center text-sm text-gray-600">
+          Note: Coverage details change periodically. For the most current information, consult with an independent insurance advisor.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step: Getting Your Alternative Therapies Covered</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow this comprehensive process to maximize your insurance coverage for complementary medicine in Switzerland.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">The Five Officially Recognized Disciplines:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-primary-100 p-1.5 rounded-full text-primary-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Traditional Chinese Medicine (TCM)</h5>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                          Including acupuncture, herbal medicine, dietary therapy, and traditional massage techniques.
+                        </p>
+                      </div>
+                      <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-primary-100 p-1.5 rounded-full text-primary-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Homeopathy</h5>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                          Treatment using highly diluted substances to trigger the body's natural healing process.
+                        </p>
+                      </div>
+                      <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-primary-100 p-1.5 rounded-full text-primary-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Anthroposophic Medicine</h5>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                          Holistic approach integrating conventional medicine with natural remedies and spiritual science.
+                        </p>
+                      </div>
+                      <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-primary-100 p-1.5 rounded-full text-primary-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Phytotherapy (Herbal Medicine)</h5>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                          Use of plant-based remedies and extracts for therapeutic purposes.
+                        </p>
+                      </div>
+                      <div class="bg-white p-4 rounded-lg border border-gray-200 md:col-span-2">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-primary-100 p-1.5 rounded-full text-primary-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Neural Therapy</h5>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                          Diagnostic and therapeutic use of local anesthetics for pain management and autonomic nervous system regulation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Important Certification Bodies:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <div class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
+                          <span class="text-xs font-bold">1</span>
+                        </div>
+                        <div>
+                          <span class="font-medium">ASCA</span> (Swiss Foundation for Complementary and Alternative Medicine)
+                          <p class="text-sm text-gray-600 mt-1">Recognizes over 200 therapy methods and maintains a registry of qualified practitioners.</p>
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <div class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
+                          <span class="text-xs font-bold">2</span>
+                        </div>
+                        <div>
+                          <span class="font-medium">RME</span> (Register of Empirical Medicine)
+                          <p class="text-sm text-gray-600 mt-1">Certifies practitioners in more than 130 therapy methods recognized by many Swiss insurers.</p>
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <div class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
+                          <span class="text-xs font-bold">3</span>
+                        </div>
+                        <div>
+                          <span class="font-medium">FMH</span> (Swiss Medical Association)
+                          <p class="text-sm text-gray-600 mt-1">For physician-provided alternative therapy, doctors should have FMH-recognized additional qualifications.</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 3 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Key Factors to Compare in Supplementary Insurance:</h4>
+                    <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="bg-white p-3 rounded border border-gray-200">
+                        <span class="font-medium text-primary-700">Annual Coverage Limits</span>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Amount ranges from CHF 1,000 to unlimited per year depending on the package.
+                        </p>
+                      </div>
+                      <div class="bg-white p-3 rounded border border-gray-200">
+                        <span class="font-medium text-primary-700">Percentage of Costs Covered</span>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Typically 75-90% of the bill, with varying maximum amounts per session.
+                        </p>
+                      </div>
+                      <div class="bg-white p-3 rounded border border-gray-200">
+                        <span class="font-medium text-primary-700">Recognized Therapies</span>
+                        <p class="text-sm text-gray-600 mt-1">
+                          List varies widely between insurers, from just a few to over 200 therapies.
+                        </p>
+                      </div>
+                      <div class="bg-white p-3 rounded border border-gray-200">
+                        <span class="font-medium text-primary-700">Practitioner Requirements</span>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Which certification bodies the insurer recognizes (ASCA, RME, or others).
+                        </p>
+                      </div>
+                      <div class="bg-white p-3 rounded border border-gray-200">
+                        <span class="font-medium text-primary-700">Waiting Periods</span>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Some insurers impose waiting periods of 3-12 months for new policyholders.
+                        </p>
+                      </div>
+                      <div class="bg-white p-3 rounded border border-gray-200">
+                        <span class="font-medium text-primary-700">Premium Costs</span>
+                        <p class="text-sm text-gray-600 mt-1">
+                          Higher coverage generally means higher monthly premiums.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {index === 6 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Reimbursement Claim Checklist:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Detailed invoice including therapist's name, qualifications, and registration numbers</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Specific treatment methods used and dates of sessions</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Medical diagnosis or reason for treatment (if required)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Doctor's referral (if required by your insurance model)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Original receipts showing proof of payment</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Completed reimbursement form from your insurer</span>
+                      </li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                      <p class="text-sm text-gray-700 italic">
+                        <span class="font-medium">Pro Tip:</span> Keep copies of all submitted documentation and track your reimbursement claims. Many insurers now offer digital submission through their apps or online portals.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Not Sure Which Supplementary Insurance Best Covers Your Preferred Therapies?</h3>
+          <p class="text-gray-600 mb-8">Our independent advisors can help you find the optimal coverage for your alternative therapy needs, comparing options across all Swiss insurance providers.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your complementary medicine coverage needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about alternative medicine coverage in Switzerland?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/find-insurance-broker" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Find an Insurance Broker</h3>
+          </div>
+          <p class="text-gray-600">Tips for finding and evaluating independent insurance advisors in Switzerland.</p>
+        </a>
+        
+        <a href="/guides/how-to/find-best-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Find the Best Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Compare providers and plans to find the perfect coverage for your specific needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/pre-existing-conditions-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Insurance with Pre-existing Conditions</h3>
+          </div>
+          <p class="text-gray-600">Navigate the Swiss insurance system with pre-existing health conditions.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Looking for the best alternative medicine coverage?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our independent advisors can help you find the perfect supplementary insurance for your complementary therapy needs
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Alternative Therapies Coverage",
+        "item": "https://expat-savvy.ch/guides/how-to/alternative-therapies-coverage"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

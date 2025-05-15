@@ -1,0 +1,78 @@
+---
+// Create a reusable Review Schema component
+interface Review {
+  author: string;
+  reviewRating: number;
+  reviewBody: string;
+  datePublished?: string;
+}
+
+interface Props {
+  itemReviewed: {
+    name: string;
+    type: string; // e.g., "InsuranceAgency", "Product", "Service"
+    url?: string;
+  };
+  reviews: Review[];
+  aggregateRating?: {
+    ratingValue: number;
+    reviewCount: number;
+    bestRating?: number;
+    worstRating?: number;
+  };
+}
+
+const { itemReviewed, reviews, aggregateRating } = Astro.props;
+
+// Set defaults
+const defaultBestRating = 5;
+const defaultWorstRating = 1;
+
+// Calculate aggregate rating if not provided but reviews exist
+let calculatedAggregateRating = aggregateRating;
+if (!calculatedAggregateRating && reviews && reviews.length > 0) {
+  const sum = reviews.reduce((total, review) => total + review.reviewRating, 0);
+  calculatedAggregateRating = {
+    ratingValue: Number((sum / reviews.length).toFixed(1)),
+    reviewCount: reviews.length,
+    bestRating: defaultBestRating,
+    worstRating: defaultWorstRating
+  };
+}
+
+// Build the schema object
+const schema: any = {
+  "@context": "https://schema.org",
+  "@type": itemReviewed.type,
+  "name": itemReviewed.name,
+  "url": itemReviewed.url || Astro.url.toString(),
+  "review": reviews.map(review => ({
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": review.author
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": review.reviewRating,
+      "bestRating": defaultBestRating,
+      "worstRating": defaultWorstRating
+    },
+    "reviewBody": review.reviewBody,
+    "datePublished": review.datePublished || new Date().toISOString().split('T')[0]
+  }))
+};
+
+// Add aggregate rating if available
+if (calculatedAggregateRating) {
+  schema.aggregateRating = {
+    "@type": "AggregateRating",
+    "ratingValue": calculatedAggregateRating.ratingValue,
+    "reviewCount": calculatedAggregateRating.reviewCount,
+    "bestRating": calculatedAggregateRating.bestRating || defaultBestRating,
+    "worstRating": calculatedAggregateRating.worstRating || defaultWorstRating
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script> 

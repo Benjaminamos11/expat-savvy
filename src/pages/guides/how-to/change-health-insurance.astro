@@ -1,0 +1,607 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Check deadlines and notice periods",
+    text: "Verify if you're within the window for basic insurance cancellation (by November 30 for January 1 changes) or supplementary insurance (check your policy for specific notice periods, typically 3-6 months)."
+  },
+  {
+    name: "Research and compare insurance providers",
+    text: "Compare premiums, service quality, and coverage options between different insurance companies to find the best fit for your needs and budget."
+  },
+  {
+    name: "Get quotes from selected insurers",
+    text: "Contact shortlisted insurance companies to receive personalized quotes based on your profile and preferences."
+  },
+  {
+    name: "Submit formal cancellation to current insurer",
+    text: "Send a registered letter (Einschreiben/recommandé) to your current insurance company before the deadline, clearly stating your intention to terminate the policy."
+  },
+  {
+    name: "Apply for new insurance",
+    text: "Complete and submit an application form to your chosen new insurance provider, including all required personal documentation."
+  },
+  {
+    name: "Wait for confirmation from both insurers",
+    text: "Receive confirmation of cancellation from your old insurer and acceptance from your new provider before considering the switch complete."
+  },
+  {
+    name: "Update payment information",
+    text: "Set up new payment arrangements with your new insurance provider and confirm cancellation of any automatic payments to your previous insurer."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "When is the deadline to change or switch my basic health insurance?",
+    answer: "The primary deadline to change or switch your basic Swiss health insurance (KVG/LAMal) is November 30th. You must ensure your written cancellation notice reaches your current insurer by registered mail by this date for the switch to be effective January 1st of the following year."
+  },
+  {
+    question: "Can I change my health insurance if I miss the November deadline?",
+    answer: "For basic health insurance, if you miss the end-of-November deadline, you generally have to wait until the next year to switch your provider. However, you can still switch if your insurer announces premium increases for the next year - in this case, you have until the end of the month in which you were notified of the increase."
+  },
+  {
+    question: "Is it really worth changing my health insurance in Switzerland?",
+    answer: "Yes, it often is. With annual premium increases (like the expected 6% average for 2025) and evolving personal needs, regularly reviewing and potentially switching your health insurance can lead to significant cost savings or securing better coverage that more accurately fits your current life situation."
+  },
+  {
+    question: "Can I switch my health insurance if I am currently undergoing medical treatment?",
+    answer: "For basic health insurance (KVG/LAMal), yes. Swiss law mandates that all insurers must accept any applicant for basic coverage, regardless of health status or ongoing treatments. For supplementary insurance (VVG/LCA), however, the new insurer can refuse your application or exclude pre-existing conditions."
+  },
+  {
+    question: "How do I cancel my Swiss health insurance?",
+    answer: "To cancel your Swiss health insurance, you must send a formal cancellation letter by registered mail (Einschreiben/recommandé) to your current insurance provider before the applicable deadline. The letter should clearly state your intention to terminate the policy, include your policy number, and be signed. Be aware that different deadlines apply for basic and supplementary insurance."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Comparison website or broker service",
+    description: "A tool to compare multiple insurance options quickly"
+  },
+  {
+    name: "Registered mail service",
+    description: "For sending formal cancellation letters with proof of delivery"
+  },
+  {
+    name: "Premium calculator",
+    description: "To estimate potential savings from switching"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Personal identification documents",
+  "Current insurance policy details",
+  "Swiss residence permit",
+  "Bank account information"
+];
+
+const reasons = [
+  {
+    title: "Premium Reduction",
+    description: "Every fall, Switzerland announces health insurance premium changes. Premiums can increase by several percentage points, but savings can be secured by switching providers.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
+    </svg>`
+  },
+  {
+    title: "New Insurance Needs",
+    description: "As time passes, your interests and requirements change. You may want coverage for alternative medicine or dental treatments. Supplementary policies can efficiently cover these needs.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  },
+  {
+    title: "Life Changes",
+    description: "Family structure changes like teenagers turning 18 or moving to a different canton can significantly impact premiums. Some cantons have lower premiums than others.",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>`
+  }
+];
+
+const deadlines = [
+  {
+    type: "Basic Insurance",
+    date: "November 30",
+    description: "Deadline for switching basic insurance provider",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>`
+  },
+  {
+    type: "Premium Increase",
+    date: "Within 30 days",
+    description: "Special termination right when premiums increase",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
+    </svg>`
+  },
+  {
+    type: "Supplementary Insurance",
+    date: "Varies by insurer",
+    description: "Check your policy for specific termination dates",
+    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>`
+  }
+];
+---
+
+<Layout
+  title="How to Change Health Insurance in Switzerland | Expert Guide for 2025"
+  description="Learn how to switch your Swiss health insurance provider to save money and get better coverage. Step-by-step instructions with deadlines and requirements."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+>
+  <!-- Add schema markup using our component -->
+  <HowToSchema
+    name="How to Change Health Insurance in Switzerland"
+    description="A comprehensive guide to changing your health insurance provider in Switzerland, covering deadlines, requirements, and best practices."
+    totalTime="PT3H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+        alt="Person reviewing Swiss health insurance documents"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Changing Health Insurance</span>
+          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Approximately 600,000 Swiss residents switch their health insurance provider every year. Learn how you could join them and potentially save hundreds of francs.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#step-by-step"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            View Steps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Consider Changing Your Swiss Health Insurance</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Switching your health insurance provider in Switzerland can lead to significant benefits, from cost savings to better coverage that matches your current needs. With health insurance premiums increasing yearly (an average of 6% expected for 2025), reviewing your options regularly is a smart financial move.
+        </p>
+        <p class="text-lg text-gray-600">
+          This guide will walk you through the entire process of changing your health insurance, from determining if it's the right choice for you to completing the switch successfully.
+        </p>
+        
+        <div class="mt-6 mb-8">
+          <a href="/healthcare/switching-health-insurance" class="inline-flex items-center text-primary-600 hover:text-primary-800">
+            <span>Visit our comprehensive guide on switching health insurance in Switzerland</span>
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Top Reasons to Switch Insurance</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            {reasons.map(reason => (
+              <div class="flex flex-col items-center text-center">
+                <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                  <Fragment set:html={reason.icon} />
+                </div>
+                <span class="text-gray-900 font-medium">{reason.title}</span>
+                <p class="text-gray-600 text-sm mt-2">{reason.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Deadlines Section -->
+  <div id="deadlines" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Key Deadlines for Switching Health Insurance</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 max-w-5xl mx-auto">
+        {deadlines.map(deadline => (
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100">
+            <div class="flex items-center justify-center h-14 w-14 rounded-full bg-gradient-to-br from-primary-100 to-primary-50 text-primary-600 mb-6 mx-auto">
+              <Fragment set:html={deadline.icon} />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center">{deadline.type}</h3>
+            <div class="bg-primary-50 text-primary-700 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">
+              {deadline.date}
+            </div>
+            <p class="text-gray-600">{deadline.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div class="max-w-3xl mx-auto bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Important Deadline Reminder</h3>
+        <p class="text-gray-700">Mark November 30th on your calendar! This is the cut-off date for changing your basic health insurance provider for the following year. Miss this deadline, and you'll typically need to wait another full year to switch, unless your insurer announces premium increases.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div id="step-by-step" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these seven steps to successfully change your health insurance in Switzerland.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Important Deadlines:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Basic Insurance:</span> November 30th for changes effective January 1st.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Special Case:</span> Within 30 days of being notified of premium increases.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Supplementary Insurance:</span> Check your policy, typically 3-6 month notice required.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 3 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Sample Cancellation Letter Template:</h4>
+                    <div class="bg-white p-4 border border-gray-200 rounded text-sm">
+                      <p>[Your Full Name]<br />
+                      [Your Address]<br />
+                      [Your Zip Code and City]</p>
+                      <p class="mt-4">[Insurance Company Name]<br />
+                      [Insurance Company Address]<br />
+                      [Insurance Company Zip Code and City]</p>
+                      <p class="mt-4">[City, Date]</p>
+                      <p class="mt-4"><strong>Cancellation of Health Insurance Policy [Your Policy Number]</strong></p>
+                      <p class="mt-4">Dear Sir or Madam,</p>
+                      <p class="mt-2">I hereby notify you of my decision to cancel my basic health insurance policy (Policy Number: [Your Policy Number]) with effect from December 31, [Current Year].</p>
+                      <p class="mt-2">Please send me a written confirmation of this cancellation.</p>
+                      <p class="mt-4">Yours sincerely,</p>
+                      <p class="mt-4">[Your Signature]<br />
+                      [Your Full Name]</p>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Note: Send this letter by registered mail (Einschreiben/recommandé) to track delivery and have proof of sending.</p>
+                  </div>
+                )}
+                
+                {index === 4 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Required Documents for Application:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                      <li>Copy of ID or passport</li>
+                      <li>Swiss residence permit</li>
+                      <li>Cancellation confirmation from previous insurer (if available)</li>
+                      <li>Bank or post account details for payment setup</li>
+                      <li>Completed and signed application form</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help Changing Your Health Insurance?</h3>
+          <p class="text-gray-600 mb-8">Navigating deadlines, comparing options, and handling the paperwork can be overwhelming. Our experts can guide you through the entire process.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Potential Savings Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Ways to Save on Swiss Health Insurance</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">When changing your health insurance, consider these options to potentially reduce your premiums.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Choose an Alternative Model</h3>
+          <p class="text-gray-600 mb-4">Switching from the standard model to a Family Doctor, HMO, or Telmed model can reduce your premium by 15-20% while maintaining the same basic coverage.</p>
+          <p class="text-sm font-medium text-primary-600">Potential savings: Up to 20%</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Increase Your Deductible</h3>
+          <p class="text-gray-600 mb-4">If you rarely need medical care, increasing your annual deductible from CHF 300 to a higher amount (up to CHF 2,500) can significantly lower your monthly premiums.</p>
+          <p class="text-sm font-medium text-primary-600">Potential savings: Variable based on chosen deductible</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Switch Insurance Providers</h3>
+          <p class="text-gray-600 mb-4">Since all basic insurance provides identical coverage by law, comparing different providers can help you find the same coverage at a lower price.</p>
+          <p class="text-sm font-medium text-primary-600">Potential savings: Hundreds of CHF per year</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Pay Premiums Annually</h3>
+          <p class="text-gray-600 mb-4">Some insurers offer discounts if you pay your annual premiums in a single lump sum rather than monthly payments.</p>
+          <p class="text-sm font-medium text-primary-600">Potential savings: Up to 2% discount</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Review Your Supplementary Insurance</h3>
+          <p class="text-gray-600 mb-4">Evaluate if you actually use all the supplementary coverage you're paying for. Consider dropping or changing supplementary plans that don't match your current needs.</p>
+          <p class="text-sm font-medium text-primary-600">Potential savings: Varies by coverage</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Check for Family Discounts</h3>
+          <p class="text-gray-600 mb-4">Some insurers offer discounts when multiple family members are insured with them, especially for children's premiums.</p>
+          <p class="text-sm font-medium text-primary-600">Potential savings: Varies by insurer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Mistakes Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Common Mistakes When Changing Insurance</h2>
+        
+        <div class="space-y-6">
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Missing the Deadline</h3>
+            <p class="text-gray-600">The most common mistake is missing the November 30th deadline for basic insurance changes. If your cancellation letter arrives after this date, you'll typically need to wait another year to switch.</p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Not Using Registered Mail</h3>
+            <p class="text-gray-600">Always send your cancellation letter by registered mail (Einschreiben/recommandé) rather than regular mail or email. This provides proof of delivery and a timestamp, which can be crucial if there are disputes about whether you met the deadline.</p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Canceling Supplementary Before Being Accepted by New Insurer</h3>
+            <p class="text-gray-600">Unlike basic insurance, supplementary insurance applications can be rejected based on your health. Always secure acceptance from your new insurer before canceling existing supplementary coverage.</p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Choosing Based Only on Premium</h3>
+            <p class="text-gray-600">While saving money is important, don't make decisions based solely on premium costs. Consider service quality, claim processing efficiency, and availability of digital tools or English-language services, especially if you're an expat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about changing your health insurance in Switzerland?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss health insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/set-up-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Set Up Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Learn the step-by-step process for setting up your Swiss health insurance.</p>
+        </a>
+        
+        <a href="/guides/how-to/find-best-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Finding the Best Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Compare providers and plans to find the perfect coverage for your specific needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/pre-existing-conditions-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Insurance with Pre-existing Conditions</h3>
+          </div>
+          <p class="text-gray-600">Navigate Swiss health insurance with pre-existing medical conditions.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to change your Swiss health insurance?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts can help you navigate the process and find the best coverage for your needs
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Change Health Insurance",
+        "item": "https://expat-savvy.ch/guides/how-to/change-health-insurance"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

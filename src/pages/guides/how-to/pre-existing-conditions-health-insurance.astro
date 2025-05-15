@@ -1,0 +1,648 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand the Swiss insurance system's approach to pre-existing conditions",
+    text: "Know that basic health insurance (KVG/LAMal) must accept you regardless of pre-existing conditions with no exclusions or waiting periods. Supplementary insurance (VVG/LCA) can, however, reject applications or apply exclusions based on medical history."
+  },
+  {
+    name: "Gather your medical documentation",
+    text: "Collect comprehensive medical records from your current and previous healthcare providers, including diagnosis details, treatment plans, medication lists, and recent test results. Have these translated to the local language (German, French, or Italian) if coming from abroad."
+  },
+  {
+    name: "Apply for basic health insurance immediately",
+    text: "Submit your application for mandatory basic health insurance within three months of establishing residency in Switzerland. Remember that this coverage is retroactive to your arrival date, so medical expenses from your arrival can be claimed."
+  },
+  {
+    name: "Be strategic with supplementary insurance applications",
+    text: "If possible, apply for supplementary insurance before you establish residency in Switzerland or before a condition is officially diagnosed. Consider applying to multiple providers simultaneously to increase your chances of acceptance."
+  },
+  {
+    name: "Complete health questionnaires accurately and strategically",
+    text: "When applying for supplementary insurance, answer all health questions truthfully but concisely. Focus on the specific questions asked rather than volunteering additional information. Consider seeking professional guidance when completing these forms."
+  },
+  {
+    name: "Review and understand any exclusions or limitations",
+    text: "Carefully examine any policy exclusions or limitations related to your condition. Determine whether the coverage will still be valuable to you despite these restrictions. Be aware that some insurers might offer coverage but with a premium surcharge."
+  },
+  {
+    name: "Consider specialized supplementary insurance plans",
+    text: "Some insurers offer supplementary plans specifically designed for people with certain pre-existing conditions, particularly for common chronic conditions. These may provide better coverage than standard supplementary policies."
+  },
+  {
+    name: "Consult with an independent insurance advisor",
+    text: "Work with an independent advisor who specializes in Swiss health insurance and has experience helping clients with pre-existing conditions. They can provide personalized guidance and navigate the complex application process on your behalf."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "Can health insurance companies in Switzerland reject me because of pre-existing conditions?",
+    answer: "Basic health insurance (KVG/LAMal) providers cannot reject you based on pre-existing conditions — they must accept all applicants regardless of health status. However, supplementary insurance (VVG/LCA) providers can reject applications, apply permanent exclusions for specific conditions, or charge higher premiums based on your medical history."
+  },
+  {
+    question: "Are pre-existing conditions covered under basic Swiss health insurance?",
+    answer: "Yes, pre-existing conditions are fully covered under mandatory basic health insurance (KVG/LAMal) with no waiting periods or exclusions. This includes chronic illnesses, ongoing treatments, and any other health issues you had before obtaining insurance. This is one of the fundamental principles of the Swiss healthcare system."
+  },
+  {
+    question: "How should I disclose pre-existing conditions when applying for supplementary insurance?",
+    answer: "Always disclose pre-existing conditions truthfully when asked in supplementary insurance applications. Providing false information can lead to policy cancellation and claim denials. Answer the specific questions asked without volunteering additional information not requested. Consider working with an insurance advisor to help navigate the disclosure process effectively."
+  },
+  {
+    question: "What types of pre-existing conditions cause the most difficulty with supplementary insurance?",
+    answer: "Conditions that typically cause the most difficulty include chronic diseases (diabetes, multiple sclerosis, rheumatoid arthritis), mental health conditions (depression, anxiety disorders), severe allergies, cardiovascular issues, cancer (current or recent history), obesity, and back problems. However, the approach varies significantly between insurers."
+  },
+  {
+    question: "How long do I need to wait after recovering from a condition before supplementary insurers will accept me?",
+    answer: "This varies by insurer and condition. Generally, minor conditions may require 1-2 years since recovery/treatment completion, while serious conditions like cancer might require 5+ years of remission. Some chronic conditions may result in permanent exclusions. Each insurer has different internal guidelines, so it's worth applying to multiple providers."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Medical history documentation template",
+    description: "Structured form to organize your medical history for insurance applications"
+  },
+  {
+    name: "Insurance application comparison tool",
+    description: "Tool to track different supplementary insurance applications and their responses"
+  },
+  {
+    name: "Health questionnaire review service",
+    description: "Professional help with completing health questionnaires accurately"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Complete medical records and history",
+  "Doctor's letters explaining current treatment status",
+  "Translator services (if medical documents aren't in a Swiss official language)",
+  "Swiss residence permit or proof of pending permit application",
+  "List of current medications and treatments"
+];
+---
+
+<Layout
+  title="How to Get Health Insurance with Pre-existing Conditions in Switzerland | Expert Guide"
+  description="Complete guide to securing Swiss health insurance with pre-existing medical conditions. Learn about basic vs. supplementary coverage, exclusions, and how to maximize your chances of acceptance."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+>
+  <!-- Add schema markup using our component -->
+  <HowToSchema
+    name="How to Get Health Insurance with Pre-existing Conditions in Switzerland"
+    description="A comprehensive guide to navigating the Swiss health insurance system when you have pre-existing medical conditions."
+    totalTime="PT5H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+        alt="Person reviewing health insurance documents"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Pre-existing Conditions &</span>
+          <span class="block mt-2">Swiss <span class="text-primary-500">Health Insurance</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Your complete guide to navigating the Swiss insurance system with pre-existing medical conditions.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#step-by-step"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            View Steps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding Pre-existing Conditions in the Swiss System</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Navigating health insurance with pre-existing conditions can be daunting, particularly in a new country. The good news is that Switzerland has one of the most inclusive basic health insurance systems in the world. However, securing comprehensive supplementary coverage requires strategic planning and insider knowledge.
+        </p>
+        <p class="text-lg text-gray-600">
+          This guide helps you understand the unique aspects of the Swiss health insurance system for people with pre-existing medical conditions, and provides step-by-step instructions to maximize your chances of obtaining the coverage you need.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">The Swiss Two-Tier Insurance System</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="bg-gray-50 p-5 rounded-lg">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4 w-14 h-14 flex items-center justify-center">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="text-xl font-semibold text-gray-900 mb-2">Basic Insurance<br />(KVG/LAMal)</h4>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>Mandatory for all residents</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>Must accept everyone regardless of health status</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>No exclusions for pre-existing conditions</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>Same premium for everyone in same region/age group</span>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-gray-50 p-5 rounded-lg">
+              <div class="bg-yellow-100 p-3 rounded-full text-yellow-600 mb-4 w-14 h-14 flex items-center justify-center">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+              </div>
+              <h4 class="text-xl font-semibold text-gray-900 mb-2">Supplementary Insurance<br />(VVG/LCA)</h4>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-red-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  <span>Optional additional coverage</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-red-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  <span>Can reject applicants based on health status</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-red-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  <span>May apply exclusions or waiting periods</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-red-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  <span>Risk-based pricing based on health profile</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div id="step-by-step" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these eight steps to maximize your chances of securing appropriate health insurance coverage with pre-existing conditions.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-green-50 p-4 rounded-lg mt-4 border-l-4 border-green-400">
+                    <h4 class="font-medium text-gray-900 mb-2">Good News for Basic Insurance:</h4>
+                    <p class="text-gray-600">In Switzerland, the mandatory basic health insurance (KVG/LAMal) operates on a principle of solidarity. Every resident, regardless of age, gender, or health status, is entitled to the same comprehensive basic coverage. Insurers <strong>cannot</strong> reject your application, charge you higher premiums, or exclude coverage for pre-existing conditions under the basic insurance scheme.</p>
+                  </div>
+                )}
+                
+                {index === 1 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Essential Medical Documentation:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                      <li>Complete medical history with diagnoses</li>
+                      <li>Current treatment plans and medications</li>
+                      <li>Recent medical test results</li>
+                      <li>Doctor's letter explaining current status of conditions</li>
+                      <li>Timeline of major health events and treatments</li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 3 && (
+                  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg mt-4">
+                    <p class="text-yellow-800">
+                      <strong>Timing is critical:</strong> If you're moving to Switzerland and have known health conditions, try to secure supplementary insurance from your home country before establishing Swiss residency. Some international health insurance plans can be continued or converted to Swiss supplementary coverage without new health assessments.
+                    </p>
+                  </div>
+                )}
+                
+                {index === 4 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Health Questionnaire Tips:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                      <li>Answer truthfully but don't volunteer information not specifically requested</li>
+                      <li>Be precise about dates, treatments, and current status</li>
+                      <li>Include recovery information and stability periods</li>
+                      <li>For conditions in remission, clearly indicate the remission period</li>
+                      <li>Consider professional translation services for medical terms</li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 6 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Insurers Known for Special Chronic Condition Plans:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/helsana" class="text-primary-600 hover:text-primary-800">Helsana</a>: Specialty plans for diabetes management
+                      </li>
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/css" class="text-primary-600 hover:text-primary-800">CSS</a>: Targeted plans for certain chronic conditions
+                      </li>
+                      <li class="flex items-center">
+                        <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <a href="/healthcare/all-insurances/swica" class="text-primary-600 hover:text-primary-800">SWICA</a>: Supplementary coverage with limited exclusions
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 7 && (
+                  <div class="mt-4 flex justify-center">
+                    <button
+                      onclick="showConsultationModal()"
+                      class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-md"
+                    >
+                      Schedule Free Consultation with an Expert
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Personalized Guidance?</h3>
+          <p class="text-gray-600 mb-8">Every medical condition is unique, and insurance acceptance criteria change regularly. Our experts can provide customized advice for your specific situation.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get Personalized Insurance Advice
+          </button>
+          <p class="text-sm text-gray-500 mt-4">Free, confidential consultation with Swiss insurance specialists</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Condition-Specific Guidance Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Guidance for Specific Conditions</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">While every person's case is unique, here's general guidance for common pre-existing conditions.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Chronic Conditions</h3>
+          <p class="text-gray-600 mb-4">Diabetes, asthma, heart conditions, arthritis</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Fully covered under basic insurance</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>For supplementary: focus on stability period</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Consider specialized chronic condition plans</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Mental Health</h3>
+          <p class="text-gray-600 mb-4">Depression, anxiety, bipolar disorder</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Basic insurance covers therapy with physician referral</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Supplementary often has specific mental health exclusions</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Emphasize treatment compliance and stability</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Cancer History</h3>
+          <p class="text-gray-600 mb-4">Previous diagnosis, ongoing monitoring</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Basic insurance covers all necessary treatments</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Supplementary often requires 5+ years remission</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Consider targeted supplementary packages</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="max-w-5xl mx-auto mt-8 bg-white rounded-lg shadow-md p-6">
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+          <p class="text-yellow-800">
+            <strong>Remember:</strong> While the information above provides general guidance, each insurance company has different internal guidelines for assessing medical conditions. Working with an insurance expert can significantly improve your chances of finding suitable coverage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about getting insurance with pre-existing conditions?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful insurance topics for expats with specific needs.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/compare-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Compare Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Systematic framework for evaluating different Swiss health insurance options.</p>
+        </a>
+        
+        <a href="/guides/how-to/apply-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Apply for Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Step-by-step guide to the application process for Swiss health insurance.</p>
+        </a>
+        
+        <a href="/guides/how-to/find-insurance-broker" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Find an Insurance Broker</h3>
+          </div>
+          <p class="text-gray-600">Tips for finding and evaluating independent insurance advisors in Switzerland.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help with your specific condition?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts specialize in helping people with pre-existing conditions find the right coverage
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Pre-existing Conditions",
+        "item": "https://expat-savvy.ch/guides/how-to/pre-existing-conditions-health-insurance"
+      }
+    ]
+  }, null, 2)} />
+
+  <!-- Insurance Product Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "InsuranceProduct",
+    "name": "Health Insurance for Pre-existing Conditions",
+    "description": "Health insurance options for people with pre-existing medical conditions in Switzerland",
+    "insuranceCompany": [
+      {
+        "@type": "Organization",
+        "name": "All Swiss Health Insurers",
+        "description": "All Swiss insurance companies are legally required to provide basic health insurance coverage regardless of pre-existing conditions"
+      }
+    ],
+    "offeredBy": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "insurancePlan": "Basic health insurance (KVG/LAMal)",
+    "benefits": [
+      {
+        "@type": "Thing",
+        "name": "Non-discriminatory coverage",
+        "description": "Swiss basic insurance must cover all applicants regardless of health status"
+      },
+      {
+        "@type": "Thing",
+        "name": "No exclusions",
+        "description": "Pre-existing conditions must be fully covered under basic insurance"
+      },
+      {
+        "@type": "Thing",
+        "name": "Comprehensive coverage",
+        "description": "Basic insurance covers doctor visits, hospital treatment, and prescribed medications"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

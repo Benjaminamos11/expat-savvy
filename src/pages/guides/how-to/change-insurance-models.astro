@@ -1,0 +1,653 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand the different insurance models",
+    text: "Familiarize yourself with the four main health insurance models in Switzerland: Standard, Family Doctor, HMO, and Telmed, including their restrictions and benefits."
+  },
+  {
+    name: "Assess your healthcare needs and preferences",
+    text: "Consider your typical healthcare usage patterns, whether you have a preferred doctor, how often you need specialists, and your comfort level with restrictions."
+  },
+  {
+    name: "Calculate potential premium savings",
+    text: "Compare premium discounts across different models (typically 8-20% depending on the model) against the standard model to determine financial benefits."
+  },
+  {
+    name: "Evaluate healthcare provider networks",
+    text: "For HMO and Family Doctor models, research the network of approved healthcare providers to ensure they're conveniently located for you."
+  },
+  {
+    name: "Check model availability with insurers",
+    text: "Contact insurance providers to confirm which models they offer in your region, as not all models are available in all cantons or from all insurers."
+  },
+  {
+    name: "Apply for the model change",
+    text: "Submit your application to your insurer to switch to your chosen alternative model. This can typically be done annually before November 30th for the following year."
+  },
+  {
+    name: "Understand the rules and follow procedures",
+    text: "Familiarize yourself with the specific protocols of your new insurance model to ensure proper coverage and avoid unexpected costs."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "What are the main health insurance models in Switzerland?",
+    answer: "Switzerland offers four main health insurance models: (1) Standard Model - free choice of doctors and specialists; (2) Family Doctor Model - first consultations must be with your chosen general practitioner; (3) HMO (Health Maintenance Organization) Model - requires visiting specific health centers first; and (4) Telmed Model - requires calling a medical hotline before seeing a doctor. Alternative models offer premium discounts of 8-20% compared to the standard model."
+  },
+  {
+    question: "How much can I save by switching to an alternative insurance model?",
+    answer: "You can typically save between 8% and 20% on your monthly premiums by choosing an alternative model instead of the standard model. HMO models usually offer the highest discounts (15-20%), followed by Family Doctor models (10-15%) and Telmed models (8-12%). For an average adult with a CHF 300 deductible, this could translate to savings of CHF 300-700 per year."
+  },
+  {
+    question: "Can I still see specialists with alternative insurance models?",
+    answer: "Yes, but with some restrictions. With the Family Doctor and HMO models, you need a referral from your primary physician or health center to see specialists (except for gynecologists, pediatricians, and ophthalmologists in most cases). With the Telmed model, you need authorization from the telemedical service first. In emergency situations, these requirements are waived, and you can see specialists directly."
+  },
+  {
+    question: "When can I change my insurance model?",
+    answer: "You can change your insurance model at the end of each calendar year. Your request to change models must be received by your insurance company by November 30th for changes effective January 1st. Some insurers may allow model changes during the year as well, but this varies by company and isn't guaranteed."
+  },
+  {
+    question: "What happens if I don't follow the rules of my chosen model?",
+    answer: "If you don't follow the procedures of your chosen model (e.g., seeing a specialist without a referral or going to a doctor before calling the Telmed hotline), your insurance company may only reimburse a portion of the costs or may refuse coverage entirely for that treatment. Some insurers issue warnings for first-time violations, while others may even transfer you back to the standard model with higher premiums."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Priminfo.ch or Comparis.ch",
+    description: "Comparison tools for insurance models and premium calculations"
+  },
+  {
+    name: "Insurance provider model documentation",
+    description: "Detailed rules and provider networks for each model"
+  },
+  {
+    name: "Application forms for model changes",
+    description: "Required paperwork for switching models"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Current insurance policy details",
+  "List of preferred doctors and specialists",
+  "Information about your typical healthcare usage",
+  "Address and contact information"
+];
+
+// Model comparison data
+const modelComparison = [
+  {
+    model: "Standard Model",
+    restrictions: "None - free choice of doctors and specialists",
+    savings: "None (base rate)",
+    bestFor: "People who prioritize complete freedom of choice and flexibility"
+  },
+  {
+    model: "Family Doctor Model",
+    restrictions: "Must consult chosen general practitioner first",
+    savings: "10-15%",
+    bestFor: "People who already have a trusted GP they regularly visit"
+  },
+  {
+    model: "HMO Model",
+    restrictions: "Must visit specific health centers first",
+    savings: "15-20%",
+    bestFor: "Urban residents with HMO centers nearby, price-conscious consumers"
+  },
+  {
+    model: "Telmed Model",
+    restrictions: "Must call medical hotline before visiting doctors",
+    savings: "8-12%",
+    bestFor: "Tech-savvy people who don't mind phone consultations, those with simple healthcare needs"
+  }
+];
+
+// Common mistakes to avoid
+const commonMistakes = [
+  {
+    title: "Not understanding model restrictions",
+    description: "Failing to grasp the specific rules and protocols of your chosen model, which can lead to denied claims"
+  },
+  {
+    title: "Choosing based only on price",
+    description: "Selecting the cheapest model without considering how well it matches your healthcare needs and habits"
+  },
+  {
+    title: "Not checking provider networks",
+    description: "For HMO/Family Doctor models, not verifying if convenient providers are in-network"
+  },
+  {
+    title: "Forgetting emergency exceptions",
+    description: "Not knowing that model restrictions don't apply in genuine emergencies"
+  },
+  {
+    title: "Overlooking specialist access",
+    description: "Not considering how often you need specialist care, which may require additional steps in alternative models"
+  }
+];
+---
+
+<Layout
+  title="How to Change Basic Insurance Models to Save Money | Swiss Guide"
+  description="Compare standard vs. alternative insurance models (Telmed, HMO, Family Doctor) in Switzerland and save up to 20% on premiums. Expert advice for expats."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747080654/a-clean-and-professional-illustration-sh_kBJHkdZKRhCnO-nHH4Z9Ow_Bd0pKjDSRuKPrtwW9SX42A_e0wbqp.webp"
+>
+  <!-- Add schema markup using our component -->
+  <HowToSchema
+    name="How to Change Basic Insurance Models to Save Money in Switzerland"
+    description="A comprehensive guide to understanding and selecting the optimal health insurance model based on your healthcare needs and preferences."
+    totalTime="PT3H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747080654/a-clean-and-professional-illustration-sh_kBJHkdZKRhCnO-nHH4Z9Ow_Bd0pKjDSRuKPrtwW9SX42A_e0wbqp.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747080654/a-clean-and-professional-illustration-sh_kBJHkdZKRhCnO-nHH4Z9Ow_Bd0pKjDSRuKPrtwW9SX42A_e0wbqp.webp"
+        alt="Swiss Health Insurance Models Comparison"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Choosing the Right</span>
+          <span class="block mt-2">Insurance Model in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Save up to 20% on your health insurance premiums by selecting the optimal model for your healthcare needs and lifestyle.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#model-comparison"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Models
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding Swiss Health Insurance Models</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          One of the most effective ways to reduce your health insurance premiums in Switzerland without compromising on coverage is to choose an alternative insurance model. By accepting certain restrictions on how you access healthcare, you can save between 8% and 20% on your premiums.
+        </p>
+        <p class="text-lg text-gray-600">
+          This guide explains the different insurance models available in Switzerland, helps you determine which one best fits your healthcare needs, and walks you through the process of changing models to optimize your coverage.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Key Advantages of Alternative Models</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Significant Savings</span>
+              <p class="text-gray-600 text-sm mt-2">Up to 20% lower premiums without losing any benefits</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Same Core Coverage</span>
+              <p class="text-gray-600 text-sm mt-2">Identical basic benefits mandated by law</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Coordinated Care</span>
+              <p class="text-gray-600 text-sm mt-2">More consistent healthcare with fewer unnecessary treatments</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Comparison Section -->
+  <div id="model-comparison" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Swiss Health Insurance Models Compared</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Compare the four main health insurance models to understand their key differences and benefits.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Insurance Model</th>
+                <th class="py-3 px-4 text-left">Restrictions</th>
+                <th class="py-3 px-4 text-left">Premium Discount</th>
+                <th class="py-3 px-4 text-left">Best For</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {modelComparison.map(model => (
+                <tr class="hover:bg-gray-50">
+                  <td class="py-4 px-4 font-medium">{model.model}</td>
+                  <td class="py-4 px-4">{model.restrictions}</td>
+                  <td class="py-4 px-4">{model.savings}</td>
+                  <td class="py-4 px-4">{model.bestFor}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-8 max-w-3xl mx-auto bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Emergency Exception</h3>
+        <p class="text-gray-700">For all alternative models, the restrictions do not apply in case of genuine medical emergencies. You can always seek emergency care directly without following the model's usual protocols.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these seven steps to choose the best insurance model for your needs and switch to it successfully.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Insurance Model Details:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Standard Model:</span> Complete freedom of choice. You can consult any doctor, specialist, or hospital in Switzerland without restrictions or referrals.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Family Doctor Model (Hausarzt):</span> You select a general practitioner as your first point of contact. You must consult this doctor first, who will refer you to specialists if needed.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">HMO (Health Maintenance Organization):</span> You must first visit a specific health center staffed by multiple doctors. These centers manage your care and provide referrals when necessary.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Telmed (Telemedical) Model:</span> Before seeing any healthcare provider, you must call a medical advice line. The telemedical service will then advise whether a doctor's visit is necessary and provide guidance.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Typical Premium Savings by Model:</h4>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Model</th>
+                            <th class="py-2 px-3 text-left">Typical Discount</th>
+                            <th class="py-2 px-3 text-left">Annual Savings (Example)*</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3">Family Doctor</td>
+                            <td class="py-2 px-3">10-15%</td>
+                            <td class="py-2 px-3">CHF 300-450</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">HMO</td>
+                            <td class="py-2 px-3">15-20%</td>
+                            <td class="py-2 px-3">CHF 450-600</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3">Telmed</td>
+                            <td class="py-2 px-3">8-12%</td>
+                            <td class="py-2 px-3">CHF 240-360</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">*Based on an adult with average premium of CHF 300/month</p>
+                  </div>
+                )}
+                
+                {index === 6 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Model-Specific Procedures:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Family Doctor:</span> Keep your GP's contact information handy and contact them first for all non-emergency medical issues.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">HMO:</span> Locate your nearest HMO center and understand their operating hours. Remember that if you move, you may need to switch to a different HMO center.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Telmed:</span> Save the telemedical service number in your phone. Call before seeking medical care, even for seemingly minor issues, and follow their guidance precisely.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help Choosing the Right Insurance Model?</h3>
+          <p class="text-gray-600 mb-8">Our expert advisors can review your healthcare needs and help you select the optimal model for your specific situation.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Mistakes Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Common Mistakes to Avoid</h2>
+        
+        <div class="space-y-6">
+          {commonMistakes.map(mistake => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{mistake.title}</h3>
+              <p class="text-gray-600">{mistake.description}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-10 bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Important Reminder</h3>
+          <p class="text-gray-700">If you want to change your insurance model, remember that you must typically do so by November 30th for the change to take effect on January 1st of the following year. Some insurers may allow mid-year changes, but this varies by company.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Studies Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Which Model Is Right For You?</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Here are some scenarios to help you determine which insurance model might best suit your situation.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">The Urban Professional</h3>
+          <p class="text-gray-600 mb-4"><span class="italic">Sarah is a busy professional living in Zurich with generally good health. She doesn't have a regular doctor yet, and values convenience and digital services.</span></p>
+          <p class="text-gray-700 font-medium">Best option: Telmed Model</p>
+          <p class="text-gray-600 mt-2">The Telmed model allows Sarah to quickly get medical advice by phone before deciding if a doctor visit is necessary. It fits well with her busy schedule and digital-first lifestyle.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">The Family with Children</h3>
+          <p class="text-gray-600 mb-4"><span class="italic">The Meier family has two young children. They already have a trusted family doctor who knows their medical history well.</span></p>
+          <p class="text-gray-700 font-medium">Best option: Family Doctor Model</p>
+          <p class="text-gray-600 mt-2">Since they already have a trusted GP, the Family Doctor model makes sense. Their existing doctor can coordinate care for the whole family and provide continuity of care.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">The Specialist Patient</h3>
+          <p class="text-gray-600 mb-4"><span class="italic">Hans has a chronic condition that requires regular visits to specialists. He prefers direct access to his specialists without referrals.</span></p>
+          <p class="text-gray-700 font-medium">Best option: Standard Model</p>
+          <p class="text-gray-600 mt-2">Despite the higher premiums, Hans benefits from the Standard model as it allows direct access to his specialists without requiring referrals each time.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">The Budget-Conscious Expat</h3>
+          <p class="text-gray-600 mb-4"><span class="italic">Luis is a new expat in Basel looking to minimize health insurance costs. He's young, healthy, and lives near a health center.</span></p>
+          <p class="text-gray-700 font-medium">Best option: HMO Model</p>
+          <p class="text-gray-600 mt-2">The HMO model offers Luis the highest premium savings (15-20%), and since he lives near a health center and doesn't have existing doctor relationships, it's an excellent fit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about insurance models in Switzerland?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss health insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/set-up-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Set Up Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Learn the step-by-step process for setting up your Swiss health insurance.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Change Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Learn when and how to switch providers to optimize your coverage and save money.</p>
+        </a>
+        
+        <a href="/guides/how-to/find-best-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Finding the Best Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Compare providers and plans to find the perfect coverage for your specific needs.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to optimize your health insurance model?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts can help you select the best model for your needs and guide you through the change process
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Change Insurance Models",
+        "item": "https://expat-savvy.ch/guides/how-to/change-insurance-models"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

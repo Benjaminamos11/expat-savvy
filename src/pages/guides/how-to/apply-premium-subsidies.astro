@@ -1,0 +1,633 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Check your eligibility",
+    text: "Determine if you qualify for premium subsidies based on your canton's income thresholds and personal situation. Each canton sets different income limits and calculation methods."
+  },
+  {
+    name: "Gather required documentation",
+    text: "Collect necessary documents including tax statements, residence permit, health insurance policy details, and household information required for your application."
+  },
+  {
+    name: "Identify application deadlines",
+    text: "Research your canton's specific deadlines. Missing these deadlines typically means waiting until the next period to receive subsidies."
+  },
+  {
+    name: "Obtain application forms",
+    text: "Acquire the appropriate forms from your cantonal authority, either from their website or office. Some cantons send these automatically to potentially eligible residents."
+  },
+  {
+    name: "Complete and submit application",
+    text: "Fill out forms accurately, attach all required documentation, and submit through the required channel (online portal, mail, or in person) before the deadline."
+  },
+  {
+    name: "Process follow-up requirements",
+    text: "Respond to any requests for additional information or clarification from the cantonal authority during the assessment period."
+  },
+  {
+    name: "Receive and verify subsidy implementation",
+    text: "After approval, confirm your insurer is properly applying your subsidy, which is typically paid directly to them, reducing your monthly premium invoices."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "Who is eligible for premium subsidies (Prämienverbilligung) in Switzerland?",
+    answer: "Eligibility for premium subsidies is primarily based on income and varies by canton. Generally, individuals and families with low to middle incomes qualify. Many cantons use a percentage of your taxable income as the threshold (typically around 8-14% of income). Some cantons automatically notify eligible residents, while others require applications. Students, retirees, and families with children often have special provisions that make qualifying easier."
+  },
+  {
+    question: "How much can I receive in premium subsidies?",
+    answer: "Subsidy amounts vary significantly by canton, income level, and personal situation. They can range from a few hundred to several thousand francs annually. In some cases, subsidies can cover up to 100% of premiums for very low-income individuals or families. The average reduction is approximately 30-40% of premium costs. Families with children typically receive higher subsidies, with specific additional amounts designated for each child."
+  },
+  {
+    question: "Do I need to apply for premium subsidies every year?",
+    answer: "This depends on your canton. In some cantons, you need to reapply annually, while others automatically review your eligibility based on your tax declaration. In cantons requiring annual applications, you'll typically receive a reminder or new application form when your current subsidy period is ending. It's crucial to verify your canton's specific process, as missing reapplication deadlines can result in months without subsidies."
+  },
+  {
+    question: "As an expat, can I apply for premium subsidies?",
+    answer: "Yes, most legal residents in Switzerland can apply for premium subsidies, including expats with B or C permits. However, you typically need to have been a tax resident for at least one full tax period. New arrivals may need to wait until they've filed their first Swiss tax return. Some cantons have special provisions for newly arrived residents, allowing them to apply based on their current income rather than previous tax data."
+  },
+  {
+    question: "What happens if my income changes after I receive premium subsidies?",
+    answer: "If your income significantly increases or decreases during the subsidy period, the rules vary by canton. In most cantons, you're required to report substantial income changes (usually increases of 20% or more). Some cantons will adjust your subsidy amount immediately, while others may only make adjustments in the following period. Failure to report income increases can result in having to repay excess subsidies received."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Cantonal premium subsidy calculator",
+    description: "Online tools to estimate your eligibility and potential subsidy amount"
+  },
+  {
+    name: "Application forms",
+    description: "Canton-specific forms for subsidy applications"
+  },
+  {
+    name: "Tax assessment notices",
+    description: "Documentation needed to verify income eligibility"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Tax declaration and assessment documentation",
+  "Health insurance policy details",
+  "Residence permit or ID",
+  "Swiss bank account information",
+  "Family/household composition documentation"
+];
+
+// Canton examples
+const cantonExamples = [
+  {
+    canton: "Zurich",
+    threshold: "Individual: up to ~CHF 50,000, Family with 2 children: up to ~CHF 90,000",
+    deadline: "Applications must be received by December 31 for the following year",
+    process: "Online application or by mail"
+  },
+  {
+    canton: "Geneva",
+    threshold: "Based on percentage of income devoted to premiums",
+    deadline: "September 30 for the following year",
+    process: "Automatic for many residents; others must apply by mail"
+  },
+  {
+    canton: "Bern",
+    threshold: "Individual: up to ~CHF 40,000, Family with 2 children: up to ~CHF 80,000",
+    deadline: "End of year for following year's subsidies",
+    process: "Automatic for low-income residents; others must apply"
+  },
+  {
+    canton: "Vaud",
+    threshold: "Varies by family situation, typically up to ~CHF 60,000 for individuals",
+    deadline: "Applications can be made year-round",
+    process: "Annual application required, both online and paper forms accepted"
+  }
+];
+
+// Common mistakes
+const commonMistakes = [
+  {
+    title: "Missing application deadlines",
+    description: "Different cantons have different deadlines, and missing them can mean waiting months or a year for subsidies."
+  },
+  {
+    title: "Incomplete documentation",
+    description: "Not including all required supporting documents can delay processing or result in rejection."
+  },
+  {
+    title: "Failing to report income changes",
+    description: "Not reporting significant income increases can result in having to repay subsidies."
+  },
+  {
+    title: "Assuming automatic eligibility",
+    description: "Some residents assume they'll be automatically notified if eligible, which isn't true in all cantons."
+  },
+  {
+    title: "Selecting high-premium insurance",
+    description: "Some cantons base subsidies on reference premiums, and won't cover costs above these amounts."
+  }
+];
+---
+
+<Layout
+  title="How to Apply for Health Insurance Premium Subsidies in Switzerland | Guide"
+  description="Learn how to apply for Prämienverbilligung (premium subsidies) in Switzerland. Step-by-step process, eligibility requirements, and canton-specific information."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747089156/an-abstract-illustration-showing-a-perso_U2MCCgnwR2mdZ8FrFKC4NA_MkMfDpMxTfmRPH7K-sUmVQ_jk4xbm.webp"
+>
+  <!-- Add schema markup using our component -->
+  <HowToSchema
+    name="How to Apply for Health Insurance Premium Subsidies in Switzerland"
+    description="A complete guide to applying for Prämienverbilligung (health insurance premium subsidies) in Switzerland, with canton-specific information and eligibility criteria."
+    totalTime="PT5H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747089156/an-abstract-illustration-showing-a-perso_U2MCCgnwR2mdZ8FrFKC4NA_MkMfDpMxTfmRPH7K-sUmVQ_jk4xbm.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747089156/an-abstract-illustration-showing-a-perso_U2MCCgnwR2mdZ8FrFKC4NA_MkMfDpMxTfmRPH7K-sUmVQ_jk4xbm.webp"
+        alt="Swiss Health Insurance Premium Subsidies Illustration"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">How to Apply for</span>
+          <span class="block mt-2">Premium Subsidies in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Discover if you qualify for Prämienverbilligung and learn how to reduce your health insurance costs by hundreds or thousands of francs each year.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#canton-examples"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Canton Information
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding Premium Subsidies in Switzerland</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Premium subsidies (Prämienverbilligung/réduction des primes) are financial support provided by Swiss cantons to help residents with low to middle incomes pay for their mandatory health insurance premiums. With Swiss healthcare costs among the highest in the world, these subsidies can significantly reduce your monthly expenses.
+        </p>
+        <p class="text-lg text-gray-600">
+          Around 30% of Swiss residents receive some form of premium subsidy, with amounts ranging from a small contribution to nearly full coverage of premiums. The process and eligibility criteria vary significantly between cantons, making it important to understand your local regulations.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Key Facts About Swiss Premium Subsidies</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Canton-Based System</span>
+              <p class="text-gray-600 text-sm mt-2">Each canton determines its own rules, thresholds, and procedures</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Income-Based</span>
+              <p class="text-gray-600 text-sm mt-2">Eligibility typically determined by taxable income and family size</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Annual Process</span>
+              <p class="text-gray-600 text-sm mt-2">Usually requires annual application or verification</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canton Examples Section -->
+  <div id="canton-examples" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Canton-Specific Information</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Premium subsidy processes vary by canton. Here's information for some of the major cantons.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Canton</th>
+                <th class="py-3 px-4 text-left">Approximate Income Threshold</th>
+                <th class="py-3 px-4 text-left">Application Deadline</th>
+                <th class="py-3 px-4 text-left">Application Process</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {cantonExamples.map(canton => (
+                <tr class="hover:bg-gray-50">
+                  <td class="py-4 px-4 font-medium">{canton.canton}</td>
+                  <td class="py-4 px-4">{canton.threshold}</td>
+                  <td class="py-4 px-4">{canton.deadline}</td>
+                  <td class="py-4 px-4">{canton.process}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center text-sm text-gray-600">
+        Note: This information is subject to change. Always verify current thresholds and deadlines on your canton's official website.
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Application Process</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these seven steps to apply for health insurance premium subsidies in Switzerland.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Typical Eligibility Factors:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Income:</span> Your taxable income from the previous tax year is the primary factor. Many cantons use a percentage-of-income approach, providing subsidies when premiums exceed a certain percentage of your income (typically 8-14%).
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Family Size:</span> Having children typically increases eligibility thresholds and subsidy amounts. Many cantons provide higher thresholds for families and additional subsidies specifically for children's premiums.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Assets:</span> Some cantons also consider your assets, not just income. Significant wealth may reduce eligibility even with lower income.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 1 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Required Documents:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Latest tax assessment notice (Steuerveranlagung/taxation définitive)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Current health insurance policy details/insurance card</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Residence permit/Swiss ID card</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Family booklet for those with children (Familienbüchlein/livret de famille)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Bank account details for direct deposits (in some cantons)</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 4 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Application Methods by Canton Type:</h4>
+                    <div class="space-y-3">
+                      <div class="flex items-start">
+                        <div class="bg-blue-100 text-blue-700 rounded-full px-2 py-1 text-xs font-medium mt-0.5 mr-2">Type 1</div>
+                        <div>
+                          <span class="font-medium">Automatic Assessment:</span> Some cantons automatically check eligibility based on tax data and notify eligible residents. You may still need to confirm or provide additional information.
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <div class="bg-green-100 text-green-700 rounded-full px-2 py-1 text-xs font-medium mt-0.5 mr-2">Type 2</div>
+                        <div>
+                          <span class="font-medium">Application Required:</span> Other cantons require a formal application each year, either online or using paper forms. You'll need to submit all documentation by the specified deadline.
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <div class="bg-purple-100 text-purple-700 rounded-full px-2 py-1 text-xs font-medium mt-0.5 mr-2">Type 3</div>
+                        <div>
+                          <span class="font-medium">Mixed Systems:</span> Some cantons automatically notify those with very low incomes but require applications from those in middle-income brackets who might qualify.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help with Your Premium Subsidy Application?</h3>
+          <p class="text-gray-600 mb-8">The Swiss cantonal system can be complex, especially for expats. Our experts can guide you through the process for your specific canton.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Mistakes Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Common Mistakes to Avoid</h2>
+        
+        <div class="space-y-6">
+          {commonMistakes.map(mistake => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{mistake.title}</h3>
+              <p class="text-gray-600">{mistake.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Special Cases Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Special Cases</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Some situations require special consideration when applying for premium subsidies.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">New Arrivals to Switzerland</h3>
+          <p class="text-gray-600 mb-4">As a new resident, you typically need to wait until you've completed a full tax assessment before applying for regular subsidies. However, some cantons offer provisional subsidies based on current income declarations, especially for those with B permits or families.</p>
+          <p class="text-gray-700 font-medium">Tip: Contact your cantonal authority directly about options for newcomers.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Students</h3>
+          <p class="text-gray-600 mb-4">Students often qualify for premium subsidies, especially those no longer financially dependent on parents. Special provisions exist for both Swiss and international students, with some cantons having dedicated student subsidy programs.</p>
+          <p class="text-gray-700 font-medium">Tip: Check with your university's social services office for guidance.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Major Life Changes</h3>
+          <p class="text-gray-600 mb-4">Significant income changes, divorce, job loss, or having a child may qualify you for immediate subsidy adjustments in many cantons, even outside the normal application period. Document these changes and report them promptly.</p>
+          <p class="text-gray-700 font-medium">Tip: Keep all documentation related to your change in circumstances.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Cross-Cantonal Moves</h3>
+          <p class="text-gray-600 mb-4">If you move between cantons, you'll need to apply for subsidies in your new canton of residence, even if you were receiving them in your previous canton. Each canton has different systems, thresholds, and application processes.</p>
+          <p class="text-gray-700 font-medium">Tip: Apply immediately after registering in your new canton of residence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about premium subsidies in Switzerland?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss health insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/find-best-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Finding the Best Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Compare providers and plans to find the perfect coverage for your specific needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Change Insurance Models</h3>
+          </div>
+          <p class="text-gray-600">Save up to 20% by choosing the right insurance model for your healthcare needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Change Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Learn when and how to switch providers to optimize your coverage and save money.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to reduce your health insurance costs?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts can help you navigate the premium subsidy process in your canton
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Apply for Premium Subsidies",
+        "item": "https://expat-savvy.ch/guides/how-to/apply-premium-subsidies"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

@@ -1,0 +1,746 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand the different types of insurance advisors",
+    text: "Learn about tied agents who represent single companies versus independent brokers who can compare multiple providers on your behalf."
+  },
+  {
+    name: "Determine your specific insurance needs",
+    text: "Create a list of your insurance requirements based on your situation as an expat, including health, liability, household, and other coverage needs."
+  },
+  {
+    name: "Research broker qualifications and credentials",
+    text: "Look for FINMA registration, industry certifications (like CICERO), years of experience, and specialization in expat services."
+  },
+  {
+    name: "Compare service offerings between brokers",
+    text: "Evaluate key services like around-the-clock availability, multilingual support, document handling, claims assistance, and follow-up care."
+  },
+  {
+    name: "Investigate transparency and independence",
+    text: "Check how brokers are compensated, whether they disclose all commissions, and if they offer truly independent advice across all Swiss providers."
+  },
+  {
+    name: "Schedule consultations with potential brokers",
+    text: "Meet with your shortlisted brokers to assess their knowledge, communication style, and how well they understand your specific situation."
+  },
+  {
+    name: "Make your decision and establish the relationship",
+    text: "Select your broker based on your research and meetings, then formalize the relationship with clear expectations for ongoing service."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "What's the difference between an insurance broker and an insurance agent in Switzerland?",
+    answer: "An insurance agent (or tied agent) works for a specific insurance company and can only offer products from that company. A broker, on the other hand, is independent and can recommend policies from various insurers. Brokers have a legal duty to act in your best interest, comparing options across the market. While agents may have deeper knowledge of their company's products, they cannot offer the market-wide comparison and unbiased advice that brokers provide."
+  },
+  {
+    question: "How do insurance brokers in Switzerland get paid?",
+    answer: "Most Swiss insurance brokers earn commissions from insurance companies when they sell policies. These commissions are already built into insurance premiums, so you don't pay extra for using a broker. Reputable brokers like Expat Savvy are transparent about these commissions. Some brokers may alternatively charge direct fees for their services. The best brokers clearly disclose their compensation structure before you sign up, ensuring you understand how they're incentivized."
+  },
+  {
+    question: "How do I verify if an insurance broker is legitimate and qualified in Switzerland?",
+    answer: "Legitimate insurance brokers in Switzerland should be registered with FINMA (Swiss Financial Market Supervisory Authority). You can verify registration on FINMA's website. Additionally, look for industry certifications such as CICERO membership, which requires ongoing education and adherence to ethical standards. Reputable brokers will also have transparent business practices, clear terms of service, and will be willing to provide references from existing clients."
+  },
+  {
+    question: "What services should a good expat-focused insurance broker provide beyond just selling policies?",
+    answer: "A quality expat-focused broker should offer comprehensive services including: multilingual support in English and other languages, 24/7 availability for emergencies, assistance with claims processing, regular policy reviews, help with document translation and paperwork, guidance navigating Swiss insurance regulations, and personalized advice considering your home country coverage and international needs. They should also provide educational resources about the Swiss insurance system and offer continued support after the initial sale."
+  },
+  {
+    question: "Can't I just use online comparison tools instead of a broker?",
+    answer: "While online comparison tools like Comparis offer basic premium comparisons, they cannot replace the personalized advice and service of a professional broker. Comparison sites often don't show all available options, may not account for your specific circumstances as an expat, and offer little support with claims or ongoing service. A quality broker understands the nuances of each insurer's policies, negotiates on your behalf, provides guidance in your language, and offers continued support throughout your time in Switzerland."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "FINMA register",
+    description: "Official register to verify broker registration"
+  },
+  {
+    name: "CICERO directory",
+    description: "Directory of certified insurance professionals"
+  },
+  {
+    name: "Broker comparison checklist",
+    description: "Tool to compare different brokers systematically"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "List of your insurance needs and priorities",
+  "Current insurance policies and coverage details",
+  "Questions prepared for potential brokers",
+  "Personal and family information relevant to insurance",
+  "Specific expat-related insurance concerns"
+];
+
+// Broker comparison data
+const brokerComparison = [
+  {
+    company: "Expat Savvy",
+    specialization: "Full-service expat insurance advisory",
+    strengths: "24/7 support, truly independent advice across all Swiss insurers, transparent commission disclosure, multilingual service, personalized follow-up care",
+    bestFor: "Expats seeking comprehensive, personalized insurance guidance with outstanding ongoing support"
+  },
+  {
+    company: "SimpleCare",
+    specialization: "Basic health insurance comparison",
+    strengths: "Simple process, online-focused service",
+    bestFor: "Basic health insurance needs with minimal personalization"
+  },
+  {
+    company: "ExpatServices",
+    specialization: "General expat services including insurance",
+    strengths: "Broader relocation services beyond insurance",
+    bestFor: "Those seeking general relocation help with insurance as just one component"
+  },
+  {
+    company: "Swiss Prime",
+    specialization: "Insurance and financial planning",
+    strengths: "Financial planning integration, focus on higher-wealth clients",
+    bestFor: "Clients seeking combined financial and insurance advice"
+  }
+];
+
+// Common mistakes to avoid
+const commonMistakes = [
+  {
+    title: "Choosing a tied agent instead of an independent broker",
+    description: "Tied agents can only offer products from one company, severely limiting your options compared to independent brokers who can survey the entire market."
+  },
+  {
+    title: "Not verifying broker credentials",
+    description: "Working with unregistered brokers without proper FINMA registration or industry certifications leaves you vulnerable to substandard advice."
+  },
+  {
+    title: "Prioritizing price over service quality",
+    description: "The lowest initial premium might lead to higher long-term costs if you receive poor advice or insufficient support with claims and policy management."
+  },
+  {
+    title: "Failing to consider expat-specific needs",
+    description: "Some brokers lack experience with the unique insurance requirements of expatriates, leading to coverage gaps or compliance issues."
+  },
+  {
+    title: "Not asking about commission structures",
+    description: "Without transparency about how brokers are compensated, you cannot fully evaluate potential conflicts of interest in their recommendations."
+  }
+];
+
+// What to look for in a broker
+const qualityIndicators = [
+  {
+    feature: "Around-the-clock availability",
+    explanation: "Insurance emergencies don't just happen during business hours. Look for brokers offering 24/7 support for urgent situations.",
+    expatsavvyApproach: "Our dedicated advisors are available 24/7 via our emergency hotline, ensuring help whenever you need it."
+  },
+  {
+    feature: "Multilingual service",
+    explanation: "Communication is crucial for insurance matters. Your broker should be fluent in your preferred language.",
+    expatsavvyApproach: "Our team offers service in English, German, French, Italian, and several other languages to ensure clear communication."
+  },
+  {
+    feature: "Independence from insurers",
+    explanation: "True independence means access to all suitable providers in the market, not just a selected panel.",
+    expatsavvyApproach: "We maintain relationships with all major Swiss insurers and regularly review the market for new options."
+  },
+  {
+    feature: "Transparency about commissions",
+    explanation: "Brokers should be open about how they're compensated for different products they recommend.",
+    expatsavvyApproach: "We provide full disclosure of all commissions and how they might influence recommendations."
+  },
+  {
+    feature: "Claims support process",
+    explanation: "The true test of a broker comes when you need to make a claim. Ensure they'll advocate for you effectively.",
+    expatsavvyApproach: "Our step-by-step claims guidance includes preparation of documentation, submission to insurers, and follow-up until resolution."
+  }
+];
+---
+
+<Layout
+  title="How to Find an Insurance Broker in Switzerland | Expert Guide for Expats"
+  description="Tips for finding and evaluating independent insurance advisors in Switzerland. Compare broker services, credentials, and specializations for expats."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747354685/an-office-setting-showing-a-professional_gSoF_77cQmWPG3rqrYGN1w_r5qhGGn3Q-K12wQ5R8FoFw_llr3mt.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Find an Insurance Broker in Switzerland"
+    description="A comprehensive guide to finding, evaluating, and selecting the right insurance broker for expats living in Switzerland."
+    totalTime="PT3H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747354685/an-office-setting-showing-a-professional_gSoF_77cQmWPG3rqrYGN1w_r5qhGGn3Q-K12wQ5R8FoFw_llr3mt.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747354685/an-office-setting-showing-a-professional_gSoF_77cQmWPG3rqrYGN1w_r5qhGGn3Q-K12wQ5R8FoFw_llr3mt.webp"
+        alt="Insurance broker consultation with client in Switzerland"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Finding the Right</span>
+          <span class="block mt-2">Insurance Broker in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Your comprehensive guide to selecting a qualified, independent broker who truly understands expat insurance needs and puts your interests first.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Speak with Our Advisors
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#broker-comparison"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Compare Brokers
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Finding the Right Insurance Broker Matters</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Navigating the Swiss insurance landscape as an expat can be overwhelming. With different coverage requirements, language barriers, and unfamiliar regulations, having the right advisor by your side makes all the difference in securing appropriate coverage at competitive rates.
+        </p>
+        <p class="text-lg text-gray-600">
+          An independent broker serves as your personal advocate in the complex Swiss insurance system, offering unbiased advice across multiple providers, handling communications in your preferred language, and providing ongoing support throughout your time in Switzerland.
+        </p>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Key Benefits of Working with an Independent Broker</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Unbiased Comparisons</span>
+              <p class="text-gray-600 text-sm mt-2">Access to all providers instead of just one company's offerings</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Language Support</span>
+              <p class="text-gray-600 text-sm mt-2">Communication in your language, eliminating misunderstandings</p>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-primary-100 p-3 rounded-full text-primary-600 mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="text-gray-900 font-medium">Claims Advocacy</span>
+              <p class="text-gray-600 text-sm mt-2">Professional support when filing claims and resolving disputes</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-8 bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Why Expats Need Specialized Insurance Advice</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Navigating unfamiliar Swiss insurance regulations and requirements</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Understanding how Swiss coverage interacts with existing international policies</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Finding coverage suited to temporary or long-term residency situations</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Managing coverage during international travel and home country visits</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Addressing language barriers in policy documents and claims processes</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Broker Comparison Section -->
+  <div id="broker-comparison" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Comparing Insurance Brokers in Switzerland</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">While many insurance brokers operate in Switzerland, their service quality, independence, and expat focus vary significantly.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Broker</th>
+                <th class="py-3 px-4 text-left">Specialization</th>
+                <th class="py-3 px-4 text-left">Key Strengths</th>
+                <th class="py-3 px-4 text-left">Best For</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {brokerComparison.map(broker => (
+                <tr class={`hover:bg-gray-50 ${broker.company === "Expat Savvy" ? "bg-primary-50" : ""}`}>
+                  <td class="py-4 px-4 font-medium">{broker.company}</td>
+                  <td class="py-4 px-4">{broker.specialization}</td>
+                  <td class="py-4 px-4">{broker.strengths}</td>
+                  <td class="py-4 px-4">{broker.bestFor}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center text-sm text-gray-600">
+        Note: This comparison is based on publicly available information, client feedback, and professional assessment as of {new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'long'})}.
+      </div>
+
+      <div class="mt-16 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">What Sets High-Quality Insurance Brokers Apart</h3>
+        
+        <div class="space-y-8">
+          {qualityIndicators.map(indicator => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="md:flex items-start">
+                <div class="md:w-1/3 mb-4 md:mb-0">
+                  <h4 class="text-xl font-semibold text-gray-900">{indicator.feature}</h4>
+                  <p class="text-gray-600 mt-2">{indicator.explanation}</p>
+                </div>
+                <div class="md:w-2/3 md:pl-8 md:border-l border-gray-200">
+                  <div class="bg-primary-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-2">
+                      <div class="bg-primary-100 text-primary-600 p-1 rounded-full mr-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                      </div>
+                      <span class="font-medium text-primary-700">The Expat Savvy Approach</span>
+                    </div>
+                    <p class="text-gray-700">{indicator.expatsavvyApproach}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div class="mt-12 max-w-3xl mx-auto">
+        <div class="bg-yellow-50 rounded-lg shadow-md p-6 border-l-4 border-yellow-400">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">A Note on SimpleСare and Other Comparison Services</h3>
+          <p class="text-gray-700 mb-4">
+            Online services like SimpleCare offer basic comparison tools that can be a starting point, but have significant limitations compared to full-service brokers:
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span class="text-gray-700">Limited market coverage with access to only selected insurance providers</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span class="text-gray-700">Focus primarily on price rather than appropriate coverage for your specific needs</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span class="text-gray-700">Minimal claims support and ongoing service after policy purchase</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-yellow-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span class="text-gray-700">Typically do not address specialized expat considerations</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Finding Your Ideal Insurance Broker: Step-by-Step</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow this methodical approach to identify and select an insurance broker who truly meets your needs as an expat in Switzerland.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Types of Insurance Advisors in Switzerland:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-red-100 p-1.5 rounded-full text-red-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Tied Agents (Gebundene Vermittler)</h5>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1 ml-3">
+                          <li>• Represent a single insurance company</li>
+                          <li>• Cannot compare across multiple providers</li>
+                          <li>• Often incentivized to sell specific products</li>
+                          <li>• Limited options for your unique needs</li>
+                        </ul>
+                      </div>
+                      <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center mb-2">
+                          <div class="bg-green-100 p-1.5 rounded-full text-green-600 mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                          </div>
+                          <h5 class="font-medium">Independent Brokers (Unabhängige Makler)</h5>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1 ml-3">
+                          <li>• Access to multiple insurance companies</li>
+                          <li>• Legal duty to act in client's best interest</li>
+                          <li>• Ability to compare the entire market</li>
+                          <li>• Ongoing support and claims assistance</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Key Qualifications to Look For:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">FINMA Registration:</span> The broker or brokerage firm must be registered with the Swiss Financial Market Supervisory Authority. You can verify this on the FINMA website.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">CICERO Certification:</span> This industry certification ensures adherence to professional standards and ongoing education. CICERO-certified advisors regularly update their skills and knowledge.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Experience with Expats:</span> Look for brokers with specific experience serving expatriate clients, demonstrated by testimonials, case studies, or expatriate-focused resources.
+                        </div>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <div>
+                          <span class="font-medium">Language Capabilities:</span> Ensure the broker can communicate fluently in your preferred language, especially for technical insurance discussions.
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 5 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Questions to Ask Potential Brokers:</h4>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <span class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">1</span>
+                        <span>"How are you compensated for the policies you recommend, and does this vary by insurer or product?"</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">2</span>
+                        <span>"What is your process for handling claims if I need to use my insurance?"</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">3</span>
+                        <span>"How many insurance providers do you work with, and are there any major Swiss companies you don't have access to?"</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">4</span>
+                        <span>"What experience do you have working with expats in situations similar to mine?"</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="bg-primary-100 text-primary-700 rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">5</span>
+                        <span>"How and when will you review my policies, and what ongoing support do you provide?"</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Need Help Finding the Right Insurance in Switzerland?</h3>
+          <p class="text-gray-600 mb-8">Our team of independent advisors specializes in helping expats navigate the Swiss insurance landscape. We're here to provide the personalized guidance you need.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get a Free Insurance Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance for your Swiss insurance needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Mistakes Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Common Mistakes to Avoid</h2>
+        
+        <div class="space-y-6">
+          {commonMistakes.map(mistake => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{mistake.title}</h3>
+              <p class="text-gray-600">{mistake.description}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-10 bg-green-50 rounded-lg shadow-md p-6 border-l-4 border-green-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Expert Tip: The Independent Advantage</h3>
+          <p class="text-gray-700">
+            Unlike comparison websites like SimpleCare which may only show offerings from partner companies, truly independent brokers like Expat Savvy have access to all insurance providers in Switzerland. This allows us to find the most appropriate solutions for your unique situation, rather than directing you to a limited selection of options that may not be optimal for your needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full h-8 w-8 flex items-center justify-center mr-4 mt-1">
+                  <span class="text-primary-700 font-semibold">Q{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                  <p class="text-gray-600">{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-12 bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md text-center">
+          <p class="text-gray-700">Have more questions about finding the right insurance broker in Switzerland?</p>
+          <div class="mt-4">
+            <button
+              onclick="showConsultationModal()"
+              class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+            >
+              Ask Our Insurance Experts
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Insurance Guides</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore other helpful topics about Swiss insurance.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <a href="/guides/how-to/set-up-health-insurance" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Set Up Health Insurance</h3>
+          </div>
+          <p class="text-gray-600">Learn the step-by-step process for setting up your Swiss health insurance as a new resident.</p>
+        </a>
+        
+        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Change Insurance Models</h3>
+          </div>
+          <p class="text-gray-600">Save up to 20% by choosing the right insurance model for your healthcare needs.</p>
+        </a>
+        
+        <a href="/guides/how-to/insurance-when-moving-cantons" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100 group">
+          <div class="flex items-center mb-4">
+            <div class="bg-primary-100 text-primary-600 p-3 rounded-full mr-4 group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Insurance When Moving Cantons</h3>
+          </div>
+          <p class="text-gray-600">Navigate health insurance changes when relocating between Swiss cantons.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Looking for an independent insurance broker?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our team specializes in helping expats find the right insurance coverage in Switzerland
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Consultation Modal -->
+  <ConsultationModal />
+
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://expat-savvy.ch/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How-To Guides",
+        "item": "https://expat-savvy.ch/guides/how-to"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Find Insurance Broker",
+        "item": "https://expat-savvy.ch/guides/how-to/find-insurance-broker"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 
