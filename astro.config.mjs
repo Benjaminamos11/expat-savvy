@@ -3,10 +3,6 @@ import tailwind from '@astrojs/tailwind';
 import react from "@astrojs/react";
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-import { fileURLToPath } from 'url';
-import path from 'path';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   integrations: [
@@ -29,21 +25,21 @@ export default defineConfig({
       assetsInlineLimit: 4096,
       inlineStylesheets: 'always',
     },
-    optimizeDeps: {
-      exclude: [], // Don't exclude anything specific
+    // Simplified resolution for fonts
+    resolve: {
+      alias: {
+        '@fontsource': '/node_modules/@fontsource'
+      }
     },
-    ssr: {
-      noExternal: ['@fontsource/inter']
-    },
+    // Disable strict port check - this helps in development
     server: {
+      strictPort: false,
       fs: {
-        // Allow serving files from one level up (the project directory) and node_modules
-        allow: [
-          // The project directory (expat-savvy)
-          path.resolve(__dirname, '..'),
-          // Node modules directory
-          path.resolve(__dirname, 'node_modules')
-        ]
+        strict: false,
+        allow: ['/']
+      },
+      hmr: {
+        overlay: true
       }
     }
   }
