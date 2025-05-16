@@ -2,6 +2,9 @@
 import Layout from '../../../layouts/Layout.astro';
 import ConsultationModal from '../../../components/ConsultationModal.astro';
 
+// Last updated date
+const lastUpdated = "July 15, 2025";
+
 const insuranceModels = [
   {
     name: "Standard Model",
@@ -20,166 +23,192 @@ const insuranceModels = [
     savings: "Up to 15%",
     features: [
       "Personal relationship with doctor",
-      "Coordinated care",
-      "Specialist referrals when needed",
+      "Coordinated healthcare",
+      "Need referral for specialists",
       "Lower premiums"
     ]
   },
   {
-    name: "HMO",
-    description: "Health Maintenance Organization model",
+    name: "HMO Model",
+    description: "Treatment through a health maintenance organization",
+    savings: "Up to 25%",
+    features: [
+      "All services from one healthcare center",
+      "Coordinated treatment approach",
+      "Referrals required for specialists",
+      "Substantial premium discount"
+    ]
+  },
+  {
+    name: "Telemedicine",
+    description: "Initial consultation via phone or video call",
     savings: "Up to 20%",
     features: [
-      "Care through group practice",
-      "Integrated healthcare",
-      "Significant premium savings",
-      "Coordinated specialist care"
-    ]
-  },
-  {
-    name: "Telmed",
-    description: "Initial consultation via phone/video",
-    savings: "Up to 15%",
-    features: [
       "24/7 medical advice",
-      "Convenient access",
-      "Professional triage",
-      "Lower premiums"
+      "Convenient remote access",
+      "Virtual triage before appointments",
+      "No geographic limitations"
     ]
   }
 ];
 
+const coverage = {
+  included: [
+    "General practitioner & specialist visits",
+    "Hospital treatment (general ward)",
+    "Prescription medications (approved list)",
+    "Pregnancy & maternity care",
+    "Accidents (if not covered by accident insurance)",
+    "Emergency treatment (including abroad)",
+    "Preventive measures (vaccinations, screenings)",
+    "Specific alternative medicine treatments",
+    "Limited dental treatment (only for serious illnesses)",
+    "Mental health treatment"
+  ],
+  notIncluded: [
+    "Routine dental care & orthodontics",
+    "Vision care (glasses, contact lenses)",
+    "Cosmetic surgery",
+    "Private/semi-private hospital rooms",
+    "Treatments outside Switzerland (except emergencies)",
+    "Experimental treatments",
+    "Non-prescription medications",
+    "Most alternative therapies not on approved list",
+    "Spa treatments",
+    "Missed appointment fees"
+  ]
+};
+
 const deductibleOptions = [
   {
-    type: "Adults",
+    type: "Adult Deductibles (26+ years)",
     options: [
-      { amount: 300, savings: "0%" },
-      { amount: 500, savings: "8%" },
-      { amount: 1000, savings: "12%" },
-      { amount: 1500, savings: "16%" },
-      { amount: 2000, savings: "20%" },
-      { amount: 2500, savings: "25%" }
+      { amount: "CHF 300", savings: "Base premium (no savings)" },
+      { amount: "CHF 500", savings: "Approx. 7% savings" },
+      { amount: "CHF 1,000", savings: "Approx. 14% savings" },
+      { amount: "CHF 1,500", savings: "Approx. 21% savings" },
+      { amount: "CHF 2,000", savings: "Approx. 28% savings" },
+      { amount: "CHF 2,500", savings: "Approx. 35% savings" }
     ]
   },
   {
-    type: "Children",
+    type: "Child Deductibles (0-18 years)",
     options: [
-      { amount: 0, savings: "0%" },
-      { amount: 100, savings: "5%" },
-      { amount: 200, savings: "8%" },
-      { amount: 300, savings: "10%" },
-      { amount: 400, savings: "12%" },
-      { amount: 500, savings: "15%" },
-      { amount: 600, savings: "18%" }
+      { amount: "CHF 0", savings: "Base premium (no savings)" },
+      { amount: "CHF 100", savings: "Approx. 8% savings" },
+      { amount: "CHF 200", savings: "Approx. 15% savings" },
+      { amount: "CHF 300", savings: "Approx. 21% savings" },
+      { amount: "CHF 400", savings: "Approx. 28% savings" },
+      { amount: "CHF 500", savings: "Approx. 35% savings" },
+      { amount: "CHF 600", savings: "Approx. 40% savings" }
     ]
   }
 ];
 
 const premiumRanges = {
   regions: [
-    { 
-      name: "Region 1", 
-      range: "380-550", 
-      examples: "Urban centers like Zurich, Geneva, Basel",
-      description: "Major cities and metropolitan areas with highest healthcare costs"
-    },
-    { 
-      name: "Region 2", 
-      range: "340-480", 
-      examples: "Mid-sized cities, suburban areas",
-      description: "Medium population density areas with moderate healthcare costs"
-    },
-    { 
-      name: "Region 3", 
-      range: "300-420", 
-      examples: "Rural areas, smaller towns",
-      description: "Lower population density areas with lower healthcare costs"
-    }
+    { name: "High-Cost Region", range: "CHF 450-600", examples: "Geneva, Basel, Zurich" },
+    { name: "Medium-Cost Region", range: "CHF 350-450", examples: "Bern, Lausanne, Lucerne" },
+    { name: "Lower-Cost Region", range: "CHF 300-400", examples: "Rural areas of Valais, Graubünden, Appenzell" }
   ],
   ageGroups: [
-    { group: "Children (0-18)", range: "90-140", notes: "No deductible required" },
-    { group: "Young Adults (19-25)", range: "250-380", notes: "Special reduced rates" },
-    { group: "Adults (26+)", range: "300-550", notes: "Standard adult rates" }
-  ]
-};
-
-const coverage = {
-  included: [
-    "Doctor visits and treatments",
-    "Hospital stays (general ward)",
-    "Emergency treatment",
-    "Prescription medications",
-    "Pregnancy and childbirth",
-    "Preventive care",
-    "Vaccinations",
-    "Mental health care",
-    "Rehabilitation"
-  ],
-  notIncluded: [
-    "Dental care (except accidents)",
-    "Vision care (glasses/contacts)",
-    "Alternative medicine",
-    "Private hospital rooms",
-    "Cosmetic surgery",
-    "Non-prescription medications"
-  ]
-};
-
-const accidentCoverage = {
-  needCoverage: [
-    "Self-employed individuals",
-    "Part-time workers (< 8 hours/week)",
-    "Unemployed persons",
-    "Retired persons",
-    "Students without employment"
-  ],
-  alreadyCovered: [
-    "Full-time employees (via employer)",
-    "Part-time workers (≥ 8 hours/week)",
-    "Unemployment insurance recipients",
-    "Disability insurance recipients"
+    { group: "Children (0-18)", range: "CHF 80-140", notes: "Reduced premiums, no mandatory deductible option" },
+    { group: "Young Adults (19-25)", range: "CHF 250-400", notes: "Discounted rates compared to adults" },
+    { group: "Adults (26+)", range: "CHF 300-600", notes: "Standard rates, varies by region" },
+    { group: "Seniors (65+)", range: "CHF 350-650", notes: "Same rates as adults (no age-based premium increase)" }
   ]
 };
 
 const regionExplanation = {
-  title: "Understanding Premium Regions",
-  content: `Premium regions in Switzerland are determined by healthcare costs in different areas. The Federal Office of Public Health (FOPH) defines three premium regions:
-
-  Region 1: Areas with highest healthcare costs, typically major cities
-  Region 2: Areas with moderate healthcare costs, usually mid-sized cities
-  Region 3: Areas with lower healthcare costs, typically rural regions
-
-  Your premium is primarily determined by your canton of residence and the specific region within that canton. Some cantons use all three regions, while others may only use one or two regions depending on their healthcare cost structure.`,
+  title: "Why Premium Regions Exist",
+  content: "Switzerland divides cantons into different premium regions based on healthcare costs. Urban areas generally have higher premiums due to greater healthcare costs, more specialists, and higher utilization rates.",
   factors: [
-    "Population density",
-    "Number of healthcare providers",
-    "Healthcare infrastructure",
-    "Average treatment costs"
+    "Healthcare provider density",
+    "Cost of living and medical services",
+    "Utilization patterns in the region",
+    "Hospital infrastructure and technology"
   ]
 };
 
 const faqs = [
   {
-    question: "When do I need to get basic health insurance?",
-    answer: "You must obtain basic health insurance within 3 months of arrival in Switzerland or birth. Coverage is retroactive to the arrival/birth date."
+    question: "When do I need to get Swiss health insurance?",
+    answer: "You must obtain Swiss health insurance within 3 months of arriving in Switzerland. The coverage is retroactive to your arrival date. If you don't arrange insurance within this period, authorities may assign you to an insurance provider and you may face penalties.",
+    link: {
+      text: "Learn more about health insurance for new arrivals",
+      url: "/guides/how-to/health-insurance-new-arrivals"
+    }
   },
   {
-    question: "Can I be rejected for basic insurance?",
-    answer: "No, insurers must accept everyone for basic insurance regardless of age, health status, or pre-existing conditions. This is mandated by Swiss law."
+    question: "Can I choose any insurance provider?",
+    answer: "Yes, you can choose any insurance provider in Switzerland for your basic insurance. The coverage is identical across all insurers as it's regulated by law. What differs are the premium costs, service quality, and available insurance models.",
+    link: null
   },
   {
-    question: "How do I choose between different insurance models?",
-    answer: "Consider factors like premium savings, preferred doctors, and flexibility needs. Standard models offer full choice but cost more, while restricted models (family doctor, telemedicine) offer savings."
+    question: "Can I change my insurance provider?",
+    answer: "Yes, you can switch basic insurance providers twice a year: by November 30 to change from January 1, or by March 31 to change from July 1. You must have paid all outstanding premiums, and your current deductible doesn't transfer to the new insurer.",
+    link: {
+      text: "How to change your health insurance provider",
+      url: "/guides/how-to/change-health-insurance"
+    }
+  },
+  {
+    question: "Do I need supplementary insurance?",
+    answer: "Supplementary insurance is optional and covers services beyond the basic insurance package. Whether you need it depends on your personal preferences and health needs. Common supplementary options include dental care, private hospital rooms, and expanded alternative medicine coverage.",
+    link: {
+      text: "Learn about supplementary insurance options",
+      url: "/healthcare/supplementary-insurance"
+    }
   },
   {
     question: "What happens if I don't pay my premiums?",
-    answer: "Unpaid premiums can lead to debt collection and your canton may restrict you to emergency-only care. It's important to contact your insurer immediately if you have payment difficulties."
+    answer: "If you don't pay your premiums, your insurer will send reminders followed by debt collection procedures. Eventually, the canton may list you in a registry of defaulters. While insurers cannot terminate your basic coverage, they can restrict you to emergency treatment only until outstanding payments are resolved.",
+    link: null
   },
   {
-    question: "Can I switch insurance providers?",
-    answer: "Yes, you can switch basic insurance providers by giving notice by November 30th for changes effective January 1st. Special termination rights exist when premiums increase."
+    question: "How does basic health insurance work for cross-border commuters?",
+    answer: "Cross-border commuters working in Switzerland generally have the right to choose whether to be insured in Switzerland or their country of residence (if it's an EU/EFTA state). The decision depends on your specific situation, residency status, and other factors. Once you make your choice, you need to formally request an exemption from the mandatory Swiss insurance if you choose to be insured in your country of residence.",
+    link: {
+      text: "Cross-border insurance information",
+      url: "/insurance-guides/cross-border-insurance"
+    }
+  },
+  {
+    question: "Are pre-existing conditions covered?",
+    answer: "Yes, basic health insurance must cover pre-existing conditions. Unlike in some countries, Swiss insurers cannot refuse coverage or charge higher premiums for basic insurance based on your health status or medical history.",
+    link: null
+  },
+  {
+    question: "What if I need treatment while temporarily abroad?",
+    answer: "For emergency medical treatment during a temporary stay abroad (e.g., on vacation), basic insurance covers costs up to twice the amount that the same treatment would cost in Switzerland. For EU/EFTA countries, the European Health Insurance Card (EHIC), usually on the back of your Swiss insurance card, facilitates access to necessary medical care under the same conditions and at the same cost as people insured in that country.",
+    link: null
   }
 ];
+
+const relatedContent = {
+  guides: [
+    {
+      title: "How to Choose the Right Deductible",
+      description: "Learn about the financial implications of different deductible options and find the best choice for your situation.",
+      link: "/guides/how-to/choose-health-insurance-deductible"
+    },
+    {
+      title: "Switching Insurance Providers Guide",
+      description: "Step-by-step instructions on how to change your basic health insurance provider in Switzerland.",
+      link: "/guides/how-to/change-health-insurance"
+    },
+    {
+      title: "Understanding Insurance Models",
+      description: "Detailed comparison of the different insurance models available in Switzerland.",
+      link: "/guides/how-to/change-insurance-models"
+    },
+    {
+      title: "Insurance for Newcomers to Switzerland",
+      description: "Everything you need to know about obtaining health insurance when moving to Switzerland.",
+      link: "/guides/how-to/health-insurance-new-arrivals"
+    }
+  ]
+};
 ---
 
 <Layout
@@ -203,13 +232,13 @@ const faqs = [
           <span class="block">Basic Health Insurance</span>
           <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
         </h1>
-        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
-          Understanding mandatory health insurance (KVG/LAMal) in Switzerland. Learn about coverage, costs, and choosing the right insurance model.
+        <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-300">
+          Understanding mandatory health insurance (KVG/LAMal) - coverage, costs, models, and how to choose the right option for your needs.
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onclick="showConsultationModal()"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Get Expert Advice
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -218,7 +247,7 @@ const faqs = [
           </button>
           <a
             href="#compare"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-red-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Compare Models
           </a>
@@ -227,62 +256,283 @@ const faqs = [
     </div>
   </div>
 
+  <!-- Last Updated Badge -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex justify-end">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+        <svg class="mr-1.5 h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Last updated: {lastUpdated}
+      </span>
+    </div>
+  </div>
+
   <!-- Introduction Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="bg-white py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/white-waves.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Understanding Basic Insurance</h2>
-        <div class="prose prose-lg">
-          <p>
-            Basic health insurance (KVG/LAMal) is mandatory for everyone living in Switzerland. This requirement ensures that all residents have access to high-quality healthcare without facing excessive financial burdens.
-          </p>
-          <p>
-            The basic insurance package is standardized across all insurance providers, meaning the coverage is identical regardless of which insurer you choose. What differs are the service quality, premium costs, and available insurance models.
-          </p>
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">What is Basic Health Insurance (KVG/LAMal)?</h2>
+        
+        <div class="bg-gradient-to-r from-red-50 to-white rounded-lg shadow-sm p-8 mb-8 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-60 h-60 -mt-16 -mr-16 text-red-100">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-full h-full">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+          </div>
+          <div class="relative">
+            <p class="text-lg text-gray-800 mb-4">
+              Basic health insurance (KVG/LAMal) is <strong>mandatory for everyone living in Switzerland</strong>. This requirement ensures that all residents have access to high-quality healthcare without facing excessive financial burdens.
+            </p>
+            <p class="text-lg text-gray-800 mb-4">
+              The beauty of the Swiss system lies in its standardized benefits: the core services you receive are identical regardless of which insurance company you choose. What differs are the service quality, premium costs, and available insurance models.
+            </p>
+            <p class="text-lg text-gray-800">
+              For newcomers to Switzerland, you have a <strong>three-month window</strong> to secure your basic health insurance after registering as a resident. Coverage is retroactive to your arrival date, so any medical expenses during this period will be covered once you've enrolled.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Quick Links Box -->
+        <div class="bg-white rounded-xl shadow-md p-6 mt-8 border border-gray-100">
+          <h3 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+            <svg class="h-6 w-6 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Quick Navigation
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <a href="#coverage" class="flex flex-col items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors group">
+              <svg class="h-8 w-8 text-red-500 mb-2 group-hover:text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-red-700 font-medium text-sm text-center">What's Covered</span>
+            </a>
+            <a href="#not-covered" class="flex flex-col items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors group">
+              <svg class="h-8 w-8 text-red-500 mb-2 group-hover:text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-red-700 font-medium text-sm text-center">What's Not Covered</span>
+            </a>
+            <a href="#compare" class="flex flex-col items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors group">
+              <svg class="h-8 w-8 text-red-500 mb-2 group-hover:text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
+              </svg>
+              <span class="text-red-700 font-medium text-sm text-center">Insurance Models</span>
+            </a>
+            <a href="#deductibles" class="flex flex-col items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors group">
+              <svg class="h-8 w-8 text-red-500 mb-2 group-hover:text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-red-700 font-medium text-sm text-center">Deductibles & Costs</span>
+            </a>
+            <a href="#faq" class="flex flex-col items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors group">
+              <svg class="h-8 w-8 text-red-500 mb-2 group-hover:text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-red-700 font-medium text-sm text-center">FAQs</span>
+            </a>
+            <a href="#related-guides" class="flex flex-col items-center p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors group">
+              <svg class="h-8 w-8 text-red-500 mb-2 group-hover:text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+              </svg>
+              <span class="text-red-700 font-medium text-sm text-center">Helpful Guides</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Coverage Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div id="coverage" class="bg-gray-50 py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/black-twill.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">What's Covered?</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">What's Covered by Basic Insurance</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Included Coverage -->
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">
-              <span class="text-primary-600">✓</span> Included in Basic Insurance
-            </h3>
-            <ul class="space-y-3">
-              {coverage.included.map(item => (
+        <div class="prose prose-lg mb-8">
+          <p>
+            Swiss basic health insurance provides a comprehensive package of essential medical services. These benefits are standardized across all insurers, ensuring equal access to necessary care for all residents.
+          </p>
+          <p>
+            Here's a closer look at what's included in the basic insurance package (KVG/LAMal):
+          </p>
+        </div>
+        
+        <!-- Detailed Coverage Cards -->
+        <div class="space-y-6 mb-8">
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Core Medical Treatments</h3>
+            <p class="text-gray-600 mb-4">
+              This encompasses visits to general practitioners (GPs) and specialists (though specialist access might require a referral depending on your chosen insurance model). It also covers hospital stays in a general ward within your canton of residence.
+            </p>
+            <p class="text-gray-600">
+              <strong>Emergency treatments</strong> are covered worldwide, although there are limitations—typically up to double the cost of what the same treatment would cost in your canton of residence.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Medications</h3>
+            <p class="text-gray-600">
+              Prescription drugs listed on the official list of pharmaceuticals, known as the "Spezialitätenliste" (SL), are covered. However, not all medications are included. Some newer or very expensive drugs might require special approval from your insurer's medical officer, or they might be excluded from basic coverage altogether.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Maternity Care</h3>
+            <p class="text-gray-600">
+              Comprehensive maternity care is fully covered, including regular check-ups during pregnancy, the costs of childbirth (whether at a hospital, birthing center, or at home with a midwife), and postnatal care for both mother and baby. Importantly, <strong>no deductible or co-payment applies</strong> to maternity services.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Preventive Measures</h3>
+            <p class="text-gray-600">
+              Certain preventive measures are covered, such as specific vaccinations outlined in the national or cantonal vaccination plans, gynecological check-ups (every three years), and developmental screenings for children.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Specific Therapies (with limitations)</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>Physiotherapy:</strong> Covered if prescribed by a doctor, usually for a specific number of sessions.</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>Psychotherapy:</strong> Covered when provided by a medical doctor who is a psychiatrist, or by a psychologist if they are working under the supervision of a doctor.</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>Chiropractic:</strong> Treatments by recognized chiropractors are covered directly.</span>
+              </li>
                 <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span class="text-gray-600">{item}</span>
+                <span><strong>Alternative medicine:</strong> Limited coverage for specific therapies when performed by qualified medical doctors with additional certifications in that therapy.</span>
                 </li>
-              ))}
             </ul>
           </div>
 
-          <!-- Not Included -->
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">
-              <span class="text-red-500">✗</span> Not Included
-            </h3>
-            <ul class="space-y-3">
-              {coverage.notIncluded.map(item => (
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Transportation & Rescue Costs</h3>
+            <p class="text-gray-600 mb-4">
+              Basic insurance contributes to necessary medical transportation, but with significant limitations:
+            </p>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span><strong>Ambulance transport:</strong> 50% of costs covered, up to a maximum of CHF 500 per calendar year.</span>
+              </li>
                 <li class="flex items-start">
-                  <svg class="h-5 w-5 text-red-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <svg class="h-5 w-5 text-primary-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span class="text-gray-600">{item}</span>
+                <span><strong>Rescue costs:</strong> (e.g., helicopter rescue): 50% of costs covered, up to a maximum of CHF 5,000 per calendar year.</span>
                 </li>
-              ))}
             </ul>
+            <p class="text-gray-600 mt-4 text-sm italic">
+              Note: These are annual maximum contributions, not per-incident coverage. Supplementary insurance is recommended for more comprehensive transport coverage.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Medical Aids & Devices</h3>
+            <p class="text-gray-600">
+              Coverage is provided for specific medical aids and devices that are listed on the official inventory called the "Mittel- und Gegenständeliste" (MiGeL). This includes items like certain bandages, incontinence supplies, insulin pumps, and CPAP machines.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Not Covered Section -->
+        <div id="not-covered" class="mt-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">What's NOT Covered by Basic Insurance</h2>
+          <p class="text-gray-600 mb-8">
+            While comprehensive, Swiss basic health insurance doesn't cover everything. Understanding these exclusions is key to managing your healthcare expenses.
+          </p>
+          <div class="space-y-4">
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Dental Care</h4>
+              <p class="text-gray-600 text-sm">For adults, dental treatments are generally not covered by basic insurance. Exceptions are made for severe diseases of the masticatory system or if dental work is required due to a serious accident. For routine dental care, you'll need supplementary dental insurance or to pay out-of-pocket. <a href="/healthcare/dental-insurance" class="text-primary-600 hover:text-primary-800">Learn more about Dental Insurance in Switzerland →</a></p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Alternative Medicine/Complementary Therapies</h4>
+              <p class="text-gray-600 text-sm">Coverage for alternative therapies like acupuncture, homeopathy, or osteopathy is very limited under basic insurance. Some specific therapies might be covered if performed by a conventionally trained medical doctor who also has a recognized certification in that complementary therapy. For broader coverage, supplementary insurance is usually necessary. <a href="/guides/how-to/alternative-therapies-coverage" class="text-primary-600 hover:text-primary-800">Explore alternative therapy coverage →</a></p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Private Hospital Rooms</h4>
+              <p class="text-gray-600 text-sm">Basic insurance covers accommodation in a general (multi-bed) ward in a hospital within your canton of residence. If you desire a semi-private or private room, this would require supplementary hospital insurance.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Vision Care (Glasses/Contacts)</h4>
+              <p class="text-gray-600 text-sm">For adults, basic insurance generally does not cover the cost of eyeglasses or contact lenses. There are some contributions for children under 18 under specific medical conditions or for significant vision impairments.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Non-Prescription Medications</h4>
+              <p class="text-gray-600 text-sm">Medications that can be purchased over-the-counter without a doctor's prescription are typically not covered.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Cosmetic Surgery</h4>
+              <p class="text-gray-600 text-sm">Procedures that are purely cosmetic and not medically necessary are not covered.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-red-500">
+              <h4 class="font-medium text-gray-900">Treatments Abroad (Non-Emergency)</h4>
+              <p class="text-gray-600 text-sm">If you choose to receive non-emergency medical treatment outside of Switzerland, basic insurance generally will not cover it, or will only cover it up to the amount it would have cost in Switzerland. Emergency coverage abroad is, as mentioned, limited.</p>
+            </div>
+          </div>
+          
+          <div class="mt-6 bg-gray-50 p-4 rounded-md border border-gray-200">
+            <div class="flex items-start">
+              <svg class="h-6 w-6 text-red-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1v-3a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+              <p class="text-sm text-gray-700">
+                <strong>Consider Supplementary Insurance:</strong> If you regularly need services not covered by basic insurance, supplementary insurance plans can provide valuable coverage for dental care, private hospital rooms, expanded alternative medicine options, and more.
+              </p>
+            </div>
+            <div class="mt-3">
+              <a href="/healthcare/supplementary-insurance" class="text-red-600 hover:text-red-800 text-sm inline-flex items-center">
+                Explore supplementary insurance options
+                <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Coverage Info Box -->
+        <div class="bg-white rounded-lg shadow-md p-6 mt-8 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Good to Know</h3>
+          <p class="text-gray-600">
+            While basic insurance has comprehensive coverage, you may want to consider <a href="/healthcare/supplementary-insurance" class="text-primary-600 hover:text-primary-800">supplementary insurance</a> for additional benefits like private hospital rooms, more extensive dental care, or broader alternative medicine coverage.
+          </p>
+          <div class="mt-4">
+            <a href="/guides/how-to/alternative-therapies-coverage" class="text-primary-600 hover:text-primary-800 inline-flex items-center">
+              Learn about alternative medicine coverage
+              <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>
@@ -290,212 +540,467 @@ const faqs = [
   </div>
 
   <!-- Insurance Models -->
-  <div id="compare" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Insurance Models</h2>
+  <div id="compare" class="bg-white py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Insurance Models</h2>
+      
+      <div class="max-w-3xl mx-auto mb-10">
+        <p class="text-gray-600 text-center mb-8">
+          Swiss health insurers offer several models for basic health insurance. Each model offers different levels of premium savings in exchange for certain restrictions on healthcare provider choice.
+        </p>
+        <div class="bg-primary-50 rounded-lg p-4 shadow-sm border border-primary-100">
+          <div class="flex items-start">
+            <svg class="h-6 w-6 text-primary-600 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1v-3a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            <p class="text-sm text-gray-700">
+              <strong>Pro Tip:</strong> Consider your healthcare habits when choosing a model. If you prefer flexibility and direct specialist access, the Standard model may be worth the higher premium. If you don't mind having a primary contact point, alternative models can save you 15-25% on premiums.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bento Grid for Insurance Models -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {insuranceModels.map(model => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{model.name}</h3>
-            <p class="text-gray-600 mb-4">{model.description}</p>
-            <div class="inline-block px-3 py-1 mb-4 text-sm font-semibold text-primary-700 bg-primary-100 rounded-full">
+        {insuranceModels.map((model, index) => (
+          <div class={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.03] ${index === 0 ? 'border-2 border-red-300' : 'border border-gray-100'}`}>
+            <div class={`px-6 py-4 ${index === 0 ? 'bg-red-50' : ''}`}>
+              <h3 class="text-xl font-semibold text-gray-900">{model.name}</h3>
+              <p class="text-gray-600 mt-1 text-sm">{model.description}</p>
+            </div>
+            <div class="border-t border-gray-100 px-6 py-3 bg-gray-50">
+              <div class="inline-block px-3 py-1 mb-3 text-sm font-semibold text-red-700 bg-red-100 rounded-full">
               Premium Savings: {model.savings}
             </div>
             <ul class="space-y-2">
               {model.features.map(feature => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <li class="flex items-start text-sm text-gray-500">
+                    <svg class="h-4 w-4 text-red-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
                   {feature}
                 </li>
               ))}
             </ul>
+            </div>
           </div>
         ))}
+      </div>
+      
+      <div class="max-w-3xl mx-auto mt-12">
+        <div class="bg-gray-50 rounded-lg shadow-md p-6 border border-gray-200">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Looking for More Details?</h3>
+          <p class="text-gray-600 mb-4">
+            Each insurance model has specific rules about how you access healthcare services. Understanding these details can help you make the best choice for your situation.
+          </p>
+          <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+            <a href="/guides/how-to/change-insurance-models" class="inline-flex items-center text-red-600 hover:text-red-800">
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
+              </svg>
+              Compare Insurance Models in Detail
+            </a>
+            <a href="/guides/how-to/find-best-health-insurance" class="inline-flex items-center text-red-600 hover:text-red-800">
+              <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+              </svg>
+              Finding the Best Insurance
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Deductibles Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div id="deductibles" class="bg-gray-50 py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/black-twill.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Deductibles & Cost Sharing</h2>
         
         <div class="prose prose-lg mb-8">
           <p>
-            Your deductible (franchise) is the amount you pay for medical expenses before insurance coverage begins. Higher deductibles mean lower monthly premiums.
+            In the Swiss healthcare system, your costs consist of three main components: monthly premiums, annual deductibles, and co-payments.
+          </p>
+          <p>
+            Your <strong>deductible (franchise)</strong> is the amount you pay for medical expenses before insurance coverage begins. Higher deductibles mean lower monthly premiums but higher initial out-of-pocket costs.
+          </p>
+          <p>
+            After meeting your deductible, you pay a <strong>co-payment (Selbstbehalt)</strong> of 10% of costs up to an annual maximum of CHF 700 for adults and CHF 350 for children.
           </p>
         </div>
 
+        <!-- Cost Components Box -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+            <div class="bg-red-600 p-4">
+              <div class="rounded-full bg-white w-12 h-12 flex items-center justify-center mb-3">
+                <span class="text-red-600 font-bold text-xl">1</span>
+              </div>
+              <h4 class="text-lg font-medium text-white">Monthly Premium</h4>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600">Fixed monthly amount paid to your insurer regardless of whether you use medical services. Varies based on your region, age, chosen deductible, and insurance model.</p>
+              <p class="text-gray-600 text-sm mt-2">Premiums are calculated based on your age group (child, young adult, adult), your canton and specific premium region of residence, the insurance company you choose, and the insurance model you select. Importantly, premiums for basic health insurance cannot be set based on your health status or pre-existing conditions.</p>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+            <div class="bg-red-600 p-4">
+              <div class="rounded-full bg-white w-12 h-12 flex items-center justify-center mb-3">
+                <span class="text-red-600 font-bold text-xl">2</span>
+              </div>
+              <h4 class="text-lg font-medium text-white">Annual Deductible</h4>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600">The amount you pay before insurance starts covering costs. Ranges from CHF 300-2500 for adults and CHF 0-600 for children. Resets every calendar year on January 1st.</p>
+              <p class="text-gray-600 text-sm mt-2">For adults, the standard minimum deductible is CHF 300, but you can opt for higher deductibles (CHF 500, 1000, 1500, 2000, or 2500) in exchange for lower monthly premiums. For children (up to age 18), the minimum deductible is CHF 0. Choosing a higher deductible means taking on more initial risk but benefiting from reduced monthly payments.</p>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+            <div class="bg-red-600 p-4">
+              <div class="rounded-full bg-white w-12 h-12 flex items-center justify-center mb-3">
+                <span class="text-red-600 font-bold text-xl">3</span>
+              </div>
+              <h4 class="text-lg font-medium text-white">Co-payment</h4>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600">After meeting your deductible, you pay 10% of costs up to CHF 700/year (adults) or CHF 350/year (children). For hospital stays, there's an additional CHF 15/day charge (not for children or maternity).</p>
+              <p class="text-gray-600 text-sm mt-2">For example, if an adult has a CHF 300 deductible and incurs CHF 2000 in medical bills, they pay the first CHF 300 (deductible), and then 10% of the remaining CHF 1700 (which is CHF 170), totaling CHF 470. If further costs arise, they continue to pay 10% until reaching the annual co-payment cap.</p>
+              <div class="mt-3 bg-red-50 p-3 rounded-md border border-red-100">
+                <p class="text-gray-700 text-sm font-medium">
+                  Important exceptions:
+                </p>
+                <ul class="list-disc list-inside mt-1 space-y-1 text-gray-600 text-sm">
+                  <li>Maternity services have no deductible or co-payment</li>
+                  <li>For hospital stays, adults pay an additional contribution of CHF 15 per day (not applicable to children or maternity stays)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deductible Options -->
         <div class="grid gap-8">
           {deductibleOptions.map(option => (
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4">{option.type}</h3>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+              <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900">{option.type}</h3>
+              </div>
+              <div class="px-6 py-4">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                  <thead class="bg-gray-50">
+                  <table class="min-w-full">
+                    <thead class="border-b border-gray-200">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deductible (CHF)</th>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Premium Savings</th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200">
                     {option.options.map(opt => (
-                      <tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{opt.amount}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{opt.savings}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           ))}
+        </div>
+        
+        <!-- Tip Box -->
+        <div class="mt-10 bg-red-50 rounded-lg p-6 border border-red-100 shadow-sm">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-8 w-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1v-3a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-medium text-red-800">Choosing the Right Deductible</h3>
+              <div class="mt-2 text-red-700">
+                <p>When choosing a deductible, consider your expected healthcare usage. Higher deductibles work well if you're generally healthy with few expected medical expenses. Lower deductibles are better if you anticipate regular healthcare needs.</p>
+                <p class="mt-4">
+                  <a href="/guides/how-to/choose-health-insurance-deductible" class="inline-flex items-center font-medium text-red-600 hover:text-red-900">
+                    Learn more about selecting the right deductible
+                    <svg class="ml-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Regional Premiums -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="bg-white py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Premium Ranges</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Premium Ranges</h2>
         
-        <div class="space-y-8">
+        <div class="prose prose-lg mb-8">
+          <p>
+            Health insurance premiums in Switzerland vary significantly across different regions and age groups. These variations reflect the differing healthcare costs and utilization patterns across the country.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-8 mb-8">
           <!-- Regional Differences -->
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">By Region</h3>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div class="bg-gradient-to-r from-red-600 to-red-500 px-6 py-4">
+              <h3 class="text-xl font-semibold text-white">Premium Regions</h3>
+              <p class="text-red-100 mt-1">Monthly premium costs by geographic region</p>
+            </div>
+            <div class="p-6">
             <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                  <tr>
+                <table class="min-w-full">
+                  <thead>
+                    <tr class="bg-gray-50 border-b border-gray-200">
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Premium (CHF)</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Example Areas</th>
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  {premiumRanges.regions.map(region => (
-                    <tr>
+                  <tbody class="divide-y divide-gray-200">
+                    {premiumRanges.regions.map((region, index) => (
+                      <tr class={`hover:bg-gray-50 transition-colors ${index === 0 ? 'bg-red-50' : ''}`}>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{region.name}</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{region.range}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-mono">{region.range}</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{region.examples}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
 
           <!-- Age Groups -->
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">By Age Group</h3>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div class="bg-gradient-to-r from-red-600 to-red-500 px-6 py-4">
+              <h3 class="text-xl font-semibold text-white">By Age Group</h3>
+              <p class="text-red-100 mt-1">Monthly premium ranges by age category</p>
+            </div>
+            <div class="p-6">
             <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                  <tr>
+                <table class="min-w-full">
+                  <thead>
+                    <tr class="bg-gray-50 border-b border-gray-200">
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age Group</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Premium Range (CHF)</th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="divide-y divide-gray-200">
                   {premiumRanges.ageGroups.map(group => (
-                    <tr>
+                      <tr class="hover:bg-gray-50 transition-colors">
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{group.group}</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.range}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-mono">{group.range}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{group.notes}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Accident Coverage -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Accident Coverage</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Need Coverage -->
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">
-              Who Needs Accident Coverage?
-            </h3>
-            <ul class="space-y-3">
-              {accidentCoverage.needCoverage.map(item => (
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        <!-- Region Explanation Box -->
+        <div class="bg-gradient-to-br from-red-50 to-red-50 rounded-lg p-8 shadow-md border border-red-100">
+          <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="md:w-1/3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 class="text-xl font-semibold text-gray-900">{regionExplanation.title}</h3>
+            </div>
+            <div class="md:w-2/3">
+              <p class="text-gray-700 mb-4">{regionExplanation.content}</p>
+              <h4 class="text-md font-semibold text-gray-800 mb-2">Key Factors Affecting Premium Regions:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {regionExplanation.factors.map(factor => (
+                  <div class="flex items-start bg-white p-3 rounded-md shadow-sm">
+                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-gray-700">{factor}</span>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-6">
+                <a href="/blog/decoding-swiss-health-insurance-canton-region-premium" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition-colors">
+                  Learn more about premium regions
+                  <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                   </svg>
-                  <span class="text-gray-600">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Already Covered -->
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">
-              Who's Already Covered?
-            </h3>
-            <ul class="space-y-3">
-              {accidentCoverage.alreadyCovered.map(item => (
-                <li class="flex items-start">
-                  <svg class="h-5 w-5 text-primary-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="text-gray-600">{item}</span>
-                </li>
-              ))}
-            </ul>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FAQ Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+  <!-- FAQs Section -->
+  <div id="faq" class="bg-gray-50 py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/subtle-dots.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
-            </div>
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Frequently Asked Questions</h2>
+        
+        <div class="divide-y divide-gray-200 rounded-xl overflow-hidden">
+          {faqs.map((faq, index) => (
+            <details class="group bg-white" open={index === 0}>
+              <summary class="flex cursor-pointer items-center justify-between p-6 text-left text-gray-900 hover:bg-gray-50 transition-colors">
+                <h3 class="text-lg font-semibold">{faq.question}</h3>
+                <span class="ml-6 flex-shrink-0">
+                  <svg class="h-6 w-6 rotate-0 transform text-red-500 group-open:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <div class="px-6 pb-6 text-gray-600">
+                <p>{faq.answer}</p>
+                
+                {faq.link && (
+                  <div class="mt-4">
+                    <a href={faq.link.url} class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition-colors">
+                      {faq.link.text}
+                      <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </details>
           ))}
-        </dl>
+          </div>
+
+        <div class="bg-white mt-10 p-6 rounded-lg shadow-md border-l-4 border-red-500">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <svg class="h-8 w-8 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2C5.59 2 2 5.59 2 10s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm1 12h-2v-2h2v2zm0-3h-2V7h2v4z" />
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-medium text-gray-900">Have more questions?</h3>
+              <p class="mt-1 text-gray-600">
+                Our team of Swiss insurance experts is here to help with personalized advice for your specific situation.
+              </p>
+              <div class="mt-4">
+                <button
+                  onclick="showConsultationModal()"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 transition-colors"
+                >
+                  Get Expert Advice
+                  <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides -->
+  <div id="related-guides" class="bg-white py-16 relative">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Helpful Guides</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {relatedContent.guides.map((guide, index) => (
+            <a href={guide.link} class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-gray-100">
+              <div class="p-6 bg-red-50">
+                <div class="flex items-center mb-4">
+                  <div class="w-10 h-10 rounded-full flex items-center justify-center bg-red-100 text-red-700">
+                    {index % 4 === 0 && (
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                    {index % 4 === 1 && (
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1v-3a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                    {index % 4 === 2 && (
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                    {index % 4 === 3 && (
+                      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                  </div>
+                  <h3 class="ml-3 text-lg font-semibold text-gray-900 group-hover:text-red-600 transition-colors">{guide.title}</h3>
+                </div>
+                <p class="text-gray-600 text-sm">{guide.description}</p>
+                <div class="mt-4 flex items-center text-sm font-medium text-red-600">
+                  <span>Read guide</span>
+                  <svg class="ml-1 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+            </div>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </div>
 
   <!-- CTA Section -->
-  <div class="bg-primary-600">
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Need help choosing your insurance?
-        </h2>
-        <p class="mt-4 text-xl text-primary-100">
-          Get expert guidance to find the right coverage
+  <div class="bg-red-700 py-16 relative">
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6">Need Help with Your Health Insurance?</h2>
+        <div class="w-24 h-1 bg-red-300 mx-auto mb-8 rounded-full"></div>
+        <p class="text-xl text-red-100 mb-8 leading-relaxed">
+          Get personalized advice from our Swiss insurance experts to find the best solution for your unique situation and requirements.
         </p>
-        <div class="mt-8">
+        <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           <button
             onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-lg shadow-lg text-red-700 bg-white hover:bg-red-50 transition-colors hover:shadow-xl"
           >
-            Schedule Free Consultation
+            Book Free Consultation
+            <svg class="ml-2 -mr-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
           </button>
+          <a
+            href="/guides"
+            class="inline-flex items-center px-8 py-4 border border-red-300 text-base font-medium rounded-lg shadow-lg text-white hover:bg-red-600 transition-colors hover:shadow-xl"
+          >
+            Explore All Guides
+            <svg class="ml-2 -mr-1 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
         </div>
       </div>
     </div>

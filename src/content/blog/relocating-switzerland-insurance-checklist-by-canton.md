@@ -1,7 +1,7 @@
 ---
 title: "Your Swiss Relocation Insurance Checklist: Get Covered, Settle Faster (Canton by Canton)"
 description: "Moving to Switzerland? Our essential insurance checklist covers health, liability, and more by canton (Zurich, Geneva, etc.). Get set up quickly with Expat Savvy."
-publishDate: "2025-05-17"
+pubDate: "2025-05-17"
 category: "Relocation"
 author: "Expat Savvy Team"
 tags: ["relocation", "insurance checklist", "canton differences", "expat insurance", "moving to Switzerland"]

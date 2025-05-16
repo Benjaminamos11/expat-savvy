@@ -1,7 +1,7 @@
 ---
 title: "Navigating Swiss Insurance: A Guide to Choosing Your Expat Insurance Broker in 2025"
 description: "Looking for an insurance broker in Switzerland? Our comprehensive guide helps expats compare options including SimpleCare, SimpleCare Zurich, and how Expat Savvy offers superior support."
-pubDate: 2025-01-15
+pubDate: 2025-05-10
 author: "Expat Savvy Team"
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747317968/a-raw-hand-drawn-sketch-in-black-and-red_yZe9BV_NSoepHT3kJbCXwQ_2eFuotjSQQSVZ3atIVedRQ_nuw2pe.webp"
 imageAlt: "Swiss Insurance Broker Consultation"

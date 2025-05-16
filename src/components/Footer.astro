@@ -3,22 +3,24 @@ import VAG45Modal from './VAG45Modal.astro';
 import PrivacyPolicyModal from './PrivacyPolicyModal.astro';
 import TermsOfServiceModal from './TermsOfServiceModal.astro';
 ---
-<footer class="bg-gray-900 text-white py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<footer class="bg-gradient-to-b from-gray-900 to-black text-white py-12 relative">
+  <!-- Subtle background pattern -->
+  <div class="absolute inset-0 pattern-black-twill opacity-40 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="flex flex-col items-center text-center">
       <!-- Company Info -->
-      <div>
+      <div class="max-w-lg">
         <img 
           src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg" 
           alt="Expat Savvy" 
-          class="h-12 mb-4" 
+          class="h-12 mb-6 mx-auto" 
           width="180" 
           height="48" 
         />
         <p class="text-gray-400 mt-4">Your trusted insurance advisor in Switzerland since 2017.</p>
         
         <!-- Social Media Links -->
-        <div class="flex space-x-4 mt-6">
+        <div class="flex space-x-6 mt-8 justify-center">
           <a 
             href="https://www.linkedin.com/company/101603783"
             target="_blank"
@@ -53,79 +55,48 @@ import TermsOfServiceModal from './TermsOfServiceModal.astro';
             </svg>
           </a>
         </div>
-      </div>
-
-      <!-- Insurance -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Insurance</h3>
-        <ul class="space-y-2">
-          <li><a href="/health-insurance" class="text-gray-400 hover:text-white transition-colors">Health Insurance</a></li>
-          <li><a href="/insurance/personal-liability-insurance" class="text-gray-400 hover:text-white transition-colors">Personal Liability</a></li>
-          <li><a href="/insurance/household-insurance" class="text-gray-400 hover:text-white transition-colors">Household Insurance</a></li>
-          <li><a href="/3rd-pillar" class="text-gray-400 hover:text-white transition-colors">3rd Pillar</a></li>
-        </ul>
-      </div>
-
-      <!-- Resources -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Resources</h3>
-        <ul class="space-y-2">
-          <li><a href="/news" class="text-gray-400 hover:text-white transition-colors">News</a></li>
-          <li><a href="/healthcare/glossary/basic-health-insurance" class="text-gray-400 hover:text-white transition-colors">Insurance Glossary</a></li>
-          <li><a href="/healthcare/all-insurances" class="text-gray-400 hover:text-white transition-colors">Insurance Providers</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Contact</h3>
-        <ul class="space-y-2">
-          <li>
-            <a href="tel:+41791552570" class="text-gray-400 hover:text-white transition-colors flex items-center">
-              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-              </svg>
-              +41 79 155 25 70
-            </a>
-          </li>
-          <li>
-            <a href="mailto:hello@expat-savvy.ch" class="text-gray-400 hover:text-white transition-colors flex items-center">
-              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-              </svg>
-              hello@expat-savvy.ch
-            </a>
-          </li>
-          <li>
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=Talacker+41+8001+Zürich" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="text-gray-400 hover:text-white transition-colors flex items-center"
-            >
-              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-              </svg>
-              Talacker 41<br/>
-              8001 Zürich
-            </a>
-          </li>
-        </ul>
+        
+        <!-- Contact Information -->
+        <div class="mt-10 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+          <a href="tel:+41791552570" class="text-gray-400 hover:text-white transition-colors flex items-center whitespace-nowrap">
+            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+            +41 79 155 25 70
+          </a>
+          <a href="mailto:hello@expat-savvy.ch" class="text-gray-400 hover:text-white transition-colors flex items-center whitespace-nowrap">
+            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+            hello@expat-savvy.ch
+          </a>
+          <a 
+            href="https://www.google.com/maps/search/?api=1&query=Talacker+41+8001+Zürich" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-gray-400 hover:text-white transition-colors flex items-center whitespace-nowrap"
+          >
+            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+            Talacker 41, 8001 Zürich
+          </a>
+        </div>
       </div>
     </div>
 
     <div class="border-t border-gray-800 mt-12 pt-8">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex flex-col md:flex-row items-center">
-          <p class="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Expat Savvy. All rights reserved.
-          </p>
-          <p class="text-gray-400 text-sm mt-2 md:mt-0 md:ml-4">
-            Made with <span class="text-red-500">❤️</span> in Switzerland by <a href="https://www.vibestudio.ch" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-white transition-colors underline">vibestudio</a>
-          </p>
+      <div class="flex flex-col items-center text-center">
+        <p class="text-gray-400 text-sm">
+          © {new Date().getFullYear()} Expat Savvy. All rights reserved.
+        </p>
+        <div class="text-sm mt-2">
+          <p>Made with <span class="text-red-500">❤️</span> in Switzerland</p>
+          <p class="text-red-500">by <a href="https://www.vibestudio.ch" target="_blank" rel="noopener noreferrer" class="hover:text-red-400 transition-colors">vibestudio.ch</a></p>
         </div>
-        <div class="flex space-x-6 mt-4 md:mt-0">
+        
+        <div class="flex flex-wrap justify-center space-x-4 mt-6">
           <button 
             onclick="showPrivacyPolicyModal()" 
             class="text-gray-400 hover:text-white text-sm transition-colors"
@@ -138,10 +109,7 @@ import TermsOfServiceModal from './TermsOfServiceModal.astro';
           >
             Terms of Service
           </button>
-          <a href="/healthcare/all-insurances" class="text-gray-400 hover:text-white text-sm transition-colors">
-            Insurance Providers
-          </a>
-          <a href="/imprint" class="text-gray-400 hover:text-white text-sm transition-colors ml-6">
+          <a href="/imprint" class="text-gray-400 hover:text-white text-sm transition-colors">
             Imprint
           </a>
           <button 
@@ -150,6 +118,28 @@ import TermsOfServiceModal from './TermsOfServiceModal.astro';
           >
             VAG 45
           </button>
+          <a 
+            href="https://app.expat-savvy.ch" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-gray-400 hover:text-white text-sm transition-colors"
+          >
+            Login
+          </a>
         </div>
       </div>
     </div>
+  </div>
+</footer>
+
+<VAG45Modal />
+<PrivacyPolicyModal />
+<TermsOfServiceModal />
+
+<style>
+  /* Black twill pattern from Subtle Patterns */
+  .pattern-black-twill {
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/black_twill.png');
+    background-repeat: repeat;
+  }
+</style>
