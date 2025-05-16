@@ -29,14 +29,19 @@ export default defineConfig({
       assetsInlineLimit: 4096,
       inlineStylesheets: 'always',
     },
+    optimizeDeps: {
+      exclude: [], // Don't exclude anything specific
+    },
     ssr: {
       noExternal: ['@fontsource/inter']
     },
     server: {
       fs: {
-        // Allow serving files from node_modules
+        // Allow serving files from one level up (the project directory) and node_modules
         allow: [
-          // This allows serving files from node_modules
+          // The project directory (expat-savvy)
+          path.resolve(__dirname, '..'),
+          // Node modules directory
           path.resolve(__dirname, 'node_modules')
         ]
       }
