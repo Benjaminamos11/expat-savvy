@@ -3,21 +3,49 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post: CollectionEntry<'blog'>) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+// Function to convert WebP images to JPG for social media sharing
+function convertToSocialImage(imageUrl: string): string {
+  if (!imageUrl) return '';
+  
+  // Check if image is WebP
+  if (imageUrl.endsWith('.webp')) {
+    // Convert WebP to JPG for Facebook and other social media
+    return imageUrl.replace('.webp', '.jpg');
+  }
+  
+  // Return original URL if not WebP
+  return imageUrl;
 }
 
-const { post } = Astro.props as { post?: any };
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post: CollectionEntry<'blog'>) => {
+    // Process image for social media if it exists
+    const socialImage = post.data.image ? convertToSocialImage(post.data.image) : '';
+    
+    return {
+      params: { slug: post.slug },
+      props: { 
+        post,
+        socialImage
+      },
+    };
+  });
+}
+
+const { post, socialImage } = Astro.props as { post?: any, socialImage?: string };
 let Content;
 if (post && typeof post.render === 'function') {
   Content = (await post.render()).Content;
 }
+
+// Prepare frontmatter with social image
+const frontmatter = {
+  ...post?.data,
+  socialImage: socialImage || post?.data?.image
+};
 ---
 
-<BlogLayout frontmatter={post?.data}>
+<BlogLayout frontmatter={frontmatter}>
   {Content && <Content />}
 </BlogLayout> 

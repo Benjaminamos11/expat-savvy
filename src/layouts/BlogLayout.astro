@@ -16,6 +16,9 @@ const getShareUrls = (url: string, title: string) => ({
 
 const currentUrl = Astro.url.href;
 const shareUrls = getShareUrls(currentUrl, frontmatter.title);
+
+// Use the socialImage if available, otherwise use the original image
+const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
 ---
 
 <BaseLayout 
@@ -23,10 +26,11 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   description={frontmatter.description}
   type="article"
   publishDate={frontmatter.date}
+  image={imageForSocialMedia}
 >
   <!-- Add social media image conversion for proper Facebook sharing -->
   <SocialMediaImage 
-    image={frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"}
+    image={imageForSocialMedia}
     alt={`Illustration for ${frontmatter.title}`}
     width={1200}
     height={630}
@@ -359,7 +363,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": Astro.props.faqs.map(faq => ({
+      "mainEntity": Astro.props.faqs.map((faq: {question: string, answer: string}) => ({
         "@type": "Question",
         "name": faq.question,
         "acceptedAnswer": {
