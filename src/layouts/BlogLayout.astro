@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 import FAQ from '../components/FAQ.astro';
 import BlogPostSchema from '../components/schema/BlogPostSchema.astro';
+import SocialMediaImage from '../components/SocialMediaImage.astro';
 const { frontmatter } = Astro.props;
 
 // Function to generate social sharing URLs
@@ -23,6 +24,15 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   type="article"
   publishDate={frontmatter.date}
 >
+  <!-- Add social media image conversion for proper Facebook sharing -->
+  <SocialMediaImage 
+    image={frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"}
+    alt={`Illustration for ${frontmatter.title}`}
+    width={1200}
+    height={630}
+    slot="head"
+  />
+  
   <article class="max-w-5xl mx-auto px-4 py-8">
     <!-- Hero Image -->
     <div class="relative w-full aspect-[16/9] mb-12 bg-white flex items-center justify-center hero-image-container">

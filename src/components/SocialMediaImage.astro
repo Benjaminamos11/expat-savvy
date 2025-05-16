@@ -1,0 +1,46 @@
+---
+/**
+ * SocialMediaImage component
+ * Ensures images are properly formatted for social media sharing
+ * Converts WebP images to JPG for platforms like Facebook that don't support WebP
+ */
+
+interface Props {
+  image: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+const { 
+  image, 
+  alt = "Expat Savvy featured image",
+  width = 1200,
+  height = 630 
+} = Astro.props;
+
+// Convert image from WebP to JPG for social media sharing if needed
+function convertToSocialImage(imageUrl: string): string {
+  if (!imageUrl) return '';
+  
+  // Check if image is WebP
+  if (imageUrl.endsWith('.webp')) {
+    // Replace .webp with .jpg for social media sharing
+    return imageUrl.replace('.webp', '.jpg');
+  }
+  
+  // Return original URL if not WebP
+  return imageUrl;
+}
+
+// Get the social media optimized image URL
+const socialImage = convertToSocialImage(image);
+---
+
+<!-- Output the image meta tags for social media -->
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:width" content={width.toString()} />
+<meta property="og:image:height" content={height.toString()} />
+<meta property="og:image:alt" content={alt} />
+<meta name="twitter:image" content={socialImage} />
+<meta name="twitter:image:alt" content={alt} /> 

@@ -9,6 +9,7 @@ import VAG45Modal from '../components/VAG45Modal.astro';
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal.astro';
 import TermsOfServiceModal from '../components/TermsOfServiceModal.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
+import SocialMediaImage from '../components/SocialMediaImage.astro';
 
 interface Props {
   title: string;
@@ -25,9 +26,6 @@ const {
   image = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp",
   canonicalURL = Astro.url.href
 } = Astro.props;
-
-// Create a social media sharing image (JPG) from the WebP image
-const socialImage = image.endsWith('.webp') ? image.replace('.webp', '.jpg') : image;
 
 // Define CDN URLs
 const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";
@@ -122,22 +120,26 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Social Media Image handling with WebP to JPG conversion -->
+    <SocialMediaImage 
+      image={image}
+      alt={description}
+      width={1200}
+      height={630}
+    />
+    
+    <!-- Open Graph / Facebook Basic Tags -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Expat Savvy" />
     
-    <!-- Twitter -->
+    <!-- Twitter Basic Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImage} />
     
     <!-- Additional Meta Tags -->
     <meta name="author" content="Expat Savvy" />
