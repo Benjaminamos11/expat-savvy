@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import ConsultationModal from '../../../components/ConsultationModal.astro';
 import ExpandableFormBanner from '../../../components/ExpandableFormBanner.astro';
+import ReviewSchema from '../../../components/schema/ReviewSchema.astro';
 
 const tableOfContents = [
   { id: "overview", title: "Overview & Key Features" },
@@ -136,69 +137,42 @@ const faqs = [
   }
 ];
 
+// Define reviews for the ReviewSchema component
+const insuranceReviews = [
+  {
+    author: "Swiss Expat Reviewer",
+    reviewRating: 3.7,
+    reviewBody: "Visana offers a decent range of insurance products with the myVisana app and Medi24 service adding value. However, expats should carefully consider potential language barriers if English support is a priority.",
+    datePublished: "2025-05-15"
+  }
+];
+
+// Define the aggregate rating
+const aggregateRating = {
+  ratingValue: "3.7",
+  reviewCount: "25"
+};
+
+// Define the item being reviewed
+const reviewedItem = {
+  name: "Visana Health Insurance Switzerland",
+  description: "Mid-tier health insurance option from Visana, with considerations regarding English language support for expats in Switzerland",
+  url: "https://expat-savvy.ch/healthcare/all-insurances/visana",
+  type: "Product"
+};
+
 ---
 
 <Layout
   title="Visana Health Insurance Switzerland: An Expat Guide (Important Note on English Support) | Expat Savvy"
   description="Explore Visana health insurance for expats in Switzerland. Learn about plans, services (myVisana, Medi24), and crucial considerations regarding English language support. Expat Savvy helps you choose."
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "InsuranceProduct",
-      "name": "Visana Health Insurance Switzerland",
-      "description": "Mid-tier health insurance option from Visana, with considerations regarding English language support for expats in Switzerland",
-      "url": "https://expat-savvy.ch/healthcare/all-insurances/visana",
-      "provider": {
-        "@type": "Organization",
-        "name": "Visana",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Weltpoststrasse 19-21",
-        "addressLocality": "Bern",
-        "postalCode": "3015",
-        "addressCountry": "CH"
-        }
-      },
-      "areaServed": "CH",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Insurance Products",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Basic Insurance",
-              "description": "Standard model and potential alternative models, with Medi24 telephone advice service"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Supplementary Insurance",
-              "description": "Additional coverage including hospital, dental, alternative medicine, and travel insurance"
-            }
-          }
-        ]
-      },
-      "review": {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "3.7",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Swiss Expat Reviewer"
-        },
-        "reviewBody": "Visana offers a decent range of insurance products with the myVisana app and Medi24 service adding value. However, expats should carefully consider potential language barriers if English support is a priority."
-      }
-    }
-  </script>
+  <!-- New schema markup using the component -->
+  <ReviewSchema 
+    itemReviewed={reviewedItem}
+    reviews={insuranceReviews}
+    aggregateRating={aggregateRating}
+  />
 
   <!-- Article Schema -->
   <script type="application/ld+json" slot="head">
