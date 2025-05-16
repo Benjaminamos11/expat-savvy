@@ -1,0 +1,508 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Secure Your Legal Right to Reside & Work",
+    text: "Understand visa requirements, work permits, and essential documentation needed for your specific situation."
+  },
+  {
+    name: "Financial Planning & Budgeting",
+    text: "Research the cost of living in your target canton, plan for initial expenses, and consider opening a Swiss bank account."
+  },
+  {
+    name: "Accommodation Research & Initial Search",
+    text: "Begin your housing search, understand the Swiss rental market, and consider temporary accommodation options."
+  },
+  {
+    name: "Healthcare & Insurance Planning",
+    text: "Prepare for mandatory health insurance requirements and research other essential insurances."
+  },
+  {
+    name: "Gather Essential Documents",
+    text: "Collect and organize all necessary personal, professional, and official documents for your move."
+  },
+  {
+    name: "Plan Your Move & Logistics",
+    text: "Decide what belongings to bring, arrange transportation, and notify relevant parties of your departure."
+  },
+  {
+    name: "Register with Your Local Commune",
+    text: "Complete mandatory registration with local authorities within 14 days of arrival."
+  },
+  {
+    name: "Finalize Your Accommodation",
+    text: "Secure permanent housing, understand rental contracts, and arrange for rental deposits."
+  },
+  {
+    name: "Set Up Utilities & Communication",
+    text: "Arrange for electricity, water, internet, and a Swiss mobile phone number."
+  },
+  {
+    name: "Obtain Mandatory Swiss Health Insurance",
+    text: "Select and register with a Swiss health insurance provider within three months of arrival."
+  },
+  {
+    name: "Open a Permanent Swiss Bank Account",
+    text: "Set up banking for salary payments, bill payments, and daily financial needs."
+  },
+  {
+    name: "Understand Local Transportation",
+    text: "Learn about public transport options, travel passes, and driving requirements."
+  },
+  {
+    name: "Language & Cultural Integration",
+    text: "Consider language courses and familiarize yourself with Swiss customs and social etiquette."
+  },
+  {
+    name: "Explore Your New Surroundings & Build a Network",
+    text: "Discover your local area and begin building personal and professional connections."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "How long does it take to get a Swiss work permit?",
+    answer: "The processing time for a Swiss work permit can vary significantly depending on your nationality (EU/EFTA vs. non-EU/EFTA), the canton, the type of permit, and the completeness of your application. For non-EU/EFTA nationals, it can take several weeks to a few months after a job offer is secured and the employer initiates the application."
+  },
+  {
+    question: "What is the average cost of renting an apartment in Zurich/Geneva?",
+    answer: "Rent is a major expense. In major cities like Zurich and Geneva, a modern 2-bedroom apartment can range from CHF 2,500 to CHF 4,500+ per month, depending on location, size, and amenities. Other cities and rural areas may be less expensive."
+  },
+  {
+    question: "Do I need to speak the local language to live in Switzerland?",
+    answer: "While English is widely spoken in business and tourist areas, especially in larger cities, learning the local language (German, French, or Italian, depending on the region) is highly beneficial for daily life, integration, and long-term career prospects. Official communications will be in the local language."
+  },
+  {
+    question: "Can I bring my pet to Switzerland?",
+    answer: "Yes, you can bring pets to Switzerland, but there are specific rules and regulations regarding vaccinations (especially rabies), microchipping, and import permits, particularly for animals from non-EU countries. Check with the Federal Food Safety and Veterinary Office (FSVO) for current requirements."
+  },
+  {
+    question: "What are the key differences when relocating with a family versus as a single professional?",
+    answer: "Relocating with a family involves additional considerations such as schooling (finding appropriate local or international schools), childcare options, larger accommodation needs, and ensuring the entire family integrates smoothly. Single professionals might prioritize proximity to work and social life."
+  },
+  {
+    question: "How can HR departments best support employees relocating to Switzerland?",
+    answer: "HR departments can provide comprehensive support by partnering with relocation agencies, offering clear information on Swiss employment law and benefits, assisting with initial accommodation and registration, providing cultural training, and facilitating insurance advice through partners like Expat Savvy."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "SEM Website",
+    description: "Official State Secretariat for Migration website for visa information"
+  },
+  {
+    name: "Rental platforms",
+    description: "Websites like ImmoScout24, Homegate, and Comparis for housing search"
+  },
+  {
+    name: "Ch.ch",
+    description: "Official Swiss portal with information for new residents"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Valid passport with at least 6 months validity",
+  "Birth certificates and marriage certificates (if applicable)",
+  "Employment contract and work permit (if applicable)",
+  "Educational and professional qualifications",
+  "Financial documentation (bank statements, proof of funds)",
+  "Insurance documentation from home country",
+  "Medical records and prescriptions (if relevant)",
+  "Driving license and vehicle documentation (if bringing a car)"
+];
+
+// Common challenges and solutions
+const challengesSolutions = [
+  {
+    challenge: "Finding accommodation in competitive markets",
+    solution: "Start your search early, be prepared with all documentation, consider temporary accommodation initially, and potentially engage a relocation agency for assistance."
+  },
+  {
+    challenge: "Language barriers during the relocation process",
+    solution: "Use translation services when needed, learn basic phrases in the local language, seek assistance from English-speaking relocation specialists, and consider language courses upon arrival."
+  },
+  {
+    challenge: "Understanding Swiss insurance requirements",
+    solution: "Contact Expat Savvy for expert guidance on mandatory health insurance and other essential coverages. Our advisors can explain options in English and help you find the right providers."
+  },
+  {
+    challenge: "Navigating visa and permit processes",
+    solution: "Research requirements thoroughly, apply well in advance, ensure all documentation is complete and properly translated, and consider professional immigration assistance for complex cases."
+  },
+  {
+    challenge: "Cultural adjustment and integration",
+    solution: "Join expat groups and local community activities, respect Swiss customs regarding noise, recycling, and punctuality, and consider cultural integration courses."
+  }
+];
+
+// Regional considerations
+const regionalConsiderations = [
+  {
+    region: "Zurich",
+    language: "Swiss German",
+    housingMarket: "Highly competitive with low vacancy rates, especially in city center",
+    specialConsiderations: "Financial hub with high cost of living but excellent international community"
+  },
+  {
+    region: "Geneva",
+    language: "French",
+    housingMarket: "Very tight market with high prices due to international organizations",
+    specialConsiderations: "Strong international atmosphere, proximity to France for shopping/housing options"
+  },
+  {
+    region: "Basel",
+    language: "Swiss German",
+    housingMarket: "More reasonable than Zurich/Geneva but still competitive",
+    specialConsiderations: "Pharmaceutical industry hub, tri-border location (Germany, France) offers options"
+  },
+  {
+    region: "Zug",
+    language: "Swiss German",
+    housingMarket: "Expensive due to low-tax environment attracting wealthy expats and corporations",
+    specialConsiderations: "Business-friendly environment, small but international community"
+  }
+];
+
+// Pre-arrival checklist
+const preArrivalChecklist = [
+  "Research visa requirements and begin application process",
+  "Secure employment contract or proof of financial self-sufficiency",
+  "Research housing options in target canton/city",
+  "Research Swiss health insurance providers and requirements",
+  "Arrange for shipping of belongings or storage if needed",
+  "Notify current landlord, utility providers, and financial institutions",
+  "Gather and organize all necessary documentation",
+  "Consider temporary accommodation for initial arrival period",
+  "Research local schools if relocating with children",
+  "Check if professional qualifications need validation in Switzerland"
+];
+
+// Post-arrival checklist
+const postArrivalChecklist = [
+  "Register with local commune within 14 days of arrival",
+  "Secure permanent accommodation",
+  "Set up Swiss bank account",
+  "Obtain Swiss mobile phone number",
+  "Register for health insurance (within 3 months of arrival)",
+  "Register children in schools (if applicable)",
+  "Convert driving license (if needed)",
+  "Learn about local recycling and noise regulations",
+  "Explore public transportation options",
+  "Find local medical providers (GP, dentist)"
+];
+---
+
+<Layout
+  title="How to Relocate to Switzerland: A Step-by-Step Checklist (2025) | Expat Guide"
+  description="Your essential step-by-step guide on how to relocate to Switzerland. Covers visas, housing, registration, and settling in. Get expert tips from Expat Savvy."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Relocate to Switzerland: A Step-by-Step Checklist"
+    description="A comprehensive guide to planning and executing your move to Switzerland, with specific actions to take before departure and after arrival."
+    totalTime="PT90D"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
+        alt="Relocating to Switzerland checklist"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Relocating to Switzerland</span>
+          <span class="block mt-2">Step-by-Step <span class="text-primary-500">Checklist</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Your comprehensive guide to a smooth and successful move to Switzerland.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Insurance Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Your Seamless Transition to Swiss Life Starts Here</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Relocating to Switzerland, a country renowned for its stunning landscapes, high quality of life, and efficient systems, is an exciting prospect for many expats. However, the process of moving to a new country, even one as organized as Switzerland, involves numerous steps and can feel overwhelming.
+        </p>
+        <p class="text-lg text-gray-600">
+          This comprehensive checklist is designed to guide you through the various phases of your relocation, helping you stay organized and ensuring you do not miss any critical tasks. Whether you are in the early planning stages or have just arrived, this guide aims to provide practical advice and resources.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-Arrival Checklist -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Phase 1: Before You Arrive in Switzerland</h2>
+        
+        <div class="bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Pre-Arrival Checklist</h3>
+          <ul class="space-y-3">
+            {preArrivalChecklist.map(item => (
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-6">Detailed Steps for Pre-Departure</h3>
+        
+        <div class="space-y-10">
+          {steps.slice(0, 6).map((step, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                  <span class="font-bold">{index + 1}</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h4>
+                  <p class="text-gray-600 mb-4">{step.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upon Arrival Checklist -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Phase 2: Upon Arrival in Switzerland</h2>
+        
+        <div class="bg-green-50 rounded-lg shadow-md p-6 border-l-4 border-green-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Post-Arrival Checklist</h3>
+          <ul class="space-y-3">
+            {postArrivalChecklist.map(item => (
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-6">Critical First Steps After Arrival</h3>
+        
+        <div class="space-y-10">
+          {steps.slice(6, 11).map((step, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-green-100 text-green-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                  <span class="font-bold">{index + 7}</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h4>
+                  <p class="text-gray-600 mb-4">{step.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settling In Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Phase 3: Settling In & Integration</h2>
+        
+        <div class="space-y-10">
+          {steps.slice(11).map((step, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 bg-purple-100 text-purple-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                  <span class="font-bold">{index + 12}</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h4>
+                  <p class="text-gray-600 mb-4">{step.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Regional Considerations -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Regional Considerations</h2>
+        <p class="text-lg text-gray-600 mb-8 text-center">
+          Switzerland's cantonal system means that experiences can vary depending on your destination.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {regionalConsiderations.map(region => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-xl font-bold text-primary-600 mb-3">{region.region}</h3>
+              <ul class="space-y-2">
+                <li><span class="font-medium">Language:</span> {region.language}</li>
+                <li><span class="font-medium">Housing Market:</span> {region.housingMarket}</li>
+                <li><span class="font-medium">Special Considerations:</span> {region.specialConsiderations}</li>
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Essential Insurance During Relocation</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          While navigating your relocation, ensuring you have the right insurance coverage is crucial for your peace of mind and legal compliance in Switzerland.
+        </p>
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 text-center mb-8">
+          <h3 class="text-xl font-bold text-primary-800 mb-4">Insurance Requirements for New Arrivals</h3>
+          <p class="text-gray-700 mb-6">
+            Swiss law mandates that everyone residing in Switzerland must have basic health insurance (Grundversicherung) within three months of arrival. Coverage is retroactive to your arrival date.
+          </p>
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300"
+          >
+            Get Expert Insurance Guidance
+          </button>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Common Challenges & Solutions</h3>
+          <div class="space-y-6">
+            {challengesSolutions.map(item => (
+              <div class="flex flex-col md:flex-row md:items-start">
+                <div class="md:w-1/3 mb-2 md:mb-0">
+                  <h4 class="font-medium text-red-600">{item.challenge}</h4>
+                </div>
+                <div class="md:w-2/3 md:pl-6">
+                  <p class="text-gray-700">{item.solution}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Related Guides</h2>
+        
+        <div class="grid gap-6">
+          <a href="/guides/how-to/finding-ideal-relocation-agency-switzerland" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group">
+            <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Finding Your Ideal Relocation Agency in Switzerland</h3>
+              <p class="text-gray-600">Learn how to choose the best relocation agency for your specific needs and situation.</p>
+            </div>
+          </a>
+          
+          <a href="/blog/relocation-switzerland-ultimate-guide-smooth-move" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group">
+            <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Relocation Switzerland: Your Ultimate Guide to a Smooth Move</h3>
+              <p class="text-gray-600">Expert guide to relocation in Switzerland including services, costs, and tips for a seamless transition.</p>
+            </div>
+          </a>
+          
+          <a href="/guides/how-to/insurance-when-moving-cantons" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group">
+            <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Navigate Health Insurance When Moving Cantons</h3>
+              <p class="text-gray-600">Step-by-step process for updating or changing insurance when relocating within Switzerland.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

@@ -26,6 +26,9 @@ const {
   canonicalURL = Astro.url.href
 } = Astro.props;
 
+// Create a social media sharing image (JPG) from the WebP image
+const socialImage = image.endsWith('.webp') ? image.replace('.webp', '.jpg') : image;
+
 // Define CDN URLs
 const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";
 const logoLight = `${cdnBaseUrl}image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg`;
@@ -124,7 +127,9 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Expat Savvy" />
     
     <!-- Twitter -->
@@ -132,7 +137,7 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={socialImage} />
     
     <!-- Additional Meta Tags -->
     <meta name="author" content="Expat Savvy" />

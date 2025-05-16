@@ -1,0 +1,645 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Define Your Relocation Needs & Budget",
+    text: "Clarify the specific services you require, establish your budget, and consider your personal circumstances and target location."
+  },
+  {
+    name: "Research Potential Relocation Agencies",
+    text: "Use targeted online searches, explore professional relocation portals, and seek recommendations from colleagues or expat forums."
+  },
+  {
+    name: "Check Reviews, Testimonials, and Case Studies",
+    text: "Investigate agency reputations through independent reviews, client testimonials, and case studies of similar relocations."
+  },
+  {
+    name: "Shortlist 2-3 Agencies & Make Initial Contact",
+    text: "Create a shortlist of promising agencies and reach out with a clear summary of your situation, needs, and timeline."
+  },
+  {
+    name: "Ask Key Questions During Consultations",
+    text: "Use consultations to inquire about services, experience, local knowledge, pricing, communication, references, and problem-solving approaches."
+  },
+  {
+    name: "Compare Proposals & Make Your Choice",
+    text: "Thoroughly review service offerings, rapport, value (not just price), and overall fit with your specific relocation needs."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "What's the average cost of a relocation agency in Switzerland?",
+    answer: "The cost can vary significantly based on the range of services required, the complexity of the move (e.g., family size, international vs. local move), and the agency itself. Basic packages might start from a few thousand Swiss Francs (CHF), while comprehensive support for a family could be CHF 10,000 or more. Always request detailed, customized quotes."
+  },
+  {
+    question: "Is it better to use a large international relocation company or a smaller local Swiss agency?",
+    answer: "Both have potential advantages. Large international firms may offer a global network and standardized processes, which can be beneficial for corporate moves. Smaller local Swiss agencies often provide highly personalized service and deep, nuanced knowledge of specific cantons or cities. The best choice depends on your specific needs and preferences."
+  },
+  {
+    question: "What are red flags to watch out for when selecting a relocation agency?",
+    answer: "Red flags can include vague pricing or hidden fees, a lack of transparency, poor communication, overly generic proposals that don't address your specific needs, consistently negative online reviews, or an unwillingness to provide references."
+  },
+  {
+    question: "How far in advance should I contact a relocation agency before my move?",
+    answer: "It's advisable to contact relocation agencies as early as possible, ideally 2-3 months before your planned move date, especially if you require assistance with home finding in competitive markets or complex visa procedures."
+  },
+  {
+    question: "Can a relocation agency guarantee they will find me an apartment?",
+    answer: "While no agency can absolutely guarantee finding an apartment due to market dynamics, reputable agencies will have strong local networks and proven strategies to significantly increase your chances of securing suitable accommodation. They should be transparent about the market conditions in your target area."
+  },
+  {
+    question: "What questions should HR departments ask when selecting a relocation partner for their employees?",
+    answer: "HR departments should inquire about the agency's experience with corporate relocations, their capacity to handle multiple employee moves, reporting mechanisms, data protection policies, ability to customize services for different employee levels, and their strategies for ensuring a positive employee experience and quick integration."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "SARA Website",
+    description: "Swiss Association of Relocation Agents official site for accredited agencies"
+  },
+  {
+    name: "Relofinder.ch",
+    description: "Portal to connect with various relocation agencies across Switzerland"
+  },
+  {
+    name: "Expat forums",
+    description: "Online communities for recommendations and experiences with relocation agencies"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "List of specific relocation services you require",
+  "Budget range for relocation services",
+  "Timeline for your planned move",
+  "Information about your family size and needs (if applicable)",
+  "List of key questions to ask potential agencies",
+  "Contact details for potential references (e.g., colleagues who have used relocation services)"
+];
+
+// Key questions to ask relocation agencies
+const keyQuestions = [
+  {
+    category: "Services & Customization",
+    questions: [
+      "What services are included in your standard packages?",
+      "Can services be customized to my specific needs?",
+      "Do you offer partial service packages or only full-service options?"
+    ]
+  },
+  {
+    category: "Experience & Expertise",
+    questions: [
+      "What is your experience with clients similar to me?",
+      "How many relocations have you handled in my target city/canton?",
+      "Can you provide examples of how you've solved unique challenges?"
+    ]
+  },
+  {
+    category: "Local Knowledge & Networks",
+    questions: [
+      "How well do your consultants know my target city/canton?",
+      "What are your networks like for home finding or school placements?",
+      "Do you have special relationships with local authorities, landlords, or service providers?"
+    ]
+  },
+  {
+    category: "Pricing & Transparency",
+    questions: [
+      "What is your pricing structure?",
+      "Are there any potential additional costs I should be aware of?",
+      "How do you handle situations that require extra time or resources?"
+    ]
+  },
+  {
+    category: "Communication & Support",
+    questions: [
+      "Who will be my main point of contact throughout the process?",
+      "How frequently will I receive updates, and through what channels?",
+      "What support is available after the initial relocation is complete?"
+    ]
+  }
+];
+
+// Agency comparison criteria
+const comparisonCriteria = [
+  {
+    criterion: "Service scope",
+    explanation: "Compare the range of services offered against your specific needs. Some agencies specialize in certain aspects (like home finding), while others offer comprehensive packages."
+  },
+  {
+    criterion: "Canton-specific expertise",
+    explanation: "Assess their knowledge and experience in your specific destination. An agency with deep expertise in Geneva may not be the best choice for a move to Zurich."
+  },
+  {
+    criterion: "Communication style",
+    explanation: "Evaluate how responsive and clear they are during initial interactions. This often indicates how they will communicate during your relocation."
+  },
+  {
+    criterion: "Testimonials and references",
+    explanation: "Request and check references from previous clients in similar situations to yours."
+  },
+  {
+    criterion: "Transparency",
+    explanation: "Compare how open they are about their processes, challenges, and fee structures."
+  },
+  {
+    criterion: "Personal connection",
+    explanation: "Consider the rapport you establish with consultants, as you'll be working closely together during a potentially stressful time."
+  }
+];
+
+// Notable relocation agencies in Switzerland
+const notableAgencies = [
+  {
+    name: "Prime Relocation",
+    specialization: "Full-service relocation with strong presence in Zurich, Zug, and Basel",
+    url: "https://www.prime-relocation.ch",
+    strength: "Personalized service focused on executives and their families"
+  },
+  {
+    name: "Auris Relocation",
+    specialization: "Comprehensive relocation services across Switzerland",
+    url: "#",
+    strength: "Long-established presence with corporate and private client expertise"
+  },
+  {
+    name: "Crown Relocation Switzerland",
+    specialization: "Part of global network with offices in key Swiss cities",
+    url: "#",
+    strength: "International resources combined with local knowledge"
+  },
+  {
+    name: "Anchor Relocation",
+    specialization: "Zurich and Zug specialist",
+    url: "#",
+    strength: "Deep knowledge of German-speaking Switzerland"
+  },
+  {
+    name: "Relocation Genevoise",
+    specialization: "Geneva-area expert",
+    url: "#",
+    strength: "Specialized in UN and international organization relocations"
+  }
+];
+
+// Common mistakes to avoid
+const commonMistakes = [
+  {
+    mistake: "Choosing based solely on price",
+    consequence: "Cheaper services often lack comprehensive support, leading to more stress and time investment on your part",
+    avoidance: "Consider value rather than just cost. Factor in time savings, reduced stress, and better outcomes when evaluating proposals"
+  },
+  {
+    mistake: "Not verifying local expertise",
+    consequence: "Agencies without specific knowledge of your target area may struggle with finding suitable housing or navigating local procedures",
+    avoidance: "Ask for specific examples of relocations they've handled in your target canton and city"
+  },
+  {
+    mistake: "Insufficient communication about expectations",
+    consequence: "Mismatched expectations can lead to disappointment and additional costs",
+    avoidance: "Clearly define and document what services you expect, timelines, and what constitutes successful delivery"
+  },
+  {
+    mistake: "Ignoring reviews and references",
+    consequence: "Missing warning signs about poor service quality or unprofessional conduct",
+    avoidance: "Request and follow up with references, particularly from clients with similar profiles to yours"
+  },
+  {
+    mistake: "Choosing an agency without insurance expertise",
+    consequence: "Missing crucial information about mandatory insurance requirements and deadlines",
+    avoidance: "Ensure your chosen agency either provides insurance guidance or partners with specialists like Expat Savvy"
+  }
+];
+---
+
+<Layout
+  title="Finding Your Ideal Relocation Agency in Switzerland | Expert How-To Guide (2025)"
+  description="Learn how to choose the best relocation agency in Switzerland. Step-by-step tips, questions to ask, and what to look for. Expert advice from Expat Savvy."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747380214/a-raw-hand-drawn-sketch-in-red-and-black_yM5LAMJpTm-Te8bxUcy9dA_ft8QvD03QUKNb-RgM1rswg_t2lfzp.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="Finding Your Ideal Relocation Agency in Switzerland: A How-To Guide"
+    description="A step-by-step approach to selecting the perfect relocation partner for your move to Switzerland, ensuring a smooth transition to your new home."
+    totalTime="PT14D"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747380214/a-raw-hand-drawn-sketch-in-red-and-black_yM5LAMJpTm-Te8bxUcy9dA_ft8QvD03QUKNb-RgM1rswg_t2lfzp.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747380214/a-raw-hand-drawn-sketch-in-red-and-black_yM5LAMJpTm-Te8bxUcy9dA_ft8QvD03QUKNb-RgM1rswg_t2lfzp.webp"
+        alt="Finding a relocation agency in Switzerland"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Finding Your Ideal</span>
+          <span class="block mt-2">Relocation Agency in <span class="text-primary-500">Switzerland</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          A step-by-step guide to selecting the perfect partner for your move to Switzerland.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Insurance Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Finding the Right Relocation Partner Matters</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Choosing the right relocation agency can be the difference between a stressful move and a smooth transition to your new life in Switzerland. These professionals offer invaluable local expertise and support, but how do you find the one that's a perfect fit for your needs?
+        </p>
+        <p class="text-lg text-gray-600">
+          This comprehensive guide will walk you through the process of identifying, evaluating, and selecting a relocation agency that truly understands your requirements and can deliver the support you need throughout your move to Switzerland.
+        </p>
+        
+        <div class="mt-8 bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">What a Quality Relocation Agency Can Do For You</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Navigate complex visa and work permit processes on your behalf</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Access exclusive property listings in competitive housing markets</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Provide orientation tours and cultural integration support</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Handle administrative tasks like registration and utilities setup</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-blue-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">Assist with school search and enrollment for children</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step by Step Guide Section -->
+  <div id="steps" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Finding Your Ideal Relocation Agency: Step-by-Step</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow this methodical approach to identify and select a relocation agency that truly meets your needs.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+                
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Before You Start Your Search:</h4>
+                    <p class="text-gray-700 mb-3">Take time to define what you need from a relocation agency:</p>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                        <span class="text-gray-700">List the specific services you'll require (visa help, home finding, school search, etc.)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Determine your budget range for relocation services</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Consider your family size and specific needs (pets, special requirements)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Identify your target location in Switzerland (specific canton or city)</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+                
+                {index === 4 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Key Questions to Ask During Consultations:</h4>
+                    {keyQuestions.map(category => (
+                      <div class="mb-4">
+                        <h5 class="text-primary-700 font-medium mb-2">{category.category}</h5>
+                        <ul class="space-y-1">
+                          {category.questions.map(question => (
+                            <li class="flex items-start">
+                              <svg class="w-4 h-4 text-primary-600 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                              </svg>
+                              <span class="text-gray-700">{question}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Agency Comparison Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Notable Relocation Agencies in Switzerland</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">The Swiss market offers a variety of relocation providers, each with different strengths and specializations.</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto overflow-hidden shadow-md rounded-lg">
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="bg-primary-600 text-white uppercase text-sm">
+                <th class="py-3 px-4 text-left">Agency</th>
+                <th class="py-3 px-4 text-left">Specialization</th>
+                <th class="py-3 px-4 text-left">Key Strength</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              {notableAgencies.map(agency => (
+                <tr class="hover:bg-gray-50">
+                  <td class="py-4 px-4 font-medium">{agency.name}</td>
+                  <td class="py-4 px-4">{agency.specialization}</td>
+                  <td class="py-4 px-4">{agency.strength}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mt-16 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Common Mistakes to Avoid</h3>
+        
+        <div class="space-y-6">
+          {commonMistakes.map(mistake => (
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="md:flex items-start">
+                <div class="md:w-1/3 mb-4 md:mb-0">
+                  <h4 class="text-xl font-semibold text-red-600">{mistake.mistake}</h4>
+                  <p class="text-gray-600 mt-2">{mistake.consequence}</p>
+                </div>
+                <div class="md:w-2/3 md:pl-8 md:border-l border-gray-200">
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-2">
+                      <div class="bg-green-100 text-green-600 p-1 rounded-full mr-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                      </div>
+                      <span class="font-medium text-green-700">Better Approach</span>
+                    </div>
+                    <p class="text-gray-700">{mistake.avoidance}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Criteria Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Evaluation Criteria for Relocation Agencies</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">When comparing multiple agencies, focus on these key factors to make an informed decision.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        {comparisonCriteria.map(criteria => (
+          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">{criteria.criterion}</h3>
+            <p class="text-gray-600">{criteria.explanation}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Integration Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Insurance Considerations During Relocation</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          When moving to Switzerland, securing appropriate insurance coverage is a critical aspect that should not be overlooked. While your relocation agency handles the logistics of your move, Expat Savvy can ensure you have the right insurance coverage from day one.
+        </p>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Key Insurance Requirements for New Arrivals</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-1 rounded-full mt-1 mr-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-900">Mandatory Health Insurance</h4>
+                <p class="text-gray-600">Required within 3 months of arrival. Coverage is retroactive to your arrival date, and you cannot be denied basic coverage due to pre-existing conditions.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-1 rounded-full mt-1 mr-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-900">Personal Liability Insurance</h4>
+                <p class="text-gray-600">While not legally required, this is highly recommended as it protects you against claims for accidental damage to others or their property.</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-1 rounded-full mt-1 mr-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-900">Household Contents Insurance</h4>
+                <p class="text-gray-600">Protects your belongings against risks like theft, fire, and water damage. Often required by landlords when renting accommodation.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 text-center">
+          <h3 class="text-xl font-bold text-primary-800 mb-4">Need Expert Insurance Guidance?</h3>
+          <p class="text-gray-700 mb-6">
+            Expat Savvy works alongside top relocation agencies to ensure you have the right insurance coverage for your new life in Switzerland.
+          </p>
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300"
+          >
+            Schedule Your Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conclusion Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Next Steps in Your Relocation Journey</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Taking the time to carefully select your relocation agency is a critical investment in the success of your move to Switzerland. Once you've chosen your partner, you can move forward with the actual relocation process with greater confidence.
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+          <a
+            href="/guides/how-to/relocate-to-switzerland-step-by-step-checklist"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300"
+          >
+            View Relocation Checklist
+          </a>
+          <a
+            href="/blog/relocation-switzerland-ultimate-guide-smooth-move"
+            class="inline-flex items-center px-6 py-3 border border-primary-600 text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+          >
+            Read Comprehensive Relocation Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Related Guides</h2>
+        
+        <div class="grid gap-6">
+          <a href="/guides/how-to/relocate-to-switzerland-step-by-step-checklist" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group">
+            <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Relocate to Switzerland: A Step-by-Step Checklist</h3>
+              <p class="text-gray-600">Comprehensive guide covering pre-arrival planning, arrival procedures, and settling in Switzerland.</p>
+            </div>
+          </a>
+          
+          <a href="/blog/relocation-switzerland-ultimate-guide-smooth-move" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group">
+            <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Relocation Switzerland: Your Ultimate Guide to a Smooth Move</h3>
+              <p class="text-gray-600">Expert guide to relocation in Switzerland including services, costs, and tips for a seamless transition.</p>
+            </div>
+          </a>
+          
+          <a href="/guides/how-to/insurance-when-moving-cantons" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group">
+            <div class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">How to Navigate Health Insurance When Moving Cantons</h3>
+              <p class="text-gray-600">Step-by-step process for updating or changing insurance when relocating within Switzerland.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 
