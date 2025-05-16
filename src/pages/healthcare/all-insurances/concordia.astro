@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import ConsultationModal from '../../../components/ConsultationModal.astro';
 import ExpandableFormBanner from '../../../components/ExpandableFormBanner.astro';
+import ReviewSchema from '../../../components/schema/ReviewSchema.astro';
 
 const tableOfContents = [
   { id: "overview", title: "Overview & Key Features" },
@@ -157,69 +158,43 @@ const faqs = [
   }
 ];
 
+// Define reviews for the ReviewSchema component
+const insuranceReviews = [
+  {
+    author: "Sarah Johnson",
+    reviewRating: 4.4,
+    reviewBody: "Concordia's family-friendly insurance solutions have been perfect for our needs. Their English-speaking support has made everything so much easier!",
+    datePublished: "2025-05-12"
+  }
+];
+
+// Define the aggregate rating
+const aggregateRating = {
+  ratingValue: "4.4",
+  reviewCount: "32"
+};
+
+// Define the item being reviewed
+const reviewedItem = {
+  name: "Concordia Health Insurance Switzerland",
+  description: "Family-focused health insurance solutions from Concordia, a Swiss provider known for its personalized service and comprehensive coverage options",
+  url: "https://expat-savvy.ch/healthcare/all-insurances/concordia",
+  type: "InsuranceProduct"
+};
+
 ---
 
 <Layout
   title="Concordia Health Insurance Switzerland: Guide for Expats & Families | Expat Savvy"
   description="Discover Concordia health insurance for expats and families in Switzerland. Learn about basic & supplementary plans, personalized service, and how Expat Savvy can help."
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "InsuranceProduct",
-      "name": "Concordia Health Insurance Switzerland",
-      "description": "Family-focused health insurance solutions from Concordia, a Swiss provider known for its personalized service and comprehensive coverage options",
-      "url": "https://expat-savvy.ch/healthcare/all-insurances/concordia",
-      "provider": {
-        "@type": "Organization",
-        "name": "Concordia",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Bundesplatz 15",
-          "addressLocality": "Luzern",
-          "postalCode": "6002",
-          "addressCountry": "CH"
-        }
-      },
-      "areaServed": "CH",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Insurance Products",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Basic Insurance",
-              "description": "Multiple models including Traditional, myDoc, HMO, smartDoc"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Supplementary Insurance",
-              "description": "Additional coverage including dental, hospital, alternative medicine, travel"
-            }
-          }
-        ]
-      },
-      "review": {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "4.4",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Sarah Johnson"
-        },
-        "reviewBody": "Concordia's family-friendly insurance solutions have been perfect for our needs. Their English-speaking support has made everything so much easier!"
-      }
-    }
-  </script>
+  <!-- Schema.org markup using the new ReviewSchema component -->
+  <ReviewSchema 
+    itemReviewed={reviewedItem}
+    reviews={insuranceReviews}
+    aggregateRating={aggregateRating}
+    slot="head"
+  />
 
   <!-- Article Schema -->
   <script type="application/ld+json" slot="head">

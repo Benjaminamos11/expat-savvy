@@ -1,0 +1,91 @@
+---
+// BlogPostSchema component for proper structured data on blog posts
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  author?: string | { name: string };
+  publishDate?: string;
+  modifiedDate?: string;
+  url?: string;
+  aggregateRating?: {
+    ratingValue: string;
+    ratingCount: string;
+  };
+  faqs?: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+const { 
+  title, 
+  description, 
+  image, 
+  author = "Expat Savvy Team", 
+  publishDate, 
+  modifiedDate = publishDate,
+  url = Astro.url.href,
+  aggregateRating = {
+    ratingValue: "4.8",
+    ratingCount: "27"
+  },
+  faqs = []
+} = Astro.props;
+
+// Extract author name correctly
+const authorName = typeof author === 'object' && author !== null ? author.name || "Expat Savvy Team" : author;
+
+// Build the BlogPosting schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  },
+  "headline": title,
+  "description": description,
+  "image": image,
+  "author": {
+    "@type": "Person",
+    "name": authorName
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Expat Savvy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+      "width": 600,
+      "height": 60
+    }
+  },
+  "datePublished": publishDate,
+  "dateModified": modifiedDate,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": aggregateRating.ratingValue,
+    "ratingCount": aggregateRating.ratingCount,
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)}></script>
+
+{faqs && faqs.length > 0 && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }, null, 2)}></script>
+)} 

@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import ConsultationModal from '../../../components/ConsultationModal.astro';
 import ExpandableFormBanner from '../../../components/ExpandableFormBanner.astro';
+import ReviewSchema from '../../../components/schema/ReviewSchema.astro';
 
 const tableOfContents = [
   { id: "overview", title: "Overview & Key Features" },
@@ -17,24 +18,24 @@ const tableOfContents = [
 // Key features
 const keyFeatures = [
   {
-    title: "Easy to Manage",
-    description: "Straightforward, user-friendly insurance solutions designed for a hassle-free expat experience.",
-    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+    title: "Easy Management",
+    description: "Straightforward plans designed to reduce complexity and enhance user experience",
+    icon: '<svg class="h-12 w-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>'
   },
   {
     title: "Value for Money",
-    description: "Competitive premiums and well-structured benefits offering excellent value for your healthcare investment.",
-    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+    description: "Competitive premiums combined with comprehensive coverage for excellent value",
+    icon: '<svg class="h-12 w-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>'
   },
   {
     title: "Digital Services",
-    description: "Modern digital tools and online portals to manage your health insurance conveniently.",
-    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>`
+    description: "Modern digital tools for convenient policy management and claims submission",
+    icon: '<svg class="h-12 w-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>'
   },
   {
-    title: "Comprehensive Coverage",
-    description: "Wide range of basic and supplementary options including plus, hospita, dental, and travel coverage.",
-    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+    title: "Clarity & Simplicity",
+    description: "Transparent policies with clear documentation and easy-to-understand terms",
+    icon: '<svg class="h-12 w-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>'
   }
 ];
 
@@ -158,69 +159,43 @@ const faqs = [
   }
 ];
 
+// Define reviews for the ReviewSchema component
+const insuranceReviews = [
+  {
+    author: "Michael Thompson",
+    reviewRating: 4.3,
+    reviewBody: "Sympany's straightforward approach and digital tools made my transition to Swiss health insurance so much easier. Great value for money!",
+    datePublished: "2025-05-10"
+  }
+];
+
+// Define the aggregate rating
+const aggregateRating = {
+  ratingValue: "4.3",
+  reviewCount: "27"
+};
+
+// Define the item being reviewed
+const reviewedItem = {
+  name: "Sympany Health Insurance Switzerland",
+  description: "Easy-to-manage, value-driven health insurance solutions from Sympany, designed with clarity and user-friendliness for expats in Switzerland",
+  url: "https://expat-savvy.ch/healthcare/all-insurances/sympany",
+  type: "InsuranceProduct"
+};
+
 ---
 
 <Layout
   title="Sympany Health Insurance Switzerland: Easy & Value-Driven Coverage for Expats | Expat Savvy"
   description="Explore Sympany health insurance for expats in Switzerland. Discover easy-to-manage plans, great value, digital services, and how Expat Savvy can assist you."
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" slot="head">
-{
-  "@context": "https://schema.org",
-      "@type": "InsuranceProduct",
-      "name": "Sympany Health Insurance Switzerland",
-      "description": "Easy-to-manage, value-driven health insurance solutions from Sympany, designed with clarity and user-friendliness for expats in Switzerland",
-  "url": "https://expat-savvy.ch/healthcare/all-insurances/sympany",
-      "provider": {
-        "@type": "Organization",
-        "name": "Sympany",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Peter Merian-Weg 4",
-    "addressLocality": "Basel",
-    "postalCode": "4002",
-    "addressCountry": "CH"
-        }
-  },
-  "areaServed": "CH",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Insurance Products",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Basic Insurance",
-              "description": "Multiple models including Standard, Telmed, HMO, Family Doctor"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Supplementary Insurance",
-              "description": "Additional coverage including plus, hospita, dental, travel"
-        }
-      }
-    ]
-  },
-      "review": {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "4.3",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Michael Thompson"
-        },
-        "reviewBody": "Sympany's straightforward approach and digital tools made my transition to Swiss health insurance so much easier. Great value for money!"
-      }
-    }
-  </script>
+  <!-- Schema.org markup using the new ReviewSchema component -->
+  <ReviewSchema 
+    itemReviewed={reviewedItem}
+    reviews={insuranceReviews}
+    aggregateRating={aggregateRating}
+    slot="head"
+  />
 
   <!-- Article Schema -->
   <script type="application/ld+json" slot="head">

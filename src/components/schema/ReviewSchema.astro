@@ -1,78 +1,98 @@
 ---
-// Create a reusable Review Schema component
-interface Review {
-  author: string;
-  reviewRating: number;
-  reviewBody: string;
-  datePublished?: string;
-}
-
+// ReviewSchema component for proper structured data on reviews
 interface Props {
   itemReviewed: {
     name: string;
-    type: string; // e.g., "InsuranceAgency", "Product", "Service"
-    url?: string;
+    description: string;
+    url: string;
+    type: string;
   };
-  reviews: Review[];
+  reviews: Array<{
+    author: string;
+    reviewRating: number;
+    reviewBody: string;
+    datePublished?: string;
+  }>;
   aggregateRating?: {
-    ratingValue: number;
-    reviewCount: number;
-    bestRating?: number;
-    worstRating?: number;
+    ratingValue: string;
+    reviewCount: string;
   };
 }
 
-const { itemReviewed, reviews, aggregateRating } = Astro.props;
+const { 
+  itemReviewed,
+  reviews,
+  aggregateRating
+} = Astro.props;
 
-// Set defaults
-const defaultBestRating = 5;
-const defaultWorstRating = 1;
-
-// Calculate aggregate rating if not provided but reviews exist
-let calculatedAggregateRating = aggregateRating;
-if (!calculatedAggregateRating && reviews && reviews.length > 0) {
-  const sum = reviews.reduce((total, review) => total + review.reviewRating, 0);
-  calculatedAggregateRating = {
-    ratingValue: Number((sum / reviews.length).toFixed(1)),
-    reviewCount: reviews.length,
-    bestRating: defaultBestRating,
-    worstRating: defaultWorstRating
+// Define schema type that allows for additional properties
+type SchemaType = {
+  "@context": string;
+  "@type": string;
+  "name": string;
+  "description": string;
+  "url": string;
+  "review"?: Array<{
+    "@type": string;
+    "reviewRating": {
+      "@type": string;
+      "ratingValue": string;
+      "bestRating": string;
+    };
+    "author": {
+      "@type": string;
+      "name": string;
+    };
+    "reviewBody": string;
+    "datePublished": string;
+  }>;
+  "aggregateRating"?: {
+    "@type": string;
+    "ratingValue": string;
+    "reviewCount": string;
+    "bestRating": string;
+    "worstRating": string;
   };
-}
+  [key: string]: any; // Allow any additional properties
+};
 
-// Build the schema object
-const schema: any = {
+// Build the schema
+const schema: SchemaType = {
   "@context": "https://schema.org",
-  "@type": itemReviewed.type,
+  "@type": "Product",
   "name": itemReviewed.name,
-  "url": itemReviewed.url || Astro.url.toString(),
-  "review": reviews.map(review => ({
+  "description": itemReviewed.description,
+  "url": itemReviewed.url
+};
+
+// Add reviews if available
+if (reviews && reviews.length > 0) {
+  schema.review = reviews.map(review => ({
     "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": review.reviewRating.toString(),
+      "bestRating": "5"
+    },
     "author": {
       "@type": "Person",
       "name": review.author
     },
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": review.reviewRating,
-      "bestRating": defaultBestRating,
-      "worstRating": defaultWorstRating
-    },
     "reviewBody": review.reviewBody,
     "datePublished": review.datePublished || new Date().toISOString().split('T')[0]
-  }))
-};
+  }));
+}
 
 // Add aggregate rating if available
-if (calculatedAggregateRating) {
+if (aggregateRating) {
   schema.aggregateRating = {
     "@type": "AggregateRating",
-    "ratingValue": calculatedAggregateRating.ratingValue,
-    "reviewCount": calculatedAggregateRating.reviewCount,
-    "bestRating": calculatedAggregateRating.bestRating || defaultBestRating,
-    "worstRating": calculatedAggregateRating.worstRating || defaultWorstRating
+    "ratingValue": aggregateRating.ratingValue,
+    "reviewCount": aggregateRating.reviewCount,
+    "bestRating": "5",
+    "worstRating": "1"
   };
 }
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)}></script> 
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)}></script> 

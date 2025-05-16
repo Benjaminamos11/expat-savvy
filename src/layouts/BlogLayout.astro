@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 import FAQ from '../components/FAQ.astro';
+import BlogPostSchema from '../components/schema/BlogPostSchema.astro';
 const { frontmatter } = Astro.props;
 
 // Function to generate social sharing URLs
@@ -204,42 +205,14 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   <ConsultationModal />
 
   <!-- BlogPosting Schema Markup -->
-  <script type="application/ld+json" slot="head" define:vars={{ title: Astro.props.title, description: Astro.props.description, image: Astro.props.image, author: Astro.props.author, publishDate: Astro.props.publishDate, modifiedDate: Astro.props.modifiedDate }}>
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": Astro.url
-    },
-    "headline": title,
-    "description": description,
-    "image": image,
-    "author": {
-      "@type": "Person",
-      "name": author?.name || "Expat Savvy Team"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-        "width": 600,
-        "height": 60
-      }
-    },
-    "datePublished": publishDate,
-    "dateModified": modifiedDate || publishDate,
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "27",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
-  }
-  </script>
+  <BlogPostSchema
+    title={frontmatter.title}
+    description={frontmatter.description}
+    image={frontmatter.image}
+    author={frontmatter.author}
+    publishDate={frontmatter.date}
+    url={Astro.url.href}
+  />
 
   <!-- Gym-specific FAQ Schema Markup -->
   {frontmatter.title && frontmatter.title.toLowerCase().includes("gym") && (

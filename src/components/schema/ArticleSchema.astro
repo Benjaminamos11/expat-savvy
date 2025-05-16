@@ -1,0 +1,136 @@
+---
+// ArticleSchema component for proper structured data on all article-type pages
+interface Props {
+  type: "Article" | "BlogPosting" | "TechArticle" | "NewsArticle" | "HowTo";
+  title: string;
+  description: string;
+  image: string;
+  author?: string | { name: string };
+  publishDate?: string;
+  modifiedDate?: string;
+  url?: string;
+  organization?: string;
+  organizationLogo?: string;
+  // Additional properties for HowTo type
+  name?: string; // Same as title, but used for HowTo
+  totalTime?: string;
+  steps?: Array<{ name: string; text: string }>;
+  tools?: Array<{ name: string; description: string }>;
+  supply?: string[];
+}
+
+const {
+  type = "Article",
+  title,
+  description,
+  image,
+  author = "Expat Savvy Team",
+  publishDate = new Date().toISOString(),
+  modifiedDate = publishDate,
+  url = Astro.url.href,
+  organization = "Expat Savvy",
+  organizationLogo = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+  // Support for HowTo properties
+  name,
+  totalTime,
+  steps,
+  tools,
+  supply
+} = Astro.props;
+
+// Extract author name correctly
+const authorName = typeof author === 'object' && author !== null ? author.name || "Expat Savvy Team" : author;
+
+// Define base schema type that allows for additional properties
+type SchemaType = {
+  "@context": string;
+  "@type": string;
+  "mainEntityOfPage": {
+    "@type": string;
+    "@id": string;
+  };
+  "headline": string;
+  "description": string;
+  "image": string;
+  "author": {
+    "@type": string;
+    "name": string;
+  };
+  "publisher": {
+    "@type": string;
+    "name": string;
+    "logo": {
+      "@type": string;
+      "url": string;
+      "width": number;
+      "height": number;
+    };
+  };
+  "datePublished": string;
+  "dateModified": string;
+  [key: string]: any; // Allow any additional properties
+};
+
+// Build the Article schema
+const schema: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": type,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  },
+  "headline": title,
+  "description": description,
+  "image": image,
+  "author": {
+    "@type": "Person",
+    "name": authorName
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": organization,
+    "logo": {
+      "@type": "ImageObject",
+      "url": organizationLogo,
+      "width": 600,
+      "height": 60
+    }
+  },
+  "datePublished": publishDate,
+  "dateModified": modifiedDate
+};
+
+// Add HowTo specific properties if type is HowTo
+if (type === "HowTo" && steps) {
+  // Add HowTo properties directly
+  schema.name = name || title;
+  
+  if (totalTime) {
+    schema.totalTime = totalTime;
+  }
+  
+  schema.step = steps.map((step, index) => ({
+    "@type": "HowToStep",
+    "position": index + 1,
+    "name": step.name,
+    "text": step.text
+  }));
+  
+  if (tools && tools.length > 0) {
+    schema.tool = tools.map(tool => ({
+      "@type": "HowToTool",
+      "name": tool.name,
+      "description": tool.description
+    }));
+  }
+  
+  if (supply && supply.length > 0) {
+    schema.supply = supply.map(item => ({
+      "@type": "HowToSupply",
+      "name": item
+    }));
+  }
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)}></script> 
