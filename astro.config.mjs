@@ -3,6 +3,10 @@ import tailwind from '@astrojs/tailwind';
 import react from "@astrojs/react";
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   integrations: [
@@ -27,6 +31,15 @@ export default defineConfig({
     },
     ssr: {
       noExternal: ['@fontsource/inter']
+    },
+    server: {
+      fs: {
+        // Allow serving files from node_modules
+        allow: [
+          // This allows serving files from node_modules
+          path.resolve(__dirname, 'node_modules')
+        ]
+      }
     }
   }
 });

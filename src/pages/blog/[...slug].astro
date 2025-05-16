@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 
 // Function to convert WebP images to JPG for social media sharing
-function convertToSocialImage(imageUrl: string): string {
+const convertToSocialImage = (imageUrl: string): string => {
   if (!imageUrl) return '';
   
   // Check if image is WebP
@@ -15,7 +15,7 @@ function convertToSocialImage(imageUrl: string): string {
   
   // Return original URL if not WebP
   return imageUrl;
-}
+};
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
