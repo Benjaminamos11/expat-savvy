@@ -30,6 +30,9 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Define favicon URL - same as in Layout.astro
+const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
 ---
 
 <!DOCTYPE html>
@@ -43,7 +46,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href={favicon} sizes="32x32" />
+    <link rel="icon" type="image/png" href={favicon} sizes="16x16" />
+    <link rel="apple-touch-icon" href={favicon} />
+    
     <meta name="generator" content={Astro.generator} />
     
     <!-- Modal styles -->
