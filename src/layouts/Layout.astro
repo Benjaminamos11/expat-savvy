@@ -37,84 +37,30 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
-    <!-- Clean Modal Management -->
-    <script is:inline src="/scripts/modal-init.js"></script>
-    <script is:inline src="/scripts/button-fixer.js"></script>
-    <script is:inline src="/scripts/direct-modal-fix.js"></script>
-    <script is:inline src="/scripts/modal-debug.js"></script>
-    
-    <!-- Performance optimizations -->
-    <script is:inline src="/scripts/performance-optimizations.js"></script>
-    
-    <!-- Cookie control -->
-    <script is:inline>
-      // Simplified cookie control script
-      (function() {
-        // Only initialize on pages that might use third-party resources
-        if (document.querySelector('iframe[src*="cal.com"]') || document.getElementById('consultation-modal')) {
-          document.addEventListener('DOMContentLoaded', function() {
-            // Check if we have permission to use third-party cookies
-            const cookiesAllowed = localStorage.getItem('cookies-allowed') === 'true';
-            
-            // If permission not explicitly granted, add cookie notice
-            if (!cookiesAllowed) {
-              const banner = document.createElement('div');
-              banner.style.position = 'fixed';
-              banner.style.bottom = '0';
-              banner.style.left = '0';
-              banner.style.right = '0';
-              banner.style.padding = '1rem';
-              banner.style.backgroundColor = 'white';
-              banner.style.boxShadow = '0 -2px 10px rgba(0,0,0,0.1)';
-              banner.style.zIndex = '9999';
-              banner.innerHTML = `
-                <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-                  <div style="margin-bottom: 1rem;">
-                    <p style="margin: 0; font-size: 0.9rem;">
-                      We use essential cookies necessary for the website to function, and third-party cookies for booking functionality.
-                      <button id="cookie-accept" style="background: #cc242c; color: white; border: none; padding: 0.5rem 1rem; margin-left: 1rem; border-radius: 0.25rem; cursor: pointer;">Accept</button>
-                      <button id="cookie-reject" style="background: #eee; color: #333; border: none; padding: 0.5rem 1rem; margin-left: 0.5rem; border-radius: 0.25rem; cursor: pointer;">Reject</button>
-                    </p>
-                  </div>
-                </div>
-              `;
-              
-              // Add banner to page
-              document.body.appendChild(banner);
-              
-              // Add event listeners
-              document.getElementById('cookie-accept').addEventListener('click', function() {
-                localStorage.setItem('cookies-allowed', 'true');
-                banner.remove();
-                
-                // Reload the page to apply cookie settings
-                window.location.reload();
-              });
-              
-              document.getElementById('cookie-reject').addEventListener('click', function() {
-                localStorage.setItem('cookies-allowed', 'false');
-                banner.remove();
-              });
-            }
-          });
-        }
-      })();
-    </script>
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
-    <!-- Modal styles -->
-    <link rel="stylesheet" href="/scripts/modal-styles.css" />
+    <!-- Preconnect to critical domains -->
+    <link rel="preconnect" href={cdnBaseUrl} crossorigin />
+    <link rel="preconnect" href="https://app.cal.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href={logoDark} fetchpriority="high" />
+    <link rel="preload" as="image" href={logoLight} fetchpriority="high" />
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin />
+    
+    <!-- Canonical and metadata -->
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="manifest" href="/manifest.json" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href={favicon} sizes="32x32" />
     <link rel="icon" type="image/png" href={favicon} sizes="16x16" />
     <link rel="apple-touch-icon" href={favicon} />
-    
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="canonical" href={canonicalURL} />
-    
+
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
@@ -146,28 +92,23 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <meta name="author" content="Expat Savvy" />
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
-    
-    <!-- Bing IndexNow -->
     <meta name="msvalidate.01" content="e8c7f852a41b4f2d9c5e6b3a7d8f9g0h" />
-    
-    <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" as="image" href={logoDark} fetchpriority="high" />
-    <link rel="preload" as="image" href={logoLight} fetchpriority="high" />
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href={cdnBaseUrl} crossorigin />
-    <link rel="preconnect" href="https://app.cal.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
-    
-    <!-- Cookie consent settings -->
     <meta name="cookie-control" content="strict" />
     <meta name="cookie-control-third-party" content="block-unless-accepted" />
-
+    
+    <!-- Performance optimizations -->
+    <script is:inline defer src="/scripts/performance-optimizations.js"></script>
+    
+    <!-- Modal styles -->
+    <link rel="stylesheet" href="/scripts/modal-styles.css" />
+    
+    <!-- Defer non-critical scripts -->
+    <script is:inline defer src="/scripts/modal-init.js"></script>
+    <script is:inline defer src="/scripts/button-fixer.js"></script>
+    <script is:inline defer src="/scripts/direct-modal-fix.js"></script>
+    <script is:inline defer src="/scripts/modal-debug.js"></script>
+    
     <slot name="head" />
   </head>
   <body class="min-h-screen bg-gray-50 overflow-x-hidden">
@@ -180,8 +121,9 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <PrivacyPolicyModal />
     <TermsOfServiceModal />
     <ConsultationModal />
+    
     <!-- Cal element-click embed code begins -->
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
       // Define empty function stubs for modals
       window.Cal = window.Cal || {};
       window.closeConsultationModal = window.closeConsultationModal || function() {};
@@ -190,10 +132,10 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <!-- Cal element-click embed code ends -->
     
     <!-- Component Helper - Helps with missing modals -->
-    <script is:inline src="/scripts/component-helper.js"></script>
+    <script is:inline defer src="/scripts/component-helper.js"></script>
     
     <!-- Global consultation modal enhancer -->
-    <script is:inline>
+    <script is:inline defer>
       // Modal enhancer - ensures all consultation buttons work
       (function() {
         document.addEventListener('DOMContentLoaded', function() {
