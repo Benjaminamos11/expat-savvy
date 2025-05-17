@@ -185,12 +185,12 @@ if (providerName) {
         </p>
       </div>
       
-      <div class="calendar-container max-w-3xl mx-auto">
+      <div class="calendar-container max-w-5xl mx-auto">
         <!-- Cal container div -->
         <div id="my-cal-inline">
           <!-- Loading placeholder -->
-          <div class="flex flex-col items-center justify-center h-full bg-gray-50 p-8">
-            <div class="w-16 h-16 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin mb-4"></div>
+          <div class="flex flex-col items-center justify-center h-full bg-white p-8">
+            <div class="w-16 h-16 border-4 border-gray-200 border-t-red-600 rounded-full animate-spin mb-4"></div>
             <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
             <p class="text-gray-500 text-center max-w-md">
               Setting up your consultation calendar
@@ -269,7 +269,7 @@ if (providerName) {
     const calContainer = document.getElementById('my-cal-inline');
     if (calContainer) {
       calContainer.innerHTML = `
-        <div class="flex flex-col items-center justify-center h-full bg-gray-50 p-8">
+        <div class="flex flex-col items-center justify-center h-full bg-white p-8">
           <h3 class="text-xl font-medium text-gray-900 mb-4">Unable to load calendar</h3>
           <p class="text-gray-500 text-center max-w-md mb-6">
             Please contact us directly to schedule your consultation.
@@ -298,133 +298,97 @@ if (providerName) {
     });
   }
 
-  // Version 1: Direct inline embed approach using Cal's new method
-  function loadCalendarDirectly() {
-    // Create a direct Cal embed without relying on the Cal() function
-    const calContainer = document.getElementById('my-cal-inline');
+  // Function to load and initialize Cal.com
+  function loadCalendar() {
+    // First, ensure Cal global object exists
+    window.Cal = window.Cal || function() {
+      const c = window.Cal;
+      const n = c.q || [];
+      c.q = n;
+      n.push(arguments);
+    };
+    window.Cal.q = window.Cal.q || [];
     
-    // Set the loading indicator
-    calContainer.innerHTML = `
-      <div class="flex flex-col items-center justify-center h-full bg-gray-50 p-8">
-        <div class="w-16 h-16 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin mb-4"></div>
-        <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
-        <p class="text-gray-500 text-center max-w-md">Setting up your consultation calendar</p>
-      </div>
-    `;
+    // Load Cal.com script
+    const script = document.createElement('script');
+    script.src = "https://app.cal.com/embed/embed.js";
+    script.async = true;
     
-    try {
-      // First attempt: Try the direct iframe approach
-      const iframe = document.createElement('iframe');
-      iframe.src = "https://app.cal.com/robertkolar/expat-savvy";
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
-      iframe.style.borderRadius = "8px";
+    script.onload = function() {
+      console.log('Cal.com script loaded successfully');
       
-      // Add error handling for the iframe
-      iframe.onerror = function() {
-        console.error('Failed to load Cal.com iframe');
-        // Try the alternative method
-        loadCalendarAlternative();
-      };
+      // Wait for script to fully initialize
+      let attempts = 0;
+      const maxAttempts = 5;
       
-      // Add load handler to verify iframe loaded correctly
-      iframe.onload = function() {
-        console.log('Cal.com iframe loaded successfully');
-      };
-      
-      // Clear the container and add the iframe
-      setTimeout(() => {
-        calContainer.innerHTML = '';
-        calContainer.appendChild(iframe);
-      }, 300);
-    } catch (error) {
-      console.error('Error with iframe approach:', error);
-      // Fall back to the alternative method
-      loadCalendarAlternative();
-    }
-  }
-  
-  // Alternative method using Cal's embed API directly
-  function loadCalendarAlternative() {
-    console.log('Trying alternative Cal.com embed method');
-    const calContainer = document.getElementById('my-cal-inline');
-    
-    try {
-      // Create a Cal embed div with data attributes
-      const calDiv = document.createElement('div');
-      calDiv.setAttribute('data-cal-link', 'robertkolar/expat-savvy');
-      calDiv.setAttribute('data-cal-config', '{"layout":"month_view","theme":"light","hideEventTypeDetails":false}');
-      calDiv.style.width = '100%';
-      calDiv.style.height = '100%';
-      
-      // Clear container and add the configured div
-      calContainer.innerHTML = '';
-      calContainer.appendChild(calDiv);
-      
-      // Now add the Cal script that will automatically initialize
-      const script = document.createElement('script');
-      script.src = 'https://cal.com/embed.js';
-      script.defer = true;
-      script.onload = function() {
-        console.log('Cal.com embed script loaded successfully');
-      };
-      script.onerror = function() {
-        console.error('Failed to load Cal.com embed script');
-        // Try third method
-        loadCalendarFallback();
-      };
-      
-      document.body.appendChild(script);
-    } catch (error) {
-      console.error('Failed to load calendar with alternative method:', error);
-      // Try third method
-      loadCalendarFallback();
-    }
-  }
-  
-  // Final fallback method: direct static embed code
-  function loadCalendarFallback() {
-    console.log('Trying final Cal.com fallback embed method');
-    const calContainer = document.getElementById('my-cal-inline');
-    
-    try {
-      // Create direct embed using Cal's most basic HTML
-      calContainer.innerHTML = `
-        <div style="width:100%;height:100%;overflow:scroll" id="calendar-container">
-          <iframe 
-            src="https://cal.com/robertkolar/expat-savvy?embed=true&theme=light&layout=month_view" 
-            style="width:100%;height:100%;border:none;border-radius:8px;" 
-            frameborder="0"
-          ></iframe>
-        </div>
-      `;
-      
-      // Add a timeout check to verify if calendar loaded
-      setTimeout(() => {
-        const iframe = calContainer.querySelector('iframe');
-        if (iframe) {
-          // Attempt to check if iframe loaded correctly
-          if (iframe.contentDocument && iframe.contentDocument.body.innerHTML === '') {
-            console.error('Calendar iframe appears empty');
+      function initializeCalendar() {
+        attempts++;
+        console.log(`Attempting to initialize Cal.com (attempt ${attempts}/${maxAttempts})`);
+        
+        try {
+          if (typeof Cal === 'function') {
+            // Initialize Cal
+            Cal("init", {origin:"https://cal.com"});
+            Cal("inline", {
+              elementOrSelector: "#my-cal-inline",
+              calLink: "robertkolar/expat-savvy",
+              config: {
+                layout: "month_view", 
+                theme: "light",
+                hideEventTypeDetails: false,
+                primaryColor: "#dc2626", // Red-600 from Tailwind
+                backgroundColor: "#ffffff",
+                brandColor: "#dc2626"  // Red-600 from Tailwind
+              }
+            });
+            console.log('Cal.com calendar initialized successfully');
+          } else {
+            console.warn('Cal is not yet a function, waiting...');
+            if (attempts < maxAttempts) {
+              // Try again with increasing delay
+              setTimeout(initializeCalendar, 300 * attempts);
+            } else {
+              console.error('Failed to initialize Cal.com after multiple attempts');
+              throw new Error('Cal is not a function after multiple attempts');
+            }
+          }
+        } catch (error) {
+          console.error('Error initializing Cal.com:', error);
+          if (attempts < maxAttempts) {
+            // Try again with increasing delay
+            setTimeout(initializeCalendar, 300 * attempts);
+          } else {
+            // Finally show fallback if all attempts fail
             showCalendarFallback();
           }
-        } else {
-          console.error('Calendar iframe not found');
-          showCalendarFallback();
         }
-      }, 5000);
-    } catch (error) {
-      console.error('Failed all calendar embed methods:', error);
+      }
+      
+      // Start initialization
+      setTimeout(initializeCalendar, 100);
+    };
+    
+    script.onerror = function() {
+      console.error('Failed to load Cal.com script');
       showCalendarFallback();
-    }
+    };
+    
+    document.head.appendChild(script);
+    
+    // Set a timeout to show fallback if script takes too long
+    const scriptTimeout = setTimeout(() => {
+      if (!window.Cal || typeof Cal !== 'function') {
+        console.warn('Cal.com script took too long to load');
+        showCalendarFallback();
+      }
+    }, 5000);
   }
   
   // Initialize everything when DOM is ready
   function init() {
     console.log('Initializing calendar functionality');
     initSmoothScroll();
-    loadCalendarDirectly();
+    loadCalendar();
   }
   
   // Ensure everything runs at the right time
@@ -444,6 +408,23 @@ if (providerName) {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     background-color: #ffffff;
+  }
+  
+  /* Cal.com optimizations for desktop view */
+  @media (min-width: 1024px) {
+    #my-cal-inline {
+      height: 650px; /* Shorter height for better horizontal view */
+      max-width: 100%;
+    }
+    
+    .calendar-container {
+      padding: 0 1rem;
+    }
+    
+    /* Force white background and correct colors when the iframe loads */
+    :global(#my-cal-inline iframe) {
+      background-color: white !important;
+    }
   }
   
   @media (max-width: 640px) {
