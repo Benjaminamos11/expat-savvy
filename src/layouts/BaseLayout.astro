@@ -29,6 +29,9 @@ const {
   }
 } = Astro.props;
 
+const defaultDescription = "Expat Savvy - Your trusted guide for expats in Switzerland with expert insurance advice and resources";
+const finalDescription = description === "Expat Savvy - Your guide to living abroad successfully" ? defaultDescription : description;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Define favicon URL - same as in Layout.astro
@@ -58,14 +61,14 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <link rel="stylesheet" href="/scripts/modal-styles.css" />
     
     <!-- Primary Meta Tags -->
-    <title>{title} | Expat Savvy</title>
-    <meta name="title" content={`${title} | Expat Savvy`} />
-    <meta name="description" content={description} />
+    <title>{title} | Expat Savvy Switzerland</title>
+    <meta name="title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta name="description" content={finalDescription} />
     
     <!-- Social Media Image handling with WebP to JPG conversion -->
     <SocialMediaImage 
       image={image}
-      alt={description}
+      alt={finalDescription}
       width={1200}
       height={630}
     />
@@ -73,18 +76,18 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | Expat Savvy`} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Expat Savvy" />
+    <meta property="og:title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:site_name" content="Expat Savvy Switzerland" />
     
     <!-- Twitter Basic Tags -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={`${title} | Expat Savvy`} />
-    <meta property="twitter:description" content={description} />
+    <meta property="twitter:title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta property="twitter:description" content={finalDescription} />
     
     <!-- WhatsApp Sharing -->
-    <meta property="og:image:alt" content={description} />
+    <meta property="og:image:alt" content={finalDescription} />
     
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
@@ -94,11 +97,11 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
       "@context": "https://schema.org",
       "@type": type === "article" ? "BlogPosting" : "WebSite",
       "name": title,
-      "description": description,
+      "description": finalDescription,
       "url": canonicalURL,
       "publisher": {
         "@type": "Organization",
-        "name": "Expat Savvy",
+        "name": "Expat Savvy Switzerland",
         "url": Astro.site
       },
       ...(type === "article" && publishDate && {

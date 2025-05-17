@@ -56,11 +56,17 @@ type SchemaType = {
   [key: string]: any; // Allow any additional properties
 };
 
+// Valid schema types that support reviews according to Google guidelines
+const validTypes = ["Product", "LocalBusiness", "Organization", "Service"];
+const schemaType = validTypes.includes(itemReviewed.type) 
+  ? itemReviewed.type 
+  : "Product";
+
 // Build the schema
 const schema: SchemaType = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": itemReviewed.name,
+  "@type": schemaType,
+  "name": itemReviewed.name || "Expat Insurance Service", // Ensure name is always present
   "description": itemReviewed.description,
   "url": itemReviewed.url
 };

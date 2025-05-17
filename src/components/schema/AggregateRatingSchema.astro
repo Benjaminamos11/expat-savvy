@@ -1,7 +1,7 @@
 ---
-// AggregateRating Schema Component for blog posts and provider pages
+// AggregateRating Schema Component for provider pages (not to be used with BlogPosting)
 interface Props {
-  type: string; // "BlogPosting", "Product", "LocalBusiness", "InsuranceAgency", etc.
+  type: string; // "Product", "LocalBusiness", "Organization", "Service"
   itemName: string;
   itemUrl?: string;
   ratingValue: number | string;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { 
-  type, 
+  type: requestedType, 
   itemName, 
   itemUrl, 
   ratingValue, 
@@ -23,6 +23,10 @@ const {
   image,
   description
 } = Astro.props;
+
+// Only use types that are valid for AggregateRating according to Google
+const validTypes = ["Product", "LocalBusiness", "Organization", "Service"];
+const type = validTypes.includes(requestedType) ? requestedType : "Product";
 
 // Build the schema
 const schema: any = {
