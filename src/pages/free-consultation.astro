@@ -143,7 +143,7 @@ if (providerName) {
             </a>
             <a href="https://wa.me/41791552570?text=Hello%2C%20I'd%20like%20to%20schedule%20a%20consultation%20about%20{encodeURIComponent(consultationTopic)}" 
               target="_blank"
-              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#128C7E] hover:bg-[#075E54] transition-colors duration-300 shadow-lg hover:shadow-xl">
+              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#075E54] hover:bg-[#064740] transition-colors duration-300 shadow-lg hover:shadow-xl">
               Chat on WhatsApp
               <svg class="ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
@@ -186,17 +186,14 @@ if (providerName) {
       </div>
       
       <div class="calendar-container max-w-3xl mx-auto">
-        <!-- Cal inline embed code -->
-        <div id="my-cal-inline" style="width:100%;height:750px;overflow:hidden;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        <!-- Cal container div -->
+        <div id="my-cal-inline">
           <!-- Loading placeholder -->
           <div class="flex flex-col items-center justify-center h-full bg-gray-50 p-8">
             <div class="w-16 h-16 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin mb-4"></div>
             <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
             <p class="text-gray-500 text-center max-w-md">
-              {providerName ? 
-                `Setting up your consultation calendar for ${providerName} insurance` : 
-                `Setting up your ${insuranceType === 'pension' ? '3rd pillar' : insuranceType} insurance consultation calendar`
-              }
+              Setting up your consultation calendar
             </p>
           </div>
         </div>
@@ -255,67 +252,143 @@ if (providerName) {
   <ConsultationModal />
 </Layout>
 
-<!-- Cal.com embed script - only loaded on this page -->
-<script define:vars={{ calLink }}>
-  // Official Cal.com inline embed code
-  (function (C, A, L) { 
-    let p = function (a, ar) { a.q.push(ar); }; 
-    let d = C.document; 
-    C.Cal = C.Cal || function () { 
-      let cal = C.Cal; 
-      let ar = arguments; 
-      if (!cal.loaded) { 
-        cal.ns = {}; 
-        cal.q = cal.q || []; 
-        d.head.appendChild(d.createElement("script")).src = A; 
-        cal.loaded = true; 
-      } 
-      if (ar[0] === L) { 
-        const api = function () { p(api, arguments); }; 
-        const namespace = ar[1]; 
-        api.q = api.q || []; 
-        if(typeof namespace === "string"){
-          cal.ns[namespace] = cal.ns[namespace] || api;
-          p(cal.ns[namespace], ar);
-          p(cal, ["initNamespace", namespace]);
-        } else p(cal, ar); 
-        return;
-      } 
-      p(cal, ar); 
-    }; 
-  })(window, "https://app.cal.com/embed/embed.js", "init");
-
-  // Initialize with namespace
-  Cal("init", "expat-savvy", {origin:"https://cal.com"});
-
-  // Use the namespace for inline embedding
-  Cal.ns["expat-savvy"]("inline", {
-    elementOrSelector: "#my-cal-inline",
-    config: {"layout":"month_view","theme":"light"},
-    calLink: calLink, // Use the Astro variable
+<!-- Simple Cal.com embed without TypeScript complexities -->
+<script is:inline>
+  // Make sure we have a global error handler
+  window.addEventListener('error', function(event) {
+    console.error('Global error:', event.error);
+    
+    // Show a fallback if there's a Cal-related error
+    if (event.error && event.error.message && event.error.message.includes('Cal')) {
+      showCalendarFallback();
+    }
   });
-
-  // Set UI configuration
-  Cal.ns["expat-savvy"]("ui", {
-    "theme":"light",
-    "hideEventTypeDetails":false,
-    "layout":"month_view"
-  });
-
+  
+  // Function to show fallback content when calendar fails to load
+  function showCalendarFallback() {
+    const calContainer = document.getElementById('my-cal-inline');
+    if (calContainer) {
+      calContainer.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full bg-gray-50 p-8">
+          <h3 class="text-xl font-medium text-gray-900 mb-4">Unable to load calendar</h3>
+          <p class="text-gray-500 text-center max-w-md mb-6">
+            Please contact us directly to schedule your consultation.
+          </p>
+          <a href="https://wa.me/41791552570" target="_blank" 
+            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#075E54] hover:bg-[#064740] transition-colors">
+            Contact via WhatsApp
+          </a>
+        </div>
+      `;
+    }
+  }
+  
   // Add smooth scroll to booking calendar links
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a[href="#booking-calendar"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href="#booking-calendar"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href'))?.scrollIntoView({
-          behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
       });
     });
-  });
+  }
+
+  // Function to load and initialize Cal.com
+  function loadCalendar() {
+    // First, ensure Cal global object exists
+    window.Cal = window.Cal || function() {
+      const c = window.Cal;
+      const n = c.q || [];
+      c.q = n;
+      n.push(arguments);
+    };
+    window.Cal.q = window.Cal.q || [];
+    
+    // Load Cal.com script
+    const script = document.createElement('script');
+    script.src = "https://app.cal.com/embed/embed.js";
+    script.async = true;
+    
+    script.onload = function() {
+      console.log('Cal.com script loaded successfully');
+      
+      // Wait for script to fully initialize
+      let attempts = 0;
+      const maxAttempts = 5;
+      
+      function initializeCalendar() {
+        attempts++;
+        console.log(`Attempting to initialize Cal.com (attempt ${attempts}/${maxAttempts})`);
+        
+        try {
+          if (typeof Cal === 'function') {
+            // Initialize Cal
+            Cal("init", {origin:"https://cal.com"});
+            Cal("inline", {
+              elementOrSelector: "#my-cal-inline",
+              calLink: "robertkolar/expat-savvy",
+              config: {
+                layout: "month_view", 
+                theme: "light",
+                hideEventTypeDetails: false
+              }
+            });
+            console.log('Cal.com calendar initialized successfully');
+          } else {
+            console.warn('Cal is not yet a function, waiting...');
+            if (attempts < maxAttempts) {
+              // Try again with increasing delay
+              setTimeout(initializeCalendar, 300 * attempts);
+            } else {
+              console.error('Failed to initialize Cal.com after multiple attempts');
+              throw new Error('Cal is not a function after multiple attempts');
+            }
+          }
+        } catch (error) {
+          console.error('Error initializing Cal.com:', error);
+          if (attempts < maxAttempts) {
+            // Try again with increasing delay
+            setTimeout(initializeCalendar, 300 * attempts);
+          } else {
+            // Finally show fallback if all attempts fail
+            showCalendarFallback();
+          }
+        }
+      }
+      
+      // Start initialization
+      setTimeout(initializeCalendar, 100);
+    };
+    
+    script.onerror = function() {
+      console.error('Failed to load Cal.com script');
+      showCalendarFallback();
+    };
+    
+    document.head.appendChild(script);
+  }
+  
+  // Initialize everything when DOM is ready
+  function init() {
+    console.log('Initializing calendar functionality');
+    initSmoothScroll();
+    loadCalendar();
+  }
+  
+  // Ensure everything runs at the right time
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // DOM already loaded, run now
+    init();
+  }
 </script>
 
-<!-- Fix calendar styles -->
 <style>
   #my-cal-inline {
     width: 100%;
@@ -323,12 +396,7 @@ if (providerName) {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  #my-cal-inline iframe {
-    width: 100% !important;
-    height: 100% !important;
-    border: none !important;
+    background-color: #ffffff;
   }
   
   @media (max-width: 640px) {
