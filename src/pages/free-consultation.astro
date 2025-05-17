@@ -185,17 +185,25 @@ if (providerName) {
         </p>
       </div>
       
-      <div class="calendar-container max-w-5xl mx-auto">
-        <!-- Cal container div -->
-        <div id="my-cal-inline">
-          <!-- Loading placeholder -->
-          <div class="flex flex-col items-center justify-center h-full bg-white p-8">
+      <div class="calendar-container max-w-6xl mx-auto px-4">
+        <!-- Pure HTML direct embed approach - most reliable -->
+        <div id="my-cal-inline" class="relative h-[650px] border rounded-lg shadow-md bg-white overflow-hidden">
+          <!-- Static HTML embed - no JavaScript needed -->
+          <div id="calendar-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-20">
             <div class="w-16 h-16 border-4 border-gray-200 border-t-red-600 rounded-full animate-spin mb-4"></div>
             <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
-            <p class="text-gray-500 text-center max-w-md">
-              Setting up your consultation calendar
-            </p>
+            <p class="text-gray-500 text-center max-w-md">Setting up your consultation calendar</p>
           </div>
+          
+          <iframe 
+            id="cal-iframe"
+            src="https://cal.com/robertkolar/expat-savvy?layout=month_view&embed=true&primaryColor=%23dc2626&hideEventTypeDetails=false&theme=light"
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            title="Schedule your consultation"
+            allow="camera; microphone; fullscreen; payment">
+          </iframe>
         </div>
       </div>
     </div>
@@ -252,20 +260,44 @@ if (providerName) {
   <ConsultationModal />
 </Layout>
 
-<!-- Simple Cal.com embed without TypeScript complexities -->
+<!-- Basic script for calendar loading and navigation -->
 <script is:inline>
-  // Make sure we have a global error handler
-  window.addEventListener('error', function(event) {
-    console.error('Global error:', event.error);
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle loading indicator
+    const iframe = document.getElementById('cal-iframe');
+    const loader = document.getElementById('calendar-loading');
     
-    // Show a fallback if there's a Cal-related error
-    if (event.error && event.error.message && event.error.message.includes('Cal')) {
-      showCalendarFallback();
+    if (iframe && loader) {
+      // Hide loader when iframe loads
+      iframe.onload = function() {
+        loader.style.display = 'none';
+      };
+      
+      // Show fallback if loading takes too long
+      setTimeout(() => {
+        if (loader.style.display !== 'none') {
+          showFallbackContent();
+        }
+      }, 8000);
+      
+      // Handle iframe errors
+      iframe.onerror = showFallbackContent;
     }
+    
+    // Smooth scroll to calendar
+    document.querySelectorAll('a[href="#booking-calendar"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
   });
   
-  // Function to show fallback content when calendar fails to load
-  function showCalendarFallback() {
+  // Show fallback content if calendar fails to load
+  function showFallbackContent() {
     const calContainer = document.getElementById('my-cal-inline');
     if (calContainer) {
       calContainer.innerHTML = `
@@ -282,154 +314,21 @@ if (providerName) {
       `;
     }
   }
-  
-  // Add smooth scroll to booking calendar links
-  function initSmoothScroll() {
-    document.querySelectorAll('a[href="#booking-calendar"]').forEach(function(anchor) {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  }
-
-  // Function to load and initialize Cal.com
-  function loadCalendar() {
-    // First, ensure Cal global object exists
-    window.Cal = window.Cal || function() {
-      const c = window.Cal;
-      const n = c.q || [];
-      c.q = n;
-      n.push(arguments);
-    };
-    window.Cal.q = window.Cal.q || [];
-    
-    // Load Cal.com script
-    const script = document.createElement('script');
-    script.src = "https://app.cal.com/embed/embed.js";
-    script.async = true;
-    
-    script.onload = function() {
-      console.log('Cal.com script loaded successfully');
-      
-      // Wait for script to fully initialize
-      let attempts = 0;
-      const maxAttempts = 5;
-      
-      function initializeCalendar() {
-        attempts++;
-        console.log(`Attempting to initialize Cal.com (attempt ${attempts}/${maxAttempts})`);
-        
-        try {
-          if (typeof Cal === 'function') {
-            // Initialize Cal
-            Cal("init", {origin:"https://cal.com"});
-            Cal("inline", {
-              elementOrSelector: "#my-cal-inline",
-              calLink: "robertkolar/expat-savvy",
-              config: {
-                layout: "month_view", 
-                theme: "light",
-                hideEventTypeDetails: false,
-                primaryColor: "#dc2626", // Red-600 from Tailwind
-                backgroundColor: "#ffffff",
-                brandColor: "#dc2626"  // Red-600 from Tailwind
-              }
-            });
-            console.log('Cal.com calendar initialized successfully');
-          } else {
-            console.warn('Cal is not yet a function, waiting...');
-            if (attempts < maxAttempts) {
-              // Try again with increasing delay
-              setTimeout(initializeCalendar, 300 * attempts);
-            } else {
-              console.error('Failed to initialize Cal.com after multiple attempts');
-              throw new Error('Cal is not a function after multiple attempts');
-            }
-          }
-        } catch (error) {
-          console.error('Error initializing Cal.com:', error);
-          if (attempts < maxAttempts) {
-            // Try again with increasing delay
-            setTimeout(initializeCalendar, 300 * attempts);
-          } else {
-            // Finally show fallback if all attempts fail
-            showCalendarFallback();
-          }
-        }
-      }
-      
-      // Start initialization
-      setTimeout(initializeCalendar, 100);
-    };
-    
-    script.onerror = function() {
-      console.error('Failed to load Cal.com script');
-      showCalendarFallback();
-    };
-    
-    document.head.appendChild(script);
-    
-    // Set a timeout to show fallback if script takes too long
-    const scriptTimeout = setTimeout(() => {
-      if (!window.Cal || typeof Cal !== 'function') {
-        console.warn('Cal.com script took too long to load');
-        showCalendarFallback();
-      }
-    }, 5000);
-  }
-  
-  // Initialize everything when DOM is ready
-  function init() {
-    console.log('Initializing calendar functionality');
-    initSmoothScroll();
-    loadCalendar();
-  }
-  
-  // Ensure everything runs at the right time
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    // DOM already loaded, run now
-    init();
-  }
 </script>
 
 <style>
   #my-cal-inline {
     width: 100%;
-    height: 750px;
-    overflow: hidden;
+    min-height: 650px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     background-color: #ffffff;
-  }
-  
-  /* Cal.com optimizations for desktop view */
-  @media (min-width: 1024px) {
-    #my-cal-inline {
-      height: 650px; /* Shorter height for better horizontal view */
-      max-width: 100%;
-    }
-    
-    .calendar-container {
-      padding: 0 1rem;
-    }
-    
-    /* Force white background and correct colors when the iframe loads */
-    :global(#my-cal-inline iframe) {
-      background-color: white !important;
-    }
+    overflow: hidden;
   }
   
   @media (max-width: 640px) {
     #my-cal-inline {
-      height: 600px;
+      min-height: 600px;
     }
   }
 </style>
