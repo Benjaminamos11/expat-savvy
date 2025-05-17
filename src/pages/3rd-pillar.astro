@@ -5,21 +5,21 @@ import ConsultationModal from '../components/consultation/ConsultationModal.astr
 const features = [
   {
     title: "Tax Benefits",
-    description: "Significant tax deductions on contributions",
+    description: "Save thousands in taxes annually with full income deduction",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2" />
     </svg>`
   },
   {
     title: "Flexible Investment",
-    description: "Choose between bank and insurance solutions",
+    description: "Choose between bank and insurance solutions with various risk profiles",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
     </svg>`
   },
   {
     title: "Early Withdrawal",
-    description: "Access funds for property purchase or business",
+    description: "Access funds for property purchase, business, or emigration",
     icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
     </svg>`
@@ -29,23 +29,159 @@ const features = [
 const pillarTypes = [
   {
     name: "Pillar 3a",
-    description: "Restricted retirement savings with tax benefits",
+    description: "Restricted retirement savings with significant tax benefits",
     features: [
-      "Annual contribution limits",
-      "Tax-deductible contributions",
-      "Restricted withdrawal conditions",
+      "Annual contribution limits (CHF 7,056 employed, CHF 35,280 self-employed for 2025)",
+      "Tax-deductible contributions with immediate tax savings",
+      "Tax-free growth on investments until withdrawal",
+      "Preferential tax rates at withdrawal",
+      "Restricted withdrawal conditions with exceptions",
       "Government regulated"
     ]
   },
   {
     name: "Pillar 3b",
-    description: "Flexible private savings without restrictions",
+    description: "Flexible private savings without restrictions or special tax advantages",
     features: [
-      "No contribution limits",
-      "Flexible withdrawals",
-      "Various investment options",
-      "No tax benefits"
+      "No contribution limits - save as much as you want",
+      "Complete flexibility and access to funds anytime",
+      "Wide variety of investment options beyond 3a limitations",
+      "No special tax benefits on contributions",
+      "No preferred taxation at withdrawal",
+      "Ideal supplement after maximizing 3a"
     ]
+  }
+];
+
+const bankVsInsurance = [
+  {
+    type: "Bank 3a",
+    advantages: [
+      "Flexibility - no fixed contribution obligation",
+      "Transparency - clear fee structures and performance",
+      "Liquidity - easier to withdraw or transfer",
+      "No risk premiums - all money goes to retirement",
+      "Lower fees - generally more cost-efficient"
+    ],
+    disadvantages: [
+      "No insurance coverage for disability or death",
+      "Investment risk with securities-based solutions",
+      "No guaranteed returns in most offerings",
+      "May require more self-discipline to contribute"
+    ]
+  },
+  {
+    type: "Insurance 3a",
+    advantages: [
+      "Built-in risk protection for disability and/or death",
+      "Premium waiver if you become disabled",
+      "Guaranteed minimum returns in some policies",
+      "Forced saving through contractual obligation",
+      "Estate planning benefits with direct beneficiaries"
+    ],
+    disadvantages: [
+      "Less flexibility with fixed premium commitments",
+      "Higher fees for insurance components",
+      "Less transparent fee structures and returns",
+      "Surrender penalties for early termination",
+      "Lower liquidity compared to bank solutions"
+    ]
+  }
+];
+
+const providers = [
+  {
+    name: "VIAC",
+    type: "Bank-based",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747512040/viac-logo_lbehut.png",
+    key: [
+      "Digital-first provider with low fees",
+      "0.44-0.55% all-in annual fee",
+      "Up to 97% equity allocation",
+      "No minimum investment"
+    ]
+  },
+  {
+    name: "Finpension",
+    type: "Bank-based",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747512040/finpension-logo_loxgqw.png",
+    key: [
+      "Highly customizable portfolios",
+      "0.39-0.53% all-in annual fee",
+      "Up to 99% equity allocation",
+      "No minimum investment"
+    ]
+  },
+  {
+    name: "Frankly",
+    type: "Bank-based",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747512040/frankly-logo_bxm41q.png",
+    key: [
+      "UBS-backed with simplified approach",
+      "0.48-0.58% all-in annual fee",
+      "Sustainable investing focus",
+      "5 pre-defined strategies"
+    ]
+  },
+  {
+    name: "Swiss Life",
+    type: "Insurance-based",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747512040/swisslife-logo_jw9kxk.png",
+    key: [
+      "Switzerland's largest life insurer",
+      "Guaranteed interest plus bonuses",
+      "Comprehensive risk coverage",
+      "Long-term commitment"
+    ]
+  },
+  {
+    name: "AXA",
+    type: "Insurance-based",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747512040/axa-logo_dlnrzk.png",
+    key: [
+      "Major international insurer",
+      "Various product options",
+      "Strong disability and death coverage",
+      "Traditional and unit-linked options"
+    ]
+  },
+  {
+    name: "Helvetia",
+    type: "Insurance-based",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747512040/helvetia-logo_ddlbh2.png",
+    key: [
+      "Swiss insurer with multiple offerings",
+      "Balance of guarantees and investment",
+      "Customizable protection components",
+      "Various product variations"
+    ]
+  }
+];
+
+const investmentStrategies = [
+  {
+    ageGroup: "Under 40",
+    recommendation: "60-100% equities",
+    rationale: "Longer time horizon allows higher risk for growth",
+    expectedReturn: "4-7% annually"
+  },
+  {
+    ageGroup: "40-50",
+    recommendation: "40-80% equities",
+    rationale: "Still substantial time but decreasing risk capacity",
+    expectedReturn: "3-6% annually"
+  },
+  {
+    ageGroup: "50-60",
+    recommendation: "20-60% equities",
+    rationale: "Shorter horizon requires more conservative approach",
+    expectedReturn: "2-5% annually"
+  },
+  {
+    ageGroup: "60+",
+    recommendation: "0-40% equities",
+    rationale: "Focus on capital preservation as withdrawal approaches",
+    expectedReturn: "1-4% annually"
   }
 ];
 
@@ -56,37 +192,49 @@ const faqs = [
   },
   {
     question: "What's the difference between Pillar 3a and 3b?",
-    answer: "Pillar 3a is a restricted pension plan with tax benefits and annual contribution limits (6,826 CHF for employed persons, 34,128 CHF for self-employed). Pillar 3b is unrestricted private savings with no limits but fewer tax advantages."
+    answer: "Pillar 3a is a restricted pension plan with tax benefits and annual contribution limits (CHF 7,056 for employed persons, CHF 35,280 for self-employed) for 2025. Pillar 3b is unrestricted private savings with no limits but fewer tax advantages."
   },
   {
-    question: "How do I start a 3rd pillar account?",
-    answer: "You can open a 3rd pillar account with any Swiss bank or insurance company. We recommend comparing different providers to find the best solution for your needs. Our experts can help you understand the options and set up your account."
+    question: "How much can I contribute to my 3rd pillar in 2025?",
+    answer: "For 2025, the maximum contribution limits are: Employed persons with a 2nd pillar: CHF 7,056 per year; Self-employed without a 2nd pillar: 20% of net income up to CHF 35,280 per year. Contributing the maximum amount each year maximizes your tax benefits."
+  },
+  {
+    question: "How much tax can I save with a 3rd pillar?",
+    answer: "Tax savings vary based on your income, marital status, and canton of residence. Annual savings typically range from CHF 1,500-2,500 for middle-income individuals, CHF 2,500-3,500 for higher-income individuals, and CHF 3,000-7,000 for self-employed persons without a 2nd pillar."
   },
   {
     question: "When can I withdraw my 3rd pillar funds?",
-    answer: "Regular withdrawal is possible 5 years before reaching AHV retirement age. Early withdrawal is allowed for: buying property, starting a business, moving abroad permanently, or switching to self-employment."
+    answer: "Regular withdrawal is possible 5 years before or after reaching AHV retirement age. Early withdrawal is allowed for: buying your primary residence, starting a business, moving abroad permanently, switching to self-employment, or if you qualify for a full disability pension."
   },
   {
-    question: "How much should I contribute to my 3rd pillar?",
-    answer: "For employed persons, the maximum tax-deductible amount in 2025 is 7,056 CHF. For self-employed persons without a 2nd pillar, it's up to 20% of net income or maximum 35,280 CHF. Contributing the maximum amount optimizes tax benefits."
+    question: "Should I choose a bank or insurance 3a solution?",
+    answer: "Bank solutions offer more flexibility, transparency, lower fees, and easier liquidity but no risk protection. Insurance solutions provide disability/death coverage and guaranteed returns but with higher fees, less flexibility, and potential surrender penalties. Most international residents find bank-based solutions with securities investments provide the best balance of performance potential and flexibility."
+  },
+  {
+    question: "Can I have multiple 3rd pillar accounts?",
+    answer: "Yes, you can open multiple Pillar 3a accounts with different providers. Benefits include tax optimization through staggered withdrawals at retirement, diversification across providers and investment strategies, and flexibility in withdrawal planning. The total contributions across all accounts cannot exceed the annual maximum limit."
+  },
+  {
+    question: "What happens to my 3rd pillar if I leave Switzerland?",
+    answer: "When moving outside EU/EFTA, you can withdraw your entire Pillar 3a balance, subject to withholding tax. When moving to EU/EFTA countries, rules are more complex and depend on whether you remain subject to Swiss social security. Alternatively, you can leave your Pillar 3a in Switzerland until retirement age."
   }
 ];
 ---
 
 <Layout
-  title="3rd Pillar Pension Guide Switzerland | Expert Advice 2025"
-  description="Complete guide to 3rd pillar pension planning in Switzerland. Learn about tax benefits, investment options, and how to optimize your retirement savings."
+  title="Swiss 3rd Pillar Pension System | Complete Guide 2025"
+  description="Expert guide to the Swiss 3rd pillar pension system. Maximize tax benefits, compare bank vs. insurance solutions, and optimize your retirement savings strategy."
 >
   <!-- Schema.org markup -->
   <script type="application/ld+json" slot="head">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Understanding the Swiss 3rd Pillar Pension System",
-  "description": "Comprehensive guide to the Swiss 3rd pillar pension system, including tax benefits, investment options, and retirement planning strategies.",
-  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp",
-  "datePublished": "2025-01-15",
-  "dateModified": "2025-01-15",
+  "headline": "Swiss 3rd Pillar Pension System: Complete Guide (2025)",
+  "description": "Comprehensive guide to the Swiss 3rd pillar pension system, including tax benefits, investment strategies, provider comparisons, and optimization techniques for international residents.",
+  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375508/a-minimalist-sketch-illustration-of-an-o_t00FYlMGRGSGCrUU6rHxgw_HCDq44XJTc-SVB-lDenfiQ_wigsiz.webp",
+  "datePublished": "2025-05-01",
+  "dateModified": "2025-05-01",
   "author": {
     "@type": "Organization",
     "name": "Expat Savvy"
@@ -132,15 +280,23 @@ const faqs = [
         "name": "What's the difference between Pillar 3a and 3b?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Pillar 3a is a restricted pension plan with tax benefits and annual contribution limits (6,826 CHF for employed persons, 34,128 CHF for self-employed). Pillar 3b is unrestricted private savings with no limits but fewer tax advantages."
+          "text": "Pillar 3a is a restricted pension plan with tax benefits and annual contribution limits (CHF 7,056 for employed persons, CHF 35,280 for self-employed) for 2025. Pillar 3b is unrestricted private savings with no limits but fewer tax advantages."
         }
       },
       {
         "@type": "Question",
-        "name": "How do I start a 3rd pillar account?",
+        "name": "How much can I contribute to my 3rd pillar in 2025?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can open a 3rd pillar account with any Swiss bank or insurance company. We recommend comparing different providers to find the best solution for your needs. Our experts can help you understand the options and set up your account."
+          "text": "For 2025, the maximum contribution limits are: Employed persons with a 2nd pillar: CHF 7,056 per year; Self-employed without a 2nd pillar: 20% of net income up to CHF 35,280 per year. Contributing the maximum amount each year maximizes your tax benefits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When can I withdraw my 3rd pillar funds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Regular withdrawal is possible 5 years before or after reaching AHV retirement age. Early withdrawal is allowed for: buying your primary residence, starting a business, moving abroad permanently, switching to self-employment, or if you qualify for a full disability pension."
         }
       }
     ]
@@ -152,8 +308,8 @@ const faqs = [
   <div class="relative bg-white overflow-hidden">
     <div class="absolute inset-0">
       <img 
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
-        alt="Swiss mountains"
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375508/a-minimalist-sketch-illustration-of-an-o_t00FYlMGRGSGCrUU6rHxgw_HCDq44XJTc-SVB-lDenfiQ_wigsiz.webp"
+        alt="3rd pillar pension illustration"
         class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
@@ -162,11 +318,11 @@ const faqs = [
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
       <div class="text-center">
         <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-          <span class="block">3rd Pillar Pension</span>
-          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+          <span class="block">Swiss 3rd Pillar</span>
+          <span class="block mt-2">Pension <span class="text-primary-500">System</span></span>
         </h1>
         <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
-          Optimize your retirement savings with Switzerland's voluntary pension system. Learn about tax benefits and investment options.
+          Maximize tax benefits and secure your financial future with Switzerland's voluntary pension system. Expert guidance for international residents.
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
@@ -182,16 +338,43 @@ const faqs = [
             href="#compare"
             class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
-            Compare Options
+            Compare Providers
           </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Features Section -->
+  <!-- Introduction Section -->
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Understanding the Swiss Three-Pillar System</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Switzerland's pension system is built on three complementary pillars, with the 3rd pillar being your personal, voluntary retirement provision that offers significant tax advantages while securing your financial future.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">1st Pillar: State Pension</h3>
+            <p class="text-gray-600">Mandatory social security providing basic coverage. Maximum CHF 29,400 annually for individuals (2025).</p>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">2nd Pillar: Occupational Pension</h3>
+            <p class="text-gray-600">Employer-based pension system to supplement the state pension. Mandatory for employees earning over CHF 22,050 annually.</p>
+          </div>
+          <div class="bg-primary-50 rounded-lg p-6 border-2 border-primary-500">
+            <h3 class="text-xl font-semibold text-primary-700 mb-3">3rd Pillar: Private Pension</h3>
+            <p class="text-gray-600">Voluntary private savings with significant tax advantages. Essential for maintaining your standard of living in retirement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Key Benefits of the 3rd Pillar</h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         {features.map(feature => (
           <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
@@ -217,8 +400,8 @@ const faqs = [
             <p class="text-gray-600 mb-4">{type.description}</p>
             <ul class="space-y-2">
               {type.features.map(feature => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <li class="flex items-start text-sm text-gray-500">
+                  <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
                   {feature}
@@ -227,6 +410,139 @@ const faqs = [
             </ul>
           </div>
         ))}
+      </div>
+      
+      <!-- Tax Benefits Callout -->
+      <div class="mt-12 bg-primary-50 border-l-4 border-primary-500 p-6 rounded-r-lg">
+        <h3 class="text-xl font-semibold text-primary-800 mb-3">2025 Contribution Limits & Tax Benefits</h3>
+        <p class="text-gray-600 mb-4">
+          For 2025, you can contribute up to <strong>CHF 7,056</strong> if you're employed with a 2nd pillar, or <strong>up to 20% of your net income (maximum CHF 35,280)</strong> if you're self-employed without a 2nd pillar. These contributions are fully tax-deductible, potentially saving you thousands in taxes annually.
+        </p>
+        <p class="text-gray-600">
+          The tax savings depend on your income level and canton, but typically range from <strong>CHF 1,500-3,500 annually</strong> for employed persons and <strong>CHF 3,000-7,000</strong> for self-employed individuals without a 2nd pillar.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bank vs. Insurance 3a -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Bank vs. Insurance 3a Solutions</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {bankVsInsurance.map(solution => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-gray-100 px-6 py-4">
+              <h3 class="text-xl font-semibold text-gray-900">{solution.type}</h3>
+            </div>
+            <div class="p-6">
+              <div class="mb-6">
+                <h4 class="text-lg font-medium text-green-600 mb-3 flex items-center">
+                  <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  Advantages
+                </h4>
+                <ul class="space-y-2">
+                  {solution.advantages.map(item => (
+                    <li class="flex items-start text-sm text-gray-600">
+                      <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium text-red-600 mb-3 flex items-center">
+                  <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                  </svg>
+                  Disadvantages
+                </h4>
+                <ul class="space-y-2">
+                  {solution.disadvantages.map(item => (
+                    <li class="flex items-start text-sm text-gray-600">
+                      <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="mt-8 text-center">
+        <p class="text-gray-600 text-lg mb-6">
+          For most international residents, bank-based 3a solutions with securities investments often provide the best combination of flexibility, performance potential, and cost-efficiency, especially if you already have adequate insurance coverage through other policies.
+        </p>
+        <button
+          onclick="showConsultationModal()"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow"
+        >
+          Get Personalized Advice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Early Withdrawal -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Early Withdrawal Options</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-primary-500 mb-4">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Home Ownership</h3>
+          <p class="text-gray-600">Purchase, build or renovate your primary residence, repay mortgage, or acquire housing cooperative shares.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-primary-500 mb-4">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Self-Employment</h3>
+          <p class="text-gray-600">Starting self-employment as your main occupation or changing to a substantially different self-employed activity.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-primary-500 mb-4">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Leaving Switzerland</h3>
+          <p class="text-gray-600">Permanently emigrating from Switzerland (different rules apply for EU/EFTA destinations).</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-primary-500 mb-4">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Disability</h3>
+          <p class="text-gray-600">Qualifying for a full disability pension from Swiss disability insurance (IV/AI) with at least 70% disability.</p>
+        </div>
+      </div>
+      
+      <div class="mt-12 bg-orange-50 border-l-4 border-orange-500 p-6 rounded-r-lg">
+        <h3 class="text-xl font-semibold text-orange-800 mb-3">Tax Implications of Early Withdrawal</h3>
+        <p class="text-gray-600">
+          Early withdrawals are subject to special capital withdrawal taxation at reduced rates, separate from your ordinary income. Rates vary by canton and withdrawal amount, typically ranging from 2-10% depending on the amount and location.
+        </p>
       </div>
     </div>
   </div>
@@ -248,6 +564,149 @@ const faqs = [
     </div>
   </div>
 
+  <!-- For International Residents -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">For International Residents</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Moving to Switzerland</h3>
+          <p class="text-gray-600 mb-4">
+            As a newcomer to Switzerland, setting up a 3rd pillar should be one of your financial priorities after arranging mandatory insurance.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Start contributing as soon as you have a residence permit
+            </li>
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Choose providers with English support and digital platforms
+            </li>
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Consider your long-term plans in Switzerland
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Working in Switzerland</h3>
+          <p class="text-gray-600 mb-4">
+            If you're already established in Switzerland, optimizing your 3rd pillar strategy can lead to significant benefits.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Maximize annual contributions for tax optimization
+            </li>
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Consider multiple accounts for better flexibility
+            </li>
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Review your investment strategy annually
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Leaving Switzerland</h3>
+          <p class="text-gray-600 mb-4">
+            If you plan to leave Switzerland, understanding your 3rd pillar options is crucial for tax and financial planning.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Different rules for EU/EFTA vs. non-EU/EFTA destinations
+            </li>
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Withholding tax considerations for withdrawals
+            </li>
+            <li class="flex items-start text-sm text-gray-500">
+              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Option to maintain your 3rd pillar if returning later
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resource Links -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Additional Resources</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <a href="/pension-planning" class="group">
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors h-full">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">Swiss Pension System</h3>
+            <p class="text-gray-600 mb-4">
+              Understand how all three pillars work together to secure your retirement in Switzerland.
+            </p>
+            <span class="text-primary-600 font-medium inline-flex items-center">
+              Learn more
+              <svg class="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </div>
+        </a>
+        
+        <a href="/living-in-switzerland" class="group">
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors h-full">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">Living in Switzerland</h3>
+            <p class="text-gray-600 mb-4">
+              Get insights on finances, taxation, and financial planning for expatriates in Switzerland.
+            </p>
+            <span class="text-primary-600 font-medium inline-flex items-center">
+              Learn more
+              <svg class="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </div>
+        </a>
+        
+        <a href="/insurance-guides/family-insurance-planning" class="group">
+          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors h-full">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">Family Financial Planning</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive approaches to secure your family's financial future in Switzerland.
+            </p>
+            <span class="text-primary-600 font-medium inline-flex items-center">
+              Learn more
+              <svg class="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- CTA Section -->
   <div class="bg-primary-600">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -256,7 +715,7 @@ const faqs = [
           Ready to optimize your retirement savings?
         </h2>
         <p class="mt-4 text-xl text-primary-100">
-          Get expert guidance to make the most of your 3rd pillar
+          Get expert guidance tailored to your specific situation as an international resident in Switzerland
         </p>
         <div class="mt-8">
           <button
