@@ -320,44 +320,6 @@ const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "htt
     }, null, 2)} />
   )}
 
-  <!-- Add AggregateRating and FAQ Schema if available -->
-  {Astro.props.aggregateRating && (
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": Astro.url
-      },
-      "headline": Astro.props.title,
-      "description": Astro.props.description,
-      "image": Astro.props.image,
-      "author": {
-        "@type": "Person",
-        "name": Astro.props.author
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Expat Savvy",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-          "width": 600,
-          "height": 60
-        }
-      },
-      "datePublished": Astro.props.publishDate,
-      "dateModified": Astro.props.modifiedDate || Astro.props.publishDate,
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": Astro.props.aggregateRating.ratingValue || "4.8",
-        "ratingCount": Astro.props.aggregateRating.ratingCount || "27",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
-    })} />
-  )}
-
   <!-- Add FAQ Schema if available -->
   {Astro.props.faqs && Astro.props.faqs.length > 0 && (
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -394,43 +356,9 @@ const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "htt
             s.classList.add('text-gray-300');
           }
         });
-
-        // Update schema rating
-        updateSchemaRating(rating);
       });
     });
   });
-
-  function updateSchemaRating(rating: number) {
-    // Get all JSON-LD scripts
-    const schemas = document.querySelectorAll('script[type="application/ld+json"]');
-    
-    // Find the BlogPosting schema
-    schemas.forEach(schema => {
-      try {
-        const content = schema.textContent || '{}';
-        if (!content.trim()) return;
-        
-        const data = JSON.parse(content);
-        if (data && data['@type'] === 'BlogPosting') {
-          // Add or update aggregateRating
-          data.aggregateRating = {
-            '@type': 'AggregateRating',
-            ratingValue: rating,
-            bestRating: 5,
-            worstRating: 1,
-            ratingCount: 1
-          };
-          
-          // Replace the content with the updated JSON
-          const updatedContent = JSON.stringify(data, null, 2);
-          schema.textContent = updatedContent;
-        }
-      } catch (error) {
-        console.error('Error updating schema rating:', error);
-      }
-    });
-  }
 </script>
 
 <style>

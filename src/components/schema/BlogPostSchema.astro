@@ -8,10 +8,6 @@ interface Props {
   publishDate?: string;
   modifiedDate?: string;
   url?: string;
-  aggregateRating?: {
-    ratingValue: string;
-    ratingCount: string;
-  };
   faqs?: Array<{
     question: string;
     answer: string;
@@ -26,10 +22,6 @@ const {
   publishDate, 
   modifiedDate = publishDate,
   url = Astro.url.href,
-  aggregateRating = {
-    ratingValue: "4.8",
-    ratingCount: "27"
-  },
   faqs = []
 } = Astro.props;
 
@@ -62,14 +54,7 @@ const schema = {
     }
   },
   "datePublished": publishDate,
-  "dateModified": modifiedDate,
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": aggregateRating.ratingValue,
-    "ratingCount": aggregateRating.ratingCount,
-    "bestRating": "5",
-    "worstRating": "1"
-  }
+  "dateModified": modifiedDate
 };
 ---
 
