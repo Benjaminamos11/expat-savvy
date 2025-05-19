@@ -9,9 +9,9 @@ This document outlines the specific tasks, responsible parties, and deadlines fo
 - [x] Implement proper canonical URL handling
 - [x] Add redirects for broken links
 - [x] Create missing pages (supplementary insurance glossary)
-- [ ] Fix all remaining broken internal links across the site
-- [ ] Implement 404 tracking to catch future broken links
-- [ ] Update contact links across all content to point to /free-consultation
+- [x] Fix all remaining broken internal links across the site
+- [x] Implement 404 tracking to catch future broken links
+- [x] Update contact links across all content to point to /free-consultation
 - [ ] Check all CTAs to ensure they point to active pages
 
 ### Content Quick Wins
@@ -24,7 +24,7 @@ This document outlines the specific tasks, responsible parties, and deadlines fo
 ### Analytics Setup
 - [ ] Set up internal link click tracking
 - [ ] Create custom dashboard for content performance monitoring
-- [ ] Set up alerts for broken links and crawl errors
+- [x] Set up alerts for broken links and crawl errors
 - [ ] Implement proper UTM tracking for social media and newsletter links
 
 ## Weeks 3-6: Short-Term Improvements
