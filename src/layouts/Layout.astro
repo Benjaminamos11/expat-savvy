@@ -17,7 +17,7 @@ interface Props {
   description: string;
   type?: string;
   image?: string;
-  canonicalURL?: string;
+  canonicalURLProp?: string | null;
 }
 
 const { 
@@ -25,8 +25,17 @@ const {
   description, 
   type = "website",
   image = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp",
-  canonicalURL = Astro.url.href
+  canonicalURLProp = null
 } = Astro.props;
+
+// Ensure canonical URL is absolute and doesn't contain duplicate paths
+let canonicalPath = Astro.url.pathname;
+// Remove trailing slash if it exists (except for the homepage)
+if (canonicalPath !== "/" && canonicalPath.endsWith("/")) {
+  canonicalPath = canonicalPath.slice(0, -1);
+}
+// Construct the full canonical URL, using prop value if provided
+const canonicalURL = canonicalURLProp || new URL(canonicalPath, Astro.site || "https://expat-savvy.ch").toString();
 
 // Define CDN URLs
 const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";

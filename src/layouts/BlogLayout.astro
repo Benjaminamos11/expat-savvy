@@ -19,6 +19,9 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
 
 // Use the socialImage if available, otherwise use the original image
 const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
+
+// Use canonical URL from frontmatter if available
+const canonicalURL = frontmatter.canonical || undefined;
 ---
 
 <BaseLayout 
@@ -27,6 +30,7 @@ const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "htt
   type="article"
   publishDate={frontmatter.date}
   image={imageForSocialMedia}
+  canonicalURLProp={canonicalURL}
 >
   <!-- Add social media image conversion for proper Facebook sharing -->
   <SocialMediaImage 
@@ -228,100 +232,8 @@ const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "htt
     url={Astro.url.href}
   />
 
-  <!-- Gym-specific FAQ Schema Markup -->
-  {frontmatter.title && frontmatter.title.toLowerCase().includes("gym") && (
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      'mainEntity': [
-        {
-          '@type': 'Question',
-          'name': 'What insurance pays the most for the gym?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'SWICA pays up to 1300 CHF per year for gym memberships with the right supplementary coverage. See https://expat-savvy.ch/healthcare/all-insurances/swica for details.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'How much does a gym membership cost in Switzerland?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Gym memberships in Switzerland typically range from 80-150 CHF per month, with premium facilities costing up to 200 CHF. Many insurance companies offer partial reimbursement through supplementary coverage.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'Which Swiss health insurance covers fitness activities?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Most Swiss health insurance providers offer supplementary coverage for fitness activities. Popular options include SWICA, CSS, and Helsana, each with different coverage levels and requirements.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'Do I need a doctor\'s prescription for gym coverage?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Yes, most insurance providers require a doctor\'s prescription stating that regular exercise is beneficial for your health. This prescription needs to be renewed annually.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'What types of fitness activities are covered by Swiss insurance?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Swiss health insurance typically covers gym memberships, fitness classes, swimming, and other structured fitness activities. Coverage varies by provider and plan.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'How do I claim gym reimbursement from my Swiss insurance?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'To claim gym reimbursement, you\'ll need to submit your gym membership receipt, doctor\'s prescription, and proof of regular attendance. Most insurers process claims quarterly or annually.'
-          }
-        }
-      ]
-    }, null, 2)} />
-  )}
-
-  <!-- Dynamic FAQ Schema for better SEO for all non-gym posts -->
-  {frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && (
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      'mainEntity': [
-        {
-          '@type': 'Question',
-          'name': `What should expats know about ${(frontmatter.title || '').split(':')[0] || ''}?`,
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': frontmatter.description || `Learn everything about ${frontmatter.title || 'insurance topics'} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'How can expats get personal insurance advice in Switzerland?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Expats can get personalized insurance advice through a free consultation with our experts who specialize in expat insurance needs in Switzerland. Visit https://expat-savvy.ch/free-consultation for more information.'
-          }
-        },
-        {
-          '@type': 'Question',
-          'name': 'Is insurance mandatory for expats in Switzerland?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Yes, health insurance (KVG/LAMal) is mandatory for all residents in Switzerland, including expats. You must obtain coverage within three months of arrival, and it is retroactive to your arrival date.'
-          }
-        }
-      ]
-    }, null, 2)} />
-  )}
-
-  <!-- Add FAQ Schema if available -->
-  {Astro.props.faqs && Astro.props.faqs.length > 0 && (
+  <!-- FAQPage Schema Markup - Only include one FAQPage schema per page -->
+  {frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && Astro.props.faqs && Astro.props.faqs.length > 0 ? (
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -334,6 +246,39 @@ const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "htt
         }
       }))
     })} />
+  ) : (
+    frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+          {
+            '@type': 'Question',
+            'name': `What should expats know about ${(frontmatter.title || '').split(':')[0] || ''}?`,
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': frontmatter.description || `Learn everything about ${frontmatter.title || 'insurance topics'} for expats in Switzerland on our comprehensive guide at Expat Savvy.`
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'How can expats get personal insurance advice in Switzerland?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Expats can get personalized insurance advice through a free consultation with our experts who specialize in expat insurance needs in Switzerland. Visit https://expat-savvy.ch/free-consultation for more information.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Is insurance mandatory for expats in Switzerland?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Yes, health insurance (KVG/LAMal) is mandatory for all residents in Switzerland, including expats. You must obtain coverage within three months of arrival, and it is retroactive to your arrival date.'
+            }
+          }
+        ]
+      }, null, 2)} />
+    )
   )}
 </BaseLayout>
 

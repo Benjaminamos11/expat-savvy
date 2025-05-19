@@ -73,8 +73,8 @@ ${pages
       path = path.replace('src/', '');
     }
     
-    // Skip any paths containing 'draft' or starting with an underscore
-    if (path.includes('draft') || path.startsWith('_')) {
+    // Skip any paths containing 'draft', starting with an underscore, or containing dynamic route patterns
+    if (path.includes('draft') || path.startsWith('_') || path.includes('[...') || path.includes('[')) {
       return '';
     }
 

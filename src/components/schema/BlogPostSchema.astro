@@ -58,19 +58,4 @@ const schema = {
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)}></script>
-
-{faqs && faqs.length > 0 && (
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  }, null, 2)}></script>
-)} 
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)}></script> 
