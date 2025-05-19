@@ -439,37 +439,4 @@ For additional guidance on specific aspects of your relocation journey, explore 
     "@id": "https://expat-savvy.ch/blog/hidden-costs-zurich-relocation-budget-planning-expats"
   }
 }
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What are the major hidden costs when relocating to Zurich?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Beyond obvious expenses like rent, major hidden costs when relocating to Zurich include: ancillary costs (Nebenkosten) adding 10-20% to base rent; initial setup costs like security deposits (typically three months' rent) and agency fees; mandatory health insurance premiums (CHF 350-600 monthly per adult); high costs for childcare (CHF 2,000-2,500 monthly) or international schools (CHF 25,000-40,000 annually); language courses for integration; home setup costs including appliances that often aren't included in rentals; and complex tax obligations that may require professional assistance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much money should I budget for initial relocation expenses to Zurich?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For initial relocation expenses to Zurich, budget approximately CHF 15,000-25,000 for a single professional or CHF 25,000-40,000 for a family of four, excluding shipping and temporary housing. This should cover security deposits (three months' rent), first month's rent, agency fees, residence permit costs, health insurance initiation, home setup essentials, and initial living expenses. If using professional relocation services, add CHF 5,000-15,000 depending on service level. Temporary accommodation may require an additional CHF 3,000-6,000 monthly until permanent housing is secured."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are the typical monthly living expenses for a professional in Zurich?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A professional in Zurich should budget approximately CHF 5,000-7,000 monthly for living expenses. This typically includes: rent for a one-bedroom apartment (CHF 1,800-2,500), utilities and ancillary costs (CHF 200-400), mandatory health insurance (CHF 350-600), food and groceries (CHF 600-900), transportation (CHF 85-300 depending on choices), communications/internet (CHF 100-200), leisure activities (CHF 300-600), and miscellaneous expenses. Higher-end lifestyles or larger accommodations can easily push this total to CHF 8,000-10,000 monthly."
-      }
-    }
-  ]
-}
 </script> 
