@@ -94,7 +94,7 @@ To bridge any gaps, especially if you are between jobs or leaving Switzerland, y
 
 Navigating the Swiss insurance system can seem complex, but understanding the basics of accident insurance (UVG/LAA) is vital for every expat working in Switzerland. It provides essential financial protection against both workplace and leisure-time accidents. Ensure you understand your coverage through your employer, and if you are in a situation where employer-based coverage does not apply (e.g., self-employed, working limited hours, or unemployed), make sure to secure adequate accident coverage through your health insurance or a private policy.
 
-Being well-informed about your insurance coverage will allow you to enjoy all that Switzerland has to offer with greater peace of mind. For any questions, [contact us](/contact).
+Being well-informed about your insurance coverage will allow you to enjoy all that Switzerland has to offer with greater peace of mind. For any questions, [contact us](/free-consultation).
 
 *Disclaimer: This article provides general information about Swiss accident insurance. Specific policy details and conditions can vary. Always refer to your insurance provider and official Swiss government resources for precise and up-to-date information.*
 

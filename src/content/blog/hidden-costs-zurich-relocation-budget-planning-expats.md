@@ -16,7 +16,7 @@ This comprehensive guide reveals the complete financial picture of relocating to
 
 <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
   <h3 class="font-bold text-blue-800">Good to Know: Insurance Planning is Essential</h3>
-  <p>Health insurance is mandatory in Switzerland and must be arranged within 3 months of arrival. <a href="/contact">Contact Expat Savvy</a> early to understand coverage requirements and avoid penalties.</p>
+  <p>Health insurance is mandatory in Switzerland and must be arranged within 3 months of arrival. <a href="/free-consultation">Contact Expat Savvy</a> early to understand coverage requirements and avoid penalties.</p>
 </div>
 
 ## Initial Relocation Expenses: The Upfront Investment
@@ -259,7 +259,7 @@ Managing money in Switzerland:
 <div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
   <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Plan Your Zurich Relocation Budget?</h3>
   <p class="mb-4">Let Expat Savvy help you secure the right insurance coverage for your new life in Switzerland.</p>
-  <a href="/contact" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
+  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
 </div>
 
 ## Social Integration and Lifestyle Adaptation

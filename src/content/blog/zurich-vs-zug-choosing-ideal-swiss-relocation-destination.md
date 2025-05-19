@@ -15,7 +15,7 @@ This comprehensive comparison guide examines the key differences and similaritie
 
 <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
   <h3 class="font-bold text-blue-800">Good to Know: Insurance Needs in Both Locations</h3>
-  <p>Health insurance is mandatory throughout Switzerland regardless of whether you choose Zurich or Zug. <a href="/contact">Contact Expat Savvy</a> for personalized advice on selecting the right coverage for your specific situation.</p>
+  <p>Health insurance is mandatory throughout Switzerland regardless of whether you choose Zurich or Zug. <a href="/free-consultation">Contact Expat Savvy</a> for personalized advice on selecting the right coverage for your specific situation.</p>
 </div>
 
 ## Economic Landscape: Business Opportunities and Professional Environment
@@ -285,7 +285,7 @@ Opportunities for healthy living:
 <div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
   <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Choose Your Swiss Destination?</h3>
   <p class="mb-4">Let Expat Savvy help you secure the right insurance coverage for your new life in Switzerland.</p>
-  <a href="/contact" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
+  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
 </div>
 
 ## Making Your Decision: Key Considerations

@@ -45,7 +45,7 @@ While the cost of living is undeniably high, the corresponding quality of life, 
 
 <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
   <h3 class="font-bold text-blue-800">Good to Know: Insurance Needs When Moving to Zurich</h3>
-  <p>Health insurance is mandatory in Switzerland and must be arranged within 3 months of arrival. <a href="/contact">Contact Expat Savvy</a> early to ensure you have proper coverage that meets Swiss legal requirements.</p>
+  <p>Health insurance is mandatory in Switzerland and must be arranged within 3 months of arrival. <a href="/free-consultation">Contact Expat Savvy</a> early to ensure you have proper coverage that meets Swiss legal requirements.</p>
 </div>
 
 ## Planning Your Zurich Relocation: A Timeline Approach
@@ -349,7 +349,7 @@ Anticipating potential difficulties will help you navigate them more effectively
 <div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
   <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Start Your Zurich Journey?</h3>
   <p class="mb-4">Let Expat Savvy help you secure the right insurance coverage for your new life in Switzerland.</p>
-  <a href="/contact" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
+  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
 </div>
 
 ## Conclusion: Your Successful Zurich Relocation

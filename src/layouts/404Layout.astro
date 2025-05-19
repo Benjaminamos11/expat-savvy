@@ -1,0 +1,39 @@
+<script>
+  // 404 Page Tracking for Google Analytics
+  // This script sends a pageview event to Google Analytics with the URL that caused the 404
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the URL that caused the 404
+    const currentURL = window.location.pathname;
+    const referrer = document.referrer;
+    
+    // Check if Google Analytics is available
+    // @ts-ignore - gtag is a global function provided by Google Analytics
+    if (typeof window.gtag === 'function') {
+      // Send event to Google Analytics
+      // @ts-ignore
+      window.gtag('event', '404_error', {
+        'event_category': '404 Error',
+        'event_label': currentURL,
+        'event_referrer': referrer || 'direct'
+      });
+    // @ts-ignore - ga is a global function provided by older versions of Google Analytics
+    } else if (typeof window.ga === 'function') {
+      // Fallback for older GA
+      // @ts-ignore
+      window.ga('send', {
+        hitType: 'event',
+        eventCategory: '404 Error',
+        eventAction: currentURL,
+        eventLabel: referrer || 'direct'
+      });
+    }
+    
+    // Log to console for debugging
+    console.log('404 Error tracked:', {
+      url: currentURL,
+      referrer: referrer || 'direct'
+    });
+  });
+</script>
+
+</Layout> 

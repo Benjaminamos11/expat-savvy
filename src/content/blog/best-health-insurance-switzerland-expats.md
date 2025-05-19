@@ -11,7 +11,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746902865/a-detailed
 
 Welcome to Switzerland! As an expat, navigating the Swiss health insurance system can seem daunting. It's a high-quality system, but its intricacies, from mandatory requirements to various models and supplementary options, can be complex. This ultimate guide is designed to demystify Swiss health insurance for you, helping you understand your obligations, choose the best coverage tailored to your unique needs, and potentially save money in the process. We'll explore top providers like Swica, Sanitas, CSS, Helsana, and Concordia, and delve into how to secure coverage that truly supports your life in Switzerland, whether you're a frequent traveler, a fitness enthusiast, or managing a family's health.
 
-For personalized advice, you can always [contact us](/contact) at Expat Savvy.
+For personalized advice, you can always [contact us](/free-consultation) at Expat Savvy.
 
 ## 1. Understanding the Swiss Health Insurance System: The Basics
 
@@ -173,7 +173,7 @@ While online tools are helpful, navigating the Swiss insurance landscape, especi
 
 - **Assistance with Applications**: They can help you complete application forms correctly, especially important for supplementary insurance.
 
-At Expat Savvy, we specialize in helping expats find the right insurance solutions. [Get in touch](/contact) for a no-obligation consultation.
+At Expat Savvy, we specialize in helping expats find the right insurance solutions. [Get in touch](/free-consultation) for a no-obligation consultation.
 
 ## 7. Conclusion: Making an Informed Choice for Peace of Mind
 
