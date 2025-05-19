@@ -99,7 +99,7 @@ Switzerland offers diverse regions with distinct characteristics. Your choice of
 - **Zug**: Popular for its low tax rates and growing business community, particularly attractive for entrepreneurs and executives. Learn more in our [Relocating to Zug: The Insider's Guide](/blog/relocation-zug-insiders-guide-business-paradise/).
 - **Lausanne**: University city with beautiful lake views and strong education sector.
 
-For a detailed comparison of two popular destinations, see our guide on [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](https://expat-savvy.ch/guides/relocation/zurich-vs-zug-comparison/).
+For a detailed comparison of two popular destinations, see our guide on [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/).
 
 ### Factors to Consider When Choosing a Location
 
@@ -418,8 +418,8 @@ By approaching your Swiss relocation with thorough preparation and realistic exp
 For additional guidance on specific aspects of your relocation journey, explore our related resources:
 - [Relocation Zurich: The Expat's Ultimate Guide](/blog/relocation-zurich-ultimate-guide-financial-hub/)
 - [Relocating to Zug: The Insider's Guide](/blog/relocation-zug-insiders-guide-business-paradise/)
-- [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/guides/relocation/zurich-vs-zug-comparison/)
-- [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/guides/relocation/zurich-relocation-costs/)
+- [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/)
+- [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/)
 
 ---
 

@@ -96,7 +96,7 @@ A5: We analyze your individual situation, explain the pros and cons of each mode
 
 Understanding how deductibles and insurance models work is fundamental to managing your health insurance costs effectively as an expat in Switzerland. By carefully assessing your health needs, risk tolerance, and budget, and by comparing the options intelligently, you can make choices that provide both peace of mind and financial prudence.
 
-For personalized advice on optimizing your health insurance costs, [contact us](/contact) at Expat Savvy.
+For personalized advice on optimizing your health insurance costs, [contact us](/free-consultation) at Expat Savvy.
 
 Compare specific provider offerings on our Hub Page:
 

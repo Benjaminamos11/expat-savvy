@@ -73,7 +73,7 @@ Housing represents the largest expense in both locations:
 - **New developments**: Both have active construction, with Zug seeing proportionally more growth
 - **Application competition**: Equally competitive markets requiring strong applications
 
-For insights into managing relocation costs effectively, see our guide on [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](https://expat-savvy.ch/guides/relocation/zurich-relocation-costs/).
+For insights into managing relocation costs effectively, see our guide on [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/).
 
 ### Taxation Differences
 
@@ -388,7 +388,7 @@ For additional guidance on specific aspects of your relocation journey, explore 
 - [Relocation Zurich: The Expat's Ultimate Guide](/blog/relocation-zurich-ultimate-guide-financial-hub/)
 - [Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise](/blog/relocation-zug-insiders-guide-business-paradise/)
 - [Switzerland Relocation in 2025: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
-- [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/guides/relocation/zurich-relocation-costs/)
+- [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/)
 
 ---
 

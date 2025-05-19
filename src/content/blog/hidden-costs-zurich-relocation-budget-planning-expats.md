@@ -410,6 +410,8 @@ For additional guidance on specific aspects of your relocation journey, explore 
 - [Mandatory Swiss Health Insurance: What Expats Must Know](/health-insurance)
 - [Best Health Insurance Options for Expats in Switzerland](/blog/best-health-insurance-switzerland-expats)
 - [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability)
+- [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination)
+- [Relocation to Zurich: The Expat's Ultimate Guide](/blog/relocation-zurich-ultimate-guide-financial-hub)
 
 <script type="application/ld+json">
 {

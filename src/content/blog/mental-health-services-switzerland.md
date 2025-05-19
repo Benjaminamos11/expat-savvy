@@ -93,7 +93,7 @@ Beyond professional help, actively engaging in self-care and seeking community s
 
 Adjusting to life as an expat in Switzerland comes with its unique set of stressors, and prioritizing your mental health is essential. Switzerland offers a high standard of mental healthcare, and with the recent changes in insurance coverage, accessing psychological psychotherapy has become more straightforward. By understanding the system, knowing your insurance options, and actively seeking support when needed, you can ensure your mental well-being is looked after, allowing you to fully thrive in your Swiss experience.
 
-If you are struggling or simply wish to explore support options, do not hesitate to reach out to a GP or search for a qualified mental health professional. Your well-being is a priority. Feel free to [contact us](/contact) for guidance.
+If you are struggling or simply wish to explore support options, do not hesitate to reach out to a GP or search for a qualified mental health professional. Your well-being is a priority. Feel free to [contact us](/free-consultation) for guidance.
 
 *Disclaimer: This article provides general information. Insurance policies and healthcare regulations can change. Always consult with your insurance provider and relevant healthcare professionals for personalized advice and the most current information.*
 
