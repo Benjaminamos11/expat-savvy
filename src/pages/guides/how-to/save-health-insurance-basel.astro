@@ -1,0 +1,555 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand Basel's health insurance landscape",
+    text: "Learn about Basel's premium rates (among Switzerland's higher-cost regions alongside Zurich and Geneva), canton-specific regulations, and the unique tri-border region factors that affect your insurance costs."
+  },
+  {
+    name: "Check if you qualify for Basel subsidy (Prämienverbilligung)",
+    text: "Basel offers subsidies based on income and family situation. For 2025, individual income thresholds are around CHF 32,000 for individuals, making many residents eligible for assistance."
+  },
+  {
+    name: "Consider cross-border options if you're a Grenzgänger",
+    text: "If you're a cross-border worker commuting from Germany or France, you may have the right to choose between Swiss insurance or coverage in your country of residence, potentially resulting in significant savings."
+  },
+  {
+    name: "Switch to an alternative insurance model",
+    text: "HMO, Family Doctor, and Telmed models can save you 10-20% on premiums. Basel has excellent medical networks, including university hospitals and pharmaceutical industry connections."
+  },
+  {
+    name: "Choose the optimal deductible for your situation",
+    text: "Higher deductibles mean lower monthly premiums. Analyze your healthcare usage to determine if a higher deductible (up to CHF 2,500) makes financial sense given Basel's healthcare costs."
+  },
+  {
+    name: "Compare basic insurance providers in Basel",
+    text: "Premium differences between insurers for identical coverage can reach CHF 1,500+ annually in Basel. Use comparison tools to find the most cost-effective provider for your specific situation."
+  },
+  {
+    name: "Evaluate splitting basic and supplementary insurance",
+    text: "Consider having your basic insurance with the cheapest provider and supplementary coverage with a provider offering better benefits, potentially saving hundreds of francs annually."
+  },
+  {
+    name: "Apply for new insurance coverage by the deadline",
+    text: "Submit applications and cancellations by November 30th for changes effective January 1st. For international residents in Basel, verify if your existing private insurance qualifies for exemption from the Swiss system."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "How can I qualify for health insurance subsidies in Basel?",
+    answer: "To qualify for premium subsidies (Prämienverbilligung) in Basel, your annual income must fall below certain thresholds. For 2025, a single person may qualify with taxable income below approximately CHF 32,000, while a family of four may qualify with income up to CHF 48,000. Basel-Stadt automatically evaluates eligibility based on your tax declaration, but you can also apply directly if your financial situation has changed significantly."
+  },
+  {
+    question: "How much can I save by changing health insurance in Basel?",
+    answer: "Premium differences between the most expensive and cheapest health insurers in Basel can exceed CHF 1,500 annually for identical basic coverage. Combining a provider change with an adjustment to your insurance model (e.g., switching to HMO) and optimizing your deductible can save a typical Basel resident between CHF 800-2,500 per year. Families can potentially save even more by optimizing each family member's coverage separately."
+  },
+  {
+    question: "When should I apply for a higher deductible in Basel?",
+    answer: "If your healthcare costs will likely be lower than the difference between your current premium and the premium with a higher deductible, increasing your deductible makes financial sense. For example, if moving from a 300 CHF to 2,500 CHF deductible saves you 1,500 CHF annually in premiums, you'll benefit if your yearly medical expenses are less than 1,500 CHF. Given Basel's higher-than-average healthcare costs, this calculation is particularly important."
+  },
+  {
+    question: "What are my options as a cross-border worker in Basel?",
+    answer: "As a cross-border worker (Grenzgänger) commuting from Germany or France to Basel, you have the right to choose between Swiss health insurance or coverage in your country of residence. Many cross-border workers find significant savings by opting for German or French insurance while maintaining access to healthcare on both sides of the border. This option must be exercised within three months of starting work in Switzerland."
+  },
+  {
+    question: "Can employees of pharmaceutical companies in Basel get special health insurance arrangements?",
+    answer: "While employees of Basel's numerous pharmaceutical companies don't typically have automatic exemptions like international organization employees in Geneva, many companies offer corporate group insurance plans that provide better rates or enhanced coverage. Check with your employer's HR department to see if your company has negotiated special arrangements with specific insurers."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Basel-specific premium comparison websites",
+    description: "Online tools to compare insurance rates across providers in Basel canton"
+  },
+  {
+    name: "Amt für Sozialbeiträge Basel-Stadt subsidy calculator",
+    description: "Official tool to determine if you qualify for premium reductions in Basel"
+  },
+  {
+    name: "Basel healthcare provider networks directory",
+    description: "Database of doctors, clinics and hospitals in the Basel area"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Personal health information and usage history",
+  "Proof of residence in Basel canton",
+  "Tax assessment or income documentation (for subsidy applications)",
+  "Current insurance policy details (if applicable)",
+  "Details about preferred healthcare providers in Basel",
+  "Swiss ID or residence permit",
+  "Cross-border worker permit (G permit) if applicable"
+];
+
+const savingStrategies = [
+  {
+    strategy: "Basel Premium Subsidies (Prämienverbilligung)",
+    description: "Basel offers subsidies for lower and middle-income residents. For 2025, you may qualify with taxable income up to CHF 32,000 for individuals or CHF 48,000 for families, depending on your situation.",
+    savings: "Can reduce premiums by 25-65% depending on income level"
+  },
+  {
+    strategy: "Cross-Border Insurance Options",
+    description: "If you live in Germany or France but work in Basel, you may have the option to be insured under your country of residence's system rather than the Swiss system, potentially at lower rates.",
+    savings: "Up to 40-50% compared to Swiss premiums for cross-border workers"
+  },
+  {
+    strategy: "Alternative Insurance Models",
+    description: "HMO networks are well-established in Basel, particularly around the University Hospital (Universitätsspital Basel). The Family Doctor model is also popular given Basel's medical community.",
+    savings: "10-20% reduction from standard model premiums"
+  },
+  {
+    strategy: "Optimized Deductible",
+    description: "Given Basel's premium levels, increasing your deductible from CHF 300 to CHF 2,500 can lead to substantial savings, especially if you rarely need medical care.",
+    savings: "15-35% reduction in monthly premiums"
+  }
+];
+
+const baselFactors = [
+  {
+    factor: "Pharmaceutical Hub",
+    explanation: "Basel's status as a global pharmaceutical center creates a healthcare ecosystem with specialist providers and advanced medical facilities."
+  },
+  {
+    factor: "Tri-Border Location",
+    explanation: "Proximity to Germany and France creates unique options for residents and cross-border workers with potential insurance alternatives."
+  },
+  {
+    factor: "University Hospital",
+    explanation: "The presence of the University Hospital and academic medical community influences healthcare costs and service availability."
+  },
+  {
+    factor: "International Population",
+    explanation: "Basel's diverse international community means many insurers offer specialized services and packages catering to expats and multinational company employees."
+  }
+];
+---
+
+<Layout
+  title="How to Save on Health Insurance in Basel | 2025 Cost-Cutting Guide"
+  description="Discover expert strategies to reduce your health insurance premiums in Basel. Learn about cantonal subsidies, cross-border options, and save up to CHF 2,500 annually while maintaining quality healthcare access."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747321356/an-illustration-of-simplified-stylized-_2tNcN3rYRAC9Jdfc_RWtIA_1rOL9n0kRP-Z7Ac6UbO1Qg_gnnmg3.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Save on Health Insurance in Basel"
+    description="A comprehensive guide to reducing health insurance costs in Basel canton, including information about premium subsidies, cost-saving strategies, and optimizing your coverage based on Basel's unique healthcare landscape."
+    totalTime="PT4H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747321356/an-illustration-of-simplified-stylized-_2tNcN3rYRAC9Jdfc_RWtIA_1rOL9n0kRP-Z7Ac6UbO1Qg_gnnmg3.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747321356/an-illustration-of-simplified-stylized-_2tNcN3rYRAC9Jdfc_RWtIA_1rOL9n0kRP-Z7Ac6UbO1Qg_gnnmg3.webp"
+        alt="Saving money on health insurance in Basel with city landmarks"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">How to Save on</span>
+          <span class="block mt-2">Health Insurance in <span class="text-primary-500">Basel</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Expert strategies to cut your health insurance costs while maintaining excellent coverage in Basel's tri-border region.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#saving-strategies"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            View Strategies
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Optimize Your Health Insurance Costs in Basel?</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Basel ranks among Switzerland's higher-cost regions for health insurance, with 2025 average monthly premiums between CHF 375-550 for adults. However, the city's unique position at the intersection of three countries creates special opportunities for cost reduction.
+        </p>
+        <p class="text-lg text-gray-600">
+          This guide explores multiple strategies to significantly reduce your healthcare expenses in Basel, from accessing cantonal subsidies to leveraging cross-border options and optimizing your coverage model. With the right approach, Basel residents can save thousands of francs annually while maintaining access to the region's excellent healthcare system.
+        </p>
+        
+        <div class="mt-6 mb-8">
+          <a href="/news/regional-guides/basel-insurance" class="inline-flex items-center text-primary-600 hover:text-primary-800">
+            <span>See our comprehensive Basel insurance guide for more regional insights</span>
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Basel's Health Insurance Landscape</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            {baselFactors.map(item => (
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-medium text-gray-900 mb-2">{item.factor}</h4>
+                <p class="text-sm text-gray-600">{item.explanation}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cost-Saving Strategies Section -->
+  <div id="saving-strategies" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Basel Health Insurance Saving Strategies</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">These cost-cutting approaches can help you significantly reduce your health insurance premiums while maintaining quality coverage in Basel.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {savingStrategies.map((strategy, index) => (
+          <div class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex flex-col md:flex-row md:items-start">
+              <div class="mb-4 md:mb-0 md:mr-6 bg-primary-100 text-primary-700 rounded-full h-16 w-16 flex-shrink-0 flex items-center justify-center">
+                <span class="font-bold text-2xl">{index + 1}</span>
+              </div>
+              <div>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-xl font-semibold text-gray-900">{strategy.strategy}</h3>
+                  <span class="inline-flex items-center px-3 py-1 mt-2 md:mt-0 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    Typical savings: {strategy.savings}
+                  </span>
+                </div>
+                <p class="text-gray-600 mb-4">{strategy.description}</p>
+
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Basel Subsidy Application Process:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>In Basel-Stadt, subsidy eligibility is typically assessed automatically through your tax return</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>New residents or those with changed circumstances can apply directly through Amt für Sozialbeiträge</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Required documents include: residence permit, tax assessment, current insurance policy details</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Subsidies are typically paid directly to your insurer, reducing your monthly premium invoices</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
+                {index === 1 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Cross-Border Options for Basel Residents:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Cross-border workers (with G permits) can choose between Swiss insurance or their home country system</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>German insurance (gesetzliche Krankenversicherung) is often significantly cheaper than Swiss options</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>French insurance (Sécurité sociale) can also provide cost savings for those living in France</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>The choice must be made within 3 months of starting work in Switzerland and is generally binding</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Insurance Models in Basel:</h4>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Model</th>
+                            <th class="py-2 px-3 text-left">Basel Considerations</th>
+                            <th class="py-2 px-3 text-left">Savings</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Standard</td>
+                            <td class="py-2 px-3">Maximum flexibility but highest premiums</td>
+                            <td class="py-2 px-3">None (baseline)</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Family Doctor</td>
+                            <td class="py-2 px-3">Many multilingual GP options in Basel</td>
+                            <td class="py-2 px-3">~10-15%</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">HMO</td>
+                            <td class="py-2 px-3">Strong networks around University Hospital</td>
+                            <td class="py-2 px-3">~15-20%</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Telmed</td>
+                            <td class="py-2 px-3">Popular with international residents, often with English support</td>
+                            <td class="py-2 px-3">~10-15%</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+                
+                {index === 3 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Deductible Savings Calculator:</h4>
+                    <p class="text-sm text-gray-600 mb-4">If your annual healthcare costs are below the "Breakeven" amount, the higher deductible will save you money.</p>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Deductible</th>
+                            <th class="py-2 px-3 text-left">Annual Premium Savings*</th>
+                            <th class="py-2 px-3 text-left">Added Risk</th>
+                            <th class="py-2 px-3 text-left">Breakeven</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3 font-medium">300 CHF</td>
+                            <td class="py-2 px-3">Baseline</td>
+                            <td class="py-2 px-3">0 CHF</td>
+                            <td class="py-2 px-3">N/A</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">500 CHF</td>
+                            <td class="py-2 px-3">~300 CHF</td>
+                            <td class="py-2 px-3">200 CHF</td>
+                            <td class="py-2 px-3">100 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">1,000 CHF</td>
+                            <td class="py-2 px-3">~720 CHF</td>
+                            <td class="py-2 px-3">700 CHF</td>
+                            <td class="py-2 px-3">20 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">1,500 CHF</td>
+                            <td class="py-2 px-3">~900 CHF</td>
+                            <td class="py-2 px-3">1,200 CHF</td>
+                            <td class="py-2 px-3">&lt; 0 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">2,000 CHF</td>
+                            <td class="py-2 px-3">~1,080 CHF</td>
+                            <td class="py-2 px-3">1,700 CHF</td>
+                            <td class="py-2 px-3">&lt; 0 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">2,500 CHF</td>
+                            <td class="py-2 px-3">~1,260 CHF</td>
+                            <td class="py-2 px-3">2,200 CHF</td>
+                            <td class="py-2 px-3">&lt; 0 CHF</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">*Based on Basel average adult premiums. Your actual savings may vary by insurer and personal factors.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Want to Optimize Your Basel Health Insurance?</h3>
+          <p class="text-gray-600 mb-8">Our experts specialize in finding the most cost-effective insurance solutions for Basel residents. We'll analyze your specific situation and help you implement these savings strategies.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get Your Free Savings Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance tailored to Basel's unique insurance landscape.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Special Cases Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Special Situations in Basel</h2>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Cross-Border Workers (Grenzgänger)</h3>
+          <p class="text-gray-600">Basel's position at the tri-border region creates unique insurance options. If you work in Basel but live in Germany or France, you have a choice regarding health insurance under bilateral agreements. Many cross-border workers find significant savings with German or French insurance while maintaining access to Basel's healthcare facilities through special arrangements.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Pharmaceutical Industry Employees</h3>
+          <p class="text-gray-600">Basel is home to major pharmaceutical companies like Roche and Novartis. While their employees don't have automatic exemptions from the Swiss system, many benefit from corporate insurance plans with negotiated group rates or enhanced coverage options. Check with your employer's HR department to see if your company offers special insurance arrangements.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Students in Basel</h3>
+          <p class="text-gray-600">International students studying at the University of Basel or other institutions may qualify for special insurance arrangements or exemptions if they have coverage from their home country that meets Swiss standards. The monthly premium for dedicated student insurance plans can be significantly lower than standard plans, sometimes by 40-50%.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Split Family Insurance Strategies</h3>
+          <p class="text-gray-600">Families in Basel can optimize their insurance by having different family members with different insurers, models, or deductibles based on their health needs. For cross-border families with members living in different countries, this can be particularly beneficial, as each family member might have different optimal insurance arrangements based on their country of residence and healthcare needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step-by-Step Process -->
+  <div id="step-by-step" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process to Reduce Your Costs</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these eight steps to optimize your health insurance and save money in Basel.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to lower your Basel health insurance costs?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts specialize in optimizing insurance for Basel residents and expats
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+          <a
+            href="/news/regional-guides/basel-insurance"
+            class="inline-flex items-center px-6 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-primary-700 transition-colors duration-300"
+          >
+            Explore Basel Insurance Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

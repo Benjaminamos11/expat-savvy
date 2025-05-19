@@ -1,0 +1,522 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import HowToSchema from '../../../components/schema/HowToSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+
+// Define the steps for the how-to guide
+const steps = [
+  {
+    name: "Understand Geneva's health insurance landscape",
+    text: "Learn about Geneva's premium rates (among the highest in Switzerland along with Zurich and Basel), canton-specific regulations, and local healthcare system factors that affect your insurance costs."
+  },
+  {
+    name: "Check if you qualify for Geneva subsidy (Réduction des primes)",
+    text: "Geneva offers subsidies (réduction des primes) based on income and family situation. The income thresholds are higher than many other cantons, making more people eligible for assistance."
+  },
+  {
+    name: "Consider switching to an alternative insurance model",
+    text: "HMO, Family Doctor, and Telmed models can save you 10-20% on premiums. Geneva has excellent medical networks, making these models particularly attractive for cost-conscious residents."
+  },
+  {
+    name: "Choose the optimal deductible for your situation",
+    text: "Higher deductibles mean lower monthly premiums. Analyze your healthcare usage to determine if a higher deductible (up to CHF 2,500) makes financial sense given Geneva's healthcare costs."
+  },
+  {
+    name: "Compare basic insurance providers in Geneva",
+    text: "Premium differences between insurers for identical coverage can reach CHF 2,000+ annually in Geneva. Use comparison tools to find the most cost-effective provider for your specific situation."
+  },
+  {
+    name: "Evaluate splitting basic and supplementary insurance",
+    text: "Consider having your basic insurance with the cheapest provider and supplementary coverage with a provider offering better benefits, potentially saving hundreds of francs annually."
+  },
+  {
+    name: "Review and optimize your supplementary insurance",
+    text: "Many Geneva residents are over-insured with supplementary coverage they rarely use. Audit your needs and consider reducing or eliminating unnecessary supplementary policies."
+  },
+  {
+    name: "Apply for new insurance coverage by the deadline",
+    text: "Submit applications and cancellations by November 30th for changes effective January 1st. For international residents in Geneva, verify if your existing private insurance qualifies for exemption from the Swiss system."
+  }
+];
+
+// Define frequently asked questions
+const faqs = [
+  {
+    question: "How can I qualify for health insurance subsidies in Geneva?",
+    answer: "To qualify for premium subsidies (réduction des primes) in Geneva, your annual income must fall below certain thresholds. For 2025, a single person may qualify with taxable income below approximately CHF 53,000, while a family of four may qualify with income up to CHF 100,000. The Service de l'assurance-maladie (SAM) automatically evaluates eligibility based on your tax declaration, but you can also apply directly if your financial situation has changed significantly."
+  },
+  {
+    question: "How much can I save by changing health insurance in Geneva?",
+    answer: "Premium differences between the most expensive and cheapest health insurers in Geneva can exceed CHF 2,000 annually for identical basic coverage. Combining a provider change with an adjustment to your insurance model (e.g., switching to HMO) and optimizing your deductible can save a typical Geneva resident between CHF 1,000-3,000 per year. Families can potentially save even more by optimizing each family member's coverage separately."
+  },
+  {
+    question: "When should I apply for a higher deductible in Geneva?",
+    answer: "If your healthcare costs will likely be lower than the difference between your current premium and the premium with a higher deductible, increasing your deductible makes financial sense. For example, if moving from a 300 CHF to 2,500 CHF deductible saves you 1,800 CHF annually in premiums, you'll benefit if your yearly medical expenses are less than 1,800 CHF. Given Geneva's high overall healthcare costs, this calculation is particularly important."
+  },
+  {
+    question: "Is it worth having cross-border insurance if I work in Geneva but live in France?",
+    answer: "Yes, for cross-border workers (frontaliers) who commute between Geneva and France, cross-border insurance can be significantly more affordable than standard Swiss insurance. Under bilateral agreements, you can choose to be insured either in Switzerland or France. For many frontaliers, the French system (CMU) offers considerable savings compared to Swiss premiums, while still providing access to Geneva's healthcare system with proper documentation."
+  },
+  {
+    question: "Can international organization employees in Geneva opt out of Swiss health insurance?",
+    answer: "Yes, employees of international organizations based in Geneva (UN, WHO, ILO, etc.) often have access to special health insurance plans through their employers. These can be recognized as equivalent to Swiss mandatory insurance, allowing for exemption from the Swiss system. To obtain this exemption, you must submit your organization's insurance certificate to the Service de l'assurance-maladie (SAM) within three months of arriving in Geneva."
+  }
+];
+
+// Support resources and tools
+const tools = [
+  {
+    name: "Geneva-specific premium comparison websites",
+    description: "Online tools to compare insurance rates across providers in Geneva canton"
+  },
+  {
+    name: "Service de l'assurance-maladie (SAM) subsidy calculator",
+    description: "Official tool to determine if you qualify for premium reductions in Geneva"
+  },
+  {
+    name: "Geneva healthcare provider networks directory",
+    description: "Database of doctors, clinics and hospitals in the Geneva area"
+  }
+];
+
+// Supply items needed
+const supplies = [
+  "Personal health information and usage history",
+  "Proof of residence in Geneva canton",
+  "Tax assessment or income documentation (for subsidy applications)",
+  "Current insurance policy details (if applicable)",
+  "Details about preferred healthcare providers in Geneva",
+  "Swiss ID or residence permit"
+];
+
+const savingStrategies = [
+  {
+    strategy: "Geneva Premium Subsidies (Réduction des primes)",
+    description: "Geneva offers relatively generous subsidies with higher income thresholds than many other cantons. For 2025, you may qualify with taxable income up to CHF 53,000 for individuals or CHF 100,000 for families of four, depending on your situation.",
+    savings: "Can reduce premiums by 30-100% depending on income level"
+  },
+  {
+    strategy: "Alternative Insurance Models",
+    description: "HMO networks are well-established in Geneva, particularly around major medical centers like HUG (Hôpitaux Universitaires de Genève). The Telmed option is increasingly popular among international residents who prefer English-language consultations.",
+    savings: "10-20% reduction from standard model premiums"
+  },
+  {
+    strategy: "Optimized Deductible",
+    description: "Given Geneva's high premium levels, increasing your deductible from CHF 300 to CHF 2,500 can lead to substantial savings, especially if you rarely need medical care.",
+    savings: "15-40% reduction in monthly premiums"
+  },
+  {
+    strategy: "Cross-Border Options for Frontaliers",
+    description: "If you live in France but work in Geneva, you may have the option to be insured under the French system rather than the Swiss system, potentially at lower rates.",
+    savings: "Up to 50% compared to Swiss premiums for cross-border workers"
+  }
+];
+
+const genevaFactors = [
+  {
+    factor: "International Population",
+    explanation: "Geneva's large international community means many insurers offer specialized services and packages catering to expats and international organization employees."
+  },
+  {
+    factor: "Cross-Border Healthcare",
+    explanation: "Proximity to France creates unique options for frontaliers (cross-border workers) who may have alternative insurance arrangements."
+  },
+  {
+    factor: "High Premium Region",
+    explanation: "Geneva has among Switzerland's highest premiums due to its extensive healthcare infrastructure and higher overall costs of living and services."
+  },
+  {
+    factor: "Strong Medical Networks",
+    explanation: "The canton offers excellent HMO networks centered around major institutions like Hôpitaux Universitaires de Genève (HUG)."
+  }
+];
+---
+
+<Layout
+  title="How to Save on Health Insurance in Geneva | 2025 Cost-Cutting Guide"
+  description="Discover expert strategies to reduce your health insurance premiums in Geneva. Learn about cantonal subsidies, optimize your coverage, and save up to CHF 3,000 annually while maintaining quality healthcare access."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747321356/an-illustration-of-simplified-stylized-_2tNcN3rYRAC9Jdfc_RWtIA_1rOL9n0kRP-Z7Ac6UbO1Qg_gnnmg3.webp"
+>
+  <!-- Add schema markup using our components -->
+  <HowToSchema
+    name="How to Save on Health Insurance in Geneva"
+    description="A comprehensive guide to reducing health insurance costs in Geneva canton, including information about premium subsidies, cost-saving strategies, and optimizing your coverage based on Geneva's unique healthcare landscape."
+    totalTime="PT4H"
+    steps={steps}
+    tools={tools}
+    supply={supplies}
+    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747321356/an-illustration-of-simplified-stylized-_2tNcN3rYRAC9Jdfc_RWtIA_1rOL9n0kRP-Z7Ac6UbO1Qg_gnnmg3.webp"
+  />
+
+  <!-- FAQ Schema Component -->
+  <FAQSchema faqs={faqs} />
+
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747321356/an-illustration-of-simplified-stylized-_2tNcN3rYRAC9Jdfc_RWtIA_1rOL9n0kRP-Z7Ac6UbO1Qg_gnnmg3.webp"
+        alt="Saving money on health insurance in Geneva with city landmarks"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">How to Save on</span>
+          <span class="block mt-2">Health Insurance in <span class="text-primary-500">Geneva</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
+          Expert strategies to cut your health insurance costs while maintaining excellent coverage in one of Switzerland's most expensive cantons.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Help
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="#saving-strategies"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            View Strategies
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Do Geneva Health Insurance Costs Need Optimization?</h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Geneva consistently ranks among the most expensive cantons for health insurance in Switzerland, with 2025 average monthly premiums reaching CHF 500-700 for adults. However, this doesn't mean you must simply accept these high costs.
+        </p>
+        <p class="text-lg text-gray-600">
+          This guide explores multiple strategies to significantly reduce your healthcare expenses in Geneva, from accessing cantonal subsidies to optimizing your coverage model and deductible. With the right approach, Geneva residents can save thousands of francs annually while maintaining access to the canton's excellent healthcare system.
+        </p>
+        
+        <div class="mt-6 mb-8">
+          <a href="/news/regional-guides/geneva-insurance" class="inline-flex items-center text-primary-600 hover:text-primary-800">
+            <span>See our comprehensive Geneva insurance guide for more regional insights</span>
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+        
+        <div class="mt-10 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Geneva's Health Insurance Landscape</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            {genevaFactors.map(item => (
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-medium text-gray-900 mb-2">{item.factor}</h4>
+                <p class="text-sm text-gray-600">{item.explanation}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cost-Saving Strategies Section -->
+  <div id="saving-strategies" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Geneva Health Insurance Saving Strategies</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">These cost-cutting approaches can help you significantly reduce your health insurance premiums while maintaining quality coverage.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {savingStrategies.map((strategy, index) => (
+          <div class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex flex-col md:flex-row md:items-start">
+              <div class="mb-4 md:mb-0 md:mr-6 bg-primary-100 text-primary-700 rounded-full h-16 w-16 flex-shrink-0 flex items-center justify-center">
+                <span class="font-bold text-2xl">{index + 1}</span>
+              </div>
+              <div>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-xl font-semibold text-gray-900">{strategy.strategy}</h3>
+                  <span class="inline-flex items-center px-3 py-1 mt-2 md:mt-0 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    Typical savings: {strategy.savings}
+                  </span>
+                </div>
+                <p class="text-gray-600 mb-4">{strategy.description}</p>
+
+                {index === 0 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Geneva Subsidy Application Process:</h4>
+                    <ul class="space-y-2">
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>In Geneva, subsidy eligibility is typically assessed automatically through your tax return</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>New residents or those with changed circumstances can apply directly through Service de l'assurance-maladie (SAM)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Required documents include: residence permit, tax assessment, current insurance policy details</span>
+                      </li>
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-primary-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Subsidies are typically paid directly to your insurer, reducing your monthly premium invoices</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
+                {index === 1 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Insurance Models in Geneva:</h4>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Model</th>
+                            <th class="py-2 px-3 text-left">Geneva Considerations</th>
+                            <th class="py-2 px-3 text-left">Savings</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Standard</td>
+                            <td class="py-2 px-3">Maximum flexibility but highest premiums</td>
+                            <td class="py-2 px-3">None (baseline)</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Family Doctor</td>
+                            <td class="py-2 px-3">Many multilingual GP options in Geneva</td>
+                            <td class="py-2 px-3">~10-15%</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">HMO</td>
+                            <td class="py-2 px-3">Strong networks around HUG and major clinics</td>
+                            <td class="py-2 px-3">~15-20%</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">Telmed</td>
+                            <td class="py-2 px-3">Popular with international residents, often with English support</td>
+                            <td class="py-2 px-3">~10-15%</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+                
+                {index === 2 && (
+                  <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Deductible Savings Calculator:</h4>
+                    <p class="text-sm text-gray-600 mb-4">If your annual healthcare costs are below the "Breakeven" amount, the higher deductible will save you money.</p>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full bg-white">
+                        <thead>
+                          <tr class="bg-primary-50 text-primary-700">
+                            <th class="py-2 px-3 text-left">Deductible</th>
+                            <th class="py-2 px-3 text-left">Annual Premium Savings*</th>
+                            <th class="py-2 px-3 text-left">Added Risk</th>
+                            <th class="py-2 px-3 text-left">Breakeven</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                          <tr>
+                            <td class="py-2 px-3 font-medium">300 CHF</td>
+                            <td class="py-2 px-3">Baseline</td>
+                            <td class="py-2 px-3">0 CHF</td>
+                            <td class="py-2 px-3">N/A</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">500 CHF</td>
+                            <td class="py-2 px-3">~360 CHF</td>
+                            <td class="py-2 px-3">200 CHF</td>
+                            <td class="py-2 px-3">160 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">1,000 CHF</td>
+                            <td class="py-2 px-3">~840 CHF</td>
+                            <td class="py-2 px-3">700 CHF</td>
+                            <td class="py-2 px-3">140 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">1,500 CHF</td>
+                            <td class="py-2 px-3">~1,080 CHF</td>
+                            <td class="py-2 px-3">1,200 CHF</td>
+                            <td class="py-2 px-3">&lt; 0 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">2,000 CHF</td>
+                            <td class="py-2 px-3">~1,320 CHF</td>
+                            <td class="py-2 px-3">1,700 CHF</td>
+                            <td class="py-2 px-3">&lt; 0 CHF</td>
+                          </tr>
+                          <tr>
+                            <td class="py-2 px-3 font-medium">2,500 CHF</td>
+                            <td class="py-2 px-3">~1,560 CHF</td>
+                            <td class="py-2 px-3">2,200 CHF</td>
+                            <td class="py-2 px-3">&lt; 0 CHF</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">*Based on Geneva average adult premiums. Your actual savings may vary by insurer and personal factors.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        <div class="bg-primary-50 rounded-lg shadow-md p-8 mt-12 text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Want to Optimize Your Geneva Health Insurance?</h3>
+          <p class="text-gray-600 mb-8">Our experts specialize in finding the most cost-effective insurance solutions for Geneva residents. We'll analyze your specific situation and help you implement these savings strategies.</p>
+          
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
+          >
+            Get Your Free Savings Consultation
+          </button>
+          <p class="text-sm text-gray-500 mt-4">No obligation, just expert guidance tailored to Geneva's unique insurance landscape.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Special Cases Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Special Situations in Geneva</h2>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Cross-Border Workers (Frontaliers)</h3>
+          <p class="text-gray-600">If you work in Geneva but live in neighboring France, you have a unique choice regarding health insurance. Under the bilateral agreements, you can choose either the Swiss or French healthcare system. Many frontaliers find significant savings by opting for the French CMU system while maintaining access to both French and Geneva healthcare providers.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">International Organization Employees</h3>
+          <p class="text-gray-600">Geneva hosts numerous international organizations (UN, WHO, ILO, etc.) whose employees often have access to special insurance plans. These plans can be recognized as equivalent to the Swiss mandatory insurance, allowing exemption from the Swiss system. This exemption must be requested from the Service de l'assurance-maladie (SAM) within three months of arrival.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Students in Geneva</h3>
+          <p class="text-gray-600">International students studying in Geneva may qualify for special insurance arrangements or exemptions if they have coverage from their home country that meets Swiss standards. The monthly premium for dedicated student insurance plans can be significantly lower than standard plans, sometimes by 40-50%.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Split Family Insurance Strategies</h3>
+          <p class="text-gray-600">Families in Geneva can optimize their insurance by having different family members with different insurers, models, or deductibles based on their health needs. For example, children (who have lower premiums and no deductible) might be with a different insurer than parents, or a healthy spouse might choose a high-deductible plan while another chooses lower deductible coverage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step-by-Step Process -->
+  <div id="step-by-step" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Step-by-Step Process to Reduce Your Costs</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Follow these eight steps to optimize your health insurance and save money in Geneva.</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {steps.map((step, index) => (
+          <div id={`step-${index + 1}`} class="mb-12 bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                <span class="font-bold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{step.name}</h3>
+                <p class="text-gray-600 mb-4">{step.text}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map((faq, index) => (
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-primary-600 to-primary-500 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Ready to lower your Geneva health insurance costs?
+        </h2>
+        <p class="mt-4 text-xl text-primary-100">
+          Our experts specialize in optimizing insurance for Geneva residents and expats
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Schedule Free Consultation
+          </button>
+          <a
+            href="/news/regional-guides/geneva-insurance"
+            class="inline-flex items-center px-6 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-primary-700 transition-colors duration-300"
+          >
+            Explore Geneva Insurance Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Dispatch the modalOpened event to properly initialize
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 
