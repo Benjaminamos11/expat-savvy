@@ -12,14 +12,18 @@ This document outlines the specific tasks, responsible parties, and deadlines fo
 - [x] Fix all remaining broken internal links across the site
 - [x] Implement 404 tracking to catch future broken links
 - [x] Update contact links across all content to point to /free-consultation
-- [ ] Check all CTAs to ensure they point to active pages
+- [x] Check all CTAs to ensure they point to active pages
 
 ### Content Quick Wins
 - [x] Add related articles sections to high-traffic blog posts
-- [ ] Update meta descriptions for top 20 pages
-- [ ] Convert critical informational headings to question format
-- [ ] Add internal links to glossary terms (first mention in each article)
-- [ ] Update alt text on all images on top-performing pages
+- [x] Update meta descriptions for top 20 pages
+- [x] Convert critical informational headings to question format
+  - [x] Updated "Best Health Insurance Switzerland for Expats" blog post
+  - [x] Updated "How to Set Up Health Insurance" guide
+  - [x] Updated "How to Change Health Insurance" guide
+  - [x] Updated "CSS vs. Sanitas" comparison page
+- [x] Add internal links to glossary terms (first mention in each article)
+- [x] Update alt text on all images on top-performing pages
 
 ### Analytics Setup
 - [ ] Set up internal link click tracking
