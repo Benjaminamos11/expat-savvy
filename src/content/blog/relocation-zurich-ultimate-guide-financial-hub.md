@@ -104,7 +104,7 @@ Different areas of Zurich offer distinct advantages depending on your priorities
 - **Districts 6 and 7**: Residential areas with good family amenities and schools.
 - **Districts 9-12**: Outer districts offering more space and lower prices, with good transportation connections.
 
-When comparing Zurich with other Swiss cities like Zug, you'll find distinct differences in housing markets, costs, and lifestyle. For a detailed comparison, see our guide on [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](https://expat-savvy.ch/guides/relocation/zurich-vs-zug-comparison/).
+When comparing Zurich with other Swiss cities like Zug, you'll find distinct differences in housing markets, costs, and lifestyle. For a detailed comparison, see our guide on [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/).
 
 ### Rental Process and Requirements
 
@@ -296,7 +296,7 @@ Zurich regularly ranks among the world's most expensive cities. Major expenses i
 - **Childcare**: Very expensive if needed, with limited availability.
 - **Transportation**: Reasonable with annual passes, expensive if driving.
 
-For a detailed breakdown of relocation costs and budgeting advice, see our guide on [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](https://expat-savvy.ch/guides/relocation/zurich-relocation-costs/).
+For a detailed breakdown of relocation costs and budgeting advice, see our guide on [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/).
 
 ## Working with Relocation Services
 
@@ -368,9 +368,9 @@ By approaching your Zurich relocation with thorough preparation and realistic ex
 
 For additional guidance on specific aspects of your relocation journey, explore our related resources:
 - [Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise](/blog/relocation-zug-insiders-guide-business-paradise/)
-- [Switzerland Relocation in 2025: A Step-by-Step Roadmap for New Arrivals](/blog/relocation-switzerland-ultimate-guide-smooth-move/)
-- [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/guides/relocation/zurich-vs-zug-comparison/)
-- [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/guides/relocation/zurich-relocation-costs/)
+- [Switzerland Relocation in 2025: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
+- [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/)
+- [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/)
 
 ---
 
