@@ -1,15 +1,12 @@
-#!/usr/bin/env node
-
 /**
- * IndexNow URL Submission CLI
+ * IndexNow URL Submission Script
  * 
  * This script can be used to submit URLs to IndexNow when content is updated.
  * 
- * Usage:
- * npm run submit-urls -- https://expat-savvy.ch/page1 https://expat-savvy.ch/page2
+ * Usage examples:
+ * - Single URL: submitToIndexNow('https://expat-savvy.ch/new-page')
+ * - Multiple URLs: submitToIndexNow(['https://expat-savvy.ch/page1', 'https://expat-savvy.ch/page2'])
  */
-
-import fetch from 'node-fetch';
 
 // Your IndexNow API key - keep this the same as your key file
 const INDEXNOW_KEY = '425777cceabba1795f709019a3876a41';
@@ -18,12 +15,15 @@ const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
 
 /**
  * Submit one or more URLs to IndexNow
- * @param {string[]} urls - Array of URLs to submit
+ * @param {string|string[]} urls - A single URL or array of URLs to submit
  * @returns {Promise<Object>} - The response from the IndexNow API
  */
 async function submitToIndexNow(urls) {
+  // Convert single URL to array if needed
+  const urlList = Array.isArray(urls) ? urls : [urls];
+  
   // Validate that all URLs belong to the same host
-  urls.forEach(url => {
+  urlList.forEach(url => {
     if (!url.includes(HOST)) {
       throw new Error(`URL ${url} does not belong to host ${HOST}`);
     }
@@ -34,12 +34,10 @@ async function submitToIndexNow(urls) {
     host: HOST,
     key: INDEXNOW_KEY,
     keyLocation: KEY_LOCATION,
-    urlList: urls
+    urlList: urlList
   };
   
   try {
-    console.log(`Submitting ${urls.length} URLs to IndexNow...`);
-    
     // Submit to IndexNow API
     const response = await fetch('https://api.indexnow.org/IndexNow', {
       method: 'POST',
@@ -51,10 +49,10 @@ async function submitToIndexNow(urls) {
     
     // Handle response
     if (response.ok) {
-      console.log(`✅ Successfully submitted ${urls.length} URLs to IndexNow`);
-      return { success: true, message: `Successfully submitted ${urls.length} URLs` };
+      console.log(`Successfully submitted ${urlList.length} URLs to IndexNow`);
+      return { success: true, message: `Successfully submitted ${urlList.length} URLs` };
     } else {
-      console.error(`❌ Error submitting URLs to IndexNow: ${response.status} ${response.statusText}`);
+      console.error(`Error submitting URLs to IndexNow: ${response.status} ${response.statusText}`);
       return { 
         success: false, 
         statusCode: response.status, 
@@ -62,30 +60,12 @@ async function submitToIndexNow(urls) {
       };
     }
   } catch (error) {
-    console.error('❌ Failed to submit URLs to IndexNow:', error);
+    console.error('Failed to submit URLs to IndexNow:', error);
     return { success: false, message: error.message };
   }
 }
 
-// Main function to run script
-async function main() {
-  // Get URLs from command line arguments
-  const urls = process.argv.slice(2);
-  
-  if (urls.length === 0) {
-    console.error('❌ Error: No URLs provided');
-    console.log('Usage: npm run submit-urls -- URL1 URL2 URL3 ...');
-    process.exit(1);
-  }
-  
-  try {
-    await submitToIndexNow(urls);
-    process.exit(0);
-  } catch (error) {
-    console.error('❌ Error:', error.message);
-    process.exit(1);
-  }
-}
-
-// Run the script
-main();
+// For Node.js environments
+if (typeof module !== 'undefined') {
+  module.exports = { submitToIndexNow };
+} 
