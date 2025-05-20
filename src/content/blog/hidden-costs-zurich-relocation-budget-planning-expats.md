@@ -3,7 +3,6 @@ title: "The Hidden Costs of Zurich Relocation: Budget Planning for Expats (2025)
 description: "Comprehensive guide to the visible and hidden costs of relocating to Zurich. Expert advice on budgeting for housing, insurance, education, transportation, and daily expenses to help expatriates plan their finances effectively."
 author: "Benjamin Amos Wagner"
 date: 2025-05-03
-canonical: "https://expat-savvy.ch/blog/hidden-costs-zurich-relocation-budget-planning-expats"
 tags: ["relocation", "zurich", "switzerland", "expat", "budget", "housing", "costs", "financial planning", "insurance", "education"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507429/a-hand-drawn-red-and-black-sketch-showin_1wBAmnmSSfmPfMzE0jxkJw_B8INF4vMQ_e6yI-4X4lMVw_xlshml.webp"
 ---
