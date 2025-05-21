@@ -2,6 +2,7 @@
 import VAG45Modal from './VAG45Modal.astro';
 import PrivacyPolicyModal from './PrivacyPolicyModal.astro';
 import TermsOfServiceModal from './TermsOfServiceModal.astro';
+import { ensureTrailingSlash } from '@/lib/utils';
 ---
 <footer class="bg-gradient-to-b from-gray-900 to-black text-white py-12 relative">
   <!-- Subtle background pattern -->
@@ -109,7 +110,7 @@ import TermsOfServiceModal from './TermsOfServiceModal.astro';
           >
             Terms of Service
           </button>
-          <a href="/imprint" class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4">
+          <a href={ensureTrailingSlash("/imprint")} class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4">
             Imprint
           </a>
           <button 

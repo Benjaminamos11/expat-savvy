@@ -93,6 +93,11 @@ ${pages
       priority = '0.9';
     }
 
+    // Ensure path has trailing slash (except for homepage which is handled separately)
+    if (path && !path.endsWith('/')) {
+      path = path + '/';
+    }
+
     return `  <url>
     <loc>${siteUrl}/${path}</loc>
     <lastmod>${formatDate()}</lastmod>
@@ -108,6 +113,11 @@ ${blogPosts
     // Skip any paths containing 'draft' or starting with an underscore
     if (postPath.includes('draft') || postPath.startsWith('_')) {
       return '';
+    }
+
+    // Ensure path has trailing slash
+    if (postPath && !postPath.endsWith('/')) {
+      postPath = postPath + '/';
     }
 
     return `  <url>

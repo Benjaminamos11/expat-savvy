@@ -1,4 +1,6 @@
 ---
+import { ensureTrailingSlash } from '@/lib/utils';
+
 const mainNavItems = [
   { name: "About", href: "/about" },
   {
@@ -112,7 +114,7 @@ const mainNavItems = [
     <div class="flex justify-between h-20">
       <!-- Logo -->
       <div class="flex-shrink-0 flex items-center">
-        <a href="/" class="flex items-center">
+        <a href={ensureTrailingSlash("/")} class="flex items-center">
           <img 
             src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg" 
             alt="Expat Savvy" 
@@ -128,7 +130,7 @@ const mainNavItems = [
         {mainNavItems.map(item => (
           <div class="relative group">
             {item.href ? (
-              <a href={item.href} class="text-gray-700 hover:text-primary-500 py-2 px-2">
+              <a href={ensureTrailingSlash(item.href)} class="text-gray-700 hover:text-primary-500 py-2 px-2">
                 {item.name}
               </a>
             ) : (
@@ -154,7 +156,7 @@ const mainNavItems = [
                           {section.items.map(subItem => (
                             <li>
                               <a 
-                                href={subItem.href} 
+                                href={ensureTrailingSlash(subItem.href)} 
                                 class="group/item flex items-center text-sm text-gray-600 hover:text-primary-500"
                               >
                                 <span class="relative">
@@ -181,7 +183,7 @@ const mainNavItems = [
                 <div class="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
                   {item.items.map((subItem, index) => (
                     <a 
-                      href={subItem.href} 
+                      href={ensureTrailingSlash(subItem.href)} 
                       class={`block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-500 transition-colors ${subItem.highlight ? 'text-primary-600 font-medium bg-primary-50' : ''} ${index === 0 && subItem.highlight ? 'border-b border-gray-100 pb-2 mb-1' : ''}`}
                     >
                       {subItem.name}
@@ -221,7 +223,7 @@ const mainNavItems = [
 
               <!-- AI Premium Calculator -->
               <a 
-                href="/ai-chat"
+                href={ensureTrailingSlash("/ai-chat")}
                 class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
               >
                 <div class="flex items-center mb-2">
@@ -270,7 +272,7 @@ const mainNavItems = [
       <div class="px-2 py-3">
         <!-- AI Chat Link -->
         <a
-          href="/ai-chat"
+          href={ensureTrailingSlash("/ai-chat")}
           class="block w-full text-left px-3 py-2 text-base font-medium text-primary-600 bg-primary-50 rounded-md mb-2"
         >
           <div class="flex items-center">
@@ -284,7 +286,7 @@ const mainNavItems = [
         {mainNavItems.map(item => (
           <div class="space-y-1">
             {item.href ? (
-              <a href={item.href} class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50">
+              <a href={ensureTrailingSlash(item.href)} class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50">
                 {item.name}
               </a>
             ) : (
@@ -303,7 +305,7 @@ const mainNavItems = [
                         {section.title}
                       </div>
                       {section.items.map(subItem => (
-                        <a href={subItem.href} class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary-500 hover:bg-gray-50">
+                        <a href={ensureTrailingSlash(subItem.href)} class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary-500 hover:bg-gray-50">
                           {subItem.name}
                         </a>
                       ))}
@@ -311,7 +313,7 @@ const mainNavItems = [
                   ))}
 
                   {item.dropdown && item.items.map((subItem, index) => (
-                    <a href={subItem.href} class={`block px-3 py-2 text-base font-medium ${subItem.highlight ? 'text-primary-600 bg-primary-50' : 'text-gray-700'} hover:text-primary-500 hover:bg-gray-50 ${index === 0 && subItem.highlight ? 'border-b border-gray-100 pb-2 mb-1' : ''}`}>
+                    <a href={ensureTrailingSlash(subItem.href)} class={`block px-3 py-2 text-base font-medium ${subItem.highlight ? 'text-primary-600 bg-primary-50' : 'text-gray-700'} hover:text-primary-500 hover:bg-gray-50 ${index === 0 && subItem.highlight ? 'border-b border-gray-100 pb-2 mb-1' : ''}`}>
                       {subItem.name}
                     </a>
                   ))}
