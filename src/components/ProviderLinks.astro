@@ -1,0 +1,76 @@
+import { ensureTrailingSlash } from '@/lib/utils';
+
+interface Props {
+  currentProvider: string;
+}
+
+const { currentProvider } = Astro.props;
+
+// Define all providers
+const allProviders = [
+  { name: "Swica", href: "/healthcare/all-insurances/swica" },
+  { name: "Helsana", href: "/healthcare/all-insurances/helsana" },
+  { name: "CSS", href: "/healthcare/all-insurances/css" },
+  { name: "Sanitas", href: "/healthcare/all-insurances/sanitas" },
+  { name: "Concordia", href: "/healthcare/all-insurances/concordia" },
+  { name: "KPT", href: "/healthcare/all-insurances/kpt" },
+  { name: "Assura", href: "/healthcare/all-insurances/assura" },
+  { name: "Groupe Mutuel", href: "/healthcare/all-insurances/groupe-mutuel" },
+  { name: "Sympany", href: "/healthcare/all-insurances/sympany" },
+  { name: "Visana", href: "/healthcare/all-insurances/visana" },
+  { name: "Atupri", href: "/healthcare/all-insurances/atupri" }
+];
+
+// Filter out current provider and limit to 3 random providers
+const randomProviders = allProviders
+  .filter(provider => provider.name !== currentProvider)
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 3);
+
+// Helper guides relevant to all providers
+const helperGuides = [
+  {
+    title: "Find the Best Health Insurance",
+    href: "/guides/how-to/find-best-health-insurance"
+  },
+  {
+    title: "Moving Cantons Insurance Guide",
+    href: "/guides/how-to/insurance-when-moving-cantons"
+  },
+  {
+    title: "All Insurance Providers",
+    href: "/healthcare/all-insurances"
+  }
+];
+
+<div class="bg-white py-10 border-t border-gray-200 mt-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Compare Other Providers</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        {randomProviders.map(provider => (
+          <a href={ensureTrailingSlash(provider.href)} class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+            <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span class="text-gray-900 font-medium">{provider.name}</span>
+          </a>
+        ))}
+      </div>
+      
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Helpful Insurance Guides</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {helperGuides.map(guide => (
+          <a href={ensureTrailingSlash(guide.href)} class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+            <svg class="w-5 h-5 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <span class="text-gray-900 font-medium">{guide.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</div> 
