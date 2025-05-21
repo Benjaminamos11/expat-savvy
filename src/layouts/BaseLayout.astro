@@ -56,6 +56,12 @@ if (knownRedirects[canonicalPath]) {
   finalPath = knownRedirects[canonicalPath];
 }
 
+// IMPORTANT: Always add trailing slash to canonical paths (except homepage)
+// This ensures the canonical URL matches the final URL after redirects
+if (finalPath !== "/" && !finalPath.endsWith("/")) {
+  finalPath = finalPath + "/";
+}
+
 // Construct the full canonical URL, using prop value if provided
 const canonicalURL = canonicalURLProp || new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
 
