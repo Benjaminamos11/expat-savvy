@@ -13,6 +13,18 @@ const formatDate = () => {
   return '2025-05-13';
 };
 
+// Function to ensure URL has proper trailing slash
+function ensureTrailingSlash(url) {
+  // If it's the homepage, don't add a trailing slash
+  if (url === '' || url === '/') return '';
+  
+  // If URL has a file extension, don't add a trailing slash
+  if (/\.[a-zA-Z0-9]{2,4}$/.test(url)) return url;
+  
+  // Add trailing slash if not present
+  return url.endsWith('/') ? url : url + '/';
+}
+
 async function generateSitemap() {
   // Get all files except for 404, draft pages, and specific excluded patterns
   const pages = await globby([
@@ -93,10 +105,8 @@ ${pages
       priority = '0.9';
     }
 
-    // Ensure path has trailing slash (except for homepage which is handled separately)
-    if (path && !path.endsWith('/')) {
-      path = path + '/';
-    }
+    // Ensure path has correct trailing slash
+    path = ensureTrailingSlash(path);
 
     return `  <url>
     <loc>${siteUrl}/${path}</loc>
@@ -115,10 +125,8 @@ ${blogPosts
       return '';
     }
 
-    // Ensure path has trailing slash
-    if (postPath && !postPath.endsWith('/')) {
-      postPath = postPath + '/';
-    }
+    // Ensure path has proper trailing slash
+    postPath = ensureTrailingSlash(postPath);
 
     return `  <url>
     <loc>${siteUrl}/${postPath}</loc>

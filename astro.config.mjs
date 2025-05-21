@@ -9,7 +9,19 @@ export default defineConfig({
     tailwind(),
     react(),
     sitemap({
-      filter: (page) => !page.includes('/404'), // Exclude 404 page from sitemap
+      filter: (page) => {
+        // Exclude 404 page from sitemap
+        if (page.includes('/404')) return false;
+        
+        // Ensure all URLs have trailing slashes
+        // If the URL doesn't end with a trailing slash and doesn't have a file extension,
+        // exclude it from the sitemap as it will cause a redirect
+        if (!page.endsWith('/') && !page.match(/\.[^/]+$/)) {
+          return false;
+        }
+        
+        return true;
+      },
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
