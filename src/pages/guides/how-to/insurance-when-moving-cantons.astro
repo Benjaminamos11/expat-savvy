@@ -3,6 +3,7 @@ import Layout from '../../../layouts/Layout.astro';
 import HowToSchema from '../../../components/schema/HowToSchema.astro';
 import FAQSchema from '../../../components/schema/FAQSchema.astro';
 import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+import RelatedPages from '../../../components/RelatedPages.astro';
 
 // Define the steps for the how-to guide
 const steps = [
@@ -557,19 +558,19 @@ const timeline = [
   </div>
   
   <!-- CTA Section -->
-  <div class="bg-gradient-to-r from-primary-600 to-primary-500">
+  <div class="bg-primary-600">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Moving to a new canton?
+          Need help understanding Swiss healthcare?
         </h2>
         <p class="mt-4 text-xl text-primary-100">
-          Let our experts help you navigate the insurance transition and find the best options
+          Get expert guidance from our insurance specialists
         </p>
         <div class="mt-8">
           <button
             onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
           >
             Schedule Free Consultation
           </button>
@@ -577,8 +578,43 @@ const timeline = [
       </div>
     </div>
   </div>
-  
-  <!-- Consultation Modal -->
+
+  <RelatedPages 
+    title="Related Insurance Guides"
+    pages={[
+      {
+        title: "How to Find the Best Health Insurance",
+        description: "Our comprehensive guide to comparing and selecting the optimal coverage for your needs.",
+        href: "/guides/how-to/find-best-health-insurance"
+      },
+      {
+        title: "How to Change Health Insurance",
+        description: "Learn when and how to switch providers to optimize your coverage and save money.",
+        href: "/guides/how-to/change-health-insurance"
+      },
+      {
+        title: "Best Health Insurance for Expats",
+        description: "Discover the top health insurance providers and plans for expats living in Switzerland.",
+        href: "/blog/best-health-insurance-switzerland-expats" 
+      },
+      {
+        title: "Health Insurance Premiums by Canton",
+        description: "Understand how premiums vary between different Swiss cantons.",
+        href: "/blog/decoding-swiss-health-insurance-canton-region-premium"
+      },
+      {
+        title: "Compare Insurance Providers",
+        description: "View and compare all major Swiss health insurance providers.",
+        href: "/healthcare/all-insurances"
+      },
+      {
+        title: "Relocating to Switzerland Checklist",
+        description: "Complete checklist for moving to Switzerland, including insurance requirements.",
+        href: "/blog/relocating-to-switzerland-checklist"
+      }
+    ]}
+  />
+
   <ConsultationModal />
 
   <!-- BreadcrumbList Schema -->
