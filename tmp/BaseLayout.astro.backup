@@ -1,0 +1,192 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import ConsultationModal from '../components/consultation/ConsultationModal.astro';
+import SocialMediaImage from '../components/SocialMediaImage.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishDate?: Date;
+  author?: {
+    name: string;
+    url?: string;
+  };
+  canonicalURLProp?: string;
+}
+
+const {
+  title,
+  description = "Expat Savvy - Your guide to living abroad successfully",
+  image = "/images/og-image.jpg",
+  type = "website",
+  publishDate,
+  author = {
+    name: "Benjamin Amos Wagner",
+    url: "https://expat-savvy.ch"
+  },
+  canonicalURLProp
+} = Astro.props;
+
+const defaultDescription = "Expat Savvy - Your trusted guide for expats in Switzerland with expert insurance advice and resources";
+const finalDescription = description === "Expat Savvy - Your guide to living abroad successfully" ? defaultDescription : description;
+
+// Ensure canonical URL is absolute and doesn't contain duplicate paths
+let canonicalPath = Astro.url.pathname;
+// Remove trailing slash if it exists (except for the homepage)
+if (canonicalPath !== "/" && canonicalPath.endsWith("/")) {
+  canonicalPath = canonicalPath.slice(0, -1);
+}
+
+// Manually handle known redirects for canonical URLs
+// This prevents pages from setting their canonical URL to a redirected path
+let finalPath = canonicalPath;
+const knownRedirects: {[key: string]: string} = {
+  "/news/switching-health-insurance-in-switzerland": "/healthcare/switching-health-insurance",
+  "/guides/relocation/zurich-vs-zug-comparison": "/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination",
+  "/guides/relocation/zurich-relocation-costs": "/blog/hidden-costs-zurich-relocation-budget-planning-expats",
+  "/contact": "/free-consultation"
+};
+
+// Check if current path is a redirected URL and use its destination instead
+if (knownRedirects[canonicalPath]) {
+  finalPath = knownRedirects[canonicalPath];
+}
+
+// Construct the full canonical URL, using prop value if provided
+const canonicalURL = canonicalURLProp || new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
+
+// Define favicon URL - same as in Layout.astro
+const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Clean Modal Management -->
+    <script is:inline src="/scripts/modal-init.js"></script>
+    <script is:inline src="/scripts/button-fixer.js"></script>
+    <script is:inline src="/scripts/direct-modal-fix.js"></script>
+    <script is:inline src="/scripts/modal-debug.js"></script>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href={favicon} sizes="32x32" />
+    <link rel="icon" type="image/png" href={favicon} sizes="16x16" />
+    <link rel="apple-touch-icon" href={favicon} />
+    
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Bing IndexNow Integration -->
+    <meta name="msvalidate.01" content="425777CCEABBA1795F709019A3876A41" />
+    
+    <!-- Modal styles -->
+    <link rel="stylesheet" href="/scripts/modal-styles.css" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title} | Expat Savvy Switzerland</title>
+    <meta name="title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta name="description" content={finalDescription} />
+    
+    <!-- Social Media Image handling with WebP to JPG conversion -->
+    <SocialMediaImage 
+      image={image}
+      alt={finalDescription}
+      width={1200}
+      height={630}
+    />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:site_name" content="Expat Savvy Switzerland" />
+    
+    <!-- Twitter Basic Tags -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta property="twitter:description" content={finalDescription} />
+    
+    <!-- WhatsApp Sharing -->
+    <meta property="og:image:alt" content={finalDescription} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": type === "article" ? "BlogPosting" : "WebSite",
+      "name": title,
+      "description": finalDescription,
+      "url": canonicalURL,
+      "publisher": {
+        "@type": "Organization",
+        "name": "Expat Savvy Switzerland",
+        "url": Astro.site
+      },
+      ...(type === "article" && publishDate && {
+        "datePublished": publishDate.toISOString(),
+        "author": {
+          "@type": "Person",
+          "name": author.name,
+          "url": author.url
+        }
+      })
+    })} />
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      if (f && f.parentNode) f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NC6FSJTW'); 
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Analytics Tracking from Umami -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="fff60d95-7ab4-40e9-b82e-86ef90c1c567"></script>
+    
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC6FSJTW"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+    <ConsultationModal />
+
+    <!-- Cal element-click embed code begins -->
+    <script type="text/javascript">
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "expat-savvy", {origin:"https://cal.com"});
+      Cal.ns["expat-savvy"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
+    </script>
+    <!-- Cal element-click embed code ends -->
+
+    <!-- Analytics Tracking -->
+    <script is:inline src="/scripts/analytics-tracking.js" defer></script>
+    
+    <!-- Component Helper - Helps with missing modals -->
+    <script is:inline src="/scripts/component-helper.js"></script>
+  </body>
+</html> 
