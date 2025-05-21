@@ -159,6 +159,8 @@ Finding the optimal health insurance plan requires a systematic approach:
 
 8. **Annual Review**: Premiums and plans can change annually. You have the right to switch your basic health insurer (or model/deductible with your current insurer) once a year, typically by providing notice by the end of November for changes effective January 1st. Mark this in your calendar!
 
+> **Need more detailed guidance?** Check out our comprehensive step-by-step guide: [How to Find the Best Health Insurance in Switzerland](/guides/how-to/find-best-health-insurance) for a deeper walkthrough of the selection process.
+
 ## 6. Do You Need an Insurance Consultant?
 
 While online tools are helpful, navigating the Swiss insurance landscape, especially with supplementary options and specific expat needs, can be overwhelming. An independent insurance consultant, like the team at Expat Savvy, can provide significant value:
@@ -198,6 +200,8 @@ A3: If you fail to enroll in a basic health insurance plan within the three-mont
 **Q4: How much does health insurance typically cost in Switzerland for an expat?**
 
 A4: The cost of Swiss health insurance varies widely based on several factors: your canton of residence (premiums differ significantly by region), your age, your chosen deductible (Franchise – higher deductibles mean lower premiums), and the insurance model you select (e.g., Standard, HMO, Telmed). For an adult, basic insurance premiums can range roughly from CHF 300 to over CHF 600 per month. Supplementary insurance is an additional cost. You can find more details in our [Swiss Health Insurance Models Guide](/blog/health-insurance-models-switzerland).
+
+> **Moving between cantons?** If you're relocating within Switzerland, don't miss our guide on [How to Navigate Health Insurance When Moving Cantons](/guides/how-to/insurance-when-moving-cantons) to understand how premiums change and the special switching rights you gain.
 
 **Q5: Is dental insurance included in basic Swiss health insurance?**
 
