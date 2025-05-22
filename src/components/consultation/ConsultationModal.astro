@@ -100,11 +100,11 @@ const finalProviderName = props.providerName || providerName;
     data-context-title={finalContextTitle}
     data-modal-backdrop="true">
   <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
-    <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh]">
+    <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh] mobile-modal">
       <!-- Close button -->
       <button
         id="close-modal-btn"
-        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10"
+        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10 mobile-close-btn"
         aria-label="Close"
         data-close-modal="true"
       >
@@ -114,7 +114,7 @@ const finalProviderName = props.providerName || providerName;
       </button>
       
       <!-- Modal step indicators -->
-      <div class="modal-step-indicator flex items-center justify-between mb-6">
+      <div class="modal-step-indicator flex items-center justify-between mb-4 sm:mb-6">
         <div class="step step-1 active flex-grow flex items-center space-x-1">
           <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs">1</div>
           <div class="h-1 bg-red-600 flex-grow rounded-full"></div>
@@ -155,7 +155,7 @@ const finalProviderName = props.providerName || providerName;
       </div>
       
       <!-- Legal disclosure -->
-      <p class="text-xs text-gray-500 text-center mt-6">
+      <p class="text-xs text-gray-500 text-center mt-4 sm:mt-6 legal-text">
         As a registered broker, our consultations are free of charge. 
         We receive commissions from insurance providers when you choose their services through us.
         Your ongoing support and advice remain complimentary.
@@ -242,6 +242,11 @@ const finalProviderName = props.providerName || providerName;
           }
         }
       });
+      
+      // Dispatch custom event for step change
+      document.dispatchEvent(new CustomEvent('modalStepChange', {
+        detail: { stepNumber }
+      }));
     }
     
     // Next buttons handler - with debounce to prevent multiple clicks
@@ -482,6 +487,18 @@ const finalProviderName = props.providerName || providerName;
         }
       }
     });
+    
+    // Check if we need to adjust mobile viewport for iOS
+    function adjustModalForMobile() {
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        const vhUnit = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vhUnit}px`);
+      }
+    }
+    
+    // Run on load and resize
+    window.addEventListener('resize', adjustModalForMobile);
+    adjustModalForMobile();
   });
 </script>
 
@@ -531,12 +548,29 @@ const finalProviderName = props.providerName || providerName;
   /* Mobile optimizations */
   @media (max-width: 640px) {
     .modal-content {
-      max-height: 85vh;
+      max-height: calc(100vh - 40px) !important;
+      height: auto;
       padding: 1rem !important;
+      margin: 0 !important;
+      border-radius: 16px !important;
+      position: fixed !important;
+      top: 20px !important;
+      left: 10px !important;
+      right: 10px !important;
+      width: calc(100% - 20px) !important;
+      box-sizing: border-box !important;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .mobile-close-btn {
+      padding: 10px;
+      margin: -10px;
+      top: 10px !important;
+      right: 10px !important;
     }
     
     .modal-step-indicator {
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     
     .modal-step-indicator .w-4 {
@@ -552,6 +586,48 @@ const finalProviderName = props.providerName || providerName;
     .modal-steps {
       margin-top: 0.5rem;
     }
+    
+    /* Enhance touch targets */
+    button, 
+    a, 
+    select, 
+    input, 
+    textarea {
+      min-height: 44px;
+    }
+    
+    .legal-text {
+      font-size: 0.7rem;
+      line-height: 1.3;
+      margin-top: 1rem;
+      padding: 0 0.5rem;
+    }
+  }
+  
+  /* Special handling for very small screens */
+  @media (max-width: 375px) {
+    .modal-content {
+      top: 10px !important;
+      max-height: calc(100vh - 20px) !important;
+      padding: 0.875rem !important;
+    }
+    
+    .modal-step-indicator {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Compact the legal text */
+    .legal-text {
+      font-size: 0.65rem;
+      line-height: 1.2;
+      margin-top: 0.5rem;
+    }
+    
+    .modal-step-indicator .w-4 {
+      width: 0.75rem;
+      height: 0.75rem;
+      font-size: 0.6rem;
+    }
   }
   
   /* Fix for Cal.com calendar width */
@@ -564,6 +640,22 @@ const finalProviderName = props.providerName || providerName;
     width: 100% !important;
     border: none !important;
     min-height: 600px;
+  }
+  
+  /* Fix for embedded calendar on mobile */
+  @media (max-width: 640px) {
+    :global(#cal-booking-placeholder iframe) {
+      min-height: 450px !important;
+      height: auto !important;
+      max-height: calc(100vh - 150px) !important;
+    }
+    
+    /* Better handling of form fields on mobile */
+    :global(input),
+    :global(select),
+    :global(textarea) {
+      font-size: 16px !important; /* Prevent iOS zoom on focus */
+    }
   }
 </style>
 

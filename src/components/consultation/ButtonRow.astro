@@ -1,0 +1,63 @@
+---
+// Button row component for modal navigation
+interface Props {
+  prevButtonText?: string;
+  nextButtonText?: string;
+  prevButtonStep?: number;
+  nextButtonStep?: number;
+  hideNextButton?: boolean;
+  hidePrevButton?: boolean;
+}
+
+const { 
+  prevButtonText = "Back", 
+  nextButtonText = "Next", 
+  prevButtonStep = 1, 
+  nextButtonStep = 2,
+  hideNextButton = false,
+  hidePrevButton = false
+} = Astro.props;
+---
+
+<div class="flex justify-between mt-6 button-row">
+  {!hidePrevButton && (
+    <button 
+      type="button" 
+      class="modal-prev-btn flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 border border-gray-300 shadow-sm text-sm sm:text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+      data-current-step={prevButtonStep + 1}
+    >
+      <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      {prevButtonText}
+    </button>
+  )}
+  
+  {!hideNextButton && (
+    <button 
+      type="button" 
+      class="modal-next-btn flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 border border-transparent shadow-sm text-sm sm:text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors ml-auto"
+      data-current-step={nextButtonStep - 1}
+    >
+      {nextButtonText}
+      <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  )}
+</div>
+
+<style>
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    .button-row {
+      margin-top: 1rem;
+    }
+    
+    .button-row button {
+      min-height: 44px;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+</style> 
