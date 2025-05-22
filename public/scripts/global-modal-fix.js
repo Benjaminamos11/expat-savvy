@@ -1,98 +1,145 @@
 /**
- * Global Modal Fix
- * This script adds an emergency close button to the page that will forcibly close any modals.
+ * Global Modal Fix Script
+ * Fixes issues with modals, particularly related to scrolling
  */
 
 (function() {
-  // Create the emergency close button
-  function createEmergencyButton() {
-    const btn = document.createElement('button');
-    btn.id = 'global-emergency-close';
-    btn.textContent = 'Emergency Close';
-    btn.style.cssText = `
-      position: fixed;
-      top: 5px;
-      right: 5px;
-      z-index: 999999;
-      background: #ff3c3c;
-      color: white;
-      font-weight: bold;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    `;
-    
-    // Add click handler that forcibly closes any modal using direct DOM manipulation
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      // Force close modal
-      const modal = document.getElementById('consultation-modal');
-      if (modal) {
-        // Reset modal state
-        modal.classList.add('hidden');
-        // Reset body state
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = 'auto';
-        document.body.style.position = 'static';
-        document.body.style.width = 'auto';
-        document.body.style.height = 'auto';
-        
-        console.log("Emergency close button clicked - modal forcibly closed");
-      }
-      
-      // Attempt to remove any Cal.com elements
-      document.querySelectorAll('[data-cal-namespace]').forEach(el => el.remove());
-      
-      // Hide this button after use
-      this.style.display = 'none';
-      
-      return false;
-    }, true);
-    
-    // Add to document
-    document.body.appendChild(btn);
-  }
-  
-  // Initialize the fix
-  function init() {
-    // Create the emergency button
-    createEmergencyButton();
-    
-    // Global override to ensure closeConsultationModal works
-    window.closeConsultationModal = function() {
-      // Call original if it exists
-      const original = window._originalCloseConsultationModal;
-      if (typeof original === 'function') {
-        try { 
-          original();
-        } catch(e) {
-          console.error("Error calling original close function:", e);
-        }
-      }
-      
-      // Forcibly close the modal regardless
-      const modal = document.getElementById('consultation-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = 'auto';
-        console.log("Modal forcibly closed by global override");
-      }
-    };
-    
-    console.log("Global modal fix initialized");
-  }
-  
-  // Initialize immediately or on DOMContentLoaded
+  // Run when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    // DOM is already loaded
-    init();
+    setTimeout(init, 100); // Small delay to ensure other scripts are loaded
+  }
+  
+  function init() {
+    // Fix for modal step navigation scrolling
+    document.addEventListener('modalStepChange', function(event) {
+      // Scroll modal content to top on step change
+      const modalContent = document.querySelector('.modal-content');
+      if (modalContent) {
+        modalContent.scrollTop = 0;
+      }
+    });
+    
+    // Enhanced fix for consultation modal buttons
+    enhanceConsultationButtons();
+    
+    // Add explicit handlers for step navigation
+    enhanceStepNavigation();
+  }
+  
+  function enhanceConsultationButtons() {
+    // Handle all consultation buttons with a direct approach
+    document.addEventListener('click', function(e) {
+      // Find any consultation-related buttons
+      const target = e.target;
+      
+      // Check for consultation buttons by text content or attributes
+      const isConsultationButton = 
+        (target.textContent && (target.textContent.includes('Book Free') || 
+                                target.textContent.includes('Consultation') || 
+                                target.textContent.includes('Schedule'))) ||
+        target.hasAttribute('data-open-consultation') ||
+        target.closest('[data-open-consultation]');
+      
+      if (isConsultationButton) {
+        // Check if this button is already properly handled
+        const hasHandler = target.getAttribute('data-handler-attached') === 'true' ||
+                          (target.closest('button') && target.closest('button').getAttribute('data-handler-attached') === 'true');
+        
+        if (!hasHandler) {
+          // Find the closest button or link
+          const button = target.closest('button, a');
+          if (button) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Get scroll position before opening modal
+            const scrollPosition = {
+              x: window.scrollX || window.pageXOffset,
+              y: window.scrollY || window.pageYOffset
+            };
+            
+            // Show the modal directly
+            const modal = document.getElementById('consultation-modal');
+            if (modal) {
+              modal.classList.remove('hidden');
+              document.body.classList.add('modal-open');
+              
+              // Store scroll position on the modal element
+              modal.setAttribute('data-scroll-x', scrollPosition.x.toString());
+              modal.setAttribute('data-scroll-y', scrollPosition.y.toString());
+              
+              // Reset to first step
+              const steps = modal.querySelectorAll('.modal-step');
+              steps.forEach((step, index) => {
+                if (index === 0) {
+                  step.classList.remove('hidden');
+                  step.classList.add('active');
+                } else {
+                  step.classList.add('hidden');
+                  step.classList.remove('active');
+                }
+              });
+              
+              // Mark this button as handled
+              button.setAttribute('data-handler-attached', 'true');
+            }
+          }
+        }
+      }
+    }, true); // Use capturing for highest priority
+    
+    // Enhanced close button handling
+    document.addEventListener('click', function(e) {
+      const target = e.target;
+      const isCloseButton = target.matches('[data-close-modal]') || 
+                            target.closest('[data-close-modal]');
+      
+      if (isCloseButton) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Find the modal
+        const modal = target.closest('.modal, [id$="-modal"]');
+        if (modal) {
+          // Hide the modal
+          modal.classList.add('hidden');
+          document.body.classList.remove('modal-open');
+          
+          // Restore scroll position
+          const scrollX = parseInt(modal.getAttribute('data-scroll-x') || '0');
+          const scrollY = parseInt(modal.getAttribute('data-scroll-y') || '0');
+          
+          setTimeout(() => {
+            window.scrollTo(scrollX, scrollY);
+          }, 10);
+        }
+      }
+    }, true); // Use capturing for highest priority
+  }
+  
+  function enhanceStepNavigation() {
+    // Enhanced next/previous button handling for modal steps
+    document.addEventListener('click', function(e) {
+      const target = e.target;
+      
+      // Check for next/prev buttons
+      const isNextButton = target.matches('.modal-next-btn') || 
+                          target.closest('.modal-next-btn');
+      const isPrevButton = target.matches('.modal-prev-btn') || 
+                          target.closest('.modal-prev-btn');
+      
+      if (isNextButton || isPrevButton) {
+        // Scroll to top of modal content after a short delay
+        setTimeout(() => {
+          const modalContent = document.querySelector('.modal-content');
+          if (modalContent) {
+            modalContent.scrollTop = 0;
+          }
+        }, 50);
+      }
+    }, true); // Use capturing for highest priority
   }
 })();
 

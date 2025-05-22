@@ -340,6 +340,12 @@ const finalProviderName = props.providerName || providerName;
         // Navigate to next step
         goToStep(nextStep);
         
+        // Scroll to top of modal content - particularly important for mobile
+        const modalContent = document.querySelector('.modal-content');
+        if (modalContent) {
+          modalContent.scrollTop = 0;
+        }
+        
         // Reset processing flag after short delay
         setTimeout(() => {
           isProcessing = false;
@@ -353,6 +359,12 @@ const finalProviderName = props.providerName || providerName;
         const currentStep = parseInt(this.getAttribute('data-current-step') || '2');
         const prevStep = currentStep - 1;
         goToStep(prevStep);
+        
+        // Scroll to top of modal content - particularly important for mobile
+        const modalContent = document.querySelector('.modal-content');
+        if (modalContent) {
+          modalContent.scrollTop = 0;
+        }
       });
     });
     

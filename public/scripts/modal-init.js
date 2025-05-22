@@ -7,6 +7,9 @@
   // Keep track of active modals to avoid duplicate event handling
   const activeModals = {};
   
+  // Store scroll positions for each modal
+  const scrollPositions = {};
+  
   // Initialize immediately if DOM is ready, otherwise wait
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -30,6 +33,12 @@
     
     // Don't reopen if already open
     if (!modal.classList.contains('hidden')) return true;
+    
+    // Save current scroll position before opening modal
+    scrollPositions[modalId] = {
+      x: window.scrollX || window.pageXOffset,
+      y: window.scrollY || window.pageYOffset
+    };
     
     // Open the modal
     modal.classList.remove('hidden');
@@ -61,6 +70,13 @@
     // Remove from active modals
     delete activeModals[modalId];
     
+    // Restore scroll position after modal is closed
+    if (scrollPositions[modalId]) {
+      setTimeout(() => {
+        window.scrollTo(scrollPositions[modalId].x, scrollPositions[modalId].y);
+      }, 10);
+    }
+    
     // Dispatch event for other scripts
     document.dispatchEvent(new CustomEvent('modalClosed', { 
       detail: { modalId } 
@@ -77,6 +93,7 @@
       if (e.target.matches('[data-open-consultation], [data-open-modal]') || 
           e.target.closest('[data-open-consultation], [data-open-modal]')) {
         e.preventDefault();
+        e.stopPropagation(); // Prevent default and stop propagation
         
         // Get the target element
         const btn = e.target.matches('[data-open-consultation], [data-open-modal]') ? 
@@ -93,6 +110,7 @@
       // Close buttons 
       if (e.target.matches('[data-close-modal]') || e.target.closest('[data-close-modal]')) {
         e.preventDefault();
+        e.stopPropagation(); // Prevent default and stop propagation
         
         // Get the parent modal
         const modal = e.target.closest('.modal, [id$="-modal"]');
