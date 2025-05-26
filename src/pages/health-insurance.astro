@@ -8,64 +8,68 @@ const insuranceModels = [
     name: "Standard Model",
     description: "Free choice of doctors throughout Switzerland",
     savings: "0%",
-    bestFor: ["Maximum flexibility", "Direct specialist access", "No restrictions"]
+    bestFor: ["Maximum flexibility", "Direct specialist access", "No restrictions"],
+    icon: "🏥"
   },
   {
     name: "Family Doctor",
     description: "Choose a designated family doctor as first point of contact",
     savings: "Up to 15%",
-    bestFor: ["Coordinated care", "Lower premiums", "Personal relationship"]
+    bestFor: ["Coordinated care", "Lower premiums", "Personal relationship"],
+    icon: "👨‍⚕️"
   },
   {
     name: "HMO",
     description: "Use specific health centers as first point of contact",
     savings: "Up to 20%",
-    bestFor: ["Significant savings", "Integrated care", "Urban areas"]
+    bestFor: ["Significant savings", "Integrated care", "Urban areas"],
+    icon: "🏢"
   },
   {
     name: "Telmed",
     description: "Call medical hotline before visiting doctor",
     savings: "Up to 15%",
-    bestFor: ["Convenience", "Lower premiums", "Simple conditions"]
+    bestFor: ["Convenience", "Lower premiums", "Simple conditions"],
+    icon: "📞"
   }
 ];
 
 const providers = [
   {
     name: "Assura",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406940/assura-logo-png_seeklogo-462524_zlvevx.png",
+    description: "Known for competitive premiums",
     link: "/healthcare/all-insurances/assura",
-    description: "Known for competitive premiums"
+    color: "from-blue-500 to-blue-600"
   },
   {
     name: "CSS",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740414664/css-logo_yvxvxr.png",
+    description: "Switzerland's largest health insurer",
     link: "/healthcare/all-insurances/css",
-    description: "Switzerland's largest health insurer"
+    color: "from-green-500 to-green-600"
   },
   {
     name: "Groupe Mutuel",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/gm-logo_fznr7i.png",
+    description: "Comprehensive coverage options",
     link: "/healthcare/all-insurances/groupe-mutuel",
-    description: "Comprehensive coverage options"
+    color: "from-orange-500 to-orange-600"
   },
   {
     name: "Helsana",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp",
+    description: "Digital innovation leader",
     link: "/healthcare/all-insurances/helsana",
-    description: "Digital innovation leader"
+    color: "from-red-500 to-red-600"
   },
   {
     name: "Swica",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/swica_logo_yvxvxr.png",
+    description: "Top-rated customer service",
     link: "/healthcare/all-insurances/swica",
-    description: "Top-rated customer service"
+    color: "from-purple-500 to-purple-600"
   },
   {
     name: "Sanitas",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/sanitas_logo_yvxvxr.png",
+    description: "Modern insurance solutions",
     link: "/healthcare/all-insurances/sanitas",
-    description: "Modern insurance solutions"
+    color: "from-teal-500 to-teal-600"
   }
 ];
 
@@ -104,6 +108,33 @@ const faqs = [
   }
 ];
 
+const savingStrategies = [
+  {
+    title: "Choose a Higher Deductible",
+    savings: "Up to CHF 1,500/year",
+    description: "Selecting a higher annual deductible (franchise) significantly reduces your monthly premium.",
+    icon: "💰"
+  },
+  {
+    title: "Select an Alternative Model",
+    savings: "10-25% discount",
+    description: "HMO, family doctor, or telmed models offer substantial savings compared to standard.",
+    icon: "🏥"
+  },
+  {
+    title: "Exclude Accident Coverage",
+    savings: "CHF 30-50/month",
+    description: "If employed over 8 hours/week, your employer covers accidents.",
+    icon: "🛡️"
+  },
+  {
+    title: "Switch Providers Annually",
+    savings: "CHF 500-2,000/year",
+    description: "Compare rates each November to benefit from competitive premiums.",
+    icon: "🔄"
+  }
+];
+
 const meta = {
   title: 'Health Insurance in Switzerland - Complete Guide for Expats 2025 | Expat Savvy',
   description: 'Everything you need to know about health insurance in Switzerland. Compare the best and cheapest health insurance options, understand models, and find the perfect coverage for expats.',
@@ -117,654 +148,489 @@ const meta = {
   description={meta.description}
   canonicalURLProp={meta.canonicalUrl}
 >
-  <main class="py-12">
-    <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-primary-900 mb-6">
-          Health Insurance in Switzerland
-        </h1>
-        <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-          Expert guidance on Swiss health insurance. Compare providers, understand coverage options, and find the best plan for your needs.
-        </p>
-        <div class="mt-8 flex gap-4 justify-center">
-          <a href="/free-consultation" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-            Get Expert Help
-          </a>
-          <a href="/compare-providers" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-            Compare Providers
-          </a>
-        </div>
+  <main>
+    <!-- Hero Section with Split Design -->
+    <div class="relative bg-white">
+      <div class="absolute inset-0">
+        <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
       </div>
-    </section>
-
-    <!-- Quick Navigation -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <div class="bg-gray-50 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4">Quick Navigation</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <a href="#what-is-swiss-health-insurance" class="text-primary-600 hover:text-primary-800">→ What is Swiss Health Insurance?</a>
-          <a href="#how-much-does-it-cost" class="text-primary-600 hover:text-primary-800">→ How Much Does Health Insurance Cost?</a>
-          <a href="#which-is-best" class="text-primary-600 hover:text-primary-800">→ Which is the Best Health Insurance?</a>
-          <a href="#how-to-save-money" class="text-primary-600 hover:text-primary-800">→ How to Get Cheaper Health Insurance?</a>
-          <a href="#insurance-models" class="text-primary-600 hover:text-primary-800">→ What are the Insurance Models?</a>
-          <a href="#how-to-switch" class="text-primary-600 hover:text-primary-800">→ How to Switch Providers?</a>
+      <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
+        <!-- Left Side - Main Content -->
+        <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+          <div class="max-w-lg mx-auto lg:max-w-none">
+            <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+              Swiss Health Insurance
+              <span class="block text-primary-600 mt-2">Made Simple</span>
+            </h1>
+            <p class="mt-6 text-xl text-gray-500">
+              Navigate Switzerland's health insurance system with confidence. Find the perfect coverage for your needs, understand your options, and save money.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4">
+              <button
+                onclick="showConsultationModal()"
+                class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                Get Free Consultation
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+              <a 
+                href="#quick-guide"
+                class="inline-flex items-center px-8 py-4 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Explore Options
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- What is Swiss Health Insurance? -->
-    <section id="what-is-swiss-health-insurance" class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">What is Swiss Health Insurance and Why is it Mandatory?</h2>
-      
-      <div class="prose max-w-none">
-        <p class="text-lg mb-4">
-          Health insurance in Switzerland (known as KVG/LAMal) is mandatory for all residents, including expats. You must obtain coverage within 3 months of arrival, with coverage backdated to your arrival date. The Swiss healthcare system combines mandatory basic insurance with optional supplementary coverage.
-        </p>
         
-        <div class="bg-red-50 border-l-4 border-red-500 p-4 my-6">
-          <p class="font-semibold text-red-800">Legal Requirement:</p>
-          <p class="text-red-700">Missing the 3-month deadline can result in being assigned to an insurer by your canton, potentially with higher premiums and penalties.</p>
+        <!-- Right Side - Feature Highlights -->
+        <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
+          <div class="max-w-lg mx-auto">
+            <h2 class="text-3xl font-extrabold text-white mb-8">Why Choose Expat Savvy?</h2>
+            <div class="space-y-6">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white/20 backdrop-blur text-white">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-medium text-white">Expert Guidance</h3>
+                  <p class="mt-2 text-base text-primary-100">Personalized advice from insurance specialists who understand expat needs</p>
+                </div>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white/20 backdrop-blur text-white">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-medium text-white">Save Money</h3>
+                  <p class="mt-2 text-base text-primary-100">Find the best rates and learn proven strategies to reduce your premiums</p>
+                </div>
+              </div>
+              
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white/20 backdrop-blur text-white">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-medium text-white">100% Compliant</h3>
+                  <p class="mt-2 text-base text-primary-100">Ensure you meet all legal requirements within the 3-month deadline</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Guide Section -->
+    <section id="quick-guide" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Your Quick Start Guide</h2>
+          <p class="mt-4 text-xl text-gray-600">Essential information to get you started with Swiss health insurance</p>
         </div>
 
-        <h3 class="text-2xl font-semibold mt-8 mb-4">What Does Basic Health Insurance Cover?</h3>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Doctor visits and specialist consultations</li>
-          <li>Hospital treatments in general ward</li>
-          <li>Emergency care anywhere in Switzerland</li>
-          <li>Prescribed medications on the official list</li>
-          <li>Maternity care and childbirth</li>
-          <li>Basic dental care for children</li>
-          <li>Preventive vaccinations</li>
-        </ul>
+        <!-- Info Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- What is Mandatory Card -->
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-white">What's Mandatory?</h3>
+                <svg class="h-8 w-8 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-700 mb-4">Basic health insurance (KVG/LAMal) is legally required for all Swiss residents, including expats.</p>
+              <div class="text-sm text-gray-600 space-y-2">
+                <div class="flex items-center">
+                  <svg class="h-4 w-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span>Register within 3 months</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="h-4 w-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span>Coverage backdated to arrival</span>
+                </div>
+                <div class="flex items-center">
+                  <svg class="h-4 w-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span>Same benefits from all insurers</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="mt-6">
-          <a href="/blog/relocating-switzerland-insurance-checklist-by-canton" class="text-primary-600 hover:text-primary-800 font-medium">
-            → Read our complete insurance checklist for new residents
+          <!-- Average Costs Card -->
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+            <div class="bg-gradient-to-br from-green-500 to-green-600 p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-white">Average Costs</h3>
+                <svg class="h-8 w-8 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-700 mb-4">Monthly premiums vary by canton and chosen options:</p>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-600">Major cities:</span>
+                  <span class="font-semibold">CHF 350-550</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-600">Suburban areas:</span>
+                  <span class="font-semibold">CHF 300-450</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-600">Rural areas:</span>
+                  <span class="font-semibold">CHF 280-400</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions Card -->
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-white">Quick Actions</h3>
+                <svg class="h-8 w-8 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-700 mb-4">Take these steps to get started:</p>
+              <div class="space-y-3">
+                <a href="#insurance-models" class="flex items-center text-primary-600 hover:text-primary-800 transition-colors">
+                  <span class="text-2xl mr-3">1</span>
+                  <span class="font-medium">Choose your model</span>
+                </a>
+                <a href="#save-money" class="flex items-center text-primary-600 hover:text-primary-800 transition-colors">
+                  <span class="text-2xl mr-3">2</span>
+                  <span class="font-medium">Learn to save money</span>
+                </a>
+                <a href="#providers" class="flex items-center text-primary-600 hover:text-primary-800 transition-colors">
+                  <span class="text-2xl mr-3">3</span>
+                  <span class="font-medium">Compare providers</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Insurance Models Section -->
+    <section id="insurance-models" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Which Insurance Model is Right for You?</h2>
+          <p class="mt-4 text-xl text-gray-600">Each model offers different benefits and savings. Choose based on your healthcare needs.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {insuranceModels.map((model) => (
+            <div class="relative group">
+              <div class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div class="relative bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300">
+                <div class="text-4xl mb-4">{model.icon}</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{model.name}</h3>
+                <p class="text-gray-600 text-sm mb-4">{model.description}</p>
+                <div class="mb-4">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    {model.savings} savings
+                  </span>
+                </div>
+                <div class="space-y-2">
+                  <p class="text-sm font-medium text-gray-700">Best for:</p>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    {model.bestFor.map((item) => (
+                      <li class="flex items-start">
+                        <svg class="h-4 w-4 text-primary-500 mr-1 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/blog/health-insurance-models-switzerland" class="inline-flex items-center text-primary-600 hover:text-primary-800 font-medium">
+            Learn more about insurance models
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- How Much Does it Cost? -->
-    <section id="how-much-does-it-cost" class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">How Much Does Health Insurance Cost in Switzerland?</h2>
-      
-      <div class="prose max-w-none">
-        <p class="text-lg mb-6">
-          Health insurance premiums in Switzerland vary significantly based on your canton, age, deductible choice, and insurance model. Understanding these factors helps you find the most affordable coverage.
-        </p>
-
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h3 class="text-2xl font-semibold mb-4">Average Monthly Premiums by Region (2025)</h3>
-          <div class="grid md:grid-cols-3 gap-6">
-            <div class="text-center">
-              <h4 class="font-semibold text-primary-700">Major Cities</h4>
-              <p class="text-3xl font-bold text-primary-900 my-2">350-550 CHF</p>
-              <p class="text-sm text-gray-600">Zurich, Geneva, Basel centers</p>
-            </div>
-            <div class="text-center">
-              <h4 class="font-semibold text-primary-700">Suburban Areas</h4>
-              <p class="text-3xl font-bold text-primary-900 my-2">300-450 CHF</p>
-              <p class="text-sm text-gray-600">City outskirts, larger towns</p>
-            </div>
-            <div class="text-center">
-              <h4 class="font-semibold text-primary-700">Rural Areas</h4>
-              <p class="text-3xl font-bold text-primary-900 my-2">280-400 CHF</p>
-              <p class="text-sm text-gray-600">Countryside, small communities</p>
-            </div>
-          </div>
+    <!-- Save Money Section -->
+    <section id="save-money" class="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">How to Get Cheaper Health Insurance</h2>
+          <p class="mt-4 text-xl text-gray-600">Smart strategies to reduce your premiums without compromising coverage</p>
         </div>
 
-        <h3 class="text-2xl font-semibold mb-4">Why Do Premiums Vary by Canton?</h3>
-        <p class="mb-4">
-          Switzerland divides each canton into up to three premium regions based on local healthcare costs. Urban areas with more hospitals and specialists typically have higher premiums than rural regions.
-        </p>
+        <div class="grid md:grid-cols-2 gap-8">
+          {savingStrategies.map((strategy, index) => (
+            <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center text-2xl">
+                    {strategy.icon}
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">{strategy.title}</h3>
+                  <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 mb-3">
+                    Save {strategy.savings}
+                  </div>
+                  <p class="text-gray-600">{strategy.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <div class="mt-6">
-          <a href="/blog/decoding-swiss-health-insurance-canton-region-premium" class="text-primary-600 hover:text-primary-800 font-medium">
-            → Learn why your canton affects your premium
+        <div class="mt-12 bg-primary-600 rounded-2xl p-8 text-center">
+          <h3 class="text-2xl font-bold text-white mb-4">Ready to Save on Your Health Insurance?</h3>
+          <p class="text-primary-100 mb-6">Get personalized recommendations based on your specific situation</p>
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5"
+          >
+            Get Free Savings Analysis
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Providers Section -->
+    <section id="providers" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Compare Top Insurance Providers</h2>
+          <p class="mt-4 text-xl text-gray-600">Switzerland's leading health insurance companies at a glance</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {providers.map((provider) => (
+            <a href={provider.link} class="group block">
+              <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class={`h-2 bg-gradient-to-r ${provider.color}`}></div>
+                <div class="p-8">
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                    {provider.name}
+                  </h3>
+                  <p class="text-gray-600 mb-4">{provider.description}</p>
+                  <div class="flex items-center text-primary-600 font-medium">
+                    <span>Learn more</span>
+                    <svg class="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/compare-providers" class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+            Compare All Providers
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Which is the Best? -->
-    <section id="which-is-best" class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">Which is the Best Health Insurance in Switzerland?</h2>
-      
-      <div class="prose max-w-none mb-8">
-        <p class="text-lg">
-          The "best" health insurance depends on your individual needs, but some providers consistently rank highly for different criteria. Here's what to consider when choosing:
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-3">Best for Service Quality</h3>
-          <ul class="space-y-2">
-            <li><strong>Swica:</strong> Top-rated customer service</li>
-            <li><strong>CSS:</strong> Comprehensive support network</li>
-            <li><strong>Helsana:</strong> Digital innovation leader</li>
-          </ul>
-          <a href="/blog/best-health-insurance-switzerland-expats" class="text-primary-600 hover:text-primary-800 text-sm mt-4 block">
-            → Compare top providers
-          </a>
+    <!-- Resources Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Helpful Resources & Guides</h2>
+          <p class="mt-4 text-xl text-gray-600">Everything you need to master Swiss health insurance</p>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-3">Best for Low Premiums</h3>
-          <ul class="space-y-2">
-            <li><strong>Assura:</strong> Competitive basic rates</li>
-            <li><strong>Atupri:</strong> Budget-friendly options</li>
-            <li><strong>Concordia:</strong> Good value coverage</li>
-          </ul>
-          <a href="/compare-providers" class="text-primary-600 hover:text-primary-800 text-sm mt-4 block">
-            → Compare all providers
-          </a>
-        </div>
-
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-3">Best for Families</h3>
-          <ul class="space-y-2">
-            <li><strong>Groupe Mutuel:</strong> Family packages</li>
-            <li><strong>Sanitas:</strong> Child-friendly services</li>
-            <li><strong>CSS:</strong> Maternity benefits</li>
-          </ul>
-          <a href="/blog/expat-family-matters-best-swiss-health-insurers-children-maternity" class="text-primary-600 hover:text-primary-800 text-sm mt-4 block">
-            → Best for families guide
-          </a>
-        </div>
-      </div>
-
-      <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
-        <p class="text-blue-800"><strong>Pro Tip:</strong> The best insurer for you depends on your specific situation. Consider factors like customer service in your language, digital tools, supplementary options, and provider networks in your area.</p>
-      </div>
-    </section>
-
-    <!-- How to Get Cheaper Insurance -->
-    <section id="how-to-save-money" class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">How Can I Get Cheaper Health Insurance in Switzerland?</h2>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="text-2xl font-semibold mb-4">1. Choose a Higher Deductible</h3>
-          <p class="mb-4">
-            Selecting a higher annual deductible (franchise) significantly reduces your monthly premium. Options range from CHF 300 to CHF 2,500 for adults.
-          </p>
-          <div class="bg-gray-50 p-4 rounded">
-            <p class="font-semibold">Potential Savings:</p>
-            <p>Up to CHF 1,500 per year with maximum deductible</p>
-          </div>
-          <a href="/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-model" class="text-primary-600 hover:text-primary-800 text-sm mt-2 block">
-            → Calculate your optimal deductible
-          </a>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-semibold mb-4">2. Select an Alternative Model</h3>
-          <p class="mb-4">
-            Choosing HMO, family doctor, or telemedicine models instead of the standard model can save 10-25% on premiums.
-          </p>
-          <div class="bg-gray-50 p-4 rounded">
-            <p class="font-semibold">Potential Savings:</p>
-            <p>CHF 500-1,200 per year depending on model</p>
-          </div>
-          <a href="/blog/health-insurance-models-switzerland" class="text-primary-600 hover:text-primary-800 text-sm mt-2 block">
-            → Compare insurance models
-          </a>
-        </div>
-      </div>
-
-      <div class="mt-8 grid md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="text-2xl font-semibold mb-4">3. Exclude Accident Coverage</h3>
-          <p class="mb-4">
-            If you work more than 8 hours per week, your employer provides accident coverage. You can exclude this from your health insurance.
-          </p>
-          <div class="bg-gray-50 p-4 rounded">
-            <p class="font-semibold">Potential Savings:</p>
-            <p>CHF 30-50 per month</p>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-2xl font-semibold mb-4">4. Switch Providers Annually</h3>
-          <p class="mb-4">
-            Compare and switch providers during the annual switching period (by November 30) to benefit from competitive rates.
-          </p>
-          <div class="bg-gray-50 p-4 rounded">
-            <p class="font-semibold">Potential Savings:</p>
-            <p>CHF 500-2,000 per year</p>
-          </div>
-          <a href="/healthcare/switching-health-insurance" class="text-primary-600 hover:text-primary-800 text-sm mt-2 block">
-            → How to switch providers
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Insurance Models -->
-    <section id="insurance-models" class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">What Are the Different Health Insurance Models?</h2>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {insuranceModels.map((model) => (
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-xl font-semibold mb-2">{model.name}</h3>
-            <p class="text-gray-600 mb-4">{model.description}</p>
-            <div class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-semibold inline-block mb-4">
-              Premium Savings: {model.savings}
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Getting Started -->
+          <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+              <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
             </div>
-            <p class="font-semibold mb-2">Best For:</p>
-            <ul class="space-y-1">
-              {model.bestFor.map((item) => (
-                <li class="text-sm text-gray-600">• {item}</li>
-              ))}
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Getting Started</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/healthcare/new-health-insurance" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Setting up as new resident
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="/blog/relocating-switzerland-insurance-checklist-by-canton" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Insurance checklist by canton
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="/guides/how-to/find-best-health-insurance" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Finding the best insurance
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
             </ul>
           </div>
-        ))}
-      </div>
 
-      <div class="mt-8 text-center">
-        <a href="/blog/health-insurance-models-switzerland" class="text-primary-600 hover:text-primary-800 font-medium">
-          → Detailed comparison of all insurance models
-        </a>
-      </div>
-    </section>
-
-    <!-- How to Get Started -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">How Do I Get Health Insurance as a New Resident?</h2>
-      
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl font-bold text-primary-700">1</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Register Your Arrival</h3>
-          <p class="text-gray-600">Register with your local commune within 14 days of arrival</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl font-bold text-primary-700">2</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Compare Options</h3>
-          <p class="text-gray-600">Research providers, models, and deductibles for your needs</p>
-        </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl font-bold text-primary-700">3</span>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Apply Within 3 Months</h3>
-          <p class="text-gray-600">Submit your application to secure coverage from arrival date</p>
-        </div>
-      </div>
-
-      <div class="mt-8 text-center">
-        <a href="/healthcare/new-health-insurance" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-          Step-by-Step Setup Guide
-        </a>
-      </div>
-    </section>
-
-    <!-- How to Switch -->
-    <section id="how-to-switch" class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">How Can I Switch Health Insurance Providers?</h2>
-      
-      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-8">
-        <h3 class="text-xl font-semibold mb-2">Annual Switching Period</h3>
-        <p class="mb-4">
-          You can switch your basic insurance provider once per year. Your cancellation letter must reach your current insurer by <strong>November 30</strong> to switch for the following year.
-        </p>
-        <a href="/healthcare/switching-health-insurance" class="text-primary-600 hover:text-primary-800 font-medium">
-          → Complete switching guide with letter templates
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Switching Timeline</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">•</span>
-              <div>
-                <strong>September:</strong> New premiums announced
-              </div>
-            </li>
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">•</span>
-              <div>
-                <strong>October:</strong> Compare and choose new provider
-              </div>
-            </li>
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">•</span>
-              <div>
-                <strong>By Nov 30:</strong> Send cancellation letter
-              </div>
-            </li>
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">•</span>
-              <div>
-                <strong>December:</strong> Apply to new insurer
-              </div>
-            </li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Important Notes</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">✓</span>
-              <span>Basic insurance cannot be refused</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">✓</span>
-              <span>No health questionnaire required</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">✓</span>
-              <span>Coverage is seamless - no gaps</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-primary-600 mr-2">✓</span>
-              <span>Supplementary insurance has different rules</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Supplementary Insurance -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">Do I Need Supplementary Health Insurance?</h2>
-      
-      <div class="prose max-w-none mb-8">
-        <p class="text-lg">
-          While basic insurance covers essential healthcare, many expats choose supplementary insurance for additional benefits. Unlike basic insurance, supplementary coverage is optional and insurers can refuse applications based on health status.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-3">Popular Supplementary Coverage</h3>
-          <ul class="space-y-2 text-sm">
-            <li>• Private/semi-private hospital rooms</li>
-            <li>• Free choice of hospital doctors</li>
-            <li>• Alternative medicine</li>
-            <li>• Dental coverage</li>
-            <li>• Worldwide travel coverage</li>
-            <li>• Gym memberships</li>
-          </ul>
-        </div>
-
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-3">Who Should Consider It?</h3>
-          <ul class="space-y-2 text-sm">
-            <li>• Those wanting more comfort in hospitals</li>
-            <li>• Families with orthodontic needs</li>
-            <li>• People using alternative medicine</li>
-            <li>• Frequent international travelers</li>
-            <li>• Fitness enthusiasts</li>
-          </ul>
-        </div>
-
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-3">Application Tips</h3>
-          <ul class="space-y-2 text-sm">
-            <li>• Apply when young and healthy</li>
-            <li>• Complete health questionnaire honestly</li>
-            <li>• Consider waiting periods</li>
-            <li>• Compare coverage carefully</li>
-            <li>• Check exclusions</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="mt-8 space-y-2">
-        <a href="/blog/gym-coverage-swiss-insurance-revised" class="text-primary-600 hover:text-primary-800 block">
-          → How to get gym coverage through insurance
-        </a>
-        <a href="/blog/dental-insurance-expats-switzerland" class="text-primary-600 hover:text-primary-800 block">
-          → Complete guide to dental insurance
-        </a>
-      </div>
-    </section>
-
-    <!-- Special Situations -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">What About Special Situations?</h2>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Pre-existing Conditions</h3>
-          <p class="mb-4">
-            Basic insurance must accept you regardless of health conditions. However, supplementary insurance can exclude pre-existing conditions or reject applications.
-          </p>
-          <a href="/blog/navigating-swiss-health-insurance-pre-existing-conditions" class="text-primary-600 hover:text-primary-800">
-            → Guide for pre-existing conditions
-          </a>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Pregnancy and Maternity</h3>
-          <p class="mb-4">
-            Maternity care is fully covered by basic insurance with no deductible. Register your newborn within 3 months for seamless coverage.
-          </p>
-          <a href="/blog/maternity-newborn-insurance-switzerland-expat-guide" class="text-primary-600 hover:text-primary-800">
-            → Maternity insurance guide
-          </a>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Students and Young Adults</h3>
-          <p class="mb-4">
-            Students may qualify for premium reductions. Young adults (19-25) pay lower premiums than standard adult rates.
-          </p>
-          <a href="/blog/relocating-to-switzerland-checklist" class="text-primary-600 hover:text-primary-800">
-            → Insurance for students
-          </a>
-        </div>
-
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Cross-border Workers</h3>
-          <p class="mb-4">
-            Frontaliers have special options and may choose between Swiss and home country insurance in some cases.
-          </p>
-          <a href="/news/regional-guides/basel-insurance" class="text-primary-600 hover:text-primary-800">
-            → Cross-border insurance options
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Compare Providers -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">Compare Top Swiss Health Insurance Providers</h2>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {providers.map((provider) => (
-          <a href={provider.link} class="block group">
-            <div class="bg-white rounded-lg shadow-md p-6 h-full hover:shadow-lg transition-shadow">
-              <div class="h-16 flex items-center justify-center mb-4">
-                <img src={provider.logo} alt={`${provider.name} logo`} class="h-12 object-contain" />
-              </div>
-              <h3 class="text-xl font-semibold text-center mb-2 group-hover:text-primary-600">
-                {provider.name}
-              </h3>
-              <p class="text-gray-600 text-center text-sm">
-                {provider.description}
-              </p>
+          <!-- Understanding Options -->
+          <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+              <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
             </div>
-          </a>
-        ))}
-      </div>
-
-      <div class="mt-8 text-center">
-        <a href="/compare-providers" class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-          Compare All Insurance Providers
-        </a>
-      </div>
-    </section>
-
-    <!-- Regional Differences -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-6">How Do Health Insurance Costs Vary by Region?</h2>
-      
-      <div class="bg-gray-100 p-8 rounded-lg mb-8">
-        <p class="text-center text-gray-600 mb-4">Health insurance premiums vary significantly across Switzerland</p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold text-primary-700">High Premium Regions</h3>
-            <ul class="mt-2 space-y-1 text-sm">
-              <li>• Geneva (highest)</li>
-              <li>• Basel-Stadt</li>
-              <li>• Zurich</li>
-              <li>• Vaud</li>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Understanding Options</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/blog/health-insurance-models-switzerland" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Insurance models explained
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-model" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Choosing the right deductible
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="/healthcare/glossary" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Insurance glossary
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
             </ul>
           </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold text-primary-700">Medium Premium Regions</h3>
-            <ul class="mt-2 space-y-1 text-sm">
-              <li>• Bern</li>
-              <li>• Aargau</li>
-              <li>• Zug</li>
-              <li>• St. Gallen</li>
-            </ul>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold text-primary-700">Low Premium Regions</h3>
-            <ul class="mt-2 space-y-1 text-sm">
-              <li>• Appenzell</li>
-              <li>• Uri</li>
-              <li>• Obwalden</li>
-              <li>• Nidwalden</li>
+
+          <!-- Special Topics -->
+          <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+              <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Special Topics</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/blog/maternity-newborn-insurance-switzerland-expat-guide" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Maternity coverage
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="/blog/gym-coverage-swiss-insurance-revised" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Gym & fitness coverage
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="/blog/dental-insurance-expats-switzerland" class="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                  Dental insurance guide
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-      </div>
-      
-      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="text-center">
-          <h3 class="font-semibold mb-2">
-            <a href="/news/regional-guides/zurich-insurance" class="text-primary-600 hover:text-primary-800">Zurich</a>
-          </h3>
-          <p class="text-sm text-gray-600">High premiums, extensive provider network</p>
-        </div>
-        <div class="text-center">
-          <h3 class="font-semibold mb-2">
-            <a href="/news/regional-guides/geneva-insurance" class="text-primary-600 hover:text-primary-800">Geneva</a>
-          </h3>
-          <p class="text-sm text-gray-600">Highest premiums, international options</p>
-        </div>
-        <div class="text-center">
-          <h3 class="font-semibold mb-2">
-            <a href="/news/regional-guides/basel-insurance" class="text-primary-600 hover:text-primary-800">Basel</a>
-          </h3>
-          <p class="text-sm text-gray-600">High premiums, cross-border considerations</p>
-        </div>
-        <div class="text-center">
-          <h3 class="font-semibold mb-2">
-            <a href="/news/regional-guides/zug-insurance" class="text-primary-600 hover:text-primary-800">Zug</a>
-          </h3>
-          <p class="text-sm text-gray-600">Moderate premiums, business hub</p>
-        </div>
-      </div>
-
-      <div class="mt-6 text-center">
-        <a href="/insurance-guides/regional" class="text-primary-600 hover:text-primary-800 font-medium">
-          → View all regional insurance guides
-        </a>
       </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
-      
-      <FAQ items={faqs} showHeading={false} />
-    </section>
-
-    <!-- Helpful Resources -->
-    <section class="max-w-6xl mx-auto px-4 mb-16">
-      <h2 class="text-3xl font-bold mb-8">Helpful Resources</h2>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-4">How-To Guides</h3>
-          <ul class="space-y-3">
-            <li>
-              <a href="/guides/how-to/find-best-health-insurance" class="text-primary-600 hover:text-primary-800">
-                → How to Find the Best Health Insurance
-              </a>
-            </li>
-            <li>
-              <a href="/healthcare/new-health-insurance" class="text-primary-600 hover:text-primary-800">
-                → Setting Up Health Insurance as a New Resident
-              </a>
-            </li>
-            <li>
-              <a href="/healthcare/switching-health-insurance" class="text-primary-600 hover:text-primary-800">
-                → Complete Guide to Switching Providers
-              </a>
-            </li>
-            <li>
-              <a href="/blog/relocating-switzerland-insurance-checklist-by-canton" class="text-primary-600 hover:text-primary-800">
-                → Insurance Checklist by Canton
-              </a>
-            </li>
-          </ul>
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Frequently Asked Questions</h2>
+          <p class="mt-4 text-xl text-gray-600">Quick answers to common health insurance questions</p>
         </div>
-
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold mb-4">Understanding Your Options</h3>
-          <ul class="space-y-3">
-            <li>
-              <a href="/blog/health-insurance-models-switzerland" class="text-primary-600 hover:text-primary-800">
-                → Insurance Models Explained
-              </a>
-            </li>
-            <li>
-              <a href="/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-model" class="text-primary-600 hover:text-primary-800">
-                → Choosing the Right Deductible
-              </a>
-            </li>
-            <li>
-              <a href="/healthcare/glossary" class="text-primary-600 hover:text-primary-800">
-                → Health Insurance Glossary
-              </a>
-            </li>
-            <li>
-              <a href="/blog/navigating-swiss-insurance-choosing-expat-insurance-broker-2025" class="text-primary-600 hover:text-primary-800">
-                → Working with Insurance Brokers
-              </a>
-            </li>
-          </ul>
-        </div>
+        
+        <FAQ items={faqs} showHeading={false} />
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="bg-primary-600 py-16 px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Need help with your insurance?</h2>
-        <p class="text-xl text-primary-100 mb-8">Get expert guidance to find the right coverage</p>
-        <div class="flex gap-4 justify-center">
+    <!-- Final CTA Section -->
+    <section class="py-16 bg-gradient-to-br from-primary-600 to-primary-700">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-extrabold text-white mb-4">
+          Ready to Find Your Perfect Health Insurance?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8">
+          Join thousands of expats who've found better coverage and saved money with our expert guidance
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onclick="showConsultationModal()"
-            class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-100"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5"
           >
             Schedule Free Consultation
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
           </button>
-          <a href="/compare-providers" class="inline-flex items-center px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-primary-700">
-            Compare Providers
-          </a>
         </div>
-        <p class="mt-4 text-sm text-primary-200">7 people booked consultations in the last 24 hours</p>
+        <p class="mt-6 text-sm text-primary-200">
+          No obligation • Expert advice • Save time and money
+        </p>
       </div>
     </section>
   </main>
