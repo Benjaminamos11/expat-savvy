@@ -9,15 +9,15 @@ interface Props {
 const { insuranceType = 'health' } = Astro.props;
 
 // Dynamic calendar URL based on insurance type
-let calendarUrl = "https://cal.com/benjaminwagner/expat-insurance-consultation";
+let calendarUrl = "https://cal.com/robertkolar/change-health-insurance";
 
 // Special pages get unique calendars
 if (insuranceType === 'new-health') {
-  calendarUrl = "https://cal.com/benjaminwagner/new-insurance-setup";
+  calendarUrl = "https://cal.com/robertkolar/setting-up-health-insurance-in-switzerland";
 } else if (insuranceType === 'pension') {
-  calendarUrl = "https://cal.com/benjaminwagner/pension-planning";
+  calendarUrl = "https://cal.com/robertkolar/third-pillar-pension-solutions";
 } else if (insuranceType === 'liability' || insuranceType === 'household') {
-  calendarUrl = "https://cal.com/benjaminwagner/other-insurance";
+  calendarUrl = "https://cal.com/robertkolar/household-liability-insurance";
 }
 ---
 
@@ -70,40 +70,48 @@ if (insuranceType === 'new-health') {
         // Silent fail
       }
       
-      // Initialize Cal
-      if (window.Cal) {
-        // Configure Cal.com parameters
-        const config = {
-          calLink: calendarUrl.replace('https://cal.com/', ''),
-          config: {
-            name: userName,
-            email: userEmail,
-            hideEventTypeDetails: false,
-            hideBranding: true,
-            layout: 'month_view',
-          },
-          embedType: 'inline',
-          uiInMobile: 'small_calendar'
-        };
-        
-        // Create the Cal instance
-        const cal = window.Cal.ns["00000"];
-        
-        if (!cal) {
-          window.Cal.ns["00000"] = new (window.Cal?.inline?.Calendar || window.Cal?.Calendar)();
-          window.Cal.ns["00000"].init(config, {
-            elementOrSelector: '#cal-booking-placeholder',
-            embededOverlayable: false
-          });
-        }
+      // Check if mobile device
+      const isMobile = window.innerWidth <= 640;
+      
+      if (isMobile) {
+        // For mobile, open in new window
+        window.open(calendarUrl, '_blank');
       } else {
-        // Fallback to iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = `${calendarUrl}?embed=true&name=${encodeURIComponent(userName)}&email=${encodeURIComponent(userEmail)}`;
-        iframe.width = '100%';
-        iframe.height = '600px';
-        iframe.frameBorder = '0';
-        calElement.appendChild(iframe);
+        // For desktop, use inline embedding
+        if (window.Cal) {
+          // Configure Cal.com parameters
+          const config = {
+            calLink: calendarUrl.replace('https://cal.com/', ''),
+            config: {
+              name: userName,
+              email: userEmail,
+              hideEventTypeDetails: false,
+              hideBranding: true,
+              layout: 'month_view',
+            },
+            embedType: 'inline',
+            uiInMobile: 'small_calendar'
+          };
+          
+          // Create the Cal instance
+          const cal = window.Cal.ns["00000"];
+          
+          if (!cal) {
+            window.Cal.ns["00000"] = new (window.Cal?.inline?.Calendar || window.Cal?.Calendar)();
+            window.Cal.ns["00000"].init(config, {
+              elementOrSelector: '#cal-booking-placeholder',
+              embededOverlayable: false
+            });
+          }
+        } else {
+          // Fallback to iframe
+          const iframe = document.createElement('iframe');
+          iframe.src = `${calendarUrl}?embed=true&name=${encodeURIComponent(userName)}&email=${encodeURIComponent(userEmail)}`;
+          iframe.width = '100%';
+          iframe.height = '600px';
+          iframe.frameBorder = '0';
+          calElement.appendChild(iframe);
+        }
       }
     } catch (e) {
       console.error('Error initializing calendar:', e);
