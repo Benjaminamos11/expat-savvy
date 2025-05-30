@@ -39,9 +39,7 @@
 
       <div class="flex flex-col gap-3 mb-4">
         <button
-          data-cal-link="robertkolar/expat-savvy"
-          data-cal-namespace="expat-savvy"
-          data-cal-config='{"layout":"month_view","theme":"light"}'
+          id="manual-cal-booking-btn"
           type="button"
           class="w-full flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors"
         >
@@ -68,11 +66,35 @@
   // Close modal when clicking outside
   document.getElementById('consultation-modal')?.addEventListener('click', (e) => {
     if (e.target === e.currentTarget) {
-      e.currentTarget.classList.add('hidden');
+      (e.currentTarget as HTMLElement)?.classList.add('hidden');
     }
   });
+  
+  // Manual Cal.com booking handler
+  document.addEventListener('DOMContentLoaded', () => {
+    const bookingBtn = document.getElementById('manual-cal-booking-btn');
+    if (bookingBtn) {
+      bookingBtn.addEventListener('click', () => {
+        // Manually trigger Cal.com booking
+        if (window.Cal && window.Cal.ns && window.Cal.ns["expat-savvy"]) {
+          window.Cal.ns["expat-savvy"]("ui", {
+            "theme": "light",
+            "hideEventTypeDetails": false,
+            "layout": "month_view"
+          });
+          window.Cal.ns["expat-savvy"]("floatingButton", {
+            "calLink": "robertkolar/expat-savvy"
+          });
+        } else {
+          // Fallback: open Cal.com directly
+          window.open('https://cal.com/robertkolar/expat-savvy', '_blank');
+        }
+      });
+    }
+  });
+  
   // Function to show the modal globally
-  window.showConsultationModal = function() {
+  (window as any).showConsultationModal = function() {
     document.getElementById('consultation-modal')?.classList.remove('hidden');
     document.body.classList.add('modal-open');
   };
