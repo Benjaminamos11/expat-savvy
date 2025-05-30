@@ -1,0 +1,637 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+const faqs = [
+  {
+    question: "Do I need to add my family to the same insurance provider?",
+    answer: "No, in Switzerland each family member can choose a different health insurance provider. However, staying with the same provider often offers administrative convenience and potential family discounts."
+  },
+  {
+    question: "When can I add family members to my health insurance?",
+    answer: "You can add family members when they first arrive in Switzerland (within 3 months), during annual switching period (November-December), or due to qualifying life events like marriage or birth."
+  },
+  {
+    question: "Do children need their own health insurance in Switzerland?",
+    answer: "Yes, children must have their own mandatory health insurance from birth. However, they receive subsidized premiums and often qualify for additional premium reductions."
+  },
+  {
+    question: "What documents do I need to add family members?",
+    answer: "You typically need residence permits, birth certificates, marriage certificates, and for children, vaccination records. All documents may need Swiss official translations."
+  },
+  {
+    question: "Can I add my spouse immediately after they arrive?",
+    answer: "Yes, your spouse must obtain health insurance within 3 months of arrival. You can add them to your provider or they can choose a different one during this grace period."
+  }
+];
+---
+
+<Layout
+  title="How to Add Family Members to Swiss Health Insurance: Complete 2025 Guide"
+  description="Step-by-step guide to adding spouse and children to your Swiss health insurance. Learn about deadlines, required documents, and strategies to save money for families."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
+>
+  <!-- Hero Section -->
+  <div class="relative bg-white overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
+        alt="Family reviewing insurance documents together"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-blue/70 to-blue/50"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+          <span class="block">Add Family to</span>
+          <span class="block mt-2">Swiss <span class="text-primary-400">Health Insurance</span></span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-200">
+          Complete step-by-step guide to adding spouse and children to your Swiss health insurance efficiently and cost-effectively.
+        </p>
+        <div class="mt-10">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Expert Family Insurance Advice
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Overview -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Essential Information for Adding Family Members</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-lg p-6 shadow-md text-center">
+            <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">3-Month Deadline</h3>
+            <p class="text-gray-600">New family members must get insurance within 3 months of Swiss arrival</p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-md text-center">
+            <div class="bg-green-100 text-green-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Children Get Discounts</h3>
+            <p class="text-gray-600">Children under 18 receive subsidized premium rates automatically</p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-md text-center">
+            <div class="bg-purple-100 text-purple-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Individual Choice</h3>
+            <p class="text-gray-600">Each family member can choose different providers and models</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step-by-Step Guide -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Step-by-Step Process</h2>
+        
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-8">
+            <div class="flex items-start">
+              <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 mt-1">1</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Determine Timing and Eligibility</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">Valid Timing for Adding Family</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>New arrivals:</strong> Within 3 months of Swiss residence</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Annual switching period:</strong> November-December</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Life events:</strong> Marriage, birth, divorce</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span><strong>Moving cantons:</strong> Relocation between cantons</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">Required Legal Status</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span>Valid Swiss residence permit (B, C, L, etc.)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span>Registered address in Switzerland</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-blue-600 mr-2">•</span>
+                        <span>For children: Birth certificate showing Swiss residence</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-8">
+            <div class="flex items-start">
+              <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 mt-1">2</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Gather Required Documents</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">For Adding Spouse</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Marriage certificate (Swiss translation if needed)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Spouse's residence permit copy</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Proof of Swiss address registration</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Copy of passport or ID</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">For Adding Children</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Birth certificate (Swiss translation if needed)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Child's residence permit or family reunification documents</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Vaccination records (sometimes required)</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-green-600 mr-2">✓</span>
+                        <span>Previous insurance certificates (if applicable)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p class="text-sm text-yellow-800">
+                    <strong>Pro Tip:</strong> Get documents translated by an official Swiss translator if they're not in German, French, or Italian. Many insurance companies provide forms in English, but official documents often need certified translations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-8">
+            <div class="flex items-start">
+              <div class="bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 mt-1">3</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Choose Insurance Strategy</h3>
+                
+                <div class="space-y-6">
+                  <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="font-semibold text-gray-900 mb-3">Option 1: Same Provider for All Family</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 class="font-medium text-green-700 mb-2">Advantages</h5>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li>• Single point of contact</li>
+                          <li>• Potential family discounts</li>
+                          <li>• Simplified administration</li>
+                          <li>• Combined billing options</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 class="font-medium text-red-700 mb-2">Disadvantages</h5>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li>• May not be cheapest option</li>
+                          <li>• Less flexibility for individual needs</li>
+                          <li>• All affected by provider issues</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="font-semibold text-gray-900 mb-3">Option 2: Different Providers per Family Member</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 class="font-medium text-green-700 mb-2">Advantages</h5>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li>• Optimize costs for each person</li>
+                          <li>• Tailor coverage to individual needs</li>
+                          <li>• Take advantage of best rates</li>
+                          <li>• Risk distribution across providers</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 class="font-medium text-red-700 mb-2">Disadvantages</h5>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li>• More administrative work</li>
+                          <li>• Multiple contact points</li>
+                          <li>• Separate bills and payments</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-8">
+            <div class="flex items-start">
+              <div class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 mt-1">4</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Complete Application Process</h3>
+                
+                <div class="space-y-4">
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <h4 class="font-semibold text-gray-900 mb-2">Contact Your Insurance Provider</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">1.</span>
+                        <span>Call customer service or visit online portal</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">2.</span>
+                        <span>Request family member addition forms</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">3.</span>
+                        <span>Ask about family discounts or special rates</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">4.</span>
+                        <span>Confirm required documentation list</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <h4 class="font-semibold text-gray-900 mb-2">Submit Complete Application</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">1.</span>
+                        <span>Fill out all forms completely and accurately</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">2.</span>
+                        <span>Include all required supporting documents</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">3.</span>
+                        <span>Choose deductible amounts for each family member</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-orange-600 mr-2">4.</span>
+                        <span>Submit via preferred method (online, mail, or in person)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="bg-gradient-to-r from-teal-50 to-teal-100 rounded-lg p-8">
+            <div class="flex items-start">
+              <div class="bg-teal-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 mt-1">5</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Finalize and Optimize Coverage</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">Confirmation Steps</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Receive insurance certificates for all family members</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Verify all personal information is correct</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Confirm premium amounts and payment schedule</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Set up automatic payment if desired</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">Optimization Opportunities</h4>
+                    <ul class="space-y-2 text-gray-700">
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Consider supplementary insurance for children</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Apply for premium subsidies if eligible</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Review family's total healthcare budget</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-teal-600 mr-2">✓</span>
+                        <span>Plan for annual switching period review</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cost Optimization Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Family Insurance Cost Optimization</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Children's Insurance Savings</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700">Child premium (under 18)</span>
+                <span class="font-semibold text-green-600">~CHF 100-150/month</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700">Adult premium (reference)</span>
+                <span class="font-semibold text-gray-600">~CHF 300-400/month</span>
+              </div>
+              <div class="border-t border-gray-200 pt-2">
+                <div class="flex justify-between items-center">
+                  <span class="font-semibold text-gray-900">Savings per child</span>
+                  <span class="font-bold text-green-600">~CHF 200/month</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+              <p class="text-sm text-green-800">
+                Children receive automatic premium subsidies from the Swiss government, making family healthcare much more affordable.
+              </p>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Deductible Strategy for Families</h3>
+            <div class="space-y-3">
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <h4 class="font-semibold text-blue-900 mb-2">For Adults</h4>
+                <p class="text-sm text-blue-800">Consider higher deductibles (CHF 1,500-2,500) if healthy to reduce monthly premiums</p>
+              </div>
+              
+              <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                <h4 class="font-semibold text-purple-900 mb-2">For Children</h4>
+                <p class="text-sm text-purple-800">Often choose CHF 0-300 deductible as children may need more frequent medical care</p>
+              </div>
+              
+              <div class="bg-orange-50 border border-orange-200 rounded-lg p-3">
+                <h4 class="font-semibold text-orange-900 mb-2">Family Budget Planning</h4>
+                <p class="text-sm text-orange-800">Budget for maximum CHF 700 per person annually for co-payments after deductible</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-700">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Guides -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Related Family Insurance Guides</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/guides/how-to/choose-health-insurance-deductible" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Choose Right Deductible</h3>
+            </div>
+            <p class="text-gray-600">Smart strategies for selecting deductibles that save money for families</p>
+          </a>
+          
+          <a href="/guides/how-to/apply-premium-subsidies" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-green-100 text-green-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Apply for Premium Subsidies</h3>
+            </div>
+            <p class="text-gray-600">Get financial help with insurance costs through Swiss premium reduction programs</p>
+          </a>
+          
+          <a href="/blog/best-health-insurance-switzerland" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Best Health Insurance Guide</h3>
+            </div>
+            <p class="text-gray-600">Complete 2025 guide to choosing the best Swiss health insurance for your family</p>
+          </a>
+          
+          <a href="/compare-providers" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-orange-100 text-orange-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">Compare All Providers</h3>
+            </div>
+            <p class="text-gray-600">Side-by-side comparisons of all Swiss health insurance providers</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-gradient-to-r from-blue-600 to-blue-500">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          Need help adding family to your insurance?
+        </h2>
+        <p class="mt-4 text-xl text-blue-100">
+          Our experts specialize in family insurance planning and can guide you through the entire process
+        </p>
+        <div class="mt-8">
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Family Insurance Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+
+  <!-- FAQ Schema Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }, null, 2)} />
+
+  <!-- HowTo Schema Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Add Family Members to Swiss Health Insurance",
+    "description": "Complete step-by-step guide to adding spouse and children to your Swiss health insurance efficiently and cost-effectively.",
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp",
+    "totalTime": "PT1H",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "CHF",
+      "value": "0"
+    },
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Determine Timing and Eligibility",
+        "text": "Check if you can add family members now (within 3 months of arrival, annual switching period, or due to life events) and verify their legal status in Switzerland.",
+        "url": "https://expat-savvy.ch/guides/how-to/add-family-health-insurance#step1"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Gather Required Documents",
+        "text": "Collect marriage certificates, birth certificates, residence permits, and other required documentation. Get official translations if needed.",
+        "url": "https://expat-savvy.ch/guides/how-to/add-family-health-insurance#step2"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Choose Insurance Strategy",
+        "text": "Decide whether to use the same provider for all family members or choose different providers to optimize costs and coverage.",
+        "url": "https://expat-savvy.ch/guides/how-to/add-family-health-insurance#step3"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Complete Application Process",
+        "text": "Contact insurance providers, fill out forms, submit documentation, and choose appropriate deductible levels for each family member.",
+        "url": "https://expat-savvy.ch/guides/how-to/add-family-health-insurance#step4"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Finalize and Optimize Coverage",
+        "text": "Receive insurance certificates, verify all information, set up payments, and optimize coverage with supplementary insurance or premium subsidies.",
+        "url": "https://expat-savvy.ch/guides/how-to/add-family-health-insurance#step5"
+      }
+    ]
+  }, null, 2)} />
+</Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script> 

@@ -2,130 +2,186 @@
 import Layout from '../../layouts/Layout.astro';
 import ConsultationModal from '../../components/ConsultationModal.astro';
 
+const providers = [
+  {
+    name: "Mobiliar",
+    strengths: "Largest household insurer, excellent local service, comprehensive coverage",
+    bestFor: "Traditional coverage with strong claims handling",
+    features: ["Excellent damage prevention services", "Strong regional network", "Comprehensive coverage options"]
+  },
+  {
+    name: "AXA Switzerland", 
+    strengths: "Competitive pricing, modern digital services, flexible coverage",
+    bestFor: "Tech-savvy customers who value online management",
+    features: ["Innovative coverage options", "Comprehensive app", "Sustainability focus"]
+  },
+  {
+    name: "Zurich Insurance",
+    strengths: "International expertise, premium service levels, comprehensive protection",
+    bestFor: "High-net-worth individuals seeking premium coverage",
+    features: ["Excellent customer service", "Specialized valuable items coverage", "Premium protection"]
+  },
+  {
+    name: "Helvetia",
+    strengths: "Swiss heritage, personalized service, competitive pricing",
+    bestFor: "Traditional Swiss insurance with personal relationships",
+    features: ["Strong regional presence", "Customizable policies", "Personal service"]
+  },
+  {
+    name: "Allianz Suisse",
+    strengths: "European backing, innovative products, digital-first approach",
+    bestFor: "Modern families seeking comprehensive digital solutions",
+    features: ["Smart home integration", "Flexible payment options", "Digital-first approach"]
+  }
+];
+
 const coverageTypes = [
   {
-    title: "Basic Coverage",
-    description: "Protection for your household contents",
+    title: "Contents Insurance",
+    description: "Protects your personal belongings inside your home",
     items: [
-      "Furniture and furnishings",
-      "Electronics and appliances",
+      "Furniture and appliances",
+      "Electronics and devices", 
       "Clothing and personal items",
-      "Sports equipment",
-      "Books and media"
+      "Books, artwork, and collectibles",
+      "Tools and equipment",
+      "Cash and valuables (limited coverage)"
     ],
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
     </svg>`
   },
   {
-    title: "Natural Hazards",
-    description: "Protection against natural events",
+    title: "Private Liability Insurance",
+    description: "Covers damages you accidentally cause to others or their property",
     items: [
-      "Storm damage",
-      "Flooding",
-      "Hail damage",
-      "Avalanches",
-      "Landslides"
+      "Property damage to your rental apartment",
+      "Injuries caused to third parties",
+      "Damage to neighbors' property",
+      "Legal defense costs",
+      "Worldwide liability coverage",
+      "Personal injury compensation"
     ],
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-    </svg>`
-  },
-  {
-    title: "Theft Coverage",
-    description: "Protection against theft and burglary",
-    items: [
-      "Break-in theft",
-      "Robbery",
-      "Vandalism during theft",
-      "Simple theft at home",
-      "Lock replacement"
-    ],
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+    icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>`
   }
 ];
 
-const additionalCoverage = [
+const coverageAmounts = [
   {
-    title: "Simple Theft Away",
-    description: "Coverage for theft outside your home",
-    amount: "2,000-5,000 CHF",
-    examples: ["Laptop stolen at café", "Bike theft", "Phone theft"]
+    type: "Single Professional in Studio/1BR",
+    contents: "CHF 30,000-50,000",
+    liability: "CHF 5-10 million",
+    description: "Basic protection for young professionals"
   },
   {
-    title: "Glass Breakage",
-    description: "Protection for glass items",
-    amount: "Included",
-    examples: ["Windows", "Glass furniture", "Mirrors"]
+    type: "Couple in 2-3BR Apartment", 
+    contents: "CHF 50,000-80,000",
+    liability: "CHF 5-10 million",
+    description: "Standard coverage for couples"
   },
   {
-    title: "Water Damage",
-    description: "Protection against water-related incidents",
-    amount: "Included",
-    examples: ["Pipe bursts", "Aquarium leaks", "Washing machine overflow"]
+    type: "Family with Children in House",
+    contents: "CHF 80,000-150,000+",
+    liability: "CHF 10-20 million", 
+    description: "Comprehensive family protection"
   },
   {
-    title: "Valuables Coverage",
-    description: "Extra protection for valuable items",
-    amount: "As declared",
-    examples: ["Jewelry", "Art", "Collectibles"]
+    type: "High-Net-Worth Household",
+    contents: "CHF 150,000+",
+    liability: "CHF 20-50 million",
+    description: "Premium coverage with valuable items protection"
+  }
+];
+
+const costFactors = [
+  {
+    category: "Location-Based Factors",
+    factors: [
+      "Canton and municipality risk levels",
+      "Building type and construction materials", 
+      "Security features and neighborhood safety",
+      "Natural disaster risk zones"
+    ]
+  },
+  {
+    category: "Coverage-Based Factors",
+    factors: [
+      "Coverage amounts and limits",
+      "Deductible choices and structures",
+      "Add-on coverages selected",
+      "Policy bundling options"
+    ]
+  },
+  {
+    category: "Personal Factors",
+    factors: [
+      "Claims history and experience",
+      "Age and lifestyle considerations",
+      "Multi-policy discounts available",
+      "Payment method preferences"
+    ]
   }
 ];
 
 const faqs = [
   {
     question: "Is household insurance mandatory in Switzerland?",
-    answer: "While not legally mandatory, household insurance is strongly recommended and often required by landlords. It protects your personal belongings against damage, theft, and natural hazards."
+    answer: "No, household insurance is not legally mandatory in Switzerland. However, it's highly recommended and used by over 95% of households. Some landlords may require it as a rental condition."
   },
   {
-    question: "What does household insurance typically cover?",
-    answer: "Swiss household insurance typically covers furniture, electronics, clothing, valuables, and personal belongings against risks like fire, water damage, theft, and natural hazards. Many policies also include coverage for items temporarily outside your home."
+    question: "What's the difference between household insurance and building insurance?",
+    answer: "Household insurance covers your personal belongings and liability. Building insurance covers the structure itself and is typically the landlord's responsibility for rental properties or required for homeowners."
+  },
+  {
+    question: "Does household insurance cover water damage?",
+    answer: "Yes, most household insurance policies cover water damage from sudden events like burst pipes or neighbor leaks. Gradual leaks or flooding may have different coverage terms."
   },
   {
     question: "How much coverage do I need?",
-    answer: "Coverage should match the total value of your household contents. A general rule is 50,000-100,000 CHF for a 2-room apartment, increasing by about 25,000 CHF per additional room. Valuable items may need separate declaration."
+    answer: "Coverage should match the total value of your household contents. A general rule is CHF 50,000-100,000 for a 2-room apartment, increasing by about CHF 25,000 per additional room. Valuable items may need separate declaration."
   },
   {
     question: "How much does household insurance cost?",
-    answer: "Annual premiums typically range from 200-500 CHF, depending on coverage amount, location, and additional options chosen. Bundling with other insurance products often leads to discounts."
+    answer: "Annual premiums typically range from CHF 200-800, depending on coverage amount, location, and additional options chosen. Bundling with other insurance products often leads to discounts."
   },
   {
-    question: "What's not covered by household insurance?",
-    answer: "Standard policies typically don't cover motor vehicles, structural building elements (covered by building insurance), or damage from gradual wear and tear. Some risks like simple theft away from home require additional coverage."
+    question: "What happens if I underestimate my contents value?",
+    answer: "If you're underinsured, you may face proportional reduction in claim payments. For example, if you're insured for 50% of actual value, you might only receive 50% of claim amounts."
   }
 ];
 ---
 
 <Layout
-  title="Household Insurance Switzerland | Expert Guide 2025"
-  description="Complete guide to household insurance in Switzerland. Compare coverage options, understand liability protection, and get the best policy to protect your belongings. Updated for 2025."
+  title="Household Insurance Switzerland: Complete Protection Guide 2025"
+  description="Comprehensive household insurance in Switzerland. Protect your belongings and liability with expert guidance. Compare top providers and get the right coverage for your home."
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
 >
   <!-- Hero Section -->
   <div class="relative bg-white overflow-hidden">
     <div class="absolute inset-0">
       <img 
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1736285944/joshua-earle--87JyMb9ZfU-unsplash_4_rkfzpq.webp"
-        alt="Swiss mountains"
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
+        alt="Swiss home protection"
         class="w-full h-full object-cover"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-blue/70 to-blue/50"></div>
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
       <div class="text-center">
         <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
           <span class="block">Household Insurance</span>
-          <span class="block mt-2">in <span class="text-primary-500">Switzerland</span></span>
+          <span class="block mt-2">in <span class="text-primary-400">Switzerland</span></span>
         </h1>
-        <p class="mt-6 max-w-lg mx-auto text-xl text-gray-300">
-          Protect your belongings with comprehensive household insurance. Understand your coverage options and get the right protection for your home.
+        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-200">
+          Protect your belongings and liability with comprehensive household insurance. Expert guidance for complete home protection in Switzerland.
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onclick="showConsultationModal()"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Get Expert Advice
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,35 +189,83 @@ const faqs = [
             </svg>
           </button>
           <a
-            href="#compare"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            href="#coverage"
+            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
-            Compare Options
+            Explore Coverage
           </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Coverage Types -->
-  <div id="compare" class="bg-white py-16">
+  <!-- Why Household Insurance is Essential -->
+  <div class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">What's Covered?</h2>
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {coverageTypes.map(type => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <div class="text-primary-500 mb-4">
-              <Fragment set:html={type.icon} />
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Why Household Insurance is Essential in Switzerland</h2>
+        <p class="text-lg text-gray-600 mb-12">
+          Despite being optional, over 95% of Swiss households have household insurance, reflecting its crucial importance for financial protection in Switzerland's high-cost environment.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <div class="bg-red-100 text-red-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{type.title}</h3>
-            <p class="text-gray-600 mb-4">{type.description}</p>
-            <ul class="space-y-2">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">High Replacement Costs</h3>
+            <p class="text-gray-600">A basic apartment's contents can easily be worth CHF 50,000-100,000+ at Swiss retail prices</p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <div class="bg-orange-100 text-orange-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Liability Protection</h3>
+            <p class="text-gray-600">Covers damages to rental property and neighbors - costs could reach hundreds of thousands of francs</p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6 shadow-md">
+            <div class="bg-green-100 text-green-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Peace of Mind</h3>
+            <p class="text-gray-600">Financial security while building your life in Switzerland, with 24/7 emergency assistance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coverage Types -->
+  <div id="coverage" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Comprehensive Protection Coverage</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {coverageTypes.map(type => (
+          <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-8 border border-blue-200">
+            <div class="flex items-center mb-6">
+              <div class="text-blue-600 mr-4">
+                <Fragment set:html={type.icon} />
+              </div>
+              <div>
+                <h3 class="text-2xl font-semibold text-gray-900">{type.title}</h3>
+                <p class="text-gray-600 mt-1">{type.description}</p>
+              </div>
+            </div>
+            <ul class="space-y-3">
               {type.items.map(item => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
-                  {item}
+                  <span class="text-gray-700">{item}</span>
                 </li>
               ))}
             </ul>
@@ -171,29 +275,117 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Additional Coverage -->
+  <!-- Coverage Amounts Guide -->
   <div class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Additional Coverage Options</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {additionalCoverage.map(coverage => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{coverage.title}</h3>
-            <p class="text-gray-600 mb-2">{coverage.description}</p>
-            <div class="text-primary-600 font-medium mb-4">Coverage: {coverage.amount}</div>
-            <h4 class="text-sm font-medium text-gray-900 mb-2">Examples:</h4>
-            <ul class="space-y-2">
-              {coverage.examples.map(example => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  {example}
-                </li>
-              ))}
-            </ul>
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">How Much Coverage Do You Need?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {coverageAmounts.map(amount => (
+            <div class="bg-white rounded-lg p-6 shadow-md border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{amount.type}</h3>
+              <p class="text-gray-600 mb-4">{amount.description}</p>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Contents Coverage:</span>
+                  <span class="font-semibold text-blue-600">{amount.contents}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Liability Coverage:</span>
+                  <span class="font-semibold text-green-600">{amount.liability}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <h3 class="text-lg font-semibold text-yellow-800 mb-2">💡 Coverage Calculation Tip</h3>
+          <p class="text-yellow-700">
+            To calculate your contents value, do a room-by-room assessment. Living room (CHF 15,000-30,000), kitchen (CHF 8,000-15,000), bedroom (CHF 10,000-20,000), plus special items like professional equipment or valuable collections.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Providers -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Top Household Insurance Providers in Switzerland</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {providers.map(provider => (
+          <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200 hover:border-blue-300 transition-colors">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{provider.name}</h3>
+            <p class="text-gray-600 mb-3">{provider.strengths}</p>
+            <div class="mb-4">
+              <span class="text-sm font-medium text-blue-700">Best For: </span>
+              <span class="text-sm text-gray-700">{provider.bestFor}</span>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900 mb-2">Key Features:</h4>
+              <ul class="space-y-1">
+                {provider.features.map(feature => (
+                  <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-4 w-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Cost Factors -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Factors Affecting Your Premiums</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {costFactors.map(category => (
+            <div class="bg-white rounded-lg p-6 shadow-md">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">{category.category}</h3>
+              <ul class="space-y-2">
+                {category.factors.map(factor => (
+                  <li class="flex items-start text-sm text-gray-600">
+                    <svg class="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    {factor}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        
+        <div class="mt-8 text-center">
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-2">Typical Premium Ranges</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <span class="font-medium">Studio/1BR apartment:</span> CHF 200-400 annually
+              </div>
+              <div>
+                <span class="font-medium">2-3BR apartment:</span> CHF 300-600 annually
+              </div>
+              <div>
+                <span class="font-medium">Single family house:</span> CHF 400-800 annually
+              </div>
+              <div>
+                <span class="font-medium">Luxury property:</span> CHF 800-1,500+ annually
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -201,36 +393,96 @@ const faqs = [
   <!-- FAQ Section -->
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
       <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
           {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
+            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-700">{faq.answer}</p>
             </div>
           ))}
-        </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Insurance -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Complete Your Swiss Insurance Protection</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <a href="/blog/best-health-insurance-switzerland" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-blue-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">Health Insurance (Mandatory)</h3>
+            </div>
+            <p class="text-gray-600">Required by law within 3 months of arrival - choose the best coverage for your needs</p>
+          </a>
+          
+          <a href="/insurance/legal-protection-insurance" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-purple-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">Legal Protection Insurance</h3>
+            </div>
+            <p class="text-gray-600">Navigate Switzerland's complex legal environment with comprehensive legal coverage</p>
+          </a>
+          
+          <a href="/blog/third-pillar-insurance-switzerland-comprehensive-guide" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-orange-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-orange-100 text-orange-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">3rd Pillar Tax Savings</h3>
+            </div>
+            <p class="text-gray-600">Optimize your retirement planning and reduce taxes with 3rd pillar insurance</p>
+          </a>
+          
+          <a href="/guides/how-to" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-green-500 transition-all hover:shadow-lg group">
+            <div class="flex items-center mb-3">
+              <div class="bg-green-100 text-green-600 p-2 rounded-lg mr-3">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 group-hover:text-green-600 transition-colors">How-To Guides</h3>
+            </div>
+            <p class="text-gray-600">Step-by-step instructions for all your Swiss insurance needs and decisions</p>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- CTA Section -->
-  <div class="bg-primary-600">
+  <div class="bg-gradient-to-r from-blue-600 to-blue-500">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Ready to protect your belongings?
+          Ready to protect your Swiss home?
         </h2>
-        <p class="mt-4 text-xl text-primary-100">
-          Get expert guidance to find the right coverage
+        <p class="mt-4 text-xl text-blue-100">
+          Get personalized advice on household insurance options and protect your belongings with the right coverage
         </p>
         <div class="mt-8">
           <button
             onclick="showConsultationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
-            Schedule Free Consultation
+            Get Your Free Household Insurance Quote
           </button>
         </div>
       </div>
@@ -238,4 +490,50 @@ const faqs = [
   </div>
 
   <ConsultationModal />
+
+  <!-- FAQ Schema Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }, null, 2)} />
+
+  <!-- Service Schema Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Household Insurance Switzerland",
+    "description": "Comprehensive household insurance protection for residents of Switzerland, covering personal belongings and liability.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "serviceType": "Insurance Consultation"
+  }, null, 2)} />
 </Layout>
+
+<script>
+  function showConsultationModal() {
+    const modal = document.getElementById('consultation-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+  }
+</script>
