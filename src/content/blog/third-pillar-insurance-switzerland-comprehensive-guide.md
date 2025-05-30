@@ -4,7 +4,7 @@ description: "Expert guide to 3rd pillar insurance in Switzerland. Compare provi
 author: "Benjamin Amos Wagner"
 date: 2025-01-20
 tags: ["3rd pillar", "pension", "insurance", "tax optimization", "retirement planning", "switzerland"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375508/a-minimalist-sketch-illustration-of-an-o_t00FYlMGRGSGCrUU6rHxgw_HCDq44XJTc-SVB-lDenfiQ_wigsiz.webp"
 ---
 
 ## Introduction: Maximizing Your Swiss Retirement with 3rd Pillar Insurance
