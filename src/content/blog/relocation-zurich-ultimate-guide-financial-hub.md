@@ -379,7 +379,7 @@ For additional guidance on specific aspects of your relocation journey, explore 
 - [Swiss Relocation Insurance Checklist: Get Covered by Canton](/blog/relocating-switzerland-insurance-checklist-by-canton)
 - [Relocating to Switzerland: A Comprehensive Checklist for Expats](/blog/relocating-to-switzerland-checklist)
 - [Mandatory Swiss Health Insurance: What Expats Must Know](/health-insurance)
-- [Best Health Insurance Options for Expats in Switzerland](/blog/best-health-insurance-switzerland-expats)
+- [Best Health Insurance Switzerland: The Ultimate 2025 Guide](/blog/best-health-insurance-switzerland)
 - [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability)
 
 <script type="application/ld+json">

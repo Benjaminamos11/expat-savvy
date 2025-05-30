@@ -7,7 +7,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747317968/a-raw-hand
 imageAlt: "Swiss Insurance Broker Consultation"
 category: "Insurance Advisory"
 tags: ["insurance broker", "health insurance", "expat insurance", "SimpleCare", "insurance advice"]
-relatedPosts: ["choosing-quality-insurance-consultant", "best-health-insurance-switzerland-expats"]
+relatedPosts: ["choosing-quality-insurance-consultant", "best-health-insurance-switzerland"]
 featured: true
 ---
 
