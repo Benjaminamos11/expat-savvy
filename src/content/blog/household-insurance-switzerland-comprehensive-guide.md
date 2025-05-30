@@ -446,4 +446,20 @@ A: Most insurers allow coverage increases during the policy year, especially for
     }
   ]
 }
-</script> 
+</script>
+
+## Building Your Complete Swiss Insurance Portfolio
+
+Household insurance is just one piece of your comprehensive protection strategy in Switzerland. Consider these essential insurances:
+
+### **Mandatory Insurance**
+- **[Health Insurance](/health-insurance)** - Required by law within 3 months of arrival
+- **[Best Health Insurance Switzerland: Ultimate 2025 Guide](/blog/best-health-insurance-switzerland)** - Choose the right health coverage
+
+### **Highly Recommended Optional Insurance**
+- **[Legal Protection Insurance: Complete Guide](/blog/legal-protection-insurance-switzerland-complete-guide)** - Navigate Switzerland's complex legal environment
+- **[3rd Pillar Insurance: Tax-Advantaged Savings](/blog/third-pillar-insurance-switzerland-comprehensive-guide)** - Optimize retirement and reduce taxes
+
+### **How-To Guides for Smart Insurance Decisions**
+- **[How to Choose the Right Health Insurance Deductible](/guides/how-to/choose-health-insurance-deductible)** - Save money with smart deductible choices
+- **[How to Find the Best Health Insurance](/guides/how-to/find-best-health-insurance)** - Step-by-step selection methodology 
