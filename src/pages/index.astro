@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Testimonials from '../components/Testimonials.astro';
+import { getCollection } from 'astro:content';
 
 const stats = [
   { number: "1000+", label: "Happy Clients" },
@@ -59,6 +60,58 @@ const premiumPartners = [
     description: "Expert relocation services for expats moving to Switzerland"
   }
 ];
+
+// Get blog posts for featured section
+const allBlogPosts = await getCollection('blog');
+const validPosts = allBlogPosts
+  .filter(post => post.data.title && post.data.description) // Only include posts with complete data
+  .sort((a, b) => {
+    const dateA = a.data.date instanceof Date ? a.data.date : new Date(a.data.date || 0);
+    const dateB = b.data.date instanceof Date ? b.data.date : new Date(b.data.date || 0);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+// Function to get random selection of blog posts
+function getRandomPosts(posts: any[], count: number) {
+  const shuffled = [...posts].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+// Always show random posts (we'll rotate them with JavaScript)
+const initialPosts = getRandomPosts(validPosts, 3);
+
+// Pass all valid posts to the client for rotation
+const allPostsForRotation = validPosts.map(post => ({
+  slug: post.slug,
+  title: post.data.title,
+  description: post.data.description,
+  image: post.data.image,
+  date: post.data.date
+}));
+
+// Default image for posts without images
+const defaultBlogImage = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
+
+// Helper function to format dates
+const formatDate = (date: Date | string | undefined | null): string => {
+  if (!date) return '';
+  
+  try {
+    const dateObj = date instanceof Date ? date : 
+                  (typeof date === 'string' ? new Date(date) : null);
+    
+    if (!dateObj || isNaN(dateObj.valueOf())) return '';
+    
+    return dateObj.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return '';
+  }
+};
 ---
 
 <Layout
@@ -425,7 +478,7 @@ const premiumPartners = [
     </div>
   </div>
 
-  <!-- Featured Guides Section -->
+  <!-- Featured Guides Section (DYNAMIC BLOG POSTS) -->
   <div class="bg-white py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
@@ -438,86 +491,43 @@ const premiumPartners = [
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Health Insurance Models Guide -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02]">
-          <a href="/blog/health-insurance-models-switzerland" class="block">
-            <div class="h-48 bg-gray-100">
-              <img 
-                src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-of-a-decision-tr_6nFEntvvSVCuzXgDkrhweQ_qblZRc6wSP-HDClBIqJ8sQ_miepvt.webp" 
-                srcset="https://res.cloudinary.com/dphbnwjtx/image/upload/c_scale,w_300/v1746850775/a-raw-hand-drawn-sketch-of-a-decision-tr_6nFEntvvSVCuzXgDkrhweQ_qblZRc6wSP-HDClBIqJ8sQ_miepvt.webp 300w,
-                        https://res.cloudinary.com/dphbnwjtx/image/upload/c_scale,w_600/v1746850775/a-raw-hand-drawn-sketch-of-a-decision-tr_6nFEntvvSVCuzXgDkrhweQ_qblZRc6wSP-HDClBIqJ8sQ_miepvt.webp 600w"
-                sizes="(max-width: 640px) 300px, 600px"
-                loading="lazy"
-                alt="Swiss Health Insurance Models" 
-                class="w-full h-full object-cover"
-              />
+      <div class="relative overflow-hidden">
+        <!-- Dynamic blog posts container -->
+        <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {getRandomPosts(validPosts, 3).map((post) => (
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02] blog-post-card">
+              <a href={`/blog/${post.slug}`} class="block">
+                <div class="h-48 bg-gray-100">
+                  <img 
+                    src={post.data.image || defaultBlogImage} 
+                    srcset={`${(post.data.image || defaultBlogImage).replace('upload/', 'upload/c_scale,w_300/')} 300w,
+                            ${(post.data.image || defaultBlogImage).replace('upload/', 'upload/c_scale,w_600/')} 600w`}
+                    sizes="(max-width: 640px) 300px, 600px"
+                    loading="lazy"
+                    alt={`Illustration for ${post.data.title || 'Expat Savvy Article'}`} 
+                    class="w-full h-full object-cover transition-opacity duration-500"
+                  />
+                </div>
+                <div class="p-6">
+                  {post.data.date && (
+                    <div class="text-sm text-gray-500 mb-2 blog-post-date">
+                      {formatDate(post.data.date)}
+                    </div>
+                  )}
+                  <h3 class="text-base font-bold text-gray-900 mb-3 leading-tight blog-post-title" style="min-height: 3rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{post.data.title || 'Expat Savvy Article'}</h3>
+                  {post.data.description && (
+                    <p class="text-gray-600 mb-4 line-clamp-3 blog-post-description">{post.data.description}</p>
+                  )}
+                  <div class="flex items-center text-primary-500 font-medium">
+                    Read guide
+                    <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Swiss Health Insurance Models</h3>
-              <p class="text-gray-600 mb-4 line-clamp-3">Compare Standard, HMO, Family Doctor, and Telmed options to choose the best fit for your needs and budget.</p>
-              <div class="flex items-center text-primary-500 font-medium">
-                Read guide
-                <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Accident Insurance Guide -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02]">
-          <a href="/blog/accident-insurance-switzerland-uvg-laa" class="block">
-            <div class="h-48 bg-gray-100">
-              <img 
-                src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-vector-illustration-of-a-circular-shie_n7nRZNXRQbq01uASym4YJQ_FUvgwM68QDyAi3TtRmJU5A_ptj3mi.webp" 
-                srcset="https://res.cloudinary.com/dphbnwjtx/image/upload/c_scale,w_300/v1746850775/a-vector-illustration-of-a-circular-shie_n7nRZNXRQbq01uASym4YJQ_FUvgwM68QDyAi3TtRmJU5A_ptj3mi.webp 300w,
-                        https://res.cloudinary.com/dphbnwjtx/image/upload/c_scale,w_600/v1746850775/a-vector-illustration-of-a-circular-shie_n7nRZNXRQbq01uASym4YJQ_FUvgwM68QDyAi3TtRmJU5A_ptj3mi.webp 600w"
-                sizes="(max-width: 640px) 300px, 600px"
-                loading="lazy"
-                alt="Swiss Accident Insurance" 
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Accident Insurance (UVG/LAA)</h3>
-              <p class="text-gray-600 mb-4 line-clamp-3">Understand occupational and non-occupational coverage and what happens when you leave your employer.</p>
-              <div class="flex items-center text-primary-500 font-medium">
-                Read guide
-                <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Mental Health Guide -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02]">
-          <a href="/blog/mental-health-services-switzerland" class="block">
-            <div class="h-48 bg-gray-100">
-              <img 
-                src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-raw-hand-drawn-sketch-depicting-a-styl_Qq9e14s5R6GWOZ_GA-u6Zw_madbFANkQ_2RwnCfukmsag_xvfja3.webp" 
-                srcset="https://res.cloudinary.com/dphbnwjtx/image/upload/c_scale,w_300/v1746850776/a-raw-hand-drawn-sketch-depicting-a-styl_Qq9e14s5R6GWOZ_GA-u6Zw_madbFANkQ_2RwnCfukmsag_xvfja3.webp 300w,
-                        https://res.cloudinary.com/dphbnwjtx/image/upload/c_scale,w_600/v1746850776/a-raw-hand-drawn-sketch-depicting-a-styl_Qq9e14s5R6GWOZ_GA-u6Zw_madbFANkQ_2RwnCfukmsag_xvfja3.webp 600w"
-                sizes="(max-width: 640px) 300px, 600px"
-                loading="lazy"
-                alt="Mental Health Services in Switzerland" 
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Mental Health Services</h3>
-              <p class="text-gray-600 mb-4 line-clamp-3">Learn about accessing mental health services, insurance coverage for therapy, and finding English-speaking professionals.</p>
-              <div class="flex items-center text-primary-500 font-medium">
-                Read guide
-                <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-            </div>
-          </a>
+          ))}
         </div>
       </div>
 
@@ -576,18 +586,154 @@ const premiumPartners = [
   // Update booking count every 10 minutes
   function updateBookingCount() {
     const countElement = document.getElementById('booking-count');
+    const countElementDesktop = document.getElementById('booking-count-desktop');
     if (countElement) {
       const randomCount = Math.floor(Math.random() * (11 - 3 + 1)) + 3; // Random number between 3-11
-      countElement.textContent = `${randomCount} people booked a consultation in the last 24 hours`;
+      const text = `${randomCount} people booked a consultation in the last 24 hours`;
+      countElement.textContent = text;
+      if (countElementDesktop) {
+        countElementDesktop.textContent = text;
+      }
     }
   }
 
-  // Initial update
-  updateBookingCount();
+  // Simple blog slider functionality
+  function initializeBlogSlider() {
+    const container = document.getElementById('blog-container');
+    
+    if (!container) {
+      console.warn('Blog container not found');
+      return;
+    }
+    
+    // Get all blog posts data from the JSON script tag
+    const blogDataElement = document.getElementById('blog-posts-data');
+    if (!blogDataElement) {
+      console.warn('Blog posts data not found');
+      return;
+    }
+    
+    let allPosts: Array<{slug: string, title: string, description: string, image: string, date: string}>;
+    try {
+      allPosts = JSON.parse(blogDataElement.textContent || '[]');
+    } catch (e) {
+      console.error('Failed to parse blog posts data:', e);
+      return;
+    }
+    
+    if (!allPosts || allPosts.length === 0) {
+      console.warn('No blog posts available');
+      return;
+    }
+    
+    // Track which card to update next (sequential rotation)
+    let currentCardIndex = 0;
+    
+    function getCurrentlyVisibleSlugs() {
+      const cards = container!.querySelectorAll('.blog-post-card');
+      return Array.from(cards).map(card => {
+        const link = card.querySelector('a[href*="/blog/"]');
+        return link ? link.getAttribute('href')?.split('/').pop() : null;
+      }).filter((slug): slug is string => slug !== null);
+    }
+    
+    function getRandomAvailablePost() {
+      const currentlyVisible = getCurrentlyVisibleSlugs();
+      
+      // Find posts that are not currently visible
+      const availablePosts = allPosts.filter((post: any) => !currentlyVisible.includes(post.slug));
+      
+      if (availablePosts.length === 0) {
+        // Fallback: if somehow all posts are visible (shouldn't happen with 3 cards), use any post
+        return allPosts[Math.floor(Math.random() * allPosts.length)];
+      }
+      
+      return availablePosts[Math.floor(Math.random() * availablePosts.length)];
+    }
+    
+    function updateNextCard() {
+      // Performance check: only animate if page is visible
+      if (document.hidden) return;
+      
+      const cards = container!.querySelectorAll('.blog-post-card');
+      if (cards.length === 0) return;
+      
+      // Use sequential rotation: card 0, then card 1, then card 2, then back to 0
+      const card = cards[currentCardIndex] as HTMLElement;
+      currentCardIndex = (currentCardIndex + 1) % cards.length;
+      
+      const newPost = getRandomAvailablePost();
+      
+      if (!newPost) return;
+      
+      // Get card elements
+      const image = card.querySelector('img');
+      const dateEl = card.querySelector('.blog-post-date');
+      const titleEl = card.querySelector('.blog-post-title');
+      const descriptionEl = card.querySelector('.blog-post-description');
+      const link = card.querySelector('a');
+      
+      if (!image || !titleEl || !link) return;
+      
+      // Fade out
+      card.style.opacity = '0.3';
+      
+      setTimeout(() => {
+        // Update content
+        const defaultImage = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
+        const newImageSrc = newPost.image || defaultImage;
+        
+        // Update image
+        image.src = newImageSrc;
+        image.srcset = `${newImageSrc.replace('upload/', 'upload/c_scale,w_300/')} 300w, ${newImageSrc.replace('upload/', 'upload/c_scale,w_600/')} 600w`;
+        image.alt = `Illustration for ${newPost.title || 'Expat Savvy Article'}`;
+        
+        // Update link
+        link.href = `/blog/${newPost.slug}`;
+        
+        // Update date
+        if (dateEl && newPost.date) {
+          try {
+            const dateObj = new Date(newPost.date);
+            if (!isNaN(dateObj.valueOf())) {
+              dateEl.textContent = dateObj.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+            }
+          } catch (e) {
+            if (dateEl) dateEl.textContent = '';
+          }
+        }
+        
+        // Update title
+        titleEl.textContent = newPost.title || 'Expat Savvy Article';
+        
+        // Update description
+        if (descriptionEl) {
+          descriptionEl.textContent = newPost.description || '';
+        }
+        
+        // Fade back in
+        card.style.opacity = '1';
+      }, 300);
+    }
 
-  // Update every 10 minutes
-  setInterval(updateBookingCount, 10 * 60 * 1000);
+    // Set up automatic rotation every 8 seconds
+    setInterval(updateNextCard, 8 * 1000);
+  }
+
+  // Initial updates
+  updateBookingCount();
+  initializeBlogSlider();
+
+  // Set up intervals
+  setInterval(updateBookingCount, 10 * 60 * 1000); // Update booking count every 10 minutes
 </script>
+
+<!-- Hidden script tag to pass blog data to JavaScript -->
+<script type="application/json" id="blog-posts-data" set:html={JSON.stringify(allPostsForRotation)}></script>
 
 <style>
   /* Special styling for the booking count animation */
