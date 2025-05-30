@@ -495,7 +495,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
         <!-- Dynamic blog posts container -->
         <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {getRandomPosts(validPosts, 3).map((post) => (
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02] blog-post-card">
+            <div class="bg-white rounded-xl overflow-hidden blog-post-card">
               <a href={`/blog/${post.slug}`} class="block">
                 <div class="h-48 bg-gray-100">
                   <img 
@@ -783,6 +783,25 @@ const formatDate = (date: Date | string | undefined | null): string => {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+  
+  /* Enhanced blog card shadows */
+  .blog-post-card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0); /* Force hardware acceleration */
+    border-radius: 0.75rem; /* Explicit border radius */
+  }
+  
+  .blog-post-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-4px) translateZ(0); /* Remove scale, keep lift */
+    border-radius: 0.75rem; /* Maintain border radius on hover */
+  }
+  
+  /* Subtle border for extra polish */
+  .blog-post-card {
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
   
   /* Fix mobile gaps */
