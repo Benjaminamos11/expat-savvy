@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 import FAQ from '../components/FAQ.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
+import DefinitionBlock from '../components/DefinitionBlock.astro';
 
 const insuranceModels = [
   {
@@ -143,6 +145,11 @@ const meta = {
   keywords: 'health insurance in switzerland, swiss health insurance guide, health insurance expats switzerland, swiss health insurance comparison',
   canonicalUrl: 'https://expat-savvy.ch/health-insurance/'
 };
+
+const breadcrumbItems = [
+  { name: "Home", url: "/" },
+  { name: "Health Insurance", url: "/health-insurance" }
+];
 ---
 
 <Layout 
@@ -151,6 +158,10 @@ const meta = {
   canonicalURLProp={meta.canonicalUrl}
 >
   <main>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <BreadcrumbSchema items={breadcrumbItems} />
+    </div>
+    
     <!-- Hero Section with Split Design -->
     <div class="relative bg-white">
       <div class="absolute inset-0">
@@ -257,11 +268,27 @@ const meta = {
             <p class="text-gray-700 mb-4">
               Swiss health insurance consists of two main components:
             </p>
-            <div class="space-y-4">
+            
+            <DefinitionBlock 
+              term="Basic Health Insurance (KVG/LAMal)"
+              definition="Mandatory health insurance that provides essential healthcare coverage for all Swiss residents. All insurers must offer identical benefits by law, though premiums vary by canton and provider."
+              example="Doctor visits, hospital stays, prescribed medications, emergency care, and maternity services are all covered under basic insurance."
+              relatedTerms={["Supplementary Insurance", "Premium", "Deductible"]}
+            />
+            
+            <div class="space-y-4 mt-4">
               <div>
                 <h4 class="font-semibold text-gray-900 mb-2">Basic Insurance (KVG/LAMal)</h4>
                 <p class="text-gray-600">Mandatory coverage that provides access to essential healthcare services. All insurers must offer identical benefits by law, though premiums vary.</p>
               </div>
+              
+              <DefinitionBlock 
+                term="Supplementary Health Insurance (VVG)"
+                definition="Optional private insurance that covers additional benefits not included in basic insurance, such as private hospital rooms, dental care, alternative medicine, and worldwide coverage."
+                example="Dental treatment, private hospital rooms, gym memberships, and coverage abroad beyond basic emergency care."
+                relatedTerms={["Basic Insurance", "Health Questionnaire", "Pre-existing Conditions"]}
+              />
+              
               <div>
                 <h4 class="font-semibold text-gray-900 mb-2">Supplementary Insurance (VVG)</h4>
                 <p class="text-gray-600">Optional coverage for additional benefits like private hospital rooms, dental care, alternative medicine, and worldwide coverage.</p>
@@ -313,6 +340,14 @@ const meta = {
         <!-- Important Timeline -->
         <div class="bg-primary-50 border-l-4 border-primary-500 p-6 rounded-lg">
           <h3 class="text-xl font-bold text-primary-900 mb-2">Critical Timeline for New Residents</h3>
+          
+          <DefinitionBlock 
+            term="3-Month Rule"
+            definition="New Swiss residents must obtain health insurance within 3 months of arrival. Coverage is retroactive to your arrival date, meaning you'll pay premiums from day one regardless of when you sign up."
+            example="If you arrive in January but sign up in March, you'll still pay premiums for January and February when you enroll."
+            relatedTerms={["Retroactive Coverage", "Penalties", "Automatic Assignment"]}
+          />
+          
           <p class="text-primary-800">
             You have <strong>3 months from arrival</strong> to obtain health insurance. Coverage is retroactive to your arrival date, meaning you'll pay premiums from day one. Missing this deadline can result in automatic assignment to an insurer with potentially higher costs and penalties.
           </p>
@@ -446,7 +481,7 @@ const meta = {
     <section id="save-money" class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-extrabold text-gray-900">How to Get Cheaper Health Insurance in Switzerland</h2>
+          <h2 class="text-3xl font-extrabold text-gray-900">How Can You Get Cheaper Health Insurance in Switzerland?</h2>
           <p class="mt-4 text-xl text-gray-600">Proven strategies to reduce your premiums without compromising coverage</p>
         </div>
 
@@ -475,7 +510,7 @@ const meta = {
 
         <!-- Additional Saving Tips -->
         <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6">Additional Ways to Reduce Costs</h3>
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">What Are Additional Ways to Reduce Costs?</h3>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
               <h4 class="font-semibold text-gray-900 mb-3">Premium Subsidies</h4>
@@ -494,7 +529,7 @@ const meta = {
     <section class="py-16 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-extrabold text-gray-900">How to Choose Health Insurance in Switzerland</h2>
+          <h2 class="text-3xl font-extrabold text-gray-900">How Do You Choose the Best Health Insurance in Switzerland?</h2>
           <p class="mt-4 text-xl text-gray-600">Key factors to consider when selecting your health insurance provider</p>
         </div>
 
@@ -582,7 +617,7 @@ const meta = {
     <section id="providers" class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-extrabold text-gray-900">Compare Top Health Insurance Providers</h2>
+          <h2 class="text-3xl font-extrabold text-gray-900">Which Are the Best Health Insurance Providers in Switzerland?</h2>
           <p class="mt-4 text-xl text-gray-600">Detailed profiles of Switzerland's leading health insurance companies</p>
         </div>
 
