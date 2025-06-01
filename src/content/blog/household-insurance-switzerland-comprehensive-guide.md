@@ -1,10 +1,10 @@
 ---
 title: "Household Insurance Switzerland: Complete Protection Guide (2025)"
-description: "Essential guide to household insurance in Switzerland. Compare providers, understand coverage options, and protect your belongings. Expert advice from Swiss insurance specialists."
+description: "Everything expats need to know about Swiss household insurance: coverage, best providers, claims process, and tips for protecting your home and belongings."
 author: "Benjamin Amos Wagner"
-date: 2025-01-20
-tags: ["household insurance", "home insurance", "switzerland", "property protection", "contents insurance", "expat insurance"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
+date: 2025-05-15
+tags: ["household insurance", "swiss insurance", "expat", "switzerland", "property insurance", "home insurance", "2025 guide"]
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375525/a-raw-hand-drawn-sketch-illustration-usi_UJN_2gFtTuuEPyrWWIDomw_8bJ_5rc6STGAo_FTeXvWfw_xhnuhc.webp"
 ---
 
 ## Introduction: Protecting Your Home and Belongings in Switzerland

@@ -1,10 +1,10 @@
 ---
 title: "Legal Protection Insurance Switzerland: Complete Guide for 2025"
-description: "Comprehensive guide to legal protection insurance in Switzerland. Understanding coverage, costs, and when you need legal insurance. Expert advice for residents and newcomers."
+description: "A comprehensive guide to legal protection insurance in Switzerland for expats. Learn about coverage, best providers, claims process, and how to choose the right policy for your needs."
 author: "Benjamin Amos Wagner"
-date: 2025-01-20
-tags: ["legal protection insurance", "legal insurance", "switzerland", "rechtschutzversicherung", "legal coverage", "insurance guide"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
+date: 2025-05-18
+tags: ["legal protection insurance", "swiss insurance", "expat", "switzerland", "legal insurance", "2025 guide"]
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747314246/a-sketch-illustration-of-a-rugged-black-_hUCr82DTTTuXAOEvaqa8Kg_m4byvbySR62_wC1A_8p51A_hgfeoe.webp"
 ---
 
 ## Introduction: Navigating Legal Challenges in Switzerland

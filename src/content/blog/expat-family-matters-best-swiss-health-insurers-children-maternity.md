@@ -4,7 +4,7 @@ description: "Complete guide to Swiss health insurance for expat families. Compa
 author: "Benjamin Amos Wagner"
 date: 2025-05-12
 tags: ["swiss family insurance", "maternity insurance", "children health insurance", "expat families", "switzerland", "Swica", "Helsana", "CSS", "family coverage"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747374756/a-hand-drawn-sketch-style-illustration-of_FyQVjUlRRT6iTeCBJJ_YNw_Uv_jWVzMT7KrQrDSKDuCfQ_e7eohj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
 ---
 
 ## Why Do Expat Families Need Specialized Health Insurance Considerations in Switzerland?
