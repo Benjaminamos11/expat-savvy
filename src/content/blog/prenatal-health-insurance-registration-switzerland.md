@@ -4,7 +4,7 @@ description: "Everything you need to know about registering your baby for health
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["prenatal registration", "swiss health insurance", "baby insurance", "pregnancy switzerland", "supplementary insurance", "family insurance", "expat families"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803658/raw-hand-drawn-sketch-in-red-fineline-st_Pp5jEVA4Tr2MEnQGnzwWjg_3DkAjxNJSgqzq1oqSnR1HQ_zavez9.png"
 ---
 
 ## Why Is Prenatal Health Insurance Registration Critical in Switzerland?

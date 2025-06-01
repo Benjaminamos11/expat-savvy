@@ -4,7 +4,7 @@ description: "Complete guide to choosing the optimal health insurance model for 
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["insurance models", "children health insurance", "HMO", "family doctor", "standard model", "telmed", "pediatric care", "swiss health insurance"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748805483/a-raw-hand-drawn-sketch-in-a-vibrant-red_qN9Pn-xsTt638_Sx24gUNw_IKSpGuwGRgqADNI8aQyXlQ_n1m4jo.png"
 ---
 
 ## What Are the Different Health Insurance Models Available for Children in Switzerland?

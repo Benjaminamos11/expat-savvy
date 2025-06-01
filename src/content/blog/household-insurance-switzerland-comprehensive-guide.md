@@ -4,7 +4,7 @@ description: "Everything expats need to know about Swiss household insurance: co
 author: "Benjamin Amos Wagner"
 date: 2025-05-15
 tags: ["household insurance", "swiss insurance", "expat", "switzerland", "property insurance", "home insurance", "2025 guide"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375525/a-raw-hand-drawn-sketch-illustration-usi_UJN_2gFtTuuEPyrWWIDomw_8bJ_5rc6STGAo_FTeXvWfw_xhnuhc.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803661/a-hand-drawn-sketch-in-a-vibrant-red-fin_Lq-XeIQUQcq9I-_g-pYxng_rL0r6mcgQbuVcjfYlZJLxg_g3cxzb.png"
 ---
 
 ## Introduction: Protecting Your Home and Belongings in Switzerland

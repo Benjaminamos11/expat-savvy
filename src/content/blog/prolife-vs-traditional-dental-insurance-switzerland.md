@@ -4,7 +4,7 @@ description: "Complete comparison of ProLife dental insurance versus traditional
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["prolife dental insurance", "dental insurance switzerland", "orthodontic coverage", "children dental insurance", "family dental insurance", "helsana", "dental coverage comparison"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803659/a-raw-hand-drawn-sketch-in-a-vibrant-red_AWzeYphrS52jCxzTiYFhcg_IF54At-4RNqYWFphY3q1IQ_fjx2au.png"
 ---
 
 ## What Is ProLife Dental Insurance and How Does It Work for Families?

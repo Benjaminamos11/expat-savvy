@@ -4,7 +4,7 @@ description: "Master the CHF 1,000 family deductible cap to optimize your Swiss 
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["family deductible", "swiss health insurance", "deductible cap", "family insurance", "cost optimization", "children insurance", "health insurance savings"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748805692/a-raw-hand-drawn-sketch-in-a-red-finelin_uBwdWV7HSe2cCJtxfPjEiA_XovI5G_cTeigsXF8SdD8_w_1_flhd06.png"
 ---
 
 ## How Does the CHF 1,000 Family Deductible Cap Work in Switzerland?

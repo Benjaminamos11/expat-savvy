@@ -4,7 +4,7 @@ description: "Expert guide to legal protection insurance in Switzerland for expa
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["legal protection insurance", "swiss insurance", "expat", "switzerland", "legal insurance", "2025 guide", "rechtschutzversicherung", "axa", "protekta", "orion"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747314246/a-sketch-illustration-of-a-rugged-black-_hUCr82DTTTuXAOEvaqa8Kg_m4byvbySR62_wC1A_8p51A_hgfeoe.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803685/a-raw-hand-drawn-sketch-in-red-and-black_ViTcNBIMSpuvl-Wmd9MUGA_W5ezLf6NQleOdkTMckORFw_p6zzhe.png"
 ---
 
 ## Introduction: Why Legal Protection Matters for Expats in Switzerland

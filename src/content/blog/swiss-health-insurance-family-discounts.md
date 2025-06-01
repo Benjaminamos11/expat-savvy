@@ -4,7 +4,7 @@ description: "Complete guide to family discount strategies and savings opportuni
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["family discounts", "swiss health insurance", "family insurance", "insurance savings", "helsana", "concordia", "swica", "css", "cost optimization"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803660/raw-hand-drawn-sketch-in-red-fineline-st_0TuekOuxTYqgq6fHcj2buA_Qr3c1mU4Tla07KIApj-bZw_abt6ar.png"
 ---
 
 ## How Do Swiss Health Insurance Family Discounts Work?
