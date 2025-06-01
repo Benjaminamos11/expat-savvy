@@ -4,7 +4,7 @@ description: "The definitive guide to navigating health insurance for families i
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["swiss family insurance", "family health insurance switzerland", "expat families", "prenatal registration", "family deductible", "children health insurance", "family discounts", "dental insurance"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-hand-drawn-illustration-in-a-red-and-b_LWKtl6LYS4Oq-78iDWsoYw_uoXos66CR0OGQ51l0H9I2Q_y8npoj.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803662/raw-hand-drawn-sketch-in-red-fineline-st_fyIlkuH3SGyG5ebW7DBV_Q_l1IkPfzJSVSE_3_pd0hQxw_atgm3g.png"
 ---
 
 ## What Makes Swiss Family Health Insurance Different from Other Countries?
