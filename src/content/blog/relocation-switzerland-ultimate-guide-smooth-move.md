@@ -7,16 +7,6 @@ tags: ["relocation", "switzerland", "moving", "expat", "relocation agency", "zur
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
 ---
 
-import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
-
-<BreadcrumbSchema 
-  items={[
-    { name: "Home", url: "/" },
-    { name: "Blog", url: "/blog" },
-    { name: "Relocation Switzerland: Your Ultimate Guide to a Smooth Move", url: "/blog/relocation-switzerland-ultimate-guide-smooth-move" }
-  ]}
-/>
-
 ## 1. Introduction: Your Seamless Transition to Swiss Life Starts Here
 
 Dreaming of a new life or career in Switzerland, but daunted by the move? Relocating to a new country, especially one as unique and meticulously organized as Switzerland, can feel like a monumental task. From navigating visa applications and finding a home in competitive markets like Zurich or Geneva, to understanding local customs and administrative procedures, the checklist can seem endless. But what if you could transform this potentially overwhelming experience into a smooth, efficient, and even exciting journey?

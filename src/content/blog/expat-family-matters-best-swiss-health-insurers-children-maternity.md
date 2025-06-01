@@ -1,21 +1,11 @@
 ---
-title: "Expat Family Matters: Which Swiss Health Insurers Truly Offer the Best for Your Children & Maternity Needs in 2025?"
-description: "Compare how Concordia, Helsana, and Swica support expat families with maternity benefits, children's coverage including orthodontics, and family-friendly services to find the best Swiss health insurance for your loved ones."
+title: "Expat Family Matters: Best Swiss Health Insurers for Children & Maternity"
+description: "Complete guide to Swiss health insurance for expat families. Compare top insurers for maternity care, children's coverage, family discounts, and special benefits from Swica, Helsana, CSS, and more."
 author: "Benjamin Amos Wagner"
-date: 2025-05-01
-tags: ["swiss health insurance", "expat families", "maternity coverage", "children's insurance", "orthodontics", "family benefits", "switzerland", "Concordia", "Helsana", "Swica"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075358/a-sketch-style-illustration-in-a-limited_5FtbMJN6TymCd7PwS7veRA_uzg0uOWkQbWw_NSwGd9OHw_fnxej5.webp"
+date: 2025-05-12
+tags: ["swiss family insurance", "maternity insurance", "children health insurance", "expat families", "switzerland", "Swica", "Helsana", "CSS", "family coverage"]
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747374756/a-hand-drawn-sketch-style-illustration-of_FyQVjUlRRT6iTeCBJJ_YNw_Uv_jWVzMT7KrQrDSKDuCfQ_e7eohj.webp"
 ---
-
-import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
-
-<BreadcrumbSchema 
-  items={[
-    { name: "Home", url: "/" },
-    { name: "Blog", url: "/blog" },
-    { name: "Expat Family Matters: Best Swiss Health Insurers for Children & Maternity", url: "/blog/expat-family-matters-best-swiss-health-insurers-children-maternity" }
-  ]}
-/>
 
 ## Why Do Expat Families Need Specialized Health Insurance Considerations in Switzerland?
 

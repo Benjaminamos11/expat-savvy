@@ -7,16 +7,6 @@ tags: ["swiss health insurance", "expat", "switzerland", "HMO", "Telmed", "Stand
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-style-illustration_BZpx4RKAQkeMNlE9XGVZ7Q_bZ0lPMaET3qjh1YW77SFnw_cdfr10.webp"
 ---
 
-import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
-
-<BreadcrumbSchema 
-  items={[
-    { name: "Home", url: "/" },
-    { name: "Blog", url: "/blog" },
-    { name: "Decoding Swiss Health Insurance Models: HMO, Telmed, Standard, & More", url: "/blog/health-insurance-models-switzerland" }
-  ]}
-/>
-
 ## What Are the Key Differences Between Swiss Health Insurance Models?
 
 Switzerland is renowned for its high-quality healthcare system, but for expats, understanding the various health insurance models can be a complex undertaking. Unlike many countries with a single, state-run system, Switzerland offers a choice of models for its mandatory basic health insurance (Grundversicherung / Assurance de Base). This choice, while offering flexibility, can also be confusing. Understanding the differences between models like Standard (free choice of doctor), HMO (Health Maintenance Organization), Family Doctor/GP (Hausarzt), and Telmed (telemedicine-first) is crucial for making an informed decision that aligns with your healthcare needs, preferences, and budget.
