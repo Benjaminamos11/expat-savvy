@@ -4,10 +4,20 @@ description: "Compare how Concordia, Helsana, and Swica support expat families w
 author: "Benjamin Amos Wagner"
 date: 2025-05-01
 tags: ["swiss health insurance", "expat families", "maternity coverage", "children's insurance", "orthodontics", "family benefits", "switzerland", "Concordia", "Helsana", "Swica"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075358/a-sketch-style-illustration-in-a-limited_5FtbMJN6TymCd7PwS7veRA_uzg0uOWkQbWw_NSwGd9OHw_nexx9u.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075358/a-sketch-style-illustration-in-a-limited_5FtbMJN6TymCd7PwS7veRA_uzg0uOWkQbWw_NSwGd9OHw_fnxej5.webp"
 ---
 
-## Which Swiss Health Insurers Truly Offer the Best for Your Children & Maternity Needs in 2025?
+import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
+
+<BreadcrumbSchema 
+  items={[
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: "Expat Family Matters: Best Swiss Health Insurers for Children & Maternity", url: "/blog/expat-family-matters-best-swiss-health-insurers-children-maternity" }
+  ]}
+/>
+
+## Why Do Expat Families Need Specialized Health Insurance Considerations in Switzerland?
 
 Relocating to Switzerland with family, or starting one here, brings a unique set of considerations, especially when it comes to health insurance. While the Swiss healthcare system is renowned for its quality, ensuring comprehensive coverage for maternity, children's specific health needs (like orthodontics), and overall family wellbeing requires careful selection of an insurance provider and appropriate supplementary plans. This article compares how selected Swiss health insurers cater to the needs of expat families, helping you make an informed decision for 2025.
 

@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 
 const posts = await getCollection('blog');
+
 // Safe sort that handles missing or invalid dates
 const sortedPosts = posts.sort((a, b) => {
   try {
@@ -54,12 +56,40 @@ const formatDate = (date: Date | string | undefined | null): string => {
     return '';
   }
 };
+
+// Helper function to parse tag priority
+const getTagPriority = (tags: string[]) => {
+  const priorities = {
+    'health insurance': 10,
+    'relocation': 9,
+    'pension planning': 8,
+    'liability insurance': 7,
+    'household insurance': 6,
+    'expat': 5
+  };
+  
+  return Math.max(...tags.map(tag => 
+    priorities[tag.toLowerCase() as keyof typeof priorities] || 0
+  ));
+};
+
+// Categorize posts
+const featuredPosts = sortedPosts.slice(0, 3);
+const remainingPosts = sortedPosts.slice(3);
 ---
 
 <BaseLayout 
   title="Blog & Articles | Expat Savvy"
   description="Read our latest articles about insurance, expat life, and healthcare in Switzerland. Get expert advice from Expat Savvy."
 >
+  
+  <BreadcrumbSchema 
+    items={[
+      { name: "Home", url: "/" },
+      { name: "Blog", url: "/blog" }
+    ]}
+  />
+
   <main class="bg-gray-50 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">

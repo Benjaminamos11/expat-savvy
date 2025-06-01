@@ -4,8 +4,18 @@ description: "A comprehensive comparison of the different mandatory health insur
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["swiss health insurance", "expat", "switzerland", "HMO", "Telmed", "Standard", "insurance models", "healthcare guide", "basic health insurance", "choose insurance"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-of-a-decision-tr_6nFEntvvSVCuzXgDkrhweQ_qblZRc6wSP-HDClBIqJ8sQ_miepvt.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-style-illustration_BZpx4RKAQkeMNlE9XGVZ7Q_bZ0lPMaET3qjh1YW77SFnw_cdfr10.webp"
 ---
+
+import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
+
+<BreadcrumbSchema 
+  items={[
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: "Decoding Swiss Health Insurance Models: HMO, Telmed, Standard, & More", url: "/blog/health-insurance-models-switzerland" }
+  ]}
+/>
 
 ## What Are the Key Differences Between Swiss Health Insurance Models?
 

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
+import BreadcrumbSchema from '../components/BreadcrumbSchema.astro';
 
 const stats = [
   { number: "1000+", label: "Happy Clients" },
@@ -119,9 +120,16 @@ const testimonials = [
 ---
 
 <Layout
-  title="About Expat Savvy - Your Partners in Switzerland"
-  description="Meet the team behind Expat Savvy. Learn about our story, our mission to help expats navigate Swiss insurance, and why we are passionate about making your move to Switzerland smoother."
+  title="About Expat Savvy | Your Swiss Insurance Experts"
+  description="Meet the team behind Expat Savvy. Expert insurance consultants helping expats navigate Swiss health insurance, 3rd pillar, and more with personalized guidance."
 >
+  <BreadcrumbSchema 
+    items={[
+      { name: "Home", url: "/" },
+      { name: "About Us", url: "/about" }
+    ]}
+  />
+
   <!-- Schema.org markup -->
   <script type="application/ld+json" slot="head">
     {
