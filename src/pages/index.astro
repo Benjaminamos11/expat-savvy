@@ -500,9 +500,6 @@ const formatDate = (date: Date | string | undefined | null): string => {
                 <div class="h-48 bg-gray-100">
                   <img 
                     src={post.data.image || defaultBlogImage} 
-                    srcset={`${(post.data.image || defaultBlogImage).replace('upload/', 'upload/c_scale,w_300/')} 300w,
-                            ${(post.data.image || defaultBlogImage).replace('upload/', 'upload/c_scale,w_600/')} 600w`}
-                    sizes="(max-width: 640px) 300px, 600px"
                     loading="lazy"
                     alt={`Illustration for ${post.data.title || 'Expat Savvy Article'}`} 
                     class="w-full h-full object-cover transition-opacity duration-500"
@@ -685,7 +682,6 @@ const formatDate = (date: Date | string | undefined | null): string => {
         
         // Update image
         image.src = newImageSrc;
-        image.srcset = `${newImageSrc.replace('upload/', 'upload/c_scale,w_300/')} 300w, ${newImageSrc.replace('upload/', 'upload/c_scale,w_600/')} 600w`;
         image.alt = `Illustration for ${newPost.title || 'Expat Savvy Article'}`;
         
         // Update link
