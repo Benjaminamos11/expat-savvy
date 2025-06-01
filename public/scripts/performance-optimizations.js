@@ -1,21 +1,96 @@
 /**
- * Performance Optimizations Script - Enhanced Version
+ * Performance Optimizations Script - Enhanced Version with Loading Safety
  */
 
-// Execute immediately
+// Execute immediately with error handling
 (function() {
-  // Implement priority loading for critical resources
-  prioritizeCriticalResources();
+  try {
+    // Add loading safety check
+    addLoadingSafetyCheck();
+    
+    // Implement priority loading for critical resources
+    prioritizeCriticalResources();
+    
+    // Add preconnects immediately
+    addPreconnects();
+    
+    // Execute other optimizations when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOptimizations);
+    } else {
+      // DOM already loaded, run now
+      initOptimizations();
+    }
+  } catch (error) {
+    console.warn('Performance optimization error:', error);
+    // Continue with basic initialization
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', basicInit);
+    } else {
+      basicInit();
+    }
+  }
   
-  // Add preconnects immediately
-  addPreconnects();
+  // Add loading safety check to prevent partial page loads
+  function addLoadingSafetyCheck() {
+    // Check if page loads properly within 5 seconds
+    let pageLoaded = false;
+    
+    const checkPageLoad = () => {
+      pageLoaded = true;
+    };
+    
+    // Monitor multiple load indicators
+    if (document.readyState === 'complete') {
+      checkPageLoad();
+    } else {
+      window.addEventListener('load', checkPageLoad);
+      document.addEventListener('DOMContentLoaded', checkPageLoad);
+    }
+    
+    // Safety timeout - reload if page doesn't load properly
+    setTimeout(() => {
+      if (!pageLoaded && document.readyState !== 'complete') {
+        console.log('Page loading issue detected - implementing safety measures');
+        
+        // Remove problematic scripts that might be blocking
+        const blockers = document.querySelectorAll('script[src*="embed"], script[src*="widget"]');
+        blockers.forEach(script => {
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+        });
+        
+        // Force complete page rendering
+        document.body.style.visibility = 'visible';
+        document.body.style.opacity = '1';
+        
+        // Hide any loading overlays that might be stuck
+        const overlays = document.querySelectorAll('.loading-overlay, .page-loader, [class*="loading"]');
+        overlays.forEach(overlay => {
+          overlay.style.display = 'none';
+        });
+      }
+    }, 5000);
+  }
   
-  // Execute other optimizations when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initOptimizations);
-  } else {
-    // DOM already loaded, run now
-    initOptimizations();
+  // Basic initialization fallback
+  function basicInit() {
+    try {
+      // Ensure body is visible
+      document.body.style.visibility = 'visible';
+      document.body.style.opacity = '1';
+      
+      // Basic image loading
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      images.forEach(img => {
+        if (!img.complete) {
+          img.loading = 'eager';
+        }
+      });
+    } catch (error) {
+      console.warn('Basic init error:', error);
+    }
   }
   
   // Prioritize critical resources to improve page load
