@@ -172,67 +172,12 @@ Relocating to Switzerland is a significant undertaking, but it doesn't have to b
 - [Best Health Insurance Switzerland: The Ultimate 2025 Guide](/blog/best-health-insurance-switzerland)
 - [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability)
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does relocation to Switzerland typically cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Costs vary widely based on services needed, family size, and destination canton. Agency fees can range from a few thousand to over ten thousand Swiss Francs. Always get detailed quotes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I relocate to Switzerland without a job?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For non-EU/EFTA citizens, it's very difficult; a Swiss employment contract is usually required for a work permit. EU/EFTA citizens have more flexibility but still need to demonstrate financial self-sufficiency if not employed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are the biggest challenges for expats moving to Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Common challenges include finding accommodation (especially in popular cities), navigating the administrative processes, understanding the different languages and cultural norms, and the high cost of living."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does it take to find an apartment in Zurich/Geneva/Zug/Basel?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It can take anywhere from a few weeks to several months, depending on market conditions, your requirements, and whether you have professional help. Be prepared for a competitive process."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do relocation agencies help with pet relocation?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, many relocation agencies offer assistance with the necessary paperwork, vaccinations, and transport arrangements for relocating pets to Switzerland."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What support is available for families relocating with children (e.g., schools)?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Relocation agencies often provide dedicated school search services, helping families understand the Swiss education system (local vs. international schools) and assisting with applications and visits."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is it better to use a global relocation company or a local Swiss agency?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Both have pros and cons. Global companies may have broader networks if you're moving from far away, while local Swiss agencies often have deeper, more nuanced knowledge of specific cantons and cities. Consider which aligns best with your needs."
-      }
-    }
-  ]
-}
-</script> 
+---
+
+### Related Guides
+
+- [Swiss Relocation Insurance Checklist: Get Covered by Canton](/blog/relocating-switzerland-insurance-checklist-by-canton)
+- [Relocating to Switzerland: A Comprehensive Checklist for Expats](/blog/relocating-to-switzerland-checklist)
+- [Mandatory Swiss Health Insurance: What Expats Must Know](/health-insurance)
+- [Best Health Insurance Switzerland: The Ultimate 2025 Guide](/blog/best-health-insurance-switzerland)
+- [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability) 

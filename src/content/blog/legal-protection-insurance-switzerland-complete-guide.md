@@ -442,33 +442,24 @@ While legal protection insurance seems straightforward, professional guidance he
   <a href="/contact" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Legal Protection Analysis</a>
 </div>
 
-## FAQ: Legal Protection Insurance in Switzerland
+## Complete Swiss Insurance Protection Strategy
 
-**Q: Is legal protection insurance mandatory in Switzerland?**
-A: No, legal protection insurance is not mandatory in Switzerland. However, given the high costs of legal proceedings and Switzerland's complex legal environment, it's highly recommended for most residents.
+Legal protection insurance works best as part of a comprehensive insurance portfolio. Here's how it fits with other essential Swiss insurance:
 
-**Q: Can I choose my own lawyer with legal protection insurance?**
-A: This depends on your policy. Some insurers require you to use lawyers from their network, while others allow free choice of lawyer. Check your policy terms or opt for policies with free lawyer choice if this is important to you.
+### **Foundation Insurance (Mandatory)**
+- **[Health Insurance Switzerland](/health-insurance)** - Mandatory coverage within 3 months
+- **[Best Health Insurance Guide: 2025 Edition](/blog/best-health-insurance-switzerland)** - Choose optimal health coverage
 
-**Q: Does legal protection insurance cover criminal defense?**
-A: Basic legal protection usually covers criminal defense only if you're falsely accused. Intentional criminal acts are typically excluded. You can often add criminal law protection as an optional coverage.
+### **Property & Liability Protection**
+- **[Household Insurance Switzerland](/blog/household-insurance-switzerland-comprehensive-guide)** - Protect belongings and basic liability
+- **[Personal Liability Insurance](/insurance-guides/personal-liability)** - Extended liability coverage
 
-**Q: How long do I have to wait before I can use my legal protection insurance?**
-A: Most policies have a waiting period of 3-6 months for certain types of disputes to prevent people from buying insurance only when they already have legal problems. Emergency situations and some types of cases may have immediate coverage.
+### **Financial Security & Planning**
+- **[3rd Pillar Insurance: Tax Advantages](/blog/third-pillar-insurance-switzerland-comprehensive-guide)** - Retirement planning and tax optimization
 
-**Q: What's the difference between legal protection and liability insurance?**
-A: Liability insurance protects you when you accidentally cause damage to others. Legal protection insurance covers the costs of legal proceedings whether you're the plaintiff or defendant, regardless of fault.
-
-**Q: Can legal protection insurance help with visa or immigration issues?**
-A: Some policies include administrative law coverage that might help with immigration issues, but this varies by provider. Check specific policy terms or consider specialized immigration legal support.
-
-**Q: Does legal protection insurance cover business-related legal issues?**
-A: Standard personal legal protection typically excludes business matters. If you're self-employed or run a business, you'll need specialized commercial legal protection insurance.
-
-**Q: Can I cancel my legal protection insurance at any time?**
-A: Most policies can be cancelled annually with proper notice (usually 1-3 months before renewal). However, cancelling during an ongoing legal case may affect coverage for that case.
-
----
+### **Practical Guides for Smart Decisions**
+- **[How-To Guides for Swiss Insurance](/guides/how-to)** - Step-by-step instructions for all insurance needs
+- **[New Arrivals Insurance Checklist](/insurance-guides/new-arrivals-checklist)** - Complete setup guide for newcomers 
 
 ### Related Guides
 
@@ -477,79 +468,6 @@ A: Most policies can be cancelled annually with proper notice (usually 1-3 month
 - [Complete Guide to Swiss Insurance for Newcomers](/insurance-guides/new-arrivals-checklist)
 - [Best Health Insurance Switzerland: The Ultimate 2025 Guide](/blog/best-health-insurance-switzerland)
 - [3rd Pillar Insurance Switzerland: Complete Guide to Tax-Advantaged Savings](/blog/third-pillar-insurance-switzerland-comprehensive-guide)
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is legal protection insurance mandatory in Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, legal protection insurance is not mandatory in Switzerland. However, given the high costs of legal proceedings and Switzerland's complex legal environment, it's highly recommended for most residents."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I choose my own lawyer with legal protection insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "This depends on your policy. Some insurers require you to use lawyers from their network, while others allow free choice of lawyer. Check your policy terms or opt for policies with free lawyer choice if this is important to you."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does legal protection insurance cover criminal defense?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Basic legal protection usually covers criminal defense only if you're falsely accused. Intentional criminal acts are typically excluded. You can often add criminal law protection as an optional coverage."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long do I have to wait before I can use my legal protection insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most policies have a waiting period of 3-6 months for certain types of disputes to prevent people from buying insurance only when they already have legal problems. Emergency situations and some types of cases may have immediate coverage."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's the difference between legal protection and liability insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Liability insurance protects you when you accidentally cause damage to others. Legal protection insurance covers the costs of legal proceedings whether you're the plaintiff or defendant, regardless of fault."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can legal protection insurance help with visa or immigration issues?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Some policies include administrative law coverage that might help with immigration issues, but this varies by provider. Check specific policy terms or consider specialized immigration legal support."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does legal protection insurance cover business-related legal issues?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Standard personal legal protection typically excludes business matters. If you're self-employed or run a business, you'll need specialized commercial legal protection insurance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel my legal protection insurance at any time?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most policies can be cancelled annually with proper notice (usually 1-3 months before renewal). However, cancelling during an ongoing legal case may affect coverage for that case."
-      }
-    }
-  ]
-}
-</script>
 
 ## Complete Swiss Insurance Protection Strategy
 
