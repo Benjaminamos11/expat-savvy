@@ -1,5 +1,6 @@
 /**
  * Performance Optimizations Script - Enhanced Version with Loading Safety
+ * Optimized for blog pages and better Core Web Vitals
  */
 
 // Execute immediately with error handling
@@ -33,45 +34,22 @@
   
   // Add loading safety check to prevent partial page loads
   function addLoadingSafetyCheck() {
-    // Check if page loads properly within 5 seconds
-    let pageLoaded = false;
+    // Prevent partial page loads
+    let isLoaded = false;
     
-    const checkPageLoad = () => {
-      pageLoaded = true;
+    const checkLoaded = () => {
+      if (isLoaded) return;
+      if (document.readyState === 'complete') {
+        isLoaded = true;
+        document.body.classList.add('page-loaded');
+      }
     };
     
-    // Monitor multiple load indicators
-    if (document.readyState === 'complete') {
-      checkPageLoad();
-    } else {
-      window.addEventListener('load', checkPageLoad);
-      document.addEventListener('DOMContentLoaded', checkPageLoad);
-    }
+    document.addEventListener('readystatechange', checkLoaded);
+    window.addEventListener('load', checkLoaded);
     
-    // Safety timeout - reload if page doesn't load properly
-    setTimeout(() => {
-      if (!pageLoaded && document.readyState !== 'complete') {
-        console.log('Page loading issue detected - implementing safety measures');
-        
-        // Remove problematic scripts that might be blocking
-        const blockers = document.querySelectorAll('script[src*="embed"], script[src*="widget"]');
-        blockers.forEach(script => {
-          if (script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-        });
-        
-        // Force complete page rendering
-        document.body.style.visibility = 'visible';
-        document.body.style.opacity = '1';
-        
-        // Hide any loading overlays that might be stuck
-        const overlays = document.querySelectorAll('.loading-overlay, .page-loader, [class*="loading"]');
-        overlays.forEach(overlay => {
-          overlay.style.display = 'none';
-        });
-      }
-    }, 5000);
+    // Fallback safety check
+    setTimeout(checkLoaded, 5000);
   }
   
   // Basic initialization fallback
@@ -82,7 +60,7 @@
       document.body.style.opacity = '1';
       
       // Basic image loading
-      const images = document.querySelectorAll('img[loading="lazy"]');
+      const images = document.querySelectorAll('img:not([loading])');
       images.forEach(img => {
         if (!img.complete) {
           img.loading = 'eager';
@@ -95,199 +73,183 @@
   
   // Prioritize critical resources to improve page load
   function prioritizeCriticalResources() {
-    // Delay loading of non-critical scripts
-    const nonCriticalScripts = document.querySelectorAll('script:not([type="application/ld+json"]):not([type="module"]):not([src*="performance"]):not([src*="init"])');
-    nonCriticalScripts.forEach(script => {
-      if (!script.hasAttribute('defer') && !script.hasAttribute('async')) {
-        script.defer = true;
+    // Preload critical fonts
+    const fontPreloads = [
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+    ];
+    
+    fontPreloads.forEach(href => {
+      if (!document.querySelector(`link[href="${href}"]`)) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'style';
+        link.href = href;
+        link.onload = function() {
+          this.onload = null;
+          this.rel = 'stylesheet';
+        };
+        document.head.appendChild(link);
       }
     });
   }
   
   function initOptimizations() {
-    // Execute optimizations
-    lazyLoadImages();
-    optimizeFonts();
-    fixSvgPathErrors();
-    deferThirdPartyEmbeds();
-    addImageDimensions();
-  }
-  
-  // Only lazy load images below the fold
-  function lazyLoadImages() {
-    if ('loading' in HTMLImageElement.prototype) {
-      // If browser supports native lazy loading
-      const images = document.querySelectorAll('img:not([loading])');
-      
-      let i = 0;
-      while (i < images.length) {
-        const img = images[i];
-        if (!isAboveTheFold(img)) {
-          img.loading = 'lazy';
-          
-          // Set width and height if missing (to reduce layout shift)
-          if ((!img.hasAttribute('width') || !img.hasAttribute('height')) && 
-              img.hasAttribute('src') && !img.src.includes('data:image')) {
-            img.style.aspectRatio = '16/9';
-          }
-        }
-        i++;
-      }
-    }
-  }
-  
-  // Simple check for above-the-fold content
-  function isAboveTheFold(el) {
-    const rect = el.getBoundingClientRect();
-    return rect.top < window.innerHeight * 0.8; // Only elements fully in viewport are not lazy loaded
-  }
-  
-  // Add dimensions to images that are missing them
-  function addImageDimensions() {
-    const images = document.querySelectorAll('img:not([width]):not([height])');
-    images.forEach(img => {
-      // If the image is loaded, use its natural dimensions
-      if (img.complete) {
-        if (img.naturalWidth && img.naturalHeight) {
-          img.setAttribute('width', img.naturalWidth);
-          img.setAttribute('height', img.naturalHeight);
-        } else {
-          // Set a reasonable default aspect ratio
-          img.style.aspectRatio = '16/9';
-        }
-      } else {
-        // For unloaded images, add an onload handler
-        img.onload = function() {
-          if (this.naturalWidth && this.naturalHeight) {
-            this.setAttribute('width', this.naturalWidth);
-            this.setAttribute('height', this.naturalHeight);
-          }
-        };
-        
-        // Set a default aspect ratio while loading
-        img.style.aspectRatio = '16/9';
-      }
-    });
-  }
-  
-  // Optimize fonts loading
-  function optimizeFonts() {
-    // Add font-display: swap to any Google Fonts we're loading
-    const fontStyles = document.querySelectorAll('link[href*="fonts.googleapis.com"]');
-    fontStyles.forEach(link => {
-      // Modify link to add display=swap parameter if not present
-      if (link.href.indexOf('display=swap') === -1) {
-        link.href = link.href + (link.href.indexOf('?') === -1 ? '?' : '&') + 'display=swap';
-      }
-      
-      // Add preload for critical fonts
-      if (!link.hasAttribute('rel') || link.getAttribute('rel') !== 'preload') {
-        const preloadLink = document.createElement('link');
-        preloadLink.href = link.href;
-        preloadLink.rel = 'preload';
-        preloadLink.as = 'style';
-        document.head.appendChild(preloadLink);
-      }
-    });
-  }
-  
-  // Fix SVG path errors that cause console warnings
-  function fixSvgPathErrors() {
-    // Only run on pages with SVG path errors
-    if (document.querySelector('path[d*=".."]') || document.querySelector('path[d*="-."]')) {
-      const paths = document.querySelectorAll('path[d]');
-      
-      let i = 0;
-      while (i < paths.length) {
-        const path = paths[i];
-        const d = path.getAttribute('d');
-        
-        if (d && (d.includes('..') || d.includes('-.'))) {
-          // Fix common SVG syntax errors
-          path.setAttribute('d', d
-            .replace(/\.\./g, '.') // Double dots
-            .replace(/\-\./g, '-0.') // Negative decimal
-          );
-        }
-        i++;
-      }
-    }
-  }
-  
-  // Defer loading of third-party embeds until interaction or visibility
-  function deferThirdPartyEmbeds() {
-    // Skip deferring on the consultation page where Cal.com is critical
-    if (window.location.pathname.includes('free-consultation')) {
-      return;
-    }
+    // Optimize images
+    optimizeImages();
     
-    // Use Intersection Observer to load third-party content when visible
-    if ('IntersectionObserver' in window) {
-      const embedPlaceholders = document.querySelectorAll('.embed-placeholder, [data-embed-src]');
+    // Optimize external resources
+    optimizeExternalResources();
+    
+    // Implement intersection observer for lazy loading
+    implementLazyLoading();
+    
+    // Optimize CSS delivery
+    optimizeCSSDelivery();
+    
+    // Minimize layout shifts
+    minimizeLayoutShifts();
+  }
+  
+  function optimizeImages() {
+    const images = document.querySelectorAll('img:not([data-optimized])');
+    
+    images.forEach(img => {
+      // Mark as optimized to avoid double processing
+      img.setAttribute('data-optimized', 'true');
       
-      const observer = new IntersectionObserver((entries) => {
+      // Add loading="lazy" if not already set and not above fold
+      if (!img.hasAttribute('loading') && !img.hasAttribute('fetchpriority')) {
+        const rect = img.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          img.loading = 'lazy';
+        }
+      }
+      
+      // Optimize Cloudinary URLs if not already optimized
+      if (img.src.includes('cloudinary.com') && !img.src.includes('q_auto')) {
+        const originalSrc = img.src;
+        if (originalSrc.includes('/upload/')) {
+          const parts = originalSrc.split('/upload/');
+          if (parts.length === 2) {
+            const optimizedSrc = `${parts[0]}/upload/q_auto,f_auto,dpr_auto/${parts[1]}`;
+            img.src = optimizedSrc;
+          }
+        }
+      }
+      
+      // Add error handling
+      img.addEventListener('error', function() {
+        if (this.src.includes('cloudinary.com')) {
+          // Fallback to original format if WebP fails
+          this.src = this.src.replace('f_auto', 'f_jpg');
+        }
+      }, { once: true });
+    });
+  }
+  
+  function implementLazyLoading() {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const placeholder = entry.target;
-            const embedSrc = placeholder.getAttribute('data-embed-src');
+            const img = entry.target;
             
-            if (embedSrc) {
-              if (placeholder.tagName === 'IFRAME') {
-                placeholder.src = embedSrc;
-              } else {
-                const iframe = document.createElement('iframe');
-                iframe.src = embedSrc;
-                iframe.width = placeholder.getAttribute('data-width') || '100%';
-                iframe.height = placeholder.getAttribute('data-height') || '100%';
-                iframe.frameBorder = '0';
-                iframe.allowFullscreen = true;
-                placeholder.appendChild(iframe);
-              }
-              
-              // Stop observing after loading
-              observer.unobserve(placeholder);
+            // Load the image
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
             }
+            
+            // Load srcset if available
+            if (img.dataset.srcset) {
+              img.srcset = img.dataset.srcset;
+              img.removeAttribute('data-srcset');
+            }
+            
+            img.classList.remove('lazy');
+            observer.unobserve(img);
           }
         });
       }, {
-        rootMargin: '200px', // Load when within 200px of viewport
-        threshold: 0
+        root: null,
+        rootMargin: '50px',
+        threshold: 0.01
       });
       
-      embedPlaceholders.forEach(placeholder => {
-        observer.observe(placeholder);
+      // Observe lazy images
+      document.querySelectorAll('img[data-src], img.lazy').forEach(img => {
+        imageObserver.observe(img);
       });
     }
+  }
+  
+  function optimizeExternalResources() {
+    // Defer non-critical external scripts
+    const scripts = document.querySelectorAll('script[src]');
+    scripts.forEach(script => {
+      if (script.src.includes('facebook.net') || 
+          script.src.includes('googletagmanager.com') ||
+          script.src.includes('google-analytics.com')) {
+        if (!script.hasAttribute('async') && !script.hasAttribute('defer')) {
+          script.async = true;
+        }
+      }
+    });
+  }
+  
+  function optimizeCSSDelivery() {
+    // Convert non-critical CSS to load asynchronously
+    const stylesheets = document.querySelectorAll('link[rel="stylesheet"]:not([data-critical])');
+    stylesheets.forEach(link => {
+      if (!link.href.includes('modal-styles.css') && 
+          !link.href.includes('critical.css')) {
+        // Use media trick for async CSS loading
+        link.media = 'print';
+        link.onload = function() {
+          this.media = 'all';
+          this.onload = null;
+        };
+      }
+    });
+  }
+  
+  function minimizeLayoutShifts() {
+    // Add dimensions to images without them
+    const images = document.querySelectorAll('img:not([width]):not([height])');
+    images.forEach(img => {
+      // Set default dimensions to prevent layout shift
+      if (!img.style.aspectRatio) {
+        img.style.aspectRatio = '16/9';
+        img.style.objectFit = 'cover';
+      }
+    });
+    
+    // Reserve space for iframes
+    const iframes = document.querySelectorAll('iframe:not([width]):not([height])');
+    iframes.forEach(iframe => {
+      if (!iframe.style.aspectRatio) {
+        iframe.style.aspectRatio = '16/9';
+        iframe.style.width = '100%';
+      }
+    });
   }
   
   // Add preconnect links for critical domains
   function addPreconnects() {
-    const domains = [
-      'https://app.cal.com',
+    const preconnects = [
       'https://res.cloudinary.com',
       'https://fonts.googleapis.com',
-      'https://fonts.gstatic.com',
-      'https://cdn.prod.website-files.com'
+      'https://fonts.gstatic.com'
     ];
     
-    for (let i = 0; i < domains.length; i++) {
-      const domain = domains[i];
-      if (!document.querySelector(`link[rel="preconnect"][href="${domain}"]`)) {
+    preconnects.forEach(href => {
+      if (!document.querySelector(`link[href="${href}"]`)) {
         const link = document.createElement('link');
         link.rel = 'preconnect';
-        link.href = domain;
+        link.href = href;
         link.crossOrigin = 'anonymous';
-        
-        // Add to head as early as possible
-        if (document.head) {
-          document.head.appendChild(link);
-        } else {
-          // If head isn't available yet, wait for it
-          document.addEventListener('DOMContentLoaded', function() {
-            document.head.appendChild(link);
-          });
-        }
+        document.head.appendChild(link);
       }
-    }
+    });
   }
 })(); 
