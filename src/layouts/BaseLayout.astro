@@ -136,24 +136,34 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     })} />
 
     <!-- Preconnect to external domains for faster resource loading -->
+    <link rel="preconnect" href="https://res.cloudinary.com" />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://connect.facebook.net" />
-    <link rel="dns-prefetch" href="https://cloud.umami.is" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Inline critical CSS for modal -->
-    <style>
-      .modal-open { overflow: hidden; }
-      #consultation-modal.hidden { display: none !important; }
-      #consultation-modal { 
-        position: fixed; 
-        inset: 0; 
-        background: rgba(0,0,0,0.5); 
-        z-index: 9999; 
-      }
-    </style>
+    <!-- Load critical CSS immediately -->
+    <link rel="stylesheet" href="/scripts/modal-styles.css" />
     
-    <!-- Load modal styles with low priority -->
-    <link rel="stylesheet" href="/scripts/modal-styles.css" media="print" onload="this.media='all'; this.onload=null;" />
+    <!-- Consent Management (must be before GTM) -->
+    <script is:inline src="/scripts/consent/gtm-consent-init.js"></script>
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      if (f && f.parentNode) f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NC6FSJTW'); 
+    </script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Analytics Tracking from Umami -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="fff60d95-7ab4-40e9-b82e-86ef90c1c567"></script>
     
     <slot name="head" />
   </head>
@@ -174,100 +184,20 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/e
     <script is:inline src="/scripts/modal-init.js"></script>
     <script is:inline src="/scripts/button-fixer.js"></script>
     <script is:inline src="/scripts/direct-modal-fix.js"></script>
-
-    <!-- Load third-party scripts after user interaction or page load -->
-    <script>
-      // Performance-optimized script loading
-      let scriptsLoaded = false;
-      
-      function loadThirdPartyScripts() {
-        if (scriptsLoaded) return;
-        scriptsLoaded = true;
-        
-        // Load GTM with consent
-        const consentScript = document.createElement('script');
-        consentScript.src = '/scripts/consent/gtm-consent-init.js';
-        consentScript.async = true;
-        document.head.appendChild(consentScript);
-        
-        // Load GTM
-        (function(w,d,s,l,i){
-          w[l]=w[l]||[];
-          w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-          var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),
-              dl=l!='dataLayer'?'&l='+l:'';
-          j.async=true;
-          j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-          if (f && f.parentNode) f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-NC6FSJTW');
-        
-        // Load Umami analytics
-        const umamiScript = document.createElement('script');
-        umamiScript.defer = true;
-        umamiScript.src = 'https://cloud.umami.is/script.js';
-        umamiScript.setAttribute('data-website-id', 'fff60d95-7ab4-40e9-b82e-86ef90c1c567');
-        document.head.appendChild(umamiScript);
-        
-        // Load Cal.com
-        const calScript = document.createElement('script');
-        calScript.innerHTML = `
-          (function (C, A, L) { 
-            let p = function (a, ar) { a.q.push(ar); }; 
-            let d = C.document; 
-            C.Cal = C.Cal || function () { 
-              let cal = C.Cal; 
-              let ar = arguments; 
-              if (!cal.loaded) { 
-                cal.ns = {}; 
-                cal.q = cal.q || []; 
-                d.head.appendChild(d.createElement("script")).src = A; 
-                cal.loaded = true; 
-              } 
-              if (ar[0] === L) { 
-                const api = function () { p(api, arguments); }; 
-                const namespace = ar[1]; 
-                api.q = api.q || []; 
-                if(typeof namespace === "string"){
-                  cal.ns[namespace] = cal.ns[namespace] || api;
-                  p(cal.ns[namespace], ar);
-                  p(cal, ["initNamespace", namespace]);
-                } else p(cal, ar); 
-                return;
-              } 
-              p(cal, ar); 
-            }; 
-          })(window, "https://app.cal.com/embed/embed.js", "init");
-          Cal("init", "expat-savvy", {origin:"https://cal.com"});
-        `;
-        document.head.appendChild(calScript);
-        
-        // Load non-critical scripts
-        setTimeout(() => {
-          const scripts = [
-            '/scripts/analytics-tracking.js',
-            '/scripts/page-type-detection.js',
-            '/scripts/gtm/event-helper.js',
-            '/scripts/modal-debug.js'
-          ];
-          
-          scripts.forEach(src => {
-            const script = document.createElement('script');
-            script.src = src;
-            script.defer = true;
-            document.head.appendChild(script);
-          });
-        }, 1000);
-      }
-      
-      // Load scripts on user interaction or after page load
-      const events = ['mousedown', 'touchstart', 'scroll', 'keydown'];
-      events.forEach(event => {
-        document.addEventListener(event, loadThirdPartyScripts, { once: true, passive: true });
-      });
-      
-      // Fallback: load after 3 seconds if no interaction
-      setTimeout(loadThirdPartyScripts, 3000);
+    
+    <!-- Cal.com - Load after DOM ready but not deferred -->
+    <script type="text/javascript">
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "expat-savvy", {origin:"https://cal.com"});
     </script>
+
+    <!-- Load performance optimization script -->
+    <script defer src="/scripts/performance-optimizations.js"></script>
+    
+    <!-- Analytics and other scripts -->
+    <script is:inline src="/scripts/analytics-tracking.js" defer></script>
+    <script is:inline src="/scripts/page-type-detection.js" defer></script>
+    <script is:inline src="/scripts/gtm/event-helper.js" defer></script>
+    <script is:inline src="/scripts/modal-debug.js" defer></script>
   </body>
 </html> 
