@@ -23,16 +23,35 @@ const imageForSocialMedia = frontmatter.socialImage || frontmatter.image || "htt
 // Use canonical URL from frontmatter if available
 const canonicalURL = frontmatter.canonical || undefined;
 
-// Optimize hero image with responsive transformations
+// Optimize hero image with responsive transformations - Enhanced for LCP
 const optimizeImageUrl = (url: string, width: number = 800, quality: string = 'auto') => {
   if (url.includes('cloudinary.com')) {
     // Extract the path after upload/
     const parts = url.split('/upload/');
     if (parts.length === 2) {
-      return `${parts[0]}/upload/w_${width},q_${quality},f_auto,dpr_auto/${parts[1]}`;
+      // More aggressive optimization for hero images
+      return `${parts[0]}/upload/w_${width},q_${quality},f_auto,c_fill,g_center,dpr_auto/${parts[1]}`;
     }
   }
   return url;
+};
+
+// Optimize for specific breakpoints
+const getOptimizedImageSrcSet = (baseUrl: string) => {
+  if (!baseUrl.includes('cloudinary.com')) return '';
+  
+  const parts = baseUrl.split('/upload/');
+  if (parts.length !== 2) return '';
+  
+  const base = parts[0];
+  const path = parts[1];
+  
+  return [
+    `${base}/upload/w_400,q_70,f_auto,c_fill,g_center,dpr_1/${path} 400w`,
+    `${base}/upload/w_800,q_60,f_auto,c_fill,g_center,dpr_1/${path} 800w`,
+    `${base}/upload/w_1200,q_50,f_auto,c_fill,g_center,dpr_1/${path} 1200w`,
+    `${base}/upload/w_1600,q_40,f_auto,c_fill,g_center,dpr_1/${path} 1600w`
+  ].join(', ');
 };
 
 const heroImageBase = frontmatter.image || "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp";
@@ -71,12 +90,7 @@ const heroImageBase = frontmatter.image || "https://res.cloudinary.com/dphbnwjtx
     <div class="relative w-full aspect-[16/9] mb-12 bg-white flex items-center justify-center hero-image-container">
       <img 
         src={optimizeImageUrl(heroImageBase, 800)}
-        srcset={`
-          ${optimizeImageUrl(heroImageBase, 400)} 400w,
-          ${optimizeImageUrl(heroImageBase, 800)} 800w,
-          ${optimizeImageUrl(heroImageBase, 1200)} 1200w,
-          ${optimizeImageUrl(heroImageBase, 1600)} 1600w
-        `}
+        srcset={getOptimizedImageSrcSet(heroImageBase)}
         sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1280px) 1200px, 1600px"
         alt={`Illustration for ${frontmatter.title}`} 
         class="w-full h-full object-contain object-center hero-img rounded-lg"
