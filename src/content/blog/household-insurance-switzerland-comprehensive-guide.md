@@ -7,6 +7,14 @@ tags: ["household insurance", "swiss insurance", "expat", "switzerland", "proper
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803661/a-hand-drawn-sketch-in-a-vibrant-red-fin_Lq-XeIQUQcq9I-_g-pYxng_rL0r6mcgQbuVcjfYlZJLxg_g3cxzb.png"
 ---
 
+## Key Facts — Household Insurance (2025)
+
+- Includes contents cover + private liability; often bundled
+- Typical contents limits: CHF 30k–150k+; liability: CHF 5–20m
+- Common exclusions: intentional damage, wear/tear, pests; limits on cash/jewelry/bikes
+- Premium drivers: coverage amounts, deductibles, add‑ons, location risk
+- 95% of Swiss households hold this insurance; many landlords expect it
+
 ## Introduction: Protecting Your Home and Belongings in Switzerland
 
 While health insurance is mandatory in Switzerland, household insurance (Hausratversicherung/Assurance ménage) is technically optional—but it's one of the most important insurances you can have. Whether you're renting an apartment in Zurich, buying a house in Zug, or living in any Swiss canton, household insurance protects your personal belongings and provides crucial liability coverage for your living situation.
