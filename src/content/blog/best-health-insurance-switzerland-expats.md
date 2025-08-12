@@ -192,6 +192,25 @@ Securing the right health insurance is a critical step in settling into your new
 
 Switzerland's healthcare is world-class; your insurance should be too. Take the time to choose wisely, and welcome to Switzerland!
 
+## 9. 2025 Quick Comparison: Popular Providers at a Glance
+
+| Provider | Basic Models | Digital Tools | Strengths for Expats |
+|---|---|---|---|
+| SWICA | Standard, GP, HMO, Telmed | mySWICA | Excellent English support, generous wellness/gym benefits |
+| Helsana | Standard, GP, HMO, Telmed | Helsana+ | Wide network, strong supplementary options |
+| CSS | Standard, GP, HMO, Telmed | myCSS | Large insurer, balanced options, good digital/app |
+| KPT | Standard, GP, HMO, Telmed | Meine KPT | Competitive premiums in some regions, straightforward models |
+
+<div class="not-prose mt-6 flex flex-wrap gap-3">
+  <a href="/compare-providers/swica-vs-helsana" class="inline-flex items-center px-4 py-2 rounded-md bg-primary-600 text-white">SWICA vs Helsana</a>
+  <a href="/healthcare/all-insurances/css" class="inline-flex items-center px-4 py-2 rounded-md bg-gray-100 text-gray-900">CSS Review</a>
+  <a href="/healthcare/all-insurances/kpt" class="inline-flex items-center px-4 py-2 rounded-md bg-gray-100 text-gray-900">KPT Review</a>
+  <a href="/health-insurance" class="inline-flex items-center px-4 py-2 rounded-md bg-gray-100 text-gray-900">Health Insurance Hub</a>
+  <a href="#top" class="inline-flex items-center px-4 py-2 rounded-md bg-gray-100 text-gray-900">Back to top</a>
+  <a href="/free-consultation" class="inline-flex items-center px-4 py-2 rounded-md bg-primary-600 text-white">Get Free Consultation</a>
+  
+</div>
+
 ## 8. Frequently Asked Questions (FAQ)
 
 **Q1: When do I need to get Swiss health insurance after moving to Switzerland?**
