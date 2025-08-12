@@ -377,12 +377,14 @@ const faqs = [
             <input id="est-costs" type="number" min="0" step="50" value="600" class="w-full rounded-md border-gray-300 focus:border-primary-500 focus:ring-primary-500" />
 
             <label class="block text-sm font-medium text-gray-700 mt-6 mb-2">Choose a deductible</label>
-            <div class="flex flex-wrap gap-2" id="deductible-options">
-              { [300,500,1000,1500,2000,2500].map(v => (
-                <button type="button" data-value={v} class="deductible-btn px-3 py-2 rounded-md border border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-700">CHF {v}</button>
-              )) }
+            <input id="deductible-range" type="range" min="0" max="5" step="1" value="5" class="w-full" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>CHF 300</span><span>500</span><span>1’000</span><span>1’500</span><span>2’000</span><span>2’500</span>
             </div>
-            <p class="text-xs text-gray-500 mt-3">Tip: Higher deductibles lower monthly premiums but increase your out‑of‑pocket risk.</p>
+            <div class="mt-2 text-sm">Selected: <span id="deductible-current" class="font-semibold">CHF 2’500</span></div>
+            <div class="mt-4 text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-md p-3">
+              How it works: Total yearly cost = 12×monthly premium + your out‑of‑pocket (up to your deductible) + 10% co‑payment after deductible (max CHF 700).
+            </div>
           </div>
 
           <!-- Results table -->
@@ -492,15 +494,15 @@ const faqs = [
     2500: 310
   };
 
-  const btns = () => Array.from(document.querySelectorAll('.deductible-btn'));
+  const deductibleSteps = [300,500,1000,1500,2000,2500];
   function selectedDeductible() {
-    const active = document.querySelector('.deductible-btn.active');
-    return active ? Number(active.getAttribute('data-value')) : 2500;
+    const el = document.getElementById('deductible-range');
+    const idx = Number((el && (el as HTMLInputElement).value) || '5');
+    return deductibleSteps[idx] || 2500;
   }
-  function setActive(value) {
-    btns().forEach(b => b.classList.remove('active','border-primary-500','text-primary-700'));
-    const b = document.querySelector(`.deductible-btn[data-value="${value}"]`);
-    if (b) b.classList.add('active','border-primary-500','text-primary-700');
+  function updateDeductibleLabel() {
+    const label = document.getElementById('deductible-current');
+    if (label) label.textContent = `CHF ${selectedDeductible().toLocaleString('de-CH')}`;
   }
 
   function coPay(amount) {
@@ -537,8 +539,9 @@ const faqs = [
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    setActive(2500);
-    btns().forEach(b => b.addEventListener('click', () => { setActive(Number(b.getAttribute('data-value')||'0')); renderTable(); }));
+    updateDeductibleLabel();
+    const range = document.getElementById('deductible-range');
+    if (range) range.addEventListener('input', () => { updateDeductibleLabel(); renderTable(); });
     const est = document.getElementById('est-costs');
     if (est) est.addEventListener('input', renderTable);
     renderTable();
