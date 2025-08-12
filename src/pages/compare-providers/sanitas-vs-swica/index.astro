@@ -1,0 +1,192 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ConsultationModal from '../../../components/ConsultationModal.astro';
+
+const tableData = [
+  { feature: 'Basic Insurance Models Offered', sanitas: 'Standard, Telmed (Sanitas Medgate), HMO, GP', swica: 'Standard, Telmed (Medpharm), HMO (Santé), GP (Favorit Casa)' },
+  { feature: 'Typical Basic Premium Range', sanitas: 'Moderate to High (varies by canton, age, deductible)', swica: 'Moderate to High (varies by canton, age, deductible)' },
+  { feature: 'Alternative Medicine (Suppl.)', sanitas: 'Good coverage via supplementary (e.g., COMPLETA Sana-group equivalents)', swica: 'Strong coverage via Completa Top & Optima' },
+  { feature: 'Check-ups & Prevention (Suppl.)', sanitas: 'Modern preventive benefits; digital focus', swica: 'Generous prevention focus, high wellness contributions' },
+  { feature: 'International Private Hospital (Suppl.)', sanitas: 'Private/semi-private options incl. international add-ons', swica: 'Hospita Global Private — top-tier international coverage' },
+  { feature: 'Dental (Suppl.)', sanitas: 'Dental supplementary options', swica: 'Denta — dental supplementary options' },
+  { feature: 'Expat-Friendliness: English Support', sanitas: 'Very good — English pages, strong digital UX', swica: 'Very good — English site, dedicated English line' },
+  { feature: 'Digital Services', sanitas: 'Sanitas app and portal — highly rated', swica: 'mySWICA app and portal — highly rated' },
+  { feature: 'Customer Satisfaction (surveys)', sanitas: 'Generally strong', swica: 'Consistently strong (often top-tier)' }
+];
+
+const sanitasPros = [
+  'Excellent app and digital experience (Sanitas app)',
+  'Modern supplementary portfolio with flexible add-ons',
+  'Strong English resources and documentation'
+];
+const sanitasCons = [
+  'Premiums can be mid-to-high in some cantons/models',
+  'Details of benefits vary by product; careful comparison needed'
+];
+
+const swicaPros = [
+  'Outstanding English support (dedicated line) and service reputation',
+  'Generous wellness/gym contributions (with Optima)',
+  'High customer satisfaction and robust app (mySWICA)'
+];
+const swicaCons = [
+  'Can be pricier for some profiles/regions',
+  'Full benefits sometimes require combining multiple supplementary products'
+];
+
+const faqs = [
+  { q: 'Is Sanitas cheaper than SWICA?', a: 'It depends on canton, age, model, and deductible. Always compare like-for-like quotes for your profile.' },
+  { q: 'Which has better English support?', a: 'Both offer English resources. SWICA is often praised for its dedicated English line; Sanitas’ app and UX are also very strong for English speakers.' },
+  { q: 'Who is better for international hospital coverage?', a: 'Both provide strong options. SWICA’s Hospita Global Private is a well-known choice; review Sanitas’ private/semi-private terms for your destinations.' },
+  { q: 'Will I be accepted with pre-existing conditions?', a: 'Basic KVG/LAMal is guaranteed acceptance. Supplementary plans are medically underwritten and may include exclusions or loadings.' },
+  { q: 'Can Expat Savvy help me choose?', a: 'Yes — we provide objective comparisons across providers and handle switching paperwork and timelines.' }
+];
+---
+
+<Layout
+  title="Sanitas vs SWICA (2025): Which Swiss Insurer Fits You?"
+  description="Sanitas vs SWICA side-by-side: basic models, premiums, supplementary coverage, expat support, digital tools, and who should choose which — with expert help."
+>
+  <!-- Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Sanitas vs SWICA: Which Is Better in Switzerland (2025)?",
+    "description": "Compare Sanitas and SWICA for Swiss health insurance: models, premiums, supplementary options, expat-friendliness, and apps.",
+    "datePublished": "2025-06-01",
+    "dateModified": "2025-06-01",
+    "author": {"@type": "Person", "name": "Benjamin Amos Wagner"},
+    "publisher": {"@type": "Organization", "name": "Expat Savvy"},
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://expat-savvy.ch/compare-providers/sanitas-vs-swica"}
+  }
+  </script>
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://expat-savvy.ch/"},
+      {"@type":"ListItem","position":2,"name":"Compare Providers","item":"https://expat-savvy.ch/compare-providers"},
+      {"@type":"ListItem","position":3,"name":"Sanitas vs SWICA","item":"https://expat-savvy.ch/compare-providers/sanitas-vs-swica"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: (faqs || []).map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a }}))
+  })} />
+
+  <!-- Hero -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Sanitas vs <span class="text-primary-600">SWICA</span></h1>
+        <p class="mt-4 text-lg text-gray-600">Direct comparison for professionals and English speakers in Switzerland — models, premiums, supplementary coverage, and user experience.</p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+          <button onclick="showConsultationModal()" class="px-6 py-3 rounded-md text-white bg-primary-600 hover:bg-primary-700 shadow">Get Personalized Advice</button>
+          <a href="/compare-providers" class="px-6 py-3 rounded-md text-primary-700 bg-white hover:bg-gray-50 border border-gray-200 shadow">Back to Comparison Hub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div id="comparison-table" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-10">At a Glance</h2>
+      <div class="overflow-x-auto rounded-lg shadow">
+        <table class="min-w-full divide-y divide-gray-200 bg-white">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Feature</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-primary-600">Sanitas</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">SWICA</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {tableData.map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.sanitas}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{row.swica}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pros & Cons -->
+  <div id="pros-cons" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-10">Pros and Cons</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow border border-gray-200">
+          <div class="bg-primary-600 text-white px-6 py-4 rounded-t-lg font-bold text-xl">Sanitas</div>
+          <div class="p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Pros</h3>
+            <ul class="space-y-2">{sanitasPros.map(p => (<li class="text-sm text-gray-700">{p}</li>))}</ul>
+            <h3 class="font-semibold text-gray-900 mt-4 mb-2">Cons</h3>
+            <ul class="space-y-2">{sanitasCons.map(c => (<li class="text-sm text-gray-700">{c}</li>))}</ul>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow border border-gray-200">
+          <div class="bg-red-600 text-white px-6 py-4 rounded-t-lg font-bold text-xl">SWICA</div>
+          <div class="p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Pros</h3>
+            <ul class="space-y-2">{swicaPros.map(p => (<li class="text-sm text-gray-700">{p}</li>))}</ul>
+            <h3 class="font-semibold text-gray-900 mt-4 mb-2">Cons</h3>
+            <ul class="space-y-2">{swicaCons.map(c => (<li class="text-sm text-gray-700">{c}</li>))}</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Helper -->
+  <div class="bg-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto bg-gray-50 border border-gray-200 rounded-xl p-6 shadow">
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Who should choose which?</h2>
+        <ul class="space-y-2 text-sm text-gray-800">
+          <li><strong>Choose Sanitas if</strong> you prioritize a polished digital experience and flexible supplementary add-ons with clear English resources.</li>
+          <li><strong>Choose SWICA if</strong> you value top-tier English support, generous wellness contributions, and excellent customer satisfaction.</li>
+        </ul>
+        <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center sticky bottom-4">
+          <a href="/ai-chat/" class="px-6 py-3 rounded-md text-white bg-primary-600 hover:bg-primary-700 shadow">Chat with AI</a>
+          <button onclick="showConsultationModal()" class="px-6 py-3 rounded-md text-white bg-red-600 hover:bg-red-700 shadow">Free Consultation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQs -->
+  <div id="faqs" class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto space-y-4">
+        {faqs.map(f => (
+          <div class="bg-white rounded-lg shadow p-5 border border-gray-200">
+            <div class="text-base font-semibold text-gray-900">{f.q}</div>
+            <div class="text-sm text-gray-700 mt-1">{f.a}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="bg-primary-600 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold text-white">Need help deciding?</h2>
+      <p class="text-primary-100 mt-2">Get tailored quotes and unbiased comparisons in English.</p>
+      <div class="mt-6">
+        <button onclick="showConsultationModal()" class="px-6 py-3 rounded-md text-primary-700 bg-white hover:bg-primary-50 shadow">Book Free Consultation</button>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
