@@ -7,6 +7,16 @@ tags: ["relocating to switzerland", "expat checklist", "moving to switzerland", 
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-hand-drawn-sketch-of-a-checklist-icon-_bU9rLiAeQhO9EbGvWe4Stg_puqh00UMSFqCyf-H0vDp4g_awfyym.webp"
 ---
 
+## Key Facts — New Arrivals Checklist (Quick Reference)
+
+- Register with your commune within 14 days; health insurance within 3 months
+- Prepare a complete rental dossier; deposits are commonly 3 months’ rent
+- Compare health insurance models and deductibles before enrolling
+- Open a local bank account early; set up SIM and public transport
+- Gather originals + translations of vital documents before travel
+
+> Health insurance resources: [/health-insurance](/health-insurance) · [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland) · [/guides/how-to/choose-health-insurance-deductible](/guides/how-to/choose-health-insurance-deductible)
+
 ## Introduction: Embarking on Your Swiss Adventure
 
 Relocating to Switzerland, a country renowned for its stunning landscapes, high quality of life, and efficient systems, is an exciting prospect for many expats. However, the process of moving to a new country, even one as organized as Switzerland, involves numerous steps and can feel overwhelming. From visas and housing to understanding local customs and, crucially, securing essential insurance, careful planning is key to a smooth and stress-free transition. This comprehensive checklist is designed to guide you through the various phases of your relocation, helping you stay organized and ensuring you do not miss any critical tasks.
