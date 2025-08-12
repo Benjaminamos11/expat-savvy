@@ -518,7 +518,8 @@ const faqs = [
   }
 
   function renderTable() {
-    const est = Number((document.getElementById('est-costs') as HTMLInputElement).value) || 0;
+    const estEl = document.getElementById('est-costs');
+    const est = Number(estEl && 'value' in estEl ? (estEl).value : 0) || 0;
     const tbody = document.getElementById('results-body');
     const rec = document.getElementById('recommendation');
     if (!tbody || !rec) return;
@@ -545,6 +546,7 @@ const faqs = [
     if (range) range.addEventListener('input', () => { updateDeductibleLabel(); renderTable(); });
     const est = document.getElementById('est-costs');
     if (est) est.addEventListener('input', renderTable);
-    renderTable();
+    // Initial paint after DOM is ready ensures table exists
+    setTimeout(renderTable, 0);
   });
 </script>
