@@ -7,6 +7,14 @@ tags: ["swiss health insurance", "deductibles", "franchise", "telmed", "HMO", "c
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075357/a-hand-drawn-sketch-in-red-and-black-dep_g7u5_wi1T8Ci1e-FfDzHGA_3_CemOcNT8acZKSP43JYRw_i1jktb.webp"
 ---
 
+## Key Facts — Deductibles & Models (2025)
+
+- Adult deductibles: CHF 300–2,500; co‑pay 10% up to CHF 700 (CHF 350 kids)
+- Model savings vs Standard: GP ~10–15%, HMO ~15–25%, Telmed ~10–20%
+- Break‑even depends on expected medical spend; compare total annual cost
+- High deductible works best if you rarely claim and can cover CHF 2,500 out‑of‑pocket
+- Seasonal: switch or change deductible/model by 30 Nov for 1 Jan 2026
+
 ## The Price of Peace of Mind: Comparing Swiss Health Insurance Deductibles & Cost-Saving Models for Expats (2025 Deep Dive)
 
 For expatriates in Switzerland, understanding and managing health insurance costs is a significant financial consideration. Beyond the monthly premium, the choice of deductible (Franchise) and the type of insurance model (e.g., Standard, Telmed, HMO, GP) are key levers that can dramatically impact your overall annual healthcare expenditure and your access to medical services. This article provides a deep dive into these concepts, helping you compare options and make informed decisions to balance cost and coverage effectively in 2025.
