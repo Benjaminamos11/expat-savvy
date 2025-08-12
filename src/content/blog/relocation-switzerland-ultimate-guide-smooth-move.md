@@ -7,6 +7,16 @@ tags: ["relocation", "switzerland", "moving", "expat", "relocation agency", "zur
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist-hand-drawn-sketch-using-only-_zZ2wOJfbRoSwic9nOrjywg_ukKmMvEzQba0iOFUtl7nLg_dvoy02.webp"
 ---
 
+## Key Facts — Relocating to Switzerland (Quick Reference)
+
+- Register locally within 14 days of arrival; health insurance within 3 months
+- Housing is competitive in major hubs; prepare a complete dossier
+- Models/deductibles drive health insurance costs; compare before enrolling
+- School places (intl) need 6–12 months lead time
+- Public transport is excellent; car optional in most cities
+
+> Health insurance setup resources: [/health-insurance](/health-insurance) · [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland) · [/guides/how-to/choose-health-insurance-deductible](/guides/how-to/choose-health-insurance-deductible)
+
 ## 1. Introduction: Your Seamless Transition to Swiss Life Starts Here
 
 Dreaming of a new life or career in Switzerland, but daunted by the move? Relocating to a new country, especially one as unique and meticulously organized as Switzerland, can feel like a monumental task. From navigating visa applications and finding a home in competitive markets like Zurich or Geneva, to understanding local customs and administrative procedures, the checklist can seem endless. But what if you could transform this potentially overwhelming experience into a smooth, efficient, and even exciting journey?
