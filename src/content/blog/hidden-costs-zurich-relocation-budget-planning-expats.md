@@ -7,6 +7,16 @@ tags: ["relocation", "zurich", "switzerland", "expat", "budget", "housing", "cos
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507429/a-hand-drawn-red-and-black-sketch-showin_1wBAmnmSSfmPfMzE0jxkJw_B8INF4vMQ_e6yI-4X4lMVw_xlshml.webp"
 ---
 
+## Key Facts — Zurich Relocation Costs (Quick Reference)
+
+- Upfront setup: deposits, registration fees, temp housing, moving, and agency support
+- Housing: 3‑month deposits, Nebenkosten 10–20%, utilities CHF 200–400, contents/liability insurance
+- Transport: ZVV pass, Half‑Fare/GA; car ownership is costly (parking, insurance, fuel)
+- Health: basic premiums CHF ~350–600/adult, deductible choice matters; dental not included
+- Family: childcare high; intl schools CHF 25k–40k/child/year
+
+> Insurance resources: [/health-insurance](/health-insurance) · [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland) · [/guides/how-to/choose-health-insurance-deductible](/guides/how-to/choose-health-insurance-deductible)
+
 ## Understanding the True Financial Impact of Moving to Switzerland's Largest City
 
 Relocating to Zurich represents an exciting opportunity for expatriates drawn to Switzerland's economic powerhouse. While the city offers exceptional quality of life, outstanding infrastructure, and abundant professional opportunities, it also consistently ranks among the world's most expensive cities. For many newcomers, the true cost of relocation extends far beyond the obvious expenses, with numerous hidden costs that can significantly impact your financial planning.
