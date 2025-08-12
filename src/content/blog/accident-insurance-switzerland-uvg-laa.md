@@ -1,10 +1,21 @@
 ---
-title: "Expat's Comprehensive Guide to Accident Insurance in Switzerland (UVG/LAA): Coverage Beyond the Workplace"
-description: "Understanding the Swiss accident insurance system (UVG/LAA), including occupational and non-occupational coverage, and what it means for expats."
+title: "Accident Insurance in Switzerland (UVG/LAA) — 2025/2026 Guide for Employees"
+description: "Understand BU vs NBU, who pays, and how to stay covered between jobs. Seasonal tip: if you work >8h/week, exclude accident from health insurance to avoid double coverage."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
-tags: ["swiss accident insurance", "expat guide", "switzerland", "UVG", "LAA", "occupational insurance", "non-occupational insurance", "workplace safety", "insurance switzerland", "employee benefits"]
+tags: ["swiss accident insurance", "UVG", "LAA", "occupational", "non‑occupational", "2025/2026 change season"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-vector-illustration-of-a-circular-shie_n7nRZNXRQbq01uASym4YJQ_FUvgwM68QDyAi3TtRmJU5A_ptj3mi.webp"
+---
+
+## 2025/2026 Key Facts — Accident Insurance (UVG/LAA)
+
+- Employees are covered by employer accident insurance: BU (work) and, if ≥8h/week, NBU (leisure)
+- BU premium paid by employer; NBU premium usually deducted from salary
+- If you work ≥8h/week, you can exclude “accident” from your health insurance to avoid double paying
+- After employment ends, NBU usually continues 31 days (Nachdeckung); consider Abredeversicherung to extend up to 6 months
+
+> Unsure if you’re double‑covered? Get a free check: [/free-consultation](/free-consultation)
+
 ---
 
 ## Introduction: Understanding Accident Insurance in Switzerland as an Expat
