@@ -175,17 +175,26 @@ const faqs = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">🌍</div>
+          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
+            <!-- Lucide Globe -->
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"></path></svg>
+          </div>
           <h3 class="text-xl font-semibold text-gray-900">Expat-Focused Expertise</h3>
           <p class="mt-2 text-gray-600">We understand the unique challenges of navigating Swiss insurance as an international resident.</p>
         </div>
         <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">💸</div>
+          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
+            <!-- Lucide PiggyBank -->
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-2.52a8 8 0 0 0-12.45 2H3a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h1v2a6 6 0 0 0 6 6h5a6 6 0 0 0 6-6v-4a2 2 0 0 0-2-2Z"></path><path d="M16 3h3v3"></path><path d="M16 11h.01"></path></svg>
+          </div>
           <h3 class="text-xl font-semibold text-gray-900">Save Time and Money</h3>
           <p class="mt-2 text-gray-600">Access the best rates and avoid costly mistakes with our comprehensive market knowledge.</p>
         </div>
         <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">🛡️</div>
+          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
+            <!-- Lucide ShieldCheck -->
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+          </div>
           <h3 class="text-xl font-semibold text-gray-900">Full Compliance Support</h3>
           <p class="mt-2 text-gray-600">Meet all legal requirements and deadlines with our step‑by‑step guidance.</p>
         </div>
@@ -335,30 +344,68 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Insurance Providers -->
+  <!-- Insurance Providers (icons, no logos) -->
   <div id="compare" class="bg-gray-50 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Compare Top Swiss Health Insurers</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-        {providers.map(provider => (
-          <a 
-            href={provider.link}
-            class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
-          >
-            <div class="h-12 flex items-center justify-center mb-4">
-              <img 
-                src={provider.logo} 
-                alt={`${provider.name} logo`}
-                class="h-8 object-contain"
-              />
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        {providers.map(p => (
+          <a href={p.link} class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
+            <div class="h-10 w-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center mx-auto mb-3">
+              <!-- Lucide Building / Shield icon -->
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M4 21V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"></path></svg>
             </div>
-            <h3 class="text-center text-sm font-medium text-gray-900">{provider.name}</h3>
-            <p class="mt-2 text-xs text-center text-gray-500">{provider.description}</p>
+            <h3 class="text-center text-sm font-semibold text-gray-900">{p.name}</h3>
+            <p class="mt-1 text-xs text-center text-gray-500">{p.description}</p>
           </a>
         ))}
       </div>
     </div>
   </div>
+
+  <!-- Deductible & Cost Calculator -->
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-6">Find Your Best Deductible</h2>
+      <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Estimate your yearly medical spending and compare total annual cost across deductibles. We include co‑payment (10% after deductible, max CHF 700).</p>
+
+      <div id="deductible-calculator" class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          <!-- Controls -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Estimated yearly medical costs (CHF)</label>
+            <input id="est-costs" type="number" min="0" step="50" value="600" class="w-full rounded-md border-gray-300 focus:border-primary-500 focus:ring-primary-500" />
+
+            <label class="block text-sm font-medium text-gray-700 mt-6 mb-2">Choose a deductible</label>
+            <div class="flex flex-wrap gap-2" id="deductible-options">
+              { [300,500,1000,1500,2000,2500].map(v => (
+                <button type="button" data-value={v} class="deductible-btn px-3 py-2 rounded-md border border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-700">CHF {v}</button>
+              )) }
+            </div>
+            <p class="text-xs text-gray-500 mt-3">Tip: Higher deductibles lower monthly premiums but increase your out‑of‑pocket risk.</p>
+          </div>
+
+          <!-- Results table -->
+          <div class="lg:col-span-2">
+            <div class="overflow-x-auto rounded-lg border border-gray-200">
+              <table class="min-w-full divide-y divide-gray-200" id="results-table">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Deductible</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Est. Monthly Premium</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Total Yearly Cost</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Recommendation</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200" id="results-body"></tbody>
+              </table>
+            </div>
+            <div id="recommendation" class="mt-4 text-sm text-gray-700"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Premium Regions -->
   <div class="bg-white py-16">
@@ -433,3 +480,67 @@ const faqs = [
 
   <ConsultationModal />
 </Layout>
+
+<script is:inline>
+  // Simple deductible calculator with illustrative premiums
+  const premiumByDeductible = {
+    300: 520,
+    500: 480,
+    1000: 430,
+    1500: 390,
+    2000: 350,
+    2500: 310
+  };
+
+  const btns = () => Array.from(document.querySelectorAll('.deductible-btn'));
+  function selectedDeductible() {
+    const active = document.querySelector('.deductible-btn.active');
+    return active ? Number(active.getAttribute('data-value')) : 2500;
+  }
+  function setActive(value) {
+    btns().forEach(b => b.classList.remove('active','border-primary-500','text-primary-700'));
+    const b = document.querySelector(`.deductible-btn[data-value="${value}"]`);
+    if (b) b.classList.add('active','border-primary-500','text-primary-700');
+  }
+
+  function coPay(amount) {
+    return Math.min(Math.max(amount,0) * 0.10, 700);
+  }
+
+  function computeTotal(deductible, estCosts) {
+    const monthly = premiumByDeductible[deductible] ?? 400;
+    const annualPremium = monthly * 12;
+    const outOfPocket = Math.min(estCosts, deductible) + coPay(estCosts - deductible);
+    return { monthly, annualPremium, outOfPocket, total: annualPremium + outOfPocket };
+  }
+
+  function renderTable() {
+    const est = Number((document.getElementById('est-costs') as HTMLInputElement).value) || 0;
+    const tbody = document.getElementById('results-body');
+    const rec = document.getElementById('recommendation');
+    if (!tbody || !rec) return;
+    tbody.innerHTML = '';
+    let best = {ded: 0, total: Infinity};
+    Object.keys(premiumByDeductible).map(Number).sort((a,b)=>a-b).forEach(d => {
+      const r = computeTotal(d, est);
+      if (r.total < best.total) best = {ded: d, total: r.total};
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="px-4 py-3 text-sm text-gray-900">CHF ${d}</td>
+        <td class="px-4 py-3 text-sm text-gray-700">CHF ${r.monthly.toFixed(0)}/mo</td>
+        <td class="px-4 py-3 text-sm text-gray-900">CHF ${r.total.toFixed(0)}/yr <span class="text-gray-500">(incl. out‑of‑pocket)</span></td>
+        <td class="px-4 py-3 text-sm">${d === selectedDeductible() ? '<span class="text-primary-700 font-medium">Selected</span>' : ''}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    rec.innerHTML = `Best estimate: <span class="font-semibold">CHF ${best.ded}</span> for your inputs (total ~ CHF ${best.total.toFixed(0)}/yr). For an exact quote, click Get Expert Help.`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setActive(2500);
+    btns().forEach(b => b.addEventListener('click', () => { setActive(Number(b.getAttribute('data-value')||'0')); renderTable(); }));
+    const est = document.getElementById('est-costs');
+    if (est) est.addEventListener('input', renderTable);
+    renderTable();
+  });
+</script>
