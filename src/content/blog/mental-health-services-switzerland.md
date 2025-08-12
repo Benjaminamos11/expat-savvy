@@ -7,6 +7,16 @@ tags: ["mental health", "expat guide", "switzerland", "psychotherapy", "insuranc
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-raw-hand-drawn-sketch-depicting-a-styl_Qq9e14s5R6GWOZ_GA-u6Zw_madbFANkQ_2RwnCfukmsag_xvfja3.webp"
 ---
 
+## Key Facts — Mental Health Access in Switzerland
+
+- Basic insurance covers psychiatrists; prescribed psychotherapy by qualified psychologists is covered via the Anordnungsmodell (doctor prescription required)
+- Deductible + 10% co‑pay apply until caps; check your policy specifics
+- English‑speaking therapists are available in major cities; use FSP and cantonal directories
+- GP can be the first point of contact and can prescribe psychotherapy
+- Supplementary insurance can expand options (certain therapies, clinics, wellness programs)
+
+> Insurance resources: [/health-insurance](/health-insurance) · [/healthcare/glossary/supplementary-insurance](/healthcare/glossary/supplementary-insurance)
+
 ## Introduction: Prioritizing Mental Wellness as an Expat in Switzerland
 
 Relocating to a new country like Switzerland is an exciting adventure, filled with new opportunities and experiences. However, the process of adapting to a different culture, language, and social environment can also bring unique challenges that impact mental well-being. For expats, issues such as culture shock, loneliness, language barriers, and the stress of navigating a new system can take a toll. Prioritizing mental wellness is just as important as physical health, and fortunately, Switzerland offers a robust system for mental healthcare.
