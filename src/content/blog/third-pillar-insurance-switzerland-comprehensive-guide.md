@@ -7,6 +7,14 @@ tags: ["3rd pillar", "pension", "insurance", "tax optimization", "retirement pla
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375508/a-minimalist-sketch-illustration-of-an-o_t00FYlMGRGSGCrUU6rHxgw_HCDq44XJTc-SVB-lDenfiQ_wigsiz.webp"
 ---
 
+## Key Facts — 3rd Pillar (2025)
+
+- Max contribution: CHF 7,056 (employed); CHF 35,280 or 20% income (self‑employed w/o 2nd pillar)
+- 3a is tax‑deductible; 3b is flexible with limited tax perks
+- Bank 3a: low cost/flexible; Insurance 3a: guarantees + death/disability
+- Multiple accounts help stagger withdrawals and reduce tax at payout
+- Withdraw early only for retirement window, leaving CH, self‑employment, or home purchase
+
 ## Introduction: Maximizing Your Swiss Retirement with 3rd Pillar Insurance
 
 Switzerland's three-pillar pension system is renowned worldwide for its comprehensive approach to retirement security. While the first pillar (AHV/AVS) provides basic coverage and the second pillar (occupational benefits) builds on that foundation, the **3rd pillar represents your opportunity to optimize your retirement savings while enjoying significant tax advantages**.
