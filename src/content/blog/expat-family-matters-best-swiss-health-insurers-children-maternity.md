@@ -7,6 +7,14 @@ tags: ["swiss family insurance", "family health insurance switzerland", "expat f
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803662/raw-hand-drawn-sketch-in-red-fineline-st_fyIlkuH3SGyG5ebW7DBV_Q_l1IkPfzJSVSE_3_pd0hQxw_atgm3g.png"
 ---
 
+## Key Facts — Family Health Insurance in Switzerland (2025)
+
+- Prenatal registration secures children’s supplementary coverage without medical exams
+- Children’s combined deductibles capped at CHF 1,000/year across all kids
+- Co‑pay cap: CHF 350 for children (vs CHF 700 adults) after deductible
+- Telmed is rarely a good fit for young kids; GP/HMO often better balance
+- Dental: plan early; orthodontics are costly; supplementary timing matters
+
 ## What Makes Swiss Family Health Insurance Different from Other Countries?
 
 Swiss family health insurance operates on fundamentally different principles compared to most other countries, creating both opportunities and challenges for expat families navigating this complex system. Unlike countries with single-payer healthcare systems or employer-based insurance, Switzerland requires every resident to obtain individual mandatory health insurance, including children from birth. This individualized approach means that families must make strategic decisions for each family member while understanding how these choices interact to optimize both cost and coverage quality.
