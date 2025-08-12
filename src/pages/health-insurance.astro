@@ -111,6 +111,20 @@ const faqs = [
     answer: "Missing the deadline can result in being automatically assigned to an insurer by your canton, potentially with higher premiums. You may also face penalties."
   }
 ];
+
+// SSR fallback data for deductible calculator
+const ssrPremiumByDeductible = {300: 500, 500: 470, 1000: 430, 1500: 390, 2000: 360, 2500: 320};
+const ssrDeductibles = [300, 500, 1000, 1500, 2000, 2500];
+const ssrEstCosts = 600;
+const ssrCoPay = (amount: number) => Math.min(Math.max(amount, 0) * 0.10, 700);
+function ssrComputeTotal(deductible: number, estCosts: number) {
+  const monthly = ssrPremiumByDeductible[deductible] ?? 400;
+  const annualPremium = monthly * 12;
+  const outOfPocket = Math.min(estCosts, deductible) + ssrCoPay(estCosts - deductible);
+  return { monthly, total: annualPremium + outOfPocket };
+}
+const ssrRows = ssrDeductibles.map((d) => ({ deductible: d, ...ssrComputeTotal(d, ssrEstCosts) }));
+const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), { deductible: 0, total: Infinity, monthly: 0 });
 ---
 
 <Layout
@@ -399,10 +413,19 @@ const faqs = [
                     <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Recommendation</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200" id="results-body"></tbody>
+                <tbody class="divide-y divide-gray-200" id="results-body">
+                  {ssrRows.map((r) => (
+                    <tr>
+                      <td class="px-4 py-3 text-sm text-gray-900">CHF {r.deductible}</td>
+                      <td class="px-4 py-3 text-sm text-gray-700">CHF {r.monthly.toFixed(0)}/mo</td>
+                      <td class="px-4 py-3 text-sm text-gray-900">CHF {r.total.toFixed(0)}/yr <span class="text-gray-500">(incl. out‑of‑pocket)</span></td>
+                      <td class="px-4 py-3 text-sm"></td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
-            <div id="recommendation" class="mt-4 text-sm text-gray-700"></div>
+            <div id="recommendation" class="mt-4 text-sm text-gray-700">Best estimate: <span class="font-semibold">CHF {ssrBest.deductible}</span> for your inputs (total ~ CHF {ssrBest.total.toFixed(0)}/yr). For an exact quote, click Get Expert Help.</div>
           </div>
         </div>
       </div>
