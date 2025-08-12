@@ -7,6 +7,16 @@ tags: ["relocation", "zurich", "zug", "switzerland", "expat", "comparison", "hou
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507428/a-hand-drawn-split-screen-sketch-illustr_9mFaBklOR76e_4aL5sQNqw_ToPDgeg9Tc-qdcBF2LL7xw_1_usylux.webp"
 ---
 
+## Key Facts — Zurich vs Zug (Quick Comparison)
+
+- Taxes: Zug substantially lower (often 40–60% vs Zurich)
+- Housing: Zurich rent ~10–15% higher; Zug often pricier per m² to buy
+- Jobs: Zurich broader and larger market; Zug strong for execs/entrepreneurs
+- Lifestyle: Zurich urban/cultural density; Zug smaller, community feel
+- Commute: ~25‑minute train link; many live in one, work in the other
+
+> Planning resources: [/blog/relocation-zurich-ultimate-guide-financial-hub](/blog/relocation-zurich-ultimate-guide-financial-hub) · [/blog/relocation-zug-insiders-guide-business-paradise](/blog/relocation-zug-insiders-guide-business-paradise) · [/blog/hidden-costs-zurich-relocation-budget-planning-expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats)
+
 ## A Comprehensive Comparison for Expatriates Considering Switzerland's Top Business Hubs
 
 Relocating to Switzerland presents expatriates with numerous destination options, each offering distinct advantages and lifestyle characteristics. Among the most popular choices for international professionals are Zurich, Switzerland's largest city and financial powerhouse, and Zug, the small but mighty business canton known for its favorable tax environment and growing international community.
