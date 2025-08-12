@@ -1,17 +1,36 @@
 ---
-title: "Decoding Swiss Health Insurance Models: HMO, Telmed, Standard, & More – What's Best for Expats?"
-description: "A comprehensive comparison of the different mandatory health insurance models available in Switzerland (Standard, HMO, Family Doctor, Telmed), explaining how each works, their pros and cons, cost implications, and providing guidance for expats on choosing the model that best suits their healthcare preferences, language abilities, and budget."
+title: "Swiss Health Insurance Models (2025/2026): Standard vs HMO vs GP vs Telmed"
+description: "Understand model trade‑offs and savings for 2025/2026. Which fits your budget and habits? Seasonal note: premium letters in Oct, cancel by 30 Nov for changes effective 1 Jan 2026."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
-tags: ["swiss health insurance", "expat", "switzerland", "HMO", "Telmed", "Standard", "insurance models", "healthcare guide", "basic health insurance", "choose insurance"]
+tags: ["swiss health insurance", "HMO", "Telmed", "Standard", "insurance models", "2025/2026 change season"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-of-a-decision-tr_6nFEntvvSVCuzXgDkrhweQ_qblZRc6wSP-HDClBIqJ8sQ_miepvt.webp"
+---
+
+## 2025/2026 Key Facts — Model Savings at a Glance
+
+- Standard: max flexibility, generally highest premiums
+- Family Doctor (GP): usually ~10–15% cheaper vs Standard
+- HMO: often ~15–25% cheaper vs Standard (center‑first access)
+- Telmed: usually the lowest premiums (hotline first)
+- Your model + deductible choice together drive most of your premium savings
+
+> Compare and switch by 30 Nov 2025 for 1 Jan 2026. Need help? [/free-consultation](/free-consultation)
+
+## 2025/2026 Seasonal Steps
+
+1. Read your October premium letter; note your current model and deductible
+2. Decide your target model based on access preference and savings tolerance
+3. Get 2–3 quotes for your canton and chosen model/deductible
+4. Send cancellation to current insurer by 30 Nov 2025; confirm new policy from 1 Jan 2026
+
 ---
 
 ## What Are the Key Differences Between Swiss Health Insurance Models?
 
-Switzerland is renowned for its high-quality healthcare system, but for expats, understanding the various health insurance models can be a complex undertaking. Unlike many countries with a single, state-run system, Switzerland offers a choice of models for its mandatory basic health insurance (Grundversicherung / Assurance de Base). This choice, while offering flexibility, can also be confusing. Understanding the differences between models like Standard (free choice of doctor), HMO (Health Maintenance Organization), Family Doctor/GP (Hausarzt), and Telmed (telemedicine-first) is crucial for making an informed decision that aligns with your healthcare needs, preferences, and budget.
+Switzerland is renowned for its high-quality healthcare system, but for English‑speaking residents, understanding the various health insurance models can be a complex undertaking. Unlike many countries with a single, state-run system, Switzerland offers a choice of models for its mandatory basic health insurance (Grundversicherung / Assurance de Base). This choice, while offering flexibility, can also be confusing. Understanding the differences between models like Standard (free choice of doctor), HMO (Health Maintenance Organization), Family Doctor/GP (Hausarzt), and Telmed (telemedicine-first) is crucial for making an informed decision that aligns with your healthcare needs, preferences, and budget.
 
-This guide aims to demystify these models, outlining their key features, advantages, disadvantages, and typical cost implications. By understanding these options, expats can better navigate the Swiss healthcare system and choose a plan that provides both peace of mind and appropriate coverage. For a general overview, see our guide to the [Swiss healthcare system](/health-insurance).
+This guide aims to demystify these models, outlining their key features, advantages, disadvantages, and typical cost implications. For a general overview, see our [Swiss healthcare system](/health-insurance).
 
 ## What Should You Know About the Mandatory Basic Health Insurance Framework?
 
