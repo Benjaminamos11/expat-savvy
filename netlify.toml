@@ -217,6 +217,13 @@
   status = 301
   force = true
 
+# Normalize to trailing slash to avoid mixed caches (old/new variants)
+[[redirects]]
+  from = "/health-insurance"
+  to = "/health-insurance/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/health-insurance/basic"
   to = "/healthcare/glossary/basic-health-insurance"
@@ -919,4 +926,16 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
+    # Default cache for static assets. HTML will be overridden below.
     Cache-Control = "public, max-age=86400"
+
+# Ensure HTML pages are not cached aggressively (prevents stale old/new page mixes)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/**/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
