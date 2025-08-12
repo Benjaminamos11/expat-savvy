@@ -7,6 +7,16 @@ tags: ["relocation", "zug", "switzerland", "expat", "housing", "tax", "visa", "h
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507428/a-hand-drawn-red-and-black-sketch-showin_gx-zZro7RVS1FrBE4SvLDw_dEu3h53aTqqXrRCT47DlYA_jcjjui.webp"
 ---
 
+## Key Facts — Moving to Zug (Quick Reference)
+
+- Register with Einwohnerkontrolle within 14 days of arrival
+- Health insurance is mandatory within 3 months; choose model + deductible wisely
+- Highly competitive housing; prepare full rental dossier
+- Zug offers among the lowest cantonal taxes in Switzerland
+- 30 minutes to Zurich by train; Zurich Airport ~45 minutes
+
+> Compare health models and deductibles: [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland) · [/guides/how-to/choose-health-insurance-deductible](/guides/how-to/choose-health-insurance-deductible) · Canton premiums: [/blog/decoding-swiss-health-insurance-canton-region-premium](/blog/decoding-swiss-health-insurance-canton-region-premium)
+
 ## Your Comprehensive Resource for a Smooth Transition to Zug
 
 Relocating to Zug, Switzerland's renowned business hub and tax haven, presents an exceptional opportunity for professionals and families seeking a perfect balance of career advancement, quality of life, and financial advantages. This picturesque canton, nestled alongside its namesake lake, offers a unique combination of Swiss efficiency, international atmosphere, and stunning natural surroundings.
