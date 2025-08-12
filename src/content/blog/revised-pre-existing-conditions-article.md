@@ -7,6 +7,14 @@ tags: ["health insurance", "expat", "switzerland", "pre-existing conditions", "s
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-depicts-a-windin__JkUEYNBTGaJLP87QapOzw_Wt6cFG0IRkutzhHmeKgnxg_hs9k8v.webp"
 ---
 
+## Key Facts — Pre-Existing Conditions in Switzerland
+
+- Basic insurance (KVG/LAMal) must accept everyone; no health‑based pricing
+- Supplementary insurance can underwrite (exclusions, loadings, or declines)
+- Some insurers offer “premium supplement” paths vs exclusions (e.g., Sanitas)
+- Full disclosure is essential; non‑disclosure risks claim denial/cancellation
+- Use advisors for case‑by‑case options; compare multiple providers (e.g., [Sanitas](/healthcare/all-insurances/sanitas), [CSS](/healthcare/all-insurances/css))
+
 ## Navigating Pre-Existing Conditions with Swiss Health Insurance: A Guide for Expats
 
 Moving to Switzerland is an exciting chapter, but for individuals with pre-existing medical conditions, understanding the health insurance landscape is paramount. While Switzerland boasts a high-quality healthcare system, navigating it, especially with prior health concerns, can seem daunting. This guide aims to demystify the process, explaining how Swiss health insurance works for those with pre-existing conditions and highlighting new options that provide more comprehensive coverage.
