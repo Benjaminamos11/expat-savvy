@@ -7,6 +7,16 @@ tags: ["relocation", "zurich", "switzerland", "expat", "housing", "visa", "healt
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507429/a-hand-drawn-sketch-in-red-and-black-ink_ptBpzUHQSISgJlkHotYnlA_9yhq6R8ASlq04xldbV6TVw_rm0brj.webp"
 ---
 
+## Key Facts — Moving to Zurich (Quick Reference)
+
+- Register locally within 14 days of arrival (Kreisbüro)
+- Health insurance is mandatory within 3 months; choose model + deductible wisely
+- Housing market is competitive; prepare full application dossier
+- School places (intl) fill fast; apply 6–12 months ahead
+- Public transport (ZVV) is excellent; car optional, parking costly
+
+> Compare health models and deductibles: [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland) · [/guides/how-to/choose-health-insurance-deductible](/guides/how-to/choose-health-insurance-deductible)
+
 ## Your Complete Resource for Moving to Switzerland's Largest City
 
 Relocating to Zurich represents an exciting new chapter for expatriates drawn to Switzerland's economic powerhouse. As the country's largest city and a global financial center, Zurich offers exceptional quality of life, outstanding infrastructure, and abundant professional opportunities. However, navigating the relocation process requires careful planning and local knowledge to ensure a smooth transition.
@@ -173,11 +183,14 @@ Once you've secured housing, you'll need to establish various services:
 Health insurance is mandatory for all residents in Switzerland. Key points include:
 
 - Must obtain basic health insurance (Grundversicherung) within three months of arrival.
-- Many providers offer various coverage levels and premium options.
-- Deductibles (Franchises) range from CHF 300 to 2,500 annually.
-- Supplementary insurance (Zusatzversicherung) covers additional services.
+- Deductibles (Franchises) range from CHF 300 to 2,500 annually; models: Standard, GP, HMO, Telmed.
+- Consider excluding accident coverage if employed ≥8h/week (covered by UVG/LAA).
 
-For comprehensive guidance on navigating the Swiss healthcare system and selecting appropriate insurance, visit [Expat Savvy's Healthcare System Guide](https://expat-savvy.ch/healthcare-system/) and [Health Insurance Comparison](https://expat-savvy.ch/health-insurance/).
+For guidance and comparisons:
+- Hub: [/health-insurance](/health-insurance)
+- Switching: [/guides/how-to/change-health-insurance](/guides/how-to/change-health-insurance)
+- Models: [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland)
+- Canton premiums: [/blog/decoding-swiss-health-insurance-canton-region-premium](/blog/decoding-swiss-health-insurance-canton-region-premium)
 
 ### Telecommunications
 
