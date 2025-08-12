@@ -7,6 +7,16 @@ tags: ["health insurance", "expat", "switzerland", "gym", "fitness", "savings", 
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746849106/a-hand-drawn-style-illustration-of-a-swi_q72d2DQuS9GBc1WmPIaaCw_008krU2iTMW5Xa_C75c0rQ_ud00f1.webp"
 ---
 
+## Key Facts — Gym Coverage in Switzerland (2025)
+
+- Basic KVG does not cover gym memberships; benefits come via supplementary plans
+- Reimbursement typically requires Qualitop/Qualicert certified gyms or courses
+- Proof needed: membership contract + payment receipt (sometimes minimum duration)
+- Contribution levels vary widely (fixed CHF vs %); verify your specific plan
+- Swica, Sanitas, CSS, Helsana, etc., offer among the strongest fitness benefits
+
+> Related resources: [/health-insurance](/health-insurance) · [/compare-providers](/compare-providers)
+
 ## Introduction: Staying Active and Healthy as an Expat in Switzerland
 
 Moving to a new country like Switzerland brings a wave of excitement and new experiences. Amidst settling in, finding your way around, and perhaps navigating a new language, maintaining a healthy lifestyle is crucial for your overall well-being. Switzerland, with its stunning natural landscapes, offers countless opportunities for outdoor activities. However, many expats also rely on gyms and fitness centers to stay active, especially during colder months or for specific training regimes. One common question that arises, particularly given Switzerland's reputation for high living costs, is whether health insurance can help offset the expense of a gym membership. The good news is, while not a standard feature of basic coverage, many Swiss supplementary health insurance plans offer attractive contributions towards fitness-related expenses, helping you stay fit without breaking the bank.
