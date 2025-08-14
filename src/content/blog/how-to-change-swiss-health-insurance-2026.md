@@ -6,7 +6,7 @@ lastUpdated: "2025-08-13"
 category: "Health Insurance"
 author: "Expat Savvy Team"
 tags: ["health insurance change", "2026 switching", "cancellation deadline", "Swiss insurance", "provider switching"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755182236/a-hand-drawn-sketch-style-illustration-o_nULgpZyXRES-GnRjf1ZDiw_KCzFumXmRXikBEkVJU11pQ_zvdqfw.jpg"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755204379/a-hand-drawn-black-and-red-sketch-on-a-w_PA443mkxR4-qlsdG-GX7uQ_-jDxh4oCTICBhrM1N9Y7MA_vm374v.png"
 featured: true
 faqs:
   - question: "When is the deadline to cancel Swiss health insurance for 2026?"
