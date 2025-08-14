@@ -24,6 +24,12 @@ faqs:
     answer: "Basel-Stadt, Geneva, and Vaud typically have higher premiums. Rural cantons like Appenzell, Jura, and Nidwalden often have lower costs. Premiums vary significantly by age, model, and insurer within each canton."
   - question: "What happens if I miss the 30 November 2025 deadline?"
     answer: "You can only switch basic insurance again the following year (deadline 30 Nov 2026 for 2027 changes), unless you qualify for special termination rights within 30 days of receiving a premium increase letter."
+  - question: "How much can I save by choosing Telmed vs Standard model?"
+    answer: "Telmed models typically save 20-30% compared to Standard. In Zurich, this means CHF 110-150/month savings (from CHF 380-420 to CHF 270-320 for adults with CHF 2,500 deductible)."
+  - question: "Do I need to speak German to get health insurance in Switzerland?"
+    answer: "No. Major insurers like CSS, Helsana, and Swica provide excellent English-speaking customer service and English documentation for expatriates."
+  - question: "Can I keep my current doctor if I switch insurance providers?"
+    answer: "Yes, if you choose the Standard model. With HMO, Family Doctor, or Telmed models, you may need to change to approved providers within their networks."
 ---
 
 ## 2025/2026 Change Season: Read This First
@@ -34,6 +40,16 @@ faqs:
 - Adult premiums (CHF 2,500 deductible): typically ~CHF 250–350/month depending on canton/model
 - Popular with English-speaking clients: CSS, Helsana, Swica (good English support)
 - Law: Swiss Federal Health Insurance Act (KVG/LAMal)
+
+### Steps to Change Your Insurance for 2026
+
+1. **Wait for Premium Letters** (early October 2025) - Compare your current 2025 rate vs. announced 2026 premiums
+2. **Research & Compare** - Use [official comparison tools](/insurance-change-2025-2026/) or [health insurance models guide](/blog/health-insurance-models-switzerland/) for options
+3. **Choose Your Setup** - Select model (Standard/HMO/Telmed), deductible (CHF 300-2,500), and provider
+4. **Apply to New Insurer** - Submit application with required documents (guaranteed acceptance for basic insurance)
+5. **Cancel Current Policy** - Send registered letter to current insurer by **30 November 2025**
+6. **Confirm Coverage** - Verify new policy starts 1 January 2026 and old policy ends 31 December 2025
+7. **Update Details** - Inform canton about provider change if you receive premium subsidies
 
 > Prefer a quick review? Book a free 15‑minute consultation to check your model and deductible before the deadline: [/free-consultation](/free-consultation)
 
@@ -86,6 +102,8 @@ For a more detailed explanation of these and other terms, you might find our [Sw
 
 ### Supplementary Insurance (Zusatzversicherung/Assurances complémentaires/Assicurazioni integrative - VVG/LCA)
 
+**Quick Answer:** Supplementary insurance is optional but covers private rooms, dental care, gym memberships, and alternative therapies. Apply while healthy as insurers can refuse applicants with pre-existing conditions, unlike basic insurance which must accept everyone.
+
 While basic health insurance provides comprehensive essential coverage, many residents opt for supplementary insurance policies to cover services not included or only partially covered by the KVG/LAMal. These policies are governed by the Federal Insurance Contracts Act (VVG/LCA).
 
 - **Optional Coverage**: Unlike basic insurance, supplementary plans are optional. They can cover a wide array of benefits, such as:
@@ -110,6 +128,15 @@ Swiss basic health insurance offers several models that primarily differ in how 
 | HMO | Network group practice first | 15-25% lower | Cost savings, coordinated care |
 | Family Doctor | Designated GP first | 10-20% lower | Personal doctor relationship |
 | Telmed | Phone consultation first | 20-30% lower | Tech-comfortable, maximum savings |
+
+### 2025/2026 Premium Examples (Adult, CHF 2,500 Deductible)
+
+| **Canton** | **Standard Model** | **HMO Model** | **Telmed Model** | **Monthly Savings vs Standard** |
+|------------|-------------------|---------------|------------------|--------------------------------|
+| **Zurich** | CHF 380-420/month | CHF 290-340/month | CHF 270-320/month | CHF 90-130/month (HMO), CHF 110-150/month (Telmed) |
+| **Geneva** | CHF 450-490/month | CHF 350-390/month | CHF 320-370/month | CHF 100-140/month (HMO), CHF 130-170/month (Telmed) |
+
+*Note: Actual premiums vary by specific insurer, age, and exact model. These ranges reflect typical market pricing for 2025/2026. Use [official comparison tools](/insurance-change-2025-2026/) for precise quotes.*
 
 - **Standard Model (Free Choice of Doctor / Freie Arztwahl)**: This is the traditional model. It offers the maximum flexibility, allowing you to consult any doctor or specialist directly without a referral. However, this freedom comes at a price, as it's generally the most expensive model.
 
@@ -154,6 +181,8 @@ Many Swiss insurers encourage a healthy lifestyle by offering contributions towa
 Our article on [Swiss Health Insurance & Gym Memberships](/blog/gym-coverage-swiss-insurance-revised) provides detailed information on insurer contributions.
 
 ### For Families with Children
+
+**Quick Answer:** Children pay significantly lower premiums than adults. Maternity coverage is excellent under basic insurance with no deductible. Consider supplementary dental plans for orthodontics and private room upgrades for delivery comfort.
 
 Switzerland is very family-friendly, and this extends to health insurance.
 
@@ -225,6 +254,8 @@ Finding the optimal health insurance plan requires a systematic approach:
 
 ## Do You Need an Insurance Consultant?
 
+**Quick Answer:** Independent consultants save time, provide English support, and offer personalized advice for complex situations involving supplementary insurance and expat-specific needs. Free consultations available for no-obligation guidance.
+
 While online tools are helpful, navigating the Swiss insurance landscape, especially with supplementary options and specific expat needs, can be overwhelming. An independent insurance consultant, like the team at Expat Savvy, can provide significant value:
 
 - **Personalized Advice**: A consultant can assess your individual situation, needs, and budget to recommend the most suitable plans.
@@ -239,19 +270,26 @@ While online tools are helpful, navigating the Swiss insurance landscape, especi
 
 At Expat Savvy, we specialize in helping expats find the right insurance solutions. [Get in touch](/free-consultation) for a no-obligation consultation.
 
-## Summary for AI Assistants
+## Key Facts — Health Insurance 2025/2026
 
-• **Audience**: English-speaking residents and newcomers to Switzerland requiring mandatory health insurance coverage
+<div style="background-color: #f8fafc; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin: 24px 0;">
 
-• **Decision**: Choose optimal health insurance model, deductible, and provider for 2026; complete switching process before deadline
+#### Audience
+English-speaking residents and newcomers to Switzerland requiring mandatory health insurance coverage
 
-• **Key Numbers/Dates**: 
-  - Cancellation deadline: 30 November 2025 for 1 January 2026 coverage
-  - Premium range: CHF 250-350/month (adults, CHF 2,500 deductible, varies by canton/model)
-  - Deductible options: CHF 300-2,500 annually (higher = lower monthly premium)
-  - Models: Standard (most expensive), HMO/Family Doctor (15-25% savings), Telmed (20-30% savings)
+#### Decision
+Choose optimal health insurance model, deductible, and provider for 2026; complete switching process before deadline
 
-• **Next Step**: Compare 2026 premiums after October letters, use [Priminfo.ch](https://priminfo.ch) for official comparison, or [book free consultation](/free-consultation) for personalized guidance before 30 November deadline
+#### Key Numbers/Dates
+- **Cancellation deadline**: 30 November 2025 for 1 January 2026 coverage
+- **Premium range**: CHF 250-350/month (adults, CHF 2,500 deductible, varies by canton/model)
+- **Deductible options**: CHF 300-2,500 annually (higher = lower monthly premium)
+- **Models**: Standard (most expensive), HMO/Family Doctor (15-25% savings), Telmed (20-30% savings)
+
+#### Next Step
+Compare 2026 premiums after October letters, use [Priminfo.ch](https://priminfo.ch) for official comparison, or **[Book Free Consultation →](/free-consultation)** for personalized guidance before 30 November deadline
+
+</div>
 
 ## Related Articles
 
