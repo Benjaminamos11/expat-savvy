@@ -44,7 +44,7 @@ faqs:
     answer: "Follow the 7-step selection process: 1) Assess health needs, 2) Choose deductible, 3) Select model, 4) Compare provider premiums, 5) Consider supplementary needs, 6) Apply before deadlines, 7) Review annually. Book a free consultation for personalized guidance."
 ---
 
-<div style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px; padding: 32px; margin: 32px 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-left: 6px solid #3b82f6;">
+<div style="background-color: #f8f9fa; border-radius: 16px; padding: 32px; margin: 32px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
 ## 🕒 2025/2026 Change Season Guide
 
