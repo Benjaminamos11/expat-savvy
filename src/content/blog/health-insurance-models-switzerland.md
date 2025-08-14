@@ -24,6 +24,26 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand
 3. Get 2–3 quotes for your canton and chosen model/deductible
 4. Send cancellation to current insurer by 30 Nov 2025; confirm new policy from 1 Jan 2026
 
+## Key Facts — Swiss Health Insurance Models 2025/2026
+
+<div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+
+#### Who Each Model Fits Best
+• **Standard Model**: Maximum flexibility lovers willing to pay premium prices  
+• **Family Doctor**: Prefer consistent GP relationship with 10-15% savings  
+• **HMO**: Live near health centers, want 15-25% savings, OK with network doctors  
+• **Telmed**: Young/healthy, tech-comfortable, want maximum savings (20-30%)  
+
+#### Key Numbers & Dates
+• **Switching Deadline**: 30 November 2025 → new model from 1 January 2026  
+• **Model vs Model**: Telmed typically cheapest, Standard most expensive  
+• **Average Savings**: CHF 600-1,800/year by switching from Standard to Telmed/HMO  
+
+#### Next Step
+📋 [Compare 2026 premiums after October letters](/insurance-change-2025-2026/) or [book free consultation](/free-consultation) for personalized model recommendation.
+
+</div>
+
 ---
 
 ## What Are the Key Differences Between Swiss Health Insurance Models?
@@ -45,6 +65,18 @@ The key differences between the models lie in how you access these services, whi
 
 ## Which Swiss Health Insurance Models Are Available to Choose From?
 
+### Quick Comparison Table: Standard vs HMO vs Family Doctor vs Telmed
+
+| Criteria | Standard | Family Doctor | HMO | Telmed |
+|----------|----------|---------------|-----|--------|
+| **Doctor Choice** | ✅ Free choice | 🔒 Designated GP only | 🔒 Network doctors | 🔒 Phone first, then referred |
+| **Specialist Access** | ✅ Direct access | 📋 GP referral required | 📋 Network/referral required | 📞 Phone consultation first |
+| **Premium Savings** | 0% (baseline) | 10-15% cheaper | 15-25% cheaper | 20-30% cheaper |
+| **Flexibility** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+| **Best For** | Max flexibility seekers | GP relationship builders | Network center residents | Young/healthy/tech-savvy |
+
+> **Quick Answer**: Standard = highest cost but maximum freedom. Telmed = lowest cost but phone-first access. HMO/Family Doctor = middle ground with moderate savings and some restrictions.
+
 Here's a breakdown of the most common health insurance models available to expats in Switzerland:
 
 ### 1. Standard Model (Free Choice of Doctor / Freie Arztwahl / Libre Choix du Médecin)
@@ -57,6 +89,8 @@ Here's a breakdown of the most common health insurance models available to expat
 
 **Best for**: Individuals who value unrestricted access to any doctor or specialist at any time and are willing to pay a higher premium for this freedom.
 
+> **Quick Answer**: Standard model offers maximum flexibility with free doctor choice and direct specialist access, but comes with highest premiums. Ideal for those prioritizing convenience over cost savings.
+
 ### 2. Family Doctor / GP Model (Hausarzt / Médecin de Famille)
 
 **How it works**: You choose a specific family doctor (GP) from a list provided by your insurer who becomes your primary healthcare contact. For non-emergency situations, you must first consult your chosen family doctor, who will then refer you to specialists if necessary.
@@ -66,6 +100,8 @@ Here's a breakdown of the most common health insurance models available to expat
 **Cons**: Less flexibility - you must see your designated GP first (except in emergencies). If you're not satisfied with your chosen doctor, changing can be bureaucratic and may only be possible at certain times of the year.
 
 **Best for**: Those who prefer having a consistent primary care doctor and are comfortable with a gatekeeper system in exchange for lower premiums.
+
+> **Quick Answer**: Family Doctor model saves 10-15% on premiums by designating one GP as your first contact. Good for building doctor relationships but requires referrals for specialists.
 
 ### 3. HMO Model (Health Maintenance Organization / Gesundheitserhaltungsorganisation)
 
@@ -77,6 +113,8 @@ Here's a breakdown of the most common health insurance models available to expat
 
 **Best for**: Expats living near HMO centers who value cost savings and don't mind restricted doctor choice.
 
+> **Quick Answer**: HMO model offers 15-25% premium savings by limiting you to network health centers. Good for significant cost savings with multiple doctors/specialists in one location.
+
 ### 4. Telmed Model (Telemedizin)
 
 **How it works**: Before visiting any doctor (except in emergencies or for specific specialists like gynecologists and ophthalmologists), you must first call a 24/7 telemedicine hotline. Medical professionals will assess your situation over the phone and provide guidance on next steps.
@@ -86,6 +124,8 @@ Here's a breakdown of the most common health insurance models available to expat
 **Cons**: Not suitable for those who prefer face-to-face consultations for initial assessments. May not be ideal for complex or ongoing conditions requiring in-person specialist care. Quality of advice can vary.
 
 **Best for**: Younger, generally healthy individuals who are comfortable with technology and seeking the lowest possible premiums. Also suitable for those who travel frequently and need quick access to medical advice.
+
+> **Quick Answer**: Telmed model typically offers maximum savings (20-30%) by requiring phone consultation first. Best for healthy, tech-comfortable individuals prioritizing lowest premiums over face-to-face access.
 
 ## How to Choose the Right Model as an Expat
 
@@ -119,20 +159,26 @@ For further guidance or to compare specific insurance plans and their suitabilit
 
 ### Related Guides
 
-- [Swiss Health Insurance Basics](/health-insurance)
-- [New Arrivals Insurance Checklist](/insurance-guides/new-arrivals-checklist)
-- [Accident Insurance in Switzerland](/blog/accident-insurance-switzerland-uvg-laa)
+- [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland) — Complete guide and provider comparison
+- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Deadlines, switching process, and seasonal tips
+- [Swiss Health Insurance Basics](/health-insurance) — Calculator, costs, and coverage overview
+- [Swica vs Helsana Comparison](/compare-providers/swica-vs-helsana/) — Popular provider comparison for model differences
+- [Accident Insurance in Switzerland](/blog/accident-insurance-switzerland-uvg-laa) — UVG/LAA coverage and employment exclusions
 
-## Frequently Asked Questions (FAQ)
+## Frequently Asked Questions — Swiss Health Insurance Models
 
-**Q1: Can I change my Swiss health insurance model if my needs change?**
+**What is the difference between Standard, HMO, Family Doctor, and Telmed models?**
 
-A1: Yes, you can typically change your health insurance model (and even your insurer) once a year. The deadline for notifying your current insurer of a change is usually the end of November for the change to take effect on January 1st of the following year. Always check the specific deadlines and procedures with your insurer.
+Standard = free doctor choice, highest cost. HMO = network doctors, 15-25% savings. Family Doctor = designated GP, moderate savings. Telmed = phone consultation first, maximum savings (20-30%). All models offer identical KVG/LAMal benefits - the difference is access and cost.
 
-**Q2: Are the benefits covered by basic health insurance the same regardless of the model I choose?**
+**How much is health insurance in Switzerland per month?**
 
-A2: Yes, the catalogue of benefits covered by mandatory basic health insurance (Grundversicherung) is legally defined and is identical across all insurance providers and all models (Standard, HMO, Family Doctor, Telmed). The models primarily differ in how you access these services and the associated monthly premium.
+Average CHF 250-350/month for adults with CHF 2,500 deductible, varying by canton, age, and model. Telmed/HMO models offer additional savings. Use model choice + high deductible strategy to optimize costs. [Calculate your premiums here](/insurance-change-2025-2026/).
 
-**Q3: If I choose a Telmed model, can I still see a doctor in person if needed?**
+**When is the health insurance cancellation deadline in Switzerland?**
 
-A3: Yes. In a Telmed model, your first point of contact is the telemedicine service. If the medical professionals on the hotline determine that an in-person consultation is necessary, they will refer you to a GP, specialist, or hospital. The Telmed service acts as a gatekeeper. 
+Cancel by 30 November 2025 for 1 January 2026 changes. Special termination right: within 30 days of premium increase letter. Model changes with same insurer: by 31 December. [Complete switching guide here](/insurance-change-2025-2026/).
+
+**How do I switch my health insurance in Switzerland for 2026?**
+
+Compare model options after October premium letters, choose new model/provider, apply (guaranteed acceptance for basic), cancel current by 30 November, confirm 1 January 2026 start. Consider deductible optimization for additional savings. [Step-by-step process here](/guides/how-to/change-health-insurance).
