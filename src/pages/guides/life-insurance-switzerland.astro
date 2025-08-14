@@ -1,0 +1,583 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/consultation/ConsultationModal.astro';
+
+const title = "Life Insurance in Switzerland — Term vs Whole for Professionals";
+const description = "Complete guide to life insurance in Switzerland. Term vs whole life comparison, coverage needs for professionals, tax benefits, and English-speaker considerations.";
+const lastUpdated = "13.08.2025";
+
+// Define insurance types comparison
+const insuranceComparison = [
+  {
+    type: "Term Life Insurance",
+    coverage: "Pure death benefit protection for specific term (10-30 years)",
+    cost: "CHF 50-200/month for CHF 500K-1M coverage",
+    benefits: "Low cost, high coverage, flexible terms",
+    drawbacks: "No cash value, premiums increase with age",
+    bestFor: "Young families, mortgage protection, temporary needs"
+  },
+  {
+    type: "Whole Life Insurance", 
+    coverage: "Permanent death benefit with cash value accumulation",
+    cost: "CHF 200-800+/month for CHF 500K coverage",
+    benefits: "Permanent coverage, cash value growth, guaranteed elements",
+    drawbacks: "High cost, complex structure, lower investment returns",
+    bestFor: "Estate planning, business needs, high net worth individuals"
+  },
+  {
+    type: "Universal Life Insurance",
+    coverage: "Flexible premiums with investment component",
+    cost: "CHF 150-600/month depending on investment allocation",
+    benefits: "Premium flexibility, investment control, cash accumulation",
+    drawbacks: "Complex management, investment risk, variable costs",
+    bestFor: "Sophisticated investors, variable income professionals"
+  }
+];
+
+// Define coverage calculation factors
+const coverageFactors = [
+  {
+    factor: "Income Replacement",
+    calculation: "5-10 times annual income for family support",
+    example: "CHF 100,000 income → CHF 500K-1M coverage",
+    considerations: "Age of children, spouse income, future needs"
+  },
+  {
+    factor: "Debt Coverage",
+    calculation: "Outstanding mortgage, loans, business debt",
+    example: "CHF 800,000 mortgage → minimum CHF 800K coverage",
+    considerations: "Joint vs individual debt, collateral value"
+  },
+  {
+    factor: "Education Expenses",
+    calculation: "CHF 50,000-150,000 per child for university",
+    example: "2 children → CHF 100,000-300,000 additional",
+    considerations: "International schools, university abroad"
+  },
+  {
+    factor: "Final Expenses",
+    calculation: "CHF 20,000-50,000 for funeral and estate costs",
+    example: "Basic coverage for immediate expenses",
+    considerations: "Burial preferences, estate complexity"
+  }
+];
+
+// Define professional scenarios
+const professionalScenarios = [
+  {
+    profession: "Corporate Executive",
+    typicalNeeds: "CHF 1-3 million coverage, key person insurance, executive benefits",
+    recommendations: "Term for family protection, whole life for estate planning",
+    considerations: "Stock options, deferred compensation, international assignments"
+  },
+  {
+    profession: "Medical Professional",
+    typicalNeeds: "CHF 500K-2M coverage, professional liability coordination",
+    recommendations: "Term during practice building, disability insurance priority",
+    considerations: "Medical school debt, practice ownership, malpractice risks"
+  },
+  {
+    profession: "Technology Professional",
+    typicalNeeds: "CHF 500K-1.5M coverage, equity compensation planning",
+    recommendations: "Term for family needs, consider equity vesting schedules",
+    considerations: "Stock options, international mobility, startup risks"
+  },
+  {
+    profession: "Financial Services",
+    typicalNeeds: "CHF 750K-2M coverage, compliance considerations",
+    recommendations: "Term plus small whole life for regulatory requirements",
+    considerations: "Regulatory compliance, client relationships, variable income"
+  }
+];
+
+// Define tax considerations
+const taxBenefits = [
+  {
+    aspect: "Premium Deductions",
+    benefit: "Up to CHF 7,056 annually (combined with 3rd pillar)",
+    requirements: "Regular premium payments, Swiss tax residency",
+    optimization: "Coordinate with 3rd pillar contributions for maximum benefit"
+  },
+  {
+    aspect: "Death Benefit Taxation",
+    benefit: "Tax-free to beneficiaries (income tax exempt)",
+    requirements: "Proper beneficiary designation, Swiss policy",
+    optimization: "Structure for estate tax minimization"
+  },
+  {
+    aspect: "Cash Value Growth",
+    benefit: "Tax-deferred accumulation during policy life",
+    requirements: "Whole/universal life policies only",
+    optimization: "Consider vs 3rd pillar for better returns"
+  },
+  {
+    aspect: "Estate Planning",
+    benefit: "Immediate liquidity for estate expenses",
+    requirements: "Proper estate planning integration",
+    optimization: "Coordinate with inheritance tax planning"
+  }
+];
+
+// Define FAQs
+const faqs = [
+  {
+    question: "Do I need life insurance if I live in Switzerland?",
+    answer: "Life insurance isn't legally required but is essential if you have dependents, debt, or family obligations. Switzerland's high cost of living makes adequate life insurance crucial for family financial security. Professional families typically need CHF 500K-2M+ coverage depending on income and obligations."
+  },
+  {
+    question: "Should I choose term or whole life insurance in Switzerland?",
+    answer: "Term life insurance is usually better for most professionals - lower cost allows higher coverage and separate investment in 3rd pillar. Choose whole life only if you need permanent coverage for estate planning or business needs. Term provides 10-20x more death benefit per premium dollar."
+  },
+  {
+    question: "How much life insurance do I need as a professional in Switzerland?",
+    answer: "Calculate based on income replacement (5-10x annual income), debt coverage (mortgage, loans), education costs (CHF 100K-300K per child), and final expenses. Most professionals need CHF 500K-2M coverage. Higher earners or business owners may need CHF 2M-5M+ coverage."
+  },
+  {
+    question: "Can I get life insurance in Switzerland with English support?",
+    answer: "Yes, major Swiss insurers (Zurich, AXA, Swiss Life, Generali) provide comprehensive English support including applications, underwriting, and claims. International insurance brokers also specialize in English-language service for expat professionals."
+  },
+  {
+    question: "What are the tax benefits of life insurance in Switzerland?",
+    answer: "Life insurance premiums are tax-deductible up to CHF 7,056 annually (combined with 3rd pillar). Death benefits are income tax-free to beneficiaries. However, 3rd pillar typically provides better tax-efficient returns for retirement savings than whole life insurance."
+  },
+  {
+    question: "How does Swiss life insurance work if I move abroad?",
+    answer: "Swiss life insurance policies typically remain valid if you move abroad, but premium payments and tax benefits may be affected. Some insurers offer international coverage continuity. Consider portability needs when selecting providers, especially for mobile professionals."
+  }
+];
+
+// Define providers for professionals  
+const providers = [
+  {
+    name: "Swiss Life",
+    strengths: "Market leader, comprehensive products, professional expertise",
+    professionalFocus: "Executive benefits, business insurance, estate planning",
+    coverage: "CHF 100K-10M+ coverage available",
+    englishSupport: "Excellent international department"
+  },
+  {
+    name: "Zurich Life Insurance",
+    strengths: "Strong underwriting, competitive rates, digital platform",
+    professionalFocus: "Professional liability coordination, group benefits",
+    coverage: "Flexible coverage up to CHF 5M+",
+    englishSupport: "Comprehensive English services"
+  },
+  {
+    name: "AXA Life Insurance",
+    strengths: "International expertise, innovative products, good value",
+    professionalFocus: "Expat specialists, international assignments",
+    coverage: "CHF 50K-3M typical coverage range",
+    englishSupport: "Dedicated international team"
+  },
+  {
+    name: "Generali Switzerland",
+    strengths: "European expertise, multilingual support, flexible terms",
+    professionalFocus: "International professionals, mobility solutions",
+    coverage: "Customizable coverage options",
+    englishSupport: "Excellent multilingual support"
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Guide",
+    "name": "Life Insurance in Switzerland — Term vs Whole for Professionals", 
+    "description": "Complete guide to life insurance in Switzerland. Term vs whole life comparison, coverage needs for professionals, tax benefits, and English-speaker considerations.",
+    "url": "https://expat-savvy.ch/guides/life-insurance-switzerland",
+    "author": {
+      "@type": "Organization",
+      "name": "Expat Savvy"
+    },
+    "datePublished": "2025-08-13",
+    "dateModified": "2025-08-13",
+    "mainEntity": {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need life insurance if I live in Switzerland?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Life insurance isn't legally required but is essential if you have dependents, debt, or family obligations. Switzerland's high cost of living makes adequate life insurance crucial for family financial security. Professional families typically need CHF 500K-2M+ coverage depending on income and obligations."
+          }
+        },
+        {
+          "@type": "Question", 
+          "name": "Should I choose term or whole life insurance in Switzerland?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Term life insurance is usually better for most professionals - lower cost allows higher coverage and separate investment in 3rd pillar. Choose whole life only if you need permanent coverage for estate planning or business needs. Term provides 10-20x more death benefit per premium dollar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much life insurance do I need as a professional in Switzerland?", 
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Calculate based on income replacement (5-10x annual income), debt coverage (mortgage, loans), education costs (CHF 100K-300K per child), and final expenses. Most professionals need CHF 500K-2M coverage. Higher earners or business owners may need CHF 2M-5M+ coverage."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 mb-4">
+          Last updated: {lastUpdated}
+        </div>
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          Life Insurance in Switzerland
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Complete guide to life insurance for professionals. Term vs whole life comparison, coverage calculations, and expert recommendations.
+        </p>
+        <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+          <div class="rounded-md shadow">
+            <a href="/free-consultation" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10">
+              Get Expert Analysis
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Facts Section -->
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Key Facts — Life Insurance for Professionals</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-2">Coverage & Costs</h4>
+            <ul class="space-y-1 text-sm text-gray-700">
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Term life:</strong> CHF 50-200/month for CHF 500K-1M coverage</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Whole life:</strong> CHF 200-800+/month for CHF 500K coverage</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Professional needs:</strong> CHF 500K-2M+ typical coverage range</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Coverage calculation:</strong> 5-10x annual income + debt + education costs</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-2">Tax Benefits & Strategy</h4>
+            <ul class="space-y-1 text-sm text-gray-700">
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Premium deduction:</strong> Up to CHF 7,056/year (with 3rd pillar)</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Death benefits:</strong> Income tax-free to beneficiaries</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Term recommendation:</strong> Better value for most professionals</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>English support:</strong> Available from all major providers</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-4 flex flex-wrap gap-3 text-sm">
+          <a href="/blog/3rd-pillar-vs-life-insurance-switzerland" class="text-primary-700 hover:text-primary-900 underline">3rd Pillar vs Life Insurance</a>
+          <a href="/blog/best-3rd-pillar-providers-switzerland" class="text-primary-700 hover:text-primary-900 underline">Best 3rd Pillar Providers</a>
+          <a href="/free-consultation" class="text-primary-700 hover:text-primary-900 underline">Personal Analysis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Life Insurance for Swiss Professionals</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Professional families in Switzerland face unique life insurance considerations: high earning potential, substantial debt obligations, international mobility, and complex tax situations. Understanding term vs whole life options ensures optimal family protection without compromising investment returns.
+        </p>
+        
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-blue-700">
+                <strong>Professional Tip:</strong> Most professionals benefit more from term life insurance combined with separate 3rd pillar investment than from whole life insurance. The cost difference allows higher death benefits and better long-term returns.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Types Comparison -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Term vs Whole Life Insurance</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Understanding the fundamental differences helps you choose the right protection strategy.</p>
+      </div>
+      
+      <div class="space-y-6">
+        {insuranceComparison.map(insurance => (
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">{insurance.type}</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+              <div>
+                <h4 class="font-medium text-gray-900 mb-1">Coverage</h4>
+                <p class="text-gray-600">{insurance.coverage}</p>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-900 mb-1">Typical Cost</h4>
+                <p class="text-gray-600">{insurance.cost}</p>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-900 mb-1">Benefits</h4>
+                <p class="text-green-600">{insurance.benefits}</p>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-900 mb-1">Drawbacks</h4>
+                <p class="text-red-600">{insurance.drawbacks}</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+              <p class="text-sm"><strong>Best for:</strong> {insurance.bestFor}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Quick Answer: Term vs Whole -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Answer: Term vs Whole Life for Professionals</h3>
+          <p class="text-sm text-gray-700">
+            Term life insurance is usually optimal for professionals: 5-10x higher death benefit for same premium cost. Use savings to maximize 3rd pillar contributions (better tax benefits and returns). Choose whole life only for estate planning, business succession, or if you've maxed other tax-advantaged accounts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coverage Calculation -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Calculating Your Coverage Needs</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Professional coverage calculation requires comprehensive analysis of income, debt, and family needs.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {coverageFactors.map(factor => (
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{factor.factor}</h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <strong>Calculation:</strong> {factor.calculation}
+              </div>
+              <div class="bg-blue-50 p-3 rounded">
+                <strong>Example:</strong> {factor.example}
+              </div>
+              <div class="text-gray-600">
+                <strong>Consider:</strong> {factor.considerations}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Coverage Calculator Example -->
+      <div class="mt-12 bg-primary-50 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Sample Coverage Calculation</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-medium text-gray-900 mb-2">Professional Profile</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Annual income: CHF 150,000</li>
+              <li>• Mortgage: CHF 800,000</li>
+              <li>• Two children (ages 8, 12)</li>
+              <li>• Spouse income: CHF 60,000</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 mb-2">Coverage Calculation</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Income replacement: CHF 750,000 (5x income)</li>
+              <li>• Mortgage coverage: CHF 800,000</li>
+              <li>• Education costs: CHF 200,000 (2 children)</li>
+              <li>• <strong>Total needed: CHF 1,750,000</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Professional Scenarios -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Coverage by Professional Type</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Different professions have unique insurance considerations and typical coverage needs.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {professionalScenarios.map(scenario => (
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">{scenario.profession}</h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <strong>Typical Needs:</strong> {scenario.typicalNeeds}
+              </div>
+              <div>
+                <strong>Recommendations:</strong> {scenario.recommendations}
+              </div>
+              <div class="text-gray-600">
+                <strong>Special Considerations:</strong> {scenario.considerations}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Quick Answer: Professional Coverage -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Answer: Professional Coverage Strategy</h3>
+          <p class="text-sm text-gray-700">
+            Most professionals need 5-10x income in term life coverage (CHF 500K-2M+). High earners should prioritize term life + 3rd pillar over whole life. Business owners may need additional key person coverage. International professionals should ensure policy portability and English support.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tax Benefits Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Tax Benefits and Optimization</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Understanding tax implications helps optimize your life insurance strategy within overall financial planning.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {taxBenefits.map(benefit => (
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{benefit.aspect}</h3>
+            <div class="space-y-3 text-sm">
+              <div class="text-green-600">
+                <strong>Benefit:</strong> {benefit.benefit}
+              </div>
+              <div>
+                <strong>Requirements:</strong> {benefit.requirements}
+              </div>
+              <div class="text-primary-600">
+                <strong>Optimization:</strong> {benefit.optimization}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Provider Comparison -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Leading Life Insurance Providers</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Compare major Swiss life insurers specializing in professional coverage.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {providers.map(provider => (
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-semibold text-gray-900">{provider.name}</h3>
+              <span class="text-sm font-medium text-primary-600">{provider.englishSupport}</span>
+            </div>
+            <div class="space-y-2 text-sm">
+              <div><strong>Strengths:</strong> {provider.strengths}</div>
+              <div><strong>Professional Focus:</strong> {provider.professionalFocus}</div>
+              <div><strong>Coverage Range:</strong> {provider.coverage}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <div class="bg-gray-50 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Process -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">Life Insurance Application Process</h2>
+        
+        <div class="space-y-6">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Step 1: Coverage Analysis and Planning</h3>
+            <p class="text-gray-600">Calculate coverage needs, determine term vs whole life preference, and establish budget. Professional analysis ensures optimal coverage without over-insurance.</p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Step 2: Application and Health Assessment</h3>
+            <p class="text-gray-600">Complete application with health questionnaire. Medical exam may be required for higher coverage amounts. Age, health, and lifestyle factors determine premiums.</p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Step 3: Underwriting and Approval</h3>
+            <p class="text-gray-600">Insurer reviews application, medical records, and financial information. Approval typically takes 2-6 weeks. Some cases may require additional medical tests or financial documentation.</p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Step 4: Policy Issuance and Management</h3>
+            <p class="text-gray-600">Receive policy documents, set up premium payments, designate beneficiaries. Regular review ensures coverage remains appropriate as circumstances change.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conclusion Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Secure Your Family's Financial Future</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Life insurance provides essential family protection for professionals in Switzerland. Term life insurance typically offers the best value, allowing higher coverage at lower cost while maximizing 3rd pillar investment benefits. Professional guidance ensures optimal coverage aligned with your specific family and financial situation.
+        </p>
+        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+          <a href="/free-consultation" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
+            Get Expert Analysis
+          </a>
+          <a href="/blog/3rd-pillar-vs-life-insurance-switzerland" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-primary-600 text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50">
+            Compare with 3rd Pillar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
