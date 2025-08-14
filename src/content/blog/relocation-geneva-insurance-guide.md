@@ -6,7 +6,7 @@ category: "relocation"
 tags: ["geneva", "relocation", "health-insurance", "international", "diplomacy", "expats"]
 publishDate: 2025-08-13
 lastUpdated: 2025-08-13
-image: "https://images.unsplash.com/photo-1577964276243-eb5f8ded1bb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2940&q=80"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208301/a-hand-drawn-sketch-in-black-and-red-ink_yI0IIGz_R6qPUz2NrjPQ2A_UzpNU7chRe6ZBw208cSzEw_zbaruc.png"
 imageAlt: "Geneva lakefront with Jet d'Eau and UN buildings"
 author: "Expat Savvy"
 ---

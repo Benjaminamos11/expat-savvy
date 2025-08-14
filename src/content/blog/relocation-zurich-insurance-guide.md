@@ -6,7 +6,7 @@ category: "relocation"
 tags: ["zurich", "relocation", "health-insurance", "moving", "expats", "insurance-costs"]
 publishDate: 2025-08-13
 lastUpdated: 2025-08-13
-image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2940&q=80"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208300/a-stark-black-and-red-hand-drawn-sketch-_JUmqq0WjTW6M2RbGRIpC4A_UK0w41FhQIms1FQkt8WBNA_znjzdm.png"
 imageAlt: "Zurich cityscape with Lake Zurich and Swiss Alps"
 author: "Expat Savvy"
 ---

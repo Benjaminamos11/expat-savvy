@@ -6,7 +6,7 @@ lastUpdated: "2025-08-13"
 category: "Health Insurance"
 author: "Expat Savvy Team"
 tags: ["cancellation deadline 2025", "Swiss health insurance", "30 November deadline", "termination rights", "insurance switching"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747121612/swiss-insurance-cancellation-deadline-2025.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208414/a-minimalist-black-and-red-sketch-illust_APlYetvkRnus6twrUBEwFA_0ia8G-wbRnqic4CgXQVfFg_oasnuj.png"
 featured: true
 faqs:
   - question: "What is the exact Swiss health insurance cancellation deadline for 2025?"

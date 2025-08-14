@@ -6,7 +6,7 @@ lastUpdated: "2025-08-13"
 category: "Health Insurance"
 author: "Expat Savvy Team"
 tags: ["Swiss health insurance 2026", "new laws", "premium changes", "insurance regulations", "healthcare updates"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747121612/swiss-health-insurance-changes-2026.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208399/a-black-and-red-hand-drawn-fineline-sket_bkuTCDzgT1OgRPRDq2cFCQ_wEe9Nsd3RLWjPk2wIunlRg_zqufca.png"
 featured: true
 faqs:
   - question: "How much are Swiss health insurance premiums increasing in 2026?"

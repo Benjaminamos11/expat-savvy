@@ -6,7 +6,7 @@ lastUpdated: "2025-08-13"
 category: "Financial Planning"
 author: "Expat Savvy Team"
 tags: ["best pillar 3a providers", "Swiss banks", "3rd pillar comparison", "investment options", "retirement planning"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747121612/best-third-pillar-providers-switzerland-2025.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208300/a-minimalist-doodle-illustration-depicti_tFVjPeBgSa-mDhqpSDf-ZQ_PfZSpW3ERG26guOXYQt46Q_opt8t7.png"
 featured: true
 faqs:
   - question: "Which is the best 3rd pillar provider in Switzerland?"

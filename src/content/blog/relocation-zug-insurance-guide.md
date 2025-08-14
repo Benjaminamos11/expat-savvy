@@ -6,7 +6,7 @@ category: "relocation"
 tags: ["zug", "relocation", "health-insurance", "crypto-valley", "tax-benefits", "expats"]
 publishDate: 2025-08-13
 lastUpdated: 2025-08-13
-image: "https://images.unsplash.com/photo-1598662779094-110c2bad80b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2940&q=80"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208300/a-delicate-black-and-red-line-art-illust_c-rtNLaLSgOe2bUbrpLRtw_vMwzAG7hQoiBbDJs4e7LQw_duh7xc.png"
 imageAlt: "Zug city center with Lake Zug and Swiss mountains"
 author: "Expat Savvy"
 ---

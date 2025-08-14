@@ -6,7 +6,7 @@ lastUpdated: "2025-08-13"
 category: "Financial Planning"
 author: "Expat Savvy Team"
 tags: ["pillar 3a vs life insurance", "financial planning", "tax benefits", "family protection", "retirement planning"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747121612/third-pillar-vs-life-insurance-comparison.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208300/a-black-and-red-doodle-style-illustratio_HD58i2ejQvKbrfKhjK9Usw_GVI-GgSrR8yfsxn-qdGpmw_attwrm.png"
 featured: true
 faqs:
   - question: "Should I choose 3rd pillar or life insurance for retirement planning?"

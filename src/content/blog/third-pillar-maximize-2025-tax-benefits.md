@@ -6,7 +6,7 @@ lastUpdated: "2025-08-13"
 category: "Financial Planning"
 author: "Expat Savvy Team"
 tags: ["3rd pillar 2025", "tax benefits", "pillar 3a", "tax savings", "retirement planning", "year-end optimization"]
-image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747121612/swiss-third-pillar-tax-benefits-2025.webp"
+image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208300/a-hand-drawn-sketch-on-a-clean-white-bac_1KHgmNPtTeaaFGzlmaBmCA_fa1zcmBCSNyD3vvWmV3OHA_r6vyua.png"
 featured: true
 faqs:
   - question: "What is the maximum 3rd pillar contribution for 2025?"
