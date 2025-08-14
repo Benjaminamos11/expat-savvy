@@ -60,9 +60,9 @@ In the Swiss context, "relocation services" extend far beyond simply transportin
 
 These services are invaluable for individual professionals seeking a hassle-free transition and for corporate HR departments aiming to provide top-tier support to their relocating employees, ensuring a positive start to their Swiss assignment.
 
-<div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
-  <h3 class="font-bold text-blue-800">Good to Know: Insurance Needs During Relocation</h3>
-  <p>While focusing on housing and immigration, don't forget that health insurance is mandatory in Switzerland within 3 months of arrival. <a href="/contact">Contact Expat Savvy</a> early for guidance on this crucial requirement.</p>
+<div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+  <h3 style="font-weight: bold; color: #374151; margin-bottom: 8px;">Good to Know: Insurance Needs During Relocation</h3>
+  <p style="color: #6b7280; margin: 0;">While focusing on housing and immigration, don't forget that health insurance is mandatory in Switzerland within 3 months of arrival. <a href="/contact">Contact Expat Savvy</a> early for guidance on this crucial requirement.</p>
 </div>
 
 ## 3. Why Should You Use a Professional Relocation Agency in Switzerland?
@@ -90,9 +90,9 @@ Selecting the right relocation agency is crucial for a successful move. Not all 
 
 For a detailed guide on this crucial step, see our dedicated page: [Finding Your Ideal Relocation Agency in Switzerland](/guides/how-to/finding-ideal-relocation-agency-switzerland).
 
-<div class="bg-green-50 border-l-4 border-green-500 p-4 my-6">
-  <h3 class="font-bold text-green-800">Expert Advice</h3>
-  <p>When interviewing potential relocation agencies, ask for specific examples of how they've solved challenges similar to your situation. Their answers will reveal much about their problem-solving abilities and local expertise.</p>
+<div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+  <h3 style="font-weight: bold; color: #374151; margin-bottom: 8px;">Expert Advice</h3>
+  <p style="color: #6b7280; margin: 0;">When interviewing potential relocation agencies, ask for specific examples of how they've solved challenges similar to your situation. Their answers will reveal much about their problem-solving abilities and local expertise.</p>
 </div>
 
 ## 5. Spotlight on Swiss Relocation Agencies: Finding the Right Fit
@@ -127,9 +127,9 @@ For a detailed checklist of steps, refer to our guide: [How to Relocate to Switz
 
 > **Quick Answer: Admin timelines** First 14 days: register with commune. Within 3 months: secure health insurance (mandatory). First month: open bank account, set up mobile/internet, begin apartment hunting. International school applications: 6-12 months advance notice required.
 
-<div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-6">
-  <h3 class="font-bold text-yellow-800">Timeline Tip</h3>
-  <p>Begin your visa application process at least 3 months before your planned move, as processing times can vary significantly, especially for non-EU/EFTA citizens.</p>
+<div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+  <h3 style="font-weight: bold; color: #374151; margin-bottom: 8px;">Timeline Tip</h3>
+  <p style="color: #6b7280; margin: 0;">Begin your visa application process at least 3 months before your planned move, as processing times can vary significantly, especially for non-EU/EFTA citizens.</p>
 </div>
 
 ## 7. Expat Savvy: Your Insurance Partner Throughout Your Relocation
@@ -155,9 +155,9 @@ Switzerland's cantonal system means that experiences and specific considerations
 
 For more detailed information on insurance and living in these areas, explore our [Regional Insurance Guides](/insurance-guides/regional).
 
-<div class="bg-purple-50 border-l-4 border-purple-500 p-4 my-6">
-  <h3 class="font-bold text-purple-800">Canton-Specific Advice</h3>
-  <p>Each Swiss canton has its own regulations and practices. For example, Geneva's rental market has different rules and customs than Zurich's. Your relocation agent should be well-versed in the specifics of your destination canton.</p>
+<div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+  <h3 style="font-weight: bold; color: #374151; margin-bottom: 8px;">Canton-Specific Advice</h3>
+  <p style="color: #6b7280; margin: 0;">Each Swiss canton has its own regulations and practices. For example, Geneva's rental market has different rules and customs than Zurich's. Your relocation agent should be well-versed in the specifics of your destination canton.</p>
 </div>
 
 ## Frequently Asked Questions — Relocation & Insurance Switzerland
