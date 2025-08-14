@@ -7,6 +7,33 @@ tags: ["legal protection insurance", "swiss insurance", "expat", "switzerland", 
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803685/a-raw-hand-drawn-sketch-in-red-and-black_ViTcNBIMSpuvl-Wmd9MUGA_W5ezLf6NQleOdkTMckORFw_p6zzhe.png"
 ---
 
+## Key Facts — Legal Protection Insurance Switzerland 2025
+
+<div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+
+#### Coverage & Costs
+• **Annual Premiums**: CHF 150-400/year depending on coverage level and provider  
+• **Typical Coverage**: Private, traffic, employment, property legal disputes  
+• **Cost Protection**: Lawyer fees (CHF 250-500/hour), court costs, expert opinions  
+• **Waiting Periods**: 3-6 months for most claims (immediate for accidents)  
+
+#### Why Expats Need Legal Protection
+• **Language Barriers**: Professional legal support in English/your language  
+• **System Complexity**: Navigate Swiss legal system with expert guidance  
+• **High Legal Costs**: Average dispute costs CHF 5,000-20,000+ without insurance  
+• **Residency Protection**: Legal issues can affect permit status - professional help crucial  
+
+#### Top Providers for Expats
+• **AXA-ARAG**: Strong international support, comprehensive coverage  
+• **Protekta**: Swiss market leader, good multilingual service  
+• **Orion**: Competitive pricing, solid coverage options  
+• **All providers**: Must offer service in official Swiss languages + often English  
+
+#### Next Steps
+📋 [Get Free Legal Protection Analysis](/contact) • [Compare with Personal Liability](/insurance-guides/personal-liability) • [Complete Insurance Portfolio Strategy](/guides/how-to)
+
+</div>
+
 ## Introduction: Why Legal Protection Matters for Expats in Switzerland
 
 Imagine this: You've recently moved to Switzerland, excited about your new job and life. Three months in, you discover a serious water leak in your rental apartment. Your landlord refuses to fix it properly and even suggests you might be responsible for the damage. Repair estimates are running into thousands of francs, and suddenly you're facing potential legal action in a country where you don't fully understand the legal system or speak the local language fluently.
