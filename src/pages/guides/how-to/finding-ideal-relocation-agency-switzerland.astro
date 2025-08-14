@@ -502,7 +502,13 @@ const commonMistakes = [
             <tbody class="divide-y divide-gray-200">
               {notableAgencies.map(agency => (
                 <tr class="hover:bg-gray-50">
-                  <td class="py-4 px-4 font-medium">{agency.name}</td>
+                  <td class="py-4 px-4 font-medium">
+                    {agency.url !== "#" ? (
+                      <a href={agency.url} target="_blank" class="text-primary-600 hover:text-primary-800 underline">{agency.name}</a>
+                    ) : (
+                      agency.name
+                    )}
+                  </td>
                   <td class="py-4 px-4">{agency.specialization}</td>
                   <td class="py-4 px-4">{agency.strength}</td>
                 </tr>
