@@ -7,14 +7,28 @@ tags: ["dental insurance", "switzerland", "supplementary insurance", "swiss cost
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-raw-hand-drawn-fineline-sketch-depicts_ag6b-ejESwWtD6WbtTHuJA_lFDNMHe3RWCgHvE6tB48hg_r87l4l.webp"
 ---
 
-## 2025/2026 Key Facts — Dental Coverage in Switzerland
+## Key Facts — Dental Insurance Switzerland 2025/2026
 
-- Basic KVG/LAMal: adults’ routine dental generally not covered; accidents/severe disease exceptions
-- Supplementary dental covers check‑ups, fillings, root canals, crowns, implants, orthodontics (per policy)
-- Typical adult premiums for dental add‑ons vary by age/benefits and insurer
-- Seasonal: health policy changes for 1 Jan 2026 require cancellation by 30 Nov 2025 (letters in Oct)
+<div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
-> Need help comparing dental add‑ons? [/free-consultation](/free-consultation)
+#### Basic vs Supplemental Dental
+• **KVG/LAMal Basic**: Routine dental NOT covered for adults (only accidents/severe disease)  
+• **Supplementary**: Covers check-ups, fillings, crowns, implants, orthodontics (policy-dependent)  
+• **Cost Reality**: Single crown CHF 1,500-3,000+, implant CHF 3,000-6,000+  
+
+#### Typical Premiums & Waiting Periods
+• **Monthly Premiums**: CHF 20-80/month (varies by age, coverage level, insurer)  
+• **Waiting Periods**: 3-12 months for major treatments, up to 24 months for orthodontics  
+• **Annual Limits**: CHF 1,000-5,000+ depending on plan level  
+
+#### When Supplemental Worth It
+• **Yes**: Regular dental needs, family with children, orthodontics planned, pre-existing issues  
+• **Maybe**: Healthy teeth, budget-conscious, willing to pay cash for occasional treatments  
+
+#### Next Step
+📋 [Compare provider dental add-ons](/compare-providers/) or [book consultation](/free-consultation) for personalized dental coverage assessment.
+
+</div>
 
 ## Introduction: The Importance of Dental Health for English‑speaking Clients in Switzerland
 
@@ -43,6 +57,8 @@ Given the limited dental coverage under basic insurance, many residents who want
 - Dental implants
 - Periodontal treatments
 
+> **Quick Answer: Coverage scope** Basic insurance excludes routine dental for adults (only accidents/severe disease covered). Supplementary typically covers 50-80% of treatments like check-ups, fillings, crowns, implants up to annual limits (CHF 1,000-5,000+).
+
 ## Is Supplementary Dental Insurance Worth the Premium?
 
 Dental treatments in Switzerland can be expensive. Here are approximate average costs (vary by canton/dentist):
@@ -56,6 +72,8 @@ Dental treatments in Switzerland can be expensive. Here are approximate average 
 - Orthodontics: CHF 5,000–15,000+
 
 Balancing premiums, waiting periods, annual limits, and exclusions vs expected needs is key. If you anticipate more than routine care—or have children who may need orthodontics—supplementary dental is often sensible.
+
+> **Quick Answer: When supplemental worth it?** Worth it if you need regular dental care, have family with children, plan orthodontics, or have existing dental issues. Break-even: typically 2-3 dental visits per year or one major treatment every 3-4 years.
 
 ## Choosing a Dental Insurance Provider
 
@@ -78,20 +96,28 @@ Compare coverage scope, percentage covered, annual max, deductibles, waiting per
 - If changing base provider/model/deductible for 1 Jan 2026, send cancellation by 30 Nov 2025
 - Confirm the new policy and any dental riders are activated from 1 Jan 2026
 
-## Frequently Asked Questions (FAQ)
+## Frequently Asked Questions — Dental Insurance Switzerland
 
-**Q1: Does mandatory basic Swiss health insurance cover dental treatments?**  
-A1: Generally no, with exceptions for severe disease or accidents. Adults’ routine dental is usually excluded.
+**How does Swiss health insurance work for foreigners regarding dental care?**
 
-**Q2: How much does supplementary dental insurance cost?**  
-A2: Varies by insurer, benefits, age, and sometimes dental history. Get personalized quotes; start with providers above or our [/compare-providers](/compare-providers) index.
+Swiss health insurance works the same for foreigners as locals for dental coverage. Basic insurance (KVG/LAMal) excludes routine dental for adults regardless of nationality. Supplementary dental insurance available to all residents with typical waiting periods. [Complete foreigner guide here](/blog/best-health-insurance-switzerland/).
 
-**Q3: Are there waiting periods?**  
-A3: Often 3–12 months for major treatments/orthodontics. Always check the policy’s fine print.
+**How much is dental insurance in Switzerland per month?**
+
+Dental supplementary insurance typically costs CHF 20-80/month depending on age, coverage level, and provider. Annual limits range CHF 1,000-5,000+. Compare costs vs expected dental needs - break-even usually around 2-3 visits/year or major treatment every 3-4 years.
+
+**Are cleanings covered under basic Swiss health insurance?**
+
+No, routine dental cleanings are NOT covered under basic health insurance (KVG/LAMal) for adults. Cleanings cost CHF 120-300 and require supplementary dental insurance or out-of-pocket payment. Only dental accidents or severe systemic diseases qualify for basic coverage.
+
+**Can foreigners get dental insurance in Switzerland immediately?**
+
+Yes, foreigners can apply for supplementary dental insurance, but most policies have waiting periods of 3-12 months for major treatments and up to 24 months for orthodontics. Apply early after arrival to minimize gaps in coverage.
 
 ## Related Articles
 
-- Health Insurance Hub: [/health-insurance](/health-insurance)
-- Ways to Save (Models & Deductibles): [/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models/](/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models/)
-- Models Explained: [/blog/health-insurance-models-switzerland](/blog/health-insurance-models-switzerland)
-- Switching How‑to: [/guides/how-to/change-health-insurance](/guides/how-to/change-health-insurance) 
+- [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete newcomer guide including supplementary options
+- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines for base and supplementary policy changes
+- [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — Base models that work well with dental add-ons
+- [Health Insurance Hub](/health-insurance) — Calculator, costs, and coverage overview
+- [Provider Comparisons](/compare-providers/) — Compare insurers offering dental supplementary coverage
