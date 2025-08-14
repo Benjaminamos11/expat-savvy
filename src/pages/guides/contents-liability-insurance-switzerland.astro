@@ -1,0 +1,500 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConsultationModal from '../../components/consultation/ConsultationModal.astro';
+
+const title = "Contents & Liability Insurance: What English Speakers Should Know";
+const description = "Complete guide to household contents and personal liability insurance in Switzerland. Coverage, costs, requirements for rentals, and English-speaker considerations.";
+const lastUpdated = "13.08.2025";
+
+// Define insurance types
+const insuranceTypes = [
+  {
+    type: "Household Contents Insurance",
+    coverage: "Furniture, electronics, clothing, personal belongings, theft, fire, water damage",
+    mandatory: "Not legally required",
+    cost: "CHF 200-600/year",
+    recommendation: "Highly recommended for all residents"
+  },
+  {
+    type: "Personal Liability Insurance", 
+    coverage: "Damage to third parties, legal costs, bodily injury, property damage",
+    mandatory: "Required by most rental contracts",
+    cost: "CHF 100-250/year",
+    recommendation: "Essential for all residents"
+  },
+  {
+    type: "Building Insurance",
+    coverage: "Structural damage, fire, natural disasters, building repairs",
+    mandatory: "Mandatory for property owners",
+    cost: "CHF 300-1,000/year",
+    recommendation: "Automatic for homeowners"
+  }
+];
+
+// Define coverage details
+const contentsDetails = [
+  {
+    item: "Electronics & Appliances",
+    coverage: "Computers, phones, TV, kitchen appliances, cameras",
+    limits: "Up to CHF 50,000-200,000 total",
+    notes: "Often requires itemization for expensive items"
+  },
+  {
+    item: "Furniture & Clothing",
+    coverage: "All household furniture, clothing, linens, decorations", 
+    limits: "Replacement value coverage",
+    notes: "Receipts helpful for claims"
+  },
+  {
+    item: "Theft & Burglary",
+    coverage: "Stolen items from home, bicycle theft, pickpocketing",
+    limits: "CHF 5,000-20,000 for theft outside home",
+    notes: "Police report required for claims"
+  },
+  {
+    item: "Water & Fire Damage",
+    coverage: "Burst pipes, flooding, fire damage to contents",
+    limits: "Full replacement value",
+    notes: "Quick notification required"
+  }
+];
+
+// Define liability scenarios
+const liabilityScenarios = [
+  {
+    scenario: "Damage to Rental Property",
+    example: "Accidentally damage landlord's property, break fixtures",
+    coverage: "CHF 1-5 million typical",
+    importance: "Required by most rental agreements"
+  },
+  {
+    scenario: "Injury to Third Parties",
+    example: "Guest injured in your home, bicycle accident causing injury",
+    coverage: "CHF 5-10 million bodily injury",
+    importance: "Essential personal protection"
+  },
+  {
+    scenario: "Property Damage to Others",
+    example: "Water leak damages neighbor's apartment, damage to friend's belongings",
+    coverage: "CHF 1-5 million property damage",
+    importance: "Protects against major financial loss"
+  },
+  {
+    scenario: "Professional Activity",
+    example: "Home office damage, client property damage during service",
+    coverage: "Often excluded - need separate coverage",
+    importance: "Check policy exclusions carefully"
+  }
+];
+
+// Define FAQs
+const faqs = [
+  {
+    question: "Is household contents insurance mandatory in Switzerland?",
+    answer: "Household contents insurance is not legally mandatory, but it's highly recommended and often required by rental agreements. Personal liability insurance is typically mandatory for renters and essential for all residents. The modest cost (CHF 200-400/year total) provides significant financial protection."
+  },
+  {
+    question: "How much contents and liability insurance do I need in Switzerland?",
+    answer: "For contents insurance, estimate your belongings' replacement value (typically CHF 50,000-150,000 for a family). For liability, choose CHF 5-10 million coverage. Young professionals might need CHF 30,000-60,000 contents coverage, while families typically need CHF 80,000-200,000+ contents coverage."
+  },
+  {
+    question: "What's the difference between contents and liability insurance?",
+    answer: "Contents insurance covers YOUR belongings (furniture, electronics, clothing) against theft, fire, and damage. Liability insurance covers damage YOU cause to OTHER people's property or injury to others. Both are important but serve different purposes - contents protects your assets, liability protects against claims."
+  },
+  {
+    question: "Do I need separate insurance if I'm renting in Switzerland?",
+    answer: "Renters typically need both contents and liability insurance. The landlord's building insurance covers structural damage, but not your belongings or damage you cause. Most rental contracts require liability insurance. Contents insurance, while not mandatory, protects your valuable possessions."
+  },
+  {
+    question: "How do I claim on contents or liability insurance in Switzerland?",
+    answer: "Contact your insurer immediately after damage or incident. For theft, file a police report first. Document everything with photos and receipts. For liability claims, never admit fault - let your insurer handle communications. Most Swiss insurers have 24/7 claim hotlines and English support."
+  },
+  {
+    question: "Can I get English support for contents and liability insurance?",
+    answer: "Major Swiss insurers (Zurich, AXA, Generali, Allianz) offer English-language support for international residents. This includes English policy documents, customer service, and claims handling. Smaller insurers may have limited English support, so verify language services before purchasing."
+  }
+];
+
+// Define providers
+const providers = [
+  {
+    name: "Zurich Insurance",
+    strengths: "Comprehensive coverage, excellent customer service, strong English support",
+    packages: "Combined contents and liability packages, family-friendly options",
+    cost: "CHF 300-500/year combined",
+    englishSupport: "Excellent"
+  },
+  {
+    name: "AXA Switzerland",
+    strengths: "Competitive pricing, digital services, flexible coverage options",
+    packages: "Modular insurance solutions, student discounts available", 
+    cost: "CHF 250-450/year combined",
+    englishSupport: "Very good"
+  },
+  {
+    name: "Generali Switzerland",
+    strengths: "International expertise, multilingual support, comprehensive benefits",
+    packages: "Expat-focused packages, international coverage options",
+    cost: "CHF 320-550/year combined", 
+    englishSupport: "Excellent"
+  },
+  {
+    name: "Allianz Suisse",
+    strengths: "Global brand recognition, innovative products, good digital platform",
+    packages: "Smart home integration, comprehensive family packages",
+    cost: "CHF 280-480/year combined",
+    englishSupport: "Good"
+  }
+];
+
+// Define common mistakes
+const commonMistakes = [
+  {
+    mistake: "Underestimating belongings value",
+    consequence: "Insufficient coverage for full replacement costs",
+    solution: "Create detailed inventory with current replacement values"
+  },
+  {
+    mistake: "Not updating coverage annually",
+    consequence: "Coverage gaps as belongings and values change",
+    solution: "Review and adjust coverage limits annually"
+  },
+  {
+    mistake: "Ignoring policy exclusions", 
+    consequence: "Unexpected claim denials for excluded items/situations",
+    solution: "Read policy terms carefully, ask about specific exclusions"
+  },
+  {
+    mistake: "Mixing business and personal coverage",
+    consequence: "Business activities may void personal insurance",
+    solution: "Separate business insurance for professional activities"
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <!-- Schema.org markup -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Guide", 
+    "name": "Contents & Liability Insurance: What English Speakers Should Know",
+    "description": "Complete guide to household contents and personal liability insurance in Switzerland. Coverage, costs, requirements for rentals, and English-speaker considerations.",
+    "url": "https://expat-savvy.ch/guides/contents-liability-insurance-switzerland",
+    "author": {
+      "@type": "Organization",
+      "name": "Expat Savvy"
+    },
+    "datePublished": "2025-08-13", 
+    "dateModified": "2025-08-13",
+    "mainEntity": {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is household contents insurance mandatory in Switzerland?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Household contents insurance is not legally mandatory, but it's highly recommended and often required by rental agreements. Personal liability insurance is typically mandatory for renters and essential for all residents. The modest cost (CHF 200-400/year total) provides significant financial protection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much contents and liability insurance do I need in Switzerland?", 
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For contents insurance, estimate your belongings' replacement value (typically CHF 50,000-150,000 for a family). For liability, choose CHF 5-10 million coverage. Young professionals might need CHF 30,000-60,000 contents coverage, while families typically need CHF 80,000-200,000+ contents coverage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between contents and liability insurance?",
+          "acceptedAnswer": {
+            "@type": "Answer", 
+            "text": "Contents insurance covers YOUR belongings (furniture, electronics, clothing) against theft, fire, and damage. Liability insurance covers damage YOU cause to OTHER people's property or injury to others. Both are important but serve different purposes - contents protects your assets, liability protects against claims."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Hero Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 mb-4">
+          Last updated: {lastUpdated}
+        </div>
+        <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          Contents & Liability Insurance
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Essential guide to household contents and personal liability insurance for English-speaking residents in Switzerland.
+        </p>
+        <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+          <div class="rounded-md shadow">
+            <a href="/free-consultation" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10">
+              Get Insurance Advice
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Facts Section -->
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Key Facts — Contents & Liability Insurance</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-2">Essential Coverage & Costs</h4>
+            <ul class="space-y-1 text-sm text-gray-700">
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Contents insurance:</strong> CHF 200-600/year for belongings protection</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Liability insurance:</strong> CHF 100-250/year for third-party damage</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Combined packages:</strong> CHF 250-450/year for both coverages</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Coverage limits:</strong> CHF 50K-200K contents, CHF 5-10M liability</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-2">Requirements & Recommendations</h4>
+            <ul class="space-y-1 text-sm text-gray-700">
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Liability:</strong> Required by most rental contracts, essential for all</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Contents:</strong> Not mandatory but highly recommended for protection</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>English support:</strong> Available from major Swiss insurers</li>
+              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Claims process:</strong> 24/7 hotlines, police reports for theft</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-4 flex flex-wrap gap-3 text-sm">
+          <a href="https://relofinder.ch/services/" target="_blank" class="text-primary-700 hover:text-primary-900 underline">Relocation Services on ReloFinder →</a>
+          <a href="/guides/legal-protection-insurance-switzerland" class="text-primary-700 hover:text-primary-900 underline">Legal Protection Insurance</a>
+          <a href="/free-consultation" class="text-primary-700 hover:text-primary-900 underline">Insurance Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Why Contents & Liability Insurance Matter</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Moving to Switzerland involves significant investments in household belongings and creates potential liability exposure. Contents and liability insurance provide essential financial protection for international residents establishing their new lives.
+        </p>
+        
+        <div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+          <h3 style="font-weight: bold; color: #374151; margin-bottom: 8px;">Good to Know: Relocation Insurance Planning</h3>
+          <p style="color: #6b7280; margin: 0;">
+            When relocating to Switzerland, insurance setup is often overlooked amid housing and documentation priorities. Professional relocation services can provide guidance on essential insurance requirements and local provider recommendations. <a href="https://relofinder.ch/services/" target="_blank" class="text-primary-600 hover:text-primary-800 underline">ReloFinder.ch</a> offers access to relocation specialists who understand insurance needs during international moves.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insurance Types Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Types of Household Insurance</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Understanding the different insurance types helps you choose appropriate coverage for your situation.</p>
+      </div>
+      
+      <div class="space-y-6">
+        {insuranceTypes.map(insurance => (
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+            <div class="md:flex md:justify-between md:items-start">
+              <div class="md:flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{insurance.type}</h3>
+                <p class="text-gray-600 mb-3">{insurance.coverage}</p>
+                <div class="flex flex-wrap gap-4 text-sm">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    {insurance.mandatory}
+                  </span>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                    {insurance.cost}
+                  </span>
+                </div>
+              </div>
+              <div class="mt-4 md:mt-0 md:ml-6">
+                <span class="text-sm font-medium text-green-600">{insurance.recommendation}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Contents Insurance Details -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Household Contents Coverage Details</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Comprehensive protection for your personal belongings and household items.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {contentsDetails.map(detail => (
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{detail.item}</h3>
+            <p class="text-gray-600 mb-3">{detail.coverage}</p>
+            <div class="space-y-2 text-sm">
+              <div><strong>Coverage limits:</strong> {detail.limits}</div>
+              <div class="text-gray-500"><em>{detail.notes}</em></div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Quick Answer: Contents Coverage -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Answer: How Much Contents Coverage?</h3>
+          <p class="text-sm text-gray-700">
+            Calculate your belongings' replacement value: furniture, electronics, clothing, appliances, etc. Young professionals typically need CHF 30,000-60,000 coverage. Families often require CHF 80,000-200,000+. Add 20% buffer for purchases and inflation. Most policies offer CHF 50,000-300,000 coverage options.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liability Insurance Details -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Personal Liability Coverage Scenarios</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Understanding when liability insurance protects you from financial claims.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {liabilityScenarios.map(scenario => (
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{scenario.scenario}</h3>
+            <p class="text-gray-600 mb-3"><strong>Example:</strong> {scenario.example}</p>
+            <div class="space-y-2 text-sm">
+              <div><strong>Typical coverage:</strong> {scenario.coverage}</div>
+              <div class="text-primary-600 font-medium">{scenario.importance}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Quick Answer: Liability Coverage -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Answer: Liability Coverage Amount</h3>
+          <p class="text-sm text-gray-700">
+            Choose CHF 5-10 million liability coverage. CHF 5 million covers most scenarios for individuals/families. CHF 10 million provides extra security for professionals or higher-risk activities. The cost difference is minimal (CHF 50-100/year) but protection difference is substantial.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Provider Comparison -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Leading Insurance Providers</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Compare major Swiss insurers for contents and liability coverage.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {providers.map(provider => (
+          <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-primary-500">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-semibold text-gray-900">{provider.name}</h3>
+              <span class="text-sm font-medium text-primary-600">English: {provider.englishSupport}</span>
+            </div>
+            <p class="text-gray-600 mb-3"><strong>Strengths:</strong> {provider.strengths}</p>
+            <p class="text-gray-600 mb-3"><strong>Packages:</strong> {provider.packages}</p>
+            <p class="text-primary-600 font-medium">{provider.cost}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Mistakes -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Common Mistakes to Avoid</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Learn from typical errors in contents and liability insurance selection.</p>
+      </div>
+      
+      <div class="space-y-6">
+        {commonMistakes.map(mistake => (
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="md:flex items-start">
+              <div class="md:w-1/3 mb-4 md:mb-0">
+                <h3 class="text-lg font-semibold text-red-600">{mistake.mistake}</h3>
+                <p class="text-gray-600 mt-2">{mistake.consequence}</p>
+              </div>
+              <div class="md:w-2/3 md:pl-8 md:border-l border-gray-200">
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <div class="flex items-center mb-2">
+                    <div class="bg-green-100 text-green-600 p-1 rounded-full mr-2">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                    <span class="text-sm font-medium text-green-800">Better Approach</span>
+                  </div>
+                  <p class="text-sm text-green-700">{mistake.solution}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          {faqs.map(faq => (
+            <div class="bg-gray-50 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conclusion Section -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Protect Your Swiss Home and Assets</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Contents and liability insurance provide essential financial protection for international residents in Switzerland. With combined coverage starting at CHF 250-450 annually, the security far outweighs the modest cost. Professional guidance ensures you choose appropriate coverage for your specific situation.
+        </p>
+        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+          <a href="/free-consultation" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
+            Get Insurance Advice
+          </a>
+          <a href="/guides/life-insurance-switzerland" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-primary-600 text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50">
+            Next: Life Insurance Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ConsultationModal />
+</Layout>
