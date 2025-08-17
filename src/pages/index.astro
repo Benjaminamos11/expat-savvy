@@ -314,38 +314,39 @@ const formatDate = (date: Date | string | undefined | null): string => {
   </div>
 
   <!-- Why Expat-Savvy Bridge Section -->
-  <div class="bg-gradient-to-b from-gray-50 to-white py-24">
+  <div class="bg-gradient-to-b from-gray-50 to-white py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+        <h2 id="why-expat-savvy-title" class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
           Why Expats Trust Expat-Savvy.ch
         </h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Independent, expert insurance guidance tailored to life in Switzerland.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <ul role="list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-16">
         {whyExpatSavvyPoints.map(point => (
-          <div class="text-center">
-            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 text-primary-600 mx-auto mb-4">
-              <Fragment set:html={point.icon} />
+          <li role="listitem" class="group text-center rounded-2xl p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,.08)] motion-reduce:transition-none motion-reduce:hover:transform-none">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-red-50 text-red-600 mx-auto mb-4 shadow-[inset_0_0_0_1px_rgba(239,68,68,.08)]">
+              <Fragment set:html={point.icon} aria-hidden="true" />
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-3">{point.title}</h3>
             <p class="text-gray-600 leading-relaxed">{point.description}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
         <button
           data-open-consultation="true"
           data-consultation-type="new-health"
           data-consultation-title="Setting Up New Insurance"
-          class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 transition-all duration-300 shadow-md hover:shadow-lg min-w-[250px]"
+          aria-label="Set up new insurance with Expat-Savvy - open consultation booking"
+          class="inline-flex items-center justify-center px-6 md:px-8 py-3 border border-transparent text-lg font-medium rounded-2xl text-white bg-red-600 hover:bg-red-700 active:bg-red-800 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,0,0,.12)] focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 min-w-[250px] motion-reduce:transition-none motion-reduce:hover:transform-none"
         >
           Set Up New Insurance
-          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </button>
@@ -353,10 +354,11 @@ const formatDate = (date: Date | string | undefined | null): string => {
           data-open-consultation="true"
           data-consultation-type="change-health"
           data-consultation-title="Reviewing Current Insurance"
-          class="inline-flex items-center justify-center px-8 py-4 border border-primary-600 text-lg font-medium rounded-lg text-primary-600 bg-white hover:bg-primary-50 transition-all duration-300 shadow-md hover:shadow-lg min-w-[250px]"
+          aria-label="Review existing insurance with Expat-Savvy - open consultation booking"
+          class="inline-flex items-center justify-center px-6 md:px-8 py-3 border-2 border-red-500 text-lg font-medium rounded-2xl text-red-700 bg-white hover:bg-red-50 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,0,0,.12)] focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 min-w-[250px] motion-reduce:transition-none motion-reduce:hover:transform-none"
         >
           Review Existing Insurance
-          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
         </button>
@@ -827,6 +829,35 @@ const formatDate = (date: Date | string | undefined | null): string => {
   
   .animate-pulse {
     animation: pulse 2s infinite;
+  }
+  
+  /* Motion safety for reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    /* Disable all hover transforms and animations */
+    .hover\\:-translate-y-0\\.5:hover,
+    .group:hover .group-hover\\:-translate-y-0\\.5,
+    .transition-all,
+    .transition,
+    .duration-200,
+    .animate-pulse {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    
+    /* Keep only basic hover effects like color changes */
+    .hover\\:bg-red-700:hover {
+      background-color: rgb(185 28 28);
+    }
+    
+    .hover\\:bg-red-50:hover {
+      background-color: rgb(254 242 242);
+    }
+    
+    .hover\\:shadow-\\[0_8px_24px_rgba\\(0\\,0\\,0\\,\\.08\\)\\]:hover,
+    .hover\\:shadow-\\[0_8px_28px_rgba\\(0\\,0\\,0\\,\\.12\\)\\]:hover {
+      box-shadow: none !important;
+    }
   }
   
   /* Support for hero text animations */

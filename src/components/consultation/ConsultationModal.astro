@@ -93,22 +93,26 @@ const finalProviderName = props.providerName || providerName;
 ---
 
 <div id="consultation-modal" 
-    class="fixed inset-0 bg-black bg-opacity-70 hidden z-50" 
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 transition-opacity duration-200 motion-reduce:transition-none" 
     data-insurance-type={finalInsuranceType} 
     data-provider-id={finalProviderId}
     data-provider-name={finalProviderName}
     data-context-title={finalContextTitle}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
     data-modal-backdrop="true">
   <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
-    <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh] mobile-modal">
+    <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh] mobile-modal transition-all duration-200 motion-reduce:transition-none motion-reduce:transform-none scale-100 translate-y-0">
       <!-- Close button -->
       <button
         id="close-modal-btn"
-        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10 mobile-close-btn"
-        aria-label="Close"
+        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10 mobile-close-btn focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded-md p-1 transition-colors"
+        aria-label="Close consultation booking dialog"
         data-close-modal="true"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
@@ -178,6 +182,80 @@ const finalProviderName = props.providerName || providerName;
       insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health',
       providerName: document.getElementById('consultation-modal')?.getAttribute('data-provider-name') || ''
     };
+    
+    // Scroll management for modal
+    let savedScrollY = 0;
+    let lastFocusedElement: HTMLElement | null = null;
+    
+    // Focus trap variables
+    let focusableElements: HTMLElement[] = [];
+    let firstFocusableElement: HTMLElement | null = null;
+    let lastFocusableElement: HTMLElement | null = null;
+    
+    // Utility functions for scroll management
+    function saveScrollPosition() {
+      savedScrollY = window.scrollY;
+    }
+    
+    function lockBodyScroll() {
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.classList.add('overflow-hidden');
+    }
+    
+    function restoreScrollPosition() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.classList.remove('overflow-hidden');
+      window.scrollTo(0, savedScrollY);
+    }
+    
+    // Focus management
+    function getFocusableElements(container: HTMLElement): HTMLElement[] {
+      const focusableSelectors = [
+        'button:not([disabled]):not([aria-hidden="true"])',
+        '[href]:not([aria-hidden="true"])',
+        'input:not([disabled]):not([type="hidden"]):not([aria-hidden="true"])',
+        'select:not([disabled]):not([aria-hidden="true"])',
+        'textarea:not([disabled]):not([aria-hidden="true"])',
+        '[tabindex]:not([tabindex="-1"]):not([aria-hidden="true"])'
+      ].join(', ');
+      
+      return Array.from(container.querySelectorAll(focusableSelectors)) as HTMLElement[];
+    }
+    
+    function setupFocusTrap(modal: HTMLElement) {
+      focusableElements = getFocusableElements(modal);
+      firstFocusableElement = focusableElements[0] || null;
+      lastFocusableElement = focusableElements[focusableElements.length - 1] || null;
+      
+      // Focus first element
+      if (firstFocusableElement) {
+        setTimeout(() => firstFocusableElement?.focus(), 100);
+      }
+    }
+    
+    function handleFocusTrap(e: KeyboardEvent) {
+      if (e.key !== 'Tab') return;
+      
+      if (focusableElements.length === 0) return;
+      
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstFocusableElement) {
+          e.preventDefault();
+          lastFocusableElement?.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastFocusableElement) {
+          e.preventDefault();
+          firstFocusableElement?.focus();
+        }
+      }
+    }
     
     // Step navigation function - optimized to reduce DOM operations
     function goToStep(stepNumber: number): void {
@@ -373,21 +451,69 @@ const finalProviderName = props.providerName || providerName;
       });
     });
     
-    // Set up modal open/close event listeners to manage resources
-    const closeButton = document.getElementById('close-modal-btn');
-    if (closeButton) {
-      closeButton.addEventListener('click', function() {
-        const modal = document.getElementById('consultation-modal');
-        if (modal) {
-          modal.classList.add('hidden');
-          document.body.classList.remove('modal-open');
-          
-          // Dispatch custom event for cleanup
-          document.dispatchEvent(new CustomEvent('modalClosed', {
-            detail: { modalId: 'consultation-modal' }
-          }));
+    // Enhanced modal close function
+    function closeModal() {
+      const modal = document.getElementById('consultation-modal');
+      if (modal) {
+        // Remove focus trap
+        document.removeEventListener('keydown', handleFocusTrap);
+        
+        // Restore scroll and focus
+        restoreScrollPosition();
+        modal.classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        
+        // Return focus to the element that opened the modal
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+          lastFocusedElement = null;
+        }
+        
+        // Dispatch custom event for cleanup
+        document.dispatchEvent(new CustomEvent('modalClosed', {
+          detail: { modalId: 'consultation-modal' }
+        }));
+      }
+    }
+    
+    // Enhanced modal open function
+    function openModal(modal: HTMLElement, triggerElement: HTMLElement | null = null) {
+      // Save the element that triggered the modal
+      lastFocusedElement = triggerElement;
+      
+      // Save scroll position and lock body
+      saveScrollPosition();
+      lockBodyScroll();
+      
+      // Show modal
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      
+      // Set up focus trap
+      setupFocusTrap(modal);
+      document.addEventListener('keydown', handleFocusTrap);
+      
+      // Set up ESC key listener
+      document.addEventListener('keydown', function escHandler(e: KeyboardEvent) {
+        if (e.key === 'Escape') {
+          closeModal();
+          document.removeEventListener('keydown', escHandler);
         }
       });
+      
+      // Reset to first step
+      goToStep(1);
+      
+      // Dispatch custom event for setup
+      document.dispatchEvent(new CustomEvent('modalOpened', {
+        detail: { modalId: 'consultation-modal' }
+      }));
+    }
+    
+    // Set up modal close event listeners
+    const closeButton = document.getElementById('close-modal-btn');
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
     }
     
     // Handle backdrop clicks
@@ -396,13 +522,7 @@ const finalProviderName = props.providerName || providerName;
       backdrop.addEventListener('click', (event) => {
         // Only close if clicking directly on the backdrop
         if (event.target === backdrop) {
-          backdrop.classList.add('hidden');
-          document.body.classList.remove('modal-open');
-          
-          // Dispatch custom event for cleanup
-          document.dispatchEvent(new CustomEvent('modalClosed', {
-            detail: { modalId: 'consultation-modal' }
-          }));
+          closeModal();
         }
       });
     }
@@ -430,20 +550,8 @@ const finalProviderName = props.providerName || providerName;
             modal.setAttribute('data-context-title', consultationTitle);
           }
           
-          modal.classList.remove('hidden');
-          document.body.classList.add('modal-open');
-          
-          // Reset to first step
-          goToStep(1);
-          
-          // Dispatch custom event for setup with updated context
-          document.dispatchEvent(new CustomEvent('modalOpened', {
-            detail: { 
-              modalId: 'consultation-modal',
-              insuranceType: consultationType,
-              contextTitle: consultationTitle
-            }
-          }));
+          // Use enhanced modal open function
+          openModal(modal, button);
         }
       }
     });
@@ -674,6 +782,57 @@ const finalProviderName = props.providerName || providerName;
     :global(select),
     :global(textarea) {
       font-size: 16px !important; /* Prevent iOS zoom on focus */
+    }
+  }
+  
+  /* Modal animations */
+  #consultation-modal:not(.hidden) {
+    animation: modalFadeIn 0.2s ease-out;
+  }
+  
+  #consultation-modal:not(.hidden) .modal-content {
+    animation: modalSlideIn 0.2s ease-out;
+  }
+  
+  @keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes modalSlideIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.98) translateY(4px);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  /* Motion safety for reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    /* Disable all transitions and animations */
+    .transition-all,
+    .transition,
+    .duration-200,
+    .hover\\:-translate-y-0\\.5:hover,
+    .hover\\:shadow-\\[0_8px_24px_rgba\\(0\\,0\\,0\\,\\.08\\)\\]:hover,
+    .hover\\:shadow-\\[0_8px_28px_rgba\\(0\\,0\\,0\\,\\.12\\)\\]:hover,
+    #consultation-modal,
+    .modal-content {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    
+    /* Keep only opacity changes for modal visibility */
+    #consultation-modal:not(.hidden) {
+      opacity: 1;
+    }
+    
+    #consultation-modal.hidden {
+      opacity: 0;
     }
   }
 </style>

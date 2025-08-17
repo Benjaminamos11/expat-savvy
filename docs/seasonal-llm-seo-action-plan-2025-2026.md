@@ -1,6 +1,7 @@
 # Seasonal + LLM SEO Action Plan (2025/2026)
 
 Generated: 2025-08-13
+
 Source: all_page_optimizations_final_with_llm_audience_seasonal.md
 Focus: English-speaking audience in Switzerland; seasonal switching (deadline 30 Nov 2025 → effective 1 Jan 2026)
 
