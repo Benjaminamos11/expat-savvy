@@ -411,19 +411,38 @@ const finalProviderName = props.providerName || providerName;
     document.addEventListener('click', function(e) {
       // Check if clicked element has data-open-consultation attribute
       const target = e.target as HTMLElement;
-      if (target && (target.hasAttribute('data-open-consultation') || target.closest('[data-open-consultation]'))) {
+      const button = target.hasAttribute('data-open-consultation') ? target : target.closest('[data-open-consultation]') as HTMLElement;
+      
+      if (button) {
         e.preventDefault();
         const modal = document.getElementById('consultation-modal');
         if (modal) {
+          // Update modal attributes if button has them
+          const consultationType = button.getAttribute('data-consultation-type');
+          const consultationTitle = button.getAttribute('data-consultation-title');
+          
+          if (consultationType) {
+            modal.setAttribute('data-insurance-type', consultationType);
+            userData.insuranceType = consultationType;
+          }
+          
+          if (consultationTitle) {
+            modal.setAttribute('data-context-title', consultationTitle);
+          }
+          
           modal.classList.remove('hidden');
           document.body.classList.add('modal-open');
           
           // Reset to first step
           goToStep(1);
           
-          // Dispatch custom event for setup
+          // Dispatch custom event for setup with updated context
           document.dispatchEvent(new CustomEvent('modalOpened', {
-            detail: { modalId: 'consultation-modal' }
+            detail: { 
+              modalId: 'consultation-modal',
+              insuranceType: consultationType,
+              contextTitle: consultationTitle
+            }
           }));
         }
       }
