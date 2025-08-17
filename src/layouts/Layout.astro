@@ -28,9 +28,10 @@ const {
   canonicalURLProp = null
 } = Astro.props;
 
-// Ensure canonical URL is absolute and doesn't contain duplicate paths
+// Ensure canonical URL is absolute and standardized
 let canonicalPath = Astro.url.pathname;
-// Remove trailing slash if it exists (except for the homepage)
+
+// Standardize path by removing trailing slash first (except for homepage)
 if (canonicalPath !== "/" && canonicalPath.endsWith("/")) {
   canonicalPath = canonicalPath.slice(0, -1);
 }
@@ -51,7 +52,7 @@ if (knownRedirects[canonicalPath]) {
 }
 
 // IMPORTANT: Always add trailing slash to canonical paths (except homepage)
-// This ensures the canonical URL matches the final URL after redirects
+// This ensures consistent canonical URLs and matches Astro's default behavior
 if (finalPath !== "/" && !finalPath.endsWith("/")) {
   finalPath = finalPath + "/";
 }
