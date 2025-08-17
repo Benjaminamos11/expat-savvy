@@ -304,8 +304,21 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     }, null, 2)} />
   )}
 
-  <!-- Dynamic FAQ Schema for better SEO for all non-gym posts when frontmatter FAQs are not provided -->
-  {frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && (!Array.isArray((frontmatter as any).faqs) || (frontmatter as any).faqs.length === 0) && (
+  <!-- FAQ Schema - Only ONE FAQPage schema per page -->
+  {Array.isArray((frontmatter as any).faqs) && (frontmatter as any).faqs.length > 0 ? (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": ((frontmatter as any).faqs as Array<{ question: string; answer: string }>).map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    })} />
+  ) : frontmatter.title && !frontmatter.title.toLowerCase().includes("gym") && (
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -338,7 +351,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     }, null, 2)} />
   )}
 
-  <!-- Add AggregateRating and FAQ Schema if available -->
+  <!-- Add AggregateRating Schema if available -->
   {Astro.props.aggregateRating && (
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -373,22 +386,6 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
         "bestRating": "5",
         "worstRating": "1"
       }
-    })} />
-  )}
-
-  <!-- Add FAQ Schema if available via frontmatter -->
-  {Array.isArray((frontmatter as any).faqs) && (frontmatter as any).faqs.length > 0 && (
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": ((frontmatter as any).faqs as Array<{ question: string; answer: string }>).map((faq) => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
     })} />
   )}
 </BaseLayout>
