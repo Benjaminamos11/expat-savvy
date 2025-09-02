@@ -1211,12 +1211,37 @@ class OffersModal {
   }
 }
 
+// Global instance
+let globalOffersModal = null;
+
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new OffersModal());
+  document.addEventListener('DOMContentLoaded', () => {
+    globalOffersModal = new OffersModal();
+    window.globalOffersModal = globalOffersModal;
+  });
 } else {
-  new OffersModal();
+  globalOffersModal = new OffersModal();
+  window.globalOffersModal = globalOffersModal;
 }
 
-// Global access for debugging
+// Global access for debugging and external calls
 window.OffersModal = OffersModal;
+
+// Global function to open modal (for compatibility with existing scripts)
+window.openOffersModal = function() {
+  if (globalOffersModal) {
+    globalOffersModal.openModal();
+  } else {
+    // Fallback: directly show modal
+    const modal = document.getElementById('offers-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+    }
+  }
+};
+
+// Legacy compatibility
+window.showConsultationModal = window.openOffersModal;
+window.openConsultationModal = window.openOffersModal;

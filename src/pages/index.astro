@@ -174,7 +174,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
           <button
             data-open-consultation="true" 
             class="inline-flex items-center px-5 py-2.5 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            onclick="event.preventDefault(); const modalEl1 = document.getElementById('consultation-modal'); if(modalEl1) { modalEl1.classList.remove('hidden'); document.body.classList.add('modal-open'); } else if(typeof window.showConsultationModal === 'function') { window.showConsultationModal(); } return false;"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal(); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
           >
             Book Free Consultation
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,7 +209,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
               <button
                 data-open-consultation="true" 
                 class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-                onclick="event.preventDefault(); const modalEl2 = document.getElementById('consultation-modal'); if(modalEl2) { modalEl2.classList.remove('hidden'); document.body.classList.add('modal-open'); } else if(typeof window.showConsultationModal === 'function') { window.showConsultationModal(); } return false;"
+                onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal(); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
               >
                 Book Free Consultation
                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -642,7 +642,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
           <button
             data-open-consultation="true"
             class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
-            onclick="event.preventDefault(); const modalEl3 = document.getElementById('consultation-modal'); if(modalEl3) { modalEl3.classList.remove('hidden'); document.body.classList.add('modal-open'); } else if(typeof window.showConsultationModal === 'function') { window.showConsultationModal(); } return false;"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal(); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
           >
             Schedule Free Consultation
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1084,13 +1084,15 @@ const formatDate = (date: Date | string | undefined | null): string => {
             e.preventDefault();
             e.stopPropagation();
             
-            // Show modal directly
-            const modal = document.getElementById('consultation-modal');
-            if (modal) {
-              modal.classList.remove('hidden');
-              document.body.classList.add('modal-open');
-            } else if (typeof window.showConsultationModal === 'function') {
-              window.showConsultationModal();
+            // Show new offers modal
+            if (typeof window.openOffersModal === 'function') {
+              window.openOffersModal();
+            } else {
+              const modal = document.getElementById('offers-modal');
+              if (modal) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
+              }
             }
             
             return false;

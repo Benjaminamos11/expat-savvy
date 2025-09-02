@@ -157,12 +157,17 @@
       button.addEventListener('click', function(e) {
         e.preventDefault();
         
-        const modal = document.getElementById('consultation-modal');
-        if (modal) {
-          modal.classList.remove('hidden');
-          document.body.classList.add('modal-open');
+        // Use new offers modal
+        if (typeof window.openOffersModal === 'function') {
+          window.openOffersModal();
         } else {
-          console.error("Modal not found even after adding!");
+          const modal = document.getElementById('offers-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+          } else {
+            console.error("OffersModal not found!");
+          }
         }
         
         return false;

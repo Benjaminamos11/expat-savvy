@@ -103,13 +103,15 @@ setInterval(function() {
         e.stopPropagation();
         console.log('[INTERCEPT] Clicked button with text:', text);
         
-        // Show modal directly
-        const modal = document.getElementById('consultation-modal');
-        if (modal) {
-          modal.classList.remove('hidden');
-          document.body.classList.add('modal-open');
-        } else if (typeof window.showConsultationModal === 'function') {
-          window.showConsultationModal();
+        // Show new offers modal
+        if (typeof window.openOffersModal === 'function') {
+          window.openOffersModal();
+        } else {
+          const modal = document.getElementById('offers-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+          }
         }
         
         return false;

@@ -200,35 +200,32 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
             
             // Add click handler with highest priority (using capture)
             button.addEventListener('click', function(e) {
-              const modal = document.getElementById('consultation-modal');
-              if (modal) {
-                // Prevent default action for links
-                if (button.tagName === 'A') {
-                  e.preventDefault();
-                }
-                
-                // Show modal
-                modal.classList.remove('hidden');
-                document.body.classList.add('modal-open');
-                
-                // Reset to step 1
-                const allSteps = modal.querySelectorAll('.modal-step');
-                allSteps.forEach(step => {
-                  step.classList.add('hidden');
-                  step.classList.remove('active');
-                });
-                
-                const firstStep = modal.querySelector('.modal-step.step-1');
-                if (firstStep) {
-                  firstStep.classList.remove('hidden');
-                  firstStep.classList.add('active');
-                }
-                
-                // Notify other components
-                document.dispatchEvent(new CustomEvent('modalOpened', {
-                  detail: { modalId: 'consultation-modal' }
-                }));
+              // Prevent default action for links
+              if (button.tagName === 'A') {
+                e.preventDefault();
               }
+              
+              // Stop propagation to prevent other handlers
+              e.stopPropagation();
+              
+              console.log('🚀 Opening new OffersModal for button:', button.textContent?.trim());
+              
+              // Use global function to open modal
+              if (typeof window.openOffersModal === 'function') {
+                window.openOffersModal();
+              } else {
+                // Fallback: direct modal opening
+                const modal = document.getElementById('offers-modal');
+                if (modal) {
+                  modal.classList.remove('hidden');
+                  document.body.classList.add('modal-open');
+                  console.log('✅ OffersModal opened directly');
+                } else {
+                  console.error('❌ OffersModal not found in DOM');
+                }
+              }
+              
+              return false;
             }, true); // true = use capture phase for highest priority
           });
         });
