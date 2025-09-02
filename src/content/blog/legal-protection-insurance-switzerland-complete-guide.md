@@ -1,11 +1,13 @@
 ---
-title: "Legal Insurance Switzerland – Protect Your Rights as an Expat (2026 Guide)"
-description: "Complete legal protection insurance guide for expats in Switzerland. Tenant disputes, work conflicts, traffic issues. CHF 150-400/year coverage. Compare AXA-ARAG, Protekta & more."
+title: "Legal Protection Insurance in Switzerland for Expats (Tenant, Work & Traffic)"
+description: "Expats in Switzerland can cover legal costs for tenant disputes, work issues, or traffic fines. Learn how legal protection insurance works in 2026."
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["legal insurance Switzerland", "legal protection insurance", "expat rights", "tenant disputes", "work conflicts", "traffic violations", "rechtschutzversicherung", "2026 guide"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803685/a-raw-hand-drawn-sketch-in-red-and-black_ViTcNBIMSpuvl-Wmd9MUGA_W5ezLf6NQleOdkTMckORFw_p6zzhe.png"
 ---
+
+# Legal Protection Insurance in Switzerland for Expats
 
 ## Key Facts — Legal Protection Insurance Switzerland 2025
 

@@ -1,6 +1,6 @@
 ---
-title: "Best Swiss Health Insurance 2026 for Expats | Compare Helsana, Swica & CSS"
-description: "Moving to Switzerland? Compare Helsana, Swica, Sanitas & CSS. Find the cheapest Swiss health insurance for 2026. Free expat consultation before 30 Nov deadline."
+title: "Best Health Insurance in Switzerland 2026 for Expats"
+description: "Compare Swiss health insurers for expats in 2026. Helsana, Swica, CSS & Sanitas with premiums, models, and switching tips."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["swiss health insurance", "best health insurance", "switzerland", "Swica", "Sanitas", "CSS", "Helsana", "Concordia", "health insurance guide", "2025/2026 change season"]
@@ -142,7 +142,7 @@ faqs:
 
 ---
 
-# Best Health Insurance in Switzerland for Expats (2026 Change Season Guide)
+# Best Health Insurance in Switzerland for Expats (2026)
 
 ## Health Insurance Rules for Expats & Foreigners in Switzerland
 

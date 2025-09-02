@@ -1,11 +1,13 @@
 ---
-title: "Dental Insurance in Switzerland – What Expats Need to Know (2026 Guide)"
-description: "Complete guide to Swiss dental insurance. Compare CHF 20-80/month plans, understand CHF 3,000-6,000 implant costs. Basic insurance excludes routine dental. Free consultation."
+title: "Dental Insurance in Switzerland for Expats (Costs & Options)"
+description: "Learn how dental insurance works in Switzerland, what expats pay for braces & treatment, and how to choose the right plan."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["dental insurance Switzerland", "swiss dental costs", "dental insurance expats", "supplementary insurance", "2026 guide", "dentist costs Switzerland"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-raw-hand-drawn-fineline-sketch-depicts_ag6b-ejESwWtD6WbtTHuJA_lFDNMHe3RWCgHvE6tB48hg_r87l4l.webp"
 ---
+
+# Dental Insurance in Switzerland for Expats
 
 ## Key Facts — Dental Insurance Switzerland 2025/2026
 
