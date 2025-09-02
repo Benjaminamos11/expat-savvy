@@ -237,12 +237,21 @@ class OffersModal {
   
   // Generate daily-seeded social proof number
   generateSocialProof() {
+    // Use the same logic as homepage to keep numbers consistent
+    // Check if there's already a number displayed on the page
+    const existingCount = document.getElementById('booking-count');
+    if (existingCount) {
+      const match = existingCount.textContent?.match(/(\d+) people/);
+      if (match) {
+        return match[1];
+      }
+    }
+    
+    // Fallback: generate same range as homepage (3-11)
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    
-    // Simple seeded random number between 5-18
     const random = ((seed * 9301 + 49297) % 233280) / 233280;
-    const count = Math.floor(random * 14) + 5; // 5-18
+    const count = Math.floor(random * 9) + 3; // 3-11 to match homepage
     
     return count;
   }
@@ -438,19 +447,23 @@ class OffersModal {
         
         <!-- CTA Options -->
         <div class="space-y-4">
-          <button id="desktop-start-offers-btn" class="w-full bg-green-600 text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center">
-            <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
-            <div class="text-white">
-              Get 3 Best Offers
-              <div class="text-sm font-normal text-green-100 mt-1">Takes ~1 min</div>
+          <button id="desktop-start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 px-8 rounded-lg font-semibold text-lg transition-colors">
+            <div class="flex items-center justify-center text-white">
+              <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
+              <div class="text-white">
+                <div class="text-white font-semibold">Get 3 Best Offers</div>
+                <div class="text-green-100 text-sm font-normal mt-1">Takes ~1 min</div>
+              </div>
             </div>
           </button>
           
-          <button id="desktop-consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-8 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center">
-            <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
-            <div class="text-red-600">
-              Book Free Consultation
-              <div class="text-sm font-normal text-red-500 mt-1">30–60 min video call</div>
+          <button id="desktop-consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-8 rounded-lg font-semibold hover:bg-red-50 transition-colors">
+            <div class="flex items-center justify-center text-red-600">
+              <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
+              <div class="text-red-600">
+                <div class="text-red-600 font-semibold">Book Free Consultation</div>
+                <div class="text-red-500 text-sm font-normal mt-1">30–60 min video call</div>
+              </div>
             </div>
           </button>
         </div>
@@ -477,19 +490,23 @@ class OffersModal {
       
       <!-- CTA Options -->
       <div class="space-y-4 mb-8">
-        <button id="start-offers-btn" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center">
-          <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
-          <div class="text-white">
-            Get 3 Best Offers
-            <div class="text-sm font-normal text-green-100 mt-1">Takes ~1 min</div>
+        <button id="start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 px-6 rounded-lg font-semibold text-lg transition-colors">
+          <div class="flex items-center justify-center text-white">
+            <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
+            <div class="text-white">
+              <div class="text-white font-semibold">Get 3 Best Offers</div>
+              <div class="text-green-100 text-sm font-normal mt-1">Takes ~1 min</div>
+            </div>
           </div>
         </button>
         
-        <button id="consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-6 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center">
-          <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
-          <div class="text-red-600">
-            Book Free Consultation
-            <div class="text-sm font-normal text-red-500 mt-1">30–60 min video call</div>
+        <button id="consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-6 rounded-lg font-semibold hover:bg-red-50 transition-colors">
+          <div class="flex items-center justify-center text-red-600">
+            <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
+            <div class="text-red-600">
+              <div class="text-red-600 font-semibold">Book Free Consultation</div>
+              <div class="text-red-500 text-sm font-normal mt-1">30–60 min video call</div>
+            </div>
           </div>
         </button>
       </div>
