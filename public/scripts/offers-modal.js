@@ -29,6 +29,74 @@ class OffersModal {
     this.setupEventTracking();
     console.log('OffersModal initialized with intent:', this.pageIntent);
   }
+
+  // Open the modal
+  openModal() {
+    console.log('🚀 Opening OffersModal');
+    
+    const modal = document.getElementById('offers-modal');
+    if (!modal) {
+      console.error('❌ Modal element not found');
+      return;
+    }
+
+    // Reset to step 1
+    this.currentStep = 1;
+    
+    // Show modal
+    modal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    
+    // Render initial content
+    this.renderMobileContent();
+    this.renderDesktopContent();
+    
+    // Track event
+    this.trackEvent('modal_opened', { intent: this.pageIntent });
+    
+    console.log('✅ OffersModal opened successfully');
+  }
+
+  // Close the modal
+  closeModal() {
+    console.log('❌ Closing OffersModal');
+    
+    const modal = document.getElementById('offers-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+  }
+
+  // Bind global event handlers
+  bindEvents() {
+    // Close button
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('#close-offers-modal-btn, [data-close-modal="true"]')) {
+        this.closeModal();
+      }
+    });
+
+    // Mobile navigation
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('#mobile-back-btn')) {
+        this.previousStep();
+      }
+      if (e.target.matches('#mobile-next-btn')) {
+        this.nextStep();
+      }
+    });
+
+    // Escape key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('offers-modal');
+        if (modal && !modal.classList.contains('hidden')) {
+          this.closeModal();
+        }
+      }
+    });
+  }
   
   // Detect page intent for dynamic headlines
   detectPageIntent() {
@@ -338,9 +406,56 @@ class OffersModal {
     const container = document.getElementById('desktop-content');
     if (!container) return;
     
-    // For desktop, we show a more compact single-screen form
-    container.innerHTML = this.renderDesktopForm();
+    // For desktop, show intro with both buttons initially
+    if (this.currentStep === 1) {
+      container.innerHTML = this.renderDesktopIntro();
+    } else {
+      // Show the form steps
+      container.innerHTML = this.renderDesktopForm();
+    }
+    
     this.initializeLucideIcons();
+  }
+
+  // Render desktop intro with both buttons
+  renderDesktopIntro() {
+    const { headline, subline } = this.getHeadlineContent();
+    const socialCount = this.generateSocialProof();
+    
+    return `
+      <div class="space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+          <h2 id="modal-title" class="text-3xl font-bold text-gray-900 mb-3">${headline}</h2>
+          <p id="modal-description" class="text-gray-600 mb-4">${subline}</p>
+          
+          <!-- Social proof -->
+          <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800 mb-6">
+            <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-green-600"></i>
+            ${socialCount} people booked consultations in the last 24 hours
+          </div>
+        </div>
+        
+        <!-- CTA Options -->
+        <div class="space-y-4">
+          <button id="desktop-start-offers-btn" class="w-full bg-green-600 text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
+            <div class="text-white">
+              Get 3 Best Offers
+              <div class="text-sm font-normal text-green-100 mt-1">Takes ~1 min</div>
+            </div>
+          </button>
+          
+          <button id="desktop-consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-8 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center">
+            <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
+            <div class="text-red-600">
+              Book Free Consultation
+              <div class="text-sm font-normal text-red-500 mt-1">30–60 min video call</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    `;
   }
   
   // Render intro step (mobile step 1)
@@ -363,16 +478,16 @@ class OffersModal {
       <!-- CTA Options -->
       <div class="space-y-4 mb-8">
         <button id="start-offers-btn" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center">
-          <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
-          <div>
+          <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
+          <div class="text-white">
             Get 3 Best Offers
             <div class="text-sm font-normal text-green-100 mt-1">Takes ~1 min</div>
           </div>
         </button>
         
         <button id="consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-6 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center">
-          <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-          <div>
+          <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
+          <div class="text-red-600">
             Book Free Consultation
             <div class="text-sm font-normal text-red-500 mt-1">30–60 min video call</div>
           </div>
@@ -1119,8 +1234,8 @@ class OffersModal {
           
           <!-- Primary CTA -->
           <button id="desktop-start-offers-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors mb-8 flex items-center justify-center">
-            <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
-            Get 3 Best Offers <span class="text-green-200 text-sm font-normal ml-2">(Takes ~1 min)</span>
+            <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
+            <span class="text-white">Get 3 Best Offers</span> <span class="text-green-200 text-sm font-normal ml-2">(Takes ~1 min)</span>
           </button>
         </div>
         
@@ -1545,12 +1660,39 @@ class OffersModal {
   attachStepEventHandlers() {
     // Handle intro step buttons
     document.getElementById('start-offers-btn')?.addEventListener('click', () => {
+      console.log('🚀 Starting offers flow');
       this.trackEvent('cta_get_offers_click', { intent: this.pageIntent });
       this.nextStep();
     });
     
     document.getElementById('consultation-btn')?.addEventListener('click', () => {
-      this.startConsultationFlow();
+      console.log('📅 Opening consultation');
+      this.openConsultation();
+    });
+
+    // Handle desktop buttons
+    document.getElementById('desktop-start-offers-btn')?.addEventListener('click', () => {
+      console.log('🚀 Starting offers flow (desktop)');
+      this.trackEvent('cta_get_offers_click', { intent: this.pageIntent });
+      this.nextStep();
+    });
+
+    document.getElementById('desktop-consultation-btn')?.addEventListener('click', () => {
+      console.log('📅 Opening consultation (desktop)');
+      this.openConsultation();
+    });
+
+    // Handle Send My Request button
+    document.getElementById('send-request-btn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('📤 Sending request');
+      this.submitForm();
+    });
+
+    // Handle final consultation button (thank you screen)
+    document.getElementById('final-consultation-btn')?.addEventListener('click', () => {
+      console.log('📅 Opening consultation (final)');
+      this.openConsultation();
     });
     
     // Handle household selection for dynamic person adding
@@ -1754,6 +1896,117 @@ class OffersModal {
         }
       }, 100);
     }
+  }
+
+  // Open consultation (Cal.com)
+  openConsultation() {
+    const calLink = this.getCalComLink();
+    console.log('🔗 Opening Cal.com:', calLink);
+    
+    // Track event
+    this.trackEvent('cta_consultation_click', { 
+      intent: this.pageIntent,
+      cal_link: calLink 
+    });
+    
+    // Open Cal.com in new tab
+    window.open(calLink, '_blank');
+  }
+
+  // Submit form to Formspree
+  async submitForm() {
+    console.log('📤 Submitting form...');
+    
+    try {
+      // Collect form data
+      const formData = this.collectFormData();
+      console.log('📋 Form data:', formData);
+      
+      // For now, just show success (we'll implement Formspree later)
+      this.trackEvent('lead_offer_form_submit', { 
+        intent: this.pageIntent,
+        form_data: formData 
+      });
+      
+      // Move to thank you step
+      this.currentStep = 8;
+      this.renderMobileContent();
+      
+      console.log('✅ Form submitted successfully');
+      
+    } catch (error) {
+      console.error('❌ Form submission error:', error);
+      // Show error message
+      alert('Sorry, there was an error submitting your request. Please try again.');
+    }
+  }
+
+  // Collect all form data
+  collectFormData() {
+    const data = {};
+    
+    // Get all form inputs
+    const modal = document.getElementById('offers-modal');
+    if (modal) {
+      const inputs = modal.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        if (input.name && input.value) {
+          data[input.name] = input.value;
+        }
+      });
+    }
+    
+    // Add context data
+    data.page_intent = this.pageIntent;
+    data.page_slug = window.location.pathname;
+    data.timestamp = new Date().toISOString();
+    
+    return data;
+  }
+
+  // Navigate to next step
+  nextStep() {
+    if (this.isProcessing) return;
+    
+    console.log(`➡️ Next step: ${this.currentStep} → ${this.currentStep + 1}`);
+    
+    // Validate current step before proceeding
+    if (!this.validateCurrentStep()) {
+      console.log('❌ Validation failed for step', this.currentStep);
+      return;
+    }
+    
+    // Handle special cases
+    if (this.currentStep === 7) {
+      // Step 6 (Review & Send) - submit form instead of going to next step
+      this.submitForm();
+      return;
+    }
+    
+    this.currentStep++;
+    this.renderMobileContent();
+    this.renderDesktopContent();
+  }
+  
+  // Navigate to previous step
+  previousStep() {
+    if (this.currentStep > 1) {
+      console.log(`⬅️ Previous step: ${this.currentStep} → ${this.currentStep - 1}`);
+      this.currentStep--;
+      this.renderMobileContent();
+      this.renderDesktopContent();
+    }
+  }
+
+  // Validate current step
+  validateCurrentStep() {
+    // For now, just return true - we'll add proper validation later
+    return true;
+  }
+
+  // Setup event tracking (placeholder)
+  setupEventTracking() {
+    // Placeholder for analytics setup
   }
 }
 
