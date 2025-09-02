@@ -168,29 +168,146 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
   }
   
+  // Render consultation mini-intake step
+  function renderConsultationIntake() {
+    return `
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-3">Quick Details for Your Consultation</h2>
+          <p class="text-gray-600">Just a few details to prepare for your call with Robert</p>
+        </div>
+        
+        <form id="consultation-form" class="space-y-4">
+          <div>
+            <label for="consultation-postcode" class="block text-sm font-medium text-gray-700 mb-1">Postcode</label>
+            <input type="text" id="consultation-postcode" name="postcode" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                   placeholder="e.g. 8001" required>
+          </div>
+          
+          <div>
+            <label for="consultation-household" class="block text-sm font-medium text-gray-700 mb-1">Household Type</label>
+            <select id="consultation-household" name="household" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" required>
+              <option value="">Select household type</option>
+              <option value="single">Single person</option>
+              <option value="couple">Couple (no children)</option>
+              <option value="family">Family with children</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="consultation-priority" class="block text-sm font-medium text-gray-700 mb-1">Main Priority</label>
+            <select id="consultation-priority" name="priority" 
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" required>
+              <option value="">What's most important to you?</option>
+              <option value="cheapest">Find the cheapest option</option>
+              <option value="best-coverage">Best coverage & benefits</option>
+              <option value="setup-new">Setting up new insurance</option>
+              <option value="switch-current">Switch from current insurer</option>
+              <option value="family-needs">Family-specific needs</option>
+              <option value="compare-options">Compare different options</option>
+            </select>
+          </div>
+          
+          <div class="pt-4">
+            <button type="submit" id="consultation-continue-btn" 
+                    class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+              Continue to Calendar
+            </button>
+            
+            <button type="button" id="consultation-back-btn" 
+                    class="w-full mt-3 text-gray-600 hover:text-gray-800 underline">
+              Back to Get 3 Best Offers
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+  }
+  
   // Render content
   function renderContent() {
     const mobileContent = document.getElementById('mobile-content');
     const desktopContent = document.getElementById('desktop-content');
     
+    let contentHTML = '';
+    
     if (currentStep === 'intro') {
-      const introHTML = renderIntro();
-      if (mobileContent) mobileContent.innerHTML = introHTML;
-      if (desktopContent) desktopContent.innerHTML = introHTML;
-      
-      // Add event listeners
-      setTimeout(() => {
+      contentHTML = renderIntro();
+    } else if (currentStep === 'consultation') {
+      contentHTML = renderConsultationIntake();
+    }
+    
+    if (mobileContent) mobileContent.innerHTML = contentHTML;
+    if (desktopContent) desktopContent.innerHTML = contentHTML;
+    
+    // Add event listeners based on current step
+    setTimeout(() => {
+      if (currentStep === 'intro') {
+        // Intro step buttons
         document.getElementById('start-offers-btn')?.addEventListener('click', () => {
           console.log('🚀 Get 3 Best Offers clicked');
-          alert('Form flow will be implemented - this confirms the button works!');
+          alert('6-step form flow will be implemented - this confirms the button works!');
         });
         
         document.getElementById('consultation-btn')?.addEventListener('click', () => {
-          console.log('📅 Book Consultation clicked');
-          window.open('https://cal.com/robertkolar/change-health-insurance', '_blank');
+          console.log('📅 Book Consultation clicked - going to mini-intake');
+          currentStep = 'consultation';
+          renderContent();
         });
-      }, 100);
+        
+      } else if (currentStep === 'consultation') {
+        // Consultation step buttons
+        document.getElementById('consultation-form')?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          handleConsultationSubmit();
+        });
+        
+        document.getElementById('consultation-back-btn')?.addEventListener('click', () => {
+          console.log('🔙 Back to intro');
+          currentStep = 'intro';
+          renderContent();
+        });
+      }
+    }, 100);
+  }
+  
+  // Handle consultation form submission
+  function handleConsultationSubmit() {
+    const postcode = document.getElementById('consultation-postcode')?.value;
+    const household = document.getElementById('consultation-household')?.value;
+    const priority = document.getElementById('consultation-priority')?.value;
+    
+    if (!postcode || !household || !priority) {
+      alert('Please fill in all fields');
+      return;
     }
+    
+    console.log('📅 Opening Cal.com with prefilled data');
+    
+    // Get page intent for appropriate Cal.com link
+    const pageIntent = modal.getAttribute('data-page-intent') || 'home';
+    const calLinks = {
+      'setup': 'https://cal.com/robertkolar/setting-up-health-insurance-in-switzerland',
+      'change': 'https://cal.com/robertkolar/change-health-insurance',
+      'cheapest': 'https://cal.com/robertkolar/cheapest-health-insurance-consultation',
+      'best': 'https://cal.com/robertkolar/best-health-insurance-consultation',
+      'provider': 'https://cal.com/robertkolar/insurance-provider-consultation',
+      'compare': 'https://cal.com/robertkolar/compare-health-insurance'
+    };
+    
+    const calUrl = calLinks[pageIntent] || 'https://cal.com/robertkolar/change-health-insurance';
+    
+    // Prepare notes for Cal.com
+    const notes = `Postcode: ${postcode}, Household: ${household}, Priority: ${priority}`;
+    const params = new URLSearchParams({
+      notes: notes
+    });
+    
+    // Open Cal.com and close modal
+    window.open(`${calUrl}?${params.toString()}`, '_blank');
+    closeModal();
   }
   
   // Open modal
@@ -214,7 +331,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Event listeners
   document.getElementById('close-modal-btn')?.addEventListener('click', closeModal);
   document.getElementById('sidebar-consultation-btn')?.addEventListener('click', () => {
-    window.open('https://cal.com/robertkolar/change-health-insurance', '_blank');
+    console.log('📅 Sidebar consultation clicked - going to mini-intake');
+    currentStep = 'consultation';
+    renderContent();
   });
   
   modal.addEventListener('click', (e) => {
