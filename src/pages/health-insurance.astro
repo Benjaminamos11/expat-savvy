@@ -109,6 +109,18 @@ const faqs = [
   {
     question: "What happens if I miss the 3-month deadline?",
     answer: "Missing the deadline can result in being automatically assigned to an insurer by your canton, potentially with higher premiums. You may also face penalties."
+  },
+  {
+    question: "Which Swiss insurer offers the best English support?",
+    answer: "Swica, CSS, and Helsana all provide excellent English-speaking customer service and documentation. Swica is particularly noted for customer satisfaction among expats."
+  },
+  {
+    question: "Can expats switch Krankenkasse in 2026?",
+    answer: "Yes, you can switch basic insurance annually by canceling your current policy by 30 November 2025 for coverage starting 1 January 2026. Compare 2026 premiums when they're published in October."
+  },
+  {
+    question: "What's the cheapest insurance option for foreigners?",
+    answer: "Telmed and HMO models typically offer 15-25% savings compared to Standard models. Higher deductibles (CHF 2,500) also reduce monthly premiums. The cheapest option depends on your canton and health usage."
   }
 ];
 
@@ -128,8 +140,8 @@ const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), {
 ---
 
 <Layout
-  title="Health Insurance in Switzerland (2025): Models, Prices, and How to Save"
-  description="Complete expat guide to Swiss health insurance: choose models (Standard, GP, HMO, Telmed), pick the right deductible, apply subsidies, compare providers (CSS, SWICA, Helsana, KPT), and switch at the right time. Free expert consultation."
+  title="Swiss Health Insurance for Expats (2026 Guide)"
+  description="Complete guide to Swiss health insurance for expats. Compare Helsana, Swica, CSS premiums. Mandatory LAMal coverage within 3 months. Free consultation before 30 Nov deadline."
 >
   <!-- Breadcrumb JSON-LD -->
   <script type="application/ld+json" slot="head">
@@ -153,15 +165,33 @@ const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), {
       'acceptedAnswer': { '@type': 'Answer', 'text': f.answer }
     }))
   })} />
+  
+  <!-- Service Schema for Expats -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Swiss Health Insurance for Expats",
+    "description": "Complete health insurance guidance for expats moving to Switzerland. Compare Helsana, Swica, CSS, and other top providers.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "areaServed": "Switzerland",
+    "audience": "Expatriates and foreigners in Switzerland",
+    "serviceType": "Insurance Consultation"
+  }
+  </script>
   <!-- Hero Section (clean, no background image) -->
   <section class="bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <div class="text-center">
         <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6">
-          Health Insurance in <span class="text-primary-600">Switzerland</span>
+          Swiss Health Insurance for <span class="text-primary-600">Expats</span> (2026 Guide)
         </h1>
         <p class="max-w-3xl mx-auto text-xl text-gray-600 mb-8">
-          Everything you need to know about Swiss health insurance — whether you’re new in Switzerland, a professional or an English speaker: compare options, understand what’s mandatory, and learn how to save money.
+          If you've just moved to Switzerland, health insurance is mandatory. Expats must register within 3 months under LAMal. This guide is tailored for English-speaking newcomers and explains your 2026 options step-by-step.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
@@ -211,6 +241,85 @@ const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), {
           </div>
           <h3 class="text-xl font-semibold text-gray-900">Full Compliance Support</h3>
           <p class="mt-2 text-gray-600">Meet all legal requirements and deadlines with our step‑by‑step guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Provider Comparison Table -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Top Health Insurance Providers for Expats</h2>
+        <p class="text-lg text-gray-600">Compare the strengths and specialties of Switzerland's leading insurers</p>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+          <thead class="bg-primary-600 text-white">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold">Provider</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold">Strengths</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold">Best For</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4">
+                <div class="font-semibold text-gray-900">Helsana</div>
+                <div class="text-sm text-gray-500">Digital tools, cross-border support</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-700">Digital tools, cross-border support</td>
+              <td class="px-6 py-4 text-sm text-gray-700">Expats near DE/FR border</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4">
+                <div class="font-semibold text-gray-900">Swica</div>
+                <div class="text-sm text-gray-500">Top-rated customer service</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-700">Fitness benefits, English support</td>
+              <td class="px-6 py-4 text-sm text-gray-700">Active singles & families</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4">
+                <div class="font-semibold text-gray-900">CSS</div>
+                <div class="text-sm text-gray-500">Switzerland's largest health insurer</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-700">Largest network, competitive premiums</td>
+              <td class="px-6 py-4 text-sm text-gray-700">Students, newcomers</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4">
+                <div class="font-semibold text-gray-900">Sanitas</div>
+                <div class="text-sm text-gray-500">Modern insurance solutions</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-700">Strong apps, flexible add-ons</td>
+              <td class="px-6 py-4 text-sm text-gray-700">Young professionals</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4">
+                <div class="font-semibold text-gray-900">Concordia</div>
+                <div class="text-sm text-gray-500">High customer satisfaction</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-700">Family-focused, good maternity support</td>
+              <td class="px-6 py-4 text-sm text-gray-700">Parents with children</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-8 text-center p-6 bg-primary-50 rounded-lg border border-primary-200">
+        <p class="text-primary-700 mb-4">💡 <em>Not sure which insurer is best for you? Try our free insurance calculator or book a free consultation today. Deadline: 30 Nov 2025.</em></p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/calculator" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors">
+            Free Calculator
+          </a>
+          <button
+            onclick="showConsultationModal()"
+            class="inline-flex items-center px-6 py-3 border border-primary-600 text-sm font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors"
+          >
+            Free Consultation
+          </button>
         </div>
       </div>
     </div>
