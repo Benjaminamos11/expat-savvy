@@ -306,6 +306,7 @@ class OffersModal {
     
     this.updateMobileNavigation();
     this.attachStepEventHandlers();
+    this.initializeLucideIcons();
   }
   
   // Render desktop split-layout content
@@ -315,6 +316,7 @@ class OffersModal {
     
     // For desktop, we show a more compact single-screen form
     container.innerHTML = this.renderDesktopForm();
+    this.initializeLucideIcons();
   }
   
   // Render intro step (mobile step 1)
@@ -329,23 +331,27 @@ class OffersModal {
         
         <!-- Social proof -->
         <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800 mb-6">
-          <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8z" />
-          </svg>
+          <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-green-600"></i>
           ${socialCount} people booked consultations in the last 24 hours
         </div>
       </div>
       
       <!-- CTA Options -->
       <div class="space-y-4 mb-8">
-        <button id="start-offers-btn" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors">
-          ✨ Get 3 Best Offers
-          <div class="text-sm font-normal text-green-100 mt-1">Takes ~1 min</div>
+        <button id="start-offers-btn" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center">
+          <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+          <div>
+            Get 3 Best Offers
+            <div class="text-sm font-normal text-green-100 mt-1">Takes ~1 min</div>
+          </div>
         </button>
         
-        <button id="consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-6 rounded-lg font-semibold hover:bg-red-50 transition-colors">
-          📅 Book Free Consultation
-          <div class="text-sm font-normal text-red-500 mt-1">30–60 min video call</div>
+        <button id="consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-6 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center">
+          <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+          <div>
+            Book Free Consultation
+            <div class="text-sm font-normal text-red-500 mt-1">30–60 min video call</div>
+          </div>
         </button>
       </div>
     `;
@@ -362,32 +368,41 @@ class OffersModal {
         
         <!-- Postcode -->
         <div>
-          <label for="postcode" class="block text-sm font-medium text-gray-700 mb-2">Swiss Postcode</label>
+          <label for="postcode" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+            <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-gray-500"></i>
+            Swiss Postcode
+          </label>
           <input type="text" id="postcode" name="postcode" placeholder="e.g. 8001" maxlength="4" 
-                 class="form-input" pattern="[0-9]{4}" required />
+                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" pattern="[0-9]{4}" required />
           <p class="text-xs text-gray-500 mt-1">4-digit Swiss postcode</p>
         </div>
         
         <!-- Household type -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-3">Household</label>
+          <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
+            <i data-lucide="users" class="w-4 h-4 mr-2 text-gray-500"></i>
+            Household
+          </label>
           <div class="space-y-2">
-            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-              <input type="radio" name="household" value="single" class="form-radio mr-3" />
+            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="household" value="single" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3" />
+              <i data-lucide="user" class="w-5 h-5 text-gray-400 mr-3"></i>
               <div>
                 <div class="font-medium text-gray-900">Single</div>
                 <div class="text-sm text-gray-500">Just me</div>
               </div>
             </label>
-            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-              <input type="radio" name="household" value="couple" class="form-radio mr-3" />
+            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="household" value="couple" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3" />
+              <i data-lucide="heart" class="w-5 h-5 text-gray-400 mr-3"></i>
               <div>
                 <div class="font-medium text-gray-900">Couple</div>
                 <div class="text-sm text-gray-500">Me + partner</div>
               </div>
             </label>
-            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-              <input type="radio" name="household" value="family" class="form-radio mr-3" />
+            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="household" value="family" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3" />
+              <i data-lucide="home" class="w-5 h-5 text-gray-400 mr-3"></i>
               <div>
                 <div class="font-medium text-gray-900">Family with children</div>
                 <div class="text-sm text-gray-500">Parents + kids</div>
@@ -583,15 +598,19 @@ class OffersModal {
         
         <!-- Robert's photo and CTA -->
         <div class="bg-gray-50 rounded-lg p-6">
-          <img src="/images/consultants/robert-kolar.jpg" alt="Robert Kolar" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover" />
+          <div class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            <i data-lucide="user" class="w-8 h-8 text-white"></i>
+          </div>
           <h4 class="font-semibold text-gray-900 mb-2">Want to discuss your options?</h4>
           <p class="text-sm text-gray-600 mb-4">Book a free consultation with Robert, our FINMA-registered advisor.</p>
           
-          <button id="final-consultation-btn" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors mb-3">
-            📅 Book Free Consultation
+          <button id="final-consultation-btn" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors mb-3 flex items-center justify-center">
+            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+            Book Free Consultation
           </button>
           
-          <button id="just-email-btn" class="text-sm text-gray-500 hover:text-gray-700">
+          <button id="just-email-btn" class="text-sm text-gray-500 hover:text-gray-700 flex items-center justify-center">
+            <i data-lucide="mail" class="w-4 h-4 mr-1"></i>
             Just email me my offers
           </button>
         </div>
@@ -620,8 +639,9 @@ class OffersModal {
           </div>
           
           <!-- Primary CTA -->
-          <button id="desktop-start-offers-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors mb-8">
-            ✨ Get 3 Best Offers <span class="text-green-200 text-sm font-normal">(Takes ~1 min)</span>
+          <button id="desktop-start-offers-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors mb-8 flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+            Get 3 Best Offers <span class="text-green-200 text-sm font-normal ml-2">(Takes ~1 min)</span>
           </button>
         </div>
         
@@ -630,14 +650,20 @@ class OffersModal {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Location -->
             <div>
-              <label for="desktop-postcode" class="block text-sm font-medium text-gray-700 mb-2">Swiss Postcode *</label>
-              <input type="text" id="desktop-postcode" name="postcode" placeholder="e.g. 8001" maxlength="4" pattern="[0-9]{4}" required class="form-input" />
+              <label for="desktop-postcode" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Swiss Postcode *
+              </label>
+              <input type="text" id="desktop-postcode" name="postcode" placeholder="e.g. 8001" maxlength="4" pattern="[0-9]{4}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" />
             </div>
             
             <!-- Household -->
             <div>
-              <label for="desktop-household" class="block text-sm font-medium text-gray-700 mb-2">Household *</label>
-              <select id="desktop-household" name="household" required class="form-select">
+              <label for="desktop-household" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <i data-lucide="users" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Household *
+              </label>
+              <select id="desktop-household" name="household" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900 bg-white">
                 <option value="">Select...</option>
                 <option value="single">Single</option>
                 <option value="couple">Couple</option>
@@ -1208,6 +1234,29 @@ class OffersModal {
         tooltip = null;
       }
     });
+  }
+  
+  // Initialize Lucide icons after content is rendered
+  initializeLucideIcons() {
+    // Initialize Lucide icons if available
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+      try {
+        lucide.createIcons();
+      } catch (error) {
+        console.log('Lucide icons initialization skipped:', error.message);
+      }
+    } else {
+      // Retry after a short delay if Lucide hasn't loaded yet
+      setTimeout(() => {
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+          try {
+            lucide.createIcons();
+          } catch (error) {
+            console.log('Lucide icons initialization skipped (delayed):', error.message);
+          }
+        }
+      }, 100);
+    }
   }
 }
 
