@@ -1,0 +1,237 @@
+---
+// OffersModal - New dynamic lead generation modal
+// Replaces old consultation modal with "Get 3 Best Offers" + consultation paths
+
+interface Props {
+  providerName?: string;
+  providerId?: string;
+  insuranceType?: string;
+  contextTitle?: string;
+}
+
+const props = Astro.props;
+---
+
+<div id="offers-modal" 
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 transition-opacity duration-200 motion-reduce:transition-none" 
+    data-provider-id={props.providerId}
+    data-provider-name={props.providerName}
+    data-context-title={props.contextTitle}
+    data-insurance-type={props.insuranceType}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+    data-modal-backdrop="true">
+    
+  <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-5xl w-full relative shadow-xl modal-content overflow-hidden max-h-[95vh] transition-all duration-200 motion-reduce:transition-none motion-reduce:transform-none scale-100 translate-y-0">
+      
+      <!-- Close button -->
+      <button
+        id="close-offers-modal-btn"
+        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-20 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded-md p-1 transition-colors"
+        aria-label="Close offers modal"
+        data-close-modal="true"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <!-- Mobile Layout -->
+      <div class="block lg:hidden">
+        <!-- Progress bar (mobile) -->
+        <div id="mobile-progress" class="h-2 bg-gray-200">
+          <div id="mobile-progress-bar" class="h-full bg-red-500 transition-all duration-300" style="width: 0%"></div>
+        </div>
+        
+        <!-- Mobile content container -->
+        <div id="mobile-content" class="p-4 sm:p-6 overflow-y-auto" style="max-height: calc(95vh - 8px - 80px);">
+          <!-- Content will be dynamically populated -->
+        </div>
+        
+        <!-- Mobile sticky footer -->
+        <div class="sticky bottom-0 bg-white border-t border-gray-200 p-4 flex gap-3">
+          <button id="mobile-back-btn" class="hidden px-4 py-2 text-gray-600 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
+            ← Back
+          </button>
+          <button id="mobile-next-btn" class="flex-1 px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            Next
+          </button>
+        </div>
+      </div>
+      
+      <!-- Desktop Layout -->
+      <div class="hidden lg:flex">
+        <!-- Left: Form content -->
+        <div class="flex-1 p-8 overflow-y-auto" style="max-height: 95vh;">
+          <div id="desktop-content">
+            <!-- Content will be dynamically populated -->
+          </div>
+        </div>
+        
+        <!-- Right: Trust sidebar -->
+        <div class="w-80 bg-gray-50 p-6 flex flex-col justify-between border-l border-gray-200">
+          <!-- Trust elements -->
+          <div class="space-y-6">
+            <!-- Robert's photo and intro -->
+            <div class="text-center">
+              <img src="/images/robert-avatar.jpg" alt="Robert Kolar" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover" loading="eager" />
+              <h3 class="font-semibold text-gray-900">Robert Kolar</h3>
+              <p class="text-sm text-gray-600">FINMA Registered Advisor</p>
+              <p class="text-xs text-gray-500 mt-1">English • German • Slovak</p>
+            </div>
+            
+            <!-- What to expect -->
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+              <h4 class="font-medium text-gray-900 mb-3">What to expect:</h4>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li class="flex items-start">
+                  <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Quick form (≈1 min) → tailored picks
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Offers by email within 24h
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Free, independent & in English
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Seasonal urgency (shown when relevant) -->
+            <div id="desktop-urgency" class="hidden bg-red-50 border border-red-200 rounded-lg p-4">
+              <div class="flex items-center">
+                <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm text-red-800 font-medium">Switch by 30 Nov 2025</p>
+              </div>
+              <p class="text-xs text-red-600 mt-1">For 1 Jan 2026 start</p>
+            </div>
+          </div>
+          
+          <!-- Secondary CTA: Book consultation -->
+          <div class="border-t border-gray-200 pt-6">
+            <button id="desktop-consultation-btn" class="w-full px-4 py-3 border border-red-600 text-red-600 rounded-lg font-medium hover:bg-red-50 transition-colors text-center">
+              <div class="flex items-center justify-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2z" />
+                </svg>
+                Book Free Consultation
+              </div>
+              <p class="text-xs text-gray-500 mt-1">30–60 min video call</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include the modal logic script -->
+<script src="/scripts/offers-modal.js" defer></script>
+
+<style>
+  /* Modal animations */
+  #offers-modal {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+  
+  #offers-modal:not(.hidden) {
+    opacity: 1;
+  }
+  
+  .modal-content {
+    transform: scale(0.95) translateY(10px);
+    transition: transform 200ms ease-out, opacity 200ms ease-out;
+  }
+  
+  #offers-modal:not(.hidden) .modal-content {
+    transform: scale(1) translateY(0);
+  }
+  
+  /* Progress bar animation */
+  #mobile-progress-bar {
+    transition: width 300ms ease-in-out;
+  }
+  
+  /* Step transition animations */
+  .step-enter {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  
+  .step-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+  
+  .step-leave {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .step-leave-active {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+  
+  /* Disable transitions for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+    }
+  }
+  
+  /* Form styling */
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors;
+  }
+  
+  .form-select {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white;
+  }
+  
+  .form-checkbox {
+    @apply h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded;
+  }
+  
+  .form-radio {
+    @apply h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300;
+  }
+  
+  /* Slider styling */
+  .form-slider {
+    @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+  }
+  
+  .form-slider::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 bg-red-600 rounded-full cursor-pointer;
+  }
+  
+  .form-slider::-moz-range-thumb {
+    @apply w-4 h-4 bg-red-600 rounded-full cursor-pointer border-0;
+  }
+  
+  /* Tooltip styling */
+  .tooltip {
+    @apply absolute z-10 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg opacity-0 pointer-events-none transition-opacity;
+  }
+  
+  .tooltip.show {
+    @apply opacity-100;
+  }
+</style>
