@@ -147,6 +147,26 @@ class OffersModal {
     }
   }
   
+  // Get dynamic Cal.com link based on page intent
+  getCalComLink() {
+    const intent = this.pageIntent;
+    
+    switch (intent) {
+      case 'setup':
+        return "https://cal.com/robertkolar/setting-up-health-insurance-in-switzerland";
+      case 'change':
+        return "https://cal.com/robertkolar/change-health-insurance";
+      case 'pension':
+      case '3rd-pillar':
+        return "https://cal.com/robertkolar/third-pillar-pension-solutions";
+      case 'liability':
+      case 'household':
+        return "https://cal.com/robertkolar/household-liability-insurance";
+      default:
+        return "https://cal.com/robertkolar/change-health-insurance";
+    }
+  }
+  
   // Generate daily-seeded social proof number
   generateSocialProof() {
     const today = new Date();
@@ -280,27 +300,31 @@ class OffersModal {
     
     this.updateMobileProgress();
     
+    // Render proper 6-step flow as per spec
     switch (this.currentStep) {
       case 1:
-        container.innerHTML = this.renderIntroStep();
+        container.innerHTML = this.renderIntroStep(); // Initial intro with CTA buttons
         break;
       case 2:
-        container.innerHTML = this.renderLocationStep();
+        container.innerHTML = this.renderStep1WhereAndWho(); // STEP 1 — Where & Who
         break;
       case 3:
-        container.innerHTML = this.renderPersonalStep();
+        container.innerHTML = this.renderStep2People(); // STEP 2 — People
         break;
       case 4:
-        container.innerHTML = this.renderInsuranceStep();
+        container.innerHTML = this.renderStep3BasicInsurance(); // STEP 3 — Basic Insurance
         break;
       case 5:
-        container.innerHTML = this.renderSupplementaryStep();
+        container.innerHTML = this.renderStep4SupplementaryPriorities(); // STEP 4 — Supplementary Priorities
         break;
       case 6:
-        container.innerHTML = this.renderContactStep();
+        container.innerHTML = this.renderStep5ContactAndConsent(); // STEP 5 — Contact & Consent
         break;
       case 7:
-        container.innerHTML = this.renderConfirmationStep();
+        container.innerHTML = this.renderStep6ReviewAndSend(); // STEP 6 — Review & Send
+        break;
+      case 8:
+        container.innerHTML = this.renderThankYouStep(); // Thank you screen after submission
         break;
     }
     
@@ -357,8 +381,8 @@ class OffersModal {
     `;
   }
   
-  // Render location & household step (mobile step 2)
-  renderLocationStep() {
+  // STEP 1 — Where & Who
+  renderStep1WhereAndWho() {
     return `
       <div class="space-y-6">
         <div class="text-center mb-6">
@@ -377,7 +401,7 @@ class OffersModal {
           <p class="text-xs text-gray-500 mt-1">4-digit Swiss postcode</p>
         </div>
         
-        <!-- Household type -->
+                  <!-- Household type -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
             <i data-lucide="users" class="w-4 h-4 mr-2 text-gray-500"></i>
@@ -411,14 +435,464 @@ class OffersModal {
           </div>
         </div>
         
-        <!-- Dynamic person adding will be handled by JS -->
-        <div id="additional-persons" class="hidden">
-          <!-- Will be populated when couple/family is selected -->
+        <!-- Show summary chip for couple/family -->
+        <div id="household-summary" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <p class="text-sm text-blue-800">You can add people on the next screen.</p>
         </div>
       </div>
     `;
   }
+
+  // STEP 2 — People
+  renderStep2People() {
+    return `
+      <div class="space-y-6">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">People</h3>
+          <p class="text-gray-600">Tell us about each person in your household</p>
+        </div>
+        
+        <!-- People cards will be populated dynamically -->
+        <div id="people-cards" class="space-y-4">
+          <!-- Person 1 (You) -->
+          <div class="bg-white border border-gray-300 rounded-lg p-4">
+            <h4 class="font-medium text-gray-900 mb-3 flex items-center">
+              <i data-lucide="user" class="w-4 h-4 mr-2 text-gray-500"></i>
+              Person 1 (You)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+                <input 
+                  type="text" 
+                  name="person1_dob" 
+                  placeholder="DD.MM.YYYY" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
+                  required 
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Employed ≥8h/week? *</label>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input type="radio" name="person1_employed" value="yes" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-2" />
+                    <span class="text-sm text-gray-700">Yes</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="radio" name="person1_employed" value="no" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-2" />
+                    <span class="text-sm text-gray-700">No</span>
+                  </label>
+                </div>
+                <div id="person1-employed-note" class="hidden mt-1 text-xs text-blue-600">
+                  We'll exclude accident coverage.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Add person button -->
+        <button 
+          type="button" 
+          id="add-person-btn" 
+          class="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 px-4 text-gray-600 hover:border-red-300 hover:text-red-600 transition-colors flex items-center justify-center"
+        >
+          <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+          Add Another Person (optional)
+        </button>
+      </div>
+    `;
+  }
   
+  // STEP 3 — Basic Insurance
+  renderStep3BasicInsurance() {
+    return `
+      <div class="space-y-6">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Basic Insurance</h3>
+          <p class="text-gray-600">Choose your preferred deductible and model</p>
+        </div>
+        
+        <!-- Preferred deductible -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
+            <i data-lucide="shield" class="w-4 h-4 mr-2 text-gray-500"></i>
+            Preferred deductible *
+            <button type="button" class="ml-2 text-gray-400 hover:text-gray-600" data-tooltip="Higher deductible = lower monthly premium, but you pay more if you need care.">
+              <i data-lucide="help-circle" class="w-4 h-4"></i>
+            </button>
+          </label>
+          <select name="deductible" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900 bg-white">
+            <option value="">Select...</option>
+            <option value="300">CHF 300</option>
+            <option value="500">CHF 500</option>
+            <option value="1000">CHF 1,000</option>
+            <option value="1500">CHF 1,500</option>
+            <option value="2000">CHF 2,000</option>
+            <option value="2500">CHF 2,500</option>
+            <option value="unsure">Unsure</option>
+          </select>
+        </div>
+        
+        <!-- Insurance model -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
+            <i data-lucide="settings" class="w-4 h-4 mr-2 text-gray-500"></i>
+            Insurance model *
+          </label>
+          <div class="space-y-3">
+            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="insurance_model" value="standard" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
+              <div>
+                <div class="font-medium text-gray-900">Standard</div>
+                <div class="text-sm text-gray-500">Free choice of doctors; highest premiums.</div>
+              </div>
+            </label>
+            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="insurance_model" value="hmo" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
+              <div>
+                <div class="font-medium text-gray-900">HMO</div>
+                <div class="text-sm text-gray-500">Start at an HMO clinic; lower premiums.</div>
+              </div>
+            </label>
+            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="insurance_model" value="family_doctor" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
+              <div>
+                <div class="font-medium text-gray-900">Family Doctor</div>
+                <div class="text-sm text-gray-500">See your chosen GP first; save on premiums.</div>
+              </div>
+            </label>
+            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="insurance_model" value="telmed" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
+              <div>
+                <div class="font-medium text-gray-900">Telmed</div>
+                <div class="text-sm text-gray-500">Call first; usually the lowest premiums.</div>
+              </div>
+            </label>
+            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
+              <input type="radio" name="insurance_model" value="unsure" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
+              <div>
+                <div class="font-medium text-gray-900">Unsure</div>
+                <div class="text-sm text-gray-500">Help me decide</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // STEP 4 — Supplementary Priorities
+  renderStep4SupplementaryPriorities() {
+    return `
+      <div class="space-y-6">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Supplementary Priorities</h3>
+          <p class="text-gray-600">Rate your interest in additional coverage (1 = Low, 5 = High)</p>
+        </div>
+        
+        <!-- Supplementary sliders -->
+        <div class="space-y-6">
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="globe" class="w-4 h-4 mr-2 text-gray-500"></i>
+                International coverage
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="international_coverage" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+          
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="bed-double" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Hospital upgrade (semi/private)
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="hospital_upgrade" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+          
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="activity" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Prevention & fitness
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="prevention_fitness" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+          
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="eye" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Vision / glasses
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="vision_glasses" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+          
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="smile" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Dental
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="dental" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+          
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="baby" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Maternity
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="maternity" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+          
+          <div class="supplementary-item">
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
+              <span class="flex items-center">
+                <i data-lucide="brain" class="w-4 h-4 mr-2 text-gray-500"></i>
+                Mental health / alternative therapies
+              </span>
+              <span class="slider-value text-sm font-semibold text-red-600">3</span>
+            </label>
+            <input type="range" name="mental_health" min="1" max="5" value="3" 
+                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Other needs -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+            <i data-lucide="edit-3" class="w-4 h-4 mr-2 text-gray-500"></i>
+            Other needs (optional)
+          </label>
+          <textarea 
+            name="other_needs" 
+            rows="3" 
+            placeholder="Any specific insurance needs or questions?"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900"
+          ></textarea>
+        </div>
+      </div>
+    `;
+  }
+
+  // STEP 5 — Contact & Consent
+  renderStep5ContactAndConsent() {
+    return `
+      <div class="space-y-6">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Contact & Consent</h3>
+          <p class="text-gray-600">How we can reach you with your offers</p>
+        </div>
+        
+        <!-- Contact information -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+              <i data-lucide="user" class="w-4 h-4 mr-2 text-gray-500"></i>
+              Full name *
+            </label>
+            <input 
+              type="text" 
+              name="full_name" 
+              placeholder="Your full name"
+              required 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
+            />
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+              <i data-lucide="mail" class="w-4 h-4 mr-2 text-gray-500"></i>
+              Email address *
+            </label>
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="your.email@example.com"
+              required 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
+            />
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+              <i data-lucide="phone" class="w-4 h-4 mr-2 text-gray-500"></i>
+              Phone (optional)
+            </label>
+            <input 
+              type="tel" 
+              name="phone" 
+              placeholder="+41 XX XXX XX XX"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
+            />
+          </div>
+        </div>
+        
+        <!-- Consent checkbox -->
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <label class="flex items-start">
+            <input 
+              type="checkbox" 
+              name="consent" 
+              required 
+              class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded mr-3 mt-0.5 flex-shrink-0" 
+            />
+            <div class="text-sm text-gray-700">
+              <span class="font-medium">I agree to be contacted with my 3 offers.</span> 
+              Consultations are free, independent & in English. We are a FINMA-registered broker and may receive commissions. No obligation.
+            </div>
+          </label>
+        </div>
+      </div>
+    `;
+  }
+
+  // STEP 6 — Review & Send
+  renderStep6ReviewAndSend() {
+    return `
+      <div class="space-y-6">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Review & Send</h3>
+          <p class="text-gray-600">Confirm your information before sending</p>
+        </div>
+        
+        <!-- Summary box -->
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <h4 class="font-medium text-gray-900 mb-4 flex items-center">
+            <i data-lucide="file-text" class="w-4 h-4 mr-2 text-gray-500"></i>
+            Summary of your request
+          </h4>
+          
+          <div id="form-summary" class="space-y-3 text-sm">
+            <!-- This will be populated dynamically by JS -->
+          </div>
+        </div>
+        
+        <!-- Primary CTA: Send My Request -->
+        <button 
+          type="submit" 
+          id="send-request-btn"
+          class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center"
+        >
+          <i data-lucide="send" class="w-5 h-5 mr-2"></i>
+          Send My Request
+        </button>
+        
+        <!-- Secondary link: Prefer consultation -->
+        <div class="text-center">
+          <button 
+            type="button" 
+            id="prefer-consultation-btn"
+            class="text-red-600 hover:text-red-700 text-sm font-medium underline"
+          >
+            Prefer to talk now? Book Free Consultation →
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Thank You Step (after successful submission)
+  renderThankYouStep() {
+    const email = this.formData.email || 'your email';
+    const urgencyVisible = ['change', 'cheapest'].includes(this.pageIntent);
+    
+    return `
+      <div class="space-y-6 text-center">
+        <div class="space-y-4">
+          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+            <i data-lucide="check" class="w-10 h-10 text-green-600"></i>
+          </div>
+          
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Thank you! Your 3 tailored offers are on the way 🚀</h3>
+            <p class="text-gray-600">We'll prepare your comparison and send it to <strong>${email}</strong> within 24 hours.</p>
+          </div>
+          
+          ${urgencyVisible ? `
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-left">
+              <div class="flex items-center">
+                <i data-lucide="clock" class="w-5 h-5 text-red-500 mr-2"></i>
+                <p class="text-sm text-red-800 font-medium">Switch by 30 Nov 2025 for a 1 Jan 2026 start.</p>
+              </div>
+            </div>
+          ` : ''}
+        </div>
+        
+        <!-- Robert's photo and CTA -->
+        <div class="bg-gray-50 rounded-lg p-6">
+          <img 
+            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp" 
+            alt="Robert — Expat Savvy Advisor" 
+            class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover"
+            loading="eager" 
+            width="80" 
+            height="80"
+          />
+          <h4 class="font-semibold text-gray-900 mb-2">Want to discuss your options?</h4>
+          <p class="text-sm text-gray-600 mb-4">Book a free consultation with Robert, our FINMA-registered advisor.</p>
+          
+          <button id="final-consultation-btn" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors mb-3 flex items-center justify-center">
+            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+            Book Free Consultation
+          </button>
+          
+          <button id="just-close-btn" class="text-sm text-gray-500 hover:text-gray-700 flex items-center justify-center">
+            Close
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
   // Render personal info step (mobile step 3)
   renderPersonalStep() {
     return `
@@ -598,9 +1072,14 @@ class OffersModal {
         
         <!-- Robert's photo and CTA -->
         <div class="bg-gray-50 rounded-lg p-6">
-          <div class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-            <i data-lucide="user" class="w-8 h-8 text-white"></i>
-          </div>
+          <img 
+            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp" 
+            alt="Robert — Expat Savvy Advisor" 
+            class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover"
+            loading="eager" 
+            width="80" 
+            height="80"
+          />
           <h4 class="font-semibold text-gray-900 mb-2">Want to discuss your options?</h4>
           <p class="text-sm text-gray-600 mb-4">Book a free consultation with Robert, our FINMA-registered advisor.</p>
           
@@ -755,8 +1234,19 @@ class OffersModal {
     const progressBar = document.getElementById('mobile-progress-bar');
     if (!progressBar) return;
     
-    const progress = ((this.currentStep - 1) / (this.totalSteps - 1)) * 100;
-    progressBar.style.width = `${Math.min(progress, 100)}%`;
+    // Progress bar shows steps 2-7 (the 6 form steps), not including intro or thank you
+    // So step 2 is "Step 1 of 6", step 7 is "Step 6 of 6"
+    const actualStep = Math.max(0, this.currentStep - 1); // Steps 2-7 become 1-6
+    const maxSteps = 6; // 6-step flow as per spec
+    
+    if (this.currentStep <= 1 || this.currentStep >= 8) {
+      // Hide progress bar for intro and thank you screens
+      progressBar.parentElement?.classList.add('hidden');
+    } else {
+      progressBar.parentElement?.classList.remove('hidden');
+      const progress = ((actualStep - 1) / (maxSteps - 1)) * 100;
+      progressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+    }
   }
   
   // Update mobile navigation buttons
@@ -766,25 +1256,32 @@ class OffersModal {
     
     if (!backBtn || !nextBtn) return;
     
-    // Back button visibility
-    if (this.currentStep <= 1) {
+    // Back button visibility (show on steps 2-7, hide on intro and thank you)
+    if (this.currentStep <= 1 || this.currentStep >= 8) {
       backBtn.classList.add('hidden');
     } else {
       backBtn.classList.remove('hidden');
     }
     
-    // Next button text
+    // Next button text and styling based on current step
     if (this.currentStep === 1) {
-      nextBtn.textContent = 'Start';
-    } else if (this.currentStep === this.totalSteps) {
-      nextBtn.textContent = 'Submit';
+      // Intro step - buttons handled by intro step itself
+      nextBtn.style.display = 'none';
+    } else if (this.currentStep === 7) {
+      // STEP 6 — Review & Send
+      nextBtn.innerHTML = '<i data-lucide="send" class="w-4 h-4 mr-1"></i>Send My Request';
       nextBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
       nextBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-    } else if (this.currentStep === this.totalSteps + 1) {
-      // Confirmation step
-      nextBtn.textContent = 'Close';
+      nextBtn.style.display = 'flex';
+    } else if (this.currentStep >= 8) {
+      // Thank you step
+      nextBtn.style.display = 'none';
     } else {
-      nextBtn.textContent = 'Next';
+      // Steps 1-5 (currentStep 2-6): "Next →"
+      nextBtn.innerHTML = 'Next <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>';
+      nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+      nextBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+      nextBtn.style.display = 'flex';
     }
   }
   
