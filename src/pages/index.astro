@@ -956,8 +956,8 @@ const formatDate = (date: Date | string | undefined | null): string => {
   }
 </style>
 
-<!-- Emergency Inline Button Fix -->
-<script is:inline>
+<!-- Emergency script DISABLED to prevent conflicts -->
+<!-- <script is:inline>
   // This script directly targets the problematic buttons on this page
   // and fixes them with a direct approach bypassing all event systems
   
@@ -995,13 +995,15 @@ const formatDate = (date: Date | string | undefined | null): string => {
           e.stopPropagation();
           console.log("[EMERGENCY] Hero button clicked");
           
-          // Show the modal directly
-          const modal = document.getElementById('consultation-modal');
-          if (modal) {
-            modal.classList.remove('hidden');
-            document.body.classList.add('modal-open');
-          } else if (typeof window.showConsultationModal === 'function') {
-            window.showConsultationModal();
+          // Show the NEW offers modal
+          if (typeof window.openOffersModal === 'function') {
+            window.openOffersModal();
+          } else {
+            const modal = document.getElementById('offers-modal');
+            if (modal) {
+              modal.classList.remove('hidden');
+              document.body.style.overflow = 'hidden';
+            }
           }
         };
         
@@ -1042,13 +1044,15 @@ const formatDate = (date: Date | string | undefined | null): string => {
           e.stopPropagation();
           console.log("[EMERGENCY] Get Started Today button clicked");
           
-          // Show the modal directly
-          const modal = document.getElementById('consultation-modal');
-          if (modal) {
-            modal.classList.remove('hidden');
-            document.body.classList.add('modal-open');
-          } else if (typeof window.showConsultationModal === 'function') {
-            window.showConsultationModal();
+          // Show the NEW offers modal
+          if (typeof window.openOffersModal === 'function') {
+            window.openOffersModal();
+          } else {
+            const modal = document.getElementById('offers-modal');
+            if (modal) {
+              modal.classList.remove('hidden');
+              document.body.style.overflow = 'hidden';
+            }
           }
         };
         
@@ -1113,4 +1117,4 @@ const formatDate = (date: Date | string | undefined | null): string => {
   window.addEventListener('load', fixHomePageButtons);
   setTimeout(fixHomePageButtons, 500);
   setTimeout(fixHomePageButtons, 2000);
-</script>
+</script> -->
