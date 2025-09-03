@@ -2,10 +2,10 @@
 import Layout from '../../../layouts/Layout.astro';
 import OffersModal from '../../../components/OffersModal.astro';
 
-const city = "Geneva";
-const citySlug = "geneva";
-const canton = "Geneva";
-const subsidyUrl = "https://www.ge.ch/obtenir-reduction-primes-assurance-maladie";
+const city = "Basel";
+const citySlug = "basel";
+const canton = "Basel-Stadt";
+const subsidyUrl = "https://www.gesundheit.bs.ch/gesundheitsfoerderung/praemienverbilligung.html";
 
 // Dynamic social proof number (5-18, seeded daily)
 const today = new Date().toDateString();
@@ -13,15 +13,15 @@ const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
 const socialProofNumber = 5 + (seed % 14);
 
 const premiumTable = [
-  { profile: "Adult 25–35", model: "Telmed", deductible: "2,500", range: "280–370" },
-  { profile: "Adult 35–45", model: "HMO", deductible: "2,500", range: "310–390" },
-  { profile: "Family (2 adults + child)", model: "HMO mix", deductible: "mixed", range: "720–970" }
+  { profile: "Adult 25–35", model: "Telmed", deductible: "2,500", range: "260–350" },
+  { profile: "Adult 35–45", model: "HMO", deductible: "2,500", range: "290–370" },
+  { profile: "Family (2 adults + child)", model: "HMO mix", deductible: "mixed", range: "680–920" }
 ];
 
 const faqs = [
   {
-    question: `Why are premiums higher in ${city}?`,
-    answer: `${city} is in premium region 2, reflecting higher healthcare costs and the international nature of the canton. Costs are slightly lower than Zurich but higher than rural areas.`
+    question: `Why are premiums lower in ${city}?`,
+    answer: `${city} is in premium region 3, with lower costs than Zurich or Geneva. The smaller canton and efficient healthcare system help keep premiums more affordable.`
   },
   {
     question: `Which model is cheapest in ${city} (Telmed, HMO, Family Doctor, Standard)?`,
@@ -45,14 +45,14 @@ const faqs = [
 <Layout
   title={`Health Insurance ${city} 2026 | Best & Cheapest Options for Expats`}
   description={`Find the best and cheapest health insurance in ${city} (2026). Compare premiums, models (Telmed/HMO), subsidies, and expat-friendly insurers. Free consultation in English.`}
-  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740625024/visualsoflukas-AWjVCFcUIbY-unsplash_myddnf.webp"
+  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740599993/vincent-ghilione-z54zUmYA9f8-unsplash_c9aip7.webp"
 >
   <!-- JSON-LD Schema -->
   <script type="application/ld+json" slot="head">
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": `Health Insurance in ${city} (2026) — English Guide for Expats`,
+      "headline": `Health Insurance in ${city} (2026) — Guide for Expats`,
       "about": [{"@type": "City", "name": city}],
       "inLanguage": "en",
       "author": {"@type": "Organization", "name": "Expat Savvy"},
@@ -82,10 +82,10 @@ const faqs = [
       "mainEntity": [
         {
           "@type": "Question",
-          "name": `Why are premiums higher in ${city}?`,
+          "name": `Why are premiums lower in ${city}?`,
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": `${city} is in premium region 2, reflecting higher healthcare costs and the international nature of the canton. Costs are slightly lower than Zurich but higher than rural areas.`
+            "text": `${city} is in premium region 3, with lower costs than Zurich or Geneva. The smaller canton and efficient healthcare system help keep premiums more affordable.`
           }
         },
         {
@@ -128,8 +128,8 @@ const faqs = [
   <div class="relative bg-white overflow-hidden">
     <div class="absolute inset-0">
       <img 
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740625024/visualsoflukas-AWjVCFcUIbY-unsplash_myddnf.webp"
-        alt="Geneva cityscape with Lake Geneva and Jet d'Eau - health insurance guide for expats"
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740599993/vincent-ghilione-z54zUmYA9f8-unsplash_c9aip7.webp"
+        alt="Basel cityscape with Rhine river - health insurance guide for expats"
         class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
@@ -161,28 +161,32 @@ const faqs = [
           <!-- Primary CTA - Red (Consultation) -->
           <button 
             onclick="window.openOffersModal && window.openOffersModal('setup')"
-            class="group relative inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg rounded-xl shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] hover:shadow-[12px_12px_20px_#d1d1d1,-12px_-12px_20px_#ffffff] transition-all duration-300 transform hover:scale-105"
+            class="group relative inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.1)] hover:shadow-[12px_12px_20px_rgba(0,0,0,0.4),-12px_-12px_20px_rgba(255,255,255,0.15)] transition-all duration-300 transform hover:scale-105"
             aria-label="Book free consultation - independent & in English"
             aria-describedby="cta-description"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            Book Free Consultation
-            <span class="block text-sm text-red-100 font-normal">30–60 min video call</span>
+            <div>
+              <div class="font-semibold">Book Free Consultation</div>
+              <div class="text-red-200 text-sm font-normal">(recommended)</div>
+            </div>
           </button>
 
           <!-- Secondary CTA - Green -->
           <button 
             onclick="window.openOffersModal && window.openOffersModal('setup')"
-            class="group relative inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-lg rounded-xl shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] hover:shadow-[12px_12px_20px_#d1d1d1,-12px_-12px_20px_#ffffff] transition-all duration-300 transform hover:scale-105"
+            class="group relative inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-lg rounded-xl shadow-[8px_8px_16px_rgba(0,0,0,0.3),-8px_-8px_16px_rgba(255,255,255,0.1)] hover:shadow-[12px_12px_20px_rgba(0,0,0,0.4),-12px_-12px_20px_rgba(255,255,255,0.15)] transition-all duration-300 transform hover:scale-105"
             aria-label="Get 3 best offers - free, independent & in English"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            Get 3 Best Offers
-            <span class="block text-sm text-green-100 font-normal">Takes ~1 min</span>
+            <div>
+              <div class="font-semibold">Get 3 Best Offers</div>
+              <div class="text-green-200 text-sm font-normal">(≈1 min)</div>
+            </div>
           </button>
         </div>
 
@@ -200,7 +204,7 @@ const faqs = [
           2026 Premiums in {city}: what to expect
         </h2>
         <p class="max-w-3xl mx-auto text-lg text-gray-600">
-          {city} is in premium region 2, with costs slightly lower than Zurich but higher than rural areas. The international nature of the canton means many English-friendly options.
+          {city} is in premium region 3, with more affordable costs than Zurich or Geneva. The efficient healthcare system and smaller canton help keep premiums lower.
         </p>
       </div>
 
@@ -490,7 +494,7 @@ const faqs = [
           <div class="flex flex-wrap justify-center gap-4">
             <a href="/health-insurance/zurich/" class="text-red-600 hover:text-red-700 font-medium">{city} vs Zurich</a>
             <span class="text-gray-400">|</span>
-            <a href="/health-insurance/basel/" class="text-red-600 hover:text-red-700 font-medium">{city} vs Basel</a>
+            <a href="/health-insurance/geneva/" class="text-red-600 hover:text-red-700 font-medium">{city} vs Geneva</a>
             <span class="text-gray-400">|</span>
             <a href="/health-insurance/zug/" class="text-red-600 hover:text-red-700 font-medium">{city} vs Zug</a>
           </div>
