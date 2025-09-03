@@ -259,7 +259,7 @@ const categories = [
             Our insurance experts can help you navigate the Swiss insurance landscape and find the perfect coverage for your specific needs.
           </p>
           <button
-            onclick="showConsultationModal()"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors"
           >
             Schedule Free Consultation

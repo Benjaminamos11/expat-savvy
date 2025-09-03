@@ -448,7 +448,7 @@ Telmed saves 20-30% compared to Standard. In Zurich, this means CHF 110-150/mont
 3. **Apply to new insurer** before the deadline
 4. **Cancel current policy** by registered mail
 
-<a href="/free-consultation" style="display: inline-block; background-color: #ef4444; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Book Free Consultation →</a>
+<a href="/ai-chat" style="display: inline-block; background-color: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Get 3 Best Recommendations →</a>
 
 </div>
 
@@ -457,7 +457,7 @@ Telmed saves 20-30% compared to Standard. In Zurich, this means CHF 110-150/mont
 ## Related Resources
 
 **Essential Guides:**
-- [Health Insurance Hub](/health-insurance) — Complete overview and calculator
+- [Health Insurance Hub](/health-insurance) — Complete overview and AI calculator
 - [Compare Providers](/compare-providers/) — Side-by-side comparisons
 - [Insurance Models Guide](/blog/health-insurance-models-switzerland) — Standard vs HMO vs Telmed
 

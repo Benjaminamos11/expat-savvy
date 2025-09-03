@@ -784,7 +784,7 @@ const faqs = [
             Get the expert guidance you need for peace of mind with your Swiss health insurance.
           </p>
           <button
-            onclick="showConsultationModal()"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-white bg-primary-600 hover:bg-primary-700 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
           >
             Schedule Free Consultation

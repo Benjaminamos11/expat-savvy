@@ -96,7 +96,7 @@ const faqs = [
           </p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
             <button
-              onclick="showConsultationModal()"
+              onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
               class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
             >
               Get Personalized Advice
@@ -314,7 +314,7 @@ const faqs = [
         </ul>
         <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center sticky bottom-4">
           <a href="/ai-chat/" class="px-6 py-3 rounded-md text-white bg-primary-600 hover:bg-primary-700 shadow">Chat with AI</a>
-          <button onclick="showConsultationModal()" class="px-6 py-3 rounded-md text-white bg-red-600 hover:bg-red-700 shadow">Free Consultation</button>
+          <button onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;" class="px-6 py-3 rounded-md text-white bg-red-600 hover:bg-red-700 shadow">Free Consultation</button>
         </div>
       </div>
     </div>
@@ -341,7 +341,7 @@ const faqs = [
       <h2 class="text-3xl font-extrabold text-white">Need help deciding?</h2>
       <p class="text-primary-100 mt-2">Get tailored quotes and unbiased comparisons in English.</p>
       <div class="mt-6">
-        <button onclick="showConsultationModal()" class="px-6 py-3 rounded-md text-primary-700 bg-white hover:bg-primary-50 shadow">Book Free Consultation</button>
+        <button onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;" class="px-6 py-3 rounded-md text-primary-700 bg-white hover:bg-primary-50 shadow">Book Free Consultation</button>
       </div>
     </div>
   </div>

@@ -827,11 +827,42 @@ class OffersModal {
   }
 
   getHeadlineContent() {
-    // Simplified for minimal version
-    return {
-      headline: 'Find Your Best Swiss Health Insurance in Minutes',
-      subline: 'Personal, English-speaking advice. Free & no obligation.'
+    const headlines = {
+      'setup': {
+        headline: 'Set Up Your Swiss Health Insurance in Minutes',
+        subline: 'Perfect for newcomers. Personal, English-speaking guidance. Free & no obligation.'
+      },
+      'change': {
+        headline: 'Switch to Better Health Insurance for 2026',
+        subline: 'Find better rates and coverage. Personal, English-speaking advice. Free & no obligation.'
+      },
+      'compare': {
+        headline: 'Find Your Best Insurance Match in Minutes',
+        subline: 'Compare all options objectively. Personal, English-speaking advice. Free & no obligation.'
+      },
+      'cheapest': {
+        headline: 'Find the Cheapest Health Insurance for You',
+        subline: 'Save money without sacrificing coverage. Personal, English-speaking advice. Free & no obligation.'
+      },
+      'best': {
+        headline: 'Get the Best Health Insurance Recommendations',
+        subline: 'Quality and value combined. Personal, English-speaking advice. Free & no obligation.'
+      },
+      'family': {
+        headline: 'Optimize Your Family\'s Health Insurance',
+        subline: 'Family-focused coverage solutions. Personal, English-speaking advice. Free & no obligation.'
+      },
+      'provider': {
+        headline: 'Compare This Provider Against All Options',
+        subline: 'See how this insurer stacks up. Personal, English-speaking advice. Free & no obligation.'
+      },
+      'home': {
+        headline: 'Find Your Best Swiss Health Insurance in Minutes',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
+      }
     };
+    
+    return headlines[this.pageIntent] || headlines['home'];
   }
 
   getCalComLink() {
@@ -1296,8 +1327,12 @@ class OffersModal {
   // Helper for analytics (simple console log for now)
   setupGlobalModalAccess() {
     window.globalOffersModal = this; // Make instance globally accessible
-    window.openOffersModal = () => {
-      console.log('window.openOffersModal called.');
+    window.openOffersModal = (intent = null) => {
+      console.log('window.openOffersModal called with intent:', intent);
+      if (intent) {
+        this.pageIntent = intent; // Override detected intent
+        console.log('Modal intent set to:', this.pageIntent);
+      }
       this.openModal();
     }; // Global function for external triggers
     window.showConsultationModal = () => {

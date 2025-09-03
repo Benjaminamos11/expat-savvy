@@ -824,7 +824,7 @@ const supplementaryPlans = [
         
         <div class="text-center mt-8">
           <button
-            onclick="showConsultationModal()"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-md"
           >
             Get Your Free Consultation Today
@@ -866,7 +866,7 @@ const supplementaryPlans = [
         </p>
         <div class="mt-8">
           <button
-            onclick="showConsultationModal()"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
             Schedule Free Consultation

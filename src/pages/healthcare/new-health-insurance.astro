@@ -418,10 +418,10 @@ const patterns = {
             </p>
             <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onclick="showConsultationModal()"
+                onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('setup'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
                 class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                Get Free Consultation
+                Get Setup Guide & Options
                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -1108,7 +1108,7 @@ const patterns = {
               <div>
                 <h3 class="text-lg font-semibold text-gray-900">Want Premium Calculation?</h3>
                 <p class="text-gray-600">Understand your potential premium options with a personalized calculation.</p>
-                <a href="#" onclick="showConsultationModal(); return false;" class="text-primary-600 hover:underline font-medium">Request a Calculation</a>
+                <a href="/ai-chat" class="text-primary-600 hover:underline font-medium">Use AI Calculator</a>
               </div>
             </div>
           </div>
@@ -1129,10 +1129,10 @@ const patterns = {
         </p>
         <div class="mt-8">
           <button
-            onclick="showConsultationModal()"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('setup'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
           >
-            Schedule Free Consultation
+            Get Your Setup Options
           </button>
         </div>
       </div>

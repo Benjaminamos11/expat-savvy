@@ -154,7 +154,7 @@ Navigating Swiss family health insurance successfully requires understanding the
 <div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
   <h3 class="text-primary-800 text-xl font-bold mb-3">Get Expert Family Insurance Guidance</h3>
   <p class="mb-4">Our specialists help Swiss families optimize their health insurance strategy, from prenatal registration to family discount maximization.</p>
-  <a href="/contact" class="btn btn-primary px-6 py-2 rounded-md font-medium">Schedule Your Free Family Consultation</a>
+  <a href="/ai-chat" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Family Coverage Options</a>
 </div>
 
 ## Your Complete Swiss Family Health Insurance Resource Hub

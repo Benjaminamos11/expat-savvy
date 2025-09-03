@@ -372,7 +372,7 @@ If navigating Swiss health insurance in a second language feels overwhelming, **
 <div style="background-color: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 24px; margin: 24px 0; border-radius: 8px;">
   <h3 style="color: #0c4a6e; margin-top: 0;">Ready to Save on Your 2026 Health Insurance?</h3>
   <p style="margin-bottom: 16px;">Get personalized advice on finding the cheapest health insurance option for your specific situation and canton.</p>
-  <a href="/free-consultation" style="display: inline-block; background-color: #0ea5e9; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600;">Book Free Consultation →</a>
+  <a href="/ai-chat" style="display: inline-block; background-color: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600;">Find Cheapest Options for You →</a>
 </div>
 
 ## Related Articles
