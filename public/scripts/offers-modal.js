@@ -838,42 +838,68 @@ class OffersModal {
   }
 
   getHeadlineContent() {
+    // Extract city from URL if on a city page
+    const cityFromUrl = this.extractCityFromUrl();
+    
     const headlines = {
       'setup': {
-        headline: 'Set Up Your Swiss Health Insurance in Minutes',
-        subline: 'Perfect for newcomers. Personal, English-speaking guidance. Free & no obligation.'
+        headline: cityFromUrl ? `Get health insurance in ${cityFromUrl} with confidence` : 'Set Up Your Swiss Health Insurance in Minutes',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
       },
       'change': {
-        headline: 'Switch to Better Health Insurance for 2026',
-        subline: 'Find better rates and coverage. Personal, English-speaking advice. Free & no obligation.'
+        headline: cityFromUrl ? `Switch your ${cityFromUrl} health insurance for 1 Jan 2026` : 'Switch to Better Health Insurance for 2026',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
       },
       'compare': {
-        headline: 'Find Your Best Insurance Match in Minutes',
-        subline: 'Compare all options objectively. Personal, English-speaking advice. Free & no obligation.'
+        headline: cityFromUrl ? `Compare All Top Insurers in ${cityFromUrl}` : 'Find Your Best Insurance Match in Minutes',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
       },
       'cheapest': {
-        headline: 'Find the Cheapest Health Insurance for You',
-        subline: 'Save money without sacrificing coverage. Personal, English-speaking advice. Free & no obligation.'
+        headline: cityFromUrl ? `Find the cheapest health insurance in ${cityFromUrl}` : 'Find the Cheapest Health Insurance for You',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
       },
       'best': {
-        headline: 'Get the Best Health Insurance Recommendations',
-        subline: 'Quality and value combined. Personal, English-speaking advice. Free & no obligation.'
+        headline: cityFromUrl ? `Find the best health insurance in ${cityFromUrl}` : 'Get the Best Health Insurance Recommendations',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
       },
       'family': {
-        headline: 'Optimize Your Family\'s Health Insurance',
-        subline: 'Family-focused coverage solutions. Personal, English-speaking advice. Free & no obligation.'
+        headline: cityFromUrl ? `Get family health insurance sorted in ${cityFromUrl}` : 'Optimize Your Family\'s Health Insurance',
+        subline: 'Personal, English-speaking advice. Free & no obligation.'
       },
       'provider': {
-        headline: 'Compare This Provider Against All Options',
+        headline: cityFromUrl ? `Compare This Provider Against All Options in ${cityFromUrl}` : 'Compare This Provider Against All Options',
         subline: 'See how this insurer stacks up. Personal, English-speaking advice. Free & no obligation.'
       },
       'home': {
-        headline: 'Find Your Best Swiss Health Insurance in Minutes',
+        headline: cityFromUrl ? `Get health insurance in ${cityFromUrl} with confidence` : 'Find Your Best Swiss Health Insurance in Minutes',
         subline: 'Personal, English-speaking advice. Free & no obligation.'
       }
     };
     
     return headlines[this.pageIntent] || headlines['home'];
+  }
+
+  extractCityFromUrl() {
+    const path = window.location.pathname;
+    
+    // Check if we're on a city page: /health-insurance/{city}/
+    const cityMatch = path.match(/\/health-insurance\/([^\/]+)\//);
+    if (cityMatch) {
+      const citySlug = cityMatch[1];
+      // Convert slug to proper city name
+      const cityNames = {
+        'zurich': 'Zurich',
+        'geneva': 'Geneva',
+        'basel': 'Basel',
+        'bern': 'Bern',
+        'lausanne': 'Lausanne',
+        'lugano': 'Lugano',
+        'zug': 'Zug'
+      };
+      return cityNames[citySlug] || citySlug.charAt(0).toUpperCase() + citySlug.slice(1);
+    }
+    
+    return null;
   }
 
   getCalComLink() {
@@ -1037,6 +1063,12 @@ class OffersModal {
             this.renderContent();
             e.preventDefault();
           } else if (target.id === 'start-offers-btn') {
+            // Track get offers CTA click
+            this.trackEvent('cta_get_offers_click', {
+              intent: this.pageIntent,
+              source: 'get_offers_button'
+            });
+            
             // Optional: If no motivation selected, default to something
             this.formData.motivation = this.formData.motivation || 'general';
             console.log('Get 3 Best Offers clicked with motivation:', this.formData.motivation);
@@ -1235,6 +1267,12 @@ class OffersModal {
   submitOffersForm() {
     console.log('Submitting offers form...');
     
+    // Track form submission event
+    this.trackEvent('offers_form_submit_success', {
+      intent: this.pageIntent,
+      step: this.currentStep
+    });
+    
     // Save current step data first
     this.saveCurrentData();
     
@@ -1314,6 +1352,12 @@ class OffersModal {
   openModal() {
     console.log('🚀 Opening OffersModal (minimal)');
     
+    // Track modal open event
+    this.trackEvent('modal_opened', {
+      intent: this.pageIntent,
+      source: 'cta_button'
+    });
+    
     // Update mobile detection when opening modal
     this.isMobile = window.innerWidth < 1024;
     console.log('Modal opening - Updated mobile detection:', this.isMobile, 'Window width:', window.innerWidth);
@@ -1385,6 +1429,13 @@ class OffersModal {
   // Start consultation flow (redirect to mini-intake)
   startConsultationFlow() {
     console.log('Starting consultation flow: rendering mini-intake');
+    
+    // Track consultation CTA click
+    this.trackEvent('cta_consultation_click', {
+      intent: this.pageIntent,
+      source: 'consultation_button'
+    });
+    
     this.currentStep = 'consultation_intake';
     this.renderContent();
   }
@@ -1693,6 +1744,21 @@ class OffersModal {
     }
     
     console.log('Complete formData after save:', this.formData);
+  }
+
+  // Track events with city-aware data
+  trackEvent(eventName, data = {}) {
+    if (typeof umami !== 'undefined') {
+      const cityFromUrl = this.extractCityFromUrl();
+      umami.track(eventName, {
+        page: window.location.pathname,
+        intent: this.pageIntent,
+        city: cityFromUrl || 'general',
+        ...data
+      });
+    } else {
+      console.log('Umami not available, would track:', eventName, data);
+    }
   }
 
 }
