@@ -48,37 +48,44 @@ const faqs = [
   image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740625024/visualsoflukas-AWjVCFcUIbY-unsplash_myddnf.webp"
 >
   <!-- JSON-LD Schema -->
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": `Health Insurance in ${city} (2026) — English Guide for Expats`,
-      "about": [{"@type": "City", "name": city}],
-      "inLanguage": "en",
-      "author": {"@type": "Organization", "name": "Expat Savvy"},
-      "dateModified": "2025-01-03",
-      "mainEntityOfPage": {"@type": "WebPage", "@id": `https://expat-savvy.ch/health-insurance/${citySlug}/`},
-      "publisher": {"@type": "Organization", "name": "Expat Savvy"}
-    }
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": `Health Insurance in ${city} (2026) — English Guide for Expats`,
+    "about": [{"@type": "City", "name": city}],
+    "inLanguage": "en",
+    "author": {"@type": "Organization", "name": "Expat Savvy"},
+    "datePublished": "2025-01-03",
+    "dateModified": "2025-01-03",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": `https://expat-savvy.ch/health-insurance/${citySlug}/`},
+    "publisher": {
+      "@type": "Organization", 
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+      }
+    },
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740625024/visualsoflukas-AWjVCFcUIbY-unsplash_myddnf.webp",
+    "description": `Find the best and cheapest health insurance in ${city} (2026). Compare premiums, models (Telmed/HMO), subsidies, and expat-friendly insurers. Free consultation in English.`
+  })}>
   </script>
 
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
       "name": `How to set up or switch health insurance in ${city}`,
       "step": [
         {"@type": "HowToStep", "name": "Compare models & premiums"},
         {"@type": "HowToStep", "name": "Apply to new insurer"},
         {"@type": "HowToStep", "name": "Cancel current policy by 30 Nov for 1 Jan start"}
       ]
-    }
+  })}>
   </script>
 
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
@@ -121,7 +128,7 @@ const faqs = [
           }
         }
       ]
-    }
+  })}>
   </script>
 
   <!-- Hero Section -->
@@ -532,6 +539,6 @@ const faqs = [
         city: '{city}',
         page: window.location.pathname 
       });
-    }
+  })}>
   </script>
 </Layout>

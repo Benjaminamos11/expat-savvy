@@ -59,26 +59,24 @@ const faqs = [
       "dateModified": "2025-01-03",
       "mainEntityOfPage": {"@type": "WebPage", "@id": `https://expat-savvy.ch/health-insurance/${citySlug}/`},
       "publisher": {"@type": "Organization", "name": "Expat Savvy"}
-    }
+  })}>
   </script>
 
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
       "name": `How to set up or switch health insurance in ${city}`,
       "step": [
         {"@type": "HowToStep", "name": "Compare models & premiums"},
         {"@type": "HowToStep", "name": "Apply to new insurer"},
         {"@type": "HowToStep", "name": "Cancel current policy by 30 Nov for 1 Jan start"}
       ]
-    }
+  })}>
   </script>
 
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
@@ -121,7 +119,7 @@ const faqs = [
           }
         }
       ]
-    }
+  })}>
   </script>
 
   <!-- Hero Section -->
@@ -532,6 +530,6 @@ const faqs = [
         city: '{city}',
         page: window.location.pathname 
       });
-    }
+  })}>
   </script>
 </Layout>

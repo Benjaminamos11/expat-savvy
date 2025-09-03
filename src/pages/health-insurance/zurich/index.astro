@@ -48,80 +48,87 @@ const faqs = [
   image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740598472/henrique-ferreira-6v-K4PpCHVw-unsplash_1_zkpj2a.webp"
 >
   <!-- JSON-LD Schema -->
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": `Health Insurance in ${city} (2026) — English Guide for Expats`,
-      "about": [{"@type": "City", "name": city}],
-      "inLanguage": "en",
-      "author": {"@type": "Organization", "name": "Expat Savvy"},
-      "dateModified": "2025-01-03",
-      "mainEntityOfPage": {"@type": "WebPage", "@id": `https://expat-savvy.ch/health-insurance/${citySlug}/`},
-      "publisher": {"@type": "Organization", "name": "Expat Savvy"}
-    }
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": `Health Insurance in ${city} (2026) — English Guide for Expats`,
+    "about": [{"@type": "City", "name": city}],
+    "inLanguage": "en",
+    "author": {"@type": "Organization", "name": "Expat Savvy"},
+    "datePublished": "2025-01-03",
+    "dateModified": "2025-01-03",
+    "mainEntityOfPage": {"@type": "WebPage", "@id": `https://expat-savvy.ch/health-insurance/${citySlug}/`},
+    "publisher": {
+      "@type": "Organization", 
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+      }
+    },
+    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740598472/henrique-ferreira-6v-K4PpCHVw-unsplash_1_zkpj2a.webp",
+    "description": `Find the best and cheapest health insurance in ${city} (2026). Compare premiums, models (Telmed/HMO), subsidies, and expat-friendly insurers. Free consultation in English.`
+  })}>
   </script>
 
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": `How to set up or switch health insurance in ${city}`,
-      "step": [
-        {"@type": "HowToStep", "name": "Compare models & premiums"},
-        {"@type": "HowToStep", "name": "Apply to new insurer"},
-        {"@type": "HowToStep", "name": "Cancel current policy by 30 Nov for 1 Jan start"}
-      ]
-    }
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `How to set up or switch health insurance in ${city}`,
+    "step": [
+      {"@type": "HowToStep", "name": "Compare models & premiums"},
+      {"@type": "HowToStep", "name": "Apply to new insurer"},
+      {"@type": "HowToStep", "name": "Cancel current policy by 30 Nov for 1 Jan start"}
+    ]
+  })}>
   </script>
 
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": `Why are premiums higher in ${city}?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": `${city} is in premium region 1, the highest cost bracket in Switzerland. This reflects higher healthcare costs, more specialists, and advanced medical facilities in the canton.`
-          }
-        },
-        {
-          "@type": "Question",
-          "name": `Which model is cheapest in ${city}?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Telmed is often the cheapest, followed by HMO/Family Doctor models. Standard usually costs the most but offers the most flexibility."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": `Can I pick any insurer or only a ${canton} company?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": `You can choose any licensed Swiss insurer. Your premium is based on your residence in ${city}, regardless of the insurer's location.`
-          }
-        },
-        {
-          "@type": "Question",
-          "name": `Where do I apply for subsidies in ${canton}?`,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": `Apply via the canton premium-reduction portal: ${subsidyUrl}.`
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the deadline to switch for 2026?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Send your cancellation by 30 November 2025 for a 1 January 2026 start."
-          }
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Why are premiums higher in ${city}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${city} is in premium region 1, the highest cost bracket in Switzerland. This reflects higher healthcare costs, more specialists, and advanced medical facilities in the canton.`
         }
-      ]
-    }
+      },
+      {
+        "@type": "Question",
+        "name": `Which model is cheapest in ${city}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Telmed is often the cheapest, followed by HMO/Family Doctor models. Standard usually costs the most but offers the most flexibility."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Can I pick any insurer or only a ${canton} company?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `You can choose any licensed Swiss insurer. Your premium is based on your residence in ${city}, regardless of the insurer's location.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Where do I apply for subsidies in ${canton}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Apply via the canton premium-reduction portal: ${subsidyUrl}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the deadline to switch for 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Send your cancellation by 30 November 2025 for a 1 January 2026 start."
+        }
+      }
+    ]
+  })}>
   </script>
 
   <!-- Hero Section -->
