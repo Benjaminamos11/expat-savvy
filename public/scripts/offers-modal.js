@@ -888,19 +888,8 @@ class OffersModal {
   // Main event binding (called once on init)
   bindEvents() {
     console.log('Binding main events.');
-    // Close modal events
-    document.getElementById('close-modal-btn')?.addEventListener('click', () => {
-      console.log('Close button clicked.');
-      this.closeModal();
-    });
-    document.getElementById('offers-modal')?.addEventListener('click', (e) => {
-      if (e.target === document.getElementById('offers-modal')) { // Clicked on backdrop
-        console.log('Backdrop clicked.');
-        this.closeModal();
-      }
-    });
-
-    // Escape key to close
+    
+    // Escape key to close (this can be bound early)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !document.getElementById('offers-modal')?.classList.contains('hidden')) {
         console.log('Escape key pressed.');
@@ -945,6 +934,35 @@ class OffersModal {
       const target = e.target;
       console.log('Global click detected on: ID=' + (target.id || 'none') + ', Tag=' + target.tagName + ', Classes=' + (target.className || 'none') + ', Parent=' + (target.parentElement?.tagName || 'none'));
     }, {capture: true});
+  }
+
+  // Bind close events when modal is opened (close button exists in DOM)
+  bindCloseEvents() {
+    console.log('Binding close events for modal.');
+    
+    // Close button
+    const closeBtn = document.getElementById('close-modal-btn');
+    if (closeBtn && !closeBtn.dataset.closeAttached) {
+      closeBtn.addEventListener('click', () => {
+        console.log('Close button clicked.');
+        this.closeModal();
+      });
+      closeBtn.dataset.closeAttached = 'true';
+      console.log('Close button listener attached.');
+    }
+    
+    // Backdrop click
+    const modal = document.getElementById('offers-modal');
+    if (modal && !modal.dataset.backdropAttached) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) { // Clicked on backdrop
+          console.log('Backdrop clicked.');
+          this.closeModal();
+        }
+      });
+      modal.dataset.backdropAttached = 'true';
+      console.log('Backdrop listener attached.');
+    }
   }
 
   // Attach event handlers for dynamically rendered step content
@@ -1271,6 +1289,9 @@ class OffersModal {
     console.log('Modal visibility confirmed');
     
     this.renderContent();
+
+    // Bind close events now that modal is rendered
+    this.bindCloseEvents();
 
     // Attach mobile listeners after modal is visible
     this.attachMobileListeners();
