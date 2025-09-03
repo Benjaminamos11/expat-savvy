@@ -891,8 +891,14 @@ class OffersModal {
     
     // Global close button handler (fallback for all pages)
     document.addEventListener('click', (e) => {
-      if (e.target.closest('#close-modal-btn')) {
-        console.log('🔴 GLOBAL CLOSE BUTTON CLICKED!');
+      // Check if clicked element or any parent is the close button
+      const closeBtn = e.target.closest('#close-modal-btn') || 
+                      (e.target.id === 'close-modal-btn') ||
+                      (e.target.parentElement && e.target.parentElement.id === 'close-modal-btn') ||
+                      (e.target.parentElement && e.target.parentElement.parentElement && e.target.parentElement.parentElement.id === 'close-modal-btn');
+      
+      if (closeBtn) {
+        console.log('🔴 GLOBAL CLOSE BUTTON CLICKED!', 'Target:', e.target.tagName, 'ID:', e.target.id);
         e.preventDefault();
         e.stopPropagation();
         this.closeModal();
@@ -957,11 +963,22 @@ class OffersModal {
     if (closeBtn && !closeBtn.dataset.closeAttached) {
       // Use event delegation to catch all clicks on button and its children
       closeBtn.addEventListener('click', (e) => {
-        console.log('🔴 CLOSE BUTTON AREA CLICKED!', 'Target:', e.target.tagName);
+        console.log('🔴 CLOSE BUTTON AREA CLICKED!', 'Target:', e.target.tagName, 'Classes:', e.target.className);
         e.preventDefault();
         e.stopPropagation();
         this.closeModal();
       }, true); // Use capture phase to catch all clicks
+      
+      // Also add listener to all child elements
+      const allChildren = closeBtn.querySelectorAll('*');
+      allChildren.forEach(child => {
+        child.addEventListener('click', (e) => {
+          console.log('🔴 CLOSE BUTTON CHILD CLICKED!', 'Target:', e.target.tagName);
+          e.preventDefault();
+          e.stopPropagation();
+          this.closeModal();
+        });
+      });
       
       closeBtn.dataset.closeAttached = 'true';
       console.log('✅ Close button listener attached successfully.');
