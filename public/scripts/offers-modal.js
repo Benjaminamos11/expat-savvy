@@ -1254,11 +1254,19 @@ class OffersModal {
     this.currentStep = 'intro';
     this.formData = { people: [{}], name: '' };
     
+    // Save current scroll position before opening modal
+    this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    console.log('Saved scroll position:', this.scrollPosition);
+    
     modal.classList.remove('hidden');
     modal.style.display = 'block !important'; // Override for visibility
     modal.style.visibility = 'visible';
     modal.style.opacity = '1';
     document.body.classList.add('modal-open');
+    
+    // Set the body's top position to maintain visual scroll position
+    document.body.style.top = `-${this.scrollPosition}px`;
+    
     console.log('Modal opening initiated');
     console.log('Modal visibility confirmed');
     
@@ -1279,7 +1287,16 @@ class OffersModal {
     const modal = document.getElementById('offers-modal');
     if (modal) {
       modal.classList.add('hidden');
-      document.body.classList.remove('modal-open'); // Restore body scroll
+      
+      // Remove modal-open class and restore scroll position
+      document.body.classList.remove('modal-open');
+      document.body.style.top = ''; // Clear the top style
+      
+      // Restore the scroll position
+      if (this.scrollPosition !== undefined) {
+        console.log('Restoring scroll position:', this.scrollPosition);
+        window.scrollTo(0, this.scrollPosition);
+      }
     }
     // Optionally reset form state here
   }
