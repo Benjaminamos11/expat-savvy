@@ -145,8 +145,8 @@
     // Check for existing click handlers
     fixAllButtons();
     
-    // Alert user
-    alert("Modal added to page! You can now use the consultation buttons.");
+    // Modal added successfully
+    console.log("Modal added to page! Consultation buttons are now active.");
   }
   
   // Fix all consultation buttons to use the dynamically added modal

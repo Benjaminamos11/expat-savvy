@@ -165,8 +165,8 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <!-- Component Helper - DISABLED to prevent conflicts -->
     <!-- <script is:inline defer src="/scripts/component-helper.js"></script> -->
     
-    <!-- Global consultation modal enhancer -->
-    <script is:inline defer>
+    <!-- Global consultation modal enhancer -- DISABLED to prevent conflicts -->
+    <!-- <script is:inline defer>
       // Modal enhancer - ensures all consultation buttons work
       (function() {
         document.addEventListener('DOMContentLoaded', function() {
@@ -231,6 +231,44 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
           });
         });
       })();
+    </script> -->
+
+    <script>
+      // @ts-ignore
+      window.handleNextStep = function() {
+        console.time('handleNextStep total');
+        console.log('Next button onclick triggered');
+        
+        // @ts-ignore
+        if (window.globalOffersModal) {
+          // @ts-ignore
+          const instance = window.globalOffersModal;
+          
+          console.time('validateStep');
+          const isValid = instance.validateStep(instance.currentStep);
+          console.timeEnd('validateStep');
+          console.log('Validation result:', isValid);
+          
+          if (isValid) {
+            if (instance.currentStep < 6) {
+              console.time('nextStep');
+              console.log('Advancing to step', instance.currentStep + 1);
+              instance.nextStep();
+              console.timeEnd('nextStep');
+            } else {
+              console.time('submitOffersForm');
+              instance.submitOffersForm();
+              console.timeEnd('submitOffersForm');
+            }
+          } else {
+            console.log('Validation failed - not advancing');
+          }
+        } else {
+          console.error('OffersModal instance not found');
+        }
+        
+        console.timeEnd('handleNextStep total');
+      };
     </script>
   </body>
 </html>

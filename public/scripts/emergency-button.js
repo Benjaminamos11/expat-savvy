@@ -131,7 +131,7 @@
         return false;
       } catch (err) {
         console.error("💣 Error during emergency close:", err);
-        alert("Error during close. Press F5 to reload the page.");
+        console.log("If modal won't close, press F5 to reload the page.");
         return false;
       }
     };

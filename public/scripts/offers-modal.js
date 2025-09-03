@@ -1,2063 +1,1562 @@
-/**
- * OffersModal - Dynamic lead generation modal
- * Replaces old consultation modal with "Get 3 Best Offers" + consultation paths
- */
+
+window.handleNextStep = function() {
+  if (window.globalOffersModal) {
+    const instance = window.globalOffersModal;
+    if (instance.validateStep(instance.currentStep)) {
+      if (instance.currentStep < 6) {
+        instance.nextStep();
+      } else {
+        instance.submitOffersForm();
+      }
+    }
+  } else {
+    console.error('OffersModal instance not found');
+  }
+};
 
 class OffersModal {
   constructor() {
-    this.currentStep = 1;
-    this.totalSteps = 6;
-    this.formData = {};
-    this.isProcessing = false;
-    this.isMobile = window.innerWidth < 1024;
-    
-    // Intent and page context
+    this.currentStep = 'intro'; // 'intro', 'consultation_intake', or step numbers 1-6, 'thankyou'
+    this.formData = { people: [{}] }; // Init with one person
     this.pageIntent = this.detectPageIntent();
-    this.providerContext = this.getProviderContext();
+    this.isMobile = window.innerWidth < 1024; // Simple mobile detection
+    this.listenersAttachedForStep = false; // Flag to prevent multiple attachments
     
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => this.init());
-    } else {
-      this.init();
-    }
-  }
-  
-  init() {
-    this.bindEvents();
-    this.generateSocialProof();
-    this.setupEventTracking();
-    console.log('OffersModal initialized with intent:', this.pageIntent);
+    this.init();
   }
 
-  // Open the modal
-  openModal() {
-    console.log('🚀 Opening OffersModal');
-    
-    const modal = document.getElementById('offers-modal');
-    if (!modal) {
-      console.error('❌ Modal element not found');
+  init() {
+    this.bindEvents();
+    this.setupGlobalModalAccess();
+    this.renderContent(); // Initial render when modal is created
+    console.log('OffersModal initialized.');
+  }
+
+  // Detect page intent (simplified for now)
+  detectPageIntent() {
+    const path = window.location.pathname;
+    if (path.includes('/setup')) return 'setup';
+    if (path.includes('/change')) return 'change';
+    return 'home'; // Default
+  }
+
+  // Render content based on current step
+  renderContent() {
+    const mobileContentDiv = document.getElementById('mobile-content');
+    const desktopContentDiv = document.getElementById('desktop-content');
+    if (!mobileContentDiv || !desktopContentDiv) {
+      console.error('Modal content divs not found.');
       return;
     }
 
-    // Reset to step 1
-    this.currentStep = 1;
-    
-    // Show modal
-    modal.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-    
-    // Render initial content
-    this.renderMobileContent();
-    this.renderDesktopContent();
-    
-    // Track event
-    this.trackEvent('modal_opened', { intent: this.pageIntent });
-    
-    console.log('✅ OffersModal opened successfully');
+    let contentHTML = '';
+
+    // For desktop on intro step, create the two-column layout with sidebar
+    if (!this.isMobile && this.currentStep === 'intro') {
+      contentHTML = `
+        <div class="flex h-full">
+          <div class="flex-1 p-8 overflow-y-auto">
+            ${this.renderIntroStep()}
+          </div>
+          <div class="w-[360px] p-6 border-l bg-white flex flex-col">
+            <img 
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_112,h_112,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp" 
+              alt="Robert — Expat Savvy Advisor" 
+              class="w-[112px] h-[112px] rounded-full mx-auto mb-4 object-cover"
+            />
+            <h4 class="text-center text-xl font-bold">Robert Kolar</h4>
+            <p class="text-center text-gray-600 mb-3">FINMA Registered Advisor</p>
+            <div class="flex justify-center gap-2 mb-6">
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">English</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">German</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">French</span>
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Czech</span>
+            </div>
+            <div class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <h5 class="font-semibold mb-2">What to expect</h5>
+              <ul class="list-disc pl-4 text-sm space-y-1 text-gray-700">
+                <li>Personal, English-speaking advice</li>
+                <li>Compare all major insurers</li>
+                <li>Free & no obligation</li>
+              </ul>
+            </div>
+            <div style="height: 60px;"></div>
+            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold text-lg transition-colors hover:bg-red-700" onclick="window.globalOffersModal && window.globalOffersModal.startConsultationFlow()">Book Free Consultation</button>
+          </div>
+        </div>
+      `;
+    } else if (this.currentStep === 'intro') {
+      contentHTML = this.renderIntroStep();
+    } else if (this.currentStep === 'consultation_intake') {
+      contentHTML = this.renderConsultationIntakeStep();
+    } else if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6) {
+      contentHTML = this.renderOffersStep(this.currentStep);
+    } else if (this.currentStep === 'thankyou') {
+      contentHTML = this.renderThankYouStep();
+    }
+
+    // Start interval before setting HTML for form steps
+    let interval;
+    if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6 && !this.listenersAttachedForStep) {
+      console.log('Starting interval check for desktop buttons');
+      const checkInterval = 100;
+      const maxTime = 2000;
+      let timeElapsed = 0;
+
+      const nextHandler = (e) => {
+        console.log('Desktop next button clicked');
+        e.preventDefault();
+        if (this.validateStep(this.currentStep)) {
+          if (this.currentStep < 6) {
+            console.log('Step advanced to', this.currentStep + 1);
+            this.nextStep();
+          } else {
+            this.submitOffersForm();
+          }
+        }
+      };
+
+      const backHandler = (e) => {
+        console.log('Desktop back button clicked');
+        e.preventDefault();
+        this.previousStep();
+      };
+
+      const attachIfExists = (id, handler, logMsg) => {
+        let btn = document.getElementById(id);
+        if (btn && btn.dataset.attached !== 'true') {
+          console.log(`Attaching ${logMsg} listener to: ${id}`);
+          btn.addEventListener('click', handler, {capture: true});
+          btn.addEventListener('touchend', handler, {capture: true});
+          btn.dataset.attached = 'true';
+          console.log(`${logMsg} listener attached successfully`);
+          return true;
+        } else if (btn) {
+          console.log(`Immediate check for ${logMsg}: already attached`);
+        } else {
+          console.log(`Immediate check for ${logMsg}: not found`);
+        }
+        return false;
+      };
+
+      // Immediate check before interval
+      const nextAttached = attachIfExists('step-next', nextHandler, 'desktop next');
+      const backAttached = attachIfExists('step-back', backHandler, 'desktop back');
+      if (nextAttached && backAttached) {
+        this.listenersAttachedForStep = true;
+        console.log('Desktop listeners attached on immediate check');
+      } else {
+        interval = setInterval(() => {
+          timeElapsed += checkInterval;
+          console.log(`Checking for buttons at ${timeElapsed}ms`);
+          const nextNowAttached = attachIfExists('step-next', nextHandler, 'desktop next');
+          const backNowAttached = attachIfExists('step-back', backHandler, 'desktop back');
+          if (nextNowAttached && backNowAttached) {
+            clearInterval(interval);
+            this.listenersAttachedForStep = true;
+            console.log('Desktop listeners attached via interval check');
+          } else if (timeElapsed >= maxTime) {
+            clearInterval(interval);
+            console.error('Timeout - desktop buttons not found after 2s');
+          }
+        }, checkInterval);
+      }
+    }
+
+    mobileContentDiv.innerHTML = contentHTML;
+    desktopContentDiv.innerHTML = contentHTML; // Restore to simple, no sidebar in JS
+    console.log("Rendered content HTML:", contentHTML);
+
+    // Explicit check after setting HTML
+    if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6 && !this.listenersAttachedForStep) {
+      const nextHandler = (e) => {
+        console.log('Desktop next button clicked');
+        e.preventDefault();
+        if (this.validateStep(this.currentStep)) {
+          if (this.currentStep < 6) {
+            console.log('Step advanced to', this.currentStep + 1);
+            this.nextStep();
+          } else {
+            this.submitOffersForm();
+          }
+        }
+      };
+
+      const backHandler = (e) => {
+        console.log('Desktop back button clicked');
+        e.preventDefault();
+        this.previousStep();
+      };
+
+      const attachIfExists = (id, handler, logMsg) => {
+        let btn = document.getElementById(id);
+        if (btn && btn.dataset.attached !== 'true') {
+          console.log(`Attaching ${logMsg} listener to: ${id}`);
+          btn.addEventListener('click', handler, {capture: true});
+          btn.addEventListener('touchend', handler, {capture: true});
+          btn.dataset.attached = 'true';
+          console.log(`${logMsg} listener attached successfully`);
+          return true;
+        }
+        return false;
+      };
+
+      const nextAttached = attachIfExists('step-next', nextHandler, 'desktop next');
+      const backAttached = attachIfExists('step-back', backHandler, 'desktop back');
+      if (nextAttached && backAttached) {
+        this.listenersAttachedForStep = true;
+        console.log('Desktop listeners attached on explicit check after innerHTML');
+        if (interval) clearInterval(interval);
+      } else {
+        console.log('Explicit check after innerHTML: buttons not found - continuing with interval');
+      }
+    }
+
+    setTimeout(() => {
+      this.attachStepEventHandlers();
+      this.initializeLucideIcons();
+      if (this.isMobile && typeof this.currentStep === 'number') {
+        this.updateMobileProgress();
+        this.updateMobileFooter();
+        this.attachMobileListeners();
+      }
+    }, 0);
   }
 
-  // Close the modal
-  closeModal() {
-    console.log('❌ Closing OffersModal');
+  renderIntroStep() {
+    const socialCount = this.generateSocialProof();
+    const { headline, subline } = this.getHeadlineContent();
     
-    const modal = document.getElementById('offers-modal');
-    if (modal) {
-      modal.classList.add('hidden');
-      document.body.classList.remove('modal-open');
+    if (this.isMobile) {
+      // Mobile version with consultation button
+      return `
+        <div data-step-name="intro">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">${headline}</h2>
+            <p class="text-gray-600 mb-4">${subline}</p>
+            
+            <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800">
+              <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-green-600"></i>
+              ${socialCount} people booked consultations in the last 24 hours
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 gap-3 mb-6">
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="setup">
+              <i data-lucide="home" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I need to set up Swiss health insurance (new in Switzerland)</p>
+            </button>
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="switch">
+              <i data-lucide="repeat" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I want to switch to a cheaper plan for 2026</p>
+            </button>
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="review">
+              <i data-lucide="search" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I'd like to review my current coverage</p>
+            </button>
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="family">
+              <i data-lucide="users" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I need advice for my family / special situation</p>
+            </button>
+          </div>
+          
+          <button id="start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold text-lg transition-colors mb-3">
+            <div class="flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+              <div>
+                <div class="font-semibold">Get 3 Best Offers</div>
+                <div class="text-green-100 text-sm">Takes ~1 min</div>
+              </div>
+            </div>
+          </button>
+          
+          <button id="mobile-consultation-btn" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors" onclick="window.globalOffersModal && window.globalOffersModal.startConsultationFlow()">
+            <div class="flex items-center justify-center">
+              <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+              Book Free Consultation
+            </div>
+          </button>
+        </div>
+      `;
+    } else {
+      // Desktop version (no consultation button - it's in sidebar)
+      return `
+        <div data-step-name="intro">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">${headline}</h2>
+            <p class="text-gray-600 mb-4">${subline}</p>
+            
+            <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800">
+              <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-green-600"></i>
+              ${socialCount} people booked consultations in the last 24 hours
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="setup">
+              <i data-lucide="home" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I need to set up Swiss health insurance (new in Switzerland)</p>
+            </button>
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="switch">
+              <i data-lucide="repeat" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I want to switch to a cheaper plan for 2026</p>
+            </button>
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="review">
+              <i data-lucide="search" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I'd like to review my current coverage</p>
+            </button>
+            <button class="motivation-card p-4 border border-gray-300 rounded-lg hover:bg-gray-50 text-left" data-motivation="family">
+              <i data-lucide="users" class="w-5 h-5 text-green-600 mb-2"></i>
+              <p>I need advice for my family / special situation</p>
+            </button>
+          </div>
+          
+          <div style="height: 60px;"></div>
+          
+          <button id="start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold text-lg transition-colors">
+            <div class="flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+              <div>
+                <div class="font-semibold">Get 3 Best Offers</div>
+                <div class="text-green-100 text-sm">Takes ~1 min</div>
+              </div>
+            </div>
+          </button>
+        </div>
+      `;
     }
   }
 
-  // Bind global event handlers
-  bindEvents() {
-    // Close button
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('#close-offers-modal-btn, [data-close-modal="true"]')) {
-        this.closeModal();
-      }
-    });
+  renderConsultationIntakeStep() {
+    console.log('Generating Consultation Intake Step HTML.');
+    // This will be implemented in a later step once basic functionality is confirmed
+    return `
+      <div class="max-w-sm mx-auto space-y-6 p-6" data-step-name="consultation_intake">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="calendar" class="w-6 h-6 text-red-600"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Book Free Consultation</h2>
+          <p class="text-gray-600">Just a few quick details to prepare for your call with Robert.</p>
+        </div>
+        
+        <form id="consultation-form" class="space-y-4">
+          <div>
+            <label for="consultation-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input type="text" id="consultation-name" name="consultation-name" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                   placeholder="Your name" required value="${this.formData.name || ''}">
+            <p id="error-consultation-name" class="text-red-500 text-xs mt-1 hidden">Please enter your name.</p>
+          </div>
+          
+          <div>
+            <label for="consultation-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="consultation-email" name="consultation-email" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                   placeholder="your@email.com" required value="${this.formData.email || ''}">
+            <p id="error-consultation-email" class="text-red-500 text-xs mt-1 hidden">Please enter a valid email.</p>
+          </div>
+          
+          <div>
+            <label for="consultation-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
+            <input type="tel" id="consultation-phone" name="consultation-phone" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                   placeholder="+41 XX XXX XX XX" value="${this.formData.phone || ''}">
+          </div>
+          
+          <div>
+            <label for="consultation-reason" class="block text-sm font-medium text-gray-700 mb-1">What would you like to discuss?</label>
+            <textarea id="consultation-reason" name="consultation-reason" rows="3" required
+                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      placeholder="e.g. I'm new to Switzerland and need help choosing health insurance...">${this.formData.consultation_reason || ''}</textarea>
+            <p id="error-consultation-reason" class="text-red-500 text-xs mt-1 hidden">Please tell us what you'd like to discuss.</p>
+          </div>
+          
+          <div class="pt-4">
+            <button type="submit" id="consultation-continue-btn" 
+                    class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+              Continue to Calendar
+            </button>
+            
+            <button type="button" id="consultation-back-btn" 
+                    class="w-full mt-3 text-gray-600 hover:text-gray-800 underline">
+              Back to Get 3 Best Offers
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+  }
 
-    // Mobile navigation
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('#mobile-back-btn')) {
-        this.previousStep();
+  renderOffersStep(step) {
+    const { title, subtitle, intro } = this.getStepInfo(step);
+    
+    if (!this.isMobile) {
+      // Desktop: Two column layout with proper padding
+      let stepHTML = `
+        <div class="flex gap-6 h-full p-8">
+          <div class="flex-1 overflow-y-auto pr-4">
+            <h3 class="text-2xl font-bold mb-2">${title}</h3>
+            ${subtitle ? `<p class="text-gray-600 mb-6">${subtitle}</p>` : ''}
+            ${intro ? `<div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <p class="text-sm text-blue-800">${intro}</p>
+            </div>` : ''}`;
+    
+      // Add step content in left column
+      stepHTML += this.getStepContent(step);
+      
+      // Close left column, add right column with banner
+      stepHTML += `
+          </div>
+          <div class="w-[320px] flex-shrink-0">
+            ${this.getStepBanner()}
+          </div>
+        </div>`;
+      return stepHTML;
+    } else {
+      // Mobile: Single column with banner at top
+      let stepHTML = this.getStepBanner();
+      stepHTML += `<h3 class="text-xl font-bold mb-2">${title}</h3>`;
+      stepHTML += subtitle ? `<p class="text-gray-600 mb-4">${subtitle}</p>` : '';
+      stepHTML += intro ? `<div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+        <p class="text-sm text-blue-800">${intro}</p>
+      </div>` : '';
+      stepHTML += this.getStepContent(step);
+      return stepHTML;
+    }
+  }
+  
+  getStepContent(step) {
+    let stepHTML = '';
+    
+    switch (step) {
+      case 1:
+        stepHTML += `
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+              <input type="text" name="name" required value="${this.formData.name || ''}" placeholder="e.g. Benjamin Wagner"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+              <p id="error-name" class="text-red-500 text-xs mt-1 hidden">Please enter your name.</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Postcode (optional)</label>
+              <input type="text" name="postcode" pattern="\\d{4}" placeholder="e.g. 8001" value="${this.formData.postcode || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+              <p class="text-sm text-gray-500 mt-1">If you don't have one yet (new to Switzerland), leave blank—we'll follow up.</p>
+              <p id="error-postcode" class="text-red-500 text-xs mt-1 hidden">Invalid format (must be 4 digits).</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Household Type</label>
+              <select name="household" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                <option value="">Select</option>
+                <option value="single" ${this.formData.household === 'single' ? 'selected' : ''}>Single</option>
+                <option value="couple" ${this.formData.household === 'couple' ? 'selected' : ''}>Couple</option>
+                <option value="family" ${this.formData.household === 'family' ? 'selected' : ''}>Family</option>
+              </select>
+              <p id="error-household" class="text-red-500 text-xs mt-1 hidden">Please select household type.</p>
+            </div>
+          </div>
+        `;
+        // After setting innerHTML, add listeners
+        setTimeout(() => {
+          const contentDiv = document.getElementById('desktop-content') || document.getElementById('mobile-content');
+          if (!contentDiv) return;
+          
+          const nameInput = contentDiv.querySelector('input[name="name"]');
+          if (nameInput) nameInput.addEventListener('input', () => console.log('Name input to:', nameInput.value.trim()));
+          
+          const postcodeInput = contentDiv.querySelector('input[name="postcode"]');
+          if (postcodeInput) postcodeInput.addEventListener('input', () => console.log('Postcode input to:', postcodeInput.value));
+          
+          const householdSelect = contentDiv.querySelector('select[name="household"]');
+          if (householdSelect) householdSelect.addEventListener('change', () => console.log('Household selected:', householdSelect.value));
+        }, 0);
+        break;
+      case 2:
+        // Ensure at least one person exists
+        if (this.formData.people.length === 0) {
+          this.formData.people = [{ dob: '', employment: '' }];
+        }
+        
+        let peopleHTML = '';
+        for (let i = 1; i <= this.formData.people.length; i++) {
+          const person = this.formData.people[i-1];
+          peopleHTML += `
+            <div class="relative border-b pb-4 mb-4" data-person="${i}">
+              <button class="remove-person absolute top-0 right-0 text-red-600 hover:bg-red-50 p-1 rounded" data-person="${i}" ${this.formData.people.length <= 1 ? 'style="display: none;"' : ''}>
+                <i data-lucide="x" class="w-5 h-5"></i>
+              </button>
+              <h4 class="font-semibold mb-4">Person ${i}</h4>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                  <input type="date" name="dob-${i}" required value="${person.dob || ''}" max="${new Date().toISOString().split('T')[0]}" placeholder="YYYY-MM-DD" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                  <p id="error-dob-${i}" class="text-red-500 text-xs mt-1 hidden">Please enter a valid date of birth.</p>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Employment Status</label>
+                  <select name="employment-${i}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                    <option value="">Select</option>
+                    <option value="employed" ${person.employment === 'employed' ? 'selected' : ''}>Employed</option>
+                    <option value="self-employed" ${person.employment === 'self-employed' ? 'selected' : ''}>Self-employed</option>
+                    <option value="student" ${person.employment === 'student' ? 'selected' : ''}>Student</option>
+                    <option value="retired" ${person.employment === 'retired' ? 'selected' : ''}>Retired</option>
+                    <option value="unemployed" ${person.employment === 'unemployed' ? 'selected' : ''}>Unemployed</option>
+                  </select>
+                  <p id="error-employment-${i}" class="text-red-500 text-xs mt-1 hidden">Please select employment status.</p>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        stepHTML += `
+          <div class="space-y-6">
+            ${peopleHTML}
+            <button id="add-person" class="mt-4 px-4 py-2 bg-gray-200 rounded-lg">Add Person</button>
+          </div>
+        `;
+        
+
+        break;
+      case 3:
+        stepHTML += `
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Deductible</label>
+              <select name="deductible" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                <option value="">Select deductible</option>
+                <option value="300" ${this.formData.deductible === '300' ? 'selected' : ''}>CHF 300 (higher premiums)</option>
+                <option value="500" ${this.formData.deductible === '500' ? 'selected' : ''}>CHF 500</option>
+                <option value="1000" ${this.formData.deductible === '1000' ? 'selected' : ''}>CHF 1,000</option>
+                <option value="1500" ${this.formData.deductible === '1500' ? 'selected' : ''}>CHF 1,500</option>
+                <option value="2000" ${this.formData.deductible === '2000' ? 'selected' : ''}>CHF 2,000</option>
+                <option value="2500" ${this.formData.deductible === '2500' ? 'selected' : ''}>CHF 2,500 (lowest premiums)</option>
+              </select>
+              <p class="text-sm text-gray-500 mt-1">Choose higher for savings if you rarely visit doctors.</p>
+              <p id="error-deductible" class="text-red-500 text-xs mt-1 hidden">Please select a deductible.</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Insurance Model</label>
+              <select name="model" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                <option value="">Select model</option>
+                <option value="standard" ${this.formData.model === 'standard' ? 'selected' : ''}>Standard (free doctor choice)</option>
+                <option value="telmed" ${this.formData.model === 'telmed' ? 'selected' : ''}>Telmed (phone first, save ~15%)</option>
+                <option value="family-doctor" ${this.formData.model === 'family-doctor' ? 'selected' : ''}>Family Doctor (assigned GP, save ~10%)</option>
+                <option value="hmo" ${this.formData.model === 'hmo' ? 'selected' : ''}>HMO (network clinics, save ~20%)</option>
+              </select>
+              <p class="text-sm text-gray-500 mt-1">Restricted models lower premiums but limit doctor choice.</p>
+              <p id="error-model" class="text-red-500 text-xs mt-1 hidden">Please select an insurance model.</p>
+            </div>
+          </div>
+        `;
+        break;
+      case 4:
+        stepHTML += `
+          <div class="space-y-4">
+            <p class="text-base text-gray-700 mb-6">Thank you for your information ${this.formData.name ? this.formData.name.split(' ')[0] : ''}! Now to find the best options for you, please tell us about your preferences.</p>
+            <p class="text-sm text-gray-600 mb-4">Rate how important each coverage type is to you:</p>
+            ${['Alternative Medicine', 'Dental Care', 'Private Hospital Room', 'Maternity Benefits', 'Fitness/Gym Coverage', 'International Travel', 'Mental Health'].map(priority => `
+              <div class="mb-4">
+                <label class="text-sm font-medium text-gray-700 block mb-2">${priority}</label>
+                <div class="relative">
+                  <input type="range" min="1" max="5" value="${this.formData.priorities?.[priority.toLowerCase().replace(' ', '_')] || 3}" name="priority-${priority.toLowerCase().replace(' ', '_')}"
+                         class="w-full accent-green-600">
+                  <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Not important</span>
+                    <span>Very important</span>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+            <label class="block text-sm font-medium text-gray-700 mt-6">Other Needs</label>
+            <textarea name="other-needs" placeholder="Any specific requirements? (e.g., coverage for glasses, orthodontics)" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" rows="3">${this.formData.other_needs || ''}</textarea>
+          </div>
+        `;
+        break;
+      case 5:
+        stepHTML += `
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input type="email" name="email" required value="${this.formData.email || ''}" placeholder="your@email.com"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+              <p id="error-email" class="text-red-500 text-xs mt-1 hidden">Please enter a valid email address.</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
+              <input type="tel" name="phone" value="${this.formData.phone || ''}" placeholder="+41 ..."
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
+              <p class="text-sm text-gray-500 mt-1">For faster follow-up if needed.</p>
+              <p id="error-phone" class="text-red-500 text-xs mt-1 hidden">Please enter a valid phone number.</p>
+            </div>
+            <label class="flex items-start">
+              <input type="checkbox" name="consent" required class="mt-1 mr-2">
+              <span class="text-sm text-gray-600">I consent to Expat Savvy processing my data to provide personalized health insurance offers and contacting me via email/phone. This is free, no-obligation, and I can withdraw consent anytime. See our <a href="/privacy" class="text-green-600 underline">Privacy Policy</a>.</span>
+            </label>
+            <p id="error-consent" class="text-red-500 text-xs hidden">You must agree to continue.</p>
+          </div>
+        `;
+        break;
+      case 6:
+        stepHTML += `
+          <div class="text-center mb-6">
+            <p class="text-lg text-gray-700">Perfect! We'll send your 3 personalized insurance offers to <strong>${this.formData.email}</strong> within 24 hours.</p>
+          </div>
+          <div class="border border-gray-300 rounded-lg p-4 mb-6 bg-gray-50 space-y-2">
+            <h4 class="font-semibold mb-2">Your Summary</h4>
+            <p><strong>Name:</strong> ${this.formData.name || 'N/A'}</p>
+            <p><strong>Postcode:</strong> ${this.formData.postcode || 'N/A'}</p>
+            <p><strong>Household:</strong> ${this.formData.household || 'N/A'}</p>
+            <p><strong>Number of People:</strong> ${this.formData.people.length}</p>
+            <p><strong>Deductible:</strong> CHF ${this.formData.deductible || 'N/A'}</p>
+            <p><strong>Model:</strong> ${this.formData.model || 'N/A'}</p>
+            <p><strong>Email:</strong> ${this.formData.email || 'N/A'}</p>
+          </div>
+          <a href="#" id="prefer-talk" class="block text-center text-gray-600 underline mb-4">Prefer to talk now? Book Free Consultation →</a>
+        `;
+        break;
+    }
+
+    // Add navigation buttons (hidden on mobile, not on thank you step)
+    if (!this.isMobile && typeof step === 'number') {
+      stepHTML += `
+        <div class="mt-8 flex justify-between">
+          <button id="step-back" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 ${step === 1 ? 'invisible' : ''}" onclick="window.globalOffersModal && window.globalOffersModal.previousStep()">Back</button>
+          <button id="step-next" class="px-6 py-3 bg-green-600 text-white rounded-lg" onclick="window.handleNextStep()">${step === 6 ? 'Send My Request' : 'Next'}</button>
+        </div>
+      `;
+    }
+    
+    return stepHTML;
+  }
+
+  getStepTitle(step) {
+    const titles = ['Where & Who', 'People', 'Basic Insurance', 'Your Preferences', 'Contact & Consent', 'Review & Send'];
+    return titles[step - 1];
+  }
+
+  getStepInfo(step) {
+    const name = this.formData.name ? this.formData.name.split(' ')[0] : '';
+    
+    const stepInfoMap = {
+      1: {
+        title: name ? `Welcome ${name}! Let's get started` : "Let's get you the best insurance rates",
+        subtitle: "First, we need a few basic details about you",
+        intro: this.getIntentBasedIntro()
+      },
+      2: {
+        title: name ? `Thanks ${name}! Who needs coverage?` : "Who needs insurance coverage?",
+        subtitle: "Tell us about everyone who needs to be insured",
+        intro: "We only ask for the minimum information needed to calculate accurate rates. All insurers require date of birth and employment status for pricing."
+      },
+      3: {
+        title: "Choose your basic insurance preferences",
+        subtitle: "These choices significantly impact your premiums",
+        intro: "The deductible and insurance model are the two main factors that determine your monthly costs. We'll help you understand each option."
+      },
+      4: {
+        title: name ? `${name}, what's important to you?` : "What matters most in your coverage?",
+        subtitle: "Help us find plans that match your priorities",
+        intro: "While basic insurance is standardized by law, supplementary options vary greatly. Tell us what matters so we can recommend the best fit."
+      },
+      5: {
+        title: "Almost done! How can we reach you?",
+        subtitle: "We'll send your personalized comparison here",
+        intro: "Your information is secure and will only be used to send your insurance comparison. We never share your data without permission."
+      },
+      6: {
+        title: "Review your information",
+        subtitle: "Make sure everything looks correct before we calculate your rates",
+        intro: null
       }
-      if (e.target.matches('#mobile-next-btn')) {
-        this.nextStep();
+    };
+    
+    return stepInfoMap[step] || { title: `Step ${step}`, subtitle: '', intro: null };
+  }
+
+  getIntentBasedIntro() {
+    const intentMessages = {
+      'setup': "As someone new to Switzerland, getting the right health insurance is crucial. We'll help you navigate the system and find the best coverage for your needs.",
+      'change': "Great timing! The annual switching window is open until November 30th. We'll help you find better rates for 2026.",
+      'cheapest': "Looking to save money? Smart move! We'll compare all insurers to find you the lowest rates while maintaining good coverage.",
+      'best': "You want the best value, not just the cheapest. We'll balance price, service, and coverage to find your ideal insurer.",
+      'compare': "Comparing insurers is smart - prices can vary by hundreds of francs for the same coverage. Let's find your best option.",
+      'provider': "Researching specific insurers? We'll show you how they compare to others and if they're the right fit for you.",
+      'home': "Whether you're new to Switzerland or looking to optimize your coverage, we'll help you find the best insurance solution."
+    };
+    
+    return intentMessages[this.pageIntent] || intentMessages['home'];
+  }
+
+  renderThankYouStep() {
+    const email = this.formData.email || 'your email';
+    let seasonalBanner = '';
+    if (['change', 'cheapest'].includes(this.pageIntent)) {
+      seasonalBanner = '<div class="bg-yellow-50 border border-yellow-200 p-4 mb-6 rounded-lg"><div class="flex items-center"><i data-lucide="clock" class="w-5 h-5 text-yellow-600 mr-2"></i><span class="text-yellow-800 font-medium">Deadline: Switch by Nov 30 for 2026 savings!</span></div></div>';
+    }
+    
+    return `
+      <div class="max-w-md mx-auto text-center p-8">
+        <div class="mb-6">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="check" class="w-8 h-8 text-green-600"></i>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-3">Thank you!</h2>
+          <h3 class="text-xl text-gray-700 mb-4">Your 3 tailored offers are on the way</h3>
+        </div>
+        
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-6">
+          <div class="flex items-center justify-center mb-3">
+            <i data-lucide="mail" class="w-5 h-5 text-gray-600 mr-2"></i>
+            <span class="text-gray-600 font-medium">Sending to:</span>
+          </div>
+          <p class="text-lg font-semibold text-gray-900">${email}</p>
+          <p class="text-sm text-gray-600 mt-2">Within 24 hours</p>
+        </div>
+        
+        ${seasonalBanner}
+        
+        <button id="book-consultation-thankyou" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors mb-4">
+          <div class="flex items-center justify-center">
+            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+            Book Free Consultation
+          </div>
+        </button>
+        <a href="#" id="close-thankyou" class="block text-gray-500 hover:text-gray-700 underline">Close</a>
+      </div>
+    `;
+  }
+
+  getStepBanner() {
+    if (!this.isMobile) {
+      // Desktop: Full height sidebar with Robert's photo and consultation CTA
+      return `
+        <div class="bg-red-50 border border-red-200 p-6 rounded-lg shadow-sm h-full flex flex-col">
+          <div class="flex-1 flex flex-col justify-center">
+            <div class="text-center mb-6">
+              <img
+                src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp"
+                alt="Robert Kolar"
+                class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+              />
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Not sure about options?</h3>
+              <p class="text-gray-700 mb-4">Get personalized advice from Robert</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+              <h4 class="font-semibold text-red-600 mb-2">Why schedule a consultation?</h4>
+              <ul class="text-sm space-y-2 text-gray-700">
+                <li class="flex items-start">
+                  <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                  <span>Expert guidance in English</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                  <span>Compare all insurers objectively</span>
+                </li>
+                <li class="flex items-start">
+                  <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0"></i>
+                  <span>Save time and avoid costly mistakes</span>
+                </li>
+              </ul>
+            </div>
+            
+            <button id="schedule-consultation-banner" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+              Schedule Free Consultation
+            </button>
+            <p class="text-center text-sm text-red-600 font-bold mt-2">(Recommended)</p>
+          </div>
+        </div>
+      `;
+    } else {
+      // Mobile: Compact banner with Robert's small photo
+      return `
+        <div class="bg-red-50 border border-red-200 p-4 rounded-lg shadow-sm mb-6">
+          <div class="flex items-center mb-3">
+            <img
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_48,h_48,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp"
+              alt="Robert Kolar"
+              class="w-12 h-12 rounded-full mr-3 object-cover"
+            />
+            <div>
+              <h4 class="font-semibold text-gray-900">Not sure about options?</h4>
+              <p class="text-sm text-gray-600">Get personalized advice from Robert</p>
+            </div>
+          </div>
+          <button id="schedule-consultation-banner" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg font-semibold text-sm transition-colors">
+            Schedule Free Consultation
+          </button>
+          <p class="text-center text-sm text-red-600 font-bold mt-1">(Recommended)</p>
+        </div>
+      `;
+    }
+  }
+
+  updateMobileProgress() {
+    const progressBar = document.getElementById('mobile-progress-bar');
+    if (progressBar && typeof this.currentStep === 'number') {
+      const progress = (this.currentStep / 6) * 100;
+      progressBar.style.width = `${progress}%`;
+    } else if (progressBar) {
+      // Hide progress bar for non-numbered steps
+      progressBar.style.width = '0%';
+    }
+  }
+
+  updateMobileFooter() {
+    const backBtn = document.getElementById('mobile-back-btn');
+    const nextBtn = document.getElementById('mobile-next-btn');
+    if (backBtn && nextBtn) {
+      backBtn.classList.toggle('hidden', this.currentStep === 1);
+      nextBtn.textContent = this.currentStep === 6 ? 'Send My Request' : 'Next →';
+    }
+  }
+
+  // Generate consistent social proof number
+  generateSocialProof() {
+    const existingCount = document.getElementById('booking-count');
+    if (existingCount) {
+      const match = existingCount.textContent?.match(/(\d+) people/);
+      if (match) return match[1];
+    }
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const random = ((seed * 9301 + 49297) % 233280) / 233280;
+    return Math.floor(random * 9) + 3;
+  }
+
+  getHeadlineContent() {
+    // Simplified for minimal version
+    return {
+      headline: 'Find Your Best Swiss Health Insurance in Minutes',
+      subline: 'Personal, English-speaking advice. Free & no obligation.'
+    };
+  }
+
+  getCalComLink() {
+    const intent = this.pageIntent;
+    switch (intent) {
+      case 'setup': return "https://cal.com/robertkolar/setting-up-health-insurance-in-switzerland";
+      case 'change': return "https://cal.com/robertkolar/change-health-insurance";
+      default: return "https://cal.com/robertkolar/change-health-insurance";
+    }
+  }
+
+  // Main event binding (called once on init)
+  bindEvents() {
+    console.log('Binding main events.');
+    // Close modal events
+    document.getElementById('close-modal-btn')?.addEventListener('click', () => {
+      console.log('Close button clicked.');
+      this.closeModal();
+    });
+    document.getElementById('offers-modal')?.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('offers-modal')) { // Clicked on backdrop
+        console.log('Backdrop clicked.');
+        this.closeModal();
       }
     });
 
     // Escape key to close
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const modal = document.getElementById('offers-modal');
-        if (modal && !modal.classList.contains('hidden')) {
-          this.closeModal();
-        }
-      }
-    });
-  }
-  
-  // Detect page intent for dynamic headlines
-  detectPageIntent() {
-    const path = window.location.pathname;
-    const title = document.title.toLowerCase();
-    
-    // Home page
-    if (path === '/' || path === '/index.html') {
-      return 'home';
-    }
-    
-    // Setup pages
-    if (path.includes('health-insurance') || path.includes('healthcare-system') || 
-        path.includes('set-up-health-insurance') || path.includes('new-health-insurance')) {
-      return 'setup';
-    }
-    
-    // Change pages
-    if (path.includes('insurance-change') || path.includes('switching') || 
-        title.includes('switch') || title.includes('change')) {
-      return 'change';
-    }
-    
-    // Cheapest pages
-    if (path.includes('cheapest') || title.includes('cheapest')) {
-      return 'cheapest';
-    }
-    
-    // Best pages
-    if (path.includes('best-health-insurance') || title.includes('best')) {
-      return 'best';
-    }
-    
-    // Provider pages
-    if (path.includes('/healthcare/all-insurances/') || path.includes('/providers/')) {
-      return 'provider';
-    }
-    
-    // Comparison pages
-    if (path.includes('/compare-providers/') || path.includes('-vs-')) {
-      return 'comparison';
-    }
-    
-    return 'general';
-  }
-  
-  // Get provider context for dynamic headlines
-  getProviderContext() {
-    const path = window.location.pathname;
-    
-    // Extract provider from path
-    if (path.includes('/healthcare/all-insurances/')) {
-      const provider = path.split('/').pop()?.replace('.html', '') || '';
-      return provider.charAt(0).toUpperCase() + provider.slice(1);
-    }
-    
-    // Extract providers from comparison path
-    if (path.includes('/compare-providers/')) {
-      const comparison = path.split('/compare-providers/')[1]?.split('/')[0] || '';
-      if (comparison.includes('-vs-')) {
-        const [providerA, providerB] = comparison.split('-vs-').map(p => 
-          p.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-        );
-        return { providerA, providerB };
-      }
-    }
-    
-    return null;
-  }
-  
-  // Generate dynamic headlines based on intent
-  getHeadlineContent() {
-    const provider = this.providerContext;
-    
-    switch (this.pageIntent) {
-      case 'home':
-        return {
-          headline: 'Find Your Best Swiss Health Insurance in Minutes',
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      case 'setup':
-        return {
-          headline: 'Set Up Your Swiss Health Insurance (Step by Step)',
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      case 'change':
-        return {
-          headline: 'Switch Your Swiss Health Insurance for 2026',
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      case 'cheapest':
-        return {
-          headline: 'Cheapest 2026 Options for Your Canton',
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      case 'best':
-        return {
-          headline: 'Best Health Insurance for Expats — 2026 Guide',
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      case 'provider':
-        return {
-          headline: `${provider} Rate + 2 Alternatives for 2026`,
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      case 'comparison':
-        return {
-          headline: `${provider?.providerA} vs ${provider?.providerB} — Compare 2026 Rates and 1 Smart Alternative`,
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-      default:
-        return {
-          headline: 'Find Your Best Swiss Health Insurance in Minutes',
-          subline: 'Personal, English-speaking advice. Free & no obligation.'
-        };
-    }
-  }
-  
-  // Get dynamic Cal.com link based on page intent
-  getCalComLink() {
-    const intent = this.pageIntent;
-    
-    switch (intent) {
-      case 'setup':
-        return "https://cal.com/robertkolar/setting-up-health-insurance-in-switzerland";
-      case 'change':
-        return "https://cal.com/robertkolar/change-health-insurance";
-      case 'pension':
-      case '3rd-pillar':
-        return "https://cal.com/robertkolar/third-pillar-pension-solutions";
-      case 'liability':
-      case 'household':
-        return "https://cal.com/robertkolar/household-liability-insurance";
-      default:
-        return "https://cal.com/robertkolar/change-health-insurance";
-    }
-  }
-  
-  // Generate daily-seeded social proof number
-  generateSocialProof() {
-    // Use the same logic as homepage to keep numbers consistent
-    // Check if there's already a number displayed on the page
-    const existingCount = document.getElementById('booking-count');
-    if (existingCount) {
-      const match = existingCount.textContent?.match(/(\d+) people/);
-      if (match) {
-        return match[1];
-      }
-    }
-    
-    // Fallback: generate same range as homepage (3-11)
-    const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    const random = ((seed * 9301 + 49297) % 233280) / 233280;
-    const count = Math.floor(random * 9) + 3; // 3-11 to match homepage
-    
-    return count;
-  }
-  
-  // Bind all event listeners
-  bindEvents() {
-    // Close modal events
-    document.getElementById('close-offers-modal-btn')?.addEventListener('click', () => this.closeModal());
-    document.getElementById('offers-modal')?.addEventListener('click', (e) => {
-      if (e.target.dataset.modalBackdrop) this.closeModal();
-    });
-    
-    // Mobile navigation
-    document.getElementById('mobile-back-btn')?.addEventListener('click', () => this.previousStep());
-    document.getElementById('mobile-next-btn')?.addEventListener('click', () => this.nextStep());
-    
-    // Desktop consultation button
-    document.getElementById('desktop-consultation-btn')?.addEventListener('click', () => this.startConsultationFlow());
-    
-    // Global consultation buttons (replace old modal triggers)
-    this.replaceConsultationButtons();
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !document.getElementById('offers-modal')?.classList.contains('hidden')) {
+        console.log('Escape key pressed.');
         this.closeModal();
       }
     });
-    
-    // Resize handler
+
+    // Handle initial calls from non-dynamic buttons (like homepage CTAs)
+    document.querySelectorAll('[data-open-offers-modal]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Data-open-offers-modal button clicked.', button);
+        this.openModal();
+      });
+    });
+
+    // This is for the sidebar button in Astro
+    document.getElementById('sidebar-consultation-btn')?.addEventListener('click', () => {
+        console.log('Sidebar consultation button clicked.');
+        this.startConsultationFlow();
+    });
+
+    // Listen for resize to update isMobile flag
     window.addEventListener('resize', () => {
       this.isMobile = window.innerWidth < 1024;
-    });
-  }
-  
-  // Replace all existing consultation button triggers
-  replaceConsultationButtons() {
-    const selectors = [
-      '[data-open-consultation]',
-      '.consultation-button',
-      '.btn-consultation',
-      '.safe-consultation-btn',
-      'button:has-text("Book"), button:has-text("Consultation")',
-      'a:has-text("Book"), a:has-text("Consultation")'
-    ];
-    
-    // Find buttons by text content (more reliable)
-    document.querySelectorAll('button, a, [role="button"]').forEach(el => {
-      const text = el.textContent?.toLowerCase().trim() || '';
-      const isConsultationButton = 
-        text.includes('consultation') || 
-        text.includes('book') || 
-        text.includes('get started') ||
-        text.includes('free advice') ||
-        text.includes('contact us') ||
-        el.hasAttribute('data-open-consultation');
-      
-      if (isConsultationButton && !el.hasAttribute('data-offers-enhanced')) {
-        el.setAttribute('data-offers-enhanced', 'true');
-        
-        // Remove old handlers and add new one
-        el.removeAttribute('onclick');
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.openModal();
-          return false;
-        });
+      // Re-render content to adapt if needed (e.g. mobile/desktop specific UI)
+      if (!document.getElementById('offers-modal')?.classList.contains('hidden')) {
+        console.log('Window resized, re-rendering content.');
+        this.renderContent();
       }
     });
-  }
-  
-  // Open modal with dynamic content
-  openModal() {
-    const modal = document.getElementById('offers-modal');
-    if (!modal) return;
-    
-    // Track modal open
-    this.trackEvent('modal_opened', { intent: this.pageIntent });
-    
-    // Reset state
-    this.currentStep = 1;
-    this.formData = {};
-    
-    // Show modal
-    modal.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-    
-    // Generate content based on device
-    if (this.isMobile) {
-      this.renderMobileContent();
-    } else {
-      this.renderDesktopContent();
-    }
-    
-    // Show urgency for relevant intents
-    if (this.pageIntent === 'change' || this.pageIntent === 'cheapest') {
-      document.getElementById('desktop-urgency')?.classList.remove('hidden');
-    }
-    
-    // Focus management
+
+    // Attach mobile listeners after modal is visible
+    this.attachMobileListeners();
+
     setTimeout(() => {
-      const firstInput = modal.querySelector('input, select, button:not([data-close-modal])');
-      firstInput?.focus();
+      const firstFocusable = document.getElementById('offers-modal')?.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable) firstFocusable.focus();
     }, 100);
-  }
-  
-  // Close modal
-  closeModal() {
-    const modal = document.getElementById('offers-modal');
-    if (!modal) return;
-    
-    modal.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-    
-    this.trackEvent('modal_closed', { step: this.currentStep, intent: this.pageIntent });
-  }
-  
-  // Render mobile quiz-style content
-  renderMobileContent() {
-    const container = document.getElementById('mobile-content');
-    if (!container) return;
-    
-    this.updateMobileProgress();
-    
-    // Render proper 6-step flow as per spec
-    switch (this.currentStep) {
-      case 1:
-        container.innerHTML = this.renderIntroStep(); // Initial intro with CTA buttons
-        break;
-      case 2:
-        container.innerHTML = this.renderStep1WhereAndWho(); // STEP 1 — Where & Who
-        break;
-      case 3:
-        container.innerHTML = this.renderStep2People(); // STEP 2 — People
-        break;
-      case 4:
-        container.innerHTML = this.renderStep3BasicInsurance(); // STEP 3 — Basic Insurance
-        break;
-      case 5:
-        container.innerHTML = this.renderStep4SupplementaryPriorities(); // STEP 4 — Supplementary Priorities
-        break;
-      case 6:
-        container.innerHTML = this.renderStep5ContactAndConsent(); // STEP 5 — Contact & Consent
-        break;
-      case 7:
-        container.innerHTML = this.renderStep6ReviewAndSend(); // STEP 6 — Review & Send
-        break;
-      case 8:
-        container.innerHTML = this.renderThankYouStep(); // Thank you screen after submission
-        break;
-    }
-    
-    this.updateMobileNavigation();
-    this.attachStepEventHandlers();
-    this.initializeLucideIcons();
-  }
-  
-  // Render desktop split-layout content
-  renderDesktopContent() {
-    const container = document.getElementById('desktop-content');
-    if (!container) return;
-    
-    // For desktop, show intro with both buttons initially
-    if (this.currentStep === 1) {
-      container.innerHTML = this.renderDesktopIntro();
-    } else {
-      // Show the form steps
-      container.innerHTML = this.renderDesktopForm();
-    }
-    
-    this.initializeLucideIcons();
+
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      console.log('Global click detected on: ID=' + (target.id || 'none') + ', Tag=' + target.tagName + ', Classes=' + (target.className || 'none') + ', Parent=' + (target.parentElement?.tagName || 'none'));
+    }, {capture: true});
   }
 
-  // Render desktop intro with both buttons
-  renderDesktopIntro() {
-    const { headline, subline } = this.getHeadlineContent();
-    const socialCount = this.generateSocialProof();
-    
-    return `
-      <div class="space-y-8">
-        <!-- Header -->
-        <div class="text-center">
-          <h2 id="modal-title" class="text-3xl font-bold text-gray-900 mb-3">${headline}</h2>
-          <p id="modal-description" class="text-gray-600 mb-4">${subline}</p>
-          
-          <!-- Social proof -->
-          <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800 mb-6">
-            <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-green-600"></i>
-            ${socialCount} people booked consultations in the last 24 hours
-          </div>
-        </div>
-        
-        <!-- CTA Options -->
-        <div class="space-y-4">
-          <button id="desktop-start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 px-8 rounded-lg font-semibold text-lg transition-colors">
-            <div class="flex items-center justify-center text-white">
-              <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
-              <div class="text-white">
-                <div class="text-white font-semibold">Get 3 Best Offers</div>
-                <div class="text-green-100 text-sm font-normal mt-1">Takes ~1 min</div>
-              </div>
-            </div>
-          </button>
-          
-          <button id="desktop-consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-8 rounded-lg font-semibold hover:bg-red-50 transition-colors">
-            <div class="flex items-center justify-center text-red-600">
-              <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
-              <div class="text-red-600">
-                <div class="text-red-600 font-semibold">Book Free Consultation</div>
-                <div class="text-red-500 text-sm font-normal mt-1">30–60 min video call</div>
-              </div>
-            </div>
-          </button>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Render intro step (mobile step 1)
-  renderIntroStep() {
-    const { headline, subline } = this.getHeadlineContent();
-    const socialCount = this.generateSocialProof();
-    
-    return `
-      <div class="text-center mb-8">
-        <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-3">${headline}</h2>
-        <p id="modal-description" class="text-gray-600 mb-4">${subline}</p>
-        
-        <!-- Social proof -->
-        <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800 mb-6">
-          <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-green-600"></i>
-          ${socialCount} people booked consultations in the last 24 hours
-        </div>
-      </div>
-      
-      <!-- CTA Options -->
-      <div class="space-y-4 mb-8">
-        <button id="start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 px-6 rounded-lg font-semibold text-lg transition-colors">
-          <div class="flex items-center justify-center text-white">
-            <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
-            <div class="text-white">
-              <div class="text-white font-semibold">Get 3 Best Offers</div>
-              <div class="text-green-100 text-sm font-normal mt-1">Takes ~1 min</div>
-            </div>
-          </div>
-        </button>
-        
-        <button id="consultation-btn" class="w-full border-2 border-red-600 text-red-600 py-3 px-6 rounded-lg font-semibold hover:bg-red-50 transition-colors">
-          <div class="flex items-center justify-center text-red-600">
-            <i data-lucide="calendar" class="w-5 h-5 mr-2 text-red-600"></i>
-            <div class="text-red-600">
-              <div class="text-red-600 font-semibold">Book Free Consultation</div>
-              <div class="text-red-500 text-sm font-normal mt-1">30–60 min video call</div>
-            </div>
-          </div>
-        </button>
-      </div>
-    `;
-  }
-  
-  // STEP 1 — Where & Who
-  renderStep1WhereAndWho() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Where & Who</h3>
-          <p class="text-gray-600">Help us find the best options for your location</p>
-        </div>
-        
-        <!-- Postcode -->
-        <div>
-          <label for="postcode" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-            <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-gray-500"></i>
-            Swiss Postcode
-          </label>
-          <input type="text" id="postcode" name="postcode" placeholder="e.g. 8001" maxlength="4" 
-                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" pattern="[0-9]{4}" required />
-          <p class="text-xs text-gray-500 mt-1">4-digit Swiss postcode</p>
-        </div>
-        
-                  <!-- Household type -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
-            <i data-lucide="users" class="w-4 h-4 mr-2 text-gray-500"></i>
-            Household
-          </label>
-          <div class="space-y-2">
-            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="household" value="single" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3" />
-              <i data-lucide="user" class="w-5 h-5 text-gray-400 mr-3"></i>
-              <div>
-                <div class="font-medium text-gray-900">Single</div>
-                <div class="text-sm text-gray-500">Just me</div>
-              </div>
-            </label>
-            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="household" value="couple" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3" />
-              <i data-lucide="heart" class="w-5 h-5 text-gray-400 mr-3"></i>
-              <div>
-                <div class="font-medium text-gray-900">Couple</div>
-                <div class="text-sm text-gray-500">Me + partner</div>
-              </div>
-            </label>
-            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="household" value="family" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3" />
-              <i data-lucide="home" class="w-5 h-5 text-gray-400 mr-3"></i>
-              <div>
-                <div class="font-medium text-gray-900">Family with children</div>
-                <div class="text-sm text-gray-500">Parents + kids</div>
-              </div>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Show summary chip for couple/family -->
-        <div id="household-summary" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-3">
-          <p class="text-sm text-blue-800">You can add people on the next screen.</p>
-        </div>
-      </div>
-    `;
-  }
-
-  // STEP 2 — People
-  renderStep2People() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">People</h3>
-          <p class="text-gray-600">Tell us about each person in your household</p>
-        </div>
-        
-        <!-- People cards will be populated dynamically -->
-        <div id="people-cards" class="space-y-4">
-          <!-- Person 1 (You) -->
-          <div class="bg-white border border-gray-300 rounded-lg p-4">
-            <h4 class="font-medium text-gray-900 mb-3 flex items-center">
-              <i data-lucide="user" class="w-4 h-4 mr-2 text-gray-500"></i>
-              Person 1 (You)
-            </h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
-                <input 
-                  type="text" 
-                  name="person1_dob" 
-                  placeholder="DD.MM.YYYY" 
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
-                  required 
-                />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Employed ≥8h/week? *</label>
-                <div class="space-y-2">
-                  <label class="flex items-center">
-                    <input type="radio" name="person1_employed" value="yes" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-2" />
-                    <span class="text-sm text-gray-700">Yes</span>
-                  </label>
-                  <label class="flex items-center">
-                    <input type="radio" name="person1_employed" value="no" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-2" />
-                    <span class="text-sm text-gray-700">No</span>
-                  </label>
-                </div>
-                <div id="person1-employed-note" class="hidden mt-1 text-xs text-blue-600">
-                  We'll exclude accident coverage.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Add person button -->
-        <button 
-          type="button" 
-          id="add-person-btn" 
-          class="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 px-4 text-gray-600 hover:border-red-300 hover:text-red-600 transition-colors flex items-center justify-center"
-        >
-          <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
-          Add Another Person (optional)
-        </button>
-      </div>
-    `;
-  }
-  
-  // STEP 3 — Basic Insurance
-  renderStep3BasicInsurance() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Basic Insurance</h3>
-          <p class="text-gray-600">Choose your preferred deductible and model</p>
-        </div>
-        
-        <!-- Preferred deductible -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
-            <i data-lucide="shield" class="w-4 h-4 mr-2 text-gray-500"></i>
-            Preferred deductible *
-            <button type="button" class="ml-2 text-gray-400 hover:text-gray-600" data-tooltip="Higher deductible = lower monthly premium, but you pay more if you need care.">
-              <i data-lucide="help-circle" class="w-4 h-4"></i>
-            </button>
-          </label>
-          <select name="deductible" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900 bg-white">
-            <option value="">Select...</option>
-            <option value="300">CHF 300</option>
-            <option value="500">CHF 500</option>
-            <option value="1000">CHF 1,000</option>
-            <option value="1500">CHF 1,500</option>
-            <option value="2000">CHF 2,000</option>
-            <option value="2500">CHF 2,500</option>
-            <option value="unsure">Unsure</option>
-          </select>
-        </div>
-        
-        <!-- Insurance model -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-3 flex items-center">
-            <i data-lucide="settings" class="w-4 h-4 mr-2 text-gray-500"></i>
-            Insurance model *
-          </label>
-          <div class="space-y-3">
-            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="insurance_model" value="standard" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
-              <div>
-                <div class="font-medium text-gray-900">Standard</div>
-                <div class="text-sm text-gray-500">Free choice of doctors; highest premiums.</div>
-              </div>
-            </label>
-            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="insurance_model" value="hmo" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
-              <div>
-                <div class="font-medium text-gray-900">HMO</div>
-                <div class="text-sm text-gray-500">Start at an HMO clinic; lower premiums.</div>
-              </div>
-            </label>
-            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="insurance_model" value="family_doctor" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
-              <div>
-                <div class="font-medium text-gray-900">Family Doctor</div>
-                <div class="text-sm text-gray-500">See your chosen GP first; save on premiums.</div>
-              </div>
-            </label>
-            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="insurance_model" value="telmed" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
-              <div>
-                <div class="font-medium text-gray-900">Telmed</div>
-                <div class="text-sm text-gray-500">Call first; usually the lowest premiums.</div>
-              </div>
-            </label>
-            <label class="flex items-start p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-red-300 transition-colors">
-              <input type="radio" name="insurance_model" value="unsure" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 mr-3 mt-0.5" />
-              <div>
-                <div class="font-medium text-gray-900">Unsure</div>
-                <div class="text-sm text-gray-500">Help me decide</div>
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  // STEP 4 — Supplementary Priorities
-  renderStep4SupplementaryPriorities() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Supplementary Priorities</h3>
-          <p class="text-gray-600">Rate your interest in additional coverage (1 = Low, 5 = High)</p>
-        </div>
-        
-        <!-- Supplementary sliders -->
-        <div class="space-y-6">
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="globe" class="w-4 h-4 mr-2 text-gray-500"></i>
-                International coverage
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="international_coverage" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-          
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="bed-double" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Hospital upgrade (semi/private)
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="hospital_upgrade" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-          
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="activity" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Prevention & fitness
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="prevention_fitness" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-          
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="eye" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Vision / glasses
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="vision_glasses" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-          
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="smile" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Dental
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="dental" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-          
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="baby" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Maternity
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="maternity" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-          
-          <div class="supplementary-item">
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-              <span class="flex items-center">
-                <i data-lucide="brain" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Mental health / alternative therapies
-              </span>
-              <span class="slider-value text-sm font-semibold text-red-600">3</span>
-            </label>
-            <input type="range" name="mental_health" min="1" max="5" value="3" 
-                   class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>Low</span>
-              <span>High</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Other needs -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-            <i data-lucide="edit-3" class="w-4 h-4 mr-2 text-gray-500"></i>
-            Other needs (optional)
-          </label>
-          <textarea 
-            name="other_needs" 
-            rows="3" 
-            placeholder="Any specific insurance needs or questions?"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900"
-          ></textarea>
-        </div>
-      </div>
-    `;
-  }
-
-  // STEP 5 — Contact & Consent
-  renderStep5ContactAndConsent() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Contact & Consent</h3>
-          <p class="text-gray-600">How we can reach you with your offers</p>
-        </div>
-        
-        <!-- Contact information -->
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-              <i data-lucide="user" class="w-4 h-4 mr-2 text-gray-500"></i>
-              Full name *
-            </label>
-            <input 
-              type="text" 
-              name="full_name" 
-              placeholder="Your full name"
-              required 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-              <i data-lucide="mail" class="w-4 h-4 mr-2 text-gray-500"></i>
-              Email address *
-            </label>
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="your.email@example.com"
-              required 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-              <i data-lucide="phone" class="w-4 h-4 mr-2 text-gray-500"></i>
-              Phone (optional)
-            </label>
-            <input 
-              type="tel" 
-              name="phone" 
-              placeholder="+41 XX XXX XX XX"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" 
-            />
-          </div>
-        </div>
-        
-        <!-- Consent checkbox -->
-        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <label class="flex items-start">
-            <input 
-              type="checkbox" 
-              name="consent" 
-              required 
-              class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded mr-3 mt-0.5 flex-shrink-0" 
-            />
-            <div class="text-sm text-gray-700">
-              <span class="font-medium">I agree to be contacted with my 3 offers.</span> 
-              Consultations are free, independent & in English. We are a FINMA-registered broker and may receive commissions. No obligation.
-            </div>
-          </label>
-        </div>
-      </div>
-    `;
-  }
-
-  // STEP 6 — Review & Send
-  renderStep6ReviewAndSend() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Review & Send</h3>
-          <p class="text-gray-600">Confirm your information before sending</p>
-        </div>
-        
-        <!-- Summary box -->
-        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
-          <h4 class="font-medium text-gray-900 mb-4 flex items-center">
-            <i data-lucide="file-text" class="w-4 h-4 mr-2 text-gray-500"></i>
-            Summary of your request
-          </h4>
-          
-          <div id="form-summary" class="space-y-3 text-sm">
-            <!-- This will be populated dynamically by JS -->
-          </div>
-        </div>
-        
-        <!-- Primary CTA: Send My Request -->
-        <button 
-          type="submit" 
-          id="send-request-btn"
-          class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors flex items-center justify-center"
-        >
-          <i data-lucide="send" class="w-5 h-5 mr-2"></i>
-          Send My Request
-        </button>
-        
-        <!-- Secondary link: Prefer consultation -->
-        <div class="text-center">
-          <button 
-            type="button" 
-            id="prefer-consultation-btn"
-            class="text-red-600 hover:text-red-700 text-sm font-medium underline"
-          >
-            Prefer to talk now? Book Free Consultation →
-          </button>
-        </div>
-      </div>
-    `;
-  }
-
-  // Thank You Step (after successful submission)
-  renderThankYouStep() {
-    const email = this.formData.email || 'your email';
-    const urgencyVisible = ['change', 'cheapest'].includes(this.pageIntent);
-    
-    return `
-      <div class="space-y-6 text-center">
-        <div class="space-y-4">
-          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-            <i data-lucide="check" class="w-10 h-10 text-green-600"></i>
-          </div>
-          
-          <div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">Thank you! Your 3 tailored offers are on the way 🚀</h3>
-            <p class="text-gray-600">We'll prepare your comparison and send it to <strong>${email}</strong> within 24 hours.</p>
-          </div>
-          
-          ${urgencyVisible ? `
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-left">
-              <div class="flex items-center">
-                <i data-lucide="clock" class="w-5 h-5 text-red-500 mr-2"></i>
-                <p class="text-sm text-red-800 font-medium">Switch by 30 Nov 2025 for a 1 Jan 2026 start.</p>
-              </div>
-            </div>
-          ` : ''}
-        </div>
-        
-        <!-- Robert's photo and CTA -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <img 
-            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp" 
-            alt="Robert — Expat Savvy Advisor" 
-            class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover"
-            loading="eager" 
-            width="80" 
-            height="80"
-          />
-          <h4 class="font-semibold text-gray-900 mb-2">Want to discuss your options?</h4>
-          <p class="text-sm text-gray-600 mb-4">Book a free consultation with Robert, our FINMA-registered advisor.</p>
-          
-          <button id="final-consultation-btn" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors mb-3 flex items-center justify-center">
-            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
-            Book Free Consultation
-          </button>
-          
-          <button id="just-close-btn" class="text-sm text-gray-500 hover:text-gray-700 flex items-center justify-center">
-            Close
-          </button>
-        </div>
-      </div>
-    `;
-  }
-
-  // Render personal info step (mobile step 3)
-  renderPersonalStep() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Personal Details</h3>
-          <p class="text-gray-600">Birth dates and employment status</p>
-        </div>
-        
-        <div id="persons-container">
-          <!-- Will be populated based on household selection -->
-        </div>
-      </div>
-    `;
-  }
-  
-  // Render insurance preferences step (mobile step 4)
-  renderInsuranceStep() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Basic Insurance</h3>
-          <p class="text-gray-600">Your coverage preferences</p>
-        </div>
-        
-        <!-- Deductible -->
-        <div>
-          <label for="deductible" class="block text-sm font-medium text-gray-700 mb-2">
-            Annual Deductible
-            <button type="button" class="ml-1 text-gray-400 hover:text-gray-600" data-tooltip="Higher deductible = lower monthly premium">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </button>
-          </label>
-          <select id="deductible" name="deductible" class="form-select" required>
-            <option value="">Select deductible...</option>
-            <option value="300">CHF 300 (highest premium, lowest out-of-pocket)</option>
-            <option value="500">CHF 500</option>
-            <option value="1000">CHF 1,000</option>
-            <option value="1500">CHF 1,500</option>
-            <option value="2000">CHF 2,000</option>
-            <option value="2500">CHF 2,500 (lowest premium, highest out-of-pocket)</option>
-            <option value="unsure">Unsure - advise me</option>
-          </select>
-        </div>
-        
-        <!-- Model -->
-        <div>
-          <label for="model" class="block text-sm font-medium text-gray-700 mb-2">
-            Insurance Model
-            <button type="button" class="ml-1 text-gray-400 hover:text-gray-600" data-tooltip="Restricted models offer lower premiums">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </button>
-          </label>
-          <select id="model" name="model" class="form-select" required>
-            <option value="">Select model...</option>
-            <option value="standard">Standard (free choice of doctors)</option>
-            <option value="hmo">HMO (group practice first, 15-25% savings)</option>
-            <option value="family-doctor">Family Doctor (GP first, 10-20% savings)</option>
-            <option value="telmed">Telmed (phone first, 20-30% savings)</option>
-            <option value="unsure">Unsure - advise me</option>
-          </select>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Render supplementary needs step (mobile step 5)
-  renderSupplementaryStep() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Supplementary Needs</h3>
-          <p class="text-gray-600">Rate importance (1 = not important, 5 = very important)</p>
-        </div>
-        
-        <div class="space-y-4">
-          ${this.renderSlider('international', 'International coverage', 'Medical treatment abroad')}
-          ${this.renderSlider('hospital', 'Hospital upgrade', 'Private/semi-private room')}
-          ${this.renderSlider('prevention', 'Prevention & fitness', 'Gym, wellness, check-ups')}
-          ${this.renderSlider('vision', 'Glasses/vision', 'Glasses, contact lenses')}
-          ${this.renderSlider('dental', 'Dental', 'Cleanings, fillings, orthodontics')}
-          ${this.renderSlider('maternity', 'Maternity', 'Pregnancy, childbirth extras')}
-          ${this.renderSlider('mental', 'Mental health/alternative', 'Psychology, naturopathy')}
-        </div>
-        
-        <!-- Other needs -->
-        <div>
-          <label for="other-needs" class="block text-sm font-medium text-gray-700 mb-2">Other specific needs (optional)</label>
-          <textarea id="other-needs" name="other-needs" rows="2" placeholder="e.g., specific conditions, medications, cross-border work..." class="form-input"></textarea>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Helper to render slider components
-  renderSlider(name, label, description) {
-    return `
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">${label}</label>
-        <div class="flex items-center space-x-3">
-          <span class="text-xs text-gray-500">1</span>
-          <input type="range" id="${name}" name="${name}" min="1" max="5" value="3" class="form-slider flex-1" />
-          <span class="text-xs text-gray-500">5</span>
-          <span id="${name}-value" class="text-sm font-medium text-gray-900 w-8">3</span>
-        </div>
-        <p class="text-xs text-gray-500 mt-1">${description}</p>
-      </div>
-    `;
-  }
-  
-  // Render contact & consent step (mobile step 6)
-  renderContactStep() {
-    return `
-      <div class="space-y-6">
-        <div class="text-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Contact & Consent</h3>
-          <p class="text-gray-600">How to send your personalized offers</p>
-        </div>
-        
-        <!-- Contact info -->
-        <div class="space-y-4">
-          <div>
-            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-            <input type="text" id="full-name" name="full-name" required class="form-input" placeholder="Your full name" />
-          </div>
-          
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-            <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com" />
-          </div>
-          
-          <div>
-            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone (optional)</label>
-            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+41 XX XXX XX XX" />
-          </div>
-        </div>
-        
-        <!-- Consent -->
-        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <label class="flex items-start">
-            <input type="checkbox" id="consent" name="consent" required class="form-checkbox mt-1 mr-3 flex-shrink-0" />
-            <span class="text-sm text-gray-700">
-              I agree to be contacted with my 3 offers. Consultations are free, independent & in English. 
-              We are a FINMA-registered broker and may receive commissions. No obligation. *
-            </span>
-          </label>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Render confirmation step (mobile step 7)
-  renderConfirmationStep() {
-    return `
-      <div class="text-center space-y-6">
-        <div class="mb-8">
-          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Thank you! Your 3 tailored offers are on the way 🚀</h3>
-          <p class="text-gray-600 mb-6">We'll prepare your comparison and send it to <strong>${this.formData.email}</strong> within 24 hours.</p>
-          
-          ${(this.pageIntent === 'change' || this.pageIntent === 'cheapest') ? `
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-              <p class="text-sm text-red-800">
-                <strong>Reminder:</strong> Switch by 30 Nov 2025 for a 1 Jan 2026 start.
-              </p>
-            </div>
-          ` : ''}
-        </div>
-        
-        <!-- Robert's photo and CTA -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <img 
-            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_80,f_auto,c_fill,g_face/v1747501071/6758848048b5cdaf6ebe884f_WhatsApp_Image_2024-12-11_at_01.55.01_oruhjs.webp" 
-            alt="Robert — Expat Savvy Advisor" 
-            class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-cover"
-            loading="eager" 
-            width="80" 
-            height="80"
-          />
-          <h4 class="font-semibold text-gray-900 mb-2">Want to discuss your options?</h4>
-          <p class="text-sm text-gray-600 mb-4">Book a free consultation with Robert, our FINMA-registered advisor.</p>
-          
-          <button id="final-consultation-btn" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors mb-3 flex items-center justify-center">
-            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
-            Book Free Consultation
-          </button>
-          
-          <button id="just-email-btn" class="text-sm text-gray-500 hover:text-gray-700 flex items-center justify-center">
-            <i data-lucide="mail" class="w-4 h-4 mr-1"></i>
-            Just email me my offers
-          </button>
-        </div>
-      </div>
-    `;
-  }
-  
-  // Render desktop form (single screen)
-  renderDesktopForm() {
-    const { headline, subline } = this.getHeadlineContent();
-    const socialCount = this.generateSocialProof();
-    
-    return `
-      <div class="space-y-8">
-        <!-- Header -->
-        <div class="text-center">
-          <h2 id="modal-title" class="text-3xl font-bold text-gray-900 mb-3">${headline}</h2>
-          <p id="modal-description" class="text-gray-600 mb-4">${subline}</p>
-          
-          <!-- Social proof -->
-          <div class="inline-flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1 text-sm text-green-800 mb-6">
-            <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8z" />
-            </svg>
-            ${socialCount} people booked consultations in the last 24 hours
-          </div>
-          
-          <!-- Primary CTA -->
-          <button id="desktop-start-offers-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors mb-8 flex items-center justify-center">
-            <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-white"></i>
-            <span class="text-white">Get 3 Best Offers</span> <span class="text-green-200 text-sm font-normal ml-2">(Takes ~1 min)</span>
-          </button>
-        </div>
-        
-        <!-- Compact form -->
-        <form id="desktop-offers-form" class="space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Location -->
-            <div>
-              <label for="desktop-postcode" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Swiss Postcode *
-              </label>
-              <input type="text" id="desktop-postcode" name="postcode" placeholder="e.g. 8001" maxlength="4" pattern="[0-9]{4}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900" />
-            </div>
-            
-            <!-- Household -->
-            <div>
-              <label for="desktop-household" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <i data-lucide="users" class="w-4 h-4 mr-2 text-gray-500"></i>
-                Household *
-              </label>
-              <select id="desktop-household" name="household" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors text-gray-900 bg-white">
-                <option value="">Select...</option>
-                <option value="single">Single</option>
-                <option value="couple">Couple</option>
-                <option value="family">Family with children</option>
-              </select>
-            </div>
-            
-            <!-- Deductible -->
-            <div>
-              <label for="desktop-deductible" class="block text-sm font-medium text-gray-700 mb-2">Preferred Deductible</label>
-              <select id="desktop-deductible" name="deductible" class="form-select">
-                <option value="">Select...</option>
-                <option value="300">CHF 300 (highest premium)</option>
-                <option value="1000">CHF 1,000</option>
-                <option value="2500">CHF 2,500 (lowest premium)</option>
-                <option value="unsure">Unsure - advise me</option>
-              </select>
-            </div>
-            
-            <!-- Model -->
-            <div>
-              <label for="desktop-model" class="block text-sm font-medium text-gray-700 mb-2">Insurance Model</label>
-              <select id="desktop-model" name="model" class="form-select">
-                <option value="">Select...</option>
-                <option value="standard">Standard (free choice)</option>
-                <option value="telmed">Telmed (20-30% savings)</option>
-                <option value="unsure">Unsure - advise me</option>
-              </select>
-            </div>
-            
-            <!-- Name -->
-            <div>
-              <label for="desktop-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-              <input type="text" id="desktop-name" name="full-name" required class="form-input" placeholder="Your full name" />
-            </div>
-            
-            <!-- Email -->
-            <div>
-              <label for="desktop-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-              <input type="email" id="desktop-email" name="email" required class="form-input" placeholder="your@email.com" />
-            </div>
-          </div>
-          
-          <!-- Supplementary (condensed) -->
-          <div class="border-t border-gray-200 pt-6">
-            <h4 class="font-medium text-gray-900 mb-4">Supplementary priorities (optional):</h4>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <label class="flex items-center">
-                <input type="checkbox" name="supplements[]" value="international" class="form-checkbox mr-2" />
-                <span class="text-sm">International</span>
-              </label>
-              <label class="flex items-center">
-                <input type="checkbox" name="supplements[]" value="dental" class="form-checkbox mr-2" />
-                <span class="text-sm">Dental</span>
-              </label>
-              <label class="flex items-center">
-                <input type="checkbox" name="supplements[]" value="hospital" class="form-checkbox mr-2" />
-                <span class="text-sm">Hospital upgrade</span>
-              </label>
-              <label class="flex items-center">
-                <input type="checkbox" name="supplements[]" value="prevention" class="form-checkbox mr-2" />
-                <span class="text-sm">Prevention/fitness</span>
-              </label>
-            </div>
-          </div>
-          
-          <!-- Consent -->
-          <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <label class="flex items-start">
-              <input type="checkbox" id="desktop-consent" name="consent" required class="form-checkbox mt-1 mr-3 flex-shrink-0" />
-              <span class="text-sm text-gray-700">
-                I agree to be contacted with my 3 offers. Consultations are free, independent & in English. 
-                We are a FINMA-registered broker and may receive commissions. No obligation. *
-              </span>
-            </label>
-          </div>
-          
-          <!-- Submit -->
-          <button type="submit" id="desktop-submit-btn" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-            Get My 3 Best Offers →
-          </button>
-        </form>
-      </div>
-    `;
-  }
-  
-  // Update mobile progress bar
-  updateMobileProgress() {
-    const progressBar = document.getElementById('mobile-progress-bar');
-    if (!progressBar) return;
-    
-    // Progress bar shows steps 2-7 (the 6 form steps), not including intro or thank you
-    // So step 2 is "Step 1 of 6", step 7 is "Step 6 of 6"
-    const actualStep = Math.max(0, this.currentStep - 1); // Steps 2-7 become 1-6
-    const maxSteps = 6; // 6-step flow as per spec
-    
-    if (this.currentStep <= 1 || this.currentStep >= 8) {
-      // Hide progress bar for intro and thank you screens
-      progressBar.parentElement?.classList.add('hidden');
-    } else {
-      progressBar.parentElement?.classList.remove('hidden');
-      const progress = ((actualStep - 1) / (maxSteps - 1)) * 100;
-      progressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
-    }
-  }
-  
-  // Update mobile navigation buttons
-  updateMobileNavigation() {
-    const backBtn = document.getElementById('mobile-back-btn');
-    const nextBtn = document.getElementById('mobile-next-btn');
-    
-    if (!backBtn || !nextBtn) return;
-    
-    // Back button visibility (show on steps 2-7, hide on intro and thank you)
-    if (this.currentStep <= 1 || this.currentStep >= 8) {
-      backBtn.classList.add('hidden');
-    } else {
-      backBtn.classList.remove('hidden');
-    }
-    
-    // Next button text and styling based on current step
-    if (this.currentStep === 1) {
-      // Intro step - buttons handled by intro step itself
-      nextBtn.style.display = 'none';
-    } else if (this.currentStep === 7) {
-      // STEP 6 — Review & Send
-      nextBtn.innerHTML = '<i data-lucide="send" class="w-4 h-4 mr-1"></i>Send My Request';
-      nextBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
-      nextBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-      nextBtn.style.display = 'flex';
-    } else if (this.currentStep >= 8) {
-      // Thank you step
-      nextBtn.style.display = 'none';
-    } else {
-      // Steps 1-5 (currentStep 2-6): "Next →"
-      nextBtn.innerHTML = 'Next <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>';
-      nextBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
-      nextBtn.classList.add('bg-red-600', 'hover:bg-red-700');
-      nextBtn.style.display = 'flex';
-    }
-  }
-  
-  // Navigate to next step
-  nextStep() {
-    if (this.isProcessing) return;
-    
-    // Validate current step
-    if (!this.validateCurrentStep()) return;
-    
-    this.collectCurrentStepData();
-    
-    if (this.currentStep < this.totalSteps + 1) {
-      this.currentStep++;
-      this.trackEvent('form_step_completed', { step: this.currentStep - 1, intent: this.pageIntent });
-      
-      if (this.currentStep === this.totalSteps) {
-        // Submit form
-        this.submitForm();
-      } else if (this.currentStep === this.totalSteps + 1) {
-        // Show confirmation
-        this.renderMobileContent();
-      } else {
-        // Next step
-        this.renderMobileContent();
-      }
-    } else {
-      // Close modal from confirmation
-      this.closeModal();
-    }
-  }
-  
-  // Navigate to previous step
-  previousStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-      this.renderMobileContent();
-    }
-  }
-  
-  // Validate current step data
-  validateCurrentStep() {
-    switch (this.currentStep) {
-      case 1:
-        // Intro - always valid
-        return true;
-      case 2:
-        // Location step
-        const postcode = document.getElementById('postcode')?.value;
-        const household = document.querySelector('input[name="household"]:checked')?.value;
-        
-        if (!postcode || !/^\d{4}$/.test(postcode)) {
-          this.showValidationError('Please enter a valid 4-digit Swiss postcode');
-          return false;
-        }
-        if (!household) {
-          this.showValidationError('Please select your household type');
-          return false;
-        }
-        return true;
-        
-      case 3:
-        // Personal step - validate DOBs
-        const dobInputs = document.querySelectorAll('input[name$="-dob"]');
-        for (const input of dobInputs) {
-          if (!input.value) {
-            this.showValidationError('Please enter all birth dates');
-            return false;
-          }
-          // Validate date format and realistic age
-          const date = new Date(input.value.split('.').reverse().join('-'));
-          const age = (new Date() - date) / (365.25 * 24 * 60 * 60 * 1000);
-          if (age < 0 || age > 120) {
-            this.showValidationError('Please enter valid birth dates');
-            return false;
-          }
-        }
-        return true;
-        
-      case 4:
-        // Insurance step - optional validation
-        return true;
-        
-      case 5:
-        // Supplementary - always valid
-        return true;
-        
-      case 6:
-        // Contact step
-        const name = document.getElementById('full-name')?.value;
-        const email = document.getElementById('email')?.value;
-        const consent = document.getElementById('consent')?.checked;
-        
-        if (!name?.trim()) {
-          this.showValidationError('Please enter your full name');
-          return false;
-        }
-        if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          this.showValidationError('Please enter a valid email address');
-          return false;
-        }
-        if (!consent) {
-          this.showValidationError('Please agree to be contacted with your offers');
-          return false;
-        }
-        return true;
-        
-      default:
-        return true;
-    }
-  }
-  
-  // Show validation error
-  showValidationError(message) {
-    // Simple alert for now - could be enhanced with better UI
-    alert(message);
-  }
-  
-  // Collect data from current step
-  collectCurrentStepData() {
-    const container = this.isMobile ? document.getElementById('mobile-content') : document.getElementById('desktop-offers-form');
-    if (!container) return;
-    
-    // Collect all form inputs in current container
-    const inputs = container.querySelectorAll('input, select, textarea');
-    inputs.forEach(input => {
-      if (input.type === 'radio' || input.type === 'checkbox') {
-        if (input.checked) {
-          if (input.name.endsWith('[]')) {
-            // Array field
-            const name = input.name.replace('[]', '');
-            if (!this.formData[name]) this.formData[name] = [];
-            this.formData[name].push(input.value);
-          } else {
-            this.formData[input.name] = input.value;
-          }
-        }
-      } else if (input.value) {
-        this.formData[input.name] = input.value;
-      }
-    });
-    
-    // Collect slider values
-    const sliders = container.querySelectorAll('input[type="range"]');
-    sliders.forEach(slider => {
-      this.formData[slider.name] = slider.value;
-    });
-  }
-  
-  // Submit form to Formspree
-  async submitForm() {
-    if (this.isProcessing) return;
-    this.isProcessing = true;
-    
-    try {
-      // Collect final data
-      this.collectCurrentStepData();
-      
-      // Track submission start
-      this.trackEvent('form_submit_started', { intent: this.pageIntent });
-      
-      // Prepare form data for Formspree
-      const formData = new FormData();
-      
-      // Core form data
-      Object.entries(this.formData).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          formData.append(key, value.join(', '));
-        } else {
-          formData.append(key, value);
-        }
-      });
-      
-      // Hidden context data
-      formData.append('form_type', 'offers_request');
-      formData.append('page_intent', this.pageIntent);
-      formData.append('page_url', window.location.href);
-      formData.append('page_title', document.title);
-      formData.append('provider_context', JSON.stringify(this.providerContext));
-      formData.append('date_submitted', new Date().toISOString());
-      formData.append('user_agent', navigator.userAgent);
-      
-      // UTM and tracking data
-      const urlParams = new URLSearchParams(window.location.search);
-      ['utm_source', 'utm_medium', 'utm_campaign', 'gclid', 'fbclid'].forEach(param => {
-        if (urlParams.has(param)) {
-          formData.append(param, urlParams.get(param));
-        }
-      });
-      
-      // Submit to Formspree
-      const response = await fetch('https://formspree.io/f/mrbewjlr', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-      
-      if (response.ok) {
-        // Success
-        this.trackEvent('form_submit_success', { intent: this.pageIntent });
-        this.trackEvent('lead_offer_form_submit');
-        this.trackEvent('email_offers_enqueued');
-        
-        // Move to confirmation step
-        this.currentStep = this.totalSteps + 1;
-        this.renderMobileContent();
-      } else {
-        throw new Error('Submission failed');
-      }
-      
-    } catch (error) {
-      console.error('Form submission error:', error);
-      this.trackEvent('form_submit_error', { error: error.message, intent: this.pageIntent });
-      alert('There was an error submitting your request. Please try again.');
-    } finally {
-      this.isProcessing = false;
-    }
-  }
-  
-  // Start consultation flow (secondary path)
-  startConsultationFlow() {
-    this.trackEvent('cta_consultation_click', { intent: this.pageIntent });
-    
-    // For now, redirect to Cal.com - later can be enhanced with mini-intake
-    window.open('https://cal.com/robert-kolar/consultation', '_blank');
-    
-    this.trackEvent('lead_consultation_booked');
-  }
-  
-  // Event tracking
-  setupEventTracking() {
-    // Initialize tracking if available
-    if (typeof gtag !== 'undefined') {
-      this.trackEvent = (event, params = {}) => {
-        gtag('event', event, {
-          ...params,
-          page_location: window.location.href,
-          page_title: document.title
-        });
-      };
-    } else if (typeof fbq !== 'undefined') {
-      this.trackEvent = (event, params = {}) => {
-        fbq('trackCustom', event, params);
-      };
-    } else {
-      // Fallback console logging
-      this.trackEvent = (event, params = {}) => {
-        console.log('Track Event:', event, params);
-      };
-    }
-  }
-  
-  // Enhanced event tracking with fallback
-  trackEvent(event, params = {}) {
-    // Will be set by setupEventTracking
-  }
-  
-  // Attach event handlers for current step
+  // Attach event handlers for dynamically rendered step content
   attachStepEventHandlers() {
-    // Handle intro step buttons
-    document.getElementById('start-offers-btn')?.addEventListener('click', () => {
-      console.log('🚀 Starting offers flow');
-      this.trackEvent('cta_get_offers_click', { intent: this.pageIntent });
-      this.nextStep();
-    });
+    console.log('Attaching step event handlers for step:', this.currentStep);
     
-    document.getElementById('consultation-btn')?.addEventListener('click', () => {
-      console.log('📅 Opening consultation');
-      this.openConsultation();
-    });
-
-    // Handle desktop buttons
-    document.getElementById('desktop-start-offers-btn')?.addEventListener('click', () => {
-      console.log('🚀 Starting offers flow (desktop)');
-      this.trackEvent('cta_get_offers_click', { intent: this.pageIntent });
-      this.nextStep();
-    });
-
-    document.getElementById('desktop-consultation-btn')?.addEventListener('click', () => {
-      console.log('📅 Opening consultation (desktop)');
-      this.openConsultation();
-    });
-
-    // Handle Send My Request button
-    document.getElementById('send-request-btn')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log('📤 Sending request');
-      this.submitForm();
-    });
-
-    // Handle final consultation button (thank you screen)
-    document.getElementById('final-consultation-btn')?.addEventListener('click', () => {
-      console.log('📅 Opening consultation (final)');
-      this.openConsultation();
-    });
-    
-    // Handle household selection for dynamic person adding
-    document.querySelectorAll('input[name="household"]').forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        this.handleHouseholdChange(e.target.value);
+    const contentContainers = [document.getElementById('mobile-content'), document.getElementById('desktop-content')];
+    contentContainers.forEach(container => {
+      if (!container) return;
+      
+      container.addEventListener('click', (e) => {
+        const target = e.target.closest('button, a');
+        if (!target) return;
+        
+        if (this.currentStep === 'intro') {
+          if (target.classList.contains('motivation-card')) {
+            this.formData.motivation = target.dataset.motivation;
+            console.log('Motivation selected:', this.formData.motivation);
+            this.currentStep = 1;
+            this.renderContent();
+            e.preventDefault();
+          } else if (target.id === 'start-offers-btn') {
+            // Optional: If no motivation selected, default to something
+            this.formData.motivation = this.formData.motivation || 'general';
+            console.log('Get 3 Best Offers clicked with motivation:', this.formData.motivation);
+            this.currentStep = 1;
+            this.renderContent();
+            e.preventDefault();
+          }
+        } else if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6) {
+          if (target.id === 'schedule-consultation-banner' || target.closest('#schedule-consultation-banner')) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Schedule consultation clicked from step', this.currentStep);
+            this.startConsultationFlow();
+          } else if (target.id === 'step-back' || target.closest('#step-back')) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Back button clicked via delegation');
+            this.previousStep();
+          } else if (target.id === 'add-person') {
+            // Handled separately with proper data saving
+            e.preventDefault();
+          } else if (target.classList.contains('remove-person')) {
+            e.preventDefault();
+            e.stopPropagation();
+            const personIndex = parseInt(target.dataset.person) - 1;
+            if (this.formData.people.length > 1) { // Keep at least one person
+              this.saveCurrentData(); // Save current form state
+              this.formData.people.splice(personIndex, 1);
+              this.renderContent();
+            } else {
+              console.log('Cannot remove last person');
+            }
+          } else if (target.id === 'submit-offers') {
+            if (this.validateStep(6)) {
+              this.submitOffersForm();
+            }
+            e.preventDefault();
+          } else if (target.id === 'prefer-talk') {
+            this.startConsultationFlow();
+            e.preventDefault();
+          }
+        } else if (this.currentStep === 'consultation_intake') {
+          if (target.id === 'consultation-back-btn') {
+            console.log('Delegated: Back to Intro clicked');
+            this.currentStep = 'intro';
+            this.renderContent();
+            e.preventDefault();
+          } else if (target.id === 'consultation-continue-btn') {
+            console.log('Delegated: Continue to Calendar clicked');
+            console.log('Current step:', this.currentStep);
+            console.log('Target element:', target);
+            // Manually trigger submit logic since delegation is on click
+            this.submitConsultationForm();
+            e.preventDefault();
+          }
+        } else if (this.currentStep === 'thankyou') {
+          if (target.id === 'book-consultation-thankyou') {
+            this.startConsultationFlow();
+            e.preventDefault();
+          } else if (target.id === 'close-thankyou') {
+            this.closeModal();
+            e.preventDefault();
+          }
+        }
       });
-    });
-    
-    // Handle slider value display updates
-    document.querySelectorAll('input[type="range"]').forEach(slider => {
-      const valueDisplay = document.getElementById(`${slider.name}-value`);
-      if (valueDisplay) {
-        slider.addEventListener('input', () => {
-          valueDisplay.textContent = slider.value;
+      
+      // For form submit (not click-based)
+      if (this.currentStep === 'consultation_intake') {
+        const form = container.querySelector('#consultation-form');
+        if (form) {
+          console.log('Form #consultation-form found, attaching submit listener.');
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Consultation form submitted.');
+            this.submitConsultationForm();
+          });
+        } else {
+          console.error('Form #consultation-form not found in container!');
+        }
+      }
+
+      // Submit handlers for forms
+      const form = container.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (this.currentStep === 'consultation_intake') {
+            this.submitConsultationForm();
+          } else if (typeof this.currentStep === 'number') {
+            if (this.validateStep(this.currentStep)) {
+              if (this.currentStep < 6) {
+                this.nextStep();
+              } else {
+                this.submitOffersForm();
+              }
+            }
+          }
         });
       }
     });
-    
-    // Handle desktop form submission
-    document.getElementById('desktop-offers-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.handleDesktopFormSubmit();
-    });
-    
-    // Handle desktop start button
-    document.getElementById('desktop-start-offers-btn')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.trackEvent('cta_get_offers_click', { intent: this.pageIntent });
-      // Scroll to form or show form section
-      const form = document.getElementById('desktop-offers-form');
-      if (form) {
-        form.scrollIntoView({ behavior: 'smooth' });
-        form.querySelector('input')?.focus();
-      }
-    });
-    
-    // Handle confirmation step buttons
-    document.getElementById('final-consultation-btn')?.addEventListener('click', () => {
-      this.startConsultationFlow();
-    });
-    
-    document.getElementById('just-email-btn')?.addEventListener('click', () => {
-      this.closeModal();
-    });
-    
-    // Handle tooltip triggers
-    document.querySelectorAll('[data-tooltip]').forEach(trigger => {
-      this.setupTooltip(trigger);
-    });
-  }
-  
-  // Handle household type change for dynamic person adding
-  handleHouseholdChange(householdType) {
-    const container = document.getElementById('additional-persons');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    if (householdType === 'couple') {
-      container.innerHTML = `
-        <div class="border-t border-gray-200 pt-4">
-          <p class="text-sm font-medium text-gray-700 mb-2">Partner</p>
-          <button type="button" class="text-sm text-blue-600 hover:text-blue-800">+ Add partner details</button>
-        </div>
-      `;
-      container.classList.remove('hidden');
-    } else if (householdType === 'family') {
-      container.innerHTML = `
-        <div class="border-t border-gray-200 pt-4 space-y-2">
-          <p class="text-sm font-medium text-gray-700 mb-2">Family members</p>
-          <button type="button" id="add-partner-btn" class="block text-sm text-blue-600 hover:text-blue-800">+ Add partner</button>
-          <button type="button" id="add-child-btn" class="block text-sm text-blue-600 hover:text-blue-800">+ Add child</button>
-        </div>
-      `;
-      container.classList.remove('hidden');
-    } else {
-      container.classList.add('hidden');
-    }
-  }
-  
-  // Handle desktop form submission
-  async handleDesktopFormSubmit() {
-    if (this.isProcessing) return;
-    
-    // Collect desktop form data
-    const form = document.getElementById('desktop-offers-form');
-    if (!form) return;
-    
-    // Validate required fields
-    const requiredFields = form.querySelectorAll('[required]');
-    let isValid = true;
-    
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        field.classList.add('border-red-500');
-        isValid = false;
-      } else {
-        field.classList.remove('border-red-500');
-      }
-    });
-    
-    if (!isValid) {
-      this.showValidationError('Please fill in all required fields');
-      return;
-    }
-    
-    // Collect form data
-    const formData = new FormData(form);
-    this.formData = {};
-    for (const [key, value] of formData.entries()) {
-      if (key.endsWith('[]')) {
-        const arrayKey = key.replace('[]', '');
-        if (!this.formData[arrayKey]) this.formData[arrayKey] = [];
-        this.formData[arrayKey].push(value);
-      } else {
-        this.formData[key] = value;
-      }
-    }
-    
-    // Submit
-    await this.submitForm();
-    
-    // Show success message
-    document.getElementById('desktop-content').innerHTML = this.renderDesktopConfirmation();
-  }
-  
-  // Render desktop confirmation
-  renderDesktopConfirmation() {
-    return `
-      <div class="text-center space-y-6">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 class="text-2xl font-bold text-gray-900">Thank you! Your 3 tailored offers are on the way 🚀</h3>
-        <p class="text-gray-600">We'll prepare your comparison and send it to <strong>${this.formData.email}</strong> within 24 hours.</p>
-        
-        ${(this.pageIntent === 'change' || this.pageIntent === 'cheapest') ? `
-          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p class="text-sm text-red-800">
-              <strong>Reminder:</strong> Switch by 30 Nov 2025 for a 1 Jan 2026 start.
-            </p>
-          </div>
-        ` : ''}
-        
-        <button onclick="document.getElementById('offers-modal').classList.add('hidden')" class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-          Close
-        </button>
-      </div>
-    `;
-  }
-  
-  // Setup tooltip functionality
-  setupTooltip(trigger) {
-    const tooltipText = trigger.getAttribute('data-tooltip');
-    if (!tooltipText) return;
-    
-    let tooltip = null;
-    
-    trigger.addEventListener('mouseenter', () => {
-      tooltip = document.createElement('div');
-      tooltip.className = 'tooltip show';
-      tooltip.textContent = tooltipText;
-      document.body.appendChild(tooltip);
-      
-      // Position tooltip
-      const rect = trigger.getBoundingClientRect();
-      tooltip.style.left = `${rect.left + rect.width / 2}px`;
-      tooltip.style.top = `${rect.top - tooltip.offsetHeight - 5}px`;
-      tooltip.style.transform = 'translateX(-50%)';
-    });
-    
-    trigger.addEventListener('mouseleave', () => {
-      if (tooltip) {
-        tooltip.remove();
-        tooltip = null;
-      }
-    });
-  }
-  
-  // Initialize Lucide icons after content is rendered
-  initializeLucideIcons() {
-    // Initialize Lucide icons if available
-    if (typeof lucide !== 'undefined' && lucide.createIcons) {
-      try {
-        lucide.createIcons();
-      } catch (error) {
-        console.log('Lucide icons initialization skipped:', error.message);
-      }
-    } else {
-      // Retry after a short delay if Lucide hasn't loaded yet
-      setTimeout(() => {
-        if (typeof lucide !== 'undefined' && lucide.createIcons) {
-          try {
-            lucide.createIcons();
-          } catch (error) {
-            console.log('Lucide icons initialization skipped (delayed):', error.message);
-          }
-        }
-      }, 100);
-    }
-  }
 
-  // Open consultation (Cal.com)
-  openConsultation() {
-    const calLink = this.getCalComLink();
-    console.log('🔗 Opening Cal.com:', calLink);
-    
-    // Track event
-    this.trackEvent('cta_consultation_click', { 
-      intent: this.pageIntent,
-      cal_link: calLink 
-    });
-    
-    // Open Cal.com in new tab
-    window.open(calLink, '_blank');
-  }
-
-  // Submit form to Formspree
-  async submitForm() {
-    console.log('📤 Submitting form...');
-    
-    try {
-      // Collect form data
-      const formData = this.collectFormData();
-      console.log('📋 Form data:', formData);
-      
-      // For now, just show success (we'll implement Formspree later)
-      this.trackEvent('lead_offer_form_submit', { 
-        intent: this.pageIntent,
-        form_data: formData 
-      });
-      
-      // Move to thank you step
-      this.currentStep = 8;
-      this.renderMobileContent();
-      
-      console.log('✅ Form submitted successfully');
-      
-    } catch (error) {
-      console.error('❌ Form submission error:', error);
-      // Show error message
-      alert('Sorry, there was an error submitting your request. Please try again.');
-    }
-  }
-
-  // Collect all form data
-  collectFormData() {
-    const data = {};
-    
-    // Get all form inputs
-    const modal = document.getElementById('offers-modal');
-    if (modal) {
-      const inputs = modal.querySelectorAll('input, select, textarea');
-      inputs.forEach(input => {
-        if (input.name && input.value) {
-          data[input.name] = input.value;
-        }
+    // Handle add person with data preservation
+    if (this.currentStep === 2) {
+      document.querySelectorAll('#add-person').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Save current people data from DOM
+          const contentDiv = document.getElementById('desktop-content') || document.getElementById('mobile-content');
+          const currentPeople = [];
+          // Find all person divs and save their data
+          contentDiv.querySelectorAll('[data-person]').forEach((personDiv, index) => {
+            const personNum = index + 1;
+            const dobInput = personDiv.querySelector(`input[name="dob-${personNum}"]`);
+            const employmentSelect = personDiv.querySelector(`select[name="employment-${personNum}"]`);
+            if (dobInput && employmentSelect) {
+              currentPeople.push({
+                dob: dobInput.value || '',
+                employment: employmentSelect.value || ''
+              });
+            }
+          });
+          // Update formData with current values
+          this.formData.people = currentPeople;
+          // Add new empty person
+          this.formData.people.push({ dob: '', employment: '' });
+          this.renderContent();
+        });
       });
     }
-    
-    // Add context data
-    data.page_intent = this.pageIntent;
-    data.page_slug = window.location.pathname;
-    data.timestamp = new Date().toISOString();
-    
-    return data;
+
+    // Remove person is handled via event delegation above
   }
 
-  // Navigate to next step
   nextStep() {
-    if (this.isProcessing) return;
+    console.log('NextStep called. Current step:', this.currentStep, 'Type:', typeof this.currentStep);
     
-    console.log(`➡️ Next step: ${this.currentStep} → ${this.currentStep + 1}`);
-    
-    // Validate current step before proceeding
-    if (!this.validateCurrentStep()) {
-      console.log('❌ Validation failed for step', this.currentStep);
-      return;
-    }
-    
-    // Handle special cases
-    if (this.currentStep === 7) {
-      // Step 6 (Review & Send) - submit form instead of going to next step
-      this.submitForm();
-      return;
-    }
-    
-    this.currentStep++;
-    this.renderMobileContent();
-    this.renderDesktopContent();
-  }
-  
-  // Navigate to previous step
-  previousStep() {
-    if (this.currentStep > 1) {
-      console.log(`⬅️ Previous step: ${this.currentStep} → ${this.currentStep - 1}`);
-      this.currentStep--;
-      this.renderMobileContent();
-      this.renderDesktopContent();
+    if (typeof this.currentStep === 'number' && this.currentStep < 6) {
+      this.saveCurrentData(); // Save current form data before moving
+      this.currentStep = this.currentStep + 1; // Ensure numeric addition
+      this.listenersAttachedForStep = false; // Reset for new step
+      console.log('Moving to step:', this.currentStep);
+      this.renderContent();
+    } else {
+      console.log('Cannot advance - either not a number or already at step 6');
     }
   }
 
-  // Validate current step
-  validateCurrentStep() {
-    // For now, just return true - we'll add proper validation later
+  previousStep() {
+    console.log('Previous step called from step:', this.currentStep, 'type:', typeof this.currentStep);
+    this.saveCurrentData(); // Save BEFORE changing step
+    
+    if (this.currentStep === 2) {
+      this.currentStep = 1;
+      this.listenersAttachedForStep = false;
+      console.log('Going back to step 1');
+      this.renderContent();
+    } else if (this.currentStep === 3) {
+      this.currentStep = 2;
+      this.listenersAttachedForStep = false;
+      console.log('Going back to step 2');
+      this.renderContent();
+    } else if (this.currentStep === 4) {
+      this.currentStep = 3;
+      this.listenersAttachedForStep = false;
+      console.log('Going back to step 3');
+      this.renderContent();
+    } else if (this.currentStep === 5) {
+      this.currentStep = 4;
+      this.listenersAttachedForStep = false;
+      console.log('Going back to step 4');
+      this.renderContent();
+    } else if (this.currentStep === 6) {
+      this.currentStep = 5;
+      this.listenersAttachedForStep = false;
+      console.log('Going back to step 5');
+      this.renderContent();
+    } else if (this.currentStep === 1) {
+      this.currentStep = 'intro';
+      console.log('Going back to intro');
+      this.renderContent();
+    } else if (this.currentStep === 'consultation_intake') {
+      this.currentStep = 'intro';
+      console.log('Going back to intro from consultation');
+      this.renderContent();
+    }
+  }
+
+  validateStep(step) {
+    // SIMPLIFIED: No validation, just return true
+    console.log('Simplified validateStep - always returns true');
+    
+    // Don't save data here - it will be saved in nextStep()
     return true;
   }
 
-  // Setup event tracking (placeholder)
-  setupEventTracking() {
-    // Placeholder for analytics setup
+  submitOffersForm() {
+    console.log('Submitting offers form...');
+    
+    // Save current step data first
+    this.saveCurrentData();
+    
+    // Prepare form data for Formspree
+    const formData = new FormData();
+    
+    // Basic info
+    formData.append('form_type', 'get_3_best_offers');
+    formData.append('name', this.formData.name || '');
+    formData.append('email', this.formData.email || '');
+    formData.append('phone', this.formData.phone || '');
+    formData.append('postcode', this.formData.postcode || '');
+    formData.append('household', this.formData.household || '');
+    formData.append('motivation', this.formData.motivation || '');
+    
+    // Insurance preferences
+    formData.append('deductible', this.formData.deductible || '');
+    formData.append('model', this.formData.model || '');
+    
+    // People data
+    formData.append('people_count', this.formData.people?.length || 0);
+    if (this.formData.people) {
+      this.formData.people.forEach((person, index) => {
+        formData.append(`person_${index + 1}_dob`, person.dob || '');
+        formData.append(`person_${index + 1}_employment`, person.employment || '');
+      });
+    }
+    
+    // Supplementary priorities (Step 4 sliders)
+    if (this.formData.priorities) {
+      Object.keys(this.formData.priorities).forEach(key => {
+        formData.append(`priority_${key}`, this.formData.priorities[key]);
+      });
+    }
+    formData.append('other_needs', this.formData.other_needs || '');
+    
+    // Consent
+    formData.append('consent', this.formData.consent || false);
+    
+    // Hidden fields for tracking
+    formData.append('page_intent', this.pageIntent || 'home');
+    formData.append('page_slug', window.location.pathname);
+    formData.append('timestamp', new Date().toISOString());
+    
+    // Submit to Formspree
+    console.log('Submitting to Formspree with data:', Array.from(formData.entries()));
+    
+    fetch('https://formspree.io/f/mrbewjlr', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Formspree response status:', response.status);
+      if (response.ok) {
+        console.log('Form submitted successfully');
+        this.currentStep = 'thankyou';
+        this.renderContent();
+        // Fire analytics event
+        console.log('Offers submitted - tracking event');
+      } else {
+        return response.text().then(text => {
+          console.error('Formspree error response:', text);
+          throw new Error(`Form submission failed: ${response.status}`);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Submission error:', error);
+      alert('There was an error submitting your request. Please try again or contact us directly.');
+    });
   }
-}
 
-// Global instance
-let globalOffersModal = null;
+  // Open the modal
+  openModal() {
+    console.log('🚀 Opening OffersModal (minimal)');
+    const modal = document.getElementById('offers-modal');
+    if (!modal) { console.error('❌ Modal element not found'); return; }
 
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    globalOffersModal = new OffersModal();
-    window.globalOffersModal = globalOffersModal;
-  });
-} else {
-  globalOffersModal = new OffersModal();
-  window.globalOffersModal = globalOffersModal;
-}
+    this.currentStep = 'intro';
+    this.formData = { people: [{}], name: '' };
+    
+    modal.classList.remove('hidden');
+    modal.style.display = 'block !important'; // Override for visibility
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+    document.body.classList.add('modal-open');
+    console.log('Modal opening initiated');
+    console.log('Modal visibility confirmed');
+    
+    this.renderContent();
 
-// Global access for debugging and external calls
-window.OffersModal = OffersModal;
+    // Attach mobile listeners after modal is visible
+    this.attachMobileListeners();
 
-// Global function to open modal (for compatibility with existing scripts)
-window.openOffersModal = function() {
-  if (globalOffersModal) {
-    globalOffersModal.openModal();
-  } else {
-    // Fallback: directly show modal
+    setTimeout(() => {
+      const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable) firstFocusable.focus();
+    }, 100);
+  }
+
+  // Close the modal
+  closeModal() {
+    console.log('❌ Closing OffersModal');
     const modal = document.getElementById('offers-modal');
     if (modal) {
-      modal.classList.remove('hidden');
-      document.body.classList.add('modal-open');
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open'); // Restore body scroll
+    }
+    // Optionally reset form state here
+  }
+
+  // Start consultation flow (redirect to mini-intake)
+  startConsultationFlow() {
+    console.log('Starting consultation flow: rendering mini-intake');
+    this.currentStep = 'consultation_intake';
+    this.renderContent();
+  }
+
+  // Submit consultation mini-intake form and open Cal.com
+  submitConsultationForm() {
+    console.log('Opening Cal.com for consultation');
+    
+    // Get form values for Formspree and Cal.com prefill
+    const name = document.getElementById('consultation-name')?.value || '';
+    const email = document.getElementById('consultation-email')?.value || '';
+    const phone = document.getElementById('consultation-phone')?.value || '';
+    const reason = document.getElementById('consultation-reason')?.value || '';
+    
+    // Send to Formspree first
+    if (name && email) {
+      const formData = new FormData();
+      formData.append('form_type', 'consultation_request');
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('reason', reason);
+      formData.append('source', window.location.pathname);
+      
+      fetch('https://formspree.io/f/mrbewjlr', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        console.log('Consultation lead sent to Formspree:', response.ok);
+      }).catch(error => {
+        console.error('Error sending to Formspree:', error);
+      });
+    }
+    
+    // Open Cal.com with prefilled data
+    const calUrl = new URL('https://cal.com/robertkolar/expat-savvy');
+    if (name) calUrl.searchParams.append('name', name);
+    if (email) calUrl.searchParams.append('email', email);
+    if (phone || reason) {
+      const notes = `${phone ? `Phone: ${phone}` : ''}${phone && reason ? '\n' : ''}${reason ? `Topic: ${reason}` : ''}`;
+      calUrl.searchParams.append('notes', notes);
+    }
+    
+    // Open in new tab
+    window.open(calUrl.toString(), '_blank');
+    
+    // Close modal after a short delay
+    setTimeout(() => {
+      this.closeModal();
+    }, 500);
+  }
+
+  // Helper for analytics (simple console log for now)
+  setupGlobalModalAccess() {
+    window.globalOffersModal = this; // Make instance globally accessible
+    window.openOffersModal = () => {
+      console.log('window.openOffersModal called.');
+      this.openModal();
+    }; // Global function for external triggers
+    window.showConsultationModal = () => {
+      console.log('window.showConsultationModal (legacy) called.');
+      this.openModal();
+    }; // Legacy compatibility
+  }
+
+  initializeLucideIcons() {
+    console.log('Attempting to initialize Lucide icons.');
+    // Only initialize if lucide is available and modal is visible
+    const modal = document.getElementById('offers-modal');
+    if (typeof lucide !== 'undefined' && lucide.createIcons && modal && !modal.classList.contains('hidden')) {
+      try {
+        lucide.createIcons();
+        console.log('Lucide icons initialized.');
+      } catch (error) {
+        console.error('Error initializing Lucide icons:', error);
+      }
+    } else {
+      console.log('Lucide not available or modal not visible, skipping initialization.');
     }
   }
-};
 
-// Legacy compatibility
-window.showConsultationModal = window.openOffersModal;
-window.openConsultationModal = window.openOffersModal;
+  // New method for mobile attachment with retry
+  attachMobileListeners() {
+    const attachWithRetry = (id, handler, logMsg) => {
+      let btn = document.getElementById(id);
+      if (btn) {
+        console.log(`Attaching ${logMsg} listener to: ${id}`);
+        btn.addEventListener('click', handler, {capture: true});
+        btn.addEventListener('touchend', handler, {capture: true}); // For mobile touch
+      } else {
+        console.warn(`${logMsg} button not found (${id}) - retrying in 100ms`);
+        setTimeout(() => attachWithRetry(id, handler, logMsg), 100);
+      }
+    };
+
+    const nextHandler = (e) => {
+      console.log('=== MOBILE NEXT CLICKED ===');
+      console.log('Current step before:', this.currentStep, 'Type:', typeof this.currentStep);
+      e.preventDefault();
+      e.stopImmediatePropagation(); // Prevent other handlers
+      
+      if (this.validateStep(this.currentStep)) {
+        if (typeof this.currentStep === 'number' && this.currentStep < 6) {
+          console.log('Mobile: Advancing from step', this.currentStep, 'to', this.currentStep + 1);
+          this.nextStep();
+        } else if (this.currentStep === 6) {
+          console.log('Mobile: Submitting form from step 6');
+          this.submitOffersForm();
+        } else {
+          console.log('Mobile: Cannot advance - currentStep is not a number or >= 6');
+        }
+      } else {
+        console.log('Mobile: Validation failed for step', this.currentStep);
+      }
+    };
+
+    const backHandler = (e) => {
+      console.log('Mobile back button clicked');
+      e.preventDefault();
+      this.previousStep();
+    };
+
+    attachWithRetry('mobile-next-btn', nextHandler, 'mobile next');
+    attachWithRetry('mobile-back-btn', backHandler, 'mobile back');
+  }
+
+  // New method to setup observer
+  setupDesktopObserver(contentDiv) {
+    const observer = new MutationObserver((mutations) => {
+      console.log('Observer detected button addition');
+      this.attachDesktopButtons();
+      if (this.listenersAttachedForStep) {
+        observer.disconnect();
+        console.log('Observer disconnected after attachment');
+      }
+    });
+
+    observer.observe(contentDiv, { childList: true, subtree: true });
+    return observer;
+  }
+
+  // Separate attachment logic
+  attachDesktopButtons() {
+    const checkInterval = 100;
+    const maxTime = 1000;
+    let timeElapsed = 0;
+
+    const nextHandler = (e) => {
+      console.log('Desktop next button clicked');
+      e.preventDefault();
+      if (this.validateStep(this.currentStep)) {
+        if (this.currentStep < 6) {
+          console.log('Step advanced to', this.currentStep + 1);
+          this.nextStep();
+        } else {
+          this.submitOffersForm();
+        }
+      }
+    };
+
+    const backHandler = (e) => {
+      console.log('Desktop back button clicked');
+      e.preventDefault();
+      this.previousStep();
+    };
+
+    const attachIfExists = (id, handler, logMsg) => {
+      let btn = document.getElementById(id);
+      if (btn && btn.dataset.attached !== 'true') {
+        console.log(`Attaching ${logMsg} listener to: ${id}`);
+        btn.addEventListener('click', handler, {capture: true});
+        btn.addEventListener('touchend', handler, {capture: true});
+        btn.dataset.attached = 'true';
+        console.log(`${logMsg} listener attached successfully`);
+        return true;
+      }
+      return false;
+    };
+
+    // Immediate check
+    const nextAttached = attachIfExists('step-next', nextHandler, 'desktop next');
+    const backAttached = attachIfExists('step-back', backHandler, 'desktop back');
+    if (nextAttached && backAttached) {
+      this.listenersAttachedForStep = true;
+      return;
+    }
+
+    // Interval check if not found
+    console.log('Starting interval check for desktop buttons');
+    const interval = setInterval(() => {
+      timeElapsed += checkInterval;
+      const nextNowAttached = attachIfExists('step-next', nextHandler, 'desktop next');
+      const backNowAttached = attachIfExists('step-back', backHandler, 'desktop back');
+      if (nextNowAttached && backNowAttached) {
+        clearInterval(interval);
+        this.listenersAttachedForStep = true;
+        console.log('Desktop listeners attached via interval check');
+      } else if (timeElapsed >= maxTime) {
+        clearInterval(interval);
+        console.error('Timeout - desktop buttons not found after 1s');
+      }
+    }, checkInterval);
+  }
+
+  saveCurrentData() {
+    console.log('=== SAVING DATA FOR STEP ===', this.currentStep);
+    
+    // Try both mobile and desktop content divs
+    const mobileDiv = document.getElementById('mobile-content');
+    const desktopDiv = document.getElementById('desktop-content');
+    const contentDiv = this.isMobile ? mobileDiv : desktopDiv;
+    
+    console.log('Using content div:', this.isMobile ? 'mobile' : 'desktop', 'Found:', !!contentDiv);
+    
+    if (!contentDiv) {
+      console.log('No content div found - cannot save data');
+      return;
+    }
+    
+    if (this.currentStep === 1) {
+      // Save Step 1 data
+      const nameInput = contentDiv.querySelector('input[name="name"]');
+      const postcodeInput = contentDiv.querySelector('input[name="postcode"]');
+      const householdSelect = contentDiv.querySelector('select[name="household"]');
+      
+      this.formData.name = nameInput?.value || '';
+      this.formData.postcode = postcodeInput?.value || '';
+      this.formData.household = householdSelect?.value || '';
+      
+      console.log('Step 1 data saved:', {
+        name: this.formData.name,
+        postcode: this.formData.postcode,
+        household: this.formData.household
+      });
+      
+    } else if (this.currentStep === 2) {
+      // Save Step 2 data
+      this.formData.people = [];
+      const personDivs = contentDiv.querySelectorAll('[data-person]');
+      console.log('Found person divs:', personDivs.length);
+      
+      personDivs.forEach((div, index) => {
+        const dobInput = div.querySelector(`input[name="dob-${index+1}"]`);
+        const employmentSelect = div.querySelector(`select[name="employment-${index+1}"]`);
+        
+        if (dobInput && employmentSelect) {
+          const personData = {
+            dob: dobInput.value || '', 
+            employment: employmentSelect.value || ''
+          };
+          this.formData.people.push(personData);
+          console.log(`Person ${index+1} data:`, personData);
+        }
+      });
+      
+    } else if (this.currentStep === 3) {
+      // Save Step 3 data
+      const deductibleSelect = contentDiv.querySelector('select[name="deductible"]');
+      const modelSelect = contentDiv.querySelector('select[name="model"]');
+      
+      this.formData.deductible = deductibleSelect?.value || '';
+      this.formData.model = modelSelect?.value || '';
+      
+      console.log('Step 3 data saved:', {
+        deductible: this.formData.deductible,
+        model: this.formData.model
+      });
+      
+    } else if (this.currentStep === 4) {
+      // Save Step 4 data
+      this.formData.priorities = {};
+      const sliders = contentDiv.querySelectorAll('input[type="range"]');
+      sliders.forEach(input => {
+        const priorityName = input.name.replace('priority-', '');
+        this.formData.priorities[priorityName] = input.value;
+      });
+      
+      const otherNeedsTextarea = contentDiv.querySelector('textarea[name="other-needs"]');
+      this.formData.other_needs = otherNeedsTextarea?.value || '';
+      
+      console.log('Step 4 data saved:', {
+        priorities: this.formData.priorities,
+        other_needs: this.formData.other_needs
+      });
+      
+    } else if (this.currentStep === 5) {
+      // Save Step 5 data
+      const emailInput = contentDiv.querySelector('input[name="email"]');
+      const phoneInput = contentDiv.querySelector('input[name="phone"]');
+      const consentCheckbox = contentDiv.querySelector('input[name="consent"]');
+      
+      this.formData.email = emailInput?.value || '';
+      this.formData.phone = phoneInput?.value || '';
+      this.formData.consent = consentCheckbox?.checked || false;
+      
+      console.log('Step 5 data saved:', {
+        email: this.formData.email,
+        phone: this.formData.phone,
+        consent: this.formData.consent
+      });
+    }
+    
+    console.log('Complete formData after save:', this.formData);
+  }
+
+}
+
+// Instantiate the modal when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, creating OffersModal instance.');
+  const modalInstance = new OffersModal();
+  
+  // Verify initialization
+  if (window.globalOffersModal === modalInstance) {
+    console.log('✅ OffersModal successfully initialized and globally accessible');
+  } else {
+    console.error('❌ OffersModal initialization failed');
+  }
+});

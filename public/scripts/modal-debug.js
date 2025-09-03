@@ -53,8 +53,7 @@
         document.body.classList.add('modal-open');
         console.log("Modal opened via debug button");
       } else {
-        console.error("Modal element not found!");
-        alert("Modal not found in DOM!");
+        console.error("Modal element not found in DOM!");
       }
     });
     
