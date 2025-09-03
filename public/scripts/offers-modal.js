@@ -951,6 +951,18 @@ class OffersModal {
         e.stopPropagation();
         this.closeModal();
       });
+      
+      // Also handle clicks on the SVG inside the button
+      const svg = closeBtn.querySelector('svg');
+      if (svg) {
+        svg.addEventListener('click', (e) => {
+          console.log('🔴 CLOSE BUTTON SVG CLICKED!');
+          e.preventDefault();
+          e.stopPropagation();
+          this.closeModal();
+        });
+      }
+      
       closeBtn.dataset.closeAttached = 'true';
       console.log('✅ Close button listener attached successfully.');
     } else if (closeBtn) {
@@ -965,8 +977,14 @@ class OffersModal {
     
     if (modal && !modal.dataset.backdropAttached) {
       modal.addEventListener('click', (e) => {
-        console.log('Modal clicked, target:', e.target.id, 'modal:', modal.id);
-        if (e.target === modal) { // Clicked on backdrop
+        console.log('Modal clicked, target classes:', e.target.className);
+        
+        // Check if clicked on backdrop (modal itself or centering div)
+        const isBackdrop = e.target === modal || 
+                          e.target.classList.contains('fixed') ||
+                          (e.target.classList.contains('flex') && e.target.classList.contains('items-center'));
+        
+        if (isBackdrop) {
           console.log('🔴 BACKDROP CLICKED!');
           e.preventDefault();
           e.stopPropagation();
