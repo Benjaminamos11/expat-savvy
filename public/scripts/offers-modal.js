@@ -22,6 +22,8 @@ class OffersModal {
     this.isMobile = window.innerWidth < 1024; // Simple mobile detection
     this.listenersAttachedForStep = false; // Flag to prevent multiple attachments
     
+    console.log('OffersModal constructor - Mobile detection:', this.isMobile, 'Window width:', window.innerWidth);
+    
     this.init();
   }
 
@@ -42,6 +44,9 @@ class OffersModal {
 
   // Render content based on current step
   renderContent() {
+    console.log('=== RENDER CONTENT DEBUG ===');
+    console.log('Current step:', this.currentStep);
+    console.log('Is mobile:', this.isMobile, 'Window width:', window.innerWidth);
     const mobileContentDiv = document.getElementById('mobile-content');
     const desktopContentDiv = document.getElementById('desktop-content');
     if (!mobileContentDiv || !desktopContentDiv) {
@@ -163,8 +168,14 @@ class OffersModal {
       }
     }
 
-    mobileContentDiv.innerHTML = contentHTML;
-    desktopContentDiv.innerHTML = contentHTML; // Restore to simple, no sidebar in JS
+    // Set content for mobile and desktop separately
+    if (this.isMobile) {
+      mobileContentDiv.innerHTML = contentHTML;
+      desktopContentDiv.innerHTML = ''; // Clear desktop content on mobile
+    } else {
+      desktopContentDiv.innerHTML = contentHTML;
+      mobileContentDiv.innerHTML = ''; // Clear mobile content on desktop
+    }
     console.log("Rendered content HTML:", contentHTML);
 
     // Explicit check after setting HTML
@@ -1232,6 +1243,11 @@ class OffersModal {
   // Open the modal
   openModal() {
     console.log('🚀 Opening OffersModal (minimal)');
+    
+    // Update mobile detection when opening modal
+    this.isMobile = window.innerWidth < 1024;
+    console.log('Modal opening - Updated mobile detection:', this.isMobile, 'Window width:', window.innerWidth);
+    
     const modal = document.getElementById('offers-modal');
     if (!modal) { console.error('❌ Modal element not found'); return; }
 
