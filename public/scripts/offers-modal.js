@@ -889,6 +889,16 @@ class OffersModal {
   bindEvents() {
     console.log('Binding main events.');
     
+    // Global close button handler (fallback for all pages)
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#close-modal-btn')) {
+        console.log('🔴 GLOBAL CLOSE BUTTON CLICKED!');
+        e.preventDefault();
+        e.stopPropagation();
+        this.closeModal();
+      }
+    });
+    
     // Escape key to close (this can be bound early)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !document.getElementById('offers-modal')?.classList.contains('hidden')) {
@@ -945,23 +955,13 @@ class OffersModal {
     console.log('Close button found:', !!closeBtn, 'Already attached:', closeBtn?.dataset.closeAttached);
     
     if (closeBtn && !closeBtn.dataset.closeAttached) {
+      // Use event delegation to catch all clicks on button and its children
       closeBtn.addEventListener('click', (e) => {
-        console.log('🔴 CLOSE BUTTON CLICKED!');
+        console.log('🔴 CLOSE BUTTON AREA CLICKED!', 'Target:', e.target.tagName);
         e.preventDefault();
         e.stopPropagation();
         this.closeModal();
-      });
-      
-      // Also handle clicks on the SVG inside the button
-      const svg = closeBtn.querySelector('svg');
-      if (svg) {
-        svg.addEventListener('click', (e) => {
-          console.log('🔴 CLOSE BUTTON SVG CLICKED!');
-          e.preventDefault();
-          e.stopPropagation();
-          this.closeModal();
-        });
-      }
+      }, true); // Use capture phase to catch all clicks
       
       closeBtn.dataset.closeAttached = 'true';
       console.log('✅ Close button listener attached successfully.');
