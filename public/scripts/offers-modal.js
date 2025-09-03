@@ -938,30 +938,47 @@ class OffersModal {
 
   // Bind close events when modal is opened (close button exists in DOM)
   bindCloseEvents() {
-    console.log('Binding close events for modal.');
+    console.log('=== BINDING CLOSE EVENTS ===');
     
     // Close button
     const closeBtn = document.getElementById('close-modal-btn');
+    console.log('Close button found:', !!closeBtn, 'Already attached:', closeBtn?.dataset.closeAttached);
+    
     if (closeBtn && !closeBtn.dataset.closeAttached) {
-      closeBtn.addEventListener('click', () => {
-        console.log('Close button clicked.');
+      closeBtn.addEventListener('click', (e) => {
+        console.log('🔴 CLOSE BUTTON CLICKED!');
+        e.preventDefault();
+        e.stopPropagation();
         this.closeModal();
       });
       closeBtn.dataset.closeAttached = 'true';
-      console.log('Close button listener attached.');
+      console.log('✅ Close button listener attached successfully.');
+    } else if (closeBtn) {
+      console.log('⚠️ Close button already has listener attached.');
+    } else {
+      console.error('❌ Close button not found in DOM!');
     }
     
     // Backdrop click
     const modal = document.getElementById('offers-modal');
+    console.log('Modal found:', !!modal, 'Already attached:', modal?.dataset.backdropAttached);
+    
     if (modal && !modal.dataset.backdropAttached) {
       modal.addEventListener('click', (e) => {
+        console.log('Modal clicked, target:', e.target.id, 'modal:', modal.id);
         if (e.target === modal) { // Clicked on backdrop
-          console.log('Backdrop clicked.');
+          console.log('🔴 BACKDROP CLICKED!');
+          e.preventDefault();
+          e.stopPropagation();
           this.closeModal();
         }
       });
       modal.dataset.backdropAttached = 'true';
-      console.log('Backdrop listener attached.');
+      console.log('✅ Backdrop listener attached successfully.');
+    } else if (modal) {
+      console.log('⚠️ Modal backdrop already has listener attached.');
+    } else {
+      console.error('❌ Modal not found in DOM!');
     }
   }
 
@@ -1304,12 +1321,16 @@ class OffersModal {
 
   // Close the modal
   closeModal() {
-    console.log('❌ Closing OffersModal');
+    console.log('🔴 === CLOSING MODAL ===');
     const modal = document.getElementById('offers-modal');
+    console.log('Modal element found:', !!modal);
+    
     if (modal) {
+      console.log('Adding hidden class to modal...');
       modal.classList.add('hidden');
       
       // Remove modal-open class and restore scroll position
+      console.log('Removing modal-open class from body...');
       document.body.classList.remove('modal-open');
       document.body.style.top = ''; // Clear the top style
       
@@ -1318,6 +1339,10 @@ class OffersModal {
         console.log('Restoring scroll position:', this.scrollPosition);
         window.scrollTo(0, this.scrollPosition);
       }
+      
+      console.log('✅ Modal closed successfully');
+    } else {
+      console.error('❌ Modal element not found when trying to close!');
     }
     // Optionally reset form state here
   }
