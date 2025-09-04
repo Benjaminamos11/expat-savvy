@@ -175,8 +175,7 @@ class OffersModal {
       console.log('Mobile content div found:', !!mobileContentDiv);
       console.log('Desktop content div found:', !!desktopContentDiv);
       
-      // Test: Add a simple visible element first
-      mobileContentDiv.innerHTML = '<div style="background: red; color: white; padding: 20px;">MOBILE TEST CONTENT</div>' + contentHTML;
+      mobileContentDiv.innerHTML = contentHTML;
       desktopContentDiv.innerHTML = ''; // Clear desktop content on mobile
       
       console.log('Mobile content set, div innerHTML length:', mobileContentDiv.innerHTML.length);
