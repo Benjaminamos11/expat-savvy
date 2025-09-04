@@ -23,32 +23,32 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
   
 
 
-  <div class="fixed inset-0 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-6xl w-full overflow-y-auto max-h-[95vh] relative shadow-2xl transition-all duration-200 scale-100 translate-y-0">
+  <div class="fixed inset-0 flex items-center justify-center p-4 lg:p-4 p-0">
+    <div class="bg-white rounded-3xl max-w-6xl w-full overflow-y-auto max-h-[100dvh] lg:max-h-[95vh] relative shadow-2xl transition-all duration-200 scale-100 translate-y-0">
 
-      <!-- Close button -->
-      <button id="close-modal-btn" class="absolute top-4 right-4 z-10 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+      <!-- Close button - Enhanced mobile touch target -->
+      <button id="close-modal-btn" class="absolute top-3 right-3 lg:top-4 lg:right-4 z-10 p-3 lg:p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
       
-      <!-- Mobile Layout -->
-      <div class="lg:hidden pointer-events-auto"> <!-- Enable pointer events -->
-        <!-- Progress bar -->
-        <div class="h-2 bg-gray-200">
-          <div id="mobile-progress-bar" class="h-full bg-red-500 transition-all duration-300" style="width: 0%"></div>
+      <!-- Mobile Layout - Optimized for full viewport -->
+      <div class="lg:hidden pointer-events-auto h-full flex flex-col">
+        <!-- Progress bar - Enhanced visibility -->
+        <div class="h-1 bg-gray-200 flex-shrink-0">
+          <div id="mobile-progress-bar" class="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-300 shadow-sm" style="width: 0%"></div>
         </div>
         
-        <!-- Content -->
-        <div id="mobile-content" class="p-6 overflow-y-auto pointer-events-auto" style="max-height: calc(95vh - 80px); min-height: 400px;"> <!-- Remove background: yellow; -->
+        <!-- Content - Flexible height with safe areas -->
+        <div id="mobile-content" class="flex-1 p-4 overflow-y-auto pointer-events-auto" style="padding-bottom: max(1rem, env(safe-area-inset-bottom));">
           <!-- Will be populated by JavaScript -->
         </div>
         
-        <!-- Footer -->
-        <div class="sticky bottom-0 bg-white border-t border-gray-200 p-4 flex gap-3">
-          <button id="mobile-back-btn" class="hidden px-4 py-2 text-gray-600 border border-gray-300 rounded-lg">Back</button>
-          <button id="mobile-next-btn" class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold">Next →</button>
+        <!-- Footer - Safe area optimized -->
+        <div class="flex-shrink-0 bg-white border-t border-gray-200 p-4 flex gap-3 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]" style="padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+          <button id="mobile-back-btn" class="hidden px-4 py-3 text-gray-600 border border-gray-300 rounded-lg min-h-[48px] font-medium">Back</button>
+          <button id="mobile-next-btn" class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold min-h-[48px] text-lg">Next →</button>
         </div>
       </div>
       
@@ -108,10 +108,45 @@ document.addEventListener('DOMContentLoaded', function() {
   #offers-modal .flex {
     pointer-events: auto; /* Enable on flex wrappers */
   }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 1023px) {
+    /* Ensure modal uses full height on mobile */
+    #offers-modal .bg-white {
+      border-radius: 1.5rem 1.5rem 0 0; /* Rounded top only on mobile */
+      margin: 0;
+      height: 100dvh;
+      max-height: 100dvh;
+    }
+    
+    /* Safe area support for newer phones */
+    #mobile-content {
+      padding-top: max(1rem, env(safe-area-inset-top));
+    }
+    
+    /* Form inputs optimized for mobile */
+    #mobile-content input,
+    #mobile-content select,
+    #mobile-content textarea {
+      font-size: 16px; /* Prevent iOS zoom */
+      min-height: 44px; /* iOS recommended touch target */
+    }
+    
+    /* Better button spacing */
+    #mobile-content button {
+      min-height: 48px;
+      touch-action: manipulation; /* Prevent double-tap zoom */
+    }
+  }
+  
+  /* Enhanced progress bar */
+  #mobile-progress-bar {
+    box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3);
+  }
 </style>
 
 <!-- Add Lucide script before our offers-modal.js -->
 <script src="https://unpkg.com/lucide@0.244.0/dist/umd/lucide.js"></script>
 
 <!-- Include the OffersModal class logic (loads after Lucide) -->
-<script src="/scripts/offers-modal.js?v=1.3.0" defer></script>
+<script src="/scripts/offers-modal.js?v=1.3.1" defer></script>
