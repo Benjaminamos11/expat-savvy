@@ -47,6 +47,7 @@ class OffersModal {
   renderContent() {
     console.log('=== RENDER CONTENT DEBUG ===');
     console.log('Current step:', this.currentStep);
+    console.log('Current step type:', typeof this.currentStep);
     console.log('Is mobile:', this.isMobile, 'Window width:', window.innerWidth);
     const mobileContentDiv = document.getElementById('mobile-content');
     const desktopContentDiv = document.getElementById('desktop-content');
@@ -56,9 +57,11 @@ class OffersModal {
     }
 
     let contentHTML = '';
+    console.log('About to check step conditions...');
 
     // For desktop on intro step, create the two-column layout with sidebar
     if (!this.isMobile && this.currentStep === 'intro') {
+      console.log('BRANCH: Desktop intro step');
       contentHTML = `
         <div class="flex h-full">
           <div class="flex-1 p-8 overflow-y-auto">
@@ -92,8 +95,10 @@ class OffersModal {
         </div>
       `;
     } else if (this.currentStep === 'intro') {
+      console.log('BRANCH: Mobile intro step');
       contentHTML = this.renderIntroStep();
     } else if (this.currentStep === 'consultation_intake') {
+      console.log('BRANCH: Consultation intake step');
       contentHTML = this.renderConsultationIntakeStep();
     } else if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6) {
       contentHTML = this.renderOffersStep(this.currentStep);
@@ -175,19 +180,23 @@ class OffersModal {
       console.log('Mobile content div found:', !!mobileContentDiv);
       console.log('Desktop content div found:', !!desktopContentDiv);
       
-      mobileContentDiv.innerHTML = contentHTML;
+      // Debug: Add visible test content to ensure div is working
+      const testContent = '<div style="background: red; color: white; padding: 20px; margin: 10px;">MOBILE TEST - Modal Working</div>';
+      mobileContentDiv.innerHTML = testContent + contentHTML;
       desktopContentDiv.innerHTML = ''; // Clear desktop content on mobile
       
       console.log('Mobile content set, div innerHTML length:', mobileContentDiv.innerHTML.length);
       console.log('Mobile content div visible:', mobileContentDiv.offsetHeight > 0);
       console.log('Mobile content div computed style:', window.getComputedStyle(mobileContentDiv).display);
+      console.log('FULL contentHTML:', contentHTML);
     } else {
       console.log('Setting desktop content:', contentHTML);
       desktopContentDiv.innerHTML = contentHTML;
       mobileContentDiv.innerHTML = ''; // Clear mobile content on desktop
       console.log('Desktop content set, div innerHTML length:', desktopContentDiv.innerHTML.length);
     }
-    console.log("Rendered content HTML:", contentHTML);
+    console.log("Final contentHTML length:", contentHTML.length);
+    console.log("Final contentHTML preview:", contentHTML.substring(0, 200));
 
     // Explicit check after setting HTML
     if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6 && !this.listenersAttachedForStep) {
