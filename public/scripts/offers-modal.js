@@ -21,6 +21,7 @@ class OffersModal {
     this.pageIntent = this.detectPageIntent();
     this.isMobile = window.innerWidth < 1024; // Simple mobile detection
     this.listenersAttachedForStep = false; // Flag to prevent multiple attachments
+    this.isSubmitting = false; // Prevent duplicate form submissions
     
     console.log('OffersModal constructor - Mobile detection:', this.isMobile, 'Window width:', window.innerWidth);
     
@@ -1266,6 +1267,19 @@ class OffersModal {
   submitOffersForm() {
     console.log('Submitting offers form...');
     
+    // Prevent duplicate submissions
+    if (this.isSubmitting) {
+      console.log('Form already submitting, ignoring duplicate call');
+      return;
+    }
+    this.isSubmitting = true;
+    
+    // Safety timeout to reset submission flag (in case of network issues)
+    setTimeout(() => {
+      this.isSubmitting = false;
+      console.log('Submission flag reset by timeout');
+    }, 10000);
+    
     // Track form submission event
     this.trackEvent('offers_form_submit_success', {
       intent: this.pageIntent,
@@ -1334,6 +1348,7 @@ class OffersModal {
         this.renderContent();
         // Fire analytics event
         console.log('Offers submitted - tracking event');
+        this.isSubmitting = false; // Reset submission flag
       } else {
         return response.text().then(text => {
           console.error('Formspree error response:', text);
@@ -1344,6 +1359,7 @@ class OffersModal {
     .catch(error => {
       console.error('Submission error:', error);
       alert('There was an error submitting your request. Please try again or contact us directly.');
+      this.isSubmitting = false; // Reset submission flag on error
     });
   }
 
@@ -1443,6 +1459,13 @@ class OffersModal {
   submitConsultationForm() {
     console.log('Opening Cal.com for consultation');
     
+    // Prevent duplicate submissions
+    if (this.isSubmitting) {
+      console.log('Already submitting, ignoring duplicate consultation call');
+      return;
+    }
+    this.isSubmitting = true;
+    
     // Get form values for Formspree and Cal.com prefill
     const name = document.getElementById('consultation-name')?.value || '';
     const email = document.getElementById('consultation-email')?.value || '';
@@ -1465,8 +1488,10 @@ class OffersModal {
         headers: { 'Accept': 'application/json' }
       }).then(response => {
         console.log('Consultation lead sent to Formspree:', response.ok);
+        this.isSubmitting = false; // Reset submission flag
       }).catch(error => {
         console.error('Error sending to Formspree:', error);
+        this.isSubmitting = false; // Reset submission flag on error
       });
     }
     
