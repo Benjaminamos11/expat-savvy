@@ -23,8 +23,8 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
   
 
 
-  <div class="flex items-center justify-center p-4 lg:p-4 p-0 h-full">
-    <div class="bg-white rounded-3xl max-w-6xl w-full overflow-y-auto max-h-[100dvh] lg:max-h-[95vh] relative shadow-2xl transition-all duration-200 scale-100 translate-y-0">
+  <div class="flex items-center justify-center p-4 lg:p-4 p-0 h-full min-h-screen">
+    <div class="bg-white rounded-3xl max-w-6xl w-full overflow-y-auto max-h-[100dvh] lg:max-h-[95vh] relative shadow-2xl transition-all duration-200 scale-100 translate-y-0 h-full lg:h-auto">
 
       <!-- Close button - Enhanced mobile touch target -->
       <button id="close-modal-btn" class="absolute top-3 right-3 lg:top-4 lg:right-4 z-10 p-3 lg:p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
@@ -34,19 +34,19 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
       </button>
       
       <!-- Mobile Layout - Optimized for full viewport -->
-      <div class="lg:hidden pointer-events-auto h-full flex flex-col">
+      <div class="lg:hidden pointer-events-auto h-full flex flex-col min-h-full">
         <!-- Progress bar - Enhanced visibility -->
         <div class="h-1 bg-gray-200 flex-shrink-0">
           <div id="mobile-progress-bar" class="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-300 shadow-sm" style="width: 0%"></div>
         </div>
         
         <!-- Content - Optimized for single screen view -->
-        <div id="mobile-content" class="flex-1 p-3 overflow-y-auto pointer-events-auto bg-white" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
-          <!-- Will be populated by JavaScript -->
+        <div id="mobile-content" class="flex-1 p-3 overflow-y-auto pointer-events-auto bg-white" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); min-height: 500px;">
+          <!-- Content will be populated by JavaScript -->
         </div>
         
         <!-- Footer - Safe area optimized (Back button only) -->
-        <div class="flex-shrink-0 bg-white border-t border-gray-200 p-4 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]" style="padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+        <div class="flex-shrink-0 bg-gray-50 border-t border-gray-200 p-4 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]" style="padding-bottom: max(1rem, env(safe-area-inset-bottom));">
           <button id="mobile-back-btn" class="hidden w-full px-4 py-3 text-gray-600 border border-gray-300 rounded-lg min-h-[48px] font-medium">Back</button>
         </div>
       </div>

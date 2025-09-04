@@ -90,7 +90,7 @@ class OffersModal {
               </ul>
             </div>
             <div style="height: 60px;"></div>
-            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold text-lg transition-colors hover:bg-red-700" onclick="window.globalOffersModal && window.globalOffersModal.startConsultationFlow()">Book Free Consultation</button>
+            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold text-lg transition-colors hover:bg-red-700" onclick="event.stopPropagation(); event.preventDefault(); window.globalOffersModal && window.globalOffersModal.startConsultationFlow(); return false;">Book Free Consultation</button>
           </div>
         </div>
       `;
@@ -176,17 +176,26 @@ class OffersModal {
 
     // Set content for mobile and desktop separately
     if (this.isMobile) {
-      console.log('Setting mobile content:', contentHTML);
+      console.log('=== MOBILE CONTENT DEBUG ===');
+      console.log('Setting mobile content HTML length:', contentHTML.length);
       console.log('Mobile content div found:', !!mobileContentDiv);
       console.log('Desktop content div found:', !!desktopContentDiv);
+      console.log('Mobile content div classes:', mobileContentDiv?.className);
+      console.log('Mobile content div styles:', mobileContentDiv?.style.cssText);
+      
+      // Check if mobile content div has any existing content
+      console.log('Mobile content div existing innerHTML:', mobileContentDiv?.innerHTML);
       
       mobileContentDiv.innerHTML = contentHTML;
       desktopContentDiv.innerHTML = ''; // Clear desktop content on mobile
       
-      console.log('Mobile content set, div innerHTML length:', mobileContentDiv.innerHTML.length);
-      console.log('Mobile content div visible:', mobileContentDiv.offsetHeight > 0);
-      console.log('Mobile content div computed style:', window.getComputedStyle(mobileContentDiv).display);
-      console.log('FULL contentHTML:', contentHTML);
+      console.log('Mobile content set, new innerHTML length:', mobileContentDiv.innerHTML.length);
+      console.log('Mobile content div offsetHeight:', mobileContentDiv.offsetHeight);
+      console.log('Mobile content div scrollHeight:', mobileContentDiv.scrollHeight);
+      console.log('Mobile content div computed display:', window.getComputedStyle(mobileContentDiv).display);
+      console.log('Mobile content div computed background:', window.getComputedStyle(mobileContentDiv).backgroundColor);
+      console.log('Mobile content div computed color:', window.getComputedStyle(mobileContentDiv).color);
+      console.log('FULL contentHTML preview (first 500 chars):', contentHTML.substring(0, 500));
     } else {
       console.log('Setting desktop content:', contentHTML);
       desktopContentDiv.innerHTML = contentHTML;
@@ -253,10 +262,19 @@ class OffersModal {
   }
 
   renderIntroStep() {
+    console.log('=== RENDER INTRO STEP DEBUG ===');
+    console.log('isMobile flag:', this.isMobile);
+    console.log('window.innerWidth:', window.innerWidth);
+    
     const socialCount = this.generateSocialProof();
     const { headline, subline } = this.getHeadlineContent();
     
+    console.log('Generated social count:', socialCount);
+    console.log('Generated headline:', headline);
+    console.log('Generated subline:', subline);
+    
     if (this.isMobile) {
+      console.log('ENTERING MOBILE BRANCH for intro step');
       // Mobile version with consultation button
       return `
         <div data-step-name="intro">
@@ -299,7 +317,7 @@ class OffersModal {
             </div>
           </button>
           
-          <button id="mobile-consultation-btn" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors" onclick="window.globalOffersModal && window.globalOffersModal.startConsultationFlow()">
+          <button id="mobile-consultation-btn" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors" onclick="event.stopPropagation(); event.preventDefault(); window.globalOffersModal && window.globalOffersModal.startConsultationFlow(); return false;">
             <div class="flex items-center justify-center">
               <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
               Book Free Consultation
@@ -1383,6 +1401,9 @@ class OffersModal {
   // Open the modal
   openModal() {
     console.log('🚀 Opening OffersModal (minimal)');
+    console.log('=== MODAL OPEN DEBUG ===');
+    console.log('Current window dimensions:', window.innerWidth, 'x', window.innerHeight);
+    console.log('User agent:', navigator.userAgent);
     
     // Track modal open event
     this.trackEvent('modal_opened', {
@@ -1393,6 +1414,7 @@ class OffersModal {
     // Update mobile detection when opening modal
     this.isMobile = window.innerWidth < 1024;
     console.log('Modal opening - Updated mobile detection:', this.isMobile, 'Window width:', window.innerWidth);
+    console.log('Will use mobile layout:', this.isMobile);
     
     const modal = document.getElementById('offers-modal');
     if (!modal) { console.error('❌ Modal element not found'); return; }
@@ -1460,6 +1482,9 @@ class OffersModal {
 
   // Start consultation flow (redirect to mini-intake)
   startConsultationFlow() {
+    console.log('=== START CONSULTATION FLOW CALLED ===');
+    console.log('Current step before:', this.currentStep);
+    console.log('Is mobile:', this.isMobile);
     console.log('Starting consultation flow: rendering mini-intake');
     
     // Track consultation CTA click
@@ -1469,7 +1494,9 @@ class OffersModal {
     });
     
     this.currentStep = 'consultation_intake';
+    console.log('Current step after:', this.currentStep);
     this.renderContent();
+    console.log('=== END START CONSULTATION FLOW ===');
   }
 
   // Submit consultation mini-intake form and open Cal.com
