@@ -817,11 +817,10 @@ class OffersModal {
 
   updateMobileFooter() {
     const backBtn = document.getElementById('mobile-back-btn');
-    const nextBtn = document.getElementById('mobile-next-btn');
-    if (backBtn && nextBtn) {
-      backBtn.classList.toggle('hidden', this.currentStep === 1);
-      nextBtn.textContent = this.currentStep === 6 ? 'Send My Request' : 'Next →';
+    if (backBtn) {
+      backBtn.classList.toggle('hidden', this.currentStep === 1 || this.currentStep === 'intro');
     }
+    // Note: mobile-next-btn removed - navigation happens via content buttons
   }
 
   // Generate consistent social proof number
