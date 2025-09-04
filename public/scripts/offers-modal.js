@@ -180,9 +180,7 @@ class OffersModal {
       console.log('Mobile content div found:', !!mobileContentDiv);
       console.log('Desktop content div found:', !!desktopContentDiv);
       
-      // Debug: Add visible test content to ensure div is working
-      const testContent = '<div style="background: red; color: white; padding: 20px; margin: 10px;">MOBILE TEST - Modal Working</div>';
-      mobileContentDiv.innerHTML = testContent + contentHTML;
+      mobileContentDiv.innerHTML = contentHTML;
       desktopContentDiv.innerHTML = ''; // Clear desktop content on mobile
       
       console.log('Mobile content set, div innerHTML length:', mobileContentDiv.innerHTML.length);
