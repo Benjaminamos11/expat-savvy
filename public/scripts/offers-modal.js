@@ -171,11 +171,22 @@ class OffersModal {
 
     // Set content for mobile and desktop separately
     if (this.isMobile) {
-      mobileContentDiv.innerHTML = contentHTML;
+      console.log('Setting mobile content:', contentHTML);
+      console.log('Mobile content div found:', !!mobileContentDiv);
+      console.log('Desktop content div found:', !!desktopContentDiv);
+      
+      // Test: Add a simple visible element first
+      mobileContentDiv.innerHTML = '<div style="background: red; color: white; padding: 20px;">MOBILE TEST CONTENT</div>' + contentHTML;
       desktopContentDiv.innerHTML = ''; // Clear desktop content on mobile
+      
+      console.log('Mobile content set, div innerHTML length:', mobileContentDiv.innerHTML.length);
+      console.log('Mobile content div visible:', mobileContentDiv.offsetHeight > 0);
+      console.log('Mobile content div computed style:', window.getComputedStyle(mobileContentDiv).display);
     } else {
+      console.log('Setting desktop content:', contentHTML);
       desktopContentDiv.innerHTML = contentHTML;
       mobileContentDiv.innerHTML = ''; // Clear mobile content on desktop
+      console.log('Desktop content set, div innerHTML length:', desktopContentDiv.innerHTML.length);
     }
     console.log("Rendered content HTML:", contentHTML);
 
@@ -1560,26 +1571,6 @@ class OffersModal {
       }
     };
 
-    const nextHandler = (e) => {
-      console.log('=== MOBILE NEXT CLICKED ===');
-      console.log('Current step before:', this.currentStep, 'Type:', typeof this.currentStep);
-      e.preventDefault();
-      e.stopImmediatePropagation(); // Prevent other handlers
-      
-      if (this.validateStep(this.currentStep)) {
-        if (typeof this.currentStep === 'number' && this.currentStep < 6) {
-          console.log('Mobile: Advancing from step', this.currentStep, 'to', this.currentStep + 1);
-          this.nextStep();
-        } else if (this.currentStep === 6) {
-          console.log('Mobile: Submitting form from step 6');
-          this.submitOffersForm();
-        } else {
-          console.log('Mobile: Cannot advance - currentStep is not a number or >= 6');
-        }
-      } else {
-        console.log('Mobile: Validation failed for step', this.currentStep);
-      }
-    };
 
     const backHandler = (e) => {
       console.log('Mobile back button clicked');
@@ -1587,7 +1578,7 @@ class OffersModal {
       this.previousStep();
     };
 
-    attachWithRetry('mobile-next-btn', nextHandler, 'mobile next');
+    // Only attach back button - next button was removed from mobile
     attachWithRetry('mobile-back-btn', backHandler, 'mobile back');
   }
 
