@@ -69,7 +69,7 @@ class OffersModal {
           </div>
           <div class="w-[360px] p-6 border-l bg-white flex flex-col">
             <img 
-              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_112,h_112,q_80,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_112,h_112,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
               alt="Robert — Expat Savvy Advisor" 
               class="w-[112px] h-[112px] rounded-full mx-auto mb-4 object-cover"
             />
@@ -783,7 +783,7 @@ class OffersModal {
           <div class="flex-1 flex flex-col justify-center">
             <div class="text-center mb-6">
               <img
-                src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_80,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+                src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
                 alt="Robert Kolar"
                 class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
               />
@@ -822,7 +822,7 @@ class OffersModal {
         <div class="bg-red-50 border border-red-200 p-4 rounded-lg shadow-sm mb-6">
           <div class="flex items-center mb-3">
             <img
-              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_48,h_48,q_80,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_48,h_48,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
               alt="Robert Kolar"
               class="w-12 h-12 rounded-full mr-3 object-cover"
             />
