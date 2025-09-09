@@ -45,8 +45,8 @@ const faqs = [
 ---
 
 <Layout
-  title="Sanitas vs Swica – Health Insurance Comparison for Expats 2026"
-  description="Compare Sanitas vs Swica health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."
+  title={new Date() < new Date('2025-11-30') ? "🚨 Sanitas vs SWICA 2026: Change Period Ends Nov 30 - Compare & Save 40%" : "Sanitas vs Swica – Health Insurance Comparison for Expats 2026"}
+  description={new Date() < new Date('2025-11-30') ? "⏰ URGENT: 2026 change period ends Nov 30! Compare Sanitas vs SWICA head-to-head. Digital excellence vs wellness benefits, live quotes, save up to 40%. Free consultation." : "Compare Sanitas vs Swica health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."}
 >
   <!-- Schema -->
   <script type="application/ld+json" slot="head">
@@ -94,6 +94,35 @@ const faqs = [
           <p class="mt-6 text-xl text-gray-500">
             Side-by-side for professionals and English speakers in Switzerland. Compare models, premiums, supplementary coverage, and digital tools.
           </p>
+
+          <!-- Seasonal CTA Highlight (only visible until Nov 30, 2025) -->
+          <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} mt-6 p-6 bg-gradient-to-r from-red-600 to-red-700 rounded-lg text-white`}>
+            <div class="flex items-center mb-3">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-semibold">2026 CHANGE PERIOD ACTIVE</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">⚡ Digital vs Wellness: Nov 30 Deadline!</h3>
+            <p class="text-sm mb-4">Expert comparison: Sanitas digital excellence vs SWICA wellness benefits. Save up to 40%.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button
+                onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+                class="inline-flex items-center px-4 py-2 bg-white text-red-600 font-semibold rounded-md hover:bg-gray-50 transition-colors"
+                data-umami-event="seasonal-cta-comparison-sanitas-swica-consultation"
+              >
+                🔥 Book Expert Consultation
+              </button>
+              <button
+                onclick="document.getElementById('offers-modal').classList.remove('hidden')"
+                class="inline-flex items-center px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition-colors"
+                data-umami-event="seasonal-cta-comparison-sanitas-swica-offers"
+              >
+                ⚡ Get Live Quotes
+              </button>
+            </div>
+          </div>
+
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
             <button
               onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
