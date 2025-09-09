@@ -356,14 +356,14 @@ const faqs = [
         
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <button
-            onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider-helsana'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300 shadow-lg"
             data-umami-event="seasonal-helsana-consultation"
           >
             🟥 Book Free Expert Consultation (recommended)
           </button>
           <button
-            onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare-helsana'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
             class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg border border-gray-200"
             data-umami-event="seasonal-helsana-offers"
           >

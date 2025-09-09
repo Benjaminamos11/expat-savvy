@@ -106,7 +106,7 @@ const faqs = [
             <p class="text-sm mb-4">Get expert comparison between Helsana & CSS. Save up to 40% on 2026 premiums.</p>
             <div class="flex flex-col sm:flex-row gap-3">
               <button
-                onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+                onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare-helsana-css'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
                 class="inline-flex items-center px-4 py-2 bg-white text-red-600 font-semibold rounded-md hover:bg-gray-50 transition-colors"
                 data-umami-event="seasonal-cta-comparison-helsana-css-consultation"
               >
