@@ -45,8 +45,8 @@ const faqs = [
 ---
 
 <Layout
-  title="Helsana vs CSS – Health Insurance Comparison for Expats 2026"
-  description="Compare Helsana vs CSS health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."
+  title={new Date() < new Date('2025-11-30') ? "🚨 Helsana vs CSS 2026: Change Period Ends Nov 30 - Compare & Save 40%" : "Helsana vs CSS – Health Insurance Comparison for Expats 2026"}
+  description={new Date() < new Date('2025-11-30') ? "⏰ URGENT: 2026 change period ends Nov 30! Compare Helsana vs CSS head-to-head. Expert analysis, live quotes, and save up to 40%. Free consultation." : "Compare Helsana vs CSS health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."}
 >
   <!-- Schema -->
   <script type="application/ld+json" slot="head">
@@ -93,6 +93,34 @@ const faqs = [
           <p class="mt-6 text-xl text-gray-500">
             Side-by-side for professionals and English speakers in Switzerland. Compare models, premiums, supplementary coverage, and digital tools.
           </p>
+
+          <!-- Seasonal CTA Highlight (only visible until Nov 30, 2025) -->
+          <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} mt-8 p-6 bg-gradient-to-r from-red-600 to-red-700 rounded-lg text-white`}>
+            <div class="flex items-center mb-3">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-semibold">2026 CHANGE PERIOD ACTIVE</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">⚡ Last Chance: Ends Nov 30!</h3>
+            <p class="text-sm mb-4">Get expert comparison between Helsana & CSS. Save up to 40% on 2026 premiums.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button
+                onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+                class="inline-flex items-center px-4 py-2 bg-white text-red-600 font-semibold rounded-md hover:bg-gray-50 transition-colors"
+                data-umami-event="seasonal-cta-comparison-helsana-css-consultation"
+              >
+                🔥 Book Expert Consultation
+              </button>
+              <button
+                onclick="document.getElementById('offers-modal').classList.remove('hidden')"
+                class="inline-flex items-center px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition-colors"
+                data-umami-event="seasonal-cta-comparison-helsana-css-offers"
+              >
+                ⚡ Get Live Quotes
+              </button>
+            </div>
+          </div>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
             <button
               onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
@@ -359,4 +387,55 @@ const faqs = [
   </div>
 
   <ConsultationModal />
+
+  <!-- Seasonal Offers Modal -->
+  <div id="offers-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="document.getElementById('offers-modal').classList.add('hidden')"></div>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Compare Live Helsana vs CSS Quotes</h3>
+          <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+            <p class="text-sm text-red-800">
+              <strong>⚡ Quick Comparison:</strong> See real 2026 premiums for both providers. Takes 90 seconds.
+            </p>
+          </div>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Age</label>
+              <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
+                <option>18-25</option>
+                <option>26-35</option>
+                <option>36-45</option>
+                <option>46-55</option>
+                <option>Over 55</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Canton</label>
+              <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
+                <option>Zurich</option>
+                <option>Geneva</option>
+                <option>Basel</option>
+                <option>Vaud</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500" placeholder="your@email.com">
+            </div>
+          </form>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm" data-umami-event="seasonal-comparison-submit-helsana-css">
+            🚀 Get Live Comparison
+          </button>
+          <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="document.getElementById('offers-modal').classList.add('hidden')">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout> 
