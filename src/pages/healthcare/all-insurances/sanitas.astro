@@ -375,7 +375,7 @@ const faqs = [
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <button
-            onclick="document.getElementById('consultation-modal').classList.remove('hidden')"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider-sanitas'); }"
             class="inline-flex items-center px-8 py-4 bg-white text-red-600 font-bold rounded-lg hover:bg-gray-50 transition-colors shadow-lg"
             data-umami-event="seasonal-cta-consultation-sanitas"
           >
@@ -385,7 +385,7 @@ const faqs = [
             </svg>
           </button>
           <button
-            onclick="document.getElementById('offers-modal').classList.remove('hidden')"
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider-sanitas'); }"
             class="inline-flex items-center px-8 py-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-lg"
             data-umami-event="seasonal-cta-offers-sanitas"
           >
@@ -397,6 +397,10 @@ const faqs = [
         </div>
         <p class="text-sm mt-4 text-white text-opacity-80">
           ⏰ Deadline: November 30, 2025 • 📞 Free consultation • 💰 No hidden fees
+        </p>
+      </div>
+    </div>
+  </div>
         </p>
       </div>
     </div>
