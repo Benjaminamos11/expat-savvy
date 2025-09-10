@@ -382,33 +382,84 @@ const faqs = [
     </div>
   </div>
 
-  <!-- 2026 Season: Special Groupe Mutuel Incentive Box -->
-  <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-red-500 py-8`}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-2xl p-8 shadow-lg border border-red-100">
-        <div class="text-center">
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">
-            🎁 Groupe Mutuel + Expat Savvy: Exclusive Gift Basket
-          </h3>
-          <p class="text-lg text-gray-600 mb-6">
-            Switch to Groupe Mutuel for 2026 with Expat Savvy and receive an <strong>exclusive Swiss welcome gift basket</strong>. Broker services only - no direct insurer fees.
-          </p>
-          <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <button
-              onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider-groupe-mutuel'); }"
-              class="inline-flex items-center px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-              data-umami-event="seasonal-cta-consultation-groupe-mutuel"
-            >
-              🟥 Book Free Expert Consultation (recommended)
-              <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-              </svg>
-            </button>
+  <!-- 2026 Season: Professional Groupe Mutuel CTA -->
+  <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} bg-gray-50 py-12`}>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 relative overflow-hidden">
+        
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-white pointer-events-none"></div>
+        
+        <!-- Status badge -->
+        <div class="relative flex items-center justify-center mb-6">
+          <div class="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-inner">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Change Period: Expires Nov 30, 2025
           </div>
-          <p class="text-sm mt-4 text-gray-500">
-            ⏰ Change deadline: November 30, 2025 • 🎁 Gift basket included • 📞 Free expert guidance
+        </div>
+        
+        <!-- Main content -->
+        <div class="relative text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            <svg class="w-8 h-8 mx-auto mb-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10l4 9H3l4-9zM7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l2-2m4 2l2-2" />
+            </svg>
+            Gift Basket for VVG Supplementary Insurance Changes
+          </h3>
+          <p class="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
+            Switch your Groupe Mutuel supplementary insurance (VVG) for 2026 and receive <strong>special gifts and bonuses</strong>. 
+            Expert guidance available for customers changing their supplementary plans.
           </p>
         </div>
+        
+        <!-- CTA Buttons -->
+        <div class="relative flex flex-col sm:flex-row justify-center gap-4 mb-6">
+          <button
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider-groupe-mutuel'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
+            class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-red-600 text-white font-medium rounded-2xl shadow-[0_4px_14px_0_rgba(220,38,38,0.25)] hover:shadow-[0_6px_20px_0_rgba(220,38,38,0.35)] hover:bg-red-700 transition-all duration-300 hover:-translate-y-0.5"
+            data-umami-event="seasonal-groupe-mutuel-consultation"
+          >
+            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            Book Expert Consultation
+            <span class="text-xs bg-red-500 px-2 py-1 rounded-full">Recommended</span>
+          </button>
+          
+          <button
+            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare-groupe-mutuel'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
+            class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-green-600 text-white font-medium rounded-2xl shadow-[0_4px_14px_0_rgba(34,197,94,0.25)] hover:shadow-[0_6px_20px_0_rgba(34,197,94,0.35)] hover:bg-green-700 transition-all duration-300 hover:-translate-y-0.5"
+            data-umami-event="seasonal-groupe-mutuel-offers"
+          >
+            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Get 3 Best Offers
+            <span class="text-xs bg-green-500 px-2 py-1 rounded-full">~1 min</span>
+          </button>
+        </div>
+        
+        <!-- Footer info -->
+        <div class="relative flex items-center justify-center gap-6 text-sm text-gray-500">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10l4 9H3l4-9zM7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4" />
+            </svg>
+            Gift basket included
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+            No fees • Free consultation
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
