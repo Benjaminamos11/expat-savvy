@@ -6,191 +6,29 @@ import ProviderLinks from '../../../components/ProviderLinks.astro';
 
 const tableOfContents = [
   { id: "about", title: "About Sanitas" },
-  { id: "features", title: "Key Features" },
-  { id: "basic-insurance", title: "Basic Insurance Models" },
-  { id: "supplementary", title: "Supplementary Insurance" },
+  { id: "key-facts", title: "Key Facts" },
+  { id: "why-expats", title: "Why Sanitas for Expats" },
+  { id: "basic-insurance", title: "Basic Health Insurance" },
   { id: "digital", title: "Digital Experience" },
   { id: "preexisting", title: "Pre-existing Conditions" },
-  { id: "expat-benefits", title: "Benefits for Expats" },
-  { id: "expert-help", title: "How We Can Help" },
+  { id: "advantages", title: "Key Advantages" },
+  { id: "consultant", title: "Getting Started" },
+  { id: "resources", title: "Helpful Resources" },
   { id: "faq", title: "FAQs" }
-];
-
-const features = [
-  {
-    title: "Digital-First Approach",
-    description: "Modern app ecosystem with MySanitas and Medgate for easy policy management and telehealth services",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-    </svg>`
-  },
-  {
-    title: "Innovative Pre-existing Conditions Coverage",
-    description: "Unique Individual Premium Supplement allowing coverage for pre-existing conditions in supplementary insurance",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>`
-  },
-  {
-    title: "Multilingual Support",
-    description: "Comprehensive customer service in multiple languages including English to assist international residents",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-    </svg>`
-  }
-];
-
-const expat_considerations = [
-  {
-    title: "English Language Support",
-    description: "Sanitas provides comprehensive support in English, including English-speaking customer service representatives and documentation available in English for expatriates.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-    </svg>`
-  },
-  {
-    title: "Pre-existing Conditions Coverage",
-    description: "The innovative Individual Premium Supplement offers coverage for pre-existing conditions in supplementary insurance through an individualized premium adjustment rather than standard exclusions.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>`
-  },
-  {
-    title: "Digital-First Experience",
-    description: "Sanitas's digital platforms including the MySanitas app and Medgate telemedicine services allow for easy management of your policy, submission of claims, and virtual doctor consultations.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-    </svg>`
-  },
-  {
-    title: "Range of Insurance Models",
-    description: "Various basic and supplementary insurance models allow expats to find coverage options that align with their specific healthcare needs, preferences, and budget.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-    </svg>`
-  }
-];
-
-const basicInsuranceModels = [
-  {
-    name: "Standard Model",
-    description: "Free choice of doctors throughout Switzerland with highest premium",
-    benefits: [
-      "Choose any doctor",
-      "Direct specialist access",
-      "Maximum flexibility",
-      "No restrictions"
-    ]
-  },
-  {
-    name: "MedCare (Family Doctor)",
-    description: "Choose a designated family doctor as first point of contact",
-    benefits: [
-      "Lower premiums (up to 7% savings)",
-      "Coordinated care",
-      "Personal doctor relationship",
-      "Specialist referrals"
-    ]
-  },
-  {
-    name: "NetMed (HMO)",
-    description: "Health Maintenance Organization with network of doctors",
-    benefits: [
-      "Lower premiums (up to 10% savings)",
-      "Coordinated care",
-      "Network of specialists",
-      "Quality oversight"
-    ]
-  },
-  {
-    name: "CallMed (Telmed)",
-    description: "Initial consultation via Medgate app or telephone",
-    benefits: [
-      "Significant premium savings (up to 15%)",
-      "24/7 medical advice",
-      "Convenient digital access",
-      "Doctor referrals when needed"
-    ]
-  }
-];
-
-const supplementaryPlans = [
-  {
-    name: "Jump",
-    description: "Supplementary insurance tailored for young adults",
-    benefits: [
-      "Alternative medicine coverage",
-      "Vision care benefits",
-      "Fitness contributions",
-      "Preventive health measures"
-    ],
-    bestFor: "Young adults and students seeking flexible coverage"
-  },
-  {
-    name: "Classic",
-    description: "Comprehensive supplementary coverage for individuals",
-    benefits: [
-      "Orthodontic treatment",
-      "Psychotherapy sessions",
-      "Extended coverage options",
-      "Alternative treatments"
-    ],
-    bestFor: "Those seeking well-rounded supplementary coverage",
-    highlight: true
-  },
-  {
-    name: "Family",
-    description: "Family-oriented supplementary plan",
-    benefits: [
-      "Shared service account",
-      "Flexible limits per family member",
-      "Family-oriented coverage",
-      "Comprehensive protection"
-    ],
-    bestFor: "Families seeking consolidated coverage"
-  },
-  {
-    name: "Medical Private",
-    description: "Premium worldwide coverage",
-    benefits: [
-      "Worldwide choice of doctors",
-      "Private consultations",
-      "Non-KVG billing options",
-      "Global coverage"
-    ],
-    bestFor: "Expats seeking premium global medical care",
-    highlight: true
-  }
 ];
 
 const faqs = [
   {
     question: "How does Sanitas handle pre-existing conditions for supplementary insurance?",
-    answer: "Sanitas offers an innovative Individual Premium Supplement for certain pre-existing conditions. This means you might pay a higher premium, but the condition could be covered under the supplementary insurance plan, rather than being excluded. This offers a valuable alternative to the standard practice of excluding pre-existing conditions from supplementary coverage."
+    answer: "According to Sanitas's official website, they offer an innovative \"Individual Premium Supplement\" for certain pre-existing conditions. This means you might pay a higher premium, but in return, your pre-existing condition could be covered under your supplementary insurance plan. The availability and cost of this supplement depend on Sanitas's assessment of the individual case."
   },
   {
-    question: "What are the main features of the Sanitas digital apps?",
-    answer: "Sanitas offers two primary digital apps: The MySanitas app (Portal app) allows you to manage your insurance policy, submit claims by scanning receipts, view documents, check your coverage, and access your policy details. The Sanitas Medgate app facilitates telemedicine services, allowing you to consult with doctors via phone or video call, receive medical advice, and even get prescriptions when appropriate."
+    question: "Is Expat-Savvy.ch a partner of Sanitas?",
+    answer: "No, Expat-Savvy.ch is an information platform and does not have a direct partnership with Sanitas. We provide publicly available information about various insurance providers in Switzerland. For personalized advice and to purchase insurance products, we connect users with independent, external insurance consultants who may have their own partnerships with insurers, including Sanitas."
   },
   {
-    question: "Does Sanitas offer English customer support and documentation?",
-    answer: "Yes, Sanitas generally provides English support for customer service and documentation, which is beneficial for expats in Switzerland. This multilingual approach helps international residents navigate the Swiss healthcare system more comfortably."
-  },
-  {
-    question: "What basic insurance models does Sanitas offer?",
-    answer: "Sanitas offers various basic insurance models including the Standard model with free choice of doctors, the MedCare model (Family Doctor) where your designated physician is your first point of contact, the NetMed model (HMO) with access to medical networks, and the CallMed model (Telmed) where you first consult via the Medgate app or phone. Alternative models can provide premium discounts of up to 15% compared to the standard model."
-  },
-  {
-    question: "What supplementary insurance plans does Sanitas offer?",
-    answer: "Sanitas offers several supplementary insurance plans including Jump for young adults, Classic for comprehensive individual coverage, Family for family-oriented protection, and Medical Private for premium worldwide coverage. Each plan provides additional benefits beyond what's covered by basic insurance, such as upgraded hospital accommodations, alternative therapies, and more."
-  },
-  {
-    question: "What makes Sanitas different from other Swiss health insurers?",
-    answer: "Sanitas distinguishes itself through its digital-first approach with user-friendly apps, innovative solutions like the Individual Premium Supplement for pre-existing conditions, multilingual customer support, and a range of flexible insurance models. Their focus on digital innovation and accessible healthcare makes them particularly appealing to tech-savvy expatriates."
-  },
-  {
-    question: "How can I apply for Sanitas health insurance as an expat?",
-    answer: "As an expat, you can apply for Sanitas health insurance by submitting an application directly or through an independent advisor like Expat Savvy. The process typically involves filling out application forms, providing residence information, and completing a health questionnaire for supplementary insurance. Expat Savvy can guide you through the entire process, from comparing options to managing your application."
+    question: "What digital services does Sanitas actually offer?",
+    answer: "Based on verified information from Sanitas's official website, they offer the Sanitas Portal app for managing insurance affairs and the Sanitas Medgate app for telemedicine consultations. These apps provide features like digital claims submission, coverage checking, and virtual doctor consultations."
   }
 ];
 ---
@@ -203,142 +41,11 @@ const faqs = [
   <script type="application/ld+json" slot="head">
     {
       "@context": "https://schema.org",
-  "@type": ["InsuranceAgency", "LocalBusiness"],
-      "name": "Sanitas Insurance",
-  "description": "Swiss health insurance provider known for digital innovation, Individual Premium Supplement for pre-existing conditions, and comprehensive coverage options for expats.",
+      "@type": ["InsuranceAgency", "LocalBusiness"],
+      "name": "Sanitas Insurance Information Guide",
+      "description": "Swiss health insurance provider information based on publicly available sources - no partnership with Sanitas.",
       "url": "https://expat-savvy.ch/healthcare/all-insurances/sanitas/",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Jägergasse 3",
-        "addressLocality": "Zürich",
-        "postalCode": "8021",
-        "addressCountry": "CH"
-      },
-  "areaServed": {
-    "@type": "Country",
-    "name": "Switzerland"
-  },
-  "telephone": "+41 844 150 150",
-  "openingHours": "Mo,Tu,We,Th,Fr 08:00-17:00",
-  "priceRange": "$$",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Insurance Products",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Basic Insurance",
-          "description": "Multiple models including Standard, MedCare (Family Doctor), NetMed (HMO), and CallMed (Telmed) options"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Supplementary Insurance",
-          "description": "Premium options including Jump, Classic, Family, and Medical Private"
-            }
-          }
-        ]
-      },
-  "isPartOf": {
-    "@type": "Organization",
-    "name": "Expat Savvy",
-    "url": "https://expat-savvy.ch"
-  },
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://expat-savvy.ch"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Insurance Providers",
-            "item": "https://expat-savvy.ch/healthcare/all-insurances"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Sanitas",
-            "item": "https://expat-savvy.ch/healthcare/all-insurances/sanitas/"
-          }
-        ]
-  },
-  "mainEntity": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How does Sanitas handle pre-existing conditions for supplementary insurance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sanitas offers an innovative Individual Premium Supplement for certain pre-existing conditions. This means you might pay a higher premium, but the condition could be covered under the supplementary insurance plan, rather than being excluded."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What are the main features of the Sanitas digital apps?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The MySanitas app (Portal app) allows you to manage your insurance policy, submit claims, view documents, and check your coverage. The Sanitas Medgate app facilitates telemedicine services for consultations with doctors via phone or video."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does Sanitas offer English customer support and documentation?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, Sanitas generally provides English support for customer service and documentation, which is beneficial for expats in Switzerland."
-        }
-      }
-    ]
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Benjamin Amos Wagner",
-    "url": "https://expat-savvy.ch/about"
-  },
-  "datePublished": "2025-05-15"
-}
-  </script>
-  
-  <!-- Article Schema -->
-  <script type="application/ld+json" slot="head">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Sanitas Health Insurance for Expats in Switzerland: A Comprehensive Guide",
-  "description": "Navigate the Swiss health insurance system with our factual guide to Sanitas health insurance, including their innovative Individual Premium Supplement for pre-existing conditions, digital services, and comprehensive coverage options for expats.",
-  "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-  "datePublished": "2025-05-15",
-  "dateModified": "2025-08-13",
-  "author": {
-    "@type": "Person",
-    "name": "Benjamin Amos Wagner",
-    "url": "https://expat-savvy.ch/about"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Expat Savvy",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-      "width": 600,
-      "height": 60
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://expat-savvy.ch/healthcare/all-insurances/sanitas/"
-  },
-  "keywords": ["Sanitas", "health insurance", "Switzerland", "expat", "pre-existing conditions", "Individual Premium Supplement", "MySanitas app", "digital services"]
+      "keywords": ["Sanitas", "health insurance", "Switzerland", "expat", "pre-existing conditions", "Individual Premium Supplement", "digital services"]
     }
   </script>
 
@@ -361,7 +68,7 @@ const faqs = [
           </p>
         </div>
 
-        <div class="mt-8 max-w-4xl mx-auto">
+        <div class="mt-8 max-w-4xl mx-auto text-left">
           <p class="text-lg text-gray-600 mb-4">
             Welcome to Switzerland! For expatriates navigating the Swiss healthcare system, understanding the available health insurance options is essential. This guide provides publicly available information about Sanitas, a prominent health insurance provider in Switzerland known for its modern approach, comprehensive digital services, and a range of insurance plans designed to meet diverse needs.
           </p>
@@ -382,102 +89,12 @@ const faqs = [
     </div>
   </div>
 
-  <!-- 2026 Season: Professional Sanitas Special Services CTA -->
-  <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} bg-gray-50 py-12`}>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-3xl p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 relative overflow-hidden">
-        
-        <!-- Subtle background pattern -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-white pointer-events-none"></div>
-        
-        <!-- Status badge -->
-        <div class="relative flex items-center justify-center mb-6">
-          <div class="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium shadow-inner">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Change Period: Expires Nov 30, 2025
-          </div>
-        </div>
-        
-        <!-- Main content -->
-        <div class="relative text-center mb-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">
-            <svg class="w-8 h-8 mx-auto mb-2 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-            </svg>
-            Special Broker Services - 24h English Support
-          </h3>
-          <p class="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
-            Experience premium service benefits through our professional broker relationship. 24-hour English support, independent consultations, and expert insights for 2026.
-          </p>
-        </div>
-        
-        <!-- CTA Buttons -->
-        <div class="relative flex flex-col sm:flex-row justify-center gap-4 mb-6">
-          <button
-            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider-sanitas'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
-            class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-medium rounded-2xl shadow-[0_4px_14px_0_rgba(37,99,235,0.25)] hover:shadow-[0_6px_20px_0_rgba(37,99,235,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
-            data-umami-event="seasonal-sanitas-consultation"
-          >
-            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-            </svg>
-            Book Expert Consultation
-            <span class="text-xs bg-primary-500 px-2 py-1 rounded-full">Recommended</span>
-          </button>
-          
-          <button
-            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('compare-sanitas'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
-            class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-green-600 text-white font-medium rounded-2xl shadow-[0_4px_14px_0_rgba(34,197,94,0.25)] hover:shadow-[0_6px_20px_0_rgba(34,197,94,0.35)] hover:bg-green-700 transition-all duration-300 hover:-translate-y-0.5"
-            data-umami-event="seasonal-sanitas-offers"
-          >
-            <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Get 3 Best Offers
-            <span class="text-xs bg-green-500 px-2 py-1 rounded-full">~1 min</span>
-          </button>
-        </div>
-        
-        <!-- Footer info -->
-        <div class="relative flex items-center justify-center gap-6 text-sm text-gray-500">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-            </svg>
-            Premium broker services
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-            </svg>
-            No fees • Free consultation
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Last Updated + Key Facts -->
+  <!-- Key Facts Section -->
   <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 pb-6">
-      <div class="flex justify-end mb-2">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-          <svg class="mr-1.5 h-3.5 w-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          Last updated: September 11, 2025
-        </span>
-      </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="key-facts">
       <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">Key Facts About Sanitas (2025/2026) — Based on Public Information</h2>
-        <ul class="space-y-2 text-sm text-gray-700">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Key Facts About Sanitas (2025/2026) — Based on Public Information</h2>
+        <ul class="space-y-3 text-sm text-gray-700">
           <li class="flex items-start"><span class="text-primary-600 mr-2">•</span><strong>Basic Insurance:</strong> Acceptance into the mandatory basic health insurance is guaranteed by law for all Swiss residents.</li>
           <li class="flex items-start"><span class="text-primary-600 mr-2">•</span><strong>Supplementary Insurance:</strong> Acceptance into supplementary insurance plans is subject to a health check by the insurer.</li>
           <li class="flex items-start"><span class="text-primary-600 mr-2">•</span><strong>Pre-existing Conditions:</strong> Sanitas offers an "Individual Premium Supplement" which may provide coverage for certain pre-existing conditions in supplementary plans, subject to their assessment.</li>
@@ -488,154 +105,374 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Table of Contents -->
-  <div class="bg-gray-50 py-8 border-t border-b border-gray-200">
+  <!-- Why Sanitas May Be of Interest to Expats -->
+  <div class="bg-gray-50 py-12" id="why-expats">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-xl font-semibold text-gray-900 mb-4">In This Guide:</h2>
-        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
-          <ul class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
-            <li>
-              <a href="#about" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                About Sanitas
-              </a>
-            </li>
-            <li>
-              <a href="#features" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Key Features
-              </a>
-            </li>
-            <li>
-              <a href="#basic-insurance" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Basic Insurance Models
-              </a>
-            </li>
-            <li>
-              <a href="#supplementary" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Supplementary Insurance
-              </a>
-            </li>
-            <li>
-              <a href="#digital" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Digital Experience
-              </a>
-            </li>
-            <li>
-              <a href="#preexisting" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-                Pre-existing Conditions
-              </a>
-            </li>
-            <li>
-              <a href="#expat-benefits" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-                Benefits for Expats
-              </a>
-            </li>
-            <li>
-              <a href="#expert-help" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-                How We Can Help
-              </a>
-            </li>
-            <li>
-              <a href="#faq" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-                FAQs
-              </a>
-            </li>
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Why Sanitas May Be of Interest to Expats</h2>
+        
+        <p class="text-lg text-gray-600 mb-6">
+          Based on publicly available information, here are some features of Sanitas that may be relevant to international residents in Switzerland:
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">English Language Support</h3>
+            <p class="text-gray-600">Sanitas offers customer service and documentation in English, which can be helpful for expatriates.</p>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Pre-existing Conditions Coverage</h3>
+            <p class="text-gray-600">The availability of the "Individual Premium Supplement" can be a significant factor for individuals with pre-existing health conditions seeking supplementary insurance.</p>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital-First Experience</h3>
+            <p class="text-gray-600">For those who prefer managing their services online, Sanitas's digital platforms, including the Sanitas Portal app and Medgate telemedicine services, offer a convenient way to handle insurance matters.</p>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Variety of Insurance Models</h3>
+            <p class="text-gray-600">The range of basic and supplementary insurance models allows individuals to choose a plan that aligns with their healthcare needs and budget.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Sanitas Health Insurance -->
+  <div class="bg-white py-12" id="about">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">About Sanitas Health Insurance</h2>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>
+            Sanitas is one of Switzerland's leading health insurance providers, with a large number of policyholders and significant annual premium revenues. Sanitas presents itself as a health partner focused on well-being, offering innovative solutions and comprehensive coverage options.
+          </p>
+          
+          <p>
+            Sanitas is known for its forward-thinking approach to health insurance, combining traditional Swiss quality with modern digital innovation. They offer a range of digital tools to simplify insurance management. Their solutions, such as the Individual Premium Supplement for pre-existing conditions, demonstrate their efforts to address the diverse needs of their customers, including the international community in Switzerland.
+          </p>
+          
+          <p>
+            With a focus on quality service and an understanding of the challenges expats may face, Sanitas aims to make the healthcare journey in Switzerland as smooth as possible. From providing information in English to offering access to top-tier medical facilities, Sanitas is equipped to meet a wide range of expectations and provide comprehensive health coverage.
+          </p>
+          
+          <div class="bg-blue-50 rounded-lg shadow-md p-6 my-8 border-l-4 border-blue-500">
+            <p class="text-blue-800 m-0">
+              <strong>Need help understanding your options?</strong><br>
+              Expat-Savvy.ch is an information platform. We can connect you with independent insurance consultants who can provide personalized advice and help you compare different insurance providers, including Sanitas, to find the best fit for your needs.
+            </p>
+            <div class="mt-4">
+              <button
+                onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
+              >
+                Get Independent Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Sanitas Individual Premium Supplement -->
+  <div class="bg-gray-50 py-12" id="preexisting">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">The Sanitas Individual Premium Supplement: A Noteworthy Option</h2>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>
+            One of Sanitas's notable offerings is its Individual Premium Supplement for certain pre-existing health conditions. According to Sanitas's official website, they are "the first health insurer in Switzerland to offer many of its customers the option to take out supplementary insurance without a restriction" through this innovative approach.
+          </p>
+          
+          <p>
+            While most insurers may exclude pre-existing conditions from supplementary coverage, Sanitas offers a solution that may allow for coverage without such restrictions. This approach means that an individual might pay a higher premium, but in return, their pre-existing condition could be covered under the terms of their supplementary plan. This can provide a path to more comprehensive coverage for expats with existing health concerns.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sanitas Basic Health Insurance -->
+  <div class="bg-white py-12" id="basic-insurance">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Sanitas Basic Health Insurance (Obligatorische Grundversicherung)</h2>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>
+            In Switzerland, basic health insurance (Grundversicherung) is mandatory for all residents, including expatriates. This foundational coverage ensures access to essential medical services. Sanitas, like all Swiss health insurers, provides basic health insurance plans that comply with federal regulations.
+          </p>
+          
+          <p>
+            While the scope of services under basic insurance is defined by law and is consistent across all providers, Sanitas offers various models to suit different needs and preferences.
+          </p>
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Basic Health Insurance Models (Verified from Official Sources)</h3>
+          
+          <p>Based on information from Sanitas's official website, the following models are available:</p>
+          
+          <div class="space-y-4 mt-6">
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900">Basic (Free Choice of Doctor)</h4>
+              <p class="text-gray-600 mt-1">Allows for the free choice of doctors throughout Switzerland, with the highest premium.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900">CareMed (Family Doctor Model)</h4>
+              <p class="text-gray-600 mt-1">Requires choosing a designated family doctor as the first point of contact, which can result in lower premiums (discount of between 7% and 10%).</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900">NetMed (HMO Model)</h4>
+              <p class="text-gray-600 mt-1">A Health Maintenance Organization with a network of doctors, offering lower premiums (discount of between 7% and 19%).</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900">Callmed & Compact One (Telmed Models)</h4>
+              <p class="text-gray-600 mt-1">Requires an initial consultation via the Medgate app or telephone, providing significant premium savings (discount of between 7% and 23%).</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900">Medbase MultiAccess (Combi Model)</h4>
+              <p class="text-gray-600 mt-1">Choose flexibly from Medbase medical centres, Medbase pharmacies or telemedicine, offering premium discounts of between 10% and 15%.</p>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
+            <p class="text-sm text-yellow-700">
+              <strong>Note:</strong> When choosing a basic health insurance model, it is important to consider factors such as your preferred level of flexibility in choosing healthcare providers, your budget, and your comfort with models like telmed or HMO. An independent insurance consultant can provide guidance on which model might best align with your individual circumstances.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sanitas Digital Experience -->
+  <div class="bg-gray-50 py-12" id="digital">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Sanitas Digital Experience: User-Friendly Apps and Services</h2>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>
+            In an increasingly digital world, the convenience of managing health insurance online is a significant factor for many. Sanitas has embraced technology to enhance the customer experience with its comprehensive digital ecosystem, which may be particularly appealing to tech-savvy expatriates and those who value efficiency and accessibility.
+          </p>
+          
+          <div class="grid md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Sanitas Portal App (Verified Information)</h3>
+              <p class="text-gray-600 mb-4">According to Sanitas's official website, the Sanitas Portal app serves as a digital health insurance command center, offering a range of convenient features:</p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li>• Policy Documents: View insurance details, coverage limits, and policy documents in one place</li>
+                <li>• Coverage Checking: Check specific coverage details for various treatments and services</li>
+                <li>• Digital Claims Submission: Submit medical claims by scanning or uploading invoices</li>
+                <li>• Personal Details Management: Update contact information and personal details directly</li>
+                <li>• Digital Insurance Card: Access a digital insurance card anytime, anywhere</li>
+              </ul>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Sanitas Medgate App (Verified Information)</h3>
+              <p class="text-gray-600 mb-4">This specialized telemedicine application connects users directly with medical professionals:</p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li>• Virtual Consultations: Consult with qualified physicians via video or phone calls from home</li>
+                <li>• Medical Advice: Receive professional medical opinions for non-emergency situations</li>
+                <li>• Prescriptions: When appropriate, doctors can issue prescriptions sent directly to a pharmacy</li>
+                <li>• Integration with Telmed Models: For Callmed or Compact One models, this app is the mandated first point of contact</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Benefits for Expats</h3>
+          <p>For expatriates in Switzerland, Sanitas's digital services may offer several advantages:</p>
+          
+          <ul class="space-y-2 mt-4">
+            <li><strong>Language Accessibility:</strong> The apps are available in multiple languages, which can help overcome potential language barriers in the Swiss healthcare system.</li>
+            <li><strong>Familiarity:</strong> A digital approach to healthcare management may feel more familiar and comfortable for many international residents who are used to digital services.</li>
+            <li><strong>Convenience:</strong> Digital claim submission and management can be particularly valuable when navigating a new healthcare system in a foreign country.</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Highlighted Benefits for Expats -->
-  <div class="bg-primary-50 py-16">
+  <!-- Innovative Approach to Pre-existing Conditions -->
+  <div class="bg-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Popular with Expats</h2>
-        <p class="mt-4 text-xl text-gray-600">Why international residents choose Sanitas</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {expat_considerations.map(highlight => (
-          <div class="bg-white rounded-lg shadow-md p-6 transform transition-transform hover:scale-105">
-            <div class="text-primary-500 mb-4">
-              <Fragment set:html={highlight.icon} />
-            </div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">{highlight.title}</h3>
-            <p class="text-gray-600">{highlight.description}</p>
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Innovative Approach to Pre-existing Conditions</h2>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>
+            One of Sanitas's most distinctive offerings is its approach to pre-existing conditions in supplementary insurance. This is particularly relevant for expats who may be concerned about coverage limitations for existing health issues when moving to Switzerland.
+          </p>
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">The Individual Premium Supplement (Verified Information)</h3>
+          
+          <p>Traditionally, when applying for supplementary health insurance in Switzerland with pre-existing conditions, insurers typically offer one of three outcomes:</p>
+          
+          <ol class="list-decimal list-inside space-y-2 mt-4">
+            <li>Full acceptance with standard premiums (rare for significant pre-existing conditions)</li>
+            <li>Acceptance with exclusions for the pre-existing conditions (common)</li>
+            <li>Outright rejection of the application (for severe conditions)</li>
+          </ol>
+          
+          <p>According to Sanitas's official website, they offer an innovative fourth option: The Individual Premium Supplement. With this approach, instead of excluding coverage for pre-existing conditions, Sanitas may offer to cover them by calculating an individualized premium supplement based on the specific condition and associated risk.</p>
+          
+          <h4 class="text-xl font-semibold text-gray-900 mt-6 mb-3">How It Works:</h4>
+          
+          <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+            <ol class="list-decimal list-inside space-y-3">
+              <li>During the application process for supplementary insurance, you complete the standard health questionnaire.</li>
+              <li>If you disclose a pre-existing condition, Sanitas assesses the associated risk.</li>
+              <li>Rather than automatically excluding coverage for this condition, Sanitas may offer you an Individual Premium Supplement.</li>
+              <li>You pay a higher premium, but in return, the pre-existing condition is covered according to the terms of your supplementary insurance plan.</li>
+            </ol>
           </div>
-        ))}
+          
+          <h4 class="text-xl font-semibold text-gray-900 mb-3">Key Benefits for Expats:</h4>
+          
+          <ul class="space-y-2">
+            <li><strong>Comprehensive Coverage:</strong> Your pre-existing condition is covered under your supplementary insurance plan, providing more comprehensive protection.</li>
+            <li><strong>Transparency:</strong> You know exactly what you're paying for the additional coverage, with a clear breakdown of your standard premium and the supplement.</li>
+            <li><strong>Peace of Mind:</strong> Particularly valuable when settling in a new country, knowing that your existing health concerns are covered can provide significant reassurance.</li>
+            <li><strong>Choice:</strong> In many cases, you may still have the option to choose between a traditional exclusion or the premium supplement, allowing you to select the approach that best suits your needs and budget.</li>
+          </ul>
+          
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
+            <p class="text-sm text-yellow-700">
+              It's important to note that this option isn't automatically available for all conditions or applicants. The availability of the Individual Premium Supplement and its cost will depend on various factors, including the specific pre-existing condition, its severity, and your overall health profile.
+            </p>
+          </div>
+          
+          <p class="mt-6">
+            For expatriates with pre-existing health conditions who are concerned about securing comprehensive coverage in Switzerland, this innovative approach from Sanitas represents a significant advantage worth exploring. An independent insurance consultant can help you understand the potential implications for your specific situation and guide you through the application process.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- About Sanitas Section -->
-  <div class="bg-white py-12" id="about">
+  <!-- Key Sanitas Advantages for Expats -->
+  <div class="bg-gray-50 py-12" id="advantages">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">Why Sanitas May Be of Interest to Expats</h2>
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Key Sanitas Advantages for Expats</h2>
         
-        <p>
-          Based on publicly available information, here are some features of Sanitas that may be relevant to international residents in Switzerland:
-        </p>
+        <p class="text-lg text-gray-600 mb-8">Based on publicly available information, here are some reasons why Sanitas may be of interest to international residents:</p>
         
-        <ul class="list-disc pl-6 space-y-2">
-          <li><strong>English Language Support:</strong> Sanitas offers customer service and documentation in English, which can be helpful for expatriates.</li>
-          <li><strong>Pre-existing Conditions Coverage:</strong> The availability of the "Individual Premium Supplement" can be a significant factor for individuals with pre-existing health conditions seeking supplementary insurance.</li>
-          <li><strong>Digital-First Experience:</strong> For those who prefer managing their services online, Sanitas's digital platforms, including the Sanitas Portal app and Medgate telemedicine services, offer a convenient way to handle insurance matters.</li>
-          <li><strong>Variety of Insurance Models:</strong> The range of basic and supplementary insurance models allows individuals to choose a plan that aligns with their healthcare needs and budget.</li>
-        </ul>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center mb-4">
+              <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Digital-First Approach</h3>
+            </div>
+            <p class="text-gray-600">Sanitas's modern digital ecosystem, including the Sanitas Portal app and Medgate telemedicine services, offers convenient policy management and healthcare access. This may be ideal for tech-savvy expatriates who value digital accessibility.</p>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center mb-4">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Individual Premium Supplement</h3>
+            </div>
+            <p class="text-gray-600">Sanitas's innovative approach to pre-existing conditions in supplementary insurance, through an individualized premium adjustment, can provide a path to more comprehensive health coverage for some expats.</p>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center mb-4">
+              <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.107 3.567 1 1 0 01-1.334-1.49 17.087 17.087 0 003.13-3.733 18.992 18.992 0 01-1.487-2.494 1 1 0 111.79-.89c.234.47.489.928.764 1.372.417-.934.752-1.913.997-2.927H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L13 12.236 11.618 14z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Multilingual Support</h3>
+            </div>
+            <p class="text-gray-600">Sanitas provides customer service in multiple languages, including English, which can help expatriates navigate the Swiss healthcare system more comfortably. Documentation and digital services are also available in English.</p>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center mb-4">
+              <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">Global Coverage Options</h3>
+            </div>
+            <p class="text-gray-600">With premium supplementary insurance plans, Sanitas offers enhanced international coverage for treatment abroad. This can be valuable for expats who travel frequently.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Getting Started with an Independent Consultant -->
+  <div class="bg-white py-12" id="consultant">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Getting Started with an Independent Consultant</h2>
         
-        <h3 class="text-2xl font-bold text-gray-900 mt-8">About Sanitas Health Insurance</h3>
-        
-        <p>
-          Sanitas is one of Switzerland's leading health insurance providers, with a large number of policyholders and significant annual premium revenues. Sanitas presents itself as a health partner focused on well-being, offering innovative solutions and comprehensive coverage options.
-        </p>
-        
-        <p>
-          Sanitas is known for its forward-thinking approach to health insurance, combining traditional Swiss quality with modern digital innovation. They offer a range of digital tools to simplify insurance management. Their solutions, such as the Individual Premium Supplement for pre-existing conditions, demonstrate their efforts to address the diverse needs of their customers, including the international community in Switzerland.
-        </p>
-        
-        <p>
-          With a focus on quality service and an understanding of the challenges expats may face, Sanitas aims to make the healthcare journey in Switzerland as smooth as possible. From providing information in English to offering access to top-tier medical facilities, Sanitas is equipped to meet a wide range of expectations and provide comprehensive health coverage.
-        </p>
-        
-        <div class="bg-blue-50 rounded-lg shadow-md p-6 my-8 border-l-4 border-blue-500">
-          <p class="text-blue-800 m-0">
-            <strong>Need help understanding your options?</strong><br>
-            Expat-Savvy.ch is an information platform. We can connect you with independent insurance consultants who can provide personalized advice and help you compare different insurance providers, including Sanitas, to find the best fit for your needs.
+        <div class="prose prose-lg max-w-none">
+          <p>
+            Expat-Savvy.ch is an information platform that can connect you with independent insurance consultants. These consultants can help you navigate the complexities of the Swiss health insurance market and find a provider that matches your unique needs, whether it's Sanitas or another insurer.
           </p>
-          <div class="mt-4">
+          
+          <h3 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">Services Offered by Independent Consultants:</h3>
+          
+          <div class="grid md:grid-cols-2 gap-6 mt-6">
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Personalized Consultation</h4>
+              <p class="text-gray-600 text-sm">Understanding your needs, family situation, budget, and any pre-existing conditions.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Needs Analysis & Comparison</h4>
+              <p class="text-gray-600 text-sm">Explaining the plans of various insurers, including Sanitas, and comparing them with other market alternatives.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Pre-existing Conditions Guidance</h4>
+              <p class="text-gray-600 text-sm">Providing information and assistance regarding options like Sanitas's Individual Premium Supplement.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Application Help</h4>
+              <p class="text-gray-600 text-sm">Offering guidance with the application process and documentation.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Premium Optimization</h4>
+              <p class="text-gray-600 text-sm">Helping you find ways to optimize your coverage while managing costs.</p>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Family Packages</h4>
+              <p class="text-gray-600 text-sm">Evaluating family-oriented insurance options.</p>
+            </div>
+          </div>
+          
+          <div class="bg-green-50 border border-green-200 rounded-lg p-6 mt-8">
+            <h3 class="text-xl font-semibold text-green-800 mb-3">Ready to explore your options with an independent expert?</h3>
+            <p class="text-green-700 mb-4">Get the guidance you need for peace of mind with your Swiss health insurance. We can connect you with a qualified, independent consultant for a free consultation.</p>
             <button
               onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors shadow-sm"
             >
-              Get Independent Consultation
+              Get Free Consultation
             </button>
           </div>
         </div>
@@ -643,671 +480,51 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Key Features Section -->
-  <div id="features" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">Why Sanitas Stands Out for Expatriates</h2>
-        
-        <p>Choosing a health insurance provider in a new country involves careful consideration of various factors. Sanitas distinguishes itself in the Swiss market through several key attributes that are particularly beneficial for expatriates.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          {features.map(feature => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <div class="text-primary-500 mb-4">
-                <Fragment set:html={feature.icon} />
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-              <p class="text-sm text-gray-600">{feature.description}</p>
-            </div>
-          ))}
-            </div>
-        
-        <div class="bg-primary-50 p-4 rounded-lg mt-8">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">The Unique Sanitas Individual Premium Supplement: A Groundbreaking Option</h3>
-          <p>One of Sanitas's most significant and unique advantages is its Individual Premium Supplement for certain pre-existing health conditions. Unlike most insurers that exclude pre-existing conditions from supplementary coverage, Sanitas offers this innovative solution that allows coverage without restrictions.</p>
-          <p>This approach means you might pay a higher premium, but in return, your pre-existing condition would be covered according to the terms of your supplementary plan. This gives expats with existing health concerns a pathway to more comprehensive coverage than might otherwise be available.</p>
-          </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Basic Insurance Models Section -->
-  <div id="basic-insurance" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">Sanitas Basic Health Insurance (Obligatorische Grundversicherung)</h2>
-        
-        <p>
-          In Switzerland, basic health insurance (Grundversicherung) is mandatory for all residents, including expatriates. This foundational coverage ensures access to essential medical services. Sanitas, like other Swiss health insurers, provides basic health insurance plans that comply with federal regulations.
-        </p>
-        
-        <p>
-          While the scope of services under basic insurance is defined by law and is generally consistent across providers, Sanitas offers various models to suit different needs and preferences.
-        </p>
-        
-        <h3 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Basic Health Insurance Models</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          {basicInsuranceModels.map(model => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">{model.name}</h3>
-              <p class="text-gray-600 mb-4">{model.description}</p>
-            <ul class="space-y-2">
-                {model.benefits.map(benefit => (
-                  <li class="flex items-center text-sm text-gray-600">
-                    <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-        </div>
-        
-        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-8">
-          <p class="text-yellow-800 m-0">
-            <strong>Important note:</strong> When choosing a basic health insurance model with Sanitas, it's important to consider factors such as your preferred level of flexibility in choosing healthcare providers, your budget, and your comfort with models like Telmed or HMO. Expat Savvy can provide guidance on which Sanitas basic insurance model might best align with your individual circumstances.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Supplementary Insurance Section -->
-  <div id="supplementary" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">Deep Dive into Sanitas's Premium Supplementary Insurance Plans</h2>
-        
-        <p class="text-gray-600">
-          Sanitas's supplementary insurance plans are where the provider truly shines, offering a range of options designed to elevate your health coverage far beyond the standard. These plans are crafted to provide enhanced comfort, greater choice, and access to specialized treatments and wellness benefits. For expatriates seeking comprehensive protection and premium healthcare experiences, Sanitas's supplementary offerings are particularly compelling.
-        </p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Jump</h3>
-            <p class="text-gray-600 mb-4">Supplementary insurance tailored for young adults</p>
-            <ul class="space-y-2 mb-4">
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Alternative medicine coverage
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Vision care benefits
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Fitness contributions
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Preventive health measures
-              </li>
-            </ul>
-            <div class="mt-4 text-sm text-primary-600 font-medium">
-              Best for: Young adults and students seeking flexible coverage
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6 border border-primary-500 hover:shadow-lg transition-shadow relative">
-            <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-              Popular Choice
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Classic</h3>
-            <p class="text-gray-600 mb-4">Comprehensive supplementary coverage for individuals</p>
-            <ul class="space-y-2 mb-4">
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <strong class="text-primary-700">Orthodontic treatment</strong>
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Psychotherapy sessions
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Extended coverage options
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Alternative treatments
-              </li>
-            </ul>
-            <div class="mt-4 text-sm text-primary-600 font-medium">
-              Best for: Those seeking well-rounded supplementary coverage
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Family</h3>
-            <p class="text-gray-600 mb-4">Family-oriented supplementary plan</p>
-            <ul class="space-y-2 mb-4">
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Shared service account
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Flexible limits per family member
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Family-oriented coverage
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Comprehensive protection
-              </li>
-            </ul>
-            <div class="mt-4 text-sm text-primary-600 font-medium">
-              Best for: Families seeking consolidated coverage
-            </div>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6 border border-primary-500 hover:shadow-lg transition-shadow relative">
-            <div class="absolute -top-4 -right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-              Popular Choice
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">Medical Private</h3>
-            <p class="text-gray-600 mb-4">Premium worldwide coverage</p>
-            <ul class="space-y-2 mb-4">
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <strong class="text-primary-700">Worldwide choice of doctors</strong>
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Private consultations
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Non-KVG billing options
-              </li>
-              <li class="flex items-center text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <strong class="text-primary-700">Global coverage</strong>
-              </li>
-            </ul>
-            <div class="mt-4 text-sm text-primary-600 font-medium">
-              Best for: Expats seeking premium global medical care
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
-
-  <!-- ExpandableFormBanner placed after supplementary insurance section -->
-  <div class="bg-gradient-to-r from-primary-100 to-primary-200 py-10" id="quote-form">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Compare Health Insurance Options in Switzerland</h2>
-        <p class="mt-2 text-gray-700">Get personalized quotes and expert advice tailored to your situation</p>
-      </div>
-      <ExpandableFormBanner provider="sanitas" title="Calculate Your Premium for Sanitas Insurance" description="Get an estimate of your costs based on your profile and needs" />
-    </div>
-  </div>
-
-  <!-- Digital Experience Section -->
-  <div id="digital" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">Sanitas Digital Experience: User-Friendly Apps and Services</h2>
-        
-        <p>
-          In an increasingly digital world, the convenience of managing your health insurance online is increasingly important. Sanitas has embraced technology to enhance the customer experience with its comprehensive digital ecosystem, making it particularly appealing for tech-savvy expatriates and those who value efficiency and accessibility.
-        </p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">Sanitas Portal App (MySanitas)</h3>
-            <p class="text-gray-600 mb-4">This user-friendly mobile application serves as your digital health insurance command center, offering a range of convenient features:</p>
-            <ul class="space-y-2">
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Policy Documents:</strong> View your insurance details, coverage limits, and policy documents in one place.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Coverage Checking:</strong> Check your specific coverage details for various treatments and services.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Digital Claims Submission:</strong> Submit medical claims by simply scanning or uploading your invoices, eliminating paperwork and mail delays.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Personal Details Management:</strong> Update your contact information and personal details directly through the app.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Digital Insurance Card:</strong> Access your digital insurance card anytime, anywhere, even without an internet connection.</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">Sanitas Medgate App</h3>
-            <p class="text-gray-600 mb-4">This specialized telemedicine application connects you directly with medical professionals:</p>
-            <ul class="space-y-2">
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Virtual Consultations:</strong> Consult with qualified physicians via video or phone calls without leaving your home.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Medical Advice:</strong> Receive professional medical opinions for non-emergency situations.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Prescriptions:</strong> When appropriate, doctors can issue prescriptions that can be sent directly to a pharmacy.</span>
-              </li>
-              <li class="flex items-start text-sm text-gray-600">
-                <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span><strong>Integration with CallMed:</strong> For those with the CallMed basic insurance model, this app is the mandated first point of contact for medical issues.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="bg-primary-50 p-6 rounded-lg mt-8">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Benefits for Expats</h3>
-          <p class="text-gray-700 mb-4">
-            For expatriates in Switzerland, Sanitas's digital services offer several specific advantages:
-          </p>
-          <ul class="space-y-2">
-            <li class="flex items-start text-sm text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Language Accessibility:</strong> The apps are available in multiple languages, helping overcome potential language barriers in the Swiss healthcare system.</span>
-            </li>
-            <li class="flex items-start text-sm text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Familiarity:</strong> A digital approach to healthcare management may feel more familiar and comfortable for many international residents who are used to digital services.</span>
-            </li>
-            <li class="flex items-start text-sm text-gray-700">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Convenience:</strong> Digital claim submission and management are particularly valuable when navigating a new healthcare system in a foreign country.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pre-existing Conditions Section -->
-  <div id="preexisting" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900">Innovative Approach to Pre-existing Conditions</h2>
-        
-        <p>
-          One of Sanitas's most distinctive offerings is its approach to pre-existing conditions in supplementary insurance. This is particularly relevant for expats who may be concerned about coverage limitations for existing health issues when moving to Switzerland.
-        </p>
-        
-        <div class="bg-white rounded-lg shadow-lg p-8 my-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">The Individual Premium Supplement</h3>
-          
-          <p class="mb-4">
-            Traditionally, when applying for supplementary health insurance in Switzerland with pre-existing conditions, insurers typically offer one of three outcomes:
-          </p>
-          
-          <ul class="space-y-2 mb-6">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-gray-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span>Full acceptance with standard premiums (rare for significant pre-existing conditions)</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-gray-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span>Acceptance with exclusions for the pre-existing conditions (common)</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-gray-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span>Outright rejection of the application (for severe conditions)</span>
-            </li>
-          </ul>
-          
-          <p class="mb-4">
-            <strong class="text-primary-600">Sanitas offers an innovative fourth option: The Individual Premium Supplement.</strong> With this approach, instead of excluding coverage for pre-existing conditions, Sanitas may offer to cover them by calculating an individualized premium supplement based on the specific condition and associated risk.
-          </p>
-          
-          <div class="bg-primary-50 p-4 rounded-lg mb-6">
-            <h4 class="text-lg font-semibold text-gray-900 mb-2">How It Works:</h4>
-            <ol class="space-y-2 list-decimal list-inside">
-              <li class="text-gray-700">During the application process for supplementary insurance, you complete the standard health questionnaire.</li>
-              <li class="text-gray-700">If you disclose a pre-existing condition, Sanitas assesses the associated risk.</li>
-              <li class="text-gray-700">Rather than automatically excluding coverage for this condition, Sanitas may offer you an Individual Premium Supplement.</li>
-              <li class="text-gray-700">You pay a higher premium, but in return, the pre-existing condition is covered according to the terms of your supplementary insurance plan.</li>
-            </ol>
-          </div>
-          
-          <h4 class="text-lg font-semibold text-gray-900 mb-2">Key Benefits for Expats:</h4>
-          <ul class="space-y-2">
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Comprehensive Coverage:</strong> Your pre-existing condition is covered under your supplementary insurance plan, providing more comprehensive protection.</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Transparency:</strong> You know exactly what you're paying for the additional coverage, with a clear breakdown of your standard premium and the supplement.</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Peace of Mind:</strong> Particularly valuable when settling in a new country, knowing that your existing health concerns are covered can provide significant reassurance.</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-5 w-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span><strong>Choice:</strong> In many cases, you may still have the option to choose between a traditional exclusion or the premium supplement, allowing you to select the approach that best suits your needs and budget.</span>
-            </li>
-          </ul>
-        </div>
-        
-        <p>
-          It's important to note that this option isn't automatically available for all conditions or applicants. The availability of the Individual Premium Supplement and its cost will depend on various factors, including the specific pre-existing condition, its severity, and your overall health profile.
-        </p>
-        
-        <p>
-          For expatriates with pre-existing health conditions who are concerned about securing comprehensive coverage in Switzerland, this innovative approach from Sanitas represents a significant advantage worth exploring. Expat Savvy can help you understand the potential implications for your specific situation and guide you through the application process.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Key Sanitas Advantages for Expats Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Key Sanitas Advantages for Expats</h2>
-        <p class="mt-4 text-lg text-gray-600">Why Sanitas stands out for international residents</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Digital-First Approach Highlight -->
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital-First Approach</h3>
-          <p class="text-gray-600 mb-4">Sanitas's modern digital ecosystem with the MySanitas app and Medgate telemedicine services offers convenient policy management and healthcare access.</p>
-          <p class="text-gray-600">Perfect for tech-savvy expatriates who value convenience and digital accessibility in managing their healthcare needs.</p>
-        </div>
-        
-        <!-- Pre-existing Conditions Highlight -->
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Individual Premium Supplement</h3>
-          <p class="text-gray-600 mb-4">Sanitas's innovative approach allows coverage for pre-existing conditions in supplementary insurance through an individualized premium adjustment rather than exclusions.</p>
-          <p class="text-gray-600">This unique offering gives expats with pre-existing conditions a pathway to more comprehensive health coverage in Switzerland.</p>
-        </div>
-        
-        <!-- Multilingual Support Highlight -->
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Multilingual Support</h3>
-          <p class="text-gray-600 mb-4">Sanitas provides comprehensive customer service in multiple languages, including English, helping expatriates navigate the Swiss healthcare system more comfortably.</p>
-          <p class="text-gray-600">Documentation and digital services are also available in English, reducing language barriers for international residents.</p>
-        </div>
-        
-        <!-- Global Coverage Highlight -->
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Global Coverage Options</h3>
-          <p class="text-gray-600 mb-4">With premium supplementary insurance plans like Medical Private, Sanitas offers enhanced international coverage for treatment abroad.</p>
-          <p class="text-gray-600">This international flexibility is especially valuable for expats who travel frequently or maintain connections to their home countries.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Expert Help Section -->
-  <div id="expert-help" class="bg-gray-50 py-16">
+  <!-- Helpful Resources -->
+  <div class="bg-gray-50 py-12" id="resources">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Getting Started with Sanitas through Expat Savvy</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Helpful Resources</h2>
         
-        <p class="text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto">
-          Expat Savvy simplifies your insurance journey as independent advisors, helping you navigate Sanitas and other Swiss insurers to find coverage that perfectly matches your unique needs.
-        </p>
+        <p class="text-lg text-gray-600 mb-6">Learn more about health insurance in Switzerland:</p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-          <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100">
-            <h3 class="text-2xl font-semibold text-gray-900 mb-5">Our Services</h3>
-            <ul class="space-y-5">
-              <li class="flex items-start">
-                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-4">
-                  <svg class="h-6 w-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Personalized Consultation</p>
-                  <p class="text-gray-600">Understanding your needs, family situation, budget, and pre-existing conditions</p>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-4">
-                  <svg class="h-6 w-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Needs Analysis & Comparison</p>
-                  <p class="text-gray-600">Explaining Sanitas plans and comparing with market alternatives</p>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-4">
-                  <svg class="h-6 w-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Pre-existing Conditions Guidance</p>
-                  <p class="text-gray-600">Help with Sanitas's Individual Premium Supplement options</p>
-                </div>
-              </li>
-            </ul>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Switching Health Insurance</h3>
+            <p class="text-gray-600 text-sm mb-4">Learn about the process, timing, and considerations when changing your health insurance provider.</p>
+            <a href="/healthcare/switching-health-insurance/" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn more →</a>
           </div>
           
-          <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100">
-            <h3 class="text-2xl font-semibold text-gray-900 mb-5">Application Help</h3>
-            <ul class="space-y-5">
-              <li class="flex items-start">
-                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-4">
-                  <svg class="h-6 w-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Paperwork Guidance</p>
-                  <p class="text-gray-600">Support with application process and documentation</p>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-4">
-                  <svg class="h-6 w-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Premium Optimization</p>
-                  <p class="text-gray-600">Finding ways to optimize coverage while controlling costs</p>
-                </div>
-              </li>
-              <li class="flex items-start">
-                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center mr-4">
-                  <svg class="h-6 w-6 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-900">Family Packages</p>
-                  <p class="text-gray-600">Evaluation of family-oriented insurance options</p>
-                </div>
-              </li>
-            </ul>
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Health Insurance for New Arrivals</h3>
+            <p class="text-gray-600 text-sm mb-4">Everything you need to know about setting up health insurance when you first move to Switzerland.</p>
+            <a href="/healthcare/new-health-insurance/" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn more →</a>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Swiss Health Insurance Deadlines</h3>
+            <p class="text-gray-600 text-sm mb-4">Important dates and deadlines for switching or modifying your health insurance coverage in Switzerland.</p>
+            <a href="/insurance-change-2025-2026/" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Learn more →</a>
           </div>
         </div>
-        
-        <div class="bg-primary-50 p-8 rounded-xl shadow-md text-center max-w-2xl mx-auto border border-primary-100">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Ready to explore your Sanitas options?</h3>
-          <p class="text-lg text-gray-700 mb-6">
-            Get the expert guidance you need for peace of mind with your Swiss health insurance.
-          </p>
-          <button
-            onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('provider'); } else { const modal = document.getElementById('offers-modal'); if(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); } } return false;"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-lg font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1"
-          >
-            Schedule Free Consultation
-          </button>
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- Helpful Resources Section with Internal Links -->
-  <div class="bg-gray-50 py-16">
+  <!-- Frequently Asked Questions -->
+  <div class="bg-white py-12" id="faq">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Helpful Resources</h2>
-        <p class="mt-4 text-lg text-gray-600">Learn more about health insurance in Switzerland</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a href="/healthcare/switching-health-insurance" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-primary-600 mb-3">Switching Health Insurance in Switzerland</h3>
-          <p class="text-gray-600 mb-4">Learn about the process, timing, and considerations when changing your health insurance provider.</p>
-          <span class="text-primary-600 font-medium flex items-center">
-            Read more
-            <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </span>
-        </a>
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
         
-        <a href="/healthcare/health-insurance-for-new-arrivals" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-primary-600 mb-3">Health Insurance for New Arrivals</h3>
-          <p class="text-gray-600 mb-4">Everything you need to know about setting up health insurance when you first move to Switzerland.</p>
-          <span class="text-primary-600 font-medium flex items-center">
-            Read more
-            <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </span>
-        </a>
-        
-        <a href="/news/switching-health-insurance-in-switzerland" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-semibold text-primary-600 mb-3">Swiss Health Insurance Deadlines</h3>
-          <p class="text-gray-600 mb-4">Important dates and deadlines for switching or modifying your health insurance coverage in Switzerland.</p>
-          <span class="text-primary-600 font-medium flex items-center">
-            Read more
-            <svg class="ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- FAQ Section -->
-  <div id="faq" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
-      <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
-          {faqs.map((faq, index) => (
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow" id={`faq-${index}`}>
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p class="text-gray-600">{faq.answer}</p>
             </div>
           ))}
-        </dl>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Conclusion -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 text-center">Conclusion</h2>
-        <p>
-          Sanitas stands as a formidable choice for expatriates seeking health insurance in Switzerland, distinguished by its commitment to digital innovation, forward-thinking solutions for pre-existing conditions, and comprehensive suite of products designed to meet modern healthcare needs. With strong multilingual support, convenient digital tools, and innovative approaches to coverage, Sanitas addresses many of the key concerns and priorities of the global community residing in Switzerland.
-        </p>
-        <p>
-          While the Swiss healthcare system is renowned for its quality, navigating its insurance landscape can be intricate. Sanitas's offerings, particularly its digital platforms like MySanitas and Medgate, its pioneering Individual Premium Supplement for pre-existing conditions, and its diverse supplementary plans, provide pathways to enhanced care and accessible healthcare management. However, the optimal choice always depends on individual circumstances.
-        </p>
-        <p>
-          Expat Savvy is dedicated to providing you with the expert, unbiased advice needed to make an informed decision. We can help you explore Sanitas's plans in detail, compare them with other leading providers, and ensure your chosen coverage is perfectly tailored to your life in Switzerland.
-        </p>
+        </div>
       </div>
     </div>
   </div>
@@ -1357,9 +574,8 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Existing content ends -->
-  
+  <ExpandableFormBanner />
+  <ConsultationModal />
   <ProviderLinks currentProvider="Sanitas" />
 
-  <ConsultationModal />
 </Layout>
