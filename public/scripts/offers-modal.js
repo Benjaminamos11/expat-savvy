@@ -1109,9 +1109,12 @@ class OffersModal {
             console.log('Get 3 Best Offers clicked with motivation:', this.formData.motivation);
             
             // Track quote flow started
+            console.log('🎯 Tracking quote_flow_started event');
             if (typeof window.getAttributionData === 'function') {
               const attribution = window.getAttributionData();
+              console.log('🎯 Attribution data:', attribution);
               if (typeof window.attributionTracker !== 'undefined' && window.attributionTracker.sendToPlausible) {
+                console.log('🎯 Sending quote_flow_started to Plausible');
                 window.attributionTracker.sendToPlausible('quote_flow_started', {
                   channel: attribution.channel,
                   city: attribution.city,
@@ -1120,7 +1123,11 @@ class OffersModal {
                   source: attribution.utm_source,
                   flow: 'quote'
                 });
+              } else {
+                console.error('❌ attributionTracker not available');
               }
+            } else {
+              console.error('❌ getAttributionData function not available');
             }
             
             this.currentStep = 1;
@@ -1326,9 +1333,11 @@ class OffersModal {
     this.isSubmitting = true;
     
     // Track quote submitted
+    console.log('🎯 Tracking quote_submitted event');
     if (typeof window.getAttributionData === 'function') {
       const attribution = window.getAttributionData();
       if (typeof window.attributionTracker !== 'undefined' && window.attributionTracker.sendToPlausible) {
+        console.log('🎯 Sending quote_submitted to Plausible');
         window.attributionTracker.sendToPlausible('quote_submitted', {
           channel: attribution.channel,
           city: attribution.city,
@@ -1337,7 +1346,11 @@ class OffersModal {
           source: attribution.utm_source,
           flow: 'quote'
         });
+      } else {
+        console.error('❌ attributionTracker not available for quote_submitted');
       }
+    } else {
+      console.error('❌ getAttributionData not available for quote_submitted');
     }
     
     // Safety timeout to reset submission flag (in case of network issues)
@@ -1417,10 +1430,13 @@ class OffersModal {
         
         // Call the Plausible tracking function
         if (typeof window.trackLeadCreation === 'function') {
+          console.log('🎯 Calling trackLeadCreation function');
           window.trackLeadCreation({
             flow: 'quote',
             leadId: 'offers-modal-' + Date.now()
           });
+        } else {
+          console.error('❌ window.trackLeadCreation function not available');
         }
         
         this.isSubmitting = false; // Reset submission flag
