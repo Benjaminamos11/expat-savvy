@@ -259,7 +259,7 @@ async def get_funnels(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     admin: dict = Depends(verify_admin),
-    db: Session = Depends(get_db)
+    supabase: Client = Depends(get_supabase)
 ):
     """Get funnel metrics"""
     try:
@@ -288,7 +288,7 @@ async def get_funnels(
 async def upload_ad_costs(
     file: UploadFile = File(...),
     admin: dict = Depends(verify_admin),
-    db: Session = Depends(get_db)
+    supabase: Client = Depends(get_supabase)
 ):
     """Upload ad costs CSV"""
     try:
@@ -401,4 +401,6 @@ async def admin_dashboard(admin: dict = Depends(verify_admin)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)

@@ -59,6 +59,17 @@ const priorities = [
       <!-- Hidden fields for form metadata -->
       <input type="hidden" name="provider" value={provider} />
       <input type="hidden" name="form_type" value="smart_insurance" />
+      <!-- Attribution tracking fields -->
+      <input type="hidden" name="utm_source" id="utm_source" />
+      <input type="hidden" name="utm_medium" id="utm_medium" />
+      <input type="hidden" name="utm_campaign" id="utm_campaign" />
+      <input type="hidden" name="utm_term" id="utm_term" />
+      <input type="hidden" name="utm_content" id="utm_content" />
+      <input type="hidden" name="referrer" id="referrer" />
+      <input type="hidden" name="landing_path" id="landing_path" />
+      <input type="hidden" name="channel" id="channel" />
+      <input type="hidden" name="city" id="city" />
+      <input type="hidden" name="page_type" id="page_type" />
 
       <!-- Form steps - Optimize spacing and sizing for mobile -->
       <div class="form-steps-container min-h-[300px] sm:min-h-[400px] relative">
@@ -360,7 +371,175 @@ const priorities = [
     }
   });
 
+  // Populate attribution data on form load
+  function populateAttributionData() {
+    if (typeof window.getAttributionData === 'function') {
+      const attribution = window.getAttributionData();
+      
+      document.getElementById('utm_source').value = attribution.utm_source || '';
+      document.getElementById('utm_medium').value = attribution.utm_medium || '';
+      document.getElementById('utm_campaign').value = attribution.utm_campaign || '';
+      document.getElementById('utm_term').value = attribution.utm_term || '';
+      document.getElementById('utm_content').value = attribution.utm_content || '';
+      document.getElementById('referrer').value = attribution.referrer || '';
+      document.getElementById('landing_path').value = attribution.landing_path || '';
+      document.getElementById('channel').value = attribution.channel || '';
+      document.getElementById('city').value = attribution.city || '';
+      document.getElementById('page_type').value = attribution.page_type || '';
+    }
+  }
+
+  // Handle form submission to both Formspree and our API
+  document.getElementById('smart-insurance-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    // Show loading state
+    const submitButton = document.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Submitting...';
+    submitButton.disabled = true;
+
+    try {
+      // Send to our new API first
+      await sendToNewAPI(formData);
+      
+      // Then send to Formspree (fallback)
+      await sendToFormspree(form, formData);
+      
+      // Show success message
+      showSuccessMessage();
+      
+      // Track lead creation
+      if (typeof window.trackLeadCreation === 'function') {
+        window.trackLeadCreation({
+          flow: 'quote',
+          leadId: 'form-' + Date.now()
+        });
+      }
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      showErrorMessage();
+    } finally {
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+    }
+  });
+
+  async function sendToNewAPI(formData) {
+    const attribution = typeof window.getAttributionData === 'function' ? window.getAttributionData() : {};
+    
+    // Convert form data to our API format
+    const leadData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || '',
+      message: formData.get('message') || '',
+      consent_marketing: true, // Assuming consent for form submissions
+      
+      // Attribution data
+      utm_source: attribution.utm_source,
+      utm_medium: attribution.utm_medium,
+      utm_campaign: attribution.utm_campaign,
+      utm_term: attribution.utm_term,
+      utm_content: attribution.utm_content,
+      referrer: attribution.referrer,
+      landing_path: attribution.landing_path,
+      channel: attribution.channel,
+      city: attribution.city,
+      page_type: attribution.page_type,
+      
+      // Form specific data
+      provider: formData.get('provider'),
+      insurance_status: formData.get('insurance_status'),
+      insurance_type: formData.get('insurance_type'),
+      start_date: formData.get('start_date'),
+      priorities: formData.getAll('priorities'),
+      
+      // Lead metadata
+      stage: 'new',
+      flow: 'quote',
+      notes: {
+        form_type: 'smart_insurance',
+        priorities: formData.getAll('priorities'),
+        insurance_status: formData.get('insurance_status'),
+        insurance_type: formData.get('insurance_type'),
+        start_date: formData.get('start_date')
+      }
+    };
+
+    const response = await fetch('https://expat-savvy-api.fly.dev/api/lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(leadData)
+    });
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('API submission successful:', result);
+    return result;
+  }
+
+  async function sendToFormspree(form, formData) {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Formspree Error: ${response.status}`);
+    }
+
+    console.log('Formspree submission successful');
+  }
+
+  function showSuccessMessage() {
+    const form = document.getElementById('smart-insurance-form');
+    form.innerHTML = `
+      <div class="text-center py-8">
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+          <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="mt-4 text-lg font-medium text-gray-900">Thank You!</h3>
+        <p class="mt-2 text-sm text-gray-500">We've received your request and will contact you within 24 hours with personalized recommendations.</p>
+        <div class="mt-4">
+          <a href="/free-consultation" class="text-primary-600 hover:text-primary-500 text-sm font-medium">
+            Want to talk now? Schedule a free consultation →
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  function showErrorMessage() {
+    const submitButton = document.querySelector('button[type="submit"]');
+    submitButton.innerHTML = `
+      <span class="text-red-600">Error - Please try again</span>
+    `;
+    setTimeout(() => {
+      submitButton.textContent = 'Submit Request';
+      submitButton.classList.remove('bg-red-600');
+      submitButton.classList.add('bg-primary-600');
+    }, 3000);
+  }
+
   // Initialize
   updateActiveUsers();
   setInterval(updateActiveUsers, 30000); // Update every 30 seconds
+  
+  // Populate attribution data when page loads
+  setTimeout(populateAttributionData, 100); // Small delay to ensure analytics script loads
 </script>
