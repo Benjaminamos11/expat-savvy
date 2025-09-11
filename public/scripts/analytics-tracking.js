@@ -159,10 +159,23 @@ class AttributionTracker {
 
   sendToPlausible(eventName, props = {}) {
     if (typeof plausible !== 'undefined') {
-      console.log('Sending to Plausible:', eventName, props);
+      console.log('🎯 PLAUSIBLE EVENT:', eventName, props);
+      console.log('🎯 Event payload:', { 
+        name: eventName, 
+        props: props,
+        url: window.location.href,
+        domain: 'expat-savvy.ch'
+      });
       plausible(eventName, { props });
+      
+      // Additional verification
+      setTimeout(() => {
+        console.log('🎯 Plausible function type:', typeof plausible);
+        console.log('🎯 Current URL:', window.location.href);
+      }, 100);
     } else {
-      console.warn('Plausible not available - event not sent:', eventName);
+      console.error('❌ PLAUSIBLE NOT AVAILABLE - event not sent:', eventName);
+      console.log('❌ Available globals:', Object.keys(window).filter(k => k.includes('plausible') || k.includes('analytics')));
     }
   }
 

@@ -232,9 +232,25 @@ async def get_leads(
         if end_date:
             query = query.lte("created_at", end_date)
         
-        # Get total count first
-        count_result = query.execute(count="exact")
-        total = len(count_result.data) if count_result.data else 0
+        # Get total count first using proper Supabase syntax
+        count_query = supabase.table("leads").select("id", count="exact")
+        
+        # Apply same filters to count query
+        if channel:
+            count_query = count_query.eq("channel", channel)
+        if campaign:
+            count_query = count_query.eq("utm_campaign", campaign)
+        if city:
+            count_query = count_query.eq("city", city)
+        if stage:
+            count_query = count_query.eq("stage", stage)
+        if start_date:
+            count_query = count_query.gte("created_at", start_date)
+        if end_date:
+            count_query = count_query.lte("created_at", end_date)
+            
+        count_result = count_query.execute()
+        total = count_result.count if hasattr(count_result, 'count') else 0
         
         # Apply pagination and get results
         offset = (page - 1) * limit
