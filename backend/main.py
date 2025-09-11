@@ -57,6 +57,16 @@ async def root():
 async def health_check():
     return {"status": "healthy", "timestamp": datetime.now()}
 
+@app.get("/test-db")
+async def test_db_connection(supabase: Client = Depends(get_supabase)):
+    """Test database connection"""
+    try:
+        # Simple test query to verify connection
+        result = supabase.table("leads").select("count").eq("id", "test").execute()
+        return {"status": "db_connected", "message": "Database connection successful"}
+    except Exception as e:
+        return {"status": "db_error", "message": str(e)}
+
 # Lead endpoints
 @app.post("/api/lead", response_model=LeadResponse)
 async def create_lead(lead_data: LeadCreate, supabase: Client = Depends(get_supabase)):
