@@ -193,6 +193,9 @@ class AttributionTracker {
 // Initialize attribution tracking
 const attributionTracker = new AttributionTracker();
 
+// Make attribution tracker globally available
+window.attributionTracker = attributionTracker;
+
 document.addEventListener('DOMContentLoaded', function() {
   // Track Cal.com booking button clicks
   trackCalBookingClicks();
