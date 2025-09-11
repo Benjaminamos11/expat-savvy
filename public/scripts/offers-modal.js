@@ -1107,6 +1107,22 @@ class OffersModal {
             // Optional: If no motivation selected, default to something
             this.formData.motivation = this.formData.motivation || 'general';
             console.log('Get 3 Best Offers clicked with motivation:', this.formData.motivation);
+            
+            // Track quote flow started
+            if (typeof window.getAttributionData === 'function') {
+              const attribution = window.getAttributionData();
+              if (typeof window.attributionTracker !== 'undefined' && window.attributionTracker.sendToPlausible) {
+                window.attributionTracker.sendToPlausible('quote_flow_started', {
+                  channel: attribution.channel,
+                  city: attribution.city,
+                  page_type: attribution.page_type,
+                  campaign: attribution.utm_campaign,
+                  source: attribution.utm_source,
+                  flow: 'quote'
+                });
+              }
+            }
+            
             this.currentStep = 1;
             this.renderContent();
             e.preventDefault();
@@ -1309,6 +1325,21 @@ class OffersModal {
     }
     this.isSubmitting = true;
     
+    // Track quote submitted
+    if (typeof window.getAttributionData === 'function') {
+      const attribution = window.getAttributionData();
+      if (typeof window.attributionTracker !== 'undefined' && window.attributionTracker.sendToPlausible) {
+        window.attributionTracker.sendToPlausible('quote_submitted', {
+          channel: attribution.channel,
+          city: attribution.city,
+          page_type: attribution.page_type,
+          campaign: attribution.utm_campaign,
+          source: attribution.utm_source,
+          flow: 'quote'
+        });
+      }
+    }
+    
     // Safety timeout to reset submission flag (in case of network issues)
     setTimeout(() => {
       this.isSubmitting = false;
@@ -1383,6 +1414,15 @@ class OffersModal {
         this.renderContent();
         // Fire analytics event
         console.log('Offers submitted - tracking event');
+        
+        // Call the Plausible tracking function
+        if (typeof window.trackLeadCreation === 'function') {
+          window.trackLeadCreation({
+            flow: 'quote',
+            leadId: 'offers-modal-' + Date.now()
+          });
+        }
+        
         this.isSubmitting = false; // Reset submission flag
       } else {
         return response.text().then(text => {
