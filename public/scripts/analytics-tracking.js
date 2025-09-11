@@ -159,7 +159,10 @@ class AttributionTracker {
 
   sendToPlausible(eventName, props = {}) {
     if (typeof plausible !== 'undefined') {
+      console.log('Sending to Plausible:', eventName, props);
       plausible(eventName, { props });
+    } else {
+      console.warn('Plausible not available - event not sent:', eventName);
     }
   }
 
