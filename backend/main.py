@@ -13,17 +13,24 @@ import secrets
 import os
 from typing import Optional, List
 import httpx
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import uuid
 from supabase import Client
 
 from database import get_supabase
-from supabase_models import LeadModel, EventModel, AdCostModel
-from schemas import LeadCreate, LeadResponse, EventCreate, PlausibleEvent
+from supabase_models import LeadModel, EventModel, AdCostModel, EventsDailyModel, LeadSourcesModel
+from schemas import (
+    LeadCreate, LeadResponse, EventCreate, PlausibleEvent, 
+    ETLRequest, ETLResponse, DailyReportResponse, CPLReportResponse, 
+    AttributionResponse, LeadSourceCreate
+)
 from services.plausible import PlausibleService
 from services.email import EmailService
+from services.etl import ETLService
+from services.llm import get_llm_service
 from auth import verify_admin
+from api.tools import router as tools_router
 
 app = FastAPI(
     title="Expat Savvy Lead Platform",
@@ -48,6 +55,11 @@ if os.path.exists("static"):
 # Initialize services
 plausible_service = PlausibleService()
 email_service = EmailService()
+etl_service = ETLService()
+llm_service = get_llm_service()
+
+# Include AI tools router
+app.include_router(tools_router)
 
 @app.get("/")
 async def root():
@@ -87,6 +99,37 @@ async def create_lead(lead_data: LeadCreate, supabase: Client = Depends(get_supa
         
         created_lead = result.data[0]
         
+        # Create lead_sources entry for first/last touch attribution
+        lead_source_data = {
+            "id": str(uuid.uuid4()),
+            "lead_id": lead_id,
+            # First touch
+            "first_utm_source": created_lead.get("utm_source"),
+            "first_utm_medium": created_lead.get("utm_medium"),
+            "first_utm_campaign": created_lead.get("utm_campaign"),
+            "first_utm_term": created_lead.get("utm_term"),
+            "first_utm_content": created_lead.get("utm_content"),
+            "first_referrer": created_lead.get("referrer"),
+            "first_landing_path": created_lead.get("landing_path"),
+            "first_touch_at": created_lead.get("first_touch_at") or datetime.utcnow().isoformat(),
+            # Last touch (same as first for new leads)
+            "last_utm_source": created_lead.get("utm_source"),
+            "last_utm_medium": created_lead.get("utm_medium"),
+            "last_utm_campaign": created_lead.get("utm_campaign"),
+            "last_utm_term": created_lead.get("utm_term"),
+            "last_utm_content": created_lead.get("utm_content"),
+            "last_referrer": created_lead.get("referrer"),
+            "last_landing_path": created_lead.get("landing_path"),
+            "last_touch_at": created_lead.get("last_touch_at") or datetime.utcnow().isoformat(),
+            # Derived
+            "channel_derived": created_lead.get("channel"),
+            "city": created_lead.get("city"),
+            "page_type": created_lead.get("page_type"),
+            "flow": created_lead.get("flow")
+        }
+        
+        supabase.table("lead_sources").insert(lead_source_data).execute()
+
         # Create lead_created event
         event_data = {
             "id": str(uuid.uuid4()),
@@ -284,27 +327,56 @@ async def get_funnels(
     city: Optional[str] = None,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    period: str = "30d",
     admin: dict = Depends(verify_admin),
     supabase: Client = Depends(get_supabase)
 ):
-    """Get funnel metrics"""
+    """Get funnel metrics from Plausible"""
     try:
-        # This would be implemented with proper SQL queries
-        # For now, return mock data structure
-        return {
-            "total_visitors": 10000,  # From analytics
-            "quote_started": 500,
-            "quote_submitted": 250,
-            "consultation_booked": 125,
-            "attended": 100,
-            "won": 75,
-            "conversion_rates": {
-                "visitor_to_quote": 0.05,
-                "quote_to_submit": 0.5,
-                "submit_to_book": 0.5,
-                "book_to_attend": 0.8,
-                "attend_to_win": 0.75
+        # Get funnel data from Plausible
+        funnel_data = await plausible_service.get_funnel_data(period)
+        
+        if not funnel_data:
+            # Fallback to mock data if Plausible API fails
+            funnel_data = {
+                "quote_flow_started": 0,
+                "quote_submitted": 0,
+                "lead_created": 0,
+                "consultation_booked": 0,
+                "consultation_started": 0
             }
+        
+        # Get overall site stats
+        aggregate_stats = await plausible_service.get_aggregate_stats(period)
+        total_visitors = 0
+        if aggregate_stats and aggregate_stats.get("results"):
+            visitors_data = next((item for item in aggregate_stats["results"] if item["metric"] == "visitors"), None)
+            if visitors_data:
+                total_visitors = visitors_data.get("value", 0)
+        
+        # Calculate conversion rates
+        quote_started = funnel_data.get("quote_flow_started", 0)
+        quote_submitted = funnel_data.get("quote_submitted", 0)
+        leads_created = funnel_data.get("lead_created", 0)
+        consultations_booked = funnel_data.get("consultation_booked", 0)
+        consultations_started = funnel_data.get("consultation_started", 0)
+        
+        return {
+            "total_visitors": total_visitors,
+            "quote_started": quote_started,
+            "quote_submitted": quote_submitted,
+            "leads_created": leads_created,
+            "consultation_booked": consultations_booked,
+            "consultation_started": consultations_started,
+            "conversion_rates": {
+                "visitor_to_quote": (quote_started / total_visitors) if total_visitors > 0 else 0,
+                "quote_to_submit": (quote_submitted / quote_started) if quote_started > 0 else 0,
+                "submit_to_lead": (leads_created / quote_submitted) if quote_submitted > 0 else 0,
+                "lead_to_consultation": (consultations_booked / leads_created) if leads_created > 0 else 0,
+                "book_to_attend": (consultations_started / consultations_booked) if consultations_booked > 0 else 0
+            },
+            "period": period,
+            "last_updated": "real-time"
         }
         
     except Exception as e:
@@ -366,7 +438,325 @@ async def add_note(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error adding note: {str(e)}")
 
-# Admin dashboard (simple HTML interface)
+# Phase A Endpoints - Data Foundation & ETL
+
+@app.post("/api/etl/plausible", response_model=ETLResponse)
+async def run_plausible_etl(
+    etl_request: ETLRequest,
+    admin: dict = Depends(verify_admin)
+):
+    """Run Plausible ETL for a specific date"""
+    try:
+        success = await etl_service.run_daily_plausible_etl(etl_request.target_date)
+        date_str = etl_request.target_date or (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        
+        return ETLResponse(
+            success=success,
+            message=f"Plausible ETL {'completed successfully' if success else 'failed'} for {date_str}",
+            date=date_str
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error running Plausible ETL: {str(e)}")
+
+@app.post("/api/etl/gsc", response_model=ETLResponse)
+async def run_gsc_etl(
+    etl_request: ETLRequest,
+    admin: dict = Depends(verify_admin)
+):
+    """Run Google Search Console ETL for a specific date"""
+    try:
+        success = await etl_service.run_gsc_etl(etl_request.target_date)
+        date_str = etl_request.target_date or (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        
+        return ETLResponse(
+            success=success,
+            message=f"GSC ETL {'completed successfully' if success else 'failed'} for {date_str}",
+            date=date_str
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error running GSC ETL: {str(e)}")
+
+@app.post("/api/etl/full", response_model=ETLResponse)
+async def run_full_etl(
+    etl_request: ETLRequest,
+    admin: dict = Depends(verify_admin)
+):
+    """Run all ETL processes for a specific date"""
+    try:
+        results = await etl_service.run_full_etl(etl_request.target_date)
+        date_str = etl_request.target_date or (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        
+        success_count = sum(1 for success in results.values() if success)
+        total_count = len(results)
+        
+        return ETLResponse(
+            success=success_count == total_count,
+            message=f"ETL processes completed: {success_count}/{total_count} successful for {date_str}",
+            date=date_str,
+            details=results
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error running full ETL: {str(e)}")
+
+@app.post("/api/attribution/migrate")
+async def migrate_lead_sources(admin: dict = Depends(verify_admin)):
+    """Migrate existing leads to lead_sources table"""
+    try:
+        success = await etl_service.migrate_lead_sources()
+        
+        return {
+            "ok": success,
+            "message": "Lead sources migration completed successfully" if success else "Migration failed"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error migrating lead sources: {str(e)}")
+
+@app.get("/api/attribution/status")
+async def get_attribution_status(
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Get attribution tracking status and summary stats"""
+    try:
+        # Count leads
+        leads_result = supabase.table("leads").select("id", count="exact").execute()
+        total_leads = leads_result.count if leads_result.count else 0
+        
+        # Count lead_sources (attribution records)
+        sources_result = supabase.table("lead_sources").select("id", count="exact").execute()
+        total_attributed = sources_result.count if sources_result.count else 0
+        
+        # Get recent events
+        events_result = supabase.table("events_daily").select("*").order("date", desc=True).limit(7).execute()
+        recent_events = events_result.data if events_result.data else []
+        
+        return {
+            "total_leads": total_leads,
+            "total_attributed": total_attributed,
+            "attribution_coverage": f"{(total_attributed/total_leads)*100:.1f}%" if total_leads > 0 else "0%",
+            "recent_etl_data": recent_events,
+            "last_etl_run": recent_events[0]["date"] if recent_events else "Never"
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting attribution status: {str(e)}")
+
+@app.get("/api/reports/daily")
+async def get_daily_report(
+    date: Optional[str] = None,
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Get daily performance report"""
+    try:
+        if not date:
+            date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        
+        # Get events_daily data
+        events_result = supabase.table("events_daily").select("*").eq("date", date).execute()
+        events_data = events_result.data if events_result.data else []
+        
+        # Get ad_costs data
+        ad_costs_result = supabase.table("ad_costs").select("*").eq("date", date).execute()
+        ad_costs_data = ad_costs_result.data if ad_costs_result.data else []
+        
+        # Aggregate events summary
+        events_summary = {
+            "total_pageviews": sum(event.get("pageviews", 0) for event in events_data),
+            "total_quote_starts": sum(event.get("quote_starts", 0) for event in events_data),
+            "total_quote_submits": sum(event.get("quote_submits", 0) for event in events_data),
+            "total_bookings": sum(event.get("bookings", 0) for event in events_data),
+            "total_leads": sum(event.get("leads", 0) for event in events_data)
+        }
+        
+        # Aggregate ad costs summary
+        ad_costs_summary = {
+            "total_spend": sum(float(cost.get("cost", 0)) for cost in ad_costs_data),
+            "campaigns_count": len(set(cost.get("campaign") for cost in ad_costs_data)),
+            "sources": list(set(cost.get("source") for cost in ad_costs_data))
+        }
+        
+        # Calculate CPL
+        cpl_summary = {}
+        if events_summary["total_leads"] > 0 and ad_costs_summary["total_spend"] > 0:
+            cpl_summary["overall_cpl"] = ad_costs_summary["total_spend"] / events_summary["total_leads"]
+        else:
+            cpl_summary["overall_cpl"] = 0
+        
+        # Top pages by performance
+        top_pages = sorted(events_data, key=lambda x: x.get("pageviews", 0), reverse=True)[:10]
+        
+        return {
+            "date": date,
+            "events_summary": events_summary,
+            "ad_costs_summary": ad_costs_summary,
+            "cpl_summary": cpl_summary,
+            "top_pages": top_pages
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating daily report: {str(e)}")
+
+@app.get("/api/reports/cpl")
+async def get_cpl_report(
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    channel: Optional[str] = None,
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Get Cost Per Lead analysis"""
+    try:
+        if not start_date:
+            start_date = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+        if not end_date:
+            end_date = datetime.now().strftime("%Y-%m-%d")
+        
+        # Get leads in date range
+        leads_query = supabase.table("leads").select("*").gte("created_at", start_date).lte("created_at", end_date)
+        if channel:
+            leads_query = leads_query.eq("channel", channel)
+        
+        leads_result = leads_query.execute()
+        leads = leads_result.data if leads_result.data else []
+        
+        # Get ad costs in date range
+        ad_costs_result = supabase.table("ad_costs").select("*").gte("date", start_date).lte("date", end_date).execute()
+        ad_costs = ad_costs_result.data if ad_costs_result.data else []
+        
+        # Calculate metrics
+        total_spend = sum(float(cost.get("cost", 0)) for cost in ad_costs)
+        paid_leads = [lead for lead in leads if lead.get("channel") == "paid"]
+        total_leads = len(paid_leads)
+        
+        overall_cpl = total_spend / total_leads if total_leads > 0 else 0
+        
+        # Group by channel
+        by_channel = {}
+        for lead in leads:
+            ch = lead.get("channel", "unknown")
+            if ch not in by_channel:
+                by_channel[ch] = {"leads": 0, "spend": 0, "cpl": 0}
+            by_channel[ch]["leads"] += 1
+        
+        # Add spend to channels
+        for cost in ad_costs:
+            source = cost.get("source", "unknown")
+            # Map source to channel (simplified)
+            if source in ["google", "meta", "linkedin"]:
+                if "paid" not in by_channel:
+                    by_channel["paid"] = {"leads": 0, "spend": 0, "cpl": 0}
+                by_channel["paid"]["spend"] += float(cost.get("cost", 0))
+        
+        # Calculate CPL by channel
+        for ch, data in by_channel.items():
+            if data["leads"] > 0 and data["spend"] > 0:
+                data["cpl"] = data["spend"] / data["leads"]
+        
+        # Group by campaign
+        by_campaign = {}
+        for lead in paid_leads:
+            campaign = lead.get("utm_campaign", "unknown")
+            if campaign not in by_campaign:
+                by_campaign[campaign] = {"leads": 0, "spend": 0, "cpl": 0}
+            by_campaign[campaign]["leads"] += 1
+        
+        for cost in ad_costs:
+            campaign = cost.get("campaign", "unknown")
+            if campaign not in by_campaign:
+                by_campaign[campaign] = {"leads": 0, "spend": 0, "cpl": 0}
+            by_campaign[campaign]["spend"] += float(cost.get("cost", 0))
+        
+        # Calculate CPL by campaign
+        for campaign, data in by_campaign.items():
+            if data["leads"] > 0:
+                data["cpl"] = data["spend"] / data["leads"]
+        
+        return {
+            "period": f"{start_date} to {end_date}",
+            "total_spend": total_spend,
+            "total_leads": total_leads,
+            "overall_cpl": overall_cpl,
+            "by_channel": by_channel,
+            "by_campaign": by_campaign
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating CPL report: {str(e)}")
+
+@app.get("/api/attribution/{lead_id}")
+async def get_lead_attribution(
+    lead_id: str,
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Get full attribution data for a specific lead"""
+    try:
+        # Get lead
+        lead_result = supabase.table("leads").select("*").eq("id", lead_id).execute()
+        if not lead_result.data:
+            raise HTTPException(status_code=404, detail="Lead not found")
+        
+        lead = lead_result.data[0]
+        
+        # Get lead_sources
+        lead_source_result = supabase.table("lead_sources").select("*").eq("lead_id", lead_id).execute()
+        
+        first_touch = {}
+        last_touch = {}
+        
+        if lead_source_result.data:
+            lead_source = lead_source_result.data[0]
+            first_touch = {
+                "utm_source": lead_source.get("first_utm_source"),
+                "utm_medium": lead_source.get("first_utm_medium"),
+                "utm_campaign": lead_source.get("first_utm_campaign"),
+                "utm_term": lead_source.get("first_utm_term"),
+                "utm_content": lead_source.get("first_utm_content"),
+                "referrer": lead_source.get("first_referrer"),
+                "landing_path": lead_source.get("first_landing_path"),
+                "timestamp": lead_source.get("first_touch_at")
+            }
+            
+            last_touch = {
+                "utm_source": lead_source.get("last_utm_source"),
+                "utm_medium": lead_source.get("last_utm_medium"),
+                "utm_campaign": lead_source.get("last_utm_campaign"),
+                "utm_term": lead_source.get("last_utm_term"),
+                "utm_content": lead_source.get("last_utm_content"),
+                "referrer": lead_source.get("last_referrer"),
+                "landing_path": lead_source.get("last_landing_path"),
+                "timestamp": lead_source.get("last_touch_at")
+            }
+        
+        # Get events for this lead
+        events_result = supabase.table("events").select("*").eq("lead_id", lead_id).order("created_at", desc=False).execute()
+        events = events_result.data if events_result.data else []
+        
+        return {
+            "lead_id": lead_id,
+            "first_touch": first_touch,
+            "last_touch": last_touch,
+            "channel_derived": lead.get("channel"),
+            "full_attribution_chain": events
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting attribution: {str(e)}")
+
+# Enhanced AI-powered admin dashboard
+@app.get("/admin/ai", response_class=HTMLResponse)
+async def ai_admin_dashboard(admin: dict = Depends(verify_admin)):
+    """AI-powered admin dashboard with chat and approval queue"""
+    return templates.TemplateResponse("admin_ai.html", {"request": {}})
+
+# Legacy admin dashboard (simple HTML interface)
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_dashboard(admin: dict = Depends(verify_admin)):
     """Simple admin dashboard"""

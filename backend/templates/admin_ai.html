@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expat Savvy AI Growth Ops - Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; padding: 20px; background: #f5f5f5; 
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; padding: 20px; border-radius: 12px; margin-bottom: 30px;
+        }
+        .nav { 
+            background: white; padding: 15px; margin-bottom: 30px; border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav a { 
+            margin-right: 30px; text-decoration: none; color: #333; 
+            font-weight: 500; padding: 8px 16px; border-radius: 6px;
+            transition: background-color 0.2s; cursor: pointer;
+        }
+        .nav a:hover { background: #f0f0f0; }
+        .nav a.active { background: #667eea; color: white; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .card { 
+            background: white; border-radius: 12px; padding: 25px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+        }
+        .card h2 { margin: 0 0 20px 0; color: #333; display: flex; align-items: center; }
+        
+        /* AI Chat Interface */
+        .chat-container { 
+            height: 400px; border: 2px solid #e0e0e0; border-radius: 10px;
+            background: #fafafa; display: flex; flex-direction: column;
+        }
+        .chat-messages { 
+            flex: 1; padding: 15px; overflow-y: auto; 
+            background: linear-gradient(180deg, #fafafa 0%, #f0f0f0 100%);
+        }
+        .chat-input-container { 
+            padding: 15px; border-top: 1px solid #e0e0e0; background: white;
+            display: flex; gap: 10px;
+        }
+        .chat-input { 
+            flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 6px;
+            font-size: 14px;
+        }
+        .chat-send { 
+            background: #667eea; color: white; border: none; padding: 12px 20px;
+            border-radius: 6px; cursor: pointer; font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .chat-send:hover { background: #5a67d8; }
+        .context-chips { margin-bottom: 15px; }
+        .chip { 
+            display: inline-block; background: #e2e8f0; padding: 6px 12px; margin: 4px;
+            border-radius: 20px; font-size: 12px; cursor: pointer; border: none;
+            transition: all 0.2s;
+        }
+        .chip:hover { background: #cbd5e0; }
+        
+        /* Message styling */
+        .message { 
+            margin-bottom: 15px; padding: 12px; border-radius: 8px; max-width: 80%;
+        }
+        .message.user { 
+            background: #667eea; color: white; margin-left: auto; text-align: right;
+        }
+        .message.ai { 
+            background: white; border: 1px solid #e0e0e0;
+        }
+        .message.system { 
+            background: #f7fafc; color: #666; font-style: italic; text-align: center;
+            max-width: 100%; border: 1px solid #e2e8f0;
+        }
+        
+        /* Approval Queue */
+        .approval-item { 
+            border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;
+            background: #fafafa;
+        }
+        .approval-header { 
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+        }
+        .approval-type { 
+            background: #e2e8f0; padding: 4px 8px; border-radius: 4px; font-size: 12px;
+        }
+        .approval-actions { display: flex; gap: 10px; }
+        .btn { 
+            padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;
+            transition: all 0.2s;
+        }
+        .btn.approve { background: #48bb78; color: white; }
+        .btn.approve:hover { background: #38a169; }
+        .btn.reject { background: #f56565; color: white; }
+        .btn.reject:hover { background: #e53e3e; }
+        
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .stat { text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .stat-number { font-size: 24px; font-weight: bold; color: #667eea; }
+        .stat-label { font-size: 12px; color: #666; margin-top: 4px; }
+        
+        /* Loading states */
+        .loading { text-align: center; color: #666; padding: 20px; }
+        .error { color: #e53e3e; padding: 15px; background: #fed7d7; border-radius: 6px; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Expat Savvy AI Growth Ops</h1>
+            <p>Intelligent marketing optimization with AI-powered insights and human oversight</p>
+        </div>
+        
+        <div class="nav">
+            <a href="#" class="active" onclick="showTab('dashboard')">📊 Dashboard</a>
+            <a href="#" onclick="showTab('ai-chat')">🤖 AI Chat</a>
+            <a href="#" onclick="showTab('approvals')">✋ Approval Queue</a>
+            <a href="#" onclick="showTab('leads')">👥 Leads</a>
+            <a href="#" onclick="showTab('analytics')">📈 Analytics</a>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div id="dashboard-tab" class="tab-content active">
+            <div class="grid">
+                <div class="card">
+                    <h2>🤖 AI Performance Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat">
+                            <div class="stat-number" id="total-leads">-</div>
+                            <div class="stat-label">Total Leads</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="ai-suggestions">-</div>
+                            <div class="stat-label">AI Suggestions</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="avg-cpl">-</div>
+                            <div class="stat-label">Avg CPL</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="tools-used">-</div>
+                            <div class="stat-label">AI Tools Used</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>✋ Recent AI Activity</h2>
+                    <div id="recent-activity" class="loading">Loading AI activity...</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>👥 Recent Leads with Attribution</h2>
+                <div id="recent-leads" class="loading">Loading leads...</div>
+            </div>
+        </div>
+        
+        <!-- AI Chat Tab -->
+        <div id="ai-chat-tab" class="tab-content">
+            <div class="card">
+                <h2>🤖 AI Marketing Assistant</h2>
+                <div class="context-chips">
+                    <button class="chip" onclick="addContext('Analyze our lead funnel performance')">🔄 Funnel Analysis</button>
+                    <button class="chip" onclick="addContext('Find campaigns that are wasting spend')">💰 Find Waste</button>
+                    <button class="chip" onclick="addContext('Show me top performing pages')">📊 Top Pages</button>
+                    <button class="chip" onclick="addContext('Generate ideas for homepage copy tests')">💡 Copy Ideas</button>
+                    <button class="chip" onclick="addContext('Create retargeting campaign for visitors who started quotes but didn't submit')">🎯 Retargeting</button>
+                </div>
+                
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message system">
+                            👋 Hi! I'm your AI marketing assistant powered by Claude 3.5 Sonnet. I can analyze your data, find optimization opportunities, and draft campaigns for your approval. What would you like to explore?
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Ask me about performance, campaign ideas, or use commands like /find_waste..." />
+                        <button class="chat-send" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <strong>💡 AI Commands Available:</strong><br>
+                    <code>/find_waste</code> - Find inefficient campaigns<br>
+                    <code>/idea_copy homepage</code> - Generate A/B test copy ideas<br>
+                    <code>/build_retargeting quote_started_no_submit_7d</code> - Create retargeting campaigns<br>
+                    <code>/seo_overlap health insurance</code> - Check content cannibalization
+                </div>
+            </div>
+        </div>
+        
+        <!-- Approval Queue Tab -->
+        <div id="approvals-tab" class="tab-content">
+            <div class="card">
+                <h2>✋ AI Approval Queue</h2>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Review and approve AI-generated campaigns, content, and recommendations before they go live. All AI actions require human approval.
+                </p>
+                <div id="approval-queue" class="loading">Loading approval queue...</div>
+            </div>
+        </div>
+        
+        <!-- Other tabs -->
+        <div id="leads-tab" class="tab-content">
+            <div class="card">
+                <h2>👥 Lead Management</h2>
+                <div id="leads-table" class="loading">Loading leads...</div>
+            </div>
+        </div>
+        
+        <div id="analytics-tab" class="tab-content">
+            <div class="card">
+                <h2>📈 Advanced Analytics</h2>
+                <div id="analytics-data" class="loading">Loading analytics...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab management
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const navs = document.querySelectorAll('.nav a');
+            navs.forEach(nav => nav.classList.remove('active'));
+            
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load data for the active tab
+            if (tabName === 'dashboard') loadDashboard();
+            else if (tabName === 'approvals') loadApprovals();
+            else if (tabName === 'leads') loadLeads();
+            else if (tabName === 'analytics') loadAnalytics();
+        }
+        
+        // AI Chat functionality
+        function addContext(context) {
+            const input = document.getElementById('chat-input');
+            input.value = context;
+            input.focus();
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // Add user message to chat
+            addMessageToChat('user', message);
+            input.value = '';
+            
+            // Add loading message
+            const loadingId = addMessageToChat('system', '🤖 AI is analyzing...');
+            
+            try {
+                // Check if it's a command
+                if (message.startsWith('/')) {
+                    const [command, ...args] = message.slice(1).split(' ');
+                    const response = await fetch('/tools/builtin_command', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('admin:phase_a_2025')
+                        },
+                        body: JSON.stringify({
+                            command: command,
+                            args: { days: 30, page_type: args[0] || 'homepage', segment: args[0] || 'quote_started_no_submit_7d' }
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    removeMessage(loadingId);
+                    
+                    let responseText = `✅ Command /${command} executed successfully!\\n\\n`;
+                    responseText += result.analysis?.text || JSON.stringify(result, null, 2);
+                    
+                    addMessageToChat('ai', responseText);
+                } else {
+                    // Regular chat
+                    const response = await fetch('/tools/chat', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('admin:phase_a_2025')
+                        },
+                        body: JSON.stringify({
+                            messages: [{ role: 'user', content: message }],
+                            use_tools: true
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    removeMessage(loadingId);
+                    
+                    let aiResponse = result.text || 'No response received';
+                    if (result.tool_calls && result.tool_calls.length > 0) {
+                        aiResponse += '\\n\\n🔧 Used ' + result.tool_calls.length + ' AI tools to analyze your data';
+                    }
+                    
+                    addMessageToChat('ai', aiResponse);
+                }
+            } catch (error) {
+                removeMessage(loadingId);
+                addMessageToChat('system', '❌ Error: ' + error.message);
+            }
+        }
+        
+        function addMessageToChat(role, content) {
+            const messages = document.getElementById('chat-messages');
+            const messageId = 'msg-' + Date.now();
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            messageDiv.id = messageId;
+            messageDiv.innerHTML = content.replace(/\\n/g, '<br>');
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+            return messageId;
+        }
+        
+        function removeMessage(messageId) {
+            const msg = document.getElementById(messageId);
+            if (msg) msg.remove();
+        }
+        
+        // Enter key support for chat
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        // Data loading functions
+        async function loadDashboard() {
+            try {
+                // Load basic stats
+                const response = await fetch('/api/leads', {
+                    headers: { 'Authorization': 'Basic ' + btoa('admin:phase_a_2025') }
+                });
+                const data = await response.json();
+                
+                document.getElementById('total-leads').textContent = data.total || '0';
+                document.getElementById('avg-cpl').textContent = 'CHF 45'; // Mock data
+                document.getElementById('tools-used').textContent = '12'; // Mock data
+                
+                // Load AI suggestions count
+                const approvalsResponse = await fetch('/tools/list_approvals', {
+                    headers: { 'Authorization': 'Basic ' + btoa('admin:phase_a_2025') }
+                });
+                const approvalsData = await approvalsResponse.json();
+                document.getElementById('ai-suggestions').textContent = approvalsData.count || '0';
+                
+                // Load recent activity
+                let activityHtml = '';
+                if (approvalsData.approvals && approvalsData.approvals.length > 0) {
+                    approvalsData.approvals.slice(0, 3).forEach(approval => {
+                        activityHtml += `
+                            <div style="padding: 12px; margin: 8px 0; background: white; border-radius: 6px; border-left: 4px solid #667eea;">
+                                <strong>🤖 ${approval.title}</strong><br>
+                                <small style="color: #666;">${approval.item_type} • ${new Date(approval.created_at).toLocaleDateString()}</small>
+                            </div>
+                        `;
+                    });
+                } else {
+                    activityHtml = '<p style="color: #666; text-align: center; padding: 20px;">💤 No recent AI activity<br><small>Start chatting with the AI to see suggestions here!</small></p>';
+                }
+                document.getElementById('recent-activity').innerHTML = activityHtml;
+                
+                // Load recent leads
+                const leadsHtml = data.leads ? data.leads.slice(0, 5).map(lead => `
+                    <div style="padding: 10px; margin: 5px 0; background: white; border-radius: 6px; border: 1px solid #e0e0e0;">
+                        <strong>${lead.email}</strong> • ${lead.city || 'Unknown city'} • ${lead.channel || 'Unknown channel'}<br>
+                        <small style="color: #666;">${new Date(lead.created_at).toLocaleDateString()}</small>
+                    </div>
+                `).join('') : '<p style="color: #666; text-align: center;">No recent leads</p>';
+                
+                document.getElementById('recent-leads').innerHTML = leadsHtml;
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+            }
+        }
+        
+        async function loadApprovals() {
+            try {
+                const response = await fetch('/tools/list_approvals?status=pending', {
+                    headers: { 'Authorization': 'Basic ' + btoa('admin:phase_a_2025') }
+                });
+                const data = await response.json();
+                
+                const container = document.getElementById('approval-queue');
+                if (data.approvals && data.approvals.length > 0) {
+                    let html = '';
+                    data.approvals.forEach(approval => {
+                        html += `
+                            <div class="approval-item">
+                                <div class="approval-header">
+                                    <div>
+                                        <strong>🤖 ${approval.title}</strong>
+                                        <span class="approval-type">${approval.item_type}</span>
+                                    </div>
+                                    <div class="approval-actions">
+                                        <button class="btn approve" onclick="approveItem('${approval.id}', 'approve')">✓ Approve</button>
+                                        <button class="btn reject" onclick="approveItem('${approval.id}', 'reject')">✗ Reject</button>
+                                    </div>
+                                </div>
+                                <p style="margin: 10px 0; color: #666;">${approval.description}</p>
+                                <details>
+                                    <summary style="cursor: pointer; color: #667eea; font-size: 14px;">📋 View AI-Generated Details</summary>
+                                    <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; overflow: auto; font-size: 12px;">${JSON.stringify(approval.draft_payload_json, null, 2)}</pre>
+                                </details>
+                                <small style="color: #999;">🕒 Created by AI: ${new Date(approval.created_at).toLocaleString()}</small>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                } else {
+                    container.innerHTML = `
+                        <div style="text-align: center; color: #666; padding: 60px 20px;">
+                            <div style="font-size: 48px; margin-bottom: 20px;">🎉</div>
+                            <h3>All caught up!</h3>
+                            <p>No pending AI suggestions to review.<br>
+                            Ask the AI assistant to analyze your performance and it will create suggestions for your approval.</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('approval-queue').innerHTML = '<div class="error">Error loading approvals: ' + error.message + '</div>';
+            }
+        }
+        
+        async function approveItem(approvalId, action) {
+            try {
+                const response = await fetch(`/tools/approve_item/${approvalId}?action=${action}`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Basic ' + btoa('admin:phase_a_2025') }
+                });
+                
+                if (response.ok) {
+                    loadApprovals(); // Reload the approval queue
+                    loadDashboard(); // Update dashboard stats
+                    alert(`✅ AI suggestion ${action}ed successfully!`);
+                } else {
+                    alert(`❌ Error ${action}ing item`);
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+        
+        async function loadLeads() {
+            document.getElementById('leads-table').innerHTML = '<p>📋 Advanced lead management interface coming soon...</p>';
+        }
+        
+        async function loadAnalytics() {
+            document.getElementById('analytics-data').innerHTML = '<p>📊 Advanced analytics dashboard coming soon...</p>';
+        }
+        
+        // Initialize dashboard on load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboard();
+        });
+    </script>
+</body>
+</html>
+

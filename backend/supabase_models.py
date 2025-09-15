@@ -63,6 +63,121 @@ class AdCostModel(BaseModel):
     adset_adgroup: Optional[str] = None
     cost: float
 
+# Phase A Models - Data Foundation
+
+class EventsDailyModel(BaseModel):
+    """Daily aggregated events model for ETL destination"""
+    id: Optional[str] = None
+    date: datetime
+    page_path: Optional[str] = None
+    page_type: Optional[str] = None
+    city: Optional[str] = None
+    channel: Optional[str] = None
+    source: Optional[str] = None
+    campaign: Optional[str] = None
+    flow: Optional[str] = None
+    # Metrics
+    pageviews: int = 0
+    quote_starts: int = 0
+    quote_submits: int = 0
+    consultation_starts: int = 0
+    bookings: int = 0
+    leads: int = 0
+    # Metadata
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+class LeadSourcesModel(BaseModel):
+    """First/Last touch attribution model"""
+    id: Optional[str] = None
+    lead_id: str
+    # First touch
+    first_utm_source: Optional[str] = None
+    first_utm_medium: Optional[str] = None
+    first_utm_campaign: Optional[str] = None
+    first_utm_term: Optional[str] = None
+    first_utm_content: Optional[str] = None
+    first_referrer: Optional[str] = None
+    first_landing_path: Optional[str] = None
+    first_touch_at: Optional[datetime] = None
+    # Last touch
+    last_utm_source: Optional[str] = None
+    last_utm_medium: Optional[str] = None
+    last_utm_campaign: Optional[str] = None
+    last_utm_term: Optional[str] = None
+    last_utm_content: Optional[str] = None
+    last_referrer: Optional[str] = None
+    last_landing_path: Optional[str] = None
+    last_touch_at: Optional[datetime] = None
+    # Derived
+    channel_derived: Optional[str] = None
+    city: Optional[str] = None
+    page_type: Optional[str] = None
+    flow: Optional[str] = None
+    # Metadata
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+class GSCPerfModel(BaseModel):
+    """Google Search Console performance model"""
+    id: Optional[str] = None
+    date: datetime
+    page: str
+    query: str
+    clicks: int = 0
+    impressions: int = 0
+    ctr: float = 0.0
+    position: float = 0.0
+    device: Optional[str] = None
+    country: str = "che"
+    created_at: Optional[datetime] = None
+
+class EmailDripModel(BaseModel):
+    """Email drip campaign model"""
+    id: Optional[str] = None
+    name: str
+    status: str = "draft"  # draft|active|paused|archived
+    audience_sql: str
+    schedule_json: Dict[str, Any]
+    email_templates_json: Dict[str, Any]
+    pause_conditions_json: Optional[Dict[str, Any]] = None
+    performance_json: Optional[Dict[str, Any]] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+class AuditLogModel(BaseModel):
+    """AI audit log model"""
+    id: Optional[str] = None
+    created_at: Optional[datetime] = None
+    actor_type: str  # user|ai
+    actor_id: Optional[str] = None
+    action: str
+    payload_json: Optional[Dict[str, Any]] = None
+    result_json: Optional[Dict[str, Any]] = None
+
+class ApprovalModel(BaseModel):
+    """AI approval workflow model"""
+    id: Optional[str] = None
+    created_at: Optional[datetime] = None
+    item_type: str  # ad_campaign|ad_set|ad|email_drip|content_test
+    title: str
+    description: Optional[str] = None
+    draft_payload_json: Dict[str, Any]
+    status: str = "pending"  # pending|approved|rejected|cancelled
+    created_by: Optional[str] = None
+    reviewer_id: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
+    review_notes: Optional[str] = None
+
+class UserModel(BaseModel):
+    """User model for RBAC"""
+    id: Optional[str] = None
+    created_at: Optional[datetime] = None
+    email: str
+    role: str = "viewer"  # admin|advisor|viewer
+    permissions_json: Optional[Dict[str, Any]] = None
+    last_login_at: Optional[datetime] = None
+
 # SQL for creating tables in Supabase
 CREATE_TABLES_SQL = """
 -- Leads table

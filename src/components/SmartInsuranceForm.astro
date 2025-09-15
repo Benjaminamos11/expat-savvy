@@ -412,11 +412,22 @@ const priorities = [
       // Show success message
       showSuccessMessage();
       
-      // Track lead creation
+      // Track quote submission (before lead creation)
+      if (typeof window.trackQuoteSubmission === 'function') {
+        window.trackQuoteSubmission({
+          formType: 'smart_insurance',
+          insuranceType: formData.get('insurance_type'),
+          provider: formData.get('provider'),
+          insuranceStatus: formData.get('insurance_status')
+        });
+      }
+      
+      // Track lead creation (main conversion)
       if (typeof window.trackLeadCreation === 'function') {
         window.trackLeadCreation({
           flow: 'quote',
-          leadId: 'form-' + Date.now()
+          leadId: 'form-' + Date.now(),
+          stage: 'new'
         });
       }
       
