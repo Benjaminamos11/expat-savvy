@@ -181,6 +181,19 @@
     // Store attribution data on page load
     storeAttribution();
     
+    // Override showConsultationModal function to add tracking
+    if (typeof window.showConsultationModal === 'function') {
+      const originalShowConsultation = window.showConsultationModal;
+      window.showConsultationModal = function() {
+        // Track consultation modal open
+        window.trackConsultationStart({
+          triggerSource: 'showConsultationModal',
+          modalType: 'consultation'
+        });
+        return originalShowConsultation.apply(this, arguments);
+      };
+    }
+    
     // Auto-track form interactions
     document.addEventListener('DOMContentLoaded', function() {
       // Track quote form start when user interacts with first field
@@ -202,14 +215,28 @@
         });
       }
       
-      // Track consultation modal opens
+      // Track consultation modal opens via DOM manipulation and data attributes
       document.addEventListener('click', function(e) {
-        const element = e.target.closest('[data-modal-trigger="consultation"]');
-        if (element) {
-          window.trackConsultationStart({
-            triggerSource: element.textContent.trim(),
-            modalType: 'consultation'
-          });
+        const button = e.target.closest('button');
+        if (button) {
+          // Check for showConsultationModal calls
+          const onclickAttr = button.getAttribute('onclick') || '';
+          if (onclickAttr.includes('showConsultationModal') || 
+              onclickAttr.includes('consultation-modal')) {
+            window.trackConsultationStart({
+              triggerSource: button.textContent.trim() || 'consultation_button',
+              modalType: 'consultation'
+            });
+          }
+          
+          // Check for data-modal-trigger
+          const modalTrigger = button.closest('[data-modal-trigger="consultation"]');
+          if (modalTrigger) {
+            window.trackConsultationStart({
+              triggerSource: modalTrigger.textContent.trim(),
+              modalType: 'consultation'
+            });
+          }
         }
       });
       
@@ -220,6 +247,24 @@
           const ctaText = element.textContent.trim();
           const ctaLocation = element.dataset.trackCta || 'unknown';
           window.trackCTAClick(ctaText, ctaLocation);
+        }
+      });
+      
+      // Track consultation modal step progression and form submission
+      document.addEventListener('modalStepChange', function(e) {
+        const stepNumber = e.detail.stepNumber;
+        
+        if (stepNumber === 2) {
+          // User reached form step - track as quote flow start
+          window.trackQuoteFlowStart({
+            formType: 'consultation_modal',
+            flowType: 'consultation'
+          });
+        } else if (stepNumber === 3) {
+          // User completed form and reached calendar - track as quote submitted
+          window.trackQuoteSubmission({
+            formType: 'consultation_modal'
+          });
         }
       });
     });

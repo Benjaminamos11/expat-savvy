@@ -389,6 +389,17 @@ const finalProviderName = props.providerName || providerName;
           formData.append('page_title', pageTitle);
           formData.append('date_submitted', new Date().toISOString());
           
+          // Track lead creation before submitting
+          if (typeof window.trackLeadCreation === 'function') {
+            window.trackLeadCreation({
+              flow: 'consultation',
+              leadId: 'consultation-' + Date.now(),
+              stage: 'new',
+              consultationType: userData.topic || 'general',
+              insuranceType: userData.insuranceType || 'health'
+            });
+          }
+
           // Send data to Formspree (don't await to avoid blocking UI)
           fetch('https://formspree.io/f/mrbewjlr', {
             method: 'POST',
