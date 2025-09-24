@@ -15,7 +15,7 @@ faqs:
   - question: "Do cheap health insurers provide worse coverage than expensive ones?"
     answer: "No. Basic insurance coverage is identical by law across all providers. Differences are in customer service, digital tools, and supplementary options. Cheap doesn't mean worse medical coverage."
   - question: "Which canton has the cheapest health insurance premiums in 2026?"
-    answer: "Rural cantons like Appenzell, Jura, and Nidwalden typically have the lowest premiums. Urban cantons like Basel-Stadt, Geneva, and Vaud have the highest. Premiums can vary 2x between cantons."
+    answer: "ZUG is the clear winner for 2026 - premiums DECREASE by 15% due to a unique cantonal subsidy. Otherwise, rural cantons like Appenzell, Jura, and Nidwalden have the lowest base costs. Urban cantons like Basel-Stadt, Geneva, and Vaud remain the most expensive."
 ---
 
 ## Key Facts — Cheapest Swiss Health Insurance 2026
@@ -23,6 +23,8 @@ faqs:
 <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
 #### 2026 Premium Overview
+• **ZUG SPECIAL**: Only canton with DECREASING premiums (-15%) in 2026!  
+• **National Average**: 4.4% increase (CHF 16.60/month more)  
 • **Premium Letters**: October 2025 → Compare new 2026 rates  
 • **Cancellation Deadline**: 30 November 2025 for 1 January 2026 switch  
 • **Typical Savings**: CHF 100-200/month switching from expensive to cheapest provider  

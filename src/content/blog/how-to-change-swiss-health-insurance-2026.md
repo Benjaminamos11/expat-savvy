@@ -44,7 +44,7 @@ Switching health insurance in Switzerland for 2026 requires careful timing and p
 • **Proof of delivery**: Keep receipt showing insurer received cancellation  
 
 #### Cost & Coverage Considerations
-• **Compare 2026 premiums**: Often 3-8% increases across providers  
+• **Compare 2026 premiums**: 4.4% average increase nationally (range: -15% in Zug to +7.1% in Ticino)  
 • **Model savings**: HMO/Telmed save 15-30% vs Standard model  
 • **Deductible impact**: CHF 300-2,500 range affects monthly premiums  
 • **Supplementary timing**: Apply early due to medical underwriting delays  
@@ -65,7 +65,7 @@ Don't make any decisions until you receive your official premium letter in early
 - Information about your special termination rights
 - Details about deductible and model options
 
-**Important:** Premium increases of 5% or more trigger special termination rights, giving you 30 days from the letter date to cancel without waiting for the November deadline.
+**Important:** Premium increases of any amount trigger special termination rights, giving you 30 days from the letter date to cancel without waiting for the November deadline. With 2026 increases averaging 4.4% nationally, most residents will have this option.
 
 ### Step 2: Research and Compare Your Options
 
