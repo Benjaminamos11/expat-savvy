@@ -32,7 +32,8 @@ class OffersModal {
     this.bindEvents();
     this.setupGlobalModalAccess();
     this.renderContent(); // Initial render when modal is created
-    console.log('OffersModal initialized.');
+    window.globalOffersModal = this; // Make instance globally accessible
+    console.log('OffersModal initialized and set as globalOffersModal.');
   }
 
   // Detect page intent (simplified for now)
