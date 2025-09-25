@@ -33,7 +33,7 @@ faqs:
     answer: "You can apply for insurance with a visa application confirmation. Most insurers accept pending residence permit applications. Coverage becomes effective when your permit is approved."
 ---
 
-<div class="bg-gradient-to-r from-red-50 to-red-100 rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-red-100">
+<div style="background-color: #f9f9f9; padding: 20px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 
 ## 🏆 Switzerland's Top 8 Health Insurance Guide for Expats (2026)
 
@@ -117,44 +117,40 @@ Your premium calculation shows multiple options optimized for expats. Robert can
 
 ## 🚨 Critical Deadline: 30 November 2025 for Expats
 
-<div class="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl p-8 mb-8 shadow-xl">
+<div style="background-color: #f9f9f9; padding: 20px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 
-### **Time-Sensitive Action Required:**
+**Important deadline for expats switching insurance:**
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
   <div>
-    <h4 class="text-xl font-semibold mb-4">❌ **What Happens If You Miss November 30:**</h4>
-    <ul class="space-y-2">
-      <li>• **Stuck with current insurer** for entire 2026 (no changes allowed)</li>
-      <li>• **Miss potential savings** of CHF 1,800-3,600 annually</li>
-      <li>• **No access to better expat-friendly providers** until November 2026</li>
-      <li>• **Premium increases take effect** with no escape option</li>
+    <h4 class="text-lg font-medium mb-3 text-gray-700">What happens if you miss November 30:</h4>
+    <ul class="space-y-1 text-sm text-gray-600">
+      <li>• Stuck with current insurer for entire 2026</li>
+      <li>• Miss potential savings of CHF 1,800-3,600 annually</li>
+      <li>• No access to better providers until November 2026</li>
     </ul>
   </div>
   
   <div>
-    <h4 class="text-xl font-semibold mb-4">✅ **Special Considerations for Expats:**</h4>
-    <div class="space-y-3">
-      <div class="bg-white/10 rounded-lg p-3">
-        <strong>New to Switzerland:</strong> You have 3 months from arrival (not bound by November 30)
+    <h4 class="text-lg font-medium mb-3 text-gray-700">Special considerations for expats:</h4>
+    <div class="space-y-2 text-sm">
+      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+        <strong class="text-gray-700">New to Switzerland:</strong> <span class="text-gray-600">3 months from arrival</span>
       </div>
-      <div class="bg-white/10 rounded-lg p-3">
-        <strong>Switching Providers:</strong> Must cancel BY November 30 (registered mail required)
-      </div>
-      <div class="bg-white/10 rounded-lg p-3">
-        <strong>No Coverage Gaps:</strong> Continuous coverage required by law
+      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+        <strong class="text-gray-700">Switching:</strong> <span class="text-gray-600">Cancel BY November 30</span>
       </div>
     </div>
   </div>
 </div>
 
 <div class="text-center">
-  <button onclick="window.openOffersModal && window.openOffersModal('urgent-deadline')" 
-          class="inline-flex items-center px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg rounded-xl transition-colors duration-300 shadow-lg animate-pulse">
-    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z" />
+  <button onclick="window.openOffersModal && window.openOffersModal('deadline-consultation')" 
+          class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
-    Book Urgent Deadline Consultation
+    Schedule Deadline Consultation
   </button>
 </div>
 
