@@ -1870,13 +1870,20 @@ class OffersModal {
 
 // Instantiate the modal when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, creating OffersModal instance.');
-  const modalInstance = new OffersModal();
-  
-  // Verify initialization
-  if (window.globalOffersModal === modalInstance) {
-    console.log('✅ OffersModal successfully initialized and globally accessible');
-  } else {
-    console.error('❌ OffersModal initialization failed');
+  console.log('🚀 offers-modal.js loaded - DOM ready, creating OffersModal instance.');
+  try {
+    const modalInstance = new OffersModal();
+    
+    // Verify initialization
+    if (window.globalOffersModal === modalInstance) {
+      console.log('✅ OffersModal successfully initialized and globally accessible');
+    } else {
+      console.error('❌ OffersModal initialization failed');
+    }
+  } catch (error) {
+    console.error('❌ Error creating OffersModal instance:', error);
   }
 });
+
+// Add immediate script load confirmation
+console.log('🎯 offers-modal.js script loaded successfully');
