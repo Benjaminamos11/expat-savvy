@@ -1,7 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import OffersModal from '../../../components/OffersModal.astro';
-import PremiumSamples from '../../../components/PremiumSamples.astro';
 
 const city = "Geneva";
 const citySlug = "geneva";
@@ -13,10 +12,11 @@ const today = new Date().toDateString();
 const seed = today.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
 const socialProofNumber = 5 + (seed % 14);
 
+// Real 2026 Geneva premium data from Swiss Federal Office
 const premiumTable = [
-  { profile: "Adult 25–35", model: "Telmed", deductible: "2,500", range: "280–370" },
-  { profile: "Adult 35–45", model: "HMO", deductible: "2,500", range: "310–390" },
-  { profile: "Family (2 adults + child)", model: "HMO mix", deductible: "mixed", range: "720–970" }
+  { profile: "🏆 Best Value", model: "Assura PharMed", deductible: "2,500", range: "CHF 438" },
+  { profile: "⭐ Great Option", model: "CSS Hausarzt Profit", deductible: "2,500", range: "CHF 442" },
+  { profile: "📊 Average", model: "All providers", deductible: "2,500", range: "CHF 465" }
 ];
 
 const faqs = [
@@ -204,13 +204,6 @@ const faqs = [
     </div>
   </div>
 
-  <!-- Real Premium Examples -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <PremiumSamples location="geneva" />
-    </div>
-  </div>
-
   <!-- 2026 Premium Overview -->
   <div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -233,7 +226,7 @@ const faqs = [
                   <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Profile</th>
                   <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Model</th>
                   <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Deductible</th>
-                  <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Typical monthly range (CHF)</th>
+                  <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Monthly Premium</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
@@ -250,9 +243,35 @@ const faqs = [
           </div>
           
           <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
-            <p class="text-sm text-gray-600 italic">
-              <strong>Note:</strong> These are indicative ranges. We'll send <strong>3 tailored offers</strong> for your postcode within 24h.
-            </p>
+            <h4 class="font-semibold text-gray-800 mb-4">More Geneva Options (CHF 2,500 deductible):</h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+              <div class="text-center p-2 bg-white rounded shadow">
+                <p class="font-medium text-gray-800">Sanitas</p>
+                <p class="text-lg font-bold text-red-600">CHF 443</p>
+                <p class="text-xs text-gray-600">TelMed Compact</p>
+              </div>
+              <div class="text-center p-2 bg-white rounded shadow">
+                <p class="font-medium text-gray-800">Helsana</p>
+                <p class="text-lg font-bold text-red-600">CHF 446</p>
+                <p class="text-xs text-gray-600">Hausarzt R1</p>
+              </div>
+              <div class="text-center p-2 bg-white rounded shadow">
+                <p class="font-medium text-gray-800">Sympany</p>
+                <p class="text-lg font-bold text-red-600">CHF 448</p>
+                <p class="text-xs text-gray-600">casamed</p>
+              </div>
+              <div class="text-center p-2 bg-white rounded shadow">
+                <p class="font-medium text-gray-800">Concordia</p>
+                <p class="text-lg font-bold text-red-600">CHF 471</p>
+                <p class="text-xs text-gray-600">HMO</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p class="text-xs text-gray-500 text-center">
+                📊 <strong>Source:</strong> Swiss Federal Office of Public Health - Official 2026 Premium Calculator<br>
+                <strong>Profile:</strong> Adult (born 1986), CHF 2,500 deductible, no accident coverage | Updated: Sept 2025
+              </p>
+            </div>
           </div>
         </div>
 
