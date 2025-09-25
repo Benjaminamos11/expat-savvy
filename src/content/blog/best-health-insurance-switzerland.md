@@ -27,7 +27,7 @@ This comprehensive guide provides verified information about Switzerland's top h
 
 <div class="text-center my-8">
   <button onclick="window.openOffersModal && window.openOffersModal('comprehensive-guide')"
-          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+          class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
@@ -235,39 +235,29 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Entry-age premium system (premiums don't increase with age after enrollment)
 - Strong international emergency coverage and coordination
 
-#### 2026 Basic Insurance Premiums (Official Data)
-<div class="overflow-x-auto mt-4">
-  <table class="w-full border-collapse border border-gray-200">
-    <thead>
-      <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 418</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 338 (MULTICHOICE)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 580</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 463 (SANTE)</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 281</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 213 (MEDPHARM)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 553</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 428 (MULTICHOICE)</td>
-      </tr>
-    </tbody>
-  </table>
+#### 2026 Premium Examples (39yr, CHF 2,500 deductible)
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 mb-6">
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zurich</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 338</p>
+    <p class="text-xs text-gray-600">MULTICHOICE model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Geneva</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 463</p>
+    <p class="text-xs text-gray-600">SANTE model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zug</h4>
+    <p class="text-2xl font-bold text-green-600">CHF 213</p>
+    <p class="text-xs text-gray-600">MEDPHARM model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Basel</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 428</p>
+    <p class="text-xs text-gray-600">MULTICHOICE model</p>
+  </div>
 </div>
 
 #### Supplementary Insurance for Expats
@@ -286,7 +276,10 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 
 <div class="text-center mt-6">
   <button onclick="window.openOffersModal && window.openOffersModal('swica-consultation')"
-          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+          class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
     Get Expert Swica Guidance
   </button>
 </div>
@@ -303,39 +296,29 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Excellent claims processing and customer service
 - Strong preventive care programs and health coaching
 
-#### 2026 Basic Insurance Premiums (Official Data)
-<div class="overflow-x-auto mt-4">
-  <table class="w-full border-collapse border border-gray-200">
-    <thead>
-      <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 435</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 335 (Hausarzt R1)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 547</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 446 (Hausarzt R1)</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 275</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 215 (Hausarzt R1)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 512</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 416 (Hausarzt R1)</td>
-      </tr>
-    </tbody>
-  </table>
+#### 2026 Premium Examples (39yr, CHF 2,500 deductible)
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 mb-6">
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zurich</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 335</p>
+    <p class="text-xs text-gray-600">Hausarzt R1 model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Geneva</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 446</p>
+    <p class="text-xs text-gray-600">Hausarzt R1 model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zug</h4>
+    <p class="text-2xl font-bold text-green-600">CHF 215</p>
+    <p class="text-xs text-gray-600">Hausarzt R1 model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Basel</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 416</p>
+    <p class="text-xs text-gray-600">Hausarzt R1 model</p>
+  </div>
 </div>
 
 #### Supplementary Insurance for Expats
@@ -354,7 +337,10 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 
 <div class="text-center mt-6">
   <button onclick="window.openOffersModal && window.openOffersModal('helsana-consultation')"
-          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+          class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
     Get Expert Helsana Guidance
   </button>
 </div>
@@ -371,39 +357,29 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Established reputation and financial stability
 - Comprehensive range of supplementary insurance options
 
-#### 2026 Basic Insurance Premiums (Official Data)
-<div class="overflow-x-auto mt-4">
-  <table class="w-full border-collapse border border-gray-200">
-    <thead>
-      <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 425</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 326 (Hausarzt Profit)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 567</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 442 (Hausarzt Profit)</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 274</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 243 (Hausarzt Profit)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 512</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 442 (Hausarzt Profit)</td>
-      </tr>
-    </tbody>
-  </table>
+#### 2026 Premium Examples (39yr, CHF 2,500 deductible)
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 mb-6">
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zurich</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 326</p>
+    <p class="text-xs text-gray-600">Hausarzt Profit model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Geneva</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 442</p>
+    <p class="text-xs text-gray-600">Hausarzt Profit model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zug</h4>
+    <p class="text-2xl font-bold text-green-600">CHF 212</p>
+    <p class="text-xs text-gray-600">Gesundheitspraxis model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Basel</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 411</p>
+    <p class="text-xs text-gray-600">Gesundheitspraxis model</p>
+  </div>
 </div>
 
 #### Supplementary Insurance for Expats
@@ -422,7 +398,10 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 
 <div class="text-center mt-6">
   <button onclick="window.openOffersModal && window.openOffersModal('css-consultation')"
-          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+          class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
     Get Expert CSS Guidance
   </button>
 </div>
@@ -439,39 +418,29 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Comprehensive supplementary insurance portfolio
 - Excellent customer service reputation
 
-#### 2026 Basic Insurance Premiums (Official Data)
-<div class="overflow-x-auto mt-4">
-  <table class="w-full border-collapse border border-gray-200">
-    <thead>
-      <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 404</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 330 (TelMed Compact)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 567</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 443 (TelMed Compact)</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 254</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 217 (TelMed Compact)</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 531</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 433 (TelMed Compact)</td>
-      </tr>
-    </tbody>
-  </table>
+#### 2026 Premium Examples (39yr, CHF 2,500 deductible)
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 mb-6">
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zurich</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 330</p>
+    <p class="text-xs text-gray-600">TelMed Compact model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Geneva</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 443</p>
+    <p class="text-xs text-gray-600">TelMed Compact model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Zug</h4>
+    <p class="text-2xl font-bold text-green-600">CHF 205</p>
+    <p class="text-xs text-gray-600">Hausarzt 1 model</p>
+  </div>
+  <div class="bg-gray-50 rounded-lg p-4 text-center">
+    <h4 class="font-semibold text-gray-900 mb-1">Basel</h4>
+    <p class="text-2xl font-bold text-red-600">CHF 433</p>
+    <p class="text-xs text-gray-600">TelMed Compact model</p>
+  </div>
 </div>
 
 #### Supplementary Insurance for Expats
@@ -490,7 +459,10 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 
 <div class="text-center mt-6">
   <button onclick="window.openOffersModal && window.openOffersModal('sanitas-consultation')"
-          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+          class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
     Get Expert Sanitas Guidance
   </button>
 </div>
@@ -576,7 +548,7 @@ Now that you understand your options, use our AI calculator to compare real 2026
 - Estimated annual savings potential
 
 <div class="text-center mt-6">
-  <a href="/ai-chat" class="inline-flex items-center px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+  <a href="/ai-chat" class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
     </svg>
@@ -929,7 +901,7 @@ All top 4 providers (Swica, Helsana, CSS, Sanitas) offer comprehensive English s
 
 <div class="text-center mt-6">
   <button onclick="window.openOffersModal && window.openOffersModal('deadline-consultation')" 
-          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+          class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
@@ -949,7 +921,7 @@ The choice of health insurance provider will impact your finances and healthcare
 
 <div class="text-center mt-8">
   <button onclick="window.openOffersModal && window.openOffersModal('final-consultation')"
-          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-[4px_4px_8px_#d9d9d9] hover:shadow-[2px_2px_4px_#d9d9d9] transition-all duration-200">
+          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
     </svg>
