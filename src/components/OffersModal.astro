@@ -59,35 +59,40 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
   </div>
 </div>
 
-<script is:inline>
-// Create openOffersModal function immediately - not waiting for DOM
-console.log('🎯 Creating openOffersModal function immediately');
+<script>
+// EMERGENCY FIX: Create openOffersModal function immediately
+(function() {
+  console.log('🚨 EMERGENCY: Creating openOffersModal function immediately');
 
-window.openOffersModal = function() {
-  console.log('🚀 openOffersModal called');
-  
-  if (window.globalOffersModal) {
-    console.log('✅ Using globalOffersModal.openModal()');
-    window.globalOffersModal.openModal();
-  } else {
-    console.log('⚠️ Using fallback modal opening');
+  window.openOffersModal = function() {
+    console.log('🚀 EMERGENCY: openOffersModal called');
+    
     const modal = document.getElementById('offers-modal');
     if (modal) {
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       document.body.classList.add('modal-open');
-      console.log('✅ Modal opened via fallback');
+      console.log('✅ EMERGENCY: Modal opened via direct method');
     } else {
-      console.error('❌ Modal element not found');
+      console.error('❌ EMERGENCY: Modal element not found');
     }
-  }
-};
+  };
 
-// Legacy compatibility
-window.showConsultationModal = window.openOffersModal;
-window.openConsultationModal = window.openOffersModal;
+  // Legacy compatibility
+  window.showConsultationModal = window.openOffersModal;
+  window.openConsultationModal = window.openOffersModal;
 
-console.log('✅ openOffersModal function created and available');
+  console.log('✅ EMERGENCY: openOffersModal function created and available');
+  
+  // Also try to override any existing debugging functions
+  setTimeout(function() {
+    if (typeof window.openOffersModal !== 'function') {
+      console.error('❌ EMERGENCY: Function was overridden!');
+    } else {
+      console.log('✅ EMERGENCY: Function still exists after 1 second');
+    }
+  }, 1000);
+})();
 </script>
 
 <style>
