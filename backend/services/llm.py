@@ -174,7 +174,7 @@ class LLMService:
             messages = [{"role": "system", "content": system_prompt}] + messages
         
         payload = {
-            "model": "gpt-4-turbo-preview",
+            "model": "gpt-5",
             "messages": messages,
             "max_tokens": self.max_tokens
         }
