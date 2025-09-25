@@ -1,0 +1,97 @@
+---
+import premiumData from '../data/premium-samples-2026.json';
+
+export interface Props {
+  location: 'horgen_zurich' | 'zug' | 'geneva' | 'basel';
+  title?: string;
+  showComparison?: boolean;
+  compact?: boolean;
+}
+
+const { location, title, showComparison = true, compact = false } = Astro.props;
+
+const locationData = premiumData.locations[location];
+const quickData = premiumData.quickComparisons;
+
+if (!locationData) {
+  throw new Error(`Location ${location} not found in premium data`);
+}
+
+// Get best options sorted by price
+const companyEntries = Object.entries(locationData.companies);
+const sortedOptions = companyEntries
+  .map(([key, company]) => {
+    const bestModelKey = company.bestModel;
+    const models = Object.entries(company).filter(([key]) => 
+      key !== 'name' && key !== 'bestModel' && typeof company[key] === 'number'
+    );
+    const bestPrice = Math.min(...models.map(([_, price]) => price as number));
+    return {
+      company: company.name,
+      model: bestModelKey,
+      price: bestPrice,
+      key
+    };
+  })
+  .sort((a, b) => a.price - b.price);
+
+const cheapest = sortedOptions[0];
+const average = quickData.averageByLocation[location];
+---
+
+<div class="bg-white p-6 rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-6">
+  <h3 class="text-xl font-bold text-gray-900 mb-4">
+    {title || `💰 2026 Premium Examples for ${locationData.name}`}
+  </h3>
+  
+  <div class="text-sm text-gray-600 mb-4">
+    Based on: Adult (born 1986), CHF 2,500 deductible, no accident coverage
+  </div>
+  
+  <div class={`grid gap-4 ${compact ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
+    <!-- Best Value -->
+    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+      <h4 class="font-semibold text-green-800 mb-2">🏆 Best Value</h4>
+      <p class="text-lg font-bold text-green-700">{cheapest.company}</p>
+      <p class="text-2xl font-bold text-green-700">CHF {cheapest.price}/month</p>
+      <p class="text-sm text-green-600">{cheapest.model}</p>
+    </div>
+    
+    <!-- Average -->
+    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+      <h4 class="font-semibold text-blue-800 mb-2">📊 Average Premium</h4>
+      <p class="text-2xl font-bold text-blue-700">CHF {average}/month</p>
+      <p class="text-sm text-blue-600">Across all models & providers</p>
+    </div>
+    
+    <!-- Special Note for Zug -->
+    {location === 'zug' && !compact && (
+      <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+        <h4 class="font-semibold text-purple-800 mb-2">⭐ Zug Special</h4>
+        <p class="text-lg font-bold text-purple-700">15% Discount</p>
+        <p class="text-sm text-purple-600">Canton covers 99% hospital costs</p>
+      </div>
+    )}
+  </div>
+
+  {!compact && showComparison && (
+    <div class="mt-6">
+      <h4 class="font-semibold text-gray-800 mb-3">More Options:</h4>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+        {sortedOptions.slice(1, 5).map(option => (
+          <div class="text-center p-2 bg-gray-50 rounded">
+            <p class="font-medium">{option.company}</p>
+            <p class="text-lg font-bold text-red-600">CHF {option.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="mt-4 text-xs text-gray-500">
+    {location === 'zug' && (
+      <p>💡 <strong>Zug Special:</strong> 15% cantonal discount - canton covers 99% of hospital costs</p>
+    )}
+    <p>📊 Source: Swiss Federal Office of Public Health - Official 2026 Premium Calculator | Updated: Sept 2025</p>
+  </div>
+</div>
