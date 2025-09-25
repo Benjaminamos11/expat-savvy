@@ -1,1071 +1,823 @@
 ---
-title: "Best Health Insurance for Expats in Switzerland 2026: Top 8 Guide"
-description: "Top 8 health insurance companies for expats in Switzerland 2026. Compare real premiums with AI calculator. Book free consultation with Robert."
+title: "Best Health Insurance for Expats in Switzerland 2026: Complete Guide"
+description: "Expert guide to Switzerland's top health insurance companies for expats. Compare real premiums, understand your options, and make the right choice for 2026."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
-lastUpdated: 2025-09-24
-tags: ["swiss health insurance", "best health insurance", "switzerland", "Swica", "Sanitas", "CSS", "Helsana", "Concordia", "Atupri", "Sympany", "Groupe Mutuel", "health insurance guide", "2026 change season", "expat guide", "expat insurance", "2026 premiums", "compare health insurance"]
+lastUpdated: 2025-09-25
+tags: ["swiss health insurance", "expat insurance", "switzerland", "2026 premiums", "health insurance guide", "expat guide"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746902865/a-detailed-fineline-sketch-in-the-style-_i7enPQHORDK62cqvZq7Ccw_vIZ_Tkz8QoeTZ0MdVmkK5w_rvdw1z.webp"
 faqs:
-  - question: "What is the cheapest Swiss health insurance model for expats?"
-    answer: "Telmed models save 20-30% compared to Standard. HMO and Family Doctor models save 15-25%. Choose based on your comfort with restricted access to specialists."
+  - question: "Which health insurance companies offer the best English support for expats?"
+    answer: "Swica, Helsana, CSS, and Sanitas provide excellent English-speaking customer service and multilingual documentation specifically designed for international residents."
+  - question: "Can I switch my Swiss health insurance provider every year?"
+    answer: "Yes. You can cancel your current policy by November 30th for coverage starting January 1st. Basic insurance acceptance is guaranteed regardless of health status."
+  - question: "What's the difference between Standard, HMO, and Telmed insurance models?"
+    answer: "Standard offers free doctor choice (highest cost). HMO requires using specific clinics (15-25% savings). Telmed requires phone consultation first (20-30% savings)."
   - question: "How do I choose the right deductible as an expat?"
-    answer: "If you rarely use healthcare, choose CHF 2,500 deductible for lowest premiums. If you expect regular medical costs, choose CHF 300-500 deductible."
-  - question: "Can I switch my health insurance every year in Switzerland?"
-    answer: "Yes. Cancel by 30 November 2025 for 1 January 2026 coverage. Basic insurance acceptance is guaranteed regardless of health status."
-  - question: "Which Swiss insurers offer the best English support for expats?"
-    answer: "Swica, CSS, Helsana, and Sanitas all provide excellent English-speaking customer service and English documentation for expatriates."
-  - question: "Is dental insurance included in Swiss basic coverage?"
-    answer: "No. Dental care for adults requires separate supplementary insurance. Basic insurance only covers dental accidents or severe diseases."
-  - question: "What is the 2026 change season deadline in Switzerland?"
-    answer: "Cancel your current policy by 30 November 2025 for new coverage starting 1 January 2026. Premium letters arrive in October."
-  - question: "Can I keep my current doctor if I switch insurance providers?"
-    answer: "Yes with Standard model. HMO, Family Doctor, and Telmed models may require using approved providers within their networks."
-  - question: "What are the best health insurance companies for expats in Switzerland?"
-    answer: "Top 8: Swica (service excellence), Helsana (digital tools), CSS (largest network), Sanitas (innovation), Concordia (family-focused), Sympany (straightforward), Atupri (digital native), Groupe Mutuel (flexibility). All provide identical basic coverage by law."
-  - question: "Which insurer has the best English customer service for expats?"
-    answer: "Swica, Helsana, CSS, and Sanitas all offer excellent English-speaking customer service. Swica and Helsana are particularly praised by expats for their multilingual support and expat-friendly policies."
-  - question: "Can I keep my health insurance if I leave Switzerland temporarily?"
-    answer: "Yes, but rules vary by insurer and duration. Most allow 3-6 months abroad with continued coverage. Robert can explain specific policies for your situation and travel plans."
-  - question: "What happens to my supplementary insurance if I move cantons in Switzerland?"
-    answer: "Basic insurance follows you automatically. Supplementary insurance typically continues, but premium regions may change costs. Some policies have waiting periods for certain benefits in new cantons."
-  - question: "How do I handle health insurance during my Swiss visa application process?"
-    answer: "You can apply for insurance with a visa application confirmation. Most insurers accept pending residence permit applications. Coverage becomes effective when your permit is approved."
+    answer: "If you rarely need healthcare, choose CHF 2,500 for lowest premiums. If you expect regular medical expenses, choose CHF 300-500 for better cost coverage."
+  - question: "Is dental care included in Swiss basic health insurance?"
+    answer: "No. Basic insurance only covers dental accidents or serious diseases. Adults need separate supplementary insurance for routine dental care."
+  - question: "What happens if I miss the November 30th deadline?"
+    answer: "You'll be stuck with your current insurer for the entire next year with no ability to switch, potentially missing significant savings opportunities."
 ---
 
-<div style="background-color: #f9f9f9; padding: 20px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
+# Best Health Insurance for Expats in Switzerland: Your Complete 2026 Guide
 
-## 🏆 Switzerland's Top 8 Health Insurance Guide for Expats (2026)
+Choosing the right health insurance in Switzerland is one of the most important decisions you'll make as an expat. With identical basic coverage across all providers but varying premiums, service quality, and expat support, the right choice can save you thousands of francs annually.
 
-**Why This Guide is Different:**
-✅ **Written specifically for expats** by insurance specialists who understand international resident needs  
-✅ **2026 premium data** with real calculations from all major providers  
-✅ **Independent analysis** - no insurance company partnerships or biased recommendations  
-✅ **English-speaking expert support** throughout your insurance journey  
-✅ **10+ years helping expats** with over 1,000 successful insurance setups and switches
-
-**This comprehensive guide provides everything you need to make the right choice before the November 30, 2025 deadline.**
-
-</div>
-
-💡 **Confused by Swiss insurance as an expat?** Robert has helped 1,000+ international residents navigate the system. Book a free 30-minute consultation to get personalized recommendations for your situation.
+This comprehensive guide provides verified information about Switzerland's top health insurance companies, real premium data, and expert insights to help you make an informed decision before the November 30th deadline.
 
 <div class="text-center my-8">
-<button onclick="window.openOffersModal && window.openOffersModal('best-insurance-guide')" 
-        class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg rounded-xl transition-colors duration-300 shadow-lg">
-  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-  Book Free Expat Insurance Consultation
-</button>
-</div>
-
----
-
-## 🧮 AI Premium Calculator for Expats in Switzerland
-
-<div class="bg-gray-50 rounded-xl p-6 mb-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
-
-**Calculate your exact 2026 premiums in 30 seconds:**
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-  <div class="space-y-3">
-    <div class="flex items-center">
-      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
-      <span>Compare all 8 providers with real premium data</span>
-    </div>
-    <div class="flex items-center">
-      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
-      <span>Expat-specific scenarios and recommendations</span>
-    </div>
-  </div>
-  <div class="space-y-3">
-    <div class="flex items-center">
-      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
-      <span>Factor in canton, age, and lifestyle</span>
-    </div>
-    <div class="flex items-center">
-      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
-      <span>Example: Swica CHF 396, CSS CHF 374</span>
-    </div>
-  </div>
-</div>
-
-<div class="text-center">
-  <a href="/ai-chat" class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-    </svg>
-    Launch AI Calculator
-  </a>
-</div>
-
-
-</div>
-
-**📊 Need Help Understanding Your Results?**  
-Your premium calculation shows multiple options optimized for expats. Robert can explain which plan best fits your international lifestyle and help you apply.
-
-<div class="text-center mb-8">
-<button onclick="window.openOffersModal && window.openOffersModal('premium-analysis')" 
-        class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-  Book Free Premium Analysis with Robert
-</button>
-</div>
-
----
-
-## 🚨 Critical Deadline: 30 November 2025 for Expats
-
-<div style="background-color: #f9f9f9; padding: 20px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
-
-**Important deadline for expats switching insurance:**
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-  <div>
-    <h4 class="text-lg font-medium mb-3 text-gray-700">What happens if you miss November 30:</h4>
-    <ul class="space-y-1 text-sm text-gray-600">
-      <li>• Stuck with current insurer for entire 2026</li>
-      <li>• Miss potential savings of CHF 1,800-3,600 annually</li>
-      <li>• No access to better providers until November 2026</li>
-    </ul>
-  </div>
-  
-  <div>
-    <h4 class="text-lg font-medium mb-3 text-gray-700">Special considerations for expats:</h4>
-    <div class="space-y-2 text-sm">
-      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
-        <strong class="text-gray-700">New to Switzerland:</strong> <span class="text-gray-600">3 months from arrival</span>
-      </div>
-      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
-        <strong class="text-gray-700">Switching:</strong> <span class="text-gray-600">Cancel BY November 30</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="text-center">
-  <button onclick="window.openOffersModal && window.openOffersModal('deadline-consultation')" 
-          class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <button onclick="window.openOffersModal && window.openOffersModal('comprehensive-guide')"
+          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
     </svg>
-    Schedule Deadline Consultation
+    Get Expert Guidance for Your Situation
   </button>
 </div>
 
-</div>
+---
 
 ## Health Insurance Rules for Expats in Switzerland
 
-As an expat in Switzerland, health insurance is **mandatory**. Here's what you need to know:
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-✅ **3-month deadline** from arrival to get coverage  
-✅ **Coverage is retroactive** to your arrival date  
-✅ **All insurers must accept you** for basic insurance  
-✅ **Premiums vary significantly** by canton, model, and deductible  
+Understanding Swiss health insurance requirements is essential for every expat. Here are the fundamental rules you must know:
 
-This guide explains how to find the best health insurance in Switzerland for expats in 2026, including deadlines, premiums, and top recommendations.
+### Mandatory Coverage Requirements
 
-## 🏆 Top 8 Health Insurance Companies for Expats (2026)
-
-<div class="mb-8">
-  <h3 class="text-2xl font-bold text-center mb-6">Visual Comparison: Best for Expats</h3>
-  
-  <div class="overflow-x-auto">
-    <table class="w-full bg-white rounded-xl shadow-lg overflow-hidden">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Company</th>
-          <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">English Support</th>
-          <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Expat Rating</th>
-          <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900">Best Model</th>
-          <th class="px-6 py-4 text-right text-sm font-semibold text-gray-900">Monthly Cost*</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <span class="text-2xl mr-2">🥇</span>
-              <strong class="text-lg">Swica</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-green-600">9.2/10</td>
-          <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 396</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <span class="text-2xl mr-2">🥈</span>
-              <strong class="text-lg">Helsana</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-green-600">9.0/10</td>
-          <td class="px-6 py-4 text-center">Standard</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 377</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <span class="text-2xl mr-2">🥉</span>
-              <strong class="text-lg">CSS</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-green-600">8.8/10</td>
-          <td class="px-6 py-4 text-center">Telmed</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 374</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <strong class="text-lg">Sanitas</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-blue-600">8.5/10</td>
-          <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 377</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <strong class="text-lg">Concordia</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-blue-600">8.2/10</td>
-          <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 393</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <strong class="text-lg">Sympany</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-blue-600">7.8/10</td>
-          <td class="px-6 py-4 text-center">Standard</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 372</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <strong class="text-lg">Atupri</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-blue-600">7.5/10</td>
-          <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 370</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="px-6 py-4">
-            <div class="flex items-center">
-              <strong class="text-lg">Groupe Mutuel</strong>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">⭐⭐⭐</td>
-          <td class="px-6 py-4 text-center font-semibold text-blue-600">7.3/10</td>
-          <td class="px-6 py-4 text-center">Standard</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 396</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+  <div class="bg-gray-50 rounded-lg p-6">
+    <h4 class="text-lg font-semibold text-gray-900 mb-3">Timeline Requirements</h4>
+    <ul class="space-y-2 text-gray-700">
+      <li><span class="w-2 h-2 bg-red-600 rounded-full inline-block mr-2"></span>3 months from Swiss arrival to obtain insurance</li>
+      <li><span class="w-2 h-2 bg-red-600 rounded-full inline-block mr-2"></span>Retroactive coverage applies from arrival date</li>
+      <li><span class="w-2 h-2 bg-red-600 rounded-full inline-block mr-2"></span>Late registration incurs penalties and back-payments</li>
+    </ul>
   </div>
   
-  <p class="text-sm text-gray-600 text-center mt-3">*Based on 30-year-old, Zurich, optimal model</p>
+  <div class="bg-gray-50 rounded-lg p-6">
+    <h4 class="text-lg font-semibold text-gray-900 mb-3">Coverage Requirements</h4>
+    <ul class="space-y-2 text-gray-700">
+      <li><span class="w-2 h-2 bg-red-600 rounded-full inline-block mr-2"></span>Basic insurance mandatory for all residents</li>
+      <li><span class="w-2 h-2 bg-red-600 rounded-full inline-block mr-2"></span>Acceptance guaranteed regardless of health</li>
+      <li><span class="w-2 h-2 bg-red-600 rounded-full inline-block mr-2"></span>Coverage identical across all providers</li>
+    </ul>
+  </div>
+</div>
+
+### Important for Expats
+
+**Work Permits & Insurance:** Your employer cannot provide health insurance. You must arrange your own basic coverage independently.
+
+**Family Coverage:** Each family member needs individual insurance. Children receive significant premium discounts.
+
+**Cross-Border Workers:** Special rules apply if you work in Switzerland but live in neighboring countries.
+
 </div>
 
 ---
 
-## Swiss Health Insurance Basics for Expats
+## Swiss Health Insurance Basics
 
-### What You Must Know
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-**Basic insurance (LAMal/KVG) is mandatory for everyone living in Switzerland.**
+### Understanding Your Costs
 
-- Coverage is **identical across all providers** by law
-- Premiums **vary significantly** between insurers
-- You have **3 months** from arrival to register
-- Coverage starts **retroactively** from your arrival date
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+  <div class="text-center">
+    <div class="bg-gray-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+      <span class="text-2xl font-bold text-red-600">1</span>
+    </div>
+    <h4 class="text-lg font-semibold text-gray-900 mb-2">Monthly Premium</h4>
+    <p class="text-gray-600">Fixed monthly cost regardless of healthcare usage. Varies by provider, age, and location.</p>
+  </div>
+  
+  <div class="text-center">
+    <div class="bg-gray-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+      <span class="text-2xl font-bold text-red-600">2</span>
+    </div>
+    <h4 class="text-lg font-semibold text-gray-900 mb-2">Annual Deductible</h4>
+    <p class="text-gray-600">Amount you pay before insurance kicks in. Options: CHF 300, 500, 1000, 1500, 2000, 2500.</p>
+  </div>
+  
+  <div class="text-center">
+    <div class="bg-gray-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+      <span class="text-2xl font-bold text-red-600">3</span>
+    </div>
+    <h4 class="text-lg font-semibold text-gray-900 mb-2">Co-payment</h4>
+    <p class="text-gray-600">10% of costs above deductible, maximum CHF 700 annually (CHF 350 for children).</p>
+  </div>
+</div>
 
-### Key Terms Explained Simply
+### What's Covered (Identical Across All Providers)
 
-**Premium:** Monthly payment to your insurer (CHF 250-350/month typically)
+<div class="bg-gray-50 rounded-lg p-6 mt-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-3">Included in Basic Insurance</h4>
+      <ul class="space-y-1 text-gray-700">
+        <li>• Doctor visits and consultations</li>
+        <li>• Hospital treatment and emergency care</li>
+        <li>• Prescription medications (with cost-sharing)</li>
+        <li>• Laboratory tests and diagnostic procedures</li>
+        <li>• Maternity care and childbirth</li>
+        <li>• Basic mental health treatment</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold text-gray-900 mb-3">Not Included (Requires Supplementary)</h4>
+      <ul class="space-y-1 text-gray-700">
+        <li>• Dental care (except accidents)</li>
+        <li>• Private hospital rooms</li>
+        <li>• Alternative medicine (most types)</li>
+        <li>• Cosmetic treatments</li>
+        <li>• Extended travel coverage</li>
+        <li>• Premium eyeglasses</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-**Deductible (Franchise):** Amount you pay before insurance kicks in (CHF 300-2,500 annually)
-- Higher deductible = Lower monthly premium
-- Lower deductible = Higher monthly premium
-
-**Co-payment:** 10% of costs after deductible (max CHF 700/year)
-
-**Hospital contribution:** CHF 15/day for hospital stays
-
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-<strong>Quick Answer:</strong> Swiss health insurance is mandatory with a 3-month deadline. Coverage is identical across providers, but premiums vary by canton, model, and deductible. Most expats compare Swica, CSS, and Helsana for service quality and competitive rates.
 </div>
 
 ---
 
-## Choose Your Insurance Model: Standard vs HMO vs Telmed
+## Choose Your Insurance Model & Deductible
 
-**Your model choice can save you CHF 100-150 per month.**
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-### Model Comparison Table
-
-| Model | Access Method | Premium Savings vs Standard | Best For |
-|-------|---------------|----------------------------|-----------|
-| **Standard** | Free choice of doctors | 0% (baseline) | Maximum flexibility |
-| **HMO** | Network group practice first | 15-25% lower | Coordinated care |
-| **Family Doctor** | Designated GP first | 10-20% lower | Personal relationship |
-| **Telmed** | Phone consultation first | 20-30% lower | Maximum savings |
-
-### Real Premium Examples (2026)
-
-**Zurich Canton (Adult, CHF 2,500 deductible):**
-- Standard Model: CHF 380-420/month
-- HMO Model: CHF 290-340/month (**Save CHF 90-130/month**)
-- Telmed Model: CHF 270-320/month (**Save CHF 110-150/month**)
-
-**Geneva Canton (Adult, CHF 2,500 deductible):**
-- Standard Model: CHF 450-490/month
-- HMO Model: CHF 350-390/month (**Save CHF 100-140/month**)
-- Telmed Model: CHF 320-370/month (**Save CHF 130-170/month**)
-
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-<strong>Quick Answer:</strong> Standard model offers full doctor choice but costs most. HMO/Telmed models save 15-30% by requiring gatekeeper access. Choose based on your preference for flexibility vs. savings.
-</div>
-
----
-
-## Choose Your Deductible: Higher = Lower Monthly Cost
-
-**Your deductible choice affects your monthly premium significantly.**
-
-### Deductible Comparison
-
-| Deductible | Monthly Premium Impact | Break-even Point | Best For |
-|------------|----------------------|------------------|-----------|
-| **CHF 300** | Highest monthly cost | Low medical expenses | Regular healthcare users |
-| **CHF 1,000** | ~CHF 50-80/month savings | ~CHF 700/year medical costs | Moderate healthcare use |
-| **CHF 2,500** | ~CHF 100-150/month savings | ~CHF 2,200/year medical costs | Healthy, rarely see doctors |
-
-### How to Choose
-
-**Choose CHF 2,500 if:**
-- You're healthy and rarely see doctors
-- You want lowest monthly premiums
-- You can afford CHF 2,500 if needed
-
-**Choose CHF 300-500 if:**
-- You have regular medical appointments
-- You take prescription medications
-- You prefer predictable costs
-
----
-
----
-
-### 🥇 1. Swica — Service Excellence Leader
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Swica:**
-- Excellent English-speaking customer service with dedicated expat support
-- Generous fitness benefits (up to CHF 800/year through BENEVITA program)
-- Entry-age premium system (premiums don't increase with age)
-- Strong supplementary insurance options with international coverage
-- Top-rated customer satisfaction among expat communities
-
-#### Real 2026 Premiums for Swica
+### Insurance Models Compared
 
 <div class="overflow-x-auto mb-6">
-<table class="w-full bg-gray-50 rounded-lg">
-  <thead>
-    <tr class="bg-gray-100">
-      <th class="px-4 py-3 text-left text-sm font-semibold">Profile</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold">Monthly Premium</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold">Annual Total</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-gray-200">
-    <tr>
-      <td class="px-4 py-3 text-sm">30yr, Zurich, CHF 2,500 Standard</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 342</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 4,104</td>
-    </tr>
-    <tr>
-      <td class="px-4 py-3 text-sm">35yr, Geneva, CHF 1,000 HMO</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 398</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 4,776</td>
-    </tr>
-    <tr>
-      <td class="px-4 py-3 text-sm">28yr, Basel, CHF 2,500 Telmed</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 287</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 3,444</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-900">Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Doctor Choice</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Premium Savings</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Best For Expats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-medium">Standard</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-green-600">Complete Freedom</td>
+        <td class="border border-gray-200 px-4 py-3 text-center">0% (baseline)</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Frequent healthcare users</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-medium">HMO</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-orange-600">Specific Clinics</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-green-600 font-semibold">15-25%</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">City-based expats</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-medium">Telmed</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-orange-600">Call First</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-green-600 font-semibold">20-30%</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Healthy, cost-conscious</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-medium">Family Doctor</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-orange-600">Through GP</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-green-600 font-semibold">15-20%</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Families with children</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-*Calculated using live 2026 premium data*
+### Deductible Decision Framework
 
-#### Swica Supplementary Insurance for Expats
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+  <div class="bg-red-50 rounded-lg p-6 border-l-4 border-red-600">
+    <h4 class="text-lg font-semibold text-gray-900 mb-3">Choose Higher Deductible (CHF 2,500) If:</h4>
+    <ul class="space-y-2 text-gray-700">
+      <li>• You rarely visit doctors</li>
+      <li>• You're young and healthy</li>
+      <li>• You want lowest monthly premiums</li>
+      <li>• You can afford CHF 2,500 emergency expense</li>
+    </ul>
+    <div class="mt-4 p-3 bg-white rounded border">
+      <strong class="text-green-600">Potential Annual Savings: CHF 1,800-3,000</strong>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-gray-400">
+    <h4 class="text-lg font-semibold text-gray-900 mb-3">Choose Lower Deductible (CHF 300-500) If:</h4>
+    <ul class="space-y-2 text-gray-700">
+      <li>• You have ongoing medical needs</li>
+      <li>• You prefer predictable costs</li>
+      <li>• You have chronic conditions</li>
+      <li>• You're planning medical procedures</li>
+    </ul>
+    <div class="mt-4 p-3 bg-white rounded border">
+      <strong class="text-blue-600">Better protection against high medical costs</strong>
+    </div>
+  </div>
+</div>
 
-**Popular Expat Plans:**
-- **Completa Top:** Complete supplementary package, CHF 180-250/month
-- **Completa Extra:** Essential supplementary coverage, CHF 95-140/month
-- **Completa Praeventa:** Preventive care focus, CHF 45-75/month
+</div>
 
-**Expat-Specific Benefits:**
-- ✅ Worldwide emergency coverage: Up to CHF 50,000
-- ✅ English-speaking customer service: Dedicated expat hotline
-- ✅ International medical evacuation: CHF 1,000,000 coverage
-- ✅ Dental coverage: Up to CHF 1,500 annually
-- ✅ Alternative medicine: 75% reimbursement
+---
+
+## Top 8 Health Insurance Companies for Expats
+
+<div class="space-y-8">
+
+### 1. Swica — Service Excellence Leader
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
 
 **Why Expats Choose Swica:**
-- Industry-leading customer service with 24/7 English support
-- BENEVITA wellness program offers real cash rewards for healthy lifestyle
-- Transparent communication and billing in multiple languages
+- Excellent English-speaking customer service with dedicated expat support
+- BENEVITA wellness program offering fitness rewards and cashback
+- Entry-age premium system (premiums don't increase with age after enrollment)
+- Strong international emergency coverage and coordination
 
-**Best for:** Active expats who value premium service and wellness benefits
-
+#### 2026 Basic Insurance Premiums (Real Data)
+<div class="overflow-x-auto mt-4">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 396</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 287</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 276</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 445</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 336</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 325</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-**🎯 Get Expert Swica Guidance for Expats**  
-Robert specializes in helping expats optimize their Swica coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('swica-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Swica Consultation with Robert
-</button>
-
----
-
-### 🥉 3. CSS — Largest Network
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose CSS:**
-- Switzerland's largest health insurer with extensive provider network
-- Consistently competitive premiums across all cantons
-- Strong reputation for reliability and financial stability
-- Excellent support for families and students
-- Wide range of HMO and alternative model options
-
-#### Real 2026 Premiums for CSS
-
-<div class="overflow-x-auto mb-6">
-<table class="w-full bg-gray-50 rounded-lg">
-  <thead>
-    <tr class="bg-gray-100">
-      <th class="px-4 py-3 text-left text-sm font-semibold">Profile</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold">Monthly Premium</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold">Annual Total</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-gray-200">
-    <tr>
-      <td class="px-4 py-3 text-sm">30yr, Zurich, CHF 2,500 Standard</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 341</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 4,092</td>
-    </tr>
-    <tr>
-      <td class="px-4 py-3 text-sm">35yr, Geneva, CHF 1,000 HMO</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 389</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 4,668</td>
-    </tr>
-    <tr>
-      <td class="px-4 py-3 text-sm">28yr, Basel, CHF 2,500 Telmed</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 264</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 3,168</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-*Calculated using live 2026 premium data*
-
-**Best for:** Students, newcomers, and budget-conscious expats seeking reliable coverage
-
-</div>
-
-**🎯 Get Expert CSS Guidance for Expats**  
-Robert specializes in helping expats optimize their CSS coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('css-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free CSS Consultation with Robert
-</button>
-
----
-
-### 🥈 2. Helsana — Digital Innovation Leader
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Helsana:**
-- Advanced digital tools and award-winning mobile apps
-- Excellent support for cross-border workers and frequent travelers
-- Strong international network and worldwide coverage options
-- Leading in telemedicine and digital health services
-- Comprehensive English documentation and support
-
-#### Real 2026 Premiums for Helsana
-
-<div class="overflow-x-auto mb-6">
-<table class="w-full bg-gray-50 rounded-lg">
-  <thead>
-    <tr class="bg-gray-100">
-      <th class="px-4 py-3 text-left text-sm font-semibold">Profile</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold">Monthly Premium</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold">Annual Total</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-gray-200">
-    <tr>
-      <td class="px-4 py-3 text-sm">30yr, Zurich, CHF 2,500 Standard</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 356</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 4,272</td>
-    </tr>
-    <tr>
-      <td class="px-4 py-3 text-sm">35yr, Geneva, CHF 1,000 HMO</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 412</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 4,944</td>
-    </tr>
-    <tr>
-      <td class="px-4 py-3 text-sm">28yr, Basel, CHF 2,500 Telmed</td>
-      <td class="px-4 py-3 text-sm text-right font-semibold">CHF 298</td>
-      <td class="px-4 py-3 text-sm text-right">CHF 3,576</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-*Calculated using live 2026 premium data*
-
-**Best for:** Tech-savvy expats and cross-border workers who travel frequently
-
-</div>
-
-**🎯 Get Expert Helsana Guidance for Expats**  
-Robert specializes in helping expats optimize their Helsana coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('helsana-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Helsana Consultation with Robert
-</button>
-
----
-
-### 4. Sanitas — Modern Innovation
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Sanitas:**
-- Cutting-edge digital services and modern approach to healthcare
-- Innovative mobile apps with excellent user experience
-- Flexible supplementary insurance add-ons
-- Strong focus on preventive care and wellness
-- Excellent support for young professionals and digital natives
-
-**Best for:** Young professionals and digital natives who value innovation and flexibility
-
-</div>
-
-**🎯 Get Expert Sanitas Guidance for Expats**  
-Robert specializes in helping expats optimize their Sanitas coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('sanitas-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Sanitas Consultation with Robert
-</button>
-
----
-
-### 5. Concordia — Family Focus
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8x_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Concordia:**
-- Excellent maternity and family coverage options
-- Strong focus on preventive care and wellness programs
-- Competitive premiums for families with children
-- Good English support and family-friendly services
-- Solid reputation for claim processing and customer service
-
-**Best for:** Expat families with children and those planning to start a family in Switzerland
-
-</div>
-
-**🎯 Get Expert Concordia Guidance for Expats**  
-Robert specializes in helping expats optimize their Concordia coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('concordia-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Concordia Consultation with Robert
-</button>
-
----
-
-### 6. Sympany — Straightforward Approach
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Sympany:**
-- No-nonsense approach with transparent pricing
-- Good basic coverage with reliable service
-- Competitive rates in many cantons
-- Straightforward claim processes
-- Solid customer service with English support
-
-**Best for:** Expats who prefer simplicity and straightforward insurance without complex options
-
-</div>
-
-**🎯 Get Expert Sympany Guidance for Expats**  
-Robert specializes in helping expats optimize their Sympany coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('sympany-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Sympany Consultation with Robert
-</button>
-
----
-
-### 7. Atupri — Digital Native
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Atupri:**
-- Born-digital approach with modern technology focus
-- Streamlined online processes and digital-first customer service
-- Competitive premiums with transparent pricing
-- Good mobile app and online portal
-- Efficient claim processing through digital channels
-
-**Best for:** Tech-savvy expats who prefer digital-first insurance management
-
-</div>
-
-**🎯 Get Expert Atupri Guidance for Expats**  
-Robert specializes in helping expats optimize their Atupri coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('atupri-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Atupri Consultation with Robert
-</button>
-
----
-
-### 8. Groupe Mutuel — Flexibility
-
-<div class="bg-white rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-gray-100">
-
-**Why expats choose Groupe Mutuel:**
-- Flexible coverage options and model choices
-- Good presence in French-speaking Switzerland
-- Competitive rates in certain regions
-- Variety of supplementary insurance options
-- Decent customer service with some English support
-
-**Best for:** Expats in French-speaking regions who value flexibility in coverage options
-
-</div>
-
-**🎯 Get Expert Groupe Mutuel Guidance for Expats**  
-Robert specializes in helping expats optimize their Groupe Mutuel coverage and navigate supplementary options.  
-<button onclick="window.openOffersModal && window.openOffersModal('groupe-mutuel-consultation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300 mt-2">
-  Book Free Groupe Mutuel Consultation with Robert
-</button>
-
-<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
-<strong>Quick Answer:</strong> For English-speaking expats, our Top 8 are: Swica (service excellence), Helsana (digital tools), CSS (largest network), Sanitas (innovation), Concordia (family-focused), Sympany (straightforward), Atupri (digital native), and Groupe Mutuel (flexibility). All must accept you for basic insurance regardless of health.
-</div>
-
-**🤔 Not sure which model fits your expat lifestyle?**  
-HMO vs Telmed vs Standard - Robert can recommend the optimal model based on your doctor preferences, travel frequency, and budget.
-
-<div class="text-center mb-8">
-<button onclick="window.openOffersModal && window.openOffersModal('model-recommendation')" 
-        class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-  Get Personal Model Recommendation
-</button>
-</div>
-
----
-
-## 💰 Real 2026 Premium Examples: All 8 Companies Compared
-
-<div class="mb-8">
-
-**Based on live premium data for expats:**
-
-### Zurich Canton (30-year-old, CHF 2,500 deductible)
-
-<div class="overflow-x-auto mb-6">
-<table class="w-full bg-white rounded-xl shadow-lg">
-  <thead class="bg-gray-50">
-    <tr>
-      <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Company</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold text-gray-900">Standard Model</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold text-gray-900">HMO Model</th>
-      <th class="px-4 py-3 text-right text-sm font-semibold text-gray-900">Telmed Model</th>
-      <th class="px-4 py-3 text-center text-sm font-semibold text-gray-900">Best For Expats</th>
-    </tr>
-  </thead>
-  <tbody class="divide-y divide-gray-200">
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Swica</td>
-      <td class="px-4 py-3 text-right">CHF 342</td>
-      <td class="px-4 py-3 text-right text-green-600 font-semibold">CHF 287</td>
-      <td class="px-4 py-3 text-right">CHF 276</td>
-      <td class="px-4 py-3 text-center text-sm">Service quality</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Helsana</td>
-      <td class="px-4 py-3 text-right">CHF 356</td>
-      <td class="px-4 py-3 text-right">CHF 298</td>
-      <td class="px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
-      <td class="px-4 py-3 text-center text-sm">Digital tools</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">CSS</td>
-      <td class="px-4 py-3 text-right">CHF 341</td>
-      <td class="px-4 py-3 text-right">CHF 289</td>
-      <td class="px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
-      <td class="px-4 py-3 text-center text-sm">Large network</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Sanitas</td>
-      <td class="px-4 py-3 text-right">CHF 348</td>
-      <td class="px-4 py-3 text-right text-green-600 font-semibold">CHF 293</td>
-      <td class="px-4 py-3 text-right">CHF 278</td>
-      <td class="px-4 py-3 text-center text-sm">Modern approach</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Concordia</td>
-      <td class="px-4 py-3 text-right">CHF 345</td>
-      <td class="px-4 py-3 text-right">CHF 295</td>
-      <td class="px-4 py-3 text-right">CHF 281</td>
-      <td class="px-4 py-3 text-center text-sm">Family focus</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Sympany</td>
-      <td class="px-4 py-3 text-right">CHF 339</td>
-      <td class="px-4 py-3 text-right">CHF 291</td>
-      <td class="px-4 py-3 text-right">CHF 275</td>
-      <td class="px-4 py-3 text-center text-sm">Straightforward</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Atupri</td>
-      <td class="px-4 py-3 text-right">CHF 351</td>
-      <td class="px-4 py-3 text-right">CHF 297</td>
-      <td class="px-4 py-3 text-right">CHF 283</td>
-      <td class="px-4 py-3 text-center text-sm">Digital native</td>
-    </tr>
-    <tr class="hover:bg-gray-50">
-      <td class="px-4 py-3 font-semibold">Groupe Mutuel</td>
-      <td class="px-4 py-3 text-right">CHF 353</td>
-      <td class="px-4 py-3 text-right">CHF 299</td>
-      <td class="px-4 py-3 text-right">CHF 285</td>
-      <td class="px-4 py-3 text-center text-sm">Flexibility</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-</div>
-
-**💡 Want personalized calculations for your exact situation?**  
-Use our AI calculator above or book a consultation with Robert for detailed premium analysis and application assistance.
-
-<div class="text-center mb-8">
-<div class="flex flex-col sm:flex-row gap-4 justify-center">
-  <a href="/ai-chat" 
-     class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-    Calculate My Exact Premiums
-  </a>
-  <button onclick="window.openOffersModal && window.openOffersModal('personalized-analysis')" 
-          class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-    Book Personalized Analysis
+#### Supplementary Insurance for Expats
+**Popular Coverage Areas:**
+- **Hospital Insurance:** Semi-private and private room options
+- **Outpatient Coverage:** Dental care, eyeglasses, alternative medicine
+- **Travel Insurance:** Worldwide emergency treatment and medical evacuation
+
+**Key Expat Benefits:**
+- Worldwide emergency coverage with direct billing
+- English customer service and documentation
+- Dental coverage options with annual limits
+- Alternative medicine covered (complementary medicine)
+
+**Best For:** Service-oriented expats who value wellness programs and excellent customer support.
+
+<div class="text-center mt-6">
+  <button onclick="window.openOffersModal && window.openOffersModal('swica-consultation')"
+          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    Get Expert Swica Guidance
   </button>
 </div>
+
 </div>
 
-**📊 See better options for your situation?**  
-These premium examples show general rates. Robert can calculate your exact costs and help you apply to the best provider for your expat needs.
+### 2. Helsana — Digital Innovation Leader
 
-<div class="text-center mb-8">
-<button onclick="window.openOffersModal && window.openOffersModal('exact-calculation')" 
-        class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
-  Get My Exact Premium Calculation
-</button>
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose Helsana:**
+- Advanced digital tools and mobile app in multiple languages
+- Comprehensive doctor and hospital networks nationwide
+- Excellent claims processing and customer service
+- Strong preventive care programs and health coaching
+
+#### 2026 Basic Insurance Premiums (Real Data)
+<div class="overflow-x-auto mt-4">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 377</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 298</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 426</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 347</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 313</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+#### Supplementary Insurance for Expats
+**Available Coverage:**
+- **Hospital Plans:** Choice of room type and physician
+- **Outpatient Benefits:** Dental, vision, wellness treatments
+- **International Coverage:** Emergency care and repatriation
+
+**Key Expat Benefits:**
+- Multilingual mobile app and online portal
+- English-speaking customer support
+- International emergency assistance
+- Preventive healthcare programs
+
+**Best For:** Tech-savvy expats who appreciate digital tools and comprehensive healthcare networks.
+
+<div class="text-center mt-6">
+  <button onclick="window.openOffersModal && window.openOffersModal('helsana-consultation')"
+          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    Get Expert Helsana Guidance
+  </button>
+</div>
+
+</div>
+
+### 3. CSS — Switzerland's Largest Network
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose CSS:**
+- Largest healthcare provider network in Switzerland
+- Competitive premiums across all cantons
+- Established reputation and financial stability
+- Comprehensive range of supplementary insurance options
+
+#### 2026 Basic Insurance Premiums (Real Data)
+<div class="overflow-x-auto mt-4">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 374</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 289</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 423</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 338</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 313</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+#### Supplementary Insurance for Expats
+**Coverage Options:**
+- **Hospital Insurance:** Private and semi-private room coverage
+- **Ambulatory Care:** Dental, optical, and alternative treatments
+- **Travel Protection:** Emergency coverage and assistance
+
+**Key Expat Benefits:**
+- Extensive provider network for easy access to care
+- English documentation and customer service
+- Competitive supplementary insurance rates
+- Strong presence across all Swiss regions
+
+**Best For:** Expats who prioritize extensive provider networks and established market presence.
+
+<div class="text-center mt-6">
+  <button onclick="window.openOffersModal && window.openOffersModal('css-consultation')"
+          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    Get Expert CSS Guidance
+  </button>
+</div>
+
+</div>
+
+### 4. Sanitas — Innovation & Quality
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose Sanitas:**
+- Modern approach to healthcare with innovative services
+- Strong focus on customer experience and satisfaction
+- Comprehensive supplementary insurance portfolio
+- Excellent customer service reputation
+
+#### 2026 Basic Insurance Premiums (Real Data)
+<div class="overflow-x-auto mt-4">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 382</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 293</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 278</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 431</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 342</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 327</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+#### Supplementary Insurance for Expats
+**Available Plans:**
+- **Hospital Coverage:** Room upgrades and physician choice
+- **Outpatient Services:** Comprehensive dental and vision care
+- **Wellness Programs:** Prevention and alternative medicine
+
+**Key Expat Benefits:**
+- English customer service and online tools
+- Innovative digital health solutions
+- Flexible supplementary insurance combinations
+- Quality-focused healthcare partnerships
+
+**Best For:** Expats seeking innovative healthcare solutions with quality service focus.
+
+<div class="text-center mt-6">
+  <button onclick="window.openOffersModal && window.openOffersModal('sanitas-consultation')"
+          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    Get Expert Sanitas Guidance
+  </button>
+</div>
+
+</div>
+
+### 5. Concordia — Family-Focused Excellence
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose Concordia:**
+- Strong family-oriented insurance solutions
+- Competitive premiums for families with children
+- Cooperative structure focused on member benefits
+- Excellent maternity and pediatric coverage
+
+#### Supplementary Insurance for Expats
+**Family-Friendly Coverage:**
+- **Maternity Benefits:** Enhanced coverage for pregnancy and childbirth
+- **Pediatric Care:** Specialized children's health programs
+- **Family Dental:** Comprehensive dental coverage for all ages
+
+**Best For:** Expat families with children seeking comprehensive family coverage.
+
+</div>
+
+### 6. Sympany — Straightforward Solutions
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose Sympany:**
+- Clear, straightforward insurance products
+- Competitive pricing across all models
+- Efficient claims processing
+- Regional expertise with personal service
+
+**Best For:** Expats who prefer simple, straightforward insurance with competitive pricing.
+
+</div>
+
+### 7. Atupri — Digital-First Approach
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose Atupri:**
+- Modern digital-first approach to insurance
+- Competitive premiums, especially for young adults
+- Streamlined online processes
+- Focus on efficiency and user experience
+
+**Best For:** Young, tech-savvy expats who prefer digital-first insurance experiences.
+
+</div>
+
+### 8. Groupe Mutuel — Flexible Coverage
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+
+**Why Expats Choose Groupe Mutuel:**
+- Flexible insurance combinations
+- Strong presence in French-speaking regions
+- Competitive supplementary insurance options
+- Member-focused cooperative approach
+
+**Best For:** Expats in French-speaking Switzerland seeking flexible coverage options.
+
+</div>
+
 </div>
 
 ---
 
-## 7-Step Process: How to Switch Health Insurance for 2026
+## AI Premium Calculator
 
-<!-- HowTo Schema can be applied here -->
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-**Follow this step-by-step guide to switch before the 30 November deadline:**
+Now that you understand your options, use our AI calculator to compare real 2026 premiums for your specific situation:
 
-### Step 1: Wait for Premium Letters (October 2025)
-- Your current insurer sends 2026 premium rates
-- Compare with your current 2025 rates
-- Note any premium increases
+**What Our Calculator Provides:**
+- Real premium data for all 8 companies
+- Comparisons across Standard, HMO, and Telmed models
+- Personalized recommendations based on your profile
+- Estimated annual savings potential
 
-### Step 2: Research & Compare Options
-- Use [Priminfo.ch](https://priminfo.ch) for official comparisons
-- Compare different models (Standard, HMO, Telmed)
-- Consider different deductible levels
+<div class="text-center mt-6">
+  <a href="/ai-chat" class="inline-flex items-center px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>
+    Calculate My 2026 Premiums
+  </a>
+</div>
 
-### Step 3: Choose Your Setup
-- Select your preferred model
-- Choose deductible (CHF 300-2,500)
-- Pick your new provider
+</div>
 
-### Step 4: Apply to New Insurer
-- Submit application online or by phone
-- Basic insurance acceptance is guaranteed
-- Get written confirmation
+---
 
-### Step 5: Cancel Current Policy
-- Send registered letter by **30 November 2025**
-- State effective date: 31 December 2025
-- Keep proof of delivery
+## Real Premium Comparison: All 8 Companies
 
-### Step 6: Confirm Coverage
-- Verify new policy starts 1 January 2026
-- Ensure no coverage gaps
-- Update payment details
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-### Step 7: Update Details
-- Inform canton if you receive premium subsidies
-- Update employer if needed
-- Set calendar reminder for next year
+### Complete Premium Overview (2026 Data)
 
-### Quick Checklist
-✅ Compare 2026 premiums vs current rates  
-✅ Decide on model and deductible  
-✅ Get written confirmation from new insurer  
-✅ Send cancellation letter with proof  
-✅ Exclude accident coverage if employed ≥8 hours/week  
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-900">Company</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Standard Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">HMO Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Telmed Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Best For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 396</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 287</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 276</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Service quality</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Helsana</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 377</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 298</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Digital tools</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">CSS</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 374</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 289</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Large network</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Sanitas</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 382</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 293</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 278</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Innovation</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Concordia</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 393</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 295</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 281</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Families</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Sympany</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 372</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 291</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 275</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Straightforward</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Atupri</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 395</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 297</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 285</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Digital native</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Groupe Mutuel</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 396</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 299</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 285</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Flexibility</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-⚠️ <strong>Important:</strong> Missing the 30 November deadline means waiting until next year. <a href="/free-consultation">Book consultation</a> to avoid mistakes.
+<p class="text-sm text-gray-600 text-center mt-4">*Based on 30-year-old, Zurich, CHF 2,500 deductible. Data from official Swiss premium database.</p>
+
+</div>
+
+---
+
+## 7-Step Process: How to Switch Health Insurance
+
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
+
+<div class="space-y-6">
+  
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">1</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Wait for Premium Letters (October 2025)</h3>
+    <p class="text-gray-600">Your current insurer sends 2026 premium rates. Compare with current 2025 rates to see increases.</p>
+  </div>
+</div>
+
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">2</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Research Your Options</h3>
+    <p class="text-gray-600">Use our AI calculator and compare all providers. Consider different models and deductible levels.</p>
+  </div>
+</div>
+
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">3</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Choose Your Provider & Model</h3>
+    <p class="text-gray-600">Select the insurance company, model (Standard/HMO/Telmed), and deductible that best fits your needs.</p>
+  </div>
+</div>
+
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">4</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Apply to New Provider</h3>
+    <p class="text-gray-600">Submit application to your chosen insurer. Include required documents (residence permit, etc.).</p>
+  </div>
+</div>
+
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">5</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Cancel Current Insurance</h3>
+    <p class="text-gray-600">Send registered cancellation letter to current provider by November 30th. Keep receipt as proof.</p>
+  </div>
+</div>
+
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">6</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Confirm New Coverage</h3>
+    <p class="text-gray-600">Receive confirmation from new insurer. Verify coverage starts January 1st, 2026.</p>
+  </div>
+</div>
+
+<div class="flex items-start space-x-4">
+  <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold">7</div>
+  <div>
+    <h3 class="text-lg font-semibold text-gray-900">Update Payment Method</h3>
+    <p class="text-gray-600">Set up payments with new insurer. Cancel automatic payments with previous provider.</p>
+  </div>
+</div>
+
+</div>
+
 </div>
 
 ---
 
 ## Special Considerations for Expats
 
-### For Frequent Travelers
-**Basic insurance only covers emergencies abroad (limited coverage).**
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-Consider supplementary travel insurance if you:
-- Travel frequently for work or leisure
-- Visit countries with high medical costs (USA, Canada)
-- Need non-emergency treatment abroad
+### Frequent Travelers
 
-**Best providers for international coverage:**
-- Swica: Completa Top, Hospita Global
-- Sanitas: Family, Classic with travel modules
-- Concordia: Diversa World
+<div class="bg-gray-50 rounded-lg p-6 mb-6">
+**Recommended Travel Coverage by Company:**
 
-### For Fitness Enthusiasts
-**Get rewarded for staying active with gym reimbursements.**
+- **Swica:** Excellent worldwide emergency coverage with direct billing
+- **Helsana:** Comprehensive international assistance programs
+- **CSS:** Strong global network partnerships
+- **Sanitas:** Modern emergency response services
 
-**Swica leads with up to CHF 800/year for:**
-- Gym memberships (Qualitop/Qualicert certified)
-- Fitness classes
-- Swimming pool subscriptions
-- Health promotion activities
-
-Other insurers (Sanitas, Helsana, CSS) also offer fitness benefits.
-
-### For Families with Children
-**Children pay significantly lower premiums than adults.**
-
-**Key benefits:**
-- Maternity coverage with no deductible
-- Lower children's premiums
-- Family discounts available
-- Consider supplementary dental for orthodontics
-
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-<strong>Quick Answer:</strong> Children pay lower premiums. Maternity coverage is excellent under basic insurance. Consider supplementary dental plans for orthodontics and private room upgrades.
+**Key Benefits to Look For:**
+- Emergency medical evacuation
+- Treatment cost coverage abroad
+- 24/7 multilingual assistance
+- Direct billing arrangements
 </div>
 
-### For Students
-**Special arrangements may apply for EU/EFTA students with EHIC cards.**
+### Pre-existing Conditions
 
-Many international students need Swiss health insurance. Some insurers offer:
-- Student-specific plans
-- Slightly lower premiums
-- Flexible terms
+<div class="bg-gray-50 rounded-lg p-6 mb-6">
+**Company Approaches:**
 
-### For Those with Pre-Existing Conditions
-**Basic insurance must accept everyone regardless of health.**
+- **All basic insurance:** Must accept you regardless of health status
+- **Supplementary insurance:** May have waiting periods or exclusions
+- **Best practice:** Apply early and disclose conditions honestly
 
-**Important notes:**
-- No health checks for basic insurance
-- Supplementary insurance may have exclusions
-- Be transparent on applications
-- Some insurers more flexible than others
-
----
-
-## How to Find Your Best Deal
-
-<!-- This section can have FAQ schema -->
-
-**Follow this systematic approach to find optimal coverage:**
-
-### 1. Define Your Needs & Budget
-- What's your monthly budget for premiums?
-- How often do you see doctors?
-- Do you need supplementary coverage?
-
-### 2. Choose Your Deductible Wisely
-- Higher deductible = Lower monthly premiums
-- Consider your expected medical expenses
-- Can you afford the deductible if needed?
-
-### 3. Select Your Model
-- Standard: Maximum flexibility, highest cost
-- HMO/Family Doctor: Moderate savings, some restrictions
-- Telmed: Maximum savings, phone-first approach
-
-### 4. Use Comparison Tools
-- **Official:** [Priminfo.ch](https://priminfo.ch)
-- **Commercial:** Comparis.ch, Moneyland.ch
-- **Expert help:** [Free consultation](/free-consultation)
-
-### 5. Request Detailed Quotes
-- Get quotes for basic and supplementary insurance
-- Review terms and conditions carefully
-- Check English language support
-
-### 6. Consider Service Quality
-- Customer service reviews
-- English-speaking support availability
-- Digital tools and apps quality
-
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-<strong>Quick Answer:</strong> Compare premiums after October letters, choose deductible (higher = lower monthly cost), select model (Telmed saves most), apply before 30 November for 1 January 2026 start.
+**Important:** Basic insurance coverage is identical across all providers. Focus on supplementary insurance terms if you have ongoing medical needs.
 </div>
 
----
+### Language Support
 
-## Why Use an Insurance Consultant?
-
-**Independent consultants save time and provide expert guidance.**
-
-### Benefits of Professional Help:
-✅ **Personalized advice** for your specific situation  
-✅ **Market knowledge** of all insurers and products  
-✅ **Time-saving** research and comparison  
-✅ **English-language support** throughout the process  
-✅ **Application assistance** for complex cases  
-
-### When to Consider a Consultant:
-- You're new to Switzerland
-- You need supplementary insurance guidance
-- You have complex family situations
-- You want ongoing support and annual reviews
-
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-<strong>Expat Savvy specializes in helping English-speaking expats find the right insurance.</strong> <a href="/free-consultation">Book a free consultation</a> for personalized guidance.
-</div>
-
----
-
-## Frequently Asked Questions
-
-<!-- FAQ Schema can be applied here -->
-
-### What are the best health insurance plans for Switzerland?
-The best plans combine optimal models (HMO/Telmed for savings, Standard for flexibility), appropriate deductibles (CHF 300-2,500), and reliable providers like CSS, Helsana, or Swica. Compare options before the 30 November deadline.
-
-### What is the top 5 best health insurance for expats?
-1. **Swica** (service excellence, fitness benefits)
-2. **CSS** (largest network, competitive rates)
-3. **Helsana** (digital tools, cross-border friendly)
-4. **Sanitas** (innovation, modern apps)
-5. **Concordia** (family-focused, maternity support)
-
-All provide guaranteed basic insurance acceptance regardless of health.
-
-### What is the best health insurance company in Switzerland?
-No single "best" company exists. Choose based on priorities:
-- **Swica:** Entry-age premiums, fitness benefits
-- **CSS:** Competitive rates, largest network
-- **Helsana:** Digital services, cross-border support
-
-### How do I choose the right deductible as an expat?
-- **CHF 2,500:** If you're healthy and rarely see doctors (saves CHF 100-150/month)
-- **CHF 1,000:** For moderate healthcare use
-- **CHF 300:** If you have regular medical expenses
-
-### Can I switch health insurance every year?
-Yes. Cancel by 30 November 2025 for 1 January 2026 coverage. Basic insurance acceptance is guaranteed regardless of health status.
-
-### Which Swiss insurers offer the best English support?
-Swica, CSS, Helsana, and Sanitas all provide excellent English-speaking customer service and English documentation for expats.
-
-### What happens if I miss the 30 November deadline?
-You can only switch again next year (30 November 2026 for 2027 changes), unless you qualify for special termination rights within 30 days of a premium increase.
-
-### How much can I save with Telmed vs Standard model?
-Telmed saves 20-30% compared to Standard. In Zurich, this means CHF 110-150/month savings (from CHF 380-420 to CHF 270-320 for adults with CHF 2,500 deductible).
-
----
-
-## Take Action Before the Deadline
-
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); text-align: center;">
-
-### ⚠️ Deadline Alert: 30 November 2025
-
-**Don't miss your chance to switch and save money in 2026.**
-
-**Next Steps:**
-1. **Compare options** using [Priminfo.ch](https://priminfo.ch)
-2. **Get expert help** with a [free consultation](/free-consultation)
-3. **Apply to new insurer** before the deadline
-4. **Cancel current policy** by registered mail
-
-<a href="/ai-chat" style="display: inline-block; background-color: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Get 3 Best Recommendations →</a>
+All top 4 providers (Swica, Helsana, CSS, Sanitas) offer comprehensive English support including customer service, documentation, and online portals.
 
 </div>
 
 ---
 
-## Related Resources
+## Important Deadline: November 30, 2025
 
-**Essential Guides:**
-- [Health Insurance Hub](/health-insurance) — Complete overview and AI calculator
-- [Compare Providers](/compare-providers/) — Side-by-side comparisons
-- [Insurance Models Guide](/blog/health-insurance-models-switzerland) — Standard vs HMO vs Telmed
+<div style="background-color: #f9f9f9; padding: 24px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 4px solid #dc2626;">
 
-**Provider Reviews:**
-- [Swica vs Helsana](/compare-providers/swica-vs-helsana) — Top two compared
-- [CSS Insurance Review](/healthcare/all-insurances/css) — Largest network analysis
-- [Sanitas Insurance Review](/healthcare/all-insurances/sanitas) — Digital innovation focus
+### Critical Timeline for 2026 Coverage
 
-**Expat Resources:**
-- [Dental Insurance for Expats](/blog/dental-insurance-expats-switzerland) — Supplementary coverage guide
-- [Legal Protection Insurance](/blog/legal-protection-insurance-switzerland-complete-guide) — Tenant and work disputes
-- [Maternity Insurance](/blog/maternity-newborn-insurance-switzerland) — Family planning coverage
+**What you need to know about the deadline:**
 
-**How-To Guides:**
-- [Change Health Insurance](/guides/how-to/change-health-insurance) — Step-by-step process
-- [Choose Deductible](/guides/how-to/choose-health-insurance-deductible) — Optimization guide
-- [Apply for Premium Subsidies](/guides/how-to/apply-premium-subsidies) — Financial assistance
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+  <div>
+    <h4 class="text-lg font-semibold text-gray-900 mb-3">If You Miss November 30:</h4>
+    <ul class="space-y-2 text-gray-700">
+      <li>• Stuck with current insurer for entire 2026</li>
+      <li>• Miss potential savings of CHF 1,800-3,600 annually</li>
+      <li>• No access to better providers until November 2026</li>
+      <li>• Premium increases take effect with no alternatives</li>
+    </ul>
+  </div>
+  
+  <div>
+    <h4 class="text-lg font-semibold text-gray-900 mb-3">Special Expat Considerations:</h4>
+    <div class="space-y-3">
+      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+        <strong class="text-gray-900">New to Switzerland:</strong> <span class="text-gray-600">3-month grace period from arrival</span>
+      </div>
+      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+        <strong class="text-gray-900">Switching Providers:</strong> <span class="text-gray-600">Must cancel BY November 30</span>
+      </div>
+      <div class="bg-white rounded-lg p-3 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+        <strong class="text-gray-900">Coverage Gap:</strong> <span class="text-gray-600">Continuous coverage required by law</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-6">
+  <button onclick="window.openOffersModal && window.openOffersModal('deadline-consultation')" 
+          class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[inset_4px_4px_8px_#d9d9d9,inset_-4px_-4px_8px_#ffffff] transition-shadow duration-200">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+    Get Deadline Assistance
+  </button>
+</div>
+
+</div>
 
 ---
 
-*Last updated: October 2025. Premium examples based on 2025/2026 market data. Consult official sources and insurers for current rates.*
+## Make Your Decision with Expert Help
+
+The choice of health insurance provider will impact your finances and healthcare experience throughout 2026. With identical basic coverage but varying premiums, service quality, and expat support, expert guidance ensures you make the optimal decision for your situation.
+
+**Our insurance specialists have helped over 1,000 expats navigate Swiss health insurance successfully.** Get personalized recommendations based on your specific needs, family situation, and healthcare preferences.
+
+<div class="text-center mt-8">
+  <button onclick="window.openOffersModal && window.openOffersModal('final-consultation')"
+          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-[4px_4px_8px_#d9d9d9] hover:shadow-[2px_2px_4px_#d9d9d9] transition-all duration-200">
+    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+    Book Your Free Expert Consultation
+  </button>
+</div>
+
+**Don't leave this critical decision to chance. Get professional guidance and secure the best health insurance for your expat life in Switzerland.**
