@@ -24,7 +24,7 @@ faqs:
     answer: "Top 5: Swica (service excellence), CSS (largest network), Helsana (digital tools), Sanitas (innovation), Concordia (family-focused). All provide identical basic coverage by law."
 ---
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);"
+<div style="background-color: #f9f9f9; padding: 20px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;"
 
 ## 🚨 Quick Facts for Expats — 2026 Change Season
 
@@ -61,7 +61,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
 | **Sanitas** | Modern apps, flexible add-ons | Young professionals | ⭐⭐⭐⭐ |
 | **Concordia** | Family-focused, maternity support | Parents with children | ⭐⭐⭐⭐ |
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 💡 <strong>Not sure which is best for you?</strong> Try our <a href="/calculator">free calculator</a> or <a href="/free-consultation">book a consultation</a> today. Deadline: 30 Nov 2025.
 </div>
 
@@ -90,7 +90,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
 
 **Hospital contribution:** CHF 15/day for hospital stays
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Quick Answer:</strong> Swiss health insurance is mandatory with a 3-month deadline. Coverage is identical across providers, but premiums vary by canton, model, and deductible. Most expats compare Swica, CSS, and Helsana for service quality and competitive rates.
 </div>
 
@@ -121,7 +121,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
 - HMO Model: CHF 350-390/month (**Save CHF 100-140/month**)
 - Telmed Model: CHF 320-370/month (**Save CHF 130-170/month**)
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Quick Answer:</strong> Standard model offers full doctor choice but costs most. HMO/Telmed models save 15-30% by requiring gatekeeper access. Choose based on your preference for flexibility vs. savings.
 </div>
 
@@ -210,7 +210,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
 
 [Compare Concordia premiums →](/healthcare/all-insurances/concordia)
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Quick Answer:</strong> For English-speaking expats, top choices are Swica (excellent service), CSS (largest network), Helsana (digital tools), Sanitas (innovation), and Concordia (family-focused). All must accept you for basic insurance regardless of health.
 </div>
 
@@ -264,7 +264,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
 ✅ Send cancellation letter with proof  
 ✅ Exclude accident coverage if employed ≥8 hours/week  
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 ⚠️ <strong>Important:</strong> Missing the 30 November deadline means waiting until next year. <a href="/free-consultation">Book consultation</a> to avoid mistakes.
 </div>
 
@@ -305,7 +305,7 @@ Other insurers (Sanitas, Helsana, CSS) also offer fitness benefits.
 - Family discounts available
 - Consider supplementary dental for orthodontics
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Quick Answer:</strong> Children pay lower premiums. Maternity coverage is excellent under basic insurance. Consider supplementary dental plans for orthodontics and private room upgrades.
 </div>
 
@@ -364,7 +364,7 @@ Many international students need Swiss health insurance. Some insurers offer:
 - English-speaking support availability
 - Digital tools and apps quality
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Quick Answer:</strong> Compare premiums after October letters, choose deductible (higher = lower monthly cost), select model (Telmed saves most), apply before 30 November for 1 January 2026 start.
 </div>
 
@@ -387,7 +387,7 @@ Many international students need Swiss health insurance. Some insurers offer:
 - You have complex family situations
 - You want ongoing support and annual reviews
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Expat Savvy specializes in helping English-speaking expats find the right insurance.</strong> <a href="/free-consultation">Book a free consultation</a> for personalized guidance.
 </div>
 
@@ -436,7 +436,7 @@ Telmed saves 20-30% compared to Standard. In Zurich, this means CHF 110-150/mont
 
 ## Take Action Before the Deadline
 
-<div style="background-color: #fef2f2; border: 2px solid #ef4444; padding: 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); text-align: center;">
+<div style="background-color: #f9f9f9; padding: 20px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5; text-align: center;">
 
 ### ⚠️ Deadline Alert: 30 November 2025
 
@@ -448,7 +448,7 @@ Telmed saves 20-30% compared to Standard. In Zurich, this means CHF 110-150/mont
 3. **Apply to new insurer** before the deadline
 4. **Cancel current policy** by registered mail
 
-<a href="/ai-chat" style="display: inline-block; background-color: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Get 3 Best Recommendations →</a>
+<a href="/ai-chat" style="display: inline-block; background-color: white; color: #4a5568; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: 500; margin-top: 16px; box-shadow: 2px 2px 4px #d9d9d9, -2px -2px 4px #ffffff; border: 1px solid #e2e8f0;">Get Recommendations →</a>
 
 </div>
 
