@@ -1220,14 +1220,29 @@ These real premium comparisons show potential annual savings of **CHF 1,800-3,60
 
 ### Critical Consequences of Missing November 30:
 
-<div class="bg-red-100 rounded-lg p-4 mb-6 border-l-4 border-red-600">
-<div class="space-y-3">
-• **Financially locked in:** Stuck with current insurer for entire 2026 (12 full months)
-• **Lost savings:** Miss potential savings of CHF 1,800-3,600 annually 
-• **No premium relief:** Premium increases take effect with zero alternatives
-• **Service stuck:** Cannot switch to better expat-friendly providers until November 2026
-• **Missed opportunities:** No access to better supplementary insurance options
-</div>
+<div class="bg-red-50 rounded-lg p-6 mb-6 border-l-2 border-red-600 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+  <div class="space-y-4">
+    <div class="flex items-start space-x-3">
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
+      <p class="text-gray-800"><span class="font-semibold">Financially locked in:</span> Stuck with current insurer for entire 2026 (12 full months)</p>
+    </div>
+    <div class="flex items-start space-x-3">
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
+      <p class="text-gray-800"><span class="font-semibold">Lost savings:</span> Miss potential savings of CHF 1,800-3,600 annually</p>
+    </div>
+    <div class="flex items-start space-x-3">
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
+      <p class="text-gray-800"><span class="font-semibold">No premium relief:</span> Premium increases take effect with zero alternatives</p>
+    </div>
+    <div class="flex items-start space-x-3">
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
+      <p class="text-gray-800"><span class="font-semibold">Service stuck:</span> Cannot switch to better expat-friendly providers until November 2026</p>
+    </div>
+    <div class="flex items-start space-x-3">
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
+      <p class="text-gray-800"><span class="font-semibold">Missed opportunities:</span> No access to better supplementary insurance options</p>
+    </div>
+  </div>
 </div>
 
 ### For Expats Specifically:
@@ -1252,8 +1267,8 @@ These real premium comparisons show potential annual savings of **CHF 1,800-3,60
   </div>
 </div>
 
-<div class="bg-yellow-100 rounded-lg p-4 mt-6 border-l-4 border-yellow-600">
-  <p class="text-center text-lg font-semibold text-gray-900">⏰ **Days Remaining Until Deadline:** Time is running out for 2026 savings!</p>
+<div class="bg-white rounded-lg p-6 mt-6 border-l-2 border-red-600 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+  <p class="text-center text-lg font-semibold text-gray-900">⏰ <span class="text-red-600 font-bold">Days Remaining Until Deadline:</span> Time is running out for 2026 savings!</p>
 </div>
 
 <div class="text-center mt-6">
@@ -1276,21 +1291,21 @@ These real premium comparisons show potential annual savings of **CHF 1,800-3,60
 
 <div class="space-y-8">
   
-  <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-blue-500">
+  <div class="bg-white rounded-lg p-6 border-l-2 border-red-600 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
     <blockquote class="text-gray-700 italic text-lg mb-4">
       "Robert saved me CHF 2,400 annually by switching from Swica Standard to CSS Hausarzt. The consultation was invaluable for understanding Swiss insurance as an American expat."
     </blockquote>
     <cite class="text-gray-900 font-semibold">— Sarah M., Marketing Manager, Zurich</cite>
   </div>
   
-  <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-green-500">
+  <div class="bg-white rounded-lg p-6 border-l-2 border-red-600 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
     <blockquote class="text-gray-700 italic text-lg mb-4">
       "Finally found an advisor who understands expat needs. The premium calculator showed exactly where I was overpaying."
     </blockquote>
     <cite class="text-gray-900 font-semibold">— James K., Software Engineer, Geneva</cite>
   </div>
   
-  <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-red-500">
+  <div class="bg-white rounded-lg p-6 border-l-2 border-red-600 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
     <blockquote class="text-gray-700 italic text-lg mb-4">
       "Switched from Helsana to Swica and got better coverage at lower cost. Robert handled all the paperwork and deadline requirements."
     </blockquote>
