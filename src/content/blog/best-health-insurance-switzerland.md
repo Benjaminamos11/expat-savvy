@@ -21,11 +21,9 @@ faqs:
     answer: "You'll be stuck with your current insurer for the entire next year with no ability to switch, potentially missing significant savings opportunities."
 ---
 
-# Best Health Insurance for Expats in Switzerland: Your Complete 2026 Guide
-
 Choosing the right health insurance in Switzerland is one of the most important decisions you'll make as an expat. With identical basic coverage across all providers but varying premiums, service quality, and expat support, the right choice can save you thousands of francs annually.
 
-This comprehensive guide provides verified information about Switzerland's top health insurance companies, real premium data, and expert insights to help you make an informed decision before the November 30th deadline.
+This comprehensive guide provides verified information about Switzerland's top health insurance companies, real 2026 premium data, and expert insights to help you make an informed decision before the November 30th deadline.
 
 <div class="text-center my-8">
   <button onclick="window.openOffersModal && window.openOffersModal('comprehensive-guide')"
@@ -237,29 +235,36 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Entry-age premium system (premiums don't increase with age after enrollment)
 - Strong international emergency coverage and coordination
 
-#### 2026 Basic Insurance Premiums (Real Data)
+#### 2026 Basic Insurance Premiums (Official Data)
 <div class="overflow-x-auto mt-4">
   <table class="w-full border-collapse border border-gray-200">
     <thead>
       <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
         <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 396</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 287</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 276</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 418</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 338 (MULTICHOICE)</td>
       </tr>
       <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 445</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 336</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 325</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 580</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 463 (SANTE)</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 281</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 213 (MEDPHARM)</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 553</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 428 (MULTICHOICE)</td>
       </tr>
     </tbody>
   </table>
@@ -298,29 +303,36 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Excellent claims processing and customer service
 - Strong preventive care programs and health coaching
 
-#### 2026 Basic Insurance Premiums (Real Data)
+#### 2026 Basic Insurance Premiums (Official Data)
 <div class="overflow-x-auto mt-4">
   <table class="w-full border-collapse border border-gray-200">
     <thead>
       <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
         <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 377</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 298</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 435</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 335 (Hausarzt R1)</td>
       </tr>
       <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 426</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 347</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 313</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 547</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 446 (Hausarzt R1)</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 275</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 215 (Hausarzt R1)</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 512</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 416 (Hausarzt R1)</td>
       </tr>
     </tbody>
   </table>
@@ -359,29 +371,36 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Established reputation and financial stability
 - Comprehensive range of supplementary insurance options
 
-#### 2026 Basic Insurance Premiums (Real Data)
+#### 2026 Basic Insurance Premiums (Official Data)
 <div class="overflow-x-auto mt-4">
   <table class="w-full border-collapse border border-gray-200">
     <thead>
       <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
         <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 374</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 289</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 425</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 326 (Hausarzt Profit)</td>
       </tr>
       <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 423</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 338</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 313</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 567</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 442 (Hausarzt Profit)</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 274</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 243 (Hausarzt Profit)</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 512</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 442 (Hausarzt Profit)</td>
       </tr>
     </tbody>
   </table>
@@ -420,29 +439,36 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 - Comprehensive supplementary insurance portfolio
 - Excellent customer service reputation
 
-#### 2026 Basic Insurance Premiums (Real Data)
+#### 2026 Basic Insurance Premiums (Official Data)
 <div class="overflow-x-auto mt-4">
   <table class="w-full border-collapse border border-gray-200">
     <thead>
       <tr class="bg-gray-50">
-        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Profile</th>
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold">Location & Profile</th>
         <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Standard</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">HMO</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Telmed</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold">Alternative Model</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="border border-gray-200 px-4 py-3">30yr, Zurich, CHF 2,500</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 382</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 293</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 278</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Horgen/Zurich, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 404</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 330 (TelMed Compact)</td>
       </tr>
       <tr class="bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3">35yr, Geneva, CHF 1,000</td>
-        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 431</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 342</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 327</td>
+        <td class="border border-gray-200 px-4 py-3">39yr, Geneva, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 567</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 443 (TelMed Compact)</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-200 px-4 py-3">39yr, Zug, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 254</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 217 (TelMed Compact)</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3">39yr, Basel, CHF 2,500</td>
+        <td class="border border-gray-200 px-4 py-3 text-right font-semibold">CHF 531</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 433 (TelMed Compact)</td>
       </tr>
     </tbody>
   </table>
@@ -566,81 +592,192 @@ Now that you understand your options, use our AI calculator to compare real 2026
 
 <div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8">
 
-### Complete Premium Overview (2026 Data)
+### Complete Premium Overview - Real 2026 Data by Location
+
+<div class="space-y-6">
+
+#### Zurich Region (Horgen) - 39yr, CHF 2,500 deductible
 
 <div class="overflow-x-auto">
   <table class="w-full border-collapse border border-gray-200">
     <thead>
       <tr class="bg-gray-50">
         <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-900">Company</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Standard Model</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">HMO Model</th>
-        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Telmed Model</th>
-        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Best For</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Monthly Premium</th>
       </tr>
     </thead>
     <tbody>
       <tr class="hover:bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 396</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 287</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 276</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Service quality</td>
-      </tr>
-      <tr class="hover:bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3 font-semibold">Helsana</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 377</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 298</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Digital tools</td>
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Atupri</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">HMO</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 325</td>
       </tr>
       <tr class="hover:bg-gray-50">
         <td class="border border-gray-200 px-4 py-3 font-semibold">CSS</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 374</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 289</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 264</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Large network</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Hausarzt Profit</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 326</td>
       </tr>
       <tr class="hover:bg-gray-50">
         <td class="border border-gray-200 px-4 py-3 font-semibold">Sanitas</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 382</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 293</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 278</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Innovation</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">TelMed Compact</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 330</td>
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3 font-semibold">Concordia</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 393</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 295</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 281</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Families</td>
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Helsana</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">BeneFit Hausarzt R1</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 335</td>
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3 font-semibold">Sympany</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 372</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 291</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 275</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Straightforward</td>
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">FAVORIT MULTICHOICE</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 338</td>
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3 font-semibold">Atupri</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 395</td>
-        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 297</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 285</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Digital native</td>
-      </tr>
-      <tr class="hover:bg-gray-50">
-        <td class="border border-gray-200 px-4 py-3 font-semibold">Groupe Mutuel</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 396</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 299</td>
-        <td class="border border-gray-200 px-4 py-3 text-right">CHF 285</td>
-        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Flexibility</td>
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Standard</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 418</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<p class="text-sm text-gray-600 text-center mt-4">*Based on 30-year-old, Zurich, CHF 2,500 deductible. Data from official Swiss premium database.</p>
+#### Zug - 39yr, CHF 2,500 deductible (Special 15% Cantonal Discount)
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-900">Company</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Monthly Premium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Concordia</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">HMO</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 191</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Sympany</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">casamed HMO</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 196</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">FAVORIT MEDPHARM</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 213</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Helsana</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">BeneFit Hausarzt R1</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 215</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Sanitas</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">TelMed Compact</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 217</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Standard</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 281</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+#### Geneva - 39yr, CHF 2,500 deductible
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-900">Company</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Monthly Premium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Assura</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">PharMed</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 438</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">CSS</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Hausarzt Profit</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 442</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Sanitas</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">TelMed Compact</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 443</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Helsana</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">BeneFit Hausarzt R1</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 446</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">FAVORIT SANTE</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 463</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Standard</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 580</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+#### Basel - 39yr, CHF 2,500 deductible
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th class="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-900">Company</th>
+        <th class="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-900">Model</th>
+        <th class="border border-gray-200 px-4 py-3 text-right text-sm font-semibold text-gray-900">Monthly Premium</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">CSS</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Gesundheitspraxis</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 411</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Helsana</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">BeneFit Hausarzt R1</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 416</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">FAVORIT MULTICHOICE</td>
+        <td class="border border-gray-200 px-4 py-3 text-right text-green-600 font-semibold">CHF 428</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Sanitas</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">TelMed Compact</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 433</td>
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="border border-gray-200 px-4 py-3 font-semibold">Swica</td>
+        <td class="border border-gray-200 px-4 py-3 text-center text-sm">Standard</td>
+        <td class="border border-gray-200 px-4 py-3 text-right">CHF 553</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+<p class="text-sm text-gray-600 text-center mt-4">*All premiums based on official 2026 data from Swiss Federal Office of Public Health. Adult (born 1986), CHF 2,500 deductible, no accident coverage. Amounts after CHF 5.15 environmental rebate.</p>
 
 </div>
 
