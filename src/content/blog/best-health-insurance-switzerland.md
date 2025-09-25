@@ -64,65 +64,42 @@ faqs:
 
 ## 🧮 AI Premium Calculator for Expats in Switzerland
 
-<div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 mb-8 shadow-[8px_8px_16px_#d9d9d9,-8px_-8px_16px_#ffffff] border border-blue-200">
+<div class="bg-gray-50 rounded-xl p-6 mb-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
 
 **Calculate your exact 2026 premiums in 30 seconds:**
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
   <div class="space-y-3">
     <div class="flex items-center">
-      <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-      </svg>
-      <span>**Expat-specific scenarios:** Travel frequency, family situation, home country coverage</span>
+      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
+      <span>Compare all 8 providers with real premium data</span>
     </div>
     <div class="flex items-center">
-      <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-      </svg>
-      <span>**Compare all 8 providers instantly** with real 2026 premium data</span>
+      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
+      <span>Expat-specific scenarios and recommendations</span>
     </div>
   </div>
   <div class="space-y-3">
     <div class="flex items-center">
-      <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-      </svg>
-      <span>**Factor in your canton, age, and lifestyle** for accurate results</span>
+      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
+      <span>Factor in canton, age, and lifestyle</span>
     </div>
     <div class="flex items-center">
-      <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-      </svg>
-      <span>**Get personalized recommendations** based on expat needs</span>
+      <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
+      <span>Example: Swica CHF 396, CSS CHF 374</span>
     </div>
   </div>
 </div>
 
-<!-- AI Calculator Widget Integration -->
-<div class="bg-white rounded-xl p-6 shadow-inner border-2 border-dashed border-blue-300">
-  <div class="text-center">
-    <div class="mb-4">
-      <svg class="w-16 h-16 text-blue-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-      </svg>
-    </div>
-    <h3 class="text-xl font-semibold text-gray-800 mb-2">AI Premium Calculator</h3>
-    <p class="text-gray-600 mb-4">Get instant premium calculations for all 8 providers</p>
-    <a href="/ai-chat" 
-       class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300">
-      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-      </svg>
-      Launch AI Calculator
-    </a>
-  </div>
+<div class="text-center">
+  <a href="/ai-chat" class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>
+    Launch AI Calculator
+  </a>
 </div>
 
-**Example Results Preview:**
-- **Swica HMO, Zurich:** CHF 287/month  
-- **CSS Standard, Geneva:** CHF 341/month  
-- **Helsana Telmed, Basel:** CHF 264/month  
 
 </div>
 
@@ -131,7 +108,7 @@ Your premium calculation shows multiple options optimized for expats. Robert can
 
 <div class="text-center mb-8">
 <button onclick="window.openOffersModal && window.openOffersModal('premium-analysis')" 
-        class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-300">
+        class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
   Book Free Premium Analysis with Robert
 </button>
 </div>
@@ -707,7 +684,7 @@ Robert specializes in helping expats optimize their Groupe Mutuel coverage and n
   Book Free Groupe Mutuel Consultation with Robert
 </button>
 
-<div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mb-8">
+<div style="background-color: #f9f9f9; padding: 16px; margin: 16px 0; border-radius: 12px; box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff; border-left: 3px solid #e5e5e5;">
 <strong>Quick Answer:</strong> For English-speaking expats, our Top 8 are: Swica (service excellence), Helsana (digital tools), CSS (largest network), Sanitas (innovation), Concordia (family-focused), Sympany (straightforward), Atupri (digital native), and Groupe Mutuel (flexibility). All must accept you for basic insurance regardless of health.
 </div>
 
@@ -716,7 +693,7 @@ HMO vs Telmed vs Standard - Robert can recommend the optimal model based on your
 
 <div class="text-center mb-8">
 <button onclick="window.openOffersModal && window.openOffersModal('model-recommendation')" 
-        class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300">
+        class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
   Get Personal Model Recommendation
 </button>
 </div>
@@ -811,11 +788,11 @@ Use our AI calculator above or book a consultation with Robert for detailed prem
 <div class="text-center mb-8">
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
   <a href="/ai-chat" 
-     class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300">
+     class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
     Calculate My Exact Premiums
   </a>
   <button onclick="window.openOffersModal && window.openOffersModal('personalized-analysis')" 
-          class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-300">
+          class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
     Book Personalized Analysis
   </button>
 </div>
@@ -826,7 +803,7 @@ These premium examples show general rates. Robert can calculate your exact costs
 
 <div class="text-center mb-8">
 <button onclick="window.openOffersModal && window.openOffersModal('exact-calculation')" 
-        class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300">
+        class="inline-flex items-center px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-[2px_2px_4px_#d9d9d9,-2px_-2px_4px_#ffffff] hover:shadow-[inset_2px_2px_4px_#d9d9d9,inset_-2px_-2px_4px_#ffffff] transition-shadow duration-200">
   Get My Exact Premium Calculation
 </button>
 </div>
