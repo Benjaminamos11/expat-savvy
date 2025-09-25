@@ -37,79 +37,53 @@ This comprehensive guide provides verified information about Switzerland's top h
 
 ---
 
-## Why This Guide Outperforms Others
+## What You'll Get From This Guide
 
-<div class="bg-blue-50 rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8 border-l-4 border-blue-600">
+<div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8 border-l-2 border-red-600">
 
-Unlike generic insurance advice, this guide provides:
+Everything you need to make the right health insurance choice:
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
   <div class="space-y-4">
     <div class="flex items-start space-x-3">
-      <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Real 2026 premium data</h4>
-        <p class="text-gray-600 text-sm">from official Swiss sources (not estimates)</p>
+        <h4 class="font-medium text-gray-900">Current 2026 premium data</h4>
+        <p class="text-gray-600 text-sm">actual prices from Swiss official sources</p>
       </div>
     </div>
     <div class="flex items-start space-x-3">
-      <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Expat-specific analysis</h4>
-        <p class="text-gray-600 text-sm">by specialists who understand international resident needs</p>
+        <h4 class="font-medium text-gray-900">Expat-focused guidance</h4>
+        <p class="text-gray-600 text-sm">addressing your specific needs as an international resident</p>
       </div>
     </div>
     <div class="flex items-start space-x-3">
-      <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Independent recommendations</h4>
-        <p class="text-gray-600 text-sm">with no insurance company partnerships</p>
+        <h4 class="font-medium text-gray-900">Unbiased recommendations</h4>
+        <p class="text-gray-600 text-sm">no hidden partnerships or commissions</p>
       </div>
     </div>
   </div>
   
   <div class="space-y-4">
     <div class="flex items-start space-x-3">
-      <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Comprehensive coverage</h4>
-        <p class="text-gray-600 text-sm">of all major providers with detailed comparisons</p>
+        <h4 class="font-medium text-gray-900">Complete provider overview</h4>
+        <p class="text-gray-600 text-sm">detailed comparison of all major insurance companies</p>
       </div>
     </div>
     <div class="flex items-start space-x-3">
-      <div class="flex-shrink-0 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Expert consultation access</h4>
-        <p class="text-gray-600 text-sm">with English-speaking Swiss insurance specialists</p>
+        <h4 class="font-medium text-gray-900">Expert support available</h4>
+        <p class="text-gray-600 text-sm">English-speaking specialists ready to help</p>
       </div>
     </div>
   </div>
-</div>
-
-<div class="mt-6 p-4 bg-white rounded-lg border border-gray-200">
-  <p class="text-sm text-gray-600 italic text-center">
-    *Compare this to basic "top 8" lists that provide minimal information and outdated data.*
-  </p>
 </div>
 
 </div>
@@ -817,62 +791,42 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 Our advanced calculator uses official Swiss premium data to provide:
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mb-6">
-  <div class="space-y-3">
+  <div class="space-y-4">
     <div class="flex items-start space-x-3">
-      <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Real-time premium comparisons</h4>
+        <h4 class="font-medium text-gray-900">Real-time premium comparisons</h4>
         <p class="text-gray-600 text-sm">across all 8 major providers</p>
       </div>
     </div>
     <div class="flex items-start space-x-3">
-      <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Expat-specific scenarios</h4>
+        <h4 class="font-medium text-gray-900">Expat-specific scenarios</h4>
         <p class="text-gray-600 text-sm">(travel frequency, family status, health needs)</p>
       </div>
     </div>
     <div class="flex items-start space-x-3">
-      <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Model optimization</h4>
+        <h4 class="font-medium text-gray-900">Model optimization</h4>
         <p class="text-gray-600 text-sm">(Standard vs HMO vs Telmed recommendations)</p>
       </div>
     </div>
   </div>
   
-  <div class="space-y-3">
+  <div class="space-y-4">
     <div class="flex items-start space-x-3">
-      <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Annual savings estimates</h4>
+        <h4 class="font-medium text-gray-900">Annual savings estimates</h4>
         <p class="text-gray-600 text-sm">with deductible optimization</p>
       </div>
     </div>
     <div class="flex items-start space-x-3">
-      <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      <div class="w-2 h-2 bg-red-600 rounded-full mt-2"></div>
       <div>
-        <h4 class="font-semibold text-gray-900">Personalized recommendations</h4>
+        <h4 class="font-medium text-gray-900">Personalized recommendations</h4>
         <p class="text-gray-600 text-sm">based on your canton and profile</p>
       </div>
     </div>
@@ -881,22 +835,22 @@ Our advanced calculator uses official Swiss premium data to provide:
 
 ### Example Results:
 
-<div class="bg-gray-50 rounded-lg p-6 mb-6">
-  <h4 class="text-lg font-semibold text-gray-900 mb-4">*Zurich, 35-year-old, CHF 2,500 deductible*</h4>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="bg-white rounded-lg p-4 text-center">
-      <h5 class="font-semibold text-green-600 mb-2">Best Value</h5>
-      <p class="text-2xl font-bold text-gray-900">CHF 326/month</p>
+<div class="bg-white rounded-lg p-6 mb-6 shadow-[2px_2px_4px_#d9d9d9,-1px_-1px_2px_#ffffff]">
+  <h4 class="text-lg font-medium text-gray-900 mb-6 text-center">*Zurich, 35-year-old, CHF 2,500 deductible*</h4>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white rounded-lg p-4 text-center shadow-[1px_1px_3px_#d9d9d9,-1px_-1px_3px_#ffffff] border-l-2 border-red-600">
+      <h5 class="font-medium text-gray-700 mb-2">Best Value</h5>
+      <p class="text-xl font-semibold text-gray-900 mb-1">CHF 326/month</p>
       <p class="text-sm text-gray-600">CSS Hausarzt</p>
     </div>
-    <div class="bg-white rounded-lg p-4 text-center">
-      <h5 class="font-semibold text-blue-600 mb-2">Premium Service</h5>
-      <p class="text-2xl font-bold text-gray-900">CHF 418/month</p>
+    <div class="bg-white rounded-lg p-4 text-center shadow-[1px_1px_3px_#d9d9d9,-1px_-1px_3px_#ffffff] border-l-2 border-red-600">
+      <h5 class="font-medium text-gray-700 mb-2">Premium Service</h5>
+      <p class="text-xl font-semibold text-gray-900 mb-1">CHF 418/month</p>
       <p class="text-sm text-gray-600">Swica Standard</p>
     </div>
-    <div class="bg-white rounded-lg p-4 text-center">
-      <h5 class="font-semibold text-red-600 mb-2">Maximum Savings</h5>
-      <p class="text-2xl font-bold text-gray-900">CHF 1,104 annually</p>
+    <div class="bg-white rounded-lg p-4 text-center shadow-[1px_1px_3px_#d9d9d9,-1px_-1px_3px_#ffffff] border-l-2 border-red-600">
+      <h5 class="font-medium text-gray-700 mb-2">Maximum Savings</h5>
+      <p class="text-xl font-semibold text-red-600 mb-1">CHF 1,104 annually</p>
       <p class="text-sm text-gray-600">HMO model saves</p>
     </div>
   </div>
