@@ -1,6 +1,5 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 import FAQ from '../components/FAQ.astro';
 const { frontmatter } = Astro.props;
 
@@ -197,16 +196,13 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     <div id="floating-cta" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-lg shadow-xl flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4 transition-all w-full max-w-5xl border border-primary-400/20 backdrop-blur-sm">
       <span class="font-semibold text-center sm:text-left">Need help choosing insurance?</span>
       <button
-        class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base safe-consultation-btn"
-        data-safe-btn="true"
-        data-open-consultation="true"
+        onclick="window.openOffersModal()"
+        class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base"
       >
         Free Consultation
       </button>
     </div>
   </article>
-
-  <ConsultationModal />
 
   <!-- BlogPosting Schema Markup -->
   <script type="application/ld+json" slot="head">
@@ -483,103 +479,4 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
   :global(.prose img) {
     border-radius: 0.5rem;
   }
-</style> 
-
-<!-- Emergency modal handling specifically for blog posts -->
-<script is:inline>
-  // Simple blog protection - Prevent unexpected modal behavior
-  (function() {
-    console.log("🔍 Blog Modal Protection active");
-    
-    // Blog pages should never show consultation modals automatically
-    // Only allow them to be opened via explicit user action
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      // Find any consultation modal
-      const modal = document.getElementById('consultation-modal');
-      
-      // Ensure the modal is hidden on blog pages
-      if (modal && !modal.classList.contains('hidden')) {
-        console.log("Hiding modal on blog page");
-        modal.classList.add('hidden');
-      }
-      
-      // Enhanced button handling for blog pages
-      const safeButtons = document.querySelectorAll('.safe-consultation-btn');
-      safeButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const modal = document.getElementById('consultation-modal');
-          if (modal) {
-            // Remove hidden class and add modal-open class to body
-            modal.classList.remove('hidden');
-            document.body.classList.add('modal-open');
-            
-            // Properly reset modal to first step if needed
-            const firstStep = document.getElementById('consultation-step-1');
-            if (firstStep) {
-              document.querySelectorAll('.modal-step').forEach(step => {
-                step.classList.add('hidden');
-                step.classList.remove('active');
-              });
-              firstStep.classList.remove('hidden');
-              firstStep.classList.add('active');
-            }
-            
-            // Dispatch the modalOpened event to properly initialize
-            document.dispatchEvent(new CustomEvent('modalOpened', {
-              detail: { modalId: 'consultation-modal' }
-            }));
-          }
-        });
-      });
-      
-      // Ensure closing works
-      if (modal) {
-        // Close on backdrop click
-        modal.addEventListener('click', function(e) {
-          if (e.target === this) {
-            console.log("Closing modal via backdrop click");
-            if (typeof window.closeConsultationModal === 'function') {
-              window.closeConsultationModal();
-            } else {
-              this.classList.add('hidden');
-              document.body.classList.remove('modal-open');
-            }
-          }
-        });
-        
-        // Close button
-        const closeButton = modal.querySelector('#close-modal-btn');
-        if (closeButton) {
-          closeButton.addEventListener('click', function() {
-            console.log("Closing modal via close button");
-            if (typeof window.closeConsultationModal === 'function') {
-              window.closeConsultationModal();
-            } else {
-              modal.classList.add('hidden');
-              document.body.classList.remove('modal-open');
-            }
-          });
-        }
-      }
-    });
-    
-    // Block automatic opening but allow manual opening
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        const modal = document.getElementById('consultation-modal');
-        if (modal && !modal.classList.contains('hidden')) {
-          console.log("Closing modal via ESC key");
-          if (typeof window.closeConsultationModal === 'function') {
-            window.closeConsultationModal();
-          } else {
-            modal.classList.add('hidden');
-            document.body.classList.remove('modal-open');
-          }
-        }
-      }
-    });
-  })();
-</script>
+</style>
