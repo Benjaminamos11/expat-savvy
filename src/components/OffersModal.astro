@@ -59,38 +59,35 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
   </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Global function to open modal (for compatibility with existing scripts)
-  // @ts-ignore
-  window.openOffersModal = function() {
-    console.log('🚀 openOffersModal called');
-    // @ts-ignore
-    if (window.globalOffersModal) {
-      console.log('✅ Using globalOffersModal.openModal()');
-      // @ts-ignore
-      window.globalOffersModal.openModal();
-    } else {
-      console.log('⚠️ Using fallback modal opening');
-      // Fallback: directly show modal (should not be needed if script loads properly)
-      const modal = document.getElementById('offers-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        document.body.classList.add('modal-open');
-        console.log('✅ Modal opened via fallback');
-      } else {
-        console.error('❌ Modal element not found');
-      }
-    }
-  };
+<script is:inline>
+// Create openOffersModal function immediately - not waiting for DOM
+console.log('🎯 Creating openOffersModal function immediately');
+
+window.openOffersModal = function() {
+  console.log('🚀 openOffersModal called');
   
-  // Legacy compatibility
-  // @ts-ignore
-  window.showConsultationModal = window.openOffersModal;
-  // @ts-ignore
-  window.openConsultationModal = window.openOffersModal;
-});
+  if (window.globalOffersModal) {
+    console.log('✅ Using globalOffersModal.openModal()');
+    window.globalOffersModal.openModal();
+  } else {
+    console.log('⚠️ Using fallback modal opening');
+    const modal = document.getElementById('offers-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
+      console.log('✅ Modal opened via fallback');
+    } else {
+      console.error('❌ Modal element not found');
+    }
+  }
+};
+
+// Legacy compatibility
+window.showConsultationModal = window.openOffersModal;
+window.openConsultationModal = window.openOffersModal;
+
+console.log('✅ openOffersModal function created and available');
 </script>
 
 <style>
@@ -182,4 +179,4 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="https://unpkg.com/lucide@0.244.0/dist/umd/lucide.js"></script>
 
 <!-- Include the OffersModal class logic (loads after Lucide) -->
-<script src="/scripts/offers-modal.js?v=2.2.0" is:inline></script>
+<script src="/scripts/offers-modal.js?v=2.3.0" is:inline></script>
