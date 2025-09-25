@@ -194,7 +194,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
           <td class="px-6 py-4 text-center">⭐⭐⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-green-600">9.2/10</td>
           <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 287</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 396</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -206,7 +206,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
           <td class="px-6 py-4 text-center">⭐⭐⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-green-600">9.0/10</td>
           <td class="px-6 py-4 text-center">Standard</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 356</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 377</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -218,7 +218,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
           <td class="px-6 py-4 text-center">⭐⭐⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-green-600">8.8/10</td>
           <td class="px-6 py-4 text-center">Telmed</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 264</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 374</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -229,7 +229,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
           <td class="px-6 py-4 text-center">⭐⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-blue-600">8.5/10</td>
           <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 293</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 377</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -240,7 +240,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
           <td class="px-6 py-4 text-center">⭐⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-blue-600">8.2/10</td>
           <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 295</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 393</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -251,7 +251,7 @@ This guide explains how to find the best health insurance in Switzerland for exp
           <td class="px-6 py-4 text-center">⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-blue-600">7.8/10</td>
           <td class="px-6 py-4 text-center">Standard</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 339</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 372</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -261,8 +261,8 @@ This guide explains how to find the best health insurance in Switzerland for exp
           </td>
           <td class="px-6 py-4 text-center">⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-blue-600">7.5/10</td>
-          <td class="px-6 py-4 text-center">Telmed</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 283</td>
+          <td class="px-6 py-4 text-center">HMO</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 370</td>
         </tr>
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4">
@@ -272,8 +272,8 @@ This guide explains how to find the best health insurance in Switzerland for exp
           </td>
           <td class="px-6 py-4 text-center">⭐⭐⭐</td>
           <td class="px-6 py-4 text-center font-semibold text-blue-600">7.3/10</td>
-          <td class="px-6 py-4 text-center">HMO</td>
-          <td class="px-6 py-4 text-right font-semibold">CHF 299</td>
+          <td class="px-6 py-4 text-center">Standard</td>
+          <td class="px-6 py-4 text-right font-semibold">CHF 396</td>
         </tr>
       </tbody>
     </table>
