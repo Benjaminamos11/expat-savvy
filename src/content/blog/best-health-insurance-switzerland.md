@@ -26,7 +26,9 @@ Choosing the right health insurance in Switzerland is one of the most important 
 This comprehensive guide provides verified information about Switzerland's top health insurance companies, real 2026 premium data, and expert insights to help you make an informed decision before the November 30th deadline.
 
 <div class="text-center my-8">
-  <button onclick="window.openOffersModal && window.openOffersModal('comprehensive-guide')"
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="Health Insurance Expert Guidance"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -275,7 +277,9 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Service-oriented expats who value wellness programs and excellent customer support.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('swica-consultation')"
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="Swica Health Insurance Consultation"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -336,7 +340,9 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Tech-savvy expats who appreciate digital tools and comprehensive healthcare networks.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('helsana-consultation')"
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="Helsana Health Insurance Consultation"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -397,7 +403,9 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expats who prioritize extensive provider networks and established market presence.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('css-consultation')"
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="CSS Health Insurance Consultation"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -458,7 +466,9 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expats seeking innovative healthcare solutions with quality service focus.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('sanitas-consultation')"
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="Sanitas Health Insurance Consultation"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -900,7 +910,9 @@ All top 4 providers (Swica, Helsana, CSS, Sanitas) offer comprehensive English s
 </div>
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('deadline-consultation')" 
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="Deadline Assistance Consultation"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -920,7 +932,9 @@ The choice of health insurance provider will impact your finances and healthcare
 **Our insurance specialists have helped over 1,000 expats navigate Swiss health insurance successfully.** Get personalized recommendations based on your specific needs, family situation, and healthcare preferences.
 
 <div class="text-center mt-8">
-  <button onclick="window.openOffersModal && window.openOffersModal('final-consultation')"
+  <button data-open-consultation
+          data-consultation-type="health"
+          data-consultation-title="Free Expert Health Insurance Consultation"
           class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
