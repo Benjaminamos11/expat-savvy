@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
+  output: 'server',
   integrations: [
     tailwind(),
     react(),

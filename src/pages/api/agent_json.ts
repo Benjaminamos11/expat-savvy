@@ -3,46 +3,45 @@ import type { APIRoute } from 'astro';
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
+    console.log('📥 Frontend API received:', body);
     
-    // Forward request to Python backend
-    const response = await fetch('http://localhost:8000/tools/chat', {
+    const response = await fetch('http://127.0.0.1:8000/api/agent_json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + Buffer.from('admin:phase_a_2025').toString('base64')
       },
-      body: JSON.stringify({
-        messages: [{ role: 'user', content: body.message || body.query || body.text }],
-        system_prompt: `You are an expert Swiss health insurance assistant powered by GPT-5. Help users with Swiss insurance questions, premium calculations, and provider comparisons. Use official Swiss data when possible.`,
-        use_tools: true
-      })
+      body: JSON.stringify(body)
     });
 
+    console.log('📤 Backend responded with status:', response.status);
+
     if (!response.ok) {
-      throw new Error(`Backend API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error('❌ Backend error:', response.status, errorText);
+      throw new Error(`Backend error: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log('✅ Success! Returning data to frontend');
     
-    return new Response(JSON.stringify({
-      success: true,
-      response: data.text || data.message || 'I can help you with Swiss insurance questions!',
-      data: data
-    }), {
+    return new Response(JSON.stringify(data), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
   } catch (error) {
-    console.error('Agent API Error:', error);
-    
-    return new Response(JSON.stringify({
-      success: false,
-      error: 'Failed to get response from agent',
-      message: 'Sorry, I\'m having trouble right now. Please try again in a moment.'
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    console.error('❌ API route error:', error);
+    return new Response(
+      JSON.stringify({
+        message: "I'm sorry, I encountered a connection error. Please check your internet connection and try again.",
+        conversationId: null
+      }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
   }
 };
