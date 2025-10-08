@@ -379,6 +379,12 @@ async def send_user_email(user_email: str, premium_data: str, user_name: str = "
     try:
         subject = "Your Swiss Insurance Information from Expat-Savvy"
         
+        # Pre-format data to avoid backslashes in f-strings
+        formatted_premium = premium_data.replace('\n', '<br>')
+        formatted_message = message.replace('\n', '<br>') if message else ''
+        greeting = f" {user_name}" if user_name else ""
+        message_box = f'<div class="premium-box">{formatted_message}</div>' if message else ''
+        
         email_html = f"""
         <!DOCTYPE html>
         <html>
@@ -402,15 +408,15 @@ async def send_user_email(user_email: str, premium_data: str, user_name: str = "
             </div>
             
             <div class="content">
-                <p>Hello{f" {user_name}" if user_name else ""},</p>
+                <p>Hello{greeting},</p>
                 
                 <p>Thank you for using our AI assistant! Here's the information you requested:</p>
                 
                 <div class="premium-box">
-                    {premium_data.replace('\n', '<br>')}
+                    {formatted_premium}
                 </div>
                 
-                {f'<div class="premium-box">{message.replace(chr(10), "<br>")}</div>' if message else ''}
+                {message_box}
                 
                 <h2>🤝 Ready for Personal Guidance?</h2>
                 <p>While our AI provides excellent initial information, our human experts can offer personalized advice tailored to your specific situation.</p>
