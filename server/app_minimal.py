@@ -600,7 +600,10 @@ async def chat_endpoint(body: ChatBody):
         }
         
     except Exception as e:
+        import traceback
         print(f"❌ Chat error: {e}")
+        print(f"❌ Full traceback:")
+        traceback.print_exc()
         return {
             "message": "I'm having trouble right now. Please try again in a moment, or contact us directly at +41 79 155 25 70.",
             "conversationId": None
