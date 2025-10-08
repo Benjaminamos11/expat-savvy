@@ -4,8 +4,8 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     
-    // Use production backend URL
-    const BACKEND_URL = import.meta.env.PUBLIC_BACKEND_URL || 'https://expat-savvy-ai-backend-white-night-2514.fly.dev';
+    // Use production backend (now fixed with US region)
+    const BACKEND_URL = 'https://expat-savvy-ai-backend-white-night-2514.fly.dev';
     
     const response = await fetch(`${BACKEND_URL}/api/agent_json`, {
       method: 'POST',
