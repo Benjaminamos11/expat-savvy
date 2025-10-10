@@ -28,6 +28,42 @@
     }
   }
 
+  // Send LinkedIn tracking event
+  function sendLinkedInEvent(eventName, props = {}) {
+    if (window.lintrk) {
+      console.log(`🔗 LinkedIn Tracking: ${eventName}`, props);
+      window.lintrk('track', eventName, props);
+    } else {
+      console.warn('⚠️ LinkedIn Insight Tag not loaded, queuing event:', eventName);
+      // Queue for later if LinkedIn isn't loaded yet
+      setTimeout(() => sendLinkedInEvent(eventName, props), 1000);
+    }
+  }
+
+  // Send Facebook tracking event
+  function sendFacebookEvent(eventName, props = {}) {
+    if (window.fbq) {
+      console.log(`📘 Facebook Tracking: ${eventName}`, props);
+      window.fbq('track', eventName, props);
+    } else {
+      console.warn('⚠️ Facebook Pixel not loaded, queuing event:', eventName);
+      // Queue for later if Facebook isn't loaded yet
+      setTimeout(() => sendFacebookEvent(eventName, props), 1000);
+    }
+  }
+
+  // Multi-platform event tracking
+  function trackMultiPlatform(eventName, props = {}) {
+    // Plausible (existing)
+    sendPlausibleEvent(eventName, props);
+    
+    // LinkedIn
+    sendLinkedInEvent(eventName, props);
+    
+    // Facebook (if pixel is loaded)
+    sendFacebookEvent(eventName, props);
+  }
+
   // Get current page context
   function getPageContext() {
     return {
@@ -69,12 +105,22 @@
     const context = getPageContext();
     const attribution = getAttributionData();
     
-    sendPlausibleEvent('quote_flow_started', {
+    const eventData = {
       ...context,
       ...attribution,
       flow_type: props.flowType || 'quote',
       form_type: props.formType || 'smart_insurance',
       ...props
+    };
+    
+    // Track on all platforms
+    trackMultiPlatform('quote_flow_started', eventData);
+    
+    // LinkedIn-specific tracking for retargeting
+    sendLinkedInEvent('QuoteStarted', {
+      value: 1,
+      currency: 'CHF',
+      content_name: props.formType || 'smart_insurance'
     });
   };
 
@@ -85,13 +131,24 @@
     const context = getPageContext();
     const attribution = getAttributionData();
     
-    sendPlausibleEvent('quote_submitted', {
+    const eventData = {
       ...context,
       ...attribution,
       form_type: props.formType || 'smart_insurance',
       insurance_type: props.insuranceType || '',
       provider: props.provider || '',
       ...props
+    };
+    
+    // Track on all platforms
+    trackMultiPlatform('quote_submitted', eventData);
+    
+    // LinkedIn conversion tracking
+    sendLinkedInEvent('QuoteCompleted', {
+      value: 50, // Estimated value of a quote
+      currency: 'CHF',
+      content_name: props.formType || 'smart_insurance',
+      content_category: props.insuranceType || 'health_insurance'
     });
   };
 
@@ -102,13 +159,24 @@
     const context = getPageContext();
     const attribution = getAttributionData();
     
-    sendPlausibleEvent('lead_created', {
+    const eventData = {
       ...context,
       ...attribution,
       flow: props.flow || 'quote',
       leadId: props.leadId || '',
       stage: props.stage || 'new',
       ...props
+    };
+    
+    // Track on all platforms
+    trackMultiPlatform('lead_created', eventData);
+    
+    // LinkedIn high-value conversion tracking
+    sendLinkedInEvent('LeadCreated', {
+      value: 200, // Estimated value of a lead
+      currency: 'CHF',
+      content_name: props.flow || 'quote',
+      content_category: 'insurance_lead'
     });
   };
 
@@ -135,12 +203,23 @@
     const context = getPageContext();
     const attribution = getAttributionData();
     
-    sendPlausibleEvent('consultation_booked', {
+    const eventData = {
       ...context,
       ...attribution,
       calendar_type: props.calendarType || 'cal_com',
       topic: props.topic || '',
       ...props
+    };
+    
+    // Track on all platforms
+    trackMultiPlatform('consultation_booked', eventData);
+    
+    // LinkedIn premium conversion tracking
+    sendLinkedInEvent('ConsultationBooked', {
+      value: 300, // Estimated value of a consultation
+      currency: 'CHF',
+      content_name: 'consultation_booking',
+      content_category: 'insurance_consultation'
     });
   };
 
@@ -174,12 +253,24 @@
     });
   };
 
+  // LinkedIn page view tracking
+  function trackLinkedInPageView() {
+    if (window.lintrk) {
+      window.lintrk('track', 'PageView');
+    }
+  }
+
   // AUTO-INITIALIZATION
   waitForPlausible(() => {
     console.log('✅ Plausible tracking system initialized');
     
     // Store attribution data on page load
     storeAttribution();
+    
+    // Track LinkedIn page view
+    setTimeout(() => {
+      trackLinkedInPageView();
+    }, 1000);
     
     // Override showConsultationModal function to add tracking
     if (typeof window.showConsultationModal === 'function') {
