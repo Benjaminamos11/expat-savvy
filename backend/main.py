@@ -16,6 +16,7 @@ import httpx
 from datetime import datetime, timedelta
 import json
 import uuid
+import asyncio
 from supabase import Client
 
 from database import get_supabase
@@ -164,7 +165,8 @@ async def create_lead(lead_data: LeadCreate, supabase: Client = Depends(get_supa
             await email_service.start_nurture_sequence(
                 lead_id, 
                 created_lead.get("email"), 
-                created_lead.get("name")
+                created_lead.get("name"),
+                supabase
             )
         
         return LeadResponse(ok=True, lead_id=lead_id)
@@ -176,38 +178,89 @@ async def create_lead(lead_data: LeadCreate, supabase: Client = Depends(get_supa
 async def calcom_webhook(webhook_data: dict, supabase: Client = Depends(get_supabase)):
     """Handle Cal.com booking webhooks"""
     try:
-        # Extract email from webhook data
+        # Log the webhook data for debugging
+        print(f"🔔 Cal.com webhook received: {json.dumps(webhook_data, indent=2)}")
+        
+        # Extract data from webhook
+        payload = webhook_data.get("payload", {})
         attendee_email = None
-        if "payload" in webhook_data:
-            attendees = webhook_data["payload"].get("attendees", [])
-            if attendees:
-                attendee_email = attendees[0].get("email")
+        attendee_name = None
+        attendee_phone = None
+        
+        attendees = payload.get("attendees", [])
+        if attendees:
+            attendee_email = attendees[0].get("email")
+            attendee_name = attendees[0].get("name")
+            # Phone might be in responses or metadata
         
         if not attendee_email:
             raise HTTPException(status_code=400, detail="No attendee email found")
         
-        # Find lead by email
+        # Extract appointment details
+        booking_id = payload.get("uid") or payload.get("id")
+        event_type_id = payload.get("eventTypeId")
+        event_type_name = payload.get("eventType", {}).get("title") if "eventType" in payload else None
+        scheduled_at = payload.get("startTime")
+        duration = payload.get("eventType", {}).get("length") if "eventType" in payload else 30
+        timezone = payload.get("attendees", [{}])[0].get("timeZone") if attendees else None
+        meeting_url = payload.get("metadata", {}).get("videoCallUrl") or payload.get("location")
+        
+        # Find or create lead
         lead_result = supabase.table("leads").select("*").eq("email", attendee_email).execute()
         
-        if not lead_result.data:
-            raise HTTPException(status_code=404, detail="Lead not found")
+        lead_id = None
+        if lead_result.data:
+            lead = lead_result.data[0]
+            lead_id = lead["id"]
+        else:
+            # Create lead if doesn't exist (direct booking without form fill)
+            lead_id = str(uuid.uuid4())
+            supabase.table("leads").insert({
+                "id": lead_id,
+                "email": attendee_email,
+                "name": attendee_name,
+                "stage": "booked",
+                "flow": "consultation",
+                "email_sequence_status": "stopped",
+                "consent_marketing": False
+            }).execute()
+            lead = {"id": lead_id, "email": attendee_email}
         
-        lead = lead_result.data[0]
+        # Create appointment record
+        appointment_data = {
+            "id": str(uuid.uuid4()),
+            "lead_id": lead_id,
+            "attendee_name": attendee_name,
+            "attendee_email": attendee_email,
+            "attendee_phone": attendee_phone,
+            "booking_id": booking_id,
+            "event_type_id": str(event_type_id) if event_type_id else None,
+            "event_type_name": event_type_name,
+            "scheduled_at": scheduled_at,
+            "duration_minutes": duration,
+            "timezone": timezone,
+            "status": "scheduled",
+            "meeting_url": meeting_url,
+            "webhook_payload": payload
+        }
         
-        # Update lead stage
+        supabase.table("appointments").insert(appointment_data).execute()
+        
+        # Update lead stage to booked
         supabase.table("leads").update({
             "stage": "booked",
             "updated_at": datetime.utcnow().isoformat()
-        }).eq("id", lead["id"]).execute()
+        }).eq("id", lead_id).execute()
         
         # Create booking event
         event_data = {
             "id": str(uuid.uuid4()),
-            "lead_id": lead["id"],
+            "lead_id": lead_id,
             "name": "consultation_booked",
             "props": {
-                "event_type_id": webhook_data.get("payload", {}).get("eventTypeId"),
-                "booking_id": webhook_data.get("payload", {}).get("id")
+                "event_type_id": event_type_id,
+                "booking_id": booking_id,
+                "scheduled_at": scheduled_at
             }
         }
         
@@ -227,10 +280,10 @@ async def calcom_webhook(webhook_data: dict, supabase: Client = Depends(get_supa
             }
         )
         
-        # Stop nurture sequence
-        await email_service.stop_nurture_sequence(lead["id"])
+        # Stop nurture email sequence
+        await email_service.stop_nurture_sequence(lead_id, supabase)
         
-        return {"ok": True, "message": "Booking processed successfully"}
+        return {"ok": True, "message": "Booking processed successfully", "appointment_id": appointment_data["id"]}
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing webhook: {str(e)}")
@@ -251,6 +304,139 @@ async def track_event(event_data: EventCreate, supabase: Client = Depends(get_su
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error tracking event: {str(e)}")
+
+# Email Nurture Endpoints
+
+@app.api_route("/api/email/process-nurture", methods=["GET", "POST"])
+async def process_nurture_emails(supabase: Client = Depends(get_supabase)):
+    """
+    Process nurture email queue - sends Day 1 and Day 3 emails
+    Called by external cron job every 6 hours
+    Accepts both GET and POST for cron job compatibility
+    """
+    try:
+        stats = await email_service.process_nurture_queue(supabase)
+        
+        return {
+            "ok": True,
+            "message": "Nurture queue processed successfully",
+            "stats": stats,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing nurture queue: {str(e)}")
+
+@app.post("/api/test/simulate-booking")
+async def simulate_booking(supabase: Client = Depends(get_supabase)):
+    """
+    Test endpoint to simulate a Cal.com booking for bw@expat-savvy.ch
+    This tests the entire webhook flow
+    """
+    test_webhook_data = {
+        "triggerEvent": "BOOKING_CREATED",
+        "createdAt": datetime.utcnow().isoformat(),
+        "payload": {
+            "uid": f"test-booking-{uuid.uuid4()}",
+            "id": 12345,
+            "eventTypeId": 67890,
+            "eventType": {
+                "title": "15min Consultation Call",
+                "length": 15
+            },
+            "startTime": (datetime.utcnow() + timedelta(days=1)).isoformat(),
+            "endTime": (datetime.utcnow() + timedelta(days=1, minutes=15)).isoformat(),
+            "attendees": [
+                {
+                    "email": "bw@expat-savvy.ch",
+                    "name": "Benjamin Wagner",
+                    "timeZone": "Europe/Zurich"
+                }
+            ],
+            "location": "https://meet.google.com/test-link",
+            "metadata": {
+                "videoCallUrl": "https://meet.google.com/test-link"
+            }
+        }
+    }
+    
+    # Call the webhook handler
+    response = await calcom_webhook(test_webhook_data, supabase)
+    return response
+
+@app.post("/api/email/test-all-emails")
+async def test_all_emails():
+    """
+    Test endpoint to send all 3 nurture emails to bw@expat-savvy.ch
+    """
+    try:
+        test_email = "bw@expat-savvy.ch"
+        test_name = "Benjamin"
+        test_lead_id = "test-" + test_email.replace("@", "-").replace(".", "-")
+        
+        results = {}
+        
+        # Send Welcome Email
+        print("📧 Sending Welcome email...")
+        results["welcome"] = await email_service.send_welcome_email(test_lead_id, test_email, test_name, supabase=None)
+        
+        # Wait to avoid rate limit (Resend: 2 requests/second)
+        await asyncio.sleep(1)
+        
+        # Send Day 1 Email
+        print("📧 Sending Day 1 email...")
+        results["day1"] = await email_service.send_day1_email(test_lead_id, test_email, test_name, supabase=None)
+        
+        # Wait to avoid rate limit
+        await asyncio.sleep(1)
+        
+        # Send Day 3 Email
+        print("📧 Sending Day 3 email...")
+        results["day3"] = await email_service.send_day3_email(test_lead_id, test_email, test_name, supabase=None)
+        
+        return {
+            "ok": True,
+            "message": f"Test emails sent to {test_email}",
+            "results": results,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error sending test emails: {str(e)}")
+
+@app.get("/api/email/status")
+async def get_email_status(admin: dict = Depends(verify_admin), supabase: Client = Depends(get_supabase)):
+    """Get email funnel status and statistics"""
+    try:
+        # Count leads by email sequence status
+        active_result = supabase.table("leads").select("id", count="exact").eq("email_sequence_status", "active").execute()
+        stopped_result = supabase.table("leads").select("id", count="exact").eq("email_sequence_status", "stopped").execute()
+        completed_result = supabase.table("leads").select("id", count="exact").eq("email_sequence_status", "completed").execute()
+        
+        # Count emails sent
+        welcome_sent = supabase.table("leads").select("id", count="exact").not_.is_("email_welcome_sent_at", "null").execute()
+        day1_sent = supabase.table("leads").select("id", count="exact").not_.is_("email_day1_sent_at", "null").execute()
+        day3_sent = supabase.table("leads").select("id", count="exact").not_.is_("email_day3_sent_at", "null").execute()
+        
+        # Get recent email events
+        events_result = supabase.table("events").select("*").in_("name", ["email_sent_welcome", "email_sent_day1", "email_sent_day3"]).order("created_at", desc=True).limit(20).execute()
+        
+        return {
+            "sequences": {
+                "active": active_result.count if hasattr(active_result, 'count') else 0,
+                "stopped": stopped_result.count if hasattr(stopped_result, 'count') else 0,
+                "completed": completed_result.count if hasattr(completed_result, 'count') else 0
+            },
+            "emails_sent": {
+                "welcome": welcome_sent.count if hasattr(welcome_sent, 'count') else 0,
+                "day1": day1_sent.count if hasattr(day1_sent, 'count') else 0,
+                "day3": day3_sent.count if hasattr(day3_sent, 'count') else 0
+            },
+            "recent_events": events_result.data if events_result.data else []
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting email status: {str(e)}")
 
 # Admin endpoints (protected)
 @app.get("/api/leads")

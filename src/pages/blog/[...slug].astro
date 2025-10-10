@@ -4,35 +4,45 @@ import type { CollectionEntry } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import { convertToSocialImage } from '../../utils/imageUtils.js';
 
-export async function getStaticPaths() {
+// For SSR mode, we need to get the post dynamically
+const slug = Astro.params.slug;
+let post: CollectionEntry<'blog'> | undefined;
+let socialImage = '';
+
+if (slug) {
   const posts = await getCollection('blog');
-  return posts.map((post: CollectionEntry<'blog'>) => {
+  post = posts.find((p) => p.slug === slug);
+  
+  if (post) {
     // Process image for social media if it exists
-    const socialImage = post.data.image ? convertToSocialImage(post.data.image) : '';
-    
-    return {
-      params: { slug: post.slug },
-      props: { 
-        post,
-        socialImage
-      },
-    };
-  });
+    socialImage = post.data.image ? convertToSocialImage(post.data.image) : '';
+  }
 }
 
-const { post, socialImage } = Astro.props as { post?: any, socialImage?: string };
+// If no post found, return 404
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+// Render the content
 let Content;
 if (post && typeof post.render === 'function') {
-  Content = (await post.render()).Content;
+  try {
+    const rendered = await post.render();
+    Content = rendered.Content;
+  } catch (error) {
+    console.error('Error rendering post:', error);
+    Content = null;
+  }
 }
 
 // Prepare frontmatter with social image
 const frontmatter = {
-  ...post?.data,
-  socialImage: socialImage || post?.data?.image
+  ...post.data,
+  socialImage: socialImage || post.data.image
 };
 ---
 
 <BlogLayout frontmatter={frontmatter}>
-  {Content && <Content />}
+  <Content />
 </BlogLayout> 

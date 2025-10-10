@@ -400,7 +400,46 @@ const finalProviderName = props.providerName || providerName;
             });
           }
 
-          // Send data to Formspree (don't await to avoid blocking UI)
+          // Send data to backend API for email nurture
+          const leadData = {
+            name: userData.name,
+            email: userData.email,
+            phone: userData.phone || '',
+            consent_marketing: true,
+            stage: 'new',
+            flow: 'consultation',
+            notes: {
+              form_type: 'consultation_modal',
+              topic: userData.topic,
+              source: userData.source,
+              notes: userData.notes,
+              insurance_type: userData.insuranceType,
+              provider_name: userData.providerName,
+              page_url: currentPageUrl,
+              page_title: pageTitle
+            }
+          };
+
+          // Submit to backend API for email nurture
+          fetch('https://expat-savvy-api.fly.dev/api/lead', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(leadData)
+          })
+          .then(response => {
+            if (response.ok) {
+              console.log('✅ Lead created and welcome email sent');
+            } else {
+              console.error('❌ Backend API submission failed');
+            }
+          })
+          .catch(error => {
+            console.error('❌ Error submitting to backend API:', error);
+          });
+
+          // Send data to Formspree (fallback/backup)
           fetch('https://formspree.io/f/mrbewjlr', {
             method: 'POST',
             body: formData,

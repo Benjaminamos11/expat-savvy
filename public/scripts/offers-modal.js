@@ -1323,6 +1323,71 @@ class OffersModal {
     return true;
   }
 
+  async submitToBackendAPI() {
+    console.log('📤 Submitting to backend API...');
+    
+    // Get attribution data
+    const attribution = typeof window.getAttributionData === 'function' ? window.getAttributionData() : {};
+    
+    // Prepare lead data for backend API
+    const leadData = {
+      name: this.formData.name || '',
+      email: this.formData.email || '',
+      phone: this.formData.phone || '',
+      consent_marketing: this.formData.consent || true, // Assuming consent for form submissions
+      
+      // Attribution data
+      utm_source: attribution.utm_source,
+      utm_medium: attribution.utm_medium,
+      utm_campaign: attribution.utm_campaign,
+      utm_term: attribution.utm_term,
+      utm_content: attribution.utm_content,
+      referrer: attribution.referrer,
+      landing_path: attribution.landing_path,
+      channel: attribution.channel,
+      city: attribution.city,
+      page_type: attribution.page_type,
+      
+      // Lead metadata
+      stage: 'new',
+      flow: 'quote',
+      notes: {
+        form_type: 'get_3_best_offers',
+        postcode: this.formData.postcode,
+        household: this.formData.household,
+        motivation: this.formData.motivation,
+        deductible: this.formData.deductible,
+        model: this.formData.model,
+        people_count: this.formData.people?.length || 0,
+        priorities: this.formData.priorities,
+        other_needs: this.formData.other_needs,
+        page_intent: this.pageIntent,
+        page_slug: window.location.pathname
+      }
+    };
+
+    try {
+      const response = await fetch('https://expat-savvy-api.fly.dev/api/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('✅ Backend API submission successful:', result);
+      return result;
+    } catch (error) {
+      console.error('❌ Backend API submission error:', error);
+      throw error;
+    }
+  }
+
   submitOffersForm() {
     console.log('Submitting offers form...');
     
@@ -1368,6 +1433,11 @@ class OffersModal {
     
     // Save current step data first
     this.saveCurrentData();
+    
+    // First, submit to backend API
+    this.submitToBackendAPI()
+      .then(() => console.log('✅ Backend API submission successful'))
+      .catch(error => console.error('⚠️ Backend API submission failed (continuing anyway):', error));
     
     // Prepare form data for Formspree
     const formData = new FormData();

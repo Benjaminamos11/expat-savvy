@@ -1,14 +1,25 @@
-# Astro Starter Kit: Basics
+# Expat Savvy - Swiss Health Insurance Platform
 
-```sh
-npm create astro@latest -- --template basics
-```
+A comprehensive platform helping expats navigate Swiss health insurance with personalized recommendations and automated lead nurturing.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 📧 Email Nurture System
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Status:** ✅ Fully Operational
+
+This project includes a complete email nurture funnel that automatically follows up with leads who request quotes but haven't booked a consultation yet.
+
+### 📚 Documentation:
+- **[EMAIL_NURTURE_SYSTEM.md](./EMAIL_NURTURE_SYSTEM.md)** - Complete technical documentation of the email system
+- **[FORMS_INTEGRATION_STATUS.md](./FORMS_INTEGRATION_STATUS.md)** - Status of all forms and their integration
+
+### Quick Overview:
+- ✅ Welcome email sent immediately after form submission
+- ✅ Day 1 follow-up email (24 hours later)
+- ✅ Day 3 final email (72 hours later)
+- ✅ Automatic stop on booking via Cal.com webhook
+- ✅ All forms on site are connected and working
+
+---
 
 ![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
