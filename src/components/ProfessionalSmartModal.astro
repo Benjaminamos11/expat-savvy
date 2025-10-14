@@ -172,8 +172,6 @@
 
   // Professional Smart Modal Component  
   const ProfessionalSmartModal = ({ isOpen, onClose }) => {
-    console.log('🎭 ProfessionalSmartModal rendered, isOpen:', isOpen, 'currentStep:', currentStep);
-    
     const goToStep = (step) => {
       currentStep = step;
       renderModal();
@@ -211,13 +209,7 @@
       renderModal();
     };
 
-    if (!isOpen) {
-      console.log('❌ Modal not opening because isOpen is:', isOpen);
-      return null;
-    }
-    
-    console.log('✅ Modal should be visible, isOpen:', isOpen);
-    console.log('🎬 About to render modal with currentStep:', currentStep);
+    if (!isOpen) return null;
 
     // Step 1: Qualification
     const renderQualificationStep = () => React.createElement('div', { className: 'modal-step' },
@@ -712,21 +704,6 @@
       )
     );
 
-    console.log('🎭 Returning modal backdrop with currentStep:', currentStep);
-    
-    // Test: Return a simple div first to see if React can render it
-    return React.createElement('div', {
-      className: 'modal-backdrop',
-      onClick: (e) => e.target === e.currentTarget && closeModal(),
-      style: { background: 'red', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 10000 }
-    },
-      React.createElement('div', { style: { color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '200px' } }, 
-        'MODAL TEST - If you see this, React is working!'
-      )
-    );
-    
-    // Original complex return (temporarily disabled)
-    /*
     return React.createElement('div', {
       className: 'modal-backdrop',
       onClick: (e) => e.target === e.currentTarget && closeModal()
@@ -748,7 +725,6 @@
         currentStep === 'self-service-confirmation' && renderSelfServiceConfirmation()
       )
     );
-    */
   };
 
   const renderModal = () => {
@@ -923,10 +899,10 @@
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255, 0, 0, 0.8) !important; /* TEMPORARY: Bright red for debugging */
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
-  z-index: 10000 !important;
-  display: flex !important;
+  z-index: 10000;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-lg);
