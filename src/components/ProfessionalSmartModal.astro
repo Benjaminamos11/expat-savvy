@@ -157,100 +157,51 @@
     }
   ];
 
-  // Professional Smart Modal Component
-  const ProfessionalSmartModal = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [currentStep, setCurrentStep] = useState('qualification');
-    const [userData, setUserData] = useState({});
-    const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  // Modal state (using simple variables like the working version)
+  let isModalOpen = false;
+  let currentStep = 'qualification';
+  let userData = {};
+  let formData = { name: '', email: '', phone: '' };
+  let root = null;
 
-    const openModal = useCallback(() => {
-      setIsOpen(true);
-      setCurrentStep('qualification');
-      document.body.style.overflow = 'hidden';
-    }, []);
+  // Professional Smart Modal Component  
+  const ProfessionalSmartModal = ({ isOpen, onClose }) => {
+    const goToStep = (step) => {
+      currentStep = step;
+      renderModal();
+    };
 
-    const closeModal = useCallback(() => {
-      setIsOpen(false);
-      document.body.style.overflow = 'auto';
-    }, []);
-
-    const goToStep = useCallback((step) => {
-      setCurrentStep(step);
-    }, []);
-
-    const handleSituationSelect = useCallback((option) => {
-      setUserData({
+    const handleSituationSelect = (option) => {
+      userData = {
         situation: option.id,
         complexityScore: option.complexity
-      });
-      setCurrentStep('value');
-    }, []);
+      };
+      currentStep = 'value';
+      renderModal();
+    };
 
-    const handleBookingInfoSubmit = useCallback((e) => {
+    const handleBookingInfoSubmit = (e) => {
       e.preventDefault();
       if (formData.name && formData.email && formData.phone) {
-        setUserData(prev => ({ ...prev, ...formData }));
-        setCurrentStep('calendar');
+        userData = { ...userData, ...formData };
+        currentStep = 'calendar';
+        renderModal();
       }
-    }, [formData]);
+    };
 
-    const handleSelfServiceSubmit = useCallback((e) => {
+    const handleSelfServiceSubmit = (e) => {
       e.preventDefault();
       if (formData.name && formData.email) {
-        setUserData(prev => ({ ...prev, ...formData }));
-        setCurrentStep('self-service-confirmation');
+        userData = { ...userData, ...formData };
+        currentStep = 'self-service-confirmation';
+        renderModal();
       }
-    }, [formData]);
+    };
 
-    // Global modal control (using the exact same setup that worked before)
-    useEffect(() => {
-      console.log('🔧 Setting up modal controls...');
-      
-      window.openSmartModal = openModal;
-      window.closeSmartModal = closeModal;
-      
-      // Legacy compatibility
-      window.openOffersModal = openModal;
-      window.openConsultationModal = openModal;
-      window.showConsultationModal = openModal;
-
-      const handleCTAClick = (e) => {
-        const button = e.target.closest('button, a');
-        if (!button) return;
-        
-        const text = button.textContent?.toLowerCase() || '';
-        const isModalTrigger = text.includes('consultation') || 
-                              text.includes('contact us') ||
-                              text.includes('get advice') ||
-                              text.includes('book a call') ||
-                              text.includes('free advice') ||
-                              text.includes('get started');
-        
-        if (isModalTrigger) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('🎯 Opening modal from CTA click:', text);
-          openModal();
-        }
-      };
-
-      document.addEventListener('click', handleCTAClick, true);
-      
-      console.log('✅ Modal controls ready');
-      console.log('🧪 Testing modal functions...');
-      console.log('openSmartModal available:', typeof window.openSmartModal === 'function');
-      console.log('openOffersModal available:', typeof window.openOffersModal === 'function');
-      
-      return () => {
-        document.removeEventListener('click', handleCTAClick, true);
-        delete window.openSmartModal;
-        delete window.closeSmartModal;
-        delete window.openOffersModal;
-        delete window.openConsultationModal;
-        delete window.showConsultationModal;
-      };
-    }, [openModal, closeModal]);
+    const updateFormData = (field, value) => {
+      formData = { ...formData, [field]: value };
+      renderModal();
+    };
 
     if (!isOpen) return null;
 
@@ -465,7 +416,7 @@
                 type: 'text',
                 className: 'form-input',
                 value: formData.name,
-                onChange: (e) => setFormData(prev => ({ ...prev, name: e.target.value })),
+                onChange: (e) => updateFormData('name', e.target.value),
                 placeholder: 'John Doe',
                 required: true
               })
@@ -476,7 +427,7 @@
                 type: 'email',
                 className: 'form-input',
                 value: formData.email,
-                onChange: (e) => setFormData(prev => ({ ...prev, email: e.target.value })),
+                onChange: (e) => updateFormData('email', e.target.value),
                 placeholder: 'john@example.com',
                 required: true
               })
@@ -488,7 +439,7 @@
                 type: 'tel',
                 className: 'form-input',
                 value: formData.phone,
-                onChange: (e) => setFormData(prev => ({ ...prev, phone: e.target.value })),
+                onChange: (e) => updateFormData('phone', e.target.value),
                 placeholder: '+41 79 123 4567',
                 required: true
               })
@@ -610,7 +561,7 @@
                 type: 'text',
                 className: 'form-input',
                 value: formData.name,
-                onChange: (e) => setFormData(prev => ({ ...prev, name: e.target.value })),
+                onChange: (e) => updateFormData('name', e.target.value),
                 required: true
               })
             ),
@@ -620,7 +571,7 @@
                 type: 'email',
                 className: 'form-input',
                 value: formData.email,
-                onChange: (e) => setFormData(prev => ({ ...prev, email: e.target.value })),
+                onChange: (e) => updateFormData('email', e.target.value),
                 required: true
               })
             ),
@@ -770,6 +721,50 @@
     );
   };
 
+  const renderModal = () => {
+    const container = document.getElementById('professional-smart-modal-root');
+    if (!container) {
+      console.error('❌ Modal container not found');
+      return;
+    }
+    
+    if (!root) {
+      root = ReactDOM.createRoot ? ReactDOM.createRoot(container) : null;
+      if (!root) {
+        // Fallback to legacy render
+        ReactDOM.render(React.createElement(ProfessionalSmartModal, {
+          isOpen: isModalOpen,
+          onClose: closeModal
+        }), container);
+        return;
+      }
+    }
+    
+    if (root) {
+      root.render(React.createElement(ProfessionalSmartModal, {
+        isOpen: isModalOpen,
+        onClose: closeModal
+      }));
+    }
+  };
+  
+  const openModal = () => {
+    console.log('🎯 Opening Professional Smart Modal');
+    isModalOpen = true;
+    currentStep = 'qualification';
+    userData = {};
+    formData = { name: '', email: '', phone: '' };
+    document.body.style.overflow = 'hidden';
+    renderModal();
+  };
+  
+  const closeModal = () => {
+    console.log('🔒 Closing Professional Smart Modal');
+    isModalOpen = false;
+    document.body.style.overflow = 'auto';
+    renderModal();
+  };
+
   // Initialize modal (using the exact same approach that worked before)
   function initModal() {
     if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
@@ -780,15 +775,45 @@
     
     console.log('✅ React loaded successfully');
 
-    const container = document.getElementById('professional-smart-modal-root');
-    if (container && ReactDOM) {
-      console.log('✅ Container found, rendering modal...');
-      // Use the old ReactDOM.render method that worked
-      ReactDOM.render(React.createElement(ProfessionalSmartModal), container);
-      console.log('✅ Modal rendered successfully');
-    } else {
-      console.error('❌ Container not found or ReactDOM unavailable');
-    }
+    // Global functions for compatibility
+    window.openSmartModal = openModal;
+    window.closeSmartModal = closeModal;
+    
+    // Legacy compatibility
+    window.openOffersModal = openModal;
+    window.openConsultationModal = openModal;
+    window.showConsultationModal = openModal;
+
+    // Setup click handlers
+    const handleCTAClick = (e) => {
+      const button = e.target.closest('button, a');
+      if (!button) return;
+      
+      const text = button.textContent?.toLowerCase() || '';
+      const isModalTrigger = text.includes('consultation') || 
+                            text.includes('contact us') ||
+                            text.includes('get advice') ||
+                            text.includes('book a call') ||
+                            text.includes('free advice') ||
+                            text.includes('get started');
+      
+      if (isModalTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('🎯 Opening modal from CTA click:', text);
+        openModal();
+      }
+    };
+
+    document.addEventListener('click', handleCTAClick, true);
+    
+    console.log('✅ Professional Smart Modal ready');
+    console.log('🧪 Testing modal functions...');
+    console.log('openSmartModal available:', typeof window.openSmartModal === 'function');
+    console.log('openOffersModal available:', typeof window.openOffersModal === 'function');
+    
+    // Initial render
+    renderModal();
   }
 
   // Start when DOM is ready
