@@ -203,10 +203,17 @@
       }
     }, [formData]);
 
-    // Global modal control
+    // Global modal control (using the exact same setup that worked before)
     useEffect(() => {
+      console.log('🔧 Setting up modal controls...');
+      
       window.openSmartModal = openModal;
       window.closeSmartModal = closeModal;
+      
+      // Legacy compatibility
+      window.openOffersModal = openModal;
+      window.openConsultationModal = openModal;
+      window.showConsultationModal = openModal;
 
       const handleCTAClick = (e) => {
         const button = e.target.closest('button, a');
@@ -223,16 +230,25 @@
         if (isModalTrigger) {
           e.preventDefault();
           e.stopPropagation();
+          console.log('🎯 Opening modal from CTA click:', text);
           openModal();
         }
       };
 
       document.addEventListener('click', handleCTAClick, true);
       
+      console.log('✅ Modal controls ready');
+      console.log('🧪 Testing modal functions...');
+      console.log('openSmartModal available:', typeof window.openSmartModal === 'function');
+      console.log('openOffersModal available:', typeof window.openOffersModal === 'function');
+      
       return () => {
         document.removeEventListener('click', handleCTAClick, true);
         delete window.openSmartModal;
         delete window.closeSmartModal;
+        delete window.openOffersModal;
+        delete window.openConsultationModal;
+        delete window.showConsultationModal;
       };
     }, [openModal, closeModal]);
 
@@ -754,21 +770,24 @@
     );
   };
 
-  // Initialize modal
+  // Initialize modal (using the exact same approach that worked before)
   function initModal() {
     if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+      console.log('⏳ Waiting for React...');
       setTimeout(initModal, 100);
       return;
     }
+    
+    console.log('✅ React loaded successfully');
 
     const container = document.getElementById('professional-smart-modal-root');
     if (container && ReactDOM) {
-      const root = ReactDOM.createRoot ? ReactDOM.createRoot(container) : null;
-      if (root) {
-        root.render(React.createElement(ProfessionalSmartModal));
-      } else {
-        ReactDOM.render(React.createElement(ProfessionalSmartModal), container);
-      }
+      console.log('✅ Container found, rendering modal...');
+      // Use the old ReactDOM.render method that worked
+      ReactDOM.render(React.createElement(ProfessionalSmartModal), container);
+      console.log('✅ Modal rendered successfully');
+    } else {
+      console.error('❌ Container not found or ReactDOM unavailable');
     }
   }
 
