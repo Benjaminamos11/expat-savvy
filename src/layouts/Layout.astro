@@ -9,7 +9,8 @@ import Footer from '../components/Footer.astro';
 import VAG45Modal from '../components/VAG45Modal.astro';
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal.astro';
 import TermsOfServiceModal from '../components/TermsOfServiceModal.astro';
-import OffersModal from '../components/OffersModal.astro';
+import SmartModal from '../components/SmartModal.astro';
+import SmartModalAlpine from '../components/SmartModalAlpine.astro';
 import SocialMediaImage from '../components/SocialMediaImage.astro';
 
 interface Props {
@@ -130,8 +131,8 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <meta name="cookie-control" content="strict" />
     <meta name="cookie-control-third-party" content="block-unless-accepted" />
     
-    <!-- Modal styles -->
-    <link rel="stylesheet" href="/scripts/modal-styles.css" />
+    <!-- Smart Modal styles -->
+    <!-- <link rel="stylesheet" href="/styles/smart-modal.css" /> -->
     
     <!-- Plausible Analytics (Cookieless) -->
     <script defer data-domain="expat-savvy.ch" src="https://plausible.io/js/script.js"></script>
@@ -157,7 +158,9 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <VAG45Modal />
     <PrivacyPolicyModal />
     <TermsOfServiceModal />
-    <OffersModal />
+    <!-- <SmartModal /> -->
+    <!-- New Alpine.js Smart Modal -->
+    <SmartModalAlpine />
     
     <!-- Cal element-click embed code begins -->
     <script type="text/javascript" defer>
@@ -239,42 +242,11 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       })();
     </script> -->
 
-    <script>
-      // @ts-ignore
-      window.handleNextStep = function() {
-        console.time('handleNextStep total');
-        console.log('Next button onclick triggered');
-        
-        // @ts-ignore
-        if (window.globalOffersModal) {
-          // @ts-ignore
-          const instance = window.globalOffersModal;
-          
-          console.time('validateStep');
-          const isValid = instance.validateStep(instance.currentStep);
-          console.timeEnd('validateStep');
-          console.log('Validation result:', isValid);
-          
-          if (isValid) {
-            if (instance.currentStep < 6) {
-              console.time('nextStep');
-              console.log('Advancing to step', instance.currentStep + 1);
-              instance.nextStep();
-              console.timeEnd('nextStep');
-            } else {
-              console.time('submitOffersForm');
-              instance.submitOffersForm();
-              console.timeEnd('submitOffersForm');
-            }
-          } else {
-            console.log('Validation failed - not advancing');
-          }
-        } else {
-          console.error('OffersModal instance not found');
-        }
-        
-        console.timeEnd('handleNextStep total');
-      };
-    </script>
+    <!-- SmartModal JavaScript Manager -->
+    <!-- <script src="/scripts/smart-modal-manager.js" defer></script> -->
+    
+    <!-- <script>
+      // Legacy compatibility for existing CTAs - COMMENTED OUT FOR DEBUGGING
+    </script> -->
   </body>
 </html>
