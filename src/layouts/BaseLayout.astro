@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import SmartModal from '../components/SmartModal.astro';
+import SmartModalAlpine from '../components/SmartModalAlpine.astro';
 import SocialMediaImage from '../components/SocialMediaImage.astro';
 
 interface Props {
@@ -237,7 +237,7 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <slot />
     </main>
     <Footer />
-    <SmartModal />
+    <SmartModalAlpine />
 
     <!-- Cal.com - Load after DOM ready but not deferred -->
     <script type="text/javascript">
@@ -245,73 +245,16 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       Cal("init", "expat-savvy", {origin:"https://cal.com"});
     </script>
 
-    <!-- SmartModal JavaScript Manager -->
-    <script src="/scripts/smart-modal-manager.js" defer></script>
+    <!-- SmartModal JavaScript Manager - REPLACED WITH ALPINE.JS -->
+    <!-- <script src="/scripts/smart-modal-manager.js" defer></script> -->
     
     <!-- Analytics and other scripts -->
     <script is:inline src="/scripts/analytics-tracking.js" defer></script>
     <script is:inline src="/scripts/page-type-detection.js" defer></script>
     <script is:inline src="/scripts/gtm/event-helper.js" defer></script>
     
-    <script>
-      // Legacy compatibility for existing CTAs
-      window.addEventListener('DOMContentLoaded', function() {
-        console.log('🔧 BaseLayout: Setting up SmartModal CTA compatibility');
-        
-        // Find all potential CTA buttons
-        const buttons = document.querySelectorAll(
-          '[data-open-consultation], .consultation-button, .btn-consultation, ' +
-          'button[onclick*="showConsultation"], button[onclick*="openOffersModal"], ' +
-          'button[onclick*="openConsultationModal"], a[href*="consultation"], ' +
-          '.cta-button, .hero-cta, .safe-consultation-btn'
-        );
-        
-        buttons.forEach(function(button) {
-          // Skip if already processed
-          if (button.hasAttribute('data-smart-modal-enhanced')) return;
-          
-          // Check if this is a consultation-related button
-          const buttonText = button.textContent?.toLowerCase().trim() || '';
-          const isConsultationButton = buttonText.includes('consultation') || 
-                                       buttonText.includes('contact us') ||
-                                       buttonText.includes('get advice') ||
-                                       buttonText.includes('book a call') ||
-                                       buttonText.includes('free advice') ||
-                                       buttonText.includes('get started') ||
-                                       button.classList.contains('consultation-button') ||
-                                       button.hasAttribute('data-open-consultation') ||
-                                       button.hasAttribute('onclick');
-          
-          if (!isConsultationButton) return;
-          
-          // Mark as processed
-          button.setAttribute('data-smart-modal-enhanced', 'true');
-          
-          // Remove old onclick handlers
-          button.removeAttribute('onclick');
-          
-          // Add new click handler
-          button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log('🚀 BaseLayout: Opening SmartModal for button:', button.textContent?.trim());
-            
-            // Use SmartModal
-            if (window.SmartModalManager) {
-              window.SmartModalManager.open();
-            } else if (typeof window.openSmartModal === 'function') {
-              window.openSmartModal();
-            } else {
-              console.error('❌ SmartModal not available');
-            }
-            
-            return false;
-          }, true);
-        });
-        
-        console.log('✅ BaseLayout: SmartModal CTA compatibility setup complete');
-      });
-    </script>
+    <!-- <script>
+      // Legacy compatibility for existing CTAs - REPLACED WITH ALPINE.JS GLOBAL FUNCTIONS
+    </script> -->
   </body>
 </html> 
