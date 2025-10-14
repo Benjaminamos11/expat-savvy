@@ -40,8 +40,8 @@
     React.createElement('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2, d: 'M13 17h8m0 0V9m0 8l-8-8-4 4-6-6' })
   );
   
-  const Star = (props) => React.createElement('svg', { className: 'w-5 h-5', fill: props.fill || 'none', viewBox: '0 0 24 24', stroke: 'currentColor' },
-    React.createElement('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2, d: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' })
+  const Star = (props) => React.createElement('svg', { className: 'w-5 h-5', fill: props.fill || 'currentColor', viewBox: '0 0 24 24', stroke: 'none' },
+    React.createElement('path', { d: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' })
   );
   
   const Calendar = () => React.createElement('svg', { className: 'w-5 h-5', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor' },
@@ -89,26 +89,23 @@
     React.createElement('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2, d: 'M6 18L18 6M6 6l12 12' })
   );
 
-  // Robert's Authority Header Component (simplified - no image to prevent render loops)
+  // Robert's Authority Header Component with actual photo
   const RobertHeader = () => React.createElement('div', {
     className: 'robert-header'
   },
     React.createElement('div', { className: 'robert-avatar-wrapper' },
-      React.createElement('div', {
-        className: 'robert-avatar-placeholder',
+      React.createElement('img', {
+        src: 'https://res.cloudinary.com/dphbnwjtx/image/upload/w_112,h_112,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp',
+        alt: 'Robert Kolar - FINMA Registered Insurance Advisor',
+        className: 'robert-avatar',
         style: {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: '#EF4444',
-          color: 'white',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: 'bold',
-          fontSize: '18px'
+          border: '2px solid #E5E7EB',
+          objectFit: 'cover'
         }
-      }, 'RK')
+      })
     ),
     React.createElement('div', { className: 'robert-info' },
       React.createElement('div', { className: 'robert-name' }, 'Robert Kolar, FINMA Registered Advisor'),
