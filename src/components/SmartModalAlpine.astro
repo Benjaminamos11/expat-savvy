@@ -388,3 +388,93 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
 
 <!-- Alpine.js CDN -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<!-- Compatibility Script for Existing CTA Buttons -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🔧 Setting up Alpine Smart Modal compatibility');
+  
+  // Wait for Alpine to initialize
+  setTimeout(() => {
+    // Create global functions that existing buttons can call
+    window.openSmartModal = function() {
+      console.log('📞 openSmartModal called - triggering Alpine modal');
+      window.dispatchEvent(new CustomEvent('open-modal'));
+    };
+    
+    window.openOffersModal = function() {
+      console.log('📞 openOffersModal called - triggering Alpine modal');
+      window.dispatchEvent(new CustomEvent('open-modal'));
+    };
+    
+    window.openConsultationModal = function() {
+      console.log('📞 openConsultationModal called - triggering Alpine modal');
+      window.dispatchEvent(new CustomEvent('open-modal'));
+    };
+    
+    window.showConsultationModal = function() {
+      console.log('📞 showConsultationModal called - triggering Alpine modal');
+      window.dispatchEvent(new CustomEvent('open-modal'));
+    };
+    
+    console.log('✅ Alpine Smart Modal compatibility functions created');
+    
+    // Also enhance any buttons that have onclick handlers
+    const buttonsWithOnclick = document.querySelectorAll('button[onclick], a[onclick]');
+    buttonsWithOnclick.forEach(button => {
+      const onclickAttr = button.getAttribute('onclick');
+      if (onclickAttr && (
+        onclickAttr.includes('openOffersModal') || 
+        onclickAttr.includes('openConsultationModal') || 
+        onclickAttr.includes('showConsultationModal')
+      )) {
+        console.log('🔧 Enhancing button:', button.textContent?.trim());
+        
+        // Remove the onclick and add our event listener
+        button.removeAttribute('onclick');
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          console.log('🚀 Button clicked - opening Alpine modal');
+          window.dispatchEvent(new CustomEvent('open-modal'));
+        });
+      }
+    });
+    
+    // Find buttons by text content and class
+    const consultationButtons = document.querySelectorAll(
+      'button, a, .btn, .button, .cta-button, .hero-cta'
+    );
+    
+    consultationButtons.forEach(button => {
+      const buttonText = button.textContent?.toLowerCase().trim() || '';
+      const isConsultationButton = 
+        buttonText.includes('consultation') || 
+        buttonText.includes('contact us') ||
+        buttonText.includes('get advice') ||
+        buttonText.includes('book') ||
+        buttonText.includes('free advice') ||
+        buttonText.includes('get started') ||
+        button.classList.contains('consultation-button') ||
+        button.hasAttribute('data-open-consultation');
+        
+      if (isConsultationButton && !button.hasAttribute('data-alpine-enhanced')) {
+        console.log('🔧 Enhancing consultation button:', buttonText);
+        button.setAttribute('data-alpine-enhanced', 'true');
+        
+        button.addEventListener('click', (e) => {
+          // Only prevent default if it's a link to # or contains modal functions
+          const href = button.getAttribute('href');
+          if (href === '#' || href === 'javascript:void(0)' || button.hasAttribute('onclick')) {
+            e.preventDefault();
+          }
+          
+          console.log('🚀 Consultation button clicked - opening Alpine modal');
+          window.dispatchEvent(new CustomEvent('open-modal'));
+        });
+      }
+    });
+    
+    console.log('✅ Alpine Smart Modal button enhancement complete');
+  }, 1000); // Wait 1 second for Alpine to fully load
+});
+</script>
