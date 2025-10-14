@@ -1,0 +1,305 @@
+<!-- Working Smart Modal - Complete 4-step flow in one component -->
+<div id="smart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" style="display: none;">
+  <div class="flex items-center justify-center p-0 lg:p-4 h-full min-h-screen">
+    <div class="bg-white w-full h-full lg:max-w-[1200px] lg:max-h-[90vh] lg:rounded-2xl lg:h-auto overflow-y-auto relative shadow-2xl">
+      
+      <!-- Close Button -->
+      <button onclick="closeSmartModal()" class="absolute top-4 right-4 z-10 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close modal">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      
+      <!-- Modal Content -->
+      <div class="p-8 lg:p-12">
+        
+        <!-- Step 1: Qualification -->
+        <div id="step-qualification" class="modal-step">
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">What's your situation?</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            <div onclick="selectOption('new-to-switzerland', 9)" class="option-card bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer transition-all hover:border-red-500 hover:shadow-lg flex items-center gap-4">
+              <div class="text-4xl">🇨🇭</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-900">I just moved to Switzerland</div>
+                <div class="text-red-500 font-bold">→</div>
+              </div>
+            </div>
+            
+            <div onclick="selectOption('family', 8)" class="option-card bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer transition-all hover:border-red-500 hover:shadow-lg flex items-center gap-4">
+              <div class="text-4xl">👨‍👩‍👧‍👦</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-900">I need family coverage</div>
+                <div class="text-red-500 font-bold">→</div>
+              </div>
+            </div>
+            
+            <div onclick="selectOption('switch-save', 6)" class="option-card bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer transition-all hover:border-red-500 hover:shadow-lg flex items-center gap-4">
+              <div class="text-4xl">💰</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-900">I want to switch and save money</div>
+                <div class="text-red-500 font-bold">→</div>
+              </div>
+            </div>
+            
+            <div onclick="selectOption('compare-options', 4)" class="option-card bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer transition-all hover:border-red-500 hover:shadow-lg flex items-center gap-4">
+              <div class="text-4xl">⚖️</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-900">I'm comparing different options</div>
+                <div class="text-red-500 font-bold">→</div>
+              </div>
+            </div>
+            
+            <div onclick="selectOption('have-questions', 3)" class="option-card bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer transition-all hover:border-red-500 hover:shadow-lg flex items-center gap-4">
+              <div class="text-4xl">❓</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-900">I have specific questions</div>
+                <div class="text-red-500 font-bold">→</div>
+              </div>
+            </div>
+            
+            <div onclick="selectOption('just-browsing', 2)" class="option-card bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer transition-all hover:border-red-500 hover:shadow-lg flex items-center gap-4">
+              <div class="text-4xl">👀</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-900">I'm just browsing</div>
+                <div class="text-red-500 font-bold">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2: Value (High Complexity) -->
+        <div id="step-value-high" class="modal-step" style="display: none;">
+          <button onclick="goToStep('qualification')" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Back
+          </button>
+          
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Perfect! You need expert guidance.</h2>
+          <div class="max-w-2xl mx-auto text-center">
+            <p class="text-lg text-gray-700 mb-8">Your situation requires personalized advice. Let's book a free consultation to ensure you get the best coverage at the best price.</p>
+            
+            <button onclick="goToStep('booking')" class="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors">
+              Book Free Consultation →
+            </button>
+          </div>
+        </div>
+        
+        <!-- Step 2: Value (Medium Complexity) -->
+        <div id="step-value-medium" class="modal-step" style="display: none;">
+          <button onclick="goToStep('qualification')" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Back
+          </button>
+          
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Great choice! Here are your options:</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6">
+              <h3 class="font-bold text-xl mb-4">Free Consultation</h3>
+              <p class="text-gray-700 mb-6">Get personalized advice and potentially save CHF 800-1,500 per year.</p>
+              <button onclick="goToStep('booking')" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg w-full">
+                Book Call →
+              </button>
+            </div>
+            
+            <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-6">
+              <h3 class="font-bold text-xl mb-4">Self-Service Quotes</h3>
+              <p class="text-gray-700 mb-6">Get standard quotes in 4-5 minutes.</p>
+              <button onclick="goToStep('booking')" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg w-full">
+                Get Quotes →
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2: Value (Low Complexity) -->
+        <div id="step-value-low" class="modal-step" style="display: none;">
+          <button onclick="goToStep('qualification')" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Back
+          </button>
+          
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">No problem! How can I help?</h2>
+          <div class="max-w-2xl mx-auto space-y-4">
+            <div onclick="goToStep('booking')" class="bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer hover:border-red-500 hover:shadow-lg transition-all flex items-center gap-4">
+              <div class="text-3xl">📞</div>
+              <div class="flex-1">
+                <h3 class="font-bold text-lg">Quick Call</h3>
+                <p class="text-gray-600">Personalized advice (15 min)</p>
+              </div>
+              <button class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold">
+                Book Now →
+              </button>
+            </div>
+            
+            <div onclick="goToStep('booking')" class="bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer hover:border-red-500 hover:shadow-lg transition-all flex items-center gap-4">
+              <div class="text-3xl">📋</div>
+              <div class="flex-1">
+                <h3 class="font-bold text-lg">Compare Rates</h3>
+                <p class="text-gray-600">Standard quotes (4-5 min)</p>
+              </div>
+              <button class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold">
+                Get Quotes →
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 3: Booking Form -->
+        <div id="step-booking" class="modal-step" style="display: none;">
+          <button onclick="goToStep('value')" class="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Back
+          </button>
+          
+          <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">Let's get you set up!</h2>
+          
+          <form onsubmit="submitBooking(event)" class="max-w-md mx-auto space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <input type="text" id="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="Your full name">
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="your.email@example.com">
+            </div>
+            
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+              <input type="tel" id="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500" placeholder="+41 XX XXX XX XX">
+            </div>
+            
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-6 rounded-lg text-lg transition-colors">
+              Continue to Calendar →
+            </button>
+          </form>
+        </div>
+        
+        <!-- Step 4: Success -->
+        <div id="step-success" class="modal-step" style="display: none;">
+          <div class="text-center max-w-2xl mx-auto">
+            <div class="text-6xl mb-6">🎉</div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Thank you!</h2>
+            <p class="text-lg text-gray-700 mb-8">Your booking request has been submitted. We'll contact you shortly to schedule your free consultation.</p>
+            
+            <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+              <h3 class="font-bold text-green-900 mb-2">What happens next:</h3>
+              <ul class="text-green-800 text-left space-y-2">
+                <li>• We'll call you within 24 hours to confirm your appointment</li>
+                <li>• Prepare any current insurance documents</li>
+                <li>• Get ready to potentially save CHF 800-1,500 per year</li>
+              </ul>
+            </div>
+            
+            <button onclick="closeSmartModal()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg">
+              Close
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Global modal state
+let modalState = {
+  currentStep: 'qualification',
+  userData: {},
+  previousStep: null
+};
+
+// Global functions for compatibility
+window.openSmartModal = function() {
+  console.log('🎯 Opening smart modal');
+  document.getElementById('smart-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  goToStep('qualification');
+};
+
+window.closeSmartModal = function() {
+  console.log('🔒 Closing smart modal');
+  document.getElementById('smart-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  goToStep('qualification'); // Reset to start
+};
+
+// Legacy compatibility
+window.openOffersModal = window.openSmartModal;
+window.openConsultationModal = window.openSmartModal;
+window.showConsultationModal = window.openSmartModal;
+
+function goToStep(stepName) {
+  console.log(`📍 Going to step: ${stepName}`);
+  
+  // Hide all steps
+  document.querySelectorAll('.modal-step').forEach(step => {
+    step.style.display = 'none';
+  });
+  
+  // Determine which step to show based on complexity score
+  let targetStep = stepName;
+  if (stepName === 'value') {
+    const score = modalState.userData.complexityScore || 0;
+    if (score >= 7) targetStep = 'value-high';
+    else if (score >= 4) targetStep = 'value-medium';
+    else targetStep = 'value-low';
+  }
+  
+  // Show target step
+  const stepElement = document.getElementById(`step-${targetStep}`);
+  if (stepElement) {
+    stepElement.style.display = 'block';
+    modalState.currentStep = targetStep;
+  }
+}
+
+function selectOption(situation, complexityScore) {
+  console.log(`🎯 Selected: ${situation} (score: ${complexityScore})`);
+  modalState.userData.situation = situation;
+  modalState.userData.complexityScore = complexityScore;
+  goToStep('value');
+}
+
+function submitBooking(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  
+  if (name && email && phone) {
+    console.log('📝 Booking submitted:', { name, email, phone });
+    modalState.userData.bookingData = { name, email, phone };
+    goToStep('success');
+  } else {
+    alert('Please fill in all fields');
+  }
+}
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('smart-modal').style.display === 'block') {
+    closeSmartModal();
+  }
+});
+
+// Close modal when clicking backdrop
+document.getElementById('smart-modal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeSmartModal();
+  }
+});
+
+console.log('✅ WorkingSmartModal loaded');
+</script>
