@@ -4,7 +4,7 @@
 ---
 
 <!-- Professional Smart Modal Container -->
-<div id="professional-smart-modal-root"></div>
+<div id="professional-smart-modal-root" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;"></div>
 
 <!-- React 18 CDN -->
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -217,6 +217,7 @@
     }
     
     console.log('✅ Modal should be visible, isOpen:', isOpen);
+    console.log('🎬 About to render modal with currentStep:', currentStep);
 
     // Step 1: Qualification
     const renderQualificationStep = () => React.createElement('div', { className: 'modal-step' },
@@ -711,6 +712,7 @@
       )
     );
 
+    console.log('🎭 Returning modal backdrop with currentStep:', currentStep);
     return React.createElement('div', {
       className: 'modal-backdrop',
       onClick: (e) => e.target === e.currentTarget && closeModal()
@@ -904,13 +906,16 @@
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
-  z-index: 9999;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-lg);
+  pointer-events: auto;
 }
 
 .modal-container {
