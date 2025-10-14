@@ -433,12 +433,16 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('🔧 Enhancing button:', button.textContent?.trim());
         
         // Remove the onclick and add our event listener
+        const originalOnclick = button.getAttribute('onclick');
         button.removeAttribute('onclick');
         button.addEventListener('click', (e) => {
+          console.log('🎯 Onclick button clicked. Original:', originalOnclick);
           e.preventDefault();
+          e.stopPropagation();
           console.log('🚀 Button clicked - opening Alpine modal');
           window.dispatchEvent(new CustomEvent('open-modal'));
-        });
+          return false;
+        }, true); // Use capture phase
       }
     });
     
@@ -464,17 +468,50 @@ document.addEventListener('DOMContentLoaded', function() {
         button.setAttribute('data-alpine-enhanced', 'true');
         
         button.addEventListener('click', (e) => {
-          // Only prevent default if it's a link to # or contains modal functions
-          const href = button.getAttribute('href');
-          if (href === '#' || href === 'javascript:void(0)' || button.hasAttribute('onclick')) {
-            e.preventDefault();
-          }
+          console.log('🎯 Button clicked:', buttonText, 'Tag:', button.tagName, 'Href:', button.getAttribute('href'));
+          
+          // Always prevent default for consultation buttons to avoid navigation
+          e.preventDefault();
+          e.stopPropagation();
           
           console.log('🚀 Consultation button clicked - opening Alpine modal');
           window.dispatchEvent(new CustomEvent('open-modal'));
-        });
+          return false;
+        }, true); // Use capture phase for higher priority
       }
     });
+    
+    // Add a global click interceptor as backup
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('a, button');
+      if (!target) return;
+      
+      const href = target.getAttribute('href');
+      const onclick = target.getAttribute('onclick');
+      const buttonText = target.textContent?.toLowerCase().trim() || '';
+      
+      // Check if this looks like a consultation link/button
+      const isConsultationRelated = 
+        buttonText.includes('consultation') ||
+        buttonText.includes('contact') ||
+        buttonText.includes('book') ||
+        buttonText.includes('advice') ||
+        (href && (href === '#' || href.includes('javascript:') || href.includes('void(0)'))) ||
+        (onclick && (onclick.includes('Modal') || onclick.includes('consultation')));
+      
+      if (isConsultationRelated && !target.hasAttribute('data-alpine-enhanced')) {
+        console.log('🛑 Global interceptor caught:', buttonText, 'Href:', href, 'Onclick:', onclick);
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Mark as enhanced to avoid future interception
+        target.setAttribute('data-alpine-enhanced', 'true');
+        
+        console.log('🚀 Global interceptor - opening Alpine modal');
+        window.dispatchEvent(new CustomEvent('open-modal'));
+        return false;
+      }
+    }, true); // Capture phase - highest priority
     
     console.log('✅ Alpine Smart Modal button enhancement complete');
   }, 1000); // Wait 1 second for Alpine to fully load
