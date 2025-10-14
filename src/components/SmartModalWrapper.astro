@@ -1,0 +1,175 @@
+---
+// Get current page context for dynamic modal behavior
+const currentPath = Astro.url.pathname;
+
+// Determine intent based on URL path
+let pageIntent = 'home';
+if (currentPath.includes('/setup') || currentPath.includes('/new-health')) pageIntent = 'setup';
+else if (currentPath.includes('/family') || currentPath.includes('/coverage')) pageIntent = 'family';  
+else if (currentPath.includes('/change') || currentPath.includes('/switch')) pageIntent = 'change';
+else if (currentPath.includes('/cheapest')) pageIntent = 'cheapest';
+else if (currentPath.includes('/best')) pageIntent = 'best';
+else if (currentPath.includes('/compare')) pageIntent = 'compare';
+else if (currentPath.includes('/healthcare/all-insurances/')) pageIntent = 'provider';
+
+// Detect city from URL for localization
+let city = '';
+const cityPatterns = ['zurich', 'basel', 'bern', 'geneva', 'lausanne', 'lugano', 'zug'];
+for (const cityName of cityPatterns) {
+  if (currentPath.includes(cityName)) {
+    city = cityName;
+    break;
+  }
+}
+
+// Extract provider name for provider pages
+let providerName = '';
+if (pageIntent === 'provider') {
+  const pathParts = currentPath.split('/');
+  providerName = pathParts[pathParts.length - 1]?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || '';
+}
+
+const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
+---
+
+<div id="smart-modal-container"></div>
+
+<script>
+  // Import React and the modal component dynamically
+  const loadSmartModal = async () => {
+    console.log('🚀 Loading Smart Modal React component...');
+    
+    try {
+      // Dynamic imports for React and the modal
+      const [React, ReactDOM, { default: SmartModal }] = await Promise.all([
+        import('https://esm.sh/react@18.2.0'),
+        import('https://esm.sh/react-dom@18.2.0/client'),
+        import('./SmartModal.jsx')
+      ]);
+      
+      console.log('✅ React components loaded successfully');
+      
+      // Page context from Astro (injected at build time)
+      const pageContext = {
+        intent: '${pageIntent}',
+        city: '${city}',
+        slug: '${pageSlug}',
+        providerName: '${providerName}'
+      };
+      
+      // Modal state
+      let isModalOpen = false;
+      let root = null;
+      
+      const renderModal = () => {
+        const container = document.getElementById('smart-modal-container');
+        if (!container) return;
+        
+        if (!root) {
+          root = ReactDOM.createRoot(container);
+        }
+        
+        root.render(
+          React.createElement(SmartModal, {
+            isOpen: isModalOpen,
+            onClose: closeModal,
+            pageContext: pageContext
+          })
+        );
+      };
+      
+      const openModal = () => {
+        console.log('🎯 Opening React Smart Modal');
+        isModalOpen = true;
+        renderModal();
+      };
+      
+      const closeModal = () => {
+        console.log('🔒 Closing React Smart Modal');
+        isModalOpen = false;
+        renderModal();
+      };
+      
+      // Global functions for compatibility
+      window.openSmartModal = openModal;
+      window.closeSmartModal = closeModal;
+      
+      // Legacy compatibility
+      window.openOffersModal = openModal;
+      window.openConsultationModal = openModal;
+      window.showConsultationModal = openModal;
+      
+      console.log('✅ Smart Modal functions registered globally');
+      
+    } catch (error) {
+      console.error('❌ Failed to load Smart Modal:', error);
+      
+      // Fallback: show a simple alert
+      window.openSmartModal = () => {
+        alert('Modal is loading... Please try again in a moment.');
+      };
+      window.openOffersModal = window.openSmartModal;
+      window.openConsultationModal = window.openSmartModal;
+      window.showConsultationModal = window.openSmartModal;
+    }
+  };
+  
+  // Load the modal when the page loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadSmartModal);
+  } else {
+    loadSmartModal();
+  }
+</script>
+
+<style>
+  /* Ensure modal renders above everything */
+  #smart-modal-container {
+    position: relative;
+    z-index: 9999;
+  }
+  
+  /* Tailwind-like utility classes for the modal */
+  :global(.bg-black\/60) {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  :global(.backdrop-blur-sm) {
+    backdrop-filter: blur(4px);
+  }
+  
+  /* Responsive breakpoints */
+  @media (max-width: 768px) {
+    :global(.lg\\:max-w-\\[1200px\\]) {
+      max-width: 100% !important;
+    }
+    
+    :global(.lg\\:max-h-\\[90vh\\]) {
+      max-height: 100% !important;
+    }
+    
+    :global(.lg\\:rounded-2xl) {
+      border-radius: 0 !important;
+    }
+    
+    :global(.lg\\:p-12) {
+      padding: 2rem !important;
+    }
+  }
+  
+  /* Animation for highlighted cards */
+  @keyframes pulse-ring {
+    0% { 
+      transform: scale(1); 
+      opacity: 0.5; 
+    }
+    100% { 
+      transform: scale(1.05); 
+      opacity: 0; 
+    }
+  }
+  
+  :global(.animate-pulse-ring) {
+    animation: pulse-ring 2s ease-out infinite;
+  }
+</style>
