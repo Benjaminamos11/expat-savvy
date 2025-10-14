@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Debug Modal Test" 
+  description="Simple test to debug modal issues"
+>
+  <div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          🐛 Debug Modal Test
+        </h1>
+        
+        <div class="space-y-6">
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <h3 class="font-bold text-yellow-900 mb-2">Debug Information:</h3>
+            <div id="debug-info" class="text-yellow-800 text-sm font-mono space-y-1">
+              <div id="alpine-status">Alpine.js: Loading...</div>
+              <div id="modal-element">Modal Element: Checking...</div>
+              <div id="functions-status">Global Functions: Checking...</div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Test Button 1: Direct Event Dispatch -->
+            <button 
+              onclick="
+                console.log('Direct dispatch test');
+                window.dispatchEvent(new CustomEvent('open-modal'));
+              "
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg"
+            >
+              Direct Event Test
+            </button>
+            
+            <!-- Test Button 2: Function Call -->
+            <button 
+              onclick="
+                console.log('Function call test');
+                if (window.openSmartModal) { 
+                  window.openSmartModal(); 
+                } else { 
+                  alert('openSmartModal not found'); 
+                }
+              "
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg"
+            >
+              Function Call Test
+            </button>
+            
+            <!-- Test Button 3: Alpine Direct -->
+            <button 
+              x-data 
+              @click="$dispatch('open-modal')"
+              class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg"
+            >
+              Alpine Direct Test
+            </button>
+          </div>
+          
+          <div class="bg-gray-100 rounded-lg p-4">
+            <h3 class="font-bold mb-2">Console Log:</h3>
+            <div id="console-log" class="bg-black text-green-400 p-3 rounded font-mono text-sm h-64 overflow-y-auto">
+              Waiting for logs...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Simplified Modal for Testing -->
+  <div 
+    x-data="{ isOpen: false }"
+    @open-modal.window="isOpen = true; console.log('✅ Modal opened via Alpine event')"
+    @keydown.escape.window="isOpen = false"
+  >
+    <div 
+      x-show="isOpen" 
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      @click.self="isOpen = false"
+      style="display: none;"
+    >
+      <div class="bg-white rounded-lg p-8 max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-4">🎉 Modal Works!</h2>
+        <p class="text-gray-600 mb-6">The Alpine.js modal is working correctly.</p>
+        <button 
+          @click="isOpen = false"
+          class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
+        >
+          Close Modal
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<script>
+// Enhanced logging
+const originalLog = console.log;
+const logContainer = document.getElementById('console-log');
+
+function addLog(message) {
+  if (logContainer) {
+    const timestamp = new Date().toLocaleTimeString();
+    logContainer.innerHTML += `[${timestamp}] ${message}\n`;
+    logContainer.scrollTop = logContainer.scrollHeight;
+  }
+  originalLog(message);
+}
+
+console.log = addLog;
+
+document.addEventListener('DOMContentLoaded', function() {
+  addLog('🚀 Page loaded');
+  
+  // Check Alpine.js
+  setTimeout(() => {
+    const alpineStatus = document.getElementById('alpine-status');
+    if (typeof Alpine !== 'undefined') {
+      alpineStatus.textContent = 'Alpine.js: ✅ Loaded';
+      alpineStatus.className = 'text-green-800';
+      addLog('✅ Alpine.js is available');
+    } else {
+      alpineStatus.textContent = 'Alpine.js: ❌ Not loaded';
+      alpineStatus.className = 'text-red-800';
+      addLog('❌ Alpine.js not found');
+    }
+  }, 1000);
+  
+  // Check modal element
+  setTimeout(() => {
+    const modalStatus = document.getElementById('modal-element');
+    const modalElement = document.querySelector('[x-data*="isOpen"]');
+    if (modalElement) {
+      modalStatus.textContent = 'Modal Element: ✅ Found';
+      modalStatus.className = 'text-green-800';
+      addLog('✅ Modal element found in DOM');
+    } else {
+      modalStatus.textContent = 'Modal Element: ❌ Not found';
+      modalStatus.className = 'text-red-800';
+      addLog('❌ Modal element not found');
+    }
+  }, 1500);
+  
+  // Set up global functions
+  setTimeout(() => {
+    const functionsStatus = document.getElementById('functions-status');
+    
+    window.openSmartModal = function() {
+      addLog('📞 openSmartModal called');
+      window.dispatchEvent(new CustomEvent('open-modal'));
+    };
+    
+    window.openOffersModal = function() {
+      addLog('📞 openOffersModal called');
+      window.dispatchEvent(new CustomEvent('open-modal'));
+    };
+    
+    functionsStatus.textContent = 'Global Functions: ✅ Created';
+    functionsStatus.className = 'text-green-800';
+    addLog('✅ Global functions created');
+  }, 2000);
+  
+  addLog('🔧 Debug script setup complete');
+});
+
+// Listen for custom events
+window.addEventListener('open-modal', () => {
+  addLog('📡 open-modal event received');
+});
+</script>
