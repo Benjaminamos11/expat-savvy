@@ -27,6 +27,7 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
 <div 
   x-data="smartModal()" 
   x-init="init()"
+  @open-modal.window="open()"
   class="smart-modal-alpine"
 >
   <!-- Modal Backdrop -->
@@ -350,9 +351,10 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
       },
       
       open() {
+        console.log('🎯 SmartModal open() called - setting isOpen to true');
         this.isOpen = true;
         document.body.style.overflow = 'hidden';
-        console.log('🚀 Smart Modal opened');
+        console.log('🚀 Smart Modal opened, isOpen:', this.isOpen);
       },
       
       close() {
