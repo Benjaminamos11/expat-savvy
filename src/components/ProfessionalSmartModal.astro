@@ -89,17 +89,26 @@
     React.createElement('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2, d: 'M6 18L18 6M6 6l12 12' })
   );
 
-  // Robert's Authority Header Component
+  // Robert's Authority Header Component (simplified - no image to prevent render loops)
   const RobertHeader = () => React.createElement('div', {
     className: 'robert-header'
   },
     React.createElement('div', { className: 'robert-avatar-wrapper' },
-      React.createElement('img', {
-        src: 'https://res.cloudinary.com/dphbnwjtx/image/upload/v1740666308/robert-kolar-advisor.jpg',
-        alt: 'Robert Kolar',
-        className: 'robert-avatar',
-        onError: (e) => { e.target.src = 'https://via.placeholder.com/56x56/EF4444/white?text=RK'; }
-      })
+      React.createElement('div', {
+        className: 'robert-avatar-placeholder',
+        style: {
+          width: '56px',
+          height: '56px',
+          borderRadius: '50%',
+          background: '#EF4444',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 'bold',
+          fontSize: '18px'
+        }
+      }, 'RK')
     ),
     React.createElement('div', { className: 'robert-info' },
       React.createElement('div', { className: 'robert-name' }, 'Robert Kolar, FINMA Registered Advisor'),
