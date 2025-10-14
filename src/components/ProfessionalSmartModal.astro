@@ -713,6 +713,20 @@
     );
 
     console.log('🎭 Returning modal backdrop with currentStep:', currentStep);
+    
+    // Test: Return a simple div first to see if React can render it
+    return React.createElement('div', {
+      className: 'modal-backdrop',
+      onClick: (e) => e.target === e.currentTarget && closeModal(),
+      style: { background: 'red', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 10000 }
+    },
+      React.createElement('div', { style: { color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '200px' } }, 
+        'MODAL TEST - If you see this, React is working!'
+      )
+    );
+    
+    // Original complex return (temporarily disabled)
+    /*
     return React.createElement('div', {
       className: 'modal-backdrop',
       onClick: (e) => e.target === e.currentTarget && closeModal()
@@ -734,6 +748,7 @@
         currentStep === 'self-service-confirmation' && renderSelfServiceConfirmation()
       )
     );
+    */
   };
 
   const renderModal = () => {
