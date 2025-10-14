@@ -172,6 +172,8 @@
 
   // Professional Smart Modal Component  
   const ProfessionalSmartModal = ({ isOpen, onClose }) => {
+    console.log('🎭 ProfessionalSmartModal rendered, isOpen:', isOpen, 'currentStep:', currentStep);
+    
     const goToStep = (step) => {
       currentStep = step;
       renderModal();
@@ -209,7 +211,12 @@
       renderModal();
     };
 
-    if (!isOpen) return null;
+    if (!isOpen) {
+      console.log('❌ Modal not opening because isOpen is:', isOpen);
+      return null;
+    }
+    
+    console.log('✅ Modal should be visible, isOpen:', isOpen);
 
     // Step 1: Qualification
     const renderQualificationStep = () => React.createElement('div', { className: 'modal-step' },
@@ -728,29 +735,41 @@
   };
 
   const renderModal = () => {
+    console.log('🔄 renderModal called, isModalOpen:', isModalOpen);
     const container = document.getElementById('professional-smart-modal-root');
     if (!container) {
       console.error('❌ Modal container not found');
       return;
     }
     
-    if (!root) {
-      root = ReactDOM.createRoot ? ReactDOM.createRoot(container) : null;
+    console.log('✅ Container found:', container);
+    
+    try {
       if (!root) {
-        // Fallback to legacy render
-        ReactDOM.render(React.createElement(ProfessionalSmartModal, {
+        console.log('🏗️ Creating new React root...');
+        root = ReactDOM.createRoot ? ReactDOM.createRoot(container) : null;
+        if (!root) {
+          console.log('📦 Using legacy ReactDOM.render');
+          // Fallback to legacy render
+          ReactDOM.render(React.createElement(ProfessionalSmartModal, {
+            isOpen: isModalOpen,
+            onClose: closeModal
+          }), container);
+          console.log('✅ Modal rendered with legacy method');
+          return;
+        }
+      }
+      
+      if (root) {
+        console.log('🎨 Rendering with createRoot, isOpen:', isModalOpen);
+        root.render(React.createElement(ProfessionalSmartModal, {
           isOpen: isModalOpen,
           onClose: closeModal
-        }), container);
-        return;
+        }));
+        console.log('✅ Modal rendered with createRoot');
       }
-    }
-    
-    if (root) {
-      root.render(React.createElement(ProfessionalSmartModal, {
-        isOpen: isModalOpen,
-        onClose: closeModal
-      }));
+    } catch (error) {
+      console.error('❌ Error rendering modal:', error);
     }
   };
   
