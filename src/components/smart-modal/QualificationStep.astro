@@ -1,0 +1,182 @@
+---
+// QualificationStep.astro - Step 1 of the Smart Modal
+export interface Props {
+  pageIntent?: string;
+  city?: string;
+}
+
+const { pageIntent = 'home', city = '' } = Astro.props;
+
+// Dynamic headlines based on page intent (from specification)
+const headlines = {
+  home: "Find Your Best Swiss Health Insurance in Minutes",
+  setup: "Set Up Your Swiss Health Insurance in Minutes", 
+  change: "Switch to Better Health Insurance for 2026",
+  compare: "Find Your Best Insurance Match in Minutes",
+  cheapest: "Find the Cheapest Health Insurance for You",
+  best: "Get the Best Health Insurance Recommendations",
+  family: "Optimize Your Family's Health Insurance",
+  provider: "Compare This Provider Against All Options"
+};
+
+// Add city context if available
+const getCityHeadline = (intent: string, city: string) => {
+  if (city && ['zurich', 'basel', 'bern', 'geneva', 'lausanne', 'lugano', 'zug'].includes(city)) {
+    return `Get health insurance in ${city.charAt(0).toUpperCase() + city.slice(1)} with confidence`;
+  }
+  return headlines[intent] || headlines.home;
+};
+
+const headline = getCityHeadline(pageIntent, city);
+const subline = "Expert guidance from FINMA-registered advisors in English";
+---
+
+<div class="smart-modal-step qualification-step">
+  <!-- Close button handled by parent -->
+  
+  <!-- Main Content -->
+  <div class="text-center mb-lg">
+    <h1 id="smart-modal-title" class="mb-md">{headline}</h1>
+    <p class="text-medium-gray">{subline}</p>
+  </div>
+  
+  <!-- Social Proof Bar -->
+  <div class="social-proof-bar">
+    <div class="social-proof-item">
+      <svg class="social-proof-icon" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+      </svg>
+      <span>12 people booked today</span>
+    </div>
+    <div class="social-proof-item">
+      <svg class="social-proof-icon" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+      </svg>
+      <span>Avg savings: CHF 1,847</span>
+    </div>
+    <div class="social-proof-item">
+      <span>⭐⭐⭐⭐⭐ 4.9/5 (500+)</span>
+    </div>
+  </div>
+  
+  <!-- Question -->
+  <div class="mb-lg">
+    <h2 class="mb-lg">What brings you here today?</h2>
+    
+    <!-- Options Grid -->
+    <div class="options-grid">
+      <div class="card option-card" data-situation="new-to-switzerland" data-score="9">
+        <div class="emoji">🇨🇭</div>
+        <div class="content">
+          <span class="text">I just moved to Switzerland</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="card option-card" data-situation="switch-save" data-score="8">
+        <div class="emoji">💰</div>
+        <div class="content">
+          <span class="text">I want to switch & save money</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="card option-card" data-situation="family" data-score="8">
+        <div class="emoji">👨‍👩‍👧</div>
+        <div class="content">
+          <span class="text">I need advice for my family</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="card option-card" data-situation="review-coverage" data-score="5">
+        <div class="emoji">🔍</div>
+        <div class="content">
+          <span class="text">I want to review my coverage</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="card option-card" data-situation="cross-border" data-score="9">
+        <div class="emoji">🌍</div>
+        <div class="content">
+          <span class="text">I'm a cross-border worker</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+      
+      <div class="card option-card" data-situation="comparing" data-score="3">
+        <div class="emoji">📊</div>
+        <div class="content">
+          <span class="text">Just comparing options</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Trust Badge -->
+  <div class="text-center">
+    <p class="text-small text-medium-gray">100% free • No obligation</p>
+  </div>
+</div>
+
+<script>
+// Qualification step logic
+document.addEventListener('DOMContentLoaded', function() {
+  const optionCards = document.querySelectorAll('.option-card');
+  
+  optionCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const situation = this.getAttribute('data-situation');
+      const score = parseInt(this.getAttribute('data-score'));
+      
+      console.log('Selected situation:', situation, 'Score:', score);
+      
+      // Store user selection
+      if (window.SmartModalManager) {
+        window.SmartModalManager.setUserData({
+          situation: situation,
+          complexityScore: score
+        });
+        
+        // Route to appropriate next step based on score
+        let nextStep;
+        if (score >= 7) {
+          nextStep = 'value-high';
+        } else if (score >= 4) {
+          nextStep = 'value-medium';
+        } else {
+          nextStep = 'value-low';
+        }
+        
+        window.SmartModalManager.goToStep(nextStep);
+      }
+    });
+    
+    // Add keyboard support
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+    
+    // Make focusable
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+  });
+});
+</script>
+
+<style>
+  .qualification-step .options-grid .option-card:hover .arrow {
+    color: var(--red-primary);
+  }
+  
+  .qualification-step .option-card:focus {
+    outline: 2px solid var(--red-primary);
+    outline-offset: 2px;
+  }
+</style>

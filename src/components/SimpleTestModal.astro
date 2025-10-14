@@ -1,0 +1,32 @@
+<!-- Ultra-Simple Modal Test - No Alpine.js conflicts -->
+<div id="simple-test-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 40px; border-radius: 10px; max-width: 500px; text-align: center;">
+    <h2 style="margin-bottom: 20px; color: #333;">🎉 Simple Modal Works!</h2>
+    <p style="margin-bottom: 30px; color: #666;">This proves the modal system can work on your site.</p>
+    <button onclick="closeSimpleModal()" style="background: #ef4444; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px;">
+      Close Modal
+    </button>
+  </div>
+</div>
+
+<script>
+// Ultra-simple modal functions
+window.openSimpleModal = function() {
+  console.log('🚀 Opening simple modal');
+  document.getElementById('simple-test-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeSimpleModal = function() {
+  console.log('🔒 Closing simple modal');
+  document.getElementById('simple-test-modal').style.display = 'none';
+  document.body.style.overflow = '';
+};
+
+// Replace all consultation functions with simple modal
+window.openOffersModal = window.openSimpleModal;
+window.openConsultationModal = window.openSimpleModal;
+window.showConsultationModal = window.openSimpleModal;
+
+console.log('✅ Simple modal functions loaded');
+</script>

@@ -1,3 +1,10 @@
+/* Swiss Gradient Variables */
+:root {
+  --swiss-gradient: linear-gradient(90deg, #D52B1E 0%, #E63B3B 35%, #FF6B7A 70%, #FF8FA3 100%);
+  --swiss-gradient-hover: linear-gradient(90deg, #C4261A 0%, #D5302E 35%, #F55A6B 70%, #FF7F93 100%);
+  --swiss-gradient-shadow: 0 4px 12px rgba(213, 43, 30, 0.25);
+}
+
 /* Clean modal styles */
 body.modal-open {
   overflow: hidden !important;
@@ -92,4 +99,151 @@ body.modal-open {
 button[onclick*="showConsultation"], 
 a[onclick*="showConsultation"] {
   cursor: pointer !important;
+}
+
+/* Button Hierarchy Styles */
+/* Primary Consultation Button (Swiss Gradient) */
+.btn-consultation-primary {
+  background: var(--swiss-gradient) !important;
+  color: white !important;
+  min-height: 56px !important;
+  min-width: 320px !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  box-shadow: var(--swiss-gradient-shadow) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 18px 36px !important;
+  font-size: 16px !important;
+  text-decoration: none !important;
+}
+
+.btn-consultation-primary:hover {
+  background: var(--swiss-gradient-hover) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(213, 43, 30, 0.35) !important;
+}
+
+.btn-consultation-primary:active {
+  transform: translateY(0) !important;
+  box-shadow: var(--swiss-gradient-shadow) !important;
+}
+
+.btn-consultation-primary:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(213, 43, 30, 0.3), var(--swiss-gradient-shadow) !important;
+}
+
+/* Secondary Button (Get Offers/Next) */
+.btn-secondary {
+  background-color: #10B981 !important; /* green-500 */
+  color: white !important;
+  min-height: 48px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px 24px !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+}
+
+.btn-secondary:hover {
+  background-color: #059669 !important; /* green-600 */
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+}
+
+.btn-secondary:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3), 0 2px 8px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .btn-consultation-primary {
+    min-width: 100% !important;
+    min-height: 48px !important;
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
+  
+  .btn-secondary {
+    min-height: 44px !important;
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
+}
+
+/* Two-column layout for consultation panel */
+.modal-two-column {
+  display: flex !important;
+  gap: 32px !important;
+  height: 80vh !important;
+  max-height: 700px !important;
+}
+
+.modal-consultation-panel {
+  width: 55% !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 32px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.modal-content-panel {
+  width: 45% !important;
+  padding: 32px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: sticky !important;
+  top: 0 !important;
+  height: fit-content !important;
+  overflow-y: visible !important;
+}
+
+/* Only step 4 should scroll - all others fit without scrolling */
+.modal-content-panel.step-4 {
+  overflow-y: auto !important;
+  max-height: 80vh !important;
+}
+
+@media (max-width: 1024px) {
+  .modal-two-column {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  
+  .modal-consultation-panel {
+    width: 100% !important;
+    padding: 24px !important;
+  }
+  
+  .modal-content-panel {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+}
+
+/* Pulse animation for contextual nudges */
+@keyframes pulse-consultation {
+  0%, 100% {
+    box-shadow: var(--swiss-gradient-shadow) !important;
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(213, 43, 30, 0.15), var(--swiss-gradient-shadow) !important;
+  }
+}
+
+.btn-consultation-pulse {
+  animation: pulse-consultation 1s ease-in-out !important;
 } 

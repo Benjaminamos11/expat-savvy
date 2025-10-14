@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Test Smart Modal" 
+  description="Test page for the new Smart Modal system"
+>
+  <div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+          Smart Modal Test Page
+        </h1>
+        
+        <div class="space-y-6">
+          <div class="text-center">
+            <h2 class="text-xl font-semibold mb-4">Test Different Button Types</h2>
+            <p class="text-gray-600 mb-8">
+              Click any button below to test the Smart Modal system:
+            </p>
+          </div>
+          
+          <!-- Button Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            
+            <!-- Primary CTA Button -->
+            <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+              Book Free Consultation
+            </button>
+            
+            <!-- Secondary CTA Button -->
+            <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+              Schedule Free Consultation
+            </button>
+            
+            <!-- Data Attribute Button -->
+            <button data-open-consultation="true" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+              Get Expert Advice
+            </button>
+            
+            <!-- Class-based Button -->
+            <button class="consultation-button bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+              Contact Us
+            </button>
+            
+            <!-- Link Button -->
+            <a href="#" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center">
+              Get Started
+            </a>
+            
+            <!-- Direct Modal Call -->
+            <button onclick="if(window.SmartModalManager) window.SmartModalManager.open()" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+              Direct Modal Call
+            </button>
+          </div>
+          
+          <div class="mt-12 bg-gray-100 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Expected Behavior:</h3>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li>• All buttons should open the Smart Modal</li>
+              <li>• Modal should start with the qualification step (6 option cards)</li>
+              <li>• Selecting an option should route to appropriate value step</li>
+              <li>• Modal should be fully responsive (test on mobile)</li>
+              <li>• Check browser console for debug information</li>
+            </ul>
+          </div>
+          
+          <div class="mt-8 bg-blue-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-4">Testing Flow:</h3>
+            <ol class="space-y-2 text-sm text-gray-700 list-decimal list-inside">
+              <li>Click any button above to open modal</li>
+              <li>Select a situation (e.g., "I just moved to Switzerland")</li>
+              <li>Review the value demonstration step</li>
+              <li>Click "Book Free Call" to proceed to booking</li>
+              <li>Fill in your information</li>
+              <li>Test the calendar integration</li>
+              <li>Complete the booking flow</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Additional styles for testing */
+  .grid button, .grid a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

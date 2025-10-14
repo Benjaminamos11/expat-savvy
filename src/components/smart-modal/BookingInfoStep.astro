@@ -1,0 +1,420 @@
+---
+// BookingInfoStep.astro - Step 3A for collecting user info before calendar
+---
+
+<div class="smart-modal-step booking-info-step">
+  <!-- Back Button -->
+  <button class="back-button" data-action="back">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </svg>
+    Back
+  </button>
+  
+  <!-- Main Content -->
+  <div class="mt-xl">
+    <!-- Headline -->
+    <div class="text-center mb-lg">
+      <h2 class="mb-md">Perfect! Let's get you booked 🎉</h2>
+      <p class="text-medium-gray" id="booking-description">
+        This will be a 15-minute call where we'll review your situation and find you the best rates + discounts.
+      </p>
+    </div>
+    
+    <!-- Expectation Box -->
+    <div class="info-box info mb-xl">
+      <div class="title">What you'll get:</div>
+      <div class="content">
+        <div class="benefits-list">
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="benefit-text">Personalized recommendations</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="benefit-text">Hidden discount opportunities</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="benefit-text">2026 switching strategy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Form Section -->
+    <div class="form-section">
+      <h3 class="mb-lg">Quick info for the booking:</h3>
+      
+      <form id="booking-info-form">
+        <!-- Name Field -->
+        <div class="form-group">
+          <label for="booking-name" class="form-label">Your Name</label>
+          <input 
+            type="text" 
+            id="booking-name" 
+            name="name" 
+            class="form-input" 
+            placeholder="John Doe"
+            required
+            autocomplete="name"
+          />
+          <div class="form-error hidden" id="name-error">Please enter your name</div>
+        </div>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="booking-email" class="form-label">Email Address</label>
+          <input 
+            type="email" 
+            id="booking-email" 
+            name="email" 
+            class="form-input" 
+            placeholder="john@example.com"
+            required
+            autocomplete="email"
+          />
+          <div class="form-error hidden" id="email-error">Please enter a valid email address</div>
+        </div>
+        
+        <!-- Phone Field -->
+        <div class="form-group">
+          <label for="booking-phone" class="form-label">
+            Phone Number
+            <span class="form-helper">(for appointment reminder)</span>
+          </label>
+          <input 
+            type="tel" 
+            id="booking-phone" 
+            name="phone" 
+            class="form-input" 
+            placeholder="+41 79 123 4567"
+            required
+            autocomplete="tel"
+          />
+          <div class="form-error hidden" id="phone-error">Please enter a valid phone number</div>
+        </div>
+        
+        <!-- Continue Button -->
+        <button type="submit" class="btn-primary btn-large" id="continue-to-calendar" disabled>
+          CONTINUE TO CALENDAR →
+        </button>
+      </form>
+    </div>
+    
+    <!-- Trust Badges -->
+    <div class="trust-badges text-center mt-xl">
+      <div class="trust-items">
+        <div class="trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Free & no obligation</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Easy to reschedule</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Booking info step logic
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('booking-info-form');
+  const nameInput = document.getElementById('booking-name');
+  const emailInput = document.getElementById('booking-email');
+  const phoneInput = document.getElementById('booking-phone');
+  const submitButton = document.getElementById('continue-to-calendar');
+  const backButton = document.querySelector('.booking-info-step [data-action="back"]');
+  
+  // Validation functions
+  function validateName(name) {
+    return name && name.trim().length >= 2;
+  }
+  
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  
+  function validatePhone(phone) {
+    // Basic phone validation - at least 6 digits
+    const phoneRegex = /\d{6,}/;
+    return phoneRegex.test(phone.replace(/\D/g, ''));
+  }
+  
+  function showError(inputId, message) {
+    const input = document.getElementById(inputId);
+    const errorDiv = document.getElementById(inputId.replace('booking-', '') + '-error');
+    
+    input.classList.add('error');
+    if (errorDiv) {
+      errorDiv.textContent = message;
+      errorDiv.classList.remove('hidden');
+    }
+  }
+  
+  function clearError(inputId) {
+    const input = document.getElementById(inputId);
+    const errorDiv = document.getElementById(inputId.replace('booking-', '') + '-error');
+    
+    input.classList.remove('error');
+    if (errorDiv) {
+      errorDiv.classList.add('hidden');
+    }
+    
+    // Show valid state if input has content
+    if (input.value.trim()) {
+      input.classList.add('valid');
+    } else {
+      input.classList.remove('valid');
+    }
+  }
+  
+  function validateForm() {
+    let isValid = true;
+    
+    // Clear all errors first
+    clearError('booking-name');
+    clearError('booking-email');  
+    clearError('booking-phone');
+    
+    // Validate name
+    if (!validateName(nameInput.value)) {
+      showError('booking-name', 'Please enter your name (at least 2 characters)');
+      isValid = false;
+    }
+    
+    // Validate email
+    if (!validateEmail(emailInput.value)) {
+      showError('booking-email', 'Please enter a valid email address');
+      isValid = false;
+    }
+    
+    // Validate phone
+    if (!validatePhone(phoneInput.value)) {
+      showError('booking-phone', 'Please enter a valid phone number');
+      isValid = false;
+    }
+    
+    // Update button state
+    submitButton.disabled = !isValid;
+    
+    return isValid;
+  }
+  
+  // Real-time validation
+  function setupRealtimeValidation() {
+    [nameInput, emailInput, phoneInput].forEach(input => {
+      input.addEventListener('input', function() {
+        validateForm();
+      });
+      
+      input.addEventListener('blur', function() {
+        validateForm();
+      });
+    });
+  }
+  
+  // Back button handler
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      if (window.SmartModalManager) {
+        // Go back to the appropriate value step based on user's complexity score
+        const userData = window.SmartModalManager.getUserData();
+        const score = userData?.complexityScore || 5;
+        
+        let previousStep;
+        if (score >= 7) {
+          previousStep = 'value-high';
+        } else if (score >= 4) {
+          previousStep = 'value-medium';
+        } else {
+          previousStep = 'value-low';
+        }
+        
+        window.SmartModalManager.goToStep(previousStep);
+      }
+    });
+  }
+  
+  // Form submission handler
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (validateForm()) {
+        // Store user data
+        const userData = {
+          name: nameInput.value.trim(),
+          email: emailInput.value.trim(),
+          phone: phoneInput.value.trim()
+        };
+        
+        console.log('Booking info collected:', userData);
+        
+        if (window.SmartModalManager) {
+          window.SmartModalManager.setUserData(userData);
+          
+          // Show loading state
+          submitButton.disabled = true;
+          submitButton.textContent = 'Preparing calendar...';
+          
+          // Navigate to calendar step
+          setTimeout(() => {
+            window.SmartModalManager.goToStep('booking-calendar');
+          }, 500);
+        }
+      }
+    });
+  }
+  
+  // Initialize validation
+  setupRealtimeValidation();
+  
+  // Update description based on situation
+  const userData = window.SmartModalManager?.getUserData();
+  if (userData?.situation) {
+    const description = document.getElementById('booking-description');
+    const situationMap = {
+      'new-to-switzerland': 'your move to Switzerland',
+      'family': 'your family\'s coverage',
+      'cross-border': 'your cross-border situation',
+      'switch-save': 'your switching options',
+      'review-coverage': 'your current coverage',
+      'comparing': 'your comparison needs'
+    };
+    
+    const situationText = situationMap[userData.situation] || 'your situation';
+    if (description) {
+      description.textContent = `This will be a 15-minute call where we'll review ${situationText} and find you the best rates + discounts.`;
+    }
+  }
+});
+</script>
+
+<style>
+  .form-section {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+  
+  .form-helper {
+    font-size: var(--font-size-tiny);
+    color: var(--medium-gray);
+    font-weight: 400;
+    margin-left: var(--space-xs);
+  }
+  
+  .form-input.valid {
+    border-color: var(--success-green);
+    position: relative;
+  }
+  
+  .form-input.valid::after {
+    content: '✓';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--success-green);
+    font-weight: bold;
+  }
+  
+  .trust-badges {
+    margin-top: var(--space-xl);
+  }
+  
+  .trust-items {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 767px) {
+    .trust-items {
+      flex-direction: column;
+      gap: var(--space-xs);
+      align-items: center;
+    }
+  }
+  
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-small);
+    color: var(--medium-gray);
+  }
+  
+  @media (max-width: 767px) {
+    .trust-item {
+      font-size: var(--font-size-tiny);
+    }
+  }
+  
+  .trust-item svg {
+    color: var(--success-green);
+    flex-shrink: 0;
+  }
+  
+  #continue-to-calendar:disabled {
+    background: var(--gray-200);
+    color: var(--gray-400);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  #continue-to-calendar:disabled:hover {
+    background: var(--gray-200);
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Loading state styling */
+  .btn-primary.loading {
+    background: var(--gray-300);
+    color: var(--gray-500);
+    cursor: not-allowed;
+  }
+  
+  .btn-primary.loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--gray-400);
+    border-top: 2px solid var(--gray-600);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: var(--space-xs);
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>

@@ -1,0 +1,392 @@
+---
+// BookingCalendarStep.astro - Step 3B with Cal.com embed integration
+---
+
+<div class="smart-modal-step booking-calendar-step">
+  <!-- Back Button -->
+  <button class="back-button" data-action="back">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </svg>
+    Back
+  </button>
+  
+  <!-- Main Content -->
+  <div class="mt-xl">
+    <!-- Header -->
+    <div class="text-center mb-lg">
+      <h2 class="mb-xs">Pick Your Time</h2>
+      <p class="text-small text-medium-gray">Times shown in Europe/Zurich timezone</p>
+    </div>
+    
+    <!-- Calendar Embed Container -->
+    <div class="calendar-container">
+      <div id="cal-booking-placeholder">
+        <!-- Cal.com BookerEmbed will be loaded here -->
+        <div class="calendar-loading">
+          <div class="loading-spinner"></div>
+          <p>Loading calendar...</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scarcity Indicator (will be shown conditionally) -->
+    <div class="scarcity-indicator hidden" id="scarcity-indicator">
+      <span>⚡</span>
+      <span id="scarcity-text">Only 3 spots left today</span>
+    </div>
+    
+    <!-- Trust Badges -->
+    <div class="trust-badges text-center mt-lg">
+      <div class="trust-items">
+        <div class="trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Free & no obligation</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Instant confirmation email</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Easy to reschedule</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cal.com Script -->
+<script src="https://app.cal.com/embed/embed.js" defer></script>
+
+<script>
+// Booking calendar step logic
+document.addEventListener('DOMContentLoaded', function() {
+  const backButton = document.querySelector('.booking-calendar-step [data-action="back"]');
+  
+  // Back button handler
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      if (window.SmartModalManager) {
+        window.SmartModalManager.goToStep('booking-info');
+      }
+    });
+  }
+  
+  // Initialize Cal.com embed
+  function initCalEmbed() {
+    // Wait for Cal.com script to load
+    if (typeof window.Cal === 'undefined') {
+      setTimeout(initCalEmbed, 100);
+      return;
+    }
+    
+    const userData = window.SmartModalManager?.getUserData() || {};
+    const situation = userData.situation || 'general';
+    const complexityScore = userData.complexityScore || 5;
+    const pageIntent = document.getElementById('smart-modal')?.getAttribute('data-page-intent') || 'home';
+    
+    // Prepare prefill data
+    const prefillData = {
+      name: userData.name || '',
+      email: userData.email || '',
+      // Create notes with context
+      notes: `Situation: ${situation}\nComplexity: ${complexityScore}/10\nPage: ${pageIntent}\nModal flow: SmartModal v1.0`
+    };
+    
+    // Add phone if available
+    if (userData.phone) {
+      prefillData.phone = userData.phone;
+    }
+    
+    console.log('Initializing Cal.com with prefill:', prefillData);
+    
+    try {
+      // Initialize Cal.com BookerEmbed
+      window.Cal("init", {
+        origin: "https://app.cal.com",
+        debug: false
+      });
+      
+      // Create the booking embed
+      window.Cal("inline", {
+        elementOrSelector: "#cal-booking-placeholder",
+        calLink: "robertkolar/expat-savvy", // Update with actual Cal.com username/event
+        layout: "month_view",
+        config: {
+          name: userData.name || '',
+          email: userData.email || '',
+          notes: prefillData.notes,
+          theme: "light"
+        },
+        styles: {
+          branding: {
+            brandColor: "#EF4444"
+          }
+        }
+      });
+      
+      // Listen for booking success
+      window.Cal("on", {
+        action: "bookingSuccessful",
+        callback: function(e) {
+          console.log('Booking successful:', e.detail);
+          
+          // Store booking data
+          const bookingData = {
+            dateTime: e.detail.date || 'TBD',
+            callLink: e.detail.meetingUrl || e.detail.hangoutLink || '',
+            calendarEventId: e.detail.uid || e.detail.id || '',
+            bookingReference: e.detail.bookingRef || e.detail.reference || ''
+          };
+          
+          if (window.SmartModalManager) {
+            window.SmartModalManager.setBookingData(bookingData);
+            window.SmartModalManager.goToStep('confirmation');
+          }
+        }
+      });
+      
+      // Remove loading state
+      setTimeout(() => {
+        const loadingDiv = document.querySelector('.calendar-loading');
+        if (loadingDiv) {
+          loadingDiv.style.display = 'none';
+        }
+      }, 2000);
+      
+      // Show scarcity indicator if applicable (simulate for now)
+      setTimeout(() => {
+        showScarcityIndicator();
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Error initializing Cal.com:', error);
+      showCalendarError();
+    }
+  }
+  
+  // Show scarcity indicator based on available slots
+  function showScarcityIndicator() {
+    // In a real implementation, this would check actual available slots
+    const spotsLeft = Math.floor(Math.random() * 5) + 1; // Simulate 1-5 spots
+    
+    if (spotsLeft <= 4) {
+      const indicator = document.getElementById('scarcity-indicator');
+      const text = document.getElementById('scarcity-text');
+      
+      if (indicator && text) {
+        text.textContent = `Only ${spotsLeft} spot${spotsLeft === 1 ? '' : 's'} left today`;
+        indicator.classList.remove('hidden');
+        
+        // Add pulse animation
+        indicator.classList.add('pulse');
+      }
+    }
+  }
+  
+  // Show error if Cal.com fails to load
+  function showCalendarError() {
+    const placeholder = document.getElementById('cal-booking-placeholder');
+    if (placeholder) {
+      placeholder.innerHTML = `
+        <div class="calendar-error">
+          <div class="error-icon">⚠️</div>
+          <h3>Calendar temporarily unavailable</h3>
+          <p>Please contact us directly to schedule your consultation:</p>
+          <div class="contact-info">
+            <p><strong>Email:</strong> info@expat-savvy.ch</p>
+            <p><strong>Phone:</strong> +41 79 XXX XXXX</p>
+          </div>
+          <button class="btn-primary" onclick="location.reload()">Try Again</button>
+        </div>
+      `;
+    }
+  }
+  
+  // Initialize calendar when step is shown
+  initCalEmbed();
+});
+</script>
+
+<style>
+  .calendar-container {
+    min-height: 500px;
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-medium);
+    padding: var(--space-md);
+    overflow: hidden;
+  }
+  
+  @media (max-width: 767px) {
+    .calendar-container {
+      min-height: 450px;
+      padding: var(--space-xs);
+    }
+  }
+  
+  .calendar-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    color: var(--medium-gray);
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--gray-200);
+    border-top: 3px solid var(--red-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--space-md);
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .calendar-error {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--dark-gray);
+  }
+  
+  .error-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-md);
+  }
+  
+  .calendar-error h3 {
+    margin-bottom: var(--space-md);
+    color: var(--dark-gray);
+  }
+  
+  .calendar-error p {
+    margin-bottom: var(--space-sm);
+    color: var(--medium-gray);
+  }
+  
+  .contact-info {
+    background: var(--light-gray);
+    padding: var(--space-md);
+    border-radius: var(--radius-small);
+    margin: var(--space-lg) 0;
+  }
+  
+  .contact-info p {
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-small);
+  }
+  
+  .contact-info strong {
+    color: var(--dark-gray);
+  }
+  
+  /* Cal.com embed styling overrides */
+  :global(#cal-booking-placeholder iframe) {
+    width: 100% !important;
+    border: none !important;
+    border-radius: var(--radius-small) !important;
+  }
+  
+  :global(#cal-booking-placeholder .cal-embed) {
+    border-radius: var(--radius-small) !important;
+  }
+  
+  /* Mobile optimizations for calendar */
+  @media (max-width: 767px) {
+    :global(#cal-booking-placeholder iframe) {
+      min-height: 420px !important;
+    }
+    
+    :global(.cal-embed .cal-booking-form) {
+      padding: var(--space-sm) !important;
+    }
+    
+    :global(.cal-embed button) {
+      min-height: 44px !important; /* Ensure touch targets */
+      font-size: 16px !important; /* Prevent zoom */
+    }
+    
+    :global(.cal-embed input) {
+      font-size: 16px !important; /* Prevent zoom */
+      min-height: 44px !important;
+    }
+  }
+  
+  /* Scarcity indicator styling */
+  .scarcity-indicator {
+    background: var(--amber-50);
+    border: 1px solid var(--amber-200);
+    border-radius: var(--radius-small);
+    padding: var(--space-sm) var(--space-md);
+    margin: var(--space-md) 0;
+    text-align: center;
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    color: var(--amber-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+  
+  @media (max-width: 767px) {
+    .scarcity-indicator {
+      font-size: var(--font-size-tiny);
+    }
+  }
+  
+  .scarcity-indicator.pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .trust-badges {
+    margin-top: var(--space-lg);
+  }
+  
+  .trust-items {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 767px) {
+    .trust-items {
+      flex-direction: column;
+      gap: var(--space-xs);
+      align-items: center;
+    }
+  }
+  
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-small);
+    color: var(--medium-gray);
+  }
+  
+  @media (max-width: 767px) {
+    .trust-item {
+      font-size: var(--font-size-tiny);
+    }
+  }
+  
+  .trust-item svg {
+    color: var(--success-green);
+    flex-shrink: 0;
+  }
+</style>

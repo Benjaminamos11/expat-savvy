@@ -1,0 +1,473 @@
+---
+// ConfirmationStep.astro - Step 4 with success state and next steps
+---
+
+<div class="smart-modal-step confirmation-step">
+  <!-- Main Content -->
+  <div class="text-center">
+    <!-- Success Icon -->
+    <div class="success-icon mb-md">
+      <svg fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+    
+    <!-- Success Headline -->
+    <h1 class="mb-xl">Booking Confirmed! 🎉</h1>
+    
+    <!-- Booking Details Box -->
+    <div class="booking-details-box mb-xl">
+      <div class="detail-item">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+        </svg>
+        <span id="booking-date">Monday, Oct 21 at 10:00 AM</span>
+      </div>
+      <div class="detail-item">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+        </svg>
+        <span>15 minutes</span>
+      </div>
+      <div class="detail-item">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+        </svg>
+        <a href="#" id="booking-call-link" class="call-link">Video Call Link</a>
+      </div>
+    </div>
+    
+    <!-- Next Steps Section -->
+    <div class="next-steps-section text-left">
+      <h3 class="mb-lg text-center">What's Next:</h3>
+      
+      <div class="numbered-list">
+        <div class="numbered-item">
+          <div class="numbered-content">
+            <div class="numbered-title">Check your email for calendar invite and call link</div>
+          </div>
+        </div>
+        
+        <div class="numbered-item">
+          <div class="numbered-content">
+            <div class="numbered-title">(Optional) Reply with quick info:</div>
+            <div class="sub-bullets">
+              <div class="sub-bullet">Employment status</div>
+              <div class="sub-bullet">Coverage needed (self/family)</div>
+              <div class="sub-bullet">Start date needed</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="numbered-item">
+          <div class="numbered-content">
+            <div class="numbered-title">Join the call - Robert will guide you through everything!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="action-buttons mb-xl">
+      <button class="btn-primary btn-large" id="add-to-calendar">
+        ADD TO CALENDAR
+      </button>
+      <button class="btn-secondary" id="close-modal">
+        CLOSE
+      </button>
+    </div>
+    
+    <!-- Personal Signature -->
+    <div class="personal-signature">
+      <div class="signature-content">
+        <div class="avatar-container">
+          <img 
+            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_64,h_64,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+            alt="Robert Kolar"
+            class="signature-avatar"
+            width="32"
+            height="32"
+          />
+        </div>
+        <p class="signature-text">
+          Looking forward to helping you save money! - Robert
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Confirmation step logic
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCalendarBtn = document.getElementById('add-to-calendar');
+  const closeModalBtn = document.getElementById('close-modal');
+  const bookingDateElement = document.getElementById('booking-date');
+  const callLinkElement = document.getElementById('booking-call-link');
+  
+  // Load booking data and populate fields
+  function populateBookingDetails() {
+    const bookingData = window.SmartModalManager?.getBookingData() || {};
+    const userData = window.SmartModalManager?.getUserData() || {};
+    
+    console.log('Populating booking details:', bookingData);
+    
+    // Format and display booking date
+    if (bookingData.dateTime && bookingDateElement) {
+      try {
+        const date = new Date(bookingData.dateTime);
+        const options = {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'Europe/Zurich'
+        };
+        
+        const formattedDate = date.toLocaleDateString('en-US', options);
+        bookingDateElement.textContent = formattedDate;
+      } catch (error) {
+        console.error('Error formatting date:', error);
+        bookingDateElement.textContent = bookingData.dateTime;
+      }
+    }
+    
+    // Display call link
+    if (bookingData.callLink && callLinkElement) {
+      callLinkElement.href = bookingData.callLink;
+      callLinkElement.textContent = 'Join Video Call';
+    } else {
+      callLinkElement.textContent = 'Call link will be sent via email';
+      callLinkElement.removeAttribute('href');
+      callLinkElement.style.cursor = 'default';
+      callLinkElement.style.textDecoration = 'none';
+    }
+  }
+  
+  // Add to calendar functionality
+  if (addToCalendarBtn) {
+    addToCalendarBtn.addEventListener('click', function() {
+      const bookingData = window.SmartModalManager?.getBookingData() || {};
+      const userData = window.SmartModalManager?.getUserData() || {};
+      
+      if (bookingData.dateTime) {
+        try {
+          const startDate = new Date(bookingData.dateTime);
+          const endDate = new Date(startDate.getTime() + 15 * 60 * 1000); // 15 minutes
+          
+          // Format dates for calendar
+          const formatDate = (date) => {
+            return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+          };
+          
+          const title = encodeURIComponent('Expat-Savvy Insurance Consultation with Robert');
+          const description = encodeURIComponent(`Insurance consultation with Robert Kolar from Expat-Savvy.\n\nSituation: ${userData.situation || 'General consultation'}\n\nCall link: ${bookingData.callLink || 'Will be sent via email'}`);
+          const location = encodeURIComponent(bookingData.callLink || 'Video call link will be provided');
+          
+          // Google Calendar URL
+          const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${formatDate(startDate)}/${formatDate(endDate)}&details=${description}&location=${location}`;
+          
+          // Open Google Calendar
+          window.open(googleCalUrl, '_blank');
+          
+          // Track the action
+          if (typeof window.trackCalendarAdd === 'function') {
+            window.trackCalendarAdd({
+              bookingId: bookingData.calendarEventId || 'unknown',
+              method: 'google_calendar'
+            });
+          }
+          
+        } catch (error) {
+          console.error('Error creating calendar event:', error);
+          alert('There was an error creating the calendar event. Please check your email for the calendar invite.');
+        }
+      } else {
+        alert('Please check your email for the calendar invite.');
+      }
+    });
+  }
+  
+  // Close modal functionality
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', function() {
+      if (window.SmartModalManager) {
+        window.SmartModalManager.close();
+      }
+    });
+  }
+  
+  // Populate booking details when step loads
+  populateBookingDetails();
+  
+  // Track successful booking
+  setTimeout(() => {
+    const bookingData = window.SmartModalManager?.getBookingData() || {};
+    const userData = window.SmartModalManager?.getUserData() || {};
+    
+    if (typeof window.trackBookingComplete === 'function') {
+      window.trackBookingComplete({
+        situation: userData.situation || 'unknown',
+        complexityScore: userData.complexityScore || 0,
+        bookingId: bookingData.calendarEventId || 'unknown',
+        flow: 'smart-modal'
+      });
+    }
+  }, 1000);
+});
+</script>
+
+<style>
+  .confirmation-step {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg);
+  }
+  
+  @media (max-width: 767px) {
+    .confirmation-step {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+  
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--success-green);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+  }
+  
+  .success-icon::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: var(--green-100);
+    border-radius: var(--radius-full);
+    z-index: -1;
+  }
+  
+  @media (max-width: 767px) {
+    .success-icon {
+      width: 64px;
+      height: 64px;
+    }
+    
+    .success-icon::before {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  .success-icon svg {
+    width: 40px;
+    height: 40px;
+    color: var(--white);
+  }
+  
+  @media (max-width: 767px) {
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  
+  .booking-details-box {
+    background: var(--light-gray);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-medium);
+    padding: var(--space-lg);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 767px) {
+    .booking-details-box {
+      padding: var(--space-md);
+    }
+  }
+  
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-body);
+    color: var(--dark-gray);
+    line-height: 1.5;
+  }
+  
+  .detail-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .detail-item {
+      font-size: var(--font-size-small);
+    }
+  }
+  
+  .detail-item svg {
+    flex-shrink: 0;
+    color: var(--red-primary);
+  }
+  
+  .call-link {
+    color: var(--red-primary);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  
+  .call-link:hover {
+    text-decoration: none;
+  }
+  
+  .next-steps-section {
+    margin: var(--space-2xl) 0;
+  }
+  
+  .next-steps-section h3 {
+    color: var(--dark-gray);
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @media (max-width: 767px) {
+    .action-buttons {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    
+    .action-buttons .btn-primary,
+    .action-buttons .btn-secondary {
+      width: 100%;
+    }
+  }
+  
+  .personal-signature {
+    margin-top: var(--space-lg);
+  }
+  
+  .signature-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+  
+  @media (max-width: 767px) {
+    .signature-content {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+  
+  .avatar-container {
+    flex-shrink: 0;
+  }
+  
+  .signature-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 2px solid var(--gray-200);
+  }
+  
+  .signature-text {
+    font-size: var(--font-size-body);
+    color: var(--medium-gray);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .signature-text {
+      font-size: var(--font-size-small);
+      text-align: center;
+    }
+  }
+  
+  /* Success animation */
+  .success-icon {
+    animation: successBounce 0.6s ease-out 0.2s both;
+  }
+  
+  @keyframes successBounce {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Stagger animation for content */
+  .confirmation-step h1 {
+    animation: fadeInUp 0.5s ease-out 0.4s both;
+  }
+  
+  .booking-details-box {
+    animation: fadeInUp 0.5s ease-out 0.6s both;
+  }
+  
+  .next-steps-section {
+    animation: fadeInUp 0.5s ease-out 0.8s both;
+  }
+  
+  .action-buttons {
+    animation: fadeInUp 0.5s ease-out 1s both;
+  }
+  
+  .personal-signature {
+    animation: fadeInUp 0.5s ease-out 1.2s both;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .success-icon,
+    .confirmation-step h1,
+    .booking-details-box,
+    .next-steps-section,
+    .action-buttons,
+    .personal-signature {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>

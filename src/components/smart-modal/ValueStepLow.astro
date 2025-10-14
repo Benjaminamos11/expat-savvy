@@ -1,0 +1,250 @@
+---
+// ValueStepLow.astro - Step 2C for low complexity situations (1-3 score)
+---
+
+<div class="smart-modal-step value-step-low">
+  <!-- Back Button -->
+  <button class="back-button" data-action="back">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </svg>
+    Back
+  </button>
+  
+  <!-- Main Content -->
+  <div class="mt-xl">
+    <h2 class="mb-2xl text-center">No problem! How can I help?</h2>
+    
+    <!-- Option Cards Container -->
+    <div class="options-container">
+      <!-- Quick Call Option -->
+      <div class="option-card-row card" data-action="book-call">
+        <div class="option-icon">📞</div>
+        <div class="option-content">
+          <h3 class="option-title">Quick Call</h3>
+          <p class="option-subtitle">Personalized advice (15 min)</p>
+        </div>
+        <button class="btn-primary option-button">
+          BOOK NOW →
+        </button>
+      </div>
+      
+      <!-- Compare Rates Option -->
+      <div class="option-card-row card" data-action="self-service">
+        <div class="option-icon">📋</div>
+        <div class="option-content">
+          <h3 class="option-title">Compare Rates</h3>
+          <p class="option-subtitle">Standard quotes (4-5 min)</p>
+        </div>
+        <button class="btn-secondary option-button">
+          GET QUOTES →
+        </button>
+      </div>
+    </div>
+    
+    <!-- Gentle Nudge -->
+    <div class="gentle-nudge">
+      <span class="nudge-icon">💡</span>
+      <p class="nudge-text">Most people find the call more helpful for their specific situation</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Value step low logic
+document.addEventListener('DOMContentLoaded', function() {
+  // Back button
+  const backButton = document.querySelector('.value-step-low [data-action="back"]');
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      if (window.SmartModalManager) {
+        window.SmartModalManager.goToStep('qualification');
+      }
+    });
+  }
+  
+  // Option cards
+  const optionCards = document.querySelectorAll('.value-step-low .option-card-row');
+  
+  optionCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const action = this.getAttribute('data-action');
+      console.log('Selected action from low value step:', action);
+      
+      if (window.SmartModalManager) {
+        if (action === 'book-call') {
+          window.SmartModalManager.goToStep('booking-info');
+        } else if (action === 'self-service') {
+          // In Phase 2, this would go to the form
+          // For now, we'll redirect to booking as a fallback
+          window.SmartModalManager.goToStep('booking-info');
+        }
+      }
+    });
+    
+    // Also handle button clicks within cards
+    const button = card.querySelector('.option-button');
+    if (button) {
+      button.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent double triggering
+        card.click();
+      });
+    }
+    
+    // Keyboard support
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+    
+    // Make focusable
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+  });
+});
+</script>
+
+<style>
+  .options-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .option-card-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all 200ms ease;
+    border: 2px solid var(--gray-200);
+    background: var(--white);
+  }
+  
+  @media (max-width: 767px) {
+    .option-card-row {
+      padding: var(--space-md);
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-sm);
+    }
+  }
+  
+  .option-card-row:first-child:hover {
+    border-color: var(--red-primary);
+    background: var(--red-50);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .option-card-row:last-child:hover {
+    border-color: var(--gray-300);
+    background: var(--light-gray);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .option-card-row:focus {
+    outline: 2px solid var(--red-primary);
+    outline-offset: 2px;
+  }
+  
+  .option-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .option-icon {
+      font-size: 28px;
+    }
+  }
+  
+  .option-content {
+    flex: 1;
+  }
+  
+  .option-title {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: var(--space-xxs);
+  }
+  
+  @media (max-width: 767px) {
+    .option-title {
+      font-size: var(--font-size-small);
+    }
+  }
+  
+  .option-subtitle {
+    font-size: var(--font-size-small);
+    color: var(--medium-gray);
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .option-subtitle {
+      font-size: var(--font-size-tiny);
+    }
+  }
+  
+  .option-button {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    border-radius: var(--radius-small);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 767px) {
+    .option-button {
+      width: 100%;
+      margin-top: var(--space-sm);
+    }
+  }
+  
+  .option-card-row:first-child .option-button:hover {
+    background: var(--red-hover) !important;
+  }
+  
+  .option-card-row:last-child .option-button:hover {
+    background: var(--light-gray) !important;
+    border-color: var(--gray-300) !important;
+  }
+  
+  .gentle-nudge {
+    text-align: center;
+    margin-top: var(--space-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+  
+  .nudge-icon {
+    font-size: 16px;
+  }
+  
+  .nudge-text {
+    font-size: var(--font-size-small);
+    color: var(--medium-gray);
+    font-style: normal;
+    margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+    .nudge-text {
+      font-size: var(--font-size-tiny);
+    }
+    
+    .gentle-nudge {
+      flex-direction: column;
+      gap: var(--space-xxs);
+    }
+  }
+</style>

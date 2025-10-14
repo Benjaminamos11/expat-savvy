@@ -1,0 +1,266 @@
+---
+// ValueStepMedium.astro - Step 2B for medium complexity situations (4-6 score)
+---
+
+<div class="smart-modal-step value-step-medium">
+  <!-- Back Button -->
+  <button class="back-button" data-action="back">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </svg>
+    Back
+  </button>
+  
+  <!-- Main Content -->
+  <div class="mt-xl">
+    <h2 class="mb-2xl text-center">Great! How would you like to proceed?</h2>
+    
+    <!-- Comparison Cards Container -->
+    <div class="comparison-container">
+      <!-- Expert Call Card -->
+      <div class="comparison-card expert-card card">
+        <div class="card-header text-center mb-lg">
+          <div class="icon-large mb-sm">📞</div>
+          <h3 class="card-title">EXPERT CALL</h3>
+          <p class="card-duration">15 minutes</p>
+        </div>
+        
+        <div class="benefits-list mb-lg">
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="benefit-text">Personalized to your exact situation</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="benefit-text">Hidden discounts & optimization</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="benefit-text">2026 strategy & timing advice</div>
+          </div>
+        </div>
+        
+        <div class="savings-highlight success mb-lg">
+          <strong>Average savings: CHF 1,847/year</strong>
+        </div>
+        
+        <button class="btn-primary btn-large" data-action="book-call">
+          BOOK CALL →
+        </button>
+      </div>
+      
+      <!-- Self-Service Card -->
+      <div class="comparison-card self-service-card card">
+        <div class="card-header text-center mb-lg">
+          <div class="icon-large mb-sm">📋</div>
+          <h3 class="card-title">SELF-SERVICE</h3>
+          <p class="card-duration">4-5 minutes</p>
+        </div>
+        
+        <div class="features-list mb-lg">
+          <div class="feature-item">
+            <span class="bullet">•</span>
+            <span class="feature-text">Generic comparison</span>
+          </div>
+          <div class="feature-item">
+            <span class="bullet">•</span>
+            <span class="feature-text">Public rates only</span>
+          </div>
+          <div class="feature-item">
+            <span class="bullet">•</span>
+            <span class="feature-text">No personalized advice</span>
+          </div>
+        </div>
+        
+        <div class="warning-highlight warning mb-lg">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          <strong>May miss CHF 800-1,500 in savings</strong>
+        </div>
+        
+        <button class="btn-secondary btn-large" data-action="self-service">
+          GET QUOTES →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Value step medium logic
+document.addEventListener('DOMContentLoaded', function() {
+  // Back button
+  const backButton = document.querySelector('.value-step-medium [data-action="back"]');
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      if (window.SmartModalManager) {
+        window.SmartModalManager.goToStep('qualification');
+      }
+    });
+  }
+  
+  // Book call button
+  const bookCallButton = document.querySelector('.value-step-medium [data-action="book-call"]');
+  if (bookCallButton) {
+    bookCallButton.addEventListener('click', function() {
+      console.log('Book call selected from medium value step');
+      if (window.SmartModalManager) {
+        window.SmartModalManager.goToStep('booking-info');
+      }
+    });
+  }
+  
+  // Self-service button
+  const selfServiceButton = document.querySelector('.value-step-medium [data-action="self-service"]');
+  if (selfServiceButton) {
+    selfServiceButton.addEventListener('click', function() {
+      console.log('Self-service selected from medium value step');
+      if (window.SmartModalManager) {
+        // In Phase 2, this would go to the form
+        // For now, we'll redirect to booking as a fallback
+        window.SmartModalManager.goToStep('booking-info');
+      }
+    });
+  }
+});
+</script>
+
+<style>
+  .comparison-container {
+    display: grid;
+    gap: var(--space-lg);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 768px) {
+    .comparison-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .comparison-card {
+    padding: var(--space-lg);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (max-width: 767px) {
+    .comparison-card {
+      min-height: auto;
+      padding: var(--space-md);
+    }
+  }
+  
+  .card-header .icon-large {
+    font-size: 40px;
+    margin-bottom: var(--space-sm);
+  }
+  
+  @media (max-width: 767px) {
+    .card-header .icon-large {
+      font-size: 32px;
+    }
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--dark-gray);
+    margin-bottom: var(--space-xxs);
+  }
+  
+  @media (max-width: 767px) {
+    .card-title {
+      font-size: 16px;
+    }
+  }
+  
+  .card-duration {
+    font-size: var(--font-size-small);
+    color: var(--medium-gray);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .expert-card:hover {
+    border-color: var(--red-primary);
+    background: var(--red-50);
+  }
+  
+  .self-service-card:hover {
+    border-color: var(--gray-300);
+    background: var(--light-gray);
+  }
+  
+  .features-list {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .bullet {
+    color: var(--gray-400);
+    font-size: 20px;
+    width: 20px;
+    flex-shrink: 0;
+  }
+  
+  .feature-text {
+    font-size: var(--font-size-small);
+    color: var(--medium-gray);
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 767px) {
+    .feature-text {
+      font-size: var(--font-size-tiny);
+    }
+  }
+  
+  .savings-highlight {
+    background: var(--green-50);
+    padding: var(--space-sm);
+    border-radius: var(--radius-small);
+    text-align: center;
+    font-size: var(--font-size-small);
+    color: var(--green-900);
+  }
+  
+  .warning-highlight {
+    background: var(--amber-50);
+    padding: var(--space-sm);
+    border-radius: var(--radius-small);
+    text-align: center;
+    font-size: var(--font-size-small);
+    color: var(--amber-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+  
+  .comparison-card .btn-large {
+    margin-top: auto;
+  }
+</style>

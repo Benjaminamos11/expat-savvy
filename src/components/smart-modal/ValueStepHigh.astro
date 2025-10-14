@@ -1,0 +1,238 @@
+---
+// ValueStepHigh.astro - Step 2A for high complexity situations (7-10 score)
+export interface Props {
+  situation?: string;
+}
+
+const { situation = 'new-to-switzerland' } = Astro.props;
+
+// Situation-specific content
+const contentMap = {
+  'new-to-switzerland': {
+    headline: 'Perfect! Here\'s what you need to know about moving to Switzerland...',
+    insights: [
+      {
+        title: 'Permit type (B, C, L) affects which insurers accept you and pricing',
+        explanation: 'Different permit types have access to different insurance products and rates'
+      },
+      {
+        title: 'You have 3 months to register - timing impacts available discounts',
+        explanation: 'Early registration can unlock special newcomer rates and avoid penalties'
+      },
+      {
+        title: 'Expat-specific packages exist that most comparison sites don\'t show',
+        explanation: 'These specialized plans often offer better coverage for international situations'
+      }
+    ]
+  },
+  'family': {
+    headline: 'Perfect! Here\'s what you need to know about family coverage...',
+    insights: [
+      {
+        title: 'Children under 18 are often cheaper on separate policies',
+        explanation: 'Individual child policies can be significantly more cost-effective than family plans'
+      },
+      {
+        title: 'Spouse combinations can save 15-20% vs individual policies',
+        explanation: 'Strategic coupling of adult policies can unlock substantial savings'
+      },
+      {
+        title: 'Deductible strategies differ significantly for families vs singles',
+        explanation: 'Family deductible optimization requires different calculation methods'
+      }
+    ]
+  },
+  'cross-border': {
+    headline: 'Perfect! Here\'s what you need to know about cross-border work...',
+    insights: [
+      {
+        title: 'EU/EFTA workers have special exemption options (LAMal/CMU choice)',
+        explanation: 'You can choose between Swiss and home country healthcare systems'
+      },
+      {
+        title: 'Double taxation and coordination rules most sites don\'t account for',
+        explanation: 'Cross-border tax implications affect insurance premium calculations'
+      },
+      {
+        title: 'Timing of registration affects which country\'s system applies',
+        explanation: 'Registration deadlines determine your healthcare system obligations'
+      }
+    ]
+  },
+  'switch-save': {
+    headline: 'Perfect! Here\'s what you need to know about switching insurance...',
+    insights: [
+      {
+        title: 'Premium increases for 2026 vary dramatically by insurer (5-15%)',
+        explanation: 'Some insurers are raising rates much more than others'
+      },
+      {
+        title: 'Switching deadlines and procedures have specific requirements',
+        explanation: 'Missing deadlines or incorrect procedures can delay your switch'
+      },
+      {
+        title: 'Hidden discounts and loyalty penalties most people miss',
+        explanation: 'Long-term customers often pay more than new customers for the same coverage'
+      }
+    ]
+  }
+};
+
+const content = contentMap[situation] || contentMap['new-to-switzerland'];
+---
+
+<div class="smart-modal-step value-step-high">
+  <!-- Back Button -->
+  <button class="back-button" data-action="back">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </svg>
+    Back
+  </button>
+  
+  <!-- Main Content -->
+  <div class="mt-xl">
+    <h2 class="mb-lg">{content.headline}</h2>
+    
+    <!-- Warning Box -->
+    <div class="info-box warning">
+      <div class="title">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        IMPORTANT TO KNOW
+      </div>
+      <div class="content">
+        Most people in your situation miss key savings because they don't know the specific rules and opportunities that apply to their case.
+      </div>
+    </div>
+    
+    <!-- Insights List -->
+    <div class="benefits-list">
+      {content.insights.map((insight) => (
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="benefit-content">
+            <div class="benefit-text font-medium">{insight.title}</div>
+            <div class="benefit-text text-small text-medium-gray mt-xs">{insight.explanation}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Savings Info Box -->
+    <div class="info-box info">
+      <div class="title">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+        </svg>
+        Typical Savings
+      </div>
+      <div class="content">
+        <strong>CHF 1,500-2,800/year</strong> when optimized by someone who understands your specific situation and the current market dynamics.
+      </div>
+    </div>
+    
+    <!-- How would you like to proceed -->
+    <h3 class="mb-lg mt-xl">How would you like to proceed?</h3>
+    
+    <!-- Primary Option Card (Consultation) -->
+    <div class="consultation-card card" style="position: relative; background: var(--red-primary); border-color: var(--red-primary); padding: var(--space-xl); margin-bottom: var(--space-lg);">
+      <!-- Recommended Badge -->
+      <div style="position: absolute; top: -12px; left: var(--space-lg); background: var(--white); color: var(--red-primary); font-size: var(--font-size-tiny); font-weight: 700; text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius-medium); box-shadow: var(--shadow-card);">
+        ✓ RECOMMENDED
+      </div>
+      
+      <div class="flex items-center mb-md" style="color: white;">
+        <span style="font-size: 32px; margin-right: var(--space-md);">📞</span>
+        <div>
+          <h3 style="color: white; margin-bottom: 4px;">15-Min Expert Call</h3>
+        </div>
+      </div>
+      
+      <div class="benefits-list mb-lg" style="color: white; opacity: 0.95;">
+        <div style="margin-bottom: var(--space-sm);">• Personalized strategies for your exact situation</div>
+        <div style="margin-bottom: var(--space-sm);">• Hidden discounts and optimization opportunities</div>
+        <div style="margin-bottom: var(--space-sm);">• 2026 timeline planning and next steps</div>
+      </div>
+      
+      <button class="btn-large" style="background: white; color: var(--red-primary); width: 100%;" data-action="book-call">
+        BOOK FREE CALL →
+      </button>
+    </div>
+    
+    <!-- Divider -->
+    <div class="divider">
+      <span>or</span>
+    </div>
+    
+    <!-- Secondary Option -->
+    <button class="btn-ghost" style="width: 100%;" data-action="self-service">
+      Get Standard Quotes (4-5 min)
+    </button>
+    <div class="text-center mt-xs">
+      <p class="text-tiny" style="color: var(--warning-amber); display: flex; align-items: center; justify-content: center; gap: var(--space-xxs);">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        May miss CHF 1,200+ in potential savings
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Value step high logic
+document.addEventListener('DOMContentLoaded', function() {
+  // Back button
+  const backButton = document.querySelector('.value-step-high [data-action="back"]');
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      if (window.SmartModalManager) {
+        window.SmartModalManager.goToStep('qualification');
+      }
+    });
+  }
+  
+  // Book call button
+  const bookCallButton = document.querySelector('.value-step-high [data-action="book-call"]');
+  if (bookCallButton) {
+    bookCallButton.addEventListener('click', function() {
+      console.log('Book call selected from high value step');
+      if (window.SmartModalManager) {
+        window.SmartModalManager.goToStep('booking-info');
+      }
+    });
+  }
+  
+  // Self-service button  
+  const selfServiceButton = document.querySelector('.value-step-high [data-action="self-service"]');
+  if (selfServiceButton) {
+    selfServiceButton.addEventListener('click', function() {
+      console.log('Self-service selected from high value step');
+      if (window.SmartModalManager) {
+        // In Phase 2, this would go to the form
+        // For now, we'll redirect to booking as a fallback
+        window.SmartModalManager.goToStep('booking-info');
+      }
+    });
+  }
+});
+</script>
+
+<style>
+  .consultation-card:hover {
+    transform: none !important; /* Prevent transform on the red card */
+    background: var(--red-primary) !important; /* Keep background red */
+    border-color: var(--red-primary) !important;
+  }
+  
+  .consultation-card .btn-large:hover {
+    background: var(--gray-50) !important;
+    color: var(--red-primary) !important;
+  }
+</style>

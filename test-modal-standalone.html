@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Modal Test - Standalone</title>
+    <link rel="stylesheet" href="public/styles/smart-modal.css">
+    <style>
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f9fafb;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .test-button {
+            background: #ef4444;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Smart Modal Test - Standalone</h1>
+        <p>This file can be opened directly in your browser without a server.</p>
+        
+        <h2>Test Buttons:</h2>
+        <button class="test-button" onclick="openSmartModal()">Open Smart Modal</button>
+        <button class="test-button" onclick="testSmartModalManager()">Test SmartModalManager</button>
+        
+        <h2>Status:</h2>
+        <div id="status">Loading...</div>
+        
+        <h2>Console Output:</h2>
+        <div id="console-output" style="background: #f3f4f6; padding: 20px; margin-top: 20px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto;"></div>
+    </div>
+
+    <!-- Smart Modal HTML -->
+    <div id="smart-modal" 
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50"
+        data-page-intent="home" 
+        data-page-slug="test"
+        data-city=""
+        role="dialog"
+        aria-modal="true">
+      
+      <div class="flex items-center justify-center p-0 lg:p-4 h-full min-h-screen">
+        <div class="smart-modal-container bg-white w-full h-full lg:max-w-[1200px] lg:max-h-[90vh] lg:rounded-2xl lg:h-auto overflow-y-auto relative shadow-2xl transition-all duration-200 scale-100 translate-y-0">
+          <button id="smart-modal-close-btn" 
+                  class="absolute top-4 right-4 lg:top-4 lg:right-4 z-10 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Close modal">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <div id="smart-modal-content" class="h-full">
+            <!-- Content will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load the Smart Modal Manager -->
+    <script src="public/scripts/smart-modal-manager.js"></script>
+    
+    <script>
+        // Capture console output
+        const consoleOutput = document.getElementById('console-output');
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, arguments);
+            consoleOutput.textContent += '[LOG] ' + args.join(' ') + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, arguments);
+            consoleOutput.textContent += '[ERROR] ' + args.join(' ') + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+        
+        // Test functions
+        function openSmartModal() {
+            console.log('Testing openSmartModal function...');
+            if (typeof window.openSmartModal === 'function') {
+                window.openSmartModal();
+            } else {
+                console.error('openSmartModal function not found');
+            }
+        }
+        
+        function testSmartModalManager() {
+            console.log('Testing SmartModalManager...');
+            if (window.SmartModalManager) {
+                console.log('SmartModalManager found:', typeof window.SmartModalManager);
+                window.SmartModalManager.open();
+            } else {
+                console.error('SmartModalManager not found on window object');
+            }
+        }
+        
+        // Check status on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const status = document.getElementById('status');
+            
+            setTimeout(() => {
+                let statusText = '';
+                
+                if (window.SmartModalManager) {
+                    statusText += '✅ SmartModalManager loaded\n';
+                } else {
+                    statusText += '❌ SmartModalManager NOT loaded\n';
+                }
+                
+                if (typeof window.openSmartModal === 'function') {
+                    statusText += '✅ openSmartModal function available\n';
+                } else {
+                    statusText += '❌ openSmartModal function NOT available\n';
+                }
+                
+                const modal = document.getElementById('smart-modal');
+                if (modal) {
+                    statusText += '✅ Smart Modal DOM element found\n';
+                } else {
+                    statusText += '❌ Smart Modal DOM element NOT found\n';
+                }
+                
+                status.innerHTML = statusText.replace(/\n/g, '<br>');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

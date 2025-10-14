@@ -1,0 +1,152 @@
+---
+// Define props
+export interface Props {
+  insuranceType?: string;
+  intent?: string;
+  showMicroProof?: boolean;
+}
+
+const { 
+  insuranceType = 'health', 
+  intent = 'general',
+  showMicroProof = true 
+} = Astro.props;
+
+// Personalized CTA text based on intent
+const getPersonalizedCTA = (intent: string) => {
+  switch (intent) {
+    case 'setup':
+    case 'new':
+      return "Book a quick welcome consultation (15–30 min)";
+    case 'switch':
+    case 'change':
+      return "Compare your plan with Robert (15–30 min)";
+    case 'family':
+    case 'special':
+      return "Discuss your family's coverage (15–30 min)";
+    case 'review':
+      return "Get expert feedback on your plan (15–30 min)";
+    default:
+      return "Schedule Free Consultation (15–30 min)";
+  }
+};
+
+const ctaText = getPersonalizedCTA(intent);
+---
+
+<div class="consultation-panel">
+  <!-- Header -->
+  <div class="text-center mb-6">
+    <h3 class="text-xl font-bold text-gray-900 mb-2">Not sure about options?</h3>
+    <p class="text-gray-600">Get personalized advice from Robert Kolar, FINMA Registered Advisor</p>
+  </div>
+  
+  <!-- Robert's Photo -->
+  <div class="flex justify-center mb-6">
+    <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-red-100 shadow-lg">
+      <img 
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_96,h_96,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+        alt="Robert Kolar - FINMA Registered Advisor" 
+        width="96"
+        height="96"
+        class="w-full h-full object-cover" 
+        onerror="this.src='/images/default-avatar.svg'" 
+      />
+    </div>
+  </div>
+  
+  <!-- Languages -->
+  <div class="flex justify-center gap-2 mb-6">
+    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">DE</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">EN</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">FR</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">CZ</span>
+  </div>
+  
+  <!-- Benefits -->
+  <div class="mb-8">
+    <ul class="space-y-3">
+      <li class="flex items-start">
+        <span class="mr-3 mt-1 text-green-600 flex-shrink-0">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </span>
+        <span class="text-gray-700 font-medium">Expert guidance in English</span>
+      </li>
+      <li class="flex items-start">
+        <span class="mr-3 mt-1 text-green-600 flex-shrink-0">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </span>
+        <span class="text-gray-700 font-medium">Compare all insurers objectively</span>
+      </li>
+      <li class="flex items-start">
+        <span class="mr-3 mt-1 text-green-600 flex-shrink-0">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </span>
+        <span class="text-gray-700 font-medium">Save time & avoid costly mistakes</span>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Micro-proof -->
+  {showMicroProof && (
+    <div class="text-center mb-6">
+      <p class="text-sm text-gray-500">💬 Most people start with a quick call.</p>
+    </div>
+  )}
+  
+  <!-- Primary CTA Button -->
+  <div class="mb-6">
+    <button 
+      class="btn-consultation-primary w-full"
+      onclick="window.open('https://cal.com/robertkolar/expat-savvy', '_blank')"
+      aria-label="Schedule a free 15–30 minute consultation with Robert"
+    >
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      {ctaText}
+    </button>
+    <p class="text-xs text-gray-500 text-center mt-2">Recommended · 15–30 min · 100% free</p>
+  </div>
+  
+  <!-- What to Expect -->
+  <div class="bg-white rounded-lg p-4 border border-gray-200">
+    <h4 class="font-semibold text-gray-900 mb-3 text-sm">What to expect:</h4>
+    <ul class="text-xs text-gray-600 space-y-1">
+      <li>• Personal, English-speaking advice</li>
+      <li>• Compare all major insurers</li>
+      <li>• Free & no obligation</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .consultation-panel {
+    background: linear-gradient(135deg, #fef7f7 0%, #fdf2f8 100%);
+    border-radius: 12px;
+    padding: 32px;
+    height: fit-content;
+    position: sticky;
+    top: 32px;
+  }
+  
+  @media (max-width: 1024px) {
+    .consultation-panel {
+      position: relative;
+      top: 0;
+      margin-bottom: 24px;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .consultation-panel {
+      padding: 24px;
+    }
+  }
+</style>

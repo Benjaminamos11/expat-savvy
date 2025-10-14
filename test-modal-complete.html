@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Modal Test - Complete</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f9fafb;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .test-button {
+            background: #ef4444;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .test-button:hover {
+            background: #dc2626;
+        }
+        
+        /* Smart Modal CSS - Essential parts only */
+        .fixed { position: fixed; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .hidden { display: none !important; }
+        .z-50 { z-index: 50; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .h-full { height: 100%; }
+        .w-full { width: 100%; }
+        .bg-white { background-color: white; }
+        .rounded-2xl { border-radius: 1rem; }
+        .shadow-2xl { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+        .absolute { position: absolute; }
+        .top-4 { top: 1rem; }
+        .right-4 { right: 1rem; }
+        .p-2 { padding: 0.5rem; }
+        .text-gray-400 { color: #9ca3af; }
+        
+        #smart-modal {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+        
+        .smart-modal-container {
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transition: all 200ms ease;
+        }
+        
+        .smart-modal-step {
+            padding: 2rem;
+        }
+        
+        .btn-primary {
+            background: #ef4444;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+        }
+        
+        .btn-primary:hover {
+            background: #dc2626;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .option-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 200ms ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .option-card:hover {
+            border-color: #ef4444;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .emoji {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .content .text {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .content .arrow {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        body.modal-open {
+            overflow: hidden !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Smart Modal Test - Complete</h1>
+        <p>This is a completely self-contained test with inline CSS and JS.</p>
+        
+        <h2>Test Buttons:</h2>
+        <button class="test-button" onclick="testOpenModal()">Open Smart Modal</button>
+        <button class="test-button" onclick="testConsole()">Test Console</button>
+        
+        <h2>Status:</h2>
+        <div id="status">Checking...</div>
+        
+        <h2>Debug Info:</h2>
+        <div id="debug" style="background: #f3f4f6; padding: 20px; margin-top: 20px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto;"></div>
+    </div>
+
+    <!-- Smart Modal HTML -->
+    <div id="smart-modal" 
+        class="fixed inset-0 hidden z-50"
+        style="background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);">
+      
+      <div class="flex items-center justify-center h-full" style="padding: 1rem;">
+        <div class="smart-modal-container bg-white rounded-2xl shadow-2xl" style="width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative;">
+          <button id="smart-modal-close-btn" 
+                  class="absolute top-4 right-4 p-2 text-gray-400"
+                  style="z-index: 10; border: none; background: none; cursor: pointer; border-radius: 0.5rem;"
+                  onclick="closeModal()">
+            <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          
+          <div id="smart-modal-content" class="smart-modal-step">
+            <h2 style="margin-bottom: 2rem; text-align: center;">What's your situation?</h2>
+            
+            <div class="options-grid">
+              <div class="option-card" onclick="selectOption('new-to-switzerland', 9)">
+                <div class="emoji">🇨🇭</div>
+                <div class="content">
+                  <div class="text">I just moved to Switzerland</div>
+                  <div class="arrow">→</div>
+                </div>
+              </div>
+              
+              <div class="option-card" onclick="selectOption('family', 8)">
+                <div class="emoji">👨‍👩‍👧‍👦</div>
+                <div class="content">
+                  <div class="text">I need family coverage</div>
+                  <div class="arrow">→</div>
+                </div>
+              </div>
+              
+              <div class="option-card" onclick="selectOption('switch-save', 6)">
+                <div class="emoji">💰</div>
+                <div class="content">
+                  <div class="text">I want to switch and save money</div>
+                  <div class="arrow">→</div>
+                </div>
+              </div>
+              
+              <div class="option-card" onclick="selectOption('compare-options', 4)">
+                <div class="emoji">⚖️</div>
+                <div class="content">
+                  <div class="text">I'm comparing different options</div>
+                  <div class="arrow">→</div>
+                </div>
+              </div>
+              
+              <div class="option-card" onclick="selectOption('have-questions', 3)">
+                <div class="emoji">❓</div>
+                <div class="content">
+                  <div class="text">I have specific questions</div>
+                  <div class="arrow">→</div>
+                </div>
+              </div>
+              
+              <div class="option-card" onclick="selectOption('just-browsing', 2)">
+                <div class="emoji">👀</div>
+                <div class="content">
+                  <div class="text">I'm just browsing</div>
+                  <div class="arrow">→</div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+              <button class="btn-primary" onclick="testNextStep()">Test Next Step</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // Debug logging
+        function log(message) {
+            const debug = document.getElementById('debug');
+            const timestamp = new Date().toLocaleTimeString();
+            debug.textContent += `[${timestamp}] ${message}\n`;
+            debug.scrollTop = debug.scrollHeight;
+            console.log(message);
+        }
+        
+        // Test functions
+        function testOpenModal() {
+            log('🚀 Testing modal open...');
+            try {
+                const modal = document.getElementById('smart-modal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    document.body.classList.add('modal-open');
+                    log('✅ Modal opened successfully');
+                } else {
+                    log('❌ Modal element not found');
+                }
+            } catch (error) {
+                log('❌ Error opening modal: ' + error.message);
+            }
+        }
+        
+        function closeModal() {
+            log('🔒 Closing modal...');
+            try {
+                const modal = document.getElementById('smart-modal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                    log('✅ Modal closed successfully');
+                } else {
+                    log('❌ Modal element not found');
+                }
+            } catch (error) {
+                log('❌ Error closing modal: ' + error.message);
+            }
+        }
+        
+        function selectOption(situation, score) {
+            log(`🎯 Option selected: ${situation} (score: ${score})`);
+            // Simulate next step
+            setTimeout(() => {
+                log('✅ Option processed - would navigate to next step');
+            }, 500);
+        }
+        
+        function testNextStep() {
+            log('➡️ Test next step clicked');
+            alert('Next step would load here!');
+        }
+        
+        function testConsole() {
+            log('🧪 Console test - this message should appear in the debug box');
+            alert('Check the debug box below!');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🚀 Page loaded, initializing...');
+            
+            // Check status
+            const status = document.getElementById('status');
+            setTimeout(() => {
+                const modal = document.getElementById('smart-modal');
+                const closeBtn = document.getElementById('smart-modal-close-btn');
+                
+                let statusText = '';
+                if (modal) {
+                    statusText += '✅ Smart Modal DOM element found\n';
+                } else {
+                    statusText += '❌ Smart Modal DOM element NOT found\n';
+                }
+                
+                if (closeBtn) {
+                    statusText += '✅ Close button found\n';
+                } else {
+                    statusText += '❌ Close button NOT found\n';
+                }
+                
+                status.innerHTML = statusText.replace(/\n/g, '<br>');
+                log('✅ Initialization complete');
+            }, 500);
+        });
+        
+        // ESC key to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('smart-modal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            }
+        });
+        
+        // Click outside to close
+        document.getElementById('smart-modal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

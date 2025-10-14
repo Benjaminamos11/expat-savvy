@@ -44,10 +44,387 @@ class OffersModal {
     return 'home'; // Default
   }
 
+  // Render consultation panel in left column
+  renderConsultationPanel(intent = 'general') {
+    const container = document.getElementById('consultation-panel-container');
+    if (!container) return;
+
+    const personalizedCTA = this.getPersonalizedCTA(intent);
+    
+    container.innerHTML = `
+      <div class="consultation-panel">
+        <!-- Clean Header -->
+        <div class="text-center mb-6">
+          <h3 class="text-2xl font-bold text-gray-900 mb-3">Need Expert Guidance?</h3>
+          <p class="text-gray-600 text-sm">Get personalized advice from Robert Kolar<br>FINMA Registered Advisor</p>
+        </div>
+        
+        <!-- Robert's Photo -->
+        <div class="flex justify-center mb-6">
+          <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-gray-200 shadow-sm">
+            <img 
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+              alt="Robert Kolar - FINMA Registered Advisor" 
+              width="80"
+              height="80"
+              class="w-full h-full object-cover" 
+              onerror="this.src='/images/default-avatar.svg'" 
+            />
+          </div>
+        </div>
+        
+        <!-- Benefits List -->
+        <div class="mb-8">
+          <ul class="space-y-4">
+            <li class="flex items-center">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span class="text-gray-700 font-medium">Expert guidance in English</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span class="text-gray-700 font-medium">Compare all insurers objectively</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span class="text-gray-700 font-medium">Save time & avoid costly mistakes</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Primary CTA Button -->
+        <div class="mb-6">
+          <button 
+            class="btn-consultation-primary w-full"
+            onclick="window.globalOffersModal && window.globalOffersModal.startConsultationFlow()"
+            aria-label="Schedule a free 15–30 minute consultation with Robert"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            ${personalizedCTA}
+          </button>
+          <p class="text-xs text-gray-500 text-center mt-2">Recommended · 15–30 min · 100% free</p>
+        </div>
+        
+        <!-- Trust Indicator -->
+        <div class="text-center">
+          <p class="text-sm text-gray-500">💬 Most people start with a quick call</p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Render main content in right column
+  renderMainContent(contentHTML) {
+    const container = document.getElementById('main-content-container');
+    if (!container) return;
+    
+    // Add step class for CSS styling (only step 4 should scroll)
+    container.className = 'modal-content-panel';
+    if (typeof this.currentStep === 'number' && this.currentStep === 4) {
+      container.classList.add('step-4');
+    }
+
+    container.innerHTML = contentHTML;
+  }
+
+  // Get personalized CTA text based on intent
+  getPersonalizedCTA(intent) {
+    switch (intent) {
+      case 'setup':
+      case 'new':
+        return "Book a quick welcome consultation (15–30 min)";
+      case 'switch':
+      case 'change':
+        return "Compare your plan with Robert (15–30 min)";
+      case 'family':
+      case 'special':
+        return "Discuss your family's coverage (15–30 min)";
+      case 'review':
+        return "Get expert feedback on your plan (15–30 min)";
+      default:
+        return "Schedule Free Consultation (15–30 min)";
+    }
+  }
+
+  // Get current user intent based on form data
+  getCurrentIntent() {
+    // Check if user selected a motivation card
+    if (this.formData.motivation) {
+      return this.formData.motivation;
+    }
+    
+    // Check form data for indicators
+    if (this.formData.householdType === 'family') {
+      return 'family';
+    }
+    
+    // Default based on page intent
+    return this.pageIntent || 'general';
+  }
+
+  // Get form step content for main content panel
+  getFormStepContent(step, title, subtitle, intro) {
+    let contentHTML = `
+      <div data-step-name="step-${step}">
+        <h3 class="text-2xl font-bold mb-2">${title}</h3>
+        ${subtitle ? `<p class="text-gray-600 mb-6">${subtitle}</p>` : ''}
+        ${intro ? `<div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <p class="text-sm text-blue-800">${intro}</p>
+        </div>` : ''}`;
+    
+    contentHTML += this.getStepContent(step);
+    
+    // Add navigation buttons
+    contentHTML += this.getStepNavigation(step);
+    
+    contentHTML += `</div>`;
+    return contentHTML;
+  }
+
+  // Get step navigation buttons (REMOVED - no navigation buttons needed)
+  getStepNavigation(step) {
+    return ''; // No navigation buttons - removed completely
+  }
+
+  // Render mobile consultation panel (collapsible card)
+  renderMobileConsultationPanel(intent = 'general') {
+    const personalizedCTA = this.getPersonalizedCTA(intent);
+    
+    return `
+      <div class="bg-gradient-to-br from-red-50 to-pink-50 border border-red-200 rounded-lg p-4 mb-6">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center">
+            <img 
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_40,h_40,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+              alt="Robert Kolar" 
+              class="w-10 h-10 rounded-full mr-3 object-cover" 
+            />
+            <div>
+              <h4 class="font-semibold text-gray-900 text-sm">Not sure about options?</h4>
+              <p class="text-xs text-gray-600">Get personalized advice from Robert</p>
+            </div>
+          </div>
+          <button id="toggle-consultation-mobile" class="text-gray-500 hover:text-gray-700">
+            <svg class="w-5 h-5 transition-transform" id="consultation-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div id="mobile-consultation-details" class="hidden">
+          <div class="flex justify-center gap-1 mb-4">
+            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">DE</span>
+            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">EN</span>
+            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">FR</span>
+            <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">CZ</span>
+          </div>
+          
+          <div class="space-y-2 mb-4">
+            <div class="flex items-start text-sm">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Expert guidance in English</span>
+            </div>
+            <div class="flex items-start text-sm">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Compare all insurers objectively</span>
+            </div>
+            <div class="flex items-start text-sm">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-gray-700">Save time & avoid costly mistakes</span>
+            </div>
+          </div>
+          
+          <p class="text-xs text-gray-500 text-center mb-3">💬 Most people start with a quick call.</p>
+        </div>
+        
+        <button 
+          class="btn-consultation-primary w-full text-sm py-3"
+          onclick="window.globalOffersModal && window.globalOffersModal.trackConsultationBooked(window.globalOffersModal.currentStep, window.globalOffersModal.getCurrentIntent()); window.open('https://cal.com/robertkolar/expat-savvy', '_blank')"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          ${personalizedCTA}
+        </button>
+        <p class="text-xs text-gray-500 text-center mt-2">Recommended · 15–30 min · 100% free</p>
+      </div>
+    `;
+  }
+
+  // Track analytics events
+  trackEvent(eventName, properties = {}) {
+    const eventData = {
+      ...properties,
+      variant: 'consult-left-primary',
+      modal_type: 'offers_modal',
+      timestamp: new Date().toISOString()
+    };
+    
+    console.log('📊 Tracking event:', eventName, eventData);
+    
+    // Send to Plausible if available
+    if (typeof window.plausible === 'function') {
+      window.plausible(eventName, { props: eventData });
+    }
+    
+    // Send to Google Analytics if available
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, eventData);
+    }
+  }
+
+  // Track modal view
+  trackModalView(step, intent) {
+    this.trackEvent('modal_view', {
+      step: step,
+      intent: intent,
+      variant: 'consult-left-primary'
+    });
+  }
+
+  // Track CTA click
+  trackCTAClick(step, surface, intent) {
+    this.trackEvent('cta_click', {
+      step: step,
+      surface: surface,
+      intent: intent,
+      variant: 'consult-left-primary'
+    });
+  }
+
+  // Track consultation booking
+  trackConsultationBooked(step, intent) {
+    this.trackEvent('consultation_booked', {
+      source: 'modal',
+      stepAtClick: step,
+      intent: intent,
+      variant: 'consult-left-primary'
+    });
+  }
+
+  // Start consultation flow - collect details first, then show Cal.com
+  startConsultationFlow() {
+    console.log('🚀 Starting consultation flow');
+    this.trackEvent('consultation_flow_started', {
+      intent: this.getCurrentIntent(),
+      variant: 'consult-left-primary'
+    });
+    
+    // Set consultation mode
+    this.isConsultationFlow = true;
+    this.currentStep = 'consultation_intake';
+    this.renderContent();
+  }
+
+  // Validate consultation form
+  validateConsultationForm() {
+    const nameInput = document.querySelector('input[name="consultation-name"]');
+    const emailInput = document.querySelector('input[name="consultation-email"]');
+    
+    let isValid = true;
+    
+    if (!nameInput || !nameInput.value.trim()) {
+      isValid = false;
+      console.log('❌ Consultation form: Name is required');
+    }
+    
+    if (!emailInput || !emailInput.value.trim() || !this.isValidEmail(emailInput.value)) {
+      isValid = false;
+      console.log('❌ Consultation form: Valid email is required');
+    }
+    
+    return isValid;
+  }
+
+  // Save consultation form data
+  saveConsultationData() {
+    const nameInput = document.querySelector('input[name="consultation-name"]');
+    const emailInput = document.querySelector('input[name="consultation-email"]');
+    const phoneInput = document.querySelector('input[name="consultation-phone"]');
+    const topicSelect = document.querySelector('select[name="consultation-topic"]');
+    const notesTextarea = document.querySelector('textarea[name="consultation-notes"]');
+    
+    this.formData.consultationName = nameInput?.value || '';
+    this.formData.consultationEmail = emailInput?.value || '';
+    this.formData.consultationPhone = phoneInput?.value || '';
+    this.formData.consultationTopic = topicSelect?.value || '';
+    this.formData.consultationNotes = notesTextarea?.value || '';
+    
+    console.log('💾 Consultation data saved:', this.formData);
+    
+    // Trigger Resend email funnel for consultation flow
+    this.triggerConsultationEmailSequence();
+  }
+
+  // Trigger Resend email sequence for consultation flow
+  async triggerConsultationEmailSequence() {
+    try {
+      console.log('📧 Triggering consultation email sequence');
+      
+      const emailData = {
+        email: this.formData.consultationEmail,
+        name: this.formData.consultationName,
+        phone: this.formData.consultationPhone,
+        topic: this.formData.consultationTopic,
+        notes: this.formData.consultationNotes,
+        source: 'consultation_modal',
+        intent: this.getCurrentIntent()
+      };
+
+      const response = await fetch('/api/consultation-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData)
+      });
+
+      if (response.ok) {
+        console.log('✅ Consultation email sequence triggered successfully');
+        this.trackEvent('consultation_email_triggered', {
+          email: this.formData.consultationEmail,
+          intent: this.getCurrentIntent()
+        });
+      } else {
+        console.error('❌ Failed to trigger consultation email sequence');
+      }
+    } catch (error) {
+      console.error('❌ Error triggering consultation email sequence:', error);
+    }
+  }
+
+  // Simple email validation
+  isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   // Render content based on current step
   renderContent() {
     console.log('=== RENDER CONTENT DEBUG ===');
     console.log('Current step:', this.currentStep);
+    
+    // Track modal view
+    this.trackModalView(this.currentStep, this.getCurrentIntent());
     console.log('Current step type:', typeof this.currentStep);
     console.log('Is mobile:', this.isMobile, 'Window width:', window.innerWidth);
     const mobileContentDiv = document.getElementById('mobile-content');
@@ -60,49 +437,47 @@ class OffersModal {
     let contentHTML = '';
     console.log('About to check step conditions...');
 
-    // For desktop on intro step, create the two-column layout with sidebar
+    // For desktop on intro step, use the new two-column layout structure
     if (!this.isMobile && this.currentStep === 'intro') {
-      console.log('BRANCH: Desktop intro step');
-      contentHTML = `
-        <div class="flex h-full">
-          <div class="flex-1 p-8 overflow-y-auto">
-            ${this.renderIntroStep()}
-          </div>
-          <div class="w-[360px] p-6 border-l bg-white flex flex-col">
-            <img 
-              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_112,h_112,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
-              alt="Robert — Expat Savvy Advisor" 
-              class="w-[112px] h-[112px] rounded-full mx-auto mb-4 object-cover"
-            />
-            <h4 class="text-center text-xl font-bold">Robert Kolar</h4>
-            <p class="text-center text-gray-600 mb-3">FINMA Registered Advisor</p>
-            <div class="flex justify-center gap-2 mb-6">
-              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">English</span>
-              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">German</span>
-              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">French</span>
-              <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Czech</span>
-            </div>
-            <div class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-              <h5 class="font-semibold mb-2">What to expect</h5>
-              <ul class="list-disc pl-4 text-sm space-y-1 text-gray-700">
-                <li>Personal, English-speaking advice</li>
-                <li>Compare all major insurers</li>
-                <li>Free & no obligation</li>
-              </ul>
-            </div>
-            <div style="height: 60px;"></div>
-            <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold text-lg transition-colors hover:bg-red-700" onclick="event.stopPropagation(); event.preventDefault(); window.globalOffersModal && window.globalOffersModal.startConsultationFlow(); return false;">Book Free Consultation</button>
-          </div>
-        </div>
-      `;
+      console.log('BRANCH: Desktop intro step with consultation panel');
+      console.log('Checking for consultation-panel-container:', !!document.getElementById('consultation-panel-container'));
+      console.log('Checking for main-content-container:', !!document.getElementById('main-content-container'));
+      this.renderConsultationPanel(this.getCurrentIntent());
+      this.renderMainContent(this.renderIntroStep());
+      this.attachStepEventHandlers();
+      this.initializeLucideIcons();
+      return; // Exit early since we're using separate containers
     } else if (this.currentStep === 'intro') {
       console.log('BRANCH: Mobile intro step');
       contentHTML = this.renderIntroStep();
     } else if (this.currentStep === 'consultation_intake') {
-      console.log('BRANCH: Consultation intake step');
-      contentHTML = this.renderConsultationIntakeStep();
+      if (!this.isMobile) {
+        // Desktop: Show consultation intake form on LEFT side
+        this.renderConsultationIntakePanel();
+        this.renderMainContent(this.renderIntroStep());
+        this.attachStepEventHandlers();
+        this.initializeLucideIcons();
+        return;
+      } else {
+        contentHTML = this.renderConsultationIntakeStep();
+      }
+    } else if (this.currentStep === 'consultation_scheduling') {
+      if (!this.isMobile) {
+        // Desktop: Show Cal.com inline on LEFT side
+        this.renderConsultationSchedulingPanel();
+        this.renderMainContent(this.renderIntroStep());
+        return;
+      } else {
+        contentHTML = this.renderConsultationSchedulingStep();
+      }
     } else if (typeof this.currentStep === 'number' && this.currentStep >= 1 && this.currentStep <= 6) {
-      contentHTML = this.renderOffersStep(this.currentStep);
+      if (!this.isMobile) {
+        // Desktop: Use new two-column layout
+        this.renderOffersStep(this.currentStep);
+        return; // Exit early since we're using separate containers
+      } else {
+        contentHTML = this.renderOffersStep(this.currentStep);
+      }
     } else if (this.currentStep === 'thankyou') {
       contentHTML = this.renderThankYouStep();
     }
@@ -276,9 +651,11 @@ class OffersModal {
     
     if (this.isMobile) {
       console.log('ENTERING MOBILE BRANCH for intro step');
-      // Mobile version with consultation button
+      // Mobile version with consultation panel at top
       return `
         <div data-step-name="intro">
+          ${this.renderMobileConsultationPanel(this.getCurrentIntent())}
+          
           <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900 mb-3">${headline}</h2>
             <p class="text-gray-600 mb-4">${subline}</p>
@@ -308,22 +685,28 @@ class OffersModal {
             </button>
           </div>
           
-          <button id="start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold text-lg transition-colors mb-3">
+          <!-- Primary CTA: Consultation (Swiss Gradient) -->
+          <button id="mobile-consultation-btn" class="btn-consultation-primary w-full mb-3" onclick="window.globalOffersModal && window.globalOffersModal.startConsultationFlow()">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Schedule Free Consultation (15–30 min)
+          </button>
+          <p class="text-xs text-gray-500 text-center mb-4">Recommended · 15–30 min · 100% free</p>
+          
+          <!-- Secondary CTA: Get Offers (Green) -->
+          <button id="start-offers-btn" class="btn-secondary w-full">
             <div class="flex items-center justify-center">
-              <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
               <div>
-                <div class="font-semibold">Get 3 Best Offers</div>
+                <div class="font-medium">Get 3 Best Offers</div>
                 <div class="text-green-100 text-sm">Takes ~1 min</div>
               </div>
             </div>
           </button>
-          
-          <button id="mobile-consultation-btn" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors" onclick="event.stopPropagation(); event.preventDefault(); window.globalOffersModal && window.globalOffersModal.startConsultationFlow(); return false;">
-            <div class="flex items-center justify-center">
-              <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-              Book Free Consultation
-            </div>
-          </button>
+          <p class="text-xs text-gray-500 text-center mt-2">Or book a quick call now for faster results</p>
         </div>
       `;
     } else {
@@ -361,7 +744,7 @@ class OffersModal {
           
           <div style="height: 60px;"></div>
           
-          <button id="start-offers-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold text-lg transition-colors">
+          <button id="start-offers-btn" class="btn-secondary w-full">
             <div class="flex items-center justify-center">
               <i data-lucide="sparkles" class="w-5 h-5 mr-2"></i>
               <div>
@@ -377,61 +760,200 @@ class OffersModal {
 
   renderConsultationIntakeStep() {
     console.log('Generating Consultation Intake Step HTML.');
-    // This will be implemented in a later step once basic functionality is confirmed
     return `
-      <div class="max-w-sm mx-auto space-y-6 p-6" data-step-name="consultation_intake">
-        <div class="text-center">
-          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i data-lucide="calendar" class="w-6 h-6 text-red-600"></i>
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Book Free Consultation</h2>
-          <p class="text-gray-600">Just a few quick details to prepare for your call with Robert.</p>
+      <div data-step-name="consultation_intake">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">Let's schedule your consultation</h2>
+          <p class="text-gray-600">We'll collect a few details to personalize your session with Robert.</p>
         </div>
         
-        <form id="consultation-form" class="space-y-4">
+        <div class="space-y-6">
           <div>
-            <label for="consultation-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-            <input type="text" id="consultation-name" name="consultation-name" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                   placeholder="Your name" required value="${this.formData.name || ''}">
-            <p id="error-consultation-name" class="text-red-500 text-xs mt-1 hidden">Please enter your name.</p>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+            <input type="text" name="consultation-name" required value="${this.formData.name || ''}" 
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg">
           </div>
           
           <div>
-            <label for="consultation-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" id="consultation-email" name="consultation-email" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                   placeholder="your@email.com" required value="${this.formData.email || ''}">
-            <p id="error-consultation-email" class="text-red-500 text-xs mt-1 hidden">Please enter a valid email.</p>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input type="email" name="consultation-email" required value="${this.formData.email || ''}" 
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg">
           </div>
           
           <div>
-            <label for="consultation-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
-            <input type="tel" id="consultation-phone" name="consultation-phone" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                   placeholder="+41 XX XXX XX XX" value="${this.formData.phone || ''}">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Phone (optional)</label>
+            <input type="tel" name="consultation-phone" value="${this.formData.phone || ''}" 
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg">
           </div>
           
           <div>
-            <label for="consultation-reason" class="block text-sm font-medium text-gray-700 mb-1">What would you like to discuss?</label>
-            <textarea id="consultation-reason" name="consultation-reason" rows="3" required
+            <label class="block text-sm font-medium text-gray-700 mb-2">What would you like to discuss?</label>
+            <select name="consultation-topic" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg">
+              <option value="setup">Setting up Swiss health insurance</option>
+              <option value="switch">Switching to a better plan</option>
+              <option value="review">Reviewing current coverage</option>
+              <option value="family">Family insurance planning</option>
+              <option value="other">Other questions</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Additional notes (optional)</label>
+            <textarea name="consultation-notes" rows="3" 
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg"
+                      placeholder="Tell us about your specific situation..."></textarea>
+          </div>
+        </div>
+        
+        <div class="mt-8 pt-6 border-t border-gray-200">
+          <button id="schedule-consultation-btn" class="btn-consultation-primary w-full">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Continue to Scheduling
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  renderConsultationSchedulingStep() {
+    console.log('Generating Consultation Scheduling Step HTML.');
+    return `
+      <div data-step-name="consultation_scheduling">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">Choose your preferred time</h2>
+          <p class="text-gray-600">Select a time that works best for your consultation with Robert.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg border border-gray-200 p-4">
+          <div id="cal-embed" style="width: 100%; height: 620px; overflow: hidden;">
+            <iframe 
+              src="https://cal.com/robertkolar/expat-savvy?embed=true&embedType=inline" 
+              width="100%" 
+              height="620"
+              frameborder="0"
+              style="border: none; border-radius: 8px;"
+              title="Schedule a consultation with Robert Kolar">
+            </iframe>
+          </div>
+        </div>
+        
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-500">
+            Having trouble with the calendar? 
+            <a href="https://cal.com/robertkolar/expat-savvy" target="_blank" class="text-red-600 hover:text-red-700 underline">
+              Open in new tab
+            </a>
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Render consultation intake form on LEFT panel (desktop only)
+  renderConsultationIntakePanel() {
+    const container = document.getElementById('consultation-panel-container');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="consultation-panel">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Let's schedule your consultation</h3>
+          <p class="text-gray-600">We'll collect a few details to personalize your session with Robert.</p>
+        </div>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+            <input type="text" name="consultation-name" required value="${this.formData.name || ''}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input type="email" name="consultation-email" required value="${this.formData.email || ''}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Phone (optional)</label>
+            <input type="tel" name="consultation-phone" value="${this.formData.phone || ''}" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">What would you like to discuss?</label>
+            <select name="consultation-topic" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+              <option value="setup">Setting up Swiss health insurance</option>
+              <option value="switch">Switching to a better plan</option>
+              <option value="review">Reviewing current coverage</option>
+              <option value="family">Family insurance planning</option>
+              <option value="other">Other questions</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Additional notes (optional)</label>
+            <textarea name="consultation-notes" rows="2" 
                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                      placeholder="e.g. I'm new to Switzerland and need help choosing health insurance...">${this.formData.consultation_reason || ''}</textarea>
-            <p id="error-consultation-reason" class="text-red-500 text-xs mt-1 hidden">Please tell us what you'd like to discuss.</p>
+                      placeholder="Tell us about your specific situation..."></textarea>
           </div>
+        </div>
+        
+        <div class="mt-6 pt-4 border-t border-gray-200">
+          <button id="schedule-consultation-btn" class="btn-consultation-primary w-full mb-3">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Continue to Scheduling
+          </button>
           
-          <div class="pt-4">
-            <button type="submit" id="consultation-continue-btn" 
-                    class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
-              Continue to Calendar
-            </button>
-            
-            <button type="button" id="consultation-back-btn" 
-                    class="w-full mt-3 text-gray-600 hover:text-gray-800 underline">
-              Back to Get 3 Best Offers
-            </button>
+          <button id="back-to-intro-btn" class="w-full text-gray-600 hover:text-gray-800 underline text-sm">
+            ← Back to options
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Render Cal.com scheduling on LEFT panel (desktop only)
+  renderConsultationSchedulingPanel() {
+    const container = document.getElementById('consultation-panel-container');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="consultation-panel">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Choose your preferred time</h3>
+          <p class="text-gray-600">Select a time that works best for your consultation with Robert.</p>
+        </div>
+        
+        <div class="bg-gray-50 rounded-lg border border-gray-200 p-2">
+          <div id="cal-embed" style="width: 100%; height: 500px; overflow: hidden;">
+            <iframe 
+              src="https://cal.com/robertkolar/expat-savvy?embed=true&embedType=inline" 
+              width="100%" 
+              height="500"
+              frameborder="0"
+              style="border: none; border-radius: 6px;"
+              title="Schedule a consultation with Robert Kolar">
+            </iframe>
           </div>
-        </form>
+        </div>
+        
+        <div class="mt-4 text-center">
+          <p class="text-xs text-gray-500 mb-3">
+            Having trouble with the calendar? 
+            <a href="https://cal.com/robertkolar/expat-savvy" target="_blank" class="text-red-600 hover:text-red-700 underline">
+              Open in new tab
+            </a>
+          </p>
+          
+          <button id="back-to-intake-btn" class="text-gray-600 hover:text-gray-800 underline text-sm">
+            ← Back to details
+          </button>
+        </div>
       </div>
     `;
   }
@@ -440,27 +962,10 @@ class OffersModal {
     const { title, subtitle, intro } = this.getStepInfo(step);
     
     if (!this.isMobile) {
-      // Desktop: Two column layout with proper padding
-      let stepHTML = `
-        <div class="flex gap-6 h-full p-8">
-          <div class="flex-1 overflow-y-auto pr-4">
-            <h3 class="text-2xl font-bold mb-2">${title}</h3>
-            ${subtitle ? `<p class="text-gray-600 mb-6">${subtitle}</p>` : ''}
-            ${intro ? `<div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-              <p class="text-sm text-blue-800">${intro}</p>
-            </div>` : ''}`;
-    
-      // Add step content in left column
-      stepHTML += this.getStepContent(step);
-      
-      // Close left column, add right column with banner
-      stepHTML += `
-          </div>
-          <div class="w-[320px] flex-shrink-0">
-            ${this.getStepBanner()}
-          </div>
-        </div>`;
-      return stepHTML;
+      // Desktop: Use new two-column layout with consultation panel
+      this.renderConsultationPanel(this.getCurrentIntent());
+      this.renderMainContent(this.getFormStepContent(step, title, subtitle, intro));
+      return ''; // Return empty since we're using separate containers
     } else {
       // Mobile: Single column with banner at top
       let stepHTML = this.getStepBanner();
@@ -741,22 +1246,26 @@ class OffersModal {
     const email = this.formData.email || 'your email';
     let seasonalBanner = '';
     if (['change', 'cheapest'].includes(this.pageIntent)) {
-      seasonalBanner = '<div class="bg-yellow-50 border border-yellow-200 p-4 mb-6 rounded-lg"><div class="flex items-center"><i data-lucide="clock" class="w-5 h-5 text-yellow-600 mr-2"></i><span class="text-yellow-800 font-medium">Deadline: Switch by Nov 30 for 2026 savings!</span></div></div>';
+      seasonalBanner = '<div class="bg-yellow-50 border border-yellow-200 p-4 mb-6 rounded-lg"><div class="flex items-center"><svg class="w-5 h-5 text-yellow-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="text-yellow-800 font-medium">Deadline: Switch by Nov 30 for 2026 savings!</span></div></div>';
     }
     
     return `
-      <div class="max-w-md mx-auto text-center p-8">
-        <div class="mb-6">
-          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i data-lucide="check" class="w-8 h-8 text-green-600"></i>
+      <div class="max-w-2xl mx-auto text-center p-8">
+        <div class="mb-8">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
           </div>
           <h2 class="text-3xl font-bold text-gray-900 mb-3">Thank you!</h2>
-          <h3 class="text-xl text-gray-700 mb-4">Your 3 tailored offers are on the way</h3>
+          <h3 class="text-xl text-gray-700 mb-6">Your 3 tailored offers are on the way</h3>
         </div>
         
-        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-6">
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
           <div class="flex items-center justify-center mb-3">
-            <i data-lucide="mail" class="w-5 h-5 text-gray-600 mr-2"></i>
+            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
             <span class="text-gray-600 font-medium">Sending to:</span>
           </div>
           <p class="text-lg font-semibold text-gray-900">${email}</p>
@@ -765,13 +1274,18 @@ class OffersModal {
         
         ${seasonalBanner}
         
-        <button id="book-consultation-thankyou" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors mb-4">
-          <div class="flex items-center justify-center">
-            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-            Book Free Consultation
-          </div>
-        </button>
-        <a href="#" id="close-thankyou" class="block text-gray-500 hover:text-gray-700 underline">Close</a>
+        <!-- Large Swiss Gradient CTA -->
+        <div class="mb-8">
+          <button id="book-consultation-thankyou" class="btn-consultation-primary w-full max-w-md mx-auto text-lg py-4 px-8" onclick="window.globalOffersModal && window.globalOffersModal.trackConsultationBooked(window.globalOffersModal.currentStep, window.globalOffersModal.getCurrentIntent()); window.open('https://cal.com/robertkolar/expat-savvy', '_blank')">
+            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Book Free Consultation (15–30 min)
+          </button>
+          <p class="text-sm text-gray-600 mt-3">Recommended to ensure you don't miss better coverage or savings</p>
+        </div>
+        
+        <a href="#" id="close-thankyou" class="text-gray-500 hover:text-gray-700 underline">Close</a>
       </div>
     `;
   }
@@ -1091,10 +1605,67 @@ class OffersModal {
         const target = e.target.closest('button, a');
         if (!target) return;
         
-        if (this.currentStep === 'intro') {
-          if (target.classList.contains('motivation-card')) {
+        if (this.currentStep === 'consultation_intake') {
+          if (target.id === 'schedule-consultation-btn') {
+            console.log('Schedule consultation button clicked');
+            e.preventDefault();
+            
+            // Validate consultation form
+            if (this.validateConsultationForm()) {
+              // Save consultation data
+              this.saveConsultationData();
+              
+              // Move to scheduling step
+              this.currentStep = 'consultation_scheduling';
+              this.renderContent();
+              
+              // Track consultation form submitted
+              this.trackEvent('consultation_form_submitted', {
+                intent: this.getCurrentIntent(),
+                variant: 'consult-left-primary'
+              });
+            }
+          } else if (target.id === 'back-to-intro-btn') {
+            console.log('Back to intro clicked');
+            e.preventDefault();
+            this.currentStep = 'intro';
+            this.isConsultationFlow = false;
+            this.renderContent();
+          }
+        } else if (this.currentStep === 'consultation_scheduling') {
+          if (target.id === 'back-to-intake-btn') {
+            console.log('Back to intake clicked');
+            e.preventDefault();
+            this.currentStep = 'consultation_intake';
+            this.renderContent();
+          }
+        } else if (this.currentStep === 'intro') {
+          if (target.id === 'toggle-consultation-mobile') {
+            const details = document.getElementById('mobile-consultation-details');
+            const chevron = document.getElementById('consultation-chevron');
+            if (details && chevron) {
+              details.classList.toggle('hidden');
+              chevron.style.transform = details.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            }
+            e.preventDefault();
+          } else if (target.classList.contains('motivation-card')) {
             this.formData.motivation = target.dataset.motivation;
             console.log('Motivation selected:', this.formData.motivation);
+            
+            // Update consultation panel with personalized CTA if on desktop
+            if (!this.isMobile && this.currentStep === 'intro') {
+              this.renderConsultationPanel(this.formData.motivation);
+              
+              // Add pulse animation to consultation CTA
+              const consultationBtn = document.querySelector('.btn-consultation-primary');
+              if (consultationBtn) {
+                consultationBtn.classList.add('btn-consultation-pulse');
+                setTimeout(() => {
+                  consultationBtn.classList.remove('btn-consultation-pulse');
+                }, 1000);
+              }
+            }
+            
             this.currentStep = 1;
             this.renderContent();
             e.preventDefault();
@@ -1527,10 +2098,11 @@ class OffersModal {
 
   // Open the modal
   openModal() {
-    console.log('🚀 Opening OffersModal (minimal)');
+    console.log('🚀🚀🚀 Opening NEW OffersModal with Swiss Gradient Design 🚀🚀🚀');
     console.log('=== MODAL OPEN DEBUG ===');
     console.log('Current window dimensions:', window.innerWidth, 'x', window.innerHeight);
     console.log('User agent:', navigator.userAgent);
+    console.log('OffersModal ID should be: offers-modal');
     
     // Track modal open event
     this.trackEvent('modal_opened', {
