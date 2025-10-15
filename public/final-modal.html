@@ -1541,6 +1541,32 @@
         console.error('❌ Error sending form data:', error);
         // Still show confirmation even if backend fails
       });
+
+      // BACKUP: Send to Formspree to ensure no leads are lost
+      const formspreeData = new FormData();
+      formspreeData.append('form-name', 'health-insurance');
+      formspreeData.append('source', 'self_service_form');
+      formspreeData.append('name', userData.name);
+      formspreeData.append('email', userData.email);
+      formspreeData.append('phone', userData.phone);
+      formspreeData.append('situation', userData.situation || '');
+      formspreeData.append('dob', userData.dob || '');
+      formspreeData.append('address', userData.address || '');
+      formspreeData.append('postcode', userData.postcode || '');
+      formspreeData.append('city', userData.city || '');
+      formspreeData.append('canton', userData.canton || '');
+      formspreeData.append('special-requirements', userData.specialRequirements || '');
+      formspreeData.append('page-intent', pageIntent);
+
+      fetch('https://formspree.io/f/mrbewjlr', {
+        method: 'POST',
+        body: formspreeData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(() => console.log('✅ Backup sent to Formspree'))
+      .catch(error => console.error('❌ Formspree backup failed:', error));
     }
 
     // ESC key handler

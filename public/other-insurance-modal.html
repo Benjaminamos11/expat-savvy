@@ -1542,12 +1542,14 @@
       formData.append('special-requirements', userData.specialRequirements);
       formData.append('page-intent', pageIntent);
 
+      // Send to Netlify Forms with proper URL encoding
       fetch('/', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
       })
-      .then(() => {
-        console.log('✅ Form data sent to Netlify Forms');
+      .then(response => {
+        console.log('✅ Form data sent to Netlify Forms', response);
         // Track analytics
         trackEvent('form_submitted', {
           situation: userData.situation,
@@ -1556,9 +1558,20 @@
         });
       })
       .catch(error => {
-        console.error('❌ Error sending form data:', error);
+        console.error('❌ Error sending form data to Netlify:', error);
         // Still show confirmation even if form fails
       });
+
+      // BACKUP: Send to Formspree to ensure no leads are lost
+      fetch('https://formspree.io/f/mrbewjlr', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(() => console.log('✅ Backup sent to Formspree'))
+      .catch(error => console.error('❌ Formspree backup failed:', error));
     }
 
     // ESC key handler
