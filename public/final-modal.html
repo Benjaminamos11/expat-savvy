@@ -1508,29 +1508,28 @@
       renderStep('form-confirmation');
     }
 
-    // Send form data to Netlify Forms
+    // Send form data to backend API to trigger email sequence with Resend
     function sendFormDataToBackend(userData) {
-      const formData = new FormData();
-      formData.append('form-name', 'health-insurance');
-      formData.append('name', userData.name);
-      formData.append('email', userData.email);
-      formData.append('phone', userData.phone);
-      formData.append('insurance-type', userData.situation || '');
-      formData.append('dob', userData.dob || '');
-      formData.append('address', userData.address || '');
-      formData.append('postcode', userData.postcode || '');
-      formData.append('city', userData.city || '');
-      formData.append('canton', userData.canton || '');
-      formData.append('special-requirements', userData.specialRequirements || '');
+      const payload = {
+        type: 'form_submission',
+        source: 'self_service_form',
+        situation: userData.situation,
+        userData: userData,
+        timestamp: new Date().toISOString(),
+        pageIntent: pageIntent
+      };
 
-      // Send to Netlify Forms
-      fetch('/', {
+      // Send to backend API for email nurture sequence
+      fetch('/api/leads', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
       })
-      .then(response => {
-        console.log('✅ Form data sent to Netlify:', response);
+      .then(response => response.json())
+      .then(data => {
+        console.log('✅ Form data sent to backend for email sequence:', data);
         // Track analytics
         trackEvent('form_submitted', {
           situation: userData.situation,
@@ -1540,7 +1539,7 @@
       })
       .catch(error => {
         console.error('❌ Error sending form data:', error);
-        // Still show confirmation even if submission fails
+        // Still show confirmation even if backend fails
       });
     }
 
