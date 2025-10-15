@@ -268,7 +268,7 @@ Managing money in Switzerland:
 <div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
   <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Plan Your Zurich Relocation Budget?</h3>
   <p class="mb-4">Let Expat Savvy help you secure the right insurance coverage for your new life in Switzerland.</p>
-  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
+  <button onclick="window.openRelocationModal()" class="btn btn-primary px-6 py-2 rounded-md font-medium">Contact a relocation specialist for free</button>
 </div>
 
 ## Social Integration and Lifestyle Adaptation

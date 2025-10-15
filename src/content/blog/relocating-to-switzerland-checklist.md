@@ -165,4 +165,10 @@ Budget CHF 15,000-25,000+ for initial relocation costs: moving expenses (CHF 3,0
 
 **What's the relationship between work permits and health insurance in Switzerland?**
 
-Work permit type doesn't affect health insurance eligibility - all residents must have coverage within 3 months regardless of permit status (B, C, L permits). However, permit duration may influence supplementary insurance applications. Basic insurance acceptance is guaranteed; supplementary coverage may require medical underwriting. 
+Work permit type doesn't affect health insurance eligibility - all residents must have coverage within 3 months regardless of permit status (B, C, L permits). However, permit duration may influence supplementary insurance applications. Basic insurance acceptance is guaranteed; supplementary coverage may require medical underwriting.
+
+<div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
+  <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Start Your Swiss Relocation?</h3>
+  <p class="mb-4">Let our relocation specialists help you navigate the entire process, from visa applications to finding the perfect home in Switzerland.</p>
+  <button onclick="window.openRelocationModal()" class="btn btn-primary px-6 py-2 rounded-md font-medium">Contact a relocation specialist for free</button>
+</div> 

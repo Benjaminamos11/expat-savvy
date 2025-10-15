@@ -2,7 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import HowToSchema from '../../../components/schema/HowToSchema.astro';
 import FAQSchema from '../../../components/schema/FAQSchema.astro';
-import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+// Relocation modal will be loaded dynamically
 
 // Define the steps for the how-to guide
 const steps = [
@@ -251,10 +251,10 @@ const postArrivalChecklist = [
         </p>
         <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
-            onclick="showConsultationModal()"
+            onclick="window.openRelocationModal()"
             class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            Get Insurance Advice
+            Contact a relocation specialist for free
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -499,10 +499,10 @@ const postArrivalChecklist = [
             Swiss law mandates that everyone residing in Switzerland must have basic health insurance (Grundversicherung) within three months of arrival. Coverage is retroactive to your arrival date.
           </p>
           <button
-            onclick="showConsultationModal()"
+            onclick="window.openRelocationModal()"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300"
           >
-            Get Expert Insurance Guidance
+            Contact a relocation specialist for free
           </button>
         </div>
         
@@ -573,18 +573,3 @@ const postArrivalChecklist = [
   </div>
 
 </Layout>
-
-<script>
-  function showConsultationModal() {
-    const modal = document.getElementById('consultation-modal');
-    if (modal) {
-      modal.classList.remove('hidden');
-      document.body.classList.add('modal-open');
-      
-      // Dispatch the modalOpened event to properly initialize
-      document.dispatchEvent(new CustomEvent('modalOpened', {
-        detail: { modalId: 'consultation-modal' }
-      }));
-    }
-  }
-</script> 

@@ -802,18 +802,24 @@
     window.openConsultationModal = openModal;
     window.showConsultationModal = openModal;
 
-    // Setup click handlers
+    // Setup click handlers with MORE EXTENSIVE MATCHING
     const handleCTAClick = (e) => {
       const button = e.target.closest('button, a');
       if (!button) return;
       
-      const text = button.textContent?.toLowerCase() || '';
+      const text = button.textContent?.toLowerCase().trim() || '';
+      console.log('🖱️ Button clicked:', text); // DEBUG: Log ALL button clicks
+      
       const isModalTrigger = text.includes('consultation') || 
                             text.includes('contact us') ||
                             text.includes('get advice') ||
                             text.includes('book a call') ||
                             text.includes('free advice') ||
-                            text.includes('get started');
+                            text.includes('get started') ||
+                            text.includes('schedule') ||
+                            text.includes('meeting') ||
+                            text.includes('call') ||
+                            text.includes('advice');
       
       if (isModalTrigger) {
         e.preventDefault();
@@ -829,6 +835,13 @@
     console.log('🧪 Testing modal functions...');
     console.log('openSmartModal available:', typeof window.openSmartModal === 'function');
     console.log('openOffersModal available:', typeof window.openOffersModal === 'function');
+    
+    // Add global test function for manual testing
+    window.testModal = () => {
+      console.log('🧪 Manual modal test triggered');
+      openModal();
+    };
+    console.log('💡 Run window.testModal() in console to test modal manually');
     
     // Initial render
     renderModal();

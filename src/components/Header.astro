@@ -127,7 +127,12 @@ const mainNavItems = [
       </div>
 
       <!-- Desktop Menu -->
-      <div class="hidden md:flex md:items-center md:space-x-8">
+      <div class="desktop-menu hidden md:flex md:items-center md:space-x-8">
+        <style>
+          @media (min-width: 768px) {
+            .desktop-menu { display: flex !important; align-items: center; gap: 2rem; }
+          }
+        </style>
         {mainNavItems.map(item => (
           <div class="relative group">
             {item.href ? (
@@ -207,20 +212,18 @@ const mainNavItems = [
           <div class="absolute right-0 pt-2 w-[500px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             <div class="bg-white rounded-xl shadow-2xl p-5 border border-gray-100 grid grid-cols-2 gap-3">
               <!-- Schedule Meeting -->
-              <div class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                <button
-                  onclick="window.openOffersModal()"
-                  class="w-full text-left"
-                >
-                  <div class="flex items-center mb-2">
-                    <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <h3 class="text-lg font-semibold text-gray-900">Schedule Meeting</h3>
-                  </div>
-                  <p class="text-gray-600">Book a free consultation with our insurance experts</p>
-                </button>
-              </div>
+              <a 
+                href={ensureTrailingSlash("/free-consultation")}
+                class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors block"
+              >
+                <div class="flex items-center mb-2">
+                  <svg class="h-6 w-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <h3 class="text-lg font-semibold text-gray-900">Schedule Meeting</h3>
+                </div>
+                <p class="text-gray-600">Book a free consultation with our insurance experts</p>
+              </a>
 
               <!-- AI Premium Calculator -->
               <a 
@@ -326,7 +329,7 @@ const mainNavItems = [
 
         <div class="pt-4 px-3">
           <button
-            onclick="window.openOffersModal()"
+            onclick="window.openHealthModal('home')"
             class="block w-full text-center bg-[#cc242c] text-white px-4 py-2 rounded-md hover:bg-[#b91c1c] transition-colors"
           >
             Free Consultation

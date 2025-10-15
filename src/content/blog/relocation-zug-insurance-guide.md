@@ -340,4 +340,4 @@ Relocating to Zug offers exceptional insurance and tax advantages for internatio
 
 Zug's unique combination of low taxes, competitive insurance costs, and excellent quality of life creates compelling advantages for international professionals. Professional guidance ensures optimal coordination of tax and insurance strategies while maintaining comprehensive coverage.
 
-*Ready to optimize your Zug relocation and insurance strategy? [Get expert consultation](/free-consultation) tailored to your specific tax and coverage needs.*
+*Ready to optimize your Zug relocation and insurance strategy? <button onclick="openRelocationModal()" class="text-primary-600 hover:text-primary-700 font-medium underline">Get expert relocation consultation</button> tailored to your specific tax and coverage needs.*

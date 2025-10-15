@@ -21,3 +21,5 @@ done
 
 echo "🎉 All ConsultationModal imports replaced with OffersModal!"
 echo "📊 Files updated: $(find src/pages -name "*.astro" -exec grep -l "OffersModal" {} \; | wc -l | tr -d ' ')"
+
+

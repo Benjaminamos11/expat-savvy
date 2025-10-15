@@ -26,7 +26,7 @@ Choosing the right health insurance in Switzerland is one of the most important 
 This comprehensive guide provides verified information about Switzerland's top health insurance companies, real 2026 premium data, and expert insights to help you make an informed decision before the November 30th deadline.
 
 <div class="text-center my-8">
-  <button onclick="window.openOffersModal && window.openOffersModal('comprehensive-guide')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -328,7 +328,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Service-oriented expats who value wellness programs and excellent customer support.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('swica-consultation')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -389,7 +389,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Tech-savvy expats who appreciate digital tools and comprehensive healthcare networks.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('helsana-consultation')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -450,7 +450,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expats who prioritize extensive provider networks and established market presence.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('css-consultation')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -511,7 +511,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expats seeking innovative healthcare solutions with quality service focus.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('sanitas-consultation')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -578,7 +578,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expat families with children seeking comprehensive family-oriented coverage with cooperative member benefits.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('concordia-expert')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     Get Expert Concordia Guidance
   </button>
@@ -642,7 +642,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expats who prefer simple, straightforward insurance with competitive pricing and transparent terms.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('sympany-expert')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     Get Expert Sympany Guidance
   </button>
@@ -706,7 +706,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Young, tech-savvy expats who prefer digital-first insurance experiences with modern user interfaces.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('atupri-expert')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     Get Expert Atupri Guidance
   </button>
@@ -770,7 +770,7 @@ Understanding Swiss health insurance requirements is essential for every expat. 
 **Best For:** Expats in French-speaking Switzerland seeking flexible coverage options with regional expertise and bilingual support.
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('groupe-mutuel-expert')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     Get Expert Groupe Mutuel Guidance
   </button>
@@ -868,7 +868,7 @@ Our advanced calculator uses official Swiss premium data to provide:
 <div class="text-center mt-4">
   <p class="text-gray-600 mb-3">**Need Help Understanding Your Results?**</p>
   <p class="text-gray-600 text-sm mb-4">Robert can explain your calculator results and help you apply to the optimal provider for your expat situation.</p>
-  <button onclick="window.openOffersModal && window.openOffersModal('premium-analysis')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-white border-2 border-red-600 text-red-600 hover:bg-red-50 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1190,14 +1190,14 @@ All top 4 providers (Swica, Helsana, CSS, Sanitas) offer comprehensive English s
 These real premium comparisons show potential annual savings of **CHF 1,800-3,600**. Robert can help you apply to the best provider and optimize your coverage for your expat situation.
 
 <div class="flex flex-col sm:flex-row gap-4 mt-6 justify-center">
-  <button onclick="window.openOffersModal && window.openOffersModal('premium-savings')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
     </svg>
     Calculate My Exact Savings
   </button>
-  <button onclick="window.openOffersModal && window.openOffersModal('premium-optimization')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-white border-2 border-red-600 text-red-600 hover:bg-red-50 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1272,7 +1272,7 @@ These real premium comparisons show potential annual savings of **CHF 1,800-3,60
 </div>
 
 <div class="text-center mt-6">
-  <button onclick="window.openOffersModal && window.openOffersModal('deadline-consultation')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -1330,7 +1330,7 @@ The choice of health insurance provider will impact your finances and healthcare
 **Our insurance specialists have helped over 1,000 expats navigate Swiss health insurance successfully.** Get personalized recommendations based on your specific needs, family situation, and healthcare preferences.
 
 <div class="text-center mt-8">
-  <button onclick="window.openOffersModal && window.openOffersModal('final-consultation')"
+  <button onclick="window.openHealthModal('best')"
           class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />

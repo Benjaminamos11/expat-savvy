@@ -56,6 +56,10 @@ export default defineConfig({
       hmr: {
         overlay: true
       }
+    },
+    // Fix MIME type issues
+    define: {
+      __DEFINES__: JSON.stringify({})
     }
   }
 });

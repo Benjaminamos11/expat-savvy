@@ -211,6 +211,30 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <!-- Plausible Custom Event Tracking -->
     <script defer src="/scripts/plausible-tracking.js"></script>
     
+    <!-- Modal Overlay System -->
+    <script is:inline src="/scripts/modal-overlay-system.js"></script>
+    
+    <!-- Modal System Verification -->
+    <script is:inline>
+      window.addEventListener('DOMContentLoaded', () => {
+        const requiredFunctions = [
+          'openHealthModal',
+          'openLifePensionModal', 
+          'openOtherModal',
+          'openRelocationModal'
+        ];
+        
+        const missing = requiredFunctions.filter(fn => typeof window[fn] !== 'function');
+        
+        if (missing.length > 0) {
+          console.error('⚠️ Missing modal functions:', missing);
+          console.error('Please hard refresh (Cmd+Shift+R or Ctrl+Shift+R)');
+        } else {
+          console.log('✅ All modal functions loaded successfully');
+        }
+      });
+    </script>
+    
     <!-- Defer Analytics until after LCP -->
     <script>
       window.addEventListener('load', function() {
@@ -253,6 +277,49 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <script is:inline src="/scripts/analytics-tracking.js" defer></script>
     <script is:inline src="/scripts/page-type-detection.js" defer></script>
     <script is:inline src="/scripts/gtm/event-helper.js" defer></script>
+    
+    <!-- Hidden Netlify Forms for detection -->
+    <form name="health-insurance" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="insurance-type" />
+      <input type="text" name="dob" />
+      <input type="text" name="address" />
+      <input type="text" name="postcode" />
+      <input type="text" name="city" />
+      <input type="text" name="canton" />
+      <textarea name="special-requirements"></textarea>
+    </form>
+
+    <form name="life-pension" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="product-type" />
+      <textarea name="special-requirements"></textarea>
+    </form>
+
+    <form name="other-insurance" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="insurance-types" />
+      <input type="text" name="address" />
+      <input type="text" name="postcode" />
+      <input type="text" name="city" />
+      <input type="date" name="insurance-start-date" />
+      <textarea name="special-requirements"></textarea>
+    </form>
+
+    <form name="relocation-consultation" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="relocation-type" />
+      <input type="date" name="moving-date" />
+      <textarea name="special-requirements"></textarea>
+    </form>
     
     <!-- <script>
       // Legacy compatibility for existing CTAs - REPLACED WITH ALPINE.JS GLOBAL FUNCTIONS

@@ -188,8 +188,8 @@ Relocating to Switzerland is a significant undertaking, but it doesn't have to b
 
 <div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
   <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Start Your Swiss Journey?</h3>
-  <p class="mb-4">Let Expat Savvy help you secure the right insurance coverage for your new life in Switzerland.</p>
-  <a href="/contact" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Consultation</a>
+  <p class="mb-4">Let Expat Savvy help you with personalized relocation guidance and insurance setup for your new life in Switzerland.</p>
+  <button onclick="window.openRelocationModal()" class="btn btn-primary px-6 py-2 rounded-md font-medium">Contact a relocation specialist for free</button>
 </div>
 
 ---

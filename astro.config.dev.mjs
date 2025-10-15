@@ -52,6 +52,10 @@ export default defineConfig({
         overlay: true,
         port: 4322      // Different port for HMR
       }
+    },
+    // Fix MIME type issues
+    define: {
+      __DEFINES__: JSON.stringify({})
     }
   }
 });

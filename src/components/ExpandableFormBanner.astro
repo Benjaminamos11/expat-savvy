@@ -5,12 +5,14 @@ interface Props {
   provider?: string;
   title?: string;
   description?: string;
+  modalType?: 'health' | 'other' | 'life' | 'relocation';
 }
 
 const { 
   provider = "insurance",
   title = "Get Your Insurance Rate in 30 Seconds",
-  description = "Find out how much you could save on your health insurance"
+  description = "Find out how much you could save on your health insurance",
+  modalType = 'other'
 } = Astro.props;
 ---
 
@@ -30,7 +32,7 @@ const {
       </button>
       
       <button
-        onclick="showConsultationModal()"
+        onclick={modalType === 'health' ? "window.openHealthModal('home')" : modalType === 'life' ? "window.openLifePensionModal()" : modalType === 'relocation' ? "window.openRelocationModal()" : "window.openOtherModal()"}
         class="p-6 text-center hover:bg-gray-50 transition-colors relative overflow-hidden group"
       >
         <div class="relative z-10">

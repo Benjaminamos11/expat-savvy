@@ -167,12 +167,35 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     
     <!-- Cal element-click embed code begins -->
     <script type="text/javascript" defer>
-      // Define empty function stubs for modals
+      // Cal.com initialization
       window.Cal = window.Cal || {};
-      window.closeConsultationModal = window.closeConsultationModal || function() {};
-      window.openConsultationModal = window.openConsultationModal || function() {};
+      // Modal functions will be defined by ProfessionalSmartModal component
     </script>
     <!-- Cal element-click embed code ends -->
+    
+    <!-- Modal Overlay System -->
+    <script is:inline src="/scripts/modal-overlay-system.js"></script>
+    
+    <!-- Modal System Verification -->
+    <script is:inline>
+      window.addEventListener('DOMContentLoaded', () => {
+        const requiredFunctions = [
+          'openHealthModal',
+          'openLifePensionModal', 
+          'openOtherModal',
+          'openRelocationModal'
+        ];
+        
+        const missing = requiredFunctions.filter(fn => typeof window[fn] !== 'function');
+        
+        if (missing.length > 0) {
+          console.error('⚠️ Missing modal functions:', missing);
+          console.error('Please hard refresh (Cmd+Shift+R or Ctrl+Shift+R)');
+        } else {
+          console.log('✅ All modal functions loaded successfully');
+        }
+      });
+    </script>
     
     <!-- Component Helper - DISABLED to prevent conflicts -->
     <!-- <script is:inline defer src="/scripts/component-helper.js"></script> -->

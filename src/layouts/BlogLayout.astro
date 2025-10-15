@@ -13,6 +13,15 @@ const getShareUrls = (url: string, title: string) => ({
 
 const currentUrl = Astro.url.href;
 const shareUrls = getShareUrls(currentUrl, frontmatter.title);
+
+// Determine modal type based on URL and title
+const url = Astro.url.pathname.toLowerCase();
+const title = (frontmatter.title || '').toLowerCase();
+const modalType = 
+  url.includes('relocation') || title.includes('relocation') ? 'relocation' :
+  url.includes('pension') || url.includes('pillar') || url.includes('life-insurance') || title.includes('pension') || title.includes('pillar') ? 'life' :
+  url.includes('liability') || url.includes('household') || url.includes('legal-protection') || url.includes('accident-insurance') || title.includes('liability') || title.includes('household') || title.includes('legal') ? 'other' :
+  'health'; // default to health for most insurance content
 ---
 
 <BaseLayout 
@@ -196,7 +205,7 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
     <div id="floating-cta" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-lg shadow-xl flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4 transition-all w-full max-w-5xl border border-primary-400/20 backdrop-blur-sm">
       <span class="font-semibold text-center sm:text-left">Need help choosing insurance?</span>
       <button
-        onclick="window.openOffersModal()"
+        onclick={modalType === 'health' ? "window.openHealthModal('home')" : modalType === 'life' ? "window.openLifePensionModal()" : modalType === 'relocation' ? "window.openRelocationModal()" : "window.openOtherModal()"}
         class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base"
       >
         Free Consultation
@@ -442,6 +451,9 @@ const shareUrls = getShareUrls(currentUrl, frontmatter.title);
       }
     });
   }
+
+  // Relocation modal functionality is now handled via inline onclick handlers
+  console.log('✅ Blog layout loaded - modal functionality via inline handlers');
 </script>
 
 <style>

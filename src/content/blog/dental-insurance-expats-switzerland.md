@@ -165,6 +165,12 @@ Yes, children can be covered under family dental plans. Children's premiums are 
 
 The sooner the better due to waiting periods. If you're healthy, consider applying within your first 3 months in Switzerland. Most insurers allow applications year-round, unlike basic health insurance which has annual change deadlines.
 
+<div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
+  <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Get Dental Coverage?</h3>
+  <p class="mb-4">Compare dental insurance options and get expert advice on the best coverage for your needs in Switzerland.</p>
+  <button onclick="window.openOtherModal()" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Free Insurance Quote</button>
+</div>
+
 ## Related Articles
 
 - [Best Health Insurance Switzerland 2026 for Expats](/blog/best-health-insurance-switzerland/) — Complete newcomer guide including supplementary options

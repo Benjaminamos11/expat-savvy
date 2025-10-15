@@ -330,4 +330,10 @@ Book your free, no-obligation consultation today to discover how our expat servi
 
 Join the hundreds of satisfied expats who have trusted our expat services to navigate the Swiss insurance landscape with confidence.
 
-*"The guidance I received through Expat Savvy's services transformed what would have been a stressful process into a straightforward one. Their expertise in expat insurance needs is invaluable." - Michael R., Canadian expat in Zug* 
+*"The guidance I received through Expat Savvy's services transformed what would have been a stressful process into a straightforward one. Their expertise in expat insurance needs is invaluable." - Michael R., Canadian expat in Zug*
+
+<div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
+  <h3 class="text-primary-800 text-xl font-bold mb-3">Ready to Start Your Swiss Journey?</h3>
+  <p class="mb-4">Let our relocation specialists help you with the entire moving process, from visa applications to finding the perfect home in Switzerland.</p>
+  <button onclick="window.openRelocationModal()" class="btn btn-primary px-6 py-2 rounded-md font-medium">Contact a relocation specialist for free</button>
+</div> 

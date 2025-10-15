@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Other Insurance Modal - Expat Savvy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Jade Gradient System */
+    :root {
+      --jade-primary: #14B8A6;
+      --jade-light: #5EEAD4;
+      --jade-medium: #2DD4BF;
+      --red-primary: #EF4444;
+      --red-hover: #DC2626;
+      --amber-warning: #F59E0B;
+    }
+
+    .jade-gradient {
+      background: linear-gradient(135deg, #14B8A6 0%, #2DD4BF 50%, #5EEAD4 100%);
+    }
+
+    .jade-gradient-text {
+      background: linear-gradient(135deg, #14B8A6 0%, #5EEAD4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Neumorphic shadows */
+    .shadow-neu {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    .shadow-neu-hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+    .shadow-neu-intense {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Glassmorphic header */
+    .glass-header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+    }
+
+    /* Smooth transitions */
+    .transition-smooth {
+      transition: all 0.2s ease;
+    }
+
+    /* Clean focus states */
+    input:focus {
+      outline: none;
+      border-color: #EF4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    /* Cal.com Desktop Styling - Fixed Dimensions */
+    .cal-desktop-embed {
+      width: 800px !important;
+      height: 600px !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      justify-content: center !important;
+      position: relative !important;
+      background: #F3F4F6 !important;
+    }
+
+    .cal-desktop-embed iframe {
+      width: 800px !important;
+      height: 600px !important;
+      border: none !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .cal-desktop-embed,
+      .cal-desktop-embed iframe {
+        width: 100% !important;
+        height: 600px !important;
+        margin: 0 auto !important;
+      }
+    }
+
+    /* Override any Cal.com internal styling */
+    .cal-desktop-embed [data-cal-namespace="expat-savvy"],
+    .cal-desktop-embed .cal-embed,
+    .cal-desktop-embed .cal-inline {
+      width: 800px !important;
+      height: 600px !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
+
+    /* COMPACT SIZING - Reduce everything 15-20% */
+    .compact-step {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .compact-step h2 {
+      font-size: 20px !important;
+      margin-bottom: 24px !important;
+    }
+
+    .compact-step h3 {
+      font-size: 16px !important;
+      line-height: 1.3 !important;
+    }
+
+    .compact-step h4 {
+      font-size: 14px !important;
+      margin-bottom: 10px !important;
+    }
+
+    /* Tooltip for group discounts */
+    .tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .tooltip:hover::after {
+      content: "💡 Not available when going directly to insurers";
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      background: #1F2937;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .tooltip:hover::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 12px;
+      border: 6px solid transparent;
+      border-top-color: #1F2937;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Test Page -->
+  <div class="container mx-auto max-w-4xl px-4 py-24">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Final Smart Modal ✨</h1>
+      <p class="text-lg text-gray-600 mb-2">With jade gradient, realistic stats, and page-specific content</p>
+      <p class="text-sm text-gray-500 mb-8">No intermediate screen - direct to comparison</p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-8 max-w-4xl mx-auto">
+        <button onclick="openModal('setup')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Setup
+        </button>
+        <button onclick="openModal('change')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Switch
+        </button>
+        <button onclick="openModal('family')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Family
+        </button>
+        <button onclick="openModal('cheapest')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Cheapest
+        </button>
+        <button onclick="openModal('best')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Best
+        </button>
+        <button onclick="openModal('provider')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Provider
+        </button>
+        <button onclick="openModal('comparison')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Comparison
+        </button>
+        <button onclick="openModal('home')" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-3 rounded-lg shadow-neu hover:shadow-neu-hover transition-smooth text-xs">
+          Home
+        </button>
+      </div>
+
+      <div class="mt-12 p-8 bg-white rounded-xl shadow-neu text-left max-w-2xl mx-auto">
+        <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center gap-2">
+          <span class="text-2xl">✨</span>
+          Critical Improvements Implemented:
+        </h2>
+        <ul class="space-y-3 text-gray-700 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>NO intermediate screen</strong> - Direct Step 1 → Step 2 (no scrolling!)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>Condensed cards</strong> - Max 4 bullets (Expert) + 3+3 bullets (Self-service)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>Jade gradient</strong> - Luxury teal for RECOMMENDED badge & OUTCOME box</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>Realistic stats</strong> - "1000plus expats" not "500+ reviews"</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>Replaced cross-border</strong> with "supplementary insurance advice"</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>Page-specific headlines</strong> - Setup, Family, Switch, Cheapest, Best, etc.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </span>
+            <span><strong>Form interruption</strong> - After Q3, nudges to call (faster)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-neu-intense w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col relative">
+      <!-- Close Button -->
+      <button
+        onclick="closeModal()"
+        class="absolute top-4 right-4 z-10 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 w-10 h-10 flex items-center justify-center transition-smooth"
+      >
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Robert Header (glassmorphic, compact) -->
+      <div id="robert-header" class="hidden glass-header border-b border-gray-200 px-8 py-4 flex items-center gap-3">
+        <img 
+          src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_64,h_64,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+          alt="Robert Kolar"
+          class="w-12 h-12 rounded-full border-2 border-gray-200 shadow-neu"
+        />
+        <div class="flex-1">
+          <h3 class="text-sm font-semibold text-gray-900 leading-tight">Robert Kolar</h3>
+          <p class="text-xs text-gray-600 leading-tight">FINMA certified expert, EN, DE, CZ, FR</p>
+          <p class="text-xs text-gray-500 leading-tight">20+ Years experience in Insurance</p>
+        </div>
+      </div>
+
+      <!-- Content Container -->
+      <div id="modal-content" class="overflow-y-auto flex-1 bg-gray-50"></div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let currentStep = 1;
+    let pageIntent = 'home';
+    let userData = {
+      situation: '',
+      complexity: 0,
+      name: '',
+      email: '',
+      phone: '',
+      dob: '',
+      formQuestions: 0,
+      household: 1,
+      currentInsurer: '',
+      address: '',
+      postcode: '',
+      canton: '',
+      works: '',
+      deductible: '',
+      model: '',
+      supplementary: '',
+      startDate: '',
+      specialRequirements: ''
+    };
+
+    // Page-specific content
+    const pageConfig = {
+      liability: {
+        headline: "Swiss Liability Insurance",
+        subline: "Protect yourself from costly damage claims in Switzerland",
+        highlightOption: 'liability',
+        expertCopy: {
+          title: "Why liability insurance is essential:",
+          benefits: [
+            "Mandatory for residents in most cantons",
+            "Covers damage to third parties (property, persons)",
+            "Protects against expensive lawsuits",
+            "We find the best coverage for your situation"
+          ],
+          insights: [
+            "Coverage amounts vary by canton",
+            "Some policies include legal protection",
+            "Professional liability for self-employed",
+            "Family coverage options available"
+          ]
+        }
+      },
+      household: {
+        headline: "Household & Contents Insurance",
+        subline: "Cover your belongings and home against damage and theft",
+        highlightOption: 'household',
+        expertCopy: {
+          title: "Why household insurance matters:",
+          benefits: [
+            "Covers theft, fire, water damage, and natural disasters",
+            "Replacement value for your belongings",
+            "Temporary accommodation if home uninhabitable",
+            "We find comprehensive coverage at competitive rates"
+          ],
+          insights: [
+            "Coverage varies by building type (rented vs owned)",
+            "High-value items may need separate coverage",
+            "Deductible options affect premium",
+            "Some policies include liability coverage"
+          ]
+        }
+      },
+      accident: {
+        headline: "Personal Accident Insurance",
+        subline: "Essential protection for work-related and leisure accidents",
+        highlightOption: 'accident',
+        expertCopy: {
+          title: "Why accident insurance is important:",
+          benefits: [
+            "Covers medical costs from accidents",
+            "Disability benefits if unable to work",
+            "Lump sum payments for permanent disability",
+            "We find the right coverage for your lifestyle"
+          ],
+          insights: [
+            "Different coverage for work vs leisure accidents",
+            "Some policies include death benefits",
+            "Coverage amounts vary significantly",
+            "Consider your profession and hobbies"
+          ]
+        }
+      },
+      car: {
+        headline: "Car & Motor Insurance",
+        subline: "Complete coverage for your vehicle in Switzerland",
+        highlightOption: 'car',
+        expertCopy: {
+          title: "Why proper car insurance matters:",
+          benefits: [
+            "Mandatory third-party liability coverage",
+            "Comprehensive coverage for your vehicle",
+            "Legal protection and roadside assistance",
+            "We find the best rates for your driving profile"
+          ],
+          insights: [
+            "No-claims bonuses can reduce premiums",
+            "Different coverage for different vehicle types",
+            "Consider your annual mileage",
+            "Some policies include international coverage"
+          ]
+        }
+      },
+      travel: {
+        headline: "Travel Insurance",
+        subline: "Comprehensive protection for your trips abroad",
+        highlightOption: 'travel',
+        expertCopy: {
+          title: "Why travel insurance is essential:",
+          benefits: [
+            "Medical coverage worldwide",
+            "Trip cancellation and interruption",
+            "Lost luggage and personal belongings",
+            "We find coverage that matches your travel needs"
+          ],
+          insights: [
+            "Single trip vs annual multi-trip policies",
+            "Pre-existing medical conditions coverage",
+            "Adventure sports and high-risk activities",
+            "Coverage for expensive equipment and electronics"
+          ]
+        }
+      },
+      pet: {
+        headline: "Pet Insurance",
+        subline: "Protect your furry family members with quality care",
+        highlightOption: 'pet',
+        expertCopy: {
+          title: "Why pet insurance is important:",
+          benefits: [
+            "Covers veterinary costs and treatments",
+            "Emergency care and surgery",
+            "Preventive care and vaccinations",
+            "We find affordable coverage for your pet"
+          ],
+          insights: [
+            "Coverage varies by breed and age",
+            "Pre-existing conditions limitations",
+            "Annual limits and deductible options",
+            "Some policies include liability coverage"
+          ]
+        }
+      },
+      home: {
+        headline: "Other Insurance Products",
+        subline: "Expert guidance for all your insurance needs in Switzerland",
+        highlightOption: null
+      }
+    };
+
+    // Insurance types with Lucide icons
+    const situations = [
+      { id: 'liability', icon: 'shield', label: 'Liability Insurance', complexity: 7 },
+      { id: 'household', icon: 'home', label: 'Household & Contents', complexity: 6 },
+      { id: 'accident', icon: 'alert-triangle', label: 'Personal Accident', complexity: 6 },
+      { id: 'car', icon: 'car', label: 'Car & Motor Insurance', complexity: 8 },
+      { id: 'travel', icon: 'plane', label: 'Travel Insurance', complexity: 5 },
+      { id: 'pet', icon: 'heart', label: 'Pet Insurance', complexity: 5 }
+    ];
+
+    window.openModal = function openModal(intent = 'home') {
+      console.log('✅ Opening modal with intent:', intent);
+      pageIntent = intent;
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      renderStep(1);
+      setTimeout(() => {
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }, 100);
+    }
+
+    window.closeModal = function closeModal() {
+      console.log('✅ Closing modal');
+      document.getElementById('modal').classList.add('hidden');
+      document.getElementById('modal').classList.remove('flex');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        currentStep = 1;
+        userData = { situation: '', complexity: 0, name: '', email: '', phone: '', formQuestions: 0 };
+      }, 300);
+    }
+
+    function showRobertHeader(show) {
+      const header = document.getElementById('robert-header');
+      if (show) {
+        header.classList.remove('hidden');
+        header.classList.add('flex');
+      } else {
+        header.classList.add('hidden');
+        header.classList.remove('flex');
+      }
+    }
+
+    function renderStep(step) {
+      currentStep = step;
+      const content = document.getElementById('modal-content');
+      showRobertHeader(step > 1 && step !== 'form' && step !== 'form-interrupt');
+
+      switch(step) {
+        case 1:
+          content.innerHTML = renderStep1();
+          break;
+        case 2:
+          content.innerHTML = renderStep2();
+          break;
+        case 3:
+          content.innerHTML = renderStep3();
+          break;
+        case 4:
+          content.innerHTML = renderStep4();
+          setTimeout(() => {
+            if (typeof lucide !== 'undefined') {
+              lucide.createIcons();
+            }
+          }, 100);
+          break;
+        case 5:
+          content.innerHTML = renderStep5();
+          break;
+        case 'form':
+          content.innerHTML = renderFormStep();
+          break;
+        case 'form-interrupt':
+          content.innerHTML = renderFormInterrupt();
+          break;
+        case 'form-step3':
+          content.innerHTML = renderFormStep3();
+          break;
+        case 'form-step4':
+          content.innerHTML = renderFormStep4();
+          break;
+        case 'form-step5':
+          content.innerHTML = renderFormStep5();
+          break;
+        case 'form-confirmation':
+          content.innerHTML = renderFormConfirmation();
+          break;
+      }
+      
+      setTimeout(() => {
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }, 50);
+    }
+
+    function renderStep1() {
+      const config = pageConfig[pageIntent] || pageConfig.home;
+      
+      return `
+        <div class="p-8 md:p-12 bg-white">
+          <div class="max-w-3xl mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-3" style="color: #EF4444;">
+              ${config.headline}
+            </h1>
+            <p class="text-gray-600 text-center mb-8">${config.subline}</p>
+
+            <!-- Social Proof - Realistic & Compact -->
+            <div class="flex items-center justify-center gap-6 py-3 border-y border-gray-200 mb-8 text-xs">
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="users" class="w-3.5 h-3.5 text-teal-600"></i>
+                <span class="text-teal-600 font-medium">Helping expats daily</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="trending-down" class="w-3.5 h-3.5 text-teal-600"></i>
+                <span class="text-teal-600 font-medium">Avg: <strong class="text-teal-600">CHF 1,200-2,400</strong></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-teal-600 text-teal-600"></i>
+                <span class="text-teal-600 font-medium">Trusted by <strong class="text-teal-600">1000plus expats</strong></span>
+              </div>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">What brings you here today?</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              ${situations.map(sit => {
+                const isHighlighted = config.highlightOption === sit.id;
+                return `
+                  <button
+                    onclick="selectSituation('${sit.id}', ${sit.complexity})"
+                    class="bg-white border-2 ${isHighlighted ? 'border-teal-500 shadow-neu-hover' : 'border-gray-200'} rounded-xl p-6 hover:border-red-500 hover:shadow-neu-hover transition-smooth text-left group relative"
+                  >
+                    ${isHighlighted ? '<div class="absolute -top-2 -right-2 bg-gradient-to-r from-teal-500 to-teal-400 text-white text-xs font-bold px-2 py-1 rounded-full">RECOMMENDED</div>' : ''}
+                    <div class="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-50 transition-smooth">
+                      <i data-lucide="${sit.icon}" class="w-5 h-5 text-gray-600 group-hover:text-red-500"></i>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-gray-900 font-medium text-sm leading-tight">${sit.label}</span>
+                      <i data-lucide="arrow-right" class="w-4 h-4 text-gray-400 group-hover:text-red-500"></i>
+                    </div>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <p class="text-center text-sm text-gray-500 mt-8 flex items-center justify-center gap-4">
+              <span class="flex items-center gap-1">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                100% free
+              </span>
+              <span class="text-gray-300">•</span>
+              <span class="flex items-center gap-1">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                No obligation
+              </span>
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStep2() {
+      // Situation-specific benefits and outcomes
+      const situationData = {
+        'liability': { 
+          benefit: 'Cantonal requirements & coverage amounts',
+          gap: 'Legal liability guidance',
+          outcome: {
+            main: 'Complete protection from day one',
+            benefits: ['Avoid costly lawsuits', 'Right coverage for your canton']
+          }
+        },
+        'household': { 
+          benefit: 'Contents valuation & coverage strategies',
+          gap: 'Proper coverage assessment',
+          outcome: {
+            main: 'Full protection for your belongings',
+            benefits: ['Replacement value coverage', 'Peace of mind for your home']
+          }
+        },
+        'accident': { 
+          benefit: 'Work vs leisure coverage optimization',
+          gap: 'Accident coverage guidance',
+          outcome: {
+            main: 'Comprehensive accident protection',
+            benefits: ['Right coverage for your lifestyle', 'Financial security if injured']
+          }
+        },
+        'car': { 
+          benefit: 'No-claims bonus & coverage optimization',
+          gap: 'Car insurance expertise',
+          outcome: {
+            main: 'Best rates for your driving profile',
+            benefits: ['Maximum no-claims benefits', 'Complete vehicle protection']
+          }
+        },
+        'travel': { 
+          benefit: 'Trip-specific coverage matching',
+          gap: 'Travel insurance expertise',
+          outcome: {
+            main: 'Perfect coverage for your travels',
+            benefits: ['Medical protection worldwide', 'Trip cancellation coverage']
+          }
+        },
+        'pet': { 
+          benefit: 'Breed & age-specific coverage',
+          gap: 'Pet insurance guidance',
+          outcome: {
+            main: 'Quality care for your pet',
+            benefits: ['Affordable veterinary coverage', 'Emergency care protection']
+          }
+        }
+      };
+
+      const specific = situationData[userData.situation] || situationData['new'];
+      
+      return `
+        <div class="p-6 md:p-10 bg-white compact-step">
+          <button onclick="renderStep(1)" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-4 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-5xl mx-auto">
+            <h2 class="text-xl font-semibold text-gray-900 text-center mb-6">
+              How would you like to proceed?
+            </h2>
+
+            <!-- Side-by-Side Comparison - COMPACT SIZING -->
+            <div class="grid md:grid-cols-2 gap-5">
+              <!-- EXPERT CALL (Left) - COMPACT, 4 BULLETS -->
+              <div class="bg-white border-2 border-teal-500 rounded-xl p-6 hover:shadow-neu-hover transition-smooth relative" style="max-height: 520px;">
+                <!-- Jade Recommended Badge (smaller) -->
+                <div class="absolute -top-2.5 left-5 jade-gradient px-3 py-1 rounded-full text-xs font-bold text-white shadow-neu flex items-center gap-1">
+                  <i data-lucide="sparkles" class="w-3 h-3"></i>
+                  RECOMMENDED
+                </div>
+
+                <div class="flex items-center gap-2.5 mb-5 mt-1">
+                  <div class="w-10 h-10 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="phone" class="w-5 h-5 text-teal-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-bold text-gray-900">15-60min free expert call</h3>
+                  </div>
+                </div>
+
+                <div class="mb-5">
+                  <h4 class="font-medium text-gray-900 mb-3 text-sm">What we'll cover:</h4>
+                  <ul class="space-y-2.5 text-sm text-gray-700">
+                    <li class="flex items-start gap-2">
+                      <div class="w-4 h-4 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i data-lucide="check" class="w-2.5 h-2.5 text-teal-600"></i>
+                      </div>
+                      <span class="leading-tight">Best rate for you</span>
+                    </li>
+                    <li class="flex items-start gap-2 tooltip">
+                      <div class="w-4 h-4 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i data-lucide="check" class="w-2.5 h-2.5 text-teal-600"></i>
+                      </div>
+                      <span class="leading-tight">Possible group discounts (broker-only)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <div class="w-4 h-4 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i data-lucide="check" class="w-2.5 h-2.5 text-teal-600"></i>
+                      </div>
+                      <span class="leading-tight">${specific.benefit}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <div class="w-4 h-4 bg-teal-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i data-lucide="check" class="w-2.5 h-2.5 text-teal-600"></i>
+                      </div>
+                      <span class="leading-tight">Insider knowledge & support</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Jade Gradient Outcome Box (qualitative) -->
+                <div class="jade-gradient rounded-lg p-4 mb-4 text-white text-center">
+                  <div class="flex items-center justify-center gap-1.5 mb-1.5">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <p class="text-xs font-bold uppercase tracking-wide">TYPICAL OUTCOME</p>
+                  </div>
+                  <p class="text-base font-bold mb-1.5 leading-tight">${specific.outcome.main}</p>
+                  ${specific.outcome.benefits.map(b => `<p class="text-xs opacity-90 leading-snug">+ ${b}</p>`).join('')}
+                </div>
+
+                <button
+                  onclick="renderStep(3)"
+                  class="w-full bg-red-500 text-white py-3.5 rounded-lg font-semibold text-sm hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth flex items-center justify-center gap-2 mb-2.5"
+                >
+                  <span>FIND MY SAVINGS</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+
+                <p class="text-xs text-center text-gray-500 leading-tight">Independent advice - no pressure</p>
+              </div>
+
+              <!-- SELF-SERVICE (Right) - COMPACT, 3 + 3 BULLETS -->
+              <div class="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-gray-300 hover:shadow-neu transition-smooth" style="max-height: 520px;">
+                <div class="flex items-center gap-2.5 mb-5">
+                  <div class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="file-text" class="w-5 h-5 text-gray-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-bold text-gray-900">Self-Service</h3>
+                    <p class="text-xs text-gray-600">Standard Quotes (5-7 min)</p>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <h4 class="font-medium text-gray-900 mb-3 text-sm">What you get:</h4>
+                  <ul class="space-y-2.5 text-sm text-gray-600">
+                    <li class="flex items-start gap-2">
+                      <span class="text-gray-400 mt-0.5 text-xs">→</span>
+                      <span class="leading-tight">Basic comparison</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gray-400 mt-0.5 text-xs">→</span>
+                      <span class="leading-tight">Public rates</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gray-400 mt-0.5 text-xs">→</span>
+                      <span class="leading-tight">General info</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="mb-5">
+                  <h4 class="font-medium text-gray-900 mb-3 text-sm">Won't include:</h4>
+                  <ul class="space-y-2.5 text-sm text-gray-500">
+                    <li class="flex items-start gap-2">
+                      <span class="text-gray-400 mt-0.5 text-xs">•</span>
+                      <span class="leading-tight">Group discounts</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gray-400 mt-0.5 text-xs">•</span>
+                      <span class="leading-tight">Insider knowledge</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gray-400 mt-0.5 text-xs">•</span>
+                      <span class="leading-tight">${specific.gap}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Amber Warning Box (compact) -->
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-center">
+                  <div class="flex items-center justify-center gap-1.5 mb-1">
+                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-600"></i>
+                    <p class="text-xs font-bold text-amber-900 uppercase tracking-wide">POTENTIAL GAP</p>
+                  </div>
+                  <p class="text-sm font-bold text-amber-900 leading-tight">May miss opportunities</p>
+                </div>
+
+                <button
+                  onclick="renderStep('form')"
+                  class="w-full border-2 border-gray-300 text-gray-600 py-3.5 rounded-lg font-semibold text-sm hover:bg-gray-50 transition-smooth flex items-center justify-center gap-2"
+                >
+                  <span>GET STANDARD QUOTES</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="text-center mt-6 text-sm text-gray-600">
+              <p class="flex items-center justify-center gap-2">
+                <i data-lucide="info" class="w-4 h-4"></i>
+                <span>Not sure? Book the call - if I can't help, I'll tell you honestly.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormStep() {
+      return `
+        <div class="p-8 md:p-10 bg-white">
+          <button onclick="renderStep(2)" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-4 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-2xl mx-auto">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Get Your Standard Quotes</h2>
+            <p class="text-gray-600 mb-6 text-sm">Just a few quick details to get started...</p>
+
+            <form onsubmit="handleFormStep1Submit(event)" class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">Your Name</label>
+                <input type="text" id="form-name" required placeholder="John Doe" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">Email Address</label>
+                <input type="email" id="form-email" required placeholder="john@example.com" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth" />
+              </div>
+
+              <button type="submit" class="w-full bg-red-500 text-white py-4 rounded-lg font-semibold hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth">
+                CONTINUE
+              </button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormStep3() {
+      return `
+        <div class="p-8 md:p-10 bg-white compact-step">
+          <button onclick="renderStep('form-interrupt')" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-4 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-semibold text-gray-900">Tell us about your situation</h2>
+              <div class="text-xs text-gray-500">Step 1 of 2</div>
+            </div>
+
+            <p class="text-sm text-gray-600 mb-6">We have your name (${userData.name}) and email (${userData.email}). Now a few more details...</p>
+
+            <form onsubmit="handleFormStep3Submit(event)" class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-3">What insurance do you need?</label>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input type="checkbox" id="insurance-liability" value="liability" class="mr-2 h-4 w-4 rounded">
+                    <span class="text-sm">Personal Liability (Haftpflicht)</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" id="insurance-household" value="household" class="mr-2 h-4 w-4 rounded">
+                    <span class="text-sm">Household Insurance (Hausrat)</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" id="insurance-content" value="content" class="mr-2 h-4 w-4 rounded">
+                    <span class="text-sm">Content Insurance</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" id="insurance-luxury" value="luxury" class="mr-2 h-4 w-4 rounded">
+                    <span class="text-sm">Luxury Goods Insurance</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" id="insurance-legal" value="legal" class="mr-2 h-4 w-4 rounded">
+                    <span class="text-sm">Legal Protection (Rechtsschutz)</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" id="insurance-other" value="other" class="mr-2 h-4 w-4 rounded">
+                    <span class="text-sm">Other (specify in notes)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">When does the insurance need to start?</label>
+                <input type="date" id="insurance-start-date" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth" />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">Your address</label>
+                <input type="text" id="address" required placeholder="Bahnhofstrasse 10" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white mb-3 transition-smooth" />
+                <div class="grid grid-cols-2 gap-3">
+                  <input type="text" id="postcode" required placeholder="8001" pattern="[0-9]{4}" class="px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth" />
+                  <input type="text" id="city" required placeholder="Zurich" class="px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth" />
+                </div>
+                <p class="text-xs text-gray-500 mt-1.5">Needed for premium calculation</p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">How can we reach you?</label>
+                <input type="tel" id="phone" required placeholder="+41 79 123 45 67" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth" />
+                <p class="text-xs text-gray-500 mt-1.5">We'll contact you to finalize your quote</p>
+              </div>
+
+              <button type="submit" class="w-full bg-red-500 text-white py-4 rounded-lg font-semibold hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth">
+                CONTINUE →
+              </button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormStep4() {
+      return `
+        <div class="p-8 md:p-10 bg-white compact-step">
+          <button onclick="renderStep('form-step3')" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-4 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-semibold text-gray-900">What coverage are you looking for?</h2>
+              <div class="text-xs text-gray-500">Step 2 of 3</div>
+            </div>
+
+            <form onsubmit="handleFormStep4Submit(event)" class="space-y-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-3">Preferred coverage level</label>
+                <p class="text-xs text-gray-600 mb-3">Higher coverage = Higher premiums but better protection</p>
+                <div class="space-y-2">
+                  <label class="flex items-center justify-between p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="coverage" value="basic" required class="w-5 h-5 text-red-500" />
+                      <span class="text-sm font-medium text-gray-900">Basic Coverage</span>
+                    </div>
+                    <span class="text-xs text-gray-500">Essential protection</span>
+                  </label>
+                  <label class="flex items-center justify-between p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="coverage" value="standard" required class="w-5 h-5 text-red-500" />
+                      <span class="text-sm font-medium text-gray-900">Standard Coverage</span>
+                    </div>
+                    <span class="text-xs text-teal-600 font-semibold">✓ RECOMMENDED</span>
+                  </label>
+                  <label class="flex items-center justify-between p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="coverage" value="premium" required class="w-5 h-5 text-red-500" />
+                      <span class="text-sm font-medium text-gray-900">Premium Coverage</span>
+                    </div>
+                    <span class="text-xs text-gray-500">Maximum protection</span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-3">Coverage preferences</label>
+                <div class="space-y-2">
+                  <label class="flex items-start gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <input type="radio" name="preference" value="budget" required class="w-5 h-5 text-red-500 mt-0.5" />
+                    <div class="flex-1">
+                      <div class="font-medium text-sm text-gray-900">Budget-focused</div>
+                      <div class="text-xs text-gray-600">Essential coverage at lowest cost</div>
+                    </div>
+                  </label>
+                  <label class="flex items-start gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <input type="radio" name="preference" value="balanced" required class="w-5 h-5 text-red-500 mt-0.5" />
+                    <div class="flex-1">
+                      <div class="font-medium text-sm text-gray-900">Balanced</div>
+                      <div class="text-xs text-gray-600">Good coverage at reasonable price</div>
+                    </div>
+                  </label>
+                  <label class="flex items-start gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <input type="radio" name="preference" value="comprehensive" required class="w-5 h-5 text-red-500 mt-0.5" />
+                    <div class="flex-1">
+                      <div class="font-medium text-sm text-gray-900">Comprehensive</div>
+                      <div class="text-xs text-gray-600">Maximum protection and benefits</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-3">Supplementary insurance interest</label>
+                <p class="text-xs text-gray-600 mb-3">Optional coverage beyond basic insurance</p>
+                <div class="space-y-2">
+                  <label class="flex items-start gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <input type="radio" name="supplementary" value="basic" required class="w-5 h-5 text-red-500 mt-0.5" />
+                    <div class="flex-1">
+                      <div class="font-medium text-sm text-gray-900">Basic</div>
+                      <div class="text-xs text-gray-600">Just the minimum coverage, no free choice of doctor, limited coverage</div>
+                    </div>
+                  </label>
+                  <label class="flex items-start gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <input type="radio" name="supplementary" value="balanced" required class="w-5 h-5 text-red-500 mt-0.5" />
+                    <div class="flex-1">
+                      <div class="font-medium text-sm text-gray-900">Balanced</div>
+                      <div class="text-xs text-gray-600">Balanced coverage with good benefits</div>
+                    </div>
+                  </label>
+                  <label class="flex items-start gap-3 p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-red-500 transition-smooth">
+                    <input type="radio" name="supplementary" value="bestmed" required class="w-5 h-5 text-red-500 mt-0.5" />
+                    <div class="flex-1">
+                      <div class="font-medium text-sm text-gray-900">BestMed</div>
+                      <div class="text-xs text-gray-600">Private worldwide, best coverage available</div>
+                    </div>
+                  </label>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">We'll include options in your quotes</p>
+              </div>
+
+              <button type="submit" class="w-full bg-red-500 text-white py-4 rounded-lg font-semibold hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth">
+                CONTINUE →
+              </button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormStep5() {
+      return `
+        <div class="p-8 md:p-10 bg-white compact-step">
+          <button onclick="renderStep('form-step3')" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-4 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-semibold text-gray-900">Almost done!</h2>
+              <div class="text-xs text-gray-500">Step 2 of 2</div>
+            </div>
+
+            <form onsubmit="handleFormFinalSubmit(event)" class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">Additional notes or special requests (Optional)</label>
+                <textarea id="special-req" rows="4" placeholder="Any specific coverage needs, questions, or additional information..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth"></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-red-500 text-white py-4 rounded-lg font-semibold hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth flex items-center justify-center gap-2">
+                <span>GET MY QUOTE</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormConfirmation() {
+      return `
+        <div class="p-8 md:p-12 bg-white">
+          <div class="max-w-2xl mx-auto text-center">
+            <div class="w-16 h-16 jade-gradient rounded-full flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="check" class="w-8 h-8 text-white stroke-[3]"></i>
+            </div>
+
+            <h1 class="text-3xl font-bold text-gray-900 mb-3">Request Received!</h1>
+            <p class="text-gray-600 mb-8">We're preparing your personalized insurance comparison.</p>
+
+            <div class="text-left mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4 text-center">Here's what happens next:</h3>
+              <div class="space-y-4">
+                <div class="flex gap-4">
+                  <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-700 flex-shrink-0">1</div>
+                  <div class="flex-1 pt-1">
+                    <p class="text-gray-700 text-sm font-medium mb-1">We'll analyze your details</p>
+                    <p class="text-xs text-gray-600">(takes 2-3 hours)</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-700 flex-shrink-0">2</div>
+                  <div class="flex-1 pt-1">
+                    <p class="text-gray-700 text-sm font-medium mb-1">You'll receive an email with:</p>
+                    <ul class="text-xs text-gray-600 space-y-0.5 ml-3">
+                      <li>• Initial rate estimates</li>
+                      <li>• A few clarifying questions</li>
+                      <li>• Group discount eligibility</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-700 flex-shrink-0">3</div>
+                  <div class="flex-1 pt-1">
+                    <p class="text-gray-700 text-sm font-medium mb-1">Once you reply, we'll send:</p>
+                    <ul class="text-xs text-gray-600 space-y-0.5 ml-3">
+                      <li>• Final detailed comparison</li>
+                      <li>• Personalized recommendations</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6 text-sm">
+              <p class="text-gray-700">Check your email: <strong class="text-gray-900">${userData.email}</strong></p>
+            </div>
+
+            <div class="jade-gradient rounded-xl p-6 mb-6 text-white">
+              <div class="flex items-center gap-2 mb-3">
+                <i data-lucide="zap" class="w-5 h-5"></i>
+                <h3 class="font-bold text-base">WANT RESULTS FASTER?</h3>
+              </div>
+              <p class="text-sm mb-4 opacity-90">A 5-minute call lets us:</p>
+              <ul class="text-sm space-y-1.5 mb-5 opacity-90">
+                <li>• Ask clarifying questions now</li>
+                <li>• Calculate exact rates immediately</li>
+                <li>• Find any group discounts</li>
+                <li>• Explain your options on the spot</li>
+              </ul>
+              <button
+                onclick="renderStep(3)"
+                class="w-full bg-white text-teal-600 py-3 rounded-lg font-semibold hover:bg-gray-50 shadow-neu transition-smooth flex items-center justify-center gap-2"
+              >
+                <i data-lucide="phone" class="w-5 h-5"></i>
+                <span>BOOK 5-MIN CALL</span>
+              </button>
+            </div>
+
+            <button
+              onclick="closeModal()"
+              class="border-2 border-gray-300 text-gray-600 py-3 px-8 rounded-lg font-semibold hover:bg-gray-50 transition-smooth"
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFormInterrupt() {
+      return `
+        <div class="p-8 md:p-12 bg-white flex items-center justify-center min-h-[500px]">
+          <div class="max-w-2xl mx-auto text-center">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="clock" class="w-8 h-8 text-gray-600"></i>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-gray-900 mb-4">Quick heads up...</h2>
+            
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+              <p class="text-sm text-gray-700 text-center">
+                <strong class="text-red-600">Standard form quotes will show:</strong><br>
+                • Basic insurance rates only<br>
+                • No group discounts<br>
+                • No insider knowledge<br>
+                • Generic coverage options
+              </p>
+            </div>
+
+            <p class="text-gray-700 mb-4">
+              This takes <strong>3-4 minutes via form</strong>.
+            </p>
+
+            <div class="bg-white border-2 border-red-200 rounded-lg p-6 mb-6 shadow-sm">
+              <p class="font-semibold text-gray-900 mb-2">OR...</p>
+              <p class="text-gray-700 mb-3">
+                Robert can ask you these in a <strong class="text-red-600">2-minute conversation</strong> and provide personalized insurance advice, including:
+              </p>
+              <ul class="text-sm text-gray-600 space-y-1 text-left">
+                <li>• Group discounts (often 20-30% savings)</li>
+                <li>• Coverage you actually need vs. marketing</li>
+                <li>• Premium optimization strategies</li>
+                <li>• Special situation handling</li>
+              </ul>
+            </div>
+
+            <button
+              onclick="renderStep(3)"
+              class="w-full bg-red-500 text-white py-4 px-6 rounded-lg font-semibold hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth flex items-center justify-center gap-2 mb-4"
+            >
+              <i data-lucide="phone" class="w-5 h-5"></i>
+              <span>YES, LET'S TALK (FASTER)</span>
+            </button>
+
+            <button
+              onclick="renderStep('form-step3')"
+              class="text-gray-500 hover:text-gray-700 text-sm underline"
+            >
+              No thanks, I'll fill the form
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStep3() {
+      return `
+        <div class="p-8 md:p-12 bg-white">
+          <button onclick="renderStep(2)" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-6 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-2xl mx-auto">
+            <div class="flex items-center justify-center mb-6">
+              <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center">
+                <i data-lucide="calendar" class="w-6 h-6 text-red-500"></i>
+              </div>
+            </div>
+
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-3">
+              Perfect! Let's get you booked
+            </h2>
+            <p class="text-gray-600 text-center mb-8">
+              This will be a 15-minute call where we'll find your best rates and discounts.
+            </p>
+
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
+              <h3 class="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-5 h-5 text-teal-600"></i>
+                What you'll get:
+              </h3>
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3 text-sm text-gray-700">
+                  <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-neu">
+                    <i data-lucide="check" class="w-3 h-3 text-teal-600"></i>
+                  </div>
+                  <span>Personalized recommendations</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-700">
+                  <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-neu">
+                    <i data-lucide="check" class="w-3 h-3 text-teal-600"></i>
+                  </div>
+                  <span>Hidden discount opportunities</span>
+                </li>
+                <li class="flex items-center gap-3 text-sm text-gray-700">
+                  <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-neu">
+                    <i data-lucide="check" class="w-3 h-3 text-teal-600"></i>
+                  </div>
+                  <span>2026 switching strategy</span>
+                </li>
+              </ul>
+            </div>
+
+            <form id="booking-form" class="space-y-6" onsubmit="handleBookingSubmit(event)">
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  placeholder="John Doe"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="john@example.com"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">
+                  Phone Number
+                  <span class="text-gray-500 font-normal text-xs ml-1">(for reminder)</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  placeholder="+41 79 123 4567"
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-red-500 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth flex items-center justify-center gap-2"
+              >
+                <span>CONTINUE TO CALENDAR</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+
+              <p class="text-center text-sm text-gray-500 flex items-center justify-center gap-4">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="check-circle" class="w-4 h-4"></i>
+                  Free & no obligation
+                </span>
+                <span class="text-gray-300">•</span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  Easy to reschedule
+                </span>
+              </p>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStep4() {
+      // Build Cal.com URL with user data
+      let calUrl = "https://cal.com/robertkolar/expat-savvy?embed=true&layout=month_view&theme=light";
+      
+      // Add user data as query parameters
+      if (userData.name) {
+        calUrl += "&name=" + encodeURIComponent(userData.name);
+      }
+      if (userData.email) {
+        calUrl += "&email=" + encodeURIComponent(userData.email);
+      }
+      if (userData.phone) {
+        calUrl += "&phone=" + encodeURIComponent(userData.phone);
+      }
+      
+      return `
+        <div class="p-8 md:p-12 bg-gray-50">
+          <button onclick="renderStep(3)" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-6 flex items-center gap-2 transition-smooth">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            Back
+          </button>
+
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-2">Pick Your Time</h2>
+            <p class="text-center text-sm text-gray-600 mb-8">Times shown in Europe/Zurich timezone</p>
+
+            <!-- Cal.com iframe embed with auto-fill -->
+            <iframe 
+              src="${calUrl}" 
+              style="width:100%;height:700px;border:0;margin:0 auto;display:block;max-width:1000px;background:#FFFFFF;" 
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+            
+            <p class="text-center text-sm text-gray-500 flex items-center justify-center gap-4 mt-6">
+              <span class="flex items-center gap-1">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                Free
+              </span>
+              <span class="text-gray-300">•</span>
+              <span class="flex items-center gap-1">
+                <i data-lucide="video" class="w-4 h-4"></i>
+                Video or phone
+              </span>
+              <span class="text-gray-300">•</span>
+              <span class="flex items-center gap-1">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+                15-20 min
+              </span>
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStep5() {
+      return `
+        <div class="p-8 md:p-12 bg-white">
+          <div class="max-w-2xl mx-auto text-center">
+            <!-- Success Icon with jade gradient -->
+            <div class="relative inline-block mb-8">
+              <div class="w-20 h-20 jade-gradient rounded-full flex items-center justify-center mx-auto shadow-neu-hover">
+                <i data-lucide="check" class="w-10 h-10 text-white stroke-[3]"></i>
+              </div>
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Booking Confirmed!</h1>
+            <p class="text-gray-600 mb-8">Check your email for the calendar invite and call details</p>
+
+            <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-8 mb-8 shadow-neu">
+              <div class="space-y-4">
+                <div class="flex items-center justify-center gap-4">
+                  <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-neu">
+                    <i data-lucide="calendar" class="w-5 h-5 text-teal-600"></i>
+                  </div>
+                  <span class="font-semibold text-gray-900">Monday, Oct 21 at 10:00 AM</span>
+                </div>
+                <div class="flex items-center justify-center gap-4">
+                  <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-neu">
+                    <i data-lucide="clock" class="w-5 h-5 text-teal-600"></i>
+                  </div>
+                  <span class="text-gray-700">15 minutes</span>
+                </div>
+                <div class="flex items-center justify-center gap-4">
+                  <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-neu">
+                    <i data-lucide="video" class="w-5 h-5 text-teal-600"></i>
+                  </div>
+                  <span class="text-gray-700">Video call link sent via email</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-left mb-10">
+              <h3 class="text-lg font-semibold text-gray-900 mb-6 text-center">What's Next:</h3>
+              <div class="space-y-4">
+                <div class="flex gap-4">
+                  <div class="w-10 h-10 bg-teal-50 rounded-full flex items-center justify-center font-bold text-teal-600 flex-shrink-0">1</div>
+                  <div class="flex-1 pt-2">
+                    <p class="text-gray-700">Check your email for calendar invite and call link</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-10 h-10 bg-teal-50 rounded-full flex items-center justify-center font-bold text-teal-600 flex-shrink-0">2</div>
+                  <div class="flex-1 pt-2">
+                    <p class="text-gray-700 mb-2">(Optional) Reply with quick info:</p>
+                    <ul class="text-sm text-gray-600 space-y-1 ml-4">
+                      <li>• Employment status</li>
+                      <li>• Coverage needed (self/family)</li>
+                      <li>• Start date</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="w-10 h-10 bg-teal-50 rounded-full flex items-center justify-center font-bold text-teal-600 flex-shrink-0">3</div>
+                  <div class="flex-1 pt-2">
+                    <p class="text-gray-700">Join the call - Robert will guide you through everything!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-4 justify-center mb-8">
+              <button class="bg-red-500 text-white py-3 px-8 rounded-lg font-semibold hover:bg-red-600 shadow-neu hover:shadow-neu-hover transition-smooth flex items-center gap-2">
+                <i data-lucide="calendar-plus" class="w-5 h-5"></i>
+                <span>ADD TO CALENDAR</span>
+              </button>
+              <button
+                onclick="closeModal()"
+                class="border-2 border-gray-300 text-gray-600 py-3 px-8 rounded-lg font-semibold hover:bg-gray-50 transition-smooth flex items-center gap-2"
+              >
+                <span>CLOSE</span>
+              </button>
+            </div>
+
+            <div class="flex items-center justify-center gap-3 text-gray-600">
+              <img 
+                src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_64,h_64,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+                alt="Robert"
+                class="w-8 h-8 rounded-full border border-gray-200"
+              />
+              <p class="italic">Looking forward to helping you save money! - Robert</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectSituation(id, complexity) {
+      console.log('✅ Selected:', id, 'Complexity:', complexity);
+      userData.situation = id;
+      userData.complexity = complexity;
+      renderStep(2); // Go DIRECTLY to comparison (no intermediate screen)
+    }
+
+    // CONSULTATION BOOKING FLOW
+    function handleBookingSubmit(event) {
+      event.preventDefault();
+      userData.name = document.getElementById('name').value;
+      userData.email = document.getElementById('email').value;
+      userData.phone = document.getElementById('phone').value;
+      console.log('✅ Booking info collected:', userData);
+      renderStep(4); // Show calendar
+    }
+
+    // SELF-SERVICE FORM FLOW
+    function handleFormStep1Submit(event) {
+      event.preventDefault();
+      userData.name = document.getElementById('form-name').value;
+      userData.email = document.getElementById('form-email').value;
+      console.log('✅ Form Step 1 complete (name, email)');
+      renderStep('form-interrupt'); // Show interruption after step 1
+    }
+
+    function handleFormStep3Submit(event) {
+      event.preventDefault();
+      
+      // Collect insurance types
+      const insuranceTypes = [];
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+        insuranceTypes.push(cb.value);
+      });
+      userData.insuranceTypes = insuranceTypes.join(', ');
+      
+      userData.insuranceStartDate = document.getElementById('insurance-start-date').value;
+      userData.address = document.getElementById('address').value;
+      userData.postcode = document.getElementById('postcode').value;
+      userData.city = document.getElementById('city').value;
+      userData.phone = document.getElementById('phone').value;
+      
+      console.log('✅ Form Step 3 complete - going to Step 5 (final)');
+      renderStep('form-step5');
+    }
+
+    function handleFormStep4Submit(event) {
+      event.preventDefault();
+      userData.coverage = document.querySelector('input[name="coverage"]:checked').value;
+      userData.preference = document.querySelector('input[name="preference"]:checked').value;
+      
+      // Get supplementary insurance (required)
+      userData.supplementary = document.querySelector('input[name="supplementary"]:checked').value;
+      
+      console.log('✅ Form Step 4 complete');
+      renderStep('form-step5');
+    }
+
+    function handleFormFinalSubmit(event) {
+      event.preventDefault();
+      userData.specialRequirements = document.getElementById('special-req').value;
+      
+      console.log('✅ Complete form data:', userData);
+      
+      // Send to backend to trigger email sequence
+      sendFormDataToBackend(userData);
+      
+      renderStep('form-confirmation');
+    }
+
+    // Send form data to backend to trigger email sequence
+    function sendFormDataToBackend(userData) {
+      const payload = {
+        type: 'form_submission',
+        source: 'self_service_form',
+        situation: userData.situation,
+        userData: userData,
+        timestamp: new Date().toISOString(),
+        pageIntent: pageIntent
+      };
+
+      // Send to Netlify Forms (no email triggers for other insurance)
+      const formData = new FormData();
+      formData.append('form-name', 'other-insurance');
+      formData.append('product-type', userData.situation);
+      formData.append('name', userData.name);
+      formData.append('email', userData.email);
+      formData.append('phone', userData.phone);
+      formData.append('dob', userData.dob);
+      formData.append('household-size', userData.household);
+      formData.append('current-insurer', userData.currentInsurer);
+      formData.append('address', userData.address);
+      formData.append('postcode', userData.postcode);
+      formData.append('city', userData.city);
+      formData.append('canton', userData.canton);
+      formData.append('coverage-level', userData.coverage);
+      formData.append('preference', userData.preference);
+      formData.append('supplementary', userData.supplementary);
+      formData.append('start-date', userData.startDate);
+      formData.append('special-requirements', userData.specialRequirements);
+      formData.append('page-intent', pageIntent);
+
+      fetch('/', {
+        method: 'POST',
+        body: formData
+      })
+      .then(() => {
+        console.log('✅ Form data sent to Netlify Forms');
+        // Track analytics
+        trackEvent('form_submitted', {
+          situation: userData.situation,
+          source: 'other_insurance_form',
+          pageIntent: pageIntent
+        });
+      })
+      .catch(error => {
+        console.error('❌ Error sending form data:', error);
+        // Still show confirmation even if form fails
+      });
+    }
+
+    // ESC key handler
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Backdrop click
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target.id === 'modal') {
+        closeModal();
+      }
+    });
+
+    // Initialize Lucide icons
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+        console.log('✅ Lucide icons initialized');
+      } else {
+        console.warn('⚠️ Lucide not available yet');
+      }
+      console.log('✅ Final modal loaded successfully');
+    });
+
+    // Cal.com is now loaded via iframe - no initialization needed!
+  </script>
+
+  <!-- Cal.com loaded via iframe - no script needed -->
+</body>
+</html>
+

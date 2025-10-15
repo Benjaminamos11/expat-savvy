@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Modal Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      padding: 2rem;
+    }
+    
+    .test-page {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+    
+    .btn-open {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+    }
+    
+    .btn-open:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    
+    .modal-overlay.open {
+      display: flex;
+    }
+    
+    .modal-container {
+      background: white;
+      border-radius: 1rem;
+      max-width: 1200px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    
+    .modal-close:hover {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+    
+    .modal-content {
+      padding: 3rem 2rem;
+    }
+    
+    .modal-step {
+      display: none;
+    }
+    
+    .modal-step.active {
+      display: block;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      color: #111827;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .option-card {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .option-card:hover {
+      border-color: #ef4444;
+      background: #fef2f2;
+      transform: translateY(-2px);
+    }
+    
+    .option-emoji {
+      font-size: 2rem;
+    }
+    
+    .option-text {
+      flex: 1;
+      text-align: left;
+      font-weight: 600;
+      color: #111827;
+    }
+    
+    .option-arrow {
+      color: #ef4444;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .btn-primary {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      margin: 2rem auto;
+      display: block;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary:hover {
+      background: #dc2626;
+    }
+    
+    .success-message {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #10b981;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .modal-container {
+        max-height: 100vh;
+        border-radius: 0;
+      }
+      
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="test-page">
+    <h1>✅ Simple Modal Test</h1>
+    <p>No complex frameworks, just HTML/CSS/JavaScript</p>
+    <button class="btn-open" onclick="openModal()">Open Modal</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-container">
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      
+      <div class="modal-content">
+        <!-- Step 1: Qualification -->
+        <div class="modal-step active" id="step-1">
+          <h2>What brings you here today?</h2>
+          <div class="options-grid">
+            <div class="option-card" onclick="selectOption('new')">
+              <div class="option-emoji">🇨🇭</div>
+              <div class="option-text">I just moved to Switzerland</div>
+              <div class="option-arrow">→</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('family')">
+              <div class="option-emoji">👨‍👩‍👧</div>
+              <div class="option-text">I need family coverage</div>
+              <div class="option-arrow">→</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('save')">
+              <div class="option-emoji">💰</div>
+              <div class="option-text">I want to switch and save</div>
+              <div class="option-arrow">→</div>
+            </div>
+            
+            <div class="option-card" onclick="selectOption('compare')">
+              <div class="option-emoji">📊</div>
+              <div class="option-text">Just comparing options</div>
+              <div class="option-arrow">→</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2: Booking -->
+        <div class="modal-step" id="step-2">
+          <h2>Perfect! Let's book your consultation</h2>
+          <div class="success-message">
+            <p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 2rem;">
+              In the real version, this would show a calendar booking widget.
+            </p>
+            <button class="btn-primary" onclick="nextStep()">Continue →</button>
+          </div>
+        </div>
+        
+        <!-- Step 3: Confirmation -->
+        <div class="modal-step" id="step-3">
+          <div class="success-message">
+            <div class="success-icon">✓</div>
+            <h2>Booking Confirmed! 🎉</h2>
+            <p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 2rem;">
+              Check your email for the calendar invite.
+            </p>
+            <button class="btn-primary" onclick="closeModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    let selectedOption = '';
+
+    function openModal() {
+      console.log('✅ Opening modal');
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      console.log('✅ Closing modal');
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+      // Reset to step 1
+      setTimeout(() => {
+        showStep(1);
+      }, 300);
+    }
+
+    function selectOption(option) {
+      console.log('✅ Selected:', option);
+      selectedOption = option;
+      nextStep();
+    }
+
+    function showStep(step) {
+      // Hide all steps
+      document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+      // Show current step
+      document.getElementById('step-' + step).classList.add('active');
+      currentStep = step;
+    }
+
+    function nextStep() {
+      if (currentStep < 3) {
+        showStep(currentStep + 1);
+      }
+    }
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Close on backdrop click
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target.id === 'modal') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
