@@ -1574,25 +1574,15 @@
         pageIntent: pageIntent
       };
 
-      // Send to Netlify Forms (no email triggers for other insurance)
+      // Send to Netlify Forms (relocation consultation)
       const formData = new FormData();
-      formData.append('form-name', 'other-insurance');
-      formData.append('product-type', userData.situation);
+      formData.append('form-name', 'relocation-consultation');
       formData.append('name', userData.name);
       formData.append('email', userData.email);
       formData.append('phone', userData.phone);
-      formData.append('dob', userData.dob);
-      formData.append('household-size', userData.household);
-      formData.append('current-insurer', userData.currentInsurer);
-      formData.append('address', userData.address);
-      formData.append('postcode', userData.postcode);
-      formData.append('city', userData.city);
-      formData.append('canton', userData.canton);
-      formData.append('coverage-level', userData.coverage);
-      formData.append('preference', userData.preference);
-      formData.append('supplementary', userData.supplementary);
-      formData.append('start-date', userData.startDate);
-      formData.append('special-requirements', userData.specialRequirements);
+      formData.append('relocation-type', userData.situation || '');
+      formData.append('moving-date', userData.movingDate || '');
+      formData.append('special-requirements', userData.specialRequirements || '');
       formData.append('page-intent', pageIntent);
 
       fetch('/', {
