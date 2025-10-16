@@ -1592,7 +1592,7 @@
       };
 
       // Send to backend API for email nurture sequence
-      fetch('/api/leads', {
+      fetch('/api/lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1623,10 +1623,17 @@
       formspreeData.append('phone', userData.phone);
       formspreeData.append('situation', userData.situation || '');
       formspreeData.append('dob', userData.dob || '');
+      formspreeData.append('household', userData.household || '');
+      formspreeData.append('current-insurer', userData.currentInsurer || '');
       formspreeData.append('address', userData.address || '');
       formspreeData.append('postcode', userData.postcode || '');
       formspreeData.append('city', userData.city || '');
       formspreeData.append('canton', userData.canton || '');
+      formspreeData.append('works', userData.works || '');
+      formspreeData.append('deductible', userData.deductible || '');
+      formspreeData.append('model', userData.model || '');
+      formspreeData.append('supplementary', userData.supplementary || '');
+      formspreeData.append('start-date', userData.startDate || '');
       formspreeData.append('special-requirements', userData.specialRequirements || '');
       formspreeData.append('page-intent', pageIntent);
 
