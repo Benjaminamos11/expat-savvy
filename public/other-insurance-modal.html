@@ -1477,26 +1477,36 @@
       
       console.log('✅ Booking info collected:', userData);
       
-      // IMMEDIATELY send lead to Formspree when user clicks to proceed to calendar
-      const formspreeData = new FormData();
-      formspreeData.append('form-name', 'other-insurance-booking');
-      formspreeData.append('form-type', 'schedule_meeting');
-      formspreeData.append('name', userData.name);
-      formspreeData.append('email', userData.email);
-      formspreeData.append('phone', userData.phone);
-      formspreeData.append('help-reason', userData.helpReason);
-      formspreeData.append('situation', userData.situation || '');
-      formspreeData.append('page-url', userData.pageUrl);
-      formspreeData.append('page-title', userData.pageTitle);
+      // IMMEDIATELY send lead to BOTH Netlify Forms AND Formspree when user clicks to proceed to calendar
+      const formData = new FormData();
+      formData.append('form-name', 'other-insurance');
+      formData.append('form-type', 'schedule_meeting');
+      formData.append('name', userData.name);
+      formData.append('email', userData.email);
+      formData.append('phone', userData.phone);
+      formData.append('help-reason', userData.helpReason);
+      formData.append('situation', userData.situation || '');
+      formData.append('page-url', userData.pageUrl);
+      formData.append('page-title', userData.pageTitle);
       
+      // Send to Netlify Forms
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => console.log('✅ Lead sent to Netlify Forms'))
+      .catch(error => console.error('❌ Netlify Forms failed:', error));
+      
+      // Send to Formspree as backup
       fetch('https://formspree.io/f/mrbewjlr', {
         method: 'POST',
-        body: formspreeData,
+        body: formData,
         headers: {
           'Accept': 'application/json'
         }
       })
-      .then(() => console.log('✅ Lead sent to Formspree immediately'))
+      .then(() => console.log('✅ Lead sent to Formspree as backup'))
       .catch(error => console.error('❌ Formspree failed:', error));
       
       // Now show calendar
@@ -1533,28 +1543,38 @@
       
       console.log('✅ Form Step 3 complete - going to Step 5 (final)');
       
-      // IMMEDIATELY send lead to Formspree when user proceeds to final step
-      const formspreeData = new FormData();
-      formspreeData.append('form-name', 'other-insurance-self-service');
-      formspreeData.append('form-type', 'self_service_form');
-      formspreeData.append('name', userData.name);
-      formspreeData.append('email', userData.email);
-      formspreeData.append('phone', userData.phone);
-      formspreeData.append('help-reason', userData.helpReason);
-      formspreeData.append('insurance-types', userData.insuranceTypes);
-      formspreeData.append('insurance-start-date', userData.insuranceStartDate);
-      formspreeData.append('address', `${userData.address}, ${userData.postcode} ${userData.city}`);
-      formspreeData.append('page-url', userData.pageUrl);
-      formspreeData.append('page-title', userData.pageTitle);
+      // IMMEDIATELY send lead to BOTH Netlify Forms AND Formspree when user proceeds to final step
+      const formData = new FormData();
+      formData.append('form-name', 'other-insurance');
+      formData.append('form-type', 'self_service_form');
+      formData.append('name', userData.name);
+      formData.append('email', userData.email);
+      formData.append('phone', userData.phone);
+      formData.append('help-reason', userData.helpReason);
+      formData.append('insurance-types', userData.insuranceTypes);
+      formData.append('insurance-start-date', userData.insuranceStartDate);
+      formData.append('address', `${userData.address}, ${userData.postcode} ${userData.city}`);
+      formData.append('page-url', userData.pageUrl);
+      formData.append('page-title', userData.pageTitle);
       
+      // Send to Netlify Forms
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => console.log('✅ Lead sent to Netlify Forms'))
+      .catch(error => console.error('❌ Netlify Forms failed:', error));
+      
+      // Send to Formspree as backup
       fetch('https://formspree.io/f/mrbewjlr', {
         method: 'POST',
-        body: formspreeData,
+        body: formData,
         headers: {
           'Accept': 'application/json'
         }
       })
-      .then(() => console.log('✅ Lead sent to Formspree immediately'))
+      .then(() => console.log('✅ Lead sent to Formspree as backup'))
       .catch(error => console.error('❌ Formspree failed:', error));
       
       renderStep('form-step5');
