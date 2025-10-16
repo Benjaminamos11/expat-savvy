@@ -1256,15 +1256,27 @@
               <div>
                 <label class="block text-sm font-medium text-gray-900 mb-2">
                   Phone Number
-                  <span class="text-gray-500 font-normal text-xs ml-1">(for reminder)</span>
+                  <span class="text-gray-500 font-normal text-xs ml-1">(optional)</span>
                 </label>
                 <input
                   type="tel"
                   id="phone"
-                  required
                   placeholder="+41 79 123 4567"
                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth"
                 />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-900 mb-2">
+                  What do you need help with?
+                  <span class="text-gray-500 font-normal text-xs ml-1">(optional)</span>
+                </label>
+                <textarea
+                  id="help-reason"
+                  rows="3"
+                  placeholder="E.g., Looking for cheaper rates, need supplementary insurance advice, switching providers..."
+                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-white transition-smooth resize-none"
+                ></textarea>
               </div>
 
               <button
@@ -1305,6 +1317,9 @@
       }
       if (userData.phone) {
         calUrl += "&phone=" + encodeURIComponent(userData.phone);
+      }
+      if (userData.helpReason) {
+        calUrl += "&notes=" + encodeURIComponent(userData.helpReason);
       }
       
       return `
@@ -1455,9 +1470,38 @@
       event.preventDefault();
       userData.name = document.getElementById('name').value;
       userData.email = document.getElementById('email').value;
-      userData.phone = document.getElementById('phone').value;
+      userData.phone = document.getElementById('phone').value || '';
+      userData.helpReason = document.getElementById('help-reason').value || '';
+      userData.pageUrl = window.location.href;
+      userData.pageTitle = document.title;
+      
       console.log('✅ Booking info collected:', userData);
-      renderStep(4); // Show calendar
+      
+      // IMMEDIATELY send lead to Formspree when user clicks to proceed to calendar
+      const formspreeData = new FormData();
+      formspreeData.append('form-name', 'health-insurance-booking');
+      formspreeData.append('form-type', 'schedule_meeting');
+      formspreeData.append('name', userData.name);
+      formspreeData.append('email', userData.email);
+      formspreeData.append('phone', userData.phone);
+      formspreeData.append('help-reason', userData.helpReason);
+      formspreeData.append('situation', userData.situation || '');
+      formspreeData.append('page-url', userData.pageUrl);
+      formspreeData.append('page-title', userData.pageTitle);
+      formspreeData.append('page-intent', pageIntent);
+      
+      fetch('https://formspree.io/f/mrbewjlr', {
+        method: 'POST',
+        body: formspreeData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(() => console.log('✅ Lead sent to Formspree immediately'))
+      .catch(error => console.error('❌ Formspree failed:', error));
+      
+      // Now show calendar
+      renderStep(4);
     }
 
     // SELF-SERVICE FORM FLOW
