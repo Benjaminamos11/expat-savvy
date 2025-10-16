@@ -1492,18 +1492,30 @@
       formData.append('page-intent', pageIntent);
       
       // Send to Netlify Forms
+      const netlifyBody = new URLSearchParams(formData).toString();
+      console.log('🔍 Sending to Netlify:', netlifyBody);
+      
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
+        body: netlifyBody
       })
       .then(response => {
-        console.log('✅ Lead sent to Netlify Forms', response.status);
-        if (!response.ok) {
-          console.error('❌ Netlify Forms response not OK:', response.status, response.statusText);
-        }
+        console.log('📡 Netlify response status:', response.status);
+        console.log('📡 Netlify response headers:', response.headers);
+        return response.text().then(text => {
+          console.log('📡 Netlify response body:', text);
+          if (!response.ok) {
+            console.error('❌ Netlify Forms response not OK:', response.status, response.statusText);
+          } else {
+            console.log('✅ Lead sent to Netlify Forms successfully');
+          }
+        });
       })
-      .catch(error => console.error('❌ Netlify Forms failed:', error));
+      .catch(error => {
+        console.error('❌ Netlify Forms fetch failed:', error);
+        console.error('❌ Error details:', error.message, error.stack);
+      });
       
       // Send to Formspree as backup
       fetch('https://formspree.io/f/mrbewjlr', {
