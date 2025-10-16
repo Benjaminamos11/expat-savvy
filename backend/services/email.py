@@ -8,6 +8,21 @@ from typing import Dict, Any, Optional
 from datetime import datetime, timedelta
 import asyncio
 
+def _get_user_segment(situation: str) -> str:
+    """Determine if user is NEW or SWITCHING based on form data"""
+    situation_lower = situation.lower() if situation else ''
+    
+    # NEW expats: new, setup, arriving
+    if situation_lower in ['new', 'setup', 'arriving']:
+        return 'NEW'
+    
+    # SWITCHING: switch, save, compare, review, change
+    elif situation_lower in ['switch', 'save', 'compare', 'review', 'change']:
+        return 'SWITCHING'
+    
+    # Default to SWITCHING for existing
+    return 'SWITCHING'
+
 class EmailService:
     def __init__(self):
         self.provider = os.getenv("EMAIL_PROVIDER", "resend")  # resend|postmark|mailgun
@@ -15,10 +30,10 @@ class EmailService:
         self.from_email = os.getenv("FROM_EMAIL", "hello@expat-savvy.ch")
         self.cal_link = os.getenv("CAL_LINK", "https://cal.com/robertkolar/expat-savvy")
         
-    async def start_nurture_sequence(self, lead_id: str, email: str, name: Optional[str] = None, supabase = None):
+    async def start_nurture_sequence(self, lead_id: str, email: str, name: Optional[str] = None, insurance_type: Optional[str] = None, supabase = None):
         """
         Start the email nurture sequence - sends welcome email immediately
-        Day 1 and Day 3 emails are handled by the cron endpoint
+        6h and 24h emails are handled by the cron endpoint
         """
         if not self.api_key:
             print("⚠️  No email API key configured - skipping email automation")
@@ -26,7 +41,7 @@ class EmailService:
             
         try:
             # Send welcome email immediately
-            success = await self.send_welcome_email(lead_id, email, name or "there", supabase)
+            success = await self.send_welcome_email(lead_id, email, name or "there", insurance_type or "health insurance", supabase)
             
             if success:
                 print(f"✅ Started nurture sequence for {email}")
@@ -55,9 +70,9 @@ class EmailService:
             print(f"❌ Error stopping nurture sequence: {str(e)}")
             return False
         
-    async def send_welcome_email(self, lead_id: str, email: str, name: str, supabase = None):
+    async def send_welcome_email(self, lead_id: str, email: str, name: str, insurance_type: str = "health insurance", supabase = None):
         """T+0: Welcome email - sent immediately after form submission"""
-        subject = "Your Swiss Insurance Quote Request - Next Steps"
+        subject = f"✅ Got it! But we need to know you first..."
         
         html_content = f"""
         <!DOCTYPE html>
@@ -128,85 +143,98 @@ class EmailService:
                                     
                                     <!-- Thank you message -->
                                     <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-                                        Thank you for requesting your personalized Swiss insurance quotes! We're excited to help you find the perfect health insurance solution that matches your needs and budget.
+                                        Thanks for your {insurance_type} request!
+                                    </p>
+                                    
+                                    <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+                                        Here's the thing:
                                     </p>
                                     
                                     <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
-                                        To provide you with the most accurate comparison and recommendations, we'd love to learn more about your specific situation through a brief consultation.
+                                        We CAN send you generic quotes... but you'd probably choose wrong and overpay.
                                     </p>
                                     
                                     <!-- Process explanation -->
                                     <div style="background-color: #ffffff; border: 2px solid #7a0025; padding: 25px; margin: 0 0 30px 0; border-radius: 8px;">
                                         <h2 style="color: #7a0025; font-size: 18px; font-weight: 600; margin: 0 0 15px 0;">
-                                            Why We Recommend a Quick Consultation:
+                                            Why? Because the "best" insurance depends on YOUR situation:
                                         </h2>
-                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 15px 0;">
-                                            A brief consultation is the most <strong>efficient and effective way</strong> to understand your unique needs and provide truly personalized recommendations.
-                                        </p>
                                         <ul style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                                            <li style="margin-bottom: 8px;"><strong>Swiss insurance expertise</strong> - we know all major providers and their plans inside out</li>
-                                            <li style="margin-bottom: 8px;"><strong>Understand your needs</strong> - learn about your health situation and expectations</li>
-                                            <li style="margin-bottom: 8px;"><strong>Personalized comparison</strong> - compare options based on YOUR priorities</li>
-                                            <li style="margin-bottom: 8px;"><strong>Local insights</strong> - knowledge specific to your canton and situation</li>
-                                            <li style="margin-bottom: 8px;"><strong>Maximize value</strong> - ensure you get the best coverage for your budget</li>
-                                            <li style="margin-bottom: 8px;"><strong>Not sales-focused</strong> - purely informational and advisory</li>
-                                            <li style="margin-bottom: 0;"><strong>No obligation</strong> and completely free of charge</li>
+                                            <li style="margin-bottom: 8px;">→ Do you go to the gym? (Some cover up to CHF 1,300/year)</li>
+                                            <li style="margin-bottom: 8px;">→ Need glasses/contacts? (Coverage can offset your premium)</li>
+                                            <li style="margin-bottom: 8px;">→ Any pre-existing conditions? (Affects which plans work)</li>
+                                            <li style="margin-bottom: 8px;">→ Have access to group discounts? (20% off, not advertised)</li>
+                                            <li style="margin-bottom: 8px;">→ What's your budget & priorities?</li>
+                                            <li style="margin-bottom: 0;">→ Current policy? (We need to see what you have to compare properly)</li>
                                         </ul>
                                     </div>
                                     
-                                    <!-- Main CTA Button -->
-                                    <div style="text-align: center; margin: 0 0 30px 0;">
-                                        <!--[if mso]>
-                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
-                                                     style="height:50px;v-text-anchor:middle;width:280px;" 
-                                                     arcsize="12%" stroke="f" fillcolor="#7a0025">
-                                        <v:shadow on="t" color="rgba(0,0,0,0.15)" offset="2px,2px"/>
-                                        <w:anchorlock/>
-                                        <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">
-                                            Book Your Free Consultation
-                                        </center>
-                                        </v:roundrect>
-                                        <![endif]-->
-                                        <!--[if !mso]><!-->
-                                        <a href="{self.cal_link}" 
-                                           style="display: inline-block; background-color: #7a0025; color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 6px; font-weight: 600; font-size: 16px; box-shadow: 0 2px 8px rgba(122, 0, 37, 0.3); transition: all 0.3s ease;">
-                                            Book Your Free Consultation
-                                        </a>
-                                        <!--<![endif]-->
-                                    </div>
+                                    <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
+                                        Without knowing this = we're guessing. And guessing costs you money.
+                                    </p>
                                     
-                                    <!-- What to Expect -->
-                                    <div style="background-color: #f9f9f9; padding: 20px; margin: 0 0 30px 0; border-radius: 6px;">
-                                        <h3 style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 15px 0;">
-                                            What We'll Discuss in Your Consultation:
-                                        </h3>
-                                        <ul style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                                            <li style="margin-bottom: 8px;">Your health needs and expectations from insurance</li>
-                                            <li style="margin-bottom: 8px;">Detailed analysis of top Swiss insurance providers</li>
-                                            <li style="margin-bottom: 8px;">Comprehensive comparison tailored to your situation</li>
-                                            <li style="margin-bottom: 8px;">Cost-benefit analysis for your specific needs</li>
-                                            <li style="margin-bottom: 0;">Clear recommendations and next steps</li>
-            </ul>
+                                    <h3 style="color: #333333; font-size: 18px; font-weight: 600; margin: 0 0 15px 0;">
+                                        Two ways forward:
+                                    </h3>
+                                    
+                                    <!-- Main CTA Button -->
+                                    <div style="background-color: #f9f9f9; padding: 20px; margin: 0 0 20px 0; border-radius: 6px;">
+                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            <strong>✅ 15-60 min call (Recommended)</strong>
+                                        </p>
+                                        <ul style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 15px 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">→ We're happy to take time for you - no rush</li>
+                                            <li style="margin-bottom: 5px;">→ Ask the right questions about YOUR situation</li>
+                                            <li style="margin-bottom: 5px;">→ Show you options that actually fit YOUR life</li>
+                                            <li style="margin-bottom: 0;">→ Find hidden savings (gym, glasses, group rates)</li>
+                                        </ul>
+                                        <div style="text-align: center; margin: 15px 0 0 0;">
+                                            <!--[if mso]>
+                                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                                         style="height:50px;v-text-anchor:middle;width:280px;" 
+                                                         arcsize="12%" stroke="f" fillcolor="#7a0025">
+                                            <v:shadow on="t" color="rgba(0,0,0,0.15)" offset="2px,2px"/>
+                                            <w:anchorlock/>
+                                            <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">
+                                                Book Free Consultation
+                                            </center>
+                                            </v:roundrect>
+                                            <![endif]-->
+                                            <!--[if !mso]><!-->
+                                            <a href="{self.cal_link}" 
+                                               style="display: inline-block; background-color: #7a0025; color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 6px; font-weight: 600; font-size: 16px; box-shadow: 0 2px 8px rgba(122, 0, 37, 0.3); transition: all 0.3s ease;">
+                                                Book Free Consultation
+                                            </a>
+                                            <!--<![endif]-->
+                                        </div>
                                     </div>
                                     
                                     <!-- Alternative Option -->
                                     <div style="background-color: #fff8e1; border-left: 4px solid #ffd54f; padding: 20px; margin: 0 0 30px 0;">
-                                        <p style="color: #666666; font-size: 15px; line-height: 1.6; margin: 0;">
-                                            <strong>Prefer to receive quotes directly?</strong><br>
-                                            Simply reply to this email with details about your health situation and expectations, and we'll send you a personalized comparison. However, a consultation ensures we truly understand your needs and provide the most accurate recommendations.
+                                        <p style="color: #666666; font-size: 15px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            <strong>✅ Email back-and-forth</strong>
                                         </p>
+                                        <ul style="color: #666666; font-size: 15px; line-height: 1.6; margin: 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">→ Takes 2-3 days</li>
+                                            <li style="margin-bottom: 5px;">→ Multiple emails</li>
+                                            <li style="margin-bottom: 0;">→ Still works, just slower</li>
+                                        </ul>
                                     </div>
+                                    
+                                    <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
+                                        Your choice - either way, we'll get you sorted!
+                                    </p>
                                     
                                     <!-- Signature -->
                                     <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #e0e0e0;">
-                                        <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 15px 0;">
-                                            Looking forward to learning about your situation and helping you find the perfect insurance solution!
-                                        </p>
                                         <p style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 5px 0;">
-                                            The Expat Savvy Team
+                                            Robert & Team
                                         </p>
-                                        <p style="color: #666666; font-size: 14px; margin: 0;">
-                                            Swiss Health Insurance Specialists
+                                        <p style="color: #666666; font-size: 14px; margin: 0 0 15px 0;">
+                                            Expat Savvy
+                                        </p>
+                                        <p style="color: #777777; font-size: 14px; font-style: italic; margin: 0;">
+                                            P.S. Most common regret: "I wish I knew about the gym coverage earlier" (CHF 1,300/year = basically free gym)
                                         </p>
                                     </div>
                                     
@@ -263,9 +291,9 @@ class EmailService:
         
         return success
     
-    async def send_day1_email(self, lead_id: str, email: str, name: str, supabase = None):
-        """T+24h: First follow-up email"""
-        subject = "Quick Question About Your Swiss Insurance"
+    async def send_6h_email(self, lead_id: str, email: str, name: str, insurance_type: str = "health insurance", supabase = None):
+        """T+6h: First follow-up email"""
+        subject = f"⚠️ {name}, you might be leaving CHF 1,300/year on the table"
         
         html_content = f"""
         <!DOCTYPE html>
@@ -336,80 +364,127 @@ class EmailService:
                                     
                                     <!-- Thank you message -->
                                     <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-                                        I wanted to check in about your Swiss insurance quote request from yesterday. Have you had a chance to review your options yet?
+                                        Quick update on your {insurance_type} request...
                                     </p>
                                     
                                     <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
-                                        Many expats find Swiss insurance confusing - you're not alone! Here are the most common questions we get:
+                                        The problem with generic quotes:
                                     </p>
                                     
-                                    <!-- Common Questions -->
+                                    <!-- Benefits Breakdown -->
                                     <div style="background-color: #ffffff; border: 2px solid #7a0025; padding: 25px; margin: 0 0 30px 0; border-radius: 8px;">
                                         <h2 style="color: #7a0025; font-size: 18px; font-weight: 600; margin: 0 0 15px 0;">
-                                            Common Swiss Insurance Questions:
+                                            They can't tell you about:
                                         </h2>
+                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            <strong>💰 Hidden money-back benefits:</strong>
+                                        </p>
+                                        <ul style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 15px 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">→ Gym membership: Up to CHF 1,300/year reimbursed</li>
+                                            <li style="margin-bottom: 5px;">→ Glasses/contacts: CHF 200-300/year covered</li>
+                                            <li style="margin-bottom: 0;">→ Preventive care: Extra CHF 500/year for checkups</li>
+                                        </ul>
+                                        <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 15px 0; font-style: italic;">
+                                            These basically PAY for part of your premium!
+                                        </p>
+                                        
+                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            <strong>🎯 Group discounts you might qualify for:</strong>
+                                        </p>
+                                        <ul style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 15px 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">→ Employer partnerships (not public)</li>
+                                            <li style="margin-bottom: 5px;">→ Association discounts (20% off)</li>
+                                            <li style="margin-bottom: 0;">→ Multi-policy bundles</li>
+                                        </ul>
+                                        
+                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            <strong>🚫 Pre-existing condition issues:</strong>
+                                        </p>
                                         <ul style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                                            <li style="margin-bottom: 8px;">❓ Which insurance model is right for me? (HMO vs Standard)</li>
-                                            <li style="margin-bottom: 8px;">❓ How much can I actually save?</li>
-                                            <li style="margin-bottom: 8px;">❓ What's covered and what's not?</li>
-                                            <li style="margin-bottom: 8px;">❓ When can I switch insurers?</li>
-                                            <li style="margin-bottom: 8px;">❓ How do deductibles work in Switzerland?</li>
-                                            <li style="margin-bottom: 0;">❓ What about pre-existing conditions?</li>
+                                            <li style="margin-bottom: 5px;">→ Some models won't accept certain conditions</li>
+                                            <li style="margin-bottom: 5px;">→ Others charge extra</li>
+                                            <li style="margin-bottom: 0;">→ Some have workarounds we know</li>
                                         </ul>
                                     </div>
                                     
-                                    <!-- Pro Tip -->
-                                    <div style="background-color: #f3f4f6; padding: 20px; margin: 0 0 30px 0; border-left: 4px solid #7a0025; border-radius: 6px;">
-                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0;">
-                                            <strong>💡 Pro Tip:</strong> Most expats overpay by CHF 1,200-2,400/year because they don't optimize their deductible and model choice. A quick consultation can save you significant money!
+                                    <!-- Real Example -->
+                                    <div style="background-color: #f9f9f9; padding: 25px; margin: 0 0 30px 0; border-radius: 8px; border-left: 4px solid #7a0025;">
+                                        <h3 style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 15px 0;">
+                                            Real example from last month:
+                                        </h3>
+                                        <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            Maria (Spain, Zurich) got a "cheap" online quote for <strong>CHF 380/month</strong>.
+                                        </p>
+                                        <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            On the call, we found:
+                                        </p>
+                                        <ul style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 10px 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">→ She goes to gym → Saves CHF 108/month (CHF 1,300/year back)</li>
+                                            <li style="margin-bottom: 5px;">→ She needs glasses → Saves CHF 25/month (CHF 300/year back)</li>
+                                            <li style="margin-bottom: 0;">→ Group discount available → Saves CHF 60/month</li>
+                                        </ul>
+                                        <p style="color: #7a0025; font-size: 16px; line-height: 1.6; margin: 0; font-weight: 600;">
+                                            New effective cost: CHF 187/month (basically 50% off!)
+                                        </p>
+                                        <p style="color: #777777; font-size: 14px; line-height: 1.6; margin: 10px 0 0 0; font-style: italic;">
+                                            But she would have NEVER known about this from a generic quote.
                                         </p>
                                     </div>
+                                    
+                                    <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
+                                        Want to see what YOU qualify for?
+                                    </p>
                                     
                                     <!-- Main CTA Button -->
                                     <div style="text-align: center; margin: 0 0 30px 0;">
                                         <!--[if mso]>
                                         <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
-                                                     style="height:50px;v-text-anchor:middle;width:280px;" 
+                                                     style="height:50px;v-text-anchor:middle;width:320px;" 
                                                      arcsize="12%" stroke="f" fillcolor="#7a0025">
                                         <v:shadow on="t" color="rgba(0,0,0,0.15)" offset="2px,2px"/>
                                         <w:anchorlock/>
                                         <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">
-                                            Book Free Consultation (15 min)
+                                            Book Free Consultation - 15-60 Minutes
                                         </center>
                                         </v:roundrect>
                                         <![endif]-->
                                         <!--[if !mso]><!-->
                                         <a href="{self.cal_link}" 
                                            style="display: inline-block; background-color: #7a0025; color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 6px; font-weight: 600; font-size: 16px; box-shadow: 0 2px 8px rgba(122, 0, 37, 0.3); transition: all 0.3s ease;">
-                                            Book Free Consultation (15 min)
+                                            Book Free Consultation - 15-60 Minutes
                                         </a>
                                         <!--<![endif]-->
+                                        <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 15px 0 0 0; font-style: italic;">
+                                            We're happy to take the time to get this right for you. No rush, no pressure.
+                                        </p>
                                     </div>
                                     
-                                    <!-- What We'll Cover -->
-                                    <div style="background-color: #f9f9f9; padding: 20px; margin: 0 0 30px 0; border-radius: 6px;">
-                                        <h3 style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 15px 0;">
-                                            In 15 minutes, we'll cover:
-                                        </h3>
-                                        <ul style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                                            <li style="margin-bottom: 8px;">Your specific health insurance needs</li>
-                                            <li style="margin-bottom: 8px;">Best model choice for your situation</li>
-                                            <li style="margin-bottom: 8px;">Optimal deductible selection</li>
-                                            <li style="margin-bottom: 8px;">Provider comparison tailored to you</li>
-                                            <li style="margin-bottom: 0;">Potential savings calculation</li>
-                                        </ul>
+                                    <!-- Alternative Option -->
+                                    <div style="background-color: #fff8e1; border-left: 4px solid #ffd54f; padding: 20px; margin: 0 0 30px 0;">
+                                        <p style="color: #666666; font-size: 15px; line-height: 1.6; margin: 0 0 10px 0;">
+                                            <strong>Or send us:</strong>
+                                        </p>
+                                        <ol style="color: #666666; font-size: 15px; line-height: 1.6; margin: 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">Current insurance policy (if you have one)</li>
+                                            <li style="margin-bottom: 5px;">Do you use: Gym / Need glasses / Alternative medicine?</li>
+                                            <li style="margin-bottom: 5px;">Any health conditions we should know about?</li>
+                                            <li style="margin-bottom: 0;">Your monthly budget</li>
+                                        </ol>
+                                        <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 10px 0 0 0;">
+                                            We'll find every discount and benefit you qualify for.
+                                        </p>
                                     </div>
                                     
                                     <!-- Closing -->
                                     <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #e0e0e0;">
                                         <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 15px 0;">
-                                            Talk soon?
+                                            Best,
                                         </p>
                                         <p style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 5px 0;">
-                                            The Expat Savvy Team
+                                            Robert
                                         </p>
-                                        <p style="color: #666666; font-size: 14px; margin: 0;">
-                                            Helping expats save on Swiss insurance since 2020
+                                        <p style="color: #777777; font-size: 14px; font-style: italic; margin: 15px 0 0 0;">
+                                            P.S. The gym coverage alone pays for the "upgrade" to better insurance. Most people don't realize this 🏋️
                                         </p>
                                     </div>
                                     
@@ -450,7 +525,7 @@ class EmailService:
         if success and supabase:
             try:
                 supabase.table("leads").update({
-                    "email_day1_sent_at": datetime.utcnow().isoformat()
+                    "email_6h_sent_at": datetime.utcnow().isoformat()
                 }).eq("id", lead_id).execute()
                 
                 import uuid
@@ -465,10 +540,10 @@ class EmailService:
         
         return success
     
-    async def send_day3_email(self, lead_id: str, email: str, name: str, supabase = None):
-        """T+72h: Final follow-up email"""
+    async def send_24h_email(self, lead_id: str, email: str, name: str, insurance_type: str = "health insurance", supabase = None):
+        """T+24h: Final follow-up email"""
+        subject = f"📊 {name}, here's what we need to find your best option"
         try:
-            subject = "Last Chance: Your Swiss Insurance Analysis is Ready"
             
             html_content = f"""<!DOCTYPE html>
 <html>
@@ -533,95 +608,98 @@ class EmailService:
                                     
                                     <!-- Greeting -->
                                     <h1 style="color: #333333; font-size: 24px; font-weight: 600; margin: 0 0 25px 0; line-height: 1.3;">
-                                        Hi {name},
+                                        {name},
                                     </h1>
                                     
-                                    <!-- Thank you message -->
+                                    <!-- Opening -->
                                     <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-                                        This is my last email - I don't want to spam you! 😊
+                                        This is the last email (promise!), but I wanted to make sure I answered the KEY question:
                                     </p>
                                     
-                                    <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 25px 0;">
-                                        I've prepared your personalized Swiss insurance comparison, but I haven't heard back from you yet. Are you still looking for insurance guidance?
-                                    </p>
+                                    <h2 style="color: #7a0025; font-size: 20px; font-weight: 600; margin: 0 0 20px 0;">
+                                        "What do you need from me to find my best option?"
+                                    </h2>
                                     
-                                    <!-- Urgency Box -->
-                                    <div style="background-color: #fef2f2; border: 2px solid #7a0025; border-radius: 8px; padding: 25px; margin: 0 0 30px 0;">
-                                        <h2 style="color: #7a0025; font-size: 18px; font-weight: 600; margin: 0 0 15px 0;">
-                                            ⏰ Open Consultation Slots This Week:
-                                        </h2>
-                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0;">
-                                            I have a few spots available for free 15-minute consultations. We can review your situation and I'll show you exactly how much you can save.
+                                    <!-- What We Need Section -->
+                                    <div style="background-color: #ffffff; border: 2px solid #7a0025; padding: 25px; margin: 0 0 30px 0; border-radius: 8px;">
+                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 15px 0;">
+                                            <strong>If you go the email route, send us:</strong>
+                                        </p>
+                                        <ol style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 10px;"><strong>Current insurance policy</strong> (if you have one) - we need to see what you're comparing against</li>
+                                            <li style="margin-bottom: 10px;"><strong>Lifestyle factors:</strong>
+                                                <ul style="margin-top: 5px; padding-left: 20px;">
+                                                    <li>Do you use a gym? (CHF 1,300/year benefit possible)</li>
+                                                    <li>Need glasses/contacts? (CHF 300/year coverage)</li>
+                                                    <li>Use alternative medicine? (Some cover, some don't)</li>
+                                                </ul>
+                                            </li>
+                                            <li style="margin-bottom: 10px;"><strong>Any health conditions?</strong> - affects which models work for you</li>
+                                            <li style="margin-bottom: 10px;"><strong>Your monthly budget</strong> - so we show realistic options</li>
+                                            <li style="margin-bottom: 0;"><strong>Your priorities:</strong> Cheapest? Best coverage? Specific needs?</li>
+                                        </ol>
+                                        <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0; font-style: italic;">
+                                            💡 With this info, we can find every discount and benefit you qualify for.
                                         </p>
                                     </div>
                                     
-                                    <!-- Main CTA Button -->
-                                    <div style="text-align: center; margin: 0 0 30px 0;">
-                                        <!--[if mso]>
-                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
-                                                     style="height:50px;v-text-anchor:middle;width:280px;" 
-                                                     arcsize="12%" stroke="f" fillcolor="#7a0025">
-                                        <v:shadow on="t" color="rgba(0,0,0,0.15)" offset="2px,2px"/>
-                                        <w:anchorlock/>
-                                        <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">
-                                            Grab Your Spot Now
-                                        </center>
-                                        </v:roundrect>
-                                        <![endif]-->
-                                        <!--[if !mso]><!-->
-                                        <a href="{self.cal_link}" 
-                                           style="display: inline-block; background-color: #7a0025; color: #ffffff; text-decoration: none; padding: 18px 35px; border-radius: 6px; font-weight: 600; font-size: 16px; box-shadow: 0 2px 8px rgba(122, 0, 37, 0.3); transition: all 0.3s ease;">
-                                            Grab Your Spot Now
-                                        </a>
-                                        <!--<![endif]-->
-                                    </div>
+                                    <!-- OR Section -->
+                                    <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0; text-align: center; font-weight: 600;">
+                                        OR (way faster)
+                                    </p>
                                     
-                                    <!-- Testimonial -->
-                                    <div style="background-color: #f9fafb; padding: 20px; margin: 0 0 30px 0; border-radius: 6px;">
-                                        <h3 style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 15px 0;">
-                                            What Past Clients Say:
-                                        </h3>
-                                        <div style="background-color: #ffffff; padding: 20px; border-radius: 6px; border-left: 4px solid #7a0025;">
-                                            <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 10px 0; font-style: italic;">
-                                                "Robert helped me save CHF 1,800/year by switching to an HMO model. The consultation was incredibly helpful!"
-                                            </p>
-                                            <p style="color: #666666; font-size: 14px; margin: 0;">
-                                                - Sarah M., Zurich
-                                            </p>
+                                    <!-- Main CTA Button -->
+                                    <div style="background-color: #f9f9f9; padding: 25px; margin: 0 0 30px 0; border-radius: 8px;">
+                                        <p style="color: #555555; font-size: 16px; line-height: 1.6; margin: 0 0 15px 0;">
+                                            <strong>📞 15-60 minute call:</strong>
+                                        </p>
+                                        <ul style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0; padding-left: 20px;">
+                                            <li style="margin-bottom: 5px;">→ We ask all the right questions in 5 minutes</li>
+                                            <li style="margin-bottom: 5px;">→ Screen share your current policy → instant comparison</li>
+                                            <li style="margin-bottom: 5px;">→ Show you EXACTLY what you'd save & get</li>
+                                            <li style="margin-bottom: 0;">→ Done. Clean. Simple.</li>
+                                        </ul>
+                                        <div style="text-align: center;">
+                                            <!--[if mso]>
+                                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                                         style="height:50px;v-text-anchor:middle;width:280px;" 
+                                                         arcsize="12%" stroke="f" fillcolor="#7a0025">
+                                            <v:shadow on="t" color="rgba(0,0,0,0.15)" offset="2px,2px"/>
+                                            <w:anchorlock/>
+                                            <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">
+                                                Book Free Call
+                                            </center>
+                                            </v:roundrect>
+                                            <![endif]-->
+                                            <!--[if !mso]><!-->
+                                            <a href="{self.cal_link}" 
+                                               style="display: inline-block; background-color: #7a0025; color: #ffffff; text-decoration: none; padding: 18px 40px; border-radius: 6px; font-weight: 600; font-size: 16px; box-shadow: 0 2px 8px rgba(122, 0, 37, 0.3); transition: all 0.3s ease;">
+                                                Book Free Call
+                                            </a>
+                                            <!--<![endif]-->
                                         </div>
                                     </div>
                                     
-                                    <!-- What We'll Cover -->
-                                    <div style="background-color: #f9f9f9; padding: 20px; margin: 0 0 30px 0; border-radius: 6px;">
-                                        <h3 style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 15px 0;">
-                                            In Your Consultation, We'll Cover:
-                                        </h3>
-                                        <ul style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                                            <li style="margin-bottom: 8px;">Your health needs and expectations</li>
-                                            <li style="margin-bottom: 8px;">Detailed analysis of top Swiss providers</li>
-                                            <li style="margin-bottom: 8px;">Comprehensive comparison tailored to you</li>
-                                            <li style="margin-bottom: 8px;">Cost-benefit analysis for your situation</li>
-                                            <li style="margin-bottom: 0;">Clear recommendations and next steps</li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <!-- Final Message -->
+                                    <!-- Bottom Note -->
                                     <div style="background-color: #fff8e1; border-left: 4px solid #ffd54f; padding: 20px; margin: 0 0 30px 0;">
                                         <p style="color: #666666; font-size: 15px; line-height: 1.6; margin: 0;">
-                                            If you're no longer interested, no worries - just ignore this email and I won't reach out again. Otherwise, I'd love to help you navigate Swiss insurance! 🇨🇭
+                                            <strong>Not interested?</strong> No problem! Just ignore this email and I won't bug you again. But if you DO want to optimize your {insurance_type}, I'm here to help - either way works for me 👍
                                         </p>
                                     </div>
                                     
                                     <!-- Closing -->
                                     <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #e0e0e0;">
                                         <p style="color: #555555; font-size: 15px; line-height: 1.6; margin: 0 0 15px 0;">
-                                            Looking forward to helping you find the perfect insurance solution!
+                                            Either way, all the best!
                                         </p>
                                         <p style="color: #333333; font-size: 16px; font-weight: 600; margin: 0 0 5px 0;">
-                                            The Expat Savvy Team
+                                            Robert
                                         </p>
-                                        <p style="color: #666666; font-size: 14px; margin: 0;">
-                                            Swiss Health Insurance Specialists
+                                        <p style="color: #666666; font-size: 14px; margin: 0 0 15px 0;">
+                                            Expat Savvy
+                                        </p>
+                                        <p style="color: #777777; font-size: 14px; font-style: italic; margin: 0;">
+                                            P.S. The most common "aha" moment on calls: "Wait, they reimburse gym memberships?!" 😄
             </p>
         </div>
                                     
@@ -662,7 +740,7 @@ class EmailService:
             if success and supabase:
                 try:
                     supabase.table("leads").update({
-                        "email_day3_sent_at": datetime.utcnow().isoformat(),
+                        "email_24h_sent_at": datetime.utcnow().isoformat(),
                         "email_sequence_status": "completed"
                     }).eq("id", lead_id).execute()
                     
@@ -685,6 +763,7 @@ class EmailService:
         """
         Process all leads that need nurture emails
         Called by cron job every 6 hours
+        Sends T+6h and T+24h follow-up emails
         """
         if not self.api_key:
             print("⚠️  No email API key configured - skipping nurture processing")
@@ -692,7 +771,7 @@ class EmailService:
         
         try:
             now = datetime.utcnow().replace(tzinfo=None)  # Make timezone-naive for comparison
-            stats = {"processed": 0, "day1_sent": 0, "day3_sent": 0, "errors": 0}
+            stats = {"processed": 0, "6h_sent": 0, "24h_sent": 0, "errors": 0}
             
             # Get all active leads that haven't booked AND were created after email system deployment
             # Only process leads created after October 9, 2025 (when we deployed the email system)
@@ -709,29 +788,31 @@ class EmailService:
                     created_at = datetime.fromisoformat(lead["created_at"].replace("Z", "+00:00")).replace(tzinfo=None)  # Make timezone-naive
                     hours_since_creation = (now - created_at).total_seconds() / 3600
                     
-                    # Send Day 1 email (24 hours after creation)
-                    if hours_since_creation >= 24 and not lead.get("email_day1_sent_at"):
-                        print(f"  → Sending Day 1 email to {lead['email']}")
-                        success = await self.send_day1_email(
+                    # Send 6h email (6 hours after creation)
+                    if hours_since_creation >= 6 and not lead.get("email_6h_sent_at"):
+                        print(f"  → Sending 6h email to {lead['email']}")
+                        success = await self.send_6h_email(
                             lead["id"], 
                             lead["email"], 
                             lead.get("name", "there"),
+                            lead.get("type", "health insurance"),
                             supabase
                         )
                         if success:
-                            stats["day1_sent"] += 1
+                            stats["6h_sent"] += 1
                     
-                    # Send Day 3 email (72 hours after creation)
-                    elif hours_since_creation >= 72 and not lead.get("email_day3_sent_at"):
-                        print(f"  → Sending Day 3 email to {lead['email']}")
-                        success = await self.send_day3_email(
-                            lead["id"], 
-                            lead["email"], 
+                    # Send 24h email (24 hours after creation)
+                    elif hours_since_creation >= 24 and not lead.get("email_24h_sent_at"):
+                        print(f"  → Sending 24h email to {lead['email']}")
+                        success = await self.send_24h_email(
+                            lead["id"],
+                            lead["email"],
                             lead.get("name", "there"),
+                            lead.get("type", "health insurance"),
                             supabase
                         )
                         if success:
-                            stats["day3_sent"] += 1
+                            stats["24h_sent"] += 1
                 
                 except Exception as e:
                     print(f"  ❌ Error processing lead {lead.get('id')}: {str(e)}")

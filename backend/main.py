@@ -166,6 +166,7 @@ async def create_lead(lead_data: LeadCreate, supabase: Client = Depends(get_supa
                 lead_id, 
                 created_lead.get("email"), 
                 created_lead.get("name"),
+                created_lead.get("type", "health insurance"),
                 supabase
             )
         
@@ -437,6 +438,57 @@ async def get_email_status(admin: dict = Depends(verify_admin), supabase: Client
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting email status: {str(e)}")
+
+@app.post("/api/email/send-test")
+async def send_test_email(
+    email_type: str,
+    test_data: dict = {},
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """
+    Send test email to bw@expat-savvy.ch
+    
+    Args:
+        email_type: "welcome", "6h", or "24h"
+        test_data: Optional dict with name, insurance_type, situation
+    """
+    try:
+        test_email = "bw@expat-savvy.ch"
+        test_name = test_data.get('name', 'Test User')
+        insurance_type = test_data.get('insurance_type', 'health insurance')
+        
+        print(f"📧 Sending test {email_type} email to {test_email}")
+        
+        if email_type == "welcome":
+            success = await email_service.send_welcome_email(
+                "test-lead-id", test_email, test_name, insurance_type, None
+            )
+        elif email_type == "6h":
+            success = await email_service.send_6h_email(
+                "test-lead-id", test_email, test_name, insurance_type, None
+            )
+        elif email_type == "24h":
+            success = await email_service.send_24h_email(
+                "test-lead-id", test_email, test_name, insurance_type, None
+            )
+        else:
+            raise HTTPException(400, "Invalid email_type. Must be 'welcome', '6h', or '24h'")
+        
+        if success:
+            return {
+                "success": True,
+                "sent_to": test_email,
+                "email_type": email_type,
+                "test_data": test_data
+            }
+        else:
+            raise HTTPException(500, "Failed to send test email")
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error sending test email: {str(e)}")
 
 # Admin endpoints (protected)
 @app.get("/api/leads")
