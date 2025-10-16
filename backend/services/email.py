@@ -250,7 +250,8 @@ class EmailService:
                                     </p>
                                     <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 0 0 15px 0;">
                                         📧 <a href="mailto:bw@expat-savvy.ch" style="color: #7a0025; text-decoration: none;">bw@expat-savvy.ch</a><br>
-                                        📞 <a href="tel:+41791552570" style="color: #7a0025; text-decoration: none;">+41 79 155 25 70</a><br>
+                                        📞 <a href="tel:+41763648888" style="color: #7a0025; text-decoration: none;">+41 76 364 88 88</a><br>
+                                        💬 <a href="https://wa.me/41791552570" style="color: #7a0025; text-decoration: none;">WhatsApp Me</a><br>
                                         🌐 <a href="https://expat-savvy.ch" style="color: #7a0025; text-decoration: none;">expat-savvy.ch</a>
                                     </p>
                                     <p style="color: #999999; font-size: 12px; line-height: 1.5; margin: 0;">
@@ -500,7 +501,8 @@ class EmailService:
                                     </p>
                                     <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 0 0 15px 0;">
                                         📧 <a href="mailto:bw@expat-savvy.ch" style="color: #7a0025; text-decoration: none;">bw@expat-savvy.ch</a><br>
-                                        📞 <a href="tel:+41791552570" style="color: #7a0025; text-decoration: none;">+41 79 155 25 70</a><br>
+                                        📞 <a href="tel:+41763648888" style="color: #7a0025; text-decoration: none;">+41 76 364 88 88</a><br>
+                                        💬 <a href="https://wa.me/41791552570" style="color: #7a0025; text-decoration: none;">WhatsApp Me</a><br>
                                         🌐 <a href="https://expat-savvy.ch" style="color: #7a0025; text-decoration: none;">expat-savvy.ch</a>
                                     </p>
                                     <p style="color: #999999; font-size: 12px; line-height: 1.5; margin: 0;">
@@ -715,7 +717,8 @@ class EmailService:
                                     </p>
                                     <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 0 0 15px 0;">
                                         📧 <a href="mailto:bw@expat-savvy.ch" style="color: #7a0025; text-decoration: none;">bw@expat-savvy.ch</a><br>
-                                        📞 <a href="tel:+41791552570" style="color: #7a0025; text-decoration: none;">+41 79 155 25 70</a><br>
+                                        📞 <a href="tel:+41763648888" style="color: #7a0025; text-decoration: none;">+41 76 364 88 88</a><br>
+                                        💬 <a href="https://wa.me/41791552570" style="color: #7a0025; text-decoration: none;">WhatsApp Me</a><br>
                                         🌐 <a href="https://expat-savvy.ch" style="color: #7a0025; text-decoration: none;">expat-savvy.ch</a>
                                     </p>
                                     <p style="color: #999999; font-size: 12px; line-height: 1.5; margin: 0;">
