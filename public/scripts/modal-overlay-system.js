@@ -22,15 +22,40 @@ class ModalOverlaySystem {
     window.initializeCalComManually = this.initializeCalComManually.bind(this);
   }
 
+  getModalTypeFromFile(modalFile) {
+    if (modalFile.includes('relocation')) return 'relocation';
+    if (modalFile.includes('health') || modalFile.includes('final')) return 'health_insurance';
+    if (modalFile.includes('other-insurance')) return 'other_insurance';
+    if (modalFile.includes('life-pension')) return 'life_pension';
+    return 'unknown';
+  }
+
   async openModalOverlay(modalFile, options = {}) {
     try {
       console.log('🔄 Loading modal:', modalFile);
       
-      // Track modal open event
+      // Enhanced modal tracking
+      const modalType = this.getModalTypeFromFile(modalFile);
+      const context = {
+        modal_file: modalFile,
+        modal_type: modalType,
+        page_location: window.location.pathname,
+        page_title: document.title,
+        source: options.source || 'unknown',
+        intent: options.intent || 'unknown'
+      };
+      
+      // Track with enhanced system
+      if (typeof window.trackModalOpen === 'function') {
+        window.trackModalOpen(modalType, context);
+      }
+      
+      // Legacy tracking for backward compatibility
       if (typeof window.trackQuoteFlowStart === 'function') {
         window.trackQuoteFlowStart({
           flowType: 'modal',
-          modalFile: modalFile
+          modalFile: modalFile,
+          modalType: modalType
         });
       }
       
@@ -378,21 +403,37 @@ class ModalOverlaySystem {
   }
 
   // Specific modal functions
-  openRelocationModal() {
+  openRelocationModal(source = 'unknown', intent = 'unknown') {
     console.log('🚀 openRelocationModal called');
-    this.openModalOverlay('/relocation-modal.html');
+    this.openModalOverlay('/relocation-modal.html', { 
+      source, 
+      intent,
+      modal_type: 'relocation'
+    });
   }
 
-  openHealthModal(intent = 'home') {
-    this.openModalOverlay('/final-modal.html', { intent });
+  openHealthModal(intent = 'home', source = 'unknown') {
+    this.openModalOverlay('/final-modal.html', { 
+      intent, 
+      source,
+      modal_type: 'health_insurance'
+    });
   }
 
-  openOtherModal() {
-    this.openModalOverlay('/other-insurance-modal.html');
+  openOtherModal(intent = 'unknown', source = 'unknown') {
+    this.openModalOverlay('/other-insurance-modal.html', { 
+      intent, 
+      source,
+      modal_type: 'other_insurance'
+    });
   }
 
-  openLifePensionModal() {
-    this.openModalOverlay('/life-pension-modal.html');
+  openLifePensionModal(intent = 'unknown', source = 'unknown') {
+    this.openModalOverlay('/life-pension-modal.html', { 
+      intent, 
+      source,
+      modal_type: 'life_pension'
+    });
   }
   
   // Manual Cal.com initialization for when user reaches calendar step

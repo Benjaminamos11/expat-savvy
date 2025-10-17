@@ -454,6 +454,25 @@
       currentStep = step;
       const content = document.getElementById('modal-content');
       showRobertHeader(step > 1 && step !== 'form' && step !== 'form-interrupt');
+      
+      // Track modal step progression
+      if (typeof window.trackModalStep === 'function') {
+        const stepNames = {
+          1: 'intro',
+          2: 'benefits',
+          3: 'consultation_choice',
+          4: 'calendar',
+          5: 'thank_you',
+          'form-step3': 'self_service_form',
+          'form-interrupt': 'form_interrupt'
+        };
+        
+        window.trackModalStep('health_insurance', step, {
+          stepName: stepNames[step] || `step_${step}`,
+          pageIntent: pageIntent,
+          userData: userData
+        });
+      }
 
       switch(step) {
         case 1:
@@ -1341,7 +1360,8 @@
                 style="width:800px;height:600px;border:0;margin:0;padding:0;background:#FFFFFF;display:block;" 
                 frameborder="0"
                 allowfullscreen
-                scrolling="no">
+                scrolling="no"
+                onload="trackCalComLoad()">
               </iframe>
             </div>
 
@@ -1465,6 +1485,18 @@
       renderStep(2); // Go DIRECTLY to comparison (no intermediate screen)
     }
 
+    // Track Cal.com iframe load
+    function trackCalComLoad() {
+      if (typeof window.trackCalComClick === 'function') {
+        window.trackCalComClick({
+          modalType: 'health_insurance',
+          intent: pageIntent,
+          formData: userData,
+          calUrl: document.getElementById('cal-iframe')?.src
+        });
+      }
+    }
+
     // CONSULTATION BOOKING FLOW
     function handleBookingSubmit(event) {
       event.preventDefault();
@@ -1476,6 +1508,15 @@
       userData.pageTitle = document.title;
       
       console.log('✅ Booking info collected:', userData);
+      
+      // Track form submission
+      if (typeof window.trackModalSubmission === 'function') {
+        window.trackModalSubmission('health_insurance', userData, {
+          formType: 'booking_form',
+          intent: pageIntent,
+          step: 'booking_form'
+        });
+      }
       
       // IMMEDIATELY send lead to BOTH Netlify Forms AND Formspree when user clicks to proceed to calendar
       const formData = new FormData();
