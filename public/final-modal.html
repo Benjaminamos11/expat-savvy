@@ -286,6 +286,30 @@
     // State
     let currentStep = 1;
     let pageIntent = 'home';
+    let userLocation = { ip: 'unknown', country: 'unknown', city: 'unknown' };
+    
+    // Fetch user IP and location data (non-blocking)
+    async function getUserLocation() {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (response.ok) {
+          const data = await response.json();
+          userLocation = {
+            ip: data.ip || 'unknown',
+            country: data.country_name || 'unknown',
+            city: data.city || 'unknown',
+            region: data.region || 'unknown',
+            postal: data.postal || 'unknown',
+            timezone: data.timezone || 'unknown'
+          };
+          console.log('📍 User location detected:', userLocation);
+        }
+      } catch (error) {
+        console.log('ℹ️ Could not detect location (non-critical):', error);
+      }
+    }
+    
+    getUserLocation();
     let userData = {
       situation: '',
       complexity: 0,
@@ -1532,6 +1556,12 @@
       formData.append('page-title', userData.pageTitle);
       formData.append('page-intent', pageIntent);
       
+      // Add IP and location data
+      formData.append('ip_address', userLocation.ip);
+      formData.append('country', userLocation.country);
+      formData.append('city', userLocation.city);
+      formData.append('region', userLocation.region);
+      
       // Send to Netlify Forms
       const netlifyBody = new URLSearchParams(formData).toString();
       console.log('🔍 Sending to Netlify:', netlifyBody);
@@ -1558,16 +1588,41 @@
         console.error('❌ Error details:', error.message, error.stack);
       });
       
-      // Send to Formspree as backup
-      fetch('https://formspree.io/f/mrbewjlr', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(() => console.log('✅ Lead sent to Formspree as backup'))
-      .catch(error => console.error('❌ Formspree failed:', error));
+      // Send to Formspree as backup - using URLSearchParams for reliability
+      // Validate required fields before sending
+      if (!userData.name || !userData.email) {
+        console.error('❌ Cannot submit to Formspree - missing required fields');
+      } else {
+        console.log('📤 Submitting to Formspree with data:', {
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone,
+          'help-reason': userData.helpReason,
+          situation: userData.situation || '',
+          'form-type': 'schedule_meeting',
+          ip: userLocation.ip,
+          location: `${userLocation.city}, ${userLocation.country}`
+        });
+        
+        fetch('https://formspree.io/f/mrbewjlr', {
+          method: 'POST',
+          body: new URLSearchParams(formData),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('✅ Lead sent to Formspree as backup');
+          } else {
+            console.error('❌ Formspree response not OK:', response.status);
+          }
+          return response.json();
+        })
+        .then(data => console.log('Formspree response:', data))
+        .catch(error => console.error('❌ Formspree failed:', error));
+      }
       
       // Now show calendar
       renderStep(4);
@@ -1677,15 +1732,32 @@
       formspreeData.append('start-date', userData.startDate || '');
       formspreeData.append('special-requirements', userData.specialRequirements || '');
       formspreeData.append('page-intent', pageIntent);
+      
+      // Add IP and location data
+      formspreeData.append('ip_address', userLocation.ip);
+      formspreeData.append('country', userLocation.country);
+      formspreeData.append('city', userLocation.city);
+      formspreeData.append('region', userLocation.region);
 
+      // BACKUP: Send to Formspree with URLSearchParams for reliability
+      console.log('📤 Submitting final form to Formspree with complete data (including location)');
       fetch('https://formspree.io/f/mrbewjlr', {
         method: 'POST',
-        body: formspreeData,
+        body: new URLSearchParams(formspreeData),
         headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json'
         }
       })
-      .then(() => console.log('✅ Backup sent to Formspree'))
+      .then(response => {
+        if (response.ok) {
+          console.log('✅ Backup sent to Formspree');
+        } else {
+          console.error('❌ Formspree backup response not OK:', response.status);
+        }
+        return response.json();
+      })
+      .then(data => console.log('Formspree final response:', data))
       .catch(error => console.error('❌ Formspree backup failed:', error));
     }
 

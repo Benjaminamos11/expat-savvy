@@ -260,13 +260,14 @@ class ModalOverlaySystem {
           console.log('🎯 Calling modal openModal function');
           window.openModal(options.intent || 'home');
           
-          // Initialize Lucide icons after modal content is rendered
+          // Initialize Lucide icons AFTER modal content is fully rendered
+          // Increased delay to ensure DOM is ready
           setTimeout(() => {
             if (typeof lucide !== 'undefined') {
               lucide.createIcons();
-              console.log('✅ Lucide icons initialized');
+              console.log('✅ Lucide icons initialized after modal opened');
             }
-          }, 200);
+          }, 400); // Increased from 200ms to 400ms to ensure DOM is ready
           
           // Don't initialize Cal.com here - it should only happen when user reaches step 4
           console.log('📋 Modal scripts loaded, Cal.com will initialize when user reaches calendar step');

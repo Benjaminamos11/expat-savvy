@@ -25,14 +25,24 @@ if (insuranceType === 'new-health') {
   <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Schedule Your Free Consultation</h2>
   <p class="text-gray-600 mb-6 text-center text-sm md:text-base">Choose a convenient time for a 30-minute video call with our insurance expert.</p>
   
-  <div id="cal-booking-placeholder" class="cal-container">
+  <div id="cal-booking-placeholder" class="cal-container relative">
     <!-- Cal.com will be embedded here -->
-    <div class="flex justify-center items-center h-60 mb-4">
+    <div id="cal-loading" class="flex justify-center items-center h-60 mb-4">
       <div class="animate-pulse flex flex-col items-center">
         <div class="rounded-full bg-gray-200 h-16 w-16 mb-4"></div>
         <div class="h-2 bg-gray-200 rounded w-48 mb-2.5"></div>
         <div class="h-2 bg-gray-200 rounded w-40"></div>
       </div>
+      
+      <!-- Fallback link (shown after timeout) -->
+      <p id="cal-fallback-link" class="text-sm text-gray-600 mt-4 absolute bottom-4" style="display: none;">
+        Don't see the calendar? 
+        <a href={calendarUrl} 
+           target="_blank" 
+           class="text-primary-600 hover:text-primary-700 underline font-medium transition-colors">
+          Click here to open in new window
+        </a>
+      </p>
     </div>
   </div>
   
@@ -48,15 +58,28 @@ if (insuranceType === 'new-health') {
 </div>
 
 <script define:vars={{ calendarUrl }}>
+  // Show fallback link after 3 seconds if still loading
+  setTimeout(() => {
+    const loadingDiv = document.getElementById('cal-loading');
+    const fallbackLink = document.getElementById('cal-fallback-link');
+    if (loadingDiv && loadingDiv.style.display !== 'none' && fallbackLink) {
+      fallbackLink.style.display = 'block';
+      console.log('📅 Showing calendar fallback link in consultation modal');
+    }
+  }, 3000);
+  
   // Initialize Cal.com embed after a short delay
   setTimeout(() => {
     try {
       const calElement = document.getElementById('cal-booking-placeholder');
+      const loadingDiv = document.getElementById('cal-loading');
       
       if (!calElement) return;
       
-      // Attempt to clear previous content
-      calElement.innerHTML = '';
+      // Hide loading state
+      if (loadingDiv) {
+        loadingDiv.style.display = 'none';
+      }
       
       // Check if we already have user data from previous step
       let userName = '';

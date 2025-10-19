@@ -26,6 +26,17 @@
         <div class="calendar-loading">
           <div class="loading-spinner"></div>
           <p>Loading calendar...</p>
+          
+          <!-- Fallback link (hidden initially, shown after timeout) -->
+          <p class="calendar-fallback-link text-sm text-gray-600 mt-4" style="display: none;">
+            Calendar not loading? 
+            <a href="https://expat-savvy.ch/free-consultation/" 
+               class="text-red-600 hover:text-red-700 underline font-medium transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+              Open in new window
+            </a>
+          </p>
         </div>
       </div>
     </div>
@@ -153,13 +164,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
       
-      // Remove loading state
+      // Show fallback link if calendar is still loading after 3 seconds
+      setTimeout(() => {
+        const loadingDiv = document.querySelector('.calendar-loading');
+        if (loadingDiv && loadingDiv.style.display !== 'none') {
+          const fallbackLink = loadingDiv.querySelector('.calendar-fallback-link');
+          if (fallbackLink) {
+            fallbackLink.style.display = 'block';
+            console.log('📅 Showing calendar fallback link in modal');
+          }
+        }
+      }, 3000);
+      
+      // Remove loading state completely after longer timeout
       setTimeout(() => {
         const loadingDiv = document.querySelector('.calendar-loading');
         if (loadingDiv) {
           loadingDiv.style.display = 'none';
         }
-      }, 2000);
+      }, 8000); // Increased from 2000ms to 8000ms
       
       // Show scarcity indicator if applicable (simulate for now)
       setTimeout(() => {

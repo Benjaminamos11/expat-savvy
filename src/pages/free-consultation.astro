@@ -192,7 +192,18 @@ if (providerName) {
           <div id="calendar-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-20">
             <div class="w-16 h-16 border-4 border-gray-200 border-t-red-600 rounded-full animate-spin mb-4"></div>
             <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
-            <p class="text-gray-500 text-center max-w-md">Setting up your consultation calendar</p>
+            <p class="text-gray-500 text-center max-w-md mb-4">Setting up your consultation calendar</p>
+            
+            <!-- Fallback link (hidden initially, shown after timeout) -->
+            <p id="calendar-fallback" class="text-sm text-gray-600 text-center mt-4" style="display: none;">
+              Don't see the calendar? 
+              <a href="https://expat-savvy.ch/free-consultation/" 
+                 class="text-red-600 hover:text-red-700 underline font-medium transition-colors"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Click here to open in a new window
+              </a>
+            </p>
           </div>
           
           <iframe 
@@ -273,12 +284,23 @@ if (providerName) {
         loader.style.display = 'none';
       };
       
-      // Show fallback if loading takes too long
+      // Show fallback link if calendar is still loading after 3 seconds
       setTimeout(() => {
-        if (loader.style.display !== 'none') {
+        if (loader && loader.style.display !== 'none') {
+          const fallbackLink = document.getElementById('calendar-fallback');
+          if (fallbackLink) {
+            fallbackLink.style.display = 'block';
+            console.log('📅 Showing calendar fallback link');
+          }
+        }
+      }, 3000); // Show fallback link after 3 seconds
+      
+      // Show complete fallback if loading takes very long
+      setTimeout(() => {
+        if (loader && loader.style.display !== 'none') {
           showFallbackContent();
         }
-      }, 8000);
+      }, 8000); // Keep existing 8 second timeout for full fallback
       
       // Handle iframe errors
       iframe.onerror = showFallbackContent;
