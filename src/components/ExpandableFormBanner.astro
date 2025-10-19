@@ -74,7 +74,7 @@ const {
 
   // Function to open modal based on page type
   function openModalBasedOnType(event) {
-    console.log('🎯 Opening Professional Smart Modal from expandable banner');
+    console.log('🎯 openModalBasedOnType called from expandable banner!', event);
     
     // Prevent the ProfessionalSmartModal's global click handler from interfering
     if (event) {
@@ -86,18 +86,25 @@ const {
     try {
       // Use the ProfessionalSmartModal which is available in BaseLayout
       if (typeof window.openSmartModal === 'function') {
+        console.log('✅ Calling window.openSmartModal()');
         window.openSmartModal();
       } else if (typeof window.openOffersModal === 'function') {
+        console.log('✅ Calling window.openOffersModal()');
         window.openOffersModal();
       } else if (typeof window.openConsultationModal === 'function') {
+        console.log('✅ Calling window.openConsultationModal()');
         window.openConsultationModal();
       } else {
         console.error('❌ No Professional Smart Modal functions available');
+        console.log('Available functions:', Object.keys(window).filter(key => key.includes('Modal')));
       }
     } catch (error) {
       console.error('❌ Error opening Professional Smart Modal:', error);
     }
   }
+  
+  // Make function globally available
+  window.openModalBasedOnType = openModalBasedOnType;
 </script>
 
 <style>
