@@ -807,6 +807,12 @@
       const button = e.target.closest('button, a');
       if (!button) return;
       
+      // Skip buttons that are explicitly excluded from smart modal
+      if (button.hasAttribute('data-exclude-smart-modal')) {
+        console.log('🚫 Button excluded from smart modal:', button.textContent?.trim());
+        return;
+      }
+      
       const text = button.textContent?.toLowerCase().trim() || '';
       console.log('🖱️ Button clicked:', text); // DEBUG: Log ALL button clicks
       
