@@ -83,23 +83,49 @@ const {
       event.stopImmediatePropagation();
     }
     
+    const url = window.location.pathname.toLowerCase();
+    const title = document.title.toLowerCase();
+    
+    const modalType = 
+      url.includes('relocation') || title.includes('relocation') ? 'relocation' :
+      url.includes('pension') || url.includes('pillar') || url.includes('life-insurance') || title.includes('pension') || title.includes('pillar') ? 'life' :
+      url.includes('liability') || url.includes('household') || url.includes('legal-protection') || url.includes('accident-insurance') || title.includes('liability') || title.includes('household') || title.includes('legal') ? 'other' :
+      'health'; // default to health for most insurance content
+    
+    console.log('🎯 Opening modal for type:', modalType);
+    
     try {
-      // Use the ProfessionalSmartModal which is available in BaseLayout
-      if (typeof window.openSmartModal === 'function') {
-        console.log('✅ Calling window.openSmartModal()');
-        window.openSmartModal();
-      } else if (typeof window.openOffersModal === 'function') {
-        console.log('✅ Calling window.openOffersModal()');
-        window.openOffersModal();
-      } else if (typeof window.openConsultationModal === 'function') {
-        console.log('✅ Calling window.openConsultationModal()');
-        window.openConsultationModal();
+      if (modalType === 'health') {
+        console.log('✅ Opening health insurance modal');
+        if (typeof window.openHealthModal === 'function') {
+          window.openHealthModal('home');
+        } else {
+          console.error('❌ window.openHealthModal not available');
+        }
+      } else if (modalType === 'life') {
+        console.log('✅ Opening life insurance modal');
+        if (typeof window.openLifePensionModal === 'function') {
+          window.openLifePensionModal();
+        } else {
+          console.error('❌ window.openLifePensionModal not available');
+        }
+      } else if (modalType === 'relocation') {
+        console.log('✅ Opening relocation modal');
+        if (typeof window.openRelocationModal === 'function') {
+          window.openRelocationModal();
+        } else {
+          console.error('❌ window.openRelocationModal not available');
+        }
       } else {
-        console.error('❌ No Professional Smart Modal functions available');
-        console.log('Available functions:', Object.keys(window).filter(key => key.includes('Modal')));
+        console.log('✅ Opening other insurance modal');
+        if (typeof window.openOtherModal === 'function') {
+          window.openOtherModal();
+        } else {
+          console.error('❌ window.openOtherModal not available');
+        }
       }
     } catch (error) {
-      console.error('❌ Error opening Professional Smart Modal:', error);
+      console.error('❌ Error opening modal:', error);
     }
   }
   
