@@ -205,7 +205,7 @@ const modalType =
     <div id="floating-cta" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-lg shadow-xl flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4 transition-all w-full max-w-5xl border border-primary-400/20 backdrop-blur-sm">
       <span class="font-semibold text-center sm:text-left">Need help choosing insurance?</span>
       <button
-        onclick="openModalBasedOnType()"
+        onclick="openModalBasedOnType(); return false;"
         class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base"
       >
         Free Consultation
@@ -456,8 +456,15 @@ const modalType =
   console.log('✅ Blog layout loaded - modal functionality via inline handlers');
   
   // Function to open modal based on page type
-  function openModalBasedOnType() {
+  function openModalBasedOnType(event) {
     console.log('🎯 Opening Professional Smart Modal from red banner');
+    
+    // Prevent the ProfessionalSmartModal's global click handler from interfering
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }
     
     try {
       // Use the ProfessionalSmartModal which is available in BaseLayout

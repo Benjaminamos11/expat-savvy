@@ -32,7 +32,7 @@ const {
       </button>
       
       <button
-        onclick="openModalBasedOnType()"
+        onclick="openModalBasedOnType(event); return false;"
         class="p-6 text-center hover:bg-gray-50 transition-colors relative overflow-hidden group"
       >
         <div class="relative z-10">
@@ -72,8 +72,15 @@ const {
   });
 
   // Function to open modal based on page type
-  function openModalBasedOnType() {
+  function openModalBasedOnType(event) {
     console.log('🎯 Opening Professional Smart Modal from expandable banner');
+    
+    // Prevent the ProfessionalSmartModal's global click handler from interfering
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }
     
     try {
       // Use the ProfessionalSmartModal which is available in BaseLayout
