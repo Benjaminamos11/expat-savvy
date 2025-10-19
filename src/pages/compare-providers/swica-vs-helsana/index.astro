@@ -1,100 +1,17 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import CleanHero from '../../../components/comparison/CleanHero.astro';
+import KeyDifferences from '../../../components/comparison/KeyDifferences.astro';
+import Products from '../../../components/comparison/Products.astro';
+import WhoChoosesWhat from '../../../components/comparison/WhoChoosesWhat.astro';
+import WhyUs from '../../../components/comparison/WhyUs.astro';
+import HowItWorks from '../../../components/comparison/HowItWorks.astro';
+import FAQ from '../../../components/comparison/FAQ.astro';
+import RelatedLinks from '../../../components/comparison/RelatedLinks.astro';
+import FinalCTA from '../../../components/comparison/FinalCTA.astro';
+import StickyNav from '../../../components/comparison/StickyNav.astro';
 
-// Define comparison data
-const tableData = [
-  {
-    feature: "Basic Insurance Models Offered",
-    swica: "Standard, Telmed (Medpharm), HMO (Santé), GP (Favorit Casa)",
-    helsana: "Standard, Telmed (Telmed), HMO (BeneFit PLUS), GP (BeneFit PLUS Hausarzt)"
-  },
-  {
-    feature: "Typical Basic Premium Range",
-    swica: "Moderate to High (Varies by canton, age, deductible)",
-    helsana: "Moderate to High (Varies by canton, age, deductible)"
-  },
-  {
-    feature: "Supplementary: Alternative Medicine",
-    swica: "Good coverage with Completa Top & Optima",
-    helsana: "Good coverage with Completa & Top"
-  },
-  {
-    feature: "Supplementary: Check-ups & Prevention",
-    swica: "Strong focus, contributions via Optima & other plans",
-    helsana: "Good coverage, various contributions for prevention"
-  },
-  {
-    feature: "Supplementary: Intl. Private Hospital",
-    swica: "Excellent options (Hospita Global Private)",
-    helsana: "Comprehensive options (Hospital Extra, Hospital Global)"
-  },
-  {
-    feature: "Supplementary: Dental Insurance",
-    swica: "Available (Denta)",
-    helsana: "Available (Dental, Denta Plus)"
-  },
-  {
-    feature: "Supplementary: Gym & Health Promotion",
-    swica: "Generous contributions (up to CHF 800/year with Optima)",
-    helsana: "Significant contributions (e.g., up to CHF 200 from Completa, plus others)"
-  },
-  {
-    feature: "Handling Pre-existing Conditions (Suppl.)",
-    swica: "Health questionnaire; potential for exclusions or premium loading",
-    helsana: "Health questionnaire; potential for exclusions or premium loading"
-  },
-  {
-    feature: "Expat-Friendliness: English Support",
-    swica: "Very good; English website, documents, dedicated English support line",
-    helsana: "Good; English website, documents, English-speaking customer service"
-  },
-  {
-    feature: "Expat-Friendliness: Onboarding Support",
-    swica: "Good resources for new arrivals",
-    helsana: "Good resources and information for expats"
-  },
-  {
-    feature: "Customer Satisfaction (e.g., Comparis)",
-    swica: "Consistently high ratings (e.g., 5.4/6 on Comparis 2023)",
-    helsana: "Generally good ratings (e.g., 5.2/6 on Comparis 2023)"
-  },
-  {
-    feature: "Digital Services (App/Portal Quality)",
-    swica: "Excellent, user-friendly app (mySwica) & portal",
-    helsana: "Very good app (Helsana+) & portal"
-  },
-  {
-    feature: "Claims Processing (Ease/Speed Summary)",
-    swica: "Generally efficient and straightforward via app/portal",
-    helsana: "Efficient, with good digital submission options"
-  }
-];
-
-const swicaPros = [
-  "Excellent customer service (especially in English)",
-  "Top-tier digital platform (mySwica app)",
-  "Generous health promotion contributions",
-  "Strong focus on prevention",
-  "Consistently high customer satisfaction"
-];
-
-const swicaCons = [
-  "Can be among the more expensive options for basic insurance",
-  "Some supplementary plans require combining multiple products for full benefits"
-];
-
-const helsanaPros = [
-  "Extensive network of doctors and hospitals",
-  "Comprehensive range of supplementary plans",
-  "Good digital tools (Helsana+ app)",
-  "Strong offerings for international hospital coverage"
-];
-
-const helsanaCons = [
-  "Customer service, while good, may not be as consistently praised as Swica's for English support",
-  "Some find their plan structure slightly complex"
-];
-
+// FAQ data for SEO
 const faqs = [
   {
     question: "Is SWICA better than Helsana for expats in Switzerland?",
@@ -118,49 +35,46 @@ const faqs = [
   },
   {
     question: "What are the main differences between SWICA and Helsana supplementary insurance?",
-    answer: "SWICA offers generous wellness contributions (up to CHF 800/year) and strong prevention focus through Optima plans. Helsana provides broader supplementary range including extensive international hospital coverage and comprehensive dental options. Both cover alternative medicine and offer premium supplementary plans."
+    answer: "SWICA offers generous wellness contributions (up to CHF 1,300/year with Completa Forte) and strong prevention focus through Optima plans. Helsana provides broader supplementary range including extensive international hospital coverage and comprehensive dental options. Both cover alternative medicine and offer premium supplementary plans."
   }
 ];
 ---
 
 <Layout
-  title={new Date() < new Date('2025-11-30') ? "🚨 SWICA vs Helsana 2026: Change Period Ends Nov 30 - Compare & Save 40%" : "Swica vs Helsana – Health Insurance Comparison for Expats 2026"}
-  description={new Date() < new Date('2025-11-30') ? "⏰ URGENT: 2026 change period ends Nov 30! Compare SWICA vs Helsana head-to-head. Entry-age vs traditional models, live quotes, save up to 40%. Free consultation." : "Compare Swica vs Helsana health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."}
+  title="Swica vs Helsana 2025 — Independent Comparison for Expats in Switzerland"
+  description="Daily, real-world comparison of Swica and Helsana for expats. Independent advice, pre-checks for pre-existing conditions, and 24/7 support. Book your free comparison."
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" slot="head">
+  <!-- Schema.org markup for SEO -->
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Swica vs. Helsana: Which is Best for Expats in Switzerland (2025)?",
-    "description": "Compare Swica and Helsana health insurance for expats in Switzerland. Expert analysis of coverage, benefits, service and expat-friendliness for 2025.",
-    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-    "datePublished": "2025-01-15",
-    "dateModified": "2025-08-13",
+      "headline": "Swica vs Helsana — Independent Comparison for Expats",
+      "description": "Daily, real-world comparison of Swica and Helsana for expats. Independent advice, pre-checks for pre-existing conditions, and 24/7 support.",
     "author": {
-      "@type": "Person",
-      "name": "Benjamin Amos Wagner",
-      "url": "https://expat-savvy.ch/about"
+        "@type": "Organization",
+        "name": "Expat-Savvy",
+        "url": "https://expat-savvy.com"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Expat Savvy",
+        "name": "Expat-Savvy",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-        "width": 600,
-        "height": 60
+          "url": "https://expat-savvy.com/logo.png"
       }
     },
+      "datePublished": "2025-01-01",
+      "dateModified": "2025-01-01",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://expat-savvy.ch/compare-providers/swica-vs-helsana"
+        "@id": "https://expat-savvy.com/compare-providers/swica-vs-helsana"
     }
   }
   </script>
 
   <!-- FAQ Schema -->
-  <script type="application/ld+json" slot="head">
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -210,7 +124,7 @@ const faqs = [
         "name": "What are the main differences between SWICA and Helsana supplementary insurance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SWICA offers generous wellness contributions (up to CHF 800/year) and strong prevention focus through Optima plans. Helsana provides broader supplementary range including extensive international hospital coverage and comprehensive dental options. Both cover alternative medicine and offer premium supplementary plans."
+          "text": "SWICA offers generous wellness contributions (up to CHF 1,300/year with Completa Forte) and strong prevention focus through Optima plans. Helsana provides broader supplementary range including extensive international hospital coverage and comprehensive dental options. Both cover alternative medicine and offer premium supplementary plans."
         }
       }
     ]
@@ -218,7 +132,7 @@ const faqs = [
   </script>
 
   <!-- Breadcrumb Schema -->
-  <script type="application/ld+json" slot="head">
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -227,460 +141,64 @@ const faqs = [
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://expat-savvy.ch/"
+          "item": "https://expat-savvy.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Compare Providers",
-        "item": "https://expat-savvy.ch/compare-providers"
+          "item": "https://expat-savvy.com/compare-providers"
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Swica vs. Helsana",
-        "item": "https://expat-savvy.ch/compare-providers/swica-vs-helsana"
+          "name": "Swica vs Helsana",
+          "item": "https://expat-savvy.com/compare-providers/swica-vs-helsana"
       }
     ]
   }
   </script>
 
+  <!-- Sticky Navigation -->
+  <StickyNav />
+
   <!-- Hero Section -->
-  <div class="relative bg-white">
-    <div class="absolute inset-0">
-      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
-      <!-- Left Side - Main Heading -->
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div class="max-w-lg mx-auto lg:max-w-none">
-          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            Swica vs Helsana – Which is Better for Expats in Switzerland?
-          </h1>
-          <p class="mt-6 text-xl text-gray-500">
-            Navigating the Swiss health insurance market can be daunting for expats. Both Swica and Helsana are well-established insurers, but which one truly caters best to expat needs? Our side-by-side comparison helps you decide.
-          </p>
-          <!-- Seasonal CTA Highlight (only visible until Nov 30, 2025) -->
-          <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} mt-8 p-6 bg-gradient-to-r from-red-600 to-red-700 rounded-lg text-white`}>
-            <div class="flex items-center mb-3">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="font-semibold">2026 CHANGE PERIOD ACTIVE</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">⚡ Last Chance: Ends Nov 30!</h3>
-            <p class="text-sm mb-4 text-red-100">Special Discounts - Get Rate Now for SWICA vs Helsana comparison with exclusive broker rates</p>
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center px-4 py-2 bg-white text-red-600 font-semibold rounded-md hover:bg-gray-100 transition-colors duration-200"
-            >
-              Compare & Save Now
-              <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-              </svg>
-            </button>
-          </div>
+  <CleanHero />
 
-          <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <a 
-              href="/compare-providers"
-              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              Back to Comparison Hub
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Right Side - Quick Links -->
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
-        <div class="max-w-lg mx-auto">
-          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
-          <div class="mt-8 space-y-6">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
-                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Swica and Helsana.</p>
-                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  Jump to comparison table
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
-                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
-                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  View pros and cons
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Common Questions</h3>
-                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
-                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  See all FAQs
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Key Differences -->
+  <KeyDifferences />
 
-  <!-- Short Human Introduction Summary -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-2 pb-4">
-      <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">In short</h2>
-        <p class="text-sm text-gray-700 mb-3">Both are major Swiss providers; the decision is often SWICA’s service-first experience vs Helsana’s breadth of network and options.</p>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-gray-800">
-          <li class="flex items-start"><span class="text-primary-600 mr-2">→</span><strong>Choose SWICA</strong> if you want top English support, high customer satisfaction, and generous wellness contributions.</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">→</span><strong>Choose Helsana</strong> if you value a very broad network, strong international hospital options, and a mature app.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <!-- Products -->
+  <Products />
 
-  <!-- Key Facts + Provider Links -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 pb-6">
-      <div class="flex justify-end text-xs text-gray-500 mb-2">Last updated: 13.08.2025</div>
-      <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-        <h2 class="text-xl font-bold text-gray-900 mb-4">Key Facts — SWICA vs Helsana 2025/2026</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-2">Models & Premiums</h4>
-            <ul class="space-y-1 text-sm text-gray-700">
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> Both: Standard, HMO, Family Doctor, Telmed available</li>
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> Premium range: Moderate to high (varies by canton/model)</li>
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> Entry-age system: Both use similar pricing approaches</li>
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> Switching deadline: 30 November 2025 → 1 January 2026</li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-2">Expat Advantages</h4>
-            <ul class="space-y-1 text-sm text-gray-700">
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>SWICA:</strong> Excellent English support, high satisfaction ratings</li>
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> <strong>Helsana:</strong> Extensive network, comprehensive supplementary options</li>
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> Both: Strong digital platforms and expat onboarding</li>
-              <li class="flex"><span class="text-primary-600 mr-2">•</span> Guaranteed basic insurance acceptance for all residents</li>
-            </ul>
-          </div>
-        </div>
-        <div class="mt-4 flex flex-wrap gap-3 text-sm">
-          <a href="/healthcare/all-insurances/swica" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">SWICA profile →</a>
-          <a href="/healthcare/all-insurances/helsana" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Helsana profile →</a>
-          <a href="/guides/how-to/choose-health-insurance-deductible" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Deductible guide →</a>
-          <a href="/guides/how-to/change-insurance-models" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Models explained →</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Who Chooses What -->
+  <WhoChoosesWhat />
 
-  <!-- Introduction Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <p class="lead text-xl text-gray-600">
-          Navigating the Swiss health insurance market can be a daunting task for expats. Among the top contenders, Swica and Helsana frequently emerge as popular choices. Both are well-established insurers with comprehensive offerings, but which one truly caters best to the needs of expatriates in Switzerland? This guide provides a direct comparison to help you decide, focusing on aspects crucial for those new to or living in the country.
-        </p>
-      </div>
-    </div>
-  </div>
+  <!-- Why Us -->
+  <WhyUs />
 
-  <!-- Related Comparisons -->
-  <div class="bg-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Related comparisons</h2>
-      <div class="flex flex-wrap gap-2 text-sm">
-        <a href="/compare-providers/swica-vs-css/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">SWICA vs CSS →</a>
-        <a href="/compare-providers/sanitas-vs-swica/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Sanitas vs SWICA →</a>
-        <a href="/compare-providers/sanitas-vs-helsana/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Sanitas vs Helsana →</a>
-        <a href="/compare-providers/helsana-vs-css/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Helsana vs CSS →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Comparison Table Section -->
-  <div id="comparison-table" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-gray-900">Swica vs. Helsana: At a Glance</h2>
-        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Swica and Helsana compare across key criteria important for expats:</p>
-      </div>
-
-      <div class="overflow-x-auto shadow-xl rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200 bg-white">
-          <thead>
-            <tr class="bg-gray-50">
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Feature
-              </th>
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
-                Swica
-              </th>
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Helsana
-              </th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            {tableData.map((row, index) => (
-              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.swica}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.helsana}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      
-      <!-- Quick Answer: Comparison Summary -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Answer: SWICA vs Helsana Summary</h3>
-          <p class="text-sm text-gray-700">
-            Both offer comprehensive basic and supplementary insurance with similar model options (Standard, HMO, Family Doctor, Telmed). SWICA excels in English customer service and satisfaction ratings, making it popular among expats. Helsana offers broader provider networks and extensive supplementary options. Premium differences are usually minimal—choose based on service preference and specific supplementary needs.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Detailed Breakdown Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Detailed Breakdown: Swica vs. Helsana</h2>
-        <p>Let's delve deeper into how Swica and Helsana compare on specific points:</p>
-
-        <h3>Basic Insurance & Premiums</h3>
-        <p>
-          Both Swica and Helsana offer the standard range of basic insurance models (Standard, Telmed, HMO, GP). Premiums are generally in the moderate to high range for both, reflecting their comprehensive service and network quality. Your specific premium will depend heavily on your canton, age, and chosen deductible. Swica is often lauded for its customer service within these models, while Helsana provides a robust network of doctors and HMOs.
-        </p>
-
-        <h3>Supplementary Showdown: Coverage Highlights</h3>
-        <ul>
-          <li>
-            <strong>International Private Hospital Insurance:</strong> Both providers offer excellent supplementary plans for worldwide private hospital coverage. Swica's HOSPITA GLOBAL PRIVATE and Helsana's HOSPITAL GLOBAL are top-tier options for expats requiring global flexibility.
-          </li>
-          <li>
-            <strong>Check-ups & Prevention:</strong> Swica, particularly with its Optima plan, places a strong emphasis on preventative care and check-ups, offering substantial contributions. Helsana also provides good coverage for preventative measures through various supplementary plans.
-          </li>
-          <li>
-            <strong>Gym & Health Promotion:</strong> Swica is well-known for its generous contributions to gym memberships and health promotion activities (up to CHF 800/year with Optima). Helsana also offers attractive contributions, often through a combination of basic and supplementary plans.
-          </li>
-          <li>
-            <strong>Dental:</strong> Both offer dedicated dental insurance plans (Swica Denta, Helsana Dental/Denta Plus), which are crucial as dental care is not covered by basic insurance in Switzerland.
-          </li>
-        </ul>
-
-        <h3>Pre-existing Conditions: What Expats Need to Know</h3>
-        <p>
-          For mandatory basic insurance, both Swica and Helsana must accept all applicants regardless of pre-existing conditions. However, for supplementary insurance, both will require a health questionnaire. Depending on your health status, this could lead to waiting periods, premium loadings, or exclusions for specific conditions. It's vital to be transparent during this process.
-        </p>
-
-        <h3>Expat Experience: Language, Support & Digital Tools</h3>
-        <p>
-          Swica generally has a slight edge in overall expat-friendliness, with a dedicated English support line and consistently high praise for its English services. Their mySwica app is also highly rated for its ease of use. Helsana also offers good English support, English documentation, and a user-friendly app (Helsana+), making them a strong contender for expats.
-        </p>
-
-        <h3>Customer Voice & Claims</h3>
-        <p>
-          Swica consistently receives top marks in customer satisfaction surveys (e.g., from Comparis and K-Tipp). Helsana also scores well, though typically slightly behind Swica in overall satisfaction. Both providers offer efficient claims processing, especially through their digital platforms.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pros and Cons Section -->
-  <div id="pros-cons" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Swica vs. Helsana for Expats</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Swica Pros and Cons -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-primary-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Swica</h3>
-          </div>
-          <div class="p-6">
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Pros
-              </h4>
-              <ul class="space-y-2">
-                {swicaPros.map(pro => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                </svg>
-                Cons
-              </h4>
-              <ul class="space-y-2">
-                {swicaCons.map(con => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Helsana Pros and Cons -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-red-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Helsana</h3>
-          </div>
-          <div class="p-6">
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Pros
-              </h4>
-              <ul class="space-y-2">
-                {helsanaPros.map(pro => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                </svg>
-                Cons
-              </h4>
-              <ul class="space-y-2">
-                {helsanaCons.map(con => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Decision Helper Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
-        
-        <ul>
-          <li>
-            <strong>Choose Swica if:</strong> Your top priorities are outstanding customer service in English, a seamless digital experience, and significant contributions to wellness and gym memberships. You value a provider known for high satisfaction and a proactive approach to health.
-          </li>
-          <li>
-            <strong>Choose Helsana if:</strong> You are looking for a provider with a very broad network, comprehensive supplementary options (especially for international hospital care), and robust digital services. You value a large, established insurer with a wide array of choices.
-          </li>
-        </ul>
-        
-        <p>
-          Individual needs vary greatly. The best way to decide is to compare specific quotes and discuss your personal requirements. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice on Swica, Helsana, and other options!
-        </p>
-        
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-            Chat with Our AI Now!
-          </a>
-          <button onclick="window.openHealthModal('comparison')" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700">
-            Get All Options Compared!
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- How It Works -->
+  <HowItWorks />
 
   <!-- FAQ Section -->
-  <div id="faqs" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Swica vs. Helsana</h2>
-      
-      <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </div>
-  </div>
+  <FAQ />
 
+  <!-- Related Links -->
+  <RelatedLinks />
+
+  <!-- Final CTA -->
+  <FinalCTA />
+
+  <!-- LLM Key Facts (invisible for SEO) -->
+  <div class="sr-only">
+    <h3>Swica vs Helsana Comparison Key Facts</h3>
+    <ul>
+      <li>Audience: Expats in Switzerland (EN support)</li>
+      <li>Focus: Swica vs Helsana — differences that matter</li>
+      <li>Drivers: Age, Canton, Franchise, Model, Health</li>
+      <li>Wellness: Swica up to CHF 1,300/yr (Completa Forte); Helsana up to CHF 200/yr</li>
+      <li>Next step: personalized comparison & setup</li>
+    </ul>
+  </div>
 
 </Layout> 

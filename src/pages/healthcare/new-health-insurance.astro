@@ -55,9 +55,9 @@ const meta = {
   <section class="relative min-h-[50vh] md:min-h-[90vh] flex items-center overflow-hidden">
     <div class="absolute inset-0">
       <img 
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_1920,f_auto,q_auto/v1746960418/a-photograph-depicts-a-pair-of-youthful-_quYJOYFeRPqWWfrG0MYelw_ndQb4IxjRbGazkFfjfLXNA_qk6hxm.webp"
-        alt="Swiss mountains and lake representing new beginnings for expats moving to Switzerland"
-        class="w-full h-full object-cover"
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp/v1760890793/a-cinematic-photograph-of-a-delicate-gre_qbdwciSHQlm2VvUKo-4gzg_0U2cY116TAeO6YebAIVhxg_2_nj3vb3.png"
+        alt="Settling in Switzerland - new beginnings for expats"
+        class="w-full h-full object-cover object-center"
         width="1920"
         height="1080"
         loading="eager"
@@ -65,30 +65,62 @@ const meta = {
       <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
     </div>
     
-    <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class={DesignSystem.typography.heading.h1.full + ' text-white mb-6'}>
-          Set Up Your Swiss Health Insurance in 3 Simple Steps
+    <!-- Mobile layout (centered) -->
+    <div class="relative w-full mx-auto px-4 sm:px-6 md:hidden py-8">
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 animate-fade-in text-shadow">
+          <span class="block">Set Up Your Swiss</span>
+          <span class="block mt-1">Health Insurance</span>
         </h1>
-        <p class={DesignSystem.typography.body.large + ' text-gray-200 mb-8'}>
+        <p class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow">
           Mandatory for all newcomers. <strong class="text-white">We make it simple</strong> with expert guidance in English.
         </p>
-        
-        <!-- Primary CTA -->
+        <div class="mt-6 flex flex-col items-center gap-3 animate-slide-up">
           <button
-          class={DesignSystem.components.button.primary}
+            class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
             onclick="window.openHealthModal('setup')"
-        >
-          Get Your Setup Started (Free)
-          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          >
+            Get Your Setup Started (Free)
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
-        
-        <!-- Trust indicators -->
-        <p class="text-white text-sm mt-4">
-          ✓ FINMA certified consultants ✓ No obligations ✓ 100% free
-        </p>
+          <p class="text-white text-sm mt-2">
+            ✓ FINMA certified consultants ✓ No obligations ✓ 100% free
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Desktop layout (left aligned) -->
+    <div class="relative w-full mx-auto hidden md:block">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6 col-start-2 flex items-center justify-center">
+          <div class="text-left max-w-xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow">
+              <span class="block">Set Up Your Swiss</span>
+              <span class="block mt-2">Health Insurance</span>
+            </h1>
+            <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
+              Mandatory for all newcomers. <strong class="text-white">We make it simple</strong> with expert guidance in English.
+            </p>
+            <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
+              <button
+                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
+                onclick="window.openHealthModal('setup')"
+              >
+                Get Your Setup Started (Free)
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+              <p class="text-white text-sm">
+                ✓ FINMA certified consultants ✓ No obligations ✓ 100% free
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6"></div>
       </div>
     </div>
   </section>
