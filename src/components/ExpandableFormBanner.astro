@@ -73,35 +73,21 @@ const {
 
   // Function to open modal based on page type
   function openModalBasedOnType() {
-    const url = window.location.pathname.toLowerCase();
-    const title = document.title.toLowerCase();
-    
-    const modalType = 
-      url.includes('relocation') || title.includes('relocation') ? 'relocation' :
-      url.includes('pension') || url.includes('pillar') || url.includes('life-insurance') || title.includes('pension') || title.includes('pillar') ? 'life' :
-      url.includes('liability') || url.includes('household') || url.includes('legal-protection') || url.includes('accident-insurance') || title.includes('liability') || title.includes('household') || title.includes('legal') ? 'other' :
-      'health'; // default to health for most insurance content
-    
-    console.log('🎯 Opening modal for type:', modalType);
+    console.log('🎯 Opening Professional Smart Modal from expandable banner');
     
     try {
-      if (modalType === 'health') {
-        window.openHealthModal('home');
-      } else if (modalType === 'life') {
-        window.openLifePensionModal();
-      } else if (modalType === 'relocation') {
-        window.openRelocationModal();
+      // Use the ProfessionalSmartModal which is available in BaseLayout
+      if (typeof window.openSmartModal === 'function') {
+        window.openSmartModal();
+      } else if (typeof window.openOffersModal === 'function') {
+        window.openOffersModal();
+      } else if (typeof window.openConsultationModal === 'function') {
+        window.openConsultationModal();
       } else {
-        window.openOtherModal();
+        console.error('❌ No Professional Smart Modal functions available');
       }
     } catch (error) {
-      console.error('❌ Error opening modal:', error);
-      // Fallback to health modal if there's an error
-      try {
-        window.openHealthModal('home');
-      } catch (fallbackError) {
-        console.error('❌ Fallback modal also failed:', fallbackError);
-      }
+      console.error('❌ Error opening Professional Smart Modal:', error);
     }
   }
 </script>
