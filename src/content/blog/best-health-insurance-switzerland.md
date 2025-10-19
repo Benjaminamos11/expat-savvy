@@ -26,7 +26,7 @@ Choosing the right health insurance in Switzerland is one of the most important 
 This comprehensive guide provides verified information about Switzerland's top health insurance companies, real 2026 premium data, and expert insights to help you make an informed decision before the November 30th deadline.
 
 <div class="text-center my-8">
-  <button onclick="window.openHealthModal('best')"
+  <button onclick="event.preventDefault(); if(typeof window.openOffersModal === 'function') { window.openOffersModal('comparison'); } else { console.error('Offers modal not available'); } return false;"
           class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200">
     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

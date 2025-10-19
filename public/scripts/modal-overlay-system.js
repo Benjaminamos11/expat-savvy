@@ -11,6 +11,7 @@ class ModalOverlaySystem {
 
   init() {
     console.log('🚀 Modal Overlay System initialized');
+    console.log('🔧 About to create modal functions...');
     
     // Create global functions
     window.openModalOverlay = this.openModalOverlay.bind(this);
@@ -20,6 +21,17 @@ class ModalOverlaySystem {
     window.openLifePensionModal = this.openLifePensionModal.bind(this);
     window.closeModalOverlay = this.closeModalOverlay.bind(this);
     window.initializeCalComManually = this.initializeCalComManually.bind(this);
+    
+    // Legacy compatibility functions
+    window.openOffersModal = this.openHealthModal.bind(this);
+    window.openConsultationModal = this.openHealthModal.bind(this);
+    window.showConsultationModal = this.openHealthModal.bind(this);
+    
+    console.log('🔧 Legacy functions created:', {
+      openOffersModal: typeof window.openOffersModal,
+      openConsultationModal: typeof window.openConsultationModal,
+      openHealthModal: typeof window.openHealthModal
+    });
   }
 
   getModalTypeFromFile(modalFile) {

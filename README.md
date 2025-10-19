@@ -10,7 +10,7 @@ This project includes a complete email nurture funnel that automatically follows
 
 ### 📚 Documentation:
 - **[EMAIL_NURTURE_SYSTEM.md](./EMAIL_NURTURE_SYSTEM.md)** - Complete technical documentation of the email system
-- **[FORMS_INTEGRATION_STATUS.md](./FORMS_INTEGRATION_STATUS.md)** - Status of all forms and their integration
+- **[FORMS_INTEGRATION_STATUS.md](./docs/FORMS_INTEGRATION_STATUS.md)** - Status of all forms and their integration
 
 ### Quick Overview:
 - ✅ Welcome email sent immediately after form submission

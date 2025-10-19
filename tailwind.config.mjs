@@ -11,20 +11,32 @@ export default {
       },
       colors: {
         primary: {
-          50: '#fef2f2',
-          100: '#fee2e2',
+          50: '#ffebee',
+          100: '#ffcdd2',
           200: '#fecaca',
           300: '#fca5a5',
           400: '#f87171',
-          500: '#cc242c', // Logo red
-          600: '#b91c1c',
-          700: '#991b1b',
-          800: '#7f1d1d',
+          500: '#cf202d', // Logo red (exact match)
+          600: '#cf202d', // Brand red
+          700: '#b01824', // Hover state
+          800: '#8a131c', // Dark state
           900: '#450a0a',
         },
         accent: {
-          500: '#cc242c',
-          600: '#b91c1c'
+          500: '#cf202d', // Logo red
+          600: '#b01824'  // Hover
+        },
+        red: {
+          50: '#ffebee',
+          100: '#ffcdd2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#cf202d', // Override Tailwind default with brand red
+          600: '#cf202d', // Brand red
+          700: '#b01824', // Hover state
+          800: '#8a131c', // Dark state
+          900: '#450a0a',
         }
       }
     },

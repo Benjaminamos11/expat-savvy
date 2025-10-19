@@ -4,25 +4,98 @@ import PrivacyPolicyModal from './PrivacyPolicyModal.astro';
 import TermsOfServiceModal from './TermsOfServiceModal.astro';
 import { ensureTrailingSlash } from '@/lib/utils';
 ---
-<footer class="bg-gradient-to-b from-gray-900 to-black text-white py-12 relative">
-  <!-- Subtle background pattern -->
-  <div class="absolute inset-0 pattern-black-twill opacity-40 pointer-events-none"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <div class="flex flex-col items-center text-center">
-      <!-- Company Info -->
-      <div class="max-w-lg">
-        <img 
-          src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg" 
-          alt="Expat Savvy" 
-          class="h-12 mb-6 mx-auto" 
-          width="180" 
-          height="48"
-          loading="lazy"
-        />
-        <p class="text-gray-400 mt-4">Your trusted insurance advisor in Switzerland since 2017.</p>
-        
-        <!-- Social Media Links -->
-        <div class="flex space-x-6 mt-8 justify-center">
+<footer class="bg-gray-900 text-gray-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+      
+      <!-- Column 1: Get Started -->
+      <div>
+        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Get Started</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href={ensureTrailingSlash("/healthcare/new-health-insurance")} class="hover:text-white transition-colors">For Newcomers</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/switching-health-insurance")} class="hover:text-white transition-colors">Switch Insurance</a></li>
+          <li><a href={ensureTrailingSlash("/insurance-guides/family-insurance-planning")} class="hover:text-white transition-colors">Family Planning</a></li>
+          <li><a href={ensureTrailingSlash("/insurance-guides/student-insurance")} class="hover:text-white transition-colors">Students</a></li>
+          <li><a href={ensureTrailingSlash("/insurance-guides/pre-existing-conditions")} class="hover:text-white transition-colors">Pre-existing Conditions</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 2: Providers -->
+      <div>
+        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Providers</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/helsana")} class="hover:text-white transition-colors">Helsana</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/css")} class="hover:text-white transition-colors">CSS</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/swica")} class="hover:text-white transition-colors">Swica</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/sanitas")} class="hover:text-white transition-colors">Sanitas</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/concordia")} class="hover:text-white transition-colors">Concordia</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/atupri")} class="hover:text-white transition-colors">Atupri</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/assura")} class="hover:text-white transition-colors">Assura</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/groupe-mutuel")} class="hover:text-white transition-colors">Groupe Mutuel</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/kpt")} class="hover:text-white transition-colors">KPT</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/visana")} class="hover:text-white transition-colors">Visana</a></li>
+          <li><a href={ensureTrailingSlash("/healthcare/all-insurances/sympany")} class="hover:text-white transition-colors">Sympany</a></li>
+          <li><a href={ensureTrailingSlash("/compare-providers")} class="hover:text-white font-semibold transition-colors">View All →</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 3: Locations -->
+      <div>
+        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Locations</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href={ensureTrailingSlash("/health-insurance/zurich")} class="hover:text-white transition-colors">Zurich</a></li>
+          <li><a href={ensureTrailingSlash("/health-insurance/geneva")} class="hover:text-white transition-colors">Geneva</a></li>
+          <li><a href={ensureTrailingSlash("/health-insurance/basel")} class="hover:text-white transition-colors">Basel</a></li>
+          <li><a href={ensureTrailingSlash("/health-insurance/zug")} class="hover:text-white transition-colors">Zug</a></li>
+          <li><a href={ensureTrailingSlash("/health-insurance/bern")} class="hover:text-white transition-colors">Bern</a></li>
+          <li><a href={ensureTrailingSlash("/health-insurance/lausanne")} class="hover:text-white transition-colors">Lausanne</a></li>
+          <li><a href={ensureTrailingSlash("/news/regional-guides")} class="hover:text-white font-semibold transition-colors">All Regions →</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 4: Comparisons -->
+      <div>
+        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Comparisons</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href={ensureTrailingSlash("/compare-providers/helsana-vs-swica")} class="hover:text-white transition-colors">Helsana vs Swica</a></li>
+          <li><a href={ensureTrailingSlash("/compare-providers/css-vs-sanitas")} class="hover:text-white transition-colors">CSS vs Sanitas</a></li>
+          <li><a href={ensureTrailingSlash("/compare-providers/swica-vs-sanitas")} class="hover:text-white transition-colors">Swica vs Sanitas</a></li>
+          <li><a href={ensureTrailingSlash("/compare-providers")} class="hover:text-white font-semibold transition-colors">Compare All →</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 5: Topics -->
+      <div>
+        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Topics</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href={ensureTrailingSlash("/blog/dental-insurance-expats-switzerland")} class="hover:text-white transition-colors">Dental Coverage</a></li>
+          <li><a href={ensureTrailingSlash("/blog/mental-health-services-switzerland")} class="hover:text-white transition-colors">Mental Health</a></li>
+          <li><a href={ensureTrailingSlash("/blog/maternity-newborn-insurance-switzerland")} class="hover:text-white transition-colors">Maternity</a></li>
+          <li><a href={ensureTrailingSlash("/blog/accident-insurance-switzerland-uvg-laa")} class="hover:text-white transition-colors">Accident Insurance</a></li>
+          <li><a href={ensureTrailingSlash("/insurance/legal-protection-insurance")} class="hover:text-white transition-colors">Legal Protection</a></li>
+          <li><a href={ensureTrailingSlash("/3rd-pillar")} class="hover:text-white transition-colors">3rd Pillar</a></li>
+          <li><a href={ensureTrailingSlash("/blog")} class="hover:text-white font-semibold transition-colors">All Topics →</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 6: Company -->
+      <div>
+        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Company</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href={ensureTrailingSlash("/about")} class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href={ensureTrailingSlash("/about#how-we-help")} class="hover:text-white transition-colors">How We Help</a></li>
+          <li><a href={ensureTrailingSlash("/about#team")} class="hover:text-white transition-colors">Our Team</a></li>
+          <li><a href={ensureTrailingSlash("/blog")} class="hover:text-white transition-colors">Blog</a></li>
+          <li><a href={ensureTrailingSlash("/contact")} class="hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Bottom Footer -->
+    <div class="border-t border-gray-800 mt-12 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <!-- Social Icons (Left) -->
+        <div class="flex items-center space-x-6">
           <a 
             href="https://www.linkedin.com/company/101603783"
             target="_blank"
@@ -58,77 +131,63 @@ import { ensureTrailingSlash } from '@/lib/utils';
           </a>
         </div>
         
-        <!-- Contact Information -->
-        <div class="mt-10 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-          <a href="tel:+41763648888" class="text-gray-400 hover:text-white transition-colors flex items-center whitespace-nowrap">
-            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-            </svg>
-            +41 76 364 88 88
-          </a>
-          <a href="mailto:hello@expat-savvy.ch" class="text-gray-400 hover:text-white transition-colors flex items-center whitespace-nowrap">
-            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-            </svg>
-            hello@expat-savvy.ch
-          </a>
-          <a 
-            href="https://www.google.com/maps/search/?api=1&query=Talacker+41+8001+Zürich" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="text-gray-400 hover:text-white transition-colors flex items-center whitespace-nowrap"
-          >
-            <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-            </svg>
-            Talacker 41, 8001 Zürich
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="border-t border-gray-800 mt-12 pt-8">
-      <div class="flex flex-col items-center text-center">
-        <p class="text-gray-400 text-sm">
-          © {new Date().getFullYear()} Expat Savvy. All rights reserved.
-        </p>
-        <div class="text-sm mt-2">
-          <p>Made with <span class="text-red-500">❤️</span> in Switzerland</p>
-          <p class="text-red-500">by <a href="https://www.vibestudio.ch" target="_blank" rel="noopener noreferrer" class="hover:text-red-400 transition-colors">vibestudio.ch</a></p>
-        </div>
-        
-        <div class="flex flex-wrap justify-center gap-4 mt-6">
+        <!-- Legal Links (Center) -->
+        <div class="flex flex-wrap justify-center space-x-6 text-sm">
           <button 
             onclick="showPrivacyPolicyModal()" 
-            class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4"
+            class="text-gray-400 hover:text-white transition-colors"
           >
             Privacy Policy
           </button>
           <button 
             onclick="showTermsOfServiceModal()" 
-            class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4"
+            class="text-gray-400 hover:text-white transition-colors"
           >
             Terms of Service
           </button>
-          <a href={ensureTrailingSlash("/imprint")} class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4">
+          <a href={ensureTrailingSlash("/imprint")} class="text-gray-400 hover:text-white transition-colors">
             Imprint
           </a>
           <button 
             onclick="showVAG45Modal()" 
-            class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4"
+            class="text-gray-400 hover:text-white transition-colors"
           >
             VAG 45
           </button>
-          <a 
-            href="https://app.expat-savvy.ch" 
+        </div>
+        
+        <!-- Copyright (Right) -->
+        <p class="text-sm text-gray-400">
+          © {new Date().getFullYear()} Expat-Savvy. All rights reserved.
+        </p>
+      </div>
+      
+      <!-- Contact Info (Optional - below bottom bar) -->
+      <div class="mt-6 flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
+        <a href="tel:+41763648888" class="text-gray-400 hover:text-white transition-colors flex items-center">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
+          +41 76 364 88 88
+        </a>
+        <a href="mailto:hello@expat-savvy.ch" class="text-gray-400 hover:text-white transition-colors flex items-center">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+          </svg>
+          hello@expat-savvy.ch
+        </a>
+        <a 
+          href="https://www.google.com/maps/search/?api=1&query=Talacker+41+8001+Zürich" 
             target="_blank" 
             rel="noopener noreferrer" 
-            class="text-gray-400 hover:text-white text-sm transition-colors py-3 px-4"
+          class="text-gray-400 hover:text-white transition-colors flex items-center"
           >
-            Login
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+          </svg>
+          Talacker 41, 8001 Zürich
           </a>
-        </div>
       </div>
     </div>
   </div>
@@ -137,11 +196,3 @@ import { ensureTrailingSlash } from '@/lib/utils';
 <VAG45Modal />
 <PrivacyPolicyModal />
 <TermsOfServiceModal />
-
-<style>
-  /* Black twill pattern from Subtle Patterns */
-  .pattern-black-twill {
-    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/black_twill.png');
-    background-repeat: repeat;
-  }
-</style>

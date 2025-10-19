@@ -43,11 +43,21 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
 <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
 
 <script is:inline>
+  // Immediately define placeholder functions to prevent errors
+  if (typeof window !== 'undefined') {
+    window.openSmartModal = function() { console.warn('⏳ Modal still loading...'); };
+    window.closeSmartModal = function() {};
+    window.openOffersModal = function() { console.warn('⏳ Modal still loading...'); };
+    window.openConsultationModal = function() { console.warn('⏳ Modal still loading...'); };
+    window.openHealthModal = function() { console.warn('⏳ Modal still loading...'); };
+  }
+
   // Wait for React to load
   function waitForReact(callback) {
     if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined' && typeof LucideReact !== 'undefined') {
       callback();
     } else {
+      console.log('⏳ Waiting for React libraries to load...');
       setTimeout(() => waitForReact(callback), 100);
     }
   }
@@ -475,19 +485,28 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
     const renderModal = () => {
       const container = document.getElementById('smart-modal-root');
       if (!container) {
-        console.error('❌ Modal container not found');
+        console.error('❌ Modal container #smart-modal-root not found in DOM');
         return;
       }
       
-      if (!root) {
-        root = ReactDOM.createRoot(container);
-      }
+      console.log('📦 Rendering modal, isOpen:', isModalOpen);
       
-      root.render(h(SmartModal, {
-        isOpen: isModalOpen,
-        onClose: closeModal,
-        pageContext: pageContext
-      }));
+      try {
+        if (!root) {
+          root = ReactDOM.createRoot(container);
+          console.log('✅ React root created');
+        }
+        
+        root.render(h(SmartModal, {
+          isOpen: isModalOpen,
+          onClose: closeModal,
+          pageContext: pageContext
+        }));
+        
+        console.log('✅ Modal rendered successfully');
+      } catch (error) {
+        console.error('❌ Error rendering modal:', error);
+      }
     };
     
     const openModal = () => {

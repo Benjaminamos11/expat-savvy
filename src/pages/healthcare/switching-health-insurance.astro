@@ -1,100 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import HowToSchema from '../../components/schema/HowToSchema.astro';
+import { DesignSystem, cn } from '../../styles/design-system';
+import premiumData from '../../data/premium-samples-2026.json';
 
-const reasons = [
-  {
-    title: "Premiums Rising ~6%",
-    description: "2026 premiums are expected to increase by around 6% on average. Now is the time to compare and switch to avoid higher costs.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-    </svg>`
-  },
-  {
-    title: "Save CHF 500–2,000/year",
-    description: "Many expats save significant amounts annually by switching providers or adjusting their insurance model and deductible.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"/>
-    </svg>`
-  },
-  {
-    title: "Life Changes",
-    description: "Family growth, relocation to new canton, changing health needs, or dissatisfaction with current insurer service.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-    </svg>`
-  },
-  {
-    title: "Dissatisfied with Service",
-    description: "Poor claims processing, limited doctor network, poor customer support, or coverage that no longer meets your needs.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-    </svg>`
-  }
-];
-
-const savingMethods = [
-  {
-    title: "Telmed/HMO Models",
-    description: "Choose alternative models like family doctor or telehealth consultation first",
-    savings: "Up to 25%",
-    color: "bg-green-50 border-green-200 text-green-800"
-  },
-  {
-    title: "Higher Deductible",
-    description: "Increase your franchise from CHF 300 to CHF 2,500 for lower monthly premiums",
-    savings: "Variable",
-    color: "bg-red-50 border-red-200 text-red-800"
-  },
-  {
-    title: "Annual Payment",
-    description: "Pay premiums yearly instead of monthly for insurer discounts",
-    savings: "2-4%",
-    color: "bg-purple-50 border-purple-200 text-purple-800"
-  },
-  {
-    title: "Premium Subsidies",
-    description: "Check cantonal premium reduction eligibility based on income and assets",
-    savings: "Up to 80%",
-    color: "bg-yellow-50 border-yellow-200 text-yellow-800"
-  }
-];
-
-const steps = [
-  {
-    number: "1",
-    title: "Compare Providers",
-    description: "Research and compare premiums, service quality, and coverage across different Swiss insurers.",
-    detail: "Use comparison tools or work with an independent broker to evaluate your options."
-  },
-  {
-    number: "2",
-    title: "Send Cancellation",
-    description: "Send registered letter to current insurer before the deadline with your termination notice.",
-    detail: "Must be received by 30 September (supplementary) or 30 November (basic insurance)."
-  },
-  {
-    number: "3",
-    title: "Apply to New Insurer",
-    description: "Complete application with your chosen new provider - guaranteed acceptance for basic insurance.",
-    detail: "New coverage starts January 1st with no gaps in protection."
-  },
-  {
-    number: "4",
-    title: "Confirm Coverage",
-    description: "Receive confirmation and new insurance card from your new provider.",
-    detail: "Verify all details and update your payment information."
-  }
-];
-
+// FAQ Data
 const faqs = [
   {
     question: "When is the deadline to change Swiss health insurance?",
-    answer: "The deadline to switch basic health insurance (KVG/LAMal) is 30 November 2025. For supplementary insurance (dental, hospital, alternative medicine), you must cancel by 30 September 2025. Missing these deadlines means you cannot switch until next year."
+    answer: "The deadline to switch basic health insurance (KVG/LAMal) is **30 November 2025**. For supplementary insurance (dental, hospital, alternative medicine), you must cancel by **30 September 2025**. Missing these deadlines means you cannot switch until next year."
   },
   {
     question: "What is the deadline for supplementary insurance in Switzerland?",
-    answer: "The deadline for cancelling supplementary insurance in Switzerland is 30 September 2025. This applies to dental coverage, hospital benefits, alternative medicine, and other optional policies. You must send your cancellation notice by registered mail before this date to avoid automatic renewal."
+    answer: "The deadline for cancelling supplementary insurance in Switzerland is **30 September 2025**. This applies to dental coverage, hospital benefits, alternative medicine, and other optional policies. You must send your cancellation notice by registered mail before this date to avoid automatic renewal."
   },
   {
     question: "Can I switch if I'm undergoing treatment?",
@@ -106,7 +23,7 @@ const faqs = [
   },
   {
     question: "How much can I save by switching?",
-    answer: "Savings vary by situation, but many expats save CHF 500–2,000 per year by switching. With 2026 premiums expected to rise ~6%, choosing a different insurer, model (like Telmed/HMO), or higher deductible can significantly reduce your annual costs while maintaining quality coverage."
+    answer: "Savings vary by situation, but many expats save **CHF 500–2,000 per year** by switching. With 2026 premiums expected to rise ~6%, choosing a different insurer, model (like Telmed/HMO), or higher deductible can significantly reduce your annual costs while maintaining quality coverage."
   },
   {
     question: "Can I change only my insurance model (Standard → Telmed)?",
@@ -114,11 +31,19 @@ const faqs = [
   }
 ];
 
+// Calculate days until deadline
+const getDeadlineDays = () => {
+  const deadline = new Date('2025-11-30');
+  const today = new Date();
+  const diffTime = deadline.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays > 0 ? diffDays : 0;
+};
 
 const meta = {
-  title: 'Switch Health Insurance in Switzerland (2026) | Change & Save Before Deadlines',
-  description: 'Change your Swiss health insurance for 2026. Supplementary: cancel by 30 September. Basic: switch until 30 November. Save up to CHF 2,000/year. Get 3 tailored offers or book a free consultation today.',
-  keywords: 'switch health insurance Switzerland, change health insurance Switzerland, switching health insurance 2026, supplementary insurance deadline September, basic health insurance deadline November',
+  title: 'Switch Health Insurance Switzerland 2026 | Save CHF 500-2,000/year',
+  description: 'Switch your Swiss health insurance before deadlines (30 Sep/30 Nov). Compare 2026 premiums across cantons. Expert guidance in English. Free consultation.',
+  keywords: 'switch health insurance Switzerland 2026, change health insurance, health insurance deadline, Swiss health insurance comparison, expat insurance advisor',
   canonicalUrl: 'https://expat-savvy.ch/healthcare/switching-health-insurance/'
 };
 ---
@@ -128,822 +53,778 @@ const meta = {
   description={meta.description}
   canonicalURLProp={meta.canonicalUrl}
 >
-  <!-- Add HowTo Schema for switching health insurance -->
-  <HowToSchema
-    name="How to Switch Health Insurance in Switzerland"
-    description="A comprehensive guide to changing your health insurance provider in Switzerland, covering deadlines, requirements, and best practices."
-    totalTime="PT3H"
-    steps={[
-      {
-        name: "Check the deadlines and notice periods",
-        text: "Verify if you're within the window for basic insurance cancellation (by November 30 for January 1 changes) or supplementary insurance (check your policy for specific notice periods, typically 3-6 months)."
-      },
-      {
-        name: "Research and compare insurance providers",
-        text: "Compare premiums, service quality, and coverage options between different insurance companies to find the best fit for your needs and budget."
-      },
-      {
-        name: "Get quotes from selected insurers",
-        text: "Contact shortlisted insurance companies to receive personalized quotes based on your profile and preferences."
-      },
-      {
-        name: "Submit formal cancellation to current insurer",
-        text: "Send a registered letter (Einschreiben/recommandé) to your current insurance company before the deadline, clearly stating your intention to terminate the policy."
-      },
-      {
-        name: "Apply for new insurance",
-        text: "Complete and submit an application form to your chosen new insurance provider, including all required personal documentation."
-      },
-      {
-        name: "Wait for confirmation from both insurers",
-        text: "Receive confirmation of cancellation from your old insurer and acceptance from your new provider before considering the switch complete."
-      },
-      {
-        name: "Update payment information",
-        text: "Set up new payment arrangements with your new insurance provider and confirm cancellation of any automatic payments to your previous insurer."
-      }
-    ]}
-    tools={[
-      {
-        name: "Comparison website or broker service",
-        description: "A tool to compare multiple insurance options quickly"
-      },
-      {
-        name: "Registered mail service",
-        description: "For sending formal cancellation letters with proof of delivery"
-      }
-    ]}
-    supply={[
-      "Personal identification documents",
-      "Insurance policy details",
-      "Swiss residence permit",
-      "Bank account information"
-    ]}
-  />
-
-  <!-- Hero Section -->
-  <div class="relative overflow-hidden bg-gray-900">
+  <!-- ============================================ -->
+  <!-- 1. HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="relative overflow-hidden bg-gray-900">
+    <!-- Background Image with Overlay -->
     <div class="absolute inset-0">
       <img
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
-        alt="Young woman reviewing Swiss health insurance documents"
-        class="w-full h-full object-cover object-center"
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_1920,f_auto,q_auto/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+        alt="Professional woman reviewing Swiss health insurance options and premium comparisons on laptop"
+        class="w-full h-full object-cover"
+        width="1920"
+        height="1080"
+        loading="eager"
       />
       <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
     </div>
 
+    <!-- Hero Content -->
     <div class="relative z-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-            Switch Health Insurance in Switzerland (2026) – Deadlines & Savings
+      <div class={DesignSystem.spacing.container.default + ' py-24 md:py-32'}>
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class={DesignSystem.typography.heading.h1.full + ' text-white mb-6'}>
+            Switch Health Insurance in Switzerland 2026
           </h1>
-          <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-300">
-            Don't miss the 2026 switching season: Supplementary until 30 September, Basic until 30 November. Compare offers, reduce premiums, and switch stress-free with Expat-Savvy.
+          <p class={DesignSystem.typography.body.large + ' text-gray-200 mb-8'}>
+            Save <strong class="text-white">CHF 500-2,000 per year</strong> by switching providers. 
+            Don't miss the deadlines: <strong class="text-red-400">30 Sept</strong> (supplementary) and <strong class="text-red-400">30 Nov</strong> (basic).
           </p>
-          <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          
+          <!-- Primary CTA -->
             <button
-              onclick="window.openHealthModal('switch')"
-              class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+            class={DesignSystem.components.button.primary}
+            onclick="window.openHealthModal('switch')"
             >
-              🟥 Book Free Consultation (recommended)
+            Book Free Consultation
               <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              🟩 Get 3 Best Offers (≈1 min)
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+
+          <!-- Social Proof -->
+          <p class="mt-6 text-sm text-gray-300">
+            <svg class="inline h-4 w-4 text-green-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
               </svg>
-            </button>
+            1,200+ people switched this year with Expat-Savvy
+          </p>
+          
+          <p class="mt-3 text-xs text-gray-400">
+            ✓ FINMA certified consultants  ✓ No obligations  ✓ 100% free
+          </p>
           </div>
         </div>
       </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 2. TRUST INDICATORS -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.small)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <!-- Stat 1 -->
+        <div class="text-center">
+          <div class={DesignSystem.typography.heading.h2.full + ' text-red-600 mb-2'}>
+            1,200+
     </div>
+          <p class="text-gray-600">People Switched</p>
   </div>
 
-
-  <!-- Table of Contents -->
-  <div class="bg-gray-50 py-8 border-t border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-xl font-semibold text-gray-900 mb-4">In This Guide:</h2>
-        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
-          <ul class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
-            <li>
-              <a href="#why-switch" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Why Consider Switching
-              </a>
-            </li>
-            <li>
-              <a href="#deadlines" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Key Deadlines
-              </a>
-            </li>
-            <li>
-              <a href="#compare" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Ways to Reduce Premium
-              </a>
-            </li>
-            <li>
-              <a href="#how-to-switch" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                How to Switch
-              </a>
-            </li>
-            <li>
-              <a href="#expat-savvy-service" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                How Expat Savvy Helps
-              </a>
-            </li>
-            <li>
-              <a href="#faq" class="text-primary-600 hover:text-primary-800 flex items-center">
-                <svg class="mr-2 h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                Frequently Asked Questions
-              </a>
-            </li>
-          </ul>
+        <!-- Stat 2 -->
+        <div class="text-center">
+          <div class={DesignSystem.typography.heading.h2.full + ' text-red-600 mb-2'}>
+            CHF 1,500
         </div>
+          <p class="text-gray-600">Average Saved</p>
       </div>
+
+        <!-- Stat 3 -->
+        <div class="text-center">
+          <div class={DesignSystem.typography.heading.h2.full + ' text-red-600 mb-2'}>
+            30 Nov
     </div>
+          <p class="text-gray-600">Basic Deadline</p>
   </div>
 
-  <!-- Why Switch Section -->
-  <div id="why-switch" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Why Switch Health Insurance?</h2>
+        <!-- Stat 4 -->
+        <div class="text-center">
+          <div class={DesignSystem.typography.heading.h2.full + ' text-red-600 mb-2'}>
+            100%
+          </div>
+          <p class="text-gray-600">Independent</p>
+        </div>
+          </div>
+        </div>
+  </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-gray-50 rounded-lg p-6 text-center">
-          <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-            <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+  <!-- ============================================ -->
+  <!-- 3. DEADLINE INFORMATION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.small)}>
+    <div class={DesignSystem.spacing.container.narrow}>
+      <!-- Quick Answer Box -->
+      <div class="bg-gray-50 border-l-4 border-gray-400 rounded-r-lg p-4 mb-6">
+        <p class="font-semibold text-gray-900 mb-2">Quick Answer:</p>
+        <p class="text-gray-700">You can switch basic health insurance by 30 November 2025, and supplementary by 30 September 2025. Most people save CHF 500-2,000/year by switching.</p>
+      </div>
+
+      <div class="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 md:p-8">
+        <div class="flex items-start">
+          <div class="flex-shrink-0 mr-4">
+            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 text-gray-600">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Premiums Rising ~6%</h3>
-          <p class="text-gray-600 text-sm">Average premium increase expected for 2026</p>
         </div>
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">
+              Important Deadlines for 2026
+            </h2>
+            
+            <!-- Key Facts Structured Data -->
+            <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <dt class="font-semibold text-gray-700 mb-1">Supplementary Insurance:</dt>
+                <dd class="text-gray-900 font-bold text-lg">30 September 2025</dd>
+          </div>
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <dt class="font-semibold text-gray-700 mb-1">Basic Insurance:</dt>
+                <dd class="text-gray-900 font-bold text-lg">30 November 2025</dd>
+        </div>
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <dt class="font-semibold text-gray-700 mb-1">Average Savings:</dt>
+                <dd class="text-gray-900 font-semibold">CHF 500-2,000 per year</dd>
+      </div>
+              <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <dt class="font-semibold text-gray-700 mb-1">Processing Time:</dt>
+                <dd class="text-gray-900 font-semibold">2-4 weeks</dd>
+              </div>
+            </dl>
 
-        <div class="bg-gray-50 rounded-lg p-6 text-center">
-          <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-            <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-gray-50 border border-gray-300 rounded-lg p-4">
+              <p class="text-gray-700">
+                <strong>Note:</strong> Missing these deadlines means you cannot switch until the next annual period.
+              </p>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4. WHY SWITCH (EXPANDED TO 6 REASONS) -->
+  <!-- ============================================ -->
+  <section id="why-switch" class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          Why Switch Your Health Insurance?
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Switching providers can save you thousands while getting better coverage. Here's why people switch:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <!-- Reason 1: Premiums Rising -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class={DesignSystem.components.icon.medium + ' mx-auto mb-4'}>
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+              </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">Premiums Rising 6%</h3>
+          <p class="text-gray-600 text-center">2026 premiums increasing significantly. Switch now to avoid higher costs.</p>
+              </div>
+
+        <!-- Reason 2: Save Money -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class={DesignSystem.components.icon.medium + ' mx-auto mb-4'}>
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"/>
             </svg>
+            </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">Save CHF 500-2,000/year</h3>
+          <p class="text-gray-600 text-center">Most expats save significantly by switching providers or models.</p>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Save CHF 500–2,000/year</h3>
-          <p class="text-gray-600 text-sm">Potential annual savings by switching</p>
-        </div>
 
-        <div class="bg-gray-50 rounded-lg p-6 text-center">
-          <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-            <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Life Changes</h3>
-          <p class="text-gray-600 text-sm">Family growth, relocation, new needs</p>
-        </div>
-
-        <div class="bg-gray-50 rounded-lg p-6 text-center">
-          <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-            <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Reason 3: Service Issues -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class={DesignSystem.components.icon.medium + ' mx-auto mb-4'}>
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">Better Service</h3>
+          <p class="text-gray-600 text-center">Poor claims processing or limited networks? Time to upgrade your experience.</p>
+              </div>
+
+        <!-- Reason 4: Coverage Mismatch -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class={DesignSystem.components.icon.medium + ' mx-auto mb-4'}>
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Dissatisfied with Service</h3>
-          <p class="text-gray-600 text-sm">Poor support, claims issues, network limitations</p>
-        </div>
-      </div>
-
-      <div class="bg-red-50 border border-red-200 rounded-lg p-8 text-center">
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Ready to Save on Your Health Insurance?</h3>
-        <p class="text-gray-700 mb-6">Compare options and find better coverage without the hassle.</p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onclick="window.openHealthModal('change')"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300 shadow-lg"
-          >
-            🟥 Book Free Consultation (recommended)
-          </button>
-          <button
-            onclick="window.openHealthModal('switch')"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg"
-          >
-            🟩 Get 3 Best Offers (≈1 min)
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Deadlines Section -->
-  <div id="deadlines" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Deadlines You Must Know</h2>
-
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-red-500">
-            <div class="flex items-center mb-6">
-              <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mr-4">
-                <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold text-gray-900">Supplementary Insurance</h3>
-                <p class="text-gray-600">Cancel by <span class="font-semibold text-red-600">30 September 2025</span></p>
-              </div>
             </div>
-            <p class="text-gray-700">Dental, hospital, alternative medicine coverage requires advance notice to avoid automatic renewal.</p>
-          </div>
-
-          <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-red-500">
-            <div class="flex items-center mb-6">
-              <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mr-4">
-                <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold text-gray-900">Basic Insurance (KVG/LAMal)</h3>
-                <p class="text-gray-600">Switch until <span class="font-semibold text-red-600">30 November 2025</span></p>
-              </div>
-            </div>
-            <p class="text-gray-700">Mandatory coverage for all Swiss residents. Switch providers for better rates or service.</p>
-          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">Coverage Doesn't Fit</h3>
+          <p class="text-gray-600 text-center">Your needs changed but your insurance didn't. Get coverage that actually matches your life.</p>
         </div>
 
-        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
-          <div class="flex items-start">
-            <div class="bg-red-100 rounded-full p-2 mr-4 mt-1">
-              <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+        <!-- Reason 5: Life & Family Changes (NEW) -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class={DesignSystem.components.icon.medium + ' mx-auto mb-4'}>
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
               </svg>
             </div>
-            <div>
-              <h3 class="text-lg font-semibold text-red-900 mb-2">⚠️ If missed → locked in for another year</h3>
-              <p class="text-red-800">Missing these deadlines means you cannot switch until next year. Plan ahead to avoid being stuck with higher premiums or unsatisfactory coverage.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">Life & Family Changes</h3>
+          <p class="text-gray-600 text-center">Marriage, babies, divorce - your insurance should adapt to new life stages and family needs.</p>
   </div>
 
-  <!-- Ways to Reduce Premium Section -->
-  <div id="compare" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Ways to Reduce Your Premium</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-        {savingMethods.map(method => (
-          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border border-gray-100">
-            <div class="flex items-center justify-center h-14 w-14 rounded-full bg-gradient-to-br from-red-100 to-red-50 text-red-600 mb-6 mx-auto">
+        <!-- Reason 6: Moving Cantons (NEW) -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class={DesignSystem.components.icon.medium + ' mx-auto mb-4'}>
               <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center">{method.title}</h3>
-            <div class="bg-red-50 text-red-700 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">
-              Savings: {method.savings}
+          <h3 class="text-xl font-bold text-gray-900 mb-2 text-center">Moving Cantons</h3>
+          <p class="text-gray-600 text-center">Premiums vary 100%+ between cantons. Example: Zug CHF 191/month vs Geneva CHF 438/month.</p>
             </div>
-            <p class="text-gray-600">{method.description}</p>
-          </div>
-        ))}
       </div>
       
-      <div class="max-w-3xl mx-auto bg-gradient-to-br from-primary-50 to-white rounded-lg shadow-md p-8 border border-primary-50">
-        <h3 class="text-2xl font-bold text-gray-900 mb-6">Smart Strategies to Lower Your Health Insurance Costs</h3>
-        
-        <div class="space-y-6">
-          <div class="flex items-start">
-            <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
-              <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <!-- CTA -->
+      <div class="mt-12 text-center">
+        <button
+          class={DesignSystem.components.button.primary}
+          onclick="window.openHealthModal('switch')"
+        >
+          Find My Best Options
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
+        </button>
             </div>
+            </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4.5 2026 PREMIUM COMPARISON (NEW) -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          2026 Premium Changes by Canton
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Real examples showing why switching now matters. See actual 2026 premiums across major Swiss cantons.
+        </p>
+          </div>
+          
+      <!-- Canton Comparison Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+        <!-- Zurich Card -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'hover:border-red-300')}>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-gray-900">{premiumData.locations.horgen_zurich.name}</h3>
+            <span class="px-3 py-1 bg-red-50 text-red-700 rounded-full text-sm font-semibold">
+              {premiumData.locations.horgen_zurich.region}
+            </span>
+            </div>
+          <div class="space-y-3">
             <div>
-              <h4 class="text-lg font-semibold text-gray-900 mb-1">Compare Multiple Providers</h4>
-              <p class="text-gray-600">Don't just renew automatically. The same coverage can cost vastly different amounts depending on the provider. Using a comparison service like Expat Savvy can help identify the most cost-effective options while maintaining your desired coverage level.</p>
+              <p class="text-gray-600 text-sm">Average Monthly Premium:</p>
+              <p class="text-3xl font-bold text-gray-900">CHF {premiumData.quickComparisons.averageByLocation.horgen_zurich}</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p class="text-green-900 font-semibold text-sm">Best Option Available:</p>
+              <p class="text-green-800"><strong>{premiumData.quickComparisons.cheapestByLocation.horgen_zurich.company} {premiumData.quickComparisons.cheapestByLocation.horgen_zurich.model}</strong> - CHF {premiumData.quickComparisons.cheapestByLocation.horgen_zurich.premium}/month</p>
+              <p class="text-green-700 text-sm mt-1">Save up to <strong>CHF {(premiumData.quickComparisons.averageByLocation.horgen_zurich - premiumData.quickComparisons.cheapestByLocation.horgen_zurich.premium) * 12}</strong>/year</p>
+          </div>
+            <div class="text-sm text-gray-600">
+              <p><strong>Range:</strong> CHF {premiumData.quickComparisons.cheapestByLocation.horgen_zurich.premium} - CHF {Math.max(...Object.values(premiumData.locations.horgen_zurich.companies).map((c: any) => c.standard))}</p>
+            </div>
             </div>
           </div>
           
-          <div class="flex items-start">
-            <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
-              <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+        <!-- Zug Card -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'hover:border-red-300')}>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-gray-900">{premiumData.locations.zug.name}</h3>
+            <span class="px-3 py-1 bg-red-50 text-red-700 rounded-full text-sm font-semibold">
+              {premiumData.locations.zug.region}
+            </span>
             </div>
+          <div class="space-y-3">
             <div>
-              <h4 class="text-lg font-semibold text-gray-900 mb-1">Consider Your Actual Healthcare Needs</h4>
-              <p class="text-gray-600">If you rarely visit the doctor and have minimal anticipated healthcare needs, a higher deductible (franchise) could be economical. However, if you have chronic conditions or expect significant medical expenses, a lower deductible might be more cost-effective in the long run.</p>
+              <p class="text-gray-600 text-sm">Average Monthly Premium:</p>
+              <p class="text-3xl font-bold text-gray-900">CHF {premiumData.quickComparisons.averageByLocation.zug}</p>
             </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p class="text-green-900 font-semibold text-sm">Best Option Available:</p>
+              <p class="text-green-800"><strong>{premiumData.quickComparisons.cheapestByLocation.zug.company} {premiumData.quickComparisons.cheapestByLocation.zug.model}</strong> - CHF {premiumData.quickComparisons.cheapestByLocation.zug.premium}/month</p>
+              <p class="text-green-700 text-sm mt-1">Save up to <strong>CHF {(premiumData.quickComparisons.averageByLocation.zug - premiumData.quickComparisons.cheapestByLocation.zug.premium) * 12}</strong>/year</p>
           </div>
-          
-          <div class="flex items-start">
-            <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
-              <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 mb-1">Evaluate Supplementary Insurance</h4>
-              <p class="text-gray-600">Review any supplementary policies to ensure they're providing value for the premium paid. It might be more cost-effective to pay for certain services out-of-pocket rather than through supplementary insurance if you use them infrequently.</p>
-            </div>
-          </div>
-          
-          <div class="flex items-start">
-            <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
-              <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 mb-1">Maximize Payment Discounts</h4>
-              <p class="text-gray-600">Many insurers offer discounts for annual payments, electronic billing, or family policies. These modest discounts can add up to meaningful savings over time.</p>
-            </div>
-          </div>
+            <div class="text-sm text-gray-600">
+              <p><strong>Range:</strong> CHF {premiumData.quickComparisons.cheapestByLocation.zug.premium} - CHF {Math.max(...Object.values(premiumData.locations.zug.companies).map((c: any) => c.standard))}</p>
         </div>
-        
-        <div class="mt-6 text-center">
-          <button
-            onclick="window.openHealthModal('change')"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all shadow-md hover:shadow-lg"
-          >
-            Get a Personalized Premium Analysis
-          </button>
+            {premiumData.locations.zug.specialNote && (
+              <div class="text-xs text-blue-700 bg-blue-50 p-2 rounded">
+                💡 {premiumData.locations.zug.specialNote}
         </div>
-      </div>
+            )}
     </div>
   </div>
 
-  <!-- How to Switch Section -->
-  <div id="how-to-switch" class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">How to Switch Health Insurance in 3 Steps</h2>
+        <!-- Geneva Card -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'hover:border-red-300')}>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-gray-900">{premiumData.locations.geneva.name}</h3>
+            <span class="px-3 py-1 bg-red-50 text-red-700 rounded-full text-sm font-semibold">
+              {premiumData.locations.geneva.region}
+            </span>
+            </div>
+          <div class="space-y-3">
+            <div>
+              <p class="text-gray-600 text-sm">Average Monthly Premium:</p>
+              <p class="text-3xl font-bold text-gray-900">CHF {premiumData.quickComparisons.averageByLocation.geneva}</p>
+          </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p class="text-green-900 font-semibold text-sm">Best Option Available:</p>
+              <p class="text-green-800"><strong>{premiumData.quickComparisons.cheapestByLocation.geneva.company} {premiumData.quickComparisons.cheapestByLocation.geneva.model}</strong> - CHF {premiumData.quickComparisons.cheapestByLocation.geneva.premium}/month</p>
+              <p class="text-green-700 text-sm mt-1">Save up to <strong>CHF {(premiumData.quickComparisons.averageByLocation.geneva - premiumData.quickComparisons.cheapestByLocation.geneva.premium) * 12}</strong>/year</p>
+            </div>
+            <div class="text-sm text-gray-600">
+              <p><strong>Range:</strong> CHF {premiumData.quickComparisons.cheapestByLocation.geneva.premium} - CHF {Math.max(...Object.values(premiumData.locations.geneva.companies).map((c: any) => c.standard))}</p>
+          </div>
+          </div>
+        </div>
 
-      <div class="max-w-5xl mx-auto">
+        <!-- Basel Card -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'hover:border-red-300')}>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold text-gray-900">{premiumData.locations.basel.name}</h3>
+            <span class="px-3 py-1 bg-red-50 text-red-700 rounded-full text-sm font-semibold">
+              {premiumData.locations.basel.region}
+            </span>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <p class="text-gray-600 text-sm">Average Monthly Premium:</p>
+              <p class="text-3xl font-bold text-gray-900">CHF {premiumData.quickComparisons.averageByLocation.basel}</p>
+        </div>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p class="text-green-900 font-semibold text-sm">Best Option Available:</p>
+              <p class="text-green-800"><strong>{premiumData.quickComparisons.cheapestByLocation.basel.company} {premiumData.quickComparisons.cheapestByLocation.basel.model}</strong> - CHF {premiumData.quickComparisons.cheapestByLocation.basel.premium}/month</p>
+              <p class="text-green-700 text-sm mt-1">Save up to <strong>CHF {(premiumData.quickComparisons.averageByLocation.basel - premiumData.quickComparisons.cheapestByLocation.basel.premium) * 12}</strong>/year</p>
+      </div>
+            <div class="text-sm text-gray-600">
+              <p><strong>Range:</strong> CHF {premiumData.quickComparisons.cheapestByLocation.basel.premium} - CHF {Math.max(...Object.values(premiumData.locations.basel.companies).map((c: any) => c.standard))}</p>
+    </div>
+  </div>
+          </div>
+        </div>
+
+      <!-- Source Note -->
+      <p class="text-center text-sm text-gray-500 italic">
+        Data source: {premiumData.metadata.source} | Profile: {premiumData.metadata.profile}
+      </p>
+
+      <!-- CTA -->
+      <div class="mt-12 text-center">
+            <button
+          class={DesignSystem.components.button.primary}
+          onclick="window.openHealthModal('switch')"
+            >
+          Calculate My Savings
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
+        <p class="mt-3 text-sm text-gray-600">
+          See personalized comparisons for your canton, age, and coverage needs
+        </p>
+          </div>
+        </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 5. WAYS TO SAVE -->
+  <!-- ============================================ -->
+  <section id="save-money" class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          4 Ways to Reduce Your Premium
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Smart strategies to lower your health insurance costs without compromising coverage.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <!-- Method 1: Telmed/HMO -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'text-center')}>
+          <div class="inline-block px-4 py-2 bg-red-50 text-red-700 rounded-full text-sm font-semibold mb-4">
+            Save up to 25%
+              </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Telmed/HMO Models</h3>
+          <p class="text-gray-600">Choose alternative models like family doctor or telehealth consultation first. Learn more in our <a href="/blog/health-insurance-models-switzerland" class="text-red-600 hover:underline">insurance models guide</a>.</p>
+            </div>
+
+        <!-- Method 2: Higher Deductible -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'text-center')}>
+          <div class="inline-block px-4 py-2 bg-red-50 text-red-700 rounded-full text-sm font-semibold mb-4">
+            Variable savings
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Higher Deductible</h3>
+          <p class="text-gray-600">Increase your franchise from CHF 300 to CHF 2,500 for lower monthly premiums</p>
+      </div>
+      
+        <!-- Method 3: Annual Payment -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'text-center')}>
+          <div class="inline-block px-4 py-2 bg-red-50 text-red-700 rounded-full text-sm font-semibold mb-4">
+            Save 2-4%
+                </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Annual Payment</h3>
+          <p class="text-gray-600">Pay premiums yearly instead of monthly for insurer discounts</p>
+              </div>
+              
+        <!-- Method 4: Premium Subsidies -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, 'text-center')}>
+          <div class="inline-block px-4 py-2 bg-red-50 text-red-700 rounded-full text-sm font-semibold mb-4">
+            Save up to 80%
+                </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Premium Subsidies</h3>
+          <p class="text-gray-600">Check cantonal premium reduction eligibility based on income and assets</p>
+                </div>
+              </div>
+            </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 6. HOW TO SWITCH -->
+  <!-- ============================================ -->
+  <section id="how-to-switch" class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          How to Switch in 3 Simple Steps
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          The switching process is straightforward when you know what to do. If you're new to Switzerland, check our <a href="/healthcare/new-health-insurance" class="text-red-600 hover:underline">new arrivals guide</a>.
+        </p>
+                </div>
+
+      <!-- Steps -->
+      <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <!-- Step 1 -->
           <div class="text-center">
             <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-              <span class="text-2xl font-bold text-red-600">1</span>
-            </div>
+              <span class="text-3xl font-bold text-red-600">1</span>
+                </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">Compare Providers</h3>
-            <p class="text-gray-600 mb-6">Review different insurance companies and their offerings. Compare premiums, models (Telmed/HMO), and coverage options.</p>
-            <svg class="h-12 w-12 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-            </svg>
-          </div>
-
+            <p class="text-gray-600">Review different insurance companies and their offerings. Use our <a href="/compare-providers" class="text-red-600 hover:underline">provider comparison tool</a> to see premiums and coverage.</p>
+              </div>
+              
+          <!-- Step 2 -->
           <div class="text-center">
             <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-              <span class="text-2xl font-bold text-red-600">2</span>
-            </div>
+              <span class="text-3xl font-bold text-red-600">2</span>
+                </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">Send Cancellation</h3>
-            <p class="text-gray-600 mb-6">Send termination letter by registered mail before deadline. Basic insurance: 30 November, Supplementary: 30 September.</p>
-            <svg class="h-12 w-12 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
-          </div>
+            <p class="text-gray-600">Send termination letter by registered mail before deadline. We can handle this for you.</p>
+                </div>
 
+          <!-- Step 3 -->
           <div class="text-center">
             <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-              <span class="text-2xl font-bold text-red-600">3</span>
+              <span class="text-3xl font-bold text-red-600">3</span>
+              </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Apply to New Insurer</h3>
+            <p class="text-gray-600">Complete application with chosen provider. Basic insurance has guaranteed acceptance.</p>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Apply New Insurance</h3>
-            <p class="text-gray-600 mb-6">Complete application with chosen provider. Basic insurance has guaranteed acceptance for all applicants.</p>
-            <svg class="h-12 w-12 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
           </div>
-        </div>
-
-        <div class="bg-gray-50 rounded-lg p-8 text-center">
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Need Help with the Process?</h3>
-          <p class="text-gray-700 mb-6">We handle all the paperwork, cancellations, and applications for you.</p>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          
+        <!-- CTA Box -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 text-center border border-gray-200">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">We Handle Everything For You</h3>
+          <p class="text-gray-600 mb-6">From comparing providers to completing paperwork, we manage the entire switching process.</p>
             <button
-              onclick="window.openHealthModal('switch')"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300 shadow-lg"
+            class={DesignSystem.components.button.primary}
+            onclick="window.openHealthModal('switch')"
             >
-              🟥 Book Free Consultation (recommended)
-            </button>
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg"
-            >
-              🟩 Get 3 Best Offers (≈1 min)
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- How Expat-Savvy Helps Section -->
-  <div id="expat-savvy-service" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">How Expat-Savvy Helps You Switch</h2>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <div class="bg-white rounded-lg shadow-lg p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">Independent Broker for Expats</h3>
-            <ul class="space-y-4">
-              <li class="flex items-start">
-                <svg class="h-6 w-6 text-red-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span class="text-gray-700">Access to Helsana, Swica, CSS, Sanitas & more</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="h-6 w-6 text-red-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-                <span class="text-gray-700">AI-powered premium calculator</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="h-6 w-6 text-red-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                </svg>
-                <span class="text-gray-700">Tailored advice in English (outside office hours)</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="h-6 w-6 text-red-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-                <span class="text-gray-700">We handle cancellation + application paperwork</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="h-6 w-6 text-red-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"/>
-                </svg>
-                <span class="text-gray-700">Free & no obligation</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="text-center lg:text-left">
-          <div class="bg-red-50 border border-red-200 rounded-lg p-8 mb-8">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Let us handle your switch — stress-free!</h3>
-            <p class="text-gray-700 mb-6">From deadline tracking to paperwork completion, we manage everything so you can focus on what matters most.</p>
-            <button
-              onclick="window.openHealthModal('switch')"
-              class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-300 shadow-lg"
-            >
-              🟥 Book Free Consultation (recommended)
+            Let Us Handle It
               <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
           </div>
         </div>
       </div>
-    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 7. HOW WE HELP (WITH VALUE PROPOSITION) -->
+  <!-- ============================================ -->
+  <section id="expat-savvy-service" class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          How Expat-Savvy Makes Switching Easy
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Independent broker service designed specifically for expats navigating Swiss health insurance.
+        </p>
   </div>
 
-  <!-- Ways to Save Money Section ---->
-  <div id="save-money" class="bg-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Lower Your Premiums</span>
-        <h2 class="mt-2 text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Ways to Lower Premiums</h2>
-        <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">Smart strategies to reduce your health insurance costs while maintaining quality coverage.</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+        <!-- Left: Image -->
+        <div class="order-2 lg:order-1">
+          <img
+            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_800,f_auto,q_auto/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp"
+            alt="Insurance advisor helping expat switch health insurance in Switzerland"
+            class="rounded-2xl shadow-xl w-full"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        {savingMethods.map((method) => (
-          <div class="group">
-            <div class="bg-white rounded-2xl p-6 h-full shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-              <div class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold mb-4 ${method.color}`}>
-                Save: {method.savings}
-              </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-3">{method.title}</h3>
-              <p class="text-gray-600 leading-relaxed">{method.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <!-- Additional Savings Tips -->
-      <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-8 md:p-12 border border-green-200">
-        <div class="max-w-4xl mx-auto">
-          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Smart Strategies to Maximize Your Savings</h3>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="space-y-6">
-              <div class="flex items-start">
-                <div class="flex-shrink-0 h-8 w-8 bg-green-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Compare Multiple Providers</h4>
-                  <p class="text-gray-700">The same coverage can vary significantly in cost. Use comparison tools to find the best value.</p>
-                </div>
-              </div>
-              
-              <div class="flex items-start">
-                <div class="flex-shrink-0 h-8 w-8 bg-green-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Assess Your Healthcare Needs</h4>
-                  <p class="text-gray-700">Match your deductible and model to your actual usage patterns for optimal savings.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div class="space-y-6">
-              <div class="flex items-start">
-                <div class="flex-shrink-0 h-8 w-8 bg-green-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Review Supplementary Coverage</h4>
-                  <p class="text-gray-700">Evaluate if supplementary policies provide value or if out-of-pocket payments make more sense.</p>
-                </div>
-              </div>
-              
-              <div class="flex items-start">
-                <div class="flex-shrink-0 h-8 w-8 bg-green-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Maximize Payment Discounts</h4>
-                  <p class="text-gray-700">Take advantage of annual payment discounts and electronic billing savings.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-8 text-center">
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-2xl text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Calculate My Potential Savings
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- How Expat-Savvy Helps Section -->
-  <div id="expat-savvy-service" class="bg-gray-50 py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <span class="text-red-600 font-semibold text-sm uppercase tracking-wider">Expert Support</span>
-        <h2 class="mt-2 text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">How Expat-Savvy Helps You Switch</h2>
-        <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">Independent broker service designed specifically for expats navigating Swiss health insurance.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
-        <!-- Left: Service Features -->
-        <div>
-          <div class="space-y-8">
+        <!-- Right: Value Props -->
+        <div class="order-1 lg:order-2 space-y-6">
+          <!-- Value 1 -->
             <div class="flex items-start">
-              <div class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-2xl flex items-center justify-center mr-6">
-                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex-shrink-0 mr-4">
+              <div class={DesignSystem.components.icon.medium}>
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                 </svg>
               </div>
+              </div>
               <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Independent Broker for Expats</h3>
-                <p class="text-gray-700">Access to Helsana, Swica, CSS, Sanitas & more. We compare the entire Swiss market to find what's best for you.</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Independent Broker</h3>
+              <p class="text-gray-600">Access to all Swiss insurers (Helsana, Swica, CSS, Sanitas & more). We compare the entire market for you.</p>
               </div>
             </div>
             
+          <!-- Value 2 -->
             <div class="flex items-start">
-              <div class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-2xl flex items-center justify-center mr-6">
-                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">AI-Powered Premium Calculator</h3>
-                <p class="text-gray-700">Get instant, accurate premium comparisons and discover your potential savings with our advanced AI tools.</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start">
-              <div class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-2xl flex items-center justify-center mr-6">
-                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex-shrink-0 mr-4">
+              <div class={DesignSystem.components.icon.medium}>
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                 </svg>
               </div>
+              </div>
               <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">English-Speaking Support</h3>
-                <p class="text-gray-700">Tailored advice in English, available outside office hours. No language barriers, no confusion.</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">English-Speaking Support</h3>
+              <p class="text-gray-600">Tailored advice in English, available outside office hours. No language barriers, no confusion.</p>
               </div>
             </div>
             
+          <!-- Value 3 -->
             <div class="flex items-start">
-              <div class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-2xl flex items-center justify-center mr-6">
-                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Complete Paperwork Handling</h3>
-                <p class="text-gray-700">We handle all cancellations, applications, and paperwork. Focus on what matters while we manage the bureaucracy.</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start">
-              <div class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-2xl flex items-center justify-center mr-6">
-                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex-shrink-0 mr-4">
+              <div class={DesignSystem.components.icon.medium}>
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"/>
                 </svg>
               </div>
+              </div>
               <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Free & No Obligation</h3>
-                <p class="text-gray-700">Our service is completely free. We're compensated by insurers, so you pay nothing for expert guidance.</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Free & No Obligation</h3>
+              <p class="text-gray-600">Our service is completely free. We're compensated by insurers, so you pay nothing for expert guidance.</p>
+              </div>
+            </div>
+            
+          <!-- Value 4 -->
+            <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4">
+              <div class={DesignSystem.components.icon.medium}>
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              </div>
+              <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Paperwork Handled</h3>
+              <p class="text-gray-600">We handle all cancellations, applications, and paperwork. Focus on what matters while we manage the bureaucracy.</p>
+              </div>
+            </div>
+            
+          <!-- Value 5 -->
+            <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4">
+              <div class={DesignSystem.components.icon.medium}>
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              </div>
+              <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Deadline Tracking</h3>
+              <p class="text-gray-600">We track all deadlines and ensure your cancellation and application are submitted on time.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: CTA Box -->
-        <div>
-          <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
-            <h3 class="text-2xl md:text-3xl font-bold mb-6">Let us handle your switch — stress-free!</h3>
-            <p class="text-red-100 mb-8 text-lg leading-relaxed">
-              From deadline tracking to paperwork completion, we manage everything so you can focus on what matters most.
-            </p>
-            
-            <div class="space-y-4">
-              <button
-                onclick="window.openHealthModal('switch')"
-                class="w-full inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-2xl text-red-700 bg-white hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                <span class="mr-3">🟥</span>
-                Book Free Consultation
-                <span class="ml-2 px-2 py-1 bg-red-100 rounded-full text-xs text-red-700">recommended</span>
-              </button>
-              
-              <button
-                onclick="window.openHealthModal('comparison')"
-                class="w-full inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-2xl text-white bg-red-800 bg-opacity-50 hover:bg-opacity-70 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-white border-opacity-20"
-              >
-                <span class="mr-3">🟩</span>
-                Get 3 Best Offers
-                <span class="ml-2 text-sm opacity-80">(~1 min)</span>
-              </button>
             </div>
-            
-            <div class="mt-6 flex items-center text-sm text-red-100">
-              <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Free consultation • No obligation • English-speaking support
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 8. FAQ SECTION -->
+  <!-- ============================================ -->
+  <section id="faq" class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.narrow}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          Frequently Asked Questions
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600'}>
+          Get answers to common questions about switching health insurance in Switzerland. For retirement planning, see our <a href="/3rd-pillar" class="text-red-600 hover:underline">3rd pillar guide</a>.
+        </p>
   </div>
 
-  <!-- FAQ Section -->
-  <div id="faq" class="bg-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <span class="text-red-600 font-semibold text-sm uppercase tracking-wider">Frequently Asked Questions</span>
-        <h2 class="mt-2 text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Your Questions Answered</h2>
-        <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">Get clarity on the most common questions about switching health insurance in Switzerland.</p>
-      </div>
-
-      <div class="max-w-4xl mx-auto">
-        <div class="space-y-8">
+      <div class="space-y-6">
           {faqs.map((faq, index) => (
-            <div class="group">
-              <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="flex items-start">
-                  <div class="flex-shrink-0 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl h-12 w-12 flex items-center justify-center mr-6">
-                    <span class="text-blue-600 font-bold text-lg">Q{index + 1}</span>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-700 transition-colors">{faq.question}</h3>
-                    <p class="text-gray-700 leading-relaxed">{faq.answer}</p>
-                  </div>
-                </div>
-              </div>
+          <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">{faq.question}</h3>
+            <p class="text-gray-700 leading-relaxed" set:html={faq.answer} />
             </div>
           ))}
         </div>
         
-        <div class="mt-16 bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 md:p-12 text-center border border-blue-100">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Have More Questions?</h3>
-          <p class="text-gray-700 mb-8 text-lg">Our Swiss health insurance experts are here to help with any specific questions about your situation.</p>
+      <!-- FAQ CTA -->
+      <div class="mt-12 text-center">
+        <p class="text-gray-600 mb-6">Have more questions? Our experts are here to help.</p>
           <button
-            onclick="window.openHealthModal('change')"
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-2xl text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+          class={DesignSystem.components.button.secondary}
+          onclick="window.openHealthModal('review')"
           >
-            Ask Our Insurance Experts
+          Ask Our Experts
             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </button>
         </div>
       </div>
-    </div>
-  </div>
+  </section>
 
-  <!-- Final CTA Section -->
-  <div class="bg-gradient-to-r from-red-600 to-red-800 py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Ready to Switch Your Health Insurance?</h2>
-        <div class="bg-red-700/60 rounded-2xl p-6 mb-8 inline-block backdrop-blur-sm">
+  <!-- ============================================ -->
+  <!-- EXIT INTENT VALUE PROP (NEW) -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", "py-12 md:py-16")}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="bg-gray-100 rounded-2xl p-8 md:p-12">
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8">
+          Still Not Sure If Switching Is Worth It?
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-center">
+          <div>
+            <p class="text-4xl md:text-5xl font-bold text-red-600 mb-2">60 min</p>
+            <p class="text-gray-700 text-lg">Average consultation time</p>
+    </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-bold text-red-600 mb-2">CHF 1,500</p>
+            <p class="text-gray-700 text-lg">Average annual savings</p>
+  </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-bold text-red-600 mb-2">96%</p>
+            <p class="text-gray-700 text-lg">Client satisfaction rate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 9. FINAL CTA -->
+  <!-- ============================================ -->
+  <section class="bg-gradient-to-r from-red-600 to-red-800 py-16 md:py-20">
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">
+          Ready to Switch and Save?
+        </h2>
+        
+        <!-- Deadline Reminder Box -->
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 mb-8 inline-block">
           <p class="text-white text-lg mb-2">
             ⚡ Don't miss the 2026 switching deadlines:
           </p>
-          <p class="text-white font-semibold text-xl">
+          <p class="text-white font-bold text-xl">
             Supplementary → 30 September · Basic → 30 November
           </p>
         </div>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
+        <!-- CTAs Side by Side -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <!-- Primary CTA -->
           <button
-            onclick="window.openHealthModal('change')"
-            class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold rounded-2xl text-red-600 bg-white hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 min-w-[280px]"
-          >
-            <span class="mr-3">🟥</span>
-            Book Free Consultation
-            <span class="ml-2 px-3 py-1 bg-red-100 rounded-full text-sm text-red-600">recommended</span>
-          </button>
-          <button
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-2xl text-red-600 bg-white hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl"
             onclick="window.openHealthModal('switch')"
-            class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold rounded-2xl text-white bg-red-800 bg-opacity-60 hover:bg-opacity-80 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 border-2 border-white border-opacity-30 min-w-[280px]"
           >
-            <span class="mr-3">🟩</span>
-            Get 3 Best Offers
-            <span class="ml-2 text-lg opacity-90">(~1 min)</span>
+            Get Personalized Recommendations
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+
+          <!-- Secondary CTA -->
+          <button
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-2xl text-white bg-transparent hover:bg-white/10 border-2 border-white transition-all duration-200"
+            onclick="window.openHealthModal('comparing')"
+          >
+            Quick Self-Service Quote
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
+            </svg>
           </button>
         </div>
 
-        <div class="text-red-100 text-lg">
+        <!-- Trust Indicators -->
+        <div class="text-red-100">
           <div class="flex items-center justify-center mb-2">
             <svg class="h-5 w-5 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
-            Free consultation • No obligation • English-speaking support
+            <span>Free • No obligation • English support</span>
           </div>
-          <p class="text-base opacity-90">
-            Join 1000+ expats who've optimized their Swiss health insurance with Expat-Savvy
-          </p>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50 shadow-lg">
+    <button 
+      class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
+      onclick="window.openHealthModal('switch')"
+    >
+      Get My Best Options
+      <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </button>
   </div>
 
+  <!-- ============================================ -->
+  <!-- SCHEMA MARKUP (SEO) -->
+  <!-- ============================================ -->
 
-  <!-- Schema Markup for SEO -->
+  <!-- Article Schema -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Switching Health Insurance in Switzerland 2025 | Complete Guide",
-    "description": "Expert guide on changing health insurance in Switzerland. Learn when and how to switch providers, compare options, and save on premiums. Free consultation available.",
+    "headline": "Complete Guide to Switching Health Insurance in Switzerland 2026",
+    "description": "Expert guide on changing health insurance providers in Switzerland. Learn deadlines, save CHF 500-2,000/year, and get free expert help.",
     "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp",
-    "datePublished": new Date().toISOString(),
+    "datePublished": "2025-01-15",
     "dateModified": new Date().toISOString(),
     "author": {
       "@type": "Person",
-      "name": "Benjamin Amos Wagner",
-      "url": "https://expat-savvy.ch/about"
+      "name": "Benjamin Wagner",
+      "jobTitle": "FINMA-Certified Insurance Advisor"
     },
     "publisher": {
       "@type": "Organization",
@@ -952,25 +833,16 @@ const meta = {
         "@type": "ImageObject",
         "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
       }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": Astro.url.href
     }
   }, null, 2)} />
 
-  <!-- HowTo Schema Markup -->
+  <!-- HowTo Schema -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Switch Health Insurance in Switzerland (2026)",
-    "description": "Complete guide to switching Swiss health insurance with deadlines, requirements, and step-by-step process for expats.",
+    "name": "How to Switch Health Insurance in Switzerland",
+    "description": "Complete guide to switching Swiss health insurance with deadlines and step-by-step process.",
     "totalTime": "PT30M",
-    "supply": [
-      "Current insurance policy details",
-      "ID or passport",
-      "Registered mail service"
-    ],
     "step": [
       {
         "@type": "HowToStep",
@@ -989,79 +861,11 @@ const meta = {
         "name": "Apply for New Insurance",
         "text": "Complete application with your chosen new insurance provider. Basic insurance has guaranteed acceptance.",
         "position": 3
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Confirm Coverage",
-        "text": "Receive confirmation from both old and new insurers ensuring seamless coverage transition.",
-        "position": 4
       }
     ]
   }, null, 2)} />
 
-  <!-- Service Schema Markup -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Health Insurance Switching Service",
-    "description": "Independent broker service helping expats switch Swiss health insurance. Compare options, handle paperwork, and save on premiums.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "url": "https://expat-savvy.ch",
-      "logo": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+41-44-123-4567",
-        "contactType": "customer service",
-        "availableLanguage": ["English", "German", "French"]
-      }
-    },
-    "areaServed": "CH",
-    "serviceType": "Health Insurance Broker",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "CHF",
-      "description": "Free consultation and comparison service"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Swiss Health Insurance Providers",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Helsana Health Insurance"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "CSS Health Insurance"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Swica Health Insurance"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Sanitas Health Insurance"
-          }
-        }
-      ]
-    }
-  }, null, 2)} />
-
-  <!-- FAQ Schema Markup -->
+  <!-- FAQ Schema -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -1070,12 +874,12 @@ const meta = {
       "name": faq.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": faq.answer
+        "text": faq.answer.replace(/<\/?strong>/g, '').replace(/<\/?a[^>]*>/g, '')
       }
     }))
   }, null, 2)} />
 
-  <!-- BreadcrumbList Schema -->
+  <!-- Breadcrumb Schema -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -1098,113 +902,6 @@ const meta = {
         "name": "Switching Health Insurance",
         "item": "https://expat-savvy.ch/healthcare/switching-health-insurance"
       }
-    ]
-  }, null, 2)} />
-
-  <!-- Insurance Service Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Health Insurance Consultation",
-    "provider": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "description": "Expert insurance consultancy for expats in Switzerland",
-      "url": "https://expat-savvy.ch/",
-      "logo": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "CH",
-        "addressLocality": "Zurich"
-      }
-    },
-    "description": "Expert guidance on switching health insurance providers in Switzerland, with personalized consultation services and premium comparison.",
-    "areaServed": {
-      "@type": "Country",
-      "name": "Switzerland"
-    },
-    "audience": {
-      "@type": "Audience",
-      "audienceType": "Expats and residents in Switzerland"
-    },
-    "offers": {
-      "@type": "Offer",
-      "offeredBy": {
-        "@type": "Organization",
-        "name": "Expat Savvy"
-      },
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Health Insurance Consultation"
-      },
-      "price": "0",
-      "priceCurrency": "CHF",
-      "availability": "https://schema.org/InStock"
-    }
-  }, null, 2)} />
-
-  <!-- HowTo Schema for the Switching Process -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Switch Health Insurance in Switzerland",
-    "description": "Complete guide to changing your health insurance provider in Switzerland for better rates and coverage.",
-    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp",
-    "totalTime": "PT1H",
-    "estimatedCost": {
-      "@type": "MonetaryAmount",
-      "currency": "CHF",
-      "value": "0"
-    },
-    "tool": [
-      {
-        "@type": "HowToTool",
-        "name": "Comparison tools"
-      },
-      {
-        "@type": "HowToTool",
-        "name": "Cancellation letter template"
-      }
-    ],
-    "step": steps.map((step, index) => ({
-      "@type": "HowToStep",
-      "position": index + 1,
-      "name": step.title,
-      "text": step.description,
-      "url": `${Astro.url.href}#how-to-switch`
-    }))
-  }, null, 2)} />
-
-  <!-- Local Business Schema for Expat Savvy -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Expat Savvy",
-    "description": "Expert insurance consultancy for expats in Switzerland",
-    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-    "url": "https://expat-savvy.ch/",
-    "telephone": "",
-    "email": "info@expat-savvy.ch",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "CH",
-      "addressLocality": "Zurich"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "priceRange": "Free consultation",
-    "sameAs": [
-      "https://www.linkedin.com/company/expat-savvy/"
     ]
   }, null, 2)} />
 
