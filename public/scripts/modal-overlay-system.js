@@ -48,10 +48,7 @@ class ModalOverlaySystem {
 
   async openModalOverlay(modalFile, options = {}) {
     try {
-      // Add cache-busting parameter
-      const cacheBuster = `?v=${Date.now()}`;
-      const modalFileWithCache = modalFile + cacheBuster;
-      console.log('🔄 Loading modal:', modalFileWithCache);
+      console.log('🔄 Loading modal:', modalFile);
       
       // Enhanced modal tracking
       const modalType = this.getModalTypeFromFile(modalFile);
@@ -90,7 +87,7 @@ class ModalOverlaySystem {
       this.isOpening = true;
       
       // Fetch modal HTML
-      const response = await fetch(modalFileWithCache);
+      const response = await fetch(modalFile);
       if (!response.ok) {
         throw new Error(`Failed to load modal: ${response.status}`);
       }
