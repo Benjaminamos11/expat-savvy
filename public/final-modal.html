@@ -481,14 +481,23 @@
     }
 
     window.closeModal = function closeModal() {
-      console.log('✅ Closing modal');
-      document.getElementById('modal').classList.add('hidden');
-      document.getElementById('modal').classList.remove('flex');
-      document.body.style.overflow = '';
-      setTimeout(() => {
-        currentStep = 1;
-        userData = { situation: '', complexity: 0, name: '', email: '', phone: '', formQuestions: 0 };
-      }, 300);
+      console.log('✅ Closing modal from final-modal.html');
+      
+      // Check if modal-overlay-system is managing this modal
+      if (typeof window.closeModalOverlay === 'function') {
+        console.log('🔄 Delegating to modal-overlay-system closeModalOverlay');
+        window.closeModalOverlay();
+      } else {
+        // Fallback to direct close if overlay system not present
+        console.log('📋 Closing directly (no overlay system)');
+        document.getElementById('modal').classList.add('hidden');
+        document.getElementById('modal').classList.remove('flex');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          currentStep = 1;
+          userData = { situation: '', complexity: 0, name: '', email: '', phone: '', formQuestions: 0 };
+        }, 300);
+      }
     }
 
     function showRobertHeader(show) {
