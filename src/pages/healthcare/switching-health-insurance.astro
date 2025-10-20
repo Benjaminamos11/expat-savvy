@@ -133,33 +133,56 @@ const meta = {
   </section>
 
   <!-- ============================================ -->
-  <!-- 2.1 BEFORE YOU SWITCH — CLARITY SECTION (NEW) -->
+  <!-- 2.1 BEFORE YOU SWITCH — CLARITY SECTION -->
   <!-- ============================================ -->
-  <section class={cn("bg-white", DesignSystem.spacing.section.small)}>
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
         <!-- Left: Copy -->
         <div>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6 tracking-tight">
             Before You Switch, You Need Clarity
           </h2>
-          <p class="text-gray-700 mb-4">
-            Most people don’t know exactly what they pay for or what’s covered. We review your current plan, explain your options in simple English, and show whether switching makes financial sense.
+          <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+            Most people we meet already have insurance — but don't know exactly what they're paying for or what's covered.
           </p>
-          <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start"><span class="mr-2">•</span> Identify unnecessary add-ons and overlaps</li>
-            <li class="flex items-start"><span class="mr-2">•</span> Check if your model (Standard/Telmed/HMO) still fits</li>
-            <li class="flex items-start"><span class="mr-2">•</span> Validate if a higher deductible actually saves you</li>
-            <li class="flex items-start"><span class="mr-2">•</span> Review supplementary benefits you really use</li>
+          <p class="text-gray-700 mb-6">
+            We review your current plan, explain your options clearly in English, and show whether switching makes financial or practical sense.
+          </p>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Identify unnecessary add-ons and overlaps</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Check if your model (Standard/Telmed/HMO) still fits</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Validate if a higher deductible actually saves you money</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Review supplementary benefits you really use</span>
+            </li>
           </ul>
-          <div class="mt-6">
+          <div class="mt-8">
             <button
               class={DesignSystem.components.button.primary}
               onclick="window.openHealthModal('switching')"
-              aria-label="Book personal consultation"
+              aria-label="Book free consultation"
             >
-              Book My Personal Consultation
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Book My Free Consultation →
+              <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
@@ -167,73 +190,143 @@ const meta = {
         </div>
 
         <!-- Right: Simple card -->
-        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="text-lg font-semibold text-gray-900 mb-3">Your Situation At A Glance</h3>
-          <dl class="grid grid-cols-1 gap-3 text-sm text-gray-700">
-            <div class="flex items-center justify-between">
-              <dt>Current insurer</dt>
-              <dd class="font-semibold">We’ll benchmark for you</dd>
+        <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-md">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Your Situation At A Glance</h3>
+          <dl class="grid grid-cols-1 gap-4 text-sm text-gray-700">
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+              <dt class="text-gray-600">Current insurer</dt>
+              <dd class="font-medium text-gray-900">We'll benchmark for you</dd>
             </div>
-            <div class="flex items-center justify-between">
-              <dt>Model</dt>
-              <dd class="font-semibold">Standard / Telmed / HMO</dd>
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+              <dt class="text-gray-600">Model</dt>
+              <dd class="font-medium text-gray-900">Standard / Telmed / HMO</dd>
             </div>
-            <div class="flex items-center justify-between">
-              <dt>Deductible</dt>
-              <dd class="font-semibold">CHF 300 – 2,500</dd>
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+              <dt class="text-gray-600">Deductible</dt>
+              <dd class="font-medium text-gray-900">CHF 300 – 2,500</dd>
             </div>
-            <div class="flex items-center justify-between">
-              <dt>Supplementary</dt>
-              <dd class="font-semibold">Hospital • Dental • Alternative</dd>
+            <div class="flex items-center justify-between py-2">
+              <dt class="text-gray-600">Supplementary</dt>
+              <dd class="font-medium text-gray-900">Hospital • Dental • Alternative</dd>
             </div>
           </dl>
-          <p class="text-xs text-gray-500 mt-4">Independent, FINMA-certified guidance. Free and unbiased.</p>
+          <p class="text-xs text-gray-500 mt-6 pt-4 border-t border-gray-100">Independent, FINMA-certified guidance. Free and unbiased.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Transition -->
+  <div class="py-6 bg-gray-50">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Most tools and direct insurers only show you prices — but not the real coverage differences or approval strategies.
+    </p>
+  </div>
+
   <!-- ========================================================= -->
-  <!-- 2.2 WHY ONLINE COMPARISONS AREN'T ENOUGH — COMPARISON (NEW) -->
+  <!-- 2.2 WHY ONLINE COMPARISONS AREN'T ENOUGH -->
   <!-- ========================================================= -->
-  <section class={cn("bg-gray-50", DesignSystem.spacing.section.small)}>
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
-      <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 text-center mb-8">
-        Why Online Comparisons Aren’t Enough
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-2">Generic Tools</h3>
-          <ul class="text-gray-700 text-sm space-y-2">
-            <li>– Limited insurers</li>
-            <li>– Doesn’t check pre-existing conditions</li>
-            <li>– No negotiation for group rates</li>
-            <li>– No help with cancellations</li>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+          Why Online Comparisons Aren't Enough
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
+          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Generic Tools</h3>
+          <ul class="text-gray-700 text-sm space-y-3">
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>Limited insurers</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>Doesn't check pre-existing conditions</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>No negotiation for group rates</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>No help with cancellations</span>
+            </li>
           </ul>
         </div>
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-2">Direct Insurer</h3>
-          <ul class="text-gray-700 text-sm space-y-2">
-            <li>– Only their own products</li>
-            <li>– No independent advice</li>
-            <li>– Up-selling of add-ons</li>
-            <li>– Slow support</li>
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
+          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Direct Insurer</h3>
+          <ul class="text-gray-700 text-sm space-y-3">
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>Only their own products</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>No independent advice</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>Up-selling of add-ons</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              <span>Slow support</span>
+            </li>
           </ul>
         </div>
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-gray-900 mb-2">Expat‑Savvy Consultation</h3>
-          <ul class="text-gray-700 text-sm space-y-2">
-            <li>+ Independent across all major insurers</li>
-            <li>+ Strategy for pre‑existing conditions</li>
-            <li>+ Access to group discounts where available</li>
-            <li>+ We handle cancellations and setup</li>
+        <div class="bg-white border-2 border-red-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Expat-Savvy Consultation</h3>
+          <ul class="text-gray-700 text-sm space-y-3">
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Independent across all major insurers</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Strategy for pre-existing conditions</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Access to group discounts where available</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>We handle cancellations and setup</span>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="text-center mt-8">
-        <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book personal consultation">
-          Get My Independent Review
-          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="text-center mt-12">
+        <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book free consultation">
+          Book My Free Consultation →
+          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </button>
@@ -242,11 +335,13 @@ const meta = {
   </section>
 
   <!-- ============================================ -->
-  <!-- 2.3 YOUR PERSONALIZED CONSULTATION — ICON GRID (NEW) -->
+  <!-- 2.3 YOUR PERSONALIZED CONSULTATION — ICON GRID -->
   <!-- ============================================ -->
-  <section class={cn("bg-white", DesignSystem.spacing.section.small)}>
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
-      <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 text-center mb-8">Your Personalized Consultation Includes</h2>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Your Personalized Consultation Includes</h2>
+      </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
           <h3 class="font-semibold text-gray-900 mb-1">Full policy review</h3>
@@ -273,41 +368,69 @@ const meta = {
           <p class="text-gray-700 text-sm">Clear explanations and ongoing service in English.</p>
         </div>
       </div>
-      <div class="text-center mt-8">
-        <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book personal consultation">
-          Start My Free Consultation →
+      <div class="text-center mt-12">
+        <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book free consultation">
+          Book My Free Consultation →
+          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </button>
       </div>
     </div>
   </section>
 
+  <!-- Transition -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Expert insight into switching strategy:
+    </p>
+  </div>
+
   <!-- ========================= -->
-  <!-- 2.4 EXPERT INSIGHT (NEW) -->
+  <!-- 2.4 EXPERT INSIGHT -->
   <!-- ========================= -->
-  <section class={cn("bg-gray-50", DesignSystem.spacing.section.small)}>
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.narrow}>
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
-        <div class="flex items-start gap-4">
-          <img src="/assets/robert-mini.jpg" alt="Robert – FINMA‑certified expert" class="w-14 h-14 rounded-full object-cover" loading="lazy" />
-          <div>
-            <p class="text-gray-800 italic">“Switching is not just about the cheapest number. It’s about aligning your model, deductible and supplementary benefits with how you actually use healthcare — that’s where the real savings and better coverage come from.”</p>
-            <p class="text-gray-500 text-sm mt-2">— Robert, FINMA‑certified advisor</p>
+      <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-md max-w-3xl mx-auto">
+        <div class="flex items-start gap-6">
+          <div class="flex-shrink-0">
+            <img 
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_64,h_64,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+              alt="Robert - FINMA Certified Insurance Consultant"
+              class="w-16 h-16 rounded-full border-2 border-gray-200 shadow-sm"
+              loading="lazy"
+            />
+          </div>
+          <div class="flex-1">
+            <p class="text-gray-800 italic text-lg mb-4">
+              "Switching is not about chasing the cheapest premium — it's about aligning your model, deductible, and supplementary coverage with how you actually use healthcare."
+            </p>
+            <p class="text-sm text-gray-600">
+              <strong class="text-gray-900">Robert</strong>, FINMA-certified Insurance Broker
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Transition -->
+  <div class="py-6 bg-gray-50">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Here's what people say about switching with our help:
+    </p>
+  </div>
+
   <!-- ============================================ -->
   <!-- 3. TESTIMONIALS (SOCIAL PROOF) -->
   <!-- ============================================ -->
   <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
-      <div class="text-center mb-4">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-2'}>
+      <div class="text-center mb-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
           What Our Clients Say
         </h2>
-        <p class={DesignSystem.typography.body.large + ' text-gray-700 font-semibold'}>
+        <p class="text-xl text-gray-700 font-semibold">
           ★★★★★ Rated 4.9 / 5 by expats across Switzerland
         </p>
       </div>
@@ -469,7 +592,7 @@ const meta = {
       </div>
 
       <!-- Clean Mistakes List -->
-      <div class="max-w-4xl mx-auto space-y-4">
+      <div class="max-w-4xl mx-auto space-y-6">
         
         <!-- Mistake 1 -->
         <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
@@ -590,13 +713,20 @@ const meta = {
     </div>
   </section>
 
+  <!-- Transition -->
+  <div class="py-6 bg-gray-50">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Still have questions? Here are the most common ones we hear:
+    </p>
+  </div>
+
   <!-- ============================================ -->
   <!-- 5. FAQ SECTION -->
   <!-- ============================================ -->
-  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+  <section class={cn("bg-white", "pt-24 pb-20")}>
     <div class={DesignSystem.spacing.container.narrow}>
-      <div class="text-center mb-12">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
           Frequently Asked Questions
         </h2>
         <p class={DesignSystem.typography.body.large + ' text-gray-600'}>
@@ -636,10 +766,13 @@ const meta = {
   <section class="bg-gradient-to-r from-red-600 to-red-800 py-16 md:py-20">
     <div class={DesignSystem.spacing.container.default}>
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">
+        <p class="text-lg text-white/80 mb-3">
+          Deadline to switch your 2026 insurance: 30 November 2025
+        </p>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">
           Don't Guess Your Coverage — Know It
         </h2>
-        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
           Get a professional audit and personalized comparison. 100% free and in English.
         </p>
 
