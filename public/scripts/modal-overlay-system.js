@@ -394,6 +394,9 @@ class ModalOverlaySystem {
       this.currentModal = null;
     }
     
+    // Force reset the isOpening flag to prevent reopening issues
+    this.isOpening = false;
+    
     // Remove any existing modals
     const existingModals = document.querySelectorAll('#modal');
     console.log('🔍 Found existing modals to remove:', existingModals.length);
