@@ -460,11 +460,15 @@
       { id: 'compare', icon: 'eye', label: 'Just comparing options', complexity: 3 }
     ];
 
-    window.openModal = function openModal(intent = 'home') {
-      console.log('✅ Opening modal with intent:', intent);
+    // Internal modal state control (not on window object to avoid conflicts)
+    function openModalInternal(intent = 'home') {
+      console.log('✅ Opening modal internally with intent:', intent);
       pageIntent = intent;
-      document.getElementById('modal').classList.remove('hidden');
-      document.getElementById('modal').classList.add('flex');
+      const modalEl = document.getElementById('modal');
+      if (modalEl) {
+        modalEl.classList.remove('hidden');
+        modalEl.classList.add('flex');
+      }
       document.body.style.overflow = 'hidden';
       renderStep(1);
       setTimeout(() => {
@@ -472,13 +476,11 @@
       }, 100);
     }
 
-    // Compatibility function for health insurance pages
-    window.openHealthModal = function openHealthModal(intent = 'setup') {
-      // Map 'new' intent to 'setup' (which has "Welcome to Switzerland")
-      const mappedIntent = (intent === 'new') ? 'setup' : intent;
-      console.log('🏥 Opening Health Modal - Original intent:', intent, '→ Mapped to:', mappedIntent);
-      window.openModal(mappedIntent);
-    }
+    // Make openModalInternal available globally for overlay system to call
+    window.openModal = openModalInternal;
+    
+    // DO NOT redefine window.openHealthModal here - it's already defined by modal-overlay-system.js
+    // The overlay system will call our window.openModal with the correct intent
 
     window.closeModal = function closeModal() {
       console.log('✅ Closing modal from final-modal.html');

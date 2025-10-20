@@ -126,6 +126,8 @@ class ModalOverlaySystem {
       
       // Extract and execute scripts from the modal
       const scripts = doc.querySelectorAll('script');
+      console.log(`📜 Found ${scripts.length} scripts to inject`);
+      
       scripts.forEach((script, index) => {
         if (script.textContent && !script.src) {
           try {
@@ -133,14 +135,13 @@ class ModalOverlaySystem {
             const newScript = document.createElement('script');
             newScript.textContent = script.textContent;
             newScript.setAttribute('data-modal-script', 'true');
+            newScript.setAttribute('data-script-index', index);
             
-            // Add a small delay between script executions to ensure proper loading order
-            setTimeout(() => {
-              document.body.appendChild(newScript);
-              console.log(`✅ Executed modal script ${index + 1}`);
-            }, index * 50);
+            // Execute scripts immediately and sequentially
+            document.body.appendChild(newScript);
+            console.log(`✅ Injected and executed modal script ${index + 1}/${scripts.length}`);
           } catch (error) {
-            console.warn('⚠️ Error executing script:', error);
+            console.warn(`⚠️ Error executing script ${index + 1}:`, error);
           }
         }
       });
@@ -266,39 +267,31 @@ class ModalOverlaySystem {
       // Initialize basic modal functionality
       this.initializeModalContent(modalClone);
       
-      // Call the modal's openModal function if it exists
-      // Increased delay to ensure all modal scripts have executed
-      setTimeout(() => {
-        console.log('🔍 Checking for window.openModal...');
-        if (typeof window.openModal === 'function') {
-          console.log('🎯 Calling modal openModal function with intent:', options.intent || 'home');
-          window.openModal(options.intent || 'home');
+      // Call the modal's openModal function after scripts have executed
+      // Use requestAnimationFrame to ensure scripts have run
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          console.log('🔍 Checking for window.openModal...');
+          console.log('🔍 window.openModal type:', typeof window.openModal);
           
-          // Initialize Lucide icons AFTER modal content is fully rendered
-          setTimeout(() => {
-            if (typeof lucide !== 'undefined') {
-              lucide.createIcons();
-              console.log('✅ Lucide icons initialized after modal opened');
-            }
-          }, 400);
-          
-          console.log('✅ Modal will use its own Cal.com initialization');
-        } else {
-          console.error('❌ window.openModal function not found! Retrying...');
-          // Retry with longer delay
-          setTimeout(() => {
-            if (typeof window.openModal === 'function') {
-              console.log('🔄 Retry successful - calling modal openModal');
-              window.openModal(options.intent || 'home');
-              setTimeout(() => {
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-              }, 400);
-            } else {
-              console.error('❌ Still no window.openModal after retry - modal scripts not loading');
-            }
-          }, 300);
-        }
-      }, 300);
+          if (typeof window.openModal === 'function') {
+            console.log('🎯 Calling modal openModal function with intent:', options.intent || 'home');
+            window.openModal(options.intent || 'home');
+            
+            // Initialize Lucide icons AFTER modal content is fully rendered
+            setTimeout(() => {
+              if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+                console.log('✅ Lucide icons initialized after modal opened');
+              }
+            }, 200);
+            
+            console.log('✅ Modal initialized successfully');
+          } else {
+            console.error('❌ window.openModal function not found! Scripts not executed yet.');
+          }
+        }, 100);
+      });
       
       // Reset opening flag after a delay to prevent immediate closure
       setTimeout(() => {
