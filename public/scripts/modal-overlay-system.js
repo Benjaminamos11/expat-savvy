@@ -275,7 +275,9 @@ class ModalOverlaySystem {
           console.log('🔍 window.openModal type:', typeof window.openModal);
           
           if (typeof window.openModal === 'function') {
-            console.log('🎯 Calling modal openModal function with intent:', options.intent || 'home');
+            console.log('🎯🎯🎯 CALLING window.openModal with intent:', options.intent || 'home');
+            console.log('🔍 Intent value:', options.intent);
+            console.log('🔍 Options object:', options);
             window.openModal(options.intent || 'home');
             
             // Initialize Lucide icons AFTER modal content is fully rendered
