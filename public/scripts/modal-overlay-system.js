@@ -27,6 +27,10 @@ class ModalOverlaySystem {
     window.openConsultationModal = this.openHealthModal.bind(this);
     window.showConsultationModal = this.openHealthModal.bind(this);
     
+    console.log('✅ Modal functions created successfully!');
+    console.log('🔧 openHealthModal type:', typeof window.openHealthModal);
+    console.log('🔧 openOffersModal type:', typeof window.openOffersModal);
+    console.log('🔧 openConsultationModal type:', typeof window.openConsultationModal);
     console.log('🔧 Legacy functions created:', {
       openOffersModal: typeof window.openOffersModal,
       openConsultationModal: typeof window.openConsultationModal,
@@ -656,12 +660,18 @@ class ModalOverlaySystem {
 
 // Initialize when DOM is ready
 let modalSystemInstance;
+console.log('📦 modal-overlay-system.js loaded, document.readyState:', document.readyState);
 if (document.readyState === 'loading') {
+  console.log('⏳ Document still loading, waiting for DOMContentLoaded...');
   document.addEventListener('DOMContentLoaded', () => {
+    console.log('✅ DOMContentLoaded fired, creating ModalOverlaySystem...');
     modalSystemInstance = new ModalOverlaySystem();
+    console.log('✅ ModalOverlaySystem instance created:', !!modalSystemInstance);
   });
 } else {
+  console.log('✅ Document already loaded, creating ModalOverlaySystem immediately...');
   modalSystemInstance = new ModalOverlaySystem();
+  console.log('✅ ModalOverlaySystem instance created:', !!modalSystemInstance);
 }
 
 // Global close handler (with debounce)
