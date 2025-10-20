@@ -212,13 +212,39 @@
     if (!isOpen) return null;
 
     // Step 1: Qualification
-    const renderQualificationStep = () => React.createElement('div', { className: 'modal-step' },
-      React.createElement(RobertHeader),
-      React.createElement('div', { className: 'step-content' },
-        React.createElement('div', { className: 'step-header' },
-          React.createElement('h1', { className: 'step-title' }, "What's your situation?"),
-          React.createElement('p', { className: 'step-subtitle' }, "Personal, English-speaking advice. Free & no obligation."),
-          React.createElement('p', { className: 'step-question' }, "What brings you here today?")
+    const renderQualificationStep = () => {
+      const pageUrl = window.location.pathname;
+      const isNewPage = pageUrl.includes('/new-health-insurance') || pageUrl.includes('/setup');
+      const isSwitchPage = pageUrl.includes('/switching') || pageUrl.includes('/change');
+      
+      console.log('🔍 Modal Debug - Page URL:', pageUrl);
+      console.log('🔍 Modal Debug - isNewPage:', isNewPage);
+      console.log('🔍 Modal Debug - isSwitchPage:', isSwitchPage);
+      
+      let mainHeadline = "Find Your Best Swiss Health Insurance";
+      let subHeadline = "Personal, English-speaking advice. Free & no obligation.";
+      
+      if (isNewPage) {
+        mainHeadline = "Welcome to Switzerland! Let's Set Up Your Health Insurance";
+        subHeadline = "FINMA-certified advisors guide you through every step in English.";
+        console.log('✅ Modal: Using NEW IN SWITZERLAND version');
+      } else if (isSwitchPage) {
+        mainHeadline = "Switch to Better Health Insurance for 2026";
+        subHeadline = "Save money while keeping or improving your coverage.";
+        console.log('✅ Modal: Using SWITCHING version');
+      } else {
+        console.log('ℹ️ Modal: Using DEFAULT version');
+      }
+      
+      console.log('📋 Modal Headline:', mainHeadline);
+      
+      return React.createElement('div', { className: 'modal-step' },
+        React.createElement(RobertHeader),
+        React.createElement('div', { className: 'step-content' },
+          React.createElement('div', { className: 'step-header' },
+            React.createElement('h1', { className: 'step-title' }, mainHeadline),
+            React.createElement('p', { className: 'step-subtitle' }, subHeadline),
+            React.createElement('p', { className: 'step-question' }, "What brings you here today?")
         ),
         
         React.createElement('div', { className: 'social-proof-bar' },
@@ -246,13 +272,18 @@
         ),
 
         React.createElement('div', { className: 'situation-options' },
-          situationOptions.map((option) =>
-            React.createElement('div', {
+          situationOptions.map((option) => {
+            const pageUrl = window.location.pathname;
+            const isNewPage = pageUrl.includes('/new-health-insurance') || pageUrl.includes('/setup');
+            const isSwitchPage = pageUrl.includes('/switching') || pageUrl.includes('/change');
+            const showRecommended = (option.id === 'new-to-switzerland' && isNewPage) || (option.id === 'switch-save' && isSwitchPage);
+            
+            return React.createElement('div', {
               key: option.id,
-              className: `situation-card ${option.id === 'new-to-switzerland' ? 'highlighted' : ''}`,
+              className: `situation-card ${showRecommended ? 'highlighted' : ''}`,
               onClick: () => handleSituationSelect(option)
             },
-              option.id === 'new-to-switzerland' && React.createElement('div', { className: 'recommended-badge' }, 'RECOMMENDED'),
+              showRecommended && React.createElement('div', { className: 'recommended-badge' }, 'RECOMMENDED FOR YOU'),
               React.createElement('div', { className: 'situation-card-icon', style: { color: option.iconColor } },
                 React.createElement(option.icon, { className: 'icon-lg' })
               ),
@@ -260,13 +291,13 @@
                 React.createElement('div', { className: 'situation-card-label' }, option.label),
                 React.createElement(ArrowRight, { className: 'situation-card-arrow' })
               )
-            )
-          )
+            );
+          })
         ),
 
         React.createElement('div', { className: 'step-footer' }, '100% free • No obligation')
       )
-    );
+    )};
 
     // Step 2: Value Demonstration (Side-by-side)
     const renderValueStep = () => {
@@ -801,6 +832,7 @@
     window.openOffersModal = openModal;
     window.openConsultationModal = openModal;
     window.showConsultationModal = openModal;
+    window.openHealthModal = openModal; // Add this for health insurance pages
 
     // Setup click handlers with MORE EXTENSIVE MATCHING
     const handleCTAClick = (e) => {

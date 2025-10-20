@@ -5,7 +5,8 @@ const currentPath = Astro.url.pathname;
 // Determine intent based on URL path (same as existing system)
 let pageIntent = 'home';
 if (currentPath.includes('/setup')) pageIntent = 'setup';
-else if (currentPath.includes('/change')) pageIntent = 'change';
+else if (currentPath.includes('/switching') || currentPath.includes('/change')) pageIntent = 'switch';
+else if (currentPath.includes('/new-health-insurance')) pageIntent = 'new';
 else if (currentPath.includes('/cheapest')) pageIntent = 'cheapest';
 else if (currentPath.includes('/best')) pageIntent = 'best';
 else if (currentPath.includes('/compare')) pageIntent = 'compare';

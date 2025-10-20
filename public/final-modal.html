@@ -472,6 +472,14 @@
       }, 100);
     }
 
+    // Compatibility function for health insurance pages
+    window.openHealthModal = function openHealthModal(intent = 'setup') {
+      // Map 'new' intent to 'setup' (which has "Welcome to Switzerland")
+      const mappedIntent = (intent === 'new') ? 'setup' : intent;
+      console.log('🏥 Opening Health Modal - Original intent:', intent, '→ Mapped to:', mappedIntent);
+      window.openModal(mappedIntent);
+    }
+
     window.closeModal = function closeModal() {
       console.log('✅ Closing modal');
       document.getElementById('modal').classList.add('hidden');
