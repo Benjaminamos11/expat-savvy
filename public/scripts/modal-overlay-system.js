@@ -267,28 +267,38 @@ class ModalOverlaySystem {
       this.initializeModalContent(modalClone);
       
       // Call the modal's openModal function if it exists
+      // Increased delay to ensure all modal scripts have executed
       setTimeout(() => {
+        console.log('🔍 Checking for window.openModal...');
         if (typeof window.openModal === 'function') {
-          console.log('🎯 Calling modal openModal function');
+          console.log('🎯 Calling modal openModal function with intent:', options.intent || 'home');
           window.openModal(options.intent || 'home');
           
           // Initialize Lucide icons AFTER modal content is fully rendered
-          // Increased delay to ensure DOM is ready
           setTimeout(() => {
             if (typeof lucide !== 'undefined') {
               lucide.createIcons();
               console.log('✅ Lucide icons initialized after modal opened');
             }
-          }, 400); // Increased from 200ms to 400ms to ensure DOM is ready
+          }, 400);
           
-          // Don't initialize Cal.com here - it should only happen when user reaches step 4
-          console.log('📋 Modal scripts loaded, Cal.com will initialize when user reaches calendar step');
-          
-          // Let each modal handle its own Cal.com initialization
-          // Each modal has its own initializeCalCom() function with the correct calLink
           console.log('✅ Modal will use its own Cal.com initialization');
+        } else {
+          console.error('❌ window.openModal function not found! Retrying...');
+          // Retry with longer delay
+          setTimeout(() => {
+            if (typeof window.openModal === 'function') {
+              console.log('🔄 Retry successful - calling modal openModal');
+              window.openModal(options.intent || 'home');
+              setTimeout(() => {
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+              }, 400);
+            } else {
+              console.error('❌ Still no window.openModal after retry - modal scripts not loading');
+            }
+          }, 300);
         }
-      }, 100);
+      }, 300);
       
       // Reset opening flag after a delay to prevent immediate closure
       setTimeout(() => {
