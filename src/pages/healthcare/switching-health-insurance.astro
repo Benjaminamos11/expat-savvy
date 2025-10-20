@@ -256,95 +256,251 @@ const meta = {
             </h2>
           </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Generic Tools</h3>
-          <ul class="text-gray-700 text-sm space-y-3">
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>Limited insurers</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>Doesn't check pre-existing conditions</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>No negotiation for group rates</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>No help with cancellations</span>
-            </li>
-          </ul>
+      <!-- Comparison Table -->
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden max-w-5xl mx-auto">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-gray-200">
+                <th class="text-left p-4 text-sm font-semibold text-gray-700 bg-gray-50">Feature</th>
+                <th class="text-center p-4 text-sm font-semibold text-gray-700 bg-gray-50">Generic Tools</th>
+                <th class="text-center p-4 text-sm font-semibold text-gray-700 bg-gray-50">Direct Insurer</th>
+                <th class="text-center p-4 text-sm font-semibold text-gray-700 bg-red-50 border-t-4 border-red-500">Expat-Savvy Consultation</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <!-- Range of insurers -->
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Range of insurers</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <span class="text-gray-700">Limited</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">Own products only</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/30">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">All major Swiss insurers</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Pre-existing conditions -->
+              <tr class="border-b border-gray-100 bg-gray-50/50">
+                <td class="p-4 font-medium text-gray-900">Pre-existing conditions strategy</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/50">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Acceptance-maximizing strategy</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Group discounts -->
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Group discounts</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/30">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Available where applicable</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Cancellations & setup -->
+              <tr class="border-b border-gray-100 bg-gray-50/50">
+                <td class="p-4 font-medium text-gray-900">Cancellations & setup</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/50">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">We handle end-to-end</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Availability -->
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Availability</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-gray-700">Office hours only</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-gray-700">Office hours only</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/30">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Extended hours incl. evenings</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- English support -->
+              <tr class="border-b border-gray-100 bg-gray-50/50">
+                <td class="p-4 font-medium text-gray-900">English support</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <span class="text-gray-700">Partial</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <span class="text-gray-700">Often limited</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/50">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Native, full English support</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Advice bias -->
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Advice bias</td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <span class="text-gray-700">—</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">Sales-driven up-sell</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50/30">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Independent, client-first</span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Annual review -->
+              <tr>
+                <td class="p-4 font-medium text-gray-900 bg-gray-50/50">Annual review</td>
+                <td class="p-4 text-center bg-gray-50/50">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-gray-50/50">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="text-gray-700">No</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center bg-red-50">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Proactive yearly check-ins</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Direct Insurer</h3>
-          <ul class="text-gray-700 text-sm space-y-3">
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>Only their own products</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>No independent advice</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>Up-selling of add-ons</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span>Slow support</span>
-            </li>
-          </ul>
       </div>
-        <div class="bg-white border-2 border-red-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-          <h3 class="font-semibold text-gray-900 mb-4 text-lg">Expat-Savvy Consultation</h3>
-          <ul class="text-gray-700 text-sm space-y-3">
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span>Independent across all major insurers</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span>Strategy for pre-existing conditions</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span>Access to group discounts where available</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span>We handle cancellations and setup</span>
-            </li>
-          </ul>
-    </div>
-  </div>
       <div class="text-center mt-12">
         <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book free consultation">
           Book My Free Consultation →
