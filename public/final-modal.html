@@ -1740,17 +1740,63 @@
 
     // Send form data to backend API to trigger email sequence with Resend
     function sendFormDataToBackend(userData) {
+      // Map userData to LeadCreate schema format
       const payload = {
-        type: 'form_submission',
-        source: 'self_service_form',
-        situation: userData.situation,
-        userData: userData,
-        timestamp: new Date().toISOString(),
-        pageIntent: pageIntent
+        // REQUIRED FIELDS
+        email: userData.email,
+        name: userData.name,
+        phone: userData.phone || '',
+        
+        // CRITICAL: Set these to trigger email automation
+        consent_marketing: true,  // ← This enables email automation
+        stage: 'new',             // ← This is required for email automation
+        
+        // Flow and context
+        flow: 'self_service',
+        page_type: pageIntent || 'home',
+        city: userData.city || userLocation.city || '',
+        
+        // Attribution (get from URL params if available)
+        utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || 'organic',
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || null,
+        utm_term: new URLSearchParams(window.location.search).get('utm_term') || null,
+        utm_content: new URLSearchParams(window.location.search).get('utm_content') || null,
+        referrer: document.referrer || null,
+        landing_path: window.location.pathname || '/',
+        channel: new URLSearchParams(window.location.search).get('utm_source') ? 'paid' : 'organic',
+        
+        // Lead type
+        type: 'health insurance',
+        
+        // Additional metadata in notes
+        notes: {
+          source: 'self_service_form',
+          situation: userData.situation,
+          dob: userData.dob,
+          household: userData.household,
+          current_insurer: userData.currentInsurer,
+          address: userData.address,
+          postcode: userData.postcode,
+          canton: userData.canton,
+          works: userData.works,
+          deductible: userData.deductible,
+          model: userData.model,
+          supplementary: userData.supplementary,
+          start_date: userData.startDate,
+          special_requirements: userData.specialRequirements,
+          page_intent: pageIntent,
+          ip_address: userLocation.ip,
+          country: userLocation.country,
+          region: userLocation.region,
+          timestamp: new Date().toISOString()
+        }
       };
 
+      console.log('📤 Sending lead to backend API with email automation enabled:', payload);
+
       // Send to backend API for email nurture sequence
-      fetch('/api/lead', {
+      fetch('https://expat-savvy-api.fly.dev/api/lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

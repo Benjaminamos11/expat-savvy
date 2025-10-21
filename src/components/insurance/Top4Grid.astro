@@ -1,0 +1,166 @@
+---
+const providers = [
+  {
+    id: 'swica',
+    name: 'Swica',
+    logo: '/images/providers/swica-logo.svg',
+    price: '338',
+    rating: 5,
+    bestFor: 'Service Excellence',
+    highlights: ['English Support', 'Wellness Program', 'Entry-age Pricing'],
+    color: 'red'
+  },
+  {
+    id: 'helsana',
+    name: 'Helsana',
+    logo: '/images/providers/helsana-logo.svg',
+    price: '335',
+    rating: 5,
+    bestFor: 'Digital Innovation',
+    highlights: ['Best App', 'Digital Tools', 'Large Network'],
+    color: 'red'
+  },
+  {
+    id: 'css',
+    name: 'CSS',
+    logo: '/images/providers/css-logo.svg',
+    price: '326',
+    rating: 5,
+    bestFor: 'Best Price',
+    highlights: ['Lowest Cost', 'Largest Network', 'Stable'],
+    color: 'red'
+  },
+  {
+    id: 'sanitas',
+    name: 'Sanitas',
+    logo: '/images/providers/sanitas-logo.svg',
+    price: '330',
+    rating: 5,
+    bestFor: 'Innovation',
+    highlights: ['Modern', 'Quality Focus', 'English Support'],
+    color: 'red'
+  }
+];
+---
+
+<section id="top4-grid" class="bg-gradient-to-b from-white to-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Switzerland's Top 4 for Expats</h2>
+      <p class="text-xl text-gray-600">These providers offer full English support and premium service</p>
+      <p class="text-sm text-gray-500 mt-2">Click any card to see full details below</p>
+    </div>
+
+    <!-- Provider Cards Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      {providers.map((provider) => (
+        <div 
+          class="provider-card bg-white rounded-2xl p-6 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] hover:shadow-[6px_6px_12px_#d9d9d9,-6px_-6px_12px_#ffffff] transition-all duration-300 cursor-pointer border-2 border-transparent hover:border-red-500"
+          data-provider={provider.id}
+        >
+          <!-- Logo -->
+          <div class="h-16 flex items-center justify-center mb-4 grayscale hover:grayscale-0 transition-all">
+            <img src={provider.logo} alt={provider.name} class="h-12" />
+          </div>
+
+          <!-- Price -->
+          <div class="text-center mb-4">
+            <div class="text-sm text-gray-600 mb-1">From</div>
+            <div class="text-3xl font-bold text-gray-900">CHF {provider.price}</div>
+            <div class="text-xs text-gray-500">/month</div>
+          </div>
+
+          <!-- Rating -->
+          <div class="flex justify-center mb-4 text-yellow-500">
+            {Array.from({ length: provider.rating }).map(() => (
+              <span>⭐</span>
+            ))}
+          </div>
+
+          <!-- Badge -->
+          <div class="text-center mb-4">
+            <span class="inline-block px-3 py-1 bg-red-50 text-red-600 rounded-full text-sm font-medium">
+              {provider.bestFor}
+            </span>
+          </div>
+
+          <!-- Highlights -->
+          <div class="space-y-2 mb-6">
+            {provider.highlights.map((highlight) => (
+              <div class="flex items-center text-sm text-gray-700">
+                <svg class="w-4 h-4 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>{highlight}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTAs -->
+          <div class="space-y-2">
+            <button 
+              onclick={`window.openOffersModal && window.openOffersModal('${provider.id}-quote')`}
+              class="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-all"
+            >
+              Get Quote
+            </button>
+            <button 
+              onclick={`document.getElementById('provider-${provider.id}').scrollIntoView({behavior: 'smooth'})`}
+              class="w-full px-4 py-2 bg-white border-2 border-gray-200 hover:border-red-500 text-gray-700 rounded-lg font-semibold transition-all"
+            >
+              See Details ↓
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Comparison Selector -->
+    <div class="bg-white rounded-2xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff]">
+      <h3 class="text-xl font-semibold mb-4">Compare Side-by-Side</h3>
+      <p class="text-gray-600 mb-6">Select 2-3 providers to see detailed comparison</p>
+      
+      <div class="flex flex-wrap gap-3 mb-6">
+        {providers.map((provider) => (
+          <label class="compare-checkbox flex items-center px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer border-2 border-transparent hover:border-red-500 transition-all">
+            <input type="checkbox" class="mr-3 w-5 h-5 text-red-600" value={provider.id} />
+            <span class="font-medium">{provider.name}</span>
+          </label>
+        ))}
+      </div>
+
+      <button 
+        id="compare-button"
+        onclick="window.scrollTo({top: document.getElementById('comparison-table').offsetTop, behavior: 'smooth'})"
+        class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+        disabled
+      >
+        Compare Selected
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('.compare-checkbox input[type="checkbox"]');
+    const compareButton = document.getElementById('compare-button');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const checked = Array.from(checkboxes).filter((cb: Element) => (cb as HTMLInputElement).checked);
+        if (compareButton) {
+          (compareButton as HTMLButtonElement).disabled = checked.length < 2 || checked.length > 3;
+        }
+        
+        // Store selected providers for comparison table
+        if (checked.length >= 2 && checked.length <= 3) {
+          const selectedIds = checked.map((cb: Element) => (cb as HTMLInputElement).value);
+          sessionStorage.setItem('compareProviders', JSON.stringify(selectedIds));
+        }
+      });
+    });
+  });
+</script>
+

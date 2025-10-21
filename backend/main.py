@@ -30,6 +30,7 @@ from services.plausible import PlausibleService
 from services.email import EmailService
 from services.etl import ETLService
 from services.llm import get_llm_service
+from services.attribution import AttributionService
 from auth import verify_admin
 from api.tools import router as tools_router
 
@@ -42,7 +43,7 @@ app = FastAPI(
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://expat-savvy.ch", "http://localhost:3000"],
+    allow_origins=["https://expat-savvy.ch", "http://localhost:3000", "http://localhost:4321"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -85,20 +86,66 @@ async def test_db_connection(supabase: Client = Depends(get_supabase)):
 async def create_lead(lead_data: LeadCreate, supabase: Client = Depends(get_supabase)):
     """Create a new lead with attribution tracking"""
     try:
-        # Generate UUID for the lead
-        lead_id = str(uuid.uuid4())
+        # Check if lead already exists for this email
+        existing_result = supabase.table("leads").select("*").eq("email", lead_data.email).execute()
         
-        # Prepare lead data
-        lead_dict = lead_data.dict()
-        lead_dict["id"] = lead_id
-        
-        # Insert lead into Supabase
-        result = supabase.table("leads").insert(lead_dict).execute()
-        
-        if not result.data:
-            raise HTTPException(status_code=500, detail="Failed to create lead")
-        
-        created_lead = result.data[0]
+        if existing_result.data:
+            # Lead exists - update instead of creating duplicate
+            existing_lead = existing_result.data[0]
+            lead_id = existing_lead["id"]
+            
+            # Prepare update data
+            update_data = lead_data.dict()
+            
+            # 🎯 ENHANCED ATTRIBUTION: Enrich with platform detection
+            update_data = AttributionService.enrich_lead_data(update_data)
+            
+            # Smart update logic:
+            # - If existing is 'new' and new is 'booked', upgrade to 'booked'
+            # - If existing is 'booked', keep as 'booked'
+            # - Always stop email sequence if user is booking
+            if lead_data.stage == "booked" or existing_lead.get("stage") == "booked":
+                update_data["stage"] = "booked"
+                update_data["email_sequence_status"] = "stopped"
+                update_data["flow"] = "self_service_to_booking" if existing_lead.get("flow") == "self_service" else "booking"
+            else:
+                # Keep existing email sequence status
+                update_data["email_sequence_status"] = existing_lead.get("email_sequence_status", "active")
+            
+            # Update existing lead
+            result = supabase.table("leads").update(update_data).eq("id", lead_id).execute()
+            
+            if not result.data:
+                raise HTTPException(status_code=500, detail="Failed to update existing lead")
+            
+            created_lead = result.data[0]
+            print(f"🔄 Updated existing lead {lead_id} for {lead_data.email}")
+            
+        else:
+            # New lead - create as before
+            lead_id = str(uuid.uuid4())
+            
+            # Prepare lead data
+            lead_dict = lead_data.dict()
+            lead_dict["id"] = lead_id
+            
+            # 🎯 ENHANCED ATTRIBUTION: Enrich with platform detection
+            lead_dict = AttributionService.enrich_lead_data(lead_dict)
+            
+            # Set email sequence status to 'active' for new leads with consent
+            if lead_dict.get("consent_marketing") and lead_dict.get("stage") == "new":
+                lead_dict["email_sequence_status"] = "active"
+            else:
+                lead_dict["email_sequence_status"] = "stopped"
+            
+            # Insert lead into Supabase
+            result = supabase.table("leads").insert(lead_dict).execute()
+            
+            if not result.data:
+                raise HTTPException(status_code=500, detail="Failed to create lead")
+            
+            created_lead = result.data[0]
+            print(f"✅ Created new lead {lead_id} for {lead_data.email}")
         
         # Create lead_sources entry for first/last touch attribution
         lead_source_data = {
@@ -987,6 +1034,357 @@ async def get_lead_attribution(
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting attribution: {str(e)}")
+
+# Admin Dashboard Endpoints
+
+@app.get("/api/admin/leads/detailed")
+async def get_detailed_leads(
+    page: int = 1,
+    limit: int = 50,
+    search: Optional[str] = None,
+    stage: Optional[str] = None,
+    channel: Optional[str] = None,
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Get leads with full attribution, email tracking, and appointment data"""
+    try:
+        # Build base query
+        query = supabase.table("leads").select("*")
+        
+        # Apply filters
+        if search:
+            query = query.or_(f"name.ilike.%{search}%,email.ilike.%{search}%")
+        if stage:
+            query = query.eq("stage", stage)
+        if channel:
+            query = query.eq("channel", channel)
+        if date_from:
+            query = query.gte("created_at", date_from)
+        if date_to:
+            query = query.lte("created_at", date_to)
+        
+        # Get total count
+        count_query = supabase.table("leads").select("id", count="exact")
+        if search:
+            count_query = count_query.or_(f"name.ilike.%{search}%,email.ilike.%{search}%")
+        if stage:
+            count_query = count_query.eq("stage", stage)
+        if channel:
+            count_query = count_query.eq("channel", channel)
+        if date_from:
+            count_query = count_query.gte("created_at", date_from)
+        if date_to:
+            count_query = count_query.lte("created_at", date_to)
+            
+        count_result = count_query.execute()
+        total = count_result.count if hasattr(count_result, 'count') else 0
+        
+        # Apply pagination
+        offset = (page - 1) * limit
+        result = query.range(offset, offset + limit - 1).order("created_at", desc=True).execute()
+        
+        leads = result.data if result.data else []
+        
+        # Enhance each lead with additional data
+        enhanced_leads = []
+        for lead in leads:
+            lead_id = lead["id"]
+            
+            # Get lead_sources for attribution
+            lead_source_result = supabase.table("lead_sources").select("*").eq("lead_id", lead_id).execute()
+            lead_source = lead_source_result.data[0] if lead_source_result.data else {}
+            
+            # Get appointments for booking status
+            appointments_result = supabase.table("appointments").select("*").eq("lead_id", lead_id).execute()
+            appointments = appointments_result.data if appointments_result.data else []
+            
+            # Get email events
+            email_events_result = supabase.table("events").select("*").eq("lead_id", lead_id).in_("name", ["email_sent_welcome", "email_sent_day1", "email_sent_day3"]).execute()
+            email_events = email_events_result.data if email_events_result.data else []
+            
+            # Parse notes for additional data
+            notes = lead.get("notes", {})
+            
+            enhanced_lead = {
+                **lead,
+                "attribution": {
+                    "first_touch": {
+                        "utm_source": lead_source.get("first_utm_source"),
+                        "utm_medium": lead_source.get("first_utm_medium"),
+                        "utm_campaign": lead_source.get("first_utm_campaign"),
+                        "utm_term": lead_source.get("first_utm_term"),
+                        "referrer": lead_source.get("first_referrer"),
+                        "landing_path": lead_source.get("first_landing_path"),
+                        "timestamp": lead_source.get("first_touch_at")
+                    },
+                    "last_touch": {
+                        "utm_source": lead_source.get("last_utm_source"),
+                        "utm_medium": lead_source.get("last_utm_medium"),
+                        "utm_campaign": lead_source.get("last_utm_campaign"),
+                        "utm_term": lead_source.get("last_utm_term"),
+                        "referrer": lead_source.get("last_referrer"),
+                        "landing_path": lead_source.get("last_landing_path"),
+                        "timestamp": lead_source.get("last_touch_at")
+                    }
+                },
+                "email_tracking": {
+                    "welcome_sent": lead.get("email_welcome_sent_at") is not None,
+                    "welcome_sent_at": lead.get("email_welcome_sent_at"),
+                    "day1_sent": lead.get("email_6h_sent_at") is not None,
+                    "day1_sent_at": lead.get("email_6h_sent_at"),
+                    "day3_sent": lead.get("email_24h_sent_at") is not None,
+                    "day3_sent_at": lead.get("email_24h_sent_at"),
+                    "sequence_status": lead.get("email_sequence_status", "stopped")
+                },
+                "booking_status": {
+                    "has_booking": len(appointments) > 0,
+                    "appointments": appointments,
+                    "next_appointment": appointments[0] if appointments else None
+                },
+                "location": {
+                    "ip_address": notes.get("ip_address"),
+                    "country": notes.get("country"),
+                    "city": notes.get("city") or lead.get("city"),
+                    "region": notes.get("region")
+                },
+                "form_data": {
+                    "situation": notes.get("situation"),
+                    "page_intent": notes.get("page_intent"),
+                    "source": notes.get("source"),
+                    "form_type": notes.get("form_type")
+                }
+            }
+            
+            enhanced_leads.append(enhanced_lead)
+        
+        return {
+            "leads": enhanced_leads,
+            "total": total,
+            "page": page,
+            "limit": limit,
+            "total_pages": (total + limit - 1) // limit
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching detailed leads: {str(e)}")
+
+@app.get("/api/admin/stats/overview")
+async def get_dashboard_stats(
+    period: str = "30d",
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Get dashboard overview statistics"""
+    try:
+        # Calculate date range
+        from datetime import datetime, timedelta
+        if period == "7d":
+            days = 7
+        elif period == "30d":
+            days = 30
+        elif period == "90d":
+            days = 90
+        else:
+            days = 30
+            
+        start_date = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        today = datetime.utcnow().date().isoformat()
+        
+        # Total leads
+        total_leads_result = supabase.table("leads").select("id", count="exact").execute()
+        total_leads = total_leads_result.count if hasattr(total_leads_result, 'count') else 0
+        
+        # New leads today
+        today_leads_result = supabase.table("leads").select("id", count="exact").gte("created_at", today).execute()
+        today_leads = today_leads_result.count if hasattr(today_leads_result, 'count') else 0
+        
+        # Booked consultations
+        booked_result = supabase.table("leads").select("id", count="exact").eq("stage", "booked").execute()
+        booked_consultations = booked_result.count if hasattr(booked_result, 'count') else 0
+        
+        # Email statistics
+        welcome_sent_result = supabase.table("leads").select("id", count="exact").not_.is_("email_welcome_sent_at", "null").execute()
+        welcome_sent = welcome_sent_result.count if hasattr(welcome_sent_result, 'count') else 0
+        
+        day1_sent_result = supabase.table("leads").select("id", count="exact").not_.is_("email_6h_sent_at", "null").execute()
+        day1_sent = day1_sent_result.count if hasattr(day1_sent_result, 'count') else 0
+        
+        day3_sent_result = supabase.table("leads").select("id", count="exact").not_.is_("email_24h_sent_at", "null").execute()
+        day3_sent = day3_sent_result.count if hasattr(day3_sent_result, 'count') else 0
+        
+        # Calculate email open rate (simplified - using sent emails as proxy)
+        email_open_rate = (welcome_sent + day1_sent + day3_sent) / max(total_leads, 1) * 100
+        
+        # Top channels
+        channels_result = supabase.table("leads").select("channel").execute()
+        channels = channels_result.data if channels_result.data else []
+        channel_counts = {}
+        for lead in channels:
+            channel = lead.get("channel", "unknown")
+            channel_counts[channel] = channel_counts.get(channel, 0) + 1
+        
+        top_channels = [{"channel": k, "count": v} for k, v in sorted(channel_counts.items(), key=lambda x: x[1], reverse=True)[:5]]
+        
+        # Top pages (from landing_path)
+        pages_result = supabase.table("leads").select("landing_path").execute()
+        pages = pages_result.data if pages_result.data else []
+        page_counts = {}
+        for lead in pages:
+            page = lead.get("landing_path", "/")
+            page_counts[page] = page_counts.get(page, 0) + 1
+        
+        top_pages = [{"page": k, "count": v} for k, v in sorted(page_counts.items(), key=lambda x: x[1], reverse=True)[:5]]
+        
+        # Recent activity (last 10 leads)
+        recent_leads_result = supabase.table("leads").select("name", "email", "stage", "created_at").order("created_at", desc=True).limit(10).execute()
+        recent_activity = recent_leads_result.data if recent_leads_result.data else []
+        
+        # Convert recent activity to more readable format
+        formatted_activity = []
+        for lead in recent_activity:
+            created_at = lead.get("created_at", "")
+            if created_at:
+                try:
+                    dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+                    time_ago = datetime.utcnow() - dt.replace(tzinfo=None)
+                    if time_ago.days > 0:
+                        time_str = f"{time_ago.days}d ago"
+                    elif time_ago.seconds > 3600:
+                        time_str = f"{time_ago.seconds // 3600}h ago"
+                    else:
+                        time_str = f"{time_ago.seconds // 60}m ago"
+                except:
+                    time_str = "recently"
+            else:
+                time_str = "recently"
+                
+            formatted_activity.append({
+                "name": lead.get("name", "Unknown"),
+                "email": lead.get("email", ""),
+                "stage": lead.get("stage", "new"),
+                "time_ago": time_str
+            })
+        
+        return {
+            "total_leads": total_leads,
+            "new_leads_today": today_leads,
+            "booked_consultations": booked_consultations,
+            "email_open_rate": round(email_open_rate, 1),
+            "email_stats": {
+                "welcome_sent": welcome_sent,
+                "day1_sent": day1_sent,
+                "day3_sent": day3_sent
+            },
+            "top_channels": top_channels,
+            "top_pages": top_pages,
+            "recent_activity": formatted_activity,
+            "period": period,
+            "generated_at": datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating dashboard stats: {str(e)}")
+
+@app.get("/api/admin/export/leads")
+async def export_leads_csv(
+    date_from: Optional[str] = None,
+    date_to: Optional[str] = None,
+    admin: dict = Depends(verify_admin),
+    supabase: Client = Depends(get_supabase)
+):
+    """Export all leads to CSV with full attribution data"""
+    try:
+        import csv
+        import io
+        
+        # Build query
+        query = supabase.table("leads").select("*")
+        if date_from:
+            query = query.gte("created_at", date_from)
+        if date_to:
+            query = query.lte("created_at", date_to)
+            
+        result = query.order("created_at", desc=True).execute()
+        leads = result.data if result.data else []
+        
+        # Create CSV content
+        output = io.StringIO()
+        writer = csv.writer(output)
+        
+        # Write header
+        headers = [
+            "ID", "Name", "Email", "Phone", "City", "Stage", "Type", "Channel",
+            "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content",
+            "Referrer", "Landing Path", "First Touch At", "Last Touch At",
+            "Email Sequence Status", "Welcome Email Sent", "6h Email Sent", "24h Email Sent",
+            "Consent Marketing", "Created At", "Updated At",
+            "IP Address", "Country", "Region", "Page Intent", "Situation", "Form Type"
+        ]
+        writer.writerow(headers)
+        
+        # Write data rows
+        for lead in leads:
+            # Get lead_sources for attribution
+            lead_source_result = supabase.table("lead_sources").select("*").eq("lead_id", lead["id"]).execute()
+            lead_source = lead_source_result.data[0] if lead_source_result.data else {}
+            
+            # Parse notes
+            notes = lead.get("notes", {})
+            
+            row = [
+                lead.get("id", ""),
+                lead.get("name", ""),
+                lead.get("email", ""),
+                lead.get("phone", ""),
+                lead.get("city", ""),
+                lead.get("stage", ""),
+                lead.get("type", ""),
+                lead.get("channel", ""),
+                lead_source.get("first_utm_source", ""),
+                lead_source.get("first_utm_medium", ""),
+                lead_source.get("first_utm_campaign", ""),
+                lead_source.get("first_utm_term", ""),
+                lead_source.get("first_utm_content", ""),
+                lead_source.get("first_referrer", ""),
+                lead_source.get("first_landing_path", ""),
+                lead_source.get("first_touch_at", ""),
+                lead_source.get("last_touch_at", ""),
+                lead.get("email_sequence_status", ""),
+                lead.get("email_welcome_sent_at", ""),
+                lead.get("email_6h_sent_at", ""),
+                lead.get("email_24h_sent_at", ""),
+                lead.get("consent_marketing", False),
+                lead.get("created_at", ""),
+                lead.get("updated_at", ""),
+                notes.get("ip_address", ""),
+                notes.get("country", ""),
+                notes.get("region", ""),
+                notes.get("page_intent", ""),
+                notes.get("situation", ""),
+                notes.get("form_type", "")
+            ]
+            writer.writerow(row)
+        
+        # Get CSV content
+        csv_content = output.getvalue()
+        output.close()
+        
+        # Generate filename
+        from datetime import datetime
+        timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        filename = f"leads_export_{timestamp}.csv"
+        
+        return Response(
+            content=csv_content,
+            media_type="text/csv",
+            headers={"Content-Disposition": f"attachment; filename={filename}"}
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error exporting leads: {str(e)}")
 
 # Enhanced AI-powered admin dashboard
 @app.get("/admin/ai", response_class=HTMLResponse)

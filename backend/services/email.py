@@ -776,7 +776,7 @@ class EmailService:
             now = datetime.utcnow().replace(tzinfo=None)  # Make timezone-naive for comparison
             stats = {"processed": 0, "6h_sent": 0, "24h_sent": 0, "errors": 0}
             
-            # Get all active leads that haven't booked AND were created after email system deployment
+            # Get all active leads that haven't booked AND haven't already received all emails
             # Only process leads created after October 9, 2025 (when we deployed the email system)
             cutoff_date = "2025-10-09T00:00:00Z"
             result = supabase.table("leads").select("*").eq("email_sequence_status", "active").eq("stage", "new").gte("created_at", cutoff_date).execute()

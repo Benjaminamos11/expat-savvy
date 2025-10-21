@@ -1,0 +1,188 @@
+---
+const providers = [
+  {
+    id: 'swica',
+    name: 'Swica',
+    tagline: 'Service Excellence for Expats',
+    highlights: [
+      '#1 English customer service rating',
+      'BENEVITA wellness cashback program',
+      'Entry-age pricing (no age increases)',
+      'Worldwide emergency with direct billing'
+    ],
+    premiums: {
+      zurich: '338',
+      geneva: '463',
+      zug: '213',
+      basel: '428'
+    }
+  },
+  {
+    id: 'helsana',
+    name: 'Helsana',
+    tagline: 'Digital Innovation Leader',
+    highlights: [
+      '4.9/5 rated mobile app',
+      'Advanced digital health tools',
+      'Comprehensive provider network',
+      'Preventive care & health coaching'
+    ],
+    premiums: {
+      zurich: '335',
+      geneva: '446',
+      zug: '215',
+      basel: '416'
+    }
+  },
+  {
+    id: 'css',
+    name: 'CSS',
+    tagline: "Switzerland's Largest Network",
+    highlights: [
+      'Lowest premiums across all cantons',
+      'Largest healthcare provider network',
+      'Established reputation since 1899',
+      'Competitive supplementary rates'
+    ],
+    premiums: {
+      zurich: '326',
+      geneva: '442',
+      zug: '212',
+      basel: '411'
+    }
+  },
+  {
+    id: 'sanitas',
+    name: 'Sanitas',
+    tagline: 'Innovation & Quality Focus',
+    highlights: [
+      'Modern healthcare approach',
+      'Strong quality partnerships',
+      'Innovative digital solutions',
+      'Excellent customer satisfaction'
+    ],
+    premiums: {
+      zurich: '330',
+      geneva: '443',
+      zug: '205',
+      basel: '433'
+    }
+  }
+];
+---
+
+<section class="bg-white py-16">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Complete Provider Analysis
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Detailed breakdown of each insurer to help you make the right choice
+      </p>
+    </div>
+
+    <div class="space-y-8">
+      {providers.map((provider) => (
+        <div 
+          id={`provider-${provider.id}`}
+          class="bg-white rounded-xl shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] overflow-hidden border border-gray-200"
+        >
+          <!-- Provider Header -->
+          <div class="bg-gray-50 p-6 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900">{provider.name}</h3>
+                  <p class="text-gray-600">{provider.tagline}</p>
+                </div>
+              </div>
+
+              <div class="hidden md:block text-right">
+                <div class="text-sm text-gray-600">From</div>
+                <div class="text-2xl font-bold text-gray-900">CHF {provider.premiums.zurich}</div>
+                <div class="text-xs text-gray-500">/month</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Provider Content -->
+          <div class="p-6">
+            <!-- Quick Highlights -->
+            <div class="mb-6">
+              <h4 class="font-semibold text-gray-900 mb-3">Why Expats Choose {provider.name}:</h4>
+              <div class="grid md:grid-cols-2 gap-3">
+                {provider.highlights.map(highlight => (
+                  <div class="flex items-start space-x-2">
+                    <svg class="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-sm text-gray-700">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Premium Breakdown -->
+            <div class="mb-6 p-4 bg-gray-50 rounded-xl">
+              <h4 class="font-semibold text-gray-900 mb-3">2026 Premiums (39yr, CHF 2,500 deductible):</h4>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center">
+                  <div class="text-sm text-gray-600 mb-1">Zurich</div>
+                  <div class="text-xl font-bold text-gray-900">CHF {provider.premiums.zurich}</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-sm text-gray-600 mb-1">Geneva</div>
+                  <div class="text-xl font-bold text-gray-900">CHF {provider.premiums.geneva}</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-sm text-gray-600 mb-1">Zug</div>
+                  <div class="text-xl font-bold text-red-600">CHF {provider.premiums.zug}</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-sm text-gray-600 mb-1">Basel</div>
+                  <div class="text-xl font-bold text-gray-900">CHF {provider.premiums.basel}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button 
+                onclick={`window.openOffersModal && window.openOffersModal('${provider.id}-quote')`}
+                class="flex-1 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-all"
+              >
+                Get {provider.name} Quote
+              </button>
+              <button 
+                onclick={`window.openOffersModal && window.openOffersModal('${provider.id}-expert')`}
+                class="flex-1 px-6 py-3 bg-white border-2 border-gray-300 hover:border-red-500 text-gray-700 rounded-lg font-semibold transition-all"
+              >
+                Talk to Expert About {provider.name}
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Compare All CTA -->
+    <div class="text-center mt-8">
+      <button 
+        onclick="document.getElementById('comparison-table').scrollIntoView({behavior: 'smooth'})"
+        class="inline-flex items-center px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Compare All 4 Side-by-Side
+      </button>
+    </div>
+  </div>
+</section>

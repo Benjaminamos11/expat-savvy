@@ -34,6 +34,11 @@ class LeadCreate(BaseModel):
     
     # Consent
     consent_marketing: bool = False
+    
+    # Lead metadata
+    stage: Optional[str] = "new"  # new, contacted, booked, closed
+    type: Optional[str] = "health insurance"  # health insurance, life insurance, etc.
+    notes: Optional[Dict[str, Any]] = None  # Additional metadata
 
 class LeadResponse(BaseModel):
     ok: bool
