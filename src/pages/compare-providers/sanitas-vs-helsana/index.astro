@@ -1,698 +1,1075 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ConsultationModal from '../../../components/ConsultationModal.astro';
+import { DesignSystem, cn } from '../../../styles/design-system';
 
-// Define comparison data
-const tableData = [
-  {
-    feature: "Basic Insurance Models Offered",
-    sanitas: "Standard, Telmed (CallMed), HMO (CareMed), GP (Medbase MultiAccess)",
-    helsana: "Standard, Telmed (Telmed), HMO (BeneFit PLUS), GP (BeneFit PLUS Hausarzt)"
-  },
-  {
-    feature: "Typical Basic Premium Range",
-    sanitas: "Moderate",
-    helsana: "Moderate to High"
-  },
-  {
-    feature: "Digital Portal/App Quality",
-    sanitas: "Excellent (Sanitas Portal app - highly rated, feature-rich)",
-    helsana: "Very good (Helsana+ app - user-friendly, comprehensive)"
-  },
-  {
-    feature: "Telemedicine Integration",
-    sanitas: "Strong (CallMed model, integrated digital health services)",
-    helsana: "Strong (Telmed model, Helsana+ app features)"
-  },
-  {
-    feature: "Digital Health Coaching/Programs",
-    sanitas: "Available (e.g., via Sanitas Active App, partnerships)",
-    helsana: "Available (e.g., Helsana Coach app, various programs)"
-  },
-  {
-    feature: "Symptom Checkers & AI Tools",
-    sanitas: "Integrated into digital offerings",
-    helsana: "Integrated into digital offerings"
-  },
-  {
-    feature: "Wearable Device Integration",
-    sanitas: "Good (e.g., Sanitas Active App rewards for activity)",
-    helsana: "Good (e.g., Helsana+ app can connect with some trackers)"
-  },
-  {
-    feature: "Online Appointment Booking",
-    sanitas: "Increasingly available through portal or partner networks",
-    helsana: "Available through portal or partner networks"
-  },
-  {
-    feature: "Supplementary: Alternative Medicine",
-    sanitas: "Strong focus, extensive coverage",
-    helsana: "Good coverage"
-  },
-  {
-    feature: "Supplementary: Intl. Private Hospital",
-    sanitas: "Available (Hospital Extra Liberty, Hospital Top Liberty)",
-    helsana: "Comprehensive options (Hospital Extra, Hospital Global)"
-  },
-  {
-    feature: "Expat-Friendliness: English Support",
-    sanitas: "Very good; comprehensive English resources",
-    helsana: "Good; English website, documents, English-speaking support"
-  },
-  {
-    feature: "Customer Satisfaction (e.g., Comparis)",
-    sanitas: "Consistently good (e.g., 5.2/6)",
-    helsana: "Generally good (e.g., 5.2/6)"
-  }
-];
+export const prerender = true;
 
-const sanitasPros = [
-  "Leading-edge digital platform (Sanitas Portal) with extensive integrated features",
-  "Strong focus on rewarding healthy lifestyles (Active App)",
-  "Excellent English digital resources",
-  "Innovative partnerships in digital health"
-];
-
-const sanitasCons = [
-  "Some advanced digital features might require specific supplementary plans",
-  "The sheer number of digital options could be overwhelming for some"
-];
-
-const helsanaPros = [
-  "Very good and user-friendly digital platform (Helsana+)",
-  "Specialized coaching apps (Helsana Coach)",
-  "Strong telemedicine integration",
-  "Comprehensive range of services from a major insurer"
-];
-
-const helsanaCons = [
-  "Digital health features sometimes spread across multiple apps rather than one central hub",
-  "Innovation may feel slightly less cutting-edge than Sanitas in certain niche digital health areas"
-];
+const meta = {
+  title: "Sanitas vs Helsana — Which Is Better for Expats in Switzerland?",
+  description: "Independent comparison between Sanitas and Helsana for expats in Switzerland — find which fits your lifestyle, budget, and coverage goals.",
+  canonicalUrl: "https://expat-savvy.ch/compare-providers/sanitas-vs-helsana/"
+};
 
 const faqs = [
   {
-    question: "Which app is more user-friendly for expats, Sanitas Portal or Helsana+?",
-    answer: "Both are highly user-friendly and available in English. Sanitas Portal is often praised for its comprehensive integration of many services in one place, while Helsana+ is known for its clean design and ease of navigation."
+    question: "Can I switch between Sanitas and Helsana anytime?",
+    answer: "You can switch basic insurance annually by submitting cancellation by 30 November for the following year. Supplementary insurance requires a separate health questionnaire and acceptance. We help you navigate the process strategically to maximize approval chances and manage all deadlines."
   },
   {
-    question: "Do both insurers offer rewards for using fitness trackers?",
-    answer: "Sanitas, through its Active App, directly rewards activity that can be tracked by various devices. Helsana+ can connect with some trackers, and they encourage activity through various programs, but direct financial rewards for tracker use might be structured differently."
+    question: "How long does the comparison process take?",
+    answer: "The consultation takes 30-60 minutes. We listen to your goals, canton, and health situation, then send both quotes (Sanitas & Helsana) with a side-by-side comparison within 24 hours. You decide with confidence, and we handle all forms and submissions."
   },
   {
-    question: "How good is the English support for their digital health services?",
-    answer: "Both Sanitas and Helsana offer good to very good English support for their digital platforms and services, recognizing the needs of the expat community."
+    question: "What if I have pre-existing conditions?",
+    answer: "Basic insurance must accept everyone regardless of health. For supplementary insurance, both Sanitas and Helsana conduct health checks and may exclude conditions or load premiums. We help structure applications strategically, leverage group discounts, and improve your acceptance odds."
   },
   {
-    question: "Can I get online medical consultations in English with both?",
-    answer: "Yes, both insurers facilitate telemedicine services where consultations in English are generally available, either through their own platforms or partner services."
+    question: "Is the consultation really free?",
+    answer: "Yes, 100% free. We're FINMA-certified brokers paid equally by either insurer, so our advice is completely independent. No hidden fees, no sales pressure — just clear, personalized guidance for your peace of mind."
   },
   {
-    question: "How can Expat Savvy help me compare the digital health offerings of Sanitas and Helsana?",
-    answer: "Expat Savvy stays updated on the latest digital health innovations from Swiss insurers. We can help you compare the specific features, usability, and expat-friendliness of platforms from Sanitas, Helsana, and others, ensuring you choose an insurer whose digital services match your preferences and needs."
+    question: "Does Sanitas have better English support than Helsana?",
+    answer: "Yes, Sanitas is particularly known for dedicated English-language hotlines and expat-focused service teams. Helsana also offers English support via their hotline. Both are good options for expats, and we help you compare service quality alongside premiums and coverage."
+  },
+  {
+    question: "Is Sanitas more expensive than Helsana?",
+    answer: "It depends on your canton and chosen model. Premiums vary by region — in some cantons Sanitas is competitive, in others Helsana may be lower. Both are mid-range insurers. We provide exact comparisons for your specific location and situation."
+  },
+  {
+    question: "What if I'm planning to stay only a few months or a year?",
+    answer: "For short stays, you still need basic Swiss health insurance within 90 days. We recommend cost-effective basic models with higher deductibles (CHF 2,500) to minimize premiums. Supplementary insurance may not make sense for short-term stays. We help you choose the most economical option for your stay duration."
   }
 ];
---- 
+---
 
 <Layout
-  title={new Date() < new Date('2025-11-30') ? "🚨 Sanitas Vs Helsana 2026: Change Period Ends Nov 30 - Compare & Save 40%" : "Sanitas vs Helsana – Health Insurance Comparison for Expats 2026"}
-  description={new Date() < new Date('2025-11-30') ? "⏰ URGENT: 2026 change period ends Nov 30! Compare head-to-head analysis, live quotes, save up to 40%. Free expert consultation." : "Compare Sanitas vs Helsana health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."}
+  title={meta.title}
+  description={meta.description}
+  canonicalURLProp={meta.canonicalUrl}
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Sanitas vs. Helsana: Innovation in Digital Health Compared for Expats (2025)",
-    "description": "Compare Sanitas and Helsana health insurance for expats in Switzerland. Expert analysis of digital health innovation to help you choose the right provider.",
-    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-    "datePublished": "2025-06-01",
-    "dateModified": "2025-08-13",
-    "author": {
-      "@type": "Person",
-      "name": "Benjamin Amos Wagner",
-      "url": "https://expat-savvy.ch/about"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-        "width": 600,
-        "height": 60
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://expat-savvy.ch/compare-providers/sanitas-vs-helsana"
-    }
-  }
-  </script>
-
-  <!-- FAQ Schema -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Which app is more user-friendly for expats, Sanitas Portal or Helsana+?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Both are highly user-friendly and available in English. Sanitas Portal is often praised for its comprehensive integration of many services in one place, while Helsana+ is known for its clean design and ease of navigation."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do both insurers offer rewards for using fitness trackers?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sanitas, through its Active App, directly rewards activity that can be tracked by various devices. Helsana+ can connect with some trackers, and they encourage activity through various programs, but direct financial rewards for tracker use might be structured differently."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How good is the English support for their digital health services?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Both Sanitas and Helsana offer good to very good English support for their digital platforms and services, recognizing the needs of the expat community."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I get online medical consultations in English with both?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, both insurers facilitate telemedicine services where consultations in English are generally available, either through their own platforms or partner services."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can Expat Savvy help me compare the digital health offerings of Sanitas and Helsana?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Expat Savvy stays updated on the latest digital health innovations from Swiss insurers. We can help you compare the specific features, usability, and expat-friendliness of platforms from Sanitas, Helsana, and others, ensuring you choose an insurer whose digital services match your preferences and needs."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Breadcrumb Schema -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://expat-savvy.ch/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Compare Providers",
-        "item": "https://expat-savvy.ch/compare-providers"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Sanitas vs. Helsana",
-        "item": "https://expat-savvy.ch/compare-providers/sanitas-vs-helsana"
-      }
-    ]
-  }
-  </script>
-
-  <!-- Hero Section -->
-  <div class="relative bg-white">
-    <div class="absolute inset-0">
-      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+  <!-- ============================================ -->
+  <!-- 1. HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="relative h-screen md:min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 hero-background">
+      <img
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746960418/a-photograph-depicts-a-pair-of-youthful-_quYJOYFeRPqWWfrG0MYelw_ndQb4IxjRbGazkFfjfLXNA_qk6hxm.jpg"
+        alt="Sanitas vs Helsana comparison for expats in Switzerland"
+        class="w-full h-full object-cover object-center"
+        width="1920"
+        height="1080"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/0 via-black/30 to-black/45"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
-      <!-- Left Side - Main Heading -->
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div class="max-w-lg mx-auto lg:max-w-none">
-          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            Sanitas vs. Helsana:<br>
-            <span class="text-primary-600">Innovation in Digital Health Compared</span>
-          </h1>
-          <p class="mt-6 text-xl text-gray-500">
-            For expatriates in Switzerland who value innovation, particularly in digital health services, Sanitas and Helsana are two prominent providers with distinct approaches. Our comparison helps you navigate their digital offerings.
-          </p>
-          <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              Get Personalized Advice
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
-            <a 
-              href="/compare-providers"
-              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              Back to Comparison Hub
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Right Side - Quick Links -->
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
-        <div class="max-w-lg mx-auto">
-          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
-          <div class="mt-8 space-y-6">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
-                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Sanitas and Helsana.</p>
-                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  Jump to comparison table
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
-                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
-                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  View pros and cons
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Common Questions</h3>
-                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
-                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  See all FAQs
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 2026 Season: Comparison Special Incentive Box -->
-  <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-red-500 py-8`}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-2xl p-8 shadow-lg border border-red-100">
-        <div class="text-center">
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">
-            🆚 2026 Comparison Special: Sanitas vs Helsana Expert Analysis
-          </h3>
-          <p class="text-lg text-gray-600 mb-6">
-            Get professional comparison analysis between Sanitas and Helsana for 2026, plus access to <strong>exclusive incentives</strong> when switching with Expat Savvy. Broker services only - no direct insurer fees.
-          </p>
-          <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-              data-umami-event="seasonal-cta-comparison-sanitas-helsana"
-            >
-              🟥 Get Expert Comparison Analysis
-              <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-              </svg>
-            </button>
-          </div>
-          <p class="text-sm mt-4 text-gray-500">
-            ⏰ Change deadline: November 30, 2025 • 🎁 Exclusive incentives included • 📞 Free expert guidance
+    <!-- Mobile layout (full-screen) -->
+    <div class="relative w-full h-full flex items-center justify-center px-4 sm:px-6 md:hidden">
+      <div class="text-center max-w-sm mx-auto">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 animate-fade-in text-shadow leading-tight">
+          <span class="block">Choosing Between Sanitas and Helsana?</span>
+          <span class="block mt-2">We Help You Find What's Right for You.</span>
+        </h1>
+        <p class="text-base sm:text-lg text-white/95 animate-slide-up text-shadow mb-6 leading-relaxed">
+          Independent, FINMA-certified advice for expats — free, unbiased, and 100% in English.
+        </p>
+        <div class="flex flex-col items-center gap-4 animate-slide-up">
+          <button
+            class="inline-flex items-center px-6 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center"
+            onclick="window.openHealthModal('sanitas-vs-helsana')"
+            aria-label="Get free independent comparison"
+          >
+            Get My Free Independent Comparison
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <p class="text-white/90 text-sm text-center">
+            Free, independent, and FINMA-certified advice — no obligations.
           </p>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Related Comparisons -->
-  <div class="bg-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Related comparisons</h2>
-      <div class="flex flex-wrap gap-2 text-sm">
-        <a href="/compare-providers/helsana-vs-css/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Helsana vs CSS →</a>
-        <a href="/compare-providers/css-vs-sanitas/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">CSS vs Sanitas →</a>
-        <a href="/compare-providers/sanitas-vs-swica/" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Sanitas vs SWICA →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Short Human Introduction Summary -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-2 pb-4">
-      <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">In short</h2>
-        <p class="text-sm text-gray-700 mb-3">Both are strong Swiss insurers; the choice is often between a best-in-class digital experience and the breadth of network and hospital options.</p>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-gray-800">
-          <li class="flex items-start"><span class="text-primary-600 mr-2">→</span><strong>Choose Sanitas</strong> if you want a top-tier digital portal, strong alternative medicine options, and excellent English resources.</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">→</span><strong>Choose Helsana</strong> if you value a broad network, robust international hospital coverage, and a mature app experience.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Key Facts + Provider Links -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 pb-6">
-      <div class="flex justify-end text-xs text-gray-500 mb-2">Last updated: 13.08.2025</div>
-      <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">Key Facts — Sanitas vs Helsana (2025)</h2>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-gray-700">
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Both offer all major basic models (Standard, GP, HMO, Telmed); premiums depend on canton, age, model, and deductible</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Basic insurance has guaranteed acceptance; supplementary is medically underwritten</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Combine high deductible + restricted model for biggest savings if usage is low</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Switching: cancel by 30 Nov for 1 Jan; adjust model/deductible by 31 Dec</li>
-        </ul>
-        <div class="mt-4 flex flex-wrap gap-3 text-sm">
-          <a href="/healthcare/all-insurances/sanitas" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Sanitas profile →</a>
-          <a href="/healthcare/all-insurances/helsana" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Helsana profile →</a>
-          <a href="/guides/how-to/choose-health-insurance-deductible" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Deductible guide →</a>
-          <a href="/guides/how-to/change-insurance-models" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Models explained →</a>
+    
+    <!-- Desktop layout (left aligned) -->
+    <div class="relative w-full mx-auto hidden md:block">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6 col-start-2 flex items-center justify-center">
+          <div class="text-left max-w-xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow">
+              <span class="block">Choosing Between Sanitas and Helsana?</span>
+              <span class="block mt-2">We Help You Find What's Right for You.</span>
+            </h1>
+            <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
+              Independent, FINMA-certified advice for expats — free, unbiased, and 100% in English.
+            </p>
+            <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
+              <button
+                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
+                onclick="window.openHealthModal('sanitas-vs-helsana')"
+                aria-label="Get free independent comparison"
+              >
+                Get My Free Independent Comparison
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+              <p class="text-white/90 text-sm">
+                Free, independent, and FINMA-certified advice — no obligations.
+              </p>
+            </div>
+          </div>
         </div>
+        <div class="col-span-6"></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Introduction Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <p class="lead text-xl text-gray-600">
-          For those in Switzerland who value innovation, particularly in digital health services, Sanitas and Helsana are two prominent health insurance providers that consistently invest in technology to enhance member experience. Both offer comprehensive coverage and robust digital platforms, but their approaches to innovation and specific digital health features can differ. This comparison focuses on their digital health offerings and how they cater to the needs of tech-savvy individuals.
+  <!-- ============================================ -->
+  <!-- 1.5 INTRODUCTION SECTION -->
+  <!-- ============================================ -->
+  <section class="bg-gray-50 pt-16 pb-8 border-t border-gray-100">
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-8">
+          Making the Right Choice Isn't Easy
+        </h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          Choosing between Sanitas and Helsana isn't simple. Prices, benefits, and acceptance rules differ — and what's best for one person may not be for another.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+          We've helped hundreds of expats find which insurer fits their lifestyle, budget, and long-term plans.
+        </p>
+        <p class="text-gray-800 font-medium text-lg leading-relaxed">
+          Here's how they compare — and why personal advice matters more than price.
         </p>
       </div>
     </div>
+  </section>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      Before deciding, let's look at the essentials side-by-side.
+    </p>
   </div>
 
-  <!-- Comparison Table Section -->
-  <div id="comparison-table" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- ============================================ -->
+  <!-- 2. AT A GLANCE — COMPARISON TABLE -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-gray-900">Sanitas vs. Helsana: At a Glance (Focus on Digital Health Innovation)</h2>
-        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Sanitas and Helsana compare across key digital health criteria important for expats:</p>
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          Sanitas vs Helsana — At a Glance
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Both are reputable insurers. The better choice depends on your profile, canton, and coverage goals.
+        </p>
       </div>
 
-      <div class="overflow-x-auto shadow-xl rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200 bg-white">
+      <div class="max-w-5xl mx-auto overflow-x-auto">
+        <table class="w-full border-separate border-spacing-y-2">
           <thead>
-            <tr class="bg-gray-50">
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Feature
-              </th>
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
-                Sanitas
-              </th>
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Helsana
-              </th>
+            <tr class="text-left">
+              <th class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-50 rounded-l-xl">Category</th>
+              <th class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-50">Sanitas</th>
+              <th class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-50 rounded-r-xl">Helsana</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
-            {tableData.map((row, index) => (
-              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.sanitas}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.helsana}</td>
-              </tr>
-            ))}
+          <tbody class="text-sm">
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Founded</td>
+              <td class="px-6 py-4 text-gray-700">1958</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">1899</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Headquarters</td>
+              <td class="px-6 py-4 text-gray-700">Zurich</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Dübendorf</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Clients</td>
+              <td class="px-6 py-4 text-gray-700">~850K</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">~2.2M</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Languages</td>
+              <td class="px-6 py-4 text-gray-700">DE, FR, IT, EN</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">DE, FR, IT, EN</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Strengths</td>
+              <td class="px-6 py-4 text-gray-700">Strong English support, digital services, expat-friendly</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Helsana+ app, fast reimbursements, broad family coverage</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Limitations</td>
+              <td class="px-6 py-4 text-gray-700">Mid-range premiums, smaller network</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Regionally high premiums, strict supplementary</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Supplementary Plans</td>
+              <td class="px-6 py-4 text-gray-700">Basic Smart, Classic, Premium, Hospital Plus</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Completa, Sana, Top, Primeo</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Premium Trend 2026</td>
+              <td class="px-6 py-4 text-gray-700">+5.4%</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">+5.2%</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Ideal for</td>
+              <td class="px-6 py-4 text-gray-700">International residents, expats, urban professionals</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Families, professionals, wellness-oriented</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">English Support</td>
+              <td class="px-6 py-4 text-gray-700">✅ Excellent (dedicated)</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">✅ Good (hotline)</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
+  </section>
+
+  <!-- Transition Divider -->
+  <div class="border-t border-gray-100 mt-12 mb-16"></div>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      Numbers only tell part of the story — what really matters is how each insurer fits <em>you</em>.
+    </p>
   </div>
 
-  <!-- Detailed Breakdown Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Detailed Breakdown: Sanitas vs. Helsana (Digital Health Focus)</h2>
-        <p>Let's explore the nuances of how these two insurers stack up in terms of digital innovation:</p>
-
-        <h3>Digital Platforms: Sanitas Portal vs. Helsana+</h3>
-        <p>
-          Both Sanitas and Helsana have invested significantly in their digital platforms, making them leaders in this space.
-        </p>
-        <ul>
-          <li>
-            <strong>Sanitas (Sanitas Portal app & online portal):</strong> The Sanitas Portal is often lauded for its comprehensive features, intuitive design, and integration of various digital health services. Users can manage policies, submit claims, access telemedicine, use symptom checkers, connect with health coaching, and even order medications. The app is highly rated by users.
-          </li>
-          <li>
-            <strong>Helsana (Helsana+ app & online portal):</strong> The Helsana+ app is also a very strong offering, providing a user-friendly interface for claims submission, policy management, access to telemedicine, and health information. Helsana has also developed specialized apps like the Helsana Coach for targeted health support.
-          </li>
-        </ul>
-
-        <p>
-          While both are excellent, Sanitas often has a slight edge in terms of the breadth of <em>integrated</em> digital health tools directly within its main portal, whereas Helsana sometimes offers specialized functionalities through separate, albeit connected, applications.
-        </p>
-
-        <h3>Innovation in Digital Health Services</h3>
-        <ul>
-          <li>
-            <strong>Sanitas:</strong> Actively promotes digital health through initiatives like the Sanitas Active App, which rewards users for physical activity. They also partner with various digital health startups and integrate innovative services like AI-powered symptom checkers and digital therapy options.
-          </li>
-          <li>
-            <strong>Helsana:</strong> Also a strong innovator, Helsana focuses on providing practical digital tools for everyday health management. Their Helsana Coach app, for example, offers personalized support for nutrition, exercise, and mindfulness. They continuously update their digital offerings to improve user experience and access to care.
-          </li>
-        </ul>
-
-        <h3>Telemedicine and Remote Care</h3>
-        <p>
-          Both insurers offer robust Telmed basic insurance models and integrate telemedicine services well into their digital platforms. This allows expats to conveniently access initial medical consultations remotely, often in English, which is a significant advantage.
-        </p>
-
-        <h3>Expat-Friendliness in the Digital Realm</h3>
-        <ul>
-          <li>
-            <strong>Sanitas:</strong> Provides comprehensive English versions of its digital platforms and documentation, making it very accessible for expats. Their digital tools are designed to be intuitive, reducing language barriers.
-          </li>
-          <li>
-            <strong>Helsana:</strong> Also offers good English support on its digital platforms and provides key documents in English. The user experience is generally smooth for English-speaking users.
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pros and Cons Section -->
-  <div id="pros-cons" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Sanitas vs. Helsana (Digital Innovation Focus)</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Sanitas Pros and Cons -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-red-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Sanitas</h3>
-          </div>
-          <div class="p-6">
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Pros
-              </h4>
-              <ul class="space-y-2">
-                {sanitasPros.map(pro => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                </svg>
-                Cons
-              </h4>
-              <ul class="space-y-2">
-                {sanitasCons.map(con => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Helsana Pros and Cons -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-red-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Helsana</h3>
-          </div>
-          <div class="p-6">
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Pros
-              </h4>
-              <ul class="space-y-2">
-                {helsanaPros.map(pro => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                </svg>
-                Cons
-              </h4>
-              <ul class="space-y-2">
-                {helsanaCons.map(con => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Decision Helper Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
-        
-        <ul>
-          <li>
-            <strong>Choose Sanitas if:</strong> You are an expat who wants a top-tier, all-in-one digital health experience with a wide array of integrated tools, rewards for activity, and excellent English support. You are excited by innovative digital health solutions.
-          </li>
-          <li>
-            <strong>Choose Helsana if:</strong> You value a very user-friendly and reliable digital platform from a major insurer, with access to specialized coaching apps and strong telemedicine. You prefer a balance of digital convenience and established, comprehensive service.
-          </li>
-        </ul>
-        
-        <p>
-          Both are excellent choices for expats who prioritize digital health tools. The best fit may depend on your preference for an all-in-one platform versus specialized apps and the specific types of digital health services you value most. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice!
-        </p>
-        
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-            Chat with Our AI Now!
-          </a>
-          <button onclick="window.openHealthModal('comparison')" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Book Your Free Consultation!
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FAQ Section -->
-  <div id="faqs" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Sanitas vs. Helsana (Digital Health Focus)</h2>
-      
-      <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <div class="bg-primary-600 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Your Next Step with Expat Savvy
+  <!-- ============================================ -->
+  <!-- 3. CONTEXT & SCENARIOS — PERSONALIZED DECISION GUIDE -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+          Which Insurer Is Right for <em>Your</em> Situation?
         </h2>
-        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
-          For expats keen on leveraging digital health innovations, both Sanitas and Helsana offer compelling solutions. Expat Savvy is here to help you delve into the details.
+        <p class="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed mb-6">
+          There's no single "best" insurer — it depends on who you are, how long you'll stay, what lifestyle you live, and how you want to be covered.
         </p>
-        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-            Chat with AI for Instant Answers
-          </a>
-          <button onclick="window.openHealthModal('comparison')" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Book Your Free Consultation
+        <p class="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed">
+          That's why we review every client's situation individually before recommending Swica, Helsana, or another provider.
+        </p>
+      </div>
+
+      <!-- Interactive Two-Column Decision Guide -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <!-- Left Column: Clickable Cases List -->
+        <div class="space-y-3 order-2 lg:order-1">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Choose your situation</h3>
+          <p class="text-gray-600 text-sm mb-6">Every situation needs a different insurance approach.<br>Here's how we guide you depending on your case:</p>
+          
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button active" 
+            data-case="new"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">New in Switzerland</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="comparing"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Already Insured & Comparing</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="budget"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Budget & Coverage Balance</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="active"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Active Lifestyle</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="families"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Families & Long-Term Plans</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="conditions"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Pre-Existing Conditions & Group Discounts</span>
+            </div>
           </button>
         </div>
-        
-        <div class="mt-6">
-          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
-            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Return to Main Comparison Hub
-          </a>
+
+        <!-- Right Column: Dynamic Content Area -->
+        <div class="bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100 relative order-1 lg:order-2">
+          <!-- Red top border for brand accent -->
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#D72638] to-[#E60000] rounded-t-2xl"></div>
+          
+          <div id="case-content" class="min-h-[300px] lg:min-h-[400px]">
+            <div class="case-content" data-case="new">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🏠 New in Switzerland</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>You need to register for Swiss health insurance within 90 days — but what's best depends on how long you'll stay.</p>
+                <p><strong>Swica</strong> offers flexible models if you're unsure about your duration, while <strong>Helsana</strong> provides strong family coverage and digital support for long-term residents.</p>
+                <p>We'll help you balance setup simplicity with future flexibility, so your first plan fits your real life in Switzerland.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="comparing">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🔁 Already Insured & Comparing</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>If you're already with one insurer, the question isn't "is it cheaper?" — it's what changes when you switch.</p>
+                <p><strong>Helsana</strong> may offer better app support and claims speed, while <strong>Swica's</strong> fitness and wellness benefits often offset higher premiums.</p>
+                <p>We analyze your current coverage line-by-line and show you whether it's truly worth switching — or just optimizing what you already have.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="budget">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">💰 Budget & Coverage Balance</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Lower premiums sound great — until you realize what you gave up.</p>
+                <p><strong>Swica's</strong> entry-age model can mean higher long-term savings if you join early, while <strong>Helsana's</strong> rates are stable but can rise faster with age.</p>
+                <p>We calculate not just what you pay now, but what you'll pay over time for the same protection.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="active">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🏋️ Active Lifestyle</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p><strong>Swica</strong> reimburses up to CHF 1,300 per year for gym and wellness programs — a big win for active expats.</p>
+                <p><strong>Helsana</strong>, on the other hand, rewards consistent healthy behavior via its Helsana+ App, often translating into smaller premium rebates.</p>
+                <p>We help you use every available fitness benefit and structure your supplementary coverage for maximum reward value.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="families">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">👨‍👩‍👧 Families & Long-Term Plans</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Planning to stay long-term?</p>
+                <p><strong>Helsana's</strong> family policies and dental add-ons are strong, but its supplementary premiums rise with age.</p>
+                <p><strong>Swica</strong> uses entry-age pricing, which means your rates stay lower if you join early.</p>
+                <p>We'll help you model long-term cost vs. family protection — so your future stays affordable and well covered.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="conditions">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🛡️ Pre-Existing Conditions & Group Discounts</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Both <strong>Helsana</strong> and <strong>Swica</strong> handle medical history differently — one stricter, one more flexible.</p>
+                <p>We pre-check your acceptance chances and find broker-only group discounts that can lower your total cost.</p>
+                <p>This consultation step is crucial if you've had prior treatments or want supplementary coverage without rejection risk.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End paragraph -->
+      <div class="mt-12 text-center max-w-4xl mx-auto">
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          These examples show why a tailored review always beats a generic online calculator.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Every factor — age, canton, stay duration, health history, and lifestyle — affects what's truly right for you.
+        </p>
+        <p class="text-gray-800 font-medium text-lg mt-4">
+          That's what our free consultation is for — we analyze your full picture and find the insurer that fits.
+        </p>
+      </div>
+
+      <div class="mt-12 text-center max-w-4xl mx-auto">
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Our consultation goes beyond comparing prices — we analyze your profile, age, canton, and health situation to recommend the optimal insurer and plan combination.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition Divider -->
+  <div class="border-t border-gray-100 mt-12 mb-16"></div>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      Every year, we analyze the real differences for hundreds of expats — here's what our expert says.
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 4. INDEPENDENT EXPERT PERSPECTIVE SECTION -->
+  <!-- ============================================ -->
+  <section class="bg-gray-50 py-16 md:py-20">
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-6xl mx-auto">
+        <!-- Section Title with Red Accent -->
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Independent Expert Perspective
+          </h2>
+          <div class="w-24 h-0.5 bg-gradient-to-r from-red-500 to-transparent mx-auto"></div>
+        </div>
+
+        <!-- Two-Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <!-- Left Column: Content -->
+          <div class="space-y-6">
+            <div class="space-y-4 text-gray-700 leading-relaxed">
+              <p class="text-lg">
+                Every day, we benchmark <strong>Sanitas, Helsana, Swica, and CSS</strong> — evaluating real claim experiences, acceptance criteria, and pricing logic for expats.
+                Our goal: to make sure you choose an insurer that fits your real life in Switzerland — your plans, your health, and your peace of mind.
+              </p>
+              
+              <p class="text-lg">
+                With over a decade of experience comparing insurers daily, we know exactly where the differences matter — in <strong>service behavior</strong>, <strong>long-term premium structure</strong>, and <strong>how flexible each provider truly is</strong> when your situation changes.
+              </p>
+            </div>
+
+            <!-- Highlighted Quote Box -->
+            <div class="bg-white/80 border border-red-200 rounded-2xl p-5 shadow-sm relative">
+              <svg class="w-6 h-6 text-red-500 absolute top-3 left-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+              </svg>
+              <blockquote class="text-lg text-gray-800 italic leading-relaxed pl-8">
+                "Health insurance is the only investment we hope to never see a return on — because true value lies in the peace of mind that we're protected when it matters most."
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- Right Column: Expert Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+            <div class="text-center mb-6">
+              <img 
+                src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_160,h_160,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+                alt="Robert Kolar" 
+                class="w-20 h-20 rounded-full mx-auto mb-4"
+                width="80"
+                height="80"
+              />
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Robert Kolar</h3>
+              <p class="text-gray-600 mb-4">FINMA-certified Insurance Broker</p>
+            </div>
+
+            <blockquote class="text-gray-700 italic leading-relaxed mb-6 text-center">
+              "We analyze Sanitas, Helsana, Swica, and CSS daily — not from marketing materials, but from real expat experiences. The best insurer isn't always the cheapest — it's the one that stands by you when life gets unpredictable."
+            </blockquote>
+
+            <div class="space-y-2 text-sm text-gray-600">
+              <div class="flex items-center justify-center">
+                <span class="mr-2">🌐</span>
+                <span>Speaks English, German & French</span>
+              </div>
+              <div class="flex items-center justify-center">
+                <span class="mr-2">💼</span>
+                <span>20+ years advising expats & families in Switzerland</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4.3 HOW IT WORKS SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <p class="text-center text-gray-600 text-base mb-6 max-w-2xl mx-auto">
+        Every consultation follows the same transparent process.
+      </p>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          How It Works
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Understand exactly what happens when you book a consultation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 max-w-6xl mx-auto mb-8">
+        <!-- Step 1 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">1</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">30–60 min consultation</h3>
+          <p class="text-gray-600 text-sm">
+            We listen to your goals, canton, and health situation.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">2</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">We send both quotes</h3>
+          <p class="text-gray-600 text-sm">
+            Swica & Helsana + side-by-side comparison.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">3</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Personal recommendation</h3>
+          <p class="text-gray-600 text-sm">
+            You decide with confidence.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">4</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">We set up everything</h3>
+          <p class="text-gray-600 text-sm">
+            Forms, submission, and yearly updates.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 text-sm italic">
+          Completely free — we're paid equally by either insurer, never by the client.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4.4 WHAT WE HELP YOU SOLVE SECTION -->
+  <!-- ============================================ -->
+  <section class="bg-gray-50 py-16 md:py-24">
+    <div class={DesignSystem.spacing.container.default}>
+      <!-- Intro Line -->
+      <p class="text-center text-gray-600 text-lg mb-4 max-w-3xl mx-auto">
+        You don't just get quotes — you get clarity, protection, and long-term support.
+      </p>
+
+      <!-- Section Title -->
+      <h2 class={cn(DesignSystem.typography.heading.h2.full, 'text-gray-900 mb-12 text-center')}>
+        What We Help You Solve
+      </h2>
+
+      <!-- 3×2 Card Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 max-w-6xl mx-auto mb-12">
+        <!-- Card 1: Independent Advice -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Truly independent advice</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">We're licensed, neutral, and only focused on what's best for you.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Personalized Assessment -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Personalized assessment</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Age, canton, and health all matter; we factor in every detail before recommending.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Pre-check -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Pre-check for pre-existing conditions</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Avoid rejection by applying with the right insurer from the start.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Broker Discounts -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Exclusive broker group discounts</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Access lower rates and benefits not available when applying directly.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Continuous Service -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Continuous yearly check-ups</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">We monitor new premiums and help you switch easily if a better deal appears.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Always Reachable -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Always reachable</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">English-speaking support, even outside regular office hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Button with Glow -->
+      <div class="text-center">
+        <button
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#E60000] to-[#FF3B3B] hover:from-[#CC0000] hover:to-[#E60000] text-white font-bold rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-red-500/50 transition-all duration-300 transform hover:-translate-y-0.5"
+          onclick="window.openHealthModal('sanitas-vs-helsana')"
+          aria-label="Get personalized comparison"
+        >
+          Get My Personalized Comparison
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+        
+        <!-- Disclaimer -->
+        <p class="text-sm text-gray-500 mt-4 italic">
+          *Free, independent, and fully compliant with Swiss FINMA regulations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 7. SOCIAL PROOF — REVIEWS SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <p class="text-center text-gray-600 text-base mb-6 max-w-3xl mx-auto">
+        Every year, hundreds of expats rely on our independent comparisons — here's what they say.
+      </p>
+      <div class="text-center mb-4">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-2'}>
+          What Our Clients Say
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-700 font-semibold'}>
+          ★★★★★ Rated 4.9 / 5 by expats across Switzerland
+        </p>
+      </div>
+      <p class={DesignSystem.typography.body.base + ' text-gray-600 max-w-3xl mx-auto text-center mb-12'}>
+        Real experiences from people who got independent insurance advice.
+      </p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8">
+        <!-- Review 1 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "Robert was an excellent assistant. He introduced me to the complex health system in Switzerland and made sure I took the best decision, providing information and answering all my questions."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">German Barquero</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "I had great experience with expat-savvy, receiving very helpful, professional advice tailored to my personal situation. Robert has demonstrated his in-depth knowledge of the field."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">Rebeka Johnson</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "Robert's advice was very helpful in choosing the right health insurance package and getting over the hurdles of pre-existing conditions. He found me a much better deal."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">Martin Walsh</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center">
+        <a 
+          href="https://g.page/r/CX1UrJhGK5HTEBA/review" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center gap-2"
+        >
+          See all reviews on Google
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      That's why every good decision starts with a short consultation — no guessing, just clarity.
+    </p>
   </div>
 
-</Layout> 
+  <!-- ============================================ -->
+  <!-- 5. CTA SECTION -->
+  <!-- ============================================ -->
+  <section class="relative bg-gradient-to-br from-[#D72638] via-[#E60000] to-[#FF4545] py-16 md:py-20 overflow-hidden">
+    <!-- Subtle Swiss cross pattern background -->
+    <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M30 0v60M0 30h60\" stroke=\"white\" stroke-width=\"12\"/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+    
+    <div class={DesignSystem.spacing.container.default + ' relative z-10'}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Find Out Which Insurer Fits <em>You</em> Best
+        </h2>
+        <p class="text-white text-lg mb-8 opacity-95">
+          Get independent, FINMA-certified advice — completely free and in English.
+        </p>
+        <button
+          class="inline-flex items-center px-8 py-4 bg-white text-red-600 font-bold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-lg hover:scale-105"
+          onclick="window.openHealthModal('sanitas-vs-helsana')"
+          aria-label="Book free consultation"
+        >
+          Book My Free Consultation
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+        <p class="text-white text-sm mt-6 opacity-90">
+          Fully independent — no sales pressure, just clarity and honest guidance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 6. FAQ SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-12 text-center'}>
+          Common Questions About Sanitas vs Helsana
+        </h2>
+
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+              <summary class="cursor-pointer px-6 py-5 flex justify-between items-center list-none">
+                <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
+                <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SCHEMA MARKUP (SEO) -->
+  <!-- ============================================ -->
+
+  <!-- WebPage Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Sanitas vs Helsana Comparison | Expat-Savvy",
+    "description": meta.description,
+    "url": meta.canonicalUrl,
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat-Savvy.ch",
+      "url": "https://expat-savvy.ch"
+    }
+  }, null, 2)} />
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }, null, 2)} />
+
+</Layout>
+
+<script is:inline>
+  // Interactive Case Selection
+  document.addEventListener('DOMContentLoaded', function() {
+    const caseButtons = document.querySelectorAll('.case-button');
+    const caseContents = document.querySelectorAll('.case-content');
+    
+    caseButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const caseType = this.getAttribute('data-case');
+        
+        // Remove active class from all buttons
+        caseButtons.forEach(btn => {
+          btn.classList.remove('active', 'border-red-300', 'bg-red-50');
+          btn.classList.add('border-gray-200');
+        });
+        
+        // Add active class to clicked button
+        this.classList.add('active', 'border-red-300', 'bg-red-50');
+        this.classList.remove('border-gray-200');
+        
+        // Hide all content
+        caseContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        // Show selected content (using more specific selector)
+        const selectedContent = document.querySelector(`.case-content[data-case="${caseType}"]`);
+        if (selectedContent) {
+          selectedContent.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Interactive case selector */
+  .case-button.active {
+    border-color: rgb(239 68 68);
+    background-color: rgb(254 242 242);
+  }
+  
+  .case-content {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  .case-content.hidden {
+    opacity: 0;
+    display: none;
+  }
+  
+  .case-button {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Hero parallax effect */
+  .hero-background img {
+    animation: subtle-zoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes subtle-zoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Text shadow for better readability */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Smooth fade-in animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 1s ease-out 0.3s both;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    .hero-background img {
+      object-position: center center;
+    }
+    
+    .case-button {
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .case-content h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .case-content p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  }
+</style>
+

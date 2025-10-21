@@ -29,7 +29,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-hand-dra
 • **Professional Help**: Relocation services recommended for competitive markets  
 
 #### Next Steps
-📋 [Best Health Insurance for New Arrivals](/blog/best-health-insurance-switzerland/) • [2025/2026 Switching Guide](/insurance-change-2025-2026/) • [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist)
+📋 [Best Health Insurance for New Arrivals](/healthcare/best-health-insurance-switzerland/) • [2025/2026 Switching Guide](/insurance-change-2025-2026/) • [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist)
 
 </div>
 
@@ -135,7 +135,7 @@ Welcome to Switzerland! We hope this guide helps you embark on your Swiss journe
 
 ### Related Guides
 
-- [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete guide for new arrivals
+- [Best Health Insurance Switzerland 2025/2026](/healthcare/best-health-insurance-switzerland/) — Complete guide for new arrivals
 - [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal switching deadlines and optimization
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard comparison
 - [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Detailed admin and insurance timeline

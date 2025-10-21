@@ -1,662 +1,1075 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ConsultationModal from '../../../components/ConsultationModal.astro';
+import { DesignSystem, cn } from '../../../styles/design-system';
 
-// Define comparison data
-const tableData = [
-  {
-    feature: "Basic Insurance Models Offered",
-    swica: "Standard, Telmed (Medpharm), HMO (Santé), GP (Favorit Casa)",
-    sanitas: "Standard, Telmed (CallMed), HMO (CareMed), GP (Medbase MultiAccess)"
-  },
-  {
-    feature: "Typical Basic Premium Range",
-    swica: "Moderate to High (Varies by canton, age, deductible)",
-    sanitas: "Moderate (Varies by canton, age, deductible)"
-  },
-  {
-    feature: "Supplementary: Alternative Medicine",
-    swica: "Good coverage with Completa Top & Optima",
-    sanitas: "Strong focus, extensive coverage with Classic & Family plans"
-  },
-  {
-    feature: "Supplementary: Check-ups & Prevention",
-    swica: "Strong focus, contributions via Optima & other plans",
-    sanitas: "Good, various contributions for check-ups and prevention"
-  },
-  {
-    feature: "Supplementary: Intl. Private Hospital",
-    swica: "Excellent options (Hospita Global Private)",
-    sanitas: "Available (Hospital Extra Liberty, Hospital Top Liberty)"
-  },
-  {
-    feature: "Supplementary: Dental Insurance",
-    swica: "Available (Denta)",
-    sanitas: "Available (Dental Basic, Dental Plus)"
-  },
-  {
-    feature: "Supplementary: Gym & Health Promotion",
-    swica: "Generous contributions (up to CHF 800/year with Optima)",
-    sanitas: "Contributions via various plans (e.g., Sanitas Active App rewards)"
-  },
-  {
-    feature: "Handling Pre-existing Conditions (Suppl.)",
-    swica: "Health questionnaire; potential for exclusions or premium loading",
-    sanitas: "Health questionnaire; potential for exclusions or premium loading. Unique Individual Premium Supplement option for some conditions."
-  },
-  {
-    feature: "Expat-Friendliness: English Support",
-    swica: "Very good; English website, documents, dedicated English support line",
-    sanitas: "Very good; English website, comprehensive English documents, good English support"
-  },
-  {
-    feature: "Expat-Friendliness: Onboarding Support",
-    swica: "Good resources for new arrivals",
-    sanitas: "Good resources and clear information for expats"
-  },
-  {
-    feature: "Customer Satisfaction (e.g., Comparis)",
-    swica: "Consistently high ratings (e.g., 5.4/6 on Comparis 2023)",
-    sanitas: "Consistently good ratings (e.g., 5.2/6 on Comparis 2023)"
-  },
-  {
-    feature: "Digital Services (App/Portal Quality)",
-    swica: "Excellent, user-friendly mySwica app & portal",
-    sanitas: "Excellent, highly-rated Sanitas Portal app & online portal"
-  },
-  {
-    feature: "Claims Processing (Ease/Speed Summary)",
-    swica: "Generally efficient and straightforward via app/portal",
-    sanitas: "Very efficient, excellent digital submission options"
-  }
-];
+export const prerender = true;
 
-const swicaPros = [
-  "Top-rated customer service with excellent English support",
-  "Outstanding and intuitive mySwica digital platform",
-  "Generous wellness and gym contributions (up to CHF 800/year)",
-  "Strong international coverage options"
-];
-
-const swicaCons = [
-  "Can be one of the more expensive providers",
-  "Especially for comprehensive supplementary packages"
-];
-
-const sanitasPros = [
-  "Excellent and feature-rich Sanitas Portal app",
-  "Strong focus on alternative medicine",
-  "Comprehensive English resources",
-  "Potential for Individual Premium Supplement for some pre-existing conditions"
-];
-
-const sanitasCons = [
-  "While customer service is good, Swica often has a slight edge in personalized English support ratings",
-  "Some supplementary plans can be complex to combine for optimal coverage"
-];
+const meta = {
+  title: "Swica vs Sanitas — Which Is Better for Expats in Switzerland?",
+  description: "Independent comparison between Swica and Sanitas for expats in Switzerland — find which fits your lifestyle, budget, and coverage goals.",
+  canonicalUrl: "https://expat-savvy.ch/compare-providers/swica-vs-sanitas/"
+};
 
 const faqs = [
   {
-    question: "Which app is better, mySwica or Sanitas Portal?",
-    answer: "Both are excellent and highly rated. mySwica is often praised for its simplicity and ease of use, while Sanitas Portal is noted for its breadth of features and integrated digital health services. The preference can be subjective."
+    question: "Can I switch between Swica and Sanitas anytime?",
+    answer: "You can switch basic insurance annually by submitting cancellation by 30 November for the following year. Supplementary insurance requires a separate health questionnaire and acceptance. We help you navigate the process strategically to maximize approval chances and manage all deadlines."
   },
   {
-    question: "Do Swica and Sanitas offer good support for expats new to Switzerland?",
-    answer: "Yes, both providers have experience with expatriates and offer good resources and support to help them navigate the Swiss health insurance system and set up their policies."
+    question: "How long does the comparison process take?",
+    answer: "The consultation takes 30-60 minutes. We listen to your goals, canton, and health situation, then send both quotes (Swica & Sanitas) with a side-by-side comparison within 24 hours. You decide with confidence, and we handle all forms and submissions."
   },
   {
-    question: "How do their international health coverage options compare for expats who travel a lot?",
-    answer: "Both offer strong supplementary plans for international private hospital coverage. Swica's HOSPITA GLOBAL PRIVATE is particularly comprehensive. It's important to compare the specific terms and geographical coverage of their respective international plans."
+    question: "What if I have pre-existing conditions?",
+    answer: "Basic insurance must accept everyone regardless of health. For supplementary insurance, both Swica and Sanitas conduct health checks and may exclude conditions or load premiums. We help structure applications strategically, leverage group discounts, and improve your acceptance odds."
   },
   {
-    question: "If I have a pre-existing condition, am I more likely to get supplementary coverage with Sanitas than Swica?",
-    answer: "It's case-dependent. Both will assess your health. Sanitas's option for an Individual Premium Supplement for some conditions on some plans may offer a path to coverage where others might decline, but this is not guaranteed. Full transparency with both insurers is key."
+    question: "Is the consultation really free?",
+    answer: "Yes, 100% free. We're FINMA-certified brokers paid equally by either insurer, so our advice is completely independent. No hidden fees, no sales pressure — just clear, personalized guidance for your peace of mind."
   },
   {
-    question: "How can Expat Savvy help me choose between Swica and Sanitas based on my digital and expat needs?",
-    answer: "Expat Savvy understands the nuances that matter to expats, from digital usability to English service quality and international benefits. We provide unbiased comparisons of specific plans from Swica, Sanitas, and others, tailored to your individual profile, ensuring you choose the insurer that best aligns with your preferences and requirements."
+    question: "Does Sanitas have better English support than Swica?",
+    answer: "Both insurers offer good English support, but Sanitas is particularly known for dedicated English-language hotlines and expat-focused service teams. Swica also has strong English support in major cities. We help you compare service quality alongside premiums and coverage."
+  },
+  {
+    question: "Does Swica really reimburse CHF 1,300 for gyms?",
+    answer: "Yes, with Swica's Completa Forte or Optima supplementary plans, you can receive up to CHF 1,300 per year for fitness memberships, yoga, swimming, and wellness activities. If you're active and use these benefits, the effective cost can be very competitive. We help you calculate net value."
+  },
+  {
+    question: "What if I'm planning to stay only a few months or a year?",
+    answer: "For short stays, you still need basic Swiss health insurance within 90 days. We recommend cost-effective basic models with higher deductibles (CHF 2,500) to minimize premiums. Supplementary insurance may not make sense for short-term stays. We help you choose the most economical option for your stay duration."
   }
 ];
---- 
+---
 
 <Layout
-  title={new Date() < new Date('2025-11-30') ? "🚨 Swica Vs Sanitas 2026: Change Period Ends Nov 30 - Compare & Save 40%" : "Swica vs Sanitas – Health Insurance Comparison for Expats 2026"}
-  description={new Date() < new Date('2025-11-30') ? "⏰ URGENT: 2026 change period ends Nov 30! Compare head-to-head analysis, live quotes, save up to 40%. Free expert consultation." : "Compare Swica vs Sanitas health insurance for expats in Switzerland. Premiums, models, and which provider fits best in 2026."}
+  title={meta.title}
+  description={meta.description}
+  canonicalURLProp={meta.canonicalUrl}
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Swica vs. Sanitas: Focus on Digital & Expat Services (2025)",
-    "description": "Compare Swica and Sanitas health insurance for expats in Switzerland. Expert analysis of digital tools, English service, and expat-focused benefits.",
-    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-    "datePublished": "2025-06-01",
-    "dateModified": "2025-08-13",
-    "author": {
-      "@type": "Person",
-      "name": "Benjamin Amos Wagner",
-      "url": "https://expat-savvy.ch/about"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
-        "width": 600,
-        "height": 60
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://expat-savvy.ch/compare-providers/swica-vs-sanitas"
-    }
-  }
-  </script>
-
-  <!-- FAQ Schema -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Which app is better, mySwica or Sanitas Portal?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Both are excellent and highly rated. mySwica is often praised for its simplicity and ease of use, while Sanitas Portal is noted for its breadth of features and integrated digital health services. The preference can be subjective."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do Swica and Sanitas offer good support for expats new to Switzerland?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, both providers have experience with expatriates and offer good resources and support to help them navigate the Swiss health insurance system and set up their policies."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do their international health coverage options compare for expats who travel a lot?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Both offer strong supplementary plans for international private hospital coverage. Swica's HOSPITA GLOBAL PRIVATE is particularly comprehensive. It's important to compare the specific terms and geographical coverage of their respective international plans."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "If I have a pre-existing condition, am I more likely to get supplementary coverage with Sanitas than Swica?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It's case-dependent. Both will assess your health. Sanitas's option for an Individual Premium Supplement for some conditions on some plans may offer a path to coverage where others might decline, but this is not guaranteed. Full transparency with both insurers is key."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can Expat Savvy help me choose between Swica and Sanitas based on my digital and expat needs?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Expat Savvy understands the nuances that matter to expats, from digital usability to English service quality and international benefits. We provide unbiased comparisons of specific plans from Swica, Sanitas, and others, tailored to your individual profile, ensuring you choose the insurer that best aligns with your preferences and requirements."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Breadcrumb Schema -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://expat-savvy.ch/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Compare Providers",
-        "item": "https://expat-savvy.ch/compare-providers"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Swica vs. Sanitas",
-        "item": "https://expat-savvy.ch/compare-providers/swica-vs-sanitas"
-      }
-    ]
-  }
-  </script>
-
-  <!-- Hero Section -->
-  <div class="relative bg-white">
-    <div class="absolute inset-0">
-      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
+  <!-- ============================================ -->
+  <!-- 1. HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="relative h-screen md:min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 hero-background">
+      <img
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746960418/a-photograph-depicts-a-pair-of-youthful-_quYJOYFeRPqWWfrG0MYelw_ndQb4IxjRbGazkFfjfLXNA_qk6hxm.jpg"
+        alt="Swica vs Sanitas comparison for expats in Switzerland"
+        class="w-full h-full object-cover object-center"
+        width="1920"
+        height="1080"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/0 via-black/30 to-black/45"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
-      <!-- Left Side - Main Heading -->
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div class="max-w-lg mx-auto lg:max-w-none">
-          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-            Swica vs. Sanitas:<br>
-            <span class="text-primary-600">Focus on Digital & Expat Services</span>
-          </h1>
-          <p class="mt-6 text-xl text-gray-500">
-            For expatriates in Switzerland who prioritize a seamless digital experience and robust services tailored to their needs, Swica and Sanitas often top the list of health insurance providers. Our comparison helps you decide which is the perfect match.
+
+    <!-- Mobile layout (full-screen) -->
+    <div class="relative w-full h-full flex items-center justify-center px-4 sm:px-6 md:hidden">
+      <div class="text-center max-w-sm mx-auto">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 animate-fade-in text-shadow leading-tight">
+          <span class="block">Choosing Between Swica and Sanitas?</span>
+          <span class="block mt-2">We Help You Find What's Right for You.</span>
+        </h1>
+        <p class="text-base sm:text-lg text-white/95 animate-slide-up text-shadow mb-6 leading-relaxed">
+          Independent, FINMA-certified advice for expats — free, unbiased, and 100% in English.
+        </p>
+        <div class="flex flex-col items-center gap-4 animate-slide-up">
+          <button
+            class="inline-flex items-center px-6 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center"
+            onclick="window.openHealthModal('swica-vs-sanitas')"
+            aria-label="Get free independent comparison"
+          >
+            Get My Free Independent Comparison
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <p class="text-white/90 text-sm text-center">
+            Free, independent, and FINMA-certified advice — no obligations.
           </p>
-          <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <button
-              onclick="window.openHealthModal('comparison')"
-              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              Get Personalized Advice
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
-            <a 
-              href="/compare-providers"
-              class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-            >
-              Back to Comparison Hub
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-            </a>
-          </div>
         </div>
       </div>
-      
-      <!-- Right Side - Quick Links -->
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
-        <div class="max-w-lg mx-auto">
-          <h2 class="text-3xl font-extrabold text-white">Quick Navigation</h2>
-          <div class="mt-8 space-y-6">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Compare Providers</h3>
-                <p class="mt-2 text-base text-primary-100">See our detailed side-by-side feature comparison of Swica and Sanitas.</p>
-                <a href="#comparison-table" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  Jump to comparison table
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Pros & Cons</h3>
-                <p class="mt-2 text-base text-primary-100">View the advantages and disadvantages of each provider at a glance.</p>
-                <a href="#pros-cons" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  View pros and cons
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-medium text-white">Common Questions</h3>
-                <p class="mt-2 text-base text-primary-100">Find answers to frequently asked questions about both insurers.</p>
-                <a href="#faqs" class="inline-flex items-center mt-2 text-white hover:text-primary-200">
-                  See all FAQs
-                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-              </div>
+    </div>
+    
+    <!-- Desktop layout (left aligned) -->
+    <div class="relative w-full mx-auto hidden md:block">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6 col-start-2 flex items-center justify-center">
+          <div class="text-left max-w-xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow">
+              <span class="block">Choosing Between Swica and Sanitas?</span>
+              <span class="block mt-2">We Help You Find What's Right for You.</span>
+            </h1>
+            <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
+              Independent, FINMA-certified advice for expats — free, unbiased, and 100% in English.
+            </p>
+            <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
+              <button
+                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
+                onclick="window.openHealthModal('swica-vs-sanitas')"
+                aria-label="Get free independent comparison"
+              >
+                Get My Free Independent Comparison
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+              <p class="text-white/90 text-sm">
+                Free, independent, and FINMA-certified advice — no obligations.
+              </p>
             </div>
           </div>
         </div>
+        <div class="col-span-6"></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Short Human Introduction Summary -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-2 pb-4">
-      <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">In short</h2>
-        <p class="text-sm text-gray-700 mb-3">Both are excellent for English speakers in Switzerland. The right choice depends on what you value most day to day.</p>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-gray-800">
-          <li class="flex items-start"><span class="text-primary-600 mr-2">→</span><strong>Choose Swica</strong> if you want proactive English support and generous wellness benefits (e.g., contributions to gym/fitness) with a premium feel.</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">→</span><strong>Choose Sanitas</strong> if you prefer a polished, feature‑rich portal/app, strong alternative medicine coverage, and flexible supplementary combinations.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Key Facts + Provider Links -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 pb-6">
-      <div class="flex justify-end text-xs text-gray-500 mb-2">Last updated: 13.08.2025</div>
-      <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">Key Facts — Swica vs Sanitas (2025)</h2>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-gray-700">
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Full suite of basic models from both; premiums depend on canton, age, model, and deductible</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Basic insurance guaranteed acceptance; supplementary underwriting required</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Swica: strong English line + generous fitness contributions; Sanitas: feature-rich digital portal</li>
-          <li class="flex items-start"><span class="text-primary-600 mr-2">•</span> Switching: cancel by 30 Nov; adjust model/deductible by 31 Dec with current insurer</li>
-        </ul>
-        <div class="mt-4 flex flex-wrap gap-3 text-sm">
-          <a href="/healthcare/all-insurances/swica" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">SWICA profile →</a>
-          <a href="/healthcare/all-insurances/sanitas" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Sanitas profile →</a>
-          <a href="/guides/how-to/choose-health-insurance-deductible" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Deductible guide →</a>
-          <a href="/guides/how-to/change-insurance-models" class="px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-800 hover:border-primary-400">Models explained →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Introduction Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <p class="lead text-xl text-gray-600">
-          For expatriates in Switzerland who prioritize a seamless digital experience and robust services tailored to their needs, Swica and Sanitas often top the list of health insurance providers. Both are renowned for their strong digital platforms and customer-centric approaches, but they have nuances that might make one a better choice for your specific situation. This comparison focuses on their digital capabilities and overall expat-friendliness.
+  <!-- ============================================ -->
+  <!-- 1.5 INTRODUCTION SECTION -->
+  <!-- ============================================ -->
+  <section class="bg-gray-50 pt-16 pb-8 border-t border-gray-100">
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-8">
+          Making the Right Choice Isn't Easy
+        </h2>
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          Choosing between Swica and Sanitas isn't simple. Prices, benefits, and acceptance rules differ — and what's best for one person may not be for another.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+          We've helped hundreds of expats find which insurer fits their lifestyle, budget, and long-term plans.
+        </p>
+        <p class="text-gray-800 font-medium text-lg leading-relaxed">
+          Here's how they compare — and why personal advice matters more than price.
         </p>
       </div>
     </div>
+  </section>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      Before deciding, let's look at the essentials side-by-side.
+    </p>
   </div>
 
-  <!-- Comparison Table Section -->
-  <div id="comparison-table" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- ============================================ -->
+  <!-- 2. AT A GLANCE — COMPARISON TABLE -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-gray-900">Swica vs. Sanitas: At a Glance</h2>
-        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Here's a quick overview of how Swica and Sanitas compare, with a special focus on digital services and expat needs:</p>
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          Swica vs Sanitas — At a Glance
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Both are reputable insurers. The better choice depends on your profile, canton, and coverage goals.
+        </p>
       </div>
 
-      <div class="overflow-x-auto shadow-xl rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200 bg-white">
+      <div class="max-w-5xl mx-auto overflow-x-auto">
+        <table class="w-full border-separate border-spacing-y-2">
           <thead>
-            <tr class="bg-gray-50">
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Feature
-              </th>
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-primary-600 uppercase tracking-wider">
-                Swica
-              </th>
-              <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                Sanitas
-              </th>
+            <tr class="text-left">
+              <th class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-50 rounded-l-xl">Category</th>
+              <th class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-50">Swica</th>
+              <th class="px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-50 rounded-r-xl">Sanitas</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
-            {tableData.map((row, index) => (
-              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.swica}</td>
-                <td class="px-6 py-4 text-sm text-gray-700">{row.sanitas}</td>
-              </tr>
-            ))}
+          <tbody class="text-sm">
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Founded</td>
+              <td class="px-6 py-4 text-gray-700">1992</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">1958</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Headquarters</td>
+              <td class="px-6 py-4 text-gray-700">Winterthur</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Zurich</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Clients</td>
+              <td class="px-6 py-4 text-gray-700">~1.6M</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">~850K</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Languages</td>
+              <td class="px-6 py-4 text-gray-700">DE, FR, IT, EN</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">DE, FR, IT, EN</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Strengths</td>
+              <td class="px-6 py-4 text-gray-700">Wellness/gym rebate (CHF 1,300), high satisfaction, BENEVITA app</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Strong English support, digital services, expat-friendly</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Limitations</td>
+              <td class="px-6 py-4 text-gray-700">Higher premiums in some cantons</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Mid-range premiums, smaller network</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Supplementary Plans</td>
+              <td class="px-6 py-4 text-gray-700">Completa Forte, Optima, Privata</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">Basic Smart, Classic, Premium, Hospital Plus</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Premium Trend 2026</td>
+              <td class="px-6 py-4 text-gray-700">+5.8%</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">+5.4%</td>
+            </tr>
+            <tr class="bg-white shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">Ideal for</td>
+              <td class="px-6 py-4 text-gray-700">Active expats, fitness-oriented, wellness-focused</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">International residents, expats, urban professionals</td>
+            </tr>
+            <tr class="bg-gray-50 shadow-sm rounded-xl">
+              <td class="px-6 py-4 font-medium text-gray-900 rounded-l-xl">English Support</td>
+              <td class="px-6 py-4 text-gray-700">✅ Good</td>
+              <td class="px-6 py-4 text-gray-700 rounded-r-xl">✅ Excellent (dedicated)</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
+  </section>
+
+  <!-- Transition Divider -->
+  <div class="border-t border-gray-100 mt-12 mb-16"></div>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      Numbers only tell part of the story — what really matters is how each insurer fits <em>you</em>.
+    </p>
   </div>
 
-  <!-- Detailed Breakdown Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Detailed Breakdown: Swica vs. Sanitas</h2>
-        <p>Let's dive into the specifics, particularly concerning their digital offerings and expat services:</p>
-
-        <h3>Basic Insurance & Premiums</h3>
-        <p>
-          Both Swica and Sanitas offer the standard suite of basic insurance models, allowing expats to choose based on their preferences for cost and access to care. Premium-wise, both are in the moderate to upper-moderate range, reflecting their quality of service and comprehensive offerings. Swica is often perceived as slightly more premium in its pricing but justifies this with exceptional service.
-        </p>
-
-        <h3>Digital Experience: mySwica vs. Sanitas Portal</h3>
-        <p>This is a key area where both insurers excel, making them attractive for tech-savvy expats.</p>
-        <ul>
-          <li>
-            <strong>Swica (mySwica app & portal):</strong> Swica's digital platform is consistently praised for its intuitive design, ease of use, and comprehensive features. Expats can easily submit claims by photo, view policy documents, manage personal details, find doctors, and access telemedicine services. The English version is well-maintained.
-          </li>
-          <li>
-            <strong>Sanitas (Sanitas Portal app & online portal):</strong> Sanitas also boasts an excellent digital offering. The Sanitas Portal app is highly rated for its functionality, allowing users to manage all aspects of their insurance, submit invoices, access digital health coaching, and utilize services like medication ordering or symptom checkers. Their English digital services are also very comprehensive.
-          </li>
-        </ul>
-
-        <p>While both are top-tier, some users might find the mySwica interface slightly more streamlined, whereas the Sanitas Portal might offer a broader range of integrated digital health services.</p>
-
-        <h3>Expat-Friendliness: Language, Support, and Onboarding</h3>
-        <ul>
-          <li>
-            <strong>English Language Support:</strong> Both Swica and Sanitas provide very good English language support. Swica has a dedicated English-speaking customer service line, and their website and documents are widely available in English. Sanitas also offers extensive English documentation and reliable English-speaking customer service agents.
-          </li>
-          <li>
-            <strong>Onboarding for New Arrivals:</strong> Both insurers have experience catering to expatriates and provide resources and information to help new arrivals understand the Swiss health system and get their insurance set up. Swica's proactive customer service is often highlighted by expats as particularly helpful during the initial phase.
-          </li>
-        </ul>
-
-        <h3>Supplementary Coverage Tailored for Expats</h3>
-        <ul>
-          <li>
-            <strong>International Coverage:</strong> Swica's HOSPITA GLOBAL PRIVATE is a standout option for comprehensive worldwide private hospital coverage. Sanitas also offers strong international hospital plans like Hospital Extra Liberty and Hospital Top Liberty.
-          </li>
-          <li>
-            <strong>Alternative Medicine & Wellness:</strong> Sanitas is well-regarded for its extensive supplementary coverage for alternative medicine. Swica also provides good options, especially with its Completa Top and Optima plans, the latter also offering significant contributions (up to CHF 800/year) to gym memberships and wellness activities. Sanitas encourages wellness through its Active App and various plan contributions.
-          </li>
-        </ul>
-
-        <h3>Handling of Pre-existing Conditions</h3>
-        <p>
-          For supplementary insurance, both require a health declaration. Swica is known for a thorough assessment. Sanitas also assesses health status but uniquely offers, in some cases, an "Individual Premium Supplement" for certain pre-existing conditions on some supplementary plans, which can be a valuable option for expats who might otherwise face exclusions.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pros and Cons Section -->
-  <div id="pros-cons" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Pros and Cons: Swica vs. Sanitas for Digitally-Minded Expats</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Swica Pros and Cons -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-red-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Swica</h3>
-          </div>
-          <div class="p-6">
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Pros
-              </h4>
-              <ul class="space-y-2">
-                {swicaPros.map(pro => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                </svg>
-                Cons
-              </h4>
-              <ul class="space-y-2">
-                {swicaCons.map(con => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sanitas Pros and Cons -->
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div class="bg-red-600 py-4 px-6">
-            <h3 class="text-2xl font-bold text-white">Sanitas</h3>
-          </div>
-          <div class="p-6">
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Pros
-              </h4>
-              <ul class="space-y-2">
-                {sanitasPros.map(pro => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold text-gray-900 flex items-center mb-3">
-                <svg class="h-5 w-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                </svg>
-                Cons
-              </h4>
-              <ul class="space-y-2">
-                {sanitasCons.map(con => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Decision Helper Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-4xl mx-auto">
-        <h2>Which Provider is Right for You? Making Your Choice with Expat Savvy's Help</h2>
-        
-        <ul>
-          <li>
-            <strong>Choose Swica if:</strong> Your absolute priority is a seamless digital experience combined with top-tier, proactive English customer service and generous wellness benefits. You are willing to potentially pay a bit more for this premium experience.
-          </li>
-          <li>
-            <strong>Choose Sanitas if:</strong> You are looking for an excellent digital platform with a wide array of integrated health services, strong alternative medicine coverage, and potentially more flexible options for pre-existing conditions (case-dependent).
-          </li>
-        </ul>
-        
-        <p>
-          Both are excellent choices for expats who value digital convenience and good English support. The best fit depends on your specific priorities regarding service style, wellness benefits, and approach to pre-existing conditions. Still deciding? Chat with our AI for quick answers or book a Free Consultation with an Expat Savvy expert for personalized advice on Swica, Sanitas, and other options!
-        </p>
-        
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/ai-chat/" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-            Chat with Our AI Now!
-          </a>
-          <button onclick="window.openHealthModal('comparison')" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Book Your Free Consultation!
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FAQ Section -->
-  <div id="faqs" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-12 text-center">Frequently Asked Questions (FAQ): Swica vs. Sanitas (Expat Focus)</h2>
-      
-      <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-lg p-6 transition-all hover:shadow-xl border border-gray-100 hover:border-primary-200">
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <div class="bg-primary-600 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Your Next Step with Expat Savvy
+  <!-- ============================================ -->
+  <!-- 3. CONTEXT & SCENARIOS — PERSONALIZED DECISION GUIDE -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+          Which Insurer Is Right for <em>Your</em> Situation?
         </h2>
-        <p class="mt-4 text-xl text-primary-100 max-w-3xl mx-auto">
-          Choosing between two digitally advanced and expat-friendly insurers like Swica and Sanitas comes down to fine-tuning based on your personal priorities. Expat Savvy is here to provide the expert, impartial advice you need.
+        <p class="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed mb-6">
+          There's no single "best" insurer — it depends on who you are, how long you'll stay, what lifestyle you live, and how you want to be covered.
         </p>
-        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          <a href="/ai-chat/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-            Chat with AI for Instant Answers
-          </a>
-          <button onclick="window.openHealthModal('comparison')" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Book Your Free Consultation
+        <p class="text-gray-700 max-w-4xl mx-auto text-lg leading-relaxed">
+          That's why we review every client's situation individually before recommending Swica, Helsana, or another provider.
+        </p>
+      </div>
+
+      <!-- Interactive Two-Column Decision Guide -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <!-- Left Column: Clickable Cases List -->
+        <div class="space-y-3 order-2 lg:order-1">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Choose your situation</h3>
+          <p class="text-gray-600 text-sm mb-6">Every situation needs a different insurance approach.<br>Here's how we guide you depending on your case:</p>
+          
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button active" 
+            data-case="new"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">New in Switzerland</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="comparing"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Already Insured & Comparing</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="budget"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Budget & Coverage Balance</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="active"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Active Lifestyle</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="families"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Families & Long-Term Plans</span>
+            </div>
+          </button>
+
+          <button 
+            class="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200 case-button" 
+            data-case="conditions"
+          >
+            <div class="flex items-center">
+              <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="font-medium text-gray-900">Pre-Existing Conditions & Group Discounts</span>
+            </div>
           </button>
         </div>
-        
-        <div class="mt-6">
-          <a href="/compare-providers" class="inline-flex items-center text-primary-100 hover:text-white">
-            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Return to Main Comparison Hub
-          </a>
+
+        <!-- Right Column: Dynamic Content Area -->
+        <div class="bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100 relative order-1 lg:order-2">
+          <!-- Red top border for brand accent -->
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#D72638] to-[#E60000] rounded-t-2xl"></div>
+          
+          <div id="case-content" class="min-h-[300px] lg:min-h-[400px]">
+            <div class="case-content" data-case="new">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🏠 New in Switzerland</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>You need to register for Swiss health insurance within 90 days — but what's best depends on how long you'll stay.</p>
+                <p><strong>Swica</strong> offers flexible models if you're unsure about your duration, while <strong>Helsana</strong> provides strong family coverage and digital support for long-term residents.</p>
+                <p>We'll help you balance setup simplicity with future flexibility, so your first plan fits your real life in Switzerland.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="comparing">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🔁 Already Insured & Comparing</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>If you're already with one insurer, the question isn't "is it cheaper?" — it's what changes when you switch.</p>
+                <p><strong>Helsana</strong> may offer better app support and claims speed, while <strong>Swica's</strong> fitness and wellness benefits often offset higher premiums.</p>
+                <p>We analyze your current coverage line-by-line and show you whether it's truly worth switching — or just optimizing what you already have.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="budget">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">💰 Budget & Coverage Balance</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Lower premiums sound great — until you realize what you gave up.</p>
+                <p><strong>Swica's</strong> entry-age model can mean higher long-term savings if you join early, while <strong>Helsana's</strong> rates are stable but can rise faster with age.</p>
+                <p>We calculate not just what you pay now, but what you'll pay over time for the same protection.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="active">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🏋️ Active Lifestyle</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p><strong>Swica</strong> reimburses up to CHF 1,300 per year for gym and wellness programs — a big win for active expats.</p>
+                <p><strong>Helsana</strong>, on the other hand, rewards consistent healthy behavior via its Helsana+ App, often translating into smaller premium rebates.</p>
+                <p>We help you use every available fitness benefit and structure your supplementary coverage for maximum reward value.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="families">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">👨‍👩‍👧 Families & Long-Term Plans</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Planning to stay long-term?</p>
+                <p><strong>Helsana's</strong> family policies and dental add-ons are strong, but its supplementary premiums rise with age.</p>
+                <p><strong>Swica</strong> uses entry-age pricing, which means your rates stay lower if you join early.</p>
+                <p>We'll help you model long-term cost vs. family protection — so your future stays affordable and well covered.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+
+            <div class="case-content hidden" data-case="conditions">
+              <h4 class="text-xl font-semibold text-gray-900 mb-4">🛡️ Pre-Existing Conditions & Group Discounts</h4>
+              <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Both <strong>Helsana</strong> and <strong>Swica</strong> handle medical history differently — one stricter, one more flexible.</p>
+                <p>We pre-check your acceptance chances and find broker-only group discounts that can lower your total cost.</p>
+                <p>This consultation step is crucial if you've had prior treatments or want supplementary coverage without rejection risk.</p>
+                <p class="text-sm italic text-gray-600 mt-6">We'll help you evaluate all this based on your age, plans, and lifestyle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End paragraph -->
+      <div class="mt-12 text-center max-w-4xl mx-auto">
+        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+          These examples show why a tailored review always beats a generic online calculator.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Every factor — age, canton, stay duration, health history, and lifestyle — affects what's truly right for you.
+        </p>
+        <p class="text-gray-800 font-medium text-lg mt-4">
+          That's what our free consultation is for — we analyze your full picture and find the insurer that fits.
+        </p>
+      </div>
+
+      <div class="mt-12 text-center max-w-4xl mx-auto">
+        <p class="text-gray-700 text-lg leading-relaxed">
+          Our consultation goes beyond comparing prices — we analyze your profile, age, canton, and health situation to recommend the optimal insurer and plan combination.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition Divider -->
+  <div class="border-t border-gray-100 mt-12 mb-16"></div>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      Every year, we analyze the real differences for hundreds of expats — here's what our expert says.
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 4. INDEPENDENT EXPERT PERSPECTIVE SECTION -->
+  <!-- ============================================ -->
+  <section class="bg-gray-50 py-16 md:py-20">
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-6xl mx-auto">
+        <!-- Section Title with Red Accent -->
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Independent Expert Perspective
+          </h2>
+          <div class="w-24 h-0.5 bg-gradient-to-r from-red-500 to-transparent mx-auto"></div>
+        </div>
+
+        <!-- Two-Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <!-- Left Column: Content -->
+          <div class="space-y-6">
+            <div class="space-y-4 text-gray-700 leading-relaxed">
+              <p class="text-lg">
+                Every day, we benchmark <strong>Swica, Sanitas, Helsana, and CSS</strong> — evaluating real claim experiences, acceptance criteria, and pricing logic for expats.
+                Our goal: to make sure you choose an insurer that fits your real life in Switzerland — your plans, your health, and your peace of mind.
+              </p>
+              
+              <p class="text-lg">
+                With over a decade of experience comparing insurers daily, we know exactly where the differences matter — in <strong>service behavior</strong>, <strong>long-term premium structure</strong>, and <strong>how flexible each provider truly is</strong> when your situation changes.
+              </p>
+            </div>
+
+            <!-- Highlighted Quote Box -->
+            <div class="bg-white/80 border border-red-200 rounded-2xl p-5 shadow-sm relative">
+              <svg class="w-6 h-6 text-red-500 absolute top-3 left-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+              </svg>
+              <blockquote class="text-lg text-gray-800 italic leading-relaxed pl-8">
+                "Health insurance is the only investment we hope to never see a return on — because true value lies in the peace of mind that we're protected when it matters most."
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- Right Column: Expert Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+            <div class="text-center mb-6">
+              <img 
+                src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_160,h_160,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+                alt="Robert Kolar" 
+                class="w-20 h-20 rounded-full mx-auto mb-4"
+                width="80"
+                height="80"
+              />
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Robert Kolar</h3>
+              <p class="text-gray-600 mb-4">FINMA-certified Insurance Broker</p>
+            </div>
+
+            <blockquote class="text-gray-700 italic leading-relaxed mb-6 text-center">
+              "We analyze Swica, Sanitas, Helsana, and CSS daily — not from marketing materials, but from real expat experiences. The best insurer isn't always the cheapest — it's the one that stands by you when life gets unpredictable."
+            </blockquote>
+
+            <div class="space-y-2 text-sm text-gray-600">
+              <div class="flex items-center justify-center">
+                <span class="mr-2">🌐</span>
+                <span>Speaks English, German & French</span>
+              </div>
+              <div class="flex items-center justify-center">
+                <span class="mr-2">💼</span>
+                <span>20+ years advising expats & families in Switzerland</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4.3 HOW IT WORKS SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <p class="text-center text-gray-600 text-base mb-6 max-w-2xl mx-auto">
+        Every consultation follows the same transparent process.
+      </p>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          How It Works
+        </h2>
+        <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+          Understand exactly what happens when you book a consultation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 max-w-6xl mx-auto mb-8">
+        <!-- Step 1 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">1</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">30–60 min consultation</h3>
+          <p class="text-gray-600 text-sm">
+            We listen to your goals, canton, and health situation.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">2</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">We send both quotes</h3>
+          <p class="text-gray-600 text-sm">
+            Swica & Helsana + side-by-side comparison.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">3</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Personal recommendation</h3>
+          <p class="text-gray-600 text-sm">
+            You decide with confidence.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 text-center">
+          <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-red-600 font-bold text-xl">4</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">We set up everything</h3>
+          <p class="text-gray-600 text-sm">
+            Forms, submission, and yearly updates.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-600 text-sm italic">
+          Completely free — we're paid equally by either insurer, never by the client.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4.4 WHAT WE HELP YOU SOLVE SECTION -->
+  <!-- ============================================ -->
+  <section class="bg-gray-50 py-16 md:py-24">
+    <div class={DesignSystem.spacing.container.default}>
+      <!-- Intro Line -->
+      <p class="text-center text-gray-600 text-lg mb-4 max-w-3xl mx-auto">
+        You don't just get quotes — you get clarity, protection, and long-term support.
+      </p>
+
+      <!-- Section Title -->
+      <h2 class={cn(DesignSystem.typography.heading.h2.full, 'text-gray-900 mb-12 text-center')}>
+        What We Help You Solve
+      </h2>
+
+      <!-- 3×2 Card Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 max-w-6xl mx-auto mb-12">
+        <!-- Card 1: Independent Advice -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Truly independent advice</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">We're licensed, neutral, and only focused on what's best for you.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Personalized Assessment -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Personalized assessment</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Age, canton, and health all matter; we factor in every detail before recommending.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Pre-check -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Pre-check for pre-existing conditions</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Avoid rejection by applying with the right insurer from the start.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Broker Discounts -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Exclusive broker group discounts</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">Access lower rates and benefits not available when applying directly.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Continuous Service -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Continuous yearly check-ups</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">We monitor new premiums and help you switch easily if a better deal appears.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Always Reachable -->
+        <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold text-gray-900 mb-2">Always reachable</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">English-speaking support, even outside regular office hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Button with Glow -->
+      <div class="text-center">
+        <button
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#E60000] to-[#FF3B3B] hover:from-[#CC0000] hover:to-[#E60000] text-white font-bold rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-red-500/50 transition-all duration-300 transform hover:-translate-y-0.5"
+          onclick="window.openHealthModal('swica-vs-sanitas')"
+          aria-label="Get personalized comparison"
+        >
+          Get My Personalized Comparison
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+        
+        <!-- Disclaimer -->
+        <p class="text-sm text-gray-500 mt-4 italic">
+          *Free, independent, and fully compliant with Swiss FINMA regulations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 7. SOCIAL PROOF — REVIEWS SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <p class="text-center text-gray-600 text-base mb-6 max-w-3xl mx-auto">
+        Every year, hundreds of expats rely on our independent comparisons — here's what they say.
+      </p>
+      <div class="text-center mb-4">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-2'}>
+          What Our Clients Say
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-700 font-semibold'}>
+          ★★★★★ Rated 4.9 / 5 by expats across Switzerland
+        </p>
+      </div>
+      <p class={DesignSystem.typography.body.base + ' text-gray-600 max-w-3xl mx-auto text-center mb-12'}>
+        Real experiences from people who got independent insurance advice.
+      </p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8">
+        <!-- Review 1 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "Robert was an excellent assistant. He introduced me to the complex health system in Switzerland and made sure I took the best decision, providing information and answering all my questions."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">German Barquero</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "I had great experience with expat-savvy, receiving very helpful, professional advice tailored to my personal situation. Robert has demonstrated his in-depth knowledge of the field."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">Rebeka Johnson</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "Robert's advice was very helpful in choosing the right health insurance package and getting over the hurdles of pre-existing conditions. He found me a much better deal."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">Martin Walsh</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center">
+        <a 
+          href="https://g.page/r/CX1UrJhGK5HTEBA/review" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center gap-2"
+        >
+          See all reviews on Google
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-500 max-w-3xl mx-auto px-4 text-base">
+      That's why every good decision starts with a short consultation — no guessing, just clarity.
+    </p>
   </div>
 
-  <ConsultationModal />
-</Layout> 
+  <!-- ============================================ -->
+  <!-- 5. CTA SECTION -->
+  <!-- ============================================ -->
+  <section class="relative bg-gradient-to-br from-[#D72638] via-[#E60000] to-[#FF4545] py-16 md:py-20 overflow-hidden">
+    <!-- Subtle Swiss cross pattern background -->
+    <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M30 0v60M0 30h60\" stroke=\"white\" stroke-width=\"12\"/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+    
+    <div class={DesignSystem.spacing.container.default + ' relative z-10'}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+          Find Out Which Insurer Fits <em>You</em> Best
+        </h2>
+        <p class="text-white text-lg mb-8 opacity-95">
+          Get independent, FINMA-certified advice — completely free and in English.
+        </p>
+        <button
+          class="inline-flex items-center px-8 py-4 bg-white text-red-600 font-bold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-lg hover:scale-105"
+          onclick="window.openHealthModal('swica-vs-sanitas')"
+          aria-label="Book free consultation"
+        >
+          Book My Free Consultation
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+        <p class="text-white text-sm mt-6 opacity-90">
+          Fully independent — no sales pressure, just clarity and honest guidance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 6. FAQ SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-12 text-center'}>
+          Common Questions About Swica vs Sanitas
+        </h2>
+
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+              <summary class="cursor-pointer px-6 py-5 flex justify-between items-center list-none">
+                <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
+                <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SCHEMA MARKUP (SEO) -->
+  <!-- ============================================ -->
+
+  <!-- WebPage Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Swica vs Sanitas Comparison | Expat-Savvy",
+    "description": meta.description,
+    "url": meta.canonicalUrl,
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat-Savvy.ch",
+      "url": "https://expat-savvy.ch"
+    }
+  }, null, 2)} />
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }, null, 2)} />
+
+</Layout>
+
+<script is:inline>
+  // Interactive Case Selection
+  document.addEventListener('DOMContentLoaded', function() {
+    const caseButtons = document.querySelectorAll('.case-button');
+    const caseContents = document.querySelectorAll('.case-content');
+    
+    caseButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const caseType = this.getAttribute('data-case');
+        
+        // Remove active class from all buttons
+        caseButtons.forEach(btn => {
+          btn.classList.remove('active', 'border-red-300', 'bg-red-50');
+          btn.classList.add('border-gray-200');
+        });
+        
+        // Add active class to clicked button
+        this.classList.add('active', 'border-red-300', 'bg-red-50');
+        this.classList.remove('border-gray-200');
+        
+        // Hide all content
+        caseContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+        
+        // Show selected content (using more specific selector)
+        const selectedContent = document.querySelector(`.case-content[data-case="${caseType}"]`);
+        if (selectedContent) {
+          selectedContent.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Interactive case selector */
+  .case-button.active {
+    border-color: rgb(239 68 68);
+    background-color: rgb(254 242 242);
+  }
+  
+  .case-content {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  .case-content.hidden {
+    opacity: 0;
+    display: none;
+  }
+  
+  .case-button {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Hero parallax effect */
+  .hero-background img {
+    animation: subtle-zoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes subtle-zoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Text shadow for better readability */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Smooth fade-in animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 1s ease-out 0.3s both;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    .hero-background img {
+      object-position: center center;
+    }
+    
+    .case-button {
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .case-content h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .case-content p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  }
+</style>
+

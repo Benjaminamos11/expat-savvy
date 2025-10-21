@@ -28,7 +28,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist
 • **English-Friendly**: CSS, Helsana, Swica provide excellent expat support  
 
 #### Next Steps
-📋 [2025/2026 Insurance Guide](/blog/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Switching Deadlines](/insurance-change-2025-2026/)
+📋 [2025/2026 Insurance Guide](/healthcare/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Switching Deadlines](/insurance-change-2025-2026/)
 
 </div>
 
@@ -164,7 +164,7 @@ For more detailed information on insurance and living in these areas, explore ou
 
 **How does Swiss health insurance work for foreigners relocating to Switzerland?**
 
-Swiss health insurance works identically for foreigners and Swiss citizens. Basic insurance (KVG/LAMal) is mandatory within 3 months of arrival regardless of nationality. All residents get guaranteed acceptance, and premiums are the same. Choose models (Standard/HMO/Telmed) based on access preferences vs cost savings. [Complete newcomer insurance guide here](/blog/best-health-insurance-switzerland/).
+Swiss health insurance works identically for foreigners and Swiss citizens. Basic insurance (KVG/LAMal) is mandatory within 3 months of arrival regardless of nationality. All residents get guaranteed acceptance, and premiums are the same. Choose models (Standard/HMO/Telmed) based on access preferences vs cost savings. [Complete newcomer insurance guide here](/healthcare/best-health-insurance-switzerland/).
 
 **Do students in Switzerland need health insurance when relocating?**
 

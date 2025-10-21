@@ -30,7 +30,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507428/a-hand-dra
 • **International Schools**: High demand - apply 6-12 months ahead  
 
 #### Next Steps
-📋 [Best Health Insurance Zug](/blog/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Tax-Optimized Insurance Strategy](/insurance-change-2025-2026/)
+📋 [Best Health Insurance Zug](/healthcare/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Tax-Optimized Insurance Strategy](/insurance-change-2025-2026/)
 
 </div>
 
@@ -545,7 +545,7 @@ Zug canton offers some of Switzerland's most competitive health insurance premiu
 - 3rd Pillar Contribution: Up to CHF 7,056 tax deduction
 - Total Tax Savings: CHF 1,000-2,500/year (depending on tax bracket)
 
-For personalized insurance guidance tailored to Zug business professionals, [book a free consultation](/free-consultation) or explore our [comprehensive insurance strategies](/blog/best-health-insurance-switzerland/).
+For personalized insurance guidance tailored to Zug business professionals, [book a free consultation](/free-consultation) or explore our [comprehensive insurance strategies](/healthcare/best-health-insurance-switzerland/).
 
 ## Financial Planning for Your Zug Relocation
 
@@ -729,7 +729,7 @@ Zug offers all Swiss health insurance models optimized for business professional
 
 ### Related Guides
 
-- [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete guide with Zug-specific considerations
+- [Best Health Insurance Switzerland 2025/2026](/healthcare/best-health-insurance-switzerland/) — Complete guide with Zug-specific considerations
 - [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines and tax-optimized switching strategies  
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard for Zug business professionals
 - [Relocating to Switzerland: Step-by-Step Checklist](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Complete admin and insurance timeline
