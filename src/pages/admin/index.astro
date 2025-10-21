@@ -1,0 +1,290 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Admin Dashboard - Expat Savvy" description="Lead management and analytics dashboard">
+  <div class="px-4 py-6 sm:px-0">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
+      <p class="mt-2 text-gray-600">Monitor your leads, email performance, and conversion metrics</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Total Leads</dt>
+                <dd class="text-lg font-medium text-gray-900" id="totalLeads">-</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">New Today</dt>
+                <dd class="text-lg font-medium text-gray-900" id="todayLeads">-</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Booked</dt>
+                <dd class="text-lg font-medium text-gray-900" id="bookedConsultations">-</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Email Rate</dt>
+                <dd class="text-lg font-medium text-gray-900" id="emailOpenRate">-%</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <!-- Top Channels -->
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Top Channels</h3>
+          <div id="topChannels">
+            <div class="animate-pulse">
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Pages -->
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Top Pages</h3>
+          <div id="topPages">
+            <div class="animate-pulse">
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white shadow rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Recent Activity</h3>
+        <div class="flow-root">
+          <ul id="recentActivity" class="-mb-8">
+            <div class="animate-pulse">
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+              <div class="h-4 bg-gray-200 rounded mb-2"></div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script is:inline>
+  // Auth utilities
+  function checkAuth() {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      window.location.href = '/admin/login';
+      return null;
+    }
+    return token;
+  }
+  
+  async function fetchWithAuth(endpoint) {
+    const token = checkAuth();
+    if (!token) return null;
+    
+    try {
+      const response = await fetch(`https://expat-savvy-api.fly.dev${endpoint}`, {
+        headers: {
+          'Authorization': `Basic ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_username');
+          window.location.href = '/admin/login';
+          return null;
+        }
+        throw new Error(`API call failed: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('API call error:', error);
+      throw error;
+    }
+  }
+  
+  function getStageColor(stage) {
+    switch (stage) {
+      case 'new': return 'bg-blue-100 text-blue-800';
+      case 'contacted': return 'bg-yellow-100 text-yellow-800';
+      case 'booked': return 'bg-green-100 text-green-800';
+      case 'closed': return 'bg-gray-100 text-gray-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  }
+  
+  let dashboardData = null;
+  
+  async function loadDashboardData() {
+    try {
+      console.log('Loading dashboard data...');
+      const data = await fetchWithAuth('/api/admin/stats/overview');
+      console.log('Dashboard data loaded:', data);
+      if (data) {
+        dashboardData = data;
+        updateDashboard();
+      }
+    } catch (error) {
+      console.error('Failed to load dashboard data:', error);
+    }
+  }
+  
+  function updateDashboard() {
+    if (!dashboardData) return;
+    
+    // Update stats cards
+    document.getElementById('totalLeads').textContent = dashboardData.total_leads || 0;
+    document.getElementById('todayLeads').textContent = dashboardData.new_leads_today || 0;
+    document.getElementById('bookedConsultations').textContent = dashboardData.booked_consultations || 0;
+    document.getElementById('emailOpenRate').textContent = `${dashboardData.email_open_rate || 0}%`;
+    
+    // Update top channels
+    const topChannelsDiv = document.getElementById('topChannels');
+    if (dashboardData.top_channels && dashboardData.top_channels.length > 0) {
+      topChannelsDiv.innerHTML = dashboardData.top_channels.map(channel => `
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-900 capitalize">${channel.channel}</span>
+          <span class="text-sm text-gray-500">${channel.count}</span>
+        </div>
+      `).join('');
+    } else {
+      topChannelsDiv.innerHTML = '<p class="text-sm text-gray-500">No data available</p>';
+    }
+    
+    // Update top pages
+    const topPagesDiv = document.getElementById('topPages');
+    if (dashboardData.top_pages && dashboardData.top_pages.length > 0) {
+      topPagesDiv.innerHTML = dashboardData.top_pages.map(page => `
+        <div class="flex justify-between items-center py-2">
+          <span class="text-sm font-medium text-gray-900">${page.page}</span>
+          <span class="text-sm text-gray-500">${page.count}</span>
+        </div>
+      `).join('');
+    } else {
+      topPagesDiv.innerHTML = '<p class="text-sm text-gray-500">No data available</p>';
+    }
+    
+    // Update recent activity
+    const recentActivityDiv = document.getElementById('recentActivity');
+    if (dashboardData.recent_activity && dashboardData.recent_activity.length > 0) {
+      recentActivityDiv.innerHTML = dashboardData.recent_activity.map(activity => `
+        <li>
+          <div class="relative pb-8">
+            <div class="relative flex space-x-3">
+              <div>
+                <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
+                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                <div>
+                  <p class="text-sm text-gray-500">
+                    <span class="font-medium text-gray-900">${activity.name}</span> 
+                    <span class="text-gray-500">(${activity.email})</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStageColor(activity.stage)} ml-2">
+                      ${activity.stage}
+                    </span>
+                  </p>
+                </div>
+                <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                  ${activity.time_ago}
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      `).join('');
+    } else {
+      recentActivityDiv.innerHTML = '<p class="text-sm text-gray-500">No recent activity</p>';
+    }
+  }
+  
+  // Load data on page load
+  loadDashboardData();
+  
+  // Make refreshData available globally for auto-refresh
+  window.refreshData = loadDashboardData;
+  
+  // Auto-refresh every 30 seconds
+  setInterval(loadDashboardData, 30000);
+</script>

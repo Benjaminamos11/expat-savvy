@@ -1,0 +1,1041 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import { DesignSystem, cn } from '../../../styles/design-system';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const insurers = await getCollection('insurers');
+  return insurers.map(insurer => ({
+    params: { slug: insurer.slug },
+    props: { insurerData: insurer.data, slug: insurer.slug }
+  }));
+}
+
+const { insurerData, slug } = Astro.props;
+const data = insurerData;
+
+// Transform FAQ data to match component expectations
+const faqs = data.faq.map(item => ({
+  question: item.q,
+  answer: item.a
+}));
+
+const meta = {
+  title: `${data.name} Health Insurance Switzerland | Independent English Overview`,
+  description: data.metaDescription || `${data.name} health insurance for expats: independent review of premiums, coverage, pros & cons. FINMA-certified English support. Free expert comparison.`,
+  canonicalUrl: `https://expat-savvy.ch/healthcare/all-insurances/${slug}/`
+};
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  canonicalURLProp={meta.canonicalUrl}
+>
+  <!-- ============================================ -->
+  <!-- 1. HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="relative min-h-[50vh] md:min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+      <img
+        src={data.hero.backgroundUrl}
+        alt={`${data.name} health insurance Switzerland - independent review`}
+        class="w-full h-full object-cover object-center"
+        width="1920"
+        height="1080"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+    </div>
+
+    <!-- Mobile layout (centered) -->
+    <div class="relative w-full mx-auto px-4 sm:px-6 md:hidden -mt-16">
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 animate-fade-in text-shadow">
+          <span class="block">{data.hero.title.split(' — ')[0]}</span>
+          <span class="block mt-1">— {data.hero.title.split(' — ')[1] || 'and Whether It\'s Right for You'}</span>
+        </h1>
+        <p class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow">
+          {data.hero.subtitle}
+        </p>
+        <div class="mt-6 flex flex-col items-center gap-3 animate-slide-up">
+          <button
+            class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+            onclick={`window.openHealthModal('${slug}')`}
+            aria-label="Get personalized consultation"
+          >
+            Get Your Personalized Consultation
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <p class="text-white text-sm mt-2">
+            ✓ FINMA certified ✓ English support ✓ Independent
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Desktop layout (left aligned) -->
+    <div class="relative w-full mx-auto hidden md:block">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6 col-start-2 flex items-center justify-center">
+          <div class="text-left max-w-xl">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow">
+              <span class="block">{data.hero.title.split(' — ')[0]}</span>
+              <span class="block mt-2">— {data.hero.title.split(' — ')[1] || 'and Whether It\'s Right for You'}</span>
+            </h1>
+            <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
+              {data.hero.subtitle}
+            </p>
+            <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
+              <button
+                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
+                onclick={`window.openHealthModal('${slug}')`}
+                aria-label="Get personalized consultation"
+              >
+                Get Your Personalized Consultation
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+              <p class="text-white text-sm">
+                ✓ FINMA certified ✓ English support ✓ Independent
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 1.5 ABOUT INSURER -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto text-center animate-fade-in">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+          About {data.name}
+        </h2>
+        <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+          <strong class="text-gray-900">{data.name} health insurance Switzerland</strong> is {data.marketPosition.toLowerCase()}, serving {data.customers.toLowerCase()}. {data.strengths[0] && `Known for ${data.strengths[0].toLowerCase()}, `}{data.name} combines {data.founded < "1950" ? "decades of experience" : "modern approaches"} with digital tools to simplify insurance management.
+        </p>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          This guide explains {data.name}'s strengths, limitations, and how it compares to <a href="/healthcare/switching-health-insurance/" class="text-red-600 hover:underline font-semibold">other major Swiss insurers</a> — especially for expats seeking English-language support and independent advice from <strong class="text-gray-900">FINMA-certified brokers</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition Divider -->
+  <div class="border-t border-gray-100 mt-12 mb-16"></div>
+
+  <!-- Transition Text -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Understanding {data.name}'s foundation is the first step — but how do you know if it's right for you?
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 2. FACTS TABLE -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          {data.name} at a Glance
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Detailed factual overview of {data.name} health insurance.
+        </p>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden max-w-5xl mx-auto">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-gray-200">
+                <th class="text-left p-4 text-sm font-medium text-gray-500 bg-gray-50">Attribute</th>
+                <th class="text-left p-4 text-sm font-medium text-gray-500 bg-gray-50">Details</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Insurer Name</td>
+                <td class="p-4 text-gray-700">{data.name}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100 bg-neutral-50/50">
+                <td class="p-4 font-medium text-gray-900">Founded</td>
+                <td class="p-4 text-gray-700">{data.founded}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Headquarters</td>
+                <td class="p-4 text-gray-700">{data.hq}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100 bg-neutral-50/50">
+                <td class="p-4 font-medium text-gray-900">Market Position</td>
+                <td class="p-4 text-gray-700">{data.marketPosition}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Clients</td>
+                <td class="p-4 text-gray-700">{data.customers}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100 bg-neutral-50/50">
+                <td class="p-4 font-medium text-gray-900">Languages / English Service</td>
+                <td class="p-4 text-gray-700">
+                  {data.languages.join(', ')}
+                  {data.special?.englishSupportLevel && (
+                    <div class="mt-1 text-xs text-gray-600 italic">{data.special.englishSupportLevel}</div>
+                  )}
+                </td>
+              </tr>
+              
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Strengths</td>
+                <td class="p-4 text-gray-700">{data.strengths.join(', ')}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100 bg-neutral-50/50">
+                <td class="p-4 font-medium text-gray-900">Limitations</td>
+                <td class="p-4 text-gray-700">
+                  {data.limitations.join(', ')}
+                  {data.special?.strictUnderwriting && (
+                    <span class="ml-2 inline-block px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-xs font-medium">Strict supplementary acceptance</span>
+                  )}
+                </td>
+              </tr>
+              
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Unique Supplementary Plans</td>
+                <td class="p-4 text-gray-700">{data.uniquePlans.join(', ')}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100 bg-neutral-50/50">
+                <td class="p-4 font-medium text-gray-900">Known For / Keywords</td>
+                <td class="p-4 text-gray-700">{data.knownFor.join(', ')}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Customer Focus</td>
+                <td class="p-4 text-gray-700">{data.customerFocus}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100 bg-neutral-50/50">
+                <td class="p-4 font-medium text-gray-900">Premium Example ({data.premiumExample.location})</td>
+                <td class="p-4 text-gray-700">{data.premiumExample.value}</td>
+              </tr>
+              
+              <tr class="border-b border-gray-100">
+                <td class="p-4 font-medium text-gray-900">Premium Stability Trend</td>
+                <td class="p-4 text-gray-700">{data.premiumTrend}</td>
+              </tr>
+              
+              <tr>
+                <td class="p-4 font-medium text-gray-900">Claim Support Quality</td>
+                <td class="p-4 text-gray-700">{data.claimsRating}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+          <p class="text-xs text-gray-500 text-center">*Based on official BAG data and public {data.name} reports, verified October 2025.</p>
+        </div>
+      </div>
+
+      <!-- Insurer Highlights (if present) -->
+      {data.highlights && data.highlights.length > 0 && (
+        <div class="max-w-5xl mx-auto mt-6">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <h3 class="text-base font-medium text-gray-900 mb-4 flex items-center gap-2">
+              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              {data.name} Highlights
+            </h3>
+            <ul class="space-y-3">
+              {data.highlights.map((highlight: string) => (
+                <li class="flex items-start text-gray-600">
+                  <svg class="w-4 h-4 text-gray-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-sm leading-relaxed">{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      <!-- Gym Rebate Callout (if present) -->
+      {data.special?.gymRebateMax && data.special.gymRebateMax > 0 && (
+        <div class="max-w-5xl mx-auto mt-6">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+              <h4 class="text-sm font-medium text-gray-900">Fitness & Wellness</h4>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Eligible supplementary plans can reimburse up to <span class="font-semibold text-gray-900">CHF {data.special.gymRebateMax}/year</span> for fitness and wellness activities (plan- and eligibility-dependent).
+            </p>
+          </div>
+        </div>
+      )}
+
+      <!-- Age Entry Note (if present) -->
+      {data.special?.hasAgeEntryNote && data.special?.ageEntryNote && (
+        <div class="max-w-5xl mx-auto mt-6">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div>
+                <p class="text-gray-900 font-medium mb-2 text-sm">Age Entry Note</p>
+                <p class="text-gray-600 text-sm leading-relaxed">{data.special.ageEntryNote}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Notable Products (if present) -->
+      {data.special?.notableProducts && data.special.notableProducts.length > 0 && (
+        <div class="max-w-5xl mx-auto mt-6">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
+              <h4 class="text-sm font-medium text-gray-900">Key Products</h4>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              {data.special.notableProducts.map((product: string) => (
+                <span class="inline-block px-3 py-1.5 bg-gray-50 text-gray-700 rounded-lg text-sm font-medium border border-gray-200">{product}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <div class="py-6 bg-gray-50">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Let's look at the three most common reasons expats evaluate {data.name} — and what really matters in each case.
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 3. WHY PEOPLE CONSIDER THIS INSURER -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          Why People Consider {data.name}
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Three common situations where {data.name} comes up — and how we help you decide.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Scenario 1: New in Switzerland -->
+        <a href="/healthcare/new-health-insurance/" class="group">
+          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-6 text-center h-full">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-800 mb-3">New in Switzerland</h3>
+            <p class="text-gray-600 text-sm mb-4">
+              Need to register within 90 days? {data.name} can be one of several good options — we help you compare all.
+            </p>
+            <span class="text-red-600 font-semibold text-sm inline-flex items-center gap-1">
+              Learn More
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Scenario 2: Considering a Change -->
+        <a href="/healthcare/switching-health-insurance/" class="group">
+          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-6 text-center h-full">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-800 mb-3">Already Insured, Considering a Change</h3>
+            <p class="text-gray-600 text-sm mb-4">
+              We check if switching or optimizing makes sense — often you can save without losing benefits.
+            </p>
+            <span class="text-red-600 font-semibold text-sm inline-flex items-center gap-1">
+              Learn More
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Scenario 3: Want to Optimize -->
+        <div class="group cursor-pointer" onclick={`window.openHealthModal('${slug}')`}>
+          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-6 text-center h-full">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-800 mb-3">Want to Optimize Your Coverage</h3>
+            <p class="text-gray-600 text-sm mb-4">
+              We review your plan and suggest upgrades or savings across 50+ insurers.
+            </p>
+            <span class="text-red-600 font-semibold text-sm inline-flex items-center gap-1">
+              Book Consultation
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Data matters — but experience matters more. Here's what our independent advisors see after years of comparing {data.name} to other providers.
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 4. INDEPENDENT EXPERT PERSPECTIVE -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center md:items-start">
+          <!-- Left: Text -->
+          <div>
+            <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+              Independent Expert Perspective
+            </h2>
+            <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+              We regularly benchmark <strong class="text-gray-900">{data.name}, CSS, Swica</strong>, and others for expats. Each insurer has unique acceptance policies and claim behaviors — the right choice depends on your needs.
+            </p>
+            <p class="text-gray-700 mb-8 leading-relaxed">
+              {data.name} {data.strengths[0] ? `excels in ${data.strengths[0].toLowerCase()}` : 'has specific strengths'}, but may not always be the most cost-effective option. We compare <strong class="text-gray-900">basic insurance (LAMal/KVG)</strong> and <strong class="text-gray-900">supplementary insurance</strong> premiums, service quality, and long-term value across all providers.
+            </p>
+            <div class="border border-[#E60000]/20 rounded-xl p-6 bg-white shadow-[0_0_12px_rgba(230,0,0,0.05)]">
+              <p class="text-gray-800 italic leading-relaxed">
+                "The best insurer is the one that matches your health usage, budget, and risk profile — not necessarily the biggest name."
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Expert Box -->
+          <div class="bg-white rounded-2xl p-8 md:p-10 shadow-md min-h-[320px] md:min-h-[360px] flex flex-col">
+            <div class="flex-1">
+              <blockquote class="text-gray-700 mb-6 leading-relaxed italic">
+                "{data.expert.quote}"
+              </blockquote>
+              
+              <!-- Attribution -->
+              <div class="border-t border-gray-200 pt-6 mt-6">
+                <div class="flex items-start gap-4 mb-6">
+                  <img 
+                    src={data.expert.avatarUrl}
+                    alt={`${data.expert.name}, ${data.expert.title}`}
+                    class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-gray-200 shadow-md flex-shrink-0"
+                    width="80"
+                    height="80"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p class="font-bold text-gray-900 text-lg">{data.expert.name}</p>
+                    <p class="text-sm text-gray-600 mb-3">{data.expert.title}</p>
+                    
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>{data.expert.languages}</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-sm text-gray-700">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>{data.expert.experience}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 5. INSURER VS OTHER INSURERS -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          {data.name} vs Other Swiss Insurers
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-gray-200 mb-8">
+          <p class="text-gray-700 mb-6 leading-relaxed text-lg">
+            {data.name} is {data.marketPosition.toLowerCase()} — {data.customerFocus.toLowerCase()}.
+          </p>
+          <p class="text-gray-700 leading-relaxed text-lg">
+            However, it's not always the most affordable, especially compared to regional competitors. We compare all major Swiss insurers independently.
+          </p>
+        </div>
+
+        <!-- Comparison Links -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {data.internalCompareLinks.map((link: any) => (
+            <a href={link.href} class="group bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md hover:border-red-300 transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-semibold text-gray-900 group-hover:text-red-600 transition-colors">{link.label}</span>
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+              <p class="text-sm text-gray-600">Compare coverage & premiums</p>
+            </a>
+          ))}
+        </div>
+
+        <p class="text-sm text-gray-500 text-center italic">
+          *Our independent comparison is based on verified BAG data, public insurer reports, and real client feedback.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Our review process is straightforward and transparent — so you always understand what we recommend and why.
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 6. PROCESS FLOW — "How Our Review Works" -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          How Our Review Works
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+          Whether you're considering {data.name} or comparing all options, here's our process.
+        </p>
+      </div>
+
+      <!-- Flow Grid -->
+      <div class="grid grid-cols-2 gap-3 max-w-2xl mx-auto mb-8">
+        <!-- Step 1: Review your plan -->
+        <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+          <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <p class="text-sm font-medium text-gray-900 mb-1">Review your plan</p>
+          <p class="text-xs text-gray-600">We read your basic & supplementary cover</p>
+        </div>
+
+        <!-- Step 2: Explain options -->
+        <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+          <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          </svg>
+          <p class="text-sm font-medium text-gray-900 mb-1">Explain options</p>
+          <p class="text-xs text-gray-600">Clear English, what stays / what changes</p>
+        </div>
+
+        <!-- Step 3: Identify savings & risks -->
+        <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+          <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          <p class="text-sm font-medium text-gray-900 mb-1">Identify savings & risks</p>
+          <p class="text-xs text-gray-600">Model, deductible, overlaps</p>
+        </div>
+
+        <!-- Step 4: Confirm & handle switch -->
+        <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
+          <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          <p class="text-sm font-medium text-gray-900 mb-1">Confirm & handle switch</p>
+          <p class="text-xs text-gray-600">We do forms + cancellation</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-gray-500 text-center max-w-2xl mx-auto mb-8 pt-4 border-t border-gray-100">
+        Independent, FINMA-certified guidance. Free and unbiased.
+      </p>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <button
+          class={DesignSystem.components.button.primary}
+          onclick={`window.openHealthModal('${slug}')`}
+          aria-label={`Start ${data.name} review`}
+        >
+          Start My Free Review →
+          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 7. EMOTIONAL SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.narrow}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+          Health Insurance Isn't Just About Numbers
+        </h2>
+        
+        <p class={DesignSystem.typography.body.large + ' text-gray-700 mb-8'}>
+          It's about peace of mind — knowing you're covered for all eventualities, with an expert who continues to take care of you year after year.
+        </p>
+        
+        <!-- Pulsing heart icon -->
+        <div class="flex justify-center mb-8">
+          <svg class="w-16 h-16 text-red-400 pulsing-heart" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </div>
+
+        <p class="text-gray-700 leading-relaxed">
+          Whether you choose {data.name} or another provider, we ensure your decision is informed, strategic, and aligned with your wellbeing in Switzerland.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <style is:global>
+    @keyframes pulse-heart {
+      0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+    
+    .pulsing-heart {
+      animation: pulse-heart 2s ease-in-out infinite;
+    }
+  </style>
+
+  <!-- Transition -->
+  <div class="py-6 bg-white">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Here's what people say about getting independent insurance advice with us:
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 8. SOCIAL PROOF — REVIEWS SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="text-center mb-4">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-2'}>
+          What Our Clients Say
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-700 font-semibold'}>
+          ★★★★★ Rated 4.9 / 5 by expats across Switzerland
+        </p>
+      </div>
+      <p class={DesignSystem.typography.body.base + ' text-gray-600 max-w-3xl mx-auto text-center mb-12'}>
+        Real experiences from people who got independent insurance advice.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Review 1 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "Robert was an excellent assistant. He introduced me to the complex health system in Switzerland and made sure I took the best decision, providing information and answering all my questions."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">German Barquero</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "I had great experience with expat-savvy, receiving very helpful, professional advice tailored to my personal situation. Robert has demonstrated his in-depth knowledge of the field."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">Rebeka Johnson</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-gray-700 mb-4 leading-relaxed">
+            "Robert's advice was very helpful in choosing the right health insurance package and getting over the hurdles of pre-existing conditions. He found me a much better deal."
+          </p>
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <div>
+              <p class="text-sm font-semibold text-gray-900">Martin Walsh</p>
+              <p class="text-xs text-gray-500">Google Review</p>
+            </div>
+            <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+              Verified Client
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center">
+        <a 
+          href="https://g.page/r/CX1UrJhGK5HTEBA/review" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center gap-2"
+        >
+          See all reviews on Google
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <div class="py-6 bg-gray-50">
+    <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
+      Still have questions? Here are the most common ones we hear about {data.name}:
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 9. FAQ SECTION -->
+  <!-- ============================================ -->
+  <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+    <div class={DesignSystem.spacing.container.narrow}>
+      <div class="text-center mb-12">
+        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+          Common Questions About {data.name}
+        </h2>
+        <p class={DesignSystem.typography.body.large + ' text-gray-600'}>
+          Everything you need to know about {data.name} health insurance.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">{faq.question}</h3>
+            <p class="text-gray-700 leading-relaxed" set:html={faq.answer} />
+          </div>
+        ))}
+      </div>
+
+      <!-- FAQ CTA -->
+      <div class="mt-12 text-center">
+        <p class="text-gray-600 mb-6">More questions about {data.name} or Swiss health insurance in general?</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button
+            class={DesignSystem.components.button.secondary}
+            onclick={`window.openHealthModal('${slug}')`}
+            aria-label={`Ask our experts about ${data.name}`}
+          >
+            Ask Our Experts
+            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </button>
+          <a href="/healthcare/new-health-insurance/" class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center gap-2">
+            See full health insurance FAQ
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 10. FINAL CTA BANNER -->
+  <!-- ============================================ -->
+  <section class="bg-gradient-to-r from-red-600 to-red-800 py-16 md:py-20 pb-24 md:pb-28">
+    <div class={DesignSystem.spacing.container.default}>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          Not Sure If {data.name} Is Right for You?
+        </h2>
+        <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+          Get a personalized, independent consultation — 100% free and in English.
+        </p>
+
+        <!-- Primary CTA -->
+        <div class="mb-6">
+          <button
+            class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold rounded-2xl text-red-600 bg-white hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl"
+            onclick={`window.openHealthModal('${slug}')`}
+            aria-label={`Book free consultation about ${data.name}`}
+          >
+            Book My Free Consultation →
+            <svg class="ml-2 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="text-white/90 text-sm space-y-1">
+          <div class="flex items-center justify-center">
+            <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>100% free service • FINMA-certified advisors</span>
+          </div>
+          <div class="flex items-center justify-center">
+            <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>Independent comparison across all insurers</span>
+          </div>
+          <div class="flex items-center justify-center">
+            <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span>English-speaking support throughout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50 shadow-lg">
+    <button 
+      class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
+      onclick={`window.openHealthModal('${slug}')`}
+      aria-label={`Book free ${data.name} consultation`}
+    >
+      Book Free Consultation
+      <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SCHEMA MARKUP (SEO) -->
+  <!-- ============================================ -->
+
+  <!-- WebPage Schema with Enhanced Context -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${data.name} Health Insurance Switzerland | Expat-Savvy`,
+    "description": meta.description,
+    "url": meta.canonicalUrl,
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat-Savvy.ch",
+      "url": "https://expat-savvy.ch",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+      }
+    },
+    "about": {
+      "@type": "Organization",
+      "name": data.name,
+      "url": data.brandUrl,
+      "sameAs": data.brandUrl ? [data.brandUrl] : [],
+      "foundingDate": data.founded,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": data.hq.split('(')[0].trim(),
+        "addressCountry": "CH"
+      }
+    }
+  }, null, 2)} />
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer.replace(/<\/?strong>/g, '').replace(/<\/?a[^>]*>/g, '')
+      }
+    }))
+  }, null, 2)} />
+
+  <!-- Service Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `Independent ${data.name} Insurance Review & Comparison`,
+    "description": `Independent comparison and consultation for ${data.name} health insurance and alternatives across Switzerland`,
+    "provider": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "serviceType": "Insurance Broker",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Expats, International Residents"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CHF",
+      "availability": "https://schema.org/InStock"
+    }
+  }, null, 2)} />
+
+  <!-- Article Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": `${data.name} Health Insurance Switzerland — Independent Review for Expats`,
+    "description": meta.description,
+    "keywords": `${data.name} health insurance Switzerland, ${data.name} expats, compare Swiss insurers, independent broker Switzerland, English support, supplementary insurance, LAMal, KVG`,
+    "datePublished": "2025-01-15",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": data.expert.name,
+      "jobTitle": data.expert.title
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
+      }
+    }
+  }, null, 2)} />
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://expat-savvy.ch/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Healthcare",
+        "item": "https://expat-savvy.ch/healthcare"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "All Insurances",
+        "item": "https://expat-savvy.ch/healthcare/all-insurances"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": data.name,
+        "item": meta.canonicalUrl
+      }
+    ]
+  }, null, 2)} />
+
+</Layout>
+

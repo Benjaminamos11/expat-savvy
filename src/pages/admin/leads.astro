@@ -1,0 +1,639 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Leads Management - Expat Savvy" description="Comprehensive leads table with filters and export">
+  <div class="px-4 py-6 sm:px-0">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">Leads Management</h1>
+          <p class="mt-2 text-gray-600">View and manage all leads with full attribution data</p>
+        </div>
+        <div class="flex space-x-3">
+          <button onclick="exportLeads()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            Export CSV
+          </button>
+          <button onclick="refreshLeads()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white shadow rounded-lg mb-6">
+      <div class="px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
+            <input type="text" id="search" placeholder="Name or email..." 
+                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+          </div>
+          <div>
+            <label for="stageFilter" class="block text-sm font-medium text-gray-700">Stage</label>
+            <select id="stageFilter" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+              <option value="">All Stages</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="booked">Booked</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+          <div>
+            <label for="channelFilter" class="block text-sm font-medium text-gray-700">Channel</label>
+            <select id="channelFilter" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+              <option value="">All Channels</option>
+              <option value="organic">Organic</option>
+              <option value="paid">Paid</option>
+              <option value="social">Social</option>
+              <option value="direct">Direct</option>
+            </select>
+          </div>
+          <div>
+            <label for="dateFilter" class="block text-sm font-medium text-gray-700">Date Range</label>
+            <select id="dateFilter" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+              <option value="">All Time</option>
+              <option value="today">Today</option>
+              <option value="7d">Last 7 days</option>
+              <option value="30d">Last 30 days</option>
+              <option value="90d">Last 90 days</option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button onclick="applyFilters()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            Apply Filters
+          </button>
+          <button onclick="clearFilters()" class="ml-3 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md text-sm font-medium">
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leads Table -->
+    <div class="bg-white shadow rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stage</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Channel</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Emails</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody" class="bg-white divide-y divide-gray-200">
+              <tr>
+                <td colspan="8" class="px-6 py-12 text-center text-gray-500">
+                  <div class="animate-pulse">
+                    <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded"></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+          <div class="flex-1 flex justify-between sm:hidden">
+            <button onclick="previousPage()" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+              Previous
+            </button>
+            <button onclick="nextPage()" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+              Next
+            </button>
+          </div>
+          <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-sm text-gray-700" id="paginationInfo">
+                Showing <span class="font-medium">0</span> to <span class="font-medium">0</span> of <span class="font-medium">0</span> results
+              </p>
+            </div>
+            <div>
+              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <button onclick="previousPage()" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                  <span class="sr-only">Previous</span>
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <span id="pageNumbers" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                  Page 1 of 1
+                </span>
+                <button onclick="nextPage()" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                  <span class="sr-only">Next</span>
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lead Detail Modal -->
+  <div id="leadModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+      <div class="mt-3">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-medium text-gray-900">Lead Details</h3>
+          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div id="leadModalContent">
+          <!-- Content will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script is:inline>
+  // Auth and utility functions
+  function checkAuth() {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      window.location.href = '/admin/login';
+      return null;
+    }
+    return token;
+  }
+  
+  async function fetchWithAuth(endpoint) {
+    const token = checkAuth();
+    if (!token) return null;
+    
+    try {
+      const response = await fetch(`https://expat-savvy-api.fly.dev${endpoint}`, {
+        headers: {
+          'Authorization': `Basic ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_username');
+          window.location.href = '/admin/login';
+          return null;
+        }
+        throw new Error(`API call failed: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('API call error:', error);
+      throw error;
+    }
+  }
+  
+  function formatDate(dateString) {
+    if (!dateString) return 'Never';
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      return 'Invalid date';
+    }
+  }
+  
+  function formatTimeAgo(dateString) {
+    if (!dateString) return 'Never';
+    try {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffMs = now.getTime() - date.getTime();
+      const diffMinutes = Math.floor(diffMs / (1000 * 60));
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      
+      if (diffMinutes < 60) return `${diffMinutes}m ago`;
+      else if (diffHours < 24) return `${diffHours}h ago`;
+      else return `${diffDays}d ago`;
+    } catch {
+      return 'Unknown';
+    }
+  }
+  
+  function getStageColor(stage) {
+    switch (stage) {
+      case 'new': return 'bg-blue-100 text-blue-800';
+      case 'contacted': return 'bg-yellow-100 text-yellow-800';
+      case 'booked': return 'bg-green-100 text-green-800';
+      case 'closed': return 'bg-gray-100 text-gray-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  }
+  
+  function getChannelColor(channel) {
+    switch (channel) {
+      case 'organic': return 'bg-green-100 text-green-800';
+      case 'paid': return 'bg-blue-100 text-blue-800';
+      case 'social': return 'bg-purple-100 text-purple-800';
+      case 'direct': return 'bg-gray-100 text-gray-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  }
+  
+  let currentPage = 1;
+  let currentFilters = {};
+  let leadsData = null;
+  
+  async function loadLeads(page = 1, filters = {}) {
+    try {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: '50',
+        ...filters
+      });
+      
+      const data = await fetchWithAuth(`/api/admin/leads/detailed?${params}`);
+      if (data) {
+        leadsData = data;
+        updateLeadsTable();
+        updatePagination();
+      }
+    } catch (error) {
+      console.error('Failed to load leads:', error);
+    }
+  }
+  
+  function updateLeadsTable() {
+    if (!leadsData || !leadsData.leads) return;
+    
+    const tbody = document.getElementById('leadsTableBody');
+    if (leadsData.leads.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" class="px-6 py-12 text-center text-gray-500">
+            No leads found
+          </td>
+        </tr>
+      `;
+      return;
+    }
+    
+    tbody.innerHTML = leadsData.leads.map(lead => `
+      <tr class="hover:bg-gray-50 cursor-pointer" onclick="showLeadDetails('${lead.id}')">
+        <td class="px-6 py-4 whitespace-nowrap">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 h-10 w-10">
+              <div class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                <span class="text-sm font-medium text-gray-700">
+                  ${(lead.name || lead.email).charAt(0).toUpperCase()}
+                </span>
+              </div>
+            </div>
+            <div class="ml-4">
+              <div class="text-sm font-medium text-gray-900">${lead.name || 'No name'}</div>
+              <div class="text-sm text-gray-500">${lead.email}</div>
+              ${lead.phone ? `<div class="text-sm text-gray-500">${lead.phone}</div>` : ''}
+            </div>
+          </div>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStageColor(lead.stage)}">
+            ${lead.stage || 'new'}
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getChannelColor(lead.channel)}">
+            ${lead.channel || 'unknown'}
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          <div class="flex space-x-1">
+            ${lead.email_tracking.welcome_sent ? '<span class="text-green-500">✓</span>' : '<span class="text-gray-300">○</span>'}
+            ${lead.email_tracking.day1_sent ? '<span class="text-green-500">✓</span>' : '<span class="text-gray-300">○</span>'}
+            ${lead.email_tracking.day3_sent ? '<span class="text-green-500">✓</span>' : '<span class="text-gray-300">○</span>'}
+          </div>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${lead.booking_status.has_booking ? 
+            `<span class="text-green-500">✓ Booked</span>` : 
+            '<span class="text-gray-300">○</span>'
+          }
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${lead.location.city || lead.city || 'Unknown'}
+          ${lead.location.country ? `<br><span class="text-xs">${lead.location.country}</span>` : ''}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${formatTimeAgo(lead.created_at)}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <button onclick="event.stopPropagation(); showLeadDetails('${lead.id}')" 
+                  class="text-red-600 hover:text-red-900">
+            View Details
+          </button>
+        </td>
+      </tr>
+    `).join('');
+  }
+  
+  function updatePagination() {
+    if (!leadsData) return;
+    
+    const { page, total, limit, total_pages } = leadsData;
+    const start = (page - 1) * limit + 1;
+    const end = Math.min(page * limit, total);
+    
+    document.getElementById('paginationInfo').innerHTML = `
+      Showing <span class="font-medium">${start}</span> to <span class="font-medium">${end}</span> of <span class="font-medium">${total}</span> results
+    `;
+    
+    document.getElementById('pageNumbers').textContent = `Page ${page} of ${total_pages}`;
+  }
+  
+  function applyFilters() {
+    const search = document.getElementById('search').value;
+    const stage = document.getElementById('stageFilter').value;
+    const channel = document.getElementById('channelFilter').value;
+    const dateFilter = document.getElementById('dateFilter').value;
+    
+    currentFilters = {};
+    if (search) currentFilters.search = search;
+    if (stage) currentFilters.stage = stage;
+    if (channel) currentFilters.channel = channel;
+    if (dateFilter) {
+      const now = new Date();
+      if (dateFilter === 'today') {
+        currentFilters.date_from = now.toISOString().split('T')[0];
+      } else if (dateFilter === '7d') {
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        currentFilters.date_from = weekAgo.toISOString().split('T')[0];
+      } else if (dateFilter === '30d') {
+        const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        currentFilters.date_from = monthAgo.toISOString().split('T')[0];
+      } else if (dateFilter === '90d') {
+        const quarterAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+        currentFilters.date_from = quarterAgo.toISOString().split('T')[0];
+      }
+    }
+    
+    currentPage = 1;
+    loadLeads(currentPage, currentFilters);
+  }
+  
+  function clearFilters() {
+    document.getElementById('search').value = '';
+    document.getElementById('stageFilter').value = '';
+    document.getElementById('channelFilter').value = '';
+    document.getElementById('dateFilter').value = '';
+    currentFilters = {};
+    currentPage = 1;
+    loadLeads(currentPage);
+  }
+  
+  function previousPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      loadLeads(currentPage, currentFilters);
+    }
+  }
+  
+  function nextPage() {
+    if (leadsData && currentPage < leadsData.total_pages) {
+      currentPage++;
+      loadLeads(currentPage, currentFilters);
+    }
+  }
+  
+  async function showLeadDetails(leadId) {
+    try {
+      const lead = leadsData.leads.find(l => l.id === leadId);
+      if (!lead) return;
+      
+      const modalContent = document.getElementById('leadModalContent');
+      modalContent.innerHTML = `
+        <div class="space-y-6">
+          <!-- Contact Info -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Contact Information</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Name</label>
+                <p class="text-sm text-gray-900">${lead.name || 'Not provided'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <p class="text-sm text-gray-900">${lead.email}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Phone</label>
+                <p class="text-sm text-gray-900">${lead.phone || 'Not provided'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">City</label>
+                <p class="text-sm text-gray-900">${lead.city || lead.location.city || 'Not provided'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Attribution -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Attribution</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Channel</label>
+                <p class="text-sm text-gray-900">${lead.channel || 'Unknown'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">UTM Source</label>
+                <p class="text-sm text-gray-900">${lead.attribution.first_touch.utm_source || 'None'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Referrer</label>
+                <p class="text-sm text-gray-900">${lead.attribution.first_touch.referrer || 'Direct'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Landing Page</label>
+                <p class="text-sm text-gray-900">${lead.attribution.first_touch.landing_path || '/'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Email Tracking -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Email Sequence</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">Welcome Email</span>
+                <span class="text-sm ${lead.email_tracking.welcome_sent ? 'text-green-600' : 'text-gray-500'}">
+                  ${lead.email_tracking.welcome_sent ? '✓ Sent' : '○ Not sent'}
+                </span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">6h Follow-up</span>
+                <span class="text-sm ${lead.email_tracking.day1_sent ? 'text-green-600' : 'text-gray-500'}">
+                  ${lead.email_tracking.day1_sent ? '✓ Sent' : '○ Not sent'}
+                </span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">24h Follow-up</span>
+                <span class="text-sm ${lead.email_tracking.day3_sent ? 'text-green-600' : 'text-gray-500'}">
+                  ${lead.email_tracking.day3_sent ? '✓ Sent' : '○ Not sent'}
+                </span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">Status</span>
+                <span class="text-sm text-gray-900">${lead.email_tracking.sequence_status}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Booking Status -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Booking Status</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">Has Booking</span>
+                <span class="text-sm ${lead.booking_status.has_booking ? 'text-green-600' : 'text-gray-500'}">
+                  ${lead.booking_status.has_booking ? '✓ Yes' : '○ No'}
+                </span>
+              </div>
+              ${lead.booking_status.next_appointment ? `
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-700">Next Appointment</span>
+                  <span class="text-sm text-gray-900">${formatDate(lead.booking_status.next_appointment.start_time)}</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+          
+          <!-- Location -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Location</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">IP Address</label>
+                <p class="text-sm text-gray-900">${lead.location.ip_address || 'Unknown'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Country</label>
+                <p class="text-sm text-gray-900">${lead.location.country || 'Unknown'}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Region</label>
+                <p class="text-sm text-gray-900">${lead.location.region || 'Unknown'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Form Data -->
+          ${lead.form_data.situation ? `
+            <div>
+              <h4 class="text-lg font-medium text-gray-900 mb-3">Form Data</h4>
+              <div class="space-y-2">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Situation</label>
+                  <p class="text-sm text-gray-900">${lead.form_data.situation}</p>
+                </div>
+                ${lead.form_data.page_intent ? `
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700">Page Intent</label>
+                    <p class="text-sm text-gray-900">${lead.form_data.page_intent}</p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          ` : ''}
+          
+          <!-- Timestamps -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Timestamps</h4>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">Created</span>
+                <span class="text-sm text-gray-900">${formatDate(lead.created_at)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-700">Updated</span>
+                <span class="text-sm text-gray-900">${formatDate(lead.updated_at)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('leadModal').classList.remove('hidden');
+    } catch (error) {
+      console.error('Failed to load lead details:', error);
+    }
+  }
+  
+  function closeModal() {
+    document.getElementById('leadModal').classList.add('hidden');
+  }
+  
+  async function exportLeads() {
+    try {
+      const params = new URLSearchParams(currentFilters);
+      const response = await fetch(`https://expat-savvy-api.fly.dev/api/admin/export/leads?${params}`, {
+        headers: {
+          'Authorization': `Basic ${localStorage.getItem('admin_token')}`
+        }
+      });
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `leads_export_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      } else {
+        throw new Error('Export failed');
+      }
+    } catch (error) {
+      console.error('Export error:', error);
+      alert('Failed to export leads. Please try again.');
+    }
+  }
+  
+  function refreshLeads() {
+    loadLeads(currentPage, currentFilters);
+  }
+  
+  // Make functions available globally
+  window.applyFilters = applyFilters;
+  window.clearFilters = clearFilters;
+  window.previousPage = previousPage;
+  window.nextPage = nextPage;
+  window.showLeadDetails = showLeadDetails;
+  window.closeModal = closeModal;
+  window.exportLeads = exportLeads;
+  window.refreshLeads = refreshLeads;
+  
+  // Load data on page load
+  loadLeads();
+  
+  // Make refreshData available globally for auto-refresh
+  window.refreshData = refreshLeads;
+</script>

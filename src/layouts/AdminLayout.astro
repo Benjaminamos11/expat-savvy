@@ -1,0 +1,148 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Admin Dashboard" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'red': {
+                50: '#fef2f2',
+                100: '#fee2e2',
+                200: '#fecaca',
+                300: '#fca5a5',
+                400: '#f87171',
+                500: '#ef4444',
+                600: '#dc2626',
+                700: '#b91c1c',
+                800: '#991b1b',
+                900: '#7f1d1d',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  </head>
+  <body class="bg-gray-50">
+    <div class="min-h-screen">
+      <!-- Header -->
+      <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <a href="/" class="flex items-center">
+                  <div class="h-8 w-8 bg-gradient-to-r from-red-600 to-red-800 rounded-lg flex items-center justify-center">
+                    <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <span class="ml-3 text-xl font-bold text-gray-900">Expat Savvy</span>
+                </a>
+              </div>
+              <nav class="ml-10 flex space-x-8">
+                <a href="/admin" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                <a href="/admin/leads" class="text-gray-500 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Leads</a>
+                <a href="/admin/analytics" class="text-gray-500 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Analytics</a>
+              </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+              <span class="text-sm text-gray-500" id="adminUsername">Loading...</span>
+              <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <slot />
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center">
+            <p class="text-sm text-gray-500">
+              Last updated: <span id="lastUpdate">Loading...</span>
+            </p>
+            <p class="text-sm text-gray-500">
+              Auto-refresh: <span id="refreshCountdown">30s</span>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script is:inline>
+      // Auth utilities inline
+      function getUsername() {
+        return localStorage.getItem('admin_username');
+      }
+      
+      function logout() {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_username');
+        window.location.href = '/admin/login';
+      }
+      
+      // Set username
+      const username = getUsername();
+      if (username) {
+        document.getElementById('adminUsername').textContent = username;
+      }
+      
+      // Make logout available globally
+      window.logout = logout;
+      
+      // Update last update time
+      function updateLastUpdate() {
+        const now = new Date();
+        document.getElementById('lastUpdate').textContent = now.toLocaleTimeString();
+      }
+      
+      updateLastUpdate();
+      
+      // Auto-refresh countdown
+      let refreshCountdown = 30;
+      function updateCountdown() {
+        document.getElementById('refreshCountdown').textContent = `${refreshCountdown}s`;
+        refreshCountdown--;
+        
+        if (refreshCountdown < 0) {
+          refreshCountdown = 30;
+          // Trigger page refresh or data reload
+          if (typeof window.refreshData === 'function') {
+            window.refreshData();
+          }
+        }
+      }
+      
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>

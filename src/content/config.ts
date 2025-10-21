@@ -18,6 +18,77 @@ const providers = defineCollection({
   })
 });
 
+const insurers = defineCollection({
+  type: 'content',
+  schema: z.object({
+    // Required fields
+    name: z.string(),
+    
+    // Hero section
+    hero: z.object({
+      title: z.string(),
+      subtitle: z.string(),
+      backgroundUrl: z.string()
+    }),
+    
+    // Facts table data
+    brandUrl: z.string().optional(),
+    founded: z.string(),
+    hq: z.string(),
+    marketPosition: z.string(),
+    customers: z.string(),
+    languages: z.array(z.string()),
+    strengths: z.array(z.string()),
+    limitations: z.array(z.string()),
+    uniquePlans: z.array(z.string()),
+    knownFor: z.array(z.string()),
+    customerFocus: z.string(),
+    premiumExample: z.object({
+      location: z.string(),
+      value: z.string(),
+      year: z.string()
+    }),
+    premiumTrend: z.string(),
+    claimsRating: z.string(),
+    
+    // Expert section
+    expert: z.object({
+      quote: z.string(),
+      name: z.string(),
+      title: z.string(),
+      avatarUrl: z.string(),
+      languages: z.string(),
+      experience: z.string()
+    }),
+    
+    // Comparison links
+    internalCompareLinks: z.array(z.object({
+      label: z.string(),
+      href: z.string()
+    })),
+    
+    // Optional highlights and special features
+    highlights: z.array(z.string()).optional(),
+    special: z.object({
+      gymRebateMax: z.number().optional(),
+      hasAgeEntryNote: z.boolean().optional(),
+      ageEntryNote: z.string().optional(),
+      strictUnderwriting: z.boolean().optional(),
+      notableProducts: z.array(z.string()).optional(),
+      englishSupportLevel: z.string().optional()
+    }).optional(),
+    
+    // FAQ
+    faq: z.array(z.object({
+      q: z.string(),
+      a: z.string()
+    })),
+    
+    // SEO
+    metaDescription: z.string().optional()
+  })
+});
+
 const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -32,5 +103,6 @@ const blogCollection = defineCollection({
 
 export const collections = {
   providers,
+  insurers,
   'blog': blogCollection,
 };

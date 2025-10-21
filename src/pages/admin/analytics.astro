@@ -1,0 +1,392 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Analytics - Expat Savvy" description="Channel performance and conversion analytics">
+  <div class="px-4 py-6 sm:px-0">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
+          <p class="mt-2 text-gray-600">Channel performance, conversion metrics, and traffic analysis</p>
+        </div>
+        <div class="flex space-x-3">
+          <select id="periodSelect" class="border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm">
+            <option value="7d">Last 7 days</option>
+            <option value="30d" selected>Last 30 days</option>
+            <option value="90d">Last 90 days</option>
+          </select>
+          <button onclick="refreshAnalytics()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Total Leads</dt>
+                <dd class="text-lg font-medium text-gray-900" id="totalLeads">-</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Conversion Rate</dt>
+                <dd class="text-lg font-medium text-gray-900" id="conversionRate">-%</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Email Open Rate</dt>
+                <dd class="text-lg font-medium text-gray-900" id="emailOpenRate">-%</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dl>
+                <dt class="text-sm font-medium text-gray-500 truncate">Avg. Time to Book</dt>
+                <dd class="text-lg font-medium text-gray-900" id="avgTimeToBook">-</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <!-- Channel Performance -->
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Channel Performance</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Channel</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leads</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booked</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
+                </tr>
+              </thead>
+              <tbody id="channelPerformanceBody" class="bg-white divide-y divide-gray-200">
+                <tr>
+                  <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+                    <div class="animate-pulse">
+                      <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div class="h-4 bg-gray-200 rounded"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Performance -->
+      <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Page Performance</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Page</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leads</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booked</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
+                </tr>
+              </thead>
+              <tbody id="pagePerformanceBody" class="bg-white divide-y divide-gray-200">
+                <tr>
+                  <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+                    <div class="animate-pulse">
+                      <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div class="h-4 bg-gray-200 rounded"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Geographic Distribution -->
+    <div class="bg-white shadow rounded-lg mb-8">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Geographic Distribution</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leads</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booked</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
+              </tr>
+            </thead>
+            <tbody id="geographicDistributionBody" class="bg-white divide-y divide-gray-200">
+              <tr>
+                <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                  <div class="animate-pulse">
+                    <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded"></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Traffic Source Breakdown -->
+    <div class="bg-white shadow rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Traffic Source Breakdown</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900" id="organicLeads">-</div>
+            <div class="text-sm text-gray-500">Organic</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900" id="paidLeads">-</div>
+            <div class="text-sm text-gray-500">Paid</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900" id="socialLeads">-</div>
+            <div class="text-sm text-gray-500">Social</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900" id="directLeads">-</div>
+            <div class="text-sm text-gray-500">Direct</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script is:inline>
+  // Auth utilities
+  function checkAuth() {
+    const token = localStorage.getItem('admin_token');
+    if (!token) {
+      window.location.href = '/admin/login';
+      return null;
+    }
+    return token;
+  }
+  
+  async function fetchWithAuth(endpoint) {
+    const token = checkAuth();
+    if (!token) return null;
+    
+    try {
+      const response = await fetch(`https://expat-savvy-api.fly.dev${endpoint}`, {
+        headers: {
+          'Authorization': `Basic ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_username');
+          window.location.href = '/admin/login';
+          return null;
+        }
+        throw new Error(`API call failed: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('API call error:', error);
+      throw error;
+    }
+  }
+  
+  let analyticsData = null;
+  let currentPeriod = '30d';
+  
+  async function loadAnalytics(period = '30d') {
+    try {
+      const data = await fetchWithAuth(`/api/admin/stats/overview?period=${period}`);
+      if (data) {
+        analyticsData = data;
+        updateAnalytics();
+      }
+    } catch (error) {
+      console.error('Failed to load analytics:', error);
+    }
+  }
+  
+  function updateAnalytics() {
+    if (!analyticsData) return;
+    
+    // Update key metrics
+    document.getElementById('totalLeads').textContent = analyticsData.total_leads || 0;
+    
+    const conversionRate = analyticsData.total_leads > 0 ? 
+      ((analyticsData.booked_consultations / analyticsData.total_leads) * 100).toFixed(1) : 0;
+    document.getElementById('conversionRate').textContent = `${conversionRate}%`;
+    
+    document.getElementById('emailOpenRate').textContent = `${analyticsData.email_open_rate || 0}%`;
+    document.getElementById('avgTimeToBook').textContent = 'N/A'; // Would need additional calculation
+    
+    // Update channel performance
+    updateChannelPerformance();
+    
+    // Update page performance
+    updatePagePerformance();
+    
+    // Update geographic distribution
+    updateGeographicDistribution();
+    
+    // Update traffic source breakdown
+    updateTrafficSourceBreakdown();
+  }
+  
+  function updateChannelPerformance() {
+    const tbody = document.getElementById('channelPerformanceBody');
+    if (!analyticsData.top_channels || analyticsData.top_channels.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-gray-500">No data available</td></tr>';
+      return;
+    }
+    
+    tbody.innerHTML = analyticsData.top_channels.map(channel => {
+      // Calculate booked rate (simplified - would need actual booked data per channel)
+      const bookedRate = 'N/A'; // Would need to fetch actual booked data per channel
+      
+      return `
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 capitalize">${channel.channel}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${channel.count}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bookedRate}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+  
+  function updatePagePerformance() {
+    const tbody = document.getElementById('pagePerformanceBody');
+    if (!analyticsData.top_pages || analyticsData.top_pages.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-gray-500">No data available</td></tr>';
+      return;
+    }
+    
+    tbody.innerHTML = analyticsData.top_pages.map(page => {
+      // Calculate booked rate (simplified - would need actual booked data per page)
+      const bookedRate = 'N/A'; // Would need to fetch actual booked data per page
+      
+      return `
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${page.page}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${page.count}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bookedRate}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+  
+  function updateGeographicDistribution() {
+    const tbody = document.getElementById('geographicDistributionBody');
+    // This would need additional API endpoint to get geographic data
+    tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-gray-500">Geographic data not available</td></tr>';
+  }
+  
+  function updateTrafficSourceBreakdown() {
+    // Calculate traffic source breakdown from channel data
+    const channels = analyticsData.top_channels || [];
+    const organic = channels.find(c => c.channel === 'organic')?.count || 0;
+    const paid = channels.find(c => c.channel === 'paid')?.count || 0;
+    const social = channels.find(c => c.channel === 'social')?.count || 0;
+    const direct = channels.find(c => c.channel === 'direct')?.count || 0;
+    
+    document.getElementById('organicLeads').textContent = organic;
+    document.getElementById('paidLeads').textContent = paid;
+    document.getElementById('socialLeads').textContent = social;
+    document.getElementById('directLeads').textContent = direct;
+  }
+  
+  function refreshAnalytics() {
+    const period = document.getElementById('periodSelect').value;
+    currentPeriod = period;
+    loadAnalytics(period);
+  }
+  
+  // Make functions available globally
+  window.refreshAnalytics = refreshAnalytics;
+  
+  // Load data on page load
+  loadAnalytics();
+  
+  // Handle period change
+  document.getElementById('periodSelect').addEventListener('change', refreshAnalytics);
+  
+  // Make refreshData available globally for auto-refresh
+  window.refreshData = refreshAnalytics;
+</script>
