@@ -25,6 +25,124 @@ function ensureTrailingSlash(url) {
   return url.endsWith('/') ? url : url + '/';
 }
 
+// Function to check if a URL has a redirect configured
+function hasRedirect(url) {
+  // List of URLs that redirect (from netlify.toml)
+  const redirectUrls = [
+    // Regional guides redirects
+    'news/regional-guides/zurich-insurance',
+    'news/regional-guides/zurich-insurance/',
+    'news/regional-guides/zurich/',
+    'news/regional-guides/zurich',
+    'news/regional-guides/geneva-insurance',
+    'news/regional-guides/geneva-insurance/',
+    'news/regional-guides/geneva/',
+    'news/regional-guides/geneva',
+    'news/regional-guides/basel-insurance',
+    'news/regional-guides/basel-insurance/',
+    'news/regional-guides/basel/',
+    'news/regional-guides/basel',
+    'news/regional-guides/bern-insurance',
+    'news/regional-guides/bern-insurance/',
+    'news/regional-guides/bern/',
+    'news/regional-guides/bern',
+    'news/regional-guides/lausanne-insurance',
+    'news/regional-guides/lausanne-insurance/',
+    'news/regional-guides/lausanne/',
+    'news/regional-guides/lausanne',
+    'news/regional-guides/zug-insurance',
+    'news/regional-guides/zug-insurance/',
+    'news/regional-guides/zug/',
+    'news/regional-guides/zug',
+    'news/regional-guides/lugano-insurance',
+    'news/regional-guides/lugano-insurance/',
+    'news/regional-guides/lugano/',
+    'news/regional-guides/lugano',
+    
+    // Archived pages redirects
+    'healthcare/all-insurances/_archived/groupe-mutuel',
+    'healthcare/all-insurances/_archived/groupe-mutuel/',
+    'compare-providers/_archived/kpt-vs-helsana',
+    'compare-providers/_archived/kpt-vs-helsana/',
+    'compare-providers/_archived/groupe-mutuel-vs-assura',
+    'compare-providers/_archived/groupe-mutuel-vs-assura/',
+    'compare-providers/_archived/concordia-vs-kpt',
+    'compare-providers/_archived/concordia-vs-kpt/',
+    'healthcare/all-insurances/_archived/atupri',
+    'healthcare/all-insurances/_archived/atupri/',
+    'healthcare/all-insurances/_archived/swica',
+    'healthcare/all-insurances/_archived/swica/',
+    'healthcare/all-insurances/_archived/helsana',
+    'healthcare/all-insurances/_archived/helsana/',
+    'healthcare/all-insurances/_archived/concordia',
+    'healthcare/all-insurances/_archived/concordia/',
+    'blog/_archived/best-health-insurance-switzerland-expats',
+    'blog/_archived/best-health-insurance-switzerland-expats/',
+    'healthcare/all-insurances/_archived/css',
+    'healthcare/all-insurances/_archived/css/',
+    'healthcare/all-insurances/_archived/sympany',
+    'healthcare/all-insurances/_archived/sympany/',
+    'index',
+    'index/',
+    'blog/_archived/best-health-insurance-switzerland',
+    'blog/_archived/best-health-insurance-switzerland/',
+    'healthcare/all-insurances/_archived/sanitas',
+    'healthcare/all-insurances/_archived/sanitas/',
+    'healthcare/all-insurances/_archived/assura',
+    'healthcare/all-insurances/_archived/assura/',
+    'compare-providers/_archived/visana-vs-atupri',
+    'compare-providers/_archived/visana-vs-atupri/',
+    'compare-providers/_archived/groupe-mutuel-vs-sympany',
+    'compare-providers/_archived/groupe-mutuel-vs-sympany/',
+    'healthcare/all-insurances/_archived/visana',
+    'healthcare/all-insurances/_archived/visana/',
+    'healthcare/all-insurances/_archived/kpt',
+    'healthcare/all-insurances/_archived/kpt/',
+    
+    // Other redirects
+    'insurance',
+    'insurance/',
+    'guides/moving-cantons',
+    'guides/moving-cantons/',
+    'healthcare/glossary',
+    'healthcare/glossary/',
+    'draft',
+    'draft/',
+    'test-alpine-modal',
+    'test-alpine-modal/',
+    'simple-test.html',
+    'simple-test.html/',
+    'providers/swica',
+    'providers/swica/',
+    'providers/helsana',
+    'providers/helsana/',
+    'providers/css',
+    'providers/css/',
+    'providers/sanitas',
+    'providers/sanitas/',
+    'providers/assura',
+    'providers/assura/',
+    'providers/concordia',
+    'providers/concordia/',
+    'providers/atupri',
+    'providers/atupri/',
+    'providers/groupe-mutuel',
+    'providers/groupe-mutuel/',
+    'providers/kpt',
+    'providers/kpt/',
+    'providers/visana',
+    'providers/visana/',
+    'providers/sympany',
+    'providers/sympany/',
+    'healthcare/all-insurances/egk',
+    'healthcare/all-insurances/egk/',
+    'healthcare/all-insurances/axa',
+    'healthcare/all-insurances/axa/'
+  ];
+  
+  return redirectUrls.includes(url);
+}
+
 async function generateSitemap() {
   // Get all files except for 404, draft pages, and specific excluded patterns
   const pages = await globby([
@@ -87,6 +205,11 @@ ${pages
     
     // Skip any paths containing 'draft', starting with an underscore, or containing dynamic route patterns
     if (path.includes('draft') || path.startsWith('_') || path.includes('[...') || path.includes('[')) {
+      return '';
+    }
+
+    // Skip URLs that have redirects configured
+    if (hasRedirect(path)) {
       return '';
     }
 
