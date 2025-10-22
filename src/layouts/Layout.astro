@@ -62,6 +62,9 @@ if (finalPath !== "/" && !finalPath.endsWith("/")) {
 // Construct the full canonical URL, using prop value if provided
 const canonicalURL = canonicalURLProp || new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
 
+// Ensure canonical URL always ends with trailing slash for consistency
+const finalCanonicalURL = canonicalURL.endsWith('/') ? canonicalURL : canonicalURL + '/';
+
 // Define CDN URLs
 const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";
 const logoLight = `${cdnBaseUrl}image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg`;
@@ -88,7 +91,7 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin />
     
     <!-- Canonical and metadata -->
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={finalCanonicalURL} />
     <link rel="manifest" href="/manifest.json" />
     
     <!-- Favicon -->
@@ -112,14 +115,14 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     
     <!-- Open Graph / Facebook Basic Tags -->
     <meta property="og:type" content={type} />
-    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:url" content={finalCanonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Expat Savvy" />
     
     <!-- Twitter Basic Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:url" content={finalCanonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     
