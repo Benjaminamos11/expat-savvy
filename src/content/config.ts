@@ -99,6 +99,10 @@ const blogCollection = defineCollection({
     image: z.string().optional().nullable(),
     tags: z.array(z.string()).optional().nullable(),
   }),
+  // Exclude archived files from being processed
+  ignore: {
+    pattern: '_archived/**'
+  }
 });
 
 export const collections = {
