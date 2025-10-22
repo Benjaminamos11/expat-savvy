@@ -1410,12 +1410,17 @@
     }
 
     function renderStep4() {
-      // Build Cal.com URL with user data
-      let calUrl = "https://cal.com/robertkolar/expat-savvy?embed=true&layout=month_view&theme=light&embedType=inline&hideEventTypeDetails=false";
+      // Detect if mobile device
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      
+      // Build Cal.com URL with user data (without embed params for mobile)
+      let calUrl = isMobile 
+        ? "https://cal.com/robertkolar/expat-savvy"
+        : "https://cal.com/robertkolar/expat-savvy?embed=true&layout=month_view&theme=light&embedType=inline&hideEventTypeDetails=false";
       
       // Add user data as query parameters
       if (userData.name) {
-        calUrl += "&name=" + encodeURIComponent(userData.name);
+        calUrl += (calUrl.includes('?') ? '&' : '?') + "name=" + encodeURIComponent(userData.name);
       }
       if (userData.email) {
         calUrl += "&email=" + encodeURIComponent(userData.email);
@@ -1427,6 +1432,61 @@
         calUrl += "&notes=" + encodeURIComponent(userData.helpReason);
       }
       
+      // On mobile, show a button to open in new tab
+      if (isMobile) {
+        // Auto-open in new tab and show message
+        setTimeout(() => {
+          window.open(calUrl, '_blank');
+        }, 100);
+        
+        return `
+          <div class="p-6 md:p-12 bg-white">
+            <button onclick="renderStep(3)" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-6 flex items-center gap-2 transition-smooth">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              Back
+            </button>
+
+            <div class="max-w-2xl mx-auto text-center">
+              <div class="mb-8">
+                <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <i data-lucide="calendar" class="w-10 h-10 text-red-500"></i>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Book Your Consultation</h2>
+                <p class="text-gray-600 mb-6">For the best booking experience on mobile, we'll open the calendar in a new tab.</p>
+              </div>
+
+              <button 
+                onclick="window.open('${calUrl}', '_blank')" 
+                class="w-full max-w-md mx-auto bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-8 rounded-xl flex items-center justify-center gap-3 transition-smooth shadow-lg hover:shadow-xl mb-6">
+                <i data-lucide="external-link" class="w-5 h-5"></i>
+                Open Calendar to Book
+              </button>
+
+              <div class="bg-gray-50 rounded-xl p-6 max-w-md mx-auto">
+                <p class="text-sm text-gray-600 mb-4">What you'll get:</p>
+                <div class="space-y-3 text-left">
+                  <div class="flex items-center gap-3">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-red-500 flex-shrink-0"></i>
+                    <span class="text-sm text-gray-700">Free 15-minute consultation</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i data-lucide="video" class="w-5 h-5 text-red-500 flex-shrink-0"></i>
+                    <span class="text-sm text-gray-700">Video or phone call</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <i data-lucide="clock" class="w-5 h-5 text-red-500 flex-shrink-0"></i>
+                    <span class="text-sm text-gray-700">Easy to reschedule anytime</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-xs text-gray-500 mt-6">Times shown in Europe/Zurich timezone</p>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Desktop: show iframe as before
       return `
         <div class="p-8 md:p-12 bg-white">
           <button onclick="renderStep(3)" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg mb-6 flex items-center gap-2 transition-smooth">

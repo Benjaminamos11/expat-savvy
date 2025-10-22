@@ -467,6 +467,71 @@ class ModalOverlaySystem {
     console.log('🔍 Cal script loaded:', window.calScriptLoaded);
     console.log('🔍 Cal function available:', typeof window.Cal !== 'undefined');
     
+    // Detect if mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    console.log('📱 Is mobile device:', isMobile);
+    
+    // On mobile, open in new tab instead of embedding
+    if (isMobile) {
+      console.log('📱 Mobile detected - opening Cal.com in new tab');
+      
+      // Get user data from the modal's userData object
+      let calUrl = "https://cal.com/primerelocation/expat-savvy";
+      
+      if (window.userData) {
+        const params = new URLSearchParams();
+        
+        if (window.userData.firstName || window.userData.lastName) {
+          const fullName = `${window.userData.firstName || ''} ${window.userData.lastName || ''}`.trim();
+          if (fullName) {
+            params.append('name', fullName);
+          }
+        }
+        
+        if (window.userData.email) {
+          params.append('email', window.userData.email);
+        }
+        
+        if (window.userData.phone) {
+          params.append('phone', window.userData.phone);
+        }
+        
+        if (params.toString()) {
+          calUrl += '?' + params.toString();
+        }
+      }
+      
+      // Open in new tab
+      window.open(calUrl, '_blank');
+      
+      // Show mobile-friendly message in the container
+      const container = document.querySelector('#my-cal-inline-expat-savvy');
+      if (container) {
+        container.innerHTML = `
+          <div class="text-center p-8">
+            <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Calendar opened in new tab</h3>
+            <p class="text-gray-600 mb-6">For the best booking experience on mobile, we've opened the calendar in a new tab.</p>
+            <button 
+              onclick="window.open('${calUrl}', '_blank')" 
+              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg inline-flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              Open Calendar Again
+            </button>
+          </div>
+        `;
+      }
+      
+      return;
+    }
+    
+    // Desktop: Continue with normal initialization
     const tryInitialize = async () => {
       // Check if both script is loaded and Cal function is available
       const hasCalFunction = typeof window.Cal === 'function';
