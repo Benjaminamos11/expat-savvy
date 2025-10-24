@@ -178,6 +178,21 @@ async function generateSitemap() {
     console.error('Error reading blog directory:', err);
   }
 
+  // Manually add insurer pages that are generated dynamically
+  const insurerPages = [
+    'healthcare/all-insurances/helsana',
+    'healthcare/all-insurances/swica', 
+    'healthcare/all-insurances/css',
+    'healthcare/all-insurances/sanitas',
+    'healthcare/all-insurances/concordia',
+    'healthcare/all-insurances/atupri',
+    'healthcare/all-insurances/assura',
+    'healthcare/all-insurances/groupe-mutuel',
+    'healthcare/all-insurances/kpt',
+    'healthcare/all-insurances/visana',
+    'healthcare/all-insurances/sympany'
+  ];
+
   // Create sitemap entries for each page
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -203,8 +218,9 @@ ${pages
       path = path.replace('src/', '');
     }
     
-    // Skip any paths containing 'draft', starting with an underscore, or containing dynamic route patterns
-    if (path.includes('draft') || path.startsWith('_') || path.includes('[...') || path.includes('[')) {
+    // Skip any paths containing 'draft' or starting with an underscore
+    // Note: We now include dynamic routes like [slug].astro as they generate actual pages
+    if (path.includes('draft') || path.startsWith('_')) {
       return '';
     }
 
@@ -239,6 +255,20 @@ ${pages
   </url>`;
   })
   .filter(entry => entry) // Remove empty entries
+  .join('\n')}
+
+${insurerPages
+  .map(insurerPath => {
+    // Ensure path has proper trailing slash
+    insurerPath = ensureTrailingSlash(insurerPath);
+
+    return `  <url>
+    <loc>${siteUrl}/${insurerPath}</loc>
+    <lastmod>${formatDate()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+  })
   .join('\n')}
 
 ${blogPosts
