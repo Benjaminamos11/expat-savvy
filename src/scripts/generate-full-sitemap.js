@@ -218,9 +218,8 @@ ${pages
       path = path.replace('src/', '');
     }
     
-    // Skip any paths containing 'draft' or starting with an underscore
-    // Note: We now include dynamic routes like [slug].astro as they generate actual pages
-    if (path.includes('draft') || path.startsWith('_')) {
+    // Skip any paths containing 'draft', starting with an underscore, or dynamic route patterns
+    if (path.includes('draft') || path.startsWith('_') || path.includes('[') || path.includes(']')) {
       return '';
     }
 

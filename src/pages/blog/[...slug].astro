@@ -21,7 +21,10 @@ if (slug) {
 
 // If no post found, return 404
 if (!post) {
-  return Astro.redirect('/404');
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not Found'
+  });
 }
 
 // Render the content
