@@ -421,4 +421,5 @@ For additional guidance on specific aspects of your relocation journey, explore 
 - [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability)
 - [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination)
 - [Relocation to Zurich: The Expat's Ultimate Guide](/blog/relocation-zurich-ultimate-guide-financial-hub)
+- [Swiss Cost of Living Guide](https://expat-services.ch/guide/swiss-cost-of-living-guide-2025) - Comprehensive cost comparison across Swiss cities
 

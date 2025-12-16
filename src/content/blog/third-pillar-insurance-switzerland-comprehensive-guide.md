@@ -249,6 +249,7 @@ A: Pillar 3a is "tied" with contribution limits and restricted access but offers
 - [Tax Optimization with 3rd Pillar Insurance](/guides/how-to/save-taxes-with-3a-pillar)
 - [Complete Guide to Swiss Pension Planning](/blog/swiss-pension-system-complete-guide)
 - [Retirement Planning for Expats in Switzerland](/blog/retirement-planning-expats-switzerland)
+- [Pillar 3a Guide 2026](https://expat-services.ch/guide/pillar-3a-switzerland-2026) - Updated contribution limits and strategies
 
 
 ## Your Complete Swiss Insurance & Financial Strategy

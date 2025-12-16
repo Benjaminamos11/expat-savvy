@@ -361,7 +361,7 @@ When selecting a relocation agency, consider:
 - Client testimonials and references
 - Personal rapport with your consultant
 
-[Relofinder.ch](https://relofinder.ch) offers a comprehensive comparison of relocation agencies in Switzerland, helping you identify the best match for your specific needs. For personalized relocation services, [Prime Relocation](https://primerelocation.ch) provides comprehensive support tailored to expatriates moving to Switzerland.
+[Relofinder.ch](https://relofinder.ch) offers a comprehensive comparison of relocation agencies in Switzerland, helping you identify the best match for your specific needs. For personalized relocation services, [Prime Relocation](https://primerelocation.ch) provides comprehensive support tailored to expatriates moving to Switzerland. For a comprehensive immigration guide, see the [Swiss Immigration Blueprint](https://expat-services.ch/guide/swiss-immigration-blueprint-2025) on Expat Services.
 
 For detailed guidance on selecting the right relocation partner, see our guide on [Finding Your Ideal Relocation Agency in Switzerland](https://expat-savvy.ch/guides/how-to/finding-ideal-relocation-agency-switzerland/).
 

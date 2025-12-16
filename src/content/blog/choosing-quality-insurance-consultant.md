@@ -94,6 +94,7 @@ Choosing an insurance consultant in Switzerland is about finding a partner commi
 - [Understanding Mandatory Swiss Health Insurance](/health-insurance)
 - [Key Insurance Policies for Expats in Switzerland](/insurance-guides)
 - [Comparing Insurance Providers in Switzerland](/compare-providers)
+- [Insurance Consultant Directory](https://expat-services.ch/guide/health-insurance-consultants-switzerland-2025) - Browse vetted insurance professionals in Switzerland
 
 ## Frequently Asked Questions (FAQ)
 

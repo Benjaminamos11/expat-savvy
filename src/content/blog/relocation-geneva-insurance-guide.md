@@ -173,6 +173,9 @@ Professional relocation services provide essential guidance for Geneva's complex
 - Diplomatic and corporate relocation expertise
 - **Why Use ReloFinder:** Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner
 
+**Additional Resources**
+- [Expat Services Insurance Directory](https://expat-services.ch/insurance) - Comprehensive insurance provider listings for expats
+
 ### **Geneva Relocation Timeline with International Coordination**
 
 **Pre-Arrival (3-4 months before)**

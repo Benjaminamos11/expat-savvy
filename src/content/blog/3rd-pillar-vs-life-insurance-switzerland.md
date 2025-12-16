@@ -357,3 +357,9 @@ For most Swiss families, the optimal approach involves maximizing 3rd pillar con
 The key is matching each tool to its strength: 3rd pillar for accumulation and growth, life insurance for protection and security. Regular review ensures your strategy evolves with changing life circumstances and financial goals.
 
 **Need personalized analysis of your situation?** [Contact our experts](/free-consultation) for tailored guidance on optimizing your 3rd pillar and life insurance strategy for maximum financial benefit.
+
+---
+
+### Additional Resources
+
+- [Expat Services Finance Guide](https://expat-services.ch/finance) - Comprehensive financial planning resources for expats in Switzerland

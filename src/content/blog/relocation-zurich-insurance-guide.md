@@ -125,6 +125,9 @@ Professional relocation services provide essential insurance guidance during Zur
 - Local specialist recommendations
 - **Why Use ReloFinder:** Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner
 
+**Additional Resources**
+- [Expat Services Insurance Directory](https://expat-services.ch/insurance) - Comprehensive insurance provider listings for expats
+
 ### **Insurance Setup Timeline for Zurich Moves**
 
 **Pre-Arrival (2-3 months before)**

@@ -156,6 +156,10 @@ Professional relocation services provide essential guidance for Zug moves, helpi
 - Corporate relocation expertise
 - **Why Use ReloFinder:** Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner
 
+**Additional Resources**
+- [Expat Services Insurance Directory](https://expat-services.ch/insurance) - Insurance provider listings
+- [Expat Services Finance Guide](https://expat-services.ch/finance) - Financial planning resources for expats
+
 ### **Zug Relocation Timeline with Insurance Coordination**
 
 **Pre-Arrival (3-4 months before)**

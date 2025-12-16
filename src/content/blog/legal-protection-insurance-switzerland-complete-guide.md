@@ -802,6 +802,7 @@ Legal protection insurance works best as part of a comprehensive insurance portf
 - [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability)
 - [Complete Guide to Swiss Insurance for Newcomers](/insurance-guides/new-arrivals-checklist)
 - [3rd Pillar Insurance Switzerland: Complete Guide to Tax-Advantaged Savings](/blog/third-pillar-insurance-switzerland-comprehensive-guide)
+- [Expat Services Legal Guide](https://expat-services.ch/legal) - Additional legal resources and service providers for expats
 
 ---
 

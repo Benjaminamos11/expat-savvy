@@ -464,6 +464,7 @@ Our AI calculator uses the same official Swiss Federal Office data to show your 
 - [Swiss Health Insurance Premium Subsidies](/guides/how-to/apply-premium-subsidies) — Financial assistance for lower incomes
 - [Dental Insurance Switzerland for Expats](/blog/dental-insurance-expats-switzerland/) — Supplementary coverage for dental costs
 - [Legal Insurance Switzerland](/blog/legal-protection-insurance-switzerland-complete-guide/) — Additional protection for expats
+- [Best Health Insurance Switzerland 2026](https://expat-services.ch/guide/best-health-insurance-switzerland-2026) — Comprehensive guide on Expat Services
 
 ---
 

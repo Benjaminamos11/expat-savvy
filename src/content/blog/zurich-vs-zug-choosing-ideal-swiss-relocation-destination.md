@@ -372,7 +372,7 @@ Approaches to making an informed choice:
 - **Expatriate consultations**: Speaking with residents of both communities
 - **Relocation agency guidance**: Professional advice based on your specific profile
 
-Working with a relocation agency like [Prime Relocation](https://primerelocation.ch) can provide personalized insights into which location better suits your specific circumstances. For comparing relocation agencies, [Relofinder.ch](https://relofinder.ch) offers a comprehensive overview of service providers in both Zurich and Zug.
+Working with a relocation agency like [Prime Relocation](https://primerelocation.ch) can provide personalized insights into which location better suits your specific circumstances. For comparing relocation agencies, [Relofinder.ch](https://relofinder.ch) offers a comprehensive overview of service providers in both Zurich and Zug. For detailed cost comparisons between Swiss cities, see the [Swiss Cost of Living Guide](https://expat-services.ch/guide/swiss-cost-of-living-guide-2025) on Expat Services.
 
 ## Conclusion: Making Your Informed Choice
 

@@ -140,6 +140,7 @@ Welcome to Switzerland! We hope this guide helps you embark on your Swiss journe
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard comparison
 - [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Detailed admin and insurance timeline
 - [Ultimate Switzerland Relocation Guide](/blog/relocation-switzerland-ultimate-guide-smooth-move/) — Comprehensive planning resource
+- [Swiss Immigration Blueprint](https://expat-services.ch/guide/swiss-immigration-blueprint-2025) — Comprehensive immigration and visa guide
 
 ## Frequently Asked Questions — Switzerland Relocation & Insurance
 

@@ -328,6 +328,9 @@ Book your free, no-obligation consultation today to discover how our expat servi
 - Email: bw@expat-savvy.ch
 - WhatsApp: [Send us a message](https://wa.me/41791552570)
 
+**Additional Resources:**
+- [Expat Services Directory](https://expat-services.ch) - Comprehensive directory of expat service providers in Switzerland
+
 Join the hundreds of satisfied expats who have trusted our expat services to navigate the Swiss insurance landscape with confidence.
 
 *"The guidance I received through Expat Savvy's services transformed what would have been a stressful process into a straightforward one. Their expertise in expat insurance needs is invaluable." - Michael R., Canadian expat in Zug*
