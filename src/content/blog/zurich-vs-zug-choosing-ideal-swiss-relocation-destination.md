@@ -83,6 +83,8 @@ Housing represents the largest expense in both locations:
 - **New developments**: Both have active construction, with Zug seeing proportionally more growth
 - **Application competition**: Equally competitive markets requiring strong applications
 
+**Access Off-Market Properties:** In both Zurich and Zug, a significant portion of premium properties never reach public platforms. International professionals, expats, and HNWIs can access these exclusive listings through [Offlist.ch](https://offlist.ch) - register anonymously with just your email, specify your preferences, and receive direct contact from agencies and private owners who prefer discretion over public advertising. [Learn more about off-market property access](/blog/off-market-homes-switzerland-expats-hnwi/).
+
 For insights into managing relocation costs effectively, see our guide on [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/).
 
 ### Taxation Differences

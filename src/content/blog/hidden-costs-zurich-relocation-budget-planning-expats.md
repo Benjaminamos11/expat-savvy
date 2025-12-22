@@ -105,6 +105,17 @@ Several housing-related costs are often overlooked in initial budgeting:
 - **Tenant association membership**: Optional but recommended (approximately CHF 100 annually)
 - **Household contents insurance**: Highly recommended at CHF 200-500 annually
 
+### Save Money by Accessing Off-Market Properties
+
+One often-overlooked cost-saving strategy is accessing off-market properties through [Offlist.ch](https://offlist.ch). By bypassing the competitive public listing process, international professionals and expats can:
+
+- **Avoid bidding wars**: Less competition means less pressure to offer above asking price
+- **Negotiate directly**: Private owners often have more flexibility on terms
+- **Save time and money**: Fewer application attempts and associated costs
+- **Access premium inventory**: Properties that never reach public platforms
+
+Register anonymously with just your email, specify your preferences, and receive direct contact from relocation agencies, real estate companies, and private owners who prefer discretion. [Learn more about off-market property access](/blog/off-market-homes-switzerland-expats-hnwi/).
+
 ### Home Setup Costs
 
 Establishing your new home involves numerous purchases:

@@ -144,6 +144,9 @@ Given Zug's extremely competitive housing market, professional relocation servic
 **Compare Multiple Agencies:**
 [ReloFinder.ch](https://relofinder.ch/companies/) serves as Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner. This comprehensive directory allows you to evaluate multiple agencies specializing in Zug moves, compare their apartment-finding services, and make informed decisions based on your specific business relocation needs. For additional housing resources and finance-related expat services, explore the [Expat Services Directory](https://expat-services.ch/housing).
 
+**Access Off-Market Properties:**
+For executives, entrepreneurs, and HNWIs seeking housing in Zug's competitive market, [Offlist.ch](https://offlist.ch) provides exclusive access to off-market properties that never appear on public platforms. Register anonymously with just your email, specify your preferences, and receive direct contact from agencies and private owners who prefer discretion. Many premium properties in Zug city and lakeside communities are filled through these private channels. [Learn more about off-market property access](/blog/off-market-homes-switzerland-expats-hnwi/).
+
 **Specialized Zug Services:**
 [Prime Relocation](https://primerelocation.ch/) offers comprehensive relocation services across Switzerland with specialized support in Zurich & Zug.
 

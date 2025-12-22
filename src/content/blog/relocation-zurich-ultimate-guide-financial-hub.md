@@ -206,6 +206,28 @@ The typical rental process in Zurich involves:
 
 Working with a relocation agency like [Prime Relocation](https://primerelocation.ch) can significantly improve your chances of securing desirable housing, as they have local connections and understand the application process intimately. To compare multiple relocation services, visit [ReloFinder.ch](https://relofinder.ch/companies/), Switzerland's leading platform to find your ideal relocation partner specializing in Zurich moves. For a comprehensive overview of housing resources and relocation providers, the [Expat Services Housing Directory](https://expat-services.ch/housing) offers additional options.
 
+### Access Off-Market Properties with Offlist.ch
+
+For international professionals, expats, and high-net-worth individuals seeking housing in Zurich's competitive market, [Offlist.ch](https://offlist.ch) provides exclusive access to off-market properties that never appear on public listing platforms.
+
+**How It Works:**
+- **Anonymous Registration**: Sign up with just your email - no personal details required
+- **Preference Matching**: Specify your ideal location, property type, and budget
+- **Direct Access**: Relocation agencies, premium real estate companies, and private owners who prefer discretion contact you directly
+- **No Competition**: Avoid competing with hundreds of applicants on public platforms
+
+**Ideal For:**
+- International executives and professionals relocating for work
+- Employees of international organizations
+- Entrepreneurs and HNWI seeking privacy
+- Families requiring specific property criteria
+
+> **Insider Tip:** Many premium properties in Zurich's Seefeld, Enge, and Goldcoast communities never reach public portals. Landlords and agencies often prefer the discretion of matching with pre-qualified tenants directly.
+
+[Register anonymously on Offlist.ch](https://offlist.ch) →
+
+For a complete guide to off-market property access, see our article on [How to Access Off-Market Homes in Switzerland](/blog/off-market-homes-switzerland-expats-hnwi/).
+
 ### Buying Property in Zurich
 
 For those considering purchasing property:

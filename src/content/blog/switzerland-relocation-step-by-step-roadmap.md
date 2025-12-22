@@ -80,6 +80,8 @@ Switzerland's high cost of living requires careful financial planning:
   <p>Begin your housing search at least 2-3 months before your planned arrival. The Swiss market moves quickly, and securing accommodation from abroad can be challenging without sufficient lead time.</p>
 </div>
 
+For access to off-market properties that bypass the competitive public listings, consider [Offlist.ch](https://offlist.ch) - a platform where expats and international professionals register anonymously and receive direct contact from agencies and private owners seeking discretion. [Learn more about off-market property access](/blog/off-market-homes-switzerland-expats-hnwi/).
+
 ## Choosing Your Swiss Destination: Finding the Right Fit
 
 Switzerland offers diverse regions with distinct characteristics. Your choice of location will significantly impact your experience.

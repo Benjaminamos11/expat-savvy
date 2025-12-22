@@ -112,6 +112,9 @@ The Swiss relocation market offers a variety of providers, from large internatio
 *   **Compare Multiple Agencies: [ReloFinder](https://relofinder.ch/companies/)**
     When evaluating relocation options, [ReloFinder.ch](https://relofinder.ch/companies/) serves as Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner. This comprehensive directory allows you to review multiple agencies, compare services, and make informed decisions based on your specific needs and location preferences.
 
+*   **Access Off-Market Properties: [Offlist.ch](https://offlist.ch)**
+    For international professionals, expats, and HNWIs seeking housing in Switzerland's competitive markets, [Offlist.ch](https://offlist.ch) provides exclusive access to off-market properties that never appear on public platforms. Register anonymously with just your email, specify your preferences, and receive direct contact from agencies and private owners who prefer discretion. [Learn more about off-market property access](/blog/off-market-homes-switzerland-expats-hnwi/).
+
 ## 6. The Relocation Journey: What to Expect (A General Timeline/Process)
 
 While every relocation is unique, a typical journey managed by a professional agency often follows these general phases:
