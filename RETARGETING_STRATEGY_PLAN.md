@@ -17,7 +17,7 @@
 
 #### 2. **Meta Pixel (Facebook)**
 - **Status**: ✅ Partially implemented
-- **Pixel ID**: `664563256370416`
+- **Pixel ID**: `1559068011804417`
 - **Current Events**: Only `PageView`
 - **Issues**: 
   - Not integrated with forms/leads
@@ -263,7 +263,7 @@ window.trackFacebookEvent = function(eventName, params = {}) {
 // LinkedIn Insight Tag
 const linkedinPixelId = 'YOUR_PIXEL_ID';
 // Meta Pixel (already exists)
-const metaPixelId = '664563256370416';
+const metaPixelId = '1559068011804417';
 // Google Analytics 4
 const ga4Id = 'G-XXXXXXXXXX';
 ---
