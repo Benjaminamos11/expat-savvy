@@ -9,14 +9,15 @@
  * - Stub functions available immediately for tracking calls
  * - Full script loads only when needed
  */
-
-const META_PIXEL_ID = '1393006485701609';
 ---
 
 <!-- Meta Pixel - Loads only on consent -->
-<script is:inline define:vars={{ META_PIXEL_ID }}>
+<script is:inline>
 (function() {
   'use strict';
+  
+  // Hardcoded pixel ID to avoid variable interpolation issues
+  var PIXEL_ID = '1393006485701609';
   
   var pixelLoaded = false;
   var queuedEvents = [];
@@ -54,7 +55,7 @@ const META_PIXEL_ID = '1393006485701609';
     
     // Initialize with consent granted
     fbq('consent', 'grant');
-    fbq('init', META_PIXEL_ID);
+    fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
     
     // Process any queued events
@@ -63,7 +64,7 @@ const META_PIXEL_ID = '1393006485701609';
     }
     queuedEvents = [];
     
-    console.log('[MetaPixel] Script loaded and initialized');
+    console.log('[MetaPixel] Script loaded with ID:', PIXEL_ID);
   };
   
   // Listen for consent updates
