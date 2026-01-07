@@ -1,20 +1,13 @@
 ---
 // Remove individual font imports and use Google Fonts instead (loaded in global.css)
-// import '@fontsource/inter/400.css';
-// import '@fontsource/inter/500.css';
-// import '@fontsource/inter/600.css';
-// import '@fontsource/inter/700.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import VAG45Modal from '../components/VAG45Modal.astro';
 import PrivacyPolicyModal from '../components/PrivacyPolicyModal.astro';
 import TermsOfServiceModal from '../components/TermsOfServiceModal.astro';
-import SmartModal from '../components/SmartModal.astro';
-// import SmartModalAlpine from '../components/SmartModalAlpine.astro'; // MOVED TO BaseLayout
-// import ProfessionalSmartModal from '../components/ProfessionalSmartModal.astro'; // REPLACED BY MODAL OVERLAY SYSTEM
 import SocialMediaImage from '../components/SocialMediaImage.astro';
 
-// Analytics Components - Consent Mode v2 compliant
+// Analytics Components - Consent Mode v2 compliant (loaded at end of body for performance)
 import GoogleTag from '../components/analytics/GoogleTag.astro';
 import FacebookPixel from '../components/analytics/FacebookPixel.astro';
 import CookieBanner from '../components/analytics/CookieBanner.astro';
@@ -44,7 +37,6 @@ if (canonicalPath !== "/" && canonicalPath.endsWith("/")) {
 }
 
 // Manually handle known redirects for canonical URLs
-// This prevents pages from setting their canonical URL to a redirected path
 let finalPath = canonicalPath;
 const knownRedirects: {[key: string]: string} = {
   "/news/switching-health-insurance-in-switzerland": "/healthcare/switching-health-insurance",
@@ -53,28 +45,22 @@ const knownRedirects: {[key: string]: string} = {
   "/contact": "/free-consultation"
 };
 
-// Check if current path is a redirected URL and use its destination instead
 if (knownRedirects[canonicalPath]) {
   finalPath = knownRedirects[canonicalPath];
 }
 
-// IMPORTANT: Always add trailing slash to canonical paths (except homepage)
-// This ensures consistent canonical URLs and matches Astro's default behavior
+// Always add trailing slash to canonical paths (except homepage)
 if (finalPath !== "/" && !finalPath.endsWith("/")) {
   finalPath = finalPath + "/";
 }
 
-// Construct the full canonical URL, using prop value if provided
 const canonicalURL = canonicalURLProp || new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
-
-// Ensure canonical URL always ends with trailing slash for consistency
 const finalCanonicalURL = canonicalURL.endsWith('/') ? canonicalURL : canonicalURL + '/';
 
 // Define CDN URLs
 const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";
 const logoLight = `${cdnBaseUrl}image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg`;
 const logoDark = `${cdnBaseUrl}image/upload/v1740080077/logoexpatsavvy_sykutm.svg`;
-// Define favicon URL with automatic WebP optimization
 const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
 ---
 <!doctype html>
@@ -83,36 +69,18 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
-    <!-- Preconnect to critical domains -->
+    <!-- Preconnect to critical domains only -->
     <link rel="preconnect" href={cdnBaseUrl} crossorigin />
-    <link rel="preconnect" href="https://app.cal.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
-    <!-- Preconnect for analytics (improves loading performance) -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-    <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
     
-    <!-- 
-      ANALYTICS: Google Tag with Consent Mode v2
-      CRITICAL: This must load BEFORE any other tracking scripts.
-      Sets consent defaults to 'denied' then loads gtag.js
-      IDs: GA4 (G-8M24FL4XQQ), Google Ads (AW-11375797246)
-    -->
-    <GoogleTag />
-    
-    <!-- 
-      ANALYTICS: Facebook/Meta Pixel
-      Shared Pixel ID for cross-domain audience building: 1393006485701609
-      Respects consent state from CookieBanner
-    -->
-    <FacebookPixel />
+    <!-- DNS prefetch for analytics (lighter than preconnect, non-blocking) -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
     
     <!-- Preload critical assets -->
     <link rel="preload" as="image" href={logoDark} fetchpriority="high" />
-    <link rel="preload" as="image" href={logoLight} fetchpriority="high" />
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" type="font/woff2" crossorigin />
     
     <!-- Canonical and metadata -->
     <link rel="canonical" href={finalCanonicalURL} />
@@ -129,7 +97,7 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Social Media Image handling with WebP to JPG conversion -->
+    <!-- Social Media Image -->
     <SocialMediaImage 
       image={image}
       alt={description}
@@ -137,14 +105,14 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       height={630}
     />
     
-    <!-- Open Graph / Facebook Basic Tags -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={finalCanonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Expat Savvy" />
     
-    <!-- Twitter Basic Tags -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={finalCanonicalURL} />
     <meta name="twitter:title" content={title} />
@@ -155,26 +123,11 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <meta name="msvalidate.01" content="425777CCEABBA1795F709019A3876A41" />
-    <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
-    <meta name="cookie-control" content="strict" />
-    <meta name="cookie-control-third-party" content="block-unless-accepted" />
     
-    <!-- Smart Modal styles -->
-    <!-- <link rel="stylesheet" href="/styles/smart-modal.css" /> -->
-    
-    <!-- Plausible Analytics (Cookieless) -->
+    <!-- Plausible Analytics (Cookieless, deferred) -->
     <script defer data-domain="expat-savvy.ch" src="https://plausible.io/js/script.js"></script>
-    
-    <!-- Plausible Custom Event Tracking -->
     <script defer src="/scripts/plausible-tracking.js"></script>
     <script defer src="/scripts/enhanced-plausible-tracking.js"></script>
-    
-    <!-- Defer non-critical scripts -->
-    <!-- DISABLED conflicting scripts to prevent modal interference -->
-    <!-- <script is:inline defer src="/scripts/modal-init.js"></script> -->
-    <!-- <script is:inline defer src="/scripts/button-fixer.js"></script> -->
-    <!-- <script is:inline defer src="/scripts/direct-modal-fix.js"></script> -->
-    <!-- <script is:inline defer src="/scripts/modal-debug.js"></script> -->
     
     <slot name="head" />
   </head>
@@ -184,40 +137,11 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <slot />
     </main>
     <Footer />
+    
+    <!-- Modals -->
     <VAG45Modal />
     <PrivacyPolicyModal />
     <TermsOfServiceModal />
-    <!-- <SmartModal /> -->
-    <!-- New Alpine.js Smart Modal - MOVED TO BaseLayout TO AVOID DUPLICATION -->
-    <!-- <SmartModalAlpine /> -->
-    <!-- Professional Smart Modal with complete 4-step flow -->
-    <!-- <ProfessionalSmartModal /> --> <!-- REPLACED BY MODAL OVERLAY SYSTEM -->
-    
-    <!-- Hidden Netlify Forms for detection -->
-    <form name="health-insurance" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="text" name="phone" />
-      <input type="text" name="message" />
-      <input type="text" name="bot-field" />
-    </form>
-    
-    <!-- Cal element-click embed code begins -->
-    <script type="text/javascript" defer>
-      // Cal.com initialization
-      window.Cal = window.Cal || {};
-      // Modal functions are defined by modal-overlay-system.js
-    </script>
-    <!-- Cal element-click embed code ends -->
-    
-    <!-- Modal Overlay System -->
-    <script is:inline src="/scripts/modal-overlay-system.js"></script>
-    
-    <!-- <SmartModal /> -->
-    <!-- New Alpine.js Smart Modal - MOVED TO BaseLayout TO AVOID DUPLICATION -->
-    <!-- <SmartModalAlpine /> -->
-    <!-- Professional Smart Modal with complete 4-step flow -->
-    <!-- <ProfessionalSmartModal /> --> <!-- REPLACED BY MODAL OVERLAY SYSTEM -->
     
     <!-- Hidden Netlify Forms for detection -->
     <form name="health-insurance" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
@@ -231,6 +155,7 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <input type="text" name="city" />
       <input type="text" name="canton" />
       <textarea name="special-requirements"></textarea>
+      <input type="text" name="bot-field" />
     </form>
 
     <form name="life-pension" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
@@ -262,131 +187,18 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <textarea name="special-requirements"></textarea>
     </form>
     
-    <!-- Cal element-click embed code begins -->
-    <script type="text/javascript" defer>
-      // Cal.com initialization
-      window.Cal = window.Cal || {};
-      // Modal functions are defined by modal-overlay-system.js
-    </script>
-    <!-- Cal element-click embed code ends -->
-    
-    <!-- Modal Overlay System -->
+    <!-- Modal Overlay System (single instance) -->
     <script is:inline src="/scripts/modal-overlay-system.js"></script>
     
-    <!-- Test modal functions immediately after loading -->
-    <script is:inline>
-      setTimeout(() => {
-        console.log('🧪 Testing modal functions after 100ms:');
-        console.log('openOffersModal:', typeof window.openOffersModal);
-        console.log('openHealthModal:', typeof window.openHealthModal);
-        console.log('openConsultationModal:', typeof window.openConsultationModal);
-      }, 100);
-    </script>
-    
-    <!-- Modal System Verification -->
-    <script is:inline>
-      window.addEventListener('DOMContentLoaded', () => {
-        const requiredFunctions = [
-          'openHealthModal',
-          'openLifePensionModal', 
-          'openOtherModal',
-          'openRelocationModal'
-        ];
-        
-        const missing = requiredFunctions.filter(fn => typeof window[fn] !== 'function');
-        
-        if (missing.length > 0) {
-          console.error('⚠️ Missing modal functions:', missing);
-          console.error('Please hard refresh (Cmd+Shift+R or Ctrl+Shift+R)');
-        } else {
-          console.log('✅ All modal functions loaded successfully');
-        }
-      });
-    </script>
-    
-    <!-- Component Helper - DISABLED to prevent conflicts -->
-    <!-- <script is:inline defer src="/scripts/component-helper.js"></script> -->
-    
-    <!-- Global consultation modal enhancer -- DISABLED to prevent conflicts -->
-    <!-- <script is:inline defer>
-      // Modal enhancer - ensures all consultation buttons work
-      (function() {
-        document.addEventListener('DOMContentLoaded', function() {
-          console.log("🔧 Setting up consultation modal enhancer");
-          
-          // Fix all possible consultation buttons  
-          const consultationButtons = document.querySelectorAll(
-            '[data-open-consultation], .consultation-button, .btn-consultation, ' +
-            'button, a.btn, a.button, .cta-button, .hero-cta, .safe-consultation-btn'
-          );
-          
-          consultationButtons.forEach(function(button) {
-            // Skip if already processed
-            if (button.hasAttribute('data-enhanced')) return;
-            
-            // Check button text
-            const buttonText = button.textContent?.toLowerCase().trim() || '';
-            const isConsultationButton = buttonText.includes('consultation') || 
-                                         buttonText.includes('contact us') ||
-                                         buttonText.includes('get advice') ||
-                                         buttonText.includes('book a call') ||
-                                         buttonText.includes('free advice') ||
-                                         buttonText.includes('get started') ||
-                                         button.classList.contains('consultation-button') ||
-                                         button.hasAttribute('data-open-consultation');
-                                         
-            // Skip if not a consultation-related button                             
-            if (!isConsultationButton) return;
-            
-            // Mark as processed
-            button.setAttribute('data-enhanced', 'true');
-            
-            // Add click handler with highest priority (using capture)
-            button.addEventListener('click', function(e) {
-              // Prevent default action for links
-              if (button.tagName === 'A') {
-                e.preventDefault();
-              }
-              
-              // Stop propagation to prevent other handlers
-              e.stopPropagation();
-              
-              console.log('🚀 Opening new OffersModal for button:', button.textContent?.trim());
-              
-              // Use global function to open modal
-              if (typeof window.openOffersModal === 'function') {
-                window.openOffersModal();
-              } else {
-                // Fallback: direct modal opening
-                const modal = document.getElementById('offers-modal');
-                if (modal) {
-                  modal.classList.remove('hidden');
-                  document.body.classList.add('modal-open');
-                  console.log('✅ OffersModal opened directly');
-                } else {
-                  console.error('❌ OffersModal not found in DOM');
-                }
-              }
-              
-              return false;
-            }, true); // true = use capture phase for highest priority
-          });
-        });
-      })();
-    </script> -->
-
-    <!-- SmartModal JavaScript Manager -->
-    <!-- <script src="/scripts/smart-modal-manager.js" defer></script> -->
-    
-    <!-- <script>
-      // Legacy compatibility for existing CTAs - COMMENTED OUT FOR DEBUGGING
-    </script> -->
-    
     <!-- 
-      GDPR/Swiss DSG Cookie Consent Banner
-      Handles user consent and updates Google/Meta consent states
-      Shows on first visit, remembers preference in localStorage
+      ANALYTICS: Loaded at end of body for better performance
+      Google Tag sets consent defaults, then loads gtag.js
+      Facebook Pixel respects consent state
     -->
+    <GoogleTag />
+    <FacebookPixel />
+    
+    <!-- Cookie Consent Banner -->
     <CookieBanner />
   </body>
 </html>

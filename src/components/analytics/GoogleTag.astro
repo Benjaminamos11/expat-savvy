@@ -2,27 +2,27 @@
 /**
  * Google Tag Component with Consent Mode v2
  * 
- * This component handles Google Ads (AW-11375797246) and GA4 (G-8M24FL4XQQ)
- * with full GDPR/Swiss DSG compliance via Consent Mode v2.
+ * PERFORMANCE OPTIMIZED:
+ * - Consent defaults set synchronously (required for compliance)
+ * - gtag.js loaded with async (non-blocking)
+ * - Placed at end of body for better LCP
  * 
- * Key features:
- * - Sets consent defaults BEFORE any Google scripts load
- * - Supports cross-domain audience building with shared IDs
- * - Integrates with CookieBanner for consent updates
+ * IDs:
+ * - GA4: G-8M24FL4XQQ
+ * - Google Ads: AW-11375797246
  */
 
 const GA4_ID = 'G-8M24FL4XQQ';
 const GOOGLE_ADS_ID = 'AW-11375797246';
 ---
 
-<!-- Google Consent Mode v2: Set defaults FIRST (before gtag.js loads) -->
+<!-- Google Consent Mode v2: Set defaults (must be sync for compliance) -->
 <script is:inline define:vars={{ GA4_ID, GOOGLE_ADS_ID }}>
-  // Initialize dataLayer before anything else
+  // Initialize dataLayer
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   
-  // CRITICAL: Set consent defaults BEFORE loading gtag.js
-  // This ensures no data is collected before user consent
+  // Set consent defaults BEFORE loading gtag.js
   gtag('consent', 'default', {
     'ad_storage': 'denied',
     'ad_user_data': 'denied',
@@ -31,10 +31,10 @@ const GOOGLE_ADS_ID = 'AW-11375797246';
     'functionality_storage': 'granted',
     'personalization_storage': 'denied',
     'security_storage': 'granted',
-    'wait_for_update': 500 // Wait up to 500ms for consent update
+    'wait_for_update': 500
   });
   
-  // Set region-specific defaults for EEA/UK (stricter)
+  // Region-specific defaults for stricter regions
   gtag('consent', 'default', {
     'ad_storage': 'denied',
     'ad_user_data': 'denied', 
@@ -43,29 +43,26 @@ const GOOGLE_ADS_ID = 'AW-11375797246';
     'region': ['CH', 'AT', 'DE', 'FR', 'IT', 'GB', 'ES', 'NL', 'BE', 'PL', 'SE', 'DK', 'FI', 'NO', 'IE', 'PT', 'CZ', 'RO', 'HU', 'GR']
   });
 
-  // Initialize gtag with timestamp
   gtag('js', new Date());
   
-  // Configure GA4 with privacy-safe defaults
+  // Configure GA4
   gtag('config', GA4_ID, {
     'anonymize_ip': true,
     'allow_google_signals': false,
     'allow_ad_personalization_signals': false,
-    'restricted_data_processing': true,
     'send_page_view': true
   });
   
   // Configure Google Ads
   gtag('config', GOOGLE_ADS_ID, {
-    'anonymize_ip': true,
-    'restricted_data_processing': true
+    'anonymize_ip': true
   });
   
-  // Check for existing consent and apply immediately
+  // Restore consent from localStorage immediately
   (function() {
     try {
-      const savedConsent = localStorage.getItem('cookie_consent');
-      if (savedConsent === 'accepted') {
+      var consent = localStorage.getItem('cookie_consent');
+      if (consent === 'accepted') {
         gtag('consent', 'update', {
           'ad_storage': 'granted',
           'ad_user_data': 'granted',
@@ -73,33 +70,23 @@ const GOOGLE_ADS_ID = 'AW-11375797246';
           'analytics_storage': 'granted',
           'personalization_storage': 'granted'
         });
-        console.log('[GoogleTag] Consent restored from localStorage');
       }
-    } catch (e) {
-      // localStorage may be blocked
-      console.warn('[GoogleTag] Could not read consent from localStorage');
-    }
+    } catch (e) {}
   })();
   
-  // Global function to update consent (called by CookieBanner)
+  // Global function to update consent
   window.updateGoogleConsent = function(granted) {
-    const consentState = granted ? 'granted' : 'denied';
+    var state = granted ? 'granted' : 'denied';
     gtag('consent', 'update', {
-      'ad_storage': consentState,
-      'ad_user_data': consentState,
-      'ad_personalization': consentState,
-      'analytics_storage': consentState,
-      'personalization_storage': consentState
+      'ad_storage': state,
+      'ad_user_data': state,
+      'ad_personalization': state,
+      'analytics_storage': state,
+      'personalization_storage': state
     });
-    console.log('[GoogleTag] Consent updated:', consentState);
-    
-    // Fire a custom event for other scripts to listen to
-    window.dispatchEvent(new CustomEvent('consentUpdate', { 
-      detail: { granted } 
-    }));
+    window.dispatchEvent(new CustomEvent('consentUpdate', { detail: { granted: granted } }));
   };
 </script>
 
-<!-- Load gtag.js AFTER consent defaults are set -->
+<!-- Load gtag.js async (non-blocking) -->
 <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
-

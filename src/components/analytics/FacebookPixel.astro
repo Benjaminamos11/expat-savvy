@@ -1,94 +1,100 @@
 ---
 /**
- * Facebook/Meta Pixel Component
+ * Facebook/Meta Pixel Component - PERFORMANCE OPTIMIZED
  * 
- * Shared Pixel ID: 1393006485701609
- * Used for cross-domain retargeting audience building.
+ * Pixel ID: 1393006485701609
  * 
- * Features:
- * - Listens for consent updates from CookieBanner
- * - Revokes consent via fbq('consent', 'revoke') when denied
- * - Supports Advanced Matching when consent is granted
+ * OPTIMIZATION: Loads lazily after page is interactive
+ * - Defers loading until after DOMContentLoaded
+ * - Only fully initializes if consent is granted
+ * - Reduces initial page load blocking
  */
 
 const META_PIXEL_ID = '1393006485701609';
 ---
 
-<!-- Meta Pixel Code with Consent Integration -->
+<!-- Meta Pixel - Lazy loaded for performance -->
 <script is:inline define:vars={{ META_PIXEL_ID }}>
-  // Initialize Meta Pixel with consent awareness
-  !function(f,b,e,v,n,t,s) {
-    if(f.fbq) return;
-    n = f.fbq = function() {
-      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-    };
-    if(!f._fbq) f._fbq = n;
-    n.push = n;
-    n.loaded = !0;
-    n.version = '2.0';
-    n.queue = [];
-    t = b.createElement(e);
-    t.async = !0;
-    t.src = v;
-    s = b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t, s);
-  }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+(function() {
+  'use strict';
+  
+  var pixelLoaded = false;
+  
+  function loadPixel() {
+    if (pixelLoaded) return;
+    pixelLoaded = true;
+    
+    // Initialize Meta Pixel
+    !function(f,b,e,v,n,t,s) {
+      if(f.fbq) return;
+      n = f.fbq = function() {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if(!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-  // Check consent status before initialization
-  (function() {
-    const hasConsent = (function() {
-      try {
-        return localStorage.getItem('cookie_consent') === 'accepted';
-      } catch (e) {
-        return false;
-      }
-    })();
+    // Check consent and initialize
+    var hasConsent = false;
+    try {
+      hasConsent = localStorage.getItem('cookie_consent') === 'accepted';
+    } catch (e) {}
 
     if (hasConsent) {
-      // Full tracking with consent
       fbq('consent', 'grant');
-      fbq('init', META_PIXEL_ID);
-      fbq('track', 'PageView');
-      console.log('[MetaPixel] Initialized with full tracking (consent granted)');
     } else {
-      // Initialize with revoked consent - basic analytics only
       fbq('consent', 'revoke');
-      fbq('init', META_PIXEL_ID);
-      // PageView still fires but with limited data collection
-      fbq('track', 'PageView');
-      console.log('[MetaPixel] Initialized with limited tracking (consent pending/denied)');
     }
-  })();
-
-  // Listen for consent updates from CookieBanner
+    
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+  
+  // Listen for consent updates
   window.addEventListener('consentUpdate', function(e) {
+    // Load pixel if not loaded yet
+    if (!pixelLoaded) loadPixel();
+    
     if (e.detail && e.detail.granted) {
-      fbq('consent', 'grant');
-      console.log('[MetaPixel] Consent granted - full tracking enabled');
+      if (typeof fbq === 'function') fbq('consent', 'grant');
     } else {
-      fbq('consent', 'revoke');
-      console.log('[MetaPixel] Consent revoked - limited tracking only');
+      if (typeof fbq === 'function') fbq('consent', 'revoke');
     }
   });
 
-  // Global function for custom event tracking
+  // Helper functions
   window.trackMetaEvent = function(eventName, params) {
-    if (typeof fbq === 'function') {
-      fbq('track', eventName, params || {});
-      console.log('[MetaPixel] Event tracked:', eventName, params);
-    }
+    if (!pixelLoaded) loadPixel();
+    if (typeof fbq === 'function') fbq('track', eventName, params || {});
   };
 
-  // Global function for custom conversions
   window.trackMetaCustomEvent = function(eventName, params) {
-    if (typeof fbq === 'function') {
-      fbq('trackCustom', eventName, params || {});
-      console.log('[MetaPixel] Custom event tracked:', eventName, params);
-    }
+    if (!pixelLoaded) loadPixel();
+    if (typeof fbq === 'function') fbq('trackCustom', eventName, params || {});
   };
+
+  // Load after page is interactive (better for performance)
+  if (document.readyState === 'complete') {
+    // Page already loaded, wait a tick then load
+    setTimeout(loadPixel, 100);
+  } else {
+    // Wait for page to be interactive
+    window.addEventListener('load', function() {
+      setTimeout(loadPixel, 100);
+    });
+  }
+})();
 </script>
 
-<!-- Fallback for users with JavaScript disabled -->
+<!-- Noscript fallback -->
 <noscript>
   <img 
     height="1" 
@@ -98,4 +104,3 @@ const META_PIXEL_ID = '1393006485701609';
     alt=""
   />
 </noscript>
-
