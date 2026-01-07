@@ -1,32 +1,42 @@
 ---
 /**
- * Facebook/Meta Pixel Component - PERFORMANCE OPTIMIZED
+ * Facebook/Meta Pixel Component - CONSENT-FIRST LOADING
  * 
  * Pixel ID: 1393006485701609
  * 
- * OPTIMIZATION: Loads lazily after page is interactive
- * - Defers loading until after DOMContentLoaded
- * - Only fully initializes if consent is granted
- * - Reduces initial page load blocking
+ * OPTIMIZATION: Only loads fbevents.js AFTER user accepts cookies
+ * - Zero impact on PageSpeed until consent given
+ * - Stub functions available immediately for tracking calls
+ * - Full script loads only when needed
  */
 
 const META_PIXEL_ID = '1393006485701609';
 ---
 
-<!-- Meta Pixel - Lazy loaded for performance -->
+<!-- Meta Pixel - Loads only on consent -->
 <script is:inline define:vars={{ META_PIXEL_ID }}>
 (function() {
   'use strict';
   
   var pixelLoaded = false;
+  var queuedEvents = [];
   
-  function loadPixel() {
+  // Stub fbq function to queue events before pixel loads
+  window.fbq = window.fbq || function() {
+    if (pixelLoaded && window._fbq) {
+      window._fbq.apply(null, arguments);
+    } else {
+      queuedEvents.push(arguments);
+    }
+  };
+  
+  // Function to load the actual pixel script
+  window.loadMetaPixel = function() {
     if (pixelLoaded) return;
     pixelLoaded = true;
     
-    // Initialize Meta Pixel
+    // Load the Facebook Pixel script
     !function(f,b,e,v,n,t,s) {
-      if(f.fbq) return;
       n = f.fbq = function() {
         n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
       };
@@ -41,66 +51,52 @@ const META_PIXEL_ID = '1393006485701609';
       s = b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-    // Check consent and initialize
-    var hasConsent = false;
-    try {
-      hasConsent = localStorage.getItem('cookie_consent') === 'accepted';
-    } catch (e) {}
-
-    if (hasConsent) {
-      fbq('consent', 'grant');
-    } else {
-      fbq('consent', 'revoke');
-    }
     
+    // Initialize with consent granted
+    fbq('consent', 'grant');
     fbq('init', META_PIXEL_ID);
     fbq('track', 'PageView');
-  }
+    
+    // Process any queued events
+    for (var i = 0; i < queuedEvents.length; i++) {
+      fbq.apply(null, queuedEvents[i]);
+    }
+    queuedEvents = [];
+    
+    console.log('[MetaPixel] Script loaded and initialized');
+  };
   
   // Listen for consent updates
   window.addEventListener('consentUpdate', function(e) {
-    // Load pixel if not loaded yet
-    if (!pixelLoaded) loadPixel();
-    
     if (e.detail && e.detail.granted) {
-      if (typeof fbq === 'function') fbq('consent', 'grant');
-    } else {
-      if (typeof fbq === 'function') fbq('consent', 'revoke');
+      window.loadMetaPixel();
     }
   });
 
-  // Helper functions
+  // Helper functions (queue events if pixel not loaded)
   window.trackMetaEvent = function(eventName, params) {
-    if (!pixelLoaded) loadPixel();
-    if (typeof fbq === 'function') fbq('track', eventName, params || {});
+    if (pixelLoaded) {
+      fbq('track', eventName, params || {});
+    } else {
+      queuedEvents.push(['track', eventName, params || {}]);
+    }
   };
 
   window.trackMetaCustomEvent = function(eventName, params) {
-    if (!pixelLoaded) loadPixel();
-    if (typeof fbq === 'function') fbq('trackCustom', eventName, params || {});
+    if (pixelLoaded) {
+      fbq('trackCustom', eventName, params || {});
+    } else {
+      queuedEvents.push(['trackCustom', eventName, params || {}]);
+    }
   };
-
-  // Load after page is interactive (better for performance)
-  if (document.readyState === 'complete') {
-    // Page already loaded, wait a tick then load
-    setTimeout(loadPixel, 100);
-  } else {
-    // Wait for page to be interactive
-    window.addEventListener('load', function() {
-      setTimeout(loadPixel, 100);
-    });
-  }
+  
+  // Check for existing consent on page load
+  try {
+    var consent = localStorage.getItem('cookie_consent');
+    if (consent === 'accepted') {
+      // User previously accepted - load the pixel
+      window.loadMetaPixel();
+    }
+  } catch (e) {}
 })();
 </script>
-
-<!-- Noscript fallback -->
-<noscript>
-  <img 
-    height="1" 
-    width="1" 
-    style="display:none" 
-    src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-    alt=""
-  />
-</noscript>
