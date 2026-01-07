@@ -1,0 +1,486 @@
+---
+/**
+ * Cookie Consent Banner Component
+ * 
+ * A polished, on-brand GDPR/Swiss DSG compliant cookie banner.
+ * Matches Expat-Savvy design system with brand red (#cf202d).
+ * 
+ * Psychological design: "Accept All" is prominent and inviting,
+ * "Essentials Only" is subdued but accessible.
+ */
+---
+
+<!-- Subtle Blocking Overlay -->
+<div 
+  id="cookie-overlay"
+  class="cookie-overlay"
+  aria-hidden="true"
+></div>
+
+<!-- Cookie Consent Banner -->
+<div 
+  id="cookie-banner" 
+  class="cookie-banner"
+  role="dialog"
+  aria-labelledby="cookie-banner-title"
+  aria-describedby="cookie-banner-description"
+  aria-modal="true"
+  aria-hidden="true"
+>
+  <div class="cookie-card">
+    <!-- Header -->
+    <div class="cookie-header">
+      <div class="cookie-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.598 11.064a1.006 1.006 0 0 0-.854-.172A2.938 2.938 0 0 1 20 11c-1.654 0-3-1.346-3-3 0-.217.031-.444.082-.661a1 1 0 0 0-.335-1.029 1.009 1.009 0 0 0-1.072-.096A2.926 2.926 0 0 1 14.5 6.5c-1.654 0-3-1.346-3-3 0-.544.146-1.073.423-1.532a1 1 0 0 0-.182-1.176A.99.99 0 0 0 11 .5c-5.514 0-10 4.486-10 10s4.486 10 10 10 10-4.486 10-10c0-.316-.015-.631-.044-.944a1.007 1.007 0 0 0-.358-.692zM8.5 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-3 8a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5.5-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+        </svg>
+      </div>
+      <h3 id="cookie-banner-title" class="cookie-title">
+        We use cookies to improve your experience
+      </h3>
+    </div>
+    
+    <!-- Description -->
+    <p id="cookie-banner-description" class="cookie-description">
+      We use cookies and similar technologies to analyze traffic, personalize content, and serve targeted ads. 
+      By clicking "Accept All", you consent to our use of cookies. You can manage your preferences at any time.
+    </p>
+    
+    <!-- Action Buttons -->
+    <div class="cookie-actions">
+      <button 
+        id="cookie-reject" 
+        class="cookie-btn cookie-btn-secondary"
+        type="button"
+      >
+        Essentials Only
+      </button>
+      <button 
+        id="cookie-accept" 
+        class="cookie-btn cookie-btn-primary"
+        type="button"
+      >
+        Accept All
+      </button>
+    </div>
+    
+    <!-- Footer Links -->
+    <div class="cookie-footer">
+      <a href="/privacy-policy" class="cookie-link">Privacy Policy</a>
+      <span class="cookie-dot">·</span>
+      <a href="/terms-of-service" class="cookie-link">Terms of Service</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Subtle Blocking Overlay - less aggressive blur */
+  .cookie-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    
+    /* Softer blur and lighter darken */
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  
+  .cookie-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Cookie Banner Container */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1rem;
+    
+    /* Initial hidden state */
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Smooth spring-like animation */
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+  }
+  
+  .cookie-banner.visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* The Card */
+  .cookie-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border-top: 4px solid #cf202d;
+    box-shadow: 
+      0 -4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 -10px 15px -3px rgba(0, 0, 0, 0.08),
+      0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 1.75rem 2rem 1.5rem;
+  }
+  
+  /* Header */
+  .cookie-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin-bottom: 0.875rem;
+  }
+  
+  .cookie-icon {
+    width: 44px;
+    height: 44px;
+    background: #cf202d;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+  
+  .cookie-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .cookie-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    letter-spacing: -0.02em;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.3;
+  }
+  
+  /* Description */
+  .cookie-description {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #4b5563;
+    margin: 0 0 1.5rem 0;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  /* Action Buttons */
+  .cookie-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .cookie-btn {
+    padding: 0.8125rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* Secondary button - subdued but clear */
+  .cookie-btn-secondary {
+    background: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .cookie-btn-secondary:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+  
+  /* Primary button - prominent and inviting */
+  .cookie-btn-primary {
+    background: #cf202d;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(207, 32, 45, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cookie-btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .cookie-btn-primary:hover {
+    background: #b01824;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(207, 32, 45, 0.4);
+  }
+  
+  .cookie-btn:focus-visible {
+    outline: 3px solid rgba(207, 32, 45, 0.4);
+    outline-offset: 2px;
+  }
+  
+  /* Footer */
+  .cookie-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f4f6;
+  }
+  
+  .cookie-link {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  .cookie-link:hover {
+    color: #cf202d;
+  }
+  
+  .cookie-dot {
+    color: #d1d5db;
+    font-size: 0.875rem;
+  }
+  
+  /* Mobile responsive */
+  @media (max-width: 600px) {
+    .cookie-banner {
+      padding: 0.75rem;
+    }
+    
+    .cookie-card {
+      padding: 1.5rem 1.25rem 1.25rem;
+      border-radius: 14px;
+    }
+    
+    .cookie-header {
+      gap: 0.75rem;
+    }
+    
+    .cookie-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+    
+    .cookie-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+    
+    .cookie-title {
+      font-size: 1rem;
+    }
+    
+    .cookie-description {
+      font-size: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .cookie-actions {
+      flex-direction: column-reverse;
+    }
+    
+    .cookie-btn {
+      width: 100%;
+      padding: 0.875rem 1.25rem;
+    }
+  }
+  
+  /* Large screens */
+  @media (min-width: 1024px) {
+    .cookie-banner {
+      padding: 1.5rem;
+    }
+    
+    .cookie-card {
+      padding: 2rem 2.5rem 1.75rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    'use strict';
+    
+    const CONSENT_KEY = 'cookie_consent';
+    const banner = document.getElementById('cookie-banner');
+    const overlay = document.getElementById('cookie-overlay');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const rejectBtn = document.getElementById('cookie-reject');
+    
+    if (!banner || !overlay || !acceptBtn || !rejectBtn) {
+      console.error('[CookieBanner] Required elements not found');
+      return;
+    }
+    
+    // Prevent scrolling when banner is visible
+    function lockScroll() {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = getScrollbarWidth() + 'px';
+    }
+    
+    function unlockScroll() {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+    
+    function getScrollbarWidth() {
+      return window.innerWidth - document.documentElement.clientWidth;
+    }
+    
+    // Check for existing consent
+    function checkConsent() {
+      try {
+        const savedConsent = localStorage.getItem(CONSENT_KEY);
+        
+        if (savedConsent === 'accepted' || savedConsent === 'essentials') {
+          // User previously made a choice - update consent silently
+          updateConsent(savedConsent === 'accepted', false);
+          hideBanner();
+          console.log('[CookieBanner] Returning user:', savedConsent);
+        } else {
+          // New user - show banner after a brief delay
+          setTimeout(showBanner, 600);
+          console.log('[CookieBanner] New user - showing banner');
+        }
+      } catch (e) {
+        // localStorage blocked - show banner
+        setTimeout(showBanner, 600);
+        console.warn('[CookieBanner] localStorage unavailable');
+      }
+    }
+    
+    function showBanner() {
+      overlay.classList.add('visible');
+      banner.classList.add('visible');
+      banner.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden', 'false');
+      lockScroll();
+      // Focus the accept button for accessibility (and psychological nudge)
+      setTimeout(() => acceptBtn.focus(), 450);
+    }
+    
+    function hideBanner() {
+      overlay.classList.remove('visible');
+      banner.classList.remove('visible');
+      banner.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('aria-hidden', 'true');
+      unlockScroll();
+    }
+    
+    function savePreference(choice) {
+      try {
+        localStorage.setItem(CONSENT_KEY, choice);
+      } catch (e) {
+        console.warn('[CookieBanner] Could not save preference');
+      }
+    }
+    
+    function updateConsent(fullConsent, showLog) {
+      // Update Google Consent Mode
+      if (typeof window.updateGoogleConsent === 'function') {
+        window.updateGoogleConsent(fullConsent);
+      }
+      
+      // Dispatch event for Meta Pixel and other scripts
+      window.dispatchEvent(new CustomEvent('consentUpdate', { 
+        detail: { granted: fullConsent } 
+      }));
+      
+      if (showLog !== false) {
+        console.log('[CookieBanner] Consent:', fullConsent ? 'full' : 'essentials only');
+      }
+    }
+    
+    // Accept All - full consent
+    acceptBtn.addEventListener('click', function() {
+      savePreference('accepted');
+      updateConsent(true);
+      hideBanner();
+      
+      // Track in Plausible (cookieless)
+      if (typeof plausible === 'function') {
+        plausible('Cookie Consent', { props: { choice: 'accept_all' } });
+      }
+    });
+    
+    // Essentials Only - deny marketing cookies
+    rejectBtn.addEventListener('click', function() {
+      savePreference('essentials');
+      updateConsent(false);
+      hideBanner();
+      
+      // Track in Plausible (cookieless)
+      if (typeof plausible === 'function') {
+        plausible('Cookie Consent', { props: { choice: 'essentials_only' } });
+      }
+    });
+    
+    // Clicking overlay subtly highlights the banner
+    overlay.addEventListener('click', function(e) {
+      e.stopPropagation();
+      banner.style.animation = 'gentle-pulse 0.4s ease';
+      setTimeout(() => { banner.style.animation = ''; }, 400);
+    });
+    
+    // Check for test mode (reset consent via URL param)
+    if (window.location.search.includes('reset_consent=1')) {
+      try { localStorage.removeItem(CONSENT_KEY); } catch(e) {}
+      // Clean the URL
+      const url = new URL(window.location.href);
+      url.searchParams.delete('reset_consent');
+      window.history.replaceState({}, '', url.toString());
+    }
+    
+    // Initialize
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', checkConsent);
+    } else {
+      checkConsent();
+    }
+    
+    // Global functions
+    window.showCookieBanner = showBanner;
+    window.hideCookieBanner = hideBanner;
+    window.resetCookieConsent = function() {
+      try {
+        localStorage.removeItem(CONSENT_KEY);
+        showBanner();
+      } catch (e) {}
+    };
+  })();
+</script>
+
+<style is:global>
+  @keyframes gentle-pulse {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.005); }
+  }
+</style>

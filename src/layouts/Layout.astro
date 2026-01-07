@@ -14,6 +14,11 @@ import SmartModal from '../components/SmartModal.astro';
 // import ProfessionalSmartModal from '../components/ProfessionalSmartModal.astro'; // REPLACED BY MODAL OVERLAY SYSTEM
 import SocialMediaImage from '../components/SocialMediaImage.astro';
 
+// Analytics Components - Consent Mode v2 compliant
+import GoogleTag from '../components/analytics/GoogleTag.astro';
+import FacebookPixel from '../components/analytics/FacebookPixel.astro';
+import CookieBanner from '../components/analytics/CookieBanner.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -84,6 +89,25 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
+    <!-- Preconnect for analytics (improves loading performance) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+    
+    <!-- 
+      ANALYTICS: Google Tag with Consent Mode v2
+      CRITICAL: This must load BEFORE any other tracking scripts.
+      Sets consent defaults to 'denied' then loads gtag.js
+      IDs: GA4 (G-8M24FL4XQQ), Google Ads (AW-11375797246)
+    -->
+    <GoogleTag />
+    
+    <!-- 
+      ANALYTICS: Facebook/Meta Pixel
+      Shared Pixel ID for cross-domain audience building: 1393006485701609
+      Respects consent state from CookieBanner
+    -->
+    <FacebookPixel />
     
     <!-- Preload critical assets -->
     <link rel="preload" as="image" href={logoDark} fetchpriority="high" />
@@ -357,5 +381,12 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <!-- <script>
       // Legacy compatibility for existing CTAs - COMMENTED OUT FOR DEBUGGING
     </script> -->
+    
+    <!-- 
+      GDPR/Swiss DSG Cookie Consent Banner
+      Handles user consent and updates Google/Meta consent states
+      Shows on first visit, remembers preference in localStorage
+    -->
+    <CookieBanner />
   </body>
 </html>
