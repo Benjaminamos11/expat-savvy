@@ -40,15 +40,15 @@
     }
   }
 
-  // Send Facebook tracking event
+  // Send Facebook tracking event (uses our consent-aware helper)
   function sendFacebookEvent(eventName, props = {}) {
-    if (window.fbq) {
+    // Use our trackMetaEvent helper which queues events until consent is given
+    if (window.trackMetaEvent) {
       console.log(`📘 Facebook Tracking: ${eventName}`, props);
-      window.fbq('track', eventName, props);
+      window.trackMetaEvent(eventName, props);
     } else {
-      console.warn('⚠️ Facebook Pixel not loaded, queuing event:', eventName);
-      // Queue for later if Facebook isn't loaded yet
-      setTimeout(() => sendFacebookEvent(eventName, props), 1000);
+      // trackMetaEvent not yet available, wait
+      setTimeout(() => sendFacebookEvent(eventName, props), 500);
     }
   }
 

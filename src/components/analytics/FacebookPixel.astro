@@ -5,9 +5,6 @@
  * Pixel ID: 1393006485701609
  * 
  * OPTIMIZATION: Only loads fbevents.js AFTER user accepts cookies
- * - Zero impact on PageSpeed until consent given
- * - Stub functions available immediately for tracking calls
- * - Full script loads only when needed
  */
 ---
 
@@ -16,20 +13,8 @@
 (function() {
   'use strict';
   
-  // Hardcoded pixel ID to avoid variable interpolation issues
-  var PIXEL_ID = '1393006485701609';
-  
   var pixelLoaded = false;
   var queuedEvents = [];
-  
-  // Stub fbq function to queue events before pixel loads
-  window.fbq = window.fbq || function() {
-    if (pixelLoaded && window._fbq) {
-      window._fbq.apply(null, arguments);
-    } else {
-      queuedEvents.push(arguments);
-    }
-  };
   
   // Function to load the actual pixel script
   window.loadMetaPixel = function() {
@@ -53,18 +38,21 @@
       s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     
-    // Initialize with consent granted
+    // Initialize with the correct pixel ID
     fbq('consent', 'grant');
-    fbq('init', PIXEL_ID);
+    fbq('init', '1393006485701609');
     fbq('track', 'PageView');
     
     // Process any queued events
     for (var i = 0; i < queuedEvents.length; i++) {
-      fbq.apply(null, queuedEvents[i]);
+      var evt = queuedEvents[i];
+      if (evt && evt.length >= 2) {
+        fbq(evt[0], evt[1], evt[2] || {});
+      }
     }
     queuedEvents = [];
     
-    console.log('[MetaPixel] Script loaded with ID:', PIXEL_ID);
+    console.log('[MetaPixel] Loaded with ID: 1393006485701609');
   };
   
   // Listen for consent updates
@@ -74,17 +62,18 @@
     }
   });
 
-  // Helper functions (queue events if pixel not loaded)
+  // Helper functions - only work after pixel is loaded
   window.trackMetaEvent = function(eventName, params) {
-    if (pixelLoaded) {
+    if (pixelLoaded && typeof fbq === 'function') {
       fbq('track', eventName, params || {});
     } else {
+      // Queue for when pixel loads
       queuedEvents.push(['track', eventName, params || {}]);
     }
   };
 
   window.trackMetaCustomEvent = function(eventName, params) {
-    if (pixelLoaded) {
+    if (pixelLoaded && typeof fbq === 'function') {
       fbq('trackCustom', eventName, params || {});
     } else {
       queuedEvents.push(['trackCustom', eventName, params || {}]);
@@ -95,7 +84,6 @@
   try {
     var consent = localStorage.getItem('cookie_consent');
     if (consent === 'accepted') {
-      // User previously accepted - load the pixel
       window.loadMetaPixel();
     }
   } catch (e) {}
