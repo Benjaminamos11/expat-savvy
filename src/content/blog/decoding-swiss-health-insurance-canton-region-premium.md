@@ -1,18 +1,18 @@
 ---
-title: "Canton & Region Premiums (2025/2026): How Location Changes Your Swiss Insurance Price"
-description: "Understand Swiss KVG premium regions and why Zurich, Geneva or Basel differ. Seasonal update for 2025/2026: premium letters in Oct, cancel by 30 Nov to switch for 1 Jan. Save with model/deductible choice."
+title: "Canton & Region Premiums: How Location Changes Your Swiss Insurance Price"
+description: "Understand Swiss KVG premium regions and why Zurich, Geneva or Basel differ. Seasonal update: premium letters in Oct, cancel by 30 Nov to switch for 1 Jan the following year. Save with model/deductible choice."
 pubDate: "2025-05-15"
 category: "Health Insurance"
 author: "Expat Savvy Team"
-tags: ["health insurance", "premium regions", "canton differences", "KVG/LAMal", "2025/2026 change season"]
+tags: ["health insurance", "premium regions", "canton differences", "KVG/LAMal", "annual change season"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747121518/a-raw-hand-drawn-sketch-illustration-on-_OnfpRNDSSHOh_0IM1ycnxg_4NIkL4FQSyi40TzU2PceYA_gg4f8l.webp"
 featured: true
 ---
 
-## 2025/2026 Key Facts — Premium Regions in Switzerland
+## Key Facts — Premium Regions in Switzerland
 
-- Premium letters arrive: early October 2025
-- Cancellation deadline for a 1 Jan 2026 switch: 30 November 2025
+- Premium letters arrive: early October each year
+- Cancellation deadline for switching: 30 November
 - Premiums set per KVG premium region (42+ zones approved by FOPH/BAG)
 - Urban centers (Geneva, Basel‑Stadt) trend higher; rural cantons often lower
 - Your premium is based on your registered commune (residence), not choice
@@ -22,12 +22,12 @@ featured: true
 
 ---
 
-## 2025/2026 Change Season — What to Do
+## Annual Change Season — What to Do
 
 1. Read your October premium letter; note region and model/deductible
 2. Decide target model (HMO/GP/Telmed vs Standard) and deductible (CHF 300–2,500)
 3. Request quotes from 2–3 providers for your region
-4. Send cancellation to current insurer by 30 Nov 2025 (keep proof)
+4. Send cancellation to current insurer by 30 November (keep proof)
 5. Confirm new policy starts 1 Jan 2026
 
 ---

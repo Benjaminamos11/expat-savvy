@@ -1,11 +1,11 @@
 ---
-title: "Relocation to Zurich & Insurance Guide: Complete 2025 Guide"
+title: "Relocation to Zurich & Insurance Guide: Complete 2026 Guide"
 description: "Complete guide to relocating to Zurich with insurance considerations. Health insurance costs, premium bands, relocation services, and English-speaker resources for Zurich moves."
 slug: "relocation-zurich-insurance-guide"
 category: "relocation"
 tags: ["zurich", "relocation", "health-insurance", "moving", "expats", "insurance-costs"]
-publishDate: 2025-08-13
-lastUpdated: 2025-08-13
+publishDate: 2026-08-13
+lastUpdated: 2026-08-13
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208300/a-stark-black-and-red-hand-drawn-sketch-_JUmqq0WjTW6M2RbGRIpC4A_UK0w41FhQIms1FQkt8WBNA_znjzdm.png"
 imageAlt: "Zurich cityscape with Lake Zurich and Swiss Alps"
 author: "Expat Savvy"

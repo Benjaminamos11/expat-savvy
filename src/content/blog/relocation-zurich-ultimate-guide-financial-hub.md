@@ -1,5 +1,5 @@
 ---
-title: "Relocation Zurich: The Expat's Ultimate Guide to Switzerland's Financial Hub (2025)"
+title: "Relocation Zurich: The Expat's Ultimate Guide to Switzerland's Financial Hub (2026)"
 description: "Comprehensive guide for expatriates relocating to Zurich. Expert advice on neighborhoods, housing, visa requirements, healthcare, education options, and cultural integration. Discover how to make your Swiss transition seamless."
 author: "Benjamin Amos Wagner"
 date: 2025-05-05
@@ -29,7 +29,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507429/a-hand-dra
 • **International Schools**: 6-12 months lead time required  
 
 #### Next Steps
-📋 [Best Health Insurance Zurich](/blog/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [2025/2026 Switching Guide](/insurance-change-2025-2026/)
+📋 [Best Health Insurance Zurich](/blog/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Switching Guide](/switching-health-insurance/)
 
 </div>
 
@@ -120,7 +120,7 @@ For comprehensive guidance on all aspects of relocating to Switzerland, includin
 
 Zurich's high cost of living is well-documented, but understanding the specific insurance landscape and cost structure helps you budget effectively and make informed decisions about your coverage.
 
-### Health Insurance Costs in Zurich (2025/2026)
+### Health Insurance Costs in Zurich
 
 Health insurance premiums in Zurich canton are among Switzerland's highest, making model choice crucial for cost management:
 
@@ -481,7 +481,7 @@ By approaching your Zurich relocation with thorough preparation and realistic ex
 
 For additional guidance on specific aspects of your relocation journey, explore our related resources:
 - [Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise](/blog/relocation-zug-insiders-guide-business-paradise/)
-- [Switzerland Relocation in 2025: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
+- [Switzerland Relocation in 2026: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
 - [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/)
 - [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/)
 
@@ -512,7 +512,7 @@ Basic health insurance: Yes, guaranteed acceptance within 3 months of arrival. S
 ### Related Guides
 
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete guide with Zurich-specific considerations
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines and switching strategies
+- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines and switching strategies
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard for Zurich expats
 - [Relocating to Switzerland: Step-by-Step Checklist](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Complete admin and insurance timeline
 - [Ultimate Guide to Switzerland Relocation](/blog/relocation-switzerland-ultimate-guide-smooth-move/) — Comprehensive relocation planning

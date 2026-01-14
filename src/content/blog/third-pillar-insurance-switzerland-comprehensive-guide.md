@@ -1,5 +1,5 @@
 ---
-title: "3rd Pillar Insurance Switzerland: Complete Guide to Tax-Advantaged Savings (2025)"
+title: "3rd Pillar Insurance Switzerland: Complete Guide to Tax-Advantaged Savings (2026)"
 description: "Expert guide to 3rd pillar insurance in Switzerland. Compare providers, understand tax benefits, and maximize your pension savings. Get personalized advice from Swiss insurance specialists."
 author: "Benjamin Amos Wagner"
 date: 2025-01-20
@@ -7,7 +7,7 @@ tags: ["3rd pillar", "pension", "insurance", "tax optimization", "retirement pla
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375508/a-minimalist-sketch-illustration-of-an-o_t00FYlMGRGSGCrUU6rHxgw_HCDq44XJTc-SVB-lDenfiQ_wigsiz.webp"
 ---
 
-## Key Facts — 3rd Pillar (2025)
+## Key Facts — 3rd Pillar (2026)
 
 - Max contribution: CHF 7,056 (employed); CHF 35,280 or 20% income (self‑employed w/o 2nd pillar)
 - 3a is tax‑deductible; 3b is flexible with limited tax perks
@@ -73,7 +73,7 @@ One of the most important decisions is choosing between bank-based 3a accounts a
 
 > **🎯 Recommendation:** For most professionals, a combination approach works best: bank 3a for maximum contributions and flexibility, plus insurance 3a for guaranteed benefits and protection needs.
 
-## Top 3rd Pillar Insurance Providers in Switzerland (2025)
+## Top 3rd Pillar Insurance Providers in Switzerland (2026)
 
 ### 1. **Swiss Life**
 - **Strengths**: Market leader, comprehensive product range, strong financial stability
@@ -102,7 +102,7 @@ One of the most important decisions is choosing between bank-based 3a accounts a
 
 ## Maximizing Tax Benefits: Strategic Contribution Planning
 
-### Annual Contribution Limits (2025)
+### Annual Contribution Limits (2026)
 - **Employed individuals**: CHF 7,056 maximum
 - **Self-employed without 2nd pillar**: CHF 35,280 maximum (or 20% of income)
 - **Self-employed with 2nd pillar**: CHF 7,056 maximum

@@ -1,5 +1,5 @@
 ---
-title: "Comprehensive Expat Services in Switzerland: Your Complete Guide to Insurance & Relocation Support (2025)"
+title: "Comprehensive Expat Services in Switzerland: Your Complete Guide to Insurance & Relocation Support (2026)"
 description: "Discover expert expat services in Switzerland. From health insurance to 3rd pillar planning, Expat Savvy offers personalized consultations in Zurich and across Switzerland. Free English-language support."
 author: "Benjamin Amos Wagner"
 date: 2025-05-17

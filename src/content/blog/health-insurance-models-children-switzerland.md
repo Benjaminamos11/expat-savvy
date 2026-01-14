@@ -1,8 +1,8 @@
 ---
-title: "HMO vs Family Doctor vs Standard: Best Models for Swiss Children 2025"
+title: "HMO vs Family Doctor vs Standard: Best Models for Swiss Children 2026"
 description: "Complete guide to choosing the optimal health insurance model for children in Switzerland. Compare HMO, Family Doctor, Standard, and Telmed models for pediatric care access and costs."
 author: "Benjamin Amos Wagner"
-date: 2025-05-20
+date: 2026-05-20
 tags: ["insurance models", "children health insurance", "HMO", "family doctor", "standard model", "telmed", "pediatric care", "swiss health insurance"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748805483/a-raw-hand-drawn-sketch-in-a-vibrant-red_qN9Pn-xsTt638_Sx24gUNw_IKSpGuwGRgqADNI8aQyXlQ_n1m4jo.png"
 ---
@@ -148,7 +148,7 @@ Selecting the optimal health insurance model for your children requires careful 
 Insurance model selection is one component of comprehensive family health insurance strategy in Switzerland. For complete guidance on family coverage optimization, explore our comprehensive resources:
 
 ### **Essential Family Planning**
-- **[Swiss Family Health Insurance Guide 2025](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
+- **[Swiss Family Health Insurance Guide 2026](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
 - **[Swiss Health Insurance Prenatal Registration](/blog/prenatal-health-insurance-registration-switzerland/)** - Secure guaranteed coverage before birth
 
 ### **Cost Optimization**

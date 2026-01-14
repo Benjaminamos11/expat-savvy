@@ -1,5 +1,5 @@
 ---
-title: "The Hidden Costs of Zurich Relocation: Budget Planning for Expats (2025)"
+title: "The Hidden Costs of Zurich Relocation: Budget Planning for Expats (2026)"
 description: "Comprehensive guide to the visible and hidden costs of relocating to Zurich. Expert advice on budgeting for housing, insurance, education, transportation, and daily expenses to help expatriates plan their finances effectively."
 author: "Benjamin Amos Wagner"
 date: 2025-05-03
@@ -418,7 +418,7 @@ By thoroughly understanding both the obvious and hidden costs of relocating to Z
 For additional guidance on specific aspects of your relocation journey, explore our related resources:
 - [Relocation Zurich: The Expat's Ultimate Guide](/blog/relocation-zurich-ultimate-guide-financial-hub/)
 - [Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise](/blog/relocation-zug-insiders-guide-business-paradise/)
-- [Switzerland Relocation in 2025: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
+- [Switzerland Relocation in 2026: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
 - [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/)
 
 ---

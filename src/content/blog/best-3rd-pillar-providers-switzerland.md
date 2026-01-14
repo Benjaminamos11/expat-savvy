@@ -1,8 +1,8 @@
 ---
-title: "Best 3rd Pillar Providers in Switzerland: Complete 2025 Comparison"
-description: "Compare the best Swiss 3rd pillar providers for 2025. Bank vs insurance solutions, fees, investment options, and recommendations for different investor profiles."
-publishDate: "2025-08-13"
-lastUpdated: "2025-08-13"
+title: "Best 3rd Pillar Providers in Switzerland: Complete 2026 Comparison"
+description: "Compare the best Swiss 3rd pillar providers for 2026. Bank vs insurance solutions, fees, investment options, and recommendations for different investor profiles."
+publishDate: "2026-08-13"
+lastUpdated: "2026-08-13"
 category: "Financial Planning"
 author: "Expat Savvy Team"
 tags: ["best pillar 3a providers", "Swiss banks", "3rd pillar comparison", "investment options", "retirement planning"]
@@ -27,7 +27,7 @@ Selecting the right 3rd pillar provider is crucial for maximizing your retiremen
 
 **Ready to choose your optimal provider?** [Book a free consultation](/free-consultation) to get personalized recommendations based on your specific situation and goals.
 
-## Key Facts — 3rd Pillar Provider Selection 2025
+## Key Facts — 3rd Pillar Provider Selection 2026
 
 <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
@@ -56,7 +56,7 @@ Selecting the right 3rd pillar provider is crucial for maximizing your retiremen
 • **Beneficiary updates**: Review designations annually for life changes  
 
 #### Next Steps
-📋 [Maximize 2025 tax benefits](/blog/third-pillar-maximize-2025-tax-benefits/) • [3rd pillar vs life insurance](/blog/3rd-pillar-vs-life-insurance-switzerland/) • [Free consultation](/free-consultation)
+📋 [Maximize 2026 tax benefits](/blog/third-pillar-maximize-2026-tax-benefits/) • [3rd pillar vs life insurance](/blog/3rd-pillar-vs-life-insurance-switzerland/) • [Free consultation](/free-consultation)
 
 </div>
 

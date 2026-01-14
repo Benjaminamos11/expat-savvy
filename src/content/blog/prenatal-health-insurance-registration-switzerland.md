@@ -1,8 +1,8 @@
 ---
-title: "Swiss Health Insurance Prenatal Registration: Complete Guide 2025"
+title: "Swiss Health Insurance Prenatal Registration: Complete Guide 2026"
 description: "Everything you need to know about registering your baby for health insurance before birth in Switzerland. Secure guaranteed coverage, avoid medical exams, and optimize your family's insurance strategy."
 author: "Benjamin Amos Wagner"
-date: 2025-05-20
+date: 2026-05-20
 tags: ["prenatal registration", "swiss health insurance", "baby insurance", "pregnancy switzerland", "supplementary insurance", "family insurance", "expat families"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803658/raw-hand-drawn-sketch-in-red-fineline-st_Pp5jEVA4Tr2MEnQGnzwWjg_3DkAjxNJSgqzq1oqSnR1HQ_zavez9.png"
 ---
@@ -120,7 +120,7 @@ Prenatal health insurance registration in Switzerland provides irreplaceable adv
 Prenatal registration is just one component of comprehensive family health insurance planning in Switzerland. For complete guidance on optimizing your family's coverage strategy, explore our comprehensive resources:
 
 ### **Essential Family Planning**
-- **[Swiss Family Health Insurance Guide 2025](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
+- **[Swiss Family Health Insurance Guide 2026](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
 - **[Swiss Family Deductible Strategy: CHF 1,000 Cap](/blog/swiss-family-deductible-strategy-1000-cap/)** - Maximize savings with strategic deductible planning
 
 ### **Coverage Optimization**

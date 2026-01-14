@@ -12,7 +12,7 @@ faqs:
   - question: "How much money can I save by switching to the cheapest health insurance in 2026?"
     answer: "Maximum savings vary by location: Zurich CHF 93/month (CHF 1,116 annually), Geneva CHF 142/month (CHF 1,704 annually), Basel CHF 94/month (CHF 1,128 annually). Zug offers exceptional savings due to cantonal subsidy."
   - question: "When is the exact deadline to switch health insurance for 2026?"
-    answer: "Send registered mail cancellation by 30 November 2025 for coverage starting 1 January 2026. Apply to new insurer simultaneously. Special termination right: 30 days after receiving premium increase notice."
+    answer: "Send registered mail cancellation by 30 November for coverage starting 1 January the following year. Apply to new insurer simultaneously. Special termination right: 30 days after receiving premium increase notice."
   - question: "Is basic health insurance coverage identical across all Swiss insurers?"
     answer: "Yes, by federal law (KVG/LAMal). All insurers provide identical basic medical coverage, same provider network access, same treatments. Only differences: customer service quality, digital tools, supplementary insurance options."
   - question: "Which canton has the lowest health insurance premiums in 2026?"
@@ -35,11 +35,11 @@ faqs:
 • **Basel**: Save CHF 94/month (CHF 1,128 annually)
 • **Zug**: Save CHF 90/month (CHF 1,080 annually)
 
-### Critical 2026 Deadlines
-• **Premium Letters**: Received October 2025 ✅
-• **Comparison Period**: October-November 2025
-• **Cancellation Deadline**: 30 November 2025 (registered mail)
-• **New Coverage**: 1 January 2026
+### Critical Deadlines
+• **Premium Letters**: Received October each year ✅
+• **Comparison Period**: October-November
+• **Cancellation Deadline**: 30 November (registered mail)
+• **New Coverage**: 1 January the following year
 
 ### Model Savings (Same Provider)
 • **Standard**: CHF 0 discount (baseline)
@@ -53,7 +53,7 @@ faqs:
 
 ## Each October, New Premiums Are Published: Here's Where Expats Can Find the Cheapest Krankenkasse in 2026
 
-Every autumn, Swiss health insurers announce their premium adjustments for the following year. For 2026, these announcements typically arrive in your mailbox during October 2025, giving you until **30 November 2025** to make changes for coverage starting **1 January 2026**.
+Every autumn, Swiss health insurers announce their premium adjustments for the following year. For 2026, these announcements typically arrive in your mailbox during October each year, giving you until **30 November** to make changes for coverage starting **1 January the following year**.
 
 Understanding which insurers offer the lowest premiums in your specific canton can save you hundreds or even thousands of francs annually. This guide breaks down the 2026 premium landscape to help you find the most cost-effective health insurance option.
 
@@ -220,7 +220,7 @@ Based on official Swiss Federal Office of Public Health premium data:
 To achieve maximum savings on your 2026 health insurance, combine these strategies:
 
 ### Step 1: Choose the Cheapest Provider in Your Canton
-Use [Priminfo.ch](https://priminfo.ch) when 2026 premiums are published in October 2025.
+Use [Priminfo.ch](https://priminfo.ch) when 2026 premiums are published in October each year.
 
 ### Step 2: Select the Right Model
 - **Healthy with low medical usage**: Choose Telmed (20-30% savings)
@@ -240,15 +240,15 @@ If moving cantons, factor in health insurance costs. Rural cantons can be 50%+ c
 
 ## 2026 Switching Timeline & Deadlines
 
-### October 2025: Premium Letters Arrive
+### October each year: Premium Letters Arrive
 - Compare your current 2025 premium with announced 2026 rates
 - Research cheapest alternatives in your canton
 - Calculate total potential savings (provider + model + deductible changes)
 
 ### November 2025: Decision & Application Month
-- **By 30 November 2025**: Send registered cancellation letter to current insurer
+- **By 30 November**: Send registered cancellation letter to current insurer
 - **Simultaneously**: Apply to new insurer (guaranteed acceptance for basic insurance)
-- **Verify**: New coverage starts 1 January 2026, old coverage ends 31 December 2025
+- **Verify**: New coverage starts 1 January the following year, old coverage ends 31 December 2025
 
 ### December 2025: Confirmation Period
 - Receive confirmation from new insurer
@@ -405,7 +405,7 @@ Assura typically offers the lowest premiums, followed by CSS and KPT in many can
 Switching from expensive to cheapest providers can save CHF 100-200+ per month. Additional savings: Telmed model saves 20-30%, CHF 2,500 deductible saves CHF 100-150/month vs CHF 300 deductible.
 
 **When is the deadline to switch to cheaper health insurance for 2026?**
-Cancel your current policy by 30 November 2025 for new coverage starting 1 January 2026. Premium letters arrive in October - compare then. Special termination right within 30 days of premium increase notice.
+Cancel your current policy by 30 November for new coverage starting 1 January the following year. Premium letters arrive in October - compare then. Special termination right within 30 days of premium increase notice.
 
 **Do cheap health insurers provide worse coverage than expensive ones?**
 No. Basic insurance coverage is identical by law across all providers. Differences are in customer service, digital tools, and supplementary options. Cheap doesn't mean worse medical coverage.
@@ -420,11 +420,11 @@ Yes. All insurers must accept you for basic insurance regardless of health statu
 Basic medical coverage is identical. Differences include customer service quality, English support depth, digital tools sophistication, and supplementary insurance options. Assura focuses on low costs, Swica on service quality.
 
 **How do I switch to the cheapest health insurance for 2026?**
-1) Wait for October 2025 premium letters 2) Compare options on Priminfo.ch 3) Apply to new cheaper insurer 4) Send registered cancellation letter to current insurer by 30 November 2025 5) Verify new coverage starts 1 January 2026.
+1) Wait for October each year premium letters 2) Compare options on Priminfo.ch 3) Apply to new cheaper insurer 4) Send registered cancellation letter to current insurer by 30 November 5) Verify new coverage starts 1 January the following year.
 
 ## Secure Your 2026 Savings: Time-Sensitive Action Required
 
-Based on official Swiss Federal Office of Public Health data, potential savings of CHF 1,080-3,408 annually make the 30 November 2025 deadline critical for your finances.
+Based on official Swiss Federal Office of Public Health data, potential savings of CHF 1,080-3,408 annually make the 30 November deadline critical for your finances.
 
 ### Confirmed Savings Opportunities:
 - **Zug Residents**: Switch to Concordia HMO, save CHF 1,080/year
@@ -436,7 +436,7 @@ Based on official Swiss Federal Office of Public Health data, potential savings 
 1. **Compare Your Current Premium**: Check against official 2026 rates above
 2. **Calculate Potential Savings**: Use specific examples in your canton
 3. **Apply to Cheaper Provider**: Guarantee basic insurance acceptance
-4. **Send Registered Cancellation**: Mail by 30 November 2025 deadline
+4. **Send Registered Cancellation**: Mail by 30 November deadline
 
 <div class="bg-white rounded-xl p-8 shadow-[4px_4px_8px_#d9d9d9,-4px_-4px_8px_#ffffff] mb-8 border-l-2 border-red-600">
 

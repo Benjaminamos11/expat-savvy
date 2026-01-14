@@ -1,5 +1,5 @@
 ---
-title: "Household Insurance Switzerland: Complete Protection Guide (2025)"
+title: "Household Insurance Switzerland: Complete Protection Guide (2026)"
 description: "Everything expats need to know about Swiss household insurance: coverage, best providers, claims process, and tips for protecting your home and belongings."
 author: "Benjamin Amos Wagner"
 date: 2025-05-15
@@ -7,7 +7,7 @@ tags: ["household insurance", "swiss insurance", "expat", "switzerland", "proper
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803661/a-hand-drawn-sketch-in-a-vibrant-red-fin_Lq-XeIQUQcq9I-_g-pYxng_rL0r6mcgQbuVcjfYlZJLxg_g3cxzb.png"
 ---
 
-## Key Facts — Household Insurance (2025)
+## Key Facts — Household Insurance (2026)
 
 - Includes contents cover + private liability; often bundled
 - Typical contents limits: CHF 30k–150k+; liability: CHF 5–20m
@@ -114,7 +114,7 @@ For people new to Switzerland, household insurance provides:
 - **Cyber protection**: Coverage for online fraud and identity theft
 - **Garden furniture/tools**: Coverage for outdoor items
 
-## Top Household Insurance Providers in Switzerland (2025)
+## Top Household Insurance Providers in Switzerland (2026)
 
 ### 1. **Mobiliar**
 - **Strengths**: Largest household insurer in Switzerland, excellent local service, comprehensive coverage options

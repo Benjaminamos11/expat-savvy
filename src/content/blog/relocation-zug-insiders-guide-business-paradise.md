@@ -1,5 +1,5 @@
 ---
-title: "Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise (2025)"
+title: "Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise (2026)"
 description: "Comprehensive guide for expatriates relocating to Zug. Expert advice on neighborhoods, housing, tax advantages, visa requirements, healthcare, education options, and cultural integration. Discover how to make your Swiss transition seamless."
 author: "Benjamin Amos Wagner"
 date: 2025-05-06
@@ -30,7 +30,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747507428/a-hand-dra
 • **International Schools**: High demand - apply 6-12 months ahead  
 
 #### Next Steps
-📋 [Best Health Insurance Zug](/healthcare/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Tax-Optimized Insurance Strategy](/insurance-change-2025-2026/)
+📋 [Best Health Insurance Zug](/healthcare/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Tax-Optimized Insurance Strategy](/switching-health-insurance/)
 
 </div>
 
@@ -478,7 +478,7 @@ While these services represent an additional cost, many expatriates find that th
 
 Zug's appeal extends beyond tax advantages to include competitive insurance premiums and excellent corporate benefits. Understanding the insurance landscape helps optimize your total compensation package.
 
-### Health Insurance Costs in Zug (2025/2026)
+### Health Insurance Costs in Zug
 
 Zug canton offers some of Switzerland's most competitive health insurance premiums, making it attractive for business professionals:
 
@@ -733,7 +733,7 @@ Zug offers all Swiss health insurance models optimized for business professional
 ### Related Guides
 
 - [Best Health Insurance Switzerland 2025/2026](/healthcare/best-health-insurance-switzerland/) — Complete guide with Zug-specific considerations
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines and tax-optimized switching strategies  
+- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines and tax-optimized switching strategies  
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard for Zug business professionals
 - [Relocating to Switzerland: Step-by-Step Checklist](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Complete admin and insurance timeline
 - [Ultimate Guide to Switzerland Relocation](/blog/relocation-switzerland-ultimate-guide-smooth-move/) — Comprehensive relocation planning
@@ -748,7 +748,7 @@ When comparing Zug with other Swiss cities like Zurich, you'll find distinct dif
 
 For additional guidance on specific aspects of your relocation journey, explore our related resources:
 - [Relocation Zurich: The Expat's Ultimate Guide to Switzerland's Financial Hub](/blog/relocation-zurich-ultimate-guide-financial-hub/)
-- [Switzerland Relocation in 2025: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
+- [Switzerland Relocation in 2026: A Step-by-Step Roadmap for New Arrivals](/blog/switzerland-relocation-step-by-step-roadmap/)
 - [Zurich vs. Zug: Choosing Your Ideal Swiss Relocation Destination](/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination/)
 - [The Hidden Costs of Zurich Relocation: Budget Planning for Expats](/blog/hidden-costs-zurich-relocation-budget-planning-expats/)
 

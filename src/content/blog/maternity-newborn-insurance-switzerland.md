@@ -1,13 +1,13 @@
 ---
-title: "Maternity & Newborn Insurance Switzerland (2025/2026): What’s Covered and What to Do"
-description: "No deductible/co-payment for standard maternity services, what basic vs supplementary covers, newborn registration, and a 2025/2026 seasonal checklist (letters in Oct, cancel by 30 Nov for 1 Jan 2026)."
+title: "Maternity & Newborn Insurance Switzerland: What's Covered and What to Do"
+description: "No deductible/co-payment for standard maternity services, what basic vs supplementary covers, newborn registration, and an annual seasonal checklist (letters in Oct, cancel by 30 Nov for 1 Jan the following year)."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
-tags: ["maternity insurance", "newborn coverage", "swiss healthcare", "family planning", "2025/2026 change season"]
+tags: ["maternity insurance", "newborn coverage", "swiss healthcare", "family planning", "annual change season"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-delicate-hand-drawn-illustration-depic_A8JUQaFpTG6JYcbO-zhv2A_KhpTv1RLRwOWWVeVr_KarQ_y8zcit.webp"
 ---
 
-## Key Facts — Maternity & Newborn Insurance 2025/2026
+## Key Facts — Maternity & Newborn Insurance
 
 <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
@@ -49,8 +49,8 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-delicate
 - Provide estimated due date and preferred coverage start (birth date)
 
 ### Step 4: Timeline Management for 2025/2026 Changes
-- **October 2025**: Review premium letters for family coverage costs
-- **By 30 November 2025**: Cancel current policies if switching for 1 January 2026
+- **October each year**: Review premium letters for family coverage costs
+- **By 30 November**: Cancel current policies if switching for 1 January the following year
 - **Newborn registration**: Can be done throughout pregnancy, coverage starts from birth
 
 ### Step 5: Confirm Coverage & Documentation
@@ -107,7 +107,7 @@ Basic covers most standard costs without deductible/co‑payment from week 13. A
 ## Related Articles
 
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete newcomer guide and provider comparison
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines and family switching strategies
+- [Switching Health Insurance](/insurance-change-2025-2026/) — Seasonal deadlines and family switching strategies
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Family Doctor for families with children
 - [Health Insurance Hub](/health-insurance) — Calculator, costs, and coverage overview for families
 - [Relocating with Family](/blog/relocating-to-switzerland-checklist/) — Complete checklist for newcomers with children

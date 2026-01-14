@@ -1,13 +1,13 @@
 ---
-title: "Swiss Family Health Insurance Guide 2025: Complete Guide for Expats"
+title: "Swiss Family Health Insurance Guide 2026: Complete Guide for Expats"
 description: "The definitive guide to navigating health insurance for families in Switzerland, covering everything from prenatal registration to cost optimization strategies for expat families."
 author: "Benjamin Amos Wagner"
-date: 2025-05-20
+date: 2026-05-20
 tags: ["swiss family insurance", "family health insurance switzerland", "expat families", "prenatal registration", "family deductible", "children health insurance", "family discounts", "dental insurance"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803662/raw-hand-drawn-sketch-in-red-fineline-st_fyIlkuH3SGyG5ebW7DBV_Q_l1IkPfzJSVSE_3_pd0hQxw_atgm3g.png"
 ---
 
-## Key Facts — Family Health Insurance in Switzerland (2025)
+## Key Facts — Family Health Insurance in Switzerland (2026)
 
 - Prenatal registration secures children’s supplementary coverage without medical exams
 - Children’s combined deductibles capped at CHF 1,000/year across all kids
@@ -173,7 +173,7 @@ This guide provides the foundation for understanding Swiss family health insuran
 - **[ProLife vs Traditional Dental Insurance: Swiss Family Guide](/blog/prolife-vs-traditional-dental-insurance-switzerland/)** - Comprehensive dental insurance comparison for families
 
 ### **Additional Resources**
-- **[Best Health Insurance Switzerland: The Ultimate 2025 Guide](/blog/best-health-insurance-switzerland)** - General Swiss health insurance guidance
+- **[Best Health Insurance Switzerland: The Ultimate 2026 Guide](/blog/best-health-insurance-switzerland)** - General Swiss health insurance guidance
 - **[Complete Guide to Swiss Insurance for Newcomers](/insurance-guides/new-arrivals-checklist)** - Getting started as a new resident
 
 **Key Action Steps for Families:**

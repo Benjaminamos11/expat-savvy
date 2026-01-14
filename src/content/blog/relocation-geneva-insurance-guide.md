@@ -1,11 +1,11 @@
 ---
-title: "Relocation to Geneva & Insurance Guide: International Hub 2025"
+title: "Relocation to Geneva & Insurance Guide: International Hub 2026"
 description: "Complete guide to relocating to Geneva with international insurance considerations. Health insurance costs, international organizations, diplomatic coverage, and relocation services for Geneva's global community."
 slug: "relocation-geneva-insurance-guide"
 category: "relocation"
 tags: ["geneva", "relocation", "health-insurance", "international", "diplomacy", "expats"]
-publishDate: 2025-08-13
-lastUpdated: 2025-08-13
+publishDate: 2026-08-13
+lastUpdated: 2026-08-13
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208301/a-hand-drawn-sketch-in-black-and-red-ink_yI0IIGz_R6qPUz2NrjPQ2A_UzpNU7chRe6ZBw208cSzEw_zbaruc.png"
 imageAlt: "Geneva lakefront with Jet d'Eau and UN buildings"
 author: "Expat Savvy"

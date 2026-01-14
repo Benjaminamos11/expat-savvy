@@ -125,11 +125,11 @@ Many major Swiss health insurers offer dental add‑ons:
 
 Compare coverage scope, percentage covered, annual max, deductibles, waiting periods, dentist choice, and premiums. Independent advice helps avoid surprises.
 
-## Seasonal Note — 2025/2026
+## Seasonal Note
 
 - Review your October premium letter and your current dental add‑ons
-- If changing base provider/model/deductible for 1 Jan 2026, send cancellation by 30 Nov 2025
-- Confirm the new policy and any dental riders are activated from 1 Jan 2026
+- If changing base provider/model/deductible, send cancellation by 30 November
+- Confirm the new policy and any dental riders are activated from 1 January the following year
 
 ## Frequently Asked Questions — Dental Insurance Switzerland
 
@@ -174,7 +174,7 @@ The sooner the better due to waiting periods. If you're healthy, consider applyi
 ## Related Articles
 
 - [Best Health Insurance Switzerland 2026 for Expats](/blog/best-health-insurance-switzerland/) — Complete newcomer guide including supplementary options
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines for base and supplementary policy changes
+- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines for base and supplementary policy changes
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — Base models that work well with dental add-ons
 - [Health Insurance Hub](/health-insurance) — Calculator, costs, and coverage overview
 - [Provider Comparisons](/compare-providers/) — Compare insurers offering dental supplementary coverage

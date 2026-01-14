@@ -7,7 +7,7 @@ tags: ["relocating to switzerland", "expat checklist", "moving to switzerland", 
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-hand-drawn-sketch-of-a-checklist-icon-_bU9rLiAeQhO9EbGvWe4Stg_puqh00UMSFqCyf-H0vDp4g_awfyym.webp"
 ---
 
-## Key Facts — Switzerland Relocation Checklist 2025/2026
+## Key Facts — Switzerland Relocation Checklist
 
 <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
@@ -29,7 +29,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-hand-dra
 • **Professional Help**: Relocation services recommended for competitive markets  
 
 #### Next Steps
-📋 [Best Health Insurance for New Arrivals](/healthcare/best-health-insurance-switzerland/) • [2025/2026 Switching Guide](/insurance-change-2025-2026/) • [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist)
+📋 [Best Health Insurance for New Arrivals](/healthcare/best-health-insurance-switzerland/) • [Switching Guide](/switching-health-insurance/) • [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist)
 
 </div>
 
@@ -135,8 +135,8 @@ Welcome to Switzerland! We hope this guide helps you embark on your Swiss journe
 
 ### Related Guides
 
-- [Best Health Insurance Switzerland 2025/2026](/healthcare/best-health-insurance-switzerland/) — Complete guide for new arrivals
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal switching deadlines and optimization
+- [Best Health Insurance Switzerland](/healthcare/best-health-insurance-switzerland/) — Complete guide for new arrivals
+- [Switching Health Insurance](/switching-health-insurance/) — Seasonal switching deadlines and optimization
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard comparison
 - [Step-by-Step Relocation Guide](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Detailed admin and insurance timeline
 - [Ultimate Switzerland Relocation Guide](/blog/relocation-switzerland-ultimate-guide-smooth-move/) — Comprehensive planning resource

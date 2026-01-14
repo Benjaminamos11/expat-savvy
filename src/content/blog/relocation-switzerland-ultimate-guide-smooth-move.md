@@ -1,5 +1,5 @@
 ---
-title: "Relocation Switzerland: Your Ultimate Guide to a Smooth Move (2025 Update)"
+title: "Relocation Switzerland: Your Ultimate Guide to a Smooth Move (2026 Update)"
 description: "Expert guide to relocation in Switzerland. Discover top agencies (incl. primerelocation.ch), services, costs, and tips for a seamless move to Zurich, Geneva, Zug, Basel & beyond. Partner with Expat Savvy for your insurance needs."
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
@@ -28,7 +28,7 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747375513/minimalist
 • **English-Friendly**: CSS, Helsana, Swica provide excellent expat support  
 
 #### Next Steps
-📋 [2025/2026 Insurance Guide](/healthcare/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Switching Deadlines](/insurance-change-2025-2026/)
+📋 [Insurance Switching Guide](/healthcare/best-health-insurance-switzerland/) • [Compare Models](/blog/health-insurance-models-switzerland/) • [Switching Deadlines](/switching-health-insurance/)
 
 </div>
 
@@ -200,7 +200,7 @@ Relocating to Switzerland is a significant undertaking, but it doesn't have to b
 ### Related Guides
 
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete newcomer guide and provider comparison
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Seasonal deadlines and newcomer enrollment strategies
+- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines and newcomer enrollment strategies
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — Standard vs HMO vs Telmed for newcomers
 - [Relocating to Switzerland: Step-by-Step Checklist](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Administrative timeline and requirements
 - [Relocating to Switzerland: Comprehensive Checklist](/blog/relocating-to-switzerland-checklist) — Complete planning guide for families

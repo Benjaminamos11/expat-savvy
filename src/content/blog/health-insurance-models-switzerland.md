@@ -1,13 +1,13 @@
 ---
-title: "Swiss Health Insurance Models (2025/2026): Standard vs HMO vs GP vs Telmed"
-description: "Understand model trade‑offs and savings for 2025/2026. Which fits your budget and habits? Seasonal note: premium letters in Oct, cancel by 30 Nov for changes effective 1 Jan 2026."
+title: "Swiss Health Insurance Models: Standard vs HMO vs GP vs Telmed"
+description: "Understand model trade‑offs and savings. Which fits your budget and habits? Seasonal note: premium letters in Oct, cancel by 30 Nov for changes effective 1 Jan the following year."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
-tags: ["swiss health insurance", "HMO", "Telmed", "Standard", "insurance models", "2025/2026 change season"]
+tags: ["swiss health insurance", "HMO", "Telmed", "Standard", "insurance models", "annual change season"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand-drawn-sketch-of-a-decision-tr_6nFEntvvSVCuzXgDkrhweQ_qblZRc6wSP-HDClBIqJ8sQ_miepvt.webp"
 ---
 
-## 2025/2026 Key Facts — Model Savings at a Glance
+## Key Facts — Model Savings at a Glance
 
 - Standard: max flexibility, generally highest premiums
 - Family Doctor (GP): usually ~10–15% cheaper vs Standard
@@ -15,14 +15,14 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-raw-hand
 - Telmed: usually the lowest premiums (hotline first)
 - Your model + deductible choice together drive most of your premium savings
 
-> Compare and switch by 30 Nov 2025 for 1 Jan 2026. Need help? [/free-consultation](/free-consultation)
+> Compare and switch by 30 November each year for coverage starting 1 January the following year. Need help? [/free-consultation](/free-consultation)
 
-## 2025/2026 Seasonal Steps
+## Annual Switching Steps
 
 1. Read your October premium letter; note your current model and deductible
 2. Decide your target model based on access preference and savings tolerance
 3. Get 2–3 quotes for your canton and chosen model/deductible
-4. Send cancellation to current insurer by 30 Nov 2025; confirm new policy from 1 Jan 2026
+4. Send cancellation to current insurer by 30 November; confirm new policy from 1 January the following year
 
 ## Key Facts — Swiss Health Insurance Models 2025/2026
 
@@ -160,7 +160,7 @@ For further guidance or to compare specific insurance plans and their suitabilit
 ### Related Guides
 
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland) — Complete guide and provider comparison
-- [Insurance Change 2025/2026](/insurance-change-2025-2026/) — Deadlines, switching process, and seasonal tips
+- [Switching Health Insurance](/insurance-change-2025-2026/) — Deadlines, switching process, and seasonal tips
 - [Swiss Health Insurance Basics](/health-insurance) — Calculator, costs, and coverage overview
 - [Swica vs Helsana Comparison](/compare-providers/swica-vs-helsana/) — Popular provider comparison for model differences
 - [Accident Insurance in Switzerland](/blog/accident-insurance-switzerland-uvg-laa) — UVG/LAA coverage and employment exclusions

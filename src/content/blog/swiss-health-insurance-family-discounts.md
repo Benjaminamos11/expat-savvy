@@ -1,8 +1,8 @@
 ---
-title: "Swiss Health Insurance Family Discounts: Maximize Your Savings 2025"
+title: "Swiss Health Insurance Family Discounts: Maximize Your Savings 2026"
 description: "Complete guide to family discount strategies and savings opportunities in Swiss health insurance. Learn how to save thousands annually through strategic consolidation with Helsana, Concordia, Swica, and CSS."
 author: "Benjamin Amos Wagner"
-date: 2025-05-20
+date: 2026-05-20
 tags: ["family discounts", "swiss health insurance", "family insurance", "insurance savings", "helsana", "concordia", "swica", "css", "cost optimization"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748803660/raw-hand-drawn-sketch-in-red-fineline-st_0TuekOuxTYqgq6fHcj2buA_Qr3c1mU4Tla07KIApj-bZw_abt6ar.png"
 ---
@@ -158,7 +158,7 @@ Swiss health insurance family discounts provide powerful opportunities for cost 
 Family discount optimization is one component of comprehensive family health insurance strategy in Switzerland. For complete guidance on family coverage optimization, explore our comprehensive resources:
 
 ### **Essential Family Planning**
-- **[Swiss Family Health Insurance Guide 2025](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
+- **[Swiss Family Health Insurance Guide 2026](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
 - **[Swiss Health Insurance Prenatal Registration](/blog/prenatal-health-insurance-registration-switzerland/)** - Secure guaranteed coverage before birth
 
 ### **Cost Optimization**

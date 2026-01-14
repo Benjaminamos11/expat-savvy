@@ -1,13 +1,13 @@
 ---
-title: "Accident Insurance in Switzerland (UVG/LAA) — 2025/2026 Guide for Employees"
+title: "Accident Insurance in Switzerland (UVG/LAA) — Guide for Employees"
 description: "Understand BU vs NBU, who pays, and how to stay covered between jobs. Seasonal tip: if you work >8h/week, exclude accident from health insurance to avoid double coverage."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
-tags: ["swiss accident insurance", "UVG", "LAA", "occupational", "non‑occupational", "2025/2026 change season"]
+tags: ["swiss accident insurance", "UVG", "LAA", "occupational", "non‑occupational", "annual change season"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850775/a-vector-illustration-of-a-circular-shie_n7nRZNXRQbq01uASym4YJQ_FUvgwM68QDyAi3TtRmJU5A_ptj3mi.webp"
 ---
 
-## 2025/2026 Key Facts — Accident Insurance (UVG/LAA)
+## Key Facts — Accident Insurance (UVG/LAA)
 
 - Employees are covered by employer accident insurance: BU (work) and, if ≥8h/week, NBU (leisure)
 - BU premium paid by employer; NBU premium usually deducted from salary

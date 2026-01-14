@@ -1,8 +1,8 @@
 ---
-title: "Swiss Family Deductible Strategy: CHF 1,000 Cap Explained 2025"
+title: "Swiss Family Deductible Strategy: CHF 1,000 Cap Explained 2026"
 description: "Master the CHF 1,000 family deductible cap to optimize your Swiss health insurance costs and save thousands annually. Complete guide to deductible strategies for families with children."
 author: "Benjamin Amos Wagner"
-date: 2025-05-20
+date: 2026-05-20
 tags: ["family deductible", "swiss health insurance", "deductible cap", "family insurance", "cost optimization", "children insurance", "health insurance savings"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1748805692/a-raw-hand-drawn-sketch-in-a-red-finelin_uBwdWV7HSe2cCJtxfPjEiA_XovI5G_cTeigsXF8SdD8_w_1_flhd06.png"
 ---
@@ -124,7 +124,7 @@ The CHF 1,000 family deductible cap provides powerful opportunities for Swiss fa
 Deductible optimization is one component of comprehensive family health insurance strategy in Switzerland. For complete guidance on family coverage optimization, explore our comprehensive resources:
 
 ### **Essential Family Planning**
-- **[Swiss Family Health Insurance Guide 2025](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
+- **[Swiss Family Health Insurance Guide 2026](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
 - **[Swiss Health Insurance Prenatal Registration](/blog/prenatal-health-insurance-registration-switzerland/)** - Secure guaranteed coverage before birth
 
 ### **Coverage Optimization**

@@ -10,11 +10,11 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto/v1755208
 featured: true
 faqs:
   - question: "When is the deadline to cancel Swiss health insurance for 2026?"
-    answer: "You must cancel your current health insurance by 30 November 2025 to switch providers from 1 January 2026. The cancellation must be sent by registered mail and received by your insurer before this deadline."
+    answer: "You must cancel your current health insurance by 30 November to switch providers from 1 January the following year. The cancellation must be sent by registered mail and received by your insurer before this deadline."
   - question: "How do I cancel my Swiss health insurance for 2026?"
     answer: "Send a registered letter to your current insurer stating your intention to cancel basic insurance effective 31 December 2025. Include your policy number, personal details, and confirmation of new coverage. Keep proof of delivery."
   - question: "Can I switch Swiss health insurance models mid-year?"
-    answer: "No, you can only change insurance models (Standard, HMO, Family Doctor, Telmed) during the annual switching period. Changes take effect from 1 January 2026 if you cancel by 30 November 2025."
+    answer: "No, you can only change insurance models (Standard, HMO, Family Doctor, Telmed) during the annual switching period. Changes take effect from 1 January the following year if you cancel by 30 November."
   - question: "What happens if I miss the 30 November deadline for 2026?"
     answer: "If you miss the deadline, you're locked into your current provider for 2026. However, you have special termination rights within 30 days of receiving your premium increase letter, typically sent in October."
   - question: "Do I need to find new insurance before cancelling my current policy?"
@@ -32,10 +32,10 @@ Switching health insurance in Switzerland for 2026 requires careful timing and p
 <div style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
 #### Critical Deadlines & Timeline
-• **30 November 2025**: Final deadline to cancel current insurance (registered mail required)  
-• **October 2025**: Premium letters arrive with 2026 rates  
+• **30 November**: Final deadline to cancel current insurance (registered mail required)  
+• **October each year**: Premium letters arrive with rates for the following year  
 • **30-day window**: Special termination right after receiving premium increase  
-• **1 January 2026**: New insurance coverage begins  
+• **1 January the following year**: New insurance coverage begins  
 
 #### Required Actions & Documents
 • **New provider application**: Submit before cancelling current policy  
@@ -50,7 +50,7 @@ Switching health insurance in Switzerland for 2026 requires careful timing and p
 • **Supplementary timing**: Apply early due to medical underwriting delays  
 
 #### Next Steps
-📋 [Compare 2026 provider options](/insurance-change-2025-2026/) • [Book switching consultation](/free-consultation) • [Understand insurance models](/blog/health-insurance-models-switzerland/)
+📋 [Compare 2026 provider options](/switching-health-insurance/) • [Book switching consultation](/free-consultation) • [Understand insurance models](/blog/health-insurance-models-switzerland/)
 
 </div>
 
@@ -104,7 +104,7 @@ Never cancel your current insurance until you have written confirmation from you
 2. **Basic Insurance**: Acceptance is guaranteed - no health questions
 3. **Supplementary Insurance**: Requires medical underwriting and separate application
 4. **Receive Confirmation**: Get written acceptance before proceeding
-5. **Verify Coverage Start**: Confirm 1 January 2026 start date
+5. **Verify Coverage Start**: Confirm 1 January the following year start date
 
 #### Application Requirements
 - Personal identification (ID/passport)
@@ -139,7 +139,7 @@ Dear Sir/Madam,
 
 I hereby give notice to cancel my basic health insurance policy number [XXXXX] effective 31 December 2025.
 
-I have secured replacement coverage with [New Provider] effective 1 January 2026.
+I have secured replacement coverage with [New Provider] effective 1 January the following year.
 
 Please confirm receipt of this cancellation and provide final premium statement.
 
@@ -154,14 +154,14 @@ Sincerely,
 <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin: 24px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
 <h3 style="font-size: 1.125rem; font-weight: 600; color: #111827; margin-bottom: 8px;">Quick Answer: Cancellation Must-Dos</h3>
 <p style="color: #374151; margin: 0; font-size: 0.875rem;">
-Send registered letter by 30 November 2025 with policy number, clear cancellation intent, and effective date 31 December 2025. Include confirmation of new coverage starting 1 January 2026. Keep delivery receipt as proof. Never cancel before securing written acceptance from new provider.
+Send registered letter by 30 November with policy number, clear cancellation intent, and effective date 31 December 2025. Include confirmation of new coverage starting 1 January the following year. Keep delivery receipt as proof. Never cancel before securing written acceptance from new provider.
 </p>
 </div>
 
 ### Step 5: Coordinate the Transition
 
 #### Final Checklist for Smooth Transition
-- [ ] **Confirm new policy start date**: 1 January 2026
+- [ ] **Confirm new policy start date**: 1 January the following year
 - [ ] **Verify accident coverage**: Exclude if employed ≥8 hours/week
 - [ ] **Update premium subsidy office**: Notify if you receive cantonal support
 - [ ] **Transfer payment method**: Set up new premium payments
@@ -253,7 +253,7 @@ Secure new coverage first, use registered mail for cancellation, include all req
 
 ## Conclusion
 
-Changing Swiss health insurance for 2026 requires careful planning and precise timing, but following this step-by-step guide ensures a smooth transition. Remember the critical 30 November 2025 deadline, always secure new coverage before cancelling, and use registered mail for all official communications.
+Changing Swiss health insurance for 2026 requires careful planning and precise timing, but following this step-by-step guide ensures a smooth transition. Remember the critical 30 November deadline, always secure new coverage before cancelling, and use registered mail for all official communications.
 
 The key to success is starting early, comparing options thoroughly, and getting professional guidance when needed. With proper preparation, you can optimize your health insurance for 2026 while avoiding common pitfalls that cost time and money.
 

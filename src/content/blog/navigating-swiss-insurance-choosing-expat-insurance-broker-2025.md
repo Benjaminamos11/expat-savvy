@@ -1,7 +1,7 @@
 ---
-title: "Navigating Swiss Insurance: A Guide to Choosing Your Expat Insurance Broker in 2025"
+title: "Navigating Swiss Insurance: A Guide to Choosing Your Expat Insurance Broker in 2026"
 description: "Looking for an insurance broker in Switzerland? Our comprehensive guide helps expats compare broker options and find the right insurance advisor for your needs."
-pubDate: 2025-05-10
+pubDate: 2026-05-10
 author: "Expat Savvy Team"
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747317968/a-raw-hand-drawn-sketch-in-black-and-red_yZe9BV_NSoepHT3kJbCXwQ_2eFuotjSQQSVZ3atIVedRQ_nuw2pe.webp"
 imageAlt: "Swiss Insurance Broker Consultation"
@@ -35,7 +35,7 @@ The Swiss market features a variety of insurance advisory services, from large f
 
 Several reputable brokers serve the expat community in Switzerland. [Langpartner](https://langpartner.ch) offers insurance and financial advisory services with multilingual support, providing personalized consultation for both Swiss residents and expatriates. [Unterwaldner](https://unterwaldner.com) operates as an independent insurance brokerage with access to multiple providers, offering comprehensive coverage solutions.
 
-For a broader overview of insurance consultants and service providers in Switzerland, the [Expat Services Directory](https://expat-services.ch/guide/health-insurance-consultants-switzerland-2025) provides a comprehensive listing of vetted professionals who specialize in helping expatriates navigate the Swiss insurance landscape.
+For a broader overview of insurance consultants and service providers in Switzerland, the [Expat Services Directory](https://expat-services.ch/guide/health-insurance-consultants-switzerland-2026) provides a comprehensive listing of vetted professionals who specialize in helping expatriates navigate the Swiss insurance landscape.
 
 When considering any insurance broker, verifying their current service range, FINMA registration, and specific expertise with expat needs is always a prudent step. This ensures you have the most up-to-date information about their offerings and how they might align with your needs as an expat in Switzerland.
 
