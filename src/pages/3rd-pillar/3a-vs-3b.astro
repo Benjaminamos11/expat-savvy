@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import PillarQuiz from "../../components/pillar3/PillarQuiz.astro";
+import ArticleSchema from "../../components/ArticleSchema.astro";
+import FAQSchema from "../../components/FAQSchema.astro";
 
 const metadata = {
     title: "Pillar 3a vs. 3b in Switzerland: What's the Difference? (2026 Guide)",
@@ -42,6 +44,15 @@ const localHeroImage = "/images/spoke-hero-3a-3b.png";
     description={metadata.description}
     canonicalURLProp={metadata.canonical}
 >
+    <Fragment slot="head">
+        <ArticleSchema
+            title={metadata.title}
+            description={metadata.description}
+            image={localHeroImage}
+        />
+        <FAQSchema faqs={faqs} />
+    </Fragment>
+
     <!-- GLOBAL STYLE OVERRIDES FOR SPOKE PAGE -->
     <style is:global>
         .spoke-container {

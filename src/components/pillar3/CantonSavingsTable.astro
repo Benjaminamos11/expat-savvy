@@ -1,0 +1,172 @@
+---
+/**
+ * CantonSavingsTable.astro
+ * Interactive table showing estimated tax savings by canton.
+ */
+const cantonData = [
+    { name: "Zurich", savings: 1411 },
+    { name: "Bern", savings: 1580 },
+    { name: "Lucerne", savings: 1320 },
+    { name: "Uri", savings: 1100 },
+    { name: "Schwyz", savings: 950 },
+    { name: "Obwalden", savings: 1050 },
+    { name: "Nidwalden", savings: 1020 },
+    { name: "Glarus", savings: 1350 },
+    { name: "Zug", savings: 890 },
+    { name: "Fribourg", savings: 1620 },
+    { name: "Solothurn", savings: 1550 },
+    { name: "Basel-Stadt", savings: 1680 },
+    { name: "Basel-Landschaft", savings: 1640 },
+    { name: "Schaffhausen", savings: 1480 },
+    { name: "Appenzell A.Rh.", savings: 1420 },
+    { name: "Appenzell I.Rh.", savings: 1380 },
+    { name: "St. Gallen", savings: 1450 },
+    { name: "Graubünden", savings: 1400 },
+    { name: "Aargau", savings: 1390 },
+    { name: "Thurgau", savings: 1430 },
+    { name: "Ticino", savings: 1360 },
+    { name: "Vaud", savings: 1720 },
+    { name: "Valais", savings: 1590 },
+    { name: "Neuchâtel", savings: 1750 },
+    { name: "Geneva", savings: 1780 },
+    { name: "Jura", savings: 1710 },
+];
+---
+
+<div
+    class="canton-savings-table-wrapper overflow-hidden rounded-xl border border-gray-100 shadow-lg bg-white"
+>
+    <div class="overflow-x-auto">
+        <table
+            id="canton-table"
+            class="w-full text-left border-collapse feature-table"
+        >
+            <thead>
+                <tr class="bg-[#1a1a2e] text-white">
+                    <th
+                        class="p-4 md:p-6 font-bold cursor-pointer hover:bg-[#252545] transition-colors group"
+                        data-sort="name"
+                    >
+                        <div class="flex items-center gap-2">
+                            Canton
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-chevrons-up-down text-white/40 group-hover:text-white"
+                                ><path d="m7 15 5 5 5-5"></path><path
+                                    d="m7 9 5-5 5 5"></path></svg
+                            >
+                        </div>
+                    </th>
+                    <th
+                        class="p-4 md:p-6 font-bold cursor-pointer hover:bg-[#252545] transition-colors group"
+                        data-sort="savings"
+                    >
+                        <div class="flex items-center gap-2">
+                            Est. Annual Savings
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-chevrons-up-down text-white/40 group-hover:text-white"
+                                ><path d="m7 15 5 5 5-5"></path><path
+                                    d="m7 9 5-5 5 5"></path></svg
+                            >
+                        </div>
+                    </th>
+                    <th class="p-4 md:p-6 font-bold"> Tax Profile </th>
+                </tr>
+            </thead>
+            <tbody id="canton-tbody" class="divide-y divide-gray-100">
+                {
+                    cantonData.map((canton) => (
+                        <tr
+                            class="hover:bg-[#f8f9fa] transition-colors"
+                            data-name={canton.name}
+                            data-savings={canton.savings}
+                        >
+                            <td class="p-4 md:p-6 font-semibold text-[#1a1a2e]">
+                                {canton.name}
+                            </td>
+                            <td class="p-4 md:p-6 font-bold text-[#C41E3A]">
+                                CHF {canton.savings.toLocaleString("de-CH")}
+                            </td>
+                            <td class="p-4 md:p-6 text-sm text-gray-500">
+                                {canton.savings > 1600 ? (
+                                    <span class="bg-red-50 text-red-700 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                                        High Optimization
+                                    </span>
+                                ) : canton.savings < 1100 ? (
+                                    <span class="bg-green-50 text-green-700 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                                        Low Tax Base
+                                    </span>
+                                ) : (
+                                    <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                                        Moderate Saving
+                                    </span>
+                                )}
+                            </td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="bg-gray-50 p-4 border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 italic">
+            *Based on CHF 120,000 gross income, single, no children, max 3a
+            contribution (2026).
+        </p>
+    </div>
+</div>
+
+<script is:inline>
+    (function () {
+        const table = document.getElementById("canton-table");
+        const tbody = document.getElementById("canton-tbody");
+        const headers = table.querySelectorAll("th[data-sort]");
+
+        let sortDir = 1;
+        let activeSort = null;
+
+        headers.forEach((header) => {
+            header.addEventListener("click", () => {
+                const sortKey = header.getAttribute("data-sort");
+
+                if (activeSort === sortKey) {
+                    sortDir *= -1;
+                } else {
+                    sortDir = 1;
+                    activeSort = sortKey;
+                }
+
+                const rows = Array.from(tbody.querySelectorAll("tr"));
+
+                rows.sort((a, b) => {
+                    let valA = a.getAttribute(`data-${sortKey}`);
+                    let valB = b.getAttribute(`data-${sortKey}`);
+
+                    if (sortKey === "savings") {
+                        return (parseInt(valA) - parseInt(valB)) * sortDir;
+                    }
+                    return valA.localeCompare(valB) * sortDir;
+                });
+
+                rows.forEach((row) => tbody.appendChild(row));
+            });
+        });
+    })();
+</script>

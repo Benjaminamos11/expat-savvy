@@ -1,0 +1,54 @@
+---
+/**
+ * ArticleSchema.astro
+ * LLM & SEO Optimization: Provides structured data for Articles and Guides.
+ * Helps search engines (Google) and AI crawlers (Perplexity/OpenAI) understand content.
+ */
+
+interface Props {
+    title: string;
+    description: string;
+    image: string;
+    author?: string;
+    publishDate?: string;
+    modifiedDate?: string;
+}
+
+const {
+    title,
+    description,
+    image,
+    author = "Hans Steiner",
+    publishDate = "2026-01-28T12:00:00Z",
+    modifiedDate = new Date().toISOString(),
+} = Astro.props;
+
+const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description: description,
+    image: image.startsWith("http") ? image : `https://expat-savvy.ch${image}`,
+    author: {
+        "@type": "Person",
+        name: author,
+        url: "https://expat-savvy.ch/about",
+    },
+    publisher: {
+        "@type": "Organization",
+        name: "Expat Savvy",
+        logo: {
+            "@type": "ImageObject",
+            url: "https://expat-savvy.ch/favicon.png",
+        },
+    },
+    datePublished: publishDate,
+    dateModified: modifiedDate,
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": Astro.url.href,
+    },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />

@@ -3,13 +3,41 @@ import Layout from "../../layouts/Layout.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import TaxSavingsCalculatorVanilla from "../../components/calculators/TaxSavingsCalculatorVanilla.astro";
+import ArticleSchema from "../../components/ArticleSchema.astro";
+import FAQSchema from "../../components/FAQSchema.astro";
+import CantonSavingsTable from "../../components/pillar3/CantonSavingsTable.astro";
 
 const metadata = {
-    title: "3rd Pillar Tax Optimization: Complete Guide for 2026 | Expat Savvy",
+    title: "3rd Pillar Tax Savings in Switzerland: An Expat's Guide (2026)",
     description:
-        "Maximize your Swiss tax savings with our expert guide. Learn about annual deductions, withdrawal strategies, and calculate your potential savings instantly.",
+        "Learn how to maximize your 3rd pillar tax deductions in Switzerland. Our guide covers contribution limits, canton-specific savings, and advanced strategies for expats.",
     canonical: "https://expat-savvy.ch/3rd-pillar/tax-optimization/",
 };
+
+const faqs = [
+    {
+        question: "What is the deadline for making a 3a contribution?",
+        answer: "The hard deadline is December 31st of the calendar year. However, we recommend completing your transfer by mid-December to ensure the funds are cleared and booked in time for the tax certificate generation.",
+    },
+    {
+        question: "Can I deduct 3b contributions?",
+        answer: "Generally, no. Pillar 3b (unrestricted pension) is paid from after-tax income and is not deductible from your gross income. However, it offers other benefits like tax-free growth and flexible withdrawal.",
+    },
+    {
+        question: "How are 3rd pillar withdrawals taxed?",
+        answer: "Withdrawals are taxed at a reduced rate, separate from your other income. This is called a capital withdrawal tax. By staggerring your withdrawals (the 'Ladder Strategy'), you can keep the progression low and save thousands in exit taxes.",
+    },
+    {
+        question: "Do I have to declare my 3a assets on my tax return?",
+        answer: "Yes, you should declare the existence of the account/policy, but the assets themselves are exempt from wealth tax. The interest or dividends earned within the 3a are also exempt from income and withholding tax.",
+    },
+    {
+        question: "Can my spouse and I both have a 3a account?",
+        answer: "Yes. If both spouses are earning an AHV-liable income, both can contribute up to the maximum legal limit (CHF 7,258 each in 2026) and deduct it from your joint tax return.",
+    },
+];
+
+const heroImage = "/images/tax-savings-hero.png";
 ---
 
 <Layout
@@ -17,354 +45,392 @@ const metadata = {
     description={metadata.description}
     canonicalURLProp={metadata.canonical}
 >
+    <Fragment slot="head">
+        <ArticleSchema
+            title={metadata.title}
+            description={metadata.description}
+            image={heroImage}
+        />
+        <FAQSchema faqs={faqs} />
+    </Fragment>
+
+    <style is:global>
+        .spoke-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .spoke-h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #1a1a2e;
+        }
+        .spoke-h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .spoke-body {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1a1a2e;
+        }
+        .pro-tip-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #c41e3a;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+    </style>
+
     <BreadcrumbSchema
         items={[
             { name: "Home", url: "/" },
             { name: "3rd Pillar Hub", url: "/3rd-pillar" },
-            {
-                name: "Tax Optimization Guide",
-                url: "/3rd-pillar/tax-optimization",
-            },
+            { name: "Tax Optimization", url: "/3rd-pillar/tax-optimization" },
         ]}
     />
 
-    <!-- Hero Section -->
-    <div class="bg-gray-50 py-16 border-b border-gray-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span
-                class="text-[#C41E3A] font-bold tracking-wider uppercase text-sm mb-4 block"
-            >
-                Financial Strategy
-            </span>
+    <!-- HERO IMAGE -->
+    <div
+        class="w-full h-[400px] md:h-[550px] relative overflow-hidden bg-gray-900"
+    >
+        <img
+            src={heroImage}
+            alt="Alpine flowers on mountain peak at sunrise"
+            class="w-full h-full object-cover opacity-70"
+        />
+        <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-gray-900/60 to-transparent"
+        >
             <h1
-                class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight"
+                class="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-2xl max-w-4xl leading-tight"
             >
-                The Ultimate Guide to <br class="hidden md:block" />
-                <span class="text-[#C41E3A]">3rd Pillar Tax Savings</span>
+                The Ultimate Guide to 3rd Pillar <span class="text-[#C41E3A]"
+                    >Tax Savings</span
+                >
             </h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Stop overpaying taxes. Discover how the "Triple Tax Advantage"
-                can save you six figures over your time in Switzerland.
+            <p
+                class="text-white/90 text-xl md:text-2xl font-medium drop-shadow-md max-w-2xl"
+            >
+                Unlock thousands of francs in annual tax savings with the Swiss
+                pension system.
             </p>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="py-16 bg-white">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Introduction -->
-            <div class="prose prose-lg text-gray-700 max-w-none mb-12">
-                <p>
-                    The 3rd Pillar is the only vehicle in the Swiss tax code
-                    that offers a "Triple Tax Advantage": Tax-deductible
-                    contributions, tax-free growth, and a reduced tax rate on
-                    withdrawal. Mastering these rules can save you six figures
-                    over a lifetime.
-                </p>
+    <!-- MAIN CONTENT -->
+    <div class="bg-white py-16 md:py-24">
+        <div class="spoke-container">
+            <!-- CALCULATOR SECTION -->
+            <div class="mb-24">
+                <div class="text-center mb-12">
+                    <RedSectionHeader
+                        title="Calculate Your Exact Tax Savings"
+                        align="center"
+                    />
+                    <p class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto">
+                        Use our 2026 calculator to see how much your
+                        contribution will reduce your tax bill based on your
+                        canton and income.
+                    </p>
+                </div>
+                <div class="p-4 md:p-8 bg-[#1a1a2e] rounded-3xl shadow-2xl">
+                    <TaxSavingsCalculatorVanilla />
+                </div>
             </div>
 
-            <!-- 1. Top Slice Deduction -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                    1. The "Top-Slice" Deduction Effect
-                </h2>
-                <div class="prose prose-lg text-gray-700 max-w-none">
+            <!-- FUNDAMENTALS -->
+            <div class="mb-24">
+                <RedSectionHeader title="How 3a Tax Deductions Work" />
+                <div class="spoke-body space-y-6 mt-8">
                     <p>
-                        Switzerland uses progressive tax rates. The money you
-                        earn last is taxed the most. Conversely, the money you
-                        deduct comes off the "top stack" of your income.
+                        The Swiss 3rd Pillar is a voluntary pension scheme that
+                        is heavily incentivized by the government. When you
+                        contribute to a Pillar 3a account, the entire amount is
+                        deducted from your taxable income for that year.
                     </p>
                     <p>
-                        If you earn CHF 150,000, your top CHF 7,000 might be
-                        taxed at 30%, even if your average rate is 20%. By
-                        contributing to Pillar 3a, you wipe out that most
-                        expensive slice of income.
+                        Because Switzerland uses a <strong
+                            >progressive income tax system</strong
+                        >, these deductions are taken from your "marginal" tax
+                        bracket—the highest percentage you pay. For a
+                        high-income earner in a city like Zurich or Geneva, this
+                        can mean a CHF 7,000 contribution effectively costs only
+                        CHF 5,000, with the resulting CHF 2,000 being returned
+                        to you as a tax refund.
                     </p>
+
                     <div
-                        class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#C41E3A] my-8"
+                        class="my-10 p-8 border border-gray-100 rounded-2xl bg-[#F8F9FA]"
                     >
-                        <strong>The Golden Rule:</strong> Always contribute before
-                        December 31st. If the money lands on January 1st, deduction
-                        for the previous year is lost forever.
+                        <h4 class="font-bold text-xl mb-4 text-[#1a1a2e]">
+                            2026 Contribution Limits
+                        </h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-xl shadow-sm">
+                                <span
+                                    class="block text-[#C41E3A] font-bold text-2xl mb-1"
+                                    >CHF 7,258</span
+                                >
+                                <span
+                                    class="text-sm text-gray-500 uppercase font-bold tracking-wider"
+                                    >With 2nd Pillar</span
+                                >
+                                <p class="text-xs text-gray-400 mt-2">
+                                    For employees already enrolled in a pension
+                                    fund (LPP/BVG).
+                                </p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl shadow-sm">
+                                <span
+                                    class="block text-[#C41E3A] font-bold text-2xl mb-1"
+                                    >CHF 36,288</span
+                                >
+                                <span
+                                    class="text-sm text-gray-500 uppercase font-bold tracking-wider"
+                                    >Without 2nd Pillar</span
+                                >
+                                <p class="text-xs text-gray-400 mt-2">
+                                    Maximum 20% of net income for the
+                                    self-employed.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Canton Comparison -->
-            <div
-                class="bg-gray-50 p-8 rounded-2xl mb-16 border border-gray-100 shadow-sm"
-            >
-                <h3
-                    class="font-bold text-xl text-gray-900 mb-6 border-b border-gray-200 pb-4"
-                >
-                    Potential Savings by Canton (Max Contribution)
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex justify-between items-center text-lg">
-                        <span class="text-gray-600"
-                            >Geneva / Lausanne (High Tax)</span
-                        >
-                        <span class="font-bold text-[#C41E3A]"
-                            >~CHF 2,000 - 2,500</span
-                        >
-                    </li>
-                    <li class="flex justify-between items-center text-lg">
-                        <span class="text-gray-600"
-                            >Zurich / Bern (Medium Tax)</span
-                        >
-                        <span class="font-bold text-[#C41E3A]"
-                            >~CHF 1,600 - 2,000</span
-                        >
-                    </li>
-                    <li class="flex justify-between items-center text-lg">
-                        <span class="text-gray-600">Zug / Schwyz (Low Tax)</span
-                        >
-                        <span class="font-bold text-[#C41E3A]"
-                            >~CHF 1,100 - 1,400</span
-                        >
-                    </li>
-                </ul>
-                <p
-                    class="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-200"
-                >
-                    *Estimates for single earner CHF 100k gross income.
+            <!-- CANTON COMPARISON -->
+            <div class="mb-24">
+                <RedSectionHeader title="Savings by Canton: A Comparison" />
+                <p class="spoke-body text-gray-600 mt-6 mb-10">
+                    Tax savings vary significantly across Switzerland due to
+                    cantonal and communal tax rates. A contribution in Fribourg
+                    or Basel might save you more than the same contribution in
+                    Zug.
                 </p>
+                <CantonSavingsTable />
             </div>
 
-            <!-- Calculator Section -->
-            <div class="my-20">
+            <!-- ADVANCED STRATEGIES -->
+            <div class="mb-24">
                 <RedSectionHeader
-                    title="Calculate Your Personal Savings"
-                    align="left"
-                    className="mb-8"
+                    title="Advanced Tax Optimization Strategies"
                 />
-                <TaxSavingsCalculatorVanilla />
-            </div>
 
-            <!-- 2. Withdrawal Strategy -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                    2. The "Exit Tax" Strategy
-                </h2>
-                <div class="prose prose-lg text-gray-700 max-w-none">
-                    <p>
-                        You don't pay 0% tax when you take the money out. You
-                        pay a specific <strong
-                            >Capital Withdrawal Tax (Kapitalauszahlungssteuer)</strong
-                        >. This is separate from your income tax and typically
-                        1/5th to 1/2 of the normal rate.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-6 mt-8">
-                    <div
-                        class="border border-gray-200 p-6 rounded-xl hover:shadow-lg transition bg-white"
-                    >
-                        <div class="text-4xl mb-4">🏔️</div>
-                        <h4 class="font-bold text-lg mb-2">
-                            Relocation Arbitrage
-                        </h4>
-                        <p class="text-sm text-gray-600">
-                            If you move from a high-tax canton (e.g. Vaud) to a
-                            low-tax canton (e.g. Schwyz) <em>before</em> you withdraw
-                            your capital, you pay the tax rate of your <strong
-                                >new</strong
-                            > domicile. This can save 50% on the exit bill.
+                <div class="mt-12">
+                    <h3 class="spoke-h3">
+                        Strategy 1: Staggering Withdrawals (The Ladder)
+                    </h3>
+                    <div class="spoke-body space-y-4">
+                        <p>
+                            When you eventually withdraw your 3rd pillar capital
+                            (usually at retirement), you pay a <strong
+                                >capital withdrawal tax</strong
+                            >. This tax is progressive—the larger the single
+                            withdrawal, the higher the tax rate.
                         </p>
-                    </div>
-                    <div
-                        class="border border-gray-200 p-6 rounded-xl hover:shadow-lg transition bg-white"
-                    >
-                        <div class="text-4xl mb-4">🪜</div>
-                        <h4 class="font-bold text-lg mb-2">
-                            The "Ladder" Strategy
-                        </h4>
-                        <p class="text-sm text-gray-600">
-                            Progressive tax applies to withdrawals too.
-                            <strong>Solution:</strong> Open 5 separate 3a accounts
-                            and cash them out in different years (e.g. age 60, 61,
-                            62, 63, 64) to break the progression.
+                        <p>
+                            By opening <strong>multiple 3a accounts</strong> (we recommend
+                            five) and staggering their closure over five consecutive
+                            years (e.g., ages 60–64), you keep each withdrawal in
+                            a lower tax bracket. This simple "Ladder Strategy" can
+                            save you between 20% and 40% in exit taxes.
                         </p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Compound Effect Table -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                    The 10-Year Compound Effect
-                </h2>
-                <div
-                    class="overflow-hidden rounded-xl border border-gray-200 shadow-sm"
-                >
-                    <table class="min-w-full text-sm">
-                        <thead class="bg-gray-100 text-gray-900">
-                            <tr>
-                                <th class="p-4 text-left font-bold">Year</th>
-                                <th class="p-4 text-left font-bold"
-                                    >Contribution</th
+                <div class="mt-12">
+                    <h3 class="spoke-h3">
+                        Strategy 2: Buying into Your 2nd Pillar
+                    </h3>
+                    <div class="spoke-body space-y-4">
+                        <p>
+                            For expats who moved to Switzerland later in their
+                            careers, there is often a "pension gap" in their 2nd
+                            Pillar (LPP). You are legally allowed to "buy in" to
+                            your pension fund to fill this gap.
+                        </p>
+                        <p>
+                            These buy-ins are <strong
+                                >fully tax-deductible</strong
+                            > and have much higher limits than the 3rd pillar. Combining
+                            a maxed-out 3rd pillar with strategic 2nd pillar buy-ins
+                            is the ultimate way to reduce your Swiss tax burden to
+                            the legal minimum.
+                        </p>
+
+                        <div class="pro-tip-box">
+                            <div class="text-2xl">💡</div>
+                            <div>
+                                <span
+                                    class="block font-bold text-[#1a1a2e] mb-1"
+                                    >Pro Tip for Expats:</span
                                 >
-                                <th
-                                    class="p-4 text-left font-bold text-green-700"
-                                    >Tax Saved (@25%)</th
+                                <p
+                                    class="text-sm text-gray-600 leading-relaxed"
                                 >
-                                <th class="p-4 text-left font-bold"
-                                    >Total Value (Inv @ 5%)</th
-                                >
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 bg-white">
-                            <tr
-                                ><td class="p-4">Year 1</td><td class="p-4"
-                                    >CHF 7,258</td
-                                ><td class="p-4 font-bold text-green-700"
-                                    >CHF 1,815</td
-                                ><td class="p-4">CHF 7,620</td></tr
-                            >
-                            <tr
-                                ><td class="p-4">Year 5</td><td class="p-4"
-                                    >CHF 7,258</td
-                                ><td class="p-4 font-bold text-green-700"
-                                    >CHF 1,815</td
-                                ><td class="p-4">CHF 42,100</td></tr
-                            >
-                            <tr
-                                ><td class="p-4">Year 10</td><td class="p-4"
-                                    >CHF 7,258</td
-                                ><td class="p-4 font-bold text-green-700"
-                                    >CHF 1,815</td
-                                ><td class="p-4">CHF 95,800</td></tr
-                            >
-                            <tr
-                                class="bg-red-50 font-bold border-t-2 border-red-100"
-                            >
-                                <td class="p-4 text-[#C41E3A]">TOTAL Impact</td>
-                                <td class="p-4">CHF 72,580</td>
-                                <td class="p-4 text-green-700"
-                                    >CHF 18,150 (cash back)</td
-                                >
-                                <td class="p-4 text-gray-900"
-                                    >~CHF 96k (Asset)</td
-                                >
-                            </tr>
-                        </tbody>
-                    </table>
+                                    Before making a 2nd pillar buy-in, always
+                                    check your pension certificate for the
+                                    "Maximum possible purchase" amount and
+                                    verify the 3-year blocking period for
+                                    capital withdrawals.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs text-gray-500 mt-3 italic">
-                    *Compound growth and tax savings reinvested assumes annual
-                    market performance. Not guaranteed.
-                </p>
             </div>
 
-            <!-- Key Takeaways -->
-            <div class="bg-gray-900 text-white p-8 rounded-2xl shadow-xl mb-16">
-                <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-8 w-8 text-[#C41E3A]"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+            <!-- HANS STEINER CARD -->
+            <div
+                class="mb-24 bg-[#F8F9FA] rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm"
+            >
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div
+                        class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                    Key Takeaways
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3">
-                        <span class="text-[#C41E3A] font-bold mt-1">✓</span>
-                        <span class="text-gray-300"
-                            >Contributions are fully deductible from taxable
-                            income (up to CHF 7,258/year).</span
+                        <img
+                            src="/images/hans-steiner.png"
+                            alt="Hans Steiner"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
+                            Create a Personalized Tax Strategy
+                        </h2>
+                        <p class="spoke-body text-gray-600 mb-8 max-w-xl">
+                            "Every expat's tax situation is unique. Our role is
+                            to find the invisible gaps in your planning and seal
+                            them before tax season arrives."
+                        </p>
+                        <button
+                            onclick="window.openContextualModal()"
+                            class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
                         >
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-[#C41E3A] font-bold mt-1">✓</span>
-                        <span class="text-gray-300"
-                            >Savings grow 100% tax-free (no income or wealth tax
-                            on the pot).</span
-                        >
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-[#C41E3A] font-bold mt-1">✓</span>
-                        <span class="text-gray-300"
-                            >Use the "Ladder Strategy" (5 accounts) to reduce
-                            tax upon withdrawal.</span
-                        >
-                    </li>
-                </ul>
+                            Book a Free Tax Analysis
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ SECTION -->
+            <div class="mb-24">
+                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
+                    Frequently Asked Questions
+                </h2>
+                <div class="space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <div class="border-b border-gray-100">
+                                <details class="group py-4">
+                                    <summary class="flex justify-between items-center cursor-pointer list-none">
+                                        <span class="text-lg md:text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors">
+                                            {faq.question}
+                                        </span>
+                                        <span class="text-2xl font-light text-gray-400 group-open:rotate-45 transition-transform">
+                                            +
+                                        </span>
+                                    </summary>
+                                    <div class="pt-4 pb-2 text-gray-600 spoke-body leading-relaxed animate-fade-in">
+                                        {faq.answer}
+                                    </div>
+                                </details>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- CTA Section -->
-    <div class="bg-[#C41E3A] py-20 text-center px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-            Need a Personalized Tax Strategy?
-        </h2>
-        <p class="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
-            Our experts can calculate a precise projection based on your canton,
-            age, and income.
-        </p>
-        <button
-            onclick="window.openContextualModal()"
-            class="bg-white text-[#C41E3A] font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-gray-100 transition transform hover:-translate-y-1"
-        >
-            Book Free Tax Analysis
-        </button>
+    <!-- FINAL CTA -->
+    <div class="bg-[#1a1a2e] py-24 text-center">
+        <div class="spoke-container">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                Ready to Cut Your Tax Bill?
+            </h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Join 5,000+ expats who have optimized their Swiss pension
+                strategy. Get your free tax analysis today.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl transition transform hover:-translate-y-1"
+            >
+                Get My Free Plan
+            </button>
+        </div>
     </div>
 
-    <!-- Related Guides -->
-    <div class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-10 text-center">
-                Continue Reading
+    <!-- RELATED GUIDES -->
+    <div class="py-24 bg-gray-50">
+        <div class="spoke-container">
+            <h2
+                class="text-2xl font-bold text-[#1a1a2e] mb-12 text-center uppercase tracking-[0.2em]"
+            >
+                Mastering the 3rd Pillar
             </h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <a
-                    href="/3rd-pillar/providers"
-                    class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition group"
+                    href="/3rd-pillar/3a-vs-3b"
+                    class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-transparent hover:border-[#C41E3A]"
                 >
-                    <h3
-                        class="font-bold text-lg mb-2 group-hover:text-[#C41E3A] transition-colors"
+                    <h4
+                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A]"
                     >
-                        Best 3rd Pillar Providers
-                    </h3>
-                    <p class="text-gray-600 text-sm">
-                        Compare fees and returns of VIAC, Finpension, and more.
+                        3a vs. 3b Comparison
+                    </h4>
+                    <p class="text-gray-500 text-sm mb-6">
+                        Choosing between restricted and flexible pension
+                        buckets.
                     </p>
+                    <span class="text-[#C41E3A] font-bold text-sm"
+                        >Read Comparison →</span
+                    >
                 </a>
                 <a
-                    href="/3rd-pillar/3a-vs-3b"
-                    class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition group"
+                    href="/3rd-pillar/providers"
+                    class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-transparent hover:border-[#C41E3A]"
                 >
-                    <h3
-                        class="font-bold text-lg mb-2 group-hover:text-[#C41E3A] transition-colors"
+                    <h4
+                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A]"
                     >
-                        Pillar 3a vs 3b
-                    </h3>
-                    <p class="text-gray-600 text-sm">
-                        Understand the differences between bound and free
-                        pension plans.
+                        Bank vs. Insurance
+                    </h4>
+                    <p class="text-gray-500 text-sm mb-6">
+                        Understand why your choice of provider dictates your
+                        return.
                     </p>
+                    <span class="text-[#C41E3A] font-bold text-sm"
+                        >Read Guide →</span
+                    >
                 </a>
                 <a
                     href="/3rd-pillar/withdrawal-guide"
-                    class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition group"
+                    class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-transparent hover:border-[#C41E3A]"
                 >
-                    <h3
-                        class="font-bold text-lg mb-2 group-hover:text-[#C41E3A] transition-colors"
+                    <h4
+                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A]"
                     >
                         Withdrawal Guide
-                    </h3>
-                    <p class="text-gray-600 text-sm">
-                        How to access your funds early for property or
-                        relocation.
+                    </h4>
+                    <p class="text-gray-500 text-sm mb-6">
+                        How to unlock your funds for property or leaving
+                        Switzerland.
                     </p>
+                    <span class="text-[#C41E3A] font-bold text-sm"
+                        >Read Rules →</span
+                    >
                 </a>
             </div>
         </div>
