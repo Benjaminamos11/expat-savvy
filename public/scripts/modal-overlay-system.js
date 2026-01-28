@@ -3,6 +3,49 @@
  * Loads HTML modal files as overlays instead of popup windows
  */
 
+// EMERGENCY FALLBACK: Define global function immediately in case class init fails
+window.openLifePensionModal = function (intent = 'unknown', source = 'unknown') {
+  console.log('💰 Emergency fallback: Opening Financial Modal (Legacy Name)');
+  const modalFile = '/financial-modal.html';
+
+  // Basic fetch and append logic (simplified version of class logic)
+  fetch(modalFile)
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const modalElement = doc.querySelector('#modal');
+      if (modalElement) {
+        // Create close handler if needed
+        window.closeModalOverlay = function () {
+          const m = document.querySelector('#modal');
+          if (m) m.remove();
+          document.body.style.overflow = '';
+        };
+
+        modalElement.classList.remove('hidden');
+        modalElement.classList.add('flex');
+        modalElement.style.display = 'flex';
+        modalElement.style.zIndex = '9999';
+        document.body.appendChild(modalElement);
+        document.body.style.overflow = 'hidden';
+
+        // Run scripts
+        doc.querySelectorAll('script').forEach(s => {
+          const newScript = document.createElement('script');
+          newScript.textContent = s.textContent;
+          document.body.appendChild(newScript);
+        });
+
+        // Trigger open
+        setTimeout(() => {
+          if (window.openModal) window.openModal(intent);
+        }, 100);
+      }
+    })
+    .catch(err => console.error('Fallback modal failed:', err));
+};
+
 class ModalOverlaySystem {
   constructor() {
     this.currentModal = null;
@@ -12,21 +55,23 @@ class ModalOverlaySystem {
   init() {
     console.log('🚀 Modal Overlay System initialized');
     console.log('🔧 About to create modal functions...');
-    
+
     // Create global functions
     window.openModalOverlay = this.openModalOverlay.bind(this);
     window.openRelocationModal = this.openRelocationModal.bind(this);
     window.openHealthModal = this.openHealthModal.bind(this);
     window.openOtherModal = this.openOtherModal.bind(this);
     window.openLifePensionModal = this.openLifePensionModal.bind(this);
+    window.openFinancialModal = this.openLifePensionModal.bind(this); // Alias for new name
+    window.openContextualModal = this.openContextualModal.bind(this); // New smart router
     window.closeModalOverlay = this.closeModalOverlay.bind(this);
     window.initializeCalComManually = this.initializeCalComManually.bind(this);
-    
+
     // Legacy compatibility functions
     window.openOffersModal = this.openHealthModal.bind(this);
     window.openConsultationModal = this.openHealthModal.bind(this);
     window.showConsultationModal = this.openHealthModal.bind(this);
-    
+
     console.log('✅ Modal functions created successfully!');
     console.log('🔧 openHealthModal type:', typeof window.openHealthModal);
     console.log('🔧 openOffersModal type:', typeof window.openOffersModal);
@@ -42,14 +87,14 @@ class ModalOverlaySystem {
     if (modalFile.includes('relocation')) return 'relocation';
     if (modalFile.includes('health') || modalFile.includes('final')) return 'health_insurance';
     if (modalFile.includes('other-insurance')) return 'other_insurance';
-    if (modalFile.includes('life-pension')) return 'life_pension';
+    if (modalFile.includes('life-pension') || modalFile.includes('financial-modal')) return 'life_pension';
     return 'unknown';
   }
 
   async openModalOverlay(modalFile, options = {}) {
     try {
       console.log('🔄 Loading modal:', modalFile);
-      
+
       // Enhanced modal tracking
       const modalType = this.getModalTypeFromFile(modalFile);
       const context = {
@@ -60,12 +105,12 @@ class ModalOverlaySystem {
         source: options.source || 'unknown',
         intent: options.intent || 'unknown'
       };
-      
+
       // Track with enhanced system
       if (typeof window.trackModalOpen === 'function') {
         window.trackModalOpen(modalType, context);
       }
-      
+
       // Legacy tracking for backward compatibility
       if (typeof window.trackQuoteFlowStart === 'function') {
         window.trackQuoteFlowStart({
@@ -74,7 +119,7 @@ class ModalOverlaySystem {
           modalType: modalType
         });
       }
-      
+
       // Remove existing modal if any (before setting isOpening flag)
       if (this.currentModal) {
         this.currentModal.remove();
@@ -82,82 +127,106 @@ class ModalOverlaySystem {
         const existingModals = document.querySelectorAll('#modal');
         existingModals.forEach(modal => modal.remove());
       }
-      
+
       // Set a flag to prevent immediate closure
       this.isOpening = true;
-      
+
       // Fetch modal HTML
       const response = await fetch(modalFile);
       if (!response.ok) {
         throw new Error(`Failed to load modal: ${response.status}`);
       }
-      
+
       const html = await response.text();
       console.log('📄 HTML fetched, length:', html.length);
       console.log('📄 HTML contains modal:', html.includes('id="modal"'));
-      
+
       // Parse HTML to extract modal content
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      
+
       // Find the modal element
       const modalElement = doc.querySelector('#modal');
       if (!modalElement) {
         throw new Error('Modal element not found in HTML');
       }
-      
+
       console.log('📋 Modal element found:', modalElement);
-      
+
       // Clone the modal element to avoid DOM issues
       const modalClone = modalElement.cloneNode(true);
-      
-      // Ensure the modal is visible and properly styled
+
+      // Ensure the modal is visible and properly styled but hidden initially for transition
       modalClone.classList.remove('hidden');
       modalClone.classList.add('flex');
       modalClone.style.display = 'flex';
       modalClone.style.zIndex = '9999';
-      
-      // Add modal to page
-      document.body.appendChild(modalClone);
-      
-      console.log('📋 Modal added to DOM:', modalClone);
-      
-      // Prevent body scroll
-      document.body.style.overflow = 'hidden';
-      
-      // Track current modal
-      this.currentModal = modalClone;
-      
-      // Extract and execute scripts from the modal
+      modalClone.style.opacity = '0';
+      modalClone.style.visibility = 'hidden';
+      modalClone.style.transition = 'opacity 0.4s ease-out, visibility 0.4s ease-out';
+
+      // 1. Extract and execute scripts from the modal
       const scripts = doc.querySelectorAll('script');
       console.log(`📜 Found ${scripts.length} scripts to inject`);
-      
+
       scripts.forEach((script, index) => {
         if (script.textContent && !script.src) {
           try {
-            // Create a new script element
             const newScript = document.createElement('script');
             newScript.textContent = script.textContent;
             newScript.setAttribute('data-modal-script', 'true');
             newScript.setAttribute('data-script-index', index);
-            
-            // Execute scripts immediately and sequentially
             document.body.appendChild(newScript);
-            console.log(`✅ Injected and executed modal script ${index + 1}/${scripts.length}`);
           } catch (error) {
             console.warn(`⚠️ Error executing script ${index + 1}:`, error);
           }
         }
       });
-      
-      // Load Tailwind CSS if not already loaded
-      if (!document.querySelector('script[src*="tailwindcss"]')) {
+
+      // 2. Extract and inject CSS styles from the modal (DO THIS BEFORE APPENDING CLONE)
+      const styleElement = doc.querySelector('style');
+      if (styleElement) {
+        const modalStyles = document.createElement('style');
+        modalStyles.textContent = styleElement.textContent;
+        modalStyles.setAttribute('data-modal-styles', 'true');
+        document.head.appendChild(modalStyles);
+        console.log('✅ Injected modal CSS styles (pre-append)');
+      }
+
+      // 3. Add modal to page
+      document.body.appendChild(modalClone);
+      console.log('📋 Modal added to DOM:', modalClone);
+
+      // Trigger fade-in with a 100ms safety buffer to allow layout to settle
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          modalClone.style.opacity = '1';
+          modalClone.style.visibility = 'visible';
+        });
+      }, 100);
+
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+
+      // Track current modal
+      this.currentModal = modalClone;
+
+      // Scripts already handled above for timing reasons
+
+      // Load Tailwind CSS IF NOT ALREADY PRESENT (Injection of CDN Tailwind can cause FOUC on pages with bundled Tailwind)
+      const hasTailwind = document.querySelector('script[src*="tailwindcss"]') ||
+        Array.from(document.styleSheets).some(s => s.href?.includes('tailwind'));
+
+      if (!hasTailwind && !document.getElementById('tailwind-cdn')) {
         const tailwindScript = document.createElement('script');
+        tailwindScript.id = 'tailwind-cdn';
         tailwindScript.src = 'https://cdn.tailwindcss.com';
         document.head.appendChild(tailwindScript);
         console.log('✅ Loaded Tailwind CSS');
+      } else {
+        console.log('✅ Tailwind already detected, skipping injection to prevent FOUC');
       }
-      
+
       // Load Lucide icons if not already loaded
       if (!document.querySelector('script[src*="lucide"]')) {
         const lucideScript = document.createElement('script');
@@ -165,7 +234,7 @@ class ModalOverlaySystem {
         document.head.appendChild(lucideScript);
         console.log('✅ Loaded Lucide icons');
       }
-      
+
       // Load Cal.com script if not already loaded
       if (!window.Cal && !window.calScriptLoaded) {
         const calScript = document.createElement('script');
@@ -173,21 +242,21 @@ class ModalOverlaySystem {
         calScript.async = true;
         calScript.onload = async () => {
           console.log('✅ Cal.com script loaded successfully');
-          
+
           // Wait a bit for Cal to be available
           setTimeout(async () => {
             window.calScriptLoaded = true;
-            
+
             // Try to get the Cal API using the modern approach
             try {
               if (typeof window.getCalApi === 'function') {
-                const cal = await window.getCalApi({namespace: "expat-savvy"});
+                const cal = await window.getCalApi({ namespace: "expat-savvy" });
                 window.calApi = cal;
                 console.log('✅ Cal API obtained successfully');
               } else {
                 console.log('⚠️ getCalApi not available, using legacy Cal function');
               }
-              
+
               // Check if legacy Cal function is available
               if (typeof window.Cal === 'function') {
                 console.log('✅ Legacy Cal function is available');
@@ -208,17 +277,9 @@ class ModalOverlaySystem {
         window.calScriptLoaded = true;
         console.log('✅ Cal.com script already loaded');
       }
-      
-      // Extract and inject CSS styles from the modal
-      const styleElement = doc.querySelector('style');
-      if (styleElement) {
-        const modalStyles = document.createElement('style');
-        modalStyles.textContent = styleElement.textContent;
-        modalStyles.setAttribute('data-modal-styles', 'true');
-        document.head.appendChild(modalStyles);
-        console.log('✅ Injected modal CSS styles');
-      }
-      
+
+      // Styles already handled above for timing reasons
+
       // Add additional CSS to force red colors and fix blue borders
       const additionalStyles = document.createElement('style');
       additionalStyles.textContent = `
@@ -267,23 +328,23 @@ class ModalOverlaySystem {
       additionalStyles.setAttribute('data-red-override-styles', 'true');
       document.head.appendChild(additionalStyles);
       console.log('✅ Added red color overrides');
-      
+
       // Initialize basic modal functionality
       this.initializeModalContent(modalClone);
-      
+
       // Call the modal's openModal function after scripts have executed
       // Use requestAnimationFrame to ensure scripts have run
       requestAnimationFrame(() => {
         setTimeout(() => {
           console.log('🔍 Checking for window.openModal...');
           console.log('🔍 window.openModal type:', typeof window.openModal);
-          
+
           if (typeof window.openModal === 'function') {
             console.log('🎯🎯🎯 CALLING window.openModal with intent:', options.intent || 'home');
             console.log('🔍 Intent value:', options.intent);
             console.log('🔍 Options object:', options);
             window.openModal(options.intent || 'home');
-            
+
             // Initialize Lucide icons AFTER modal content is fully rendered
             setTimeout(() => {
               if (typeof lucide !== 'undefined') {
@@ -291,21 +352,21 @@ class ModalOverlaySystem {
                 console.log('✅ Lucide icons initialized after modal opened');
               }
             }, 200);
-            
+
             console.log('✅ Modal initialized successfully');
           } else {
             console.error('❌ window.openModal function not found! Scripts not executed yet.');
           }
         }, 100);
       });
-      
+
       // Reset opening flag after a delay to prevent immediate closure
       setTimeout(() => {
         this.isOpening = false;
       }, 500);
-      
+
       console.log('✅ Modal loaded successfully');
-      
+
     } catch (error) {
       console.error('❌ Failed to load modal:', error);
       // Fallback to popup window
@@ -323,12 +384,12 @@ class ModalOverlaySystem {
     modalElement.style.height = '100% !important';
     modalElement.style.zIndex = '9999 !important';
     modalElement.style.backgroundColor = 'rgba(0, 0, 0, 0.6) !important';
-    
+
     // Initialize Lucide icons if available
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
-    
+
     // Add basic close functionality to close buttons
     const closeButtons = modalElement.querySelectorAll('[onclick*="closeModal"], .close-modal, button[onclick*="close"]');
     console.log('🔍 Found close buttons:', closeButtons.length);
@@ -343,7 +404,7 @@ class ModalOverlaySystem {
         this.closeModalOverlay();
       });
     });
-    
+
     // Also look for X button specifically
     const xButtons = modalElement.querySelectorAll('button[class*="absolute"][class*="top"]');
     console.log('🔍 Found X buttons:', xButtons.length);
@@ -357,7 +418,7 @@ class ModalOverlaySystem {
         this.closeModalOverlay();
       });
     });
-    
+
     // Add backdrop click to close (with delay to prevent immediate closure)
     setTimeout(() => {
       modalElement.addEventListener('click', (e) => {
@@ -370,140 +431,163 @@ class ModalOverlaySystem {
         }
       });
     }, 400);
-    
+
     // Debug: Check if modal is actually in DOM
     setTimeout(() => {
       const modalInDOM = document.querySelector('#modal');
       console.log('🔍 Modal in DOM after init:', modalInDOM);
       console.log('🔍 Modal visibility:', modalInDOM ? window.getComputedStyle(modalInDOM).display : 'not found');
     }, 100);
-    
+
     console.log('🔧 Modal content initialized with proper positioning');
   }
 
   closeModalOverlay() {
     console.log('🔒 Closing modal overlay...', 'isOpening:', this.isOpening);
     console.trace('Close called from:');
-    
+
     // Prevent closing if we're still opening
     if (this.isOpening) {
       console.log('⚠️ Modal is still opening, ignoring close request');
       return;
     }
-    
+
     // Re-enable modal backdrop clicks
     const modal = document.querySelector('#modal');
     if (modal) {
       modal.style.pointerEvents = 'auto';
       console.log('🔓 Re-enabled modal backdrop clicks');
     }
-    
+
     if (this.currentModal) {
       this.currentModal.remove();
       this.currentModal = null;
     }
-    
+
     // Force reset the isOpening flag to prevent reopening issues
     this.isOpening = false;
-    
+
     // Remove any existing modals
     const existingModals = document.querySelectorAll('#modal');
     console.log('🔍 Found existing modals to remove:', existingModals.length);
     existingModals.forEach(modal => modal.remove());
-    
+
     // Remove modal scripts and styles
     const modalScripts = document.querySelectorAll('script[data-modal-script="true"]');
     modalScripts.forEach(script => script.remove());
-    
+
     const modalStyles = document.querySelectorAll('style[data-modal-styles="true"]');
     modalStyles.forEach(style => style.remove());
-    
+
     const redStyles = document.querySelectorAll('style[data-red-override-styles="true"]');
     redStyles.forEach(style => style.remove());
-    
+
     // Restore body scroll
     document.body.style.overflow = '';
-    
+
     console.log('🔒 Modal closed and cleaned up');
   }
 
   // Specific modal functions
   openRelocationModal(source = 'unknown', intent = 'unknown') {
     console.log('🚀 openRelocationModal called');
-    this.openModalOverlay('/relocation-modal.html', { 
-      source, 
+    this.openModalOverlay('/relocation-modal.html', {
+      source,
       intent,
       modal_type: 'relocation'
     });
   }
 
   openHealthModal(intent = 'home', source = 'unknown') {
-    this.openModalOverlay('/final-modal.html', { 
-      intent, 
+    this.openModalOverlay('/final-modal.html', {
+      intent,
       source,
       modal_type: 'health_insurance'
     });
   }
 
   openOtherModal(intent = 'unknown', source = 'unknown') {
-    this.openModalOverlay('/other-insurance-modal.html', { 
-      intent, 
+    this.openModalOverlay('/other-insurance-modal.html', {
+      intent,
       source,
       modal_type: 'other_insurance'
     });
   }
 
   openLifePensionModal(intent = 'unknown', source = 'unknown') {
-    this.openModalOverlay('/life-pension-modal.html', { 
-      intent, 
+    console.log('💰 Opening Premium Financial Modal via openLifePensionModal');
+    this.openModalOverlay('/financial-modal.html', {
+      intent,
       source,
       modal_type: 'life_pension'
     });
   }
-  
+
+  // contextual logic to determine which modal to open based on the current page
+  openContextualModal(intent = 'header', source = 'unknown') {
+    const path = window.location.pathname.toLowerCase();
+
+    // Check if we are on a finance/pension related page
+    const isFinancialPage =
+      path.includes('3rd-pillar') ||
+      path.includes('pension') ||
+      path.includes('finance') ||
+      path.includes('retirement') ||
+      path.includes('life-insurance') ||
+      path.includes('tax');
+
+    if (isFinancialPage) {
+      console.log('🧠 Contextual Router: Financial page detected, opening Financial Modal');
+      this.openLifePensionModal(intent, source);
+    } else {
+      console.log('🧠 Contextual Router: Defaulting to Health Modal');
+      this.openHealthModal(intent, source);
+    }
+  }
+
   // Manual Cal.com initialization for when user reaches calendar step
   initializeCalComManually() {
     console.log('🎯 Manual Cal.com initialization triggered...');
     console.log('🔍 Cal script loaded:', window.calScriptLoaded);
     console.log('🔍 Cal function available:', typeof window.Cal !== 'undefined');
-    
+
     // Detect if mobile device
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
     console.log('📱 Is mobile device:', isMobile);
-    
+
     // On mobile, open in new tab instead of embedding
     if (isMobile) {
       console.log('📱 Mobile detected - opening Cal.com in new tab');
-      
+
       // Get user data from the modal's userData object
       let calUrl = "https://cal.com/primerelocation/expat-savvy";
-      
+
       if (window.userData) {
         const params = new URLSearchParams();
-        
+
         if (window.userData.firstName || window.userData.lastName) {
           const fullName = `${window.userData.firstName || ''} ${window.userData.lastName || ''}`.trim();
           if (fullName) {
             params.append('name', fullName);
           }
         }
-        
+
         if (window.userData.email) {
           params.append('email', window.userData.email);
         }
-        
+
         if (window.userData.phone) {
           params.append('phone', window.userData.phone);
         }
-        
+
         if (params.toString()) {
           calUrl += '?' + params.toString();
         }
       }
-      
+
       // Open in new tab
       window.open(calUrl, '_blank');
-      
+
       // Show mobile-friendly message in the container
       const container = document.querySelector('#my-cal-inline-expat-savvy');
       if (container) {
@@ -527,17 +611,17 @@ class ModalOverlaySystem {
           </div>
         `;
       }
-      
+
       return;
     }
-    
+
     // Desktop: Continue with normal initialization
     const tryInitialize = async () => {
       // Check if both script is loaded and Cal function is available
       const hasCalFunction = typeof window.Cal === 'function';
       const hasCalApi = window.calApi && typeof window.calApi === 'function';
       const hasCalObject = window.Cal && typeof window.Cal === 'object';
-      
+
       console.log('🔍 Cal availability check:', {
         scriptLoaded: window.calScriptLoaded,
         hasCalFunction,
@@ -546,7 +630,7 @@ class ModalOverlaySystem {
         calType: typeof window.Cal,
         calKeys: window.Cal ? Object.keys(window.Cal) : []
       });
-      
+
       if (window.calScriptLoaded && (hasCalFunction || hasCalApi || hasCalObject)) {
         try {
           const container = document.querySelector('#my-cal-inline-expat-savvy');
@@ -554,82 +638,82 @@ class ModalOverlaySystem {
             console.error('❌ Calendar container not found for manual init');
             return;
           }
-          
+
           console.log('✅ Found container for manual init:', container);
           console.log('🔍 Container dimensions:', {
             width: container.offsetWidth,
             height: container.offsetHeight,
             display: window.getComputedStyle(container).display
           });
-          
+
           // Clear any existing content
           container.innerHTML = '';
-          
+
           // Keep modal backdrop clicks enabled for calendar step
           const modal = document.querySelector('#modal');
           if (modal) {
             // Don't disable pointer events - allow user to close modal
             console.log('✅ Modal backdrop clicks remain enabled for calendar step');
           }
-          
+
           // Try Cal.com APIs first, fallback to iframe
           if (window.calApi) {
             console.log('🎯 Using modern Cal API...');
-            
+
             // Apply UI styling (like in React version)
             window.calApi("ui", {
-              "theme":"light",
-              "cssVarsPerTheme":{
-                "light":{"cal-brand":"#EF4444"}, // Red as requested
-                "dark":{"cal-brand":"#EF4444"}
+              "theme": "light",
+              "cssVarsPerTheme": {
+                "light": { "cal-brand": "#EF4444" }, // Red as requested
+                "dark": { "cal-brand": "#EF4444" }
               },
-              "hideEventTypeDetails":false,
-              "layout":"month_view"
+              "hideEventTypeDetails": false,
+              "layout": "month_view"
             });
-            
+
             // Create inline embed using modern API
             window.calApi("inline", {
-              elementOrSelector:"#my-cal-inline-expat-savvy",
+              elementOrSelector: "#my-cal-inline-expat-savvy",
               config: {
-                "layout":"month_view",
-                "theme":"light"
+                "layout": "month_view",
+                "theme": "light"
               },
               calLink: "primerelocation/expat-savvy",
             });
           } else if (typeof window.Cal === 'function') {
             console.log('🎯 Using legacy Cal API...');
-            
+
             // Initialize Cal.com using legacy approach
-            window.Cal("init", "expat-savvy", {origin:"https://app.cal.com"});
-            
+            window.Cal("init", "expat-savvy", { origin: "https://app.cal.com" });
+
             // Apply UI styling first (like in React version)
             window.Cal.ns["expat-savvy"]("ui", {
-              "theme":"light",
-              "cssVarsPerTheme":{
-                "light":{"cal-brand":"#EF4444"}, // Red as requested
-                "dark":{"cal-brand":"#EF4444"}
+              "theme": "light",
+              "cssVarsPerTheme": {
+                "light": { "cal-brand": "#EF4444" }, // Red as requested
+                "dark": { "cal-brand": "#EF4444" }
               },
-              "hideEventTypeDetails":false,
-              "layout":"month_view"
+              "hideEventTypeDetails": false,
+              "layout": "month_view"
             });
-            
+
             // Create inline embed
             window.Cal.ns["expat-savvy"]("inline", {
-              elementOrSelector:"#my-cal-inline-expat-savvy",
+              elementOrSelector: "#my-cal-inline-expat-savvy",
               config: {
-                "layout":"month_view",
-                "theme":"light"
+                "layout": "month_view",
+                "theme": "light"
               },
               calLink: "primerelocation/expat-savvy",
             });
           } else {
             console.log('🎯 No working Cal API found, using iframe embed...');
-            
+
             // Get user data from the modal's userData object
             let prefillParams = '';
             if (window.userData) {
               const params = new URLSearchParams();
-              
+
               if (window.userData.firstName || window.userData.lastName) {
                 const fullName = `${window.userData.firstName || ''} ${window.userData.lastName || ''}`.trim();
                 if (fullName) {
@@ -637,23 +721,23 @@ class ModalOverlaySystem {
                   console.log('📝 Prefilling name:', fullName);
                 }
               }
-              
+
               if (window.userData.email) {
                 params.append('email', window.userData.email);
                 console.log('📝 Prefilling email:', window.userData.email);
               }
-              
+
               if (window.userData.phone) {
                 // Cal.com uses 'phone' for phone number
                 params.append('phone', window.userData.phone);
                 console.log('📝 Prefilling phone:', window.userData.phone);
               }
-              
+
               if (params.toString()) {
                 prefillParams = '&' + params.toString();
               }
             }
-            
+
             // Use iframe embed as the most reliable method
             const iframe = document.createElement('iframe');
             iframe.src = `https://cal.com/primerelocation/expat-savvy?embed=true&layout=month_view&theme=light${prefillParams}`;
@@ -664,7 +748,7 @@ class ModalOverlaySystem {
             iframe.style.background = '#F3F4F6'; // Match Cal.com gray
             iframe.style.display = 'block';
             iframe.setAttribute('allow', 'camera; microphone; geolocation');
-            
+
             // Make the entire container gray to match Cal.com
             container.style.background = '#F3F4F6';
             container.style.backgroundColor = '#F3F4F6';
@@ -672,31 +756,31 @@ class ModalOverlaySystem {
             container.style.margin = '0';
             container.style.overflow = 'hidden';
             container.style.minHeight = '600px';
-            
+
             // Don't block pointer events on the container - allow backdrop clicks
             container.style.pointerEvents = 'none';
             iframe.style.pointerEvents = 'auto';
-            
+
             // Find the parent modal content container and make it gray
             const modalContent = document.querySelector('#modal-content');
             if (modalContent) {
               modalContent.style.padding = '0';
               modalContent.style.backgroundColor = '#F3F4F6';
             }
-            
+
             // Find the step 4 container and make it gray
             const step4Container = container.closest('.bg-white');
             if (step4Container) {
               step4Container.style.padding = '0';
               step4Container.style.backgroundColor = '#F3F4F6';
             }
-            
+
             container.appendChild(iframe);
             console.log('✅ Created Cal.com iframe embed with prefill data');
           }
-          
+
           console.log('✅ Cal.com manually initialized successfully');
-          
+
           // Debug: Check what was created in the container
           setTimeout(() => {
             console.log('🔍 Container content after init:', container.innerHTML.length > 0 ? 'Has content' : 'Empty');
@@ -717,7 +801,7 @@ class ModalOverlaySystem {
         setTimeout(tryInitialize, 1000);
       }
     };
-    
+
     // Start trying to initialize
     tryInitialize();
   }
@@ -746,18 +830,18 @@ document.addEventListener('click', (e) => {
     console.log('⚠️ Ignoring click - modal is opening');
     return;
   }
-  
+
   // Check for close button clicks
-  if (e.target.classList.contains('close-modal') || 
-      e.target.closest('.close-modal') ||
-      e.target.closest('[onclick*="closeModal"]') ||
-      e.target.closest('button[onclick*="closeModal"]')) {
+  if (e.target.classList.contains('close-modal') ||
+    e.target.closest('.close-modal') ||
+    e.target.closest('[onclick*="closeModal"]') ||
+    e.target.closest('button[onclick*="closeModal"]')) {
     e.preventDefault();
     e.stopPropagation();
     window.closeModalOverlay();
     return;
   }
-  
+
   // Check for backdrop clicks
   if (e.target.classList.contains('modal') && e.target.id === 'modal') {
     window.closeModalOverlay();
@@ -770,7 +854,7 @@ document.addEventListener('keydown', (e) => {
   if (modalSystemInstance && modalSystemInstance.isOpening) {
     return;
   }
-  
+
   if (e.key === 'Escape') {
     window.closeModalOverlay();
   }

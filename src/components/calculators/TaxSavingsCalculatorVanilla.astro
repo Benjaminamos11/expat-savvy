@@ -1,0 +1,421 @@
+---
+// Vanilla JS calculator - no React hydration needed
+const cantons = [
+    "Aargau",
+    "Appenzell Ausserrhoden",
+    "Appenzell Innerrhoden",
+    "Basel-Landschaft",
+    "Basel-Stadt",
+    "Bern",
+    "Fribourg",
+    "Geneva",
+    "Glarus",
+    "Graubünden",
+    "Jura",
+    "Lucerne",
+    "Neuchâtel",
+    "Nidwalden",
+    "Obwalden",
+    "Schaffhausen",
+    "Schwyz",
+    "Solothurn",
+    "St. Gallen",
+    "Thurgau",
+    "Ticino",
+    "Uri",
+    "Valais",
+    "Vaud",
+    "Zug",
+    "Zurich",
+];
+---
+
+<div
+    class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 max-w-7xl mx-auto"
+>
+    <div class="flex flex-col lg:flex-row">
+        <!-- Left Side: Inputs -->
+        <div class="p-8 lg:p-12 bg-gray-50 lg:w-1/2 space-y-8">
+            <!-- Contribution Amount -->
+            <div>
+                <label class="block text-gray-700 font-bold mb-3 text-lg"
+                    >Contribution Amount</label
+                >
+                <div class="flex items-center gap-4 mb-2">
+                    <input
+                        type="number"
+                        id="contribution-input"
+                        value="7258"
+                        class="w-32 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C41E3A] focus:border-[#C41E3A] outline-none font-bold text-gray-900"
+                    />
+                    <span class="text-gray-500">CHF</span>
+                </div>
+                <input
+                    type="range"
+                    id="contribution-slider"
+                    min="0"
+                    max="36288"
+                    step="100"
+                    value="7258"
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#C41E3A]"
+                />
+                <div class="flex gap-2 mt-3">
+                    <button
+                        type="button"
+                        data-contribution="7258"
+                        class="contribution-preset px-3 py-1 text-sm bg-white border border-gray-300 rounded-full hover:border-[#C41E3A] hover:text-[#C41E3A] transition"
+                    >
+                        Max 3a (Employed)
+                    </button>
+                    <button
+                        type="button"
+                        data-contribution="36288"
+                        class="contribution-preset px-3 py-1 text-sm bg-white border border-gray-300 rounded-full hover:border-[#C41E3A] hover:text-[#C41E3A] transition"
+                    >
+                        Max 3a (Self-Employed)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Canton Selection -->
+            <div>
+                <label class="block text-gray-700 font-bold mb-3 text-lg"
+                    >Canton of Residence</label
+                >
+                <select
+                    id="canton-select"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#C41E3A] focus:border-[#C41E3A] outline-none bg-white"
+                >
+                    {
+                        cantons.map((canton) => (
+                            <option
+                                value={canton}
+                                selected={canton === "Zurich"}
+                            >
+                                {canton}
+                            </option>
+                        ))
+                    }
+                </select>
+            </div>
+
+            <!-- Income Slider -->
+            <div>
+                <label class="block text-gray-700 font-bold mb-3 text-lg"
+                    >Annual Gross Income (CHF)</label
+                >
+                <div
+                    id="income-display"
+                    class="mb-2 font-bold text-gray-900 text-xl"
+                >
+                    CHF 120'000
+                </div>
+                <input
+                    type="range"
+                    id="income-slider"
+                    min="50000"
+                    max="500000"
+                    step="5000"
+                    value="120000"
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#C41E3A]"
+                />
+            </div>
+
+            <!-- Marital Status -->
+            <div>
+                <label class="block text-gray-700 font-bold mb-3 text-lg"
+                    >Marital Status</label
+                >
+                <div class="flex gap-6">
+                    <label class="flex items-center cursor-pointer">
+                        <input
+                            type="radio"
+                            name="marital"
+                            value="single"
+                            checked
+                            class="w-5 h-5 text-[#C41E3A] focus:ring-[#C41E3A]"
+                        />
+                        <span class="ml-2 text-gray-700 text-lg">Single</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input
+                            type="radio"
+                            name="marital"
+                            value="married"
+                            class="w-5 h-5 text-[#C41E3A] focus:ring-[#C41E3A]"
+                        />
+                        <span class="ml-2 text-gray-700 text-lg">Married</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Outputs -->
+        <div
+            class="p-8 lg:p-12 bg-white lg:w-1/2 flex flex-col justify-between relative"
+        >
+            <div
+                class="absolute top-0 right-0 w-2 h-full bg-[#C41E3A]/5 hidden lg:block"
+            >
+            </div>
+
+            <div>
+                <h3
+                    class="text-gray-500 font-medium uppercase tracking-wider text-sm mb-1"
+                >
+                    Estimated Annual Tax Savings
+                </h3>
+                <div
+                    id="savings-amount"
+                    class="text-5xl lg:text-6xl font-extrabold text-[#C41E3A] mb-2 tracking-tight"
+                >
+                    CHF 1'411
+                </div>
+                <div
+                    id="monthly-savings"
+                    class="text-gray-500 mb-8 pb-8 border-b border-gray-100"
+                >
+                    ≈ CHF 118 / month in your pocket
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-semibold text-gray-700"
+                                >Pillar 3a Savings</span
+                            >
+                            <span
+                                id="pillar-3a-amount"
+                                class="font-bold text-[#C41E3A]">CHF 1'411</span
+                            >
+                        </div>
+                        <div
+                            class="w-full bg-gray-100 rounded-full h-4 overflow-hidden"
+                        >
+                            <div
+                                class="bg-[#C41E3A] h-4 rounded-full"
+                                style="width: 100%"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-semibold text-gray-400"
+                                >Pillar 3b Savings</span
+                            >
+                            <span class="font-medium text-gray-400"
+                                >CHF 0.00</span
+                            >
+                        </div>
+                        <div
+                            class="w-full bg-gray-100 rounded-full h-4 overflow-hidden"
+                        >
+                            <div
+                                class="bg-gray-300 h-4 rounded-full"
+                                style="width: 1%"
+                            >
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">
+                            Pillar 3b contributions are generally not tax
+                            deductible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-12 bg-[#F5E6E8] p-5 rounded-xl border border-[#C41E3A]/10"
+            >
+                <!-- Expert Header & Quote Combined -->
+                <div class="flex items-start gap-4 mb-4">
+                    <img
+                        src="/images/hans_steiner_expert.png"
+                        alt="Hans Steiner"
+                        class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+                    />
+                    <div class="text-left">
+                        <h4 class="font-bold text-gray-900 leading-none">
+                            Hans Steiner
+                        </h4>
+                        <p
+                            class="text-[11px] text-[#C41E3A] font-medium tracking-wide uppercase mt-1 mb-2"
+                        >
+                            Finanzplaner mit eidg. FA
+                        </p>
+                        <p class="text-xs text-gray-700 italic leading-relaxed">
+                            "The 3rd Pillar is the most powerful tax tool
+                            available. I'll help you secure your standard of
+                            living."
+                        </p>
+                    </div>
+                </div>
+
+                <div id="cta-container">
+                    <button
+                        type="button"
+                        onclick="window.openLifePensionModal('Deep 3a Analysis', 'Calculator')"
+                        class="w-full py-3.5 bg-[#C41E3A] text-white font-bold rounded-xl shadow-lg hover:bg-red-700 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-calendar-check-2"
+                            ><path d="M8 2v4"></path><path d="M16 2v4"
+                            ></path><path
+                                d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"
+                            ></path><path d="M3 10h18"></path><path
+                                d="m16 20 2 2 4-4"></path></svg
+                        >
+                        Schedule Deep Analysis
+                    </button>
+                    <p
+                        class="text-[11px] text-center text-gray-500 mt-2 flex items-center justify-center gap-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-check-circle"
+                            ><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
+                            ></path><path d="m9 11 3 3L22 4"></path></svg
+                        >
+                        Free non-binding consultation
+                    </p>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div
+                class="mt-6 text-xs text-gray-400 border-t border-gray-100 pt-4"
+            >
+                <p>
+                    <span class="font-bold">Methodology:</span> Calculations are based
+                    on projected 2026 tax data. Results are estimates assuming a standard
+                    deduction profile and may vary based on your specific municipality,
+                    confession, and deductions. Marginal tax rates are simplified
+                    averages for the selected canton.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+    // Tax calculation logic
+    const highTaxCantons = [
+        "Geneva",
+        "Vaud",
+        "Bern",
+        "Neuchâtel",
+        "Jura",
+        "Basel-Stadt",
+    ];
+    const lowTaxCantons = ["Zug", "Schwyz", "Nidwalden", "Obwalden", "Uri"];
+
+    function calculateSavings(contribution, canton, income, maritalStatus) {
+        let marginalRate = 0.15;
+
+        if (income > 80000) marginalRate += 0.05;
+        if (income > 120000) marginalRate += 0.05;
+        if (income > 180000) marginalRate += 0.05;
+
+        if (highTaxCantons.includes(canton)) marginalRate += 0.05;
+        if (lowTaxCantons.includes(canton)) marginalRate -= 0.03;
+
+        if (maritalStatus === "married") marginalRate -= 0.02;
+
+        marginalRate = Math.max(0.1, Math.min(0.4, marginalRate));
+
+        return Math.round(contribution * marginalRate);
+    }
+
+    function formatCurrency(val) {
+        return new Intl.NumberFormat("de-CH", {
+            style: "currency",
+            currency: "CHF",
+            maximumFractionDigits: 0,
+        }).format(val);
+    }
+
+    function updateCalculator() {
+        const contribution =
+            parseInt(document.getElementById("contribution-input").value) || 0;
+        const canton = document.getElementById("canton-select").value;
+        const income =
+            parseInt(document.getElementById("income-slider").value) || 0;
+        const maritalStatus =
+            document.querySelector('input[name="marital"]:checked')?.value ||
+            "single";
+
+        const savings = calculateSavings(
+            contribution,
+            canton,
+            income,
+            maritalStatus,
+        );
+        const monthly = Math.round(savings / 12);
+
+        document.getElementById("savings-amount").textContent =
+            formatCurrency(savings);
+        document.getElementById("monthly-savings").textContent =
+            `≈ ${formatCurrency(monthly)} / month in your pocket`;
+        document.getElementById("pillar-3a-amount").textContent =
+            formatCurrency(savings);
+        document.getElementById("income-display").textContent =
+            formatCurrency(income);
+    }
+
+    // Event listeners
+    document
+        .getElementById("contribution-input")
+        ?.addEventListener("input", (e) => {
+            const val = e.target.value;
+            document.getElementById("contribution-slider").value = val;
+            updateCalculator();
+        });
+
+    document
+        .getElementById("contribution-slider")
+        ?.addEventListener("input", (e) => {
+            const val = e.target.value;
+            document.getElementById("contribution-input").value = val;
+            updateCalculator();
+        });
+
+    document.querySelectorAll(".contribution-preset").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            const val = e.target.dataset.contribution || "0";
+            document.getElementById("contribution-input").value = val;
+            document.getElementById("contribution-slider").value = val;
+            updateCalculator();
+        });
+    });
+
+    document
+        .getElementById("canton-select")
+        ?.addEventListener("change", updateCalculator);
+    document
+        .getElementById("income-slider")
+        ?.addEventListener("input", updateCalculator);
+    document.querySelectorAll('input[name="marital"]').forEach((radio) => {
+        radio.addEventListener("change", updateCalculator);
+    });
+
+    // Initial calculation
+    updateCalculator();
+</script>

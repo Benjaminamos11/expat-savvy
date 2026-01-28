@@ -1,0 +1,18 @@
+---
+interface Props {
+    title: string;
+    className?: string;
+    align?: "left" | "center";
+}
+
+const { title, className = "", align = "left" } = Astro.props;
+---
+
+<div
+    class={`flex items-center ${align === "center" ? "justify-center" : ""} ${className}`}
+>
+    <div class="h-8 w-1.5 bg-[#C41E3A] mr-4 rounded-sm"></div>
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+        {title}
+    </h2>
+</div>

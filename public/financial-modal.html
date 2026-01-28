@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Financial Modal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Cal.com Embed Script -->
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "3rd-pillar-tax-optimization", { origin: "https://app.cal.com" });
+  </script>
+  <style>
+    /* Premium Design System */
+    :root {
+      --primary-red: #C41E3A;
+      --primary-red-dark: #a01830;
+      --primary-navy: #1a1a2e;
+      --text-dark: #2d2d2d;
+      --text-light: #666666;
+      --bg-white: #ffffff;
+      --bg-gray: #f8f8f8;
+      --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-serif);
+      letter-spacing: -0.02em;
+    }
+
+    /* Luxury texture for left panel */
+    .premium-panel-texture {
+      background-color: var(--primary-navy);
+      background-image:
+        linear-gradient(30deg, #1f1f3a 12%, transparent 12.5%, transparent 87%, #1f1f3a 87.5%, #1f1f3a),
+        linear-gradient(150deg, #1f1f3a 12%, transparent 12.5%, transparent 87%, #1f1f3a 87.5%, #1f1f3a),
+        linear-gradient(30deg, #1f1f3a 12%, transparent 12.5%, transparent 87%, #1f1f3a 87.5%, #1f1f3a),
+        linear-gradient(150deg, #1f1f3a 12%, transparent 12.5%, transparent 87%, #1f1f3a 87.5%, #1f1f3a),
+        linear-gradient(60deg, #252542 25%, transparent 25.5%, transparent 75%, #252542 75%, #252542),
+        linear-gradient(60deg, #252542 25%, transparent 25.5%, transparent 75%, #252542 75%, #252542);
+      background-size: 80px 140px;
+      background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    }
+
+    .premium-gradient-overlay {
+      background: linear-gradient(180deg, rgba(26, 26, 46, 0.7) 0%, rgba(26, 26, 46, 0.95) 100%);
+    }
+
+    /* Tab active state */
+    .tab-active {
+      color: var(--primary-red);
+      font-weight: 600;
+      border-bottom: 3px solid var(--primary-red);
+    }
+
+    .tab-inactive {
+      color: #9ca3af;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab-inactive:hover {
+      color: var(--text-dark);
+    }
+
+    /* Form Inputs */
+    .premium-input {
+      border: 1px solid #e5e7eb;
+      background-color: var(--bg-gray);
+      transition: all 0.15s ease;
+    }
+
+    .premium-input:focus {
+      background-color: #fff;
+      border-color: var(--primary-red);
+      box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.08);
+      outline: none;
+    }
+
+    .premium-input.error {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .animate-modal-desktop {
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-modal-mobile {
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-step {
+      animation: fadeSlide 0.25s ease-out forwards;
+    }
+
+    /* Mobile Bottom Sheet */
+    @media (max-width: 768px) {
+      .mobile-sheet {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 20px 20px 0 0;
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+    }
+
+    /* Calendar Container */
+    #calendar-container {
+      min-height: 400px;
+    }
+
+    @media (min-width: 769px) {
+      #calendar-container {
+        min-height: 500px;
+      }
+    }
+
+    /* Step transitions */
+    .step-hidden {
+      display: none !important;
+    }
+
+    /* Fade in animation for the whole modal content to prevent flash */
+    .modal-content-fade {
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+    }
+
+    .modal-content-fade.visible {
+      opacity: 1;
+    }
+
+    /* Prevent full-screen layout shift on desktop before Tailwind applies */
+    @media (min-width: 768px) {
+      .mobile-sheet {
+        max-width: 1024px !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        height: auto !important;
+        max-height: 90vh !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Modal Container -->
+  <div id="modal" class="fixed inset-0 z-[9999] hidden items-center justify-center">
+
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="window.closeModalOverlay()">
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div
+      class="relative w-full h-full md:h-auto md:max-w-5xl md:mx-4 flex flex-col md:flex-row bg-white md:rounded-2xl shadow-2xl overflow-hidden animate-modal-mobile md:animate-modal-desktop mobile-sheet">
+
+      <!-- DESKTOP LEFT PANEL (Hidden on Mobile) -->
+      <div class="hidden md:flex md:w-[40%] bg-[#1a1a2e] relative flex-col text-white">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 premium-panel-texture opacity-30"></div>
+        <div class="absolute inset-0 premium-gradient-overlay"></div>
+
+        <!-- Red Accent Bar -->
+        <div class="h-2 w-full bg-[#C41E3A] relative z-10"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 p-8 flex flex-col h-full justify-between">
+
+          <!-- Consultant Info -->
+          <div class="text-center mt-6">
+            <div class="relative inline-block mb-6">
+              <img src="/images/hans_steiner_expert.png" alt="Hans Steiner"
+                class="w-32 h-32 rounded-full object-cover border-4 border-white/10 shadow-xl" />
+              <div
+                class="absolute bottom-1 right-1 bg-[#d4af37] text-[#1a1a2e] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                Expert
+              </div>
+            </div>
+
+            <h3 class="font-serif text-2xl font-bold mb-1">Hans Steiner</h3>
+            <p class="text-gray-300 text-sm tracking-wide uppercase font-medium mb-1">Finanzplaner mit eidg. FA</p>
+            <p class="text-gray-400 text-xs">Expat Specialist &middot; EN/DE/FR</p>
+          </div>
+
+          <!-- Value Prop -->
+          <div class="my-8 text-center">
+            <h4 class="font-serif text-xl text-white mb-3">Expert Financial Planning</h4>
+            <p class="text-gray-300 leading-relaxed font-light">
+              Personalized strategies for your retirement. <br />
+              <span class="text-white font-medium">Free consultation, no obligation.</span>
+            </p>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="space-y-2.5 border-t border-white/10 pt-5">
+            <div class="flex items-center gap-3 text-xs text-gray-300">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#C41E3A]"></i>
+              <span>FINMA-Certified Advisors</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-gray-300">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-[#C41E3A]"></i>
+              <span>Trusted by 1000+ Expats</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-gray-300">
+              <i data-lucide="lock" class="w-3.5 h-3.5 text-[#C41E3A]"></i>
+              <span>Secure Swiss Data Processing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="w-full md:w-[60%] bg-white flex flex-col h-full md:h-auto max-h-[92vh] md:max-h-[75vh] overflow-y-auto">
+
+        <!-- Mobile Header (Sticky) -->
+        <div
+          class="md:hidden sticky top-0 z-30 bg-[#C41E3A] text-white px-4 py-3 flex items-center justify-between shadow-md">
+          <span class="font-serif font-bold text-lg" id="mobile-title">Schedule Consultation</span>
+          <button onclick="window.closeModalOverlay()" class="p-1 hover:bg-white/10 rounded-full">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Consultant Card (Sticky below header) -->
+        <div
+          class="md:hidden sticky top-[52px] z-20 bg-[#f8f8f8] border-b border-gray-200 px-4 py-3 flex items-center gap-3">
+          <img src="/images/hans_steiner_expert.png" alt="Hans" class="w-12 h-12 rounded-full border border-gray-300">
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm">Hans Steiner</h4>
+            <p class="text-xs text-gray-600">Finanzplaner mit eidg. FA</p>
+          </div>
+        </div>
+
+        <!-- Desktop Header & Close -->
+        <div class="hidden md:flex justify-end p-4">
+          <button onclick="window.closeModalOverlay()"
+            class="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <!-- Content Padding -->
+        <div class="p-5 md:p-8 pt-0 md:pt-0 flex-grow flex flex-col">
+
+          <!-- Tabs -->
+          <div class="flex border-b border-gray-200 mb-6">
+            <button onclick="switchTab('schedule')" id="tab-schedule"
+              class="flex-1 pb-3 text-center transition-colors tab-active">
+              Schedule Meeting
+            </button>
+            <button onclick="switchTab('analysis')" id="tab-analysis"
+              class="flex-1 pb-3 text-center transition-colors tab-inactive">
+              Get Analysis
+            </button>
+          </div>
+
+          <!-- ========== STEP 1: FORM ========== -->
+          <div id="step-form" class="flex-grow flex flex-col animate-step">
+
+            <!-- Dynamic Heading -->
+            <div class="mb-6">
+              <h2 class="text-2xl md:text-3xl font-serif font-bold text-[#1a1a2e] mb-2" id="form-title">Let's Find Your
+                Best Strategy</h2>
+              <p class="text-gray-500" id="form-subtitle">60min pension planning / tax strategy consultation</p>
+            </div>
+
+            <!-- Form Fields -->
+            <form id="consultation-form" class="space-y-4 md:space-y-5 flex-grow">
+
+              <!-- Name -->
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-1.5 tracking-wide">Full Name</label>
+                <input type="text" id="field-name" name="name" required
+                  class="w-full h-12 px-4 rounded-lg premium-input text-gray-900 placeholder:text-gray-400"
+                  placeholder="e.g., John Smith" minlength="2" maxlength="50">
+                <p class="text-red-500 text-xs mt-1 hidden" id="error-name">Please enter your name (at least 2
+                  characters)</p>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-1.5 tracking-wide">Email
+                  Address</label>
+                <input type="email" id="field-email" name="email" required
+                  class="w-full h-12 px-4 rounded-lg premium-input text-gray-900 placeholder:text-gray-400"
+                  placeholder="john@company.com">
+                <p class="text-red-500 text-xs mt-1 hidden" id="error-email">Please enter a valid email address</p>
+              </div>
+
+              <!-- Topic Selection -->
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-1.5 tracking-wide">Topic</label>
+                <div class="relative">
+                  <select id="field-topic" name="topic"
+                    class="w-full h-12 px-4 rounded-lg premium-input text-gray-900 appearance-none bg-transparent relative z-10 cursor-pointer">
+                    <option value="3rd Pillar Planning">3rd Pillar Planning</option>
+                    <option value="Life Insurance">Life Insurance</option>
+                    <option value="Retirement Strategy">Retirement Strategy</option>
+                    <option value="Tax Optimization">Tax Optimization</option>
+                  </select>
+                  <i data-lucide="chevron-down"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"></i>
+                </div>
+              </div>
+
+            </form>
+
+            <!-- CTA Button -->
+            <div
+              class="mt-6 md:mt-8 sticky bottom-0 bg-white md:static py-4 md:py-0 border-t md:border-t-0 border-gray-100 -mx-5 px-5 md:mx-0 md:px-0">
+              <button type="button" onclick="handleNextStep()" id="btn-next"
+                class="w-full h-14 bg-[#C41E3A] hover:bg-[#a01830] text-white font-bold text-base uppercase tracking-wide rounded-lg shadow-lg hover:shadow-xl transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                <span id="btn-next-text">Next: Select Your Time</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+              <p class="text-center text-xs text-gray-400 mt-3">No credit card required</p>
+            </div>
+
+          </div>
+
+          <!-- ========== STEP 2: CALENDAR ========== -->
+          <div id="step-calendar" class="step-hidden flex-grow flex flex-col">
+
+            <!-- Back Button -->
+            <button onclick="goToStep('form')"
+              class="flex items-center gap-1 text-gray-500 hover:text-gray-800 text-sm mb-4 transition-colors">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              Back to Form
+            </button>
+
+            <!-- Heading -->
+            <div class="mb-6">
+              <h2 class="text-2xl md:text-3xl font-serif font-bold text-[#1a1a2e] mb-2">Select Your Preferred Time</h2>
+              <p class="text-gray-500">Our specialist will confirm within 24 hours</p>
+            </div>
+
+            <!-- Calendar Container -->
+            <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-3rd-pillar-tax-optimization"
+              class="flex-grow bg-gray-50 rounded-xl border border-gray-200 min-h-[450px] md:min-h-[500px] w-full relative">
+              <!-- Cal.com will be injected here -->
+              <div id="calendar-loading" class="absolute inset-0 flex items-center justify-center bg-gray-50 z-10">
+                <div class="text-center">
+                  <i data-lucide="loader-2" class="w-8 h-8 text-[#C41E3A] animate-spin mx-auto mb-3"></i>
+                  <p class="text-gray-500">Connecting to schedule...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fallback Link -->
+            <div class="mt-3 text-center">
+              <a href="https://cal.com/hans-steiner/3rd-pillar-tax-optimization" target="_blank"
+                class="text-[10px] text-gray-400 hover:text-[#C41E3A] underline transition-colors">
+                Having trouble loading? Open in new tab
+              </a>
+            </div>
+
+            <!-- Scarcity Notice -->
+            <p class="text-center text-xs text-[#C41E3A] mt-2 flex items-center justify-center gap-1">
+              <i data-lucide="clock" class="w-3 h-3"></i>
+              High demand: Slots limited this week
+            </p>
+
+          </div>
+
+          <!-- ========== CONFIRMATION SCREEN ========== -->
+          <div id="step-confirmation" class="step-hidden flex-col items-center justify-center text-center py-10 h-full">
+            <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
+              <i data-lucide="check-circle-2" class="w-12 h-12 text-green-600"></i>
+            </div>
+            <h3 class="text-3xl font-serif font-bold text-[#1a1a2e] mb-2" id="confirm-title">Perfect! You're All Set
+            </h3>
+            <p class="text-gray-600 text-lg mb-4" id="confirm-subtitle">Calendar invite sent to your email</p>
+
+            <div class="space-y-2 text-left bg-gray-50 rounded-xl p-6 max-w-sm mx-auto mb-8">
+              <div class="flex items-center gap-2 text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                <span id="confirm-detail-1">Appointment confirmed</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                <span id="confirm-detail-2">Consultant: Hans Steiner</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-700">
+                <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
+                <span id="confirm-detail-3">Check your email for details</span>
+              </div>
+            </div>
+
+            <button onclick="window.closeModalOverlay()"
+              class="px-8 py-3 bg-[#C41E3A] hover:bg-[#a01830] text-white font-bold rounded-lg transition-colors">
+              Close
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Icons
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    // State
+    window.currentTab = 'schedule';
+    window.currentStep = 'form';
+    window.formData = {};
+    window.calendarInitialized = false;
+
+    // ========== TAB SWITCHING ==========
+    window.switchTab = function (tab) {
+      window.currentTab = tab;
+      window.currentStep = 'form';
+
+      const btnSchedule = document.getElementById('tab-schedule');
+      const btnAnalysis = document.getElementById('tab-analysis');
+      const title = document.getElementById('form-title');
+      const subtitle = document.getElementById('form-subtitle');
+      const btnNextText = document.getElementById('btn-next-text');
+      const mobileTitle = document.getElementById('mobile-title');
+
+      // Reset to form step
+      goToStep('form');
+
+      if (tab === 'schedule') {
+        btnSchedule.className = 'flex-1 pb-3 text-center transition-colors tab-active';
+        btnAnalysis.className = 'flex-1 pb-3 text-center transition-colors tab-inactive';
+
+        title.innerText = "Let's Find Your Best Strategy";
+        subtitle.innerText = "60min pension planning / tax strategy consultation";
+        btnNextText.innerText = "Next: Select Your Time";
+        mobileTitle.innerText = "Schedule Consultation";
+      } else {
+        btnAnalysis.className = 'flex-1 pb-3 text-center transition-colors tab-active';
+        btnSchedule.className = 'flex-1 pb-3 text-center transition-colors tab-inactive';
+
+        title.innerText = "Get Your Personalized Analysis";
+        subtitle.innerText = "We'll send detailed insights within 24 hours";
+        btnNextText.innerText = "Send My Analysis";
+        mobileTitle.innerText = "Get Analysis";
+      }
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    };
+
+    // ========== STEP NAVIGATION ==========
+    window.goToStep = function (step) {
+      const stepForm = document.getElementById('step-form');
+      const stepCalendar = document.getElementById('step-calendar');
+      const stepConfirmation = document.getElementById('step-confirmation');
+
+      // Hide all steps
+      stepForm.classList.add('step-hidden');
+      stepCalendar.classList.add('step-hidden');
+      stepConfirmation.classList.add('step-hidden');
+      stepConfirmation.classList.remove('flex');
+
+      // Show target step
+      if (step === 'form') {
+        stepForm.classList.remove('step-hidden');
+        stepForm.classList.add('animate-step');
+      } else if (step === 'calendar') {
+        stepCalendar.classList.remove('step-hidden');
+        stepCalendar.classList.add('animate-step');
+        initializeCalendar();
+      } else if (step === 'confirmation') {
+        stepConfirmation.classList.remove('step-hidden');
+        stepConfirmation.classList.add('flex');
+      }
+
+      window.currentStep = step;
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    };
+
+    // ========== FORM VALIDATION ==========
+    window.validateForm = function () {
+      let isValid = true;
+
+      const name = document.getElementById('field-name');
+      const email = document.getElementById('field-email');
+      const errorName = document.getElementById('error-name');
+      const errorEmail = document.getElementById('error-email');
+
+      // Reset errors
+      name.classList.remove('error');
+      email.classList.remove('error');
+      errorName.classList.add('hidden');
+      errorEmail.classList.add('hidden');
+
+      // Validate name
+      if (!name.value || name.value.trim().length < 2) {
+        name.classList.add('error');
+        errorName.classList.remove('hidden');
+        isValid = false;
+      }
+
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value || !emailRegex.test(email.value)) {
+        email.classList.add('error');
+        errorEmail.classList.remove('hidden');
+        isValid = false;
+      }
+
+      return isValid;
+    };
+
+    // ========== NEXT STEP HANDLER ==========
+    window.handleNextStep = async function () {
+      if (!validateForm()) return;
+
+      const btn = document.getElementById('btn-next');
+      const btnText = document.getElementById('btn-next-text');
+      const originalText = btnText.innerText;
+
+      // Store form data
+      window.formData = {
+        name: document.getElementById('field-name').value,
+        email: document.getElementById('field-email').value,
+        topic: document.getElementById('field-topic').value
+      };
+
+      // PERSIST LEAD AS SOON AS STEP 1 IS DONE
+      // Show loading state on button
+      btn.disabled = true;
+      btnText.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin inline mr-2"></i>Saving...';
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      try {
+        await saveLeadToSupabase(window.formData);
+        console.log('✅ Lead persisted successfully after Step 1');
+      } catch (err) {
+        console.warn('⚠️ Lead persistence failed, but continuing flow:', err);
+      } finally {
+        // Reset button state
+        btn.disabled = false;
+        btnText.innerText = originalText;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
+
+      if (window.currentTab === 'schedule') {
+        // Go to calendar step
+        goToStep('calendar');
+      } else {
+        // Analysis path - submit directly
+        submitAnalysisRequest();
+      }
+    };
+
+    // ========== LEAD PERSISTENCE (SUPABASE & NETLIFY) ==========
+    window.saveLeadToSupabase = async function (data) {
+      console.log('📤 Persisting lead to backend...', data);
+
+      const payload = {
+        email: data.email,
+        name: data.name,
+        topic: data.topic,
+        flow: 'financial_modal_v2',
+        source: window.location.pathname,
+        type: '3rd pillar / tax'
+      };
+
+      // 1. Primary: Backend API
+      const apiPromise = fetch('https://expat-savvy-api.fly.dev/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...payload,
+          stage: 'new',
+          consent_marketing: true,
+          notes: {
+            modal_version: 'v2',
+            intent: window.currentTab,
+            timestamp: new Date().toISOString()
+          }
+        })
+      }).catch(err => console.warn('Backend API failed:', err));
+
+      // 2. Secondary: Netlify Forms
+      const netlifyFormData = new FormData();
+      netlifyFormData.append('form-name', 'life-pension');
+      netlifyFormData.append('name', data.name);
+      netlifyFormData.append('email', data.email);
+      netlifyFormData.append('product-type', data.topic);
+      netlifyFormData.append('special-requirements', `Step 1 completed. Intent: ${window.currentTab}`);
+
+      const netlifyPromise = fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(netlifyFormData).toString()
+      }).catch(err => console.warn('Netlify submission failed:', err));
+
+      // Wait for at least the API call or a timeout
+      return Promise.race([
+        Promise.all([apiPromise, netlifyPromise]),
+        new Promise(resolve => setTimeout(resolve, 2000)) // 2s timeout max
+      ]);
+    };
+
+    // ========== CALENDAR INITIALIZATION ==========
+    window.initializeCalendar = function () {
+      const loading = document.getElementById('calendar-loading');
+      if (loading) loading.style.display = 'flex';
+
+      const ns = "3rd-pillar-tax-optimization";
+
+      // Delay to ensure DOM state is ready for iframe
+      setTimeout(() => {
+        try {
+          if (typeof window.Cal === "undefined") {
+            console.error("Cal.com script not loaded");
+            return;
+          }
+
+          // Use the exact snippet pattern provided
+          window.Cal("init", ns, { origin: "https://app.cal.com" });
+
+          window.Cal.ns[ns]("inline", {
+            elementOrSelector: "#my-cal-inline-3rd-pillar-tax-optimization",
+            calLink: "hans-steiner/3rd-pillar-tax-optimization",
+            config: {
+              layout: "month_view",
+              theme: "light",
+              useSlotsViewOnSmallScreen: "true",
+              name: window.formData.name || '',
+              email: window.formData.email || '',
+              notes: `Request from Expat-Savvy: ${window.formData.topic || '3rd Pillar'}`
+            }
+          });
+
+          window.Cal.ns[ns]("ui", {
+            theme: "light",
+            hideEventTypeDetails: true,
+            layout: "month_view"
+          });
+
+          window.Cal.ns[ns]("on", {
+            action: "bookingSuccessful",
+            callback: (e) => {
+              console.log("Booking successful:", e.detail);
+              showBookingConfirmation(e.detail);
+            }
+          });
+
+          window.calendarInitialized = true;
+
+          // Hide loader after a reasonable wait for iframe to hand over
+          setTimeout(() => {
+            if (loading) loading.style.display = 'none';
+          }, 2500);
+        } catch (err) {
+          console.error("Cal.com Error:", err);
+          if (loading) loading.style.display = 'none';
+        }
+      }, 200);
+    };
+
+    // ========== BOOKING CONFIRMATION ==========
+    window.showBookingConfirmation = function (details) {
+      const title = document.getElementById('confirm-title');
+      const subtitle = document.getElementById('confirm-subtitle');
+      const detail1 = document.getElementById('confirm-detail-1');
+      const detail2 = document.getElementById('confirm-detail-2');
+      const detail3 = document.getElementById('confirm-detail-3');
+
+      title.innerText = "Perfect! You're All Set";
+      subtitle.innerText = `Calendar invite sent to ${window.formData.email}`;
+      detail1.innerText = "Appointment confirmed";
+      detail2.innerText = "Consultant: Hans Steiner";
+      detail3.innerText = "Check your email for meeting link";
+
+      goToStep('confirmation');
+
+      // Auto-close after 5 seconds
+      setTimeout(() => {
+        // window.closeModalOverlay();
+      }, 5000);
+    };
+
+    // ========== ANALYSIS SUBMISSION ==========
+    window.submitAnalysisRequest = function () {
+      const btn = document.getElementById('btn-next');
+      const btnText = document.getElementById('btn-next-text');
+
+      // Loading state
+      btn.disabled = true;
+      btnText.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin inline mr-2"></i>Processing...';
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      // Simulate API call (replace with actual API call)
+      setTimeout(() => {
+        // Update confirmation for analysis
+        const title = document.getElementById('confirm-title');
+        const subtitle = document.getElementById('confirm-subtitle');
+        const detail1 = document.getElementById('confirm-detail-1');
+        const detail2 = document.getElementById('confirm-detail-2');
+        const detail3 = document.getElementById('confirm-detail-3');
+
+        title.innerText = "Analysis Request Received";
+        subtitle.innerText = "Check your email within 24 hours";
+        detail1.innerText = "We're preparing your personalized insights";
+        detail2.innerText = `Sent to: ${window.formData.email}`;
+        detail3.innerText = "Reply to continue the conversation";
+
+        goToStep('confirmation');
+
+        // Reset button
+        btn.disabled = false;
+        btnText.innerText = "Send My Analysis";
+
+        // Auto-close after 5 seconds
+        setTimeout(() => {
+          // window.closeModalOverlay();
+        }, 5000);
+      }, 1500);
+    };
+
+    // ========== OPEN MODAL API ==========
+    window.openModal = function (intent) {
+      // Reset state
+      window.currentStep = 'form';
+      window.formData = {};
+      window.calendarInitialized = false;
+
+      // Reset form
+      const form = document.getElementById('consultation-form');
+      if (form) form.reset();
+
+      // Reset steps visibility
+      goToStep('form');
+
+      // Pre-select tab based on intent
+      if (intent && (intent.includes('analysis') || intent.includes('rate'))) {
+        switchTab('analysis');
+      } else {
+        switchTab('schedule');
+      }
+
+      const modal = document.getElementById('modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    };
+
+    // Initialize icons on load
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+  </script>
+</body>
+
+</html>

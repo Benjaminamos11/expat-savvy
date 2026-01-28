@@ -15,14 +15,14 @@ export default defineConfig({
       filter: (page) => {
         // Exclude 404 page from sitemap
         if (page.includes('/404')) return false;
-        
+
         // Ensure all URLs have trailing slashes
         // If the URL doesn't end with a trailing slash and doesn't have a file extension,
         // exclude it from the sitemap as it will cause a redirect
         if (!page.endsWith('/') && !page.match(/\.[^/]+$/)) {
           return false;
         }
-        
+
         return true;
       },
       changefreq: 'weekly',
@@ -35,6 +35,9 @@ export default defineConfig({
   site: 'https://expat-savvy.ch',
   compressHTML: true,
   vite: {
+    define: {
+      __DEFINES__: JSON.stringify({})
+    },
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,
@@ -56,10 +59,6 @@ export default defineConfig({
       hmr: {
         overlay: true
       }
-    },
-    // Fix MIME type issues
-    define: {
-      __DEFINES__: JSON.stringify({})
     }
   }
 });

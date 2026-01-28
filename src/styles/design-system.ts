@@ -14,17 +14,19 @@ export const DesignSystem = {
       main: '#cf202d',      // Brand Red (exact match from logo)
       hover: '#b01824',     // Darker red for hover states
       light: '#e63946',     // Light red
+      flow: '#C41E3A',      // Red Flow specific red
+      highlight: '#F5E6E8', // Red Flow highlight background
       50: '#ffebee',
       100: '#ffcdd2',
       600: '#cf202d',       // Standard Tailwind naming
       700: '#b01824',       // Hover state
       800: '#8a131c',       // Dark state
     },
-    
+
     // Neutrals
     white: '#ffffff',
     black: '#000000',
-    
+
     gray: {
       50: '#f9fafb',
       100: '#f3f4f6',
@@ -36,7 +38,7 @@ export const DesignSystem = {
       800: '#1f2937',
       900: '#111827',
     },
-    
+
     // Semantic Colors
     success: '#10b981',
     warning: '#f59e0b',
@@ -51,7 +53,7 @@ export const DesignSystem = {
     fontFamily: {
       sans: 'system-ui, -apple-system, sans-serif',
     },
-    
+
     // Heading Sizes
     heading: {
       h1: {
@@ -75,7 +77,7 @@ export const DesignSystem = {
         full: 'text-xl md:text-2xl font-semibold',
       },
     },
-    
+
     // Body Text
     body: {
       large: 'text-lg md:text-xl',
@@ -137,7 +139,7 @@ export const DesignSystem = {
         transition-all duration-200
       `,
     },
-    
+
     // Card Styles
     card: {
       default: `
@@ -148,7 +150,7 @@ export const DesignSystem = {
       padding: 'p-6 md:p-8',
       noPadding: '',
     },
-    
+
     // Icon Container
     icon: {
       large: `
@@ -178,13 +180,13 @@ export const DesignSystem = {
       overlay: 'bg-gradient-to-r from-black/50 to-black/30',
       minHeight: 'min-h-[50vh] md:min-h-[90vh]',
     },
-    
+
     content: {
       white: 'bg-white',
       gray: 'bg-gray-50',
       primary: 'bg-red-600',
     },
-    
+
     cta: {
       background: 'bg-gradient-to-r from-red-600 to-red-800',
       padding: 'py-16 md:py-20',

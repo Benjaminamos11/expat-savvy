@@ -30,10 +30,22 @@ export default defineConfig({
   site: 'https://expat-savvy.ch',
   compressHTML: true,
   vite: {
+    define: {
+      __DEFINES__: JSON.stringify({}),
+      'import.meta.env.DEV': JSON.stringify(true)
+    },
+    optimizeDeps: {
+      exclude: []
+    },
     build: {
       cssCodeSplit: false,
       assetsInlineLimit: 4096,
       inlineStylesheets: 'always',
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      }
     },
     resolve: {
       alias: {
@@ -42,20 +54,16 @@ export default defineConfig({
     },
     server: {
       strictPort: false,
-      host: '0.0.0.0',  // Allow external access
-      port: 4321,       // Fixed port
+      host: '0.0.0.0',
+      port: 4321,
       fs: {
         strict: false,
         allow: ['/']
       },
       hmr: {
         overlay: true,
-        port: 4322      // Different port for HMR
+        port: 4322
       }
-    },
-    // Fix MIME type issues
-    define: {
-      __DEFINES__: JSON.stringify({})
     }
   }
 });
