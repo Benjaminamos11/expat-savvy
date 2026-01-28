@@ -1,0 +1,551 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
+import HansSteinerCard from "../../components/consultant/ConsultantProfileCard.astro";
+
+const metadata = {
+    title: "Expat Guide to 3rd Pillar Withdrawal When Leaving Switzerland (2026)",
+    description:
+        "Your complete guide to withdrawing your 3rd and 2nd pillar assets when leaving Switzerland. Learn the rules for EU/EFTA vs. third countries and discover the 3a-to-3b conversion strategy.",
+    canonical: "https://expat-savvy.ch/3rd-pillar/withdrawal-guide/",
+};
+
+const heroImage = "/images/leaving-switzerland-hero.png"; // Placeholder for the path, logic below for actual image
+
+const faqs = [
+    {
+        question: "What is the exact process to reclaim the withholding tax?",
+        answer: "When you withdraw your pension assets while living abroad, Switzerland deducts a withholding tax (Quellensteuer). To reclaim this, you typically need to prove that you are being taxed in your new country of residence and that a Double Taxation Agreement (DTA) exists between Switzerland and that country. The process involves submitting specialized forms (e.g., Form 7) to the tax office of the canton where your pension foundation is located.",
+    },
+    {
+        question:
+            "How do I find out how much of my 2nd pillar is 'extra-mandatory'?",
+        answer: "This information is found on your annual Pension Certificate (Vorsorgeausweis). Look for the section titled 'LPP/BVG Capital' or 'Mandatory Capital'. The difference between your total balance and this mandatory amount is your extra-mandatory capital, which is more flexible to withdraw if moving to the EU/EFTA.",
+    },
+    {
+        question: "Can I convert a bank 3a into a 3b when I leave?",
+        answer: "No, bank-based 3a accounts (like those with VIAC or Finpension) are strictly cash or securities accounts. Upon leaving, these must be closed and the cash paid out. Only insurance-based 3a policies offer the 'conversion' feature where the contract continues as a 3b plan, maintaining your insurance cover and investment continuity.",
+    },
+    {
+        question:
+            "What are the tax implications of my 3b policy in my new country?",
+        answer: "This varies by country. While Switzerland may treat 3b payouts as tax-free under certain conditions, your new country might view the growth as taxable capital gains or the conversion as a taxable event. We strongly recommend a consultation to review the specific treaty between Switzerland and your destination.",
+    },
+    {
+        question: "How does this affect my AHV (1st Pillar) benefits?",
+        answer: "Leaving Switzerland does not 'cancel' your 1st pillar. You stop contributing to the Swiss system, but your past contributions remain. Depending on your nationality and the years contributed, you may be eligible for a partial Swiss pension at retirement age, or in some cases (for non-EU/EFTA nationals moving to non-agreement countries), a refund of your contributions.",
+    },
+];
+---
+
+<Layout
+    title={metadata.title}
+    description={metadata.description}
+    canonicalURLProp={metadata.canonical}
+>
+    <!-- HERO SECTION -->
+    <div
+        class="relative h-[75vh] min-h-[600px] flex items-center overflow-hidden"
+    >
+        <div class="absolute inset-0 bg-black/50 z-10"></div>
+        <img
+            src="/brain/7923f477-f3e7-4850-b1b0-cf245481b9a3/leaving_switzerland_hero_1769618981460.png"
+            alt="Expat leaving Switzerland - Pension Withdrawal Guide"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+
+        <div class="container mx-auto px-6 relative z-20 text-center">
+            <h1
+                class="text-4xl md:text-7xl font-extrabold mb-8 drop-shadow-2xl leading-tight text-white mx-auto max-w-5xl"
+            >
+                Leaving Switzerland: <span class="text-[#C41E3A]"
+                    >Your Pension Withdrawal Roadmap</span
+                >
+            </h1>
+            <p
+                class="text-white/90 text-xl md:text-2xl font-medium drop-shadow-md max-w-3xl mx-auto leading-relaxed"
+            >
+                Withdrawing your pension is one of the most complex parts of
+                leaving Switzerland. This guide provides a clear, step-by-step
+                roadmap to ensure you maximize your assets and avoid costly
+                mistakes.
+            </p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <!-- SECTION 1: THE 3A ADVANTAGE -->
+                <section class="mb-32">
+                    <RedSectionHeader
+                        title="Pillar 3a: Your Key to a Flexible Departure"
+                    />
+                    <div class="spoke-body mt-8 space-y-6">
+                        <p class="text-xl font-bold text-[#1a1a2e]">
+                            Unlike the 2nd pillar, the 3rd pillar is remarkably
+                            simple when it comes to international moves: <span
+                                class="text-[#C41E3A]"
+                                >it goes where you go.</span
+                            >
+                        </p>
+                        <p>
+                            Pillar 3a assets can be withdrawn in full,
+                            regardless of your destination country. Whether you
+                            are moving to London, New York, or a remote island
+                            in the Pacific, the Swiss government allows you to
+                            close your 3a account and take the capital with you.
+                        </p>
+                        <div
+                            class="bg-gray-50 p-8 rounded-[30px] border border-gray-100 my-10"
+                        >
+                            <h4 class="font-bold text-[#1a1a2e] mb-4">
+                                The Standard Exit Process:
+                            </h4>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="w-6 h-6 rounded-full bg-[#C41E3A] text-white flex items-center justify-center text-xs flex-shrink-0 mt-1"
+                                        >1</span
+                                    >
+                                    <span
+                                        ><strong>Deregistration:</strong> Visit your
+                                        local commune and receive your official 'Abmeldebestätigung'
+                                        (deregistration certificate).</span
+                                    >
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="w-6 h-6 rounded-full bg-[#C41E3A] text-white flex items-center justify-center text-xs flex-shrink-0 mt-1"
+                                        >2</span
+                                    >
+                                    <span
+                                        ><strong>Verification:</strong> Provide this
+                                        certificate and a valid foreign address to
+                                        your bank or insurance provider.</span
+                                    >
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="w-6 h-6 rounded-full bg-[#C41E3A] text-white flex items-center justify-center text-xs flex-shrink-0 mt-1"
+                                        >3</span
+                                    >
+                                    <span
+                                        ><strong>Payout:</strong> The funds are typically
+                                        paid into a Swiss bank account in your name,
+                                        which you can then transfer internationally.</span
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <p>
+                            However, "can be withdrawn" doesn't always mean
+                            "should be withdrawn." Before you cash out, you must
+                            consider the <strong
+                                >withholding tax (Quellensteuer)</strong
+                            >. This tax is deducted automatically by the canton
+                            where the foundation is based. While often
+                            reclaimable under double taxation agreements, the
+                            paperwork is tedious and mistakes can lead to
+                            permanent losses.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: THE 2ND PILLAR CRITICAL RULES -->
+                <section class="mb-32">
+                    <RedSectionHeader
+                        title="The 2nd Pillar: Critical Rules You Must Know"
+                    />
+                    <div class="spoke-body mt-8 space-y-6">
+                        <p>
+                            The 2nd Pillar (LPP/BVG) is where most expats face
+                            their biggest hurdle. Unlike the 3rd pillar, your
+                            ability to access this cash depends almost entirely
+                            on your passport and your next zip code.
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8 my-16">
+                            <!-- EU/EFTA -->
+                            <div
+                                class="p-10 rounded-[40px] bg-blue-50/30 border-2 border-blue-100"
+                            >
+                                <h3
+                                    class="text-2xl font-bold text-[#1a1a2e] mb-6"
+                                >
+                                    Moving to EU/EFTA
+                                </h3>
+                                <p class="text-sm mb-8 leading-relaxed">
+                                    If you are moving to a country with
+                                    mandatory social security agreements
+                                    (EU/EFTA), your 2nd pillar is split.
+                                </p>
+                                <div class="space-y-4">
+                                    <div
+                                        class="p-4 bg-white rounded-2xl border border-blue-200"
+                                    >
+                                        <div
+                                            class="text-[10px] uppercase font-black text-blue-500 mb-1"
+                                        >
+                                            Status: Restricted
+                                        </div>
+                                        <div class="font-bold">
+                                            Mandatory Portion: LOCKED
+                                        </div>
+                                        <p class="text-xs text-gray-500">
+                                            Stays in a Swiss vested benefits
+                                            account until retirement.
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="p-4 bg-white rounded-2xl border border-green-200"
+                                    >
+                                        <div
+                                            class="text-[10px] uppercase font-black text-green-600 mb-1"
+                                        >
+                                            Status: Available
+                                        </div>
+                                        <div class="font-bold">
+                                            Extra-Mandatory: CASH OUT
+                                        </div>
+                                        <p class="text-xs text-gray-500">
+                                            You can withdraw everything above
+                                            the legal minimum.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Third Country -->
+                            <div
+                                class="p-10 rounded-[40px] bg-red-50/30 border-2 border-red-100"
+                            >
+                                <h3
+                                    class="text-2xl font-bold text-[#1a1a2e] mb-6"
+                                >
+                                    Moving to Third Country
+                                </h3>
+                                <p class="text-sm mb-8 leading-relaxed">
+                                    If you are moving to a non-EU/EFTA country
+                                    (e.g., USA, UK, UAE, Asia), the rules are
+                                    much simpler.
+                                </p>
+                                <div class="space-y-4">
+                                    <div
+                                        class="p-4 bg-[#C41E3A] rounded-2xl text-white shadow-xl shadow-red-200"
+                                    >
+                                        <div
+                                            class="text-[10px] uppercase font-black text-white/70 mb-1"
+                                        >
+                                            Status: Full Exit
+                                        </div>
+                                        <div class="font-bold text-xl">
+                                            100% WITHDRAWAL
+                                        </div>
+                                        <p class="text-sm text-white/80">
+                                            The entire balance can be paid out
+                                            regardless of mandatory split.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>
+                            <strong
+                                >Why this matters for your 3rd pillar:</strong
+                            > Because your 2nd pillar might be locked away for decades
+                            if you move within Europe, your 3rd pillar becomes your
+                            primary "liquid asset" to fund your move, buy a property
+                            abroad, or start a business in your new home.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: THE ADVANCED STRATEGY -->
+                <section class="mb-32">
+                    <div
+                        class="bg-[#1a1a2e] rounded-[50px] p-12 md:p-16 text-white relative overflow-hidden group"
+                    >
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-[#C41E3A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                        >
+                        </div>
+                        <div class="relative z-10">
+                            <RedSectionHeader
+                                title="The Advanced Strategy: Don't Cash Out, Convert"
+                            />
+                            <div
+                                class="spoke-body mt-10 space-y-8 text-white/80"
+                            >
+                                <p class="text-white text-xl leading-relaxed">
+                                    Most expats assume leaving Switzerland means
+                                    they MUST close their 3rd pillar. This is a
+                                    common and often expensive mistake.
+                                </p>
+                                <div class="grid md:grid-cols-3 gap-8 my-12">
+                                    <div class="space-y-4">
+                                        <div class="text-3xl">🔄</div>
+                                        <h4 class="text-white font-bold">
+                                            Continuity
+                                        </h4>
+                                        <p class="text-sm">
+                                            Keep your long-term investment
+                                            strategy running without
+                                            interruption.
+                                        </p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="text-3xl">🛡️</div>
+                                        <h4 class="text-white font-bold">
+                                            Protection
+                                        </h4>
+                                        <p class="text-sm">
+                                            Retain valuable life and disability
+                                            insurance—often ungettable abroad.
+                                        </p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="text-3xl">💰</div>
+                                        <h4 class="text-white font-bold">
+                                            Tax Efficiency
+                                        </h4>
+                                        <p class="text-sm">
+                                            Final payouts can remain tax-free in
+                                            Switzerland, even for non-residents.
+                                        </p>
+                                    </div>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-6">
+                                    How 3a-to-3b Conversion Works
+                                </h3>
+                                <p>
+                                    If you have an <strong
+                                        >insurance-based 3a plan</strong
+                                    >, you have the option to convert the policy
+                                    into a flexible <strong>Pillar 3b</strong> plan.
+                                    While you lose the tax deduction on future premiums
+                                    (since you no longer pay Swiss income tax), you
+                                    maintain the policy structure.
+                                </p>
+                                <p>
+                                    This is the "Secret Weapon" for savvy
+                                    expats: You secure your death and disability
+                                    benefits globally and keep your equity
+                                    investment compounding in a stable
+                                    Swiss-denominated environment.
+                                </p>
+
+                                <div
+                                    class="mt-12 p-8 border border-white/10 rounded-3xl bg-white/5"
+                                >
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 bg-[#C41E3A] rounded-full flex items-center justify-center font-black"
+                                        >
+                                            !
+                                        </div>
+                                        <h4 class="text-xl font-bold">
+                                            Bank vs. Insurance Reality Check
+                                        </h4>
+                                    </div>
+                                    <p class="text-sm">
+                                        <strong>Important:</strong> You cannot do
+                                        this with a bank app (VIAC/Finpension). If
+                                        you move, those apps require you to sell your
+                                        positions and close the account. Only the
+                                        "Modern Insurance" path allows for this level
+                                        of strategic departure planning.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 4: HANS STEINER CARD -->
+                <div id="hans-steiner" class="mb-32 scroll-mt-24">
+                    <div
+                        class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm"
+                    >
+                        <div
+                            class="flex flex-col md:flex-row items-center gap-10"
+                        >
+                            <div
+                                class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
+                            >
+                                <img
+                                    src="/images/hans-steiner.png"
+                                    alt="Hans Steiner"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div class="flex-grow">
+                                <div
+                                    class="text-[10px] uppercase font-black text-[#C41E3A] tracking-[0.2em] mb-2"
+                                >
+                                    Departure Expert
+                                </div>
+                                <h2
+                                    class="text-3xl font-bold text-[#1a1a2e] mb-4"
+                                >
+                                    Is a 3a-to-3b Conversion Right for You?
+                                </h2>
+                                <p
+                                    class="spoke-body text-gray-600 mb-8 max-w-xl italic"
+                                >
+                                    "Cashing out is immediate, but conversion is
+                                    strategic. Let's look at your destination
+                                    country and see if maintaining your Swiss
+                                    safety net is the smarter move."
+                                </p>
+                                <button
+                                    onclick="window.openContextualModal()"
+                                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                                >
+                                    Book a Free Departure Strategy Call
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: FAQ -->
+                <section class="mb-32">
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
+                    >
+                        Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        {
+                            faqs.map((faq) => (
+                                <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white">
+                                    <details class="group">
+                                        <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
+                                            <span class="text-xl font-bold text-[#1a1a2e] pr-4">
+                                                {faq.question}
+                                            </span>
+                                            <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
+                                                ↓
+                                            </span>
+                                        </summary>
+                                        <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
+                                            {faq.answer}
+                                        </div>
+                                    </details>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </section>
+
+                <!-- RELATED GUIDES -->
+                <div class="grid md:grid-cols-3 gap-6 mb-32">
+                    <a
+                        href="/3rd-pillar/bank-vs-insurance/"
+                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
+                    >
+                        <h4 class="font-bold mb-2">Bank vs. Insurance</h4>
+                        <p
+                            class="text-xs text-gray-400 group-hover:text-white/60"
+                        >
+                            Compare the two fundamental paths of the 3rd pillar.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/life-insurance-guide/"
+                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
+                    >
+                        <h4 class="font-bold mb-2">Life Insurance Guide</h4>
+                        <p
+                            class="text-xs text-gray-400 group-hover:text-white/60"
+                        >
+                            Understanding the protection layer of your 3rd
+                            pillar solution.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/tax-optimization/"
+                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
+                    >
+                        <h4 class="font-bold mb-2">Tax Savings Blueprint</h4>
+                        <p
+                            class="text-xs text-gray-400 group-hover:text-white/60"
+                        >
+                            Maximize your deductions while you are still in
+                            Switzerland.
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FINAL CTA -->
+    <div class="bg-[#1a1a2e] py-32 text-center relative overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C41E3A] to-transparent opacity-50"
+        >
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8">
+                Ready to Plan Your Perfect Exit?
+            </h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Don't leave your Swiss assets to chance. Get a holistic
+                withdrawal strategy built for your new life abroad.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-6 px-16 rounded-full text-2xl shadow-2xl transition transform hover:-translate-y-1"
+            >
+                Get My Personalized Withdrawal Plan
+            </button>
+        </div>
+    </div>
+
+    <!-- SCHEMA MARKUP -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: metadata.title,
+            description: metadata.description,
+            author: {
+                "@type": "Person",
+                name: "Hans Steiner",
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Expat Savvy",
+                logo: {
+                    "@type": "ImageObject",
+                    url: "https://expat-savvy.ch/logo.png",
+                },
+            },
+            mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": metadata.canonical,
+            },
+        })}
+    />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer,
+                },
+            })),
+        })}
+    />
+</Layout>
