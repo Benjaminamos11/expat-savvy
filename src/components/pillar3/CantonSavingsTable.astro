@@ -34,87 +34,135 @@ const cantonData = [
 ---
 
 <div
-    class="canton-savings-table-wrapper overflow-hidden rounded-xl border border-gray-100 shadow-lg bg-white"
+    class="canton-savings-table-wrapper overflow-hidden rounded-2xl border border-gray-100 shadow-xl bg-white"
 >
+    <!-- Search Bar -->
+    <div
+        class="p-6 bg-[#1a1a2e] border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4"
+    >
+        <div>
+            <h3 class="text-white font-bold text-lg leading-tight">
+                Compare Cantonal Savings
+            </h3>
+            <p class="text-white/50 text-xs mt-1">
+                Real-time comparison across all 26 Swiss cantons.
+            </p>
+        </div>
+        <div class="relative max-w-xs w-full">
+            <span
+                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="text-white/30"
+                    ><circle cx="11" cy="11" r="8"></circle><path
+                        d="m21 21-4.3-4.3"></path></svg
+                >
+            </span>
+            <input
+                type="text"
+                id="canton-search"
+                placeholder="Search canton..."
+                class="w-full bg-white/10 border border-white/20 rounded-lg py-2 pl-10 pr-4 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#C41E3A] focus:border-transparent placeholder-white/20 transition-all font-medium"
+            />
+        </div>
+    </div>
+
     <div class="overflow-x-auto">
         <table
             id="canton-table"
             class="w-full text-left border-collapse feature-table"
         >
             <thead>
-                <tr class="bg-[#1a1a2e] text-white">
+                <tr class="bg-gray-50 border-b border-gray-100 italic">
                     <th
-                        class="p-4 md:p-6 font-bold cursor-pointer hover:bg-[#252545] transition-colors group"
+                        class="p-4 md:p-6 font-bold cursor-pointer hover:bg-gray-100 transition-colors group text-[#1a1a2e]"
                         data-sort="name"
                     >
                         <div class="flex items-center gap-2">
                             Canton
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
+                                width="14"
+                                height="14"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="2"
+                                stroke-width="2.5"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="lucide lucide-chevrons-up-down text-white/40 group-hover:text-white"
+                                class="lucide lucide-chevrons-up-down text-gray-300 group-hover:text-[#C41E3A] transition-colors"
                                 ><path d="m7 15 5 5 5-5"></path><path
                                     d="m7 9 5-5 5 5"></path></svg
                             >
                         </div>
                     </th>
                     <th
-                        class="p-4 md:p-6 font-bold cursor-pointer hover:bg-[#252545] transition-colors group"
+                        class="p-4 md:p-6 font-bold cursor-pointer hover:bg-gray-100 transition-colors group text-[#1a1a2e]"
                         data-sort="savings"
                     >
                         <div class="flex items-center gap-2">
                             Est. Annual Savings
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
+                                width="14"
+                                height="14"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="2"
+                                stroke-width="2.5"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="lucide lucide-chevrons-up-down text-white/40 group-hover:text-white"
+                                class="lucide lucide-chevrons-up-down text-gray-300 group-hover:text-[#C41E3A] transition-colors"
                                 ><path d="m7 15 5 5 5-5"></path><path
                                     d="m7 9 5-5 5 5"></path></svg
                             >
                         </div>
                     </th>
-                    <th class="p-4 md:p-6 font-bold"> Tax Profile </th>
+                    <th class="p-4 md:p-6 font-bold text-[#1a1a2e]">
+                        Tax Optimization Strategy
+                    </th>
                 </tr>
             </thead>
             <tbody id="canton-tbody" class="divide-y divide-gray-100">
                 {
                     cantonData.map((canton) => (
                         <tr
-                            class="hover:bg-[#f8f9fa] transition-colors"
-                            data-name={canton.name}
+                            class="hover:bg-gray-50/80 transition-colors group"
+                            data-name={canton.name.toLowerCase()}
                             data-savings={canton.savings}
                         >
-                            <td class="p-4 md:p-6 font-semibold text-[#1a1a2e]">
+                            <td class="p-4 md:p-6 font-semibold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors">
                                 {canton.name}
                             </td>
-                            <td class="p-4 md:p-6 font-bold text-[#C41E3A]">
-                                CHF {canton.savings.toLocaleString("de-CH")}
+                            <td class="p-4 md:p-6 font-extrabold text-[#1a1a2e]">
+                                <span class="text-xs text-gray-400 font-medium mr-1 tracking-wider">
+                                    CHF
+                                </span>
+                                {canton.savings.toLocaleString("de-CH")}
                             </td>
-                            <td class="p-4 md:p-6 text-sm text-gray-500">
+                            <td class="p-4 md:p-6">
                                 {canton.savings > 1600 ? (
-                                    <span class="bg-red-50 text-red-700 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                                    <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-[#C41E3A] bg-[#C41E3A]/5 text-[#C41E3A] text-[10px] font-extrabold uppercase tracking-widest shadow-sm">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#C41E3A] mr-2 animate-pulse" />
                                         High Optimization
                                     </span>
                                 ) : canton.savings < 1100 ? (
-                                    <span class="bg-green-50 text-green-700 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                                    <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-300 bg-white text-gray-500 text-[10px] font-extrabold uppercase tracking-widest">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2" />
                                         Low Tax Base
                                     </span>
                                 ) : (
-                                    <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                                    <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-[#1a1a2e] bg-[#1a1a2e]/5 text-[#1a1a2e] text-[10px] font-extrabold uppercase tracking-widest">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#1a1a2e] mr-2" />
                                         Moderate Saving
                                     </span>
                                 )}
@@ -124,12 +172,48 @@ const cantonData = [
                 }
             </tbody>
         </table>
+
+        <!-- Empty State -->
+        <div id="canton-empty" class="hidden py-16 text-center">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="text-gray-300"
+                    ><circle cx="11" cy="11" r="8"></circle><path
+                        d="m21 21-4.3-4.3"></path></svg
+                >
+            </div>
+            <p class="text-gray-400 font-bold mb-1">
+                No canton matches your search
+            </p>
+            <p class="text-gray-300 text-sm">
+                Try searching for a different name or clear the field.
+            </p>
+        </div>
     </div>
-    <div class="bg-gray-50 p-4 border-t border-gray-100">
+    <div
+        class="bg-gray-50/50 p-4 border-t border-gray-100 flex items-center justify-between"
+    >
         <p class="text-[10px] text-gray-400 italic">
             *Based on CHF 120,000 gross income, single, no children, max 3a
             contribution (2026).
         </p>
+        <div
+            class="text-[10px] text-[#C41E3A] font-bold uppercase tracking-widest flex items-center gap-2"
+        >
+            <span class="flex h-1.5 w-1.5 rounded-full bg-[#C41E3A]"></span>
+            Live Data Estimates
+        </div>
     </div>
 </div>
 
@@ -137,14 +221,62 @@ const cantonData = [
     (function () {
         const table = document.getElementById("canton-table");
         const tbody = document.getElementById("canton-tbody");
+        const emptyState = document.getElementById("canton-empty");
+        const searchInput = document.getElementById("canton-search");
         const headers = table.querySelectorAll("th[data-sort]");
 
         let sortDir = 1;
         let activeSort = null;
 
+        // Search Logic
+        function filterRows() {
+            const query = searchInput.value.toLowerCase().trim();
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+            let visibleCount = 0;
+
+            rows.forEach((row) => {
+                const name = row.getAttribute("data-name");
+                if (name.includes(query)) {
+                    row.classList.remove("hidden");
+                    visibleCount++;
+                } else {
+                    row.classList.add("hidden");
+                }
+            });
+
+            if (visibleCount === 0) {
+                table.classList.add("hidden");
+                emptyState.classList.remove("hidden");
+            } else {
+                table.classList.remove("hidden");
+                emptyState.classList.add("hidden");
+            }
+        }
+
+        searchInput.addEventListener("input", filterRows);
+
+        // Sort Logic
         headers.forEach((header) => {
             header.addEventListener("click", () => {
                 const sortKey = header.getAttribute("data-sort");
+
+                // Clear other icons
+                headers.forEach((h) => {
+                    const svg = h.querySelector("svg");
+                    if (svg)
+                        svg.classList.replace(
+                            "text-[#C41E3A]",
+                            "text-gray-300",
+                        );
+                });
+
+                // Highlight active icon
+                const activeIcon = header.querySelector("svg");
+                if (activeIcon)
+                    activeIcon.classList.replace(
+                        "text-gray-300",
+                        "text-[#C41E3A]",
+                    );
 
                 if (activeSort === sortKey) {
                     sortDir *= -1;
