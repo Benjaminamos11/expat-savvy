@@ -1,0 +1,576 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
+import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
+import ArticleSchema from "../../components/ArticleSchema.astro";
+import FAQSchema from "../../components/FAQSchema.astro";
+import InsuranceSecuritySimulator from "../../components/pillar3/InsuranceSecuritySimulator.astro";
+
+const metadata = {
+    title: "3rd Pillar Insurance: The Secure Path for Expats in Switzerland",
+    description:
+        "Discover why a 3rd pillar insurance solution provides superior security, discipline, and a clear path to homeownership for expats in Switzerland. Compare the benefits and find your ideal plan.",
+    canonical: "https://expat-savvy.ch/3rd-pillar/bank-vs-insurance/",
+};
+
+const faqs = [
+    {
+        question: "Do I absolutely need an insurance 3a to get a mortgage?",
+        answer: "While not legally mandatory in all cases, many Swiss banks require an insurance-linked 3a policy as collateral (pledging). This ensures the mortgage can be amortized and eventually repaid even in the event of death or disability, making your application significantly stronger.",
+    },
+    {
+        question: "What is the current Technical Interest Rate for Swiss Life?",
+        answer: "The 'Technischer Zins' varies by product and year of contract, but it represents a guaranteed minimum return on the savings portion of your premium. Unlike bank accounts where rates can drop to zero, this provides a reliable floor for your capital accumulation.",
+    },
+    {
+        question: "How does the Premium Waiver work in practice?",
+        answer: "If you become unable to work due to illness or accident (disability), the insurance company takes over your premium payments. Your 3a account continues to grow and your insurance protection remains in force, exactly as if you were still paying into it yourself.",
+    },
+    {
+        question: "Can I lose money with a Swiss Life Dynamic Elements policy?",
+        answer: "Modern products like Dynamic Elements Duo are designed to balance stock market opportunities with capital guarantees. While the investment portion fluctuates, the integrated guarantees ensure that a part of your capital and/or a minimum pension is always protected.",
+    },
+    {
+        question: "What if I want to leave Switzerland after buying a home?",
+        answer: "Your 3a insurance policy remains a valuable asset. If you leave Switzerland permanently, you may be able to withdraw the capital (subject to certain conditions and the 3-year blocking period if you used it for a mortgage). Alternatively, you can often keep the policy active to maintain your global life insurance coverage.",
+    },
+];
+
+const heroImage = "/images/bank-vs-insurance-hero.jpg";
+---
+
+<Layout
+    title={metadata.title}
+    description={metadata.description}
+    canonicalURLProp={metadata.canonical}
+>
+    <Fragment slot="head">
+        <ArticleSchema
+            title={metadata.title}
+            description={metadata.description}
+            image={heroImage}
+        />
+        <FAQSchema faqs={faqs} />
+    </Fragment>
+
+    <style is:global>
+        .spoke-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .spoke-body {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1a1a2e;
+        }
+        .comparison-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .pro-tip-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #c41e3a;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+    </style>
+
+    <BreadcrumbSchema
+        items={[
+            { name: "Home", url: "/" },
+            { name: "3rd Pillar Hub", url: "/3rd-pillar" },
+            {
+                name: "Bank vs. Insurance",
+                url: "/3rd-pillar/bank-vs-insurance",
+            },
+        ]}
+    />
+
+    <!-- HERO IMAGE -->
+    <div
+        class="w-full h-[500px] md:h-[650px] relative overflow-hidden bg-gray-900 text-white"
+    >
+        <img
+            src={heroImage}
+            alt="Happy family in front of a beautiful Swiss home at sunset"
+            class="w-full h-full object-cover opacity-60"
+        />
+        <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"
+        >
+            <h1
+                class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-2xl max-w-5xl leading-tight"
+            >
+                The Secure Path to Your <span class="text-[#C41E3A]"
+                    >Swiss Home & Retirement</span
+                >
+            </h1>
+            <p
+                class="text-white/90 text-xl md:text-2xl font-medium drop-shadow-md max-w-2xl"
+            >
+                For expats, financial discipline and a clear path to
+                homeownership are paramount. Discover how a 3rd pillar insurance
+                solution provides the structure you need.
+            </p>
+        </div>
+    </div>
+
+    <!-- CONTENT START -->
+    <div class="bg-white py-16 md:py-24">
+        <div class="spoke-container">
+            <!-- SECTION 1: TWO PHILOSOPHIES -->
+            <div class="mb-24">
+                <div class="text-center mb-16">
+                    <RedSectionHeader
+                        title="Two Philosophies for Your Future"
+                        align="center"
+                    />
+                    <p class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto">
+                        Choosing between a bank and an insurance provider isn't
+                        just about rates—it's about choosing the foundation of
+                        your Swiss financial bridge.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Insurance Card -->
+                    <div
+                        class="relative p-8 md:p-10 rounded-3xl border-2 border-[#C41E3A] bg-white shadow-xl overflow-hidden group"
+                    >
+                        <div class="absolute top-0 right-0 p-4">
+                            <span
+                                class="bg-[#C41E3A] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter"
+                                >Recommended for Homeowners</span
+                            >
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
+                            The Disciplined Homeowner
+                        </h3>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            A structured insurance-based 3a provides guaranteed
+                            capital, bundled protection (life/disability), and
+                            the specific collateral requirements Swiss banks
+                            demand for home ownership.
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#C41E3A] mt-1 font-bold"
+                                    >✓</span
+                                >
+                                <span class="text-sm font-medium text-[#1a1a2e]"
+                                    >Automated "forced" savings discipline</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#C41E3A] mt-1 font-bold"
+                                    >✓</span
+                                >
+                                <span class="text-sm font-medium text-[#1a1a2e]"
+                                    >Guaranteed payout for mortgage collateral</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#C41E3A] mt-1 font-bold"
+                                    >✓</span
+                                >
+                                <span class="text-sm font-medium text-[#1a1a2e]"
+                                    >Premium waiver in case of disability</span
+                                >
+                            </li>
+                        </ul>
+                        <div
+                            class="h-1 w-full bg-[#C41E3A]/10 rounded-full overflow-hidden"
+                        >
+                            <div class="h-full bg-[#C41E3A] w-[95%]"></div>
+                        </div>
+                        <span
+                            class="block text-[10px] text-gray-400 mt-2 font-bold uppercase"
+                            >Security Factor: 95%</span
+                        >
+                    </div>
+
+                    <!-- Bank Card -->
+                    <div
+                        class="p-8 md:p-10 rounded-3xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 transition-all group"
+                    >
+                        <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
+                            The Flexible Renter
+                        </h3>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            Bank solutions offer 100% flexibility at the cost of
+                            structure. This high-risk, DIY approach often lacks
+                            the guarantees and protection needed to satisfy
+                            Swiss mortgage lenders.
+                        </p>
+                        <ul class="space-y-4 mb-8 text-gray-600">
+                            <li class="flex items-start gap-3 opacity-60">
+                                <span class="text-gray-400 mt-1 font-bold"
+                                    >✕</span
+                                >
+                                <span class="text-sm"
+                                    >Easy to skip payments (breaking savings
+                                    goals)</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-3 opacity-60">
+                                <span class="text-gray-400 mt-1 font-bold"
+                                    >✕</span
+                                >
+                                <span class="text-sm"
+                                    >No protection if you become unable to work</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-3 opacity-60">
+                                <span class="text-gray-400 mt-1 font-bold"
+                                    >✕</span
+                                >
+                                <span class="text-sm"
+                                    >Volatile capital (less attractive to banks)</span
+                                >
+                            </li>
+                        </ul>
+                        <div
+                            class="h-1 w-full bg-gray-200 rounded-full overflow-hidden"
+                        >
+                            <div class="h-full bg-gray-400 w-[40%]"></div>
+                        </div>
+                        <span
+                            class="block text-[10px] text-gray-400 mt-2 font-bold uppercase"
+                            >Security Factor: 40%</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: THE HOMEOWNERSHIP ADVANTAGE -->
+            <div class="mb-24">
+                <RedSectionHeader
+                    title="The Key to Unlocking Your Swiss Mortgage"
+                />
+                <div class="spoke-body space-y-8 mt-8">
+                    <p>
+                        Buying property in Switzerland is fundamentally
+                        different from other countries. Here, the 3rd Pillar
+                        isn't just a tax-advantaged savings account—it is a
+                        critical financial instrument used to facilitate <strong
+                            >Indirect Amortization</strong
+                        >.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center my-12">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold text-[#1a1a2e]">
+                                What is Indirect Amortization?
+                            </h3>
+                            <p class="text-gray-600">
+                                Instead of paying back your mortgage debt
+                                directly to the bank, you pay the same amount
+                                into your 3rd pillar insurance policy. The debt
+                                stays the same (keeping your tax deductions
+                                high), while your 3a account grows to eventually
+                                pay off the mortgage in one lump sum.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-[#1a1a2e] p-8 rounded-3xl text-white shadow-2xl"
+                        >
+                            <div
+                                class="text-[#C41E3A] font-bold uppercase text-xs tracking-widest mb-4 italic"
+                            >
+                                The Bank's Perspective
+                            </div>
+                            <p
+                                class="text-lg font-medium leading-relaxed italic"
+                            >
+                                "For our expat clients, having a 3a insurance
+                                policy is often the deciding factor in getting
+                                their mortgage approved. It's a non-negotiable
+                                sign of stability for the banks."
+                            </p>
+                            <div class="mt-4 text-white/50 text-sm">
+                                — Swiss Real Estate Advisor
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        Swiss banks favor insurance-based 3a solutions as
+                        collateral for a simple reason: **Guarantee.** They need
+                        to know that the mortgage will be repaid even if the
+                        unthinkable happens. A bank 3a account offers zero
+                        protection if you die or become disabled. An insurance
+                        3a, however, clears the debt automatically, protecting
+                        both the bank's investment and your family's home.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 3: CASE STUDY -->
+            <div class="mb-24">
+                <RedSectionHeader
+                    title="Case Study: Performance, Security & Guarantees"
+                />
+                <div class="spoke-body space-y-8 mt-12">
+                    <p>
+                        High-end insurance solutions, like the <strong
+                            >Swiss Life Dynamic Elements Duo</strong
+                        >, have evolved beyond simple savings. They combine the
+                        growth potential of the stock market with the bedrock
+                        security of traditional insurance.
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-6 my-12">
+                        <div
+                            class="p-6 bg-[#f8f9fa] rounded-2xl border border-gray-100"
+                        >
+                            <h4
+                                class="font-bold text-[#1a1a2e] mb-2 text-sm uppercase tracking-wider"
+                            >
+                                The "Floor"
+                            </h4>
+                            <div
+                                class="text-xl font-extrabold text-[#C41E3A] mb-3"
+                            >
+                                Technical Interest Rate
+                            </div>
+                            <p class="text-xs text-gray-500 leading-relaxed">
+                                Framing a guaranteed minimum return (Technischer
+                                Zins) that stays locked in, regardless of how
+                                the banking sector or market fluctuates.
+                            </p>
+                        </div>
+                        <div
+                            class="p-6 bg-[#f8f9fa] rounded-2xl border border-gray-100"
+                        >
+                            <h4
+                                class="font-bold text-[#1a1a2e] mb-2 text-sm uppercase tracking-wider"
+                            >
+                                The "Bonus"
+                            </h4>
+                            <div
+                                class="text-xl font-extrabold text-[#C41E3A] mb-3"
+                            >
+                                Surplus Participation
+                            </div>
+                            <p class="text-xs text-gray-500 leading-relaxed">
+                                You benefit directly from the insurance
+                                company's profitability (Überschussbeteiligung),
+                                adding a performance layer on top of your
+                                guarantees.
+                            </p>
+                        </div>
+                        <div
+                            class="p-6 bg-[#f8f9fa] rounded-2xl border border-gray-100"
+                        >
+                            <h4
+                                class="font-bold text-[#1a1a2e] mb-2 text-sm uppercase tracking-wider"
+                            >
+                                The "Safety Net"
+                            </h4>
+                            <div
+                                class="text-xl font-extrabold text-[#C41E3A] mb-3"
+                            >
+                                Premium Waiver
+                            </div>
+                            <p class="text-xs text-gray-500 leading-relaxed">
+                                If you become disabled (Prämienbefreiung), Swiss
+                                Life continues to pay your premiums for you.
+                                Your goals are met, no matter what.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-[#1a1a2e] text-white p-10 rounded-3xl text-center shadow-2xl"
+                    >
+                        <div class="text-2xl md:text-3xl font-extrabold mb-4">
+                            Guaranteed Capital + <span class="text-[#C41E3A]"
+                                >Technical Zins</span
+                            > + Surplus = <span
+                                class="underline decoration-[#C41E3A]"
+                                >Total Secure Return</span
+                            >
+                        </div>
+                        <p class="text-white/60 text-sm">
+                            The formula for long-term peace of mind in the Swiss
+                            market.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: INTERACTIVE SIMULATOR -->
+            <div class="mb-32">
+                <div class="text-center mb-12">
+                    <RedSectionHeader
+                        title="Simulate Your Financial Security"
+                        align="center"
+                    />
+                    <p class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto">
+                        See how your current strategy holds up against Swiss
+                        mortgage and protection requirements.
+                    </p>
+                </div>
+
+                <InsuranceSecuritySimulator />
+            </div>
+
+            <!-- RELATED GUIDES -->
+            <div class="mb-24 pt-16 border-t border-gray-100">
+                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
+                    Continue Your Journey
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <a
+                        href="/3rd-pillar/tax-optimization/"
+                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
+                    >
+                        <div
+                            class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
+                        >
+                            Optimization
+                        </div>
+                        <h4
+                            class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
+                        >
+                            3a Tax Guide
+                        </h4>
+                        <p class="text-sm text-gray-500">
+                            Maximize your annual deductions with Canton-specific
+                            strategies.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/pillar-3a-vs-3b/"
+                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
+                    >
+                        <div
+                            class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
+                        >
+                            Comparison
+                        </div>
+                        <h4
+                            class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
+                        >
+                            3a vs 3b
+                        </h4>
+                        <p class="text-sm text-gray-500">
+                            Choosing the right pillar for your length of stay in
+                            Switzerland.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/"
+                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
+                    >
+                        <div
+                            class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
+                        >
+                            Strategic Hub
+                        </div>
+                        <h4
+                            class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
+                        >
+                            3rd Pillar Masterclass
+                        </h4>
+                        <p class="text-sm text-gray-500">
+                            The complete blueprint for expat retirement
+                            planning.
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- HANS STEINER CARD -->
+            <div
+                class="mb-24 bg-[#F8F9FA] rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm"
+            >
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div
+                        class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
+                    >
+                        <img
+                            src="/images/hans-steiner.png"
+                            alt="Hans Steiner"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div class="flex-grow">
+                        <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
+                            Design Your Home & Retirement Plan
+                        </h2>
+                        <p class="spoke-body text-gray-600 mb-8 max-w-xl">
+                            "Buying a home in Switzerland as an expat requires
+                            more than just a down payment—it requires a tactical
+                            insurance foundation that banks respect."
+                        </p>
+                        <button
+                            onclick="window.openContextualModal()"
+                            class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                        >
+                            Book a Free Homeownership Strategy Call
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ SECTION -->
+            <div class="mb-24">
+                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
+                    Frequently Asked Questions
+                </h2>
+                <div class="space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <div class="border-b border-gray-100">
+                                <details class="group py-4">
+                                    <summary class="flex justify-between items-center cursor-pointer list-none">
+                                        <span class="text-lg md:text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors">
+                                            {faq.question}
+                                        </span>
+                                        <span class="text-2xl font-light text-gray-400 group-open:rotate-45 transition-transform">
+                                            +
+                                        </span>
+                                    </summary>
+                                    <div class="pt-4 pb-2 text-gray-600 spoke-body leading-relaxed animate-fade-in">
+                                        {faq.answer}
+                                    </div>
+                                </details>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="bg-[#1a1a2e] py-24 text-center">
+        <div class="spoke-container">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                Ready to Secure Your Swiss Dream?
+            </h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Discover the tailored insurance solutions that unlock
+                homeownership and guaranteed retirement for expats.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl transition transform hover:-translate-y-1"
+            >
+                Explore Homeownership Solutions
+            </button>
+        </div>
+    </div>
+</Layout>

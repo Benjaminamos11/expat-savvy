@@ -1,0 +1,380 @@
+---
+/**
+ * InsuranceSecuritySimulator.astro
+ * Specialized quiz for the Bank vs. Insurance debate.
+ * Focuses on security, discipline, and homeownership goals.
+ */
+---
+
+<div
+    class="insurance-simulator-root relative bg-white rounded-[40px] shadow-2xl max-w-2xl mx-auto text-[#1a1a2e] border border-gray-100 overflow-hidden min-h-[550px] font-inter"
+>
+    <!-- CSS Triggers (Hidden) -->
+    <input type="radio" name="sim-step" id="s-step-1" class="hidden" checked />
+    <input type="radio" name="sim-step" id="s-step-2" class="hidden" />
+    <input type="radio" name="sim-step" id="s-step-3" class="hidden" />
+    <input type="radio" name="sim-step" id="s-step-4" class="hidden" />
+    <input type="radio" name="sim-step" id="s-step-result" class="hidden" />
+
+    <!-- STEP 1: Protection Focus -->
+    <div class="sim-step step-1 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 1 OF 4</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-gray-100"></div>
+                <div class="h-1 w-4 rounded-full bg-gray-100"></div>
+                <div class="h-1 w-4 rounded-full bg-gray-100"></div>
+            </div>
+        </div>
+        <h3
+            class="text-2xl md:text-3xl font-bold mb-10 leading-tight text-[#1a1a2e]"
+        >
+            What is more important for your Swiss retirement?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="s-step-2"
+                class="sim-btn"
+                onclick="saveSimAnswer(0, 'safety')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">Guaranteed Capital</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >Protecting the downside at all costs</span
+                    >
+                </div>
+            </label>
+            <label
+                for="s-step-2"
+                class="sim-btn"
+                onclick="saveSimAnswer(0, 'growth')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">Market Performance</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >A higher appetite for risk & volatility</span
+                    >
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 2: Disability Coverage -->
+    <div class="sim-step step-2 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 2 OF 4</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-gray-100"></div>
+                <div class="h-1 w-4 rounded-full bg-gray-100"></div>
+            </div>
+        </div>
+        <h3
+            class="text-2xl md:text-3xl font-bold mb-10 leading-tight text-[#1a1a2e]"
+        >
+            If you became unable to work, how would you continue saving?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="s-step-3"
+                class="sim-btn"
+                onclick="saveSimAnswer(1, 'insurance')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">Automated Waiver</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >I want my premiums covered by the provider</span
+                    >
+                </div>
+            </label>
+            <label
+                for="s-step-3"
+                class="sim-btn"
+                onclick="saveSimAnswer(1, 'savings')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">Personal Reserves</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >I will use my own cash to fill the gap</span
+                    >
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 3: Discipline -->
+    <div class="sim-step step-3 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 3 OF 4</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-gray-100"></div>
+            </div>
+        </div>
+        <h3
+            class="text-2xl md:text-3xl font-bold mb-10 leading-tight text-[#1a1a2e]"
+        >
+            Do you struggle with "skipping" months in your savings plan?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="s-step-4"
+                class="sim-btn"
+                onclick="saveSimAnswer(2, 'yes')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">Yes, I need discipline</span
+                    >
+                    <span class="text-xs text-gray-500 font-medium"
+                        >Forced structure helps me stay on track</span
+                    >
+                </div>
+            </label>
+            <label
+                for="s-step-4"
+                class="sim-btn"
+                onclick="saveSimAnswer(2, 'no')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">No, I'm very diligent</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >I can manage voluntary contributions myself</span
+                    >
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 4: Homeownership -->
+    <div class="sim-step step-4 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 4 OF 4</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+            </div>
+        </div>
+        <h3
+            class="text-2xl md:text-3xl font-bold mb-10 leading-tight text-[#1a1a2e]"
+        >
+            Is buying a home in Switzerland a major financial goal?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="s-step-result"
+                class="sim-btn"
+                onclick="saveSimAnswer(3, 'yes'); calculateSimResult();"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg"
+                        >Yes, it's my top priority</span
+                    >
+                    <span class="text-xs text-gray-500 font-medium"
+                        >I want to own a home in Switzerland</span
+                    >
+                </div>
+            </label>
+            <label
+                for="s-step-result"
+                class="sim-btn"
+                onclick="saveSimAnswer(3, 'maybe'); calculateSimResult();"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">Maybe in the future</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >Potential property purchase 10+ years away</span
+                    >
+                </div>
+            </label>
+            <label
+                for="s-step-result"
+                class="sim-btn"
+                onclick="saveSimAnswer(3, 'no'); calculateSimResult();"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <div class="flex flex-col text-left">
+                    <span class="font-bold text-lg">No, I plan to rent</span>
+                    <span class="text-xs text-gray-500 font-medium"
+                        >I prefer flexibility and living as a renter</span
+                    >
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div
+        id="sim-result-screen"
+        class="sim-step step-result p-8 md:p-12 text-center"
+    >
+        <div id="sim-res-icon" class="text-7xl mb-6">🛡️</div>
+        <h3
+            id="sim-res-title"
+            class="text-2xl md:text-3xl font-bold mb-6 text-[#1a1a2e]"
+        >
+            Your Security Profile
+        </h3>
+        <p
+            id="sim-res-desc"
+            class="text-gray-600 text-lg leading-relaxed mb-10 max-w-md mx-auto"
+        >
+            Calculating your path to security...
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full shadow-2xl transition-all hover:-translate-y-1"
+            >
+                Get My Customized Plan
+            </button>
+            <label
+                for="s-step-1"
+                class="text-gray-400 hover:text-gray-600 font-bold py-4 px-6 cursor-pointer"
+            >
+                Start Over
+            </label>
+        </div>
+    </div>
+</div>
+
+<style is:inline>
+    .sim-step {
+        display: none !important;
+    }
+    #s-step-1:checked ~ .step-1,
+    #s-step-2:checked ~ .step-2,
+    #s-step-3:checked ~ .step-3,
+    #s-step-4:checked ~ .step-4,
+    #s-step-result:checked ~ .step-result {
+        display: block !important;
+        animation: simFadeIn 0.4s ease-out forwards;
+    }
+
+    .sim-btn {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        width: 100%;
+        text-align: left;
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        background: #fff;
+        border: 2px solid #f1f1f1;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+    .sim-btn:hover {
+        border-color: #c41e3a;
+        box-shadow: 0 10px 30px -10px rgba(196, 30, 58, 0.2);
+    }
+    .dot-ring {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 9999px;
+        border: 2px solid #e5e5e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: border-color 0.2s ease;
+    }
+    .sim-btn:hover .dot-ring {
+        border-color: #c41e3a;
+    }
+    .dot-fill {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 9999px;
+        background: #c41e3a;
+        transform: scale(0);
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .sim-btn:hover .dot-fill {
+        transform: scale(1);
+    }
+
+    @keyframes simFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script is:inline>
+    (function () {
+        const simAnswers = {};
+
+        window.saveSimAnswer = function (step, val) {
+            simAnswers[step] = val;
+        };
+
+        window.calculateSimResult = function () {
+            const iconEl = document.getElementById("sim-res-icon");
+            const titleEl = document.getElementById("sim-res-title");
+            const descEl = document.getElementById("sim-res-desc");
+
+            let result = {
+                title: "Hybrid Protection Plan",
+                desc: "A balanced strategy with traditional 3a security and low-cost protection seems ideal for your current goals.",
+                icon: "⚖️",
+            };
+
+            // Homeownership Logic (Override)
+            if (simAnswers[3] === "yes") {
+                result = {
+                    title: "Homeownership Specialist",
+                    desc: "Because buying a home is your top priority, an insurance-based 3a is essential. It serves as mandatory collateral and ensures your mortgage stays secure.",
+                    icon: "🏘️",
+                };
+            } else if (
+                simAnswers[0] === "safety" ||
+                simAnswers[1] === "insurance" ||
+                simAnswers[2] === "yes"
+            ) {
+                result = {
+                    title: "Guaranteed Security Plan",
+                    desc: "You prioritize discipline and safety. An insurance solution provided by a Swiss leader like Swiss Life offers the floor you need.",
+                    icon: "🛡️",
+                };
+            }
+
+            if (iconEl && titleEl && descEl) {
+                iconEl.textContent = result.icon;
+                titleEl.textContent = result.title;
+                descEl.textContent = result.desc;
+            }
+        };
+    })();
+</script>
