@@ -1,0 +1,121 @@
+---
+import RedSectionHeader from "../common/RedSectionHeader.astro";
+
+const faqs = [
+    {
+        question: "What exactly is the 3rd Pillar?",
+        answer: "The 3rd Pillar (Säule 3a) is a private, voluntary pension plan in Switzerland that offers significant tax advantages. Unlike the mandatory 1st (State) and 2nd (Employer) pillars, the 3rd pillar is entirely up to you. It is designed to bridge the income gap at retirement and allows you to deduct your contributions from your taxable income.",
+    },
+    {
+        question: "How much can I contribute in 2026?",
+        answer: "For employees with a pension fund (2nd pillar), the maximum deductible contribution is typically around CHF 7,258. For self-employed individuals without a 2nd pillar, you can contribute up to 20% of your net operational income, capped at approximately CHF 36,288. *Note: Official figures are adjusted annually by the BSV.*",
+    },
+    {
+        question:
+            "Can expats withdraw their 3rd Pillar when leaving Switzerland?",
+        answer: "Yes. This is a key benefit for expats. If you leave Switzerland permanently and deregister, you can withdraw your entire Pillar 3a capital, regardless of your age. The payout is subject to a reduced withholding tax (Quellensteuer), which can often be reclaimed or credited depending on your new country's tax treaty.",
+    },
+    {
+        question: "Is it better to open a 3a with a Bank or Insurance?",
+        answer: "For most people seeking growth and flexibility, a Bank/Foundation solution (invested in ETFs) is superior due to lower fees and no contractual lock-in. Insurance solutions are appropriate mainly if you specifically need the integrated death/disability coverage and lack the discipline to save voluntarily.",
+    },
+    {
+        question: "Can I have multiple 3rd Pillar accounts?",
+        answer: "Yes, and you should! It is recommended to have up to 5 separate 3a accounts. This allows you to 'stagger' your withdrawals over different years as you approach retirement (e.g., ages 60, 61, 62...), breaking the progressive tax progression on the lump sum withdrawal.",
+    },
+    {
+        question: "What happens if I die before retirement?",
+        answer: "Your 3rd Pillar assets are not lost. They fall into a specific beneficiary order (creditor protection). 1. Spouse/Registered Partner, 2. Direct Descendants (Children), 3. Parents/Siblings/Other Heirs. You can modify this order to some extent by informing your provider in writing.",
+    },
+    {
+        question: "Can I use Pillar 3a to buy a house?",
+        answer: "Yes. The 'Home Ownership Promotion Scheme' (WEF) allows you to withdraw 3a capital to purchase a primary residence (not a rental property). Alternatively, you can pledge the account as collateral to your bank, keeping your money invested while potentially negotiating better mortgage rates.",
+    },
+    {
+        question: "Are investment gains taxed?",
+        answer: "No. Unlike a private savings account where dividends and interest are taxed as income every year, your Pillar 3a grows 100% tax-free. You pay no income tax on dividends and no wealth tax on the capital balance as long as it remains in the 3a wrapper.",
+    },
+    {
+        question: "Can I catch up on missed years?",
+        answer: "Currently, no. The deduction is 'use it or lose it' by December 31st each year. However, Parliament has approved a motion to allow retrospective buy-ins for gaps in contribution years, which is expected to come into force around 2025/2026, subject to specific conditions.",
+    },
+    {
+        question: "What is the difference between 3a and 3b?",
+        answer: "Pillar 3a is 'restricted': tax-deductible but locked until retirement (with exceptions). Pillar 3b is 'flexible': generally not tax-deductible (except in Geneva/Fribourg under strict conditions) but liquidity is available anytime. 3a is for retirement/tax optimization; 3b is for medium-term goals.",
+    },
+];
+---
+
+<section class="py-20 bg-white" id="faq">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <RedSectionHeader
+            title="Expert Answers to Your Burning Questions"
+            className="mb-12"
+        />
+
+        <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
+            {
+                faqs.map((faq, index) => (
+                    <div
+                        class="bg-gray-50 rounded-xl overflow-hidden hover:bg-gray-100 transition duration-200"
+                        itemscope
+                        itemprop="mainEntity"
+                        itemtype="https://schema.org/Question"
+                    >
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6">
+                                <span
+                                    class="text-lg font-bold text-gray-900"
+                                    itemprop="name"
+                                >
+                                    {faq.question}
+                                </span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg
+                                        fill="none"
+                                        height="24"
+                                        shape-rendering="geometricPrecision"
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                    >
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg>
+                                </span>
+                            </summary>
+                            <div
+                                class="text-gray-600 px-6 pb-6 text-base leading-relaxed"
+                                itemscope
+                                itemprop="acceptedAnswer"
+                                itemtype="https://schema.org/Answer"
+                            >
+                                <div itemprop="text">{faq.answer}</div>
+                            </div>
+                        </details>
+                    </div>
+                ))
+            }
+        </div>
+
+        <div
+            class="mt-12 text-center bg-blue-50 p-8 rounded-xl border border-blue-100"
+        >
+            <h4 class="font-bold text-gray-900 text-lg mb-2">
+                Still have questions?
+            </h4>
+            <p class="text-gray-600 mb-6">
+                Our expert team can analyze your specific situation—whether
+                you're a US person, self-employed, or planning to leave soon.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-3 px-8 rounded-full transition shadow-lg transform hover:-translate-y-1"
+            >
+                Get a Free Expert Assessment
+            </button>
+        </div>
+    </div>
+</section>

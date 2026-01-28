@@ -276,13 +276,20 @@
       <div
         class="w-full md:w-[60%] bg-white flex flex-col h-full md:h-auto max-h-[92vh] md:max-h-[75vh] overflow-y-auto">
 
-        <!-- Mobile Header (Sticky) -->
-        <div
-          class="md:hidden sticky top-0 z-30 bg-[#C41E3A] text-white px-4 py-3 flex items-center justify-between shadow-md">
-          <span class="font-serif font-bold text-lg" id="mobile-title">Schedule Consultation</span>
-          <button onclick="window.closeModalOverlay()" class="p-1 hover:bg-white/10 rounded-full">
-            <i data-lucide="x" class="w-6 h-6"></i>
-          </button>
+        <!-- Floating Mobile Close Button (Fixed & Guaranteed Visible) -->
+        <button onclick="window.closeModalOverlay()"
+          class="md:hidden fixed top-4 right-4 z-[99999] bg-white text-gray-800 p-2 rounded-full shadow-lg border border-gray-100 active:scale-95 transition-transform"
+          aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Mobile Header (Simplified) -->
+        <div class="md:hidden bg-[#C41E3A] text-white px-4 py-4 pt-12 shadow-sm rounded-t-[20px]">
+          <span class="font-serif font-bold text-xl block text-center" id="mobile-title">Schedule Consultation</span>
         </div>
 
         <!-- Mobile Consultant Card (Sticky below header) -->

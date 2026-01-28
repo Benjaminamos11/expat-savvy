@@ -1,0 +1,515 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
+import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
+import PillarQuiz from "../../components/pillar3/PillarQuiz.astro";
+
+const metadata = {
+    title: "Pillar 3a vs. 3b in Switzerland: What's the Difference? (2026 Guide)",
+    description:
+        "A detailed comparison of Pillar 3a vs. 3b for expats in Switzerland. Understand the tax differences, contribution limits, and withdrawal rules to choose the right one for you.",
+    canonical: "https://expat-savvy.ch/3rd-pillar/3a-vs-3b/",
+};
+
+const faqs = [
+    {
+        question: "Can I have both a Pillar 3a and a Pillar 3b?",
+        answer: "Absolutely. In fact, for many high-income earners, this is the optimal strategy. You maximize your tax-deductible contributions into 3a first (CHF 7,258), and then direct any additional savings into a flexible 3b investment plan for medium-term goals.",
+    },
+    {
+        question: "What happens to my 3a if I leave Switzerland?",
+        answer: "If you leave Switzerland permanently (de-register), you can usually withdraw your entire Pillar 3a capital, regardless of your age. You will pay a capital withdrawal tax at that time. Note: If you move to an EU/EFTA country, you may not be able to withdraw the mandatory part of your 2nd pillar, but the 3rd pillar remains accessible.",
+    },
+    {
+        question: "Is Pillar 3b worth it if it's not tax-deductible?",
+        answer: "Yes, for specific goals. While you don't get the upfront tax break, 3b policies (especially insurance wrappers) often offer tax-free payouts or tax-deferred growth under certain conditions (e.g., if held for 10+ years and paid out after age 60 in some cantons). It also bypasses probate laws in some cases, which is powerful for estate planning.",
+    },
+    {
+        question: "How many 3a accounts should I have?",
+        answer: "We recommend having at least 5 separate 3a accounts. This allows you to stagger your withdrawals over 5 years (e.g. at ages 60, 61, 62, 63, 64), which breaks the progressive tax rate on withdrawal. This 'Ladder Strategy' can save you thousands in exit taxes.",
+    },
+    {
+        question: "As an expat, which pillar should I prioritize?",
+        answer: "Almost always Pillar 3a first. The guaranteed return from the tax saving (often ~20-30% instantly) is unmatched by any normal investment product. Only once you have filled your 3a bucket should you look at 3b or general investing.",
+    },
+];
+
+const localHeroImage = "/images/spoke-hero-3a-3b.png";
+---
+
+<Layout
+    title={metadata.title}
+    description={metadata.description}
+    canonicalURLProp={metadata.canonical}
+>
+    <!-- GLOBAL STYLE OVERRIDES FOR SPOKE PAGE -->
+    <style is:global>
+        .spoke-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .font-inter {
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Typography overrides */
+        .spoke-h1 {
+            font-size: 3rem; /* 48px */
+            font-weight: 700;
+            line-height: 1.1;
+            color: #1a1a2e;
+        }
+        .spoke-h3 {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .spoke-body {
+            font-size: 1rem; /* 16px */
+            line-height: 1.6;
+            color: #1a1a2e;
+        }
+
+        /* Table Styles */
+        .feature-table thead tr {
+            background-color: #1a1a2e;
+            color: white;
+        }
+        .feature-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .feature-table tbody tr:hover {
+            background-color: #edf0f2;
+        }
+    </style>
+
+    <BreadcrumbSchema
+        items={[
+            { name: "Home", url: "/" },
+            { name: "3rd Pillar Hub", url: "/3rd-pillar" },
+            { name: "3a vs 3b Comparison", url: "/3rd-pillar/3a-vs-3b" },
+        ]}
+    />
+
+    <!-- HERO IMAGE -->
+    <div
+        class="w-full h-[400px] md:h-[500px] relative overflow-hidden bg-gray-900"
+    >
+        <img
+            src={localHeroImage}
+            alt="Pillar 3a vs 3b Hero"
+            class="w-full h-full object-cover opacity-60"
+        />
+        <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-gray-900/50 to-transparent"
+        >
+            <h1
+                class="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg font-inter"
+            >
+                Pillar 3a <span class="text-white/80 font-light">vs.</span> 3b
+            </h1>
+            <p class="text-white/90 text-xl font-medium drop-shadow-md">
+                Switzerland's Dual Pension System
+            </p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT START -->
+    <div class="bg-white py-16">
+        <div class="spoke-container">
+            <!-- SECTION 1: HERO TITLE -->
+            <div class="text-center mb-20">
+                <h1 class="spoke-h1 mb-6 font-inter">
+                    Pillar 3a vs. 3b: What's the <span class="text-[#C41E3A]"
+                        >Difference?</span
+                    >
+                </h1>
+                <p
+                    class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed spoke-body"
+                >
+                    The 3rd Pillar is split into two distinct systems. Choosing
+                    the right one is crucial for balancing tax optimization with
+                    liquidity. This guide makes it simple.
+                </p>
+            </div>
+
+            <!-- SECTION 2: TWO-UP COMPARISON CARDS -->
+            <div class="grid md:grid-cols-2 gap-8 mb-24">
+                <!-- Pillar 3a -->
+                <div
+                    class="bg-[#F8F9FA] p-8 rounded-xl border-t-2 border-[#C41E3A] shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group"
+                >
+                    <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
+                        Pillar 3a (Restricted)
+                    </h3>
+                    <p class="spoke-body text-gray-600 mb-6">
+                        The "Tax-Optimized Locked Box." Designed for those who
+                        want to maximize their annual savings through
+                        significant tax deductions.
+                    </p>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C41E3A] font-bold">✓</span>
+                            <span class="spoke-body"
+                                >100% Tax Deductible (up to limit)</span
+                            >
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-[#C41E3A] font-bold">✓</span>
+                            <span class="spoke-body"
+                                >Tax-free growth & compound interest</span
+                            >
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-gray-400 font-bold">!</span>
+                            <span class="spoke-body"
+                                >Locked until retirement (mostly)</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <!-- Pillar 3b -->
+                <div
+                    class="bg-[#F8F9FA] p-8 rounded-xl border-t-2 border-[#1a1a2e] shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group"
+                >
+                    <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
+                        Pillar 3b (Flexible)
+                    </h3>
+                    <p class="spoke-body text-gray-600 mb-6">
+                        The "Flexible Savings Plan." Ideal for medium-term goals
+                        or high-income earners who want to save beyond the 3a
+                        legal limit.
+                    </p>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span class="spoke-body"
+                                >Withdraw funds at any time</span
+                            >
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span class="spoke-body"
+                                >No contribution limits</span
+                            >
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-gray-400 font-bold">!</span>
+                            <span class="spoke-body"
+                                >Generally not tax-deductible</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 3: FEATURE TABLE -->
+            <div class="mb-24">
+                <RedSectionHeader
+                    title="At a Glance: Feature Comparison"
+                    align="left"
+                    className="mb-12"
+                />
+                <div
+                    class="overflow-x-auto rounded-xl shadow-md border border-gray-100"
+                >
+                    <table
+                        class="w-full text-left border-collapse feature-table"
+                    >
+                        <thead>
+                            <tr class="spoke-body font-bold">
+                                <th class="p-6">Feature</th>
+                                <th class="p-6">Pillar 3a</th>
+                                <th class="p-6">Pillar 3b</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 spoke-body">
+                            <tr>
+                                <td class="p-6 font-bold">Tax Deduction</td>
+                                <td class="p-6 text-green-700 font-medium"
+                                    >Yes (100% up to limit)</td
+                                >
+                                <td class="p-6 text-gray-500">No (Generally)</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold">Liquidity</td>
+                                <td class="p-6">Restricted until 60/65</td>
+                                <td class="p-6 text-green-700 font-medium"
+                                    >Flexible / Daily</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold">Contribution Limit</td
+                                >
+                                <td class="p-6">CHF 7,258 (Employees)</td>
+                                <td class="p-6 font-medium">Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold">Wealth Tax</td>
+                                <td class="p-6">Tax-Exempt</td>
+                                <td class="p-6">Taxable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION 4: DEEP DIVE 3A -->
+            <div class="mb-24 px-2">
+                <RedSectionHeader
+                    title="Deep Dive: Pillar 3a - The Tax Engine"
+                    className="mb-8"
+                />
+                <div class="spoke-body space-y-6">
+                    <p>
+                        Pillar 3a is the sweetheart of the Swiss pension system.
+                        The government wants you to save for retirement, so they
+                        offer a deal that is effectively an instant rebate on
+                        your savings. Every franc you put into Pillar 3a is
+                        removed from your taxable income.
+                    </p>
+                    <h3 class="spoke-h3">Who is Pillar 3a For?</h3>
+                    <p>
+                        It is specifically designed for <strong
+                            >Employees with an AHV-liable income</strong
+                        > and the <strong>Self-Employed</strong>. If you pay
+                        taxes in Switzerland, the 3a is usually the single most
+                        effective tool in your financial arsenal.
+                    </p>
+
+                    <h3 class="spoke-h3">The "Top-Slice" Effect</h3>
+                    <p>
+                        Since Switzerland uses progressive tax rates, your 3rd
+                        pillar deduction comes off the "top" of your income
+                        stack. If your marginal tax rate is 25%, a CHF 7,000
+                        contribution effectively only costs you CHF 5,250. You
+                        "earn" CHF 1,750 instantly.
+                    </p>
+
+                    <div
+                        class="bg-red-50 p-6 rounded-xl border-l-4 border-[#C41E3A] my-8"
+                    >
+                        <p class="font-bold text-[#1a1a2e] mb-2">
+                            2026 Legal Limits:
+                        </p>
+                        <ul class="list-disc ml-5 space-y-1">
+                            <li><strong>With 2nd Pillar:</strong> CHF 7,258</li>
+                            <li>
+                                <strong>Without 2nd Pillar:</strong> CHF 36,288 (max
+                                20% of net income)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: DEEP DIVE 3B -->
+            <div class="mb-24 px-2">
+                <RedSectionHeader
+                    title="Deep Dive: Pillar 3b - The Flexible Vessel"
+                    className="mb-8"
+                />
+                <div class="spoke-body space-y-6">
+                    <p>
+                        Pillar 3b is "free provision." While you lose the
+                        upfront tax deduction, you gain something else entirely: <strong
+                            >Control.</strong
+                        > 3b is not a specific account type but a category of assets
+                        (insurance, stocks, cash) that you dedicate to your retirement
+                        without the government's strings attached.
+                    </p>
+                    <h3 class="spoke-h3">When to Choose 3b?</h3>
+                    <ul class="list-disc ml-5 space-y-3">
+                        <li>
+                            <strong>Excess Liquidity:</strong> You have already maxed
+                            out your 3a limit and still want to save systematically.
+                        </li>
+                        <li>
+                            <strong>Short-Term Goals:</strong> You plan to buy property
+                            in 3-5 years and can't risk the funds being locked.
+                        </li>
+                        <li>
+                            <strong>Inheritance Planning:</strong> 3b insurance policies
+                            often have favorable rules for designation of beneficiaries
+                            outside of standard inheritance law.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 6: INTERACTIVE QUIZ -->
+            <div
+                class="mb-24 bg-[#1a1a2e] rounded-3xl p-12 text-white shadow-2xl relative overflow-hidden group"
+            >
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl transition-all group-hover:bg-white/10"
+                >
+                </div>
+                <div class="relative z-10">
+                    <RedSectionHeader
+                        title="Which Pillar is Right For You?"
+                        align="center"
+                        className="mb-10 !text-white"
+                    />
+                    <PillarQuiz />
+                </div>
+            </div>
+
+            <!-- SECTION 7: HANS STEINER CARD -->
+            <div
+                class="mb-24 bg-[#F8F9FA] rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+            >
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div
+                        class="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg flex-shrink-0"
+                    >
+                        <img
+                            src="/images/hans-steiner.png"
+                            alt="Hans Steiner"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div class="flex-grow text-center md:text-left">
+                        <h3
+                            class="text-3xl font-bold text-[#1a1a2e] mb-4 font-inter"
+                        >
+                            Still Unsure? Talk to Hans.
+                        </h3>
+                        <p class="spoke-body text-gray-600 mb-8 max-w-xl">
+                            "The difference between 3a and 3b isn't just about
+                            taxes; it's about matching your financial life
+                            stages to the right vehicle. A 15-minute chat can
+                            save you years of inefficient saving."
+                        </p>
+                        <button
+                            onclick="window.openContextualModal()"
+                            class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:shadow-red-900/40 transition transform hover:-translate-y-1"
+                        >
+                            Schedule a Free Consultation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 8: FAQ ACCORDION -->
+            <div class="mb-24">
+                <h2
+                    class="text-3xl font-bold text-[#1a1a2e] mb-10 text-center font-inter"
+                >
+                    Frequently Asked Questions
+                </h2>
+                <div class="space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <div class="border-b border-gray-200 py-2">
+                                <details class="group">
+                                    <summary class="flex justify-between items-center cursor-pointer list-none py-4">
+                                        <span class="spoke-h3 !m-0 !text-lg md:!text-xl font-bold group-hover:text-[#C41E3A] transition-colors">
+                                            {faq.question}
+                                        </span>
+                                        <div class="text-2xl font-light text-gray-400 group-open:hidden">
+                                            +
+                                        </div>
+                                        <div class="text-2xl font-light text-gray-400 hidden group-open:block">
+                                            −
+                                        </div>
+                                    </summary>
+                                    <div class="pb-6 spoke-body text-gray-600 animate-fade-in">
+                                        {faq.answer}
+                                    </div>
+                                </details>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /spoke-container -->
+    </div>
+
+    <!-- SECTION 9: FINAL CTA SECTION -->
+    <div class="bg-[#1a1a2e] py-24 text-center">
+        <div class="spoke-container">
+            <h2
+                class="text-4xl md:text-5xl font-bold text-white mb-8 font-inter"
+            >
+                Optimize Your Pension Mix
+            </h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Ready to find the perfect balance between tax savings and
+                liquidity? Let's build your strategy today.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl hover:shadow-red-900/50 transition transform hover:-translate-y-1"
+            >
+                Request Strategy Call
+            </button>
+        </div>
+    </div>
+
+    <!-- SECTION 10: RELATED GUIDES GRID -->
+    <div class="py-24 bg-white">
+        <div class="spoke-container">
+            <h2
+                class="text-2xl font-bold text-[#1a1a2e] mb-12 text-center uppercase tracking-widest"
+            >
+                Mastering the 3rd Pillar
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <a
+                    href="/3rd-pillar/tax-optimization"
+                    class="group block bg-[#F8F9FA] p-8 rounded-xl hover:shadow-xl transition-all duration-300 border border-transparent hover:border-[#C41E3A]"
+                >
+                    <h4
+                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A] transition-colors"
+                    >
+                        Tax Optimization Guide
+                    </h4>
+                    <p class="text-gray-600 text-sm mb-6">
+                        Learn how to shave thousands off your annual tax bill.
+                    </p>
+                    <span class="text-[#C41E3A] font-bold text-sm"
+                        >Read Guide →</span
+                    >
+                </a>
+                <a
+                    href="/3rd-pillar/providers"
+                    class="group block bg-[#F8F9FA] p-8 rounded-xl hover:shadow-xl transition-all duration-300 border border-transparent hover:border-[#C41E3A]"
+                >
+                    <h4
+                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A] transition-colors"
+                    >
+                        Best Providers Review
+                    </h4>
+                    <p class="text-gray-600 text-sm mb-6">
+                        We rank the top Swiss providers on fees and returns.
+                    </p>
+                    <span class="text-[#C41E3A] font-bold text-sm"
+                        >Read Guide →</span
+                    >
+                </a>
+                <a
+                    href="/3rd-pillar/withdrawal-guide"
+                    class="group block bg-[#F8F9FA] p-8 rounded-xl hover:shadow-xl transition-all duration-300 border border-transparent hover:border-[#C41E3A]"
+                >
+                    <h4
+                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A] transition-colors"
+                    >
+                        Early Withdrawal rules
+                    </h4>
+                    <p class="text-gray-600 text-sm mb-6">
+                        How to unlock your funds for property or relocation.
+                    </p>
+                    <span class="text-[#C41E3A] font-bold text-sm"
+                        >Read Guide →</span
+                    >
+                </a>
+            </div>
+        </div>
+    </div>
+</Layout>

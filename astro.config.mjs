@@ -34,31 +34,4 @@ export default defineConfig({
   ],
   site: 'https://expat-savvy.ch',
   compressHTML: true,
-  vite: {
-    define: {
-      __DEFINES__: JSON.stringify({})
-    },
-    build: {
-      cssCodeSplit: false,
-      assetsInlineLimit: 4096,
-      inlineStylesheets: 'always',
-    },
-    // Simplified resolution for fonts
-    resolve: {
-      alias: {
-        '@fontsource': '/node_modules/@fontsource'
-      }
-    },
-    // Disable strict port check - this helps in development
-    server: {
-      strictPort: false,
-      fs: {
-        strict: false,
-        allow: ['/']
-      },
-      hmr: {
-        overlay: true
-      }
-    }
-  }
 });

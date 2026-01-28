@@ -1,0 +1,285 @@
+---
+/**
+ * PillarQuiz.astro
+ * HYPER-ROBUST VERSION: Uses CSS for step transitions (zero JS dependency for navigation).
+ * Simple inline JS for the final result logic.
+ */
+---
+
+<div
+    class="pillar-quiz-root relative bg-[#1a1a2e] rounded-3xl shadow-2xl max-w-2xl mx-auto text-white border border-white/10 overflow-hidden min-h-[550px] font-inter"
+>
+    <!-- CSS Triggers (Hidden) -->
+    <input type="radio" name="quiz-step" id="q-step-1" class="hidden" checked />
+    <input type="radio" name="quiz-step" id="q-step-2" class="hidden" />
+    <input type="radio" name="quiz-step" id="q-step-3" class="hidden" />
+    <input type="radio" name="quiz-step" id="q-step-result" class="hidden" />
+
+    <!-- STEP 1 -->
+    <div class="quiz-step step-1 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 1 OF 3</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-white/20"></div>
+                <div class="h-1 w-4 rounded-full bg-white/20"></div>
+            </div>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            What is your primary financial goal?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-2"
+                class="quiz-btn"
+                onclick="saveQuizAnswer(0, 'tax')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg">Maximize Tax Savings</span>
+            </label>
+            <label
+                for="q-step-2"
+                class="quiz-btn"
+                onclick="saveQuizAnswer(0, 'flux')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Flexible Access to Funds</span
+                >
+            </label>
+        </div>
+        <p class="text-center text-white/40 text-xs mt-12 italic">
+            Result based on Swiss tax & pension scenarios.
+        </p>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="quiz-step step-2 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 2 OF 3</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-white/20"></div>
+            </div>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            Likely to need funds before retirement? (e.g. within 10 years)
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-3"
+                class="quiz-btn"
+                onclick="saveQuizAnswer(1, 'yes')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg">Yes</span>
+            </label>
+            <label
+                for="q-step-3"
+                class="quiz-btn"
+                onclick="saveQuizAnswer(1, 'no')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg">No</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="quiz-step step-3 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 3 OF 3</span
+            >
+            <div class="flex gap-1">
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
+            </div>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            High-income earner looking beyond ~CHF 7k limit?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-result"
+                class="quiz-btn"
+                onclick="saveQuizAnswer(2, 'yes'); calculateAndShowResult();"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg">Yes</span>
+            </label>
+            <label
+                for="q-step-result"
+                class="quiz-btn"
+                onclick="saveQuizAnswer(2, 'no'); calculateAndShowResult();"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg">No</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div
+        id="quiz-result-screen"
+        class="quiz-step step-result p-8 md:p-12 text-center animate-fade-in"
+    >
+        <div id="res-icon" class="text-7xl mb-6">💰</div>
+        <h3 id="res-title" class="text-2xl md:text-3xl font-bold mb-6">
+            Our Recommendation
+        </h3>
+        <p
+            id="res-desc"
+            class="text-white/70 text-lg leading-relaxed mb-10 max-w-md mx-auto"
+        >
+            Calculating...
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full shadow-2xl transition-all hover:-translate-y-1"
+            >
+                Get Best 2026 Strategy
+            </button>
+            <label
+                for="q-step-1"
+                class="text-white/40 hover:text-white/60 font-medium py-4 px-6 cursor-pointer bg-transparent border-none"
+            >
+                Retake Quiz
+            </label>
+        </div>
+    </div>
+</div>
+
+<style is:inline>
+    .pillar-quiz-root {
+        min-height: 580px;
+        display: flex;
+        flex-direction: column;
+    }
+    .quiz-btn {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        text-align: left;
+        padding: 1.5rem;
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .quiz-btn:hover {
+        border-color: #c41e3a;
+        background: rgba(196, 30, 58, 0.1);
+    }
+    .dot-ring {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 9999px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .quiz-btn:hover .dot-ring {
+        border-color: #c41e3a;
+    }
+    .dot-fill {
+        width: 0.6rem;
+        height: 0.6rem;
+        border-radius: 9999px;
+        background: #c41e3a;
+        transform: scale(0);
+        transition: transform 0.2s ease;
+    }
+    .quiz-btn:hover .dot-fill {
+        transform: scale(1);
+    }
+
+    /* STEP VISIBILITY LOGIC */
+    .quiz-step {
+        display: none !important;
+    }
+    #q-step-1:checked ~ .step-1 {
+        display: block !important;
+    }
+    #q-step-2:checked ~ .step-2 {
+        display: block !important;
+    }
+    #q-step-3:checked ~ .step-3 {
+        display: block !important;
+    }
+    #q-step-result:checked ~ .step-result {
+        display: block !important;
+    }
+
+    /* Transitions */
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
+
+<script is:inline>
+    (function () {
+        const quizAnswers = {};
+
+        window.saveQuizAnswer = function (step, val) {
+            quizAnswers[step] = val;
+        };
+
+        window.calculateAndShowResult = function () {
+            const iconEl = document.getElementById("res-icon");
+            const titleEl = document.getElementById("res-title");
+            const descEl = document.getElementById("res-desc");
+
+            let result = {
+                title: "Pillar 3a (Restricted)",
+                desc: "Pillar 3a is your best starting point. The immediate tax deduction outweighs the lock-in for most savers.",
+                icon: "💰",
+            };
+
+            if (quizAnswers[2] === "yes") {
+                result = {
+                    title: "A Mix of 3a & 3b",
+                    desc: "Maximize 3a first for tax breaks, then use 3b for excess savings to maintain flexibility.",
+                    icon: "⚖️",
+                };
+            } else if (quizAnswers[1] === "yes" || quizAnswers[0] === "flux") {
+                result = {
+                    title: "Pillar 3b (Flexible)",
+                    desc: "For short-term access and freedom, Pillar 3b is safer. 3a is locked until age 60.",
+                    icon: "🔓",
+                };
+            }
+
+            if (iconEl && titleEl && descEl) {
+                iconEl.textContent = result.icon;
+                titleEl.textContent = result.title;
+                descEl.textContent = result.desc;
+            }
+        };
+    })();
+</script>
