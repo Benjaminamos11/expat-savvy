@@ -1,0 +1,555 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
+import HansSteinerCard from "../../components/consultant/ConsultantProfileCard.astro";
+
+const metadata = {
+    title: "3rd Pillar for Young Professionals in Switzerland (Ages 25-35)",
+    description:
+        "Why a complete 3rd pillar strategy for young expats in Switzerland combines growth with protection. Learn the smart way to build your financial future.",
+    canonical: "https://expat-savvy.ch/3rd-pillar/for-young-professionals/",
+};
+
+const faqs = [
+    {
+        question: "What happens to my 3a contributions if I become disabled?",
+        answer: "With an insurance-based 3a solution, you benefit from a 'Premium Waiver'. This means that if you are unable to work due to illness or accident, the insurance company takes over your contributions for you. Your retirement goal remains on track, regardless of your ability to earn an income. This is a critical protection that bank or app-based solutions do not provide.",
+    },
+    {
+        question: "Can I get life insurance with a bank 3a?",
+        answer: "No. Bank-based 3a accounts (like VIAC, Finpension, or Frankly) are purely investment or savings accounts. They do not include any insurance components. If you want life insurance coverage, you would need to buy a separate policy, which is often more expensive and less tax-efficient than an integrated 3a solution.",
+    },
+    {
+        question:
+            "Is an insurance 3a really inflexible if I leave Switzerland?",
+        answer: "This is a common myth. While insurance contracts are longer-term, they offer a unique 'conversion' feature (3a to 3b). This allows you to maintain your insurance protection and continue your investment compounding even after you move abroad. Bank accounts, by contrast, must usually be liquidated when you leave, potentially in a market downturn.",
+    },
+    {
+        question: "Why not just buy separate life insurance?",
+        answer: "Separate life insurance is paid for with after-tax money (Pillar 3b). By integrating it into your Pillar 3a, your premiums are tax-deductible. For a young professional, this essentially means the Swiss tax office is subsidizing roughly 20-35% of your insurance costs.",
+    },
+    {
+        question:
+            "I'm single with no kids. Do I still need the protection component?",
+        answer: "The 'protection' isn't just for others—it's for you. The risk of disability is statistically much higher for young people than the risk of death. Ensuring that your retirement wealth continues to build even if you can't work is the ultimate 'self-insurance'.",
+    },
+];
+---
+
+<Layout
+    title={metadata.title}
+    description={metadata.description}
+    canonicalURLProp={metadata.canonical}
+>
+    <!-- HERO SECTION -->
+    <div
+        class="relative h-[80vh] min-h-[700px] flex items-center overflow-hidden"
+    >
+        <div class="absolute inset-0 bg-black/40 z-10"></div>
+        <img
+            src="/images/young-professionals-hero.png"
+            alt="Young Professionals in Switzerland - 3rd Pillar Guide"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+
+        <div class="container mx-auto px-6 relative z-20 text-center">
+            <h1
+                class="text-4xl md:text-7xl font-extrabold mb-8 drop-shadow-2xl leading-tight text-white mx-auto max-w-5xl"
+            >
+                Your 30s Will Define Your 60s. <br />
+                <span class="text-[#C41E3A]">Start Your 3rd Pillar Today.</span>
+            </h1>
+            <p
+                class="text-white/90 text-xl md:text-2xl font-medium drop-shadow-md max-w-3xl mx-auto leading-relaxed mb-10"
+            >
+                For young expats, the 3rd pillar isn't just a retirement
+                account; it's the foundation of your entire financial life in
+                Switzerland. Learn the strategy that balances aggressive growth
+                with essential protection.
+            </p>
+            <button
+                onclick="document.getElementById('compounding').scrollIntoView({behavior: 'smooth'})"
+                class="bg-white text-[#1a1a2e] font-black py-5 px-12 rounded-2xl text-xl hover:bg-[#C41E3A] hover:text-white transition-all shadow-2xl"
+            >
+                See the Power of Starting Now
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div
+                class="max-w-4xl mx-auto border-b border-gray-100 pb-32 mb-32"
+                id="compounding"
+            >
+                <!-- SECTION 1: THE POWER OF COMPOUNDING -->
+                <section class="text-center">
+                    <RedSectionHeader
+                        title="Why Starting at 25 is a Financial Superpower"
+                        align="center"
+                    />
+                    <p
+                        class="text-gray-600 mt-6 text-xl max-w-2xl mx-auto mb-16"
+                    >
+                        In Switzerland, time is quite literally money. Waiting
+                        just one decade to start your 3rd pillar doesn't just
+                        cost you 10 years of contributions—it costs you a
+                        lifetime of interest.
+                    </p>
+
+                    <!-- INTERACTIVE CHART COMPONENT -->
+                    <div
+                        class="bg-[#1a1a2e] p-8 md:p-12 rounded-[50px] shadow-2xl relative overflow-hidden group"
+                    >
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-[#C41E3A]/10 to-transparent"
+                        >
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="flex flex-col md:flex-row justify-between items-center mb-12 gap-8"
+                            >
+                                <div class="text-left">
+                                    <div class="flex items-center gap-4 mb-2">
+                                        <div
+                                            class="w-4 h-4 rounded-full bg-[#C41E3A]"
+                                        >
+                                        </div>
+                                        <span class="text-white font-bold"
+                                            >Scenario A: Starts at age 25</span
+                                        >
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-4 h-4 rounded-full bg-blue-400"
+                                        >
+                                        </div>
+                                        <span class="text-white/60"
+                                            >Scenario B: Starts at age 35</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div
+                                        class="text-white/50 text-xs uppercase font-black tracking-widest mb-1"
+                                    >
+                                        The Difference at Age 65
+                                    </div>
+                                    <div
+                                        class="text-4xl md:text-5xl font-black text-[#C41E3A] drop-shadow-lg"
+                                    >
+                                        ~CHF 340,000
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CHART PLACEHOLDER / CANVAS -->
+                            <div
+                                class="h-[300px] w-full bg-white/5 rounded-3xl p-6 border border-white/10 flex items-end justify-between relative"
+                            >
+                                <!-- Bars for visual representation -->
+                                <div
+                                    class="flex-1 flex flex-col items-center justify-end h-full"
+                                >
+                                    <div
+                                        class="w-20 md:w-32 bg-gradient-to-t from-[#C41E3A] to-[#ff4d6d] rounded-t-2xl shadow-lg transition-all duration-1000 group-hover:h-[90%]"
+                                        style="height: 0%"
+                                    >
+                                    </div>
+                                    <div class="text-white font-bold mt-4">
+                                        Age 25
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex-1 flex flex-col items-center justify-end h-full"
+                                >
+                                    <div
+                                        class="w-20 md:w-32 bg-gradient-to-t from-blue-400 to-blue-200 rounded-t-2xl shadow-lg transition-all duration-1000 group-hover:h-[45%]"
+                                        style="height: 0%"
+                                    >
+                                    </div>
+                                    <div class="text-white/60 font-bold mt-4">
+                                        Age 35
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <p
+                                        class="text-white/20 text-4xl font-black uppercase tracking-[0.5em] rotate-12"
+                                    >
+                                        Compounding
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="text-white/40 text-sm mt-8 italic">
+                                *Calculated at CHF 7,258 annual contribution
+                                with a conservative 5% average annual return
+                                over 40 years vs 30 years.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- SECTION 2: THE COMPLETE 3A STRATEGY -->
+                <section class="mb-32">
+                    <RedSectionHeader
+                        title="Beyond Returns: Building a Financial Fortress"
+                    />
+                    <div class="spoke-body mt-8 space-y-8">
+                        <p class="text-xl leading-relaxed">
+                            Many young professionals view the 3rd pillar as a
+                            simple "investment pot." While maximizing returns is
+                            crucial, a truly sophisticated strategy recognizes
+                            that <span class="text-[#C41E3A] font-bold"
+                                >life isn't linear.</span
+                            >
+                        </p>
+
+                        <div class="my-16 grid md:grid-cols-2 gap-12">
+                            <div class="space-y-6">
+                                <h3 class="text-2xl font-bold text-[#1a1a2e]">
+                                    The Growth Engine
+                                </h3>
+                                <div
+                                    class="p-6 bg-blue-50/50 border border-blue-100 rounded-3xl"
+                                >
+                                    <p
+                                        class="text-sm text-gray-700 leading-relaxed"
+                                    >
+                                        Bank and FinTech 3a solutions (like VIAC
+                                        or Finpension) are the <strong
+                                            >Accelerator</strong
+                                        >. They provide low-cost market access
+                                        and allow for maximum equity exposure.
+                                        They are essential for turning your
+                                        annual contributions into significant
+                                        retirement wealth through stock market
+                                        growth.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <h3 class="text-2xl font-bold text-[#C41E3A]">
+                                    The Safety Net
+                                </h3>
+                                <div
+                                    class="p-6 bg-red-50/50 border border-red-100 rounded-3xl"
+                                >
+                                    <p
+                                        class="text-sm text-gray-700 leading-relaxed"
+                                    >
+                                        Modern Insurance solutions are the <strong
+                                            >Foundation</strong
+                                        >. They provide what an app cannot: the
+                                        "Premium Waiver." If you become disabled
+                                        or seriously ill, the insurance company
+                                        pays your contributions for you. It
+                                        ensures your financial house doesn't
+                                        collapse if you lose your ability to
+                                        work.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-10 bg-[#1a1a2e] rounded-[40px] text-white"
+                        >
+                            <h4
+                                class="text-2xl font-bold mb-6 flex items-center gap-4 text-[#C41E3A]"
+                            >
+                                <span
+                                    class="w-8 h-8 rounded-full bg-[#C41E3A] text-white flex items-center justify-center text-sm font-black italic"
+                                    >!</span
+                                >
+                                The House Analogy
+                            </h4>
+                            <p class="text-lg text-white/80 leading-relaxed">
+                                "Think of your financial life like building a
+                                luxury villa. A bank 3a is like designing the
+                                top floors with stunning views—it's where the
+                                excitement and growth happen. But an <strong
+                                    >insurance 3a is the reinforced concrete
+                                    foundation</strong
+                                >. It ensures the entire structure stays
+                                standing even during a massive storm. You
+                                wouldn't build a 50-story skyscraper on sand
+                                just because it's cheaper; you invest in the
+                                foundation first."
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: HANS STEINER CARD -->
+                <div id="hans-steiner" class="mb-32 scroll-mt-24">
+                    <div
+                        class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm relative overflow-hidden"
+                    >
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-[#C41E3A]/5 rounded-bl-full"
+                        >
+                        </div>
+                        <div
+                            class="flex flex-col md:flex-row items-center gap-10 relative z-10"
+                        >
+                            <div
+                                class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
+                            >
+                                <img
+                                    src="/images/hans-steiner.png"
+                                    alt="Hans Steiner"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div class="flex-grow text-center md:text-left">
+                                <div
+                                    class="text-[10px] uppercase font-black text-[#C41E3A] tracking-[0.2em] mb-2"
+                                >
+                                    Portfolio Strategist
+                                </div>
+                                <h2
+                                    class="text-3xl font-bold text-[#1a1a2e] mb-4"
+                                >
+                                    Find Your Perfect Growth vs. Protection
+                                    Balance
+                                </h2>
+                                <p
+                                    class="spoke-body text-gray-600 mb-8 max-w-xl italic mx-auto md:mx-0"
+                                >
+                                    "For expats under 35, the biggest risk is
+                                    not a market crash—it's losing your income
+                                    early in your career. Let's design a hybrid
+                                    plan that captures market gains while
+                                    protecting your lifestyle."
+                                </p>
+                                <button
+                                    onclick="window.openContextualModal()"
+                                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                                >
+                                    Get My Free Hybrid Strategy Analysis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: THE HYBRID APPROACH -->
+                <section class="mb-32">
+                    <RedSectionHeader
+                        title="The Hybrid Approach: The Best of Both Worlds"
+                    />
+                    <div class="spoke-body mt-8 space-y-8">
+                        <p>
+                            Savvy expats don't choose between "Bank" or
+                            "Insurance"—they use both. In Switzerland, you are
+                            legally allowed to have up to five separate 3rd
+                            pillar accounts. This is the key to a
+                            professional-grade strategy.
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8 my-12">
+                            <div
+                                class="p-8 rounded-3xl border-2 border-dashed border-gray-200 hover:border-[#C41E3A] transition-colors group"
+                            >
+                                <div
+                                    class="text-3xl mb-4 grayscale group-hover:grayscale-0 transition-all"
+                                >
+                                    🛡️
+                                </div>
+                                <h4 class="text-xl font-bold mb-3">
+                                    Priority #1: The Safety Net
+                                </h4>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Allocate your first 3a bucket to an <strong
+                                        >Insurance Plan</strong
+                                    >. Secure your premium waiver and essential
+                                    life cover while you are young and premiums
+                                    are low.
+                                </p>
+                                <div
+                                    class="text-[10px] font-black uppercase text-[#C41E3A]"
+                                >
+                                    Status: Foundation Locked
+                                </div>
+                            </div>
+                            <div
+                                class="p-8 rounded-3xl border-2 border-dashed border-gray-200 hover:border-blue-400 transition-colors group"
+                            >
+                                <div
+                                    class="text-3xl mb-4 grayscale group-hover:grayscale-0 transition-all"
+                                >
+                                    🚀
+                                </div>
+                                <h4 class="text-xl font-bold mb-3">
+                                    Priority #2: The Accelerator
+                                </h4>
+                                <p class="text-sm text-gray-600 mb-4">
+                                    Direct your surplus contributions into a <strong
+                                        >Bank-based App</strong
+                                    >. Use 100% equity funds to maximize your
+                                    returns over your 30+ year horizon.
+                                </p>
+                                <div
+                                    class="text-[10px] font-black uppercase text-blue-500"
+                                >
+                                    Status: Growth Mode
+                                </div>
+                            </div>
+                        </div>
+
+                        <p
+                            class="bg-gray-50 p-8 rounded-3xl border border-gray-100 italic text-gray-600"
+                        >
+                            "This 'Bucket Strategy' is the gold standard for
+                            expats. It gives you the peace of mind of a
+                            guaranteed retirement contribution and the
+                            excitement of a high-growth investment portfolio
+                            simultaneously."
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SECTION 5: FAQ -->
+                <section class="mb-32">
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
+                    >
+                        Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        {
+                            faqs.map((faq) => (
+                                <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white">
+                                    <details class="group">
+                                        <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
+                                            <span class="text-xl font-bold text-[#1a1a2e] pr-4">
+                                                {faq.question}
+                                            </span>
+                                            <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
+                                                ↓
+                                            </span>
+                                        </summary>
+                                        <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
+                                            {faq.answer}
+                                        </div>
+                                    </details>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </section>
+
+                <!-- RELATED GUIDES -->
+                <div class="grid md:grid-cols-3 gap-6 mb-32">
+                    <a
+                        href="/3rd-pillar/bank-vs-insurance/"
+                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
+                    >
+                        <h4 class="font-bold mb-2">Bank vs. Insurance</h4>
+                        <p
+                            class="text-xs text-gray-400 group-hover:text-white/60"
+                        >
+                            A technical deep dive into the two pillars of 3a.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/providers/"
+                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
+                    >
+                        <h4 class="font-bold mb-2">Top 2026 Providers</h4>
+                        <p
+                            class="text-xs text-gray-400 group-hover:text-white/60"
+                        >
+                            Our curated list of the best apps and insurers.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/tax-optimization/"
+                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
+                    >
+                        <h4 class="font-bold mb-2">Tax Savings 101</h4>
+                        <p
+                            class="text-xs text-gray-400 group-hover:text-white/60"
+                        >
+                            How to deduct CHF 7k+ from your income today.
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FINAL CTA -->
+    <div class="bg-[#1a1a2e] py-32 text-center relative overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C41E3A] to-transparent opacity-50"
+        >
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8">
+                Ready to Build Your Financial Fortress?
+            </h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Secure your foundation today and accelerate your growth for
+                tomorrow. Let's design your custom hybrid strategy.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-6 px-16 rounded-full text-2xl shadow-2xl transition transform hover:-translate-y-1"
+            >
+                Design My Hybrid 3a Strategy
+            </button>
+        </div>
+    </div>
+
+    <!-- SCHEMA MARKUP -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: metadata.title,
+            description: metadata.description,
+            author: {
+                "@type": "Person",
+                name: "Hans Steiner",
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Expat Savvy",
+                logo: {
+                    "@type": "ImageObject",
+                    url: "https://expat-savvy.ch/logo.png",
+                },
+            },
+            mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": metadata.canonical,
+            },
+        })}
+    />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer,
+                },
+            })),
+        })}
+    />
+</Layout>
