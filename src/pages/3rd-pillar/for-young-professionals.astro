@@ -2,6 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import HansSteinerCard from "../../components/consultant/ConsultantProfileCard.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
+import ArticleSchema from "../../components/ArticleSchema.astro";
+import FAQSchema from "../../components/FAQSchema.astro";
 
 const metadata = {
     title: "3rd Pillar for Young Professionals in Switzerland (Ages 25-35)",
@@ -41,6 +44,25 @@ const faqs = [
     description={metadata.description}
     canonicalURLProp={metadata.canonical}
 >
+    <Fragment slot="head">
+        <ArticleSchema
+            title={metadata.title}
+            description={metadata.description}
+            image="/images/young-professionals-hero.png"
+        />
+        <FAQSchema faqs={faqs} />
+    </Fragment>
+
+    <BreadcrumbSchema
+        items={[
+            { name: "Home", url: "/" },
+            { name: "3rd Pillar", url: "/3rd-pillar" },
+            {
+                name: "Young Professionals",
+                url: "/3rd-pillar/for-young-professionals",
+            },
+        ]}
+    />
     <!-- HERO SECTION -->
     <div
         class="relative h-[80vh] min-h-[700px] flex items-center overflow-hidden"
@@ -98,9 +120,9 @@ const faqs = [
                         lifetime of interest.
                     </p>
 
-                    <!-- INTERACTIVE CHART COMPONENT -->
+                    <!-- SIMPLIFIED STATIC CHART -->
                     <div
-                        class="bg-[#1a1a2e] p-8 md:p-12 rounded-[50px] shadow-2xl relative overflow-hidden group"
+                        class="bg-[#1a1a2e] p-8 md:p-16 rounded-[50px] shadow-2xl relative overflow-hidden"
                     >
                         <div
                             class="absolute inset-0 bg-gradient-to-br from-[#C41E3A]/10 to-transparent"
@@ -108,89 +130,89 @@ const faqs = [
                         </div>
 
                         <div class="relative z-10">
+                            <!-- Comparison Grid -->
                             <div
-                                class="flex flex-col md:flex-row justify-between items-center mb-12 gap-8"
+                                class="grid md:grid-cols-2 gap-12 items-stretch"
                             >
-                                <div class="text-left">
-                                    <div class="flex items-center gap-4 mb-2">
-                                        <div
-                                            class="w-4 h-4 rounded-full bg-[#C41E3A]"
-                                        >
-                                        </div>
-                                        <span class="text-white font-bold"
-                                            >Scenario A: Starts at age 25</span
-                                        >
-                                    </div>
-                                    <div class="flex items-center gap-4">
-                                        <div
-                                            class="w-4 h-4 rounded-full bg-blue-400"
-                                        >
-                                        </div>
-                                        <span class="text-white/60"
-                                            >Scenario B: Starts at age 35</span
-                                        >
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <div
-                                        class="text-white/50 text-xs uppercase font-black tracking-widest mb-1"
-                                    >
-                                        The Difference at Age 65
-                                    </div>
-                                    <div
-                                        class="text-4xl md:text-5xl font-black text-[#C41E3A] drop-shadow-lg"
-                                    >
-                                        ~CHF 340,000
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- CHART PLACEHOLDER / CANVAS -->
-                            <div
-                                class="h-[300px] w-full bg-white/5 rounded-3xl p-6 border border-white/10 flex items-end justify-between relative"
-                            >
-                                <!-- Bars for visual representation -->
+                                <!-- Scenario A -->
                                 <div
-                                    class="flex-1 flex flex-col items-center justify-end h-full"
+                                    class="bg-white/5 p-10 rounded-3xl border border-white/10 flex flex-col items-center text-center"
                                 >
                                     <div
-                                        class="w-20 md:w-32 bg-gradient-to-t from-[#C41E3A] to-[#ff4d6d] rounded-t-2xl shadow-lg transition-all duration-1000 group-hover:h-[90%]"
-                                        style="height: 0%"
+                                        class="text-[#C41E3A] text-xs font-black uppercase tracking-[0.2em] mb-4"
                                     >
+                                        The Smart Move
                                     </div>
-                                    <div class="text-white font-bold mt-4">
+                                    <div
+                                        class="text-white text-2xl font-bold mb-2"
+                                    >
                                         Age 25
                                     </div>
-                                </div>
-                                <div
-                                    class="flex-1 flex flex-col items-center justify-end h-full"
-                                >
                                     <div
-                                        class="w-20 md:w-32 bg-gradient-to-t from-blue-400 to-blue-200 rounded-t-2xl shadow-lg transition-all duration-1000 group-hover:h-[45%]"
-                                        style="height: 0%"
+                                        class="text-4xl md:text-5xl font-black text-white mb-6"
                                     >
+                                        CHF 920k
                                     </div>
-                                    <div class="text-white/60 font-bold mt-4">
-                                        Age 35
-                                    </div>
+                                    <p
+                                        class="text-white/60 text-sm leading-relaxed"
+                                    >
+                                        Starting early captures the full
+                                        exponential curve of Swiss markets.
+                                    </p>
                                 </div>
 
+                                <!-- Scenario B -->
                                 <div
-                                    class="absolute inset-0 flex items-center justify-center"
+                                    class="bg-white/5 p-10 rounded-3xl border border-white/10 flex flex-col items-center text-center opacity-70"
                                 >
-                                    <p
-                                        class="text-white/20 text-4xl font-black uppercase tracking-[0.5em] rotate-12"
+                                    <div
+                                        class="text-blue-400 text-xs font-black uppercase tracking-[0.2em] mb-4"
                                     >
-                                        Compounding
+                                        The Delayed Path
+                                    </div>
+                                    <div
+                                        class="text-white/60 text-2xl font-bold mb-2"
+                                    >
+                                        Age 35
+                                    </div>
+                                    <div
+                                        class="text-4xl md:text-5xl font-black text-white/60 mb-6"
+                                    >
+                                        CHF 580k
+                                    </div>
+                                    <p
+                                        class="text-white/40 text-sm leading-relaxed"
+                                    >
+                                        Waiting 10 years reduces your final
+                                        wealth by over 35%.
                                     </p>
                                 </div>
                             </div>
 
-                            <p class="text-white/40 text-sm mt-8 italic">
-                                *Calculated at CHF 7,258 annual contribution
-                                with a conservative 5% average annual return
-                                over 40 years vs 30 years.
-                            </p>
+                            <!-- The Delta Callout -->
+                            <div
+                                class="mt-12 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8"
+                            >
+                                <div class="text-center md:text-left">
+                                    <div
+                                        class="text-white/30 text-xs font-black uppercase tracking-widest mb-1"
+                                    >
+                                        The Opportunity Cost
+                                    </div>
+                                    <div
+                                        class="text-4xl md:text-6xl font-black text-[#C41E3A]"
+                                    >
+                                        ~CHF 340,000
+                                    </div>
+                                </div>
+                                <div class="text-center md:text-right max-w-xs">
+                                    <p class="text-white/40 text-sm italic">
+                                        *Assuming CHF 7,258/year at 5% return.
+                                        Every year you wait cost you roughly CHF
+                                        25,000 in future growth.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -509,47 +531,4 @@ const faqs = [
             </button>
         </div>
     </div>
-
-    <!-- SCHEMA MARKUP -->
-    <script
-        type="application/ld+json"
-        set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: metadata.title,
-            description: metadata.description,
-            author: {
-                "@type": "Person",
-                name: "Hans Steiner",
-            },
-            publisher: {
-                "@type": "Organization",
-                name: "Expat Savvy",
-                logo: {
-                    "@type": "ImageObject",
-                    url: "https://expat-savvy.ch/logo.png",
-                },
-            },
-            mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": metadata.canonical,
-            },
-        })}
-    />
-
-    <script
-        type="application/ld+json"
-        set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((faq) => ({
-                "@type": "Question",
-                name: faq.question,
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: faq.answer,
-                },
-            })),
-        })}
-    />
 </Layout>

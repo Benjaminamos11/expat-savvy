@@ -2,6 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import ConsultantProfileCard from "../../components/consultant/ConsultantProfileCard.astro";
+import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
+import ArticleSchema from "../../components/ArticleSchema.astro";
+import FAQSchema from "../../components/FAQSchema.astro";
 import InsuranceSecuritySimulator from "../../components/pillar3/InsuranceSecuritySimulator.astro";
 
 const metadata = {
@@ -44,6 +47,22 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
     description={metadata.description}
     canonicalURLProp={metadata.canonical}
 >
+    <Fragment slot="head">
+        <ArticleSchema
+            title={metadata.title}
+            description={metadata.description}
+            image="/images/best-providers-hero.png"
+        />
+        <FAQSchema faqs={faqs} />
+    </Fragment>
+
+    <BreadcrumbSchema
+        items={[
+            { name: "Home", url: "/" },
+            { name: "3rd Pillar", url: "/3rd-pillar" },
+            { name: "Best Providers", url: "/3rd-pillar/providers" },
+        ]}
+    />
     <!-- HERO SECTION -->
     <div
         class="relative h-[70vh] min-h-[600px] flex items-center overflow-hidden"
@@ -869,47 +888,4 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
             </button>
         </div>
     </div>
-
-    <!-- SCHEMA MARKUP -->
-    <script
-        type="application/ld+json"
-        set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline: metadata.title,
-            description: metadata.description,
-            author: {
-                "@type": "Person",
-                name: "Hans Steiner",
-            },
-            publisher: {
-                "@type": "Organization",
-                name: "Expat Savvy",
-                logo: {
-                    "@type": "ImageObject",
-                    url: "https://expat-savvy.ch/logo.png",
-                },
-            },
-            mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": metadata.canonical,
-            },
-        })}
-    />
-
-    <script
-        type="application/ld+json"
-        set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((faq) => ({
-                "@type": "Question",
-                name: faq.question,
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: faq.answer,
-                },
-            })),
-        })}
-    />
 </Layout>
