@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import ConsultantProfileCard from "../../components/consultant/ConsultantProfileCard.astro";
-import InsuranceSecuritySimulator from "../../components/calculators/InsuranceSecuritySimulator.astro";
+import InsuranceSecuritySimulator from "../../components/pillar3/InsuranceSecuritySimulator.astro";
 
 const metadata = {
     title: "3rd Pillar Providers: A Strategic Review for Expats (2026)",
@@ -42,7 +42,7 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
 <Layout
     title={metadata.title}
     description={metadata.description}
-    canonical={metadata.canonical}
+    canonicalURLProp={metadata.canonical}
 >
     <!-- HERO SECTION -->
     <div
@@ -213,7 +213,8 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 >
                                     4.8% <span
                                         class="text-sm font-bold text-gray-400 block uppercase pt-2"
-                                        >Avg. Annualized Return*</span>
+                                        >Avg. Annualized Return*</span
+                                    >
                                 </div>
                                 <p class="text-sm text-gray-600">
                                     With its equity-focused strategy, the
@@ -231,7 +232,8 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 >
                                     100% <span
                                         class="text-sm font-bold text-white/50 block uppercase pt-2"
-                                        >Integrated Safety Net</span>
+                                        >Integrated Safety Net</span
+                                    >
                                 </div>
                                 <p class="text-sm text-white/70">
                                     Through the <strong>Premium Waiver</strong>,
@@ -427,99 +429,237 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                 }
             </script>
 
+            <!-- NEW SECTION: PROVIDER COMPARISON MATRIX -->
+            <div class="mb-32">
+                <div class="max-w-5xl mx-auto">
+                    <RedSectionHeader
+                        title="The 2026 Provider Comparison Matrix"
+                    />
+                    <p class="text-gray-600 mt-4 mb-12 spoke-body">
+                        Compare the top-tier 3rd pillar providers in
+                        Switzerland. While apps win on fees, modern insurance
+                        wins on leverage and protection.
+                    </p>
+
+                    <div
+                        class="overflow-x-auto rounded-[40px] shadow-2xl border border-gray-100"
+                    >
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-[#1a1a2e] text-white">
+                                    <th
+                                        class="p-8 font-bold uppercase text-xs tracking-widest"
+                                        >Provider</th
+                                    >
+                                    <th
+                                        class="p-8 font-bold uppercase text-xs tracking-widest"
+                                        >Annual Fees</th
+                                    >
+                                    <th
+                                        class="p-8 font-bold uppercase text-xs tracking-widest"
+                                        >Max Equities</th
+                                    >
+                                    <th
+                                        class="p-8 font-bold uppercase text-xs tracking-widest"
+                                        >Integrated Protection</th
+                                    >
+                                    <th
+                                        class="p-8 font-bold uppercase text-xs tracking-widest text-[#C41E3A]"
+                                        >Mortgage Score</th
+                                    >
+                                </tr>
+                            </thead>
+                            <tbody class="text-[#1a1a2e]">
+                                <tr
+                                    class="border-b border-gray-50 hover:bg-gray-50 transition-colors"
+                                >
+                                    <td class="p-8">
+                                        <div class="font-bold text-lg">
+                                            Finpension / VIAC
+                                        </div>
+                                        <div
+                                            class="text-xs text-blue-500 font-bold uppercase tracking-tight"
+                                        >
+                                            Digital Apps
+                                        </div>
+                                    </td>
+                                    <td class="p-8 font-medium"
+                                        >0.39% - 0.44%</td
+                                    >
+                                    <td class="p-8">99%</td>
+                                    <td class="p-8 text-gray-400"
+                                        >None (Optional add-on)</td
+                                    >
+                                    <td class="p-8 text-gray-400"
+                                        >Low (Volatile Collateral)</td
+                                    >
+                                </tr>
+                                <tr
+                                    class="bg-red-50/30 border-b border-[#C41E3A]/10 hover:bg-red-50/50 transition-colors"
+                                >
+                                    <td class="p-8">
+                                        <div class="font-bold text-lg">
+                                            Swiss Life Dynamic Elements
+                                        </div>
+                                        <div
+                                            class="text-xs text-[#C41E3A] font-bold uppercase tracking-tight"
+                                        >
+                                            Modern Insurance
+                                        </div>
+                                    </td>
+                                    <td class="p-8 font-medium"
+                                        >~2.0% - 3.0% <span
+                                            class="text-[10px] block opacity-60 text-[#1a1a2e] font-normal italic"
+                                            >Including Insurance Premiums</span
+                                        ></td
+                                    >
+                                    <td class="p-8">95%</td>
+                                    <td class="p-8 text-green-600 font-bold"
+                                        >Integrated Safety Net ✓</td
+                                    >
+                                    <td
+                                        class="p-8 text-[#C41E3A] font-black underline decoration-2 decoration-[#C41E3A]/30 underline-offset-4"
+                                        >High (Premium Collateral)</td
+                                    >
+                                </tr>
+                                <tr
+                                    class="border-b border-gray-50 hover:bg-gray-50 transition-colors opacity-60"
+                                >
+                                    <td class="p-8">
+                                        <div class="font-bold text-lg">
+                                            Traditional Banks
+                                        </div>
+                                        <div
+                                            class="text-xs text-gray-400 font-bold uppercase tracking-tight"
+                                        >
+                                            Outdated Path
+                                        </div>
+                                    </td>
+                                    <td class="p-8 font-medium"
+                                        >0.80% - 1.50%</td
+                                    >
+                                    <td class="p-8">Variable</td>
+                                    <td class="p-8 text-gray-400">None</td>
+                                    <td class="p-8 text-gray-400 font-medium"
+                                        >Medium (Stable but low LTV)</td
+                                    >
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- RELATED HUB LINKS (BEFORE HANS) -->
-            <div class="mb-24 pt-16 border-t border-gray-100">
-                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
-                    Master Your Expat Strategy
-                </h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <a
-                        href="/3rd-pillar/bank-vs-insurance/"
-                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
+            <div class="mb-32 pt-16 border-t border-gray-100">
+                <div class="max-w-4xl mx-auto">
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
                     >
-                        <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
-                            Detailed Comparison
-                        </h4>
-                        <p class="text-sm text-gray-500">
-                            Bank vs Insurance: A deeper dive into the specific
-                            mechanics of both paths.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/tax-optimization/"
-                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
-                    >
-                        <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
-                            Tax Savings Blueprint
-                        </h4>
-                        <p class="text-sm text-gray-500">
-                            How to legally minimize your Swiss tax burden
-                            through the 3rd pillar.
-                        </p>
-                    </a>
+                        Master Your Expat Strategy
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <a
+                            href="/3rd-pillar/bank-vs-insurance/"
+                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
+                        >
+                            <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
+                                Detailed Comparison
+                            </h4>
+                            <p class="text-sm text-gray-500">
+                                Bank vs Insurance: A deeper dive into the
+                                specific mechanics of both paths.
+                            </p>
+                        </a>
+                        <a
+                            href="/3rd-pillar/tax-optimization/"
+                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
+                        >
+                            <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
+                                Tax Savings Blueprint
+                            </h4>
+                            <p class="text-sm text-gray-500">
+                                How to legally minimize your Swiss tax burden
+                                through the 3rd pillar.
+                            </p>
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- HANS STEINER CARD -->
             <div id="hans-steiner" class="mb-32 scroll-mt-24 text-center">
-                <div
-                    class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm inline-block text-left w-full"
-                >
-                    <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="max-w-4xl mx-auto">
+                    <div
+                        class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm inline-block text-left w-full"
+                    >
                         <div
-                            class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
+                            class="flex flex-col md:flex-row items-center gap-10"
                         >
-                            <img
-                                src="/images/hans-steiner.png"
-                                alt="Hans Steiner"
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
-                                Get Your Free, Personalized Strategy Analysis
-                            </h2>
-                            <p class="spoke-body text-gray-600 mb-8 max-w-xl">
-                                "Choosing the wrong path can cost you decades of
-                                compounded security. Let's find your ideal Swiss
-                                setup."
-                            </p>
-                            <button
-                                onclick="window.openContextualModal()"
-                                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                            <div
+                                class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
                             >
-                                Request My Free Analysis
-                            </button>
+                                <img
+                                    src="/images/hans-steiner.png"
+                                    alt="Hans Steiner"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div class="flex-grow">
+                                <h2
+                                    class="text-3xl font-bold text-[#1a1a2e] mb-4"
+                                >
+                                    Get Your Free, Personalized Strategy
+                                    Analysis
+                                </h2>
+                                <p
+                                    class="spoke-body text-gray-600 mb-8 max-w-xl"
+                                >
+                                    "Choosing the wrong path can cost you
+                                    decades of compounded security. Let's find
+                                    your ideal Swiss setup."
+                                </p>
+                                <button
+                                    onclick="window.openContextualModal()"
+                                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                                >
+                                    Request My Free Analysis
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- FAQ SECTION -->
-            <div class="mb-24">
-                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
-                    Frequently Asked Questions
-                </h2>
-                <div class="max-w-4xl mx-auto space-y-4">
-                    {
-                        faqs.map((faq) => (
-                            <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white shadow-sm">
-                                <details class="group">
-                                    <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
-                                        <span class="text-xl font-bold text-[#1a1a2e] pr-4">
-                                            {faq.question}
-                                        </span>
-                                        <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
-                                            ↓
-                                        </span>
-                                    </summary>
-                                    <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
-                                        {faq.answer}
-                                    </div>
-                                </details>
-                            </div>
-                        ))
-                    }
+            <div class="mb-40">
+                <div class="max-w-4xl mx-auto">
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
+                    >
+                        Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        {
+                            faqs.map((faq) => (
+                                <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white shadow-sm">
+                                    <details class="group">
+                                        <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
+                                            <span class="text-xl font-bold text-[#1a1a2e] pr-4">
+                                                {faq.question}
+                                            </span>
+                                            <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
+                                                ↓
+                                            </span>
+                                        </summary>
+                                        <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
+                                            {faq.answer}
+                                        </div>
+                                    </details>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </div>
