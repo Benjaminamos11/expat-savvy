@@ -1,534 +1,593 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
+import ConsultantProfileCard from "../../components/consultant/ConsultantProfileCard.astro";
+import InsuranceSecuritySimulator from "../../components/calculators/InsuranceSecuritySimulator.astro";
 
 const metadata = {
-    title: "Best 3rd Pillar Providers 2026: VIAC, Finpension & More | Expat Savvy",
+    title: "3rd Pillar Providers: A Strategic Review for Expats (2026)",
     description:
-        "Unbiased comparison of the top Swiss 3rd pillar providers. We review fees, app experience, and investment strategies to help you choose the best one.",
+        "Digital apps vs. modern insurance. Our strategic review goes beyond fees to show you which 3rd pillar provider truly offers the best long-term value and security for expats.",
     canonical: "https://expat-savvy.ch/3rd-pillar/providers/",
 };
+
+const faqs = [
+    {
+        question:
+            "Are the returns on insurance products really as good as digital apps?",
+        answer: "Yes. Modern insurance solutions like Swiss Life Dynamic Elements Duo utilize equity-focused strategies that compete directly with digital-only portfolios. The key difference is the added layer of capital guarantees and integrated protection that apps lack.",
+    },
+    {
+        question: "If I use VIAC, can't I just buy separate life insurance?",
+        answer: "You can, but it is often less efficient. Combining a bank 3a with standalone insurance usually results in higher total costs and more administrative complexity. More importantly, bank 3a accounts are not as favored by Swiss banks as mortgage collateral compared to insurance policies.",
+    },
+    {
+        question:
+            "What are the exact costs of a Swiss Life Dynamic Elements Duo policy?",
+        answer: "Costs depend on your age, contribution level, and chosen protection. However, the 'all-in' cost—including management and the safety net—is strategically positioned to provide better long-term value than a fragmented DIY strategy.",
+    },
+    {
+        question: "Why are traditional banks no longer a good option?",
+        answer: "Traditional banks often combine higher fees with lower investment flexibility and zero integrated insurance. In the 2026 landscape, they represent an outdated middle ground that offers neither the low cost of apps nor the high security of modern insurance.",
+    },
+    {
+        question: "How do I know which of the 'Three Paths' is right for me?",
+        answer: "It depends on your goals: if you only care about the lowest fee today, apps win. If you care about homeownership, family security, and guaranteed retirement capital, the modern insurance path is the intelligent choice.",
+    },
+];
+
+const heroImage = "/images/providers-v3-three-paths.jpg";
 ---
 
 <Layout
     title={metadata.title}
     description={metadata.description}
-    canonicalURLProp={metadata.canonical}
+    canonical={metadata.canonical}
 >
-    <BreadcrumbSchema
-        items={[
-            { name: "Home", url: "/" },
-            { name: "3rd Pillar Hub", url: "/3rd-pillar" },
-            { name: "Best Providers Review", url: "/3rd-pillar/providers" },
-        ]}
-    />
+    <!-- HERO SECTION -->
+    <div
+        class="relative h-[70vh] min-h-[600px] flex items-center overflow-hidden"
+    >
+        <div
+            class="absolute inset-0 bg-black/40 z-10 transition-opacity group-hover:opacity-30"
+        >
+        </div>
+        <img
+            src={heroImage}
+            alt="The Three Paths to your 3rd Pillar"
+            class="absolute inset-0 w-full h-full object-cover grayscale-[20%] brightness-[85%]"
+        />
 
-    <!-- Hero Section -->
-    <div class="bg-gray-50 py-16 border-b border-gray-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span
-                class="text-[#C41E3A] font-bold tracking-wider uppercase text-sm mb-4 block"
-            >
-                Market Review
-            </span>
+        <div class="container mx-auto px-6 relative z-20 mt-20">
             <h1
-                class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight"
+                class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-2xl max-w-5xl leading-tight text-white"
             >
-                The Best 3rd Pillar <br class="hidden md:block" />
-                <span class="text-[#C41E3A]">Providers in 2026</span>
+                The Three Paths to Your 3rd Pillar: <span class="text-[#C41E3A]"
+                    >Which Will You Choose?</span
+                >
             </h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                We analyzed the Swiss market on Fees, Investment Choice, and
-                Expat-Friendliness to find the perfect home for your retirement
-                savings.
+            <p
+                class="text-white/90 text-xl md:text-2xl font-medium drop-shadow-md max-w-2xl"
+            >
+                The choice is no longer just 'bank vs. insurance'. It's a
+                strategic decision between digital apps, traditional banks, and
+                modern insurance. This guide reveals the hidden risks and
+                opportunities of each.
             </p>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Intro -->
-            <div class="max-w-3xl mx-auto prose prose-lg text-gray-700 mb-16">
-                <p>
-                    Choosing the right provider is arguably more important than
-                    choosing the right stock. High fees compound negatively over
-                    time, eating up to 30% of your potential retirement wealth.
-                    We have analyzed the top digital and traditional players to
-                    give you a clear winner.
-                </p>
+    <!-- MAIN CONTENT AREA -->
+    <main class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <!-- SECTION 1: THE THREE PATHS EXPLAINED -->
+            <div class="mb-32">
+                <div class="max-w-4xl mx-auto">
+                    <RedSectionHeader
+                        title="Understanding Your Options: Digital vs. Bank vs. Modern Insurance"
+                    />
+
+                    <div class="spoke-body space-y-10 mt-12">
+                        <p
+                            class="text-xl font-semibold text-[#1a1a2e] leading-relaxed italic border-l-4 border-[#C41E3A] pl-6"
+                        >
+                            "In 2026, choosing a 3rd pillar provider based on
+                            'fees' alone is like choosing a parachute based on
+                            its weight. It's the wrong metric for the most
+                            important part of the journey."
+                        </p>
+
+                        <div
+                            class="space-y-6 text-lg text-gray-700 leading-relaxed"
+                        >
+                            <h3
+                                class="text-2xl font-bold text-[#1a1a2e] flex items-center gap-3"
+                            >
+                                <span
+                                    class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm"
+                                    >1</span
+                                >
+                                Path 1: The Digital Apps (VIAC, Finpension)
+                            </h3>
+                            <p>
+                                Digital apps have revolutionized the accessible
+                                side of the Swiss 3rd pillar. By slashing
+                                management fees and allowing users to open an
+                                account in minutes, they are the 'entry ticket'
+                                for many expats. They excel at transparency and
+                                pure equity exposure.
+                            </p>
+                            <div
+                                class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-400"
+                            >
+                                <strong class="text-blue-900"
+                                    >The Critical Weakness:</strong
+                                > They solve for cost, but they do not solve for risk.
+                                The lack of integrated insurance is a significant
+                                gamble with your family's future. Without a waiver
+                                of premium, if you fall ill or lose your ability to
+                                work, your contributions stop immediately—potentially
+                                turning a retirement dream into a poverty gap.
+                            </div>
+
+                            <h3
+                                class="text-2xl font-bold text-[#1a1a2e] mt-12 flex items-center gap-3"
+                            >
+                                <span
+                                    class="w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center text-sm"
+                                    >2</span
+                                >
+                                Path 2: The Traditional Bank
+                            </h3>
+                            <p>
+                                These are the classic 3a saving accounts offered
+                                by high-street banks. While once the standard,
+                                in today's landscape, this is rarely the optimal
+                                path for a savvy expat. They often combine
+                                high-cost active funds with zero insurance
+                                benefits and lower flexibility than digital
+                                apps.
+                                <strong class="text-[#1a1a2e]"
+                                    >Verdict: An outdated model for 2026.</strong
+                                >
+                            </p>
+
+                            <h3
+                                class="text-2xl font-bold text-[#1a1a2e] mt-12 flex items-center gap-3"
+                            >
+                                <span
+                                    class="w-8 h-8 rounded-full bg-[#C41E3A] text-white flex items-center justify-center text-sm"
+                                    >3</span
+                                >
+                                Path 3: The Modern Insurance Solution
+                            </h3>
+                            <p>
+                                This is the intelligent, integrated choice. Far
+                                removed from the 'opaque' policies of the past,
+                                modern insurance solutions combine competitive,
+                                market-linked returns with the non-negotiable
+                                security of guaranteed capital and integrated
+                                life/disability insurance.
+                            </p>
+                            <p class="font-bold text-[#1a1a2e] text-xl pb-4">
+                                It is the holistic solution: solving for wealth
+                                acceleration and risk mitigation simultaneously.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Provider Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-                <!-- Finpension -->
-                <div
-                    class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-blue-600 hover:-translate-y-1 transition duration-300 flex flex-col"
-                >
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold">1. Finpension</h4>
-                            <span
-                                class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded"
-                                >Best Overall</span
-                            >
-                        </div>
-                        <div class="space-y-3 text-sm mb-6">
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">Fee</span>
-                                <span class="font-bold text-gray-900"
-                                    >0.39%</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600"
-                                    >Equity Exposure</span
-                                >
-                                <span class="font-bold text-gray-900"
-                                    >Up to 99%</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">App Rating</span>
-                                <span class="font-bold text-yellow-500"
-                                    >★★★★★</span
-                                >
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            The cost leader. Their flat fee structure includes
-                            almost everything (even VAT). They offer highly
-                            customizable strategies for advanced investors who
-                            want to tilt towards US Tech or Green Energy.
-                        </p>
-                    </div>
+            <!-- SECTION 2: THE SWISS LIFE CASE STUDY -->
+            <div class="mb-32 py-24 bg-gray-50/50 rounded-[60px] px-8 md:px-20">
+                <div class="max-w-4xl mx-auto">
                     <div
-                        class="bg-gray-50 p-3 text-center text-xs font-bold uppercase tracking-wide text-gray-500 border-t border-gray-100"
+                        class="bg-white p-1 md:p-2 rounded-full inline-block mb-10 shadow-sm border border-gray-100"
                     >
-                        Best for: Cost Optimizers
+                        <div
+                            class="px-6 py-2 bg-[#C41E3A] text-white rounded-full text-xs font-bold uppercase tracking-widest"
+                        >
+                            Case Study
+                        </div>
                     </div>
-                </div>
+                    <h2
+                        class="text-3xl md:text-5xl font-bold text-[#1a1a2e] mb-12"
+                    >
+                        Swiss Life Dynamic Elements Duo: The Best of Both Worlds
+                    </h2>
 
-                <!-- VIAC -->
-                <div
-                    class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-green-600 hover:-translate-y-1 transition duration-300 flex flex-col"
-                >
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold">2. VIAC</h4>
-                            <span
-                                class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded"
-                                >Best App Experience</span
-                            >
-                        </div>
-                        <div class="space-y-3 text-sm mb-6">
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">Fee</span>
-                                <span class="font-bold text-gray-900"
-                                    >~0.44%</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600"
-                                    >Equity Exposure</span
-                                >
-                                <span class="font-bold text-gray-900"
-                                    >Up to 99%</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">App Rating</span>
-                                <span class="font-bold text-yellow-500"
-                                    >★★★★★</span
-                                >
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            The pioneer of digital 3a. Extremely polished mobile
-                            experience. They include a basic death/disability
-                            insurance option for free, which is a nice touch for
-                            families.
+                    <div class="spoke-body space-y-10">
+                        <p class="text-lg">
+                            To understand why Path 3 is dominating the strategy
+                            of high-net-worth expats, we must look at the
+                            **Swiss Life Dynamic Elements Duo**. It represents
+                            the pinnacle of modern 3rd pillar engineering.
                         </p>
-                    </div>
-                    <div
-                        class="bg-gray-50 p-3 text-center text-xs font-bold uppercase tracking-wide text-gray-500 border-t border-gray-100"
-                    >
-                        Best for: Digital Natives
-                    </div>
-                </div>
 
-                <!-- Frankly -->
-                <div
-                    class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-purple-600 hover:-translate-y-1 transition duration-300 flex flex-col"
-                >
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold">3. Frankly (ZKB)</h4>
-                            <span
-                                class="bg-gray-100 text-gray-800 text-xs font-bold px-2 py-1 rounded"
-                                >Bank Backed</span
-                            >
-                        </div>
-                        <div class="space-y-3 text-sm mb-6">
+                        <div class="grid md:grid-cols-2 gap-10 my-16">
                             <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
+                                class="p-8 bg-white rounded-3xl shadow-xl border border-gray-100"
                             >
-                                <span class="text-gray-600">Fee</span>
-                                <span class="font-bold text-gray-900"
-                                    >0.45%</span
+                                <div
+                                    class="text-[#C41E3A] text-4xl font-black mb-4"
                                 >
+                                    4.8% <span
+                                        class="text-sm font-bold text-gray-400 block uppercase pt-2"
+                                        >Avg. Annualized Return*</span>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    With its equity-focused strategy, the
+                                    Dynamic Elements Duo has achieved returns
+                                    that rival many digital-only portfolios,
+                                    proving you don't have to sacrifice growth
+                                    for safety.
+                                </p>
                             </div>
                             <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
+                                class="p-8 bg-[#1a1a2e] text-white rounded-3xl shadow-xl"
                             >
-                                <span class="text-gray-600"
-                                    >Equity Exposure</span
+                                <div
+                                    class="text-white text-4xl font-black mb-4"
                                 >
-                                <span class="font-bold text-gray-900"
-                                    >Up to 95%</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">App Rating</span>
-                                <span class="font-bold text-yellow-500"
-                                    >★★★★☆</span
-                                >
+                                    100% <span
+                                        class="text-sm font-bold text-white/50 block uppercase pt-2"
+                                        >Integrated Safety Net</span>
+                                </div>
+                                <p class="text-sm text-white/70">
+                                    Through the <strong>Premium Waiver</strong>,
+                                    Swiss Life pays your contributions if you
+                                    become disabled. This 'Forced Discipline'
+                                    ensures your goal is reached no matter what.
+                                </p>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            Backed by Zürcher Kantonalbank (AAA rated). Great
-                            community discount features lowering fees. Solid ESG
-                            focus if sustainable investing is your priority.
-                        </p>
-                    </div>
-                    <div
-                        class="bg-gray-50 p-3 text-center text-xs font-bold uppercase tracking-wide text-gray-500 border-t border-gray-100"
-                    >
-                        Best for: Safety + Returns
-                    </div>
-                </div>
 
-                <!-- True Wealth -->
-                <div
-                    class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-yellow-500 hover:-translate-y-1 transition duration-300 flex flex-col"
-                >
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold">4. True Wealth</h4>
-                            <span
-                                class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded"
-                                >Auto-Pilot</span
-                            >
-                        </div>
-                        <div class="space-y-3 text-sm mb-6">
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">Fee</span>
-                                <span class="font-bold text-gray-900"
-                                    >0.0% (Platform)</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600"
-                                    >Equity Exposure</span
-                                >
-                                <span class="font-bold text-gray-900"
-                                    >Up to 99%</span
-                                >
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            No management fee (only product costs).
-                            Automatically rebalances your 3a to match your
-                            overall wealth portfolio.
-                        </p>
-                    </div>
-                    <div
-                        class="bg-gray-50 p-3 text-center text-xs font-bold uppercase tracking-wide text-gray-500 border-t border-gray-100"
-                    >
-                        Best for: Hands-off Investors
-                    </div>
-                </div>
-
-                <!-- Traditional Banks -->
-                <div
-                    class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300 flex flex-col opacity-75 hover:opacity-100"
-                >
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold">
-                                5. Traditional Banks
+                        <div class="space-y-6">
+                            <h4 class="text-2xl font-bold text-[#1a1a2e]">
+                                Reframing the "Cost" Argument
                             </h4>
-                            <span
-                                class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                                >Old School</span
-                            >
+                            <p>
+                                While digital apps boast near-zero fees, they
+                                provide near-zero protection. The Swiss Life
+                                model is strategically priced: the slightly
+                                higher inclusive cost funds the critical
+                                insurance component. In fact, if you were to
+                                calculate the cost of a bank 3a plus a
+                                standalone life insurance policy plus a
+                                standalone disability waiver, the **All-in
+                                Dynamic Elements Duo** is often substantially
+                                more efficient.
+                            </p>
+                            <p class="font-semibold text-[#C41E3A]">
+                                "Expats who plan to buy a Swiss home value this
+                                policy most. Swiss banks view a Swiss Life
+                                policy as premium collateral—something they
+                                simply won't do for a volatile app-based
+                                portfolio."
+                            </p>
                         </div>
-                        <div class="space-y-3 text-sm mb-6">
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">Fee</span>
-                                <span class="font-bold text-red-600"
-                                    >1.2% - 1.8%</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600"
-                                    >Equity Exposure</span
-                                >
-                                <span class="font-bold text-gray-900"
-                                    >Limited / Fund specific</span
-                                >
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            High fees but integrated into your main e-banking.
-                            Good if you want personal advice in a physical
-                            branch, but costly.
-                        </p>
-                    </div>
-                    <div
-                        class="bg-gray-50 p-3 text-center text-xs font-bold uppercase tracking-wide text-gray-500 border-t border-gray-100"
-                    >
-                        Best for: Convenience
-                    </div>
-                </div>
-
-                <!-- Insurance -->
-                <div
-                    class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-red-800 hover:-translate-y-1 transition duration-300 flex flex-col opacity-75 hover:opacity-100"
-                >
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold">6. Insurance 3a</h4>
-                            <span
-                                class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded"
-                                >Mixed Product</span
-                            >
-                        </div>
-                        <div class="space-y-3 text-sm mb-6">
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">Costs</span>
-                                <span class="font-bold text-red-600"
-                                    >High / Opaque</span
-                                >
-                            </div>
-                            <div
-                                class="flex justify-between border-b border-gray-100 pb-2"
-                            >
-                                <span class="text-gray-600">Lock-in</span>
-                                <span class="font-bold text-red-600"
-                                    >Decades</span
-                                >
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                            Combined savings and insurance. Generally not
-                            recommended for pure saving due to high commission
-                            fees and lack of flexibility.
-                        </p>
-                    </div>
-                    <div
-                        class="bg-gray-50 p-3 text-center text-xs font-bold uppercase tracking-wide text-gray-500 border-t border-gray-100"
-                    >
-                        Best for: Specific Coverage Needs
                     </div>
                 </div>
             </div>
 
-            <!-- Cost Comparison Table -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6 font-center">
-                    The Cost of Investing CHF 100,000
+            <!-- SECTION 3: THE HOLISTIC SOLUTION FINDER (Interactive Quiz) -->
+            <div class="mb-32 scroll-mt-24" id="solution-finder">
+                <div
+                    class="max-w-3xl mx-auto bg-white border-2 border-[#1a1a2e] rounded-[40px] p-10 md:p-16 shadow-2xl relative"
+                >
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#C41E3A] text-white px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest shadow-lg"
+                    >
+                        Strategy Quiz
+                    </div>
+
+                    <div id="quiz-container">
+                        <div id="quiz-step-1" class="quiz-step">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-[#1a1a2e] mb-10 text-center"
+                            >
+                                Step 1: How would you describe your investment
+                                style?
+                            </h3>
+                            <div class="grid gap-4">
+                                <button onclick="nextStep(2)" class="quiz-btn"
+                                    >Hands-off: I want an expert to manage it
+                                    for long-term security.</button
+                                >
+                                <button onclick="nextStep(2)" class="quiz-btn"
+                                    >Hands-on: I like to manage my own low-cost
+                                    portfolio.</button
+                                >
+                                <button onclick="nextStep(2)" class="quiz-btn"
+                                    >Balanced: I want growth but I cannot afford
+                                    to lose my capital.</button
+                                >
+                            </div>
+                        </div>
+
+                        <div id="quiz-step-2" class="quiz-step hidden">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-[#1a1a2e] mb-10 text-center"
+                            >
+                                Step 2: How important is family protection if
+                                you fall ill?
+                            </h3>
+                            <div class="grid gap-4">
+                                <button onclick="nextStep(3)" class="quiz-btn"
+                                    >Priority #1: I need a guaranteed safety net
+                                    for my dependents.</button
+                                >
+                                <button onclick="nextStep(3)" class="quiz-btn"
+                                    >Important: But I believe I have some
+                                    separate coverage.</button
+                                >
+                                <button onclick="nextStep(3)" class="quiz-btn"
+                                    >Risk-taker: I'm comfortable with market
+                                    volatility and no waiver.</button
+                                >
+                            </div>
+                        </div>
+
+                        <div id="quiz-step-3" class="quiz-step hidden">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-[#1a1a2e] mb-10 text-center"
+                            >
+                                Step 3: Are you planning to buy property in
+                                Switzerland?
+                            </h3>
+                            <div class="grid gap-4">
+                                <button onclick="showResult()" class="quiz-btn"
+                                    >Yes: Homeownership is a key goal within
+                                    5-10 years.</button
+                                >
+                                <button onclick="showResult()" class="quiz-btn"
+                                    >Maybe: I'm considering it but I'm not sure
+                                    yet.</button
+                                >
+                                <button onclick="showResult()" class="quiz-btn"
+                                    >No: I plan to remain flexible or eventually
+                                    leave.</button
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            id="quiz-result"
+                            class="quiz-step hidden text-center"
+                        >
+                            <div
+                                class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl"
+                            >
+                                ✓
+                            </div>
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-[#1a1a2e] mb-6"
+                            >
+                                Your Strategy Analysis is Ready
+                            </h3>
+                            <p
+                                class="text-lg text-gray-600 mb-10 leading-relaxed"
+                            >
+                                Thank you. Your profile suggests that a simple
+                                digital app may not cover all your needs. A
+                                modern, integrated solution could offer you
+                                better security, mortgage advantages, and
+                                long-term value.
+                            </p>
+                            <div
+                                class="bg-gray-50 p-8 rounded-3xl border border-gray-100 mb-10 text-left"
+                            >
+                                <p
+                                    class="font-bold text-[#1a1a2e] mb-2 underline decoration-[#C41E3A] decoration-2"
+                                >
+                                    Next Step Recommendation:
+                                </p>
+                                <p class="text-sm text-gray-500 italic">
+                                    "Request a free analysis to see how a
+                                    holistic strategy would work for your
+                                    specific residence and tax situation."
+                                </p>
+                            </div>
+                            <button
+                                onclick="document.getElementById('hans-steiner').scrollIntoView({ behavior: 'smooth' });"
+                                class="bg-[#C41E3A] text-white font-bold py-5 px-12 rounded-full text-xl hover:scale-105 transition-transform shadow-xl"
+                            >
+                                Request Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .quiz-btn {
+                    @apply w-full p-6 text-left border-2 border-gray-100 rounded-2xl hover:border-[#C41E3A] hover:bg-red-50 transition-all font-semibold text-[#1a1a2e];
+                }
+                .hidden {
+                    display: none;
+                }
+            </style>
+
+            <script is:inline>
+                function nextStep(step) {
+                    document
+                        .querySelectorAll(".quiz-step")
+                        .forEach((s) => s.classList.add("hidden"));
+                    document
+                        .getElementById(`quiz-step-${step}`)
+                        .classList.remove("hidden");
+                }
+                function showResult() {
+                    document
+                        .querySelectorAll(".quiz-step")
+                        .forEach((s) => s.classList.add("hidden"));
+                    document
+                        .getElementById("quiz-result")
+                        .classList.remove("hidden");
+                }
+            </script>
+
+            <!-- RELATED HUB LINKS (BEFORE HANS) -->
+            <div class="mb-24 pt-16 border-t border-gray-100">
+                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
+                    Master Your Expat Strategy
                 </h2>
-                <p class="mb-8 text-gray-600">
-                    Fees erode your compound interest. See the difference over 1
-                    year on a six-figure portfolio.
-                </p>
-                <div
-                    class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm"
-                >
-                    <table class="min-w-full text-sm">
-                        <thead class="bg-gray-800 text-white">
-                            <tr>
-                                <th class="p-4 text-left font-bold">Provider</th
-                                >
-                                <th class="p-4 text-left font-bold"
-                                    >Total Expense Ratio (TER)</th
-                                >
-                                <th class="p-4 text-left font-bold"
-                                    >Annual Cost (CHF 100k)</th
-                                >
-                                <th class="p-4 text-left font-bold"
-                                    >30-Year Impact Estimate</th
-                                >
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 bg-white">
-                            <tr
-                                ><td class="p-4 font-bold text-blue-700"
-                                    >Finpension</td
-                                ><td class="p-4">0.39%</td><td class="p-4"
-                                    >CHF 390</td
-                                ><td class="p-4 text-green-700 font-bold"
-                                    >Success</td
-                                ></tr
-                            >
-                            <tr class="bg-gray-50"
-                                ><td class="p-4 font-bold text-green-700"
-                                    >VIAC</td
-                                ><td class="p-4">0.44%</td><td class="p-4"
-                                    >CHF 440</td
-                                ><td class="p-4 text-green-700 font-bold"
-                                    >Success</td
-                                ></tr
-                            >
-                            <tr
-                                ><td class="p-4 font-bold text-purple-700"
-                                    >Frankly</td
-                                ><td class="p-4">0.45%</td><td class="p-4"
-                                    >CHF 450</td
-                                ><td class="p-4 text-green-700 font-bold"
-                                    >Success</td
-                                ></tr
-                            >
-                            <tr class="bg-gray-50"
-                                ><td class="p-4 text-gray-600"
-                                    >Traditional Bank</td
-                                ><td class="p-4">1.50%</td><td
-                                    class="p-4 text-red-600 font-bold"
-                                    >CHF 1,500</td
-                                ><td class="p-4 text-red-600">Lost ~CHF 60k+</td
-                                ></tr
-                            >
-                        </tbody>
-                    </table>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <a
+                        href="/3rd-pillar/bank-vs-insurance/"
+                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
+                    >
+                        <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
+                            Detailed Comparison
+                        </h4>
+                        <p class="text-sm text-gray-500">
+                            Bank vs Insurance: A deeper dive into the specific
+                            mechanics of both paths.
+                        </p>
+                    </a>
+                    <a
+                        href="/3rd-pillar/tax-optimization/"
+                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
+                    >
+                        <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
+                            Tax Savings Blueprint
+                        </h4>
+                        <p class="text-sm text-gray-500">
+                            How to legally minimize your Swiss tax burden
+                            through the 3rd pillar.
+                        </p>
+                    </a>
                 </div>
             </div>
 
-            <!-- Key Takeaways -->
-            <div
-                class="bg-gray-900 text-white p-8 rounded-2xl shadow-xl mb-16 max-w-4xl mx-auto"
-            >
-                <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-8 w-8 text-[#C41E3A]"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                    </svg>
-                    Our Verdict
-                </h3>
-                <p class="text-lg text-gray-300 leading-relaxed mb-4">
-                    For most expats, <strong>Finpension</strong> or <strong
-                        >VIAC</strong
-                    > are the clear winners. They offer English interfaces, low fees,
-                    and high equity exposure which is essential for long-term growth.
-                </p>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    If you already bank with ZKB, <strong>Frankly</strong> is a fantastic
-                    integrated option. Avoid traditional expensive bank funds and
-                    mixed insurance products if your goal is pure wealth accumulation.
-                </p>
+            <!-- HANS STEINER CARD -->
+            <div id="hans-steiner" class="mb-32 scroll-mt-24 text-center">
+                <div
+                    class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm inline-block text-left w-full"
+                >
+                    <div class="flex flex-col md:flex-row items-center gap-10">
+                        <div
+                            class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
+                        >
+                            <img
+                                src="/images/hans-steiner.png"
+                                alt="Hans Steiner"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
+                                Get Your Free, Personalized Strategy Analysis
+                            </h2>
+                            <p class="spoke-body text-gray-600 mb-8 max-w-xl">
+                                "Choosing the wrong path can cost you decades of
+                                compounded security. Let's find your ideal Swiss
+                                setup."
+                            </p>
+                            <button
+                                onclick="window.openContextualModal()"
+                                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                            >
+                                Request My Free Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ SECTION -->
+            <div class="mb-24">
+                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
+                    Frequently Asked Questions
+                </h2>
+                <div class="max-w-4xl mx-auto space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white shadow-sm">
+                                <details class="group">
+                                    <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
+                                        <span class="text-xl font-bold text-[#1a1a2e] pr-4">
+                                            {faq.question}
+                                        </span>
+                                        <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
+                                            ↓
+                                        </span>
+                                    </summary>
+                                    <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
+                                        {faq.answer}
+                                    </div>
+                                </details>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- CTA Section -->
-    <div class="bg-[#C41E3A] py-20 text-center px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-            Still Unsure?
-        </h2>
-        <p class="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
-            Get a free consultation to review your current setup and see if you
-            can save on fees.
-        </p>
-        <button
-            onclick="window.openContextualModal()"
-            class="bg-white text-[#C41E3A] font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-gray-100 transition transform hover:-translate-y-1"
+    <!-- FINAL CTA -->
+    <div class="bg-[#1a1a2e] py-32 text-center relative overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C41E3A] to-transparent opacity-50"
         >
-            Review My Pension
-        </button>
-    </div>
-
-    <!-- Related Guides -->
-    <div class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-10 text-center">
-                Continue Reading
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8">
+                Ready to Build a Smarter Plan?
             </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <a
-                    href="/3rd-pillar/tax-optimization"
-                    class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition group"
-                >
-                    <h3
-                        class="font-bold text-lg mb-2 group-hover:text-[#C41E3A] transition-colors"
-                    >
-                        Tax Optimization
-                    </h3>
-                    <p class="text-gray-600 text-sm">
-                        How to save CHF 2,000+ per year.
-                    </p>
-                </a>
-                <a
-                    href="/3rd-pillar/bank-vs-insurance"
-                    class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition group"
-                >
-                    <h3
-                        class="font-bold text-lg mb-2 group-hover:text-[#C41E3A] transition-colors"
-                    >
-                        Bank vs. Insurance
-                    </h3>
-                    <p class="text-gray-600 text-sm">
-                        Why keeping them separate is usually better.
-                    </p>
-                </a>
-                <a
-                    href="/3rd-pillar/for-young-professionals"
-                    class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition group"
-                >
-                    <h3
-                        class="font-bold text-lg mb-2 group-hover:text-[#C41E3A] transition-colors"
-                    >
-                        For Young Professionals
-                    </h3>
-                    <p class="text-gray-600 text-sm">
-                        Start early and let compound interest do the magic.
-                    </p>
-                </a>
-            </div>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Don't leave your Swiss future to an algorithm. Get a holistic
+                strategy built for real security.
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-6 px-16 rounded-full text-2xl shadow-2xl transition transform hover:-translate-y-1"
+            >
+                Get My Holistic Strategy
+            </button>
         </div>
     </div>
+
+    <!-- SCHEMA MARKUP -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: metadata.title,
+            description: metadata.description,
+            author: {
+                "@type": "Person",
+                name: "Hans Steiner",
+            },
+            publisher: {
+                "@type": "Organization",
+                name: "Expat Savvy",
+                logo: {
+                    "@type": "ImageObject",
+                    url: "https://expat-savvy.ch/logo.png",
+                },
+            },
+            mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": metadata.canonical,
+            },
+        })}
+    />
+
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer,
+                },
+            })),
+        })}
+    />
 </Layout>
