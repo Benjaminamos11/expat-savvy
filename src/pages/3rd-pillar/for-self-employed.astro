@@ -37,6 +37,62 @@ const faqs = [
         question: "How do I prove my income to be eligible for the 'Big 3a'?",
         answer: "You typically provide your last finalized tax assessment (Einschätzungsmitteilung) or a statement of earnings from your AHV/AVS compensation office. The key is that you have no active contributions to a 2nd Pillar fund.",
     },
+    {
+        question: "What's my maximum 3a contribution as self-employed?",
+        answer: "As an independent (without a pension fund), you can contribute 20% of your net earned income, up to a maximum of CHF 36,288 (2026 limit). If you have a pension fund (e.g., voluntary), your limit is the same as an employee: CHF 7,258.",
+    },
+    {
+        question: "How do I calculate my maximum contribution?",
+        answer: "Take your net income (after business expenses and AHV/IV/EO contributions) and multiply by 20%. If that number is below CHF 36,288, that's your limit. If it's above, your limit is capped at CHF 36,288.",
+    },
+    {
+        question: "Can I contribute more in good years?",
+        answer: "Yes, because the limit is 20% of that specific year's income. If your business has a 'golden year' where you earn CHF 200,000, you can max out the full CHF 36,288. In a lower-earning year, your limit will be lower.",
+    },
+    {
+        question: "What if my income is variable?",
+        answer: "This is common for freelancers. You can use a 'hybrid strategy': contribute a conservative monthly amount to an insurance 3a for foundation protection, and then top up a bank 3a at year-end once you know your final profit.",
+    },
+    {
+        question: "Should I join a voluntary 2nd pillar?",
+        answer: "For most sole proprietors, the 'Big 3a' is more flexible and cost-effective. A 2nd pillar (BVG) is usually only worth it for very high earners (CHF 150k+) who want to 'buy back' years and have exhausted their 3a limits.",
+    },
+    {
+        question: "How does the 20% rule work for GmbH owners?",
+        answer: "If you are an employee of your GmbH, you are subject to the 'Small 3a' limit (CHF 7,258). However, if you take owner distributions/dividends, these are not 'earned income' and don't count for 3a. Consult your accountant to optimize your salary vs. dividend mix.",
+    },
+    {
+        question: "Can I deduct my 3a contributions from my taxes?",
+        answer: "Absolutely. 100% of your 3a contribution is deducted from your taxable income, reducing both your federal and cantonal/communal tax bill. For high earners, this can result in 25-40% immediate 'cash back' in tax savings.",
+    },
+    {
+        question: "What happens to my 3a if I become employed?",
+        answer: "Your 3a remains yours. The assets stay invested. Your contribution limit for the next year will simply drop to the 'Small 3a' limit (CHF 7,258) because you will then have a mandatory 2nd pillar through your employer.",
+    },
+    {
+        question: "Can I use my 3a to fund my business?",
+        answer: "Yes. One of the few ways to withdraw 3a early is when you start a sole proprietorship. However, this is risky as you are depleting your retirement for business capital. It's often better to keep it as your backup.",
+    },
+    {
+        question: "What's the deadline for making contributions?",
+        answer: "The funds must be received by the provider by the last business day of December. For self-employed, we recommend making the payment by mid-December to ensure processing within the tax year.",
+    },
+    {
+        question: "Can I have multiple 3a accounts?",
+        answer: "Yes, and you should. By having 3-5 different accounts and closing them in different years (between ages 60-65), you can avoid higher 'progression' taxes on the withdrawal. This is called 'staggered withdrawal'.",
+    },
+    {
+        question: "What if I leave Switzerland permanently?",
+        answer: "As a non-Swiss national leaving permanently, you can usually withdraw your 3rd pillar cash. It will be subject to a 'withholding tax' (Quellensteuer), which varies depending on which Canton the pension foundation is based in.",
+    },
+    {
+        question: "Is 3a mandatory for self-employed?",
+        answer: "No, it's voluntary (Optional). However, given that you don't have a 2nd pillar, it is effectively 'economically mandatory' if you don't want to rely solely on the very basic 1st Pillar (AHV) in retirement.",
+    },
+    {
+        question: "Can I pause my insurance 3rd pillar if I have no income?",
+        answer: "Yes. Most modern 'Entrepreneur' policies allow for 'premium holidays' or reductions if your business faces a hardship. This is why choosing a flexible policy is critical for freelancers.",
+    },
 ];
 
 const heroImage = "/images/self-employed-hero.png";
@@ -113,19 +169,18 @@ const heroImage = "/images/self-employed-hero.png";
                         </p>
                         <p>
                             While most employees are capped at CHF 7,258 per
-                            year, you can contribute up to **20% of your net
-                            earned income**, up to a maximum of **CHF 36,288**
-                            (2026 limit). This represents one of the most
-                            powerful tax deduction tools available to
-                            individuals in Switzerland.
+                            year, you can contribute up to <strong
+                                >20% of your net earned income</strong
+                            >, up to a maximum of <strong>CHF 36,288</strong>
+                            (2026 limit). This represents one of the most powerful
+                            tax deduction tools available to individuals in Switzerland.
                         </p>
                         <p>
                             However, this privilege comes with a heavy
-                            realization: **You have no 2nd Pillar.** In a
-                            traditional job, your employer automatically covers
-                            you for disability, provides a death benefit for
-                            your family, and builds a retirement pot alongside
-                            you.
+                            realization: <strong>You have no 2nd Pillar.</strong
+                            > In a traditional job, your employer automatically covers
+                            you for disability, provides a death benefit for your
+                            family, and builds a retirement pot alongside you.
                         </p>
                         <div
                             class="bg-gray-50 p-8 rounded-[30px] border border-gray-100 my-10 border-l-4 border-l-[#C41E3A]"
@@ -141,8 +196,81 @@ const heroImage = "/images/self-employed-hero.png";
                         <p>
                             You must decide: Will you treat your 3rd pillar as
                             just another investment account, or as the
-                            **fortress** that replaces everything a corporate
+                            <strong>fortress</strong> that replaces everything a corporate
                             job would have provided?
+                        </p>
+                    </div>
+                </section>
+
+                <!-- NEW SECTION: THE 20% RULE -->
+                <section class="mb-32">
+                    <RedSectionHeader title="The 20% Rule Explained" />
+                    <div class="spoke-body mt-8 space-y-6">
+                        <p>
+                            As a self-employed person, you can contribute up to
+                            <strong>20% of your net income</strong> to your 3a, with
+                            a maximum annual limit of <strong>CHF 36,288</strong
+                            > (2026). Here's how to calculate your maximum contribution:
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-8 my-10">
+                            <div
+                                class="bg-gray-50 p-8 rounded-3xl border border-gray-100"
+                            >
+                                <h4 class="font-bold text-[#1a1a2e] mb-4">
+                                    Example 1 (Moderate Income)
+                                </h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li>
+                                        • Net income: <strong
+                                            >CHF 100,000</strong
+                                        >
+                                    </li>
+                                    <li>
+                                        • 20% of net income: <strong
+                                            >CHF 20,000</strong
+                                        >
+                                    </li>
+                                    <li class="pt-4 text-[#C41E3A] font-bold">
+                                        Max Contribution: CHF 20,000
+                                    </li>
+                                    <li class="text-xs italic">
+                                        This is below the CHF 36,288 cap.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div
+                                class="bg-[#1a1a2e] p-8 rounded-3xl text-white"
+                            >
+                                <h4 class="font-bold mb-4">
+                                    Example 2 (High Income)
+                                </h4>
+                                <ul class="space-y-2 text-white/70">
+                                    <li>
+                                        • Net income: <strong
+                                            >CHF 200,000</strong
+                                        >
+                                    </li>
+                                    <li>
+                                        • 20% of net income: <strong
+                                            >CHF 40,000</strong
+                                        >
+                                    </li>
+                                    <li class="pt-4 text-[#C41E3A] font-bold">
+                                        Max Contribution: CHF 36,288
+                                    </li>
+                                    <li class="text-xs italic">
+                                        This exceeds the cap, so the limit
+                                        applies.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-sm italic text-gray-500">
+                            This is a massive tax advantage compared to employed
+                            individuals, who can only contribute <strong
+                                >CHF 7,258</strong
+                            >
+                            annually.
                         </p>
                     </div>
                 </section>
@@ -241,6 +369,121 @@ const heroImage = "/images/self-employed-hero.png";
                     </script>
                 </section>
 
+                <!-- NEW SECTION: WHY NO 2ND PILLAR -->
+                <section class="mb-32">
+                    <RedSectionHeader title="Why You Don't Have a 2nd Pillar" />
+                    <div class="spoke-body mt-8 space-y-6">
+                        <p>
+                            Unlike employed workers, you don't have a mandatory
+                            <strong>2nd pillar (occupational pension)</strong>.
+                            This means you have no employer-funded retirement
+                            savings and no automatic disability or life
+                            insurance.
+                        </p>
+                        <p>
+                            This is why the 3a is so critical for you—it's your
+                            only tax-advantaged retirement vehicle and your only
+                            source of integrated insurance protection.
+                        </p>
+                        <div
+                            class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500"
+                        >
+                            <p class="text-blue-800 text-sm">
+                                <strong>Note:</strong> You have the option to voluntarily
+                                join a 2nd pillar, but most self-employed find the
+                                3a more flexible and cost-effective.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW SECTION: BUSINESS STRUCTURES -->
+                <section class="mb-32">
+                    <RedSectionHeader title="Sole Proprietorship vs. GmbH/AG" />
+                    <div class="spoke-body mt-8 space-y-8">
+                        <div class="border-l-4 border-[#C41E3A] pl-6">
+                            <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
+                                If you are a Sole Proprietor (Einzelfirma)
+                            </h4>
+                            <p>
+                                You can contribute up to 20% of your net
+                                business income to your 3a. This is
+                                straightforward and provides the maximum tax
+                                relief.
+                            </p>
+                        </div>
+                        <div class="border-l-4 border-gray-300 pl-6">
+                            <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
+                                If you are a GmbH or AG Owner
+                            </h4>
+                            <p>
+                                The rules are more complex. If you are an
+                                employee of your own company (drawing a salary),
+                                you can only contribute <strong
+                                    >CHF 7,258</strong
+                                > annually (the employee limit).
+                            </p>
+                            <p class="mt-4 text-sm text-gray-500 italic">
+                                *In certain cases involving distributions,
+                                different limits can apply. Consult your
+                                accountant for your specific situation.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW SECTION: MANAGING VARIABLE INCOME -->
+                <section class="mb-32">
+                    <RedSectionHeader title="Managing Variable Income" />
+                    <div class="spoke-body mt-8 space-y-12">
+                        <p>
+                            As a freelancer, your income fluctuates. Here are
+                            three strategies for managing your 3a contributions:
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div
+                                class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100"
+                            >
+                                <h5 class="font-bold text-[#C41E3A] mb-4">
+                                    1. Percentage-Based
+                                </h5>
+                                <p class="text-sm text-gray-600">
+                                    Calculate 20% of your expected annual income
+                                    and contribute monthly (e.g., CHF
+                                    2,000/month if you expect CHF 120,000
+                                    income).
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100"
+                            >
+                                <h5 class="font-bold text-[#C41E3A] mb-4">
+                                    2. Lump-Sum Annual
+                                </h5>
+                                <p class="text-sm text-gray-600">
+                                    Wait until year-end to see your actual
+                                    income, then make a single contribution.
+                                    This is more accurate but requires cash flow
+                                    planning.
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100"
+                            >
+                                <h5 class="font-bold text-[#C41E3A] mb-4">
+                                    3. Hybrid Approach
+                                </h5>
+                                <p class="text-sm text-gray-600">
+                                    Contribute a conservative amount monthly
+                                    (e.g., CHF 1,500), then make a lump-sum
+                                    top-up at year-end if income exceeded
+                                    expectations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- SECTION 3: THE NON-NEGOTIABLE FOUNDATION -->
                 <section class="mb-32">
                     <RedSectionHeader
@@ -261,12 +504,13 @@ const heroImage = "/images/self-employed-hero.png";
                                     If you get sick or have an accident and
                                     cannot work for 6 months, your income as a
                                     freelancer stops. In a bank 3a, your savings
-                                    also stop. In an **Insurance 3a**, the
-                                    provider takes over your payments. Your
-                                    retirement pot continues to grow as if you
-                                    were still working. This is non-negotiable
-                                    for anyone without an employer-sponsored
-                                    plan.
+                                    also stop. In an <strong
+                                        >Insurance 3a</strong
+                                    >, the provider takes over your payments.
+                                    Your retirement pot continues to grow as if
+                                    you were still working. This is
+                                    non-negotiable for anyone without an
+                                    employer-sponsored plan.
                                 </p>
                             </div>
                             <div class="space-y-4">
@@ -311,9 +555,9 @@ const heroImage = "/images/self-employed-hero.png";
                                         with no brakes and no seatbelts. It's
                                         great when things go fast, but it
                                         doesn't protect you from a crash. The
-                                        Insurance 3a is the **safety
-                                        sub-structure** your entire financial
-                                        life depends on.
+                                        Insurance 3a is the <strong
+                                            >safety sub-structure</strong
+                                        > your entire financial life depends on.
                                     </p>
                                 </div>
                             </div>

@@ -17,26 +17,84 @@ const heroImage = "/images/leaving-switzerland-hero.png"; // Placeholder for the
 
 const faqs = [
     {
-        question: "What is the exact process to reclaim the withholding tax?",
-        answer: "When you withdraw your pension assets while living abroad, Switzerland deducts a withholding tax (Quellensteuer). To reclaim this, you typically need to prove that you are being taxed in your new country of residence and that a Double Taxation Agreement (DTA) exists between Switzerland and that country. The process involves submitting specialized forms (e.g., Form 7) to the tax office of the canton where your pension foundation is located.",
+        question: "What is the withholding tax rate in my canton?",
+        answer: "Rates vary significantly. While the average is around 7-10%, cantons like Schwyz or Uri are closer to 5%, whereas Geneva or Jura can be as high as 15-20%. This is why 'tax residence' during withdrawal is critical.",
     },
     {
-        question:
-            "How do I find out how much of my 2nd pillar is 'extra-mandatory'?",
-        answer: "This information is found on your annual Pension Certificate (Vorsorgeausweis). Look for the section titled 'LPP/BVG Capital' or 'Mandatory Capital'. The difference between your total balance and this mandatory amount is your extra-mandatory capital, which is more flexible to withdraw if moving to the EU/EFTA.",
+        question: "Can I reclaim the withholding tax?",
+        answer: "Yes, if you live in a country with a Double Taxation Agreement (DTA) with Switzerland. You must prove you are paying tax in your new country and submit Form 7 to the relevant cantonal tax office.",
     },
     {
-        question: "Can I convert a bank 3a into a 3b when I leave?",
-        answer: "No, bank-based 3a accounts (like those with VIAC or Finpension) are strictly cash or securities accounts. Upon leaving, these must be closed and the cash paid out. Only insurance-based 3a policies offer the 'conversion' feature where the contract continues as a 3b plan, maintaining your insurance cover and investment continuity.",
+        question: "What's a vested benefits account (Freizügigkeitskonto)?",
+        answer: "It is a specialized Swiss account where your 2nd pillar pension capital is held when you leave a job and don't immediately join a new pension fund. It keeps the funds in the 'pension system' while maintaining the tax-free status.",
     },
     {
-        question:
-            "What are the tax implications of my 3b policy in my new country?",
-        answer: "This varies by country. While Switzerland may treat 3b payouts as tax-free under certain conditions, your new country might view the growth as taxable capital gains or the conversion as a taxable event. We strongly recommend a consultation to review the specific treaty between Switzerland and your destination.",
+        question: "How long does the withdrawal process take?",
+        answer: "Typically 4 to 8 weeks from the moment you submit your official deregistration certificate and foreign address proof. Bank 3a is usually faster than insurance-based 3a.",
     },
     {
-        question: "How does this affect my AHV (1st Pillar) benefits?",
-        answer: "Leaving Switzerland does not 'cancel' your 1st pillar. You stop contributing to the Swiss system, but your past contributions remain. Depending on your nationality and the years contributed, you may be eligible for a partial Swiss pension at retirement age, or in some cases (for non-EU/EFTA nationals moving to non-agreement countries), a refund of your contributions.",
+        question: "Can I withdraw my 2nd pillar at the same time?",
+        answer: "Yes, once you have deregistered. If moving to a non-EU/EFTA country, you can take 100%. If moving to EU/EFTA, you can usually only take the 'extra-mandatory' portion.",
+    },
+    {
+        question: "What happens to my AHV when I leave?",
+        answer: "Your AHV (1st pillar) remains in Switzerland. You will be eligible for a partial Swiss pension at age 65 based on the years you contributed. Non-EU/EFTA nationals moving to non-agreement countries can sometimes request a refund.",
+    },
+    {
+        question: "Do I need to file a tax return in my new country?",
+        answer: "Generally yes. Most countries require you to declare the arrival of large sums of capital. Whether it is taxed as income or considered a tax-free capital transfer depends on the specific laws of that country.",
+    },
+    {
+        question: "Can I leave my 3a in Switzerland after I move?",
+        answer: "Yes. You are not forced to withdraw it. However, you can no longer contribute to it, and you must inform the provider of your new address. Some providers may charge a higher fee for non-resident accounts.",
+    },
+    {
+        question: "What's the best strategy for withdrawing multiple pillars?",
+        answer: "Stagger the withdrawals if possible. Withdrawing everything in one calendar year can push you into a higher progressive tax bracket. A multi-year withdrawal strategy is often more tax-efficient.",
+    },
+    {
+        question: "Are there penalties for early withdrawal?",
+        answer: "For 3a, there are no 'penalties' other than the withdrawal tax. For 2nd pillar, some foundations might have small administrative fees for the transfer to a vested benefits account.",
+    },
+    {
+        question: "How does the 3a-to-3b conversion work?",
+        answer: "This is exclusive to insurance-based 3a. Upon leaving, the contract is 'released' from the 3a tax rules and becomes a flexible 3b policy. You maintain your insurance cover and investment strategy globally.",
+    },
+    {
+        question: "What if I return to Switzerland later?",
+        answer: "You can open new 3a accounts and join a new 2nd pillar. Any funds you left in vested benefits accounts can be transferred into your new employer's pension fund to increase your retirement benefits.",
+    },
+    {
+        question: "Can I withdraw my 3a to pay off a mortgage before leaving?",
+        answer: "Yes, this is valid even if the property is your primary residence in Switzerland. You can also withdraw 3a to buy property abroad as long as it will be your primary home.",
+    },
+    {
+        question: "How is the withdrawal taxed in my new country?",
+        answer: "Countries like Germany or the UK may tax the withdrawal as income, but usually allow you to credit the Swiss withholding tax paid. The USA generally treats it as a tax-deferred transfer if moved into a 401k/IRA equivalent (consult a CPA).",
+    },
+    {
+        question: "What documents do I need for the withdrawal?",
+        answer: "Official deregistration from the commune (Abmeldebestätigung), valid passport, proof of foreign address (utility bill), and your bank details for the payout.",
+    },
+    {
+        question: "Can I withdraw my 3a to start a business abroad?",
+        answer: "You can withdraw it for becoming self-employed in Switzerland, but for starting a business abroad, the legal trigger used is usually 'leaving Switzerland' rather than 'starting a business'.",
+    },
+    {
+        question: "What is the 'mandatory' vs 'extra-mandatory' portion?",
+        answer: "The mandatory portion is the minimum required by law (LPP/BVG). The extra-mandatory is anything your employer contributed on top. This distinction only matters when moving to EU/EFTA countries.",
+    },
+    {
+        question: "Can I move my 3a to a low-tax canton foundation?",
+        answer: "Yes! Many savvy expats move their 3a to a foundation based in a low-tax canton (like Schwyz) shortly before leaving to lock in the lower withholding tax rate.",
+    },
+    {
+        question: "Do I lose my insurance coverage when I deregister?",
+        answer: "If you have a bank 3a with 'free' insurance perks, yes. If you have a dedicated insurance-based 3a, you can convert it to 3b and keep the coverage active worldwide.",
+    },
+    {
+        question: "What if my destination country has no DTA with Switzerland?",
+        answer: "The Swiss withholding tax becomes final and cannot be reclaimed. In this case, choosing a low-tax canton foundation (like Schwyz) is even more critical.",
     },
 ];
 ---
@@ -53,6 +111,35 @@ const faqs = [
             image="/images/leaving-switzerland-hero.png"
         />
         <FAQSchema faqs={faqs} />
+        <script type="application/ld+json">
+            {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                "name": "How to Withdraw Your 3rd Pillar When Leaving Switzerland",
+                "step": [
+                    {
+                        "@type": "HowToStep",
+                        "text": "Determine your destination country (EU/EFTA vs. Non-EU)."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "Check if you qualify for full withdrawal based on the LPP/BVG split."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "Deregister from your Swiss commune and receive certificates."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "Submit withdrawal request to your 3a foundation or 2nd pillar fund."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "Receive funds and manage tax implications/reclaims."
+                    }
+                ]
+            })}
+        </script>
     </Fragment>
 
     <BreadcrumbSchema
@@ -164,14 +251,66 @@ const faqs = [
                         <p>
                             However, "can be withdrawn" doesn't always mean
                             "should be withdrawn." Before you cash out, you must
-                            consider the <strong
-                                >withholding tax (Quellensteuer)</strong
-                            >. This tax is deducted automatically by the canton
+                            consider the <strong>withholding tax (Quellensteuer)</strong>. This tax is deducted automatically by the canton
                             where the foundation is based. While often
                             reclaimable under double taxation agreements, the
                             paperwork is tedious and mistakes can lead to
                             permanent losses.
                         </p>
+                    </div>
+                </section>
+
+                <!-- SECTION: WITHHOLDING TAX OPTIMIZATION -->
+                <section class="mb-32 px-2">
+                    <h2 class="text-3xl font-bold text-[#1a1a2e] mb-8 font-inter">Withholding Tax (Quellensteuer) Optimization</h2>
+                    <div class="spoke-body space-y-6">
+                        <p>
+                            Withdrawal tax rates vary significantly by canton. While you might pay 15-20% in Geneva or Lausanne, the rate in Schwyz can be as low as 5%. This is a massive difference when withdrawing a life's worth of savings.
+                        </p>
+                        <div class="bg-red-50 p-8 rounded-[40px] border border-red-100 mb-8">
+                            <p class="font-bold text-[#1a1a2e] mb-2 uppercase tracking-tight">Tactical Advice:</p>
+                            <p>
+                                If you are planning to leave Switzerland, consider withdrawing your 3a while still residing in a low-tax canton (like Schwyz or Uri) before you deregister. <strong>This can save you thousands of CHF in withholding tax</strong> compared to withdrawing from a foundation based in Zurich or Geneva.
+                            </p>
+                        </div>
+                        <div class="overflow-x-auto rounded-xl border border-gray-100 shadow-sm">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-gray-50">
+                                    <tr class="text-xs font-bold uppercase tracking-wider">
+                                        <th class="p-4 border-b">Canton</th>
+                                        <th class="p-4 border-b">Typical Tax Rate</th>
+                                        <th class="p-4 border-b">Tax Profile</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm">
+                                    <tr class="border-b">
+                                        <td class="p-4 font-bold">Schwyz (SZ)</td>
+                                        <td class="p-4">~4.8% - 5.5%</td>
+                                        <td class="p-4 text-green-600 font-medium">Ultra Low</td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-4 font-bold">Zug (ZG)</td>
+                                        <td class="p-4">~5.5% - 6.5%</td>
+                                        <td class="p-4 text-green-600 font-medium">Low</td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-4 font-bold">Zurich (ZH)</td>
+                                        <td class="p-4">~8.5% - 10.5%</td>
+                                        <td class="p-4 text-orange-600 font-medium">Medium</td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-4 font-bold">Bern (BE)</td>
+                                        <td class="p-4">~12.0% - 14.5%</td>
+                                        <td class="p-4 text-red-600 font-medium">High</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold">Geneva (GE)</td>
+                                        <td class="p-4">~15.5% - 18.0%</td>
+                                        <td class="p-4 text-red-700 font-medium">Very High</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
 
@@ -246,12 +385,10 @@ const faqs = [
                                 <h3
                                     class="text-2xl font-bold text-[#1a1a2e] mb-6"
                                 >
-                                    Moving to Third Country
+                                    Moving to Non-EU/EFTA
                                 </h3>
                                 <p class="text-sm mb-8 leading-relaxed">
-                                    If you are moving to a non-EU/EFTA country
-                                    (e.g., USA, UK, UAE, Asia), the rules are
-                                    much simpler.
+                                    If you are moving to a third country (e.g., USA, UK, UAE, Australia), the rules are simple.
                                 </p>
                                 <div class="space-y-4">
                                     <div
@@ -274,14 +411,62 @@ const faqs = [
                             </div>
                         </div>
 
+                        <div class="grid md:grid-cols-2 gap-8 mb-16">
+                            <div class="bg-gray-50 p-6 rounded-3xl">
+                                <h5 class="font-bold text-sm mb-4">EU/EFTA Countries:</h5>
+                                <ul class="text-xs space-y-2 grid grid-cols-2">
+                                    <li>• Germany</li>
+                                    <li>• France</li>
+                                    <li>• Italy</li>
+                                    <li>• Spain</li>
+                                    <li>• Austria</li>
+                                    <li>• Netherlands</li>
+                                    <li>• Belgium</li>
+                                    <li>• Portugal</li>
+                                    <li>• Norway</li>
+                                    <li>• Sweden</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-3xl">
+                                <h5 class="font-bold text-sm mb-4">Non-EU/EFTA Examples:</h5>
+                                <ul class="text-xs space-y-2 grid grid-cols-2">
+                                    <li>• USA</li>
+                                    <li>• Canada</li>
+                                    <li>• UK (Post-Brexit)</li>
+                                    <li>• Australia</li>
+                                    <li>• Singapore</li>
+                                    <li>• UAE</li>
+                                    <li>• Thailand</li>
+                                    <li>• Brazil</li>
+                                    <li>• Japan</li>
+                                    <li>• South Africa</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <p>
-                            <strong
-                                >Why this matters for your 3rd pillar:</strong
-                            > Because your 2nd pillar might be locked away for decades
+                            <strong>Why this matters for your 3rd pillar:</strong> Because your 2nd pillar might be locked away for decades
                             if you move within Europe, your 3rd pillar becomes your
                             primary "liquid asset" to fund your move, buy a property
                             abroad, or start a business in your new home.
                         </p>
+                    </div>
+                </section>
+
+                <!-- SECTION: VESTED BENEFITS EXPLANATION -->
+                <section class="mb-32 px-2">
+                    <h2 class="text-3xl font-bold text-[#1a1a2e] mb-8 font-inter">Vested Benefits Account (Freizügigkeitskonto)</h2>
+                    <div class="spoke-body space-y-6">
+                        <p>
+                            When you leave your job in Switzerland, your 2nd pillar assets are moved to a <strong>Vested Benefits Account</strong> (Freizügigkeitskonto). This is NOT your 3rd pillar; it is a holding tank for your employment-linked pension funds.
+                        </p>
+                        <div class="bg-blue-50 p-8 rounded-[40px] border border-blue-100">
+                            <p class="font-bold text-[#1a1a2e] mb-4">The Golden Rule of Vesting:</p>
+                            <ul class="list-disc ml-5 space-y-3">
+                                <li>If you move to <strong>EU/EFTA</strong>, you cannot withdraw the mandatory portion of your 2nd pillar; it stays vested until retirement.</li>
+                                <li>If you move to a <strong>Non-EU/EFTA country</strong>, you can withdraw the entire amount (mandatory + extra-mandatory).</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
@@ -381,6 +566,61 @@ const faqs = [
                                         "Modern Insurance" path allows for this level
                                         of strategic departure planning.
                                     </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: WITHDRAWAL TIMELINE -->
+                <section class="mb-32 px-2">
+                    <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center font-inter">Step-by-Step Withdrawal Timeline</h2>
+                    <div class="relative">
+                        <!-- Vertical Line -->
+                        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gray-100 -translate-x-1/2 hidden md:block"></div>
+                        
+                        <div class="space-y-12">
+                            <!-- Step 1 -->
+                            <div class="relative flex flex-col md:flex-row items-center gap-8 group">
+                                <div class="md:w-1/2 md:text-right">
+                                    <span class="text-sm font-black text-[#C41E3A] uppercase tracking-widest">Month 1-2</span>
+                                    <h4 class="text-xl font-bold text-[#1a1a2e]">Planning & Strategy</h4>
+                                    <p class="text-sm text-gray-600 mt-2">Decide on departure date. Check your 3a and 2nd pillar statements to calculate your total liquidity.</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-white border-4 border-[#C41E3A] flex-shrink-0 relative z-10 hidden md:flex items-center justify-center font-bold text-[#C41E3A]">1</div>
+                                <div class="md:w-1/2"></div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative flex flex-col md:flex-row items-center gap-8 group">
+                                <div class="md:w-1/2"></div>
+                                <div class="w-10 h-10 rounded-full bg-white border-4 border-[#C41E3A] flex-shrink-0 relative z-10 hidden md:flex items-center justify-center font-bold text-[#C41E3A]">2</div>
+                                <div class="md:w-1/2 text-left">
+                                    <span class="text-sm font-black text-[#C41E3A] uppercase tracking-widest">Month 3</span>
+                                    <h4 class="text-xl font-bold text-[#1a1a2e]">Deregistration</h4>
+                                    <p class="text-sm text-gray-600 mt-2">Visit your commune. Get your 'Abmeldebestätigung'. This is the legal golden key for your funds.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative flex flex-col md:flex-row items-center gap-8 group">
+                                <div class="md:w-1/2 md:text-right">
+                                    <span class="text-sm font-black text-[#C41E3A] uppercase tracking-widest">Month 4</span>
+                                    <h4 class="text-xl font-bold text-[#1a1a2e]">Submission</h4>
+                                    <p class="text-sm text-gray-600 mt-2">Submit certificates and proof of your new foreign address to your bank or insurance provider.</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-white border-4 border-[#C41E3A] flex-shrink-0 relative z-10 hidden md:flex items-center justify-center font-bold text-[#C41E3A]">3</div>
+                                <div class="md:w-1/2"></div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative flex flex-col md:flex-row items-center gap-8 group">
+                                <div class="md:w-1/2"></div>
+                                <div class="w-10 h-10 rounded-full bg-[#C41E3A] border-4 border-[#C41E3A] flex-shrink-0 relative z-10 hidden md:flex items-center justify-center font-bold text-white">4</div>
+                                <div class="md:w-1/2 text-left">
+                                    <span class="text-sm font-black text-[#C41E3A] uppercase tracking-widest">Month 5-6</span>
+                                    <h4 class="text-xl font-bold text-[#1a1a2e]">Funds Received</h4>
+                                    <p class="text-sm text-gray-600 mt-2">The capital is paid out. Reclaim withholding tax if applicable based on your target country's DTA.</p>
                                 </div>
                             </div>
                         </div>

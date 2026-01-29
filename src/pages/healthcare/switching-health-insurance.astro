@@ -1,39 +1,46 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { DesignSystem, cn } from '../../styles/design-system';
-import premiumData from '../../data/premium-samples-2026.json';
+import Layout from "../../layouts/Layout.astro";
+import { DesignSystem, cn } from "../../styles/design-system";
+import premiumData from "../../data/premium-samples-2026.json";
 
 // FAQ Data
 const faqs = [
   {
     question: "When is the deadline to change Swiss health insurance?",
-    answer: "The deadline to switch basic health insurance (KVG/LAMal) is **30 November each year**. For supplementary insurance (dental, hospital, alternative medicine), you must cancel by **30 September each year**. Missing these deadlines means you cannot switch until next year."
+    answer:
+      "The deadline to switch basic health insurance (KVG/LAMal) is <strong>30 November each year</strong>. For supplementary insurance (dental, hospital, alternative medicine), you must cancel by <strong>30 September each year</strong>. Missing these deadlines means you cannot switch until next year.",
   },
   {
-    question: "What is the deadline for supplementary insurance in Switzerland?",
-    answer: "The deadline for cancelling supplementary insurance in Switzerland is **30 September each year**. This applies to dental coverage, hospital benefits, alternative medicine, and other optional policies. You must send your cancellation notice by registered mail before this date to avoid automatic renewal."
+    question:
+      "What is the deadline for supplementary insurance in Switzerland?",
+    answer:
+      "The deadline for cancelling supplementary insurance in Switzerland is <strong>30 September each year</strong>. This applies to dental coverage, hospital benefits, alternative medicine, and other optional policies. You must send your cancellation notice by registered mail before this date to avoid automatic renewal.",
   },
   {
     question: "Can I switch if I'm undergoing treatment?",
-    answer: "Yes, for basic health insurance (KVG/LAMal), you can switch even if undergoing medical treatment. Swiss law requires all insurers to accept any applicant for basic coverage, regardless of health status. However, for supplementary insurance, the new insurer may refuse your application or exclude pre-existing conditions."
+    answer:
+      "Yes, for basic health insurance (KVG/LAMal), you can switch even if undergoing medical treatment. Swiss law requires all insurers to accept any applicant for basic coverage, regardless of health status. However, for supplementary insurance, the new insurer may refuse your application or exclude pre-existing conditions.",
   },
   {
     question: "How do I cancel my Swiss health insurance?",
-    answer: "To cancel Swiss health insurance, send a formal cancellation letter by registered mail (Einschreiben/Recommandé) to your current insurer. The letter must include your policy number, full name, and termination date. For basic insurance, aim for 30 November; for supplementary insurance, 30 September."
+    answer:
+      "To cancel Swiss health insurance, send a formal cancellation letter by registered mail (Einschreiben/Recommandé) to your current insurer. The letter must include your policy number, full name, and termination date. For basic insurance, aim for 30 November; for supplementary insurance, 30 September.",
   },
   {
     question: "How much can I save by switching?",
-    answer: "Savings vary by situation, but many expats save **CHF 500–2,000 per year** by switching. With 2026 premiums expected to rise ~6%, choosing a different insurer, model (like Telmed/HMO), or higher deductible can significantly reduce your annual costs while maintaining quality coverage."
+    answer:
+      "Savings vary by situation, but many expats save <strong>CHF 500–2,000 per year</strong> by switching. With 2026 premiums expected to rise ~6%, choosing a different insurer, model (like Telmed/HMO), or higher deductible can significantly reduce your annual costs while maintaining quality coverage.",
   },
   {
     question: "Can I change only my insurance model (Standard → Telmed)?",
-    answer: "Yes! From 2025, you can change your basic insurance model (Standard → Telmed/HMO/Family Doctor) within the same insurer at different times throughout the year, not just during the annual switching period. This offers flexibility to optimize your coverage and premiums as your needs change."
-  }
+    answer:
+      "Yes! From 2025, you can change your basic insurance model (Standard → Telmed/HMO/Family Doctor) within the same insurer at different times throughout the year, not just during the annual switching period. This offers flexibility to optimize your coverage and premiums as your needs change.",
+  },
 ];
 
 // Calculate days until deadline
 const getDeadlineDays = () => {
-  const deadline = new Date('2025-11-30');
+  const deadline = new Date("2025-11-30");
   const today = new Date();
   const diffTime = deadline.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -41,11 +48,15 @@ const getDeadlineDays = () => {
 };
 
 const meta = {
-  title: 'Switch Health Insurance Switzerland 2026 | Independent FINMA-Certified Experts',
-  description: 'Review your current Swiss health insurance and discover better options. Independent, English-speaking, FINMA-certified experts help you switch smartly — including group discounts, pre-existing condition guidance, and full setup support.',
-  keywords: 'switch health insurance Switzerland 2026, change health insurance, health insurance deadline, Swiss health insurance comparison, expat insurance advisor, FINMA certified',
-  canonicalUrl: 'https://expat-savvy.ch/healthcare/switching-health-insurance/',
-  image: 'https://res.cloudinary.com/dphbnwjtx/image/upload/w_1920,h_1080,q_95,f_webp,c_fill,e_sharpen:100/v1761097677/a-cinematic-photograph-of-two-alpine-flo_NoEv4dgFSguvRbSqj7ocuw_r5qPNoYHR7yi5xMPUhOl7A_pksopn.png'
+  title:
+    "Switch Health Insurance Switzerland 2026 | Independent FINMA-Certified Experts",
+  description:
+    "Review your current Swiss health insurance and discover better options. Independent, English-speaking, FINMA-certified experts help you switch smartly — including group discounts, pre-existing condition guidance, and full setup support.",
+  keywords:
+    "switch health insurance Switzerland 2026, change health insurance, health insurance deadline, Swiss health insurance comparison, expat insurance advisor, FINMA certified",
+  canonicalUrl: "https://expat-savvy.ch/healthcare/switching-health-insurance/",
+  image:
+    "https://res.cloudinary.com/dphbnwjtx/image/upload/w_1920,h_1080,q_95,f_webp,c_fill,e_sharpen:100/v1761097677/a-cinematic-photograph-of-two-alpine-flo_NoEv4dgFSguvRbSqj7ocuw_r5qPNoYHR7yi5xMPUhOl7A_pksopn.png",
 };
 ---
 
@@ -57,7 +68,9 @@ const meta = {
   <!-- ============================================ -->
   <!-- 1. HERO SECTION -->
   <!-- ============================================ -->
-  <section class="relative h-screen md:min-h-[90vh] flex items-center overflow-hidden">
+  <section
+    class="relative h-screen md:min-h-[90vh] flex items-center overflow-hidden"
+  >
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0">
       <img
@@ -68,18 +81,25 @@ const meta = {
         height="1080"
         loading="eager"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40">
+      </div>
     </div>
 
     <!-- Mobile layout (centered) -->
     <div class="relative w-full mx-auto px-4 sm:px-6 md:hidden -mt-16">
       <div class="text-center">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 animate-fade-in text-shadow">
+        <h1
+          class="text-3xl sm:text-4xl font-extrabold text-white mb-3 animate-fade-in text-shadow"
+        >
           <span class="block">Re-Evaluate Your Swiss Health Insurance</span>
           <span class="block mt-1">— With Expert Guidance</span>
         </h1>
-        <p class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow">
-          Most insured people don't know exactly what they're covered for. We review your current plan, explain what you really need, and help you switch smart — <strong class="text-white">100% free</strong> and independent.
+        <p
+          class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow"
+        >
+          Most insured people don't know exactly what they're covered for. We
+          review your current plan, explain what you really need, and help you
+          switch smart — <strong class="text-white">100% free</strong> and independent.
         </p>
         <div class="mt-6 flex flex-col items-center gap-3 animate-slide-up">
           <button
@@ -88,8 +108,17 @@ const meta = {
             aria-label="Book personal consultation"
           >
             Book My Personal Consultation →
-            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg
+              class="ml-2 h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </button>
           <p class="text-white text-sm mt-2">
@@ -98,18 +127,24 @@ const meta = {
         </div>
       </div>
     </div>
-    
+
     <!-- Desktop layout (left aligned) -->
     <div class="relative w-full mx-auto hidden md:block">
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-6 col-start-2 flex items-center justify-center">
           <div class="text-left max-w-xl">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow">
+            <h1
+              class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow"
+            >
               <span class="block">Re-Evaluate Your Swiss Health Insurance</span>
               <span class="block mt-2">— With Expert Guidance</span>
             </h1>
             <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
-              Most insured people don't know exactly what they're covered for. We review your current plan, explain what you really need, and help you switch smart — <strong class="text-white">100% free</strong> and independent.
+              Most insured people don't know exactly what they're covered for.
+              We review your current plan, explain what you really need, and
+              help you switch smart — <strong class="text-white"
+                >100% free</strong
+              > and independent.
             </p>
             <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
               <button
@@ -118,8 +153,17 @@ const meta = {
                 aria-label="Book personal consultation"
               >
                 Book My Personal Consultation →
-                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <svg
+                  class="ml-2 h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
               </button>
               <p class="text-white text-sm">
@@ -141,37 +185,81 @@ const meta = {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
         <!-- Left: Copy -->
         <div>
-          <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+          <h2
+            class={DesignSystem.typography.heading.h2.full +
+              " text-gray-900 mb-6"}
+          >
             Before You Switch, You Need Clarity
           </h2>
           <p class="text-gray-700 mb-6 text-lg leading-relaxed">
-            Most people we meet already have insurance — but don't know exactly what they're paying for or what's covered.
+            Most people we meet already have insurance — but don't know exactly
+            what they're paying for or what's covered.
           </p>
           <p class="text-gray-700 mb-6">
-            We review your current plan, explain your options clearly in English, and show whether switching makes financial or practical sense.
+            We review your current plan, explain your options clearly in
+            English, and show whether switching makes financial or practical
+            sense.
           </p>
           <ul class="space-y-3 text-gray-700">
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              <svg
+                class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
               </svg>
               <span>Identify unnecessary add-ons and overlaps</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              <svg
+                class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
               </svg>
               <span>Check if your model (Standard/Telmed/HMO) still fits</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              <svg
+                class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
               </svg>
-              <span>Validate if a higher deductible actually saves you money</span>
+              <span
+                >Validate if a higher deductible actually saves you money</span
+              >
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              <svg
+                class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
               </svg>
               <span>Review supplementary benefits you really use</span>
             </li>
@@ -183,68 +271,144 @@ const meta = {
               aria-label="Book free consultation"
             >
               Book My Free Consultation →
-              <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <svg
+                class="ml-2 h-5 w-5 inline"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </button>
-    </div>
-  </div>
+          </div>
+        </div>
 
         <!-- Right: How Our Review Works -->
         <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-md">
-          <h4 class="text-lg font-semibold text-gray-900 mb-6">How Our Review Works</h4>
-          
+          <h4 class="text-lg font-semibold text-gray-900 mb-6">
+            How Our Review Works
+          </h4>
+
           <!-- Flow Grid -->
           <div class="grid grid-cols-2 gap-3 mb-6">
             <!-- Step 1: Review your plan -->
-            <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
-              <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            <div
+              class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
+            >
+              <svg
+                class="w-6 h-6 text-red-600 mb-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
               </svg>
-              <p class="text-sm font-medium text-gray-900 mb-1">Review your plan</p>
-              <p class="text-xs text-gray-600">We read your basic & supplementary cover</p>
+              <p class="text-sm font-medium text-gray-900 mb-1">
+                Review your plan
+              </p>
+              <p class="text-xs text-gray-600">
+                We read your basic & supplementary cover
+              </p>
             </div>
 
             <!-- Step 2: Explain options -->
-            <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
-              <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            <div
+              class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
+            >
+              <svg
+                class="w-6 h-6 text-red-600 mb-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                ></path>
               </svg>
-              <p class="text-sm font-medium text-gray-900 mb-1">Explain options</p>
-              <p class="text-xs text-gray-600">Clear English, what stays / what changes</p>
+              <p class="text-sm font-medium text-gray-900 mb-1">
+                Explain options
+              </p>
+              <p class="text-xs text-gray-600">
+                Clear English, what stays / what changes
+              </p>
             </div>
 
             <!-- Step 3: Identify savings & risks -->
-            <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
-              <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            <div
+              class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
+            >
+              <svg
+                class="w-6 h-6 text-red-600 mb-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                ></path>
               </svg>
-              <p class="text-sm font-medium text-gray-900 mb-1">Identify savings & risks</p>
+              <p class="text-sm font-medium text-gray-900 mb-1">
+                Identify savings & risks
+              </p>
               <p class="text-xs text-gray-600">Model, deductible, overlaps</p>
             </div>
 
             <!-- Step 4: Confirm & handle switch -->
-            <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200">
-              <svg class="w-6 h-6 text-red-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            <div
+              class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-xl hover:-translate-y-0.5 hover:shadow-md transition-all duration-200"
+            >
+              <svg
+                class="w-6 h-6 text-red-600 mb-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                ></path>
               </svg>
-              <p class="text-sm font-medium text-gray-900 mb-1">Confirm & handle switch</p>
+              <p class="text-sm font-medium text-gray-900 mb-1">
+                Confirm & handle switch
+              </p>
               <p class="text-xs text-gray-600">We do forms + cancellation</p>
             </div>
           </div>
 
-          <p class="text-xs text-gray-500 pt-4 border-t border-gray-100 text-center">Independent, FINMA-certified guidance. Free and unbiased.</p>
+          <p
+            class="text-xs text-gray-500 pt-4 border-t border-gray-100 text-center"
+          >
+            Independent, FINMA-certified guidance. Free and unbiased.
+          </p>
         </div>
-          </div>
-        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Transition -->
   <div class="py-6 bg-gray-50">
     <p class="text-center text-gray-600 max-w-3xl mx-auto px-4">
-      Most tools and direct insurers only show you prices — but not the real coverage differences or approval strategies.
+      Most tools and direct insurers only show you prices — but not the real
+      coverage differences or approval strategies.
     </p>
-      </div>
+  </div>
 
   <!-- ========================================================= -->
   <!-- 2.2 WHY ONLINE COMPARISONS AREN'T ENOUGH -->
@@ -252,21 +416,38 @@ const meta = {
   <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
       <div class="text-center mb-12">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+        <h2
+          class={DesignSystem.typography.heading.h2.full +
+            " text-gray-900 mb-4"}
+        >
           Why Online Comparisons Aren't Enough
-            </h2>
-          </div>
-      
+        </h2>
+      </div>
+
       <!-- Comparison Table -->
-      <div class="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden max-w-5xl mx-auto">
+      <div
+        class="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden max-w-5xl mx-auto"
+      >
         <div class="overflow-x-auto">
           <table class="w-full">
             <thead>
               <tr class="border-b border-gray-200">
-                <th class="text-left p-4 text-sm font-medium text-gray-500 bg-gray-50">Feature</th>
-                <th class="text-center p-4 text-sm font-medium text-gray-500 bg-gray-50">Online Comparison</th>
-                <th class="text-center p-4 text-sm font-medium text-gray-500 bg-gray-50">Direct Insurer</th>
-                <th class="text-center p-4 text-sm font-medium text-gray-500 bg-rose-50 border-t-4 border-red-500">Expat-Savvy Consultation</th>
+                <th
+                  class="text-left p-4 text-sm font-medium text-gray-500 bg-gray-50"
+                  >Feature</th
+                >
+                <th
+                  class="text-center p-4 text-sm font-medium text-gray-500 bg-gray-50"
+                  >Online Comparison</th
+                >
+                <th
+                  class="text-center p-4 text-sm font-medium text-gray-500 bg-gray-50"
+                  >Direct Insurer</th
+                >
+                <th
+                  class="text-center p-4 text-sm font-medium text-gray-500 bg-rose-50 border-t-4 border-red-500"
+                  >Expat-Savvy Consultation</th
+                >
               </tr>
             </thead>
             <tbody class="text-sm">
@@ -275,84 +456,177 @@ const meta = {
                 <td class="p-4 font-medium text-gray-900">Insurers</td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    <svg
+                      class="w-5 h-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      ></path>
                     </svg>
                     <span class="text-gray-700">Basic only</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">Own products only</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50/50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">All major Swiss insurers</span>
+                    <span class="text-gray-900 font-semibold"
+                      >All major Swiss insurers</span
+                    >
                   </div>
                 </td>
               </tr>
 
               <!-- Supplementary products -->
               <tr class="border-b border-gray-100 bg-neutral-50/50">
-                <td class="p-4 font-medium text-gray-900">Supplementary products</td>
+                <td class="p-4 font-medium text-gray-900"
+                  >Supplementary products</td
+                >
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    <svg
+                      class="w-5 h-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      ></path>
                     </svg>
                     <span class="text-gray-700">No or very limited</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">Only their own products</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Full consultation & comparison</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Full consultation & comparison</span
+                    >
                   </div>
                 </td>
               </tr>
 
               <!-- Pre-existing conditions -->
               <tr class="border-b border-gray-100">
-                <td class="p-4 font-medium text-gray-900">Pre-existing conditions strategy</td>
+                <td class="p-4 font-medium text-gray-900"
+                  >Pre-existing conditions strategy</td
+                >
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50/50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Acceptance-maximizing strategy</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Acceptance-maximizing strategy</span
+                    >
                   </div>
                 </td>
               </tr>
@@ -362,55 +636,115 @@ const meta = {
                 <td class="p-4 font-medium text-gray-900">Group discounts</td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Available where applicable</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Available where applicable</span
+                    >
                   </div>
                 </td>
               </tr>
 
               <!-- Cancellations & setup -->
               <tr class="border-b border-gray-100">
-                <td class="p-4 font-medium text-gray-900">Cancellations & setup</td>
+                <td class="p-4 font-medium text-gray-900"
+                  >Cancellations & setup</td
+                >
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50/50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">We handle end-to-end</span>
+                    <span class="text-gray-900 font-semibold"
+                      >We handle end-to-end</span
+                    >
                   </div>
                 </td>
               </tr>
@@ -420,26 +754,55 @@ const meta = {
                 <td class="p-4 font-medium text-gray-900">Availability</td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <svg
+                      class="w-5 h-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <span class="text-gray-700">Office hours only</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <svg
+                      class="w-5 h-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <span class="text-gray-700">Office hours only</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Extended hours incl. evenings</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Extended hours incl. evenings</span
+                    >
                   </div>
                 </td>
               </tr>
@@ -449,26 +812,57 @@ const meta = {
                 <td class="p-4 font-medium text-gray-900">English support</td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    <svg
+                      class="w-5 h-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      ></path>
                     </svg>
                     <span class="text-gray-700">Partial</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    <svg
+                      class="w-5 h-5 text-amber-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      ></path>
                     </svg>
                     <span class="text-gray-700">Often limited</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50/50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Native, full English support</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Native, full English support</span
+                    >
                   </div>
                 </td>
               </tr>
@@ -483,18 +877,38 @@ const meta = {
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">Sales-driven up-sell</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Independent, client-first</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Independent, client-first</span
+                    >
                   </div>
                 </td>
               </tr>
@@ -504,43 +918,87 @@ const meta = {
                 <td class="p-4 font-medium text-gray-900">Annual review</td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <svg
+                      class="w-5 h-5 text-red-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                     <span class="text-gray-700">No</span>
                   </div>
                 </td>
                 <td class="p-4 text-center bg-rose-50/50">
                   <div class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    <svg
+                      class="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="text-gray-900 font-semibold">Proactive yearly check-ins</span>
+                    <span class="text-gray-900 font-semibold"
+                      >Proactive yearly check-ins</span
+                    >
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        
+
         <!-- Table Caption -->
         <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
-          <p class="text-xs text-gray-500 text-center">Data based on real expat experiences with Swiss insurers.</p>
+          <p class="text-xs text-gray-500 text-center">
+            Data based on real expat experiences with Swiss insurers.
+          </p>
         </div>
       </div>
       <div class="text-center mt-12">
-        <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book free consultation">
+        <button
+          class={DesignSystem.components.button.primary}
+          onclick="window.openHealthModal('switching')"
+          aria-label="Book free consultation"
+        >
           Book My Free Consultation →
-          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          <svg
+            class="ml-2 h-5 w-5 inline"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
         </button>
       </div>
@@ -553,86 +1011,211 @@ const meta = {
   <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
       <div class="text-center mb-12">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+        <h2
+          class={DesignSystem.typography.heading.h2.full +
+            " text-gray-900 mb-4"}
+        >
           Your Personalized Consultation Includes
         </h2>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Card 1: Full policy review -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5")}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+            "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5",
+          )}
+        >
           <div class="mb-4">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            <svg
+              class="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 mb-2">Full policy review</h3>
-          <p class="text-gray-700 text-sm">We audit your current basic and supplementary coverage.</p>
+          <p class="text-gray-700 text-sm">
+            We audit your current basic and supplementary coverage.
+          </p>
         </div>
 
         <!-- Card 2: Premium optimization -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5")}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+            "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5",
+          )}
+        >
           <div class="mb-4">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            <svg
+              class="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 mb-2">Premium optimization</h3>
-          <p class="text-gray-700 text-sm">Model and deductible strategy tailored to your usage.</p>
+          <p class="text-gray-700 text-sm">
+            Model and deductible strategy tailored to your usage.
+          </p>
         </div>
 
         <!-- Card 3: Group discounts -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5")}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+            "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5",
+          )}
+        >
           <div class="mb-4">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            <svg
+              class="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 mb-2">Group discounts</h3>
-          <p class="text-gray-700 text-sm">Insider rates where available with partner providers.</p>
+          <p class="text-gray-700 text-sm">
+            Insider rates where available with partner providers.
+          </p>
         </div>
 
         <!-- Card 4: Pre-existing guidance -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5")}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+            "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5",
+          )}
+        >
           <div class="mb-4">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            <svg
+              class="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              ></path>
             </svg>
           </div>
-          <h3 class="font-semibold text-gray-900 mb-2">Pre‑existing guidance</h3>
-          <p class="text-gray-700 text-sm">We structure applications to maximize acceptance.</p>
+          <h3 class="font-semibold text-gray-900 mb-2">
+            Pre‑existing guidance
+          </h3>
+          <p class="text-gray-700 text-sm">
+            We structure applications to maximize acceptance.
+          </p>
         </div>
 
         <!-- Card 5: Paperwork handled -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5")}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+            "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5",
+          )}
+        >
           <div class="mb-4">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            <svg
+              class="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 mb-2">Paperwork handled</h3>
-          <p class="text-gray-700 text-sm">We prepare cancellations and new applications end‑to‑end.</p>
+          <p class="text-gray-700 text-sm">
+            We prepare cancellations and new applications end‑to‑end.
+          </p>
         </div>
 
         <!-- Card 6: English support -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding, "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5")}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+            "hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5",
+          )}
+        >
           <div class="mb-4">
-            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            <svg
+              class="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold text-gray-900 mb-2">English support</h3>
-          <p class="text-gray-700 text-sm">Clear explanations and ongoing service in English.</p>
+          <p class="text-gray-700 text-sm">
+            Clear explanations and ongoing service in English.
+          </p>
         </div>
-        </div>
+      </div>
       <div class="text-center mt-12">
-        <button class={DesignSystem.components.button.primary} onclick="window.openHealthModal('switching')" aria-label="Book free consultation">
+        <button
+          class={DesignSystem.components.button.primary}
+          onclick="window.openHealthModal('switching')"
+          aria-label="Book free consultation"
+        >
           Book My Free Consultation →
-          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+          <svg
+            class="ml-2 h-5 w-5 inline"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
         </button>
-            </div>
-  </div>
+      </div>
+    </div>
   </section>
 
   <!-- ============================================ -->
@@ -640,59 +1223,129 @@ const meta = {
   <!-- ============================================ -->
   <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center"
+      >
         <!-- Left: Content -->
         <div>
-          <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+          <h2
+            class={DesignSystem.typography.heading.h2.full +
+              " text-gray-900 mb-6"}
+          >
             Why Choose Expat-Savvy
           </h2>
-          <p class={DesignSystem.typography.body.large + ' text-gray-700 mb-6'}>
-            Most people compare premiums. We compare protection, acceptance, and peace of mind.
+          <p class={DesignSystem.typography.body.large + " text-gray-700 mb-6"}>
+            Most people compare premiums. We compare protection, acceptance, and
+            peace of mind.
           </p>
           <p class="text-gray-700 mb-8">
-            When you switch with Expat-Savvy, you're not dealing with an anonymous platform — you get a FINMA-certified advisor who:
+            When you switch with Expat-Savvy, you're not dealing with an
+            anonymous platform — you get a FINMA-certified advisor who:
           </p>
 
           <ul class="space-y-4 mb-8">
             <li class="flex items-start">
-              <svg class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <svg
+                class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-700"><strong class="text-gray-900">Reviews your situation</strong>, not a generic average</span>
+              <span class="text-gray-700"
+                ><strong class="text-gray-900">Reviews your situation</strong>,
+                not a generic average</span
+              >
             </li>
             <li class="flex items-start">
-              <svg class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <svg
+                class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-700"><strong class="text-gray-900">Benchmarks all major Swiss insurers</strong> independently</span>
+              <span class="text-gray-700"
+                ><strong class="text-gray-900"
+                  >Benchmarks all major Swiss insurers</strong
+                > independently</span
+              >
             </li>
             <li class="flex items-start">
-              <svg class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <svg
+                class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-700"><strong class="text-gray-900">Finds insider group discounts</strong> others can't access</span>
+              <span class="text-gray-700"
+                ><strong class="text-gray-900"
+                  >Finds insider group discounts</strong
+                > others can't access</span
+              >
             </li>
             <li class="flex items-start">
-              <svg class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <svg
+                class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-700"><strong class="text-gray-900">Handles every step</strong> — from cancellation to new enrollment</span>
+              <span class="text-gray-700"
+                ><strong class="text-gray-900">Handles every step</strong> — from
+                cancellation to new enrollment</span
+              >
             </li>
             <li class="flex items-start">
-              <svg class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <svg
+                class="w-6 h-6 text-red-600 mr-3 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-700"><strong class="text-gray-900">Supports you in English</strong>, with real human guidance</span>
+              <span class="text-gray-700"
+                ><strong class="text-gray-900">Supports you in English</strong>,
+                with real human guidance</span
+              >
             </li>
           </ul>
 
           <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
             <p class="text-gray-800 italic">
-              "It's not just a switch — it's a relationship built on trust, clarity, and ongoing care."
+              "It's not just a switch — it's a relationship built on trust,
+              clarity, and ongoing care."
             </p>
-            </div>
-      </div>
-      
+          </div>
+        </div>
+
         <!-- Right: Image -->
         <div class="order-first lg:order-last">
           <img
@@ -704,8 +1357,8 @@ const meta = {
             loading="lazy"
           />
         </div>
-            </div>
-            </div>
+      </div>
+    </div>
   </section>
 
   <!-- ============================================ -->
@@ -714,74 +1367,111 @@ const meta = {
   <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
       <div class="text-center mb-12">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+        <h2
+          class={DesignSystem.typography.heading.h2.full +
+            " text-gray-900 mb-4"}
+        >
           How the Process Works
         </h2>
-        <p class={DesignSystem.typography.body.large + ' text-gray-600 max-w-3xl mx-auto'}>
+        <p
+          class={DesignSystem.typography.body.large +
+            " text-gray-600 max-w-3xl mx-auto"}
+        >
           A clear, simple path from review to confident decision.
         </p>
-          </div>
-          
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
+      >
         <!-- Step 1 -->
         <div class="text-center">
-          <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+          <div
+            class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"
+          >
             <span class="text-3xl font-bold text-red-600">1</span>
-            </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Free Consultation</h3>
-          <p class="text-gray-600">
-            We start with a quick online call where we review your current coverage and needs in simple English.
-          </p>
           </div>
-          
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Free Consultation
+          </h3>
+          <p class="text-gray-600">
+            We start with a quick online call where we review your current
+            coverage and needs in simple English.
+          </p>
+        </div>
+
         <!-- Step 2 -->
         <div class="text-center">
-          <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+          <div
+            class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"
+          >
             <span class="text-3xl font-bold text-red-600">2</span>
-            </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Independent Comparison</h3>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Independent Comparison
+          </h3>
           <p class="text-gray-600">
-            We benchmark premiums and benefits across all major insurers — including your current one.
+            We benchmark premiums and benefits across all major insurers —
+            including your current one.
           </p>
-  </div>
+        </div>
 
         <!-- Step 3 -->
         <div class="text-center">
-          <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+          <div
+            class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"
+          >
             <span class="text-3xl font-bold text-red-600">3</span>
-            </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Personalized Recommendation</h3>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Personalized Recommendation
+          </h3>
           <p class="text-gray-600">
-            You receive clear, side-by-side options with our expert advice on what's best for your situation.
+            You receive clear, side-by-side options with our expert advice on
+            what's best for your situation.
           </p>
         </div>
 
         <!-- Step 4 -->
         <div class="text-center">
-          <div class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+          <div
+            class="bg-red-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"
+          >
             <span class="text-3xl font-bold text-red-600">4</span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Easy Switch & Ongoing Care</h3>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            Easy Switch & Ongoing Care
+          </h3>
           <p class="text-gray-600">
-            We handle all cancellations, new applications, and follow-up — and stay available whenever your life changes.
+            We handle all cancellations, new applications, and follow-up — and
+            stay available whenever your life changes.
           </p>
-          </div>
         </div>
+      </div>
 
       <!-- CTA -->
       <div class="text-center mt-12">
-            <button
+        <button
           class={DesignSystem.components.button.primary}
           onclick="window.openHealthModal('switching')"
           aria-label="Get personalized comparison"
         >
           Get Your Personalized Comparison →
-          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
-          </div>
-        </div>
+          <svg
+            class="ml-2 h-5 w-5 inline"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
   </section>
 
   <!-- ============================================ -->
@@ -790,24 +1480,33 @@ const meta = {
   <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.narrow}>
       <div class="text-center max-w-3xl mx-auto">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-6'}>
+        <h2
+          class={DesignSystem.typography.heading.h2.full +
+            " text-gray-900 mb-6"}
+        >
           More Than a Policy — It's Peace of Mind
         </h2>
-        <p class={DesignSystem.typography.body.large + ' text-gray-700 mb-6'}>
+        <p class={DesignSystem.typography.body.large + " text-gray-700 mb-6"}>
           Health insurance isn't just paperwork.
         </p>
         <p class="text-gray-700 mb-8">
-          It's the peace of knowing that when something happens, you're covered — by the right plan, the right partner, and the right guidance.
+          It's the peace of knowing that when something happens, you're covered
+          — by the right plan, the right partner, and the right guidance.
         </p>
 
         <!-- Robert's Quote Card -->
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-md max-w-3xl mx-auto mb-8">
+        <div
+          class="bg-white border border-gray-200 rounded-2xl p-8 shadow-md max-w-3xl mx-auto mb-8"
+        >
           <div class="text-center">
             <!-- Robert's Photo with Frame -->
             <div class="mb-6 flex justify-center">
               <div class="relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 rounded-full transform scale-110"></div>
-                <img 
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 rounded-full transform scale-110"
+                >
+                </div>
+                <img
                   src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_160,h_160,q_100,f_webp,c_fill,g_face,dpr_2.0/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.jpg"
                   alt="Robert, FINMA-certified Insurance Broker"
                   class="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
@@ -819,24 +1518,33 @@ const meta = {
             </div>
 
             <!-- Quote -->
-            <blockquote class="text-gray-800 italic text-lg leading-relaxed mb-6">
-              "Switching isn't about chasing the cheapest premium — it's about aligning your model, deductible, and supplementary coverage with how you actually use healthcare. That's where real savings and protection come from."
+            <blockquote
+              class="text-gray-800 italic text-lg leading-relaxed mb-6"
+            >
+              "Switching isn't about chasing the cheapest premium — it's about
+              aligning your model, deductible, and supplementary coverage with
+              how you actually use healthcare. That's where real savings and
+              protection come from."
             </blockquote>
-            
+
             <!-- Attribution -->
             <div class="text-gray-700">
               <p class="font-semibold text-gray-900 text-lg">Robert</p>
               <p class="text-sm">FINMA-certified Insurance Broker</p>
-              <p class="text-sm text-gray-600">(Independent expert advisor at Expat-Savvy)</p>
+              <p class="text-sm text-gray-600">
+                (Independent expert advisor at Expat-Savvy)
+              </p>
+            </div>
           </div>
-          </div>
-      </div>
-      
+        </div>
+
         <p class="text-gray-700">
-          We stay by your side every year — reviewing your coverage, helping with renewals, and making sure you're always protected as your life in Switzerland evolves.
+          We stay by your side every year — reviewing your coverage, helping
+          with renewals, and making sure you're always protected as your life in
+          Switzerland evolves.
         </p>
-                </div>
-              </div>
+      </div>
+    </div>
   </section>
 
   <!-- Transition -->
@@ -852,137 +1560,303 @@ const meta = {
   <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
       <div class="text-center mb-4">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-2'}>
+        <h2
+          class={DesignSystem.typography.heading.h2.full +
+            " text-gray-900 mb-2"}
+        >
           What Our Clients Say
         </h2>
-        <p class={DesignSystem.typography.body.large + ' text-gray-700 font-semibold'}>
+        <p
+          class={DesignSystem.typography.body.large +
+            " text-gray-700 font-semibold"}
+        >
           ★★★★★ Rated 4.9 / 5 by expats across Switzerland
         </p>
-                </div>
-      <p class={DesignSystem.typography.body.base + ' text-gray-600 max-w-3xl mx-auto text-center mb-12'}>
-        Real experiences from people who switched their Swiss health insurance with us.
+      </div>
+      <p
+        class={DesignSystem.typography.body.base +
+          " text-gray-600 max-w-3xl mx-auto text-center mb-12"}
+      >
+        Real experiences from people who switched their Swiss health insurance
+        with us.
       </p>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <!-- Review 1 -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+          )}
+        >
           <div class="flex items-center gap-1 mb-4">
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-                </div>
+          </div>
           <p class="text-gray-700 mb-4">
-            "Robert was an excellent assistant. He introduced me to the complex health system in Switzerland and made sure I took the best decision, providing information and answering all my questions. He made sure the health insurance matched all my needs. Totally recommended."
+            "Robert was an excellent assistant. He introduced me to the complex
+            health system in Switzerland and made sure I took the best decision,
+            providing information and answering all my questions. He made sure
+            the health insurance matched all my needs. Totally recommended."
           </p>
           <p class="text-sm text-gray-600">
-            <strong class="text-gray-900">German Barquero</strong><br>
+            <strong class="text-gray-900">German Barquero</strong><br />
             Google Review • 16 weeks ago
           </p>
-              </div>
-              
+        </div>
+
         <!-- Review 2 -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+          )}
+        >
           <div class="flex items-center gap-1 mb-4">
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-                </div>
+          </div>
           <p class="text-gray-700 mb-4">
-            "I had great experience with expat-savvy, receiving very helpful, professional advice tailored to my personal situation. Robert has demonstrated his in-depth knowledge of the field which he was not shy to share. I am grateful for the valuable support!"
+            "I had great experience with expat-savvy, receiving very helpful,
+            professional advice tailored to my personal situation. Robert has
+            demonstrated his in-depth knowledge of the field which he was not
+            shy to share. I am grateful for the valuable support!"
           </p>
           <p class="text-sm text-gray-600">
-            <strong class="text-gray-900">Rebeka Johnson</strong><br>
+            <strong class="text-gray-900">Rebeka Johnson</strong><br />
             Google Review • 16 weeks ago
           </p>
-                </div>
+        </div>
 
         <!-- Review 3 -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+          )}
+        >
           <div class="flex items-center gap-1 mb-4">
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-              </div>
+          </div>
           <p class="text-gray-700 mb-4">
-            "Robert's advice was very helpful in choosing the right health insurance package and getting over the hurdles of pre-existing conditions. He found me a much better deal than the one I had previously arranged through my company. Highly recommend!"
+            "Robert's advice was very helpful in choosing the right health
+            insurance package and getting over the hurdles of pre-existing
+            conditions. He found me a much better deal than the one I had
+            previously arranged through my company. Highly recommend!"
           </p>
           <p class="text-sm text-gray-600">
-            <strong class="text-gray-900">Martin Walsh</strong><br>
+            <strong class="text-gray-900">Martin Walsh</strong><br />
             Google Review • 8 weeks ago
           </p>
-          </div>
-          
+        </div>
+
         <!-- Review 4 -->
-        <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
+        <div
+          class={cn(
+            DesignSystem.components.card.default,
+            DesignSystem.components.card.padding,
+          )}
+        >
           <div class="flex items-center gap-1 mb-4">
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
-            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
+            </svg>
+            <svg
+              class="w-5 h-5 text-yellow-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              ></path>
             </svg>
           </div>
           <p class="text-gray-700 mb-4">
-            "Really smooth process. They answered all my questions in plain English and found me better coverage at a lower price than what I was paying. Everything handled professionally from start to finish."
+            "Really smooth process. They answered all my questions in plain
+            English and found me better coverage at a lower price than what I
+            was paying. Everything handled professionally from start to finish."
           </p>
           <p class="text-sm text-gray-600">
-            <strong class="text-gray-900">Sarah Thompson</strong><br>
+            <strong class="text-gray-900">Sarah Thompson</strong><br />
             Google Review • 12 weeks ago
           </p>
         </div>
       </div>
 
       <div class="text-center">
-        <a href="https://g.page/r/CWFfE9sKiH8PEAI/review" target="_blank" rel="noopener noreferrer" class="text-red-600 hover:text-red-700 font-semibold text-sm">
+        <a
+          href="https://g.page/r/CWFfE9sKiH8PEAI/review"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-red-600 hover:text-red-700 font-semibold text-sm"
+        >
           See all reviews on Google →
         </a>
-        </div>
       </div>
+    </div>
   </section>
 
   <!-- ============================================ -->
@@ -990,152 +1864,219 @@ const meta = {
   <!-- ============================================ -->
   <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.default}>
-      
       <!-- Header with Robert's Expert Knowledge -->
-      <div class="max-w-5xl mx-auto mb-12 bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg">
+      <div
+        class="max-w-5xl mx-auto mb-12 bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg"
+      >
         <div class="flex items-start gap-6">
           <!-- Robert's Photo -->
           <div class="flex-shrink-0">
-            <img 
-              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_64,h_64,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" 
+            <img
+              src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_64,h_64,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
               alt="Robert - FINMA Certified Insurance Consultant"
               class="w-20 h-20 rounded-full border-2 border-gray-200 shadow-md"
-            loading="lazy"
-          />
-      </div>
+              loading="lazy"
+            />
+          </div>
 
           <div class="flex-1">
-            <h2 class="text-2xl font-bold text-gray-900 mb-3">5 Mistakes We Help You Avoid</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">
+              5 Mistakes We Help You Avoid
+            </h2>
             <p class="text-gray-700 mb-2">
-              "I see these mistakes weekly when people switch their health insurance. Here's how to avoid them — and how we help you get it right."
+              "I see these mistakes weekly when people switch their health
+              insurance. Here's how to avoid them — and how we help you get it
+              right."
             </p>
             <p class="text-sm text-gray-600 italic">
               — Robert, FINMA-certified Insurance Broker
             </p>
-              </div>
-              </div>
-            </div>
-            
+          </div>
+        </div>
+      </div>
+
       <!-- Clean Mistakes List -->
       <div class="max-w-4xl mx-auto space-y-6">
-        
         <!-- Mistake 1 -->
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+        <div
+          class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+        >
           <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center"
+            >
               <span class="text-red-600 font-bold text-lg">1</span>
-              </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Missing the Deadline and Getting Locked In</h3>
-              <p class="text-gray-700 text-sm mb-1">
-                <span class="text-red-600 font-semibold">Risk:</span> Deadline is 30 Nov for basic, 30 Sep for supplementary. Miss it = stuck for another year.
-              </p>
-              <p class="text-gray-700 text-sm">
-                <span class="text-gray-900 font-semibold">Solution:</span> We track deadlines and ensure your cancellation is submitted on time.
-              </p>
-              </div>
-              </div>
-            </div>
-            
-        <!-- Mistake 2 -->
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-              <span class="text-red-600 font-bold text-lg">2</span>
-              </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Canceling Supplementary Without Securing New Coverage</h3>
-              <p class="text-gray-700 text-sm mb-1">
-                <span class="text-red-600 font-semibold">Risk:</span> New insurers can reject supplementary applications. Cancel first = lose coverage forever.
-              </p>
-              <p class="text-gray-700 text-sm">
-                <span class="text-gray-900 font-semibold">Solution:</span> We always apply to the new insurer first, then cancel the old one.
-              </p>
-              </div>
-              </div>
-            </div>
-            
-        <!-- Mistake 3 -->
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-              <span class="text-red-600 font-bold text-lg">3</span>
-              </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Switching Only Based on Premium</h3>
-              <p class="text-gray-700 text-sm mb-1">
-                <span class="text-red-600 font-semibold">Risk:</span> Cheapest isn't always best. Service quality and claims processing matter.
-              </p>
-              <p class="text-gray-700 text-sm">
-                <span class="text-gray-900 font-semibold">Solution:</span> We assess insurer reputation, network coverage, and English support quality.
-              </p>
-              </div>
-              </div>
-            </div>
-            
-        <!-- Mistake 4 -->
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-              <span class="text-red-600 font-bold text-lg">4</span>
-              </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Not Comparing Alternative Models</h3>
-              <p class="text-gray-700 text-sm mb-1">
-                <span class="text-red-600 font-semibold">Risk:</span> Missing out on 15-25% savings with Telmed/HMO models.
-              </p>
-              <p class="text-gray-700 text-sm">
-                <span class="text-gray-900 font-semibold">Solution:</span> We assess whether alternative models fit your healthcare usage pattern.
-              </p>
-              </div>
-              </div>
-            </div>
-
-        <!-- Mistake 5 -->
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-              <span class="text-red-600 font-bold text-lg">5</span>
             </div>
             <div class="flex-1">
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Doing It Alone Without Expert Guidance</h3>
+              <h3 class="text-lg font-bold text-gray-900 mb-2">
+                Missing the Deadline and Getting Locked In
+              </h3>
               <p class="text-gray-700 text-sm mb-1">
-                <span class="text-red-600 font-semibold">Risk:</span> Missing group discounts, wrong deductible choice, or overlooking better options.
+                <span class="text-red-600 font-semibold">Risk:</span> Deadline is
+                30 Nov for basic, 30 Sep for supplementary. Miss it = stuck for another
+                year.
               </p>
               <p class="text-gray-700 text-sm">
-                <span class="text-gray-900 font-semibold">Solution:</span> Free consultation saves you money and ensures you're fully protected.
+                <span class="text-gray-900 font-semibold">Solution:</span> We track
+                deadlines and ensure your cancellation is submitted on time.
               </p>
             </div>
           </div>
         </div>
 
+        <!-- Mistake 2 -->
+        <div
+          class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center"
+            >
+              <span class="text-red-600 font-bold text-lg">2</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 mb-2">
+                Canceling Supplementary Without Securing New Coverage
+              </h3>
+              <p class="text-gray-700 text-sm mb-1">
+                <span class="text-red-600 font-semibold">Risk:</span> New insurers
+                can reject supplementary applications. Cancel first = lose coverage
+                forever.
+              </p>
+              <p class="text-gray-700 text-sm">
+                <span class="text-gray-900 font-semibold">Solution:</span> We always
+                apply to the new insurer first, then cancel the old one.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mistake 3 -->
+        <div
+          class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center"
+            >
+              <span class="text-red-600 font-bold text-lg">3</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 mb-2">
+                Switching Only Based on Premium
+              </h3>
+              <p class="text-gray-700 text-sm mb-1">
+                <span class="text-red-600 font-semibold">Risk:</span> Cheapest isn't
+                always best. Service quality and claims processing matter.
+              </p>
+              <p class="text-gray-700 text-sm">
+                <span class="text-gray-900 font-semibold">Solution:</span> We assess
+                insurer reputation, network coverage, and English support quality.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mistake 4 -->
+        <div
+          class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center"
+            >
+              <span class="text-red-600 font-bold text-lg">4</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 mb-2">
+                Not Comparing Alternative Models
+              </h3>
+              <p class="text-gray-700 text-sm mb-1">
+                <span class="text-red-600 font-semibold">Risk:</span> Missing out
+                on 15-25% savings with Telmed/HMO models.
+              </p>
+              <p class="text-gray-700 text-sm">
+                <span class="text-gray-900 font-semibold">Solution:</span> We assess
+                whether alternative models fit your healthcare usage pattern.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mistake 5 -->
+        <div
+          class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center"
+            >
+              <span class="text-red-600 font-bold text-lg">5</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 mb-2">
+                Doing It Alone Without Expert Guidance
+              </h3>
+              <p class="text-gray-700 text-sm mb-1">
+                <span class="text-red-600 font-semibold">Risk:</span> Missing group
+                discounts, wrong deductible choice, or overlooking better options.
+              </p>
+              <p class="text-gray-700 text-sm">
+                <span class="text-gray-900 font-semibold">Solution:</span> Free consultation
+                saves you money and ensures you're fully protected.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- CTA Box -->
       <div class="mt-12 max-w-3xl mx-auto">
-        <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center shadow-lg">
+        <div
+          class="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center shadow-lg"
+        >
           <div class="flex items-center justify-center gap-3 mb-4">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            <svg
+              class="w-6 h-6 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <p class="text-gray-900 font-bold text-xl">
               We help you avoid ALL of these mistakes
             </p>
           </div>
-          <p class="text-gray-600 mb-6">Free consultation. No pressure. Just expert guidance.</p>
+          <p class="text-gray-600 mb-6">
+            Free consultation. No pressure. Just expert guidance.
+          </p>
           <button
             class={DesignSystem.components.button.primary}
             onclick="window.openHealthModal('switching')"
             aria-label="Get expert help switching insurance"
           >
             Get Expert Help Now →
-            <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg
+              class="ml-2 h-5 w-5 inline"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </button>
         </div>
       </div>
-            </div>
+    </div>
   </section>
 
   <!-- Transition -->
@@ -1151,38 +2092,62 @@ const meta = {
   <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
     <div class={DesignSystem.spacing.container.narrow}>
       <div class="text-center mb-12">
-        <h2 class={DesignSystem.typography.heading.h2.full + ' text-gray-900 mb-4'}>
+        <h2
+          class={DesignSystem.typography.heading.h2.full +
+            " text-gray-900 mb-4"}
+        >
           Frequently Asked Questions
         </h2>
-        <p class={DesignSystem.typography.body.large + ' text-gray-600'}>
+        <p class={DesignSystem.typography.body.large + " text-gray-600"}>
           Common questions about switching health insurance in Switzerland.
         </p>
-  </div>
+      </div>
 
       <div class="space-y-6">
-          {faqs.map((faq, index) => (
-          <div class={cn(DesignSystem.components.card.default, DesignSystem.components.card.padding)}>
-            <h3 class="text-xl font-bold text-gray-900 mb-3">{faq.question}</h3>
-            <p class="text-gray-700 leading-relaxed" set:html={faq.answer} />
+        {
+          faqs.map((faq, index) => (
+            <div
+              class={cn(
+                DesignSystem.components.card.default,
+                DesignSystem.components.card.padding,
+              )}
+            >
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                {faq.question}
+              </h3>
+              <p class="text-gray-700 leading-relaxed" set:html={faq.answer} />
             </div>
-          ))}
-        </div>
-        
+          ))
+        }
+      </div>
+
       <!-- FAQ CTA -->
       <div class="mt-12 text-center">
-        <p class="text-gray-600 mb-6">Have more questions? Our experts are here to help.</p>
-          <button
+        <p class="text-gray-600 mb-6">
+          Have more questions? Our experts are here to help.
+        </p>
+        <button
           class={DesignSystem.components.button.secondary}
           onclick="window.openHealthModal('switching')"
           aria-label="Ask our switching experts"
-          >
+        >
           Ask Our Experts
-          <svg class="ml-2 h-5 w-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-          </button>
-        </div>
+          <svg
+            class="ml-2 h-5 w-5 inline"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+            ></path>
+          </svg>
+        </button>
       </div>
+    </div>
   </section>
 
   <!-- ============================================ -->
@@ -1198,10 +2163,11 @@ const meta = {
           Don't Guess Your Coverage — Know It
         </h2>
         <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-          Get a professional audit and personalized comparison. 100% free and in English.
+          Get a professional audit and personalized comparison. 100% free and in
+          English.
         </p>
 
-          <!-- Primary CTA -->
+        <!-- Primary CTA -->
         <div class="mb-6">
           <button
             class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold rounded-2xl text-red-600 bg-white hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl"
@@ -1209,8 +2175,17 @@ const meta = {
             aria-label="Book free consultation to switch insurance"
           >
             Book My Free Consultation →
-            <svg class="ml-2 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg
+              class="ml-2 h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </button>
         </div>
@@ -1218,20 +2193,47 @@ const meta = {
         <!-- Trust Indicators -->
         <div class="text-white/90 text-sm space-y-1">
           <div class="flex items-center justify-center">
-            <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            <svg
+              class="h-4 w-4 text-green-300 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
             </svg>
             <span>100% free service • FINMA-certified advisors</span>
           </div>
           <div class="flex items-center justify-center">
-            <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            <svg
+              class="h-4 w-4 text-green-300 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
             </svg>
             <span>Independent comparison across all insurers</span>
           </div>
           <div class="flex items-center justify-center">
-            <svg class="h-4 w-4 text-green-300 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            <svg
+              class="h-4 w-4 text-green-300 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
             </svg>
             <span>We handle all cancellations and paperwork</span>
           </div>
@@ -1241,15 +2243,26 @@ const meta = {
   </section>
 
   <!-- Mobile Sticky CTA -->
-  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50 shadow-lg">
-    <button 
+  <div
+    class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50 shadow-lg"
+  >
+    <button
       class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
       onclick="window.openHealthModal('switching')"
       aria-label="Book free consultation"
     >
       Book Free Consultation
-      <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      <svg
+        class="ml-2 h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
       </svg>
     </button>
   </div>
@@ -1259,96 +2272,129 @@ const meta = {
   <!-- ============================================ -->
 
   <!-- Article Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Complete Guide to Switching Health Insurance in Switzerland 2026",
-    "description": "Expert guide on changing health insurance providers in Switzerland. Learn deadlines, save CHF 500-2,000/year, and get free expert help.",
-    "image": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp",
-    "datePublished": "2025-01-15",
-    "dateModified": new Date().toISOString(),
-    "author": {
-      "@type": "Person",
-      "name": "Benjamin Wagner",
-      "jobTitle": "FINMA-Certified Insurance Advisor"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg"
-      }
-    }
-  }, null, 2)} />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline:
+          "Complete Guide to Switching Health Insurance in Switzerland 2026",
+        description:
+          "Expert guide on changing health insurance providers in Switzerland. Learn deadlines, save CHF 500-2,000/year, and get free expert help.",
+        image:
+          "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746974683/a-cinematic-photograph-of-a-young-woman-_vNYdw6x6Ta2LrDeE88rp5w_doyBDP5DS4qRGSsn2tO2uw_xmxi25.webp",
+        datePublished: "2025-01-15",
+        dateModified: new Date().toISOString(),
+        author: {
+          "@type": "Person",
+          name: "Benjamin Wagner",
+          jobTitle: "FINMA-Certified Insurance Advisor",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Expat Savvy",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740080077/logoexpatsavvy_sykutm.svg",
+          },
+        },
+      },
+      null,
+      2,
+    )}
+  />
 
   <!-- HowTo Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Switch Health Insurance in Switzerland",
-    "description": "Complete guide to switching Swiss health insurance with deadlines and step-by-step process.",
-    "totalTime": "PT30M",
-    "step": [
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(
       {
-        "@type": "HowToStep",
-        "name": "Compare Insurance Providers",
-        "text": "Research and compare different Swiss health insurance providers, their premiums, models (Telmed/HMO), and coverage options.",
-        "position": 1
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: "How to Switch Health Insurance in Switzerland",
+        description:
+          "Complete guide to switching Swiss health insurance with deadlines and step-by-step process.",
+        totalTime: "PT30M",
+        step: [
+          {
+            "@type": "HowToStep",
+            name: "Compare Insurance Providers",
+            text: "Research and compare different Swiss health insurance providers, their premiums, models (Telmed/HMO), and coverage options.",
+            position: 1,
+          },
+          {
+            "@type": "HowToStep",
+            name: "Send Cancellation Notice",
+            text: "Send formal cancellation letter by registered mail before deadlines (30 Sep for supplementary, 30 Nov for basic insurance).",
+            position: 2,
+          },
+          {
+            "@type": "HowToStep",
+            name: "Apply for New Insurance",
+            text: "Complete application with your chosen new insurance provider. Basic insurance has guaranteed acceptance.",
+            position: 3,
+          },
+        ],
       },
-      {
-        "@type": "HowToStep",
-        "name": "Send Cancellation Notice",
-        "text": "Send formal cancellation letter by registered mail before deadlines (30 Sep for supplementary, 30 Nov for basic insurance).",
-        "position": 2
-      },
-      {
-        "@type": "HowToStep",
-        "name": "Apply for New Insurance",
-        "text": "Complete application with your chosen new insurance provider. Basic insurance has guaranteed acceptance.",
-        "position": 3
-      }
-    ]
-  }, null, 2)} />
+      null,
+      2,
+    )}
+  />
 
   <!-- FAQ Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer.replace(/<\/?strong>/g, '').replace(/<\/?a[^>]*>/g, '')
-      }
-    }))
-  }, null, 2)} />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer
+              .replace(/<\/?strong>/g, "")
+              .replace(/<\/?a[^>]*>/g, ""),
+          },
+        })),
+      },
+      null,
+      2,
+    )}
+  />
 
   <!-- Breadcrumb Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://expat-savvy.ch/"
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://expat-savvy.ch/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Healthcare",
+            item: "https://expat-savvy.ch/healthcare",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Switching Health Insurance",
+            item: "https://expat-savvy.ch/healthcare/switching-health-insurance",
+          },
+        ],
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Healthcare",
-        "item": "https://expat-savvy.ch/healthcare"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Switching Health Insurance",
-        "item": "https://expat-savvy.ch/healthcare/switching-health-insurance"
-      }
-    ]
-  }, null, 2)} />
-
-</Layout> 
+      null,
+      2,
+    )}
+  />
+</Layout>

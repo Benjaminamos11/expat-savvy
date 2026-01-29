@@ -16,26 +16,64 @@ const metadata = {
 
 const faqs = [
     {
-        question:
-            "Are the returns on insurance products really as good as digital apps?",
-        answer: "Yes. Modern insurance solutions like Swiss Life Dynamic Elements Duo utilize equity-focused strategies that compete directly with digital-only portfolios. The key difference is the added layer of capital guarantees and integrated protection that apps lack.",
+        question: "What are the typical fees for different providers?",
+        answer: "FinTech apps typically charge 0.5-0.8%, traditional banks 1.0-1.5%, and insurance providers 2.0-3.0% (inclusive of protection components).",
     },
     {
-        question: "If I use VIAC, can't I just buy separate life insurance?",
-        answer: "You can, but it is often less efficient. Combining a bank 3a with standalone insurance usually results in higher total costs and more administrative complexity. More importantly, bank 3a accounts are not as favored by Swiss banks as mortgage collateral compared to insurance policies.",
+        question: "Which provider has the lowest fees?",
+        answer: "Currently, Finpension (approx. 0.39%) and VIAC (approx. 0.41%) are the market leaders for lowest total expense ratio (TER) in Switzerland.",
     },
     {
-        question:
-            "What are the exact costs of a Swiss Life Dynamic Elements Duo policy?",
-        answer: "Costs depend on your age, contribution level, and chosen protection. However, the 'all-in' cost—including management and the safety net—is strategically positioned to provide better long-term value than a fragmented DIY strategy.",
+        question: "Can I switch providers later?",
+        answer: "Yes, you can transfer your 3a capital between providers. For bank-based 3a, it's usually free or low-cost. For insurance-based 3a, switching early can result in surrender losses, so it's a long-term commitment.",
     },
     {
-        question: "Why are traditional banks no longer a good option?",
-        answer: "Traditional banks often combine higher fees with lower investment flexibility and zero integrated insurance. In the 2026 landscape, they represent an outdated middle ground that offers neither the low cost of apps nor the high security of modern insurance.",
+        question: "What's the difference between bank and insurance 3a?",
+        answer: "A bank 3a is a pure investment/savings account. An insurance 3a combines investment with life insurance and a 'premium waiver' that pays your contributions if you become disabled.",
     },
     {
-        question: "How do I know which of the 'Three Paths' is right for me?",
-        answer: "It depends on your goals: if you only care about the lowest fee today, apps win. If you care about homeownership, family security, and guaranteed retirement capital, the modern insurance path is the intelligent choice.",
+        question: "Which provider is best for expats?",
+        answer: "VIAC is often cited as expat-friendly due to its ease of use and streamlined process for those who might eventually leave Switzerland (allowing for easier global transfers).",
+    },
+    {
+        question: "How do I compare providers?",
+        answer: "Look beyond just the TER. Consider the investment flexibility (equity share), the quality of integrated insurance, and how the provider is viewed by mortgage lenders.",
+    },
+    {
+        question: "What's included in the TER?",
+        answer: "The Total Expense Ratio usually covers management fees, custody fees, and fund internal costs. In insurance, it also covers the cost of risk (death/disability cover).",
+    },
+    {
+        question: "Can I have multiple 3a accounts with different providers?",
+        answer: "Yes, and it's highly recommended! Most people should aim for 5 accounts to stagger their withdrawals at retirement and minimize the capital withdrawal tax.",
+    },
+    {
+        question: "What if I want to switch from insurance to bank?",
+        answer: "You can do this by 'surrendering' the policy or converting it to a 'paid-up' state and transferring the value. Be sure to check the surrender value first, as early exits can be costly.",
+    },
+    {
+        question: "Which provider offers the best returns?",
+        answer: "Returns depend on the underlying funds. Providers offering high equity exposure (up to 99-100%) like Finpension or Swiss Life Dynamic Elements usually show the highest historical performance.",
+    },
+    {
+        question: "Is my 3a capital protected if the provider goes bankrupt?",
+        answer: "Yes. For bank-based 3a, your cash is protected up to CHF 100,000 by 'esisuisse'. For investment-based 3a (funds), the securities are 'segregated assets' and belong to you, not the bank's estate. Insurance 3a is strictly regulated by FINMA to ensure solvency.",
+    },
+    {
+        question: "Can I use my 3rd pillar to buy a home abroad?",
+        answer: "Generally, no. The 3rd pillar can only be used for an 'owner-occupied' primary residence. If you are living in Switzerland, it must be for your home here. However, if you leave Switzerland permanently, you can withdraw the capital and use it as you wish.",
+    },
+    {
+        question: "What happens to my 3a if I leave Switzerland permanently?",
+        answer: "This is one of the most common reasons for early withdrawal. You can close your 3a account and take the cash with you (subject to a small withholding tax). It's a key advantage for expats who don't stay until retirement.",
+    },
+    {
+        question: "At what age can I start withdrawing my 3rd pillar?",
+        answer: "The standard earliest withdrawal age is 5 years before the official AHV retirement age (currently age 60 for men and women, though this is evolving). Some life events like buying a home or starting a business allow for earlier access.",
+    },
+    {
+        question: "Do I have to pay taxes on 3a withdrawals?",
+        answer: "Yes, 3a withdrawals are taxed at a reduced rate, separate from your other income. This 'capital withdrawal tax' varies by canton. Staggering your withdrawals across multiple accounts can significantly lower this tax burden.",
     },
 ];
 
@@ -123,12 +161,21 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 01
                             </div>
                             <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
-                                The Digital Apps
+                                FinTech Apps
                             </h3>
+                            <p
+                                class="text-xs text-blue-600 font-bold mb-4 uppercase tracking-widest"
+                            >
+                                VIAC, Finpension, True Wealth
+                            </p>
                             <p class="text-gray-600 mb-8 leading-relaxed">
-                                <strong>Objective: Wealth Maximization.</strong> Best
-                                for expats seeking the lowest possible fees and maximum
-                                equity exposure without any insurance overhead.
+                                These digital-first providers offer low-cost,
+                                algorithm-driven investment management. VIAC and
+                                Finpension typically charge 0.5-0.8% annually,
+                                making them the cheapest options. They are ideal
+                                for tech-savvy investors who want minimal fees
+                                and maximum flexibility. However, they offer no
+                                integrated insurance protection.
                             </p>
                             <div class="space-y-3">
                                 <div
@@ -159,15 +206,21 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                             >
                                 02
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-400 mb-4">
+                            <h3 class="text-2xl font-bold text-gray-500 mb-4">
                                 Traditional Banks
                             </h3>
                             <p
-                                class="text-gray-400 mb-8 leading-relaxed line-through decoration-red-500/50"
+                                class="text-xs text-gray-400 font-bold mb-4 uppercase tracking-widest"
                             >
-                                <strong>Objective: Passive Saving.</strong> The legacy
-                                path. High fees, low flexibility, and outdated fund
-                                selections that fail to compete in 2026.
+                                UBS, PostFinance, Raiffeisen
+                            </p>
+                            <p class="text-gray-400 mb-8 leading-relaxed">
+                                Established banks offer personalized service and
+                                integrated financial planning. Fees typically
+                                range from 1-1.5% annually. They are ideal for
+                                investors who value personal relationships and
+                                comprehensive financial advice. However, they
+                                are more expensive than FinTech options.
                             </p>
                             <div
                                 class="text-xs font-black text-gray-300 uppercase tracking-widest italic pt-4"
@@ -190,12 +243,21 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 03
                             </div>
                             <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
-                                Modern Insurance
+                                Insurance Providers
                             </h3>
+                            <p
+                                class="text-xs text-[#C41E3A] font-bold mb-4 uppercase tracking-widest"
+                            >
+                                Swiss Life, AXA, Generali
+                            </p>
                             <p class="text-gray-600 mb-8 leading-relaxed">
-                                <strong>Objective: Holistic Protection.</strong> The
-                                preferred path for homeowners and parents. Combines
-                                growth with an ironclad safety net.
+                                Insurance-based 3a solutions integrate
+                                investment management with life insurance and
+                                disability protection. Fees typically range from
+                                2-3% annually due to the insurance component.
+                                They are ideal for investors who prioritize
+                                protection and peace of mind, especially
+                                families and self-employed individuals.
                             </p>
                             <div class="space-y-3">
                                 <div
@@ -215,6 +277,124 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                     Mortgage Optimized ✓
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- TER EXPLANATION SECTION -->
+                    <div
+                        class="mt-24 p-12 bg-gray-900 rounded-[40px] text-white"
+                    >
+                        <h2 class="text-3xl font-bold mb-6">
+                            Understanding Total Expense Ratio (TER)
+                        </h2>
+                        <p class="text-white/70 mb-8 leading-relaxed">
+                            The TER is the annual fee charged by your 3a
+                            provider, expressed as a percentage of your assets.
+                            Here's how it compounds:
+                        </p>
+                        <ul class="space-y-4 mb-12">
+                            <li class="flex items-start gap-4">
+                                <span
+                                    class="text-[#C41E3A] font-bold whitespace-nowrap"
+                                    >0.5% TER (FinTech):</span
+                                >
+                                <span class="text-white/80 font-medium"
+                                    >On a CHF 100,000 portfolio, you pay CHF
+                                    500/year</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span
+                                    class="text-[#C41E3A] font-bold whitespace-nowrap"
+                                    >1.0% TER (Traditional Bank):</span
+                                >
+                                <span class="text-white/80 font-medium"
+                                    >On a CHF 100,000 portfolio, you pay CHF
+                                    1,000/year</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span
+                                    class="text-[#C41E3A] font-bold whitespace-nowrap"
+                                    >2.5% TER (Insurance):</span
+                                >
+                                <span class="text-white/80 font-medium"
+                                    >On a CHF 100,000 portfolio, you pay CHF
+                                    2,500/year</span
+                                >
+                            </li>
+                        </ul>
+                        <p class="text-white/60 text-sm mb-10 italic max-w-2xl">
+                            Over 40 years, a 1.5% difference in fees reduces
+                            your final portfolio by approximately 30-40%. This
+                            is why fee comparison is critical.
+                        </p>
+
+                        <div
+                            class="overflow-x-auto rounded-3xl border border-white/10 bg-white/5"
+                        >
+                            <table class="w-full text-left">
+                                <thead class="bg-white/5">
+                                    <tr>
+                                        <th
+                                            class="p-6 font-bold uppercase text-[10px] tracking-widest text-[#C41E3A]"
+                                            >TER</th
+                                        >
+                                        <th
+                                            class="p-6 font-bold uppercase text-[10px] tracking-widest text-white/50"
+                                            >CHF 100,000 at 4% Return</th
+                                        >
+                                        <th
+                                            class="p-6 font-bold uppercase text-[10px] tracking-widest text-white/50"
+                                            >40-Year Final Value</th
+                                        >
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    <tr
+                                        class="hover:bg-white/5 transition-colors"
+                                    >
+                                        <td class="p-6 font-bold text-lg"
+                                            >0.5%</td
+                                        >
+                                        <td class="p-6 text-white/70"
+                                            >Net 3.5% return</td
+                                        >
+                                        <td
+                                            class="p-6 font-black text-xl text-green-400"
+                                            >CHF 380,000</td
+                                        >
+                                    </tr>
+                                    <tr
+                                        class="hover:bg-white/5 transition-colors"
+                                    >
+                                        <td class="p-6 font-bold text-lg"
+                                            >1.0%</td
+                                        >
+                                        <td class="p-6 text-white/70"
+                                            >Net 3.0% return</td
+                                        >
+                                        <td
+                                            class="p-6 font-black text-xl text-white/80"
+                                            >CHF 320,000</td
+                                        >
+                                    </tr>
+                                    <tr
+                                        class="hover:bg-white/5 transition-colors"
+                                    >
+                                        <td class="p-6 font-bold text-lg"
+                                            >2.5%</td
+                                        >
+                                        <td class="p-6 text-white/70"
+                                            >Net 1.5% return</td
+                                        >
+                                        <td
+                                            class="p-6 font-black text-xl text-white/40"
+                                            >CHF 160,000</td
+                                        >
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -242,8 +422,9 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                         <p class="text-lg">
                             To understand why Path 3 is dominating the strategy
                             of high-net-worth expats, we must look at the
-                            **Swiss Life Dynamic Elements Duo**. It represents
-                            the pinnacle of modern 3rd pillar engineering.
+                            <strong>Swiss Life Dynamic Elements Duo</strong>. It
+                            represents the pinnacle of modern 3rd pillar
+                            engineering.
                         </p>
 
                         <div class="grid md:grid-cols-2 gap-10 my-16">
@@ -298,9 +479,9 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 insurance component. In fact, if you were to
                                 calculate the cost of a bank 3a plus a
                                 standalone life insurance policy plus a
-                                standalone disability waiver, the **All-in
-                                Dynamic Elements Duo** is often substantially
-                                more efficient.
+                                standalone disability waiver, the <strong
+                                    >All-in Dynamic Elements Duo</strong
+                                > is often substantially more efficient.
                             </p>
                             <p class="font-semibold text-[#C41E3A]">
                                 "Expats who plan to buy a Swiss home value this
@@ -309,6 +490,91 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 simply won't do for a volatile app-based
                                 portfolio."
                             </p>
+                        </div>
+                    </div>
+
+                    <!-- PROS AND CONS SECTION -->
+                    <div class="mt-20 grid md:grid-cols-2 gap-12">
+                        <div
+                            class="p-10 bg-green-50/30 rounded-[40px] border-2 border-green-100"
+                        >
+                            <h3
+                                class="text-2xl font-bold text-green-900 mb-6 flex items-center gap-3"
+                            >
+                                <span class="text-3xl text-green-600">✓</span> Pros
+                                of Insurance 3a
+                            </h3>
+                            <ul class="space-y-4 text-green-800/80">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold"
+                                        >•</span
+                                    >
+                                    Integrated life insurance and disability protection
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold"
+                                        >•</span
+                                    >
+                                    Premium waiver if you become disabled
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold"
+                                        >•</span
+                                    >
+                                    Guaranteed capital component (security)
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold"
+                                        >•</span
+                                    >
+                                    Beneficiary clauses that bypass forced heirship
+                                    rules
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-green-500 font-bold"
+                                        >•</span
+                                    >
+                                    Suitable for families and risk-averse investors
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            class="p-10 bg-red-50/30 rounded-[40px] border-2 border-red-100"
+                        >
+                            <h3
+                                class="text-2xl font-bold text-red-900 mb-6 flex items-center gap-3"
+                            >
+                                <span class="text-3xl text-red-600">✗</span> Cons
+                                of Insurance 3a
+                            </h3>
+                            <ul class="space-y-4 text-red-800/80">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-red-500 font-bold">•</span
+                                    >
+                                    Higher fees (2-3% vs 0.5-1% for bank/FinTech)
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-red-500 font-bold">•</span
+                                    >
+                                    Lower flexibility (harder to switch providers)
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-red-500 font-bold">•</span
+                                    >
+                                    Complex fee structure (hard to understand)
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-red-500 font-bold">•</span
+                                    >
+                                    Less transparent performance data
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-red-500 font-bold">•</span
+                                    >
+                                    Overkill for young, healthy investors with no
+                                    dependents
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -512,10 +778,13 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                             <tbody class="text-[#1a1a2e]">
                                 <!-- FINPENSION -->
                                 <tr
-                                    class="border-b border-gray-50 hover:bg-blue-50/10 transition-colors"
+                                    class="border-b border-gray-100 hover:bg-blue-50/10 transition-colors group/row cursor-pointer"
+                                    onclick="window.open('https://finpension.ch', '_blank')"
                                 >
                                     <td class="p-8">
-                                        <div class="font-bold text-xl">
+                                        <div
+                                            class="font-bold text-xl group-hover/row:text-blue-600 transition-colors underline decoration-transparent group-hover/row:decoration-blue-200"
+                                        >
                                             Finpension
                                         </div>
                                         <div
@@ -535,7 +804,7 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                     </td>
                                     <td class="p-8 text-center">
                                         <div
-                                            class="inline-block px-4 py-1 bg-gray-100 rounded-full text-[10px] font-bold text-gray-500 uppercase tracking-tighter"
+                                            class="inline-block px-4 py-1 bg-gray-100 rounded-full text-[10px] font-bold text-gray-400 uppercase tracking-tighter"
                                         >
                                             Volatile
                                         </div>
@@ -549,10 +818,13 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 </tr>
                                 <!-- VIAC -->
                                 <tr
-                                    class="border-b border-gray-50 hover:bg-blue-50/10 transition-colors"
+                                    class="border-b border-gray-100 hover:bg-blue-50/10 transition-colors group/row cursor-pointer"
+                                    onclick="window.open('https://viac.ch', '_blank')"
                                 >
                                     <td class="p-8">
-                                        <div class="font-bold text-xl">
+                                        <div
+                                            class="font-bold text-xl group-hover/row:text-blue-600 transition-colors underline decoration-transparent group-hover/row:decoration-blue-200"
+                                        >
                                             VIAC
                                         </div>
                                         <div
@@ -586,10 +858,13 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 </tr>
                                 <!-- FRANKLY -->
                                 <tr
-                                    class="border-b border-gray-50 hover:bg-blue-50/10 transition-colors opacity-80 text-gray-400"
+                                    class="border-b border-gray-100 hover:bg-blue-50/10 transition-colors opacity-80 text-gray-400 group/row cursor-pointer"
+                                    onclick="window.open('https://frankly.ch', '_blank')"
                                 >
                                     <td class="p-8">
-                                        <div class="font-bold text-xl">
+                                        <div
+                                            class="font-bold text-xl group-hover/row:text-gray-600 transition-colors"
+                                        >
                                             Frankly (ZKB)
                                         </div>
                                         <div
@@ -623,10 +898,13 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 </tr>
                                 <!-- DESCARTES -->
                                 <tr
-                                    class="border-b border-gray-50 hover:bg-blue-50/10 transition-colors"
+                                    class="border-b border-gray-100 hover:bg-blue-50/10 transition-colors group/row cursor-pointer"
+                                    onclick="window.open('https://descartes.pf', '_blank')"
                                 >
                                     <td class="p-8">
-                                        <div class="font-bold text-xl">
+                                        <div
+                                            class="font-bold text-xl group-hover/row:text-green-600 transition-colors underline decoration-transparent group-hover/row:decoration-green-200"
+                                        >
                                             Descartes
                                         </div>
                                         <div
@@ -660,11 +938,12 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 </tr>
                                 <!-- SWISS LIFE -->
                                 <tr
-                                    class="bg-red-50/40 border-b border-[#C41E3A]/20 hover:bg-red-50/60 transition-colors"
+                                    class="bg-red-50/40 border-b border-[#C41E3A]/20 hover:bg-red-50/60 transition-colors group/row cursor-pointer shadow-[inset_4px_0_0_0_#C41E3A]"
+                                    onclick="window.open('https://www.swisslife.ch', '_blank')"
                                 >
                                     <td class="p-8">
                                         <div
-                                            class="font-bold text-xl text-[#C41E3A]"
+                                            class="font-bold text-xl text-[#C41E3A] group-hover/row:translate-x-1 transition-transform underline decoration-transparent group-hover/row:decoration-red-200"
                                         >
                                             Swiss Life
                                         </div>
@@ -745,6 +1024,213 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                                 >
                                     Plan My Hybrid Strategy
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LISTICLE RECOMMENDATIONS SECTION -->
+            <div class="mb-40">
+                <div class="max-w-4xl mx-auto">
+                    <RedSectionHeader title="Best 3a Providers by Use Case" />
+                    <div class="mt-12 grid sm:grid-cols-2 gap-6">
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                1
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Low Fees: <span
+                                        class="text-[#C41E3A]"
+                                        >Finpension (0.5% TER)</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    Unbeatable cost structure for pure equity
+                                    growth.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                2
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Protection: <span
+                                        class="text-[#C41E3A]"
+                                        >Swiss Life (Integrated Insurance)</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    The most comprehensive security net for your
+                                    goals.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                3
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Personalized Service: <span
+                                        class="text-[#C41E3A]"
+                                        >UBS (Dedicated Advisor)</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    When you need complex financial planning
+                                    support.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                4
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Expats: <span
+                                        class="text-[#C41E3A]"
+                                        >VIAC (Easy Withdrawal)</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    Fast processing for international moves.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                5
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Young Professionals: <span
+                                        class="text-[#C41E3A]"
+                                        >Finpension or VIAC</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    High equity share and low drag on returns.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                6
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Families: <span
+                                        class="text-[#C41E3A]"
+                                        >Swiss Life or AXA</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    Crucial protection components for
+                                    dependents.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                7
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Self-Employed: <span
+                                        class="text-[#C41E3A]"
+                                        >Swiss Life (Higher Limit Gaps)</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    Strategic filling for high-income
+                                    independent workers.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-6 bg-white rounded-3xl border border-gray-100 hover:border-[#C41E3A]/20 transition-all shadow-sm group"
+                        >
+                            <div
+                                class="w-10 h-10 bg-[#1a1a2e] text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#C41E3A] transition-colors"
+                            >
+                                8
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-bold text-[#1a1a2e] text-sm md:text-base"
+                                >
+                                    Best for Simplicity: <span
+                                        class="text-[#C41E3A]"
+                                        >PostFinance (Straightforward)</span
+                                    >
+                                </h4>
+                                <p
+                                    class="text-xs text-gray-500 leading-normal mt-1"
+                                >
+                                    Trusted Swiss institution with simple
+                                    digital flows.
+                                </p>
                             </div>
                         </div>
                     </div>

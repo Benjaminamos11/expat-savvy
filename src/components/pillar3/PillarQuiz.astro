@@ -13,20 +13,19 @@
     <input type="radio" name="quiz-step" id="q-step-1" class="hidden" checked />
     <input type="radio" name="quiz-step" id="q-step-2" class="hidden" />
     <input type="radio" name="quiz-step" id="q-step-3" class="hidden" />
+    <input type="radio" name="quiz-step" id="q-step-4" class="hidden" />
+    <input type="radio" name="quiz-step" id="q-step-5" class="hidden" />
+    <input type="radio" name="quiz-step" id="q-step-6" class="hidden" />
+    <input type="radio" name="quiz-step" id="q-step-7" class="hidden" />
     <input type="radio" name="quiz-step" id="q-step-result" class="hidden" />
 
-    <!-- STEP 1 -->
+    <!-- STEP 1: GOAL -->
     <div class="quiz-step step-1 p-8 md:p-12">
         <div class="flex items-center justify-between mb-8">
             <span
                 class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
-                >STEP 1 OF 3</span
+                >STEP 1 OF 7</span
             >
-            <div class="flex gap-1">
-                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
-                <div class="h-1 w-4 rounded-full bg-white/20"></div>
-                <div class="h-1 w-4 rounded-full bg-white/20"></div>
-            </div>
         </div>
         <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
             What is your primary financial goal?
@@ -35,7 +34,7 @@
             <label
                 for="q-step-2"
                 class="quiz-btn"
-                onclick="saveQuizAnswer(0, 'tax')"
+                onclick="saveQuizAnswer('goal', 'tax')"
             >
                 <div class="dot-ring"><div class="dot-fill"></div></div>
                 <span class="font-semibold text-lg">Maximize Tax Savings</span>
@@ -43,7 +42,7 @@
             <label
                 for="q-step-2"
                 class="quiz-btn"
-                onclick="saveQuizAnswer(0, 'flux')"
+                onclick="saveQuizAnswer('goal', 'flex')"
             >
                 <div class="dot-ring"><div class="dot-fill"></div></div>
                 <span class="font-semibold text-lg"
@@ -51,40 +50,170 @@
                 >
             </label>
         </div>
-        <p class="text-center text-white/40 text-xs mt-12 italic">
-            Result based on Swiss tax & pension scenarios.
-        </p>
     </div>
 
-    <!-- STEP 2 -->
+    <!-- STEP 2: TIMELINE -->
     <div class="quiz-step step-2 p-8 md:p-12">
         <div class="flex items-center justify-between mb-8">
             <span
                 class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
-                >STEP 2 OF 3</span
+                >STEP 2 OF 7</span
             >
-            <div class="flex gap-1">
-                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
-                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
-                <div class="h-1 w-4 rounded-full bg-white/20"></div>
-            </div>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            How long do you plan to stay in Switzerland?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-3"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('timeline', 'short')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg">Less than 5 years</span>
+            </label>
+            <label
+                for="q-step-3"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('timeline', 'long')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Indefinitely / 10+ years</span
+                >
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 3: TAX LEVEL -->
+    <div class="quiz-step step-3 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 3 OF 7</span
+            >
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            What is your estimated annual household income?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-4"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('tax_level', 'high')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Above CHF 120,000 (High Tax)</span
+                >
+            </label>
+            <label
+                for="q-step-4"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('tax_level', 'low')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Below CHF 120,000 (Lower Tax)</span
+                >
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 4: INVESTMENT STYLE -->
+    <div class="quiz-step step-4 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 4 OF 7</span
+            >
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            What is your preferred investment style?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-5"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('investment', 'agg')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Aggressive (High Stocks/Equity)</span
+                >
+            </label>
+            <label
+                for="q-step-5"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('investment', 'con')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Conservative (Gains Guaranteed)</span
+                >
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 5: LIFE STAGE -->
+    <div class="quiz-step step-5 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 5 OF 7</span
+            >
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
+            What is your current life stage?
+        </h3>
+        <div class="space-y-4">
+            <label
+                for="q-step-6"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('lifestage', 'young')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Young Professional (20s-30s)</span
+                >
+            </label>
+            <label
+                for="q-step-6"
+                class="quiz-btn"
+                onclick="saveQuizAnswer('lifestage', 'family')"
+            >
+                <div class="dot-ring"><div class="dot-fill"></div></div>
+                <span class="font-semibold text-lg"
+                    >Building a Family / Mid-Career</span
+                >
+            </label>
+        </div>
+    </div>
+
+    <!-- STEP 6: PRE-RETIREMENT CHECK -->
+    <div class="quiz-step step-6 p-8 md:p-12">
+        <div class="flex items-center justify-between mb-8">
+            <span
+                class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
+                >STEP 6 OF 7</span
+            >
         </div>
         <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
             Likely to need funds before retirement? (e.g. within 10 years)
         </h3>
         <div class="space-y-4">
             <label
-                for="q-step-3"
+                for="q-step-7"
                 class="quiz-btn"
-                onclick="saveQuizAnswer(1, 'yes')"
+                onclick="saveQuizAnswer('need_early', 'yes')"
             >
                 <div class="dot-ring"><div class="dot-fill"></div></div>
                 <span class="font-semibold text-lg">Yes</span>
             </label>
             <label
-                for="q-step-3"
+                for="q-step-7"
                 class="quiz-btn"
-                onclick="saveQuizAnswer(1, 'no')"
+                onclick="saveQuizAnswer('need_early', 'no')"
             >
                 <div class="dot-ring"><div class="dot-fill"></div></div>
                 <span class="font-semibold text-lg">No</span>
@@ -92,27 +221,22 @@
         </div>
     </div>
 
-    <!-- STEP 3 -->
-    <div class="quiz-step step-3 p-8 md:p-12">
+    <!-- STEP 7: BEYOND LIMITS -->
+    <div class="quiz-step step-7 p-8 md:p-12">
         <div class="flex items-center justify-between mb-8">
             <span
                 class="text-[#C41E3A] font-bold tracking-[0.2em] uppercase text-[10px]"
-                >STEP 3 OF 3</span
+                >STEP 7 OF 7</span
             >
-            <div class="flex gap-1">
-                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
-                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
-                <div class="h-1 w-4 rounded-full bg-[#C41E3A]"></div>
-            </div>
         </div>
         <h3 class="text-2xl md:text-3xl font-bold mb-10 leading-tight">
-            High-income earner looking beyond ~CHF 7k limit?
+            Looking to save beyond the ~CHF 7.2k limit?
         </h3>
         <div class="space-y-4">
             <label
                 for="q-step-result"
                 class="quiz-btn"
-                onclick="saveQuizAnswer(2, 'yes'); calculateAndShowResult();"
+                onclick="saveQuizAnswer('beyond_limit', 'yes'); calculateAndShowResult();"
             >
                 <div class="dot-ring"><div class="dot-fill"></div></div>
                 <span class="font-semibold text-lg">Yes</span>
@@ -120,7 +244,7 @@
             <label
                 for="q-step-result"
                 class="quiz-btn"
-                onclick="saveQuizAnswer(2, 'no'); calculateAndShowResult();"
+                onclick="saveQuizAnswer('beyond_limit', 'no'); calculateAndShowResult();"
             >
                 <div class="dot-ring"><div class="dot-fill"></div></div>
                 <span class="font-semibold text-lg">No</span>
@@ -154,16 +278,15 @@
             <label
                 for="q-step-1"
                 class="text-white/40 hover:text-white/60 font-medium py-4 px-6 cursor-pointer bg-transparent border-none"
+                >Retake Quiz</label
             >
-                Retake Quiz
-            </label>
         </div>
     </div>
 </div>
 
 <style is:inline>
     .pillar-quiz-root {
-        min-height: 580px;
+        min-height: 620px;
         display: flex;
         flex-direction: column;
     }
@@ -173,7 +296,7 @@
         gap: 1rem;
         width: 100%;
         text-align: left;
-        padding: 1.5rem;
+        padding: 1.25rem;
         border-radius: 1.25rem;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.15);
@@ -209,7 +332,6 @@
         transform: scale(1);
     }
 
-    /* STEP VISIBILITY LOGIC */
     .quiz-step {
         display: none !important;
     }
@@ -222,11 +344,22 @@
     #q-step-3:checked ~ .step-3 {
         display: block !important;
     }
+    #q-step-4:checked ~ .step-4 {
+        display: block !important;
+    }
+    #q-step-5:checked ~ .step-5 {
+        display: block !important;
+    }
+    #q-step-6:checked ~ .step-6 {
+        display: block !important;
+    }
+    #q-step-7:checked ~ .step-7 {
+        display: block !important;
+    }
     #q-step-result:checked ~ .step-result {
         display: block !important;
     }
 
-    /* Transitions */
     .animate-fade-in {
         animation: fadeIn 0.5s ease-out forwards;
     }
@@ -246,8 +379,8 @@
     (function () {
         const quizAnswers = {};
 
-        window.saveQuizAnswer = function (step, val) {
-            quizAnswers[step] = val;
+        window.saveQuizAnswer = function (key, val) {
+            quizAnswers[key] = val;
         };
 
         window.calculateAndShowResult = function () {
@@ -257,21 +390,31 @@
 
             let result = {
                 title: "Pillar 3a (Restricted)",
-                desc: "Pillar 3a is your best starting point. The immediate tax deduction outweighs the lock-in for most savers.",
+                desc: "Pillar 3a is your foundational vessel. The immediate tax deduction outweighs the lock-in for your long-term Swiss planning.",
                 icon: "💰",
             };
 
-            if (quizAnswers[2] === "yes") {
+            // Enhanced logic
+            const { goal, timeline, tax_level, beyond_limit, need_early } =
+                quizAnswers;
+
+            if (beyond_limit === "yes") {
                 result = {
-                    title: "A Mix of 3a & 3b",
-                    desc: "Maximize 3a first for tax breaks, then use 3b for excess savings to maintain flexibility.",
+                    title: "A Strategic 3a + 3b Mix",
+                    desc: "You should maximize your 3a first for the tax break, then use 3b as a flexible overflow for your additional wealth building.",
                     icon: "⚖️",
                 };
-            } else if (quizAnswers[1] === "yes" || quizAnswers[0] === "flux") {
+            } else if (need_early === "yes" || timeline === "short") {
                 result = {
                     title: "Pillar 3b (Flexible)",
-                    desc: "For short-term access and freedom, Pillar 3b is safer. 3a is locked until age 60.",
+                    desc: "Given your need for liquidity or shorter timeline in Switzerland, the flexibility of 3b is critical to avoid early withdrawal taxes.",
                     icon: "🔓",
+                };
+            } else if (tax_level === "high" && goal === "tax") {
+                result = {
+                    title: "Maximized Pillar 3a",
+                    desc: "Your high income makes the 3a tax rebate extremely powerful. Prioritize this to save several thousand francs per year.",
+                    icon: "🚀",
                 };
             }
 

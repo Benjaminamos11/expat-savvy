@@ -15,28 +15,44 @@ const metadata = {
 
 const faqs = [
     {
-        question:
-            "I think I'm a 'Flexible Maximizer'. What are the biggest risks I face?",
-        answer: "The primary risks are 'Savings Procrastination' (skipping payments) and 'Insurance Gaps'. Without the forced discipline and integrated life/disability protection of an insurance policy, many expats find themselves under-saved or uninsured during critical life events.",
+        question: "What is the premium waiver feature?",
+        answer: "The premium waiver (Beitragsverzicht) is a form of disability protection in an insurance 3a. If you become unable to work due to illness or accident, the insurance company takes over your 3a payments for you, ensuring your retirement goal and family protection remain fully funded.",
     },
     {
-        question: "Can I have both a bank and an insurance 3a?",
-        answer: "Yes, you can have multiple 3rd pillar accounts. A popular strategy for high-earning expats is to use an insurance policy for their base security and homeownership collateral, and a bank account for additional, flexible contributions up to the annual limit.",
+        question: "How does pledging (Nantissement) work?",
+        answer: "Pledging allows you to use your 3a capital as collateral for a mortgage without withdrawing it. The money stays invested and continues to compound, while the bank uses the pledge as security to give you better rates.",
     },
     {
-        question:
-            "How can I be sure the 'guarantees' from an insurance company are real?",
-        answer: "Swiss insurance companies are among the most regulated in the world. Guarantees like the Technical Interest Rate and guaranteed capital are legally binding and overseen by FINMA, providing a level of systemic security that bank interest rates cannot match.",
+        question: "Can I have both bank and insurance 3a?",
+        answer: "Yes! Many expats use a hybrid strategy: a smaller insurance 3a for base protection and mortgage pledging, and a flexible bank 3a for aggressive, low-fee equity growth.",
     },
     {
-        question:
-            "Is the 'forced discipline' of an insurance plan really an advantage?",
-        answer: "For most people, yes. Psychology shows that voluntary savings plans are often deprioritized. A fixed premium creates a powerful 'positive constraint' that ensures you actually reach your retirement and homeownership goals regardless of short-term temptations.",
+        question: "What is the hybrid approach?",
+        answer: "It's the strategy of splitting your 3rd pillar contributions between an insurance policy (for its 'Security Floor' of protection) and a bank/fintech account (for its 'Growth Ceiling' and flexibility).",
     },
     {
-        question:
-            "If I choose a bank 3a, what separate insurance do I absolutely need?",
-        answer: "You must ensure you have separate, comprehensive Term Life and Disability (Loss of Income) insurance. Many banks will also require you to 'pledge' separate assets or take out additional risk coverage if you use a bank 3a for a mortgage.",
+        question: "Which is better for families?",
+        answer: "Generally, insurance 3a is superior for families because it includes immediate life insurance and disability coverage that can protect your spouse and children if you are no longer there to provide.",
+    },
+    {
+        question: "Which is better for short-term expats?",
+        answer: "If you are 100% sure you will leave Switzerland in under 5 years, a bank 3a is usually better due to its liquidity and lack of early-exit surrenders.",
+    },
+    {
+        question: "Can I switch from insurance to bank?",
+        answer: "Yes, you can 'surrender' or convert an insurance policy to a 'paid-up' state and transfer the value. However, doing this early in a policy can involve high costs, so a thorough analysis is required.",
+    },
+    {
+        question: "What are typical insurance 3a fees?",
+        answer: "Insurance 3a fees are often 2-3% annually, which covers the cost of life insurance, disability protection, and the premium waiver. Bank 3a fees are lower (0.5-1%) but offer no protection.",
+    },
+    {
+        question: "Is insurance 3a worth the extra cost?",
+        answer: "Yes, if you value the 'sleep at night' factor. The tax savings alone often cover the cost of the insurance premiums, making the protection effectively 'free' compared to buying it with after-tax money.",
+    },
+    {
+        question: "What happens if I become disabled?",
+        answer: "With a bank 3a, you simply stop contributing and your savings plateau. With an insurance 3a (with premium waiver), the insurance company pays your contributions for you until retirement age.",
     },
 ];
 
@@ -103,15 +119,15 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
 
     <!-- HERO IMAGE -->
     <div
-        class="w-full h-[500px] md:h-[650px] relative overflow-hidden bg-gray-900 text-white"
+        class="w-full h-[400px] md:h-[550px] relative overflow-hidden bg-gray-900 text-white"
     >
         <img
             src={heroImage}
-            alt="A precision brass compass on a map of Switzerland pointing to a house-shield icon"
+            alt="A precision brass compass on a map of Switzerland"
             class="w-full h-full object-cover opacity-60"
         />
         <div
-            class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"
+            class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"
         >
             <h1
                 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-2xl max-w-5xl leading-tight"
@@ -123,366 +139,722 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
             <p
                 class="text-white/90 text-xl md:text-2xl font-medium drop-shadow-md max-w-2xl"
             >
-                It’s the most important decision for your 3rd pillar. This guide
-                provides a balanced view to help you choose the path that truly
-                matches your life goals and risk profile.
+                The most important decision for your 3rd pillar. This guide
+                provides a balanced view to help you choose the path that
+                matches your life goals.
             </p>
         </div>
     </div>
 
     <!-- CONTENT START -->
-    <div class="bg-white py-16 md:py-24">
+    <div class="bg-white pt-16 md:pt-24 pb-8">
         <div class="spoke-container">
             <!-- SECTION 1: PROFILE SELECTOR -->
             <div class="mb-24">
                 <div class="text-center mb-16">
                     <RedSectionHeader
-                        title="First, Let's Find Your Profile"
+                        title="Identify Your Professional Profile"
                         align="center"
                     />
                     <p class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto">
                         Choosing the right 3rd pillar starts with understanding
-                        your own financial DNA. Which path reflects your goals?
+                        your specific financial objectives in Switzerland.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Insurance Card: The Planner -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- The Homeowner -->
                     <div
-                        class="profile-card relative p-8 md:p-10 rounded-[40px] border-2 border-gray-100 bg-white hover:border-[#C41E3A] hover:shadow-2xl transition-all group cursor-pointer"
+                        class="profile-card p-8 rounded-[40px] border-2 border-gray-100 bg-white hover:border-[#C41E3A] hover:shadow-2xl transition-all group cursor-pointer"
                         onclick="document.getElementById('planners-path').scrollIntoView({ behavior: 'smooth' });"
                     >
-                        <div
-                            class="mb-6 w-16 h-16 rounded-2xl bg-[#C41E3A]/5 flex items-center justify-center group-hover:bg-[#C41E3A] transition-colors"
-                        >
-                            <span
-                                class="text-3xl group-hover:scale-110 transition-transform"
-                                >🛡️</span
+                        <div class="mb-6 text-[#C41E3A]">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                                ></path><polyline points="9 22 9 12 15 12 15 22"
+                                ></polyline></svg
                             >
                         </div>
-                        <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
-                            The Disciplined Planner
+                        <h3 class="text-xl font-bold text-[#1a1a2e] mb-3">
+                            The Homeowner
                         </h3>
-                        <p class="text-gray-600 mb-8 leading-relaxed">
-                            You value security, guarantees, and a clear path.
-                            Protecting your family and buying a home are top
-                            priorities. You prefer a "set it and forget it"
-                            solution that forces discipline.
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                            Planning to buy in the next 5 years. You want to
+                            pledge your policy as collateral for better rates.
                         </p>
-                        <button
-                            class="opacity-0 group-hover:opacity-100 transition-opacity bg-[#C41E3A] text-white font-bold py-3 px-8 rounded-full shadow-lg"
+                        <span class="text-[#C41E3A] font-bold text-sm"
+                            >See Path →</span
                         >
-                            See My Recommended Path
-                        </button>
                     </div>
 
-                    <!-- Bank Card: The Maximizer -->
+                    <!-- The Nomad -->
                     <div
-                        class="profile-card relative p-8 md:p-10 rounded-[40px] border-2 border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-300 hover:shadow-2xl transition-all group cursor-pointer"
+                        class="profile-card p-8 rounded-[40px] border-2 border-gray-100 bg-white hover:border-gray-300 hover:shadow-2xl transition-all group cursor-pointer"
                         onclick="document.getElementById('maximizers-path').scrollIntoView({ behavior: 'smooth' });"
                     >
-                        <div
-                            class="mb-6 w-16 h-16 rounded-2xl bg-gray-200/50 flex items-center justify-center group-hover:bg-[#1a1a2e] transition-colors"
-                        >
-                            <span
-                                class="text-3xl group-hover:scale-110 transition-transform"
-                                >📈</span
+                        <div class="mb-6 text-gray-400">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><circle cx="12" cy="12" r="10"></circle><line
+                                    x1="2"
+                                    y1="12"
+                                    x2="22"
+                                    y2="12"></line><path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                ></path></svg
                             >
                         </div>
-                        <h3 class="text-2xl font-bold text-[#1a1a2e] mb-4">
-                            The Flexible Maximizer
+                        <h3 class="text-xl font-bold text-[#1a1a2e] mb-3">
+                            The Nomad
                         </h3>
-                        <p class="text-gray-600 mb-8 leading-relaxed">
-                            You are a confident, hands-on investor with a
-                            high-risk tolerance. You need the flexibility to
-                            vary your contributions and are comfortable managing
-                            your own portfolio.
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                            You might leave Switzerland in a few years. You want
+                            maximum flexibility and low fees.
                         </p>
-                        <button
-                            class="opacity-0 group-hover:opacity-100 transition-opacity bg-[#1a1a2e] text-white font-bold py-3 px-8 rounded-full shadow-lg"
+                        <span class="text-gray-400 font-bold text-sm"
+                            >See Path →</span
                         >
-                            See My Recommended Path
-                        </button>
                     </div>
-                </div>
-            </div>
 
-            <style>
-                .profile-card:hover {
-                    transform: translateY(-5px);
-                }
-            </style>
-
-            <!-- SECTION 2: THE PLANNER'S PATH (Insurance Deep Dive) -->
-            <div id="planners-path" class="mb-24 pt-16 scroll-mt-20">
-                <RedSectionHeader
-                    title="The Planner's Path: Security, Family & Homeownership"
-                />
-                <div class="spoke-body space-y-8 mt-12">
-                    <p class="text-lg font-medium text-[#1a1a2e]">
-                        For the expat who prioritizes stability and the Swiss
-                        dream of homeownership, the insurance-based 3rd pillar
-                        is not just a savings account—it is a systemic
-                        advantage.
-                    </p>
-
-                    <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
-                        1. The Homeownership Advantage
-                    </h3>
-                    <p>
-                        In Switzerland, buying property often involves
-                        <strong>Indirect Amortization</strong>. Instead of
-                        paying back your mortgage principal directly, you
-                        contribute to your 3a insurance policy. This policy
-                        serves as the bank's primary security.
-                    </p>
+                    <!-- The Parent -->
                     <div
-                        class="bg-[#F8F9FA] p-8 rounded-3xl border border-gray-100 my-8"
+                        class="profile-card p-8 rounded-[40px] border-2 border-gray-100 bg-white hover:border-[#C41E3A] hover:shadow-2xl transition-all group cursor-pointer"
+                        onclick="document.getElementById('planners-path').scrollIntoView({ behavior: 'smooth' });"
                     >
-                        <p class="italic text-gray-700 leading-relaxed">
-                            "When we review mortgage applications for expats, an
-                            insurance-linked 3a is a massive signal of financial
-                            maturity. It guarantees the bank that the debt is
-                            covered by capital and protected by life insurance.
-                            Without it, many lenders will demand a higher down
-                            payment or impose stricter terms."
-                        </p>
-                        <div class="mt-4 text-[#C41E3A] font-bold text-sm">
-                            — Senior Mortgage Lead at an UBS Branch
+                        <div class="mb-6 text-[#C41E3A]">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                                ></path><circle cx="9" cy="7" r="4"
+                                ></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"
+                                ></path><path d="M16 3.13a4 4 0 0 1 0 7.75"
+                                ></path></svg
+                            >
                         </div>
+                        <h3 class="text-xl font-bold text-[#1a1a2e] mb-3">
+                            The Parent
+                        </h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                            You have a young family and want to ensure they're
+                            protected if something happens to you.
+                        </p>
+                        <span class="text-[#C41E3A] font-bold text-sm"
+                            >See Path →</span
+                        >
                     </div>
 
-                    <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
-                        2. The Security Advantage (The Swiss Life Case)
-                    </h3>
-                    <p>
-                        Unlike bank accounts where returns are entirely
-                        dependent on market whims, premium insurance solutions
-                        like <strong>Swiss Life Dynamic Elements Duo</strong> offer
-                        a <strong>Technical Interest Rate</strong>. This is a
-                        guaranteed floor below which your projected savings
-                        cannot fall. You benefit from modern index performance
-                        while knowing your baseline capital is legally and
-                        physically protected in Switzerland.
-                    </p>
-
-                    <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
-                        3. The Protection Advantage (Integrated Waiver)
-                    </h3>
-                    <p>
-                        What happens if you become unable to work after 5 years?
-                        In a bank solution, your savings simply stop. In an
-                        insurance solution, the <strong
-                            >Premium Waiver (Prämienbefreiung)</strong
+                    <!-- The Self-Employed -->
+                    <div
+                        class="profile-card p-8 rounded-[40px] border-2 border-gray-100 bg-white hover:border-[#C41E3A] hover:shadow-2xl transition-all group cursor-pointer"
+                        onclick="document.getElementById('planners-path').scrollIntoView({ behavior: 'smooth' });"
+                    >
+                        <div class="mb-6 text-[#C41E3A]">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><rect
+                                    x="2"
+                                    y="7"
+                                    width="20"
+                                    height="14"
+                                    rx="2"
+                                    ry="2"></rect><path
+                                    d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3 class="text-xl font-bold text-[#1a1a2e] mb-3">
+                            The Self-Employed
+                        </h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                            No employer pension or disability insurance. A fixed
+                            insurance 3a is part of your safety net.
+                        </p>
+                        <span class="text-[#C41E3A] font-bold text-sm"
+                            >See Path →</span
                         >
-                        kicks in. The insurance company continues to pay your contributions
-                        for you. Your retirement and homeownership goals stay on track,
-                        even during a crisis.
-                    </p>
-
-                    <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
-                        4. The Discipline Advantage
-                    </h3>
-                    <p>
-                        Expats face unique financial pressures. It is easy to
-                        "skip a month" of 3a contributions when a holiday or
-                        relocation comes up. Insurance plans create a <strong
-                            >positive constraint</strong
-                        >. By committing to a fixed premium, you outsource your
-                        financial discipline to a system that guarantees you
-                        will reach the finish line.
-                    </p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- SECTION 3: THE MAXIMIZER'S PATH (Bank/Flexibility) -->
-            <div id="maximizers-path" class="mb-32 pt-16 scroll-mt-20">
-                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12">
-                    The Maximizer's Path: When Flexibility is Key
-                </h2>
-                <div class="spoke-body space-y-8 mt-12">
-                    <p>
-                        For a highly specific profile, a bank-based 3rd pillar
-                        offers unique benefits. If you are a professional
-                        investor with a high-risk tolerance and a fluctuating,
-                        high-bonus income structure, the 100% flexibility of a
-                        bank account might seem attractive.
-                    </p>
-                    <p>
-                        A bank 3a allows you to change your investment strategy
-                        monthly, pull funds with more ease (within the legal 3a
-                        rules), and stop contributions entirely if you decide to
-                        leave Switzerland on short notice.
-                    </p>
+    <!-- SECTION 2: THE PLANNER'S PATH (Insurance Deep Dive) -->
+    <div id="planners-path" class="bg-gray-50 py-24 scroll-mt-20">
+        <div class="spoke-container">
+            <RedSectionHeader
+                title="The Planner's Path: Security, Family & Homeownership"
+            />
+            <div class="spoke-body space-y-8 mt-12">
+                <p class="text-lg font-medium text-[#1a1a2e]">
+                    For the expat who prioritizes stability and the Swiss dream
+                    of homeownership, the insurance-based 3rd pillar is not just
+                    a savings account—it is a systemic advantage.
+                </p>
 
-                    <!-- WARNING BOX -->
-                    <div
-                        class="bg-[#C41E3A]/5 border-2 border-[#C41E3A] p-10 rounded-[40px] my-12 relative overflow-hidden"
-                    >
+                <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
+                    1. The Homeownership Advantage
+                </h3>
+                <p>
+                    In Switzerland, buying property often involves
+                    <strong>Indirect Amortization</strong>. Instead of paying
+                    back your mortgage principal directly, you contribute to
+                    your 3a insurance policy. This policy serves as the bank's
+                    primary security.
+                </p>
+                <div
+                    class="bg-[#F8F9FA] p-8 rounded-3xl border border-gray-100 my-8"
+                >
+                    <p class="italic text-gray-700 leading-relaxed">
+                        "When we review mortgage applications for expats, an
+                        insurance-linked 3a is a massive signal of financial
+                        maturity. It guarantees the bank that the debt is
+                        covered by capital and protected by life insurance.
+                        Without it, many lenders will demand a higher down
+                        payment or impose stricter terms."
+                    </p>
+                    <div class="mt-4 text-[#C41E3A] font-bold text-sm">
+                        — Senior Mortgage Lead at an UBS Branch
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
+                    2. The Security Advantage (The Swiss Life Case)
+                </h3>
+                <p>
+                    Unlike bank accounts where returns are entirely dependent on
+                    market whims, premium insurance solutions like <strong
+                        >Swiss Life Dynamic Elements Duo</strong
+                    > offer a <strong>Technical Interest Rate</strong>. This is
+                    a guaranteed floor below which your projected savings cannot
+                    fall. You benefit from modern index performance while
+                    knowing your baseline capital is legally and physically
+                    protected in Switzerland.
+                </p>
+
+                <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
+                    3. The Premium Waiver (Beitragsverzicht) - The Killer
+                    Feature
+                </h3>
+                <p>
+                    The premium waiver is perhaps the most powerful and
+                    misunderstood feature of an insurance 3a. It ensures that
+                    your financial goals are <strong>uncancelable</strong> by life's
+                    unexpected turns.
+                </p>
+                <div
+                    class="bg-red-50 p-10 rounded-[40px] border border-red-100 my-8"
+                >
+                    <h4 class="text-xl font-bold text-red-900 mb-4">
+                        How it Works:
+                    </h4>
+                    <p class="text-red-800 leading-relaxed mb-6">
+                        If you become disabled and cannot work, the insurance
+                        company takes over your 3a policy funding automatically.
+                        Your retirement savings continue to grow as if you were
+                        still working, even while you are receiving disability
+                        benefits.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 text-sm">
                         <div
-                            class="absolute -top-4 -right-4 text-[#C41E3A] opacity-10 text-9xl font-bold italic"
+                            class="bg-white p-6 rounded-3xl shadow-sm border border-red-50"
                         >
-                            !
+                            <span
+                                class="font-black text-red-600 block mb-2 uppercase tracking-widest text-[10px]"
+                                >The Math</span
+                            >
+                            <p class="text-gray-600">
+                                You are 40 with a CHF 200k policy. You suffer an
+                                accident. With the waiver, the insurer funds you
+                                for 25 years. Your 3a hits <strong
+                                    >CHF 400k+</strong
+                                > at 65, instead of freezing at 200k.
+                            </p>
                         </div>
-                        <h4
-                            class="text-2xl font-bold text-[#1a1a2e] mb-6 flex items-center gap-3"
+                        <div
+                            class="bg-white p-6 rounded-3xl shadow-sm border border-red-50"
                         >
-                            <span class="text-[#C41E3A]">⚠️</span> CRITICAL RISK WARNING
-                        </h4>
-                        <p class="text-[#1a1a2e] font-bold mb-4">
-                            This path is only recommended for disciplined
-                            experts.
-                        </p>
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            Choosing the bank path carries significant systemic
-                            risks that most expats underestimate:
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <span class="text-[#C41E3A] font-bold">✕</span>
-                                <span class="text-sm"
-                                    ><strong>The Savings Gap:</strong> The flexibility
-                                    to contribute less means many fail to reach their
-                                    actual retirement goals.</span
-                                >
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="text-[#C41E3A] font-bold">✕</span>
-                                <span class="text-sm"
-                                    ><strong>The Insurance Gap:</strong> Zero integrated
-                                    coverage. If you die or become disabled, your
-                                    bank 3a offers $0 beyond what you've manually
-                                    saved.</span
-                                >
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="text-[#C41E3A] font-bold">✕</span>
-                                <span class="text-sm"
-                                    ><strong>The Mortgage Gap:</strong> Banks are
-                                    significantly more hesitant to accept bank 3a
-                                    portfolios as collateral, potentially killing
-                                    your homeownership dreams.</span
-                                >
-                            </li>
-                        </ul>
+                            <span
+                                class="font-black text-red-600 block mb-2 uppercase tracking-widest text-[10px]"
+                                >Bank 3a Reality</span
+                            >
+                            <p class="text-gray-600">
+                                If you stop working, your bank 3a stops growing.
+                                There is no waiver. Your future security is
+                                limited strictly to what you've already saved.
+                            </p>
+                        </div>
                     </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
+                    4. Pledging Your 3a for Mortgage (Nantissement)
+                </h3>
+                <p>
+                    Most expats think you have to withdraw your 3a for a down
+                    payment. <strong>That is often a mistake.</strong> Pledging (Nantissement)
+                    allows you to use your 3a as security without losing the magic
+                    of compound interest.
+                </p>
+                <div
+                    class="bg-blue-50/50 p-10 rounded-[40px] border border-blue-100 my-8"
+                >
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h5
+                                class="font-bold text-blue-900 mb-4 uppercase text-xs tracking-widest"
+                            >
+                                Withdrawal (Traditional)
+                            </h5>
+                            <ul class="space-y-3 text-sm text-blue-800/70">
+                                <li>• You take out CHF 100,000</li>
+                                <li>• Your 3a balance drops to CHF 0</li>
+                                <li>
+                                    • <strong
+                                        >Investment growth stops forever</strong
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5
+                                class="font-bold text-[#C41E3A] mb-4 uppercase text-xs tracking-widest"
+                            >
+                                Pledging (Strategic)
+                            </h5>
+                            <ul class="space-y-3 text-sm text-[#C41E3A]/80">
+                                <li>• Keep CHF 100,000 in your 3a</li>
+                                <li>• Bank accepts it as collateral</li>
+                                <li>
+                                    • <strong
+                                        >Your 100k continues to grow at 4-5%</strong
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-blue-100 text-center">
+                        <p class="text-blue-900 font-medium">
+                            Over 20 years, a pledged 100k grows to <strong
+                                >CHF 260,000</strong
+                            >. Withdrawal leaves you with $0 in growth.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#1a1a2e] pt-4">
+                    4. The Discipline Advantage
+                </h3>
+                <p>
+                    Expats face unique financial pressures. It is easy to "skip
+                    a month" of 3a contributions when a holiday or relocation
+                    comes up. Insurance plans create a <strong
+                        >positive constraint</strong
+                    >. By committing to a fixed premium, you outsource your
+                    financial discipline to a system that guarantees you will
+                    reach the finish line.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: THE MAXIMIZER'S PATH (Bank/Flexibility) -->
+    <div
+        id="maximizers-path"
+        class="bg-white py-24 scroll-mt-20 border-t border-gray-100"
+    >
+        <div class="spoke-container">
+            <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12">
+                The Maximizer's Path: When Flexibility is Key
+            </h2>
+            <div class="spoke-body space-y-8">
+                <p>
+                    For a specific profile, a bank-based 3rd pillar offers
+                    unique benefits. If you are a professional investor with a
+                    high-risk tolerance and a fluctuating, high-bonus income
+                    structure, the 100% flexibility of a bank account might seem
+                    attractive.
+                </p>
+                <p>
+                    A bank 3a allows you to change your investment strategy
+                    monthly, pull funds with more ease (within the legal 3a
+                    rules), and stop contributions entirely if you decide to
+                    leave Switzerland on short notice.
+                </p>
+
+                <!-- WARNING BOX -->
+                <div
+                    class="bg-[#C41E3A]/5 border-2 border-[#C41E3A] p-10 rounded-[40px] my-12 relative overflow-hidden"
+                >
+                    <div
+                        class="absolute -top-4 -right-4 text-[#C41E3A] opacity-10"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="160"
+                            height="160"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
+                            ></path><line x1="12" y1="9" x2="12" y2="13"
+                            ></line><line x1="12" y1="17" x2="12.01" y2="17"
+                            ></line></svg
+                        >
+                    </div>
+                    <h4
+                        class="text-2xl font-bold text-[#1a1a2e] mb-6 flex items-center gap-3"
+                    >
+                        <span class="text-[#C41E3A]">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
+                                ></path><line x1="12" y1="9" x2="12" y2="13"
+                                ></line><line x1="12" y1="17" x2="12.01" y2="17"
+                                ></line></svg
+                            >
+                        </span> CRITICAL RISK WARNING
+                    </h4>
+                    <p class="text-[#1a1a2e] font-bold mb-4">
+                        This path is only recommended for disciplined experts.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Choosing the bank path carries significant systemic
+                        risks that most expats underestimate:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#C41E3A]">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><line x1="18" y1="6" x2="6" y2="18"
+                                    ></line><line x1="6" y1="6" x2="18" y2="18"
+                                    ></line></svg
+                                >
+                            </span>
+                            <span class="text-sm"
+                                ><strong>The Savings Gap:</strong> The flexibility
+                                to contribute less means many fail to reach their
+                                actual retirement goals.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#C41E3A]">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><line x1="18" y1="6" x2="6" y2="18"
+                                    ></line><line x1="6" y1="6" x2="18" y2="18"
+                                    ></line></svg
+                                >
+                            </span>
+                            <span class="text-sm"
+                                ><strong>The Insurance Gap:</strong> Zero integrated
+                                coverage. If you die or become disabled, your bank
+                                3a offers $0 beyond what you've manually saved.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#C41E3A]">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><line x1="18" y1="6" x2="6" y2="18"
+                                    ></line><line x1="6" y1="6" x2="18" y2="18"
+                                    ></line></svg
+                                >
+                            </span>
+                            <span class="text-sm"
+                                ><strong>The Mortgage Gap:</strong> Banks are significantly
+                                more hesitant to accept bank 3a portfolios as collateral,
+                                potentially killing your homeownership dreams.</span
+                            >
+                        </li>
+                    </ul>
                 </div>
             </div>
 
             <!-- SECTION 4: SIDE-BY-SIDE COMPARISON TABLE -->
-            <div class="mb-24">
-                <div class="text-center mb-16">
-                    <RedSectionHeader
-                        title="The Final Verdict: Side-by-Side"
-                        align="center"
-                    />
-                    <p class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto">
-                        A clear breakdown of how the two paths compare across
-                        Switzerland's most critical financial milestones.
-                    </p>
-                </div>
+            <div id="comparison-table" class="bg-gray-50 py-24 scroll-mt-20">
+                <div class="spoke-container">
+                    <div class="mb-24">
+                        <div class="text-center mb-16">
+                            <RedSectionHeader
+                                title="The Final Verdict: Side-by-Side"
+                                align="center"
+                            />
+                            <p
+                                class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto"
+                            >
+                                A clear breakdown of how the two paths compare
+                                across Switzerland's most critical financial
+                                milestones.
+                            </p>
+                        </div>
 
-                <div
-                    class="overflow-x-auto rounded-3xl border border-gray-100 shadow-sm"
-                >
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-gray-50/50">
-                                <th
-                                    class="py-6 px-6 font-bold text-[#1a1a2e] text-sm uppercase tracking-wider"
-                                    >Feature</th
+                        <div
+                            class="overflow-x-auto rounded-3xl border border-gray-100 shadow-sm"
+                        >
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50/50">
+                                        <th
+                                            class="py-6 px-6 font-bold text-[#1a1a2e] text-sm uppercase tracking-wider"
+                                            >Feature</th
+                                        >
+                                        <th
+                                            class="py-6 px-6 font-bold text-[#C41E3A] text-sm uppercase tracking-wider"
+                                            >Insurance 3a</th
+                                        >
+                                        <th
+                                            class="py-6 px-6 font-bold text-gray-500 text-sm uppercase tracking-wider"
+                                            >Bank 3a / Fintech</th
+                                        >
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr>
+                                        <td
+                                            class="py-5 px-6 font-bold text-[#1a1a2e]"
+                                            >Capital Guarantees</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
+                                            >Legal Technical Int. Rate</td
+                                        >
+                                        <td class="py-5 px-6 text-gray-400"
+                                            >None (Market Risk)</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="py-5 px-6 font-bold text-[#1a1a2e]"
+                                            >Disability Protection</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
+                                            >Included (Premium Waiver)</td
+                                        >
+                                        <td class="py-5 px-6 text-gray-400"
+                                            >None (DIY Coverage Needed)</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="py-5 px-6 font-bold text-[#1a1a2e]"
+                                            >Life Insurance</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
+                                            >Lump Sum Protection</td
+                                        >
+                                        <td class="py-5 px-6 text-gray-400"
+                                            >Capital Only</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="py-5 px-6 font-bold text-[#1a1a2e]"
+                                            >Mortgage Collateral</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
+                                            >High (Bank Preferred)</td
+                                        >
+                                        <td class="py-5 px-6 text-gray-400"
+                                            >Moderate/Low</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="py-5 px-6 font-bold text-[#1a1a2e]"
+                                            >Savings Discipline</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
+                                            >Forced (Automatic Goal)</td
+                                        >
+                                        <td class="py-5 px-6 text-gray-400"
+                                            >Voluntary (Harder to Maintain)</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            class="py-5 px-6 font-bold text-[#1a1a2e]"
+                                            >Market Flexibility</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
+                                            >Structured Growth</td
+                                        >
+                                        <td
+                                            class="py-5 px-6 text-gray-700 font-medium whitespace-nowrap"
+                                            >100% DIY Freedom</td
+                                        >
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- SECTION: COMMON MYTHS -->
+                        <div class="mt-24">
+                            <h3
+                                class="text-2xl font-bold text-[#1a1a2e] mb-12 text-center"
+                            >
+                                Common Myths About Insurance 3a
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div
+                                    class="p-8 bg-gray-50 rounded-3xl border border-gray-100"
                                 >
-                                <th
-                                    class="py-6 px-6 font-bold text-[#C41E3A] text-sm uppercase tracking-wider"
-                                    >Insurance 3a</th
+                                    <h4
+                                        class="font-bold text-[#C41E3A] mb-2 uppercase text-xs tracking-widest"
+                                    >
+                                        Myth 1: Inflexible
+                                    </h4>
+                                    <p
+                                        class="text-sm text-gray-700 leading-relaxed"
+                                    >
+                                        <strong>Reality:</strong> While insurance
+                                        3a has higher commitment, it isn't "locked".
+                                        You can adjust coverage, switch providers,
+                                        or convert to a 'paid-up' policy. The flexibility
+                                        exists, it just requires professional guidance
+                                        to execute.
+                                    </p>
+                                </div>
+                                <div
+                                    class="p-8 bg-gray-50 rounded-3xl border border-gray-100"
                                 >
-                                <th
-                                    class="py-6 px-6 font-bold text-gray-500 text-sm uppercase tracking-wider"
-                                    >Bank 3a / Fintech</th
+                                    <h4
+                                        class="font-bold text-[#C41E3A] mb-2 uppercase text-xs tracking-widest"
+                                    >
+                                        Myth 2: Only for Old People
+                                    </h4>
+                                    <p
+                                        class="text-sm text-gray-700 leading-relaxed"
+                                    >
+                                        <strong>Reality:</strong> Insurance 3a is
+                                        actually most valuable for young families.
+                                        Locking in protection early secures lower
+                                        premiums for life and maximizes the 'Premium
+                                        Waiver' benefit over decades.
+                                    </p>
+                                </div>
+                                <div
+                                    class="p-8 bg-gray-50 rounded-3xl border border-gray-100"
                                 >
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100">
-                            <tr>
-                                <td class="py-5 px-6 font-bold text-[#1a1a2e]"
-                                    >Capital Guarantees</td
+                                    <h4
+                                        class="font-bold text-[#C41E3A] mb-2 uppercase text-xs tracking-widest"
+                                    >
+                                        Myth 3: Bank 3a is Always Cheaper
+                                    </h4>
+                                    <p
+                                        class="text-sm text-gray-700 leading-relaxed"
+                                    >
+                                        <strong>Reality:</strong> Lower fees don't
+                                        matter if you become disabled and can't contribute.
+                                        The premium waiver feature can be worth far
+                                        more than the fee difference, especially for
+                                        self-employed expats.
+                                    </p>
+                                </div>
+                                <div
+                                    class="p-8 bg-gray-50 rounded-3xl border border-gray-100"
                                 >
-                                <td
-                                    class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
-                                    >Legal Technical Int. Rate</td
-                                >
-                                <td class="py-5 px-6 text-gray-400"
-                                    >None (Market Risk)</td
-                                >
-                            </tr>
-                            <tr>
-                                <td class="py-5 px-6 font-bold text-[#1a1a2e]"
-                                    >Disability Protection</td
-                                >
-                                <td
-                                    class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
-                                    >Included (Premium Waiver)</td
-                                >
-                                <td class="py-5 px-6 text-gray-400"
-                                    >None (DIY Coverage Needed)</td
-                                >
-                            </tr>
-                            <tr>
-                                <td class="py-5 px-6 font-bold text-[#1a1a2e]"
-                                    >Life Insurance</td
-                                >
-                                <td
-                                    class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
-                                    >Lump Sum Protection</td
-                                >
-                                <td class="py-5 px-6 text-gray-400"
-                                    >Capital Only</td
-                                >
-                            </tr>
-                            <tr>
-                                <td class="py-5 px-6 font-bold text-[#1a1a2e]"
-                                    >Mortgage Collateral</td
-                                >
-                                <td
-                                    class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
-                                    >High (Bank Preferred)</td
-                                >
-                                <td class="py-5 px-6 text-gray-400"
-                                    >Moderate/Low</td
-                                >
-                            </tr>
-                            <tr>
-                                <td class="py-5 px-6 font-bold text-[#1a1a2e]"
-                                    >Savings Discipline</td
-                                >
-                                <td
-                                    class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
-                                    >Forced (Automatic Goal)</td
-                                >
-                                <td class="py-5 px-6 text-gray-400"
-                                    >Voluntary (Harder to Maintain)</td
-                                >
-                            </tr>
-                            <tr>
-                                <td class="py-5 px-6 font-bold text-[#1a1a2e]"
-                                    >Market Flexibility</td
-                                >
-                                <td
-                                    class="py-5 px-6 text-gray-700 bg-[#C41E3A]/5 font-medium"
-                                    >Structured Growth</td
-                                >
-                                <td
-                                    class="py-5 px-6 text-gray-700 font-medium whitespace-nowrap"
-                                    >100% DIY Freedom</td
-                                >
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <h4
+                                        class="font-bold text-[#C41E3A] mb-2 uppercase text-xs tracking-widest"
+                                    >
+                                        Myth 4: Pick One or the Other
+                                    </h4>
+                                    <p
+                                        class="text-sm text-gray-700 leading-relaxed"
+                                    >
+                                        <strong>Reality:</strong> The hybrid approach
+                                        is often the optimal path. Use insurance for
+                                        your base security/mortgage pledge and bank
+                                        accounts for aggressive year-end growth.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- SECTION 5: THE HYBRID STRATEGY -->
-            <div class="mb-32">
+        <!-- SECTION 5: THE HYBRID STRATEGY -->
+        <div id="hybrid-strategy" class="bg-white py-24 scroll-mt-20">
+            <div class="spoke-container">
                 <div
                     class="bg-[#1a1a2e] text-white p-10 md:p-16 rounded-[40px] shadow-2xl relative overflow-hidden"
                 >
@@ -505,7 +877,9 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
                             <p class="text-lg leading-relaxed text-white/90">
                                 What if you don't have to choose just one path?
                                 For high-earning expats, the most sophisticated
-                                3rd pillar strategy is often **Hybrid**.
+                                3rd pillar strategy is often <strong
+                                    >Hybrid</strong
+                                >.
                             </p>
                             <p class="text-white/80">
                                 By combining the bedrock security of an
@@ -514,6 +888,151 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
                                 create a financial engine that is both resilient
                                 and adaptable.
                             </p>
+                            <div
+                                class="mt-16 bg-white/5 border border-white/10 rounded-[40px] p-10"
+                            >
+                                <h4
+                                    class="text-center font-black text-white uppercase tracking-widest text-sm mb-10"
+                                >
+                                    The Hybrid Architecture
+                                </h4>
+                                <div
+                                    class="flex flex-col md:flex-row items-center justify-center gap-4"
+                                >
+                                    <!-- Insurance Foundation -->
+                                    <div
+                                        class="w-full md:w-64 p-6 bg-[#C41E3A] rounded-2xl text-center shadow-xl"
+                                    >
+                                        <div class="mb-4 text-white">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="36"
+                                                height="36"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                ><path
+                                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                                ></path></svg
+                                            >
+                                        </div>
+                                        <div
+                                            class="font-black text-white uppercase text-xs tracking-tighter mb-1 text-white/70"
+                                        >
+                                            Foundation Layer
+                                        </div>
+                                        <div
+                                            class="font-bold text-white text-lg leading-tight"
+                                        >
+                                            Insurance 3a
+                                        </div>
+                                        <div
+                                            class="mt-4 pt-4 border-t border-white/20 text-[10px] text-white/80 space-y-1"
+                                        >
+                                            <div
+                                                class="flex items-center justify-between"
+                                            >
+                                                <span>Premium Waiver</span><span
+                                                    >✓</span
+                                                >
+                                            </div>
+                                            <div
+                                                class="flex items-center justify-between"
+                                            >
+                                                <span>Life Cover</span><span
+                                                    >✓</span
+                                                >
+                                            </div>
+                                            <div
+                                                class="flex items-center justify-between"
+                                            >
+                                                <span>Guarantees</span><span
+                                                    >✓</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="text-2xl text-white/20 hidden md:block"
+                                    >
+                                        +
+                                    </div>
+
+                                    <!-- Bank Growth -->
+                                    <div
+                                        class="w-full md:w-64 p-6 bg-blue-600 rounded-2xl text-center shadow-xl"
+                                    >
+                                        <div class="mb-4 text-white">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="36"
+                                                height="36"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                ><polyline
+                                                    points="23 6 13.5 15.5 8.5 10.5 1 18"
+                                                >
+                                                </polyline><polyline
+                                                    points="17 6 23 6 23 12"
+                                                ></polyline></svg
+                                            >
+                                        </div>
+                                        <div
+                                            class="font-black text-white uppercase text-xs tracking-tighter mb-1 text-white/70"
+                                        >
+                                            Growth Layer
+                                        </div>
+                                        <div
+                                            class="font-bold text-white text-lg leading-tight"
+                                        >
+                                            Bank 3a
+                                        </div>
+                                        <div
+                                            class="mt-4 pt-4 border-t border-white/20 text-[10px] text-white/80 space-y-1"
+                                        >
+                                            <div
+                                                class="flex items-center justify-between"
+                                            >
+                                                <span>Low Fees</span><span
+                                                    >✓</span
+                                                >
+                                            </div>
+                                            <div
+                                                class="flex items-center justify-between"
+                                            >
+                                                <span>High Equity</span><span
+                                                    >✓</span
+                                                >
+                                            </div>
+                                            <div
+                                                class="flex items-center justify-between"
+                                            >
+                                                <span>Flexibility</span><span
+                                                    >✓</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-10 text-center">
+                                    <p class="text-white/60 text-sm italic">
+                                        "By combining both, you build a
+                                        financial engine that is both
+                                        unbreakable and aggressive. This is the
+                                        optimal strategy for most families and
+                                        self-employed individuals."
+                                    </p>
+                                </div>
+                            </div>
+
                             <div class="grid md:grid-cols-2 gap-8 mt-10">
                                 <div
                                     class="p-8 bg-white/10 rounded-3xl border border-white/20"
@@ -521,17 +1040,18 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
                                     <h4
                                         class="font-bold text-[#f87171] mb-3 uppercase text-xs tracking-widest"
                                     >
-                                        Your "Security Floor"
+                                        Insurance 3a (Foundation)
                                     </h4>
                                     <p
                                         class="text-base font-medium text-white leading-relaxed"
                                     >
-                                        Use a <strong class="text-[#f87171]"
-                                            >Fixed Insurance 3a</strong
-                                        > for your base contribution. This secures
-                                        your mortgage collateral, guarantees your
-                                        family's protection, and ensures you never
-                                        skip your core savings goals.
+                                        Use this for your primary security. It
+                                        secures your mortgage collateral,
+                                        guarantees your family's protection via
+                                        life insurance and the <strong
+                                            >premium waiver</strong
+                                        >, ensuring your goals are met even if
+                                        you can't work.
                                     </p>
                                 </div>
                                 <div
@@ -540,17 +1060,16 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
                                     <h4
                                         class="font-bold text-blue-400 mb-3 uppercase text-xs tracking-widest"
                                     >
-                                        Your "Flexibility Ceiling"
+                                        Bank 3a (Growth)
                                     </h4>
                                     <p
                                         class="text-base font-medium text-white leading-relaxed"
                                     >
-                                        Use a <strong class="text-blue-400"
-                                            >Bank or Fintech 3rd Pillar</strong
-                                        > for any remaining contributions up to the
-                                        legal limit. This allows you to invest excess
-                                        cash or adjust your year-end tax optimization
-                                        with 100% freedom.
+                                        Use this for aggressive wealth building.
+                                        Benefit from low fees and 80-100% equity
+                                        exposure. It provides the flexibility to
+                                        adjust contributions year-by-year as
+                                        your income fluctuates.
                                     </p>
                                 </div>
                             </div>
@@ -558,169 +1077,187 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- SECTION 6: INTERACTIVE SIMULATOR -->
-            <div class="mb-32">
-                <div class="text-center mb-12">
-                    <RedSectionHeader
-                        title="Simulate Your Financial Security"
-                        align="center"
-                    />
-                    <p class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto">
-                        See how your current strategy holds up against Swiss
-                        mortgage and protection requirements.
-                    </p>
-                </div>
-
-                <InsuranceSecuritySimulator />
-            </div>
-
-            <!-- RELATED GUIDES -->
-            <div class="mb-24 pt-16 border-t border-gray-100">
-                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
-                    Continue Your Journey
-                </h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <a
-                        href="/3rd-pillar/tax-optimization/"
-                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
-                    >
-                        <div
-                            class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
-                        >
-                            Optimization
-                        </div>
-                        <h4
-                            class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
-                        >
-                            3a Tax Guide
-                        </h4>
-                        <p class="text-sm text-gray-500">
-                            Maximize your annual deductions with Canton-specific
-                            strategies.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/pillar-3a-vs-3b/"
-                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
-                    >
-                        <div
-                            class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
-                        >
-                            Comparison
-                        </div>
-                        <h4
-                            class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
-                        >
-                            3a vs 3b
-                        </h4>
-                        <p class="text-sm text-gray-500">
-                            Choosing the right pillar for your length of stay in
-                            Switzerland.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/"
-                        class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
-                    >
-                        <div
-                            class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
-                        >
-                            Strategic Hub
-                        </div>
-                        <h4
-                            class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
-                        >
-                            3rd Pillar Masterclass
-                        </h4>
-                        <p class="text-sm text-gray-500">
-                            The complete blueprint for expat retirement
-                            planning.
-                        </p>
-                    </a>
-                </div>
-            </div>
-
-            <!-- HANS STEINER CARD -->
-            <div
-                class="mb-24 bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm"
-            >
-                <div class="flex flex-col md:flex-row items-center gap-10">
-                    <div
-                        class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
-                    >
-                        <img
-                            src="/images/hans-steiner.png"
-                            alt="Hans Steiner"
-                            class="w-full h-full object-cover"
+        <!-- SECTION 6: INTERACTIVE SIMULATOR -->
+        <div
+            id="simulator"
+            class="bg-gray-50 py-24 scroll-mt-20 border-t border-gray-100"
+        >
+            <div class="spoke-container">
+                <div class="mb-32">
+                    <div class="text-center mb-12">
+                        <RedSectionHeader
+                            title="Simulate Your Financial Security"
+                            align="center"
                         />
-                    </div>
-                    <div class="flex-grow">
-                        <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
-                            Unsure Which Profile Fits You Best?
-                        </h2>
-                        <p class="spoke-body text-gray-600 mb-8 max-w-xl">
-                            "Choosing the wrong path can cost you decades of
-                            compounded security. Let's analyze your specific
-                            goals—homeownership, family protection, or
-                            flexibility—to find your ideal Swiss setup."
-                        </p>
-                        <button
-                            onclick="window.openContextualModal()"
-                            class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                        <p
+                            class="text-gray-600 mt-4 spoke-body max-w-2xl mx-auto"
                         >
-                            Get a Free Profile Analysis
-                        </button>
+                            See how your current strategy holds up against Swiss
+                            mortgage and protection requirements.
+                        </p>
                     </div>
-                </div>
-            </div>
 
-            <!-- FAQ SECTION -->
-            <div class="mb-24">
-                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
-                    Frequently Asked Questions
-                </h2>
-                <div class="space-y-4">
-                    {
-                        faqs.map((faq) => (
-                            <div class="border-b border-gray-100">
-                                <details class="group py-4">
-                                    <summary class="flex justify-between items-center cursor-pointer list-none">
-                                        <span class="text-lg md:text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors">
-                                            {faq.question}
-                                        </span>
-                                        <span class="text-2xl font-light text-gray-400 group-open:rotate-45 transition-transform">
-                                            +
-                                        </span>
-                                    </summary>
-                                    <div class="pt-4 pb-2 text-gray-600 spoke-body leading-relaxed animate-fade-in">
-                                        {faq.answer}
-                                    </div>
-                                </details>
-                            </div>
-                        ))
-                    }
+                    <InsuranceSecuritySimulator />
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- FINAL CTA -->
-    <div class="bg-[#1a1a2e] py-24 text-center">
-        <div class="spoke-container">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-                Ready to Define Your Path?
-            </h2>
-            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
-                Discover the tailored 3rd pillar strategy that matches your
-                unique profile and secures your Swiss future.
-            </p>
-            <button
-                onclick="window.openContextualModal()"
-                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl transition transform hover:-translate-y-1"
-            >
-                Start My Personalized Plan
-            </button>
+        <!-- SECTION 7: RESOURCES & FAQ -->
+        <div id="resources" class="bg-white py-24 border-t border-gray-100">
+            <div class="spoke-container">
+                <!-- RELATED GUIDES -->
+                <div class="mb-24 pt-16">
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
+                    >
+                        Continue Your Journey
+                    </h2>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <a
+                            href="/3rd-pillar/tax-optimization/"
+                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
+                        >
+                            <div
+                                class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
+                            >
+                                Optimization
+                            </div>
+                            <h4
+                                class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
+                            >
+                                3a Tax Guide
+                            </h4>
+                            <p class="text-sm text-gray-500">
+                                Maximize your annual deductions with
+                                Canton-specific strategies.
+                            </p>
+                        </a>
+                        <a
+                            href="/3rd-pillar/pillar-3a-vs-3b/"
+                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
+                        >
+                            <div
+                                class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
+                            >
+                                Comparison
+                            </div>
+                            <h4
+                                class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
+                            >
+                                3a vs 3b
+                            </h4>
+                            <p class="text-sm text-gray-500">
+                                Choosing the right pillar for your length of
+                                stay in Switzerland.
+                            </p>
+                        </a>
+                        <a
+                            href="/3rd-pillar/"
+                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
+                        >
+                            <div
+                                class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
+                            >
+                                Strategic Hub
+                            </div>
+                            <h4
+                                class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
+                            >
+                                3rd Pillar Masterclass
+                            </h4>
+                            <p class="text-sm text-gray-500">
+                                The complete blueprint for expat retirement
+                                planning.
+                            </p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- HANS STEINER CARD -->
+                <div
+                    class="mb-24 bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm"
+                >
+                    <div class="flex flex-col md:flex-row items-center gap-10">
+                        <div
+                            class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
+                        >
+                            <img
+                                src="/images/hans-steiner.png"
+                                alt="Hans Steiner"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div class="flex-grow">
+                            <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
+                                Unsure Which Profile Fits You Best?
+                            </h2>
+                            <p class="spoke-body text-gray-600 mb-8 max-w-xl">
+                                "Choosing the wrong path can cost you decades of
+                                compounded security. Let's analyze your specific
+                                goals—homeownership, family protection, or
+                                flexibility—to find your ideal Swiss setup."
+                            </p>
+                            <button
+                                onclick="window.openContextualModal()"
+                                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
+                            >
+                                Get a Free Profile Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ SECTION -->
+                <div class="mb-24">
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
+                    >
+                        Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        {
+                            faqs.map((faq) => (
+                                <div class="border-b border-gray-100">
+                                    <details class="group py-4">
+                                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                                            <span class="text-lg md:text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors">
+                                                {faq.question}
+                                            </span>
+                                            <span class="text-2xl font-light text-gray-400 group-open:rotate-45 transition-transform">
+                                                +
+                                            </span>
+                                        </summary>
+                                        <div class="pt-4 pb-2 text-gray-600 spoke-body leading-relaxed animate-fade-in">
+                                            {faq.answer}
+                                        </div>
+                                    </details>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL CTA -->
+        <div class="bg-[#1a1a2e] py-24 text-center">
+            <div class="spoke-container">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                    Ready to Define Your Path?
+                </h2>
+                <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                    Discover the tailored 3rd pillar strategy that matches your
+                    unique profile and secures your Swiss future.
+                </p>
+                <button
+                    onclick="window.openContextualModal()"
+                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl transition transform hover:-translate-y-1"
+                >
+                    Start My Personalized Plan
+                </button>
+            </div>
         </div>
     </div>
 </Layout>

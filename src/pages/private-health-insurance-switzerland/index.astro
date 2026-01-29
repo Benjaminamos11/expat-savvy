@@ -1,52 +1,57 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import FAQ from '../../components/FAQ.astro';
-import FAQSchema from '../../components/schema/FAQSchema.astro';
-import HowToSchema from '../../components/schema/HowToSchema.astro';
-import ArticleSchema from '../../components/schema/ArticleSchema.astro';
+import Layout from "../../layouts/Layout.astro";
+import FAQ from "../../components/FAQ.astro";
+import FAQSchema from "../../components/schema/FAQSchema.astro";
+import HowToSchema from "../../components/schema/HowToSchema.astro";
+import ArticleSchema from "../../components/schema/ArticleSchema.astro";
 
 const faqs = [
   {
-    question: "Is \"private health insurance\" separate from basic insurance?",
-    answer: "No. Private/semi-private are **supplementary** hospital plans (VVG/LCA) on top of the mandatory basic (KVG/LAMal)."
+    question: 'Is "private health insurance" separate from basic insurance?',
+    answer:
+      "No. Private/semi-private are <strong>supplementary</strong> hospital plans (VVG/LCA) on top of the mandatory basic (KVG/LAMal).",
   },
   {
     question: "How much does private hospital insurance cost per month?",
-    answer: "Indicatively **CHF 400–700+** for private and **CHF 200–400** for semi-private, varying by age, canton, and insurer."
+    answer:
+      "Indicatively <strong>CHF 400–700+</strong> for private and <strong>CHF 200–400</strong> for semi-private, varying by age, canton, and insurer.",
   },
   {
     question: "Can I get private insurance with pre-existing conditions?",
-    answer: "It depends on the insurer's medical underwriting. You may face exclusions or rejection. We'll help you position your application."
+    answer:
+      "It depends on the insurer's medical underwriting. You may face exclusions or rejection. We'll help you position your application.",
   },
   {
     question: "Do these plans cover hospitals outside Switzerland?",
-    answer: "Some do (global options). We'll clarify coverage scope per plan and destination."
+    answer:
+      "Some do (global options). We'll clarify coverage scope per plan and destination.",
   },
   {
     question: "Is it worth paying for private coverage as an expat?",
-    answer: "If you value single room, free doctor choice, and quicker access (especially for planned procedures), many expats find it worthwhile."
-  }
+    answer:
+      "If you value single room, free doctor choice, and quicker access (especially for planned procedures), many expats find it worthwhile.",
+  },
 ];
 
 const howToSteps = [
   {
     name: "Check fit & pricing",
-    text: "We gather your age, postcode, and preferences."
+    text: "We gather your age, postcode, and preferences.",
   },
   {
     name: "Medical acceptance",
-    text: "Complete health questionnaire; we advise per insurer."
+    text: "Complete health questionnaire; we advise per insurer.",
   },
   {
     name: "Start coverage",
-    text: "Pick start date; align with basic insurance and any change season deadlines."
-  }
+    text: "Pick start date; align with basic insurance and any change season deadlines.",
+  },
 ];
 
 const costTable = [
   { age: "25–35", semiPrivate: "CHF 200–350", private: "CHF 400–650" },
   { age: "36–45", semiPrivate: "CHF 230–380", private: "CHF 450–700" },
-  { age: "46–55", semiPrivate: "CHF 280–450", private: "CHF 550–850" }
+  { age: "46–55", semiPrivate: "CHF 280–450", private: "CHF 550–850" },
 ];
 
 const benefitsList = [
@@ -54,36 +59,38 @@ const benefitsList = [
     category: "Comfort & Access",
     items: [
       "1-bed or 2-bed room comfort",
-      "**Free doctor/surgeon choice** (private)",
-      "Shorter waiting times for planned procedures"
-    ]
+      "<strong>Free doctor/surgeon choice</strong> (private)",
+      "Shorter waiting times for planned procedures",
+    ],
   },
   {
-    category: "For Expats & Frequent Travellers", 
+    category: "For Expats & Frequent Travellers",
     items: [
-      "Options for **global hospital coverage**",
+      "Options for <strong>global hospital coverage</strong>",
       "Better continuity of care across regions/countries",
-      "English-friendly insurers and clinics"
-    ]
-  }
+      "English-friendly insurers and clinics",
+    ],
+  },
 ];
 
 const providers = [
   { name: "SWICA", link: "/providers/swica/" },
   { name: "Helsana", link: "/providers/helsana/" },
   { name: "Sanitas", link: "/healthcare/all-insurances/sanitas/" },
-  { name: "Groupe Mutuel", link: "/healthcare/all-insurances/groupe-mutuel/" }
+  { name: "Groupe Mutuel", link: "/healthcare/all-insurances/groupe-mutuel/" },
 ];
 
-const title = "Private Health Insurance Switzerland (2026) | Semi-Private & Private Hospital Cover for Expats";
-const description = "Understand private health insurance in Switzerland: semi-private & private hospital coverage, typical costs, global options, acceptance rules, and how to apply. Independent help in English.";
-const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerland/";
+const title =
+  "Private Health Insurance Switzerland (2026) | Semi-Private & Private Hospital Cover for Expats";
+const description =
+  "Understand private health insurance in Switzerland: semi-private & private hospital coverage, typical costs, global options, acceptance rules, and how to apply. Independent help in English.";
+const canonicalURL =
+  "https://expat-savvy.ch/private-health-insurance-switzerland/";
 ---
 
 <Layout title={title} description={description} canonicalURLProp={canonicalURL}>
-  
   <!-- JSON-LD Schema -->
-  <ArticleSchema 
+  <ArticleSchema
     type="Article"
     title={title}
     description={description}
@@ -94,9 +101,9 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     author="Expat Savvy"
     slot="head"
   />
-  
+
   <FAQSchema faqs={faqs} slot="head" />
-  
+
   <HowToSchema
     name="How to apply for private hospital insurance in Switzerland"
     description="3 steps to get private hospital coverage in Switzerland"
@@ -105,26 +112,40 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
   />
 
   <main class="min-h-screen bg-gray-50">
-    
     <!-- Hero Section -->
     <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-16 lg:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-4xl mx-auto">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+          >
             Private Health Insurance in Switzerland (2026 Guide for Expats)
           </h1>
           <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-            Private health insurance in Switzerland means <strong>semi-private</strong> or <strong>private hospital</strong> coverage (supplementary). Get comfort, free doctor choice, and optional global cover — subject to medical acceptance.
+            Private health insurance in Switzerland means <strong
+              >semi-private</strong
+            > or <strong>private hospital</strong> coverage (supplementary). Get comfort,
+            free doctor choice, and optional global cover — subject to medical acceptance.
           </p>
-          
+
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <button
               onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
               class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-2xl shadow-[0_4px_14px_0_rgba(204,36,44,0.25)] hover:shadow-[0_6px_20px_0_rgba(204,36,44,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
             >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                ></path>
               </svg>
               Book Free Consultation
             </button>
@@ -132,13 +153,22 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
               onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
               class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-primary-600 font-semibold rounded-2xl border-2 border-primary-200 hover:bg-primary-50 hover:border-primary-300 transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
             >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               Get 3 Private Offers
             </button>
           </div>
-          
+
           <!-- Trust indicators -->
           <p class="text-sm text-gray-500">
             Independent, in English. Typical reply within 24h.
@@ -148,20 +178,39 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     </div>
 
     <!-- Seasonal Highlight Card -->
-    <div class={`${new Date() < new Date('2025-11-30') ? 'block' : 'hidden'} max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-16 relative z-10`}>
-      <div class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] border border-primary-100">
+    <div
+      class={`${new Date() < new Date("2025-11-30") ? "block" : "hidden"} max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-16 relative z-10`}
+    >
+      <div
+        class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] border border-primary-100"
+      >
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0">
-            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-              <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <div
+              class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-primary-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
           </div>
           <div>
-            <h3 class="font-semibold text-gray-900 mb-1">Annual Change Season</h3>
+            <h3 class="font-semibold text-gray-900 mb-1">
+              Annual Change Season
+            </h3>
             <p class="text-gray-600">
-              Supplementary (private/semi-private) applications are best submitted <strong>by 30 September</strong>. Basic insurance changes until <strong>30 November</strong>.
+              Supplementary (private/semi-private) applications are best
+              submitted <strong>by 30 September</strong>. Basic insurance
+              changes until <strong>30 November</strong>.
             </p>
           </div>
         </div>
@@ -171,21 +220,49 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- What is Private Health Insurance -->
     <section class="py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">What "Private Health Insurance" Means Here</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          What "Private Health Insurance" Means Here
+        </h2>
         <div class="prose prose-lg max-w-none text-gray-700">
           <ul class="space-y-4 text-lg">
-            <li>In Switzerland, "private health insurance" usually refers to <strong>supplementary hospital insurance</strong> under <strong>VVG/LCA</strong> (not a replacement for basic <strong>KVG/LAMal</strong>).</li>
-            <li><strong>Levels:</strong>
+            <li>
+              In Switzerland, "private health insurance" usually refers to <strong
+                >supplementary hospital insurance</strong
+              > under <strong>VVG/LCA</strong> (not a replacement for basic <strong
+                >KVG/LAMal</strong
+              >).
+            </li>
+            <li>
+              <strong>Levels:</strong>
               <ul class="ml-6 mt-2 space-y-2">
-                <li><strong>General (basic):</strong> covered by KVG/LAMal (shared ward).</li>
-                <li><strong>Semi-private</strong> <em>(supplementary)</em>: 2-bed room, wider doctor choice.</li>
-                <li><strong>Private</strong> <em>(supplementary)</em>: 1-bed room, <strong>free doctor choice nationwide</strong>, often faster access.</li>
+                <li>
+                  <strong>General (basic):</strong> covered by KVG/LAMal (shared ward).
+                </li>
+                <li>
+                  <strong>Semi-private</strong>
+                  <em>(supplementary)</em>: 2-bed room, wider doctor choice.
+                </li>
+                <li>
+                  <strong>Private</strong>
+                  <em>(supplementary)</em>: 1-bed room, <strong
+                    >free doctor choice nationwide</strong
+                  >, often faster access.
+                </li>
               </ul>
             </li>
-            <li>Private/supplementary plans require <strong>medical acceptance</strong> (health questionnaire). Acceptance is <strong>not guaranteed</strong>.</li>
+            <li>
+              Private/supplementary plans require <strong
+                >medical acceptance</strong
+              > (health questionnaire). Acceptance is <strong
+                >not guaranteed</strong
+              >.
+            </li>
           </ul>
           <p class="mt-6">
-            <a href="/health-insurance/" class="text-primary-600 hover:text-primary-700 font-medium">
+            <a
+              href="/health-insurance/"
+              class="text-primary-600 hover:text-primary-700 font-medium"
+            >
               Learn basics of Swiss health insurance →
             </a>
           </p>
@@ -196,35 +273,58 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- Typical Costs Table -->
     <section class="py-16 bg-gray-50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Typical Costs (Indicative)</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Typical Costs (Indicative)
+        </h2>
         <p class="text-lg text-gray-600 mb-8">
-          Premiums vary by age, canton, provider, and options. Ballpark monthly add-on prices (on top of basic insurance):
+          Premiums vary by age, canton, provider, and options. Ballpark monthly
+          add-on prices (on top of basic insurance):
         </p>
-        
-        <div class="bg-white rounded-2xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden">
+
+        <div
+          class="bg-white rounded-2xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden"
+        >
           <table class="w-full">
             <thead class="bg-gray-50">
               <tr>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Age</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Semi-Private</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Private</th>
+                <th
+                  class="px-6 py-4 text-left text-sm font-semibold text-gray-900"
+                  >Age</th
+                >
+                <th
+                  class="px-6 py-4 text-left text-sm font-semibold text-gray-900"
+                  >Semi-Private</th
+                >
+                <th
+                  class="px-6 py-4 text-left text-sm font-semibold text-gray-900"
+                  >Private</th
+                >
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-              {costTable.map((row) => (
-                <tr>
-                  <td class="px-6 py-4 text-sm font-medium text-gray-900">{row.age}</td>
-                  <td class="px-6 py-4 text-sm text-gray-700">{row.semiPrivate}</td>
-                  <td class="px-6 py-4 text-sm text-gray-700">{row.private}</td>
-                </tr>
-              ))}
+              {
+                costTable.map((row) => (
+                  <tr>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                      {row.age}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-700">
+                      {row.semiPrivate}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-700">
+                      {row.private}
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>
-        
+
         <div class="mt-6 text-center">
           <p class="text-sm text-gray-500 mb-4">
-            We'll send <strong>3 tailored private/semi-private offers</strong> for your postcode within 24h.
+            We'll send <strong>3 tailored private/semi-private offers</strong> for
+            your postcode within 24h.
           </p>
           <button
             onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
@@ -239,26 +339,45 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- Benefits & Who It's For -->
     <section class="py-16 bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Why People Choose Semi-Private / Private</h2>
-        
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
+          Why People Choose Semi-Private / Private
+        </h2>
+
         <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-          {benefitsList.map((category) => (
-            <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.04)] border border-gray-100">
-              <h3 class="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">{category.category}</h3>
-              <ul class="space-y-3 md:space-y-4">
-                {category.items.map((item) => (
-                  <li class="flex items-start gap-3">
-                    <div class="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-                      <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                    </div>
-                    <span class="text-sm md:text-base text-gray-700" set:html={item}></span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {
+            benefitsList.map((category) => (
+              <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.04)] border border-gray-100">
+                <h3 class="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">
+                  {category.category}
+                </h3>
+                <ul class="space-y-3 md:space-y-4">
+                  {category.items.map((item) => (
+                    <li class="flex items-start gap-3">
+                      <div class="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg
+                          class="w-3 h-3 text-green-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="3"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <span
+                        class="text-sm md:text-base text-gray-700"
+                        set:html={item}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -266,13 +385,28 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- Acceptance Rules -->
     <section class="py-16 bg-primary-50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Acceptance Rules (Important)</h2>
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          Acceptance Rules (Important)
+        </h2>
+        <div
+          class="bg-white rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100"
+        >
           <ul class="space-y-6 text-base md:text-lg text-gray-700">
             <li class="flex items-start gap-3">
-              <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
-                <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+              <div
+                class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1"
+              >
+                <svg
+                  class="w-3 h-3 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
               <div>
@@ -280,27 +414,55 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
               </div>
             </li>
             <li class="flex items-start gap-3">
-              <div class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
-                <svg class="w-3 h-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              <div
+                class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1"
+              >
+                <svg
+                  class="w-3 h-3 text-primary-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  ></path>
                 </svg>
               </div>
               <div>
-                <strong>Private & Semi-Private</strong> are <strong>supplementary</strong>: insurers can request a health questionnaire, impose exclusions/waiting periods, or decline.
+                <strong>Private & Semi-Private</strong> are <strong
+                  >supplementary</strong
+                >: insurers can request a health questionnaire, impose
+                exclusions/waiting periods, or decline.
               </div>
             </li>
             <li class="flex items-start gap-3">
-              <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
-                <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              <div
+                class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1"
+              >
+                <svg
+                  class="w-3 h-3 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  ></path>
                 </svg>
               </div>
               <div>
-                <strong>Tip:</strong> Apply earlier (younger/healthier = higher acceptance odds). We'll advise on insurer fit per profile.
+                <strong>Tip:</strong> Apply earlier (younger/healthier = higher acceptance
+                odds). We'll advise on insurer fit per profile.
               </div>
             </li>
           </ul>
-          
+
           <div class="mt-6 pt-6 border-t border-gray-100">
             <button
               onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
@@ -316,26 +478,39 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- Global Coverage -->
     <section class="py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Looking for Global Coverage?</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          Looking for Global Coverage?
+        </h2>
         <div class="prose prose-lg max-w-none text-gray-700">
           <ul class="space-y-4 text-lg">
-            <li>Some private hospital policies offer <strong>worldwide hospital cover</strong> beyond emergency-only basics.</li>
-            <li>Good for frequent travel, cross-border lifestyles, international careers.</li>
-            <li>We compare options and clarify gaps (e.g., USA high-cost areas).</li>
+            <li>
+              Some private hospital policies offer <strong
+                >worldwide hospital cover</strong
+              > beyond emergency-only basics.
+            </li>
+            <li>
+              Good for frequent travel, cross-border lifestyles, international
+              careers.
+            </li>
+            <li>
+              We compare options and clarify gaps (e.g., USA high-cost areas).
+            </li>
           </ul>
         </div>
-        
+
         <div class="mt-8 pt-6 border-t border-gray-100">
           <p class="text-sm text-gray-600 mb-4">Compare providers:</p>
           <div class="flex flex-wrap gap-3">
-            {providers.map((provider) => (
-              <a 
-                href={provider.link} 
-                class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
-              >
-                {provider.name}
-              </a>
-            ))}
+            {
+              providers.map((provider) => (
+                <a
+                  href={provider.link}
+                  class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+                >
+                  {provider.name}
+                </a>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -344,22 +519,28 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- How-To Section -->
     <section class="py-16 bg-gray-50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">How to Apply (3 Steps)</h2>
-        
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
+          How to Apply (3 Steps)
+        </h2>
+
         <div class="space-y-8">
-          {howToSteps.map((step, index) => (
-            <div class="flex items-start gap-6">
-              <div class="flex-shrink-0 w-12 h-12 bg-primary-600 text-white font-bold rounded-full flex items-center justify-center text-lg">
-                {index + 1}
+          {
+            howToSteps.map((step, index) => (
+              <div class="flex items-start gap-6">
+                <div class="flex-shrink-0 w-12 h-12 bg-primary-600 text-white font-bold rounded-full flex items-center justify-center text-lg">
+                  {index + 1}
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                    {step.name}
+                  </h3>
+                  <p class="text-gray-700 text-lg">{step.text}</p>
+                </div>
               </div>
-              <div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">{step.name}</h3>
-                <p class="text-gray-700 text-lg">{step.text}</p>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
-        
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
           <button
             onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
@@ -380,7 +561,9 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- FAQ Section -->
     <section class="py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">FAQs — Private Health Insurance in Switzerland</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
+          FAQs — Private Health Insurance in Switzerland
+        </h2>
         <FAQ items={faqs} showHeading={false} />
       </div>
     </section>
@@ -388,44 +571,105 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
     <!-- Final CTA Section -->
     <section class="py-16 bg-primary-50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Ready to compare semi-private vs private options?</h2>
-        
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          Ready to compare semi-private vs private options?
+        </h2>
+
+        <div
+          class="bg-white rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 mb-8"
+        >
           <div class="grid md:grid-cols-3 gap-6 text-center">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-3">
-              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            <div
+              class="flex flex-col md:flex-row items-center justify-center gap-3"
+            >
+              <div
+                class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5 text-primary-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  ></path>
                 </svg>
               </div>
-              <span class="font-medium text-gray-900 text-sm md:text-base">Independent & in English</span>
+              <span class="font-medium text-gray-900 text-sm md:text-base"
+                >Independent & in English</span
+              >
             </div>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-3">
-              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <div
+              class="flex flex-col md:flex-row items-center justify-center gap-3"
+            >
+              <div
+                class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5 text-primary-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
-              <span class="font-medium text-gray-900 text-sm md:text-base">3 tailored offers within 24h</span>
+              <span class="font-medium text-gray-900 text-sm md:text-base"
+                >3 tailored offers within 24h</span
+              >
             </div>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-3">
-              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            <div
+              class="flex flex-col md:flex-row items-center justify-center gap-3"
+            >
+              <div
+                class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-5 h-5 text-primary-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  ></path>
                 </svg>
               </div>
-              <span class="font-medium text-gray-900 text-sm md:text-base">Advice on acceptance odds</span>
+              <span class="font-medium text-gray-900 text-sm md:text-base"
+                >Advice on acceptance odds</span
+              >
             </div>
           </div>
         </div>
-        
+
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
             class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-2xl shadow-[0_4px_14px_0_rgba(204,36,44,0.25)] hover:shadow-[0_6px_20px_0_rgba(204,36,44,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path>
             </svg>
             Book Free Consultation
           </button>
@@ -433,23 +677,31 @@ const canonicalURL = "https://expat-savvy.ch/private-health-insurance-switzerlan
             onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
             class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-2xl shadow-[0_4px_14px_0_rgba(204,36,44,0.25)] hover:shadow-[0_6px_20px_0_rgba(204,36,44,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             Get 3 Private Offers
           </button>
         </div>
       </div>
     </section>
-
   </main>
 </Layout>
 
 <script>
   // Track page view
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof umami !== 'undefined' && umami.track) {
-      umami.track('view_private_insurance_lp');
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof umami !== "undefined" && umami.track) {
+      umami.track("view_private_insurance_lp");
     }
   });
 </script>

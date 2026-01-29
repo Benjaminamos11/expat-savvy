@@ -17,15 +17,44 @@ const metadata = {
 const faqs = [
     {
         question: "What is the deadline for making a 3a contribution?",
-        answer: "The hard deadline is December 31st of the calendar year. However, we recommend completing your transfer by mid-December to ensure the funds are cleared and booked in time for the tax certificate generation.",
+        answer: "The hard deadline is December 31st. To be safe, we recommend transfers by December 20th. Be aware of the 'Value Date' (Valuta)—if the funds arrive on Jan 1st, you lose the deduction for the previous year even if you sent them on the 30th.",
     },
     {
-        question: "Can I deduct 3b contributions?",
-        answer: "Generally, no. Pillar 3b (unrestricted pension) is paid from after-tax income and is not deductible from your gross income. However, it offers other benefits like tax-free growth and flexible withdrawal.",
+        question:
+            "What's my approximate tax saving for a CHF 7,000 contribution?",
+        answer: "Depending on your income and Canton, it's usually between CHF 1,700 and CHF 2,800. This represents an immediate ROI of 25% to 40% on your money, as you're effectively investing 'pre-tax' dollars.",
     },
     {
-        question: "How are 3rd pillar withdrawals taxed?",
-        answer: "Withdrawals are taxed at a reduced rate, separate from your other income. This is called a capital withdrawal tax. By staggerring your withdrawals (the 'Ladder Strategy'), you can keep the progression low and save thousands in exit taxes.",
+        question: "Can I deduct contributions made in previous years?",
+        answer: "No. You can only deduct 3a contributions in the calendar year they were actually paid. There is currently no option to 'back-pay' or claim deductions for missed years once the tax year has closed.",
+    },
+    {
+        question: "How does the value date (Valuta) affect my deduction?",
+        answer: "The value date is what counts for the tax office. If your bank processes the transfer slowly and the funds land with the provider on January 2nd, that contribution belongs to the new tax year. Always allow 3-5 business days at year-end.",
+    },
+    {
+        question: "Can I contribute more than the maximum?",
+        answer: "Technically yes, but any amount over the legal limit (CHF 7,258/36,288 in 2026) is not tax-deductible. Most providers will automatically refund any over-payments to prevent tax reporting errors.",
+    },
+    {
+        question: "How does 3a affect my wealth tax?",
+        answer: "3rd Pillar assets are exempt from wealth tax as long as they remain in the pension bucket. This is a significant advantage in Cantons with high wealth tax like Geneva or Vaud.",
+    },
+    {
+        question: "Is 3a deductible in all cantons?",
+        answer: "Yes, the 3a deduction is a federal law (BVV 3) and applies to Federal, Cantonal, and Communal taxes in every single Canton in Switzerland.",
+    },
+    {
+        question: "Can I claim 3b contributions as deductions?",
+        answer: "Generally no, except in Cantons Geneva and Fribourg, which allow a limited deduction for 'restricted' 3b life insurance premiums. In all other Cantons, 3b is paid from already-taxed income.",
+    },
+    {
+        question: "What if I move to a different canton mid-year?",
+        answer: "You are taxed in the Canton where you reside on December 31st. If you move from Zurich to Zug in November, your entire year's 3a contribution will be deducted at the lower Zug tax rates.",
+    },
+    {
+        question: "How do I claim the deduction on my tax return?",
+        answer: "Your 3a provider will send you a 'Tax Certificate' (Steuerbescheinigung) in January. You simply enter the amount in the 'Deductions' section of your tax return and attach the certificate as proof.",
     },
     {
         question: "Do I have to declare my 3a assets on my tax return?",
@@ -34,6 +63,23 @@ const faqs = [
     {
         question: "Can my spouse and I both have a 3a account?",
         answer: "Yes. If both spouses are earning an AHV-liable income, both can contribute up to the maximum legal limit (CHF 7,258 each in 2026) and deduct it from your joint tax return.",
+    },
+    {
+        question: "What happens if I forget to claim the deduction?",
+        answer: "You can usually submit a 'Correction' or 'Request for Revision' (Revision/Berichtigung) to your tax office within a certain period (often 30 days) after receiving your final assessment. However, it's much easier to include it correctly in the first place.",
+    },
+    {
+        question:
+            "Does the 3rd pillar saving reduce my social security contributions?",
+        answer: "No. 3rd pillar contributions reduce your taxable income (Federal, Cantonal, and Communal taxes), but they do not reduce the income used to calculate AHV/IV/EO contributions. Only 2nd pillar (Pension Fund) contributions are deducted before social security is calculated.",
+    },
+    {
+        question: "Can I use my 3a tax savings to pay next year's premium?",
+        answer: "Many people do exactly this! Since a maxed-out 3a can trigger a tax refund of over CHF 2,000, you can reinvest that refund back into your 3a the following year, creating a powerful 'tax-funded' compounding effect over time.",
+    },
+    {
+        question: "Can I change my 3a contribution amount every year?",
+        answer: "If you have a 3rd pillar bank account, you can change your contribution at any time—or skip a year entirely. With insurance-based 3a policies, your premium is usually fixed, though some 'flexible' policies allow for adjustments. Always check your contract before signing.",
     },
 ];
 
@@ -129,6 +175,97 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
     <!-- MAIN CONTENT -->
     <div class="bg-white py-16 md:py-24">
         <div class="spoke-container">
+            <!-- NEW SECTION: FEATURED SNIPPET TABLE -->
+            <div
+                class="mb-24 bg-gray-50 p-8 rounded-[40px] border border-gray-100"
+            >
+                <h2 class="text-2xl font-bold text-[#1a1a2e] mb-6 text-center">
+                    Approximate Tax Savings by Income Level (2026)
+                </h2>
+                <div class="overflow-x-auto">
+                    <table
+                        class="w-full text-left bg-white rounded-2xl overflow-hidden shadow-sm"
+                    >
+                        <thead class="bg-[#1a1a2e] text-white">
+                            <tr>
+                                <th
+                                    class="p-4 md:p-6 font-bold uppercase tracking-wider text-xs"
+                                    >Annual Income</th
+                                >
+                                <th
+                                    class="p-4 md:p-6 font-bold uppercase tracking-wider text-xs"
+                                    >3a Contribution</th
+                                >
+                                <th
+                                    class="p-4 md:p-6 font-bold uppercase tracking-wider text-xs"
+                                    >Estimated Tax Saving</th
+                                >
+                                <th
+                                    class="p-4 md:p-6 font-bold uppercase tracking-wider text-xs"
+                                    >Effective ROI</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="p-4 md:p-6 font-medium"
+                                    >CHF 50,000</td
+                                >
+                                <td class="p-4 md:p-6">CHF 5,000</td>
+                                <td class="p-4 md:p-6 text-green-600 font-bold"
+                                    >CHF 1,250</td
+                                >
+                                <td class="p-4 md:p-6 font-bold">25%</td>
+                            </tr>
+                            <tr class="bg-gray-50/50">
+                                <td class="p-4 md:p-6 font-medium"
+                                    >CHF 75,000</td
+                                >
+                                <td class="p-4 md:p-6">CHF 7,000</td>
+                                <td class="p-4 md:p-6 text-green-600 font-bold"
+                                    >CHF 1,890</td
+                                >
+                                <td class="p-4 md:p-6 font-bold">27%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 md:p-6 font-medium"
+                                    >CHF 100,000</td
+                                >
+                                <td class="p-4 md:p-6">CHF 7,000</td>
+                                <td class="p-4 md:p-6 text-green-600 font-bold"
+                                    >CHF 2,100</td
+                                >
+                                <td class="p-4 md:p-6 font-bold">30%</td>
+                            </tr>
+                            <tr class="bg-gray-50/50">
+                                <td class="p-4 md:p-6 font-medium"
+                                    >CHF 150,000</td
+                                >
+                                <td class="p-4 md:p-6">CHF 7,000</td>
+                                <td class="p-4 md:p-6 text-green-600 font-bold"
+                                    >CHF 2,800</td
+                                >
+                                <td class="p-4 md:p-6 font-bold">40%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 md:p-6 font-medium"
+                                    >CHF 200,000</td
+                                >
+                                <td class="p-4 md:p-6">CHF 14,516*</td>
+                                <td class="p-4 md:p-6 text-green-600 font-bold"
+                                    >CHF 5,806</td
+                                >
+                                <td class="p-4 md:p-6 font-bold">40%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-4 italic">
+                    *Based on a dual-income couple maxing out both 3a accounts
+                    for 2026. Savings are indicative city-level averages.
+                </p>
+            </div>
+
             <!-- CALCULATOR SECTION -->
             <div class="mb-24">
                 <div class="text-center mb-12">
@@ -167,6 +304,71 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
                         CHF 5,000, with the resulting CHF 2,000 being returned
                         to you as a tax refund.
                     </p>
+                </div>
+            </div>
+
+            <!-- ROI ANGLE SECTION -->
+            <div class="mb-24">
+                <RedSectionHeader title="Understanding Your Tax Savings ROI" />
+                <div class="spoke-body space-y-8 mt-8">
+                    <p class="text-xl">
+                        If you contribute CHF 7,000 to your 3a, you reduce your
+                        taxable income by CHF 7,000. Depending on your income
+                        bracket and canton, this saves you approximately <strong
+                            >CHF 2,100-2,800</strong
+                        > in taxes.
+                    </p>
+                    <div class="bg-[#1a1a2e] text-white p-8 rounded-3xl">
+                        <p class="text-lg leading-relaxed italic">
+                            "For every CHF 1 you invest in your 3a, you save CHF
+                            0.30-0.40 in taxes. This is a guaranteed, immediate
+                            return on investment that no traditional stock
+                            market can match in day one."
+                        </p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b-2 border-gray-100">
+                                    <th class="py-4 font-bold">Annual Income</th
+                                    >
+                                    <th class="py-4 font-bold">Contribution</th>
+                                    <th class="py-4 font-bold"
+                                        >Tax Savings (Approx)</th
+                                    >
+                                    <th class="py-4 font-bold text-[#C41E3A]"
+                                        >ROI</th
+                                    >
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-50">
+                                <tr>
+                                    <td class="py-4">CHF 60,000</td>
+                                    <td class="py-4">CHF 7,000</td>
+                                    <td class="py-4 font-bold text-green-600"
+                                        >CHF 1,750</td
+                                    >
+                                    <td class="py-4 font-black">25%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4">CHF 100,000</td>
+                                    <td class="py-4">CHF 7,000</td>
+                                    <td class="py-4 font-bold text-green-600"
+                                        >CHF 2,100</td
+                                    >
+                                    <td class="py-4 font-black">30%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4">CHF 150,000</td>
+                                    <td class="py-4">CHF 7,000</td>
+                                    <td class="py-4 font-bold text-green-600"
+                                        >CHF 2,800</td
+                                    >
+                                    <td class="py-4 font-black">40%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -262,16 +464,164 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
                 </div>
             </div>
 
+            <!-- DEADLINES SECTION -->
+            <div
+                class="mb-24 px-8 py-12 bg-[#1a1a2e] rounded-[40px] text-white"
+            >
+                <h2 class="text-3xl font-bold mb-8">
+                    Critical Deadlines for Tax Deductions
+                </h2>
+                <div class="spoke-body space-y-6 !text-white/80">
+                    <p class="!text-white/90">
+                        To claim a 3a contribution in your <strong
+                            class="!text-white">2026 tax return</strong
+                        >, you must deposit the funds into your 3a account by <strong
+                            class="!text-white">December 31, 2026</strong
+                        >.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8 my-10">
+                        <div
+                            class="bg-white/5 p-6 rounded-2xl border border-white/10"
+                        >
+                            <h4 class="text-white font-bold mb-3">
+                                Watch the "Valuta"
+                            </h4>
+                            <p class="text-sm !text-white/70">
+                                Bank transfers typically have a 1-2 day
+                                processing time. To be safe, make your
+                                contribution by <strong class="!text-white"
+                                    >December 28-29, 2026</strong
+                                > to ensure it clears by year-end.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white/5 p-6 rounded-2xl border border-white/10"
+                        >
+                            <h4 class="text-white font-bold mb-3">
+                                The "January 15" Exception
+                            </h4>
+                            <p class="text-sm !text-white/70">
+                                Some providers allow reporting up to Jan 15, but
+                                these are <strong class="!text-white"
+                                    >only deductible</strong
+                                > in the year of contribution if the funds hit the
+                                account by Dec 31.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-[#C41E3A] p-6 rounded-2xl text-center">
+                        <p class="font-bold text-white text-lg">
+                            Pro Tip: Make your contribution in January to
+                            maximize 12 months of compounding growth!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <!-- CANTON COMPARISON -->
             <div class="mb-24">
-                <RedSectionHeader title="Savings by Canton: A Comparison" />
-                <p class="spoke-body text-gray-600 mt-6 mb-10">
-                    Tax savings vary significantly across Switzerland due to
-                    cantonal and communal tax rates. A contribution in Fribourg
-                    or Basel might save you more than the same contribution in
-                    Zug.
-                </p>
-                <CantonSavingsTable />
+                <RedSectionHeader title="Tax Savings by Canton" />
+
+                <!-- CANTON NARRATIVES -->
+                <div class="grid md:grid-cols-3 gap-8 my-12">
+                    <div class="border-t-4 border-[#C41E3A] pt-6">
+                        <h4 class="font-black text-lg mb-2">
+                            Tax Deduction in Zurich
+                        </h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            In Zurich, a CHF 7,000 contribution saves
+                            approximately <strong>CHF 2,100</strong> (30% marginal
+                            rate). Zurich also taxes wealth, so your 3a balance helps
+                            reduce your overall wealth tax base.
+                        </p>
+                    </div>
+                    <div class="border-t-4 border-[#C41E3A]/40 pt-6">
+                        <h4 class="font-black text-lg mb-2">
+                            Tax Deduction in Geneva
+                        </h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            In Geneva, tax rates are higher. A CHF 7,000
+                            contribution saves approximately <strong
+                                >CHF 2,800</strong
+                            > (40% marginal rate). Geneva also allows additional 3b
+                            deductions up to CHF 6k.
+                        </p>
+                    </div>
+                    <div class="border-t-4 border-[#C41E3A]/20 pt-6">
+                        <h4 class="font-black text-lg mb-2">
+                            Tax Deduction in Zug
+                        </h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            In Zug, a CHF 7,000 contribution saves approximately <strong
+                                >CHF 1,400</strong
+                            > (20% marginal rate). Lower rates mean your 3a has less
+                            tax "power" but your overall burden is smaller.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white border-2 border-gray-100 rounded-3xl p-8">
+                    <h3 class="text-xl font-bold mb-8">
+                        Compare All Cantons (Approximate Savings for CHF 7,000)
+                    </h3>
+                    <div class="space-y-4">
+                        <details class="group bg-gray-50 rounded-2xl">
+                            <summary
+                                class="flex justify-between items-center p-6 cursor-pointer list-none font-bold"
+                            >
+                                <span
+                                    >Group A: High Tax Cantons (GE, FR, VD, NE)</span
+                                >
+                                <span
+                                    class="bg-white px-3 py-1 rounded-full text-xs text-[#C41E3A]"
+                                    >CHF 2,400 - 2,800 saved</span
+                                >
+                            </summary>
+                            <div class="p-6 pt-0 text-sm text-gray-600">
+                                These cantons have the highest marginal rates. A
+                                maxed-out 3rd pillar is non-negotiable here to
+                                bring your taxable income into a lower bracket.
+                            </div>
+                        </details>
+                        <details class="group bg-gray-50 rounded-2xl">
+                            <summary
+                                class="flex justify-between items-center p-6 cursor-pointer list-none font-bold"
+                            >
+                                <span
+                                    >Group B: Moderate Tax Cantons (ZH, BE, BS,
+                                    LU)</span
+                                >
+                                <span
+                                    class="bg-white px-3 py-1 rounded-full text-xs text-[#C41E3A]"
+                                    >CHF 1,900 - 2,300 saved</span
+                                >
+                            </summary>
+                            <div class="p-6 pt-0 text-sm text-gray-600">
+                                Standard Swiss tax havens for the middle class.
+                                The 3a remains the most effective tool to offset
+                                federal tax progression.
+                            </div>
+                        </details>
+                        <details class="group bg-gray-50 rounded-2xl">
+                            <summary
+                                class="flex justify-between items-center p-6 cursor-pointer list-none font-bold"
+                            >
+                                <span
+                                    >Group C: Low Tax Cantons (ZG, SZ, NW)</span
+                                >
+                                <span
+                                    class="bg-white px-3 py-1 rounded-full text-xs text-[#C41E3A]"
+                                    >CHF 1,200 - 1,600 saved</span
+                                >
+                            </summary>
+                            <div class="p-6 pt-0 text-sm text-gray-600">
+                                While savings are lower in absolute terms, a 3a
+                                is still strategically vital for wealth tax
+                                shielding and long-term retirement gap filling.
+                            </div>
+                        </details>
+                    </div>
+                </div>
             </div>
 
             <!-- ADVANCED STRATEGIES -->
@@ -316,7 +666,8 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
                         <p>
                             These buy-ins are <strong
                                 >fully tax-deductible</strong
-                            > and have much higher limits than the 3rd pillar. Combining
+                            >
+                            and have much higher limits than the 3rd pillar. Combining
                             a maxed-out 3rd pillar with strategic 2nd pillar buy-ins
                             is the ultimate way to reduce your Swiss tax burden to
                             the legal minimum.
