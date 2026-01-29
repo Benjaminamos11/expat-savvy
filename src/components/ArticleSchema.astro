@@ -9,7 +9,17 @@ interface Props {
     title: string;
     description: string;
     image: string;
-    author?: string;
+    author?:
+        | string
+        | {
+              "@type": string;
+              name: string;
+              url?: string;
+              affiliation?: {
+                  "@type": string;
+                  name: string;
+              };
+          };
     publishDate?: string;
     modifiedDate?: string;
 }
@@ -23,17 +33,22 @@ const {
     modifiedDate = new Date().toISOString(),
 } = Astro.props;
 
+const authorSchema =
+    typeof author === "string"
+        ? {
+              "@type": "Person",
+              name: author,
+              url: "https://expat-savvy.ch/about/hans-steiner/", // Updated to deep link
+          }
+        : author;
+
 const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
     description: description,
     image: image.startsWith("http") ? image : `https://expat-savvy.ch${image}`,
-    author: {
-        "@type": "Person",
-        name: author,
-        url: "https://expat-savvy.ch/about",
-    },
+    author: authorSchema,
     publisher: {
         "@type": "Organization",
         name: "Expat Savvy",

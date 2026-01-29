@@ -1,10 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
-import HansSteinerCard from "../../components/consultant/ConsultantProfileCard.astro";
+import HansSteinerCard from "../../components/consultant/HansSteinerCard.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import ArticleSchema from "../../components/ArticleSchema.astro";
 import FAQSchema from "../../components/FAQSchema.astro";
+import QuickSummary from "../../components/content/QuickSummary.astro";
+import ExpertInsight from "../../components/content/ExpertInsight.astro";
+import RelatedArticles from "../../components/content/RelatedArticles.astro";
 
 const metadata = {
     title: "Expat Guide to 3rd Pillar Withdrawal When Leaving Switzerland (2026)",
@@ -13,7 +16,7 @@ const metadata = {
     canonical: "https://expat-savvy.ch/3rd-pillar/withdrawal-guide/",
 };
 
-const heroImage = "/images/leaving-switzerland-hero.png"; // Placeholder for the path, logic below for actual image
+const heroImage = "/images/leaving-switzerland-hero.png"; 
 
 const faqs = [
     {
@@ -108,7 +111,16 @@ const faqs = [
         <ArticleSchema
             title={metadata.title}
             description={metadata.description}
-            image="/images/leaving-switzerland-hero.png"
+            image={heroImage}
+            author={{
+                "@type": "Person",
+                name: "Hans Steiner",
+                url: "https://expat-savvy.ch/about/hans-steiner/",
+                affiliation: {
+                    "@type": "Organization",
+                    name: "Expat Savvy",
+                },
+            }}
         />
         <FAQSchema faqs={faqs} />
         <script type="application/ld+json">
@@ -168,7 +180,7 @@ const faqs = [
                 class="text-4xl md:text-7xl font-extrabold mb-8 drop-shadow-2xl leading-tight text-white mx-auto max-w-5xl"
             >
                 Leaving Switzerland: <span class="text-[#C41E3A]"
-                    >Your Pension Withdrawal Roadmap</span
+                    >Your Pension Withdrawal Roadmap 2026</span
                 >
             </h1>
             <p
@@ -186,6 +198,14 @@ const faqs = [
     <main class="py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto">
+                <QuickSummary
+                    summary="Leaving Switzerland requires a strategic approach to your 2nd and 3rd pillar assets. This guide covers the critical differences between EU/EFTA and non-EU moves, how to optimize withholding taxes, and the '3a-to-3b' conversion strategy for keeping your insurance coverage globally."
+                    keyPoints={[
+                        "Exit Strategy: The rules change drastically depending on if you move to an EU/EFTA country or a 'third country'.",
+                        "Tax Traps: Withdrawing in a high-tax canton vs. a low-tax canton can cost you thousands in withholding tax.",
+                        "Conversion Option: Insurance-based 3a policies can often be converted to 3b to keep coverage globally."
+                    ]}
+                />
                 <!-- SECTION 1: THE 3A ADVANTAGE -->
                 <section class="mb-32">
                     <RedSectionHeader
@@ -273,7 +293,13 @@ const faqs = [
                                 If you are planning to leave Switzerland, consider withdrawing your 3a while still residing in a low-tax canton (like Schwyz or Uri) before you deregister. <strong>This can save you thousands of CHF in withholding tax</strong> compared to withdrawing from a foundation based in Zurich or Geneva.
                             </p>
                         </div>
-                        <div class="overflow-x-auto rounded-xl border border-gray-100 shadow-sm">
+
+                        <ExpertInsight
+                            insight="Most expats focus on the *logistics* of moving (movers, deregistration) and forget the *financial* logistics. The biggest mistake I see is cashing out the 2nd pillar when moving to the UK or USA without a tax strategy, often losing 15-30% to unnecessary taxes."
+                            quote="It’s not just about getting your money out, it’s about keeping it."
+                        />
+
+                        <div class="overflow-x-auto rounded-xl border border-gray-100 shadow-sm mt-8">
                             <table class="w-full text-left border-collapse">
                                 <thead class="bg-gray-50">
                                     <tr class="text-xs font-bold uppercase tracking-wider">
@@ -628,51 +654,9 @@ const faqs = [
                 </section>
 
                 <!-- SECTION 4: HANS STEINER CARD -->
-                <div id="hans-steiner" class="mb-32 scroll-mt-24">
-                    <div
-                        class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm"
-                    >
-                        <div
-                            class="flex flex-col md:flex-row items-center gap-10"
-                        >
-                            <div
-                                class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
-                            >
-                                <img
-                                    src="/images/hans-steiner.png"
-                                    alt="Hans Steiner"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="flex-grow">
-                                <div
-                                    class="text-[10px] uppercase font-black text-[#C41E3A] tracking-[0.2em] mb-2"
-                                >
-                                    Departure Expert
-                                </div>
-                                <h2
-                                    class="text-3xl font-bold text-[#1a1a2e] mb-4"
-                                >
-                                    Is a 3a-to-3b Conversion Right for You?
-                                </h2>
-                                <p
-                                    class="spoke-body text-gray-600 mb-8 max-w-xl italic"
-                                >
-                                    "Cashing out is immediate, but conversion is
-                                    strategic. Let's look at your destination
-                                    country and see if maintaining your Swiss
-                                    safety net is the smarter move."
-                                </p>
-                                <button
-                                    onclick="window.openContextualModal()"
-                                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
-                                >
-                                    Book a Free Departure Strategy Call
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <HansSteinerCard
+                    quote="Cashing out is immediate, but conversion is strategic. Let's look at your destination country and see if maintaining your Swiss safety net is the smarter move."
+                />
 
                 <!-- SECTION 5: FAQ -->
                 <section class="mb-32">
@@ -705,43 +689,25 @@ const faqs = [
                 </section>
 
                 <!-- RELATED GUIDES -->
-                <div class="grid md:grid-cols-3 gap-6 mb-32">
-                    <a
-                        href="/3rd-pillar/bank-vs-insurance/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Bank vs. Insurance</h4>
-                        <p
-                            class="text-xs text-gray-400 group-hover:text-white/60"
-                        >
-                            Compare the two fundamental paths of the 3rd pillar.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/life-insurance-guide/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Life Insurance Guide</h4>
-                        <p
-                            class="text-xs text-gray-400 group-hover:text-white/60"
-                        >
-                            Understanding the protection layer of your 3rd
-                            pillar solution.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/tax-optimization/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Tax Savings Blueprint</h4>
-                        <p
-                            class="text-xs text-gray-400 group-hover:text-white/60"
-                        >
-                            Maximize your deductions while you are still in
-                            Switzerland.
-                        </p>
-                    </a>
-                </div>
+                <RelatedArticles
+                    articles={[
+                        {
+                            title: "Bank vs. Insurance",
+                            description: "Compare the two fundamental paths of the 3rd pillar.",
+                            url: "/3rd-pillar/bank-vs-insurance/"
+                        },
+                        {
+                            title: "Tax Optimization",
+                            description: "Maximize your tax deductions before you leave.",
+                            url: "/3rd-pillar/tax-optimization/"
+                        },
+                        {
+                            title: "3a vs 3b Guide",
+                            description: "Understand specific rules for each pillar.",
+                            url: "/3rd-pillar/3a-vs-3b/"
+                        }
+                    ]}
+                />
             </div>
         </div>
     </main>
@@ -760,6 +726,8 @@ const faqs = [
                 Don't leave your Swiss assets to chance. Get a holistic
                 withdrawal strategy built for your new life abroad.
             </p>
+            <!-- Last Updated -->
+            <p class="text-white/30 text-sm mb-4">Last Updated: January 29, 2026</p>
             <button
                 onclick="window.openContextualModal()"
                 class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-6 px-16 rounded-full text-2xl shadow-2xl transition transform hover:-translate-y-1"

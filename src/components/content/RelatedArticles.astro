@@ -1,0 +1,44 @@
+---
+interface Article {
+    title: string;
+    description: string;
+    url: string;
+    image?: string; // Optional image URL
+}
+
+interface Props {
+    articles: Article[];
+}
+
+const { articles } = Astro.props;
+---
+
+<div class="not-prose mt-16 mb-12 border-t border-gray-200 pt-12">
+    <div class="flex items-center justify-between mb-8">
+        <h3 class="text-2xl font-bold text-[#1a1a2e]">
+            Related Articles & Guides
+        </h3>
+        <div class="h-1 flex-grow bg-gray-100 ml-6 rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+        {
+            articles.map((article) => (
+                <a
+                    href={article.url}
+                    class="group block bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-[#C41E3A]/20 hover:shadow-lg transition-all duration-300"
+                >
+                    <h4 class="font-bold text-[#1a1a2e] text-lg mb-2 group-hover:text-[#C41E3A] transition-colors">
+                        {article.title}
+                    </h4>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                        {article.description}
+                    </p>
+                    <span class="text-[#C41E3A] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Read Guide <span class="text-lg">→</span>
+                    </span>
+                </a>
+            ))
+        }
+    </div>
+</div>

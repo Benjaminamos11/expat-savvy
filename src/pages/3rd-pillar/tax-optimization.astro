@@ -3,12 +3,16 @@ import Layout from "../../layouts/Layout.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import TaxSavingsCalculatorVanilla from "../../components/calculators/TaxSavingsCalculatorVanilla.astro";
+import HansSteinerCard from "../../components/consultant/HansSteinerCard.astro";
+import QuickSummary from "../../components/content/QuickSummary.astro";
+import ExpertInsight from "../../components/content/ExpertInsight.astro";
+import RelatedArticles from "../../components/content/RelatedArticles.astro";
 import ArticleSchema from "../../components/ArticleSchema.astro";
 import FAQSchema from "../../components/FAQSchema.astro";
 import CantonSavingsTable from "../../components/pillar3/CantonSavingsTable.astro";
 
 const metadata = {
-    title: "3rd Pillar Tax Savings in Switzerland: An Expat's Guide (2026)",
+    title: "3rd Pillar Tax Savings in Switzerland: An Expat's Guide | 2026 Edition",
     description:
         "Learn how to maximize your 3rd pillar tax deductions in Switzerland. Our guide covers contribution limits, canton-specific savings, and advanced strategies for expats.",
     canonical: "https://expat-savvy.ch/3rd-pillar/tax-optimization/",
@@ -96,6 +100,15 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
             title={metadata.title}
             description={metadata.description}
             image={heroImage}
+            author={{
+                "@type": "Person",
+                name: "Hans Steiner",
+                url: "https://expat-savvy.ch/about/hans-steiner/",
+                affiliation: {
+                    "@type": "Organization",
+                    name: "Expat Savvy",
+                },
+            }}
         />
         <FAQSchema faqs={faqs} />
     </Fragment>
@@ -175,6 +188,18 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
     <!-- MAIN CONTENT -->
     <div class="bg-white py-16 md:py-24">
         <div class="spoke-container">
+            <div class="mb-16">
+                <QuickSummary
+                    summary="Leveraging the 3rd Pillar is the single most effective way to reduce your Swiss tax bill. By deducting contributions from your taxable income, you can achieve an immediate 25-40% return on investment."
+                    keyPoints={[
+                        "Immediate ROI: Save CHF 2,000+ in taxes instantly by contributing the maximum.",
+                        "Progressive Savings: The higher your income, the more you save due to marginal tax rates.",
+                        "Deadlines Matter: Contributions must land in the account by Dec 31st. Watch out for 'value dates'.",
+                        "Cantonal Differences: High-tax cantons like Geneva or Vaud offer the biggest deduction benefits.",
+                    ]}
+                />
+            </div>
+
             <!-- NEW SECTION: FEATURED SNIPPET TABLE -->
             <div
                 class="mb-24 bg-gray-50 p-8 rounded-[40px] border border-gray-100"
@@ -695,38 +720,17 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
                 </div>
             </div>
 
+            <!-- EXPERT INSIGHT -->
+            <ExpertInsight
+                insight="Many expats hesitate to lock money away, but they forget that tax savings are a guaranteed return. If I offered you a guaranteed 30% return on day one, you'd take it. That is exactly what a 3rd pillar deduction is."
+                quote="Don't tip the tax office. Keep your wealth."
+            />
+
             <!-- HANS STEINER CARD -->
-            <div
-                class="mb-24 bg-[#F8F9FA] rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm"
-            >
-                <div class="flex flex-col md:flex-row items-center gap-10">
-                    <div
-                        class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
-                    >
-                        <img
-                            src="/images/hans-steiner.png"
-                            alt="Hans Steiner"
-                            class="w-full h-full object-cover"
-                        />
-                    </div>
-                    <div class="flex-grow">
-                        <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
-                            Create a Personalized Tax Strategy
-                        </h2>
-                        <p class="spoke-body text-gray-600 mb-8 max-w-xl">
-                            "Every expat's tax situation is unique. Our role is
-                            to find the invisible gaps in your planning and seal
-                            them before tax season arrives."
-                        </p>
-                        <button
-                            onclick="window.openContextualModal()"
-                            class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
-                        >
-                            Book a Free Tax Analysis
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <HansSteinerCard
+                quote="Every expat's tax situation is unique. Our role is to find the invisible gaps in your planning and seal them before tax season arrives."
+                className="mb-24"
+            />
 
             <!-- FAQ SECTION -->
             <div class="mb-24">
@@ -755,6 +759,29 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
                     }
                 </div>
             </div>
+
+            <RelatedArticles
+                articles={[
+                    {
+                        title: "3a vs. 3b Comparison",
+                        description:
+                            "Choosing between restricted and flexible pension buckets.",
+                        url: "/3rd-pillar/3a-vs-3b/",
+                    },
+                    {
+                        title: "Withdrawal Guide",
+                        description:
+                            "How to get your money back when leaving Switzerland.",
+                        url: "/3rd-pillar/withdrawal-guide/",
+                    },
+                    {
+                        title: "Banking vs. Insurance",
+                        description:
+                            "Which provider type offers better tax advantages?",
+                        url: "/3rd-pillar/bank-vs-insurance/",
+                    },
+                ]}
+            />
         </div>
     </div>
 
@@ -768,6 +795,10 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
                 Join 5,000+ expats who have optimized their Swiss pension
                 strategy. Get your free tax analysis today.
             </p>
+            <!-- Last Updated -->
+            <p class="text-white/30 text-sm mb-4">
+                Last Updated: January 29, 2026
+            </p>
             <button
                 onclick="window.openContextualModal()"
                 class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-5 px-12 rounded-full text-xl shadow-2xl transition transform hover:-translate-y-1"
@@ -776,68 +807,5 @@ const heroImage = "/images/tax-savings-hero-final.jpg";
             </button>
         </div>
     </div>
-
-    <!-- RELATED GUIDES -->
-    <div class="py-24 bg-gray-50">
-        <div class="spoke-container">
-            <h2
-                class="text-2xl font-bold text-[#1a1a2e] mb-12 text-center uppercase tracking-[0.2em]"
-            >
-                Mastering the 3rd Pillar
-            </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <a
-                    href="/3rd-pillar/3a-vs-3b"
-                    class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-transparent hover:border-[#C41E3A]"
-                >
-                    <h4
-                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A]"
-                    >
-                        3a vs. 3b Comparison
-                    </h4>
-                    <p class="text-gray-500 text-sm mb-6">
-                        Choosing between restricted and flexible pension
-                        buckets.
-                    </p>
-                    <span class="text-[#C41E3A] font-bold text-sm"
-                        >Read Comparison →</span
-                    >
-                </a>
-                <a
-                    href="/3rd-pillar/providers"
-                    class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-transparent hover:border-[#C41E3A]"
-                >
-                    <h4
-                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A]"
-                    >
-                        Bank vs. Insurance
-                    </h4>
-                    <p class="text-gray-500 text-sm mb-6">
-                        Understand why your choice of provider dictates your
-                        return.
-                    </p>
-                    <span class="text-[#C41E3A] font-bold text-sm"
-                        >Read Guide →</span
-                    >
-                </a>
-                <a
-                    href="/3rd-pillar/withdrawal-guide"
-                    class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-transparent hover:border-[#C41E3A]"
-                >
-                    <h4
-                        class="text-lg font-bold text-[#1a1a2e] mb-3 group-hover:text-[#C41E3A]"
-                    >
-                        Withdrawal Guide
-                    </h4>
-                    <p class="text-gray-500 text-sm mb-6">
-                        How to unlock your funds for property or leaving
-                        Switzerland.
-                    </p>
-                    <span class="text-[#C41E3A] font-bold text-sm"
-                        >Read Rules →</span
-                    >
-                </a>
-            </div>
-        </div>
-    </div>
 </Layout>
+```

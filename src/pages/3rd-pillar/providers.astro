@@ -6,9 +6,13 @@ import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import ArticleSchema from "../../components/ArticleSchema.astro";
 import FAQSchema from "../../components/FAQSchema.astro";
 import InsuranceSecuritySimulator from "../../components/pillar3/InsuranceSecuritySimulator.astro";
+import HansSteinerCard from "../../components/consultant/HansSteinerCard.astro";
+import QuickSummary from "../../components/content/QuickSummary.astro";
+import ExpertInsight from "../../components/content/ExpertInsight.astro";
+import RelatedArticles from "../../components/content/RelatedArticles.astro";
 
 const metadata = {
-    title: "3rd Pillar Providers: A Strategic Review for Expats (2026)",
+    title: "3rd Pillar Providers: A Strategic Review for Expats | 2026 Review",
     description:
         "Digital apps vs. modern insurance. Our strategic review goes beyond fees to show you which 3rd pillar provider truly offers the best long-term value and security for expats.",
     canonical: "https://expat-savvy.ch/3rd-pillar/providers/",
@@ -90,6 +94,15 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
             title={metadata.title}
             description={metadata.description}
             image="/images/best-providers-hero.png"
+            author={{
+                "@type": "Person",
+                name: "Hans Steiner",
+                url: "https://expat-savvy.ch/about/hans-steiner/",
+                affiliation: {
+                    "@type": "Organization",
+                    name: "Expat Savvy",
+                },
+            }}
         />
         <FAQSchema faqs={faqs} />
     </Fragment>
@@ -137,6 +150,18 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
     <!-- MAIN CONTENT AREA -->
     <main class="py-24 bg-white">
         <div class="container mx-auto px-6">
+            <div class="mb-16">
+                <QuickSummary
+                    summary="Choosing a 3rd pillar provider is a strategic decision between low-cost growth (FinTech) and integrated protection (Insurance). For expats, the 'best' provider depends on your residence plans, family status, and desire for forced savings."
+                    keyPoints={[
+                        "Lowest Fees: FinTech apps like VIAC and Finpension lead the market with ~0.40% TER.",
+                        "Best Protection: Insurance providers offer disability waivers and guaranteed capital, critical for families.",
+                        "Bank Warning: Traditional bank 3a accounts offer the worst of both worlds—high fees and low returns.",
+                        "Expat Flexibility: Consider withdrawal penalties and global transfer options before signing.",
+                    ]}
+                />
+            </div>
+
             <!-- SECTION 1: THE STRATEGIC OVERVIEW (Restructured) -->
             <div class="mb-40">
                 <div class="max-w-5xl mx-auto">
@@ -399,6 +424,11 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                     </div>
                 </div>
             </div>
+
+            <ExpertInsight
+                insight="I see too many expats optimize for 0.1% lower fees while ignoring the 100% risk of disability. If you have a family, the 'cheapest' provider is often the most expensive choice when life happens. Don't buy a Ferrari engine for a car with no brakes."
+                quote="Fees matter. But safety matters more."
+            />
 
             <!-- SECTION 2: THE SWISS LIFE CASE STUDY -->
             <div class="mb-32 py-24 bg-gray-50/50 rounded-[60px] px-8 md:px-20">
@@ -1237,85 +1267,35 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
                 </div>
             </div>
 
-            <!-- RELATED HUB LINKS (BEFORE HANS) -->
-            <div class="mb-32 pt-16 border-t border-gray-100">
-                <div class="max-w-4xl mx-auto">
-                    <h2
-                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
-                    >
-                        Master Your Expat Strategy
-                    </h2>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <a
-                            href="/3rd-pillar/bank-vs-insurance/"
-                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
-                        >
-                            <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
-                                Detailed Comparison
-                            </h4>
-                            <p class="text-sm text-gray-500">
-                                Bank vs Insurance: A deeper dive into the
-                                specific mechanics of both paths.
-                            </p>
-                        </a>
-                        <a
-                            href="/3rd-pillar/tax-optimization/"
-                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#C41E3A] transition-all"
-                        >
-                            <h4 class="text-xl font-bold text-[#1a1a2e] mb-2">
-                                Tax Savings Blueprint
-                            </h4>
-                            <p class="text-sm text-gray-500">
-                                How to legally minimize your Swiss tax burden
-                                through the 3rd pillar.
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <RelatedArticles
+                articles={[
+                    {
+                        title: "Bank vs Insurance",
+                        description:
+                            "A deeper dive into the specific mechanics of both paths.",
+                        url: "/3rd-pillar/bank-vs-insurance/",
+                    },
+                    {
+                        title: "Tax Optimization",
+                        description:
+                            "How to legally minimize your Swiss tax burden through the 3rd pillar.",
+                        url: "/3rd-pillar/tax-optimization/",
+                    },
+                    {
+                        title: "Withdrawal Guide",
+                        description:
+                            "Master the rules of exiting your 3rd pillar.",
+                        url: "/3rd-pillar/withdrawal-guide/",
+                    },
+                ]}
+            />
 
             <!-- HANS STEINER CARD -->
-            <div id="hans-steiner" class="mb-32 scroll-mt-24 text-center">
-                <div class="max-w-4xl mx-auto">
-                    <div
-                        class="bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm inline-block text-left w-full"
-                    >
-                        <div
-                            class="flex flex-col md:flex-row items-center gap-10"
-                        >
-                            <div
-                                class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
-                            >
-                                <img
-                                    src="/images/hans-steiner.png"
-                                    alt="Hans Steiner"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="flex-grow">
-                                <h2
-                                    class="text-3xl font-bold text-[#1a1a2e] mb-4"
-                                >
-                                    Get Your Free, Personalized Strategy
-                                    Analysis
-                                </h2>
-                                <p
-                                    class="spoke-body text-gray-600 mb-8 max-w-xl"
-                                >
-                                    "Choosing the wrong path can cost you
-                                    decades of compounded security. Let's find
-                                    your ideal Swiss setup."
-                                </p>
-                                <button
-                                    onclick="window.openContextualModal()"
-                                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
-                                >
-                                    Request My Free Analysis
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- HANS STEINER CARD -->
+            <div id="hans-steiner" class="mb-32 scroll-mt-24">
+                <HansSteinerCard
+                    quote="Choosing the wrong path can cost you decades of compounded security. Let's find your ideal Swiss setup."
+                />
             </div>
 
             <!-- FAQ SECTION -->
@@ -1365,6 +1345,10 @@ const heroImage = "/images/providers-v3-three-paths.jpg";
             <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
                 Don't leave your Swiss future to an algorithm. Get a holistic
                 strategy built for real security.
+            </p>
+            <!-- Last Updated -->
+            <p class="text-white/30 text-sm mb-4">
+                Last Updated: January 29, 2026
             </p>
             <button
                 onclick="window.openContextualModal()"

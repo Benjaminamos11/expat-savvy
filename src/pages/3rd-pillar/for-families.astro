@@ -1,13 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
-import HansSteinerCard from "../../components/consultant/ConsultantProfileCard.astro";
+import HansSteinerCard from "../../components/consultant/HansSteinerCard.astro";
+import QuickSummary from "../../components/content/QuickSummary.astro";
+import ExpertInsight from "../../components/content/ExpertInsight.astro";
+import RelatedArticles from "../../components/content/RelatedArticles.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import ArticleSchema from "../../components/ArticleSchema.astro";
 import FAQSchema from "../../components/FAQSchema.astro";
 
 const metadata = {
-    title: "3rd Pillar for Families in Switzerland: The Ultimate Protection Guide",
+    title: "3rd Pillar for Families in Switzerland: The Ultimate Protection Guide | 2026 Guide",
     description:
         "Learn how to use the 3rd pillar to protect your family's future in Switzerland. A complete guide to life insurance, disability protection, and long-term savings for expat parents.",
     canonical: "https://expat-savvy.ch/3rd-pillar/for-families/",
@@ -87,6 +90,15 @@ const heroImage = "/images/family-3rd-pillar-hero.png";
             title={metadata.title}
             description={metadata.description}
             image={heroImage}
+            author={{
+                "@type": "Person",
+                name: "Hans Steiner",
+                url: "https://expat-savvy.ch/about/hans-steiner/",
+                affiliation: {
+                    "@type": "Organization",
+                    name: "Expat Savvy",
+                },
+            }}
         />
         <FAQSchema faqs={faqs} />
     </Fragment>
@@ -132,6 +144,18 @@ const heroImage = "/images/family-3rd-pillar-hero.png";
     <main class="py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto">
+                <div class="mb-16">
+                    <QuickSummary
+                        summary="For expat families, the 3rd pillar is more than a tax break—it's your primary safety net. It combines life insurance, disability protection, and tax-efficient savings to secure your family's future in Switzerland."
+                        keyPoints={[
+                            "Family Protection: Provides a tax-free lump sum to your spouse/children if the unexpected happens.",
+                            "Disability Waiver: Ensures your savings goals are met even if you can't work due to illness.",
+                            "Estate Planning: Bypasses forced heirship rules, allowing you to designate beneficiaries directly.",
+                            "Double the Benefit: Couples can have two separate 3a accounts, doubling the tax deduction to ~CHF 14k.",
+                        ]}
+                    />
+                </div>
+
                 <!-- SECTION 1: THE 3-IN-1 SOLUTION -->
                 <section class="mb-32">
                     <RedSectionHeader
@@ -589,196 +613,187 @@ const heroImage = "/images/family-3rd-pillar-hero.png";
                         </div>
                     </div>
                 </section>
-
-                <!-- SECTION 5: FAMILY CHECKLIST -->
-                <section class="mb-32">
-                    <div
-                        class="p-12 bg-white rounded-[50px] border-2 border-gray-100 relative overflow-hidden"
-                    >
-                        <div
-                            class="absolute top-0 left-0 w-full h-2 bg-[#C41E3A]"
-                        >
-                        </div>
-                        <h2
-                            class="text-3xl font-bold text-[#1a1a2e] mb-10 text-center"
-                        >
-                            Family 3a Protection Checklist
-                        </h2>
-                        <div class="grid md:grid-cols-2 gap-x-16 gap-y-6">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
-                                >
-                                    ✓
-                                </div>
-                                <span class="text-gray-700"
-                                    >Both partners have a 3a account</span
-                                >
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
-                                >
-                                    ✓
-                                </div>
-                                <span class="text-gray-700"
-                                    >adequate life insurance coverage on each</span
-                                >
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
-                                >
-                                    ✓
-                                </div>
-                                <span class="text-gray-700"
-                                    >Beneficiaries are designated explicitly</span
-                                >
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
-                                >
-                                    ✓
-                                </div>
-                                <span class="text-gray-700"
-                                    >Coverage matches family safety number</span
-                                >
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
-                                >
-                                    ✓
-                                </div>
-                                <span class="text-gray-700"
-                                    >Premium waiver is included (disability)</span
-                                >
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
-                                >
-                                    ✓
-                                </div>
-                                <span class="text-gray-700"
-                                    >Policies are reviewed annually</span
-                                >
-                            </div>
-                        </div>
-                        <div
-                            class="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center"
-                        >
-                            <p class="text-sm text-gray-500 italic">
-                                "Does your current setup check all these boxes?
-                                If not, you may have a critical gap in your
-                                family's safety net."
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECTION 6: HANS STEINER CARD -->
-                <div id="hans-steiner" class="mb-32 scroll-mt-24">
-                    <HansSteinerCard
-                        name="Hans Steiner"
-                        title="Senior Pension Advisor"
-                        image="/images/hans-steiner.png"
-                        bio="Protecting families is why I do this. Let's make sure your partner and children have the fortress they deserve."
-                        ctaText="Get My Free Family Security Analysis"
-                    />
-                </div>
-
-                <!-- SECTION 5: FAQ -->
-                <section class="mb-32">
-                    <h2
-                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
-                    >
-                        Frequently Asked Questions
-                    </h2>
-                    <div class="space-y-4">
-                        {
-                            faqs.map((faq) => (
-                                <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white shadow-sm">
-                                    <details class="group">
-                                        <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
-                                            <span class="text-xl font-bold text-[#1a1a2e] pr-4">
-                                                {faq.question}
-                                            </span>
-                                            <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
-                                                ↓
-                                            </span>
-                                        </summary>
-                                        <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
-                                            {faq.answer}
-                                        </div>
-                                    </details>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </section>
-
-                <!-- RELATED GUIDES -->
-                <div class="grid md:grid-cols-3 gap-6 mb-32">
-                    <a
-                        href="/3rd-pillar/bank-vs-insurance/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:border-[#C41E3A] border-2 border-transparent transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Bank vs. Insurance</h4>
-                        <p class="text-xs text-gray-400">
-                            Is protection or flexibility more important for your
-                            current stage?
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/withdrawal-guide/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:border-[#C41E3A] border-2 border-transparent transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Withdrawal Guide</h4>
-                        <p class="text-xs text-gray-400">
-                            What happens to your family's assets if you leave
-                            Switzerland?
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/tax-optimization/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:border-[#C41E3A] border-2 border-transparent transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Tax Hub</h4>
-                        <p class="text-xs text-gray-400">
-                            How to maximize every Swiss Franc your family saves.
-                        </p>
-                    </a>
-                </div>
             </div>
-        </div>
 
-        <!-- FINAL CTA -->
-        <div
-            class="bg-[#1a1a2e] py-32 text-center relative overflow-hidden text-white"
-        >
-            <div class="absolute inset-0 opacity-10">
+            <ExpertInsight
+                insight="The biggest mistake I see families make is relying solely on their employer's 2nd pillar. It often leaves a 40% income gap if disaster strikes. A well-structured 3rd pillar fills that gap for the price of a daily coffee."
+                quote="Protect the lifestyle you've built."
+            />
+
+            <!-- SECTION 5: FAMILY CHECKLIST -->
+            <section class="mb-32">
                 <div
-                    class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#C41E3A] via-transparent to-transparent"
+                    class="p-12 bg-white rounded-[50px] border-2 border-gray-100 relative overflow-hidden"
                 >
+                    <div class="absolute top-0 left-0 w-full h-2 bg-[#C41E3A]">
+                    </div>
+                    <h2
+                        class="text-3xl font-bold text-[#1a1a2e] mb-10 text-center"
+                    >
+                        Family 3a Protection Checklist
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-x-16 gap-y-6">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
+                            >
+                                ✓
+                            </div>
+                            <span class="text-gray-700"
+                                >Both partners have a 3a account</span
+                            >
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
+                            >
+                                ✓
+                            </div>
+                            <span class="text-gray-700"
+                                >adequate life insurance coverage on each</span
+                            >
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
+                            >
+                                ✓
+                            </div>
+                            <span class="text-gray-700"
+                                >Beneficiaries are designated explicitly</span
+                            >
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
+                            >
+                                ✓
+                            </div>
+                            <span class="text-gray-700"
+                                >Coverage matches family safety number</span
+                            >
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
+                            >
+                                ✓
+                            </div>
+                            <span class="text-gray-700"
+                                >Premium waiver is included (disability)</span
+                            >
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-6 h-6 rounded border-2 border-[#C41E3A] flex items-center justify-center text-[#C41E3A] font-bold"
+                            >
+                                ✓
+                            </div>
+                            <span class="text-gray-700"
+                                >Policies are reviewed annually</span
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center"
+                    >
+                        <p class="text-sm text-gray-500 italic">
+                            "Does your current setup check all these boxes? If
+                            not, you may have a critical gap in your family's
+                            safety net."
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="container mx-auto px-6 relative z-10">
-                <h2 class="text-4xl md:text-6xl font-black text-white mb-8">
-                    Ready to Build Your Family's Fortress?
+            </section>
+
+            <!-- SECTION 6: HANS STEINER CARD -->
+            <HansSteinerCard
+                quote="Protecting families is why I do this. Let's make sure your partner and children have the fortress they deserve."
+                className="mb-32"
+            />
+
+            <!-- SECTION 5: FAQ -->
+            <section class="mb-32">
+                <h2 class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center">
+                    Frequently Asked Questions
                 </h2>
-                <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
-                    Don't leave your family's Swiss future to chance. Get a
-                    personalized protection plan designed for expat parents.
-                </p>
-                <button
-                    onclick="window.openContextualModal()"
-                    class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-6 px-16 rounded-full text-2xl shadow-2xl transition transform hover:-translate-y-1 active:scale-95"
-                >
-                    Design My Family Protection Plan
-                </button>
-            </div>
+                <div class="space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <div class="border-2 border-gray-100 rounded-[30px] overflow-hidden hover:border-gray-200 transition-colors bg-white shadow-sm">
+                                <details class="group">
+                                    <summary class="flex justify-between items-center cursor-pointer p-8 list-none">
+                                        <span class="text-xl font-bold text-[#1a1a2e] pr-4">
+                                            {faq.question}
+                                        </span>
+                                        <span class="text-[#C41E3A] transform group-open:rotate-180 transition-transform text-2xl font-bold">
+                                            ↓
+                                        </span>
+                                    </summary>
+                                    <div class="px-8 pb-8 text-gray-600 leading-relaxed text-lg border-t border-gray-50 pt-6">
+                                        {faq.answer}
+                                    </div>
+                                </details>
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- RELATED GUIDES -->
+            <RelatedArticles
+                articles={[
+                    {
+                        title: "Bank vs. Insurance",
+                        description:
+                            "Is protection or flexibility more important for your current stage?",
+                        url: "/3rd-pillar/bank-vs-insurance/",
+                    },
+                    {
+                        title: "Withdrawal Guide",
+                        description:
+                            "What happens to your family's assets if you leave Switzerland?",
+                        url: "/3rd-pillar/withdrawal-guide/",
+                    },
+                    {
+                        title: "Tax Hub",
+                        description:
+                            "How to maximize every Swiss Franc your family saves.",
+                        url: "/3rd-pillar/tax-optimization/",
+                    },
+                ]}
+            />
         </div>
     </main>
+
+    <!-- FINAL CTA -->
+    <div
+        class="bg-[#1a1a2e] py-32 text-center relative overflow-hidden text-white"
+    >
+        <div class="absolute inset-0 opacity-10">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#C41E3A] via-transparent to-transparent"
+            >
+            </div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8">
+                Ready to Build Your Family's Fortress?
+            </h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
+                Don't leave your family's Swiss future to chance. Get a
+                personalized protection plan designed for expat parents.
+            </p>
+            <!-- Last Updated -->
+            <p class="text-white/30 text-sm mb-4">
+                Last Updated: January 29, 2026
+            </p>
+            <button
+                onclick="window.openContextualModal()"
+                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-6 px-16 rounded-full text-2xl shadow-2xl transition transform hover:-translate-y-1 active:scale-95"
+            >
+                Design My Family Protection Plan
+            </button>
+        </div>
+    </div>
 </Layout>

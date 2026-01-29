@@ -1,5 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import HansSteinerCard from "../../components/consultant/HansSteinerCard.astro";
+import QuickSummary from "../../components/content/QuickSummary.astro";
+import ExpertInsight from "../../components/content/ExpertInsight.astro";
+import RelatedArticles from "../../components/content/RelatedArticles.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
 import ArticleSchema from "../../components/ArticleSchema.astro";
@@ -7,7 +11,7 @@ import FAQSchema from "../../components/FAQSchema.astro";
 import InsuranceSecuritySimulator from "../../components/pillar3/InsuranceSecuritySimulator.astro";
 
 const metadata = {
-    title: "3rd Pillar: Bank vs. Insurance in Switzerland (Which is Best for You?)",
+    title: "3rd Pillar: Bank vs. Insurance in Switzerland (Which is Best for You?) | 2026 Comparison",
     description:
         "A balanced comparison of bank and insurance 3a solutions for expats. Discover which profile fits you best and learn why insurance offers superior security for your family and home.",
     canonical: "https://expat-savvy.ch/3rd-pillar/bank-vs-insurance/",
@@ -69,6 +73,15 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
             title={metadata.title}
             description={metadata.description}
             image={heroImage}
+            author={{
+                "@type": "Person",
+                name: "Hans Steiner",
+                url: "https://expat-savvy.ch/about/hans-steiner/",
+                affiliation: {
+                    "@type": "Organization",
+                    name: "Expat Savvy",
+                },
+            }}
         />
         <FAQSchema faqs={faqs} />
     </Fragment>
@@ -149,6 +162,18 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
     <!-- CONTENT START -->
     <div class="bg-white pt-16 md:pt-24 pb-8">
         <div class="spoke-container">
+            <div class="mb-16">
+                <QuickSummary
+                    summary="The choice between bank and insurance 3rd pillars defines your Swiss financial strategy. Insurance offers protection and forced savings (security), while banks offer flexibility and lower fees (growth)."
+                    keyPoints={[
+                        "Insurance 3a: Includes life insurance & premium waiver (disability protection). Best for families & homeowners.",
+                        "Bank 3a: Pure savings investment. Flexible contributions, lower fees. Best for single expats & erratic income.",
+                        "The Hybrid Strategy: Many expats combine both—a small insurance policy for security, plus a bank account for growth.",
+                        "Mortgage Impact: Insurance policies are often preferred by banks as collateral for indirect amortization.",
+                    ]}
+                />
+            </div>
+
             <!-- SECTION 1: PROFILE SELECTOR -->
             <div class="mb-24">
                 <div class="text-center mb-16">
@@ -852,6 +877,11 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
             </div>
         </div>
 
+        <ExpertInsight
+            insight="Some advisors push insurance 3a for the commission. Others push bank 3a because they can't sell insurance. The truth is usually in the middle. The 'Hybrid Strategy'—using insurance for your security floor and banks for your growth ceiling—is often the optimal mathematical answer."
+            quote="Don't choose sides. Choose math."
+        />
+
         <!-- SECTION 5: THE HYBRID STRATEGY -->
         <div id="hybrid-strategy" class="bg-white py-24 scroll-mt-20">
             <div class="spoke-container">
@@ -1108,106 +1138,34 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
         <div id="resources" class="bg-white py-24 border-t border-gray-100">
             <div class="spoke-container">
                 <!-- RELATED GUIDES -->
-                <div class="mb-24 pt-16">
-                    <h2
-                        class="text-3xl font-bold text-[#1a1a2e] mb-12 text-center"
-                    >
-                        Continue Your Journey
-                    </h2>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <a
-                            href="/3rd-pillar/tax-optimization/"
-                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
-                        >
-                            <div
-                                class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
-                            >
-                                Optimization
-                            </div>
-                            <h4
-                                class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
-                            >
-                                3a Tax Guide
-                            </h4>
-                            <p class="text-sm text-gray-500">
-                                Maximize your annual deductions with
-                                Canton-specific strategies.
-                            </p>
-                        </a>
-                        <a
-                            href="/3rd-pillar/pillar-3a-vs-3b/"
-                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
-                        >
-                            <div
-                                class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
-                            >
-                                Comparison
-                            </div>
-                            <h4
-                                class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
-                            >
-                                3a vs 3b
-                            </h4>
-                            <p class="text-sm text-gray-500">
-                                Choosing the right pillar for your length of
-                                stay in Switzerland.
-                            </p>
-                        </a>
-                        <a
-                            href="/3rd-pillar/"
-                            class="group p-8 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all shadow-sm"
-                        >
-                            <div
-                                class="text-[#C41E3A] font-bold text-xs uppercase tracking-widest mb-4"
-                            >
-                                Strategic Hub
-                            </div>
-                            <h4
-                                class="text-xl font-bold text-[#1a1a2e] group-hover:text-[#C41E3A] transition-colors mb-2"
-                            >
-                                3rd Pillar Masterclass
-                            </h4>
-                            <p class="text-sm text-gray-500">
-                                The complete blueprint for expat retirement
-                                planning.
-                            </p>
-                        </a>
-                    </div>
-                </div>
+                <RelatedArticles
+                    articles={[
+                        {
+                            title: "3a Tax Guide",
+                            description:
+                                "Maximize your annual deductions with Canton-specific strategies.",
+                            url: "/3rd-pillar/tax-optimization/",
+                        },
+                        {
+                            title: "3a vs 3b",
+                            description:
+                                "Choosing the right pillar for your length of stay in Switzerland.",
+                            url: "/3rd-pillar/pillar-3a-vs-3b/",
+                        },
+                        {
+                            title: "3rd Pillar Masterclass",
+                            description:
+                                "The complete blueprint for expat retirement planning.",
+                            url: "/3rd-pillar/",
+                        },
+                    ]}
+                />
 
                 <!-- HANS STEINER CARD -->
-                <div
-                    class="mb-24 bg-[#F8F9FA] rounded-[40px] p-8 md:p-12 border border-gray-100 shadow-sm"
-                >
-                    <div class="flex flex-col md:flex-row items-center gap-10">
-                        <div
-                            class="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0"
-                        >
-                            <img
-                                src="/images/hans-steiner.png"
-                                alt="Hans Steiner"
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-3xl font-bold text-[#1a1a2e] mb-4">
-                                Unsure Which Profile Fits You Best?
-                            </h2>
-                            <p class="spoke-body text-gray-600 mb-8 max-w-xl">
-                                "Choosing the wrong path can cost you decades of
-                                compounded security. Let's analyze your specific
-                                goals—homeownership, family protection, or
-                                flexibility—to find your ideal Swiss setup."
-                            </p>
-                            <button
-                                onclick="window.openContextualModal()"
-                                class="bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl transition transform hover:-translate-y-1"
-                            >
-                                Get a Free Profile Analysis
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <HansSteinerCard
+                    quote="Choosing the wrong path can cost you decades of compounded security. Let's find your ideal Swiss setup."
+                    className="mb-24"
+                />
 
                 <!-- FAQ SECTION -->
                 <div class="mb-24">
@@ -1250,6 +1208,10 @@ const heroImage = "/images/bank-vs-insurance-v5-hero-bright.jpg";
                 <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
                     Discover the tailored 3rd pillar strategy that matches your
                     unique profile and secures your Swiss future.
+                </p>
+                <!-- Last Updated -->
+                <p class="text-white/30 text-sm mb-4">
+                    Last Updated: January 29, 2026
                 </p>
                 <button
                     onclick="window.openContextualModal()"

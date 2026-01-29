@@ -1,13 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import RedSectionHeader from "../../components/common/RedSectionHeader.astro";
-import HansSteinerCard from "../../components/consultant/ConsultantProfileCard.astro";
+import HansSteinerCard from "../../components/consultant/HansSteinerCard.astro";
+import QuickSummary from "../../components/content/QuickSummary.astro";
+import ExpertInsight from "../../components/content/ExpertInsight.astro";
+import RelatedArticles from "../../components/content/RelatedArticles.astro";
 import BreadcrumbSchema from "../../components/BreadcrumbSchema.astro";
 import ArticleSchema from "../../components/ArticleSchema.astro";
 import FAQSchema from "../../components/FAQSchema.astro";
 
 const metadata = {
-    title: "3rd Pillar for the Self-Employed in Switzerland: The Ultimate Safety Net",
+    title: "3rd Pillar for the Self-Employed in Switzerland: The Ultimate Safety Net | 2026 Guide",
     description:
         "As a self-employed expat in Switzerland, you are your own safety net. Learn how to use the 'big 3a' to build a fortress of protection and savings.",
     canonical: "https://expat-savvy.ch/3rd-pillar/for-self-employed/",
@@ -108,6 +111,15 @@ const heroImage = "/images/self-employed-hero.png";
             title={metadata.title}
             description={metadata.description}
             image={heroImage}
+            author={{
+                "@type": "Person",
+                name: "Hans Steiner",
+                url: "https://expat-savvy.ch/about/hans-steiner/",
+                affiliation: {
+                    "@type": "Organization",
+                    name: "Expat Savvy",
+                },
+            }}
         />
         <FAQSchema faqs={faqs} />
     </Fragment>
@@ -153,6 +165,18 @@ const heroImage = "/images/self-employed-hero.png";
     <!-- MAIN CONTENT AREA -->
     <main class="py-24 bg-white">
         <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto mb-16">
+                <QuickSummary
+                    summary="For self-employed professionals, the 3rd pillar is not optional—it is your only tax-advantaged safety net. The 'Big 3a' allows for massive tax deductions (up to CHF 36,288) while replacing the missing disability and death benefits of a corporate pension."
+                    keyPoints={[
+                        "Massive Limits: Contribute 20% of net income up to CHF 36,288/year—5x the employee limit.",
+                        "No Safety Net: You have no 2nd pillar. An insurance 3a is critical to replace lost disability/death benefits.",
+                        "Tax Efficiency: Every franc contributed is 100% tax deductible, offering immediate ROI.",
+                        "Flexibility: Use 'Big 3a' for core protection and surplus cash for growth, or structure it to handle variable income.",
+                    ]}
+                />
+            </div>
+
             <div class="max-w-4xl mx-auto">
                 <!-- SECTION 1: THE BIG 3A -->
                 <section class="mb-32">
@@ -484,6 +508,11 @@ const heroImage = "/images/self-employed-hero.png";
                     </div>
                 </section>
 
+                <ExpertInsight
+                    insight="Self-employment is about freedom, but financial freedom requires a foundation. I've seen too many entrepreneurs build successful businesses but leave their personal safety net to chance. A 'Big 3a' is the most efficient way to turn business success into private wealth."
+                    quote="Pay yourself first. The tax man can wait."
+                />
+
                 <!-- SECTION 3: THE NON-NEGOTIABLE FOUNDATION -->
                 <section class="mb-32">
                     <RedSectionHeader
@@ -566,15 +595,10 @@ const heroImage = "/images/self-employed-hero.png";
                 </section>
 
                 <!-- SECTION 4: HANS STEINER CARD -->
-                <div id="hans-steiner" class="mb-32 scroll-mt-24">
-                    <HansSteinerCard
-                        name="Hans Steiner"
-                        title="Senior Pension Advisor"
-                        image="/images/hans-steiner.png"
-                        bio="I specialize in building 'Fortress Plans' for entrepreneurs. Let's design a pension strategy as resilient as your business."
-                        ctaText="Book My Free Entrepreneur Pension Review"
-                    />
-                </div>
+                <HansSteinerCard
+                    quote="I specialize in building 'Fortress Plans' for entrepreneurs. Let's design a pension strategy as resilient as your business."
+                    className="mb-32 scroll-mt-24"
+                />
 
                 <!-- SECTION 5: FAQ -->
                 <section class="mb-32">
@@ -607,43 +631,28 @@ const heroImage = "/images/self-employed-hero.png";
                 </section>
 
                 <!-- RELATED GUIDES -->
-                <div class="grid md:grid-cols-3 gap-6 mb-32">
-                    <a
-                        href="/3rd-pillar/bank-vs-insurance/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Bank vs. Insurance</h4>
-                        <p
-                            class="text-xs text-gray-400 group-hover:text-white/60"
-                        >
-                            Compare the two fundamental paths of the 3rd pillar.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/pillar-3a-vs-3b/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Families Guide</h4>
-                        <p
-                            class="text-xs text-gray-400 group-hover:text-white/60"
-                        >
-                            How to protect your loved ones while you save for
-                            tomorrow.
-                        </p>
-                    </a>
-                    <a
-                        href="/3rd-pillar/withdrawal-guide/"
-                        class="p-8 rounded-3xl bg-gray-50 hover:bg-[#1a1a2e] hover:text-white transition-all group"
-                    >
-                        <h4 class="font-bold mb-2">Withdrawal Guide</h4>
-                        <p
-                            class="text-xs text-gray-400 group-hover:text-white/60"
-                        >
-                            What happens to your assets if you decide to leave
-                            Switzerland.
-                        </p>
-                    </a>
-                </div>
+                <RelatedArticles
+                    articles={[
+                        {
+                            title: "Bank vs. Insurance",
+                            description:
+                                "Compare the two fundamental paths of the 3rd pillar.",
+                            url: "/3rd-pillar/bank-vs-insurance/",
+                        },
+                        {
+                            title: "Families Guide",
+                            description:
+                                "How to protect your loved ones while you save for tomorrow.",
+                            url: "/3rd-pillar/pillar-3a-vs-3b/",
+                        },
+                        {
+                            title: "Withdrawal Guide",
+                            description:
+                                "What happens to your assets if you decide to leave Switzerland.",
+                            url: "/3rd-pillar/withdrawal-guide/",
+                        },
+                    ]}
+                />
             </div>
         </div>
     </main>
@@ -661,6 +670,10 @@ const heroImage = "/images/self-employed-hero.png";
             <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">
                 Don't leave your Swiss future to chance. Get a holistic
                 self-employed strategy built for real security.
+            </p>
+            <!-- Last Updated -->
+            <p class="text-white/30 text-sm mb-4">
+                Last Updated: January 29, 2026
             </p>
             <button
                 onclick="window.openContextualModal()"

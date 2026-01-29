@@ -1,0 +1,82 @@
+---
+interface Props {
+    quote: string;
+    className?: string;
+}
+
+const { quote, className = "" } = Astro.props;
+---
+
+<div
+    class={`bg-gray-50 rounded-[32px] p-8 md:p-10 border border-gray-100 shadow-sm ${className}`}
+>
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+        <!-- Profile Image -->
+        <div class="shrink-0 relative">
+            <div
+                class="w-32 h-32 md:w-[150px] md:h-[150px] rounded-full overflow-hidden border-4 border-white shadow-lg relative z-10"
+            >
+                <img
+                    src="/images/hans-steiner.png"
+                    alt="Hans Steiner - Senior Consultant"
+                    class="w-full h-full object-cover"
+                />
+            </div>
+            <!-- Decorative background blur -->
+            <div
+                class="absolute inset-0 bg-[#C41E3A] opacity-10 blur-2xl rounded-full scale-110 -z-10"
+            >
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-grow text-center md:text-left space-y-4">
+            <div>
+                <h3 class="text-2xl font-bold text-[#1a1a2e]">Hans Steiner</h3>
+                <p
+                    class="text-[#C41E3A] font-bold text-sm tracking-uppercase uppercase"
+                >
+                    Senior Consultant
+                </p>
+                <p class="text-xs text-gray-500 font-medium mt-1">
+                    Certified Financial Planner (Swiss Federal Diploma) • 20+
+                    Years Expertise
+                </p>
+            </div>
+
+            <blockquote
+                class="text-lg text-gray-700 italic font-serif leading-relaxed"
+            >
+                "{quote}"
+            </blockquote>
+
+            <div
+                class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2"
+            >
+                <button
+                    onclick="window.openLifePensionModal('consultation', 'hans_steiner_card')"
+                    class="inline-flex items-center justify-center gap-2 bg-[#C41E3A] hover:bg-[#a51930] text-white font-bold py-3 px-6 rounded-full transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+                >
+                    <span>Schedule Free Consultation</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+                    >
+                </button>
+                <a
+                    href="/about/hans-steiner/"
+                    class="inline-flex items-center justify-center text-[#1a1a2e] font-semibold py-3 px-6 hover:text-[#C41E3A] transition-colors"
+                >
+                    Learn More About Hans
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
