@@ -85,7 +85,7 @@ Managing an international relocation, including all the insurance paperwork, can
 
 For comprehensive relocation support, including assistance with home search, school search, and navigating local bureaucracy, our partners at **Prime Relocation** ([https://primerelocation.ch](https://primerelocation.ch)) offer expert, personalized services. They are dedicated to ensuring that you, your family, or your employees can transition smoothly and efficiently.
 
-If you are looking for a broader range of verified relocation service providers across Switzerland, **ReloFinder** ([https://relofinder.ch](https://relofinder.ch)) is an excellent platform to connect with trusted professionals for various aspects of your move.
+If you are looking for a broader range of verified relocation service providers across Switzerland, to systematize your move, the [Swiss expat relocation platform on ReloFinder](https://relofinder.ch) is an excellent interactive system to request custom quotes and connect with trusted professionals.
 
 These resources can be particularly helpful for HR professionals tasked with relocating staff, ensuring a positive experience for new hires.
 

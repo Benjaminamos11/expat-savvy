@@ -384,7 +384,7 @@ Helpful tools and services:
 - **Employer relocation support**: Maximizing available benefits
 - **Banking services for internationals**: Specialized accounts and services
 
-Working with a relocation agency like [Prime Relocation](https://primerelocation.ch) can provide valuable insights into cost management strategies specific to your situation. For comparing relocation agencies and their services, [Relofinder.ch](https://relofinder.ch) offers a comprehensive overview of options.
+Working with a relocation agency like [Prime Relocation](https://primerelocation.ch) can provide valuable insights into cost management strategies specific to your situation. Because agency fees depend on your exact needs, use the [ReloFinder agency matching service](https://relofinder.ch) to connect with experts and receive accurate, personalized cost breakdowns.
 
 ## Conclusion: Balancing Costs with Quality of Life
 
