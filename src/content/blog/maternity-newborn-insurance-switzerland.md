@@ -104,6 +104,8 @@ Basic covers most standard costs without deductible/co‑payment from week 13. A
 4. Register your baby before birth (basic + optional supplementary)
 5. Discuss birthing options and plan finances
 
+Having a baby fundamentally changes your financial risk profile in Switzerland. If you haven't already, now is the time to perform a [Swiss family pension gap analysis](/3rd-pillar/for-families) to ensure your child and partner are financially protected against unforeseen disability or loss of income.
+
 ## Related Articles
 
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete newcomer guide and provider comparison

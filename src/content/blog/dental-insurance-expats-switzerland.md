@@ -171,6 +171,8 @@ The sooner the better due to waiting periods. If you're healthy, consider applyi
   <button onclick="window.openOtherModal()" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Free Insurance Quote</button>
 </div>
 
+Looking for more ways to optimize your Swiss finances? Make sure you aren't falling for the [Swiss Pillar 3a life insurance trap](/3rd-pillar/bank-vs-insurance). Read our guide on flexible expat wealth building.
+
 ## Related Articles
 
 - [Best Health Insurance Switzerland 2026 for Expats](/blog/best-health-insurance-switzerland/) — Complete newcomer guide including supplementary options
