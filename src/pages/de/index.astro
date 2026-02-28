@@ -1,0 +1,807 @@
+---
+import LayoutDE from "../../layouts/LayoutDE.astro";
+import TestimonialsDE from "../../components/TestimonialsDE.astro";
+
+const stats = [
+    { number: "1000+", label: "Betreute Zuwanderer" },
+    { number: "100%", label: "Unabhängig" },
+    { number: "30+", label: "Jahre Schweizer Expertise" },
+    { number: "Digitale", label: "Abendtermine" },
+];
+
+const germanReviews = [
+    {
+        text: "Der Umzug in die Schweiz war überwältigend, aber Expat Savvy hat die Versicherungsfragen extrem vereinfacht. Sie haben mir über 2000 CHF jährlich gespart!",
+        author: "Stefan Thomsen",
+        role: "Softwareentwickler aus Deutschland",
+    },
+    {
+        text: "Ihr ganzheitlicher Ansatz half mir genau zu verstehen, welchen Schutz ich brauche. Die beste Entscheidung, die ich nach meinem Umzug nach Zürich getroffen habe.",
+        author: "Markus Roth",
+        role: "Finanzexperte aus Frankfurt",
+    },
+    {
+        text: "Als vierköpfige Familie brauchten wir eine umfassende Absicherung. Sie fanden für uns die perfekte Balance aus Schutz und Kosten.",
+        author: "Julia Klein",
+        role: "Wissenschaftlerin aus Berlin",
+    },
+];
+
+const valuePoints = [
+    {
+        icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`,
+        title: "100% Unabhängig & FINMA-registriert",
+        description:
+            "Wir arbeiten nicht für die Versicherungsgesellschaften, sondern ausschliesslich für Sie. Als ungebundener Broker vergleichen wir objektiv den gesamten Markt.",
+    },
+    {
+        icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`,
+        title: "Digitale Präzision statt Papierkram",
+        description:
+            "Mit unserer komplett digitalen Bedarfsanalyse und proaktivem Markt-Monitoring stellen wir sicher, dass Ihr Portfolio dauerhaft das beste Preis-Leistungs-Verhältnis bietet.",
+    },
+    {
+        icon: `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+        title: "Ihr Brückenbauer in die Schweiz",
+        description:
+            "Wir kennen beide Systeme. Wir übersetzen den komplexen Schweizer Tarifdschungel in klare, verständliche Strategien speziell für deutsche Fach- und Führungskräfte.",
+    },
+];
+---
+
+<LayoutDE
+    title="Krankenversicherung Schweiz | Expertenberatung 2026"
+    description="Experten-Beratung statt Standard-Verkauf. Finden Sie die beste Schweizer Krankenversicherung für Zuzüger."
+>
+    <!-- Section 2: Hero Section -->
+    <div
+        class="relative min-h-[50vh] md:min-h-[90vh] flex items-center overflow-hidden hero-section"
+    >
+        <div class="absolute inset-0">
+            <img
+                src="https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto:good,w_1920/v1760890750/a-cinematic-photograph-of-a-sleek-passen_zKS_uxq9SF-xqPSKAGnnoQ_3r9qjw1LR6qa6ndDMUZHIA_gly53k.png"
+                alt="Swiss mountains"
+                class="w-full h-full object-cover object-top"
+                fetchpriority="high"
+                decoding="async"
+                width="1920"
+                height="1080"
+            />
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30"
+            >
+            </div>
+        </div>
+
+        <!-- Mobile layout -->
+        <div class="relative w-full mx-auto px-4 sm:px-6 md:hidden py-8">
+            <div class="text-center">
+                <h1
+                    class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow leading-tight"
+                >
+                    Ihr Schweizer Versicherungs-Concierge für deutsche Fach- und
+                    Führungskräfte.
+                </h1>
+                <p
+                    class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow"
+                >
+                    Sichern Sie sich Ihren deutschen PKV-Standard, optimieren
+                    Sie Ihre Quellensteuer und buchen Sie Ihre digitale
+                    Bedarfsanalyse – auch bequem nach 19 Uhr.
+                </p>
+                <div
+                    class="mt-6 flex flex-col items-center gap-3 animate-slide-up"
+                >
+                    <button
+                        class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        onclick="window.dispatchEvent(new CustomEvent('openGermanModal', { detail: { topic: 'health' } }))"
+                    >
+                        Digitale Beratung buchen
+                        <svg
+                            class="ml-2 h-5 w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+                        >
+                    </button>
+                    <div
+                        class="flex items-center justify-center text-sm text-white mt-2 w-full"
+                    >
+                        <div
+                            class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm max-w-[90vw]"
+                        >
+                            <span id="booking-count" class="text-xs text-center"
+                                >8 Personen haben kürzlich eine Beratung gebucht</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop layout -->
+        <div class="relative w-full mx-auto hidden md:block">
+            <div class="grid grid-cols-12 gap-4">
+                <div
+                    class="col-span-6 col-start-2 flex items-center justify-center"
+                >
+                    <div class="text-left max-w-xl">
+                        <h1
+                            class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow leading-tight"
+                        >
+                            Ihr Schweizer Versicherungs-Concierge für deutsche
+                            Fach- und Führungskräfte.
+                        </h1>
+                        <p
+                            class="mt-6 text-xl text-white animate-slide-up text-shadow"
+                        >
+                            Sichern Sie sich Ihren deutschen PKV-Standard,
+                            optimieren Sie Ihre Quellensteuer und buchen Sie
+                            Ihre digitale Bedarfsanalyse – auch bequem nach 19
+                            Uhr.
+                        </p>
+                        <div
+                            class="mt-10 flex flex-col items-start gap-4 animate-slide-up"
+                        >
+                            <button
+                                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
+                                onclick="window.dispatchEvent(new CustomEvent('openGermanModal', { detail: { topic: 'health' } }))"
+                            >
+                                Digitale Beratung buchen
+                                <svg
+                                    class="ml-2 h-5 w-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    ><path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                    ></path></svg
+                                >
+                            </button>
+                            <div class="flex items-center text-sm text-white">
+                                <div
+                                    class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm"
+                                >
+                                    <span
+                                        id="booking-count-desktop"
+                                        class="whitespace-nowrap"
+                                        >8 Personen haben in den letzten 24
+                                        Stunden eine Beratung gebucht</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Trust Indicators -->
+    <div class="bg-white py-6 sm:py-12 trust-indicators">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center"
+            >
+                {
+                    stats.map((stat) => (
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl md:text-4xl font-bold text-primary-600">
+                                {stat.number}
+                            </span>
+                            <span class="mt-2 text-gray-600 stat-label">
+                                {stat.label}
+                            </span>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Expert Profile Section -->
+    <div class="bg-gray-50 py-20 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="text-primary-600 font-semibold text-sm uppercase tracking-wider"
+                    >Unser Profil</span
+                >
+                <h2
+                    class="mt-2 text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight"
+                >
+                    Experten-Beratung statt Standard-Verkauf.
+                </h2>
+                <div class="mt-4 max-w-3xl mx-auto">
+                    <!-- Added Intro Paragraph as Requested -->
+                    <p class="text-xl text-gray-600 mb-6">
+                        Herzlich willkommen in der Schweiz. Als deutsche Fach-
+                        oder Führungskraft stehen Sie nun vor einem der
+                        komplexesten Gesundheits- und Steuersysteme Europas. Was
+                        in Deutschland automatisch über den Arbeitgeber geregelt
+                        wurde, liegt in der Schweiz zu 100% in Ihrer eigenen
+                        Verantwortung. Genau hier setzen wir an: Expat-Savvy
+                        schliesst die Lücke zwischen anonymen Online-Rechnern
+                        und teurem Private Banking. Wir navigieren Sie sicher
+                        durch den Tarifdschungel.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-10">
+                    {
+                        valuePoints.map((point) => (
+                            <div class="flex gap-6">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 text-primary-600">
+                                        <Fragment set:html={point.icon} />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                                        {point.title}
+                                    </h3>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        {point.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div class="relative lg:mt-0 mt-10">
+                    <div class="relative">
+                        <img
+                            src="https://res.cloudinary.com/dphbnwjtx/image/upload/c_fill,g_center,h_700,w_600,y_20,e_improve,e_sharpen,r_20/v1747850395/DSC_7067_l2xm3b.webp"
+                            loading="lazy"
+                            alt="Benjamin Wagner - Insurance Expert"
+                            class="w-full max-w-lg mx-auto rounded-3xl shadow-2xl object-cover object-center"
+                            style="max-height: 550px; width: auto;"
+                            width="600"
+                            height="700"
+                        />
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-white text-gray-900 px-8 py-4 rounded-xl shadow-xl"
+                        >
+                            <div class="flex items-center gap-3">
+                                <div class="flex-shrink-0">
+                                    <svg
+                                        class="h-6 w-6 text-primary-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        ><path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                        ></path></svg
+                                    >
+                                </div>
+                                <div>
+                                    <p class="font-bold text-lg">
+                                        Benjamin Wagner
+                                    </p>
+                                    <p class="text-sm text-gray-600">Gründer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Service Cards Grid -->
+    <div class="relative bg-white py-24">
+        <div class="absolute inset-0 pointer-events-none">
+            <div
+                class="absolute inset-0 opacity-[0.03]"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23cc242c' stroke-width='2'%3E%3Cpath d='M30 5v50M5 30h50'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                    backgroundSize: "60px 60px",
+                    maskImage:
+                        "linear-gradient(to bottom, transparent, black, transparent)",
+                }}
+            >
+            </div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="text-primary-600 font-semibold text-sm uppercase tracking-wider"
+                    >Unsere Dienstleistungen</span
+                >
+                <h2
+                    class="mt-2 text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight"
+                >
+                    Spezialisierte Lösungen
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                <a
+                    href="/de/krankenversicherung"
+                    class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 block"
+                >
+                    <div class="p-8 h-full flex flex-col items-start text-left">
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mb-6 rounded-full bg-red-50 group-hover:bg-red-100 transition-colors"
+                        >
+                            <svg
+                                class="h-8 w-8 text-red-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                ><path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            Private Krankenversicherung (VIP-Status)
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Sie sind den Premium-Standard der deutschen PKV
+                            gewohnt? Wir sorgen für ein nahtloses Upgrade im
+                            Schweizer System. Sichern Sie sich weltweite
+                            Chefarztbehandlung, Einzelzimmer und garantierten
+                            Zugang zu exklusiven Privatkliniken (z.B.
+                            Hirslanden).
+                        </p>
+                    </div>
+                </a>
+                <a
+                    href="/de/steuern-vorsorge"
+                    class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 block"
+                >
+                    <div class="p-8 h-full flex flex-col items-start text-left">
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mb-6 rounded-full bg-red-50 group-hover:bg-red-100 transition-colors"
+                        >
+                            <svg
+                                class="h-8 w-8 text-red-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                ><path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            Quellensteuer & Pensionsplanung
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Wer als deutscher Zuwanderer in die Schweiz kommt,
+                            hat oft jahrelange Einzahlungslücken im hiesigen
+                            System. Wir schliessen Ihre Vorsorgelücken und
+                            senken Ihre Quellensteuer (ab 120.000 CHF Einkommen)
+                            durch smarte Pensionskassen-Einkäufe und
+                            massgeschneiderte Säule-3a-Strategien.
+                        </p>
+                    </div>
+                </a>
+                <a
+                    href="#"
+                    onclick="event.preventDefault(); if(window.openGermanModal) window.openGermanModal('everyday');"
+                    class="group relative bg-white rounded-2xl shadow-md transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 block cursor-pointer"
+                >
+                    <div class="p-8 h-full flex flex-col items-start text-left">
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mb-6 rounded-full bg-red-50 group-hover:bg-red-100 transition-colors"
+                        >
+                            <svg
+                                class="h-8 w-8 text-red-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                ><path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            Executive Concierge & Support
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Als unabhängiger Broker begleiten wir Sie
+                            langfristig. Erwarten Sie VIP-Service: Digitale
+                            Bedarfsanalysen, WhatsApp-Support und Beratung nach
+                            Feierabend. Mithilfe smarter Technologie überwachen
+                            wir den Markt proaktiv und melden uns automatisch
+                            bei Ihnen, sobald es bessere oder günstigere
+                            Produkte für Ihr Profil gibt.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 6: The Reality Check -->
+    <div class="bg-gray-50 py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span
+                        class="text-primary-600 font-semibold text-sm uppercase tracking-wider"
+                        >System-Schock vermeiden</span
+                    >
+                    <h2
+                        class="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-6"
+                    >
+                        Das Schweizer System verstehen
+                    </h2>
+                    <div class="prose prose-lg text-gray-600">
+                        <p>
+                            Für viele deutsche Zuzüger ist der Wechsel in das
+                            Schweizer Gesundheitssystem ein echter Schock.
+                            Anders als in Deutschland gibt es hier <strong
+                                >keinen Arbeitgeberzuschuss</strong
+                            > zur Krankenversicherung – Sie zahlen 100% der Prämie
+                            selbst (KVG).
+                        </p>
+                        <p>
+                            Der nächste grosse Unterschied: In der Schweiz liegt
+                            man standardmässig im <strong>Mehrbettzimmer</strong
+                            > der allgemeinen Abteilung, es sei denn, man stockt durch
+                            gezielte Zusatzversicherungen (VVG) auf den gewohnten
+                            PKV-Standard (Chefarzt, Einzelzimmer, Privatklinik) auf.
+                        </p>
+                        <p>
+                            Gleichzeitig bietet die Schweiz enorme Chancen: Wer
+                            mehr als 120'000 CHF verdient (oder ohnehin der
+                            Quellensteuer unterliegt), kann durch eine
+                            intelligente <strong>Säule 3a</strong> mit Tarifkorrektur
+                            massiv Steuern sparen. Wir zeigen Ihnen, wie Sie diese
+                            Vorteile nutzen, ohne in starre Versicherungsfallen zu
+                            tappen.
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img
+                        src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_600,h_600,f_webp,q_auto,c_fill/v1760890805/a-cinematic-aerial-photograph-of-an-intr_p5ARiZ6rRQO3CxkWMP6wJA_hU-DxEd9RK6RnCnXFpmeKA_l7qs6t.png"
+                        alt="Schweizer Gesundheitssystem"
+                        class="rounded-3xl shadow-2xl object-cover w-full aspect-square h-auto"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 7: The Experts -->
+    <div class="bg-white py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="text-primary-600 font-semibold text-sm uppercase tracking-wider"
+                    >Unser Expertenteam</span
+                >
+                <h2
+                    class="mt-2 text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight"
+                >
+                    Ihre unabhängigen Schweizer Experten
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    Jahrzehntelange Erfahrung gebündelt für Ihren perfekten
+                    Start in der Schweiz.
+                </p>
+            </div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto"
+            >
+                <div
+                    class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-shadow flex flex-col items-center text-center"
+                >
+                    <div
+                        class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-white shadow-lg bg-gray-200"
+                    >
+                        <img
+                            src="https://expat-savvy.ch/images/hans_steiner_expert.png"
+                            alt="Hans Steiner"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">
+                        Hans Steiner
+                    </h3>
+                    <p class="text-red-600 font-medium mb-4">
+                        dipl. Finanzplaner IAF
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Mit über 30 Jahren Erfahrung im Wealth Management ist
+                        Hans der Wächter Ihrer Finanzen. Er bewahrt Zuzüger
+                        systematisch vor den berüchtigten "Säule 3a
+                        Lebensversicherungs-Fallen" und optimiert Ihre
+                        Quellensteuer-Rückforderungen bei Gehältern über 120'000
+                        CHF.
+                    </p>
+                </div>
+                <div
+                    class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-shadow flex flex-col items-center text-center"
+                >
+                    <div
+                        class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-white shadow-lg bg-gray-200"
+                    >
+                        <img
+                            src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_300,h_300,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+                            alt="Robert Kolar"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">
+                        Robert Kolar
+                    </h3>
+                    <p class="text-red-600 font-medium mb-4">
+                        Ehem. Ausbildungsleiter Krankenversicherungen
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Als ehemaliger Insider der grossen Kassen kennt Robert
+                        die Annahmerichtlinien und versteckten Klauseln im
+                        Detail. Er sorgt dafür, dass Ihr Upgrade auf den
+                        deutschen PKV-Standard (Chefarzt & Einzelzimmer) auch
+                        bei Vorerkrankungen wasserdicht und ohne gefährliche
+                        Ausschlüsse angenommen wird.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 8: FAQ-Bereich -->
+    <div class="bg-gray-50 py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900">
+                    Häufig gestellte Fragen
+                </h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    Alles Wichtige auf einen Blick für deutsche Neuankömmlinge.
+                </p>
+            </div>
+            <div class="space-y-4">
+                <details
+                    class="group bg-white rounded-2xl border border-gray-200 shadow-sm [&_summary::-webkit-details-marker]:hidden"
+                >
+                    <summary
+                        class="flex items-center justify-between cursor-pointer p-6 font-semibold text-gray-900"
+                    >
+                        <span class="text-lg"
+                            >Kann ich meine deutsche private Krankenversicherung
+                            (PKV) in der Schweiz behalten?</span
+                        >
+                        <span class="transition group-open:rotate-180">
+                            <svg
+                                fill="none"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                width="24"><path d="M6 9l6 6 6-6"></path></svg
+                            >
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600">
+                        <p>
+                            Nein, bei einem festen Umzug in die Schweiz (mit
+                            Wohnsitz und Arbeitsvertrag unterliegen Sie
+                            innerhalb von 90 Tagen der KVG-Pflicht. Sie müssen
+                            in das Schweizer System wechseln. Den gewohnten <strong
+                                >PKV-Standard</strong
+                            > (Privatabteilung im Krankenhaus, freie Arztwahl, Chefarztbehandlung)
+                            müssen Sie über freiwillige Schweizer Zusatzversicherungen
+                            (VVG) replizieren. Wir übernehmen diesen Wechsel nahtlos
+                            für Sie.
+                        </p>
+                    </div>
+                </details>
+                <details
+                    class="group bg-white rounded-2xl border border-gray-200 shadow-sm [&_summary::-webkit-details-marker]:hidden"
+                >
+                    <summary
+                        class="flex items-center justify-between cursor-pointer p-6 font-semibold text-gray-900"
+                    >
+                        <span class="text-lg"
+                            >Lohnt sich eine Säule 3a, wenn ich
+                            quellensteuerpflichtig bin?</span
+                        >
+                        <span class="transition group-open:rotate-180">
+                            <svg
+                                fill="none"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                width="24"><path d="M6 9l6 6 6-6"></path></svg
+                            >
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600">
+                        <p>
+                            Ja, in vielen Fällen massiv! Besonders wenn Sie über
+                            120'000 CHF im Jahr verdienen, sind Sie
+                            verpflichtet, eine nachträgliche ordentliche
+                            Veranlagung (Tarifkorrektur) vorzunehmen. Hier
+                            können Sie die Säule 3a vollständig steuerlich
+                            absetzen. <strong>Aber Vorsicht:</strong> Schliessen Sie
+                            niemals unüberlegt gemischte 3a-Lebensversicherungen ab
+                            (die klassische Falle für Neuankömmlinge). Wir empfehlen
+                            reine, flexible Bank- oder Wertschriftenlösungen, die
+                            Sie nicht binden.
+                        </p>
+                    </div>
+                </details>
+                <details
+                    class="group bg-white rounded-2xl border border-gray-200 shadow-sm [&_summary::-webkit-details-marker]:hidden"
+                >
+                    <summary
+                        class="flex items-center justify-between cursor-pointer p-6 font-semibold text-gray-900"
+                    >
+                        <span class="text-lg"
+                            >Bieten Sie Termine nach Feierabend an?</span
+                        >
+                        <span class="transition group-open:rotate-180">
+                            <svg
+                                fill="none"
+                                height="24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                width="24"><path d="M6 9l6 6 6-6"></path></svg
+                            >
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600">
+                        <p>
+                            Absolut. Wir wissen, dass Führungskräfte selten um
+                            10 Uhr morgens Zeit für Versicherungsfragen haben.
+                            Unser <strong>Executive Service</strong> bietet vollständig
+                            digitale Zoom-Beratungen an – auch bequem nach 19:00 Uhr
+                            und an Wochenenden.
+                        </p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 9: Reviews Section -->
+    <TestimonialsDE reviews={germanReviews} />
+</LayoutDE>
+
+<script>
+    function updateBookingCount() {
+        const countElement = document.getElementById("booking-count");
+        const countElementDesktop = document.getElementById(
+            "booking-count-desktop",
+        );
+        if (countElement) {
+            const randomCount = Math.floor(Math.random() * (11 - 3 + 1)) + 3;
+            const text = `${randomCount} Personen haben kürzlich eine Beratung gebucht`;
+            countElement.textContent = text;
+            if (countElementDesktop) {
+                countElementDesktop.textContent = text;
+            }
+        }
+    }
+    updateBookingCount();
+    setInterval(updateBookingCount, 10 * 60 * 1000);
+</script>
+
+<style>
+    @keyframes pulse {
+        0% {
+            opacity: 0.7;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.7;
+        }
+    }
+    .animate-pulse {
+        animation: pulse 2s infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .hover\:-translate-y-0\.5:hover,
+        .group:hover .group-hover\:-translate-y-0\.5,
+        .transition-all,
+        .transition,
+        .duration-200,
+        .animate-pulse {
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+        }
+        .hover\:bg-red-700:hover {
+            background-color: rgb(185 28 28);
+        }
+        .hover\:bg-red-50:hover {
+            background-color: rgb(254 242 242);
+        }
+    }
+    .animate-fade-in {
+        animation: fadeIn 1s ease-out;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    .animate-slide-up {
+        animation: slideUp 0.8s ease-out;
+        animation-fill-mode: both;
+    }
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 640px) {
+        .trust-indicators {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .hero-section {
+            min-height: calc(100vh - 65px);
+            height: auto !important;
+            max-height: none !important;
+        }
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .hero-section {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+    }
+    @media (max-width: 380px) {
+        .hero-section {
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 1.75rem !important;
+        }
+        .hero-section button {
+            padding: 0.5rem 1rem;
+        }
+    }
+</style>

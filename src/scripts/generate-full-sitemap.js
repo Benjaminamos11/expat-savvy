@@ -17,10 +17,10 @@ const formatDate = () => {
 function ensureTrailingSlash(url) {
   // If it's the homepage, don't add a trailing slash
   if (url === '' || url === '/') return '';
-  
+
   // If URL has a file extension, don't add a trailing slash
   if (/\.[a-zA-Z0-9]{2,4}$/.test(url)) return url;
-  
+
   // Add trailing slash if not present
   return url.endsWith('/') ? url : url + '/';
 }
@@ -58,7 +58,7 @@ function hasRedirect(url) {
     'news/regional-guides/lugano-insurance/',
     'news/regional-guides/lugano/',
     'news/regional-guides/lugano',
-    
+
     // Archived pages redirects
     'healthcare/all-insurances/_archived/groupe-mutuel',
     'healthcare/all-insurances/_archived/groupe-mutuel/',
@@ -98,7 +98,7 @@ function hasRedirect(url) {
     'healthcare/all-insurances/_archived/visana/',
     'healthcare/all-insurances/_archived/kpt',
     'healthcare/all-insurances/_archived/kpt/',
-    
+
     // Other redirects
     'insurance',
     'insurance/',
@@ -139,7 +139,7 @@ function hasRedirect(url) {
     'healthcare/all-insurances/axa',
     'healthcare/all-insurances/axa/'
   ];
-  
+
   return redirectUrls.includes(url);
 }
 
@@ -152,7 +152,7 @@ async function generateSitemap() {
     '../pages/**/*.mdx',
     '../content/blog/**/*.md',
     '../content/blog/**/*.mdx',
-    
+
     // Exclude these patterns
     '!../pages/404.astro',
     '!../components/**/*',
@@ -169,7 +169,7 @@ async function generateSitemap() {
   try {
     const blogDir = path.join(__dirname, '../content/blog');
     const entries = fs.readdirSync(blogDir);
-    
+
     blogPosts = entries
       .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
       .filter(file => !file.startsWith('_') && !file.includes('draft'))
@@ -181,7 +181,7 @@ async function generateSitemap() {
   // Manually add insurer pages that are generated dynamically
   const insurerPages = [
     'healthcare/all-insurances/helsana',
-    'healthcare/all-insurances/swica', 
+    'healthcare/all-insurances/swica',
     'healthcare/all-insurances/css',
     'healthcare/all-insurances/sanitas',
     'healthcare/all-insurances/concordia',
@@ -191,6 +191,14 @@ async function generateSitemap() {
     'healthcare/all-insurances/kpt',
     'healthcare/all-insurances/visana',
     'healthcare/all-insurances/sympany'
+  ];
+
+  // German microsite pages (explicit for reliable indexing)
+  const germanPages = [
+    'de/',
+    'de/krankenversicherung/',
+    'de/steuern-vorsorge/',
+    'de/ueber-uns/',
   ];
 
   // Create sitemap entries for each page
@@ -204,91 +212,102 @@ async function generateSitemap() {
     <priority>1.0</priority>
   </url>
 ${pages
-  .map(page => {
-    // Convert file path to URL format
-    let path = page
-      .replace('../pages/', '')
-      .replace('../content/blog/', 'blog/')
-      .replace(/\.(astro|md|mdx)$/, '')
-      .replace(/\/index$/, '');
-    
-    // Special handling for blog post URLs
-    if (path.startsWith('blog/')) {
-      // For blog posts, remove any "src/" prefix that might have been captured
-      path = path.replace('src/', '');
-    }
-    
-    // Skip any paths containing 'draft', starting with an underscore, or dynamic route patterns
-    if (path.includes('draft') || path.startsWith('_') || path.includes('[') || path.includes(']')) {
-      return '';
-    }
+      .map(page => {
+        // Convert file path to URL format
+        let path = page
+          .replace('../pages/', '')
+          .replace('../content/blog/', 'blog/')
+          .replace(/\.(astro|md|mdx)$/, '')
+          .replace(/\/index$/, '');
 
-    // Skip URLs that have redirects configured
-    if (hasRedirect(path)) {
-      return '';
-    }
+        // Special handling for blog post URLs
+        if (path.startsWith('blog/')) {
+          // For blog posts, remove any "src/" prefix that might have been captured
+          path = path.replace('src/', '');
+        }
 
-    // Determine changefreq and priority based on path
-    let changefreq = 'monthly';
-    let priority = '0.7';
-    
-    if (path.includes('blog/')) {
-      changefreq = 'monthly';
-      priority = '0.8';
-    } else if (path.includes('compare-providers/')) {
-      changefreq = 'monthly';
-      priority = '0.9';
-    } else if (path.includes('healthcare/all-insurances/')) {
-      changefreq = 'weekly';
-      priority = '0.9';
-    }
+        // Skip any paths containing 'draft', starting with an underscore, or dynamic route patterns
+        if (path.includes('draft') || path.startsWith('_') || path.includes('[') || path.includes(']')) {
+          return '';
+        }
 
-    // Ensure path has correct trailing slash
-    path = ensureTrailingSlash(path);
+        // Skip URLs that have redirects configured
+        if (hasRedirect(path)) {
+          return '';
+        }
 
-    return `  <url>
+        // Determine changefreq and priority based on path
+        let changefreq = 'monthly';
+        let priority = '0.7';
+
+        if (path.includes('blog/')) {
+          changefreq = 'monthly';
+          priority = '0.8';
+        } else if (path.includes('compare-providers/')) {
+          changefreq = 'monthly';
+          priority = '0.9';
+        } else if (path.includes('healthcare/all-insurances/')) {
+          changefreq = 'weekly';
+          priority = '0.9';
+        }
+
+        // Ensure path has correct trailing slash
+        path = ensureTrailingSlash(path);
+
+        return `  <url>
     <loc>${siteUrl}/${path}</loc>
     <lastmod>${formatDate()}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
-  })
-  .filter(entry => entry) // Remove empty entries
-  .join('\n')}
+      })
+      .filter(entry => entry) // Remove empty entries
+      .join('\n')}
 
 ${insurerPages
-  .map(insurerPath => {
-    // Ensure path has proper trailing slash
-    insurerPath = ensureTrailingSlash(insurerPath);
+      .map(insurerPath => {
+        // Ensure path has proper trailing slash
+        insurerPath = ensureTrailingSlash(insurerPath);
 
-    return `  <url>
+        return `  <url>
     <loc>${siteUrl}/${insurerPath}</loc>
     <lastmod>${formatDate()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>`;
-  })
-  .join('\n')}
+      })
+      .join('\n')}
+
+${germanPages
+      .map(pagePath => {
+        return `  <url>
+    <loc>${siteUrl}/${pagePath}</loc>
+    <lastmod>${formatDate()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+      })
+      .join('\n')}
 
 ${blogPosts
-  .map(postPath => {
-    // Skip any paths containing 'draft' or starting with an underscore
-    if (postPath.includes('draft') || postPath.startsWith('_')) {
-      return '';
-    }
+      .map(postPath => {
+        // Skip any paths containing 'draft' or starting with an underscore
+        if (postPath.includes('draft') || postPath.startsWith('_')) {
+          return '';
+        }
 
-    // Ensure path has proper trailing slash
-    postPath = ensureTrailingSlash(postPath);
+        // Ensure path has proper trailing slash
+        postPath = ensureTrailingSlash(postPath);
 
-    return `  <url>
+        return `  <url>
     <loc>${siteUrl}/${postPath}</loc>
     <lastmod>${formatDate()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>`;
-  })
-  .filter(entry => entry) // Remove empty entries
-  .join('\n')}
+      })
+      .filter(entry => entry) // Remove empty entries
+      .join('\n')}
 </urlset>`;
 
   // Write sitemap to public directory

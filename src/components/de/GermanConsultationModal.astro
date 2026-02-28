@@ -1,0 +1,964 @@
+---
+// GermanConsultationModal.astro — 3-Step Flow
+---
+
+<!-- React Modal Container -->
+<div id="german-modal-root"></div>
+
+<!-- React and ReactDOM from CDN -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"
+></script>
+<script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+></script>
+
+<script is:inline>
+    // Immediately define placeholder functions to prevent errors
+    if (typeof window !== "undefined") {
+        window.openGermanModal = function () {
+            console.warn("⏳ German Modal still loading...");
+        };
+    }
+
+    // Wait for React to load
+    function waitForReact(callback) {
+        if (typeof React !== "undefined" && typeof ReactDOM !== "undefined") {
+            callback();
+        } else {
+            setTimeout(() => waitForReact(callback), 100);
+        }
+    }
+
+    waitForReact(() => {
+        const { useState, useEffect, useCallback, createElement: h } = React;
+
+        // ── Checkbox item component ──
+        const CheckboxCard = ({ label, value, checked, onChange }) => {
+            return h(
+                "label",
+                {
+                    className:
+                        "flex items-center gap-3 p-3 md:p-4 rounded-xl border-2 cursor-pointer transition-all " +
+                        (checked
+                            ? "border-red-500 bg-red-50 shadow-sm"
+                            : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"),
+                },
+                h("input", {
+                    type: "checkbox",
+                    checked: checked,
+                    onChange: () => onChange(value),
+                    className: "sr-only",
+                }),
+                h(
+                    "span",
+                    {
+                        className:
+                            "w-5 h-5 flex-shrink-0 rounded border-2 flex items-center justify-center transition-colors " +
+                            (checked
+                                ? "bg-red-600 border-red-600"
+                                : "border-gray-300 bg-white"),
+                    },
+                    checked &&
+                        h(
+                            "svg",
+                            {
+                                className: "w-3.5 h-3.5 text-white",
+                                fill: "none",
+                                stroke: "currentColor",
+                                viewBox: "0 0 24 24",
+                            },
+                            h("path", {
+                                strokeLinecap: "round",
+                                strokeLinejoin: "round",
+                                strokeWidth: "3",
+                                d: "M5 13l4 4L19 7",
+                            }),
+                        ),
+                ),
+                h(
+                    "span",
+                    {
+                        className:
+                            "text-sm font-medium " +
+                            (checked ? "text-gray-900" : "text-gray-700"),
+                    },
+                    label,
+                ),
+            );
+        };
+
+        // ── Timeline Pill component ──
+        const TimelinePill = ({ label, value, selected, onSelect }) => {
+            return h(
+                "button",
+                {
+                    type: "button",
+                    onClick: () => onSelect(value),
+                    className:
+                        "px-4 py-2.5 rounded-full text-sm font-medium transition-all border " +
+                        (selected
+                            ? "bg-slate-900 text-white border-slate-900 shadow-md"
+                            : "bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:bg-gray-50"),
+                },
+                label,
+            );
+        };
+
+        // ── Main Modal Component ──
+        const GermanConsultationModal = ({ isOpen, onClose, initialTopic }) => {
+            const [step, setStep] = useState(1);
+            const [topics, setTopics] = useState([]);
+            const [timeline, setTimeline] = useState("");
+            const [calKey, setCalKey] = useState(0);
+            const [formData, setFormData] = useState({
+                name: "",
+                email: "",
+                phone: "",
+            });
+
+            const experts = {
+                robert: {
+                    id: "robert",
+                    name: "Robert Kolar",
+                    title: "Senior Health Insurance Expert",
+                    subtitle: "Spezialist für Zuwanderer · DE/EN",
+                    valueProp:
+                        "Gesundheits-Setup. Sichern Sie sich Ihren Premium-Standard in der Schweiz. Kostenlos und unverbindlich.",
+                    badges: [
+                        "Langjährige Branchenerfahrung",
+                        "Unabhängige Beratung. Alle Krankenkassen der Schweiz.",
+                        "100% Digital & Transparent",
+                    ],
+                    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_250,h_250,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+                    calLink: "https://cal.com/robertkolar/expat-savvy",
+                },
+                hans: {
+                    id: "hans",
+                    name: "Hans Steiner",
+                    title: "dipl. Finanzplaner IAF",
+                    subtitle: "Spezialist für Zuwanderer · DE/EN/FR",
+                    valueProp:
+                        "Exklusive Finanzplanung. Massgeschneiderte Strategien für Steuern und Vorsorge. Kostenlos und unverbindlich.",
+                    badges: [
+                        "FINMA-registriert",
+                        "1000+ betreute Zuwanderer",
+                        "Schweizer Datenschutz",
+                    ],
+                    image: "https://expat-savvy.ch/images/hans_steiner_expert.png",
+                    calLink: "https://cal.com/expat-savvy/hans-steiner",
+                },
+            };
+
+            const activeExpert = topics.includes("wealth")
+                ? experts.hans
+                : experts.robert;
+
+            const toggleTopic = useCallback((val) => {
+                setTopics((prev) =>
+                    prev.includes(val)
+                        ? prev.filter((t) => t !== val)
+                        : [...prev, val],
+                );
+            }, []);
+
+            const handleInputChange = (e) =>
+                setFormData((prev) => ({
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                }));
+
+            useEffect(() => {
+                if (isOpen) {
+                    setStep(1);
+                    setTopics(
+                        initialTopic && initialTopic !== "health"
+                            ? [initialTopic]
+                            : [],
+                    );
+                    setTimeline("");
+                    setFormData({ name: "", email: "", phone: "" });
+                    setCalKey((prev) => prev + 1);
+                    document.body.style.overflow = "hidden";
+                } else {
+                    document.body.style.overflow = "";
+                    // Destroy any lingering Cal.com embed iframes
+                    document
+                        .querySelectorAll('[id^="german-cal-embed"]')
+                        .forEach((el) => {
+                            el.innerHTML = "";
+                            delete el.dataset.calInitialized;
+                        });
+                }
+                return () => {
+                    document.body.style.overflow = "";
+                };
+            }, [isOpen, initialTopic]);
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === "Escape" && isOpen) onClose();
+                };
+                if (isOpen) document.addEventListener("keydown", handleKeyDown);
+                return () =>
+                    document.removeEventListener("keydown", handleKeyDown);
+            }, [isOpen, onClose]);
+
+            if (!isOpen) return null;
+
+            // ── Step indicator dots ──
+            const stepDots = h(
+                "div",
+                { className: "flex items-center justify-center gap-2 mb-6" },
+                [1, 2, 3].map((s) =>
+                    h("div", {
+                        key: s,
+                        className:
+                            "h-1.5 rounded-full transition-all " +
+                            (s === step
+                                ? "w-8 bg-red-500"
+                                : s < step
+                                  ? "w-4 bg-red-300"
+                                  : "w-4 bg-gray-200"),
+                    }),
+                ),
+            );
+
+            // ── Checkmark SVG for badges ──
+            const checkSvg = () =>
+                h(
+                    "svg",
+                    {
+                        className: "w-5 h-5 text-green-400 mr-3 flex-shrink-0",
+                        fill: "none",
+                        stroke: "currentColor",
+                        viewBox: "0 0 24 24",
+                    },
+                    h("path", {
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        strokeWidth: "2",
+                        d: "M5 13l4 4L19 7",
+                    }),
+                );
+
+            // ── LEFT SIDEBAR ──
+            const leftSidebar = h(
+                "div",
+                {
+                    className:
+                        "hidden md:flex w-full md:w-5/12 bg-slate-900 text-white p-8 lg:p-10 flex-col relative overflow-y-auto",
+                },
+                h("div", {
+                    className:
+                        "absolute inset-0 bg-gradient-to-b from-slate-800/50 to-slate-900/90 pointer-events-none",
+                }),
+                h(
+                    "div",
+                    { className: "relative z-10 flex-1 flex flex-col" },
+                    h(
+                        "span",
+                        {
+                            className:
+                                "text-red-500 font-semibold text-xs tracking-widest uppercase mb-8 block",
+                        },
+                        "Ihr Berater",
+                    ),
+                    h(
+                        "div",
+                        { className: "relative w-32 h-32 mb-6 shadow-xl" },
+                        h("img", {
+                            src: activeExpert.image,
+                            alt: activeExpert.name,
+                            className:
+                                "w-full h-full object-cover rounded-2xl border-2 border-slate-700 bg-slate-800",
+                        }),
+                    ),
+                    h(
+                        "h3",
+                        { className: "text-3xl font-extrabold mb-1" },
+                        activeExpert.name,
+                    ),
+                    h(
+                        "p",
+                        { className: "text-red-400 font-bold mb-1" },
+                        activeExpert.title,
+                    ),
+                    h(
+                        "p",
+                        {
+                            className:
+                                "text-slate-400 text-sm mb-6 pb-6 border-b border-slate-700",
+                        },
+                        activeExpert.subtitle,
+                    ),
+                    h(
+                        "p",
+                        {
+                            className:
+                                "text-lg text-slate-300 leading-relaxed font-light mb-8",
+                        },
+                        '"' + activeExpert.valueProp + '"',
+                    ),
+                    h(
+                        "div",
+                        { className: "mt-auto" },
+                        h(
+                            "ul",
+                            { className: "space-y-3" },
+                            activeExpert.badges.map((badge, idx) =>
+                                h(
+                                    "li",
+                                    {
+                                        key: idx,
+                                        className:
+                                            "flex items-center text-sm text-slate-300",
+                                    },
+                                    checkSvg(),
+                                    badge,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            );
+
+            // ── STEP 1: Bedarf & Zeitplan ──
+            const step1Content = h(
+                "div",
+                {
+                    className:
+                        "md:max-w-md mx-auto h-full flex flex-col md:justify-center modal-fadeIn py-1 md:py-2",
+                },
+                stepDots,
+                h(
+                    "div",
+                    { className: "mb-4 md:mb-6 text-center md:text-left" },
+                    h(
+                        "h2",
+                        {
+                            className:
+                                "text-2xl md:text-3xl font-extrabold text-gray-900 mb-1",
+                        },
+                        "Welche Themen möchten Sie besprechen?",
+                    ),
+                    h(
+                        "p",
+                        { className: "text-gray-500 text-sm" },
+                        "Ihre persönliche Strategie-Session. Kostenlos & unverbindlich.",
+                    ),
+                ),
+
+                // Topic checkboxes
+                h(
+                    "div",
+                    { className: "space-y-2 md:space-y-3 mb-4 md:mb-6" },
+                    h(CheckboxCard, {
+                        label: "Krankenversicherung & Gesundheits-Setup",
+                        value: "health",
+                        checked: topics.includes("health"),
+                        onChange: toggleTopic,
+                    }),
+                    h(CheckboxCard, {
+                        label: "Steueroptimierung & Säule 3a",
+                        value: "wealth",
+                        checked: topics.includes("wealth"),
+                        onChange: toggleTopic,
+                    }),
+                    h(CheckboxCard, {
+                        label: "Haftpflicht & Hausrat",
+                        value: "everyday",
+                        checked: topics.includes("everyday"),
+                        onChange: toggleTopic,
+                    }),
+                    h(CheckboxCard, {
+                        label: "Familienplanung & Schwangerschaft",
+                        value: "family",
+                        checked: topics.includes("family"),
+                        onChange: toggleTopic,
+                    }),
+                ),
+
+                // Timeline
+                h(
+                    "div",
+                    { className: "mb-4 md:mb-6" },
+                    h(
+                        "label",
+                        {
+                            className:
+                                "block text-sm font-semibold text-gray-700 mb-3",
+                        },
+                        "Ihr aktueller Status",
+                    ),
+                    h(
+                        "div",
+                        {
+                            className: "flex flex-wrap gap-2",
+                        },
+                        h(TimelinePill, {
+                            label: "Noch nicht umgezogen",
+                            value: "pre-move",
+                            selected: timeline === "pre-move",
+                            onSelect: setTimeline,
+                        }),
+                        h(TimelinePill, {
+                            label: "< 3 Monate in CH",
+                            value: "under-3m",
+                            selected: timeline === "under-3m",
+                            onSelect: setTimeline,
+                        }),
+                        h(TimelinePill, {
+                            label: "> 3 Monate in CH",
+                            value: "over-3m",
+                            selected: timeline === "over-3m",
+                            onSelect: setTimeline,
+                        }),
+                    ),
+                ),
+
+                // WEITER button
+                h(
+                    "button",
+                    {
+                        type: "button",
+                        disabled: topics.length === 0,
+                        onClick: () => setStep(2),
+                        className:
+                            "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
+                            (topics.length > 0
+                                ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
+                                : "bg-gray-300 cursor-not-allowed"),
+                    },
+                    "WEITER",
+                    h(
+                        "svg",
+                        {
+                            className: "ml-2 w-5 h-5",
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                        },
+                        h("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "2",
+                            d: "M14 5l7 7m0 0l-7 7m7-7H3",
+                        }),
+                    ),
+                ),
+            );
+
+            // ── STEP 2: Kontaktdaten & Erwartungen ──
+            const step2Content = h(
+                "div",
+                {
+                    className:
+                        "md:max-w-md mx-auto h-full flex flex-col md:justify-center modal-fadeIn py-1 md:py-2",
+                },
+                stepDots,
+                h(
+                    "div",
+                    { className: "mb-4 md:mb-6" },
+                    h(
+                        "button",
+                        {
+                            type: "button",
+                            onClick: () => setStep(1),
+                            className:
+                                "inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors mb-4",
+                        },
+                        "← Zurück",
+                    ),
+                    h(
+                        "h2",
+                        {
+                            className:
+                                "text-2xl md:text-3xl font-extrabold text-gray-900 mb-1",
+                        },
+                        "Ihre Kontaktdaten",
+                    ),
+                    h(
+                        "p",
+                        { className: "text-gray-500 text-sm" },
+                        "Damit wir Ihren Termin bestätigen können",
+                    ),
+                ),
+
+                // Form fields
+                h(
+                    "div",
+                    { className: "space-y-3 md:space-y-4 mb-4 md:mb-5" },
+                    // Name
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "label",
+                            {
+                                htmlFor: "de-name",
+                                className:
+                                    "block text-sm font-semibold text-gray-700 mb-1.5",
+                            },
+                            "Vollständiger Name",
+                        ),
+                        h("input", {
+                            type: "text",
+                            id: "de-name",
+                            name: "name",
+                            placeholder: "z.B. Max Mustermann",
+                            value: formData.name,
+                            onChange: handleInputChange,
+                            required: true,
+                            className:
+                                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                        }),
+                    ),
+                    // Email
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "label",
+                            {
+                                htmlFor: "de-email",
+                                className:
+                                    "block text-sm font-semibold text-gray-700 mb-1.5",
+                            },
+                            "E-Mail Adresse",
+                        ),
+                        h("input", {
+                            type: "email",
+                            id: "de-email",
+                            name: "email",
+                            placeholder: "max@firma.de",
+                            value: formData.email,
+                            onChange: handleInputChange,
+                            required: true,
+                            className:
+                                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                        }),
+                    ),
+                    // Phone
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "label",
+                            {
+                                htmlFor: "de-phone",
+                                className:
+                                    "block text-sm font-semibold text-gray-700 mb-1.5",
+                            },
+                            "Telefonnummer (optional)",
+                        ),
+                        h("input", {
+                            type: "tel",
+                            id: "de-phone",
+                            name: "phone",
+                            placeholder: "+41 79 000 00 00",
+                            value: formData.phone,
+                            onChange: handleInputChange,
+                            className:
+                                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                        }),
+                    ),
+                ),
+
+                // Trust message box
+                h(
+                    "div",
+                    {
+                        className:
+                            "flex items-start gap-3 bg-sky-50 border border-sky-200 rounded-xl p-3 md:p-4 mb-4 md:mb-6",
+                    },
+                    h(
+                        "svg",
+                        {
+                            className:
+                                "w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5",
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                        },
+                        h("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "2",
+                            d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+                        }),
+                    ),
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "p",
+                            {
+                                className:
+                                    "text-sm font-bold text-sky-900 mb-1",
+                            },
+                            "Was passiert als Nächstes?",
+                        ),
+                        h(
+                            "p",
+                            {
+                                className:
+                                    "text-xs text-sky-700 leading-relaxed",
+                            },
+                            "Nach der Terminbuchung erhalten Sie per E-Mail einen Link zu unserer digitalen Bedarfsanalyse. So können sich unsere Experten perfekt auf Ihr Profil vorbereiten.",
+                        ),
+                    ),
+                ),
+
+                // WEITER button
+                h(
+                    "button",
+                    {
+                        type: "button",
+                        disabled: !formData.name || !formData.email,
+                        onClick: () => setStep(3),
+                        className:
+                            "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
+                            (formData.name && formData.email
+                                ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
+                                : "bg-gray-300 cursor-not-allowed"),
+                    },
+                    "WEITER: TERMIN WÄHLEN",
+                    h(
+                        "svg",
+                        {
+                            className: "ml-2 w-5 h-5",
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                        },
+                        h("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "2",
+                            d: "M14 5l7 7m0 0l-7 7m7-7H3",
+                        }),
+                    ),
+                ),
+                h(
+                    "p",
+                    {
+                        className: "text-center text-sm text-gray-500 mt-3",
+                    },
+                    "Keine Kreditkarte erforderlich",
+                ),
+            );
+
+            // ── STEP 3: Kalender ──
+            const step3Content = h(
+                "div",
+                { className: "h-full flex flex-col modal-fadeIn" },
+                h(
+                    "div",
+                    { className: "mb-3" },
+                    h(
+                        "button",
+                        {
+                            type: "button",
+                            onClick: () => {
+                                // Destroy Cal.com embed before going back
+                                document
+                                    .querySelectorAll(
+                                        '[id^="german-cal-embed"]',
+                                    )
+                                    .forEach((el) => {
+                                        el.innerHTML = "";
+                                        delete el.dataset.calInitialized;
+                                    });
+                                setStep(2);
+                            },
+                            className:
+                                "inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors",
+                        },
+                        "← Zurück",
+                    ),
+                ),
+                h("div", {
+                    id: "german-cal-embed-" + calKey,
+                    className:
+                        "flex-1 w-full bg-white rounded-2xl overflow-auto min-h-0",
+                    ref: (el) => {
+                        if (!el || el.dataset.calInitialized) return;
+                        el.dataset.calInitialized = "true";
+
+                        const isMobile = window.innerWidth <= 640;
+                        const calLink = activeExpert.calLink.replace(
+                            "https://cal.com/",
+                            "",
+                        );
+                        const calUrl = activeExpert.calLink;
+
+                        if (isMobile) {
+                            el.innerHTML =
+                                '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:2rem 1.5rem;text-align:center;">' +
+                                '<svg style="width:64px;height:64px;color:#dc2626;margin-bottom:1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
+                                '<h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Termin wählen</h3>' +
+                                '<p style="color:#6b7280;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.5;">Wählen Sie einen passenden Termin für Ihre kostenlose 45-minütige Beratung via Zoom.</p>' +
+                                '<a href="' +
+                                calUrl +
+                                "?name=" +
+                                encodeURIComponent(formData.name) +
+                                "&email=" +
+                                encodeURIComponent(formData.email) +
+                                '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:1rem 2rem;background:#dc2626;color:white;font-weight:700;font-size:1.1rem;border-radius:1rem;text-decoration:none;box-shadow:0 4px 14px rgba(220,38,38,0.3);">' +
+                                '<svg style="width:24px;height:24px;margin-right:0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
+                                "Kalender öffnen</a>" +
+                                '<p style="color:#9ca3af;font-size:0.8rem;margin-top:1rem;">Öffnet sich in einem neuen Tab</p>' +
+                                "</div>";
+                        } else {
+                            const initCal = () => {
+                                try {
+                                    Cal("init", {
+                                        origin: "https://cal.com",
+                                    });
+                                    Cal("inline", {
+                                        elementOrSelector:
+                                            "#german-cal-embed-" + calKey,
+                                        calLink: calLink,
+                                        layout: "month_view",
+                                        config: {
+                                            name: formData.name || undefined,
+                                            email: formData.email || undefined,
+                                            hideEventTypeDetails: true,
+                                            theme: "light",
+                                            layout: "month_view",
+                                        },
+                                    });
+                                    Cal("ui", {
+                                        theme: "light",
+                                        hideEventTypeDetails: true,
+                                        layout: "month_view",
+                                    });
+                                } catch (err) {
+                                    console.warn(
+                                        "Cal.com init failed, iframe fallback:",
+                                        err,
+                                    );
+                                    el.innerHTML =
+                                        '<iframe src="' +
+                                        calUrl +
+                                        "?embed=true&layout=month_view&theme=light&name=" +
+                                        encodeURIComponent(formData.name) +
+                                        "&email=" +
+                                        encodeURIComponent(formData.email) +
+                                        '" style="width:100%;height:600px;border:none;"></iframe>';
+                                }
+                            };
+
+                            if (window.Cal) {
+                                initCal();
+                            } else {
+                                (function (C, A, L) {
+                                    let p = function (a, ar) {
+                                        a.q.push(ar);
+                                    };
+                                    let d = C.document;
+                                    C.Cal =
+                                        C.Cal ||
+                                        function () {
+                                            let cal = C.Cal;
+                                            let ar = arguments;
+                                            if (!cal.loaded) {
+                                                cal.ns = {};
+                                                cal.q = cal.q || [];
+                                                d.head.appendChild(
+                                                    d.createElement("script"),
+                                                ).src = A;
+                                                cal.loaded = true;
+                                            }
+                                            if (ar[0] === L) {
+                                                const api = function () {
+                                                    p(api, arguments);
+                                                };
+                                                const namespace = ar[1];
+                                                api.q = api.q || [];
+                                                if (
+                                                    typeof namespace ===
+                                                    "string"
+                                                ) {
+                                                    cal.ns[namespace] =
+                                                        cal.ns[namespace] ||
+                                                        api;
+                                                    p(cal.ns[namespace], ar);
+                                                    p(cal, [
+                                                        "initNamespace",
+                                                        namespace,
+                                                    ]);
+                                                } else p(cal, ar);
+                                                return;
+                                            }
+                                            p(cal, ar);
+                                        };
+                                })(
+                                    window,
+                                    "https://app.cal.com/embed/embed.js",
+                                    "init",
+                                );
+                                setTimeout(initCal, 500);
+                            }
+                        }
+                    },
+                }),
+                h(
+                    "p",
+                    {
+                        className: "text-center text-xs text-gray-400 mt-3",
+                    },
+                    "Probleme mit dem Kalender? ",
+                    h(
+                        "a",
+                        {
+                            href: activeExpert.calLink,
+                            target: "_blank",
+                            rel: "noopener",
+                            className:
+                                "text-red-500 underline hover:text-red-700",
+                        },
+                        "Im neuen Tab öffnen",
+                    ),
+                ),
+            );
+
+            // ── RENDER ──
+            return h(
+                "div",
+                {
+                    className:
+                        "fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-6",
+                },
+                // Backdrop
+                h("div", {
+                    className:
+                        "absolute inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity",
+                    onClick: onClose,
+                }),
+
+                // Modal Container
+                h(
+                    "div",
+                    {
+                        className:
+                            "relative bg-white rounded-t-3xl md:rounded-[2.5rem] shadow-2xl w-full max-w-5xl flex flex-col md:flex-row overflow-hidden transform transition-all h-full md:h-[75vh] md:max-h-[750px]",
+                    },
+
+                    // Close Button
+                    h(
+                        "button",
+                        {
+                            onClick: onClose,
+                            className:
+                                "absolute top-4 right-4 z-20 text-gray-400 hover:text-gray-900 bg-white/50 hover:bg-white rounded-full p-2 transition-colors inline-flex items-center justify-center md:text-gray-500",
+                            "aria-label": "Schliessen",
+                        },
+                        h(
+                            "svg",
+                            {
+                                className: "w-6 h-6",
+                                fill: "none",
+                                stroke: "currentColor",
+                                viewBox: "0 0 24 24",
+                            },
+                            h("path", {
+                                strokeLinecap: "round",
+                                strokeLinejoin: "round",
+                                strokeWidth: "2",
+                                d: "M6 18L18 6M6 6l12 12",
+                            }),
+                        ),
+                    ),
+
+                    // Left Sidebar
+                    leftSidebar,
+
+                    // Right Sidebar
+                    h(
+                        "div",
+                        {
+                            className:
+                                "w-full md:w-7/12 bg-white p-4 pt-6 md:p-10 overflow-y-auto relative flex flex-col",
+                        },
+                        step === 1
+                            ? step1Content
+                            : step === 2
+                              ? step2Content
+                              : step3Content,
+                    ),
+                ),
+            );
+        };
+
+        let isModalOpen = false;
+        let initialTopic = "health";
+        let root = null;
+
+        const renderModal = () => {
+            const container = document.getElementById("german-modal-root");
+            if (!container) return;
+
+            if (!root) root = ReactDOM.createRoot(container);
+
+            root.render(
+                h(GermanConsultationModal, {
+                    isOpen: isModalOpen,
+                    initialTopic: initialTopic,
+                    onClose: closeModal,
+                }),
+            );
+        };
+
+        const openModal = (e) => {
+            let topic = "health";
+            if (e && e.detail && e.detail.topic) topic = e.detail.topic;
+            else if (typeof e === "string") topic = e;
+
+            initialTopic = topic;
+            isModalOpen = true;
+            renderModal();
+        };
+
+        const closeModal = () => {
+            isModalOpen = false;
+            renderModal();
+        };
+
+        // Make functions global AND override legacy English modals
+        window.openGermanModal = openModal;
+        window.closeGermanModal = closeModal;
+
+        // Legacy overrides
+        window.openHealthModal = openModal;
+        window.openContextualModal = openModal;
+        window.openOffersModal = openModal;
+        window.openConsultationModal = openModal;
+        window.showConsultationModal = openModal;
+
+        // Re-render once on init state in case it missed early calls
+        renderModal();
+
+        // Listen for custom dispatch events
+        window.addEventListener("openGermanModal", openModal);
+
+        console.log("✅ German Consultation Modal React 3-Step loaded");
+    });
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .modal-fadeIn {
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+</style>
