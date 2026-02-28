@@ -64,9 +64,9 @@ Hi! I'm your Expat-Savvy insurance expert. Choose what you need help with:`,
     if (!userMessage || typeof userMessage !== 'string') {
       return 'Thinking...';
     }
-    
+
     const lowerMessage = userMessage.toLowerCase();
-    
+
     if (lowerMessage.includes('premium') || lowerMessage.includes('calculate') || /\b\d{4}\b/.test(userMessage)) {
       return 'Calculating live premiums from Swiss insurers...';
     } else if (lowerMessage.includes('compare') || lowerMessage.includes('provider')) {
@@ -81,7 +81,7 @@ Hi! I'm your Expat-Savvy insurance expert. Choose what you need help with:`,
   const formatMessage = (content: string) => {
     try {
       let formatted = content || '';
-      
+
       // Wrap insurance offers in styled boxes (before button conversion)
       // Pattern: **1. InsurerName**⭐ (or without star) followed by model, premium, buttons
       formatted = formatted.replace(
@@ -94,60 +94,60 @@ Hi! I'm your Expat-Savvy insurance expert. Choose what you need help with:`,
           return match;
         }
       );
-      
+
       // Convert [Get Rate Button] [Get Consultation Button] to styled buttons
       formatted = formatted.replace(
         /\[Get Rate Button\]\s*\[Get Consultation Button\]/gi,
         '<div class="flex gap-2 mt-2 mb-3">' +
-          '<button class="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow transition-all duration-200">📧 Get Rate</button>' +
-          '<a href="https://cal.com/robertkolar/expat-savvy" class="flex-1 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow text-center transition-all duration-200" target="_blank" rel="noopener">📅 Consult</a>' +
+        '<button class="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow transition-all duration-200">📧 Book Session</button>' +
+        '<a href="https://cal.com/robertkolar/expat-savvy" class="flex-1 px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow text-center transition-all duration-200" target="_blank" rel="noopener">📅 Consult</a>' +
         '</div>'
       );
-    
-    // Convert Cal.com links to buttons
-    formatted = formatted.replace(
-      /Book via Cal\.com:\s*(https:\/\/cal\.com\/[^\s]+)/gi,
-      '<a href="$1" class="inline-block mt-3 mb-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-200" target="_blank" rel="noopener">📅 Book Free Consultation</a>'
-    );
-    
-    // Convert Cal.com markdown links to buttons
-    formatted = formatted.replace(
-      /\[Book via Cal\.com\]\((https:\/\/cal\.com\/[^)]+)\)/gi,
-      '<a href="$1" class="inline-block mt-3 mb-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-200" target="_blank" rel="noopener">📅 Book Free Consultation</a>'
-    );
-    
-    // Convert WhatsApp links to buttons
-    formatted = formatted.replace(
-      /WhatsApp:\s*(\+41\s*\d+(?:\s*\d+)*)/gi,
-      (match, phone) => {
-        const cleanPhone = phone.replace(/\s+/g, '');
-        return `<a href="https://wa.me/${cleanPhone}" class="inline-block mt-2 mb-2 px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-green-700 hover:to-green-800 transition-all duration-200" target="_blank" rel="noopener">💬 WhatsApp Robert</a>`;
-      }
-    );
-    
-    // Bold headers with emojis
-    formatted = formatted
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900 font-bold">$1</strong>')
-      
-      // Bullet points
-      .replace(/^- (.*$)/gim, '<span class="flex items-start mb-1"><span class="text-red-500 font-bold mr-2">•</span><span class="text-gray-700">$1</span></span>')
-      
-      // CHF amounts - subtle gray
-      .replace(/(CHF\s*[\d,.']+(?:\/month)?)/gi, '<span class="font-semibold text-gray-600 bg-gray-100 px-2 py-1 rounded-md">$1</span>')
-      
-      // Insurer names - red text
-      .replace(/\*\*(Helsana|CSS|Swica|Sanitas|Visana|Sympany|KPT|Concordia|Assura|Groupe Mutuel|Atupri|Vivao|Galenos|Provisio|Sanagate)\*\*/g, '<strong class="text-red-800">$1</strong>')
-      
-      // Remove standalone "or" between buttons
-      .replace(/(<\/a>)\s*or\s*(<a href)/gi, '$1 $2')
-      
-      // Horizontal lines to styled dividers
-      .replace(/^---$/gm, '<div class="border-t border-gray-200 my-3"></div>')
-      
-      // Line breaks
-      .replace(/\n\n/g, '<br><br>')
-      .replace(/\n/g, '<br>');
-    
+
+      // Convert Cal.com links to buttons
+      formatted = formatted.replace(
+        /Book via Cal\.com:\s*(https:\/\/cal\.com\/[^\s]+)/gi,
+        '<a href="$1" class="inline-block mt-3 mb-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-200" target="_blank" rel="noopener">📅 Book Free Consultation</a>'
+      );
+
+      // Convert Cal.com markdown links to buttons
+      formatted = formatted.replace(
+        /\[Book via Cal\.com\]\((https:\/\/cal\.com\/[^)]+)\)/gi,
+        '<a href="$1" class="inline-block mt-3 mb-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-200" target="_blank" rel="noopener">📅 Book Free Consultation</a>'
+      );
+
+      // Convert WhatsApp links to buttons
+      formatted = formatted.replace(
+        /WhatsApp:\s*(\+41\s*\d+(?:\s*\d+)*)/gi,
+        (match, phone) => {
+          const cleanPhone = phone.replace(/\s+/g, '');
+          return `<a href="https://wa.me/${cleanPhone}" class="inline-block mt-2 mb-2 px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-green-700 hover:to-green-800 transition-all duration-200" target="_blank" rel="noopener">💬 WhatsApp Robert</a>`;
+        }
+      );
+
+      // Bold headers with emojis
+      formatted = formatted
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900 font-bold">$1</strong>')
+
+        // Bullet points
+        .replace(/^- (.*$)/gim, '<span class="flex items-start mb-1"><span class="text-red-500 font-bold mr-2">•</span><span class="text-gray-700">$1</span></span>')
+
+        // CHF amounts - subtle gray
+        .replace(/(CHF\s*[\d,.']+(?:\/month)?)/gi, '<span class="font-semibold text-gray-600 bg-gray-100 px-2 py-1 rounded-md">$1</span>')
+
+        // Insurer names - red text
+        .replace(/\*\*(Helsana|CSS|Swica|Sanitas|Visana|Sympany|KPT|Concordia|Assura|Groupe Mutuel|Atupri|Vivao|Galenos|Provisio|Sanagate)\*\*/g, '<strong class="text-red-800">$1</strong>')
+
+        // Remove standalone "or" between buttons
+        .replace(/(<\/a>)\s*or\s*(<a href)/gi, '$1 $2')
+
+        // Horizontal lines to styled dividers
+        .replace(/^---$/gm, '<div class="border-t border-gray-200 my-3"></div>')
+
+        // Line breaks
+        .replace(/\n\n/g, '<br><br>')
+        .replace(/\n/g, '<br>');
+
       return formatted;
     } catch (error) {
       console.error('Error formatting message:', error);
@@ -208,11 +208,11 @@ Hi again! I'm ready to help with your Swiss insurance questions.
       }
 
       const data = await response.json();
-      
+
       if (!data || !data.message) {
         throw new Error('Invalid response from server');
       }
-      
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -272,7 +272,7 @@ Hi again! I'm ready to help with your Swiss insurance questions.
         </div>
 
         {/* Chat Messages */}
-        <div 
+        <div
           ref={messagesEndRef}
           className="h-96 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-gray-50 to-white scroll-smooth"
           style={{ scrollBehavior: 'smooth' }}
@@ -282,11 +282,10 @@ Hi again! I'm ready to help with your Swiss insurance questions.
               <div
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-md ${
-                  message.role === 'user'
+                <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-md ${message.role === 'user'
                     ? 'bg-gradient-to-r from-red-600 to-red-700 text-white'
                     : 'bg-white border border-gray-100'
-                }`}>
+                  }`}>
                   {message.role === 'assistant' ? (
                     <div className="text-sm text-gray-800 leading-relaxed">
                       <div dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />
@@ -296,7 +295,7 @@ Hi again! I'm ready to help with your Swiss insurance questions.
                   )}
                 </div>
               </div>
-              
+
               {/* Choice buttons for welcome message */}
               {message.id === 'welcome' && (
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-lg">
@@ -304,7 +303,7 @@ Hi again! I'm ready to help with your Swiss insurance questions.
                     onClick={() => sendChoiceMessage('premium')}
                     className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-md hover:shadow-lg text-sm font-medium"
                   >
-                    💰 Calculate Premiums
+                    💰 Start Free Assessment
                   </button>
                   <button
                     onClick={() => sendChoiceMessage('general')}
@@ -334,7 +333,7 @@ Hi again! I'm ready to help with your Swiss insurance questions.
               )}
             </div>
           ))}
-          
+
           {isLoading && (
             <div className="flex justify-start">
               <div className="bg-white border border-gray-100 px-4 py-3 rounded-2xl shadow-md max-w-xs">
@@ -345,7 +344,7 @@ Hi again! I'm ready to help with your Swiss insurance questions.
               </div>
             </div>
           )}
-          
+
           {/* Scroll anchor */}
           <div />
         </div>
@@ -374,10 +373,10 @@ Hi again! I'm ready to help with your Swiss insurance questions.
               </svg>
             </button>
           </div>
-          
+
           <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
             <span>Press Enter to send, Shift+Enter for new line</span>
-            <button 
+            <button
               onClick={resetConversation}
               className="text-red-600 hover:text-red-700 font-medium"
             >

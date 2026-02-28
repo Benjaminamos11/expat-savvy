@@ -59,18 +59,19 @@ class ModalOverlaySystem {
     // Create global functions
     window.openModalOverlay = this.openModalOverlay.bind(this);
     window.openRelocationModal = this.openRelocationModal.bind(this);
-    window.openHealthModal = this.openHealthModal.bind(this);
+    // window.openHealthModal is now handled by the new unified ConsultationModal.astro
+    // window.openHealthModal = this.openHealthModal.bind(this);
     window.openOtherModal = this.openOtherModal.bind(this);
     window.openLifePensionModal = this.openLifePensionModal.bind(this);
     window.openFinancialModal = this.openLifePensionModal.bind(this); // Alias for new name
-    window.openContextualModal = this.openContextualModal.bind(this); // New smart router
+    // window.openContextualModal = this.openContextualModal.bind(this); // New smart router
     window.closeModalOverlay = this.closeModalOverlay.bind(this);
     window.initializeCalComManually = this.initializeCalComManually.bind(this);
 
-    // Legacy compatibility functions
-    window.openOffersModal = this.openHealthModal.bind(this);
-    window.openConsultationModal = this.openHealthModal.bind(this);
-    window.showConsultationModal = this.openHealthModal.bind(this);
+    // Legacy compatibility functions - now handled by ConsultationModal.astro
+    // window.openOffersModal = this.openHealthModal.bind(this);
+    // window.openConsultationModal = this.openHealthModal.bind(this);
+    // window.showConsultationModal = this.openHealthModal.bind(this);
 
     console.log('✅ Modal functions created successfully!');
     console.log('🔧 openHealthModal type:', typeof window.openHealthModal);

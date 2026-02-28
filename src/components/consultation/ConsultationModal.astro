@@ -1,767 +1,967 @@
 ---
-import IntroStep from './IntroStep.astro';
-import FormStep from './FormStep.astro';
-import CalendarStep from './CalendarStep.astro';
-import ThankYouStep from './ThankYouStep.astro';
-
-// Get current page path to determine context
-const currentPath = Astro.url.pathname;
-
-// Determine what insurance type this page is about based on the URL path
-let insuranceType = 'health'; // default
-let contextTitle = 'Insurance Consultation'; // default title
-let providerId = ''; // for insurance provider pages
-let providerName = ''; // for insurance provider pages
-
-// First check for major sections
-if (currentPath.includes('/healthcare/')) {
-  if (currentPath.includes('new-health-insurance') || currentPath.includes('setup') || currentPath.includes('new-residents')) {
-    insuranceType = 'new-health';
-    contextTitle = 'Setting Up Health Insurance';
-  } else if (currentPath.includes('switch') || currentPath.includes('change') || currentPath.includes('switching')) {
-    insuranceType = 'change-health';
-    contextTitle = 'Changing Health Insurance';
-  } else {
-    insuranceType = 'health';
-    contextTitle = 'Health Insurance Consultation';
-  }
-} else if (currentPath.includes('/3rd-pillar/') || currentPath.includes('/pension/') || currentPath.includes('pension-planning')) {
-  insuranceType = 'pension';
-  contextTitle = '3rd Pillar & Pension Planning';
-} else if (currentPath.includes('/liability/') || currentPath.includes('personal-liability')) {
-  insuranceType = 'liability';
-  contextTitle = 'Liability Insurance Consultation';
-} else if (currentPath.includes('/household/') || currentPath.includes('household-insurance')) {
-  insuranceType = 'household';
-  contextTitle = 'Household Insurance Consultation';
-} else if (currentPath.includes('/life/') || currentPath.includes('life-insurance')) {
-  insuranceType = 'life';
-  contextTitle = 'Life Insurance Consultation';
-} else if (currentPath.includes('/legal/') || currentPath.includes('legal-protection')) {
-  insuranceType = 'legal';
-  contextTitle = 'Legal Protection Insurance';
-}
-
-// Check for insurance provider specific pages
-if (currentPath.includes('/healthcare/all-insurances/')) {
-  const providerMatch = currentPath.match(/\/healthcare\/all-insurances\/([^\/]+)/);
-  if (providerMatch && providerMatch[1]) {
-    providerId = providerMatch[1];
-    // Format the provider name nicely with uppercase first letter
-    providerName = providerId.charAt(0).toUpperCase() + providerId.slice(1);
-    contextTitle = `${providerName} Insurance Consultation`;
-  }
-} 
-
-// Check for comparison pages
-if (currentPath.includes('/compare-providers/')) {
-  const compareMatch = currentPath.match(/\/compare-providers\/([^\/]+)/);
-  if (compareMatch && compareMatch[1]) {
-    const comparison = compareMatch[1].replace(/-vs-/g, ' vs ');
-    contextTitle = `${comparison.toUpperCase()} Comparison`;
-  } else {
-    contextTitle = 'Insurance Comparison';
-  }
-}
-
-// Recent bookings data - social proof
-const recentBookings = {
-  last24h: 7,
-  last7days: 28
-};
-
-// If URL has special parameters, override the defaults
-const urlParams = new URL(Astro.request.url).searchParams;
-const urlInsuranceType = urlParams.get('type');
-const urlProviderName = urlParams.get('provider');
-
-if (urlInsuranceType && ['health', 'new-health', 'pension', 'liability', 'household', 'life', 'legal'].includes(urlInsuranceType)) {
-  insuranceType = urlInsuranceType;
-}
-
-if (urlProviderName) {
-  providerName = urlProviderName;
-  contextTitle = `${providerName} Insurance Consultation`;
-}
-
-// Props from parent component (can override defaults)
-const props = Astro.props;
-const finalInsuranceType = props.insuranceType || insuranceType;
-const finalContextTitle = props.contextTitle || contextTitle;
-const finalProviderId = props.providerId || providerId;
-const finalProviderName = props.providerName || providerName;
+// ConsultationModal.astro — 3-Step Flow (English Premium Consultancy)
 ---
 
-<div id="consultation-modal" 
-    class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-[60] transition-opacity duration-200 motion-reduce:transition-none" 
-    data-insurance-type={finalInsuranceType} 
-    data-provider-id={finalProviderId}
-    data-provider-name={finalProviderName}
-    data-context-title={finalContextTitle}
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modal-title"
-    aria-describedby="modal-description"
-    data-modal-backdrop="true">
-  <div class="fixed inset-0 flex items-center justify-center p-2 sm:p-4">
-    <div class="bg-white rounded-2xl max-w-5xl w-full p-4 sm:p-8 relative shadow-xl modal-content overflow-y-auto max-h-[90vh] mobile-modal transition-all duration-200 motion-reduce:transition-none motion-reduce:transform-none scale-100 translate-y-0">
-      <!-- Close button -->
-      <button
-        id="close-modal-btn"
-        class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 z-10 mobile-close-btn focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded-md p-1 transition-colors"
-        aria-label="Close consultation booking dialog"
-        data-close-modal="true"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      
-      <!-- Modal step indicators -->
-      <div class="modal-step-indicator flex items-center justify-between mb-4 sm:mb-6">
-        <div class="step step-1 active flex-grow flex items-center space-x-1">
-          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs">1</div>
-          <div class="h-1 bg-red-600 flex-grow rounded-full"></div>
-        </div>
-        <div class="step step-2 flex-grow flex items-center space-x-1">
-          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">2</div>
-          <div class="h-1 bg-gray-300 flex-grow rounded-full"></div>
-        </div>
-        <div class="step step-3 flex-grow flex items-center space-x-1">
-          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">3</div>
-          <div class="h-1 bg-gray-300 flex-grow rounded-full"></div>
-        </div>
-        <div class="step step-4 flex-grow flex items-center">
-          <div class="w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs">4</div>
-        </div>
-      </div>
-      
-      <div class="modal-steps">
-        <!-- Step 1: Introduction -->
-        <div class="modal-step step-1 active" id="consultation-step-1">
-          <IntroStep insuranceType={finalInsuranceType} recentBookings={recentBookings} contextTitle={finalContextTitle} providerName={finalProviderName} />
-        </div>
-        
-        <!-- Step 2: Form collection -->
-        <div class="modal-step step-2 hidden" id="consultation-step-2">
-          <FormStep insuranceType={finalInsuranceType} contextTitle={finalContextTitle} providerName={finalProviderName} />
-        </div>
-        
-        <!-- Step 3: Calendar selection based on form input -->
-        <div class="modal-step step-3 hidden" id="consultation-step-3">
-          <CalendarStep insuranceType={finalInsuranceType} />
-        </div>
-        
-        <!-- Step 4: Thank you message -->
-        <div class="modal-step step-4 hidden" id="consultation-step-4">
-          <ThankYouStep insuranceType={finalInsuranceType} contextTitle={finalContextTitle} providerName={finalProviderName} />
-        </div>
-      </div>
-      
-      <!-- Legal disclosure -->
-      <p class="text-xs text-gray-500 text-center mt-4 sm:mt-6 legal-text">
-        As a registered broker, our consultations are free of charge. 
-        We receive commissions from insurance providers when you choose their services through us.
-        Your ongoing support and advice remain complimentary.
-      </p>
-    </div>
-  </div>
-</div>
+<!-- React Modal Container -->
+<div id="english-modal-root"></div>
 
-<script>
-  // Delay initialization until DOMContentLoaded to avoid blocking initial render
-  document.addEventListener('DOMContentLoaded', function() {
-    // User location storage
-    let userLocation = { ip: 'unknown', country: 'unknown', city: 'unknown' };
-    
-    // Fetch user IP and location data (non-blocking)
-    async function getUserLocation() {
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (response.ok) {
-          const data = await response.json();
-          userLocation = {
-            ip: data.ip || 'unknown',
-            country: data.country_name || 'unknown',
-            city: data.city || 'unknown',
-            region: data.region || 'unknown',
-            postal: data.postal || 'unknown',
-            timezone: data.timezone || 'unknown'
-          };
-          console.log('📍 User location detected:', userLocation);
-        }
-      } catch (error) {
-        console.log('ℹ️ Could not detect location (non-critical):', error);
-      }
+<!-- React and ReactDOM from CDN (deferred to avoid render-blocking) -->
+<script
+  defer
+  crossorigin
+  src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script
+  defer
+  crossorigin
+  src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<script is:inline>
+  // Immediately define placeholder functions that QUEUE calls until React loads.
+  // This prevents "undefined" errors when users click CTAs before the React CDN finishes loading.
+  (function () {
+    var pendingCalls = [];
+
+    function queuedOpen(topic) {
+      console.log("⏳ Modal still loading, queuing call with topic:", topic);
+      pendingCalls.push(topic || "health");
     }
-    
-    // Fetch location immediately
-    getUserLocation();
-    
-    // User data storage
-    const userData = {
-      name: '',
-      email: '',
-      phone: '',
-      topic: '',
-      source: '',
-      notes: '',
-      insuranceType: document.getElementById('consultation-modal')?.getAttribute('data-insurance-type') || 'health',
-      providerName: document.getElementById('consultation-modal')?.getAttribute('data-provider-name') || ''
+
+    // Set ALL legacy function names as queued placeholders
+    window.openEnglishModal = queuedOpen;
+    window.openHealthModal = queuedOpen;
+    window.openContextualModal = queuedOpen;
+    window.openOffersModal = queuedOpen;
+    window.openConsultationModal = queuedOpen;
+    window.showConsultationModal = queuedOpen;
+
+    // Expose the queue so the real modal can replay pending calls
+    window.__consultationModalQueue = pendingCalls;
+  })();
+</script>
+
+<script is:inline>
+  // Wait for React to load
+  function waitForReact(callback) {
+    if (typeof React !== "undefined" && typeof ReactDOM !== "undefined") {
+      callback();
+    } else {
+      setTimeout(() => waitForReact(callback), 100);
+    }
+  }
+
+  waitForReact(() => {
+    const { useState, useEffect, useCallback, createElement: h } = React;
+
+    // ── Checkbox item component ──
+    const CheckboxCard = ({ label, value, checked, onChange }) => {
+      return h(
+        "label",
+        {
+          className:
+            "flex items-center gap-3 p-3 md:p-4 rounded-xl border-2 cursor-pointer transition-all " +
+            (checked
+              ? "border-red-500 bg-red-50 shadow-sm"
+              : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"),
+        },
+        h("input", {
+          type: "checkbox",
+          checked: checked,
+          onChange: () => onChange(value),
+          className: "sr-only",
+        }),
+        h(
+          "span",
+          {
+            className:
+              "w-5 h-5 flex-shrink-0 rounded border-2 flex items-center justify-center transition-colors " +
+              (checked
+                ? "bg-red-600 border-red-600"
+                : "border-gray-300 bg-white"),
+          },
+          checked &&
+            h(
+              "svg",
+              {
+                className: "w-3.5 h-3.5 text-white",
+                fill: "none",
+                stroke: "currentColor",
+                viewBox: "0 0 24 24",
+              },
+              h("path", {
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: "3",
+                d: "M5 13l4 4L19 7",
+              }),
+            ),
+        ),
+        h(
+          "span",
+          {
+            className:
+              "text-sm font-medium " +
+              (checked ? "text-gray-900" : "text-gray-700"),
+          },
+          label,
+        ),
+      );
     };
-    
-    // Scroll management for modal
-    let savedScrollY = 0;
-    let lastFocusedElement: HTMLElement | null = null;
-    
-    // Focus trap variables
-    let focusableElements: HTMLElement[] = [];
-    let firstFocusableElement: HTMLElement | null = null;
-    let lastFocusableElement: HTMLElement | null = null;
-    
-    // Utility functions for scroll management
-    function saveScrollPosition() {
-      savedScrollY = window.scrollY;
-    }
-    
-    function lockBodyScroll() {
-      document.body.style.top = `-${savedScrollY}px`;
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.classList.add('overflow-hidden');
-    }
-    
-    function restoreScrollPosition() {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.classList.remove('overflow-hidden');
-      window.scrollTo(0, savedScrollY);
-    }
-    
-    // Focus management
-    function getFocusableElements(container: HTMLElement): HTMLElement[] {
-      const focusableSelectors = [
-        'button:not([disabled]):not([aria-hidden="true"])',
-        '[href]:not([aria-hidden="true"])',
-        'input:not([disabled]):not([type="hidden"]):not([aria-hidden="true"])',
-        'select:not([disabled]):not([aria-hidden="true"])',
-        'textarea:not([disabled]):not([aria-hidden="true"])',
-        '[tabindex]:not([tabindex="-1"]):not([aria-hidden="true"])'
-      ].join(', ');
-      
-      return Array.from(container.querySelectorAll(focusableSelectors)) as HTMLElement[];
-    }
-    
-    function setupFocusTrap(modal: HTMLElement) {
-      focusableElements = getFocusableElements(modal);
-      firstFocusableElement = focusableElements[0] || null;
-      lastFocusableElement = focusableElements[focusableElements.length - 1] || null;
-      
-      // Focus first element
-      if (firstFocusableElement) {
-        setTimeout(() => firstFocusableElement?.focus(), 100);
-      }
-    }
-    
-    function handleFocusTrap(e: KeyboardEvent) {
-      if (e.key !== 'Tab') return;
-      
-      if (focusableElements.length === 0) return;
-      
-      if (e.shiftKey) {
-        // Shift + Tab
-        if (document.activeElement === firstFocusableElement) {
-          e.preventDefault();
-          lastFocusableElement?.focus();
-        }
-      } else {
-        // Tab
-        if (document.activeElement === lastFocusableElement) {
-          e.preventDefault();
-          firstFocusableElement?.focus();
-        }
-      }
-    }
-    
-    // Step navigation function - optimized to reduce DOM operations
-    function goToStep(stepNumber: number): void {
-      // Only modify DOM if modal is actually visible
-      const modal = document.getElementById('consultation-modal');
-      if (!modal || modal.classList.contains('hidden')) {
-        return;
-      }
-      
-      // Cache DOM elements to avoid repetitive lookups
-      const steps = document.querySelectorAll('.modal-step');
-      const indicators = document.querySelectorAll('.modal-step-indicator .step');
-      
-      // Hide all steps at once with a single class toggle
-      steps.forEach(step => {
-        const isTargetStep = step.id === `consultation-step-${stepNumber}`;
-        step.classList.toggle('hidden', !isTargetStep);
-        step.classList.toggle('active', isTargetStep);
-      });
-      
-      // Update step indicators more efficiently
-      indicators.forEach((indicator, index) => {
-        const currentStep = index + 1;
-        const circle = indicator.querySelector('.w-4');
-        const line = indicator.querySelector('.h-1');
-        
-        // Set appropriate classes in batch operations
-        if (currentStep < stepNumber) {
-          // Previous steps
-          indicator.className = indicator.className.replace(/active|completed/g, '') + ' completed';
-          
-          if (circle) {
-            circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-red-600 border border-red-600 text-white text-xs';
-          }
-          
-          if (line) {
-            line.className = 'h-1 bg-red-600 flex-grow rounded-full';
-          }
-        } 
-        else if (currentStep === stepNumber) {
-          // Current step
-          indicator.className = indicator.className.replace(/active|completed/g, '') + ' active';
-          
-          if (circle) {
-            circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs';
-          }
-          
-          if (line) {
-            line.className = 'h-1 bg-red-600 flex-grow rounded-full';
-          }
-        } 
-        else {
-          // Future steps
-          indicator.className = indicator.className.replace(/active|completed/g, '');
-          
-          if (circle) {
-            circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs';
-          }
-          
-          if (line && currentStep < 4) {
-            line.className = 'h-1 bg-gray-300 flex-grow rounded-full';
-          }
-        }
-      });
-      
-      // Dispatch custom event for step change
-      document.dispatchEvent(new CustomEvent('modalStepChange', {
-        detail: { stepNumber }
-      }));
-    }
-    
-    // Next buttons handler - with debounce to prevent multiple clicks
-    let isProcessing = false;
-    document.querySelectorAll('.modal-next-btn').forEach(button => {
-      button.addEventListener('click', function(this: HTMLElement) {
-        // Prevent double-clicks
-        if (isProcessing) return;
-        isProcessing = true;
-        
-        const currentStep = parseInt(this.getAttribute('data-current-step') || '1');
-        const nextStep = currentStep + 1;
-        
-        // If on form step, validate and collect data
-        if (currentStep === 2) {
-          const nameInput = document.getElementById('consultation-name') as HTMLInputElement;
-          const emailInput = document.getElementById('consultation-email') as HTMLInputElement;
-          const phoneInput = document.getElementById('consultation-phone') as HTMLInputElement;
-          const topicSelect = document.getElementById('consultation-topic') as HTMLSelectElement;
-          const sourceSelect = document.getElementById('consultation-source') as HTMLSelectElement;
-          const notesInput = document.getElementById('consultation-notes') as HTMLTextAreaElement;
-          
-          // Validation
-          if (!nameInput?.value || !emailInput?.value) {
-            alert('Please fill in your name and email to continue.');
-            isProcessing = false;
-            return;
-          }
-          
-          // Store data for Cal.com prefill
-          userData.name = nameInput?.value;
-          userData.email = emailInput?.value;
-          userData.phone = phoneInput?.value || '';
-          userData.topic = topicSelect?.value || '';
-          userData.source = sourceSelect?.value || '';
-          userData.notes = notesInput?.value || '';
-          
-          // Save in sessionStorage for persistence
-          try {
-            sessionStorage.setItem('consultationFormData', JSON.stringify(userData));
-          } catch (e) {
-            // Fail silently if sessionStorage is unavailable
-          }
-          
-          // Submit lead data to Formspree
-          const currentPageUrl = window.location.href;
-          const pageTitle = document.title;
-          const formData = new FormData();
-          
-          // Add user data fields
-          formData.append('name', userData.name);
-          formData.append('email', userData.email);
-          formData.append('phone', userData.phone);
-          formData.append('topic', userData.topic);
-          formData.append('source', userData.source);
-          formData.append('notes', userData.notes);
-          formData.append('insurance_type', userData.insuranceType);
-          formData.append('provider_name', userData.providerName);
-          
-          // Add page context information
-          formData.append('page_url', currentPageUrl);
-          formData.append('page_title', pageTitle);
-          formData.append('date_submitted', new Date().toISOString());
-          
-          // Add IP and location data
-          formData.append('ip_address', userLocation.ip);
-          formData.append('country', userLocation.country);
-          formData.append('city', userLocation.city);
-          formData.append('region', userLocation.region);
-          
-          // Track lead creation before submitting
-          if (typeof window.trackLeadCreation === 'function') {
-            window.trackLeadCreation({
-              flow: 'consultation',
-              leadId: 'consultation-' + Date.now(),
-              stage: 'new',
-              consultationType: userData.topic || 'general',
-              insuranceType: userData.insuranceType || 'health'
-            });
-          }
 
-          // Send data to backend API for email nurture
-          const leadData = {
-            name: userData.name,
-            email: userData.email,
-            phone: userData.phone || '',
-            consent_marketing: true,
-            stage: 'new',
-            flow: 'consultation',
-            notes: {
-              form_type: 'consultation_modal',
-              topic: userData.topic,
-              source: userData.source,
-              notes: userData.notes,
-              insurance_type: userData.insuranceType,
-              provider_name: userData.providerName,
-              page_url: currentPageUrl,
-              page_title: pageTitle
-            }
-          };
+    // ── Timeline Pill component ──
+    const TimelinePill = ({ label, value, selected, onSelect }) => {
+      return h(
+        "button",
+        {
+          type: "button",
+          onClick: () => onSelect(value),
+          className:
+            "px-4 py-2.5 rounded-full text-sm font-medium transition-all border " +
+            (selected
+              ? "bg-slate-900 text-white border-slate-900 shadow-md"
+              : "bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:bg-gray-50"),
+        },
+        label,
+      );
+    };
 
-          // Submit to backend API for email nurture
-          fetch('https://expat-savvy-api.fly.dev/api/lead', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(leadData)
-          })
-          .then(response => {
-            if (response.ok) {
-              console.log('✅ Lead created and welcome email sent');
-            } else {
-              console.error('❌ Backend API submission failed');
-            }
-          })
-          .catch(error => {
-            console.error('❌ Error submitting to backend API:', error);
-          });
+    // ── Main Modal Component ──
+    const ConsultationModal = ({ isOpen, onClose, initialTopic }) => {
+      const [step, setStep] = useState(1);
+      const [topics, setTopics] = useState([initialTopic || "health"]);
+      const [timeline, setTimeline] = useState("");
+      const [calKey, setCalKey] = useState(0);
+      const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+      });
 
-          // Send data to Formspree (fallback/backup) - using URLSearchParams for reliability
-          // Validate required fields before sending
-          if (!userData.name || !userData.email) {
-            console.error('❌ Cannot submit to Formspree - missing required fields');
-          } else {
-            console.log('📤 Submitting to Formspree with data:', {
-              name: userData.name,
-              email: userData.email,
-              phone: userData.phone,
-              topic: userData.topic,
-              insurance_type: userData.insuranceType,
-              ip: userLocation.ip,
-              location: `${userLocation.city}, ${userLocation.country}`
-            });
-            
-            fetch('https://formspree.io/f/mrbewjlr', {
-              method: 'POST',
-              body: new URLSearchParams(formData),
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json'
-              }
-            })
-            .then(response => {
-              if (response.ok) {
-                console.log('✅ Form submission to Formspree successful');
-              } else {
-                console.error('❌ Form submission to Formspree failed:', response.status);
-              }
-              return response.json();
-            })
-            .then(data => console.log('Formspree response:', data))
-            .catch(error => {
-              console.error('❌ Error submitting to Formspree:', error);
-            });
-          }
-          
-          // Update insurance type based on topic if needed
-          if (userData.topic === 'new-insurance') {
-            userData.insuranceType = 'new-health';
-          } else if (userData.topic === 'health-insurance') {
-            userData.insuranceType = 'health';
-          } else if (userData.topic === '3rd-pillar' || userData.topic === 'pension-planning') {
-            userData.insuranceType = 'pension';
-          } else if (userData.topic === 'liability-insurance' || userData.topic === 'legal-insurance') {
-            userData.insuranceType = 'liability';
-          }
-        }
-        
-        // Navigate to next step
-        goToStep(nextStep);
-        
-        // Scroll to top of modal content - particularly important for mobile
-        const modalContent = document.querySelector('.modal-content');
-        if (modalContent) {
-          modalContent.scrollTop = 0;
-        }
-        
-        // Reset processing flag after short delay
-        setTimeout(() => {
-          isProcessing = false;
-        }, 300);
-      });
-    });
-    
-    // Previous buttons handler
-    document.querySelectorAll('.modal-prev-btn').forEach(button => {
-      button.addEventListener('click', function(this: HTMLElement) {
-        const currentStep = parseInt(this.getAttribute('data-current-step') || '2');
-        const prevStep = currentStep - 1;
-        goToStep(prevStep);
-        
-        // Scroll to top of modal content - particularly important for mobile
-        const modalContent = document.querySelector('.modal-content');
-        if (modalContent) {
-          modalContent.scrollTop = 0;
-        }
-      });
-    });
-    
-    // Enhanced modal close function
-    function closeModal() {
-      const modal = document.getElementById('consultation-modal');
-      if (modal) {
-        // Remove focus trap
-        document.removeEventListener('keydown', handleFocusTrap);
-        
-        // Restore scroll and focus
-        restoreScrollPosition();
-        modal.classList.add('hidden');
-        document.body.classList.remove('modal-open');
-        
-        // Return focus to the element that opened the modal
-        if (lastFocusedElement) {
-          lastFocusedElement.focus();
-          lastFocusedElement = null;
-        }
-        
-        // Dispatch custom event for cleanup
-        document.dispatchEvent(new CustomEvent('modalClosed', {
-          detail: { modalId: 'consultation-modal' }
+      const experts = {
+        robert: {
+          id: "robert",
+          name: "Robert Kolar",
+          title: "Senior Health Insurance Expert",
+          subtitle: "Expat Specialist · DE/EN",
+          valueProp:
+            "Health setup. Secure your premium standard in Switzerland. Free of charge and without obligation.",
+          badges: [
+            "Many years of industry experience",
+            "Independent advice. All health insurance companies in Switzerland.",
+            "100% Digital & Transparent",
+          ],
+          image:
+            "https://res.cloudinary.com/dphbnwjtx/image/upload/w_250,h_250,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+          calLink: "https://cal.com/robertkolar/expat-savvy",
+        },
+        hans: {
+          id: "hans",
+          name: "Hans Steiner",
+          title: "Certified Financial Planner IAF",
+          subtitle: "Expat Specialist · DE/EN/FR",
+          valueProp:
+            "Exclusive financial planning. Tailor-made strategies for taxes and pensions. Free of charge and without obligation.",
+          badges: [
+            "FINMA-registered",
+            "1000+ advised expats",
+            "Swiss Data Protection",
+          ],
+          image:
+            "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_250,h_250,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
+          calLink: "https://cal.com/expat-savvy/hans-steiner",
+        },
+      };
+
+      const activeExpert = topics.includes("wealth")
+        ? experts.hans
+        : experts.robert;
+
+      const toggleTopic = useCallback((val) => {
+        setTopics((prev) =>
+          prev.includes(val) ? prev.filter((t) => t !== val) : [...prev, val],
+        );
+      }, []);
+
+      const handleInputChange = (e) =>
+        setFormData((prev) => ({
+          ...prev,
+          [e.target.name]: e.target.value,
         }));
-      }
-    }
-    
-    // Enhanced modal open function
-    function openModal(modal: HTMLElement, triggerElement: HTMLElement | null = null) {
-      // Save the element that triggered the modal
-      lastFocusedElement = triggerElement;
-      
-      // Save scroll position and lock body
-      saveScrollPosition();
-      lockBodyScroll();
-      
-      // Show modal
-      modal.classList.remove('hidden');
-      document.body.classList.add('modal-open');
-      
-      // Set up focus trap
-      setupFocusTrap(modal);
-      document.addEventListener('keydown', handleFocusTrap);
-      
-      // Set up ESC key listener
-      document.addEventListener('keydown', function escHandler(e: KeyboardEvent) {
-        if (e.key === 'Escape') {
-          closeModal();
-          document.removeEventListener('keydown', escHandler);
+
+      useEffect(() => {
+        if (isOpen) {
+          setStep(1);
+          setTopics([initialTopic || "health"]);
+          setTimeline("");
+          setFormData({ name: "", email: "", phone: "" });
+          setCalKey((prev) => prev + 1);
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+          // Destroy any lingering Cal.com embed iframes
+          document
+            .querySelectorAll('[id^="english-cal-embed"]')
+            .forEach((el) => {
+              el.innerHTML = "";
+              delete el.dataset.calInitialized;
+            });
         }
-      });
-      
-      // Reset to first step
-      goToStep(1);
-      
-      // Dispatch custom event for setup
-      document.dispatchEvent(new CustomEvent('modalOpened', {
-        detail: { modalId: 'consultation-modal' }
-      }));
-    }
-    
-    // Set up modal close event listeners
-    const closeButton = document.getElementById('close-modal-btn');
-    if (closeButton) {
-      closeButton.addEventListener('click', closeModal);
-    }
-    
-    // Handle backdrop clicks
-    const backdrop = document.querySelector('[data-modal-backdrop="true"]');
-    if (backdrop) {
-      backdrop.addEventListener('click', (event) => {
-        // Only close if clicking directly on the backdrop
-        if (event.target === backdrop) {
-          closeModal();
-        }
-      });
-    }
-    
-    // Listen for custom consultation modal open events
-    document.addEventListener('click', function(e) {
-      // Check if clicked element has data-open-consultation attribute
-      const target = e.target as HTMLElement;
-      const button = target.hasAttribute('data-open-consultation') ? target : target.closest('[data-open-consultation]') as HTMLElement;
-      
-      if (button) {
-        e.preventDefault();
-        const modal = document.getElementById('consultation-modal');
-        if (modal) {
-          // Update modal attributes if button has them
-          const consultationType = button.getAttribute('data-consultation-type');
-          const consultationTitle = button.getAttribute('data-consultation-title');
-          
-          if (consultationType) {
-            modal.setAttribute('data-insurance-type', consultationType);
-            userData.insuranceType = consultationType;
-          }
-          
-          if (consultationTitle) {
-            modal.setAttribute('data-context-title', consultationTitle);
-          }
-          
-          // Use enhanced modal open function
-          openModal(modal, button);
-        }
-      }
-    });
-    
-    // Clean up any resources when modal is closed
-    document.addEventListener('modalClosed', function(e: Event) {
-      // Type assertion for custom event
-      const customEvent = e as CustomEvent<{modalId: string}>;
-      
-      if (customEvent.detail?.modalId === 'consultation-modal') {
-        try {
-          // Remove any Cal iframes to free up resources
-          const calIframes = document.querySelectorAll('iframe[src*="cal.com"]');
-          calIframes.forEach(iframe => {
-            iframe.remove();
-          });
-          
-          // Reset all steps to initial state
-          document.querySelectorAll('.modal-step').forEach((step, index) => {
-            if (index === 0) {
-              step.classList.remove('hidden');
-              step.classList.add('active');
+        return () => {
+          document.body.style.overflow = "";
+        };
+      }, [isOpen, initialTopic]);
+
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (e.key === "Escape" && isOpen) onClose();
+        };
+        if (isOpen) document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+      }, [isOpen, onClose]);
+
+      if (!isOpen) return null;
+
+      // ── Step indicator dots ──
+      const stepDots = h(
+        "div",
+        { className: "flex items-center justify-center gap-2 mb-6" },
+        [1, 2, 3].map((s) =>
+          h("div", {
+            key: s,
+            className:
+              "h-1.5 rounded-full transition-all " +
+              (s === step
+                ? "w-8 bg-red-500"
+                : s < step
+                  ? "w-4 bg-red-300"
+                  : "w-4 bg-gray-200"),
+          }),
+        ),
+      );
+
+      // ── Checkmark SVG for badges ──
+      const checkSvg = () =>
+        h(
+          "svg",
+          {
+            className: "w-5 h-5 text-green-400 mr-3 flex-shrink-0",
+            fill: "none",
+            stroke: "currentColor",
+            viewBox: "0 0 24 24",
+          },
+          h("path", {
+            strokeLinecap: "round",
+            strokeLinejoin: "round",
+            strokeWidth: "2",
+            d: "M5 13l4 4L19 7",
+          }),
+        );
+
+      // ── LEFT SIDEBAR ──
+      const leftSidebar = h(
+        "div",
+        {
+          className:
+            "!hidden md:!flex !w-full md:!w-5/12 bg-slate-900 text-white p-8 lg:p-10 flex-col relative overflow-y-auto !m-0 !p-8 lg:!p-10",
+        },
+        h("div", {
+          className:
+            "absolute inset-0 bg-gradient-to-b from-slate-800/50 to-slate-900/90 pointer-events-none",
+        }),
+        h(
+          "div",
+          { className: "relative z-10 flex-1 flex flex-col" },
+          h(
+            "span",
+            {
+              className:
+                "text-red-500 font-semibold text-xs tracking-widest uppercase mb-8 block",
+            },
+            "Your Consultant",
+          ),
+          h(
+            "div",
+            { className: "relative w-32 h-32 mb-6 shadow-xl" },
+            h("img", {
+              src: activeExpert.image,
+              alt: activeExpert.name,
+              className:
+                "w-full h-full object-cover rounded-2xl border-2 border-slate-700 bg-slate-800",
+            }),
+          ),
+          h(
+            "h3",
+            { className: "text-3xl font-extrabold mb-1" },
+            activeExpert.name,
+          ),
+          h(
+            "p",
+            { className: "text-red-400 font-bold mb-1" },
+            activeExpert.title,
+          ),
+          h(
+            "p",
+            {
+              className:
+                "text-slate-400 text-sm mb-6 pb-6 border-b border-slate-700",
+            },
+            activeExpert.subtitle,
+          ),
+          h(
+            "p",
+            {
+              className:
+                "text-lg text-slate-300 leading-relaxed font-light mb-8",
+            },
+            '"' + activeExpert.valueProp + '"',
+          ),
+          h(
+            "div",
+            { className: "mt-auto" },
+            h(
+              "ul",
+              { className: "space-y-3" },
+              activeExpert.badges.map((badge, idx) =>
+                h(
+                  "li",
+                  {
+                    key: idx,
+                    className: "flex items-center text-sm text-slate-300",
+                  },
+                  checkSvg(),
+                  badge,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      // ── STEP 1: Bedarf & Zeitplan ──
+      const step1Content = h(
+        "div",
+        {
+          className:
+            "md:max-w-md mx-auto h-full flex flex-col md:justify-center modal-fadeIn py-1 md:py-2",
+        },
+        stepDots,
+        h(
+          "div",
+          { className: "mb-4 md:mb-6 text-center md:text-left !m-0 !p-0" },
+          h(
+            "h2",
+            {
+              className:
+                "text-2xl md:text-3xl font-extrabold text-gray-900 !mb-1 !mt-0 !font-sans !leading-tight",
+            },
+            "How can we optimize your Swiss setup?",
+          ),
+          h(
+            "p",
+            {
+              className:
+                "text-gray-500 text-sm !m-0 !mt-2 !font-sans !leading-normal",
+            },
+            "Your personal strategy session. Free of charge & without obligation.",
+          ),
+        ),
+
+        // Topic checkboxes
+        h(
+          "div",
+          { className: "space-y-2 md:space-y-3 mb-4 md:mb-6" },
+          h(CheckboxCard, {
+            label: "VIP Health Insurance (KVG/VVG)",
+            value: "health",
+            checked: topics.includes("health"),
+            onChange: toggleTopic,
+          }),
+          h(CheckboxCard, {
+            label: "Tax Optimization & Pillar 3a",
+            value: "wealth",
+            checked: topics.includes("wealth"),
+            onChange: toggleTopic,
+          }),
+          h(CheckboxCard, {
+            label: "Personal Liability & Household",
+            value: "everyday",
+            checked: topics.includes("everyday"),
+            onChange: toggleTopic,
+          }),
+          h(CheckboxCard, {
+            label: "Family Planning & Maternity",
+            value: "family",
+            checked: topics.includes("family"),
+            onChange: toggleTopic,
+          }),
+        ),
+
+        // Timeline
+        h(
+          "div",
+          { className: "mb-4 md:mb-6" },
+          h(
+            "label",
+            {
+              className: "block text-sm font-semibold text-gray-700 mb-3",
+            },
+            "Your current status",
+          ),
+          h(
+            "div",
+            {
+              className: "flex flex-wrap gap-2",
+            },
+            h(TimelinePill, {
+              label: "Moving to Switzerland soon",
+              value: "pre-move",
+              selected: timeline === "pre-move",
+              onSelect: setTimeline,
+            }),
+            h(TimelinePill, {
+              label: "Arrived < 90 days ago",
+              value: "under-3m",
+              selected: timeline === "under-3m",
+              onSelect: setTimeline,
+            }),
+            h(TimelinePill, {
+              label: "Arrived > 90 days ago",
+              value: "over-3m",
+              selected: timeline === "over-3m",
+              onSelect: setTimeline,
+            }),
+          ),
+        ),
+
+        // WEITER button
+        h(
+          "button",
+          {
+            type: "button",
+            disabled: topics.length === 0,
+            onClick: () => setStep(2),
+            className:
+              "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
+              (topics.length > 0
+                ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
+                : "bg-gray-300 cursor-not-allowed"),
+          },
+          "NEXT: CONTACT DETAILS",
+          h(
+            "svg",
+            {
+              className: "ml-2 w-5 h-5",
+              fill: "none",
+              stroke: "currentColor",
+              viewBox: "0 0 24 24",
+            },
+            h("path", {
+              strokeLinecap: "round",
+              strokeLinejoin: "round",
+              strokeWidth: "2",
+              d: "M14 5l7 7m0 0l-7 7m7-7H3",
+            }),
+          ),
+        ),
+      );
+
+      // ── STEP 2: Kontaktdaten & Erwartungen ──
+      const step2Content = h(
+        "div",
+        {
+          className:
+            "md:max-w-md mx-auto h-full flex flex-col md:justify-center modal-fadeIn py-1 md:py-2",
+        },
+        stepDots,
+        h(
+          "div",
+          { className: "mb-4 md:mb-6" },
+          h(
+            "button",
+            {
+              type: "button",
+              onClick: () => setStep(1),
+              className:
+                "inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors mb-4",
+            },
+            "← Back",
+          ),
+          h(
+            "h2",
+            {
+              className:
+                "text-2xl md:text-3xl font-extrabold text-gray-900 mb-1",
+            },
+            "Your Contact Details",
+          ),
+          h(
+            "p",
+            { className: "text-gray-500 text-sm" },
+            "So we can confirm your appointment",
+          ),
+        ),
+
+        // Form fields
+        h(
+          "div",
+          { className: "space-y-3 md:space-y-4 mb-4 md:mb-5" },
+          // Name
+          h(
+            "div",
+            {},
+            h(
+              "label",
+              {
+                htmlFor: "en-name",
+                className: "block text-sm font-semibold text-gray-700 mb-1.5",
+              },
+              "Full Name",
+            ),
+            h("input", {
+              type: "text",
+              id: "en-name",
+              name: "name",
+              placeholder: "e.g. John Doe",
+              value: formData.name,
+              onChange: handleInputChange,
+              required: true,
+              className:
+                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+            }),
+          ),
+          // Email
+          h(
+            "div",
+            {},
+            h(
+              "label",
+              {
+                htmlFor: "en-email",
+                className: "block text-sm font-semibold text-gray-700 mb-1.5",
+              },
+              "Email Address",
+            ),
+            h("input", {
+              type: "email",
+              id: "en-email",
+              name: "email",
+              placeholder: "john@company.com",
+              value: formData.email,
+              onChange: handleInputChange,
+              required: true,
+              className:
+                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+            }),
+          ),
+          // Phone
+          h(
+            "div",
+            {},
+            h(
+              "label",
+              {
+                htmlFor: "en-phone",
+                className: "block text-sm font-semibold text-gray-700 mb-1.5",
+              },
+              "Phone number (optional)",
+            ),
+            h("input", {
+              type: "tel",
+              id: "en-phone",
+              name: "phone",
+              placeholder: "+41 79 000 00 00",
+              value: formData.phone,
+              onChange: handleInputChange,
+              className:
+                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+            }),
+          ),
+        ),
+
+        // Trust message box
+        h(
+          "div",
+          {
+            className:
+              "flex items-start gap-3 bg-sky-50 border border-sky-200 rounded-xl p-3 md:p-4 mb-4 md:mb-6",
+          },
+          h(
+            "svg",
+            {
+              className: "w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5",
+              fill: "none",
+              stroke: "currentColor",
+              viewBox: "0 0 24 24",
+            },
+            h("path", {
+              strokeLinecap: "round",
+              strokeLinejoin: "round",
+              strokeWidth: "2",
+              d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+            }),
+          ),
+          h(
+            "div",
+            {},
+            h(
+              "p",
+              {
+                className: "text-sm font-bold text-sky-900 mb-1",
+              },
+              "What happens next?",
+            ),
+            h(
+              "p",
+              {
+                className: "text-xs text-sky-700 leading-relaxed",
+              },
+              "After booking your time, you will receive an email linking to our secure Digital Demand Intake. This allows our experts to prepare a highly customized strategy prior to your Zoom call.",
+            ),
+          ),
+        ),
+
+        // WEITER button
+        h(
+          "button",
+          {
+            type: "button",
+            disabled: !formData.name || !formData.email,
+            onClick: () => setStep(3),
+            className:
+              "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
+              (formData.name && formData.email
+                ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
+                : "bg-gray-300 cursor-not-allowed"),
+          },
+          "NEXT: CHOOSE A TIME",
+          h(
+            "svg",
+            {
+              className: "ml-2 w-5 h-5",
+              fill: "none",
+              stroke: "currentColor",
+              viewBox: "0 0 24 24",
+            },
+            h("path", {
+              strokeLinecap: "round",
+              strokeLinejoin: "round",
+              strokeWidth: "2",
+              d: "M14 5l7 7m0 0l-7 7m7-7H3",
+            }),
+          ),
+        ),
+        h(
+          "p",
+          {
+            className: "text-center text-sm text-gray-500 mt-3",
+          },
+          "No credit card required",
+        ),
+      );
+
+      // ── STEP 3: Kalender ──
+      const step3Content = h(
+        "div",
+        { className: "h-full flex flex-col modal-fadeIn" },
+        h(
+          "div",
+          { className: "mb-3" },
+          h(
+            "button",
+            {
+              type: "button",
+              onClick: () => {
+                // Destroy Cal.com embed before going back
+                document
+                  .querySelectorAll('[id^="english-cal-embed"]')
+                  .forEach((el) => {
+                    el.innerHTML = "";
+                    delete el.dataset.calInitialized;
+                  });
+                setStep(2);
+              },
+              className:
+                "inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors",
+            },
+            "← Back",
+          ),
+        ),
+        h("div", {
+          id: "english-cal-embed-" + calKey,
+          className: "flex-1 w-full bg-white rounded-2xl overflow-auto min-h-0",
+          ref: (el) => {
+            if (!el || el.dataset.calInitialized) return;
+            el.dataset.calInitialized = "true";
+
+            const isMobile = window.innerWidth <= 640;
+            const calLink = activeExpert.calLink.replace(
+              "https://cal.com/",
+              "",
+            );
+            const calUrl = activeExpert.calLink;
+
+            if (isMobile) {
+              el.innerHTML =
+                '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:2rem 1.5rem;text-align:center;">' +
+                '<svg style="width:64px;height:64px;color:#dc2626;margin-bottom:1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
+                '<h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Choose an appointment</h3>' +
+                '<p style="color:#6b7280;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.5;">Choose a suitable time for your free 45-minute consultation via Zoom.</p>' +
+                '<a href="' +
+                calUrl +
+                "?name=" +
+                encodeURIComponent(formData.name) +
+                "&email=" +
+                encodeURIComponent(formData.email) +
+                '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:1rem 2rem;background:#dc2626;color:white;font-weight:700;font-size:1.1rem;border-radius:1rem;text-decoration:none;box-shadow:0 4px 14px rgba(220,38,38,0.3);">' +
+                '<svg style="width:24px;height:24px;margin-right:0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
+                "Open Calendar</a>" +
+                '<p style="color:#9ca3af;font-size:0.8rem;margin-top:1rem;">Opens in a new tab</p>' +
+                "</div>";
             } else {
-              step.classList.add('hidden');
-              step.classList.remove('active');
+              const initCal = () => {
+                try {
+                  Cal("init", {
+                    origin: "https://cal.com",
+                  });
+                  Cal("inline", {
+                    elementOrSelector: "#english-cal-embed-" + calKey,
+                    calLink: calLink,
+                    layout: "month_view",
+                    config: {
+                      name: formData.name || undefined,
+                      email: formData.email || undefined,
+                      hideEventTypeDetails: true,
+                      theme: "light",
+                      layout: "month_view",
+                    },
+                  });
+                  Cal("ui", {
+                    theme: "light",
+                    hideEventTypeDetails: true,
+                    layout: "month_view",
+                  });
+                } catch (err) {
+                  console.warn("Cal.com init failed, iframe fallback:", err);
+                  el.innerHTML =
+                    '<iframe src="' +
+                    calUrl +
+                    "?embed=true&layout=month_view&theme=light&name=" +
+                    encodeURIComponent(formData.name) +
+                    "&email=" +
+                    encodeURIComponent(formData.email) +
+                    '" style="width:100%;height:600px;border:none;"></iframe>';
+                }
+              };
+
+              if (window.Cal) {
+                initCal();
+              } else {
+                (function (C, A, L) {
+                  let p = function (a, ar) {
+                    a.q.push(ar);
+                  };
+                  let d = C.document;
+                  C.Cal =
+                    C.Cal ||
+                    function () {
+                      let cal = C.Cal;
+                      let ar = arguments;
+                      if (!cal.loaded) {
+                        cal.ns = {};
+                        cal.q = cal.q || [];
+                        d.head.appendChild(d.createElement("script")).src = A;
+                        cal.loaded = true;
+                      }
+                      if (ar[0] === L) {
+                        const api = function () {
+                          p(api, arguments);
+                        };
+                        const namespace = ar[1];
+                        api.q = api.q || [];
+                        if (typeof namespace === "string") {
+                          cal.ns[namespace] = cal.ns[namespace] || api;
+                          p(cal.ns[namespace], ar);
+                          p(cal, ["initNamespace", namespace]);
+                        } else p(cal, ar);
+                        return;
+                      }
+                      p(cal, ar);
+                    };
+                })(window, "https://app.cal.com/embed/embed.js", "init");
+                setTimeout(initCal, 500);
+              }
             }
-          });
-          
-          // Reset indicators
-          document.querySelectorAll('.modal-step-indicator .step').forEach((indicator, index) => {
-            const currentStep = index + 1;
-            const circle = indicator.querySelector('.w-4');
-            const line = indicator.querySelector('.h-1');
-            
-            if (currentStep === 1) {
-              indicator.classList.add('active');
-              indicator.classList.remove('completed');
-              
-              if (circle) {
-                circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-red-600 text-xs';
-              }
-              
-              if (line) {
-                line.className = 'h-1 bg-red-600 flex-grow rounded-full';
-              }
-            } else {
-              indicator.classList.remove('active', 'completed');
-              
-              if (circle) {
-                circle.className = 'w-4 h-4 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-400 text-xs';
-              }
-              
-              if (line) {
-                line.className = 'h-1 bg-gray-300 flex-grow rounded-full';
-              }
-            }
-          });
-        } catch (e) {
-          // Silent fail
-        }
-      }
-    });
-    
-    // Check if we need to adjust mobile viewport for iOS
-    function adjustModalForMobile() {
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        const vhUnit = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vhUnit}px`);
-      }
+          },
+        }),
+        h(
+          "p",
+          {
+            className: "text-center text-xs text-gray-400 mt-3",
+          },
+          "Issues with the calendar? ",
+          h(
+            "a",
+            {
+              href: activeExpert.calLink,
+              target: "_blank",
+              rel: "noopener",
+              className: "text-red-500 underline hover:text-red-700",
+            },
+            "Open in a new tab",
+          ),
+        ),
+      );
+
+      // ── RENDER ──
+      return h(
+        "div",
+        {
+          className:
+            "fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-6 font-sans antialiased text-gray-900 not-prose",
+        },
+        // Backdrop
+        h("div", {
+          className:
+            "absolute inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity",
+          onClick: onClose,
+        }),
+
+        // Modal Container
+        h(
+          "div",
+          {
+            className:
+              "relative bg-white rounded-t-3xl md:rounded-[2.5rem] shadow-2xl w-full max-w-5xl !flex !flex-col md:!flex-row overflow-hidden transform transition-all h-full md:h-[75vh] md:max-h-[750px]",
+          },
+
+          // Close Button
+          h(
+            "button",
+            {
+              onClick: onClose,
+              className:
+                "absolute top-4 right-4 z-20 text-gray-400 hover:text-gray-900 bg-white/50 hover:bg-white rounded-full p-2 transition-colors inline-flex items-center justify-center md:text-gray-500",
+              "aria-label": "Close",
+            },
+            h(
+              "svg",
+              {
+                className: "w-6 h-6",
+                fill: "none",
+                stroke: "currentColor",
+                viewBox: "0 0 24 24",
+              },
+              h("path", {
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: "2",
+                d: "M6 18L18 6M6 6l12 12",
+              }),
+            ),
+          ),
+
+          // Left Sidebar
+          leftSidebar,
+
+          // Right Sidebar
+          h(
+            "div",
+            {
+              className:
+                "!w-full md:!w-7/12 bg-white p-4 pt-6 md:p-10 overflow-y-auto relative !flex !flex-col",
+            },
+            step === 1
+              ? step1Content
+              : step === 2
+                ? step2Content
+                : step3Content,
+          ),
+        ),
+      );
+    };
+
+    let isModalOpen = false;
+    let initialTopic = "health";
+    let root = null;
+
+    const renderModal = () => {
+      const container = document.getElementById("english-modal-root");
+      if (!container) return;
+
+      if (!root) root = ReactDOM.createRoot(container);
+
+      root.render(
+        h(ConsultationModal, {
+          isOpen: isModalOpen,
+          initialTopic: initialTopic,
+          onClose: closeModal,
+        }),
+      );
+    };
+
+    const openModal = (e) => {
+      let rawTopic = "health";
+      if (e && e.detail && e.detail.topic) rawTopic = e.detail.topic;
+      else if (typeof e === "string") rawTopic = e;
+
+      // Map legacy string topics to the 4 valid checkboxes
+      const topicMap = {
+        home: "health",
+        health: "health",
+        life: "wealth",
+        wealth: "wealth",
+        relocation: "other",
+        liability: "other",
+        family: "family",
+        other: "other",
+      };
+
+      initialTopic = topicMap[rawTopic] || "health";
+      isModalOpen = true;
+      renderModal();
+    };
+
+    const closeModal = () => {
+      isModalOpen = false;
+      renderModal();
+    };
+
+    // Make functions global AND override legacy English modals
+    window.openEnglishModal = openModal;
+    window.closeEnglishModal = closeModal;
+
+    // Legacy overrides (so old buttons trigger this new modal)
+    window.openHealthModal = openModal;
+    window.openContextualModal = openModal;
+    window.openOffersModal = openModal;
+    window.openConsultationModal = openModal;
+    window.showConsultationModal = openModal;
+
+    // Re-render once on init state in case it missed early calls
+    renderModal();
+
+    // Replay any calls that were queued before React loaded
+    if (
+      window.__consultationModalQueue &&
+      window.__consultationModalQueue.length > 0
+    ) {
+      console.log(
+        "🔄 Replaying",
+        window.__consultationModalQueue.length,
+        "queued modal calls",
+      );
+      var firstTopic = window.__consultationModalQueue[0];
+      openModal(firstTopic);
+      window.__consultationModalQueue.length = 0; // Clear the queue
     }
-    
-    // Run on load and resize
-    window.addEventListener('resize', adjustModalForMobile);
-    adjustModalForMobile();
+
+    // Listen for custom dispatch events
+    window.addEventListener("openEnglishModal", openModal);
+
+    console.log("✅ English Consultation Modal React 3-Step loaded");
   });
 </script>
 
 <style>
-  /* Base modal styling */
-  .modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-  
-  /* Progress indicator styling */
-  .modal-step-indicator .step.completed .h-1 {
-    background-color: #dc2626;
-  }
-  
-  .modal-step-indicator .step.completed .w-4 {
-    background-color: #dc2626;
-    border-color: #dc2626;
-    color: white;
-  }
-  
-  .modal-step-indicator .step.active .w-4 {
-    border-color: #dc2626;
-  }
-  
-  /* Step transitions */
-  .modal-step {
-    transition: opacity 0.3s ease;
-  }
-  
-  .modal-step.active {
-    animation: fadeIn 0.3s ease;
-  }
-  
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -772,197 +972,7 @@ const finalProviderName = props.providerName || providerName;
       transform: translateY(0);
     }
   }
-  
-  /* Mobile optimizations */
-  @media (max-width: 640px) {
-    .modal-content {
-      max-height: calc(100vh - 40px) !important;
-      height: auto;
-      padding: 1rem !important;
-      margin: 0 !important;
-      border-radius: 16px !important;
-      position: fixed !important;
-      top: 20px !important;
-      left: 10px !important;
-      right: 10px !important;
-      width: calc(100% - 20px) !important;
-      box-sizing: border-box !important;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    .mobile-close-btn {
-      padding: 10px;
-      margin: -10px;
-      top: 10px !important;
-      right: 10px !important;
-    }
-    
-    .modal-step-indicator {
-      margin-bottom: 0.75rem;
-    }
-    
-    .modal-step-indicator .w-4 {
-      width: 0.875rem;
-      height: 0.875rem;
-      font-size: 0.625rem;
-    }
-    
-    .modal-step-indicator .h-1 {
-      height: 0.125rem;
-    }
-    
-    .modal-steps {
-      margin-top: 0.5rem;
-    }
-    
-    /* Enhance touch targets */
-    button, 
-    a, 
-    select, 
-    input, 
-    textarea {
-      min-height: 44px;
-    }
-    
-    .legal-text {
-      font-size: 0.7rem;
-      line-height: 1.3;
-      margin-top: 1rem;
-      padding: 0 0.5rem;
-    }
-  }
-  
-  /* Special handling for very small screens */
-  @media (max-width: 375px) {
-    .modal-content {
-      top: 10px !important;
-      max-height: calc(100vh - 20px) !important;
-      padding: 0.875rem !important;
-    }
-    
-    .modal-step-indicator {
-      margin-bottom: 0.5rem;
-    }
-    
-    /* Compact the legal text */
-    .legal-text {
-      font-size: 0.65rem;
-      line-height: 1.2;
-      margin-top: 0.5rem;
-    }
-    
-    .modal-step-indicator .w-4 {
-      width: 0.75rem;
-      height: 0.75rem;
-      font-size: 0.6rem;
-    }
-  }
-  
-  /* Fix for Cal.com calendar width */
-  :global(#cal-booking-placeholder) {
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  :global(#cal-booking-placeholder iframe) {
-    width: 100% !important;
-    border: none !important;
-    min-height: 600px;
-  }
-  
-  /* Fix for embedded calendar on mobile */
-  @media (max-width: 640px) {
-    :global(#cal-booking-placeholder iframe) {
-      min-height: 450px !important;
-      height: auto !important;
-      max-height: calc(100vh - 150px) !important;
-    }
-    
-    /* Better handling of form fields on mobile */
-    :global(input),
-    :global(select),
-    :global(textarea) {
-      font-size: 16px !important; /* Prevent iOS zoom on focus */
-    }
-  }
-  
-  /* Modal animations */
-  #consultation-modal:not(.hidden) {
-    animation: modalFadeIn 0.2s ease-out;
-  }
-  
-  #consultation-modal:not(.hidden) .modal-content {
-    animation: modalSlideIn 0.2s ease-out;
-  }
-  
-  @keyframes modalFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes modalSlideIn {
-    from { 
-      opacity: 0;
-      transform: scale(0.98) translateY(4px);
-    }
-    to { 
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-  
-  /* Motion safety for reduced motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    /* Disable all transitions and animations */
-    .transition-all,
-    .transition,
-    .duration-200,
-    .hover\\:-translate-y-0\\.5:hover,
-    .hover\\:shadow-\\[0_8px_24px_rgba\\(0\\,0\\,0\\,\\.08\\)\\]:hover,
-    .hover\\:shadow-\\[0_8px_28px_rgba\\(0\\,0\\,0\\,\\.12\\)\\]:hover,
-    #consultation-modal,
-    .modal-content {
-      transition: none !important;
-      animation: none !important;
-      transform: none !important;
-    }
-    
-    /* Keep only opacity changes for modal visibility */
-    #consultation-modal:not(.hidden) {
-      opacity: 1;
-    }
-    
-    #consultation-modal.hidden {
-      opacity: 0;
-    }
+  .modal-fadeIn {
+    animation: fadeIn 0.4s ease-out forwards;
   }
 </style>
-
-<script is:inline>
-  // Initialize modal functions
-  if (typeof window !== 'undefined') {
-    window.Cal = window.Cal || {};
-    
-    // Open consultation modal
-    window.openConsultationModal = function(type) {
-      const modal = document.getElementById('consultation-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        console.log('✅ Consultation modal opened', type || '');
-      } else {
-        console.error('❌ Consultation modal not found');
-      }
-    };
-    
-    // Close consultation modal
-    window.closeConsultationModal = function() {
-      const modal = document.getElementById('consultation-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-        console.log('✅ Consultation modal closed');
-      }
-    };
-  }
-</script> 

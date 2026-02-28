@@ -3,18 +3,28 @@
 const currentPath = Astro.url.pathname;
 
 // Determine intent based on URL path (same as existing system)
-let pageIntent = 'home';
-if (currentPath.includes('/setup')) pageIntent = 'setup';
-else if (currentPath.includes('/switching') || currentPath.includes('/change')) pageIntent = 'switch';
-else if (currentPath.includes('/new-health-insurance')) pageIntent = 'new';
-else if (currentPath.includes('/cheapest')) pageIntent = 'cheapest';
-else if (currentPath.includes('/best')) pageIntent = 'best';
-else if (currentPath.includes('/compare')) pageIntent = 'compare';
-else if (currentPath.includes('/healthcare/all-insurances/')) pageIntent = 'provider';
+let pageIntent = "home";
+if (currentPath.includes("/setup")) pageIntent = "setup";
+else if (currentPath.includes("/switching") || currentPath.includes("/change"))
+  pageIntent = "switch";
+else if (currentPath.includes("/new-health-insurance")) pageIntent = "new";
+else if (currentPath.includes("/cheapest")) pageIntent = "cheapest";
+else if (currentPath.includes("/best")) pageIntent = "best";
+else if (currentPath.includes("/compare")) pageIntent = "compare";
+else if (currentPath.includes("/healthcare/all-insurances/"))
+  pageIntent = "provider";
 
 // Detect city from URL for localization
-let city = '';
-const cityPatterns = ['zurich', 'basel', 'bern', 'geneva', 'lausanne', 'lugano', 'zug'];
+let city = "";
+const cityPatterns = [
+  "zurich",
+  "basel",
+  "bern",
+  "geneva",
+  "lausanne",
+  "lugano",
+  "zug",
+];
 for (const cityName of cityPatterns) {
   if (currentPath.includes(cityName)) {
     city = cityName;
@@ -22,31 +32,44 @@ for (const cityName of cityPatterns) {
   }
 }
 
-const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
+const pageSlug = currentPath.split("/").filter(Boolean).pop() || "";
 ---
 
-<div id="smart-modal" 
-    class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50"
-    data-page-intent={pageIntent} 
-    data-page-slug={pageSlug}
-    data-city={city}
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="smart-modal-title">
-  
+<div
+  id="smart-modal"
+  class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50"
+  data-page-intent={pageIntent}
+  data-page-slug={pageSlug}
+  data-city={city}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="smart-modal-title"
+>
   <div class="flex items-center justify-center p-0 lg:p-4 h-full min-h-screen">
     <!-- Modal Container -->
-    <div class="smart-modal-container bg-white w-full h-full lg:max-w-[1200px] lg:max-h-[90vh] lg:rounded-2xl lg:h-auto overflow-y-auto relative shadow-2xl transition-all duration-200 scale-100 translate-y-0">
-
+    <div
+      class="smart-modal-container bg-white w-full h-full lg:max-w-[1200px] lg:max-h-[90vh] lg:rounded-2xl lg:h-auto overflow-y-auto relative shadow-2xl transition-all duration-200 scale-100 translate-y-0"
+    >
       <!-- Close button -->
-      <button id="smart-modal-close-btn" 
-              class="absolute top-4 right-4 lg:top-4 lg:right-4 z-10 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Close modal">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      <button
+        id="smart-modal-close-btn"
+        class="absolute top-4 right-4 lg:top-4 lg:right-4 z-10 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+        aria-label="Close modal"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      
+
       <!-- Modal Content Container -->
       <div id="smart-modal-content" class="h-full">
         <!-- Content will be populated by JavaScript -->
@@ -67,14 +90,14 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
     }
-    
+
     /* Tablet */
     @media (min-width: 768px) and (max-width: 1023px) {
       max-width: 90vw;
       max-height: 90vh;
       border-radius: 0.75rem;
     }
-    
+
     /* Desktop */
     @media (min-width: 1024px) {
       max-width: 1200px;
@@ -145,7 +168,9 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
 
   /* Prevent zoom on iOS */
   @media (max-width: 767px) {
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       font-size: 16px !important;
     }
   }
@@ -169,37 +194,39 @@ const pageSlug = currentPath.split('/').filter(Boolean).pop() || '';
 </style>
 
 <script is:inline>
-// Emergency function creation for compatibility
-(function() {
-  console.log('🚀 SmartModal: Creating openOffersModal function for compatibility');
+  // Emergency function creation for compatibility
+  (function () {
+    console.log(
+      "🚀 SmartModal: Creating openOffersModal function for compatibility",
+    );
 
-  window.openSmartModal = function() {
-    console.log('📱 SmartModal: openSmartModal called');
-    
-    const modal = document.getElementById('smart-modal');
-    if (modal) {
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      document.body.classList.add('modal-open');
-      console.log('✅ SmartModal: Modal opened');
-      
-      // Initialize the smart modal system
-      if (window.SmartModalManager) {
-        window.SmartModalManager.open();
+    window.openSmartModal = function () {
+      console.log("📱 SmartModal: openSmartModal called");
+
+      const modal = document.getElementById("smart-modal");
+      if (modal) {
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        document.body.classList.add("modal-open");
+        console.log("✅ SmartModal: Modal opened");
+
+        // Initialize the smart modal system
+        if (window.SmartModalManager) {
+          window.SmartModalManager.open();
+        }
+      } else {
+        console.error("❌ SmartModal: Modal element not found");
       }
-    } else {
-      console.error('❌ SmartModal: Modal element not found');
-    }
-  };
+    };
 
-  // Legacy compatibility
-  window.openOffersModal = window.openSmartModal;
-  window.showConsultationModal = window.openSmartModal;
-  window.openConsultationModal = window.openSmartModal;
-  window.openHealthModal = window.openSmartModal;
+    // Legacy compatibility — openHealthModal is now handled by ConsultationModal.astro
+    window.openOffersModal = window.openSmartModal;
+    window.showConsultationModal = window.openSmartModal;
+    window.openConsultationModal = window.openSmartModal;
+    // window.openHealthModal = window.openSmartModal; // REMOVED: ConsultationModal.astro owns this now
 
-  console.log('✅ SmartModal: Compatibility functions created');
-})();
+    console.log("✅ SmartModal: Compatibility functions created");
+  })();
 </script>
 
 <!-- Load SmartModal JavaScript -->

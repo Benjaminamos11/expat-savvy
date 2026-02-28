@@ -1,20 +1,22 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-import ProfessionalSmartModal from '../components/ProfessionalSmartModal.astro';
-import SocialMediaImage from '../components/SocialMediaImage.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import ProfessionalSmartModal from "../components/ProfessionalSmartModal.astro";
+import ConsultationModal from "../components/consultation/ConsultationModal.astro";
+import RelocationModal from "../components/consultation/RelocationModal.astro";
+import SocialMediaImage from "../components/SocialMediaImage.astro";
 
 // Analytics Components - Consent Mode v2 compliant
-import GoogleTag from '../components/analytics/GoogleTag.astro';
-import FacebookPixel from '../components/analytics/FacebookPixel.astro';
-import CookieBanner from '../components/analytics/CookieBanner.astro';
+import GoogleTag from "../components/analytics/GoogleTag.astro";
+import FacebookPixel from "../components/analytics/FacebookPixel.astro";
+import CookieBanner from "../components/analytics/CookieBanner.astro";
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
   publishDate?: Date;
   author?: {
     name: string;
@@ -31,13 +33,17 @@ const {
   publishDate,
   author = {
     name: "Benjamin Amos Wagner",
-    url: "https://expat-savvy.ch"
+    url: "https://expat-savvy.ch",
   },
-  canonicalURLProp
+  canonicalURLProp,
 } = Astro.props;
 
-const defaultDescription = "Expat Savvy - Your trusted guide for expats in Switzerland with expert insurance advice and resources";
-const finalDescription = description === "Expat Savvy - Your guide to living abroad successfully" ? defaultDescription : description;
+const defaultDescription =
+  "Expat Savvy - Your trusted guide for expats in Switzerland with expert insurance advice and resources";
+const finalDescription =
+  description === "Expat Savvy - Your guide to living abroad successfully"
+    ? defaultDescription
+    : description;
 
 // Ensure canonical URL is absolute and doesn't contain duplicate paths
 let canonicalPath = Astro.url.pathname;
@@ -45,11 +51,14 @@ let canonicalPath = Astro.url.pathname;
 // Manually handle known redirects for canonical URLs
 // This prevents pages from setting their canonical URL to a redirected path
 let finalPath = canonicalPath;
-const knownRedirects: {[key: string]: string} = {
-  "/news/switching-health-insurance-in-switzerland": "/healthcare/switching-health-insurance",
-  "/guides/relocation/zurich-vs-zug-comparison": "/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination",
-  "/guides/relocation/zurich-relocation-costs": "/blog/hidden-costs-zurich-relocation-budget-planning-expats",
-  "/contact": "/free-consultation"
+const knownRedirects: { [key: string]: string } = {
+  "/news/switching-health-insurance-in-switzerland":
+    "/healthcare/switching-health-insurance",
+  "/guides/relocation/zurich-vs-zug-comparison":
+    "/blog/zurich-vs-zug-choosing-ideal-swiss-relocation-destination",
+  "/guides/relocation/zurich-relocation-costs":
+    "/blog/hidden-costs-zurich-relocation-budget-planning-expats",
+  "/contact": "/free-consultation",
 };
 
 // Check if current path is a redirected URL and use its destination instead
@@ -64,132 +73,152 @@ if (finalPath !== "/" && !finalPath.endsWith("/")) {
 }
 
 // Construct the full canonical URL, using prop value if provided
-const canonicalURL = canonicalURLProp || new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
+const canonicalURL =
+  canonicalURLProp ||
+  new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
 
 // Define optimized favicon URL with automatic WebP delivery
-const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
+const favicon =
+  "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href={favicon} sizes="32x32" />
     <link rel="icon" type="image/png" href={favicon} sizes="16x16" />
     <link rel="apple-touch-icon" href={favicon} />
-    
+
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Bing IndexNow Integration -->
     <meta name="msvalidate.01" content="425777CCEABBA1795F709019A3876A41" />
-    
+
     <!-- Primary Meta Tags -->
     <title>{title} | Expat Savvy Switzerland</title>
     <meta name="title" content={`${title} | Expat Savvy Switzerland`} />
     <meta name="description" content={finalDescription} />
-    
+
     <!-- Facebook Domain Verification -->
-    <meta name="facebook-domain-verification" content="y9dvho8xcoxq52cbdoplkzvsmw1seo" />
-    
+    <meta
+      name="facebook-domain-verification"
+      content="y9dvho8xcoxq52cbdoplkzvsmw1seo"
+    />
+
     <!-- Social Media Image handling with WebP to JPG conversion -->
-    <SocialMediaImage 
+    <SocialMediaImage
       image={image}
       alt={finalDescription}
       width={1200}
       height={630}
     />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | Expat Savvy Switzerland`} />
     <meta property="og:description" content={finalDescription} />
     <meta property="og:site_name" content="Expat Savvy Switzerland" />
-    
+
     <!-- Twitter Basic Tags -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={`${title} | Expat Savvy Switzerland`} />
+    <meta
+      property="twitter:title"
+      content={`${title} | Expat Savvy Switzerland`}
+    />
     <meta property="twitter:description" content={finalDescription} />
-    
+
     <!-- WhatsApp Sharing -->
     <meta property="og:image:alt" content={finalDescription} />
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
 
     <!-- JSON-LD Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": type === "article" ? "BlogPosting" : "WebSite",
-      "name": title,
-      "description": finalDescription,
-      "url": canonicalURL,
-      "publisher": {
-        "@type": "Organization",
-        "name": "Expat Savvy Switzerland",
-        "url": Astro.site
-      },
-      ...(type === "article" && publishDate && {
-        "datePublished": publishDate.toISOString(),
-        "author": {
-          "@type": "Person",
-          "name": author.name,
-          "url": author.url
-        }
-      })
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": type === "article" ? "BlogPosting" : "WebSite",
+        name: title,
+        description: finalDescription,
+        url: canonicalURL,
+        publisher: {
+          "@type": "Organization",
+          name: "Expat Savvy Switzerland",
+          url: Astro.site,
+        },
+        ...(type === "article" &&
+          publishDate && {
+            datePublished: publishDate.toISOString(),
+            author: {
+              "@type": "Person",
+              name: author.name,
+              url: author.url,
+            },
+          }),
+      })}
+    />
 
     <!-- Preconnect to external domains for faster resource loading -->
     <link rel="preconnect" href="https://res.cloudinary.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- DNS prefetch for analytics (lighter than preconnect) -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://connect.facebook.net" />
-    
+
     <!-- Load critical CSS immediately -->
     <link rel="stylesheet" href="/styles/smart-modal.css" />
 
     <!-- Plausible Analytics (Cookieless) -->
-    <script defer data-domain="expat-savvy.ch" src="https://plausible.io/js/script.js"></script>
-    
+    <script
+      defer
+      data-domain="expat-savvy.ch"
+      src="https://plausible.io/js/script.js"></script>
+
     <!-- Plausible Custom Event Tracking -->
     <script defer src="/scripts/plausible-tracking.js"></script>
     <script defer src="/scripts/enhanced-plausible-tracking.js"></script>
-    
+
     <!-- Modal Overlay System -->
-    <script is:inline src="/scripts/modal-overlay-system.js"></script>
-    
+    <script is:inline src="/scripts/modal-overlay-system.js?v=2"></script>
+
     <!-- Modal System Verification -->
     <script is:inline>
-      window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("DOMContentLoaded", () => {
         const requiredFunctions = [
-          'openHealthModal',
-          'openLifePensionModal', 
-          'openOtherModal',
-          'openRelocationModal'
+          "openHealthModal",
+          "openLifePensionModal",
+          "openOtherModal",
+          "openRelocationModal",
         ];
-        
-        const missing = requiredFunctions.filter(fn => typeof window[fn] !== 'function');
-        
+
+        const missing = requiredFunctions.filter(
+          (fn) => typeof window[fn] !== "function",
+        );
+
         if (missing.length > 0) {
-          console.error('⚠️ Missing modal functions:', missing);
-          console.error('Please hard refresh (Cmd+Shift+R or Ctrl+Shift+R)');
+          console.error("⚠️ Missing modal functions:", missing);
+          console.error("Please hard refresh (Cmd+Shift+R or Ctrl+Shift+R)");
         } else {
-          console.log('✅ All modal functions loaded successfully');
+          console.log("✅ All modal functions loaded successfully");
         }
       });
     </script>
-    
+
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
-
     <Header />
     <main class="flex-grow">
       <slot />
@@ -197,22 +226,61 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
     <Footer />
     <!-- Professional Smart Modal with complete 4-step flow -->
     <ProfessionalSmartModal />
+    <ConsultationModal />
+    <RelocationModal />
 
     <!-- Cal.com - Load after DOM ready but not deferred -->
     <script type="text/javascript">
-      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "expat-savvy", {origin:"https://cal.com"});
+      (function (C, A, L) {
+        let p = function (a, ar) {
+          a.q.push(ar);
+        };
+        let d = C.document;
+        C.Cal =
+          C.Cal ||
+          function () {
+            let cal = C.Cal;
+            let ar = arguments;
+            if (!cal.loaded) {
+              cal.ns = {};
+              cal.q = cal.q || [];
+              d.head.appendChild(d.createElement("script")).src = A;
+              cal.loaded = true;
+            }
+            if (ar[0] === L) {
+              const api = function () {
+                p(api, arguments);
+              };
+              const namespace = ar[1];
+              api.q = api.q || [];
+              if (typeof namespace === "string") {
+                cal.ns[namespace] = cal.ns[namespace] || api;
+                p(cal.ns[namespace], ar);
+                p(cal, ["initNamespace", namespace]);
+              } else p(cal, ar);
+              return;
+            }
+            p(cal, ar);
+          };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "expat-savvy", { origin: "https://cal.com" });
     </script>
 
     <!-- SmartModal JavaScript Manager - REPLACED WITH ALPINE.JS -->
     <!-- <script src="/scripts/smart-modal-manager.js" defer></script> -->
-    
+
     <!-- Analytics and other scripts -->
     <script is:inline src="/scripts/analytics-tracking.js" defer></script>
     <script is:inline src="/scripts/page-type-detection.js" defer></script>
-    
+
     <!-- Hidden Netlify Forms for detection -->
-    <form name="health-insurance" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <form
+      name="health-insurance"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
@@ -225,7 +293,13 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <textarea name="special-requirements"></textarea>
     </form>
 
-    <form name="life-pension" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <form
+      name="life-pension"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
@@ -233,7 +307,13 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <textarea name="special-requirements"></textarea>
     </form>
 
-    <form name="other-insurance" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <form
+      name="other-insurance"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
@@ -245,7 +325,13 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <textarea name="special-requirements"></textarea>
     </form>
 
-    <form name="relocation-consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <form
+      name="relocation-consultation"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
@@ -253,12 +339,12 @@ const favicon = "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto
       <input type="date" name="moving-date" />
       <textarea name="special-requirements"></textarea>
     </form>
-    
+
     <!-- Analytics: Consent-first loading (only loads after user accepts) -->
     <GoogleTag />
     <FacebookPixel />
-    
+
     <!-- Cookie Consent Banner -->
     <CookieBanner />
   </body>
-</html> 
+</html>

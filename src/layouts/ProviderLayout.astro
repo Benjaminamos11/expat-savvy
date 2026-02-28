@@ -1,25 +1,38 @@
 ---
-import Layout from './Layout.astro';
+import Layout from "./Layout.astro";
 
 const { frontmatter } = Astro.props;
 ---
-<Layout title={`${frontmatter.name} Health Insurance | Expat Savvy`} description={frontmatter.description}>
+
+<Layout
+  title={`${frontmatter.name} Health Insurance | Expat Savvy`}
+  description={frontmatter.description}
+>
   <div class="bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <img src={frontmatter.logo} alt={`${frontmatter.name} logo`} class="h-16 mx-auto mb-6" />
-          <h1 class="text-4xl font-extrabold text-gray-900 mb-4">{frontmatter.name}</h1>
+          <img
+            src={frontmatter.logo}
+            alt={`${frontmatter.name} logo`}
+            class="h-16 mx-auto mb-6"
+          />
+          <h1 class="text-4xl font-extrabold text-gray-900 mb-4">
+            {frontmatter.name}
+          </h1>
           <p class="text-xl text-gray-500">{frontmatter.description}</p>
         </div>
-        
+
         <div class="prose prose-lg mx-auto">
           <slot />
         </div>
-        
+
         <div class="mt-12 text-center">
-          <a href="/rate" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600">
-            Get a Quote
+          <a
+            href="/rate"
+            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent-500 hover:bg-accent-600"
+          >
+            Schedule Meeting
           </a>
         </div>
       </div>

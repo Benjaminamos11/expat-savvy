@@ -1575,53 +1575,10 @@
       window.openSmartModal = openModal;
       window.closeSmartModal = closeModal;
 
-      // Legacy compatibility
-      window.openOffersModal = openModal;
-      window.openConsultationModal = openModal;
-      window.showConsultationModal = openModal;
-      window.openHealthModal = openModal; // Add this for health insurance pages
-      window.openRelocationModal = openModal; // Add this for relocation pages
-      window.openLifePensionModal = openModal;
-      window.openOtherModal = openModal;
+      // Legacy compatibility removed to avoid conflict with ConsultationModal
+      window.openRelocationModal = openModal; // Keep for relocation pages
 
-      // Setup click handlers with MORE EXTENSIVE MATCHING
-      const handleCTAClick = (e) => {
-        const button = e.target.closest("button, a");
-        if (!button) return;
-
-        // Skip buttons that are explicitly excluded from smart modal
-        if (button.hasAttribute("data-exclude-smart-modal")) {
-          console.log(
-            "🚫 Button excluded from smart modal:",
-            button.textContent?.trim(),
-          );
-          return;
-        }
-
-        const text = button.textContent?.toLowerCase().trim() || "";
-        console.log("🖱️ Button clicked:", text); // DEBUG: Log ALL button clicks
-
-        const isModalTrigger =
-          text.includes("consultation") ||
-          text.includes("contact us") ||
-          text.includes("get advice") ||
-          text.includes("book a call") ||
-          text.includes("free advice") ||
-          text.includes("get started") ||
-          text.includes("schedule") ||
-          text.includes("meeting") ||
-          text.includes("call") ||
-          text.includes("advice");
-
-        if (isModalTrigger) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log("🎯 Opening modal from CTA click:", text);
-          openModal();
-        }
-      };
-
-      document.addEventListener("click", handleCTAClick, true);
+      // Setup click handlers - removed extensive text matching to prevent overriding English ConsultationModal
 
       console.log("✅ Professional Smart Modal ready");
       console.log("🧪 Testing modal functions...");

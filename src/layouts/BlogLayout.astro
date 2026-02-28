@@ -270,7 +270,7 @@ const modalType =
         }</span
       >
       <button
-        onclick="if(window.openSmartModal) { window.openSmartModal(); } else if (window.openModalBasedOnType) { window.openModalBasedOnType(event); } return false;"
+        onclick="if (window.openModalBasedOnType) { window.openModalBasedOnType(event); } return false;"
         data-exclude-smart-modal="true"
         class="bg-white text-primary-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap text-base"
       >
@@ -499,179 +499,179 @@ const modalType =
       />
     )
   }
-</BaseLayout>
 
-<script>
-  // Rating system functionality
-  document.addEventListener("DOMContentLoaded", () => {
-    const stars = document.querySelectorAll("#rating-container button");
+  <script is:inline>
+    // Rating system functionality
+    document.addEventListener("DOMContentLoaded", () => {
+      const stars = document.querySelectorAll("#rating-container button");
 
-    stars.forEach((star) => {
-      star.addEventListener("click", () => {
-        const rating = parseInt(star.getAttribute("data-rating") || "0");
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          const rating = parseInt(star.getAttribute("data-rating") || "0");
 
-        // Update star colors
-        stars.forEach((s, index) => {
-          if (index < rating) {
-            s.classList.remove("text-gray-300");
-            s.classList.add("text-yellow-400");
-          } else {
-            s.classList.remove("text-yellow-400");
-            s.classList.add("text-gray-300");
-          }
+          // Update star colors
+          stars.forEach((s, index) => {
+            if (index < rating) {
+              s.classList.remove("text-gray-300");
+              s.classList.add("text-yellow-400");
+            } else {
+              s.classList.remove("text-yellow-400");
+              s.classList.add("text-gray-300");
+            }
+          });
+
+          // Update schema rating
+          updateSchemaRating(rating);
         });
-
-        // Update schema rating
-        updateSchemaRating(rating);
       });
     });
-  });
 
-  function updateSchemaRating(rating: number) {
-    // Get all JSON-LD scripts
-    const schemas = document.querySelectorAll(
-      'script[type="application/ld+json"]',
+    function updateSchemaRating(rating) {
+      // Get all JSON-LD scripts
+      const schemas = document.querySelectorAll(
+        'script[type="application/ld+json"]',
+      );
+
+      // Find the BlogPosting schema
+      schemas.forEach((schema) => {
+        try {
+          const content = schema.textContent || "{}";
+          if (!content.trim()) return;
+
+          const data = JSON.parse(content);
+          if (data && data["@type"] === "BlogPosting") {
+            // Add or update aggregateRating
+            data.aggregateRating = {
+              "@type": "AggregateRating",
+              ratingValue: rating,
+              bestRating: 5,
+              worstRating: 1,
+              ratingCount: 1,
+            };
+
+            // Replace the content with the updated JSON
+            const updatedContent = JSON.stringify(data, null, 2);
+            schema.textContent = updatedContent;
+          }
+        } catch (error) {
+          console.error("Error updating schema rating:", error);
+        }
+      });
+    }
+
+    // Relocation modal functionality is now handled via inline onclick handlers
+    console.log(
+      "✅ Blog layout loaded - modal functionality via inline handlers",
     );
 
-    // Find the BlogPosting schema
-    schemas.forEach((schema) => {
+    // Function to open modal based on page type
+    function openModalBasedOnType(event) {
+      console.log("🎯 openModalBasedOnType called!", event);
+
+      // Prevent the ProfessionalSmartModal's global click handler from interfering
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+      }
+
+      const url = window.location.pathname.toLowerCase();
+      const title = document.title.toLowerCase();
+
+      const modalType =
+        url.includes("relocation") || title.includes("relocation")
+          ? "relocation"
+          : url.includes("pension") ||
+              url.includes("pillar") ||
+              url.includes("life-insurance") ||
+              title.includes("pension") ||
+              title.includes("pillar")
+            ? "life"
+            : url.includes("liability") ||
+                url.includes("household") ||
+                url.includes("legal-protection") ||
+                url.includes("accident-insurance") ||
+                title.includes("liability") ||
+                title.includes("household") ||
+                title.includes("legal")
+              ? "other"
+              : "health"; // default to health for most insurance content
+
+      console.log("🎯 Opening modal for type:", modalType);
+
       try {
-        const content = schema.textContent || "{}";
-        if (!content.trim()) return;
-
-        const data = JSON.parse(content);
-        if (data && data["@type"] === "BlogPosting") {
-          // Add or update aggregateRating
-          data.aggregateRating = {
-            "@type": "AggregateRating",
-            ratingValue: rating,
-            bestRating: 5,
-            worstRating: 1,
-            ratingCount: 1,
-          };
-
-          // Replace the content with the updated JSON
-          const updatedContent = JSON.stringify(data, null, 2);
-          schema.textContent = updatedContent;
+        if (modalType === "health") {
+          console.log("✅ Opening health insurance modal");
+          if (typeof window.openHealthModal === "function") {
+            window.openHealthModal("home");
+          } else {
+            console.error("❌ window.openHealthModal not available");
+          }
+        } else if (modalType === "life") {
+          console.log("✅ Opening life insurance modal");
+          if (typeof window.openLifePensionModal === "function") {
+            window.openLifePensionModal();
+          } else {
+            console.error("❌ window.openLifePensionModal not available");
+          }
+        } else if (modalType === "relocation") {
+          console.log("✅ Opening relocation modal");
+          if (typeof window.openRelocationModal === "function") {
+            window.openRelocationModal();
+          } else {
+            console.error("❌ window.openRelocationModal not available");
+          }
+        } else {
+          console.log("✅ Opening other insurance modal");
+          if (typeof window.openOtherModal === "function") {
+            window.openOtherModal();
+          } else {
+            console.error("❌ window.openOtherModal not available");
+          }
         }
       } catch (error) {
-        console.error("Error updating schema rating:", error);
+        console.error("❌ Error opening modal:", error);
       }
-    });
-  }
-
-  // Relocation modal functionality is now handled via inline onclick handlers
-  console.log(
-    "✅ Blog layout loaded - modal functionality via inline handlers",
-  );
-
-  // Function to open modal based on page type
-  function openModalBasedOnType(event) {
-    console.log("🎯 openModalBasedOnType called!", event);
-
-    // Prevent the ProfessionalSmartModal's global click handler from interfering
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
     }
 
-    const url = window.location.pathname.toLowerCase();
-    const title = document.title.toLowerCase();
+    // Make function globally available
+    window.openModalBasedOnType = openModalBasedOnType;
+  </script>
 
-    const modalType =
-      url.includes("relocation") || title.includes("relocation")
-        ? "relocation"
-        : url.includes("pension") ||
-            url.includes("pillar") ||
-            url.includes("life-insurance") ||
-            title.includes("pension") ||
-            title.includes("pillar")
-          ? "life"
-          : url.includes("liability") ||
-              url.includes("household") ||
-              url.includes("legal-protection") ||
-              url.includes("accident-insurance") ||
-              title.includes("liability") ||
-              title.includes("household") ||
-              title.includes("legal")
-            ? "other"
-            : "health"; // default to health for most insurance content
-
-    console.log("🎯 Opening modal for type:", modalType);
-
-    try {
-      if (modalType === "health") {
-        console.log("✅ Opening health insurance modal");
-        if (typeof window.openHealthModal === "function") {
-          window.openHealthModal("home");
-        } else {
-          console.error("❌ window.openHealthModal not available");
-        }
-      } else if (modalType === "life") {
-        console.log("✅ Opening life insurance modal");
-        if (typeof window.openLifePensionModal === "function") {
-          window.openLifePensionModal();
-        } else {
-          console.error("❌ window.openLifePensionModal not available");
-        }
-      } else if (modalType === "relocation") {
-        console.log("✅ Opening relocation modal");
-        if (typeof window.openRelocationModal === "function") {
-          window.openRelocationModal();
-        } else {
-          console.error("❌ window.openRelocationModal not available");
-        }
-      } else {
-        console.log("✅ Opening other insurance modal");
-        if (typeof window.openOtherModal === "function") {
-          window.openOtherModal();
-        } else {
-          console.error("❌ window.openOtherModal not available");
-        }
+  <style>
+    @media (max-width: 640px) {
+      .hero-image-container {
+        aspect-ratio: 16/9;
+        height: auto !important;
+        min-height: 120px !important;
+        max-height: 240px !important;
+        background: #fff;
+        border-radius: 1.25rem;
       }
-    } catch (error) {
-      console.error("❌ Error opening modal:", error);
+      .hero-img {
+        object-fit: contain !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 120px !important;
+        max-height: 240px !important;
+        display: block;
+        margin: 0 auto;
+        border-radius: 1rem !important;
+      }
+      #floating-cta {
+        padding: 0.75rem 1rem !important;
+        width: 90% !important;
+        font-size: 0.9rem !important;
+      }
+      #floating-cta button {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.9rem !important;
+      }
     }
-  }
 
-  // Make function globally available
-  window.openModalBasedOnType = openModalBasedOnType;
-</script>
-
-<style>
-  @media (max-width: 640px) {
-    .hero-image-container {
-      aspect-ratio: 16/9;
-      height: auto !important;
-      min-height: 120px !important;
-      max-height: 240px !important;
-      background: #fff;
-      border-radius: 1.25rem;
+    /* Add rounded corners to all images in blog content */
+    :global(.prose img) {
+      border-radius: 0.5rem;
     }
-    .hero-img {
-      object-fit: contain !important;
-      width: 100% !important;
-      height: 100% !important;
-      min-height: 120px !important;
-      max-height: 240px !important;
-      display: block;
-      margin: 0 auto;
-      border-radius: 1rem !important;
-    }
-    #floating-cta {
-      padding: 0.75rem 1rem !important;
-      width: 90% !important;
-      font-size: 0.9rem !important;
-    }
-    #floating-cta button {
-      padding: 0.5rem 1rem !important;
-      font-size: 0.9rem !important;
-    }
-  }
-
-  /* Add rounded corners to all images in blog content */
-  :global(.prose img) {
-    border-radius: 0.5rem;
-  }
-</style>
+  </style>
+</BaseLayout>

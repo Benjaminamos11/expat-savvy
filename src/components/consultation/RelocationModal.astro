@@ -1,0 +1,874 @@
+---
+// RelocationModal.astro — 2-Step Lead Gen Flow (ReloFinder Partnership)
+---
+
+<!-- React Modal Container -->
+<div id="relofinder-modal-root"></div>
+
+<!-- React and ReactDOM from CDN (deferred to avoid render-blocking) -->
+<script
+    defer
+    crossorigin="anonymous"
+    src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script
+    defer
+    crossorigin="anonymous"
+    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+></script>
+
+<script is:inline>
+    // Queue calls until React loads
+    (function () {
+        var pendingCalls = [];
+        function queuedOpen() {
+            console.log("⏳ Relocation Modal still loading, queuing call");
+            pendingCalls.push(true);
+        }
+        window.openRelocationModal = queuedOpen;
+        window.__reloModalQueue = pendingCalls;
+    })();
+</script>
+
+<script is:inline>
+    // Wait for React to load
+    function waitForReact(callback) {
+        if (typeof React !== "undefined" && typeof ReactDOM !== "undefined") {
+            callback();
+        } else {
+            setTimeout(() => waitForReact(callback), 100);
+        }
+    }
+
+    waitForReact(() => {
+        const { useState, useEffect, useCallback, createElement: h } = React;
+
+        // ── Checkbox item component ──
+        const CheckboxCard = ({ label, value, checked, onChange }) => {
+            return h(
+                "label",
+                {
+                    className:
+                        "flex items-center gap-3 p-3 md:p-4 rounded-xl border-2 cursor-pointer transition-all " +
+                        (checked
+                            ? "border-red-500 bg-red-50 shadow-sm"
+                            : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"),
+                },
+                h("input", {
+                    type: "checkbox",
+                    checked: checked,
+                    onChange: () => onChange(value),
+                    className: "sr-only",
+                }),
+                h(
+                    "span",
+                    {
+                        className:
+                            "w-5 h-5 flex-shrink-0 rounded border-2 flex items-center justify-center transition-colors " +
+                            (checked
+                                ? "bg-red-600 border-red-600"
+                                : "border-gray-300 bg-white"),
+                    },
+                    checked &&
+                        h(
+                            "svg",
+                            {
+                                className: "w-3.5 h-3.5 text-white",
+                                fill: "none",
+                                stroke: "currentColor",
+                                viewBox: "0 0 24 24",
+                            },
+                            h("path", {
+                                strokeLinecap: "round",
+                                strokeLinejoin: "round",
+                                strokeWidth: "3",
+                                d: "M5 13l4 4L19 7",
+                            }),
+                        ),
+                ),
+                h(
+                    "span",
+                    {
+                        className:
+                            "text-sm font-medium " +
+                            (checked ? "text-gray-900" : "text-gray-700"),
+                    },
+                    label,
+                ),
+            );
+        };
+
+        // ── Timeline Pill component ──
+        const TimelinePill = ({ label, value, selected, onSelect }) => {
+            return h(
+                "button",
+                {
+                    type: "button",
+                    onClick: () => onSelect(value),
+                    className:
+                        "px-4 py-2.5 rounded-full text-sm font-medium transition-all border " +
+                        (selected
+                            ? "bg-slate-900 text-white border-slate-900 shadow-md"
+                            : "bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:bg-gray-50"),
+                },
+                label,
+            );
+        };
+
+        // ── Main Modal Component ──
+        const RelocationModal = ({ isOpen, onClose }) => {
+            const [step, setStep] = useState(1);
+            const [topics, setTopics] = useState([]);
+            const [timeline, setTimeline] = useState("");
+            const [destination, setDestination] = useState("");
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [formData, setFormData] = useState({
+                name: "",
+                email: "",
+                phone: "",
+            });
+
+            const toggleTopic = useCallback((val) => {
+                setTopics((prev) =>
+                    prev.includes(val)
+                        ? prev.filter((t) => t !== val)
+                        : [...prev, val],
+                );
+            }, []);
+
+            const handleInputChange = (e) =>
+                setFormData((prev) => ({
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                }));
+
+            // Submit data to backend
+            const submitToBackend = async () => {
+                setIsSubmitting(true);
+                try {
+                    const payload = {
+                        name: formData.name,
+                        email: formData.email,
+                        phone: formData.phone,
+                        topic: "Relocation Request (ReloFinder)",
+                        language: "en",
+                        source: window.location.href,
+                        notes: `Destination: ${destination || "Not Specified"}
+Timeline: ${timeline || "Not Specified"}
+Services Requested: ${topics.join(", ") || "None Selected"}`,
+                    };
+
+                    const response = await fetch(
+                        "https://expat-savvy-api.fly.dev/api/lead",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(payload),
+                        },
+                    );
+
+                    if (!response.ok) {
+                        console.error(
+                            "Backend submission failed",
+                            await response.text(),
+                        );
+                    }
+                } catch (error) {
+                    console.error("Network error during submission", error);
+                } finally {
+                    setIsSubmitting(false);
+                    setStep(3); // Go to success screen
+                }
+            };
+
+            useEffect(() => {
+                if (isOpen) {
+                    setStep(1);
+                    setTopics([]);
+                    setTimeline("");
+                    setDestination("");
+                    setIsSubmitting(false);
+                    setFormData({ name: "", email: "", phone: "" });
+                    document.body.style.overflow = "hidden";
+                } else {
+                    document.body.style.overflow = "";
+                }
+                return () => {
+                    document.body.style.overflow = "";
+                };
+            }, [isOpen]);
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === "Escape" && isOpen) onClose();
+                };
+                if (isOpen) document.addEventListener("keydown", handleKeyDown);
+                return () =>
+                    document.removeEventListener("keydown", handleKeyDown);
+            }, [isOpen, onClose]);
+
+            if (!isOpen) return null;
+
+            // ── Step indicator dots ──
+            const stepDots = h(
+                "div",
+                { className: "flex items-center justify-center gap-2 mb-6" },
+                [1, 2].map((s) =>
+                    h("div", {
+                        key: s,
+                        className:
+                            "h-1.5 rounded-full transition-all " +
+                            (s === step
+                                ? "w-8 bg-red-500"
+                                : s < step
+                                  ? "w-4 bg-red-300"
+                                  : "w-4 bg-gray-200"),
+                    }),
+                ),
+            );
+
+            // ── Checkmark SVG for badges ──
+            const checkSvg = () =>
+                h(
+                    "svg",
+                    {
+                        className: "w-5 h-5 text-green-400 mr-3 flex-shrink-0",
+                        fill: "none",
+                        stroke: "currentColor",
+                        viewBox: "0 0 24 24",
+                    },
+                    h("path", {
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        strokeWidth: "2",
+                        d: "M5 13l4 4L19 7",
+                    }),
+                );
+
+            // ── LEFT SIDEBAR ──
+            const leftSidebar = h(
+                "div",
+                {
+                    className:
+                        "!hidden md:!flex !w-full md:!w-5/12 bg-slate-900 text-white p-8 lg:p-10 flex-col relative overflow-y-auto !m-0 !p-8 lg:!p-10",
+                },
+                h("div", {
+                    className:
+                        "absolute inset-0 bg-gradient-to-b from-slate-800/50 to-slate-900/90 pointer-events-none",
+                }),
+                h(
+                    "div",
+                    { className: "relative z-10 flex-1 flex flex-col" },
+                    h(
+                        "span",
+                        {
+                            className:
+                                "text-red-500 font-semibold text-xs tracking-widest uppercase mb-4 block",
+                        },
+                        "Our Partnership",
+                    ),
+                    h(
+                        "div",
+                        { className: "mb-6" },
+                        // Placeholder logo for relofinder
+                        h(
+                            "h3",
+                            {
+                                className:
+                                    "text-3xl font-extrabold mb-1 tracking-tight",
+                            },
+                            "ReloFinder.ch",
+                        ),
+                    ),
+                    h(
+                        "p",
+                        {
+                            className:
+                                "text-lg text-slate-300 leading-relaxed font-light mb-8 pt-4 border-t border-slate-700",
+                        },
+                        "The top network of certified, premium relocation agencies in Switzerland. Vetted for quality, speed, and discretion.",
+                    ),
+                    h(
+                        "div",
+                        { className: "mt-auto" },
+                        h(
+                            "ul",
+                            { className: "space-y-4" },
+                            h(
+                                "li",
+                                {
+                                    className:
+                                        "flex items-start text-sm text-slate-300 leading-relaxed",
+                                },
+                                checkSvg(),
+                                "Access to off-market real estate and VIP viewings",
+                            ),
+                            h(
+                                "li",
+                                {
+                                    className:
+                                        "flex items-start text-sm text-slate-300 leading-relaxed",
+                                },
+                                checkSvg(),
+                                "Accelerated immigration and work permit handling",
+                            ),
+                            h(
+                                "li",
+                                {
+                                    className:
+                                        "flex items-start text-sm text-slate-300 leading-relaxed",
+                                },
+                                checkSvg(),
+                                "Personalized school search and settling-in services",
+                            ),
+                        ),
+                    ),
+                ),
+            );
+
+            // ── STEP 1: Relocation Needs & Timeline ──
+            const step1Content = h(
+                "div",
+                {
+                    className:
+                        "md:max-w-md mx-auto h-full flex flex-col md:justify-center modal-fadeIn py-1 md:py-2",
+                },
+                stepDots,
+                h(
+                    "div",
+                    {
+                        className:
+                            "mb-4 md:mb-6 text-center md:text-left !m-0 !p-0",
+                    },
+                    h(
+                        "h2",
+                        {
+                            className:
+                                "text-2xl md:text-3xl font-extrabold text-gray-900 !mb-1 !mt-0 !font-sans !leading-tight",
+                        },
+                        "How can we support your relocation?",
+                    ),
+                    h(
+                        "p",
+                        {
+                            className:
+                                "text-gray-500 text-sm !m-0 !mt-2 !font-sans !leading-normal",
+                        },
+                        "Select the services you are looking for (multiple choices allowed).",
+                    ),
+                ),
+
+                // Topic checkboxes
+                h(
+                    "div",
+                    { className: "flex flex-col gap-2 md:gap-3 mb-4 md:mb-6" },
+                    h(CheckboxCard, {
+                        label: "Home & Apartment Search",
+                        value: "Home Search",
+                        checked: topics.includes("Home Search"),
+                        onChange: toggleTopic,
+                    }),
+                    h(CheckboxCard, {
+                        label: "Immigration & Visa Procedures",
+                        value: "Immigration",
+                        checked: topics.includes("Immigration"),
+                        onChange: toggleTopic,
+                    }),
+                    h(CheckboxCard, {
+                        label: "School Search & Education",
+                        value: "School Search",
+                        checked: topics.includes("School Search"),
+                        onChange: toggleTopic,
+                    }),
+                    h(CheckboxCard, {
+                        label: "Complete Settling-in Service",
+                        value: "Settling-In",
+                        checked: topics.includes("Settling-In"),
+                        onChange: toggleTopic,
+                    }),
+                ),
+
+                // Destination Input
+                h(
+                    "div",
+                    { className: "mb-4 md:mb-6" },
+                    h(
+                        "label",
+                        {
+                            htmlFor: "relocation-destination",
+                            className:
+                                "block text-sm font-semibold text-gray-700 mb-2",
+                        },
+                        "Where are you moving to?",
+                    ),
+                    h("input", {
+                        type: "text",
+                        id: "relocation-destination",
+                        placeholder: "e.g. Zurich, Geneva, Zug...",
+                        value: destination,
+                        onChange: (e) => setDestination(e.target.value),
+                        className:
+                            "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                    }),
+                ),
+
+                // Timeline
+                h(
+                    "div",
+                    { className: "mb-4 md:mb-6" },
+                    h(
+                        "label",
+                        {
+                            className:
+                                "block text-sm font-semibold text-gray-700 mb-3",
+                        },
+                        "Estimated move date",
+                    ),
+                    h(
+                        "div",
+                        {
+                            className: "flex flex-wrap gap-2",
+                        },
+                        h(TimelinePill, {
+                            label: "Immediately",
+                            value: "Now",
+                            selected: timeline === "Now",
+                            onSelect: setTimeline,
+                        }),
+                        h(TimelinePill, {
+                            label: "Next 1-3 months",
+                            value: "1-3 months",
+                            selected: timeline === "1-3 months",
+                            onSelect: setTimeline,
+                        }),
+                        h(TimelinePill, {
+                            label: "Next 3-6 months",
+                            value: "3-6 months",
+                            selected: timeline === "3-6 months",
+                            onSelect: setTimeline,
+                        }),
+                        h(TimelinePill, {
+                            label: "In 6+ months",
+                            value: "6+ months",
+                            selected: timeline === "6+ months",
+                            onSelect: setTimeline,
+                        }),
+                    ),
+                ),
+
+                // WEITER button
+                h(
+                    "button",
+                    {
+                        type: "button",
+                        disabled:
+                            topics.length === 0 || !destination || !timeline,
+                        onClick: () => setStep(2),
+                        className:
+                            "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
+                            (topics.length > 0 && destination && timeline
+                                ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
+                                : "bg-gray-300 cursor-not-allowed"),
+                    },
+                    "NEXT: CONTACT DETAILS",
+                    h(
+                        "svg",
+                        {
+                            className: "ml-2 w-5 h-5",
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                        },
+                        h("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "2",
+                            d: "M14 5l7 7m0 0l-7 7m7-7H3",
+                        }),
+                    ),
+                ),
+            );
+
+            // ── STEP 2: Kontaktdaten ──
+            const step2Content = h(
+                "div",
+                {
+                    className:
+                        "md:max-w-md mx-auto h-full flex flex-col md:justify-center modal-fadeIn py-1 md:py-2",
+                },
+                stepDots,
+                h(
+                    "div",
+                    { className: "mb-4 md:mb-6" },
+                    h(
+                        "button",
+                        {
+                            type: "button",
+                            onClick: () => setStep(1),
+                            className:
+                                "inline-flex items-center text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors mb-4",
+                        },
+                        "← Back",
+                    ),
+                    h(
+                        "h2",
+                        {
+                            className:
+                                "text-2xl md:text-3xl font-extrabold text-gray-900 mb-1",
+                        },
+                        "Your Contact Details",
+                    ),
+                    h(
+                        "p",
+                        { className: "text-gray-500 text-sm" },
+                        "Where should the relocation expert reach you?",
+                    ),
+                ),
+
+                // Form fields
+                h(
+                    "div",
+                    { className: "space-y-3 md:space-y-4 mb-4 md:mb-5" },
+                    // Name
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "label",
+                            {
+                                htmlFor: "relo-name",
+                                className:
+                                    "block text-sm font-semibold text-gray-700 mb-1.5",
+                            },
+                            "Full Name",
+                        ),
+                        h("input", {
+                            type: "text",
+                            id: "relo-name",
+                            name: "name",
+                            placeholder: "e.g. John Doe",
+                            value: formData.name,
+                            onChange: handleInputChange,
+                            required: true,
+                            className:
+                                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                        }),
+                    ),
+                    // Email
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "label",
+                            {
+                                htmlFor: "relo-email",
+                                className:
+                                    "block text-sm font-semibold text-gray-700 mb-1.5",
+                            },
+                            "Email Address",
+                        ),
+                        h("input", {
+                            type: "email",
+                            id: "relo-email",
+                            name: "email",
+                            placeholder: "john@company.com",
+                            value: formData.email,
+                            onChange: handleInputChange,
+                            required: true,
+                            className:
+                                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                        }),
+                    ),
+                    // Phone
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "label",
+                            {
+                                htmlFor: "relo-phone",
+                                className:
+                                    "block text-sm font-semibold text-gray-700 mb-1.5",
+                            },
+                            "Phone number (international format)",
+                        ),
+                        h("input", {
+                            type: "tel",
+                            id: "relo-phone",
+                            name: "phone",
+                            placeholder: "+41 79 000 00 00",
+                            value: formData.phone,
+                            onChange: handleInputChange,
+                            className:
+                                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                        }),
+                    ),
+                ),
+
+                // Trust message box
+                h(
+                    "div",
+                    {
+                        className:
+                            "flex items-start gap-3 bg-sky-50 border border-sky-200 rounded-xl p-3 md:p-4 mb-4 md:mb-6",
+                    },
+                    h(
+                        "svg",
+                        {
+                            className:
+                                "w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5",
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                        },
+                        h("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "2",
+                            d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+                        }),
+                    ),
+                    h(
+                        "div",
+                        {},
+                        h(
+                            "p",
+                            {
+                                className:
+                                    "text-sm font-bold text-sky-900 mb-1",
+                            },
+                            "What happens next?",
+                        ),
+                        h(
+                            "p",
+                            {
+                                className:
+                                    "text-xs text-sky-700 leading-relaxed",
+                            },
+                            "Please provide your contact details securely. A certified relocation specialist from the ReloFinder network matching your specific criteria will contact you shortly to formulate a transition plan.",
+                        ),
+                    ),
+                ),
+
+                // SUBMIT button
+                h(
+                    "button",
+                    {
+                        type: "button",
+                        disabled:
+                            !formData.name || !formData.email || isSubmitting,
+                        onClick: submitToBackend,
+                        className:
+                            "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
+                            (formData.name && formData.email && !isSubmitting
+                                ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
+                                : "bg-gray-300 cursor-not-allowed"),
+                    },
+                    isSubmitting ? "SUBMITTING..." : "SUBMIT REQUEST",
+                    !isSubmitting &&
+                        h(
+                            "svg",
+                            {
+                                className: "ml-2 w-5 h-5",
+                                fill: "none",
+                                stroke: "currentColor",
+                                viewBox: "0 0 24 24",
+                            },
+                            h("path", {
+                                strokeLinecap: "round",
+                                strokeLinejoin: "round",
+                                strokeWidth: "2",
+                                d: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8",
+                            }),
+                        ),
+                ),
+            );
+
+            // ── STEP 3: Success Screen ──
+            const step3Content = h(
+                "div",
+                {
+                    className:
+                        "md:max-w-md mx-auto h-full flex flex-col justify-center items-center text-center modal-fadeIn py-8 md:py-12",
+                },
+                h(
+                    "div",
+                    {
+                        className:
+                            "w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6",
+                    },
+                    h(
+                        "svg",
+                        {
+                            className: "w-12 h-12 text-green-500",
+                            fill: "none",
+                            stroke: "currentColor",
+                            viewBox: "0 0 24 24",
+                        },
+                        h("path", {
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "3",
+                            d: "M5 13l4 4L19 7",
+                        }),
+                    ),
+                ),
+                h(
+                    "h2",
+                    {
+                        className: "text-3xl font-extrabold text-gray-900 mb-3",
+                    },
+                    "Request Sent Successfully!",
+                ),
+                h(
+                    "p",
+                    {
+                        className: "text-lg text-gray-600 mb-8 max-w-sm",
+                    },
+                    "Thank you for reaching out. A premium ReloFinder specialist will be in touch with you shortly to discuss your transition to Switzerland.",
+                ),
+                h(
+                    "button",
+                    {
+                        type: "button",
+                        onClick: onClose,
+                        className:
+                            "border-2 border-gray-200 text-gray-700 hover:bg-gray-50 font-bold py-3 px-8 rounded-xl transition-colors",
+                    },
+                    "Close Window",
+                ),
+            );
+
+            // ── RENDER ──
+            return h(
+                "div",
+                {
+                    className:
+                        "fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-6 font-sans antialiased text-gray-900 not-prose",
+                },
+                // Backdrop
+                h("div", {
+                    className:
+                        "absolute inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity",
+                    onClick: onClose,
+                }),
+
+                // Modal Container
+                h(
+                    "div",
+                    {
+                        className:
+                            "relative bg-white rounded-t-3xl md:rounded-[2.5rem] shadow-2xl w-full max-w-5xl !flex !flex-col md:!flex-row overflow-hidden transform transition-all h-[90vh] md:h-auto md:max-h-[750px] min-h-[600px]",
+                    },
+
+                    // Close Button
+                    h(
+                        "button",
+                        {
+                            onClick: onClose,
+                            className:
+                                "absolute top-4 right-4 z-20 text-gray-400 hover:text-gray-900 bg-white/50 hover:bg-white rounded-full p-2 transition-colors inline-flex items-center justify-center md:text-gray-500",
+                            "aria-label": "Close",
+                        },
+                        h(
+                            "svg",
+                            {
+                                className: "w-6 h-6",
+                                fill: "none",
+                                stroke: "currentColor",
+                                viewBox: "0 0 24 24",
+                            },
+                            h("path", {
+                                strokeLinecap: "round",
+                                strokeLinejoin: "round",
+                                strokeWidth: "2",
+                                d: "M6 18L18 6M6 6l12 12",
+                            }),
+                        ),
+                    ),
+
+                    // Left Sidebar
+                    leftSidebar,
+
+                    // Right Sidebar
+                    h(
+                        "div",
+                        {
+                            className:
+                                "!w-full md:!w-7/12 bg-white p-4 pt-6 md:p-10 overflow-y-auto relative !flex !flex-col",
+                        },
+                        step === 1
+                            ? step1Content
+                            : step === 2
+                              ? step2Content
+                              : step3Content,
+                    ),
+                ),
+            );
+        };
+
+        let isModalOpen = false;
+        let root = null;
+
+        const renderModal = () => {
+            const container = document.getElementById("relofinder-modal-root");
+            if (!container) return;
+
+            if (!root) root = ReactDOM.createRoot(container);
+
+            root.render(
+                h(RelocationModal, {
+                    isOpen: isModalOpen,
+                    onClose: closeModal,
+                }),
+            );
+        };
+
+        const openModal = () => {
+            isModalOpen = true;
+            renderModal();
+        };
+
+        const closeModal = () => {
+            isModalOpen = false;
+            renderModal();
+        };
+
+        // Global override
+        window.openRelocationModal = openModal;
+        window.closeRelocationModal = closeModal;
+
+        // First render
+        renderModal();
+
+        // Replay pending clicks
+        if (window.__reloModalQueue && window.__reloModalQueue.length > 0) {
+            console.log(
+                "🔄 Replaying",
+                window.__reloModalQueue.length,
+                "queued relocation modal calls",
+            );
+            openModal();
+            window.__reloModalQueue.length = 0;
+        }
+
+        console.log("✅ Relocation Modal React 2-Step loaded");
+    });
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .modal-fadeIn {
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+</style>
