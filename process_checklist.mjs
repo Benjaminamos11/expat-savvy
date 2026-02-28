@@ -1,361 +1,34 @@
----
-import Layout from "../../../layouts/Layout.astro";
-import HowToSchema from "../../../components/schema/HowToSchema.astro";
-import FAQSchema from "../../../components/schema/FAQSchema.astro";
-// Relocation modal will be loaded dynamically
+import fs from 'fs';
 
-const phases = [
-  {
-    title: "Phase 1: Pre-Departure",
-    period: "Months 1-3",
-    icon: "✈️",
-    summary: "Strategic planning before you leave your home country.",
-    steps: [
-      {
-        title: "Secure Housing (The Hardest Step)",
-        text: "With a national vacancy rate of just 0.06% in major hubs like Zurich and Geneva, finding a home is the ultimate bottleneck. Standard portals are often already out of date by the time you click. You need an edge.",
-        details: [
-          "Expect to provide 3 months of salary slips or a Swiss employment contract.",
-          "Be ready to pay a rental deposit (Mietkautionsdepot) of 2-3 months rent.",
-          "Prepare your 'Dossier' in advance: Betreibungsauszug (if available), ID, and employment confirmation."
-        ],
-        cta: {
-          type: "relofinder",
-          title: "The VIP Route",
-          text: "To secure housing and B-Permit visas efficiently, executives should use the Swiss Relocation Matching Platform at ReloFinder.ch to compare verified, off-market relocation agencies.",
-          link: "https://relofinder.ch",
-          label: "Compare Agencies at ReloFinder.ch"
-        },
-        ctaSecondary: {
-          type: "offlist",
-          title: "The DIY Route",
-          text: "If you do not have a corporate package, bypass public portals entirely and search for 'Nachmieter' (replacement tenant) flats on the Swiss Off-Market Network at Offlist.ch.",
-          link: "https://www.offlist.ch",
-          label: "Search Off-Market at Offlist.ch"
-        }
-      }
-    ]
-  },
-  {
-    title: "Phase 2: Arrival",
-    period: "First 14 Days",
-    icon: "📍",
-    summary: "Critical administration steps upon landing on Swiss soil.",
-    steps: [
-      {
-        title: "Register at the Kreisbüro (Kreisgemeinde)",
-        text: "You must register with your local authorities within 14 days of arrival and BEFORE you start work. This is a non-negotiable legal requirement that triggers your residency permit.",
-        details: [
-          "Bring your passport, employment contract, and signed rental agreement.",
-          "In cities (like Zurich), this is the Kreisbüro; in smaller towns, it is the Gemeindehaus.",
-          "This registration is required for health insurance and banking."
-        ]
-      },
-      {
-        title: "Open a Swiss Bank Account",
-        text: "You will need a local IBAN for salary payments, rent transfers, and paying utilities. Most banks require your residence permit (permit card) or at least your official registration confirmation and employment contract.",
-        details: [
-          "Choose banks with dedicated expat services like UBS or ZKB.",
-          "Ask specifically for 'English-speaking' advisors to handle international transfers.",
-          "Mention your expat status to access optimized account packages."
-        ]
-      }
-    ]
-  },
-  {
-    title: "Phase 3: The 90-Day Deadline",
-    period: "Mandatory Insurances",
-    icon: "🛡️",
-    summary: "Finalizing your legal and financial protection in Switzerland.",
-    steps: [
-      {
-        title: "Secure Basic Health Insurance (KVG)",
-        text: "In Switzerland, health insurance is mandatory. You have exactly 90 days from your registration date to sign up. If you miss this deadline, authorities will force-assign you to a random provider and backdate your premiums with penalty interest.",
-        details: [
-          "Basic coverage (KVG) is identical by law, but premiums vary by provider.",
-          "Apply for supplementary (VVG) insurance early—acceptance is not guaranteed.",
-          "Save up to 30% by choosing HMO or Telmed models vs. the Standard model."
-        ]
-      },
-      {
-        title: "Secure Personal Liability & Household Insurance",
-        text: "Required by almost all Swiss landlords. You must show proof of Personal Liability (Privathaftpflicht) and Household (Hausrat) insurance before moving into a permanent flat.",
-        details: [
-          "Covers accidental damage to your rental property (essential for the deposit return).",
-          "Household insurance covers theft and fire damage to your belongings.",
-          "Can be bundled for a significant discount."
-        ],
-        cta: {
-          type: "expat-savvy",
-          title: "Get the Perfect Package",
-          text: "Don't use generic calculators. Book a Free Digital Demand Assessment with Expat-Savvy to bundle your mandatory KVG, supplementary VVG, and rental insurances perfectly.",
-          onclick: "window.openContextualModal('health')",
-          label: "Book Free Strategy Session"
-        }
-      }
-    ]
-  }
-];
+const originalFile = fs.readFileSync('src/pages/guides/how-to/relocate-to-switzerland-step-by-step-checklist.astro', 'utf-8');
+const timelineFile = fs.readFileSync('src/pages/guides/how-to/relocate-to-switzerland-step-by-step-checklist.timeline.astro', 'utf-8');
 
-// Define the steps for the how-to guide
-const steps = [
-  {
-    name: "Secure Your Legal Right to Reside & Work",
-    text: "Understand visa requirements, work permits, and essential documentation needed for your specific situation.",
-  },
-  {
-    name: "Financial Planning & Budgeting",
-    text: "Research the cost of living in your target canton, plan for initial expenses, and consider opening a Swiss bank account.",
-  },
-  {
-    name: "Accommodation Research & Initial Search",
-    text: "Begin your housing search, understand the Swiss rental market, and consider temporary accommodation options.",
-  },
-  {
-    name: "Healthcare & Insurance Planning",
-    text: "Prepare for mandatory health insurance requirements and research other essential insurances.",
-  },
-  {
-    name: "Gather Essential Documents",
-    text: "Collect and organize all necessary personal, professional, and official documents for your move.",
-  },
-  {
-    name: "Plan Your Move & Logistics",
-    text: "Decide what belongings to bring, arrange transportation, and notify relevant parties of your departure.",
-  },
-  {
-    name: "Register with Your Local Commune",
-    text: "Complete mandatory registration with local authorities within 14 days of arrival.",
-  },
-  {
-    name: "Finalize Your Accommodation",
-    text: "Secure permanent housing, understand rental contracts, and arrange for rental deposits.",
-  },
-  {
-    name: "Set Up Utilities & Communication",
-    text: "Arrange for electricity, water, internet, and a Swiss mobile phone number.",
-  },
-  {
-    name: "Obtain Mandatory Swiss Health Insurance",
-    text: "Select and register with a Swiss health insurance provider within three months of arrival.",
-  },
-  {
-    name: "Open a Permanent Swiss Bank Account",
-    text: "Set up banking for salary payments, bill payments, and daily financial needs.",
-  },
-  {
-    name: "Understand Local Transportation",
-    text: "Learn about public transport options, travel passes, and driving requirements.",
-  },
-  {
-    name: "Language & Cultural Integration",
-    text: "Consider language courses and familiarize yourself with Swiss customs and social etiquette.",
-  },
-  {
-    name: "Explore Your New Surroundings & Build a Network",
-    text: "Discover your local area and begin building personal and professional connections.",
-  },
-];
+// 1. Extract phases from timeline
+const phasesMatch = timelineFile.match(/const phases = \[\s*\{[\s\S]*?\}\s*\];/);
+const phasesCode = phasesMatch ? phasesMatch[0] : '';
 
-// Define frequently asked questions
-const faqs = [
-  {
-    question:
-      "How does Swiss health insurance work for foreigners relocating to Switzerland?",
-    answer:
-      "Swiss health insurance works identically for foreigners and Swiss citizens. Basic insurance (KVG/LAMal) is mandatory within 3 months of arrival regardless of nationality. All residents get guaranteed acceptance with identical coverage. Choose models (Standard/HMO/Telmed) based on preferences vs cost savings. Comprehensive newcomer guide at /healthcare/best-health-insurance-switzerland/.",
-  },
-  {
-    question:
-      "Do students in Switzerland need health insurance when relocating?",
-    answer:
-      "Yes, all residents including students must have mandatory basic health insurance within 3 months of arrival. Student status doesn't exempt from this legal requirement. Some insurers offer student discounts. EU students may use European Health Insurance Card temporarily but must switch to Swiss insurance within the 3-month deadline.",
-  },
-  {
-    question:
-      "How does accident coverage work if I'm employed in Switzerland during relocation?",
-    answer:
-      "If employed ≥8 hours/week, your employer provides mandatory UVG/LAA accident coverage, so exclude accident coverage from health insurance to save CHF 200-400/year. This applies once employment starts. Coordinate timing during relocation to avoid gaps or double coverage.",
-  },
-  {
-    question:
-      "What happens if I don't have health insurance in Switzerland after relocating?",
-    answer:
-      "Serious legal and financial consequences: Canton will automatically enroll you with an insurer and add penalty fees (up to 50% surcharge). You remain liable for all healthcare costs incurred without insurance. No retroactive coverage. Legal requirement means zero exceptions - secure insurance immediately upon arrival.",
-  },
-  {
-    question:
-      "What are the key differences when relocating with a family versus as a single professional?",
-    answer:
-      "Family relocation involves additional considerations: schooling (international schools need 6-12 months lead time), childcare, larger accommodation needs, higher insurance costs (per family member), and family integration activities. Single professionals focus on career networking, proximity to work, and personal integration.",
-  },
-  {
-    question:
-      "How long does it take to get a Swiss work permit during relocation?",
-    answer:
-      "Processing time varies significantly: EU/EFTA nationals get faster processing (weeks), non-EU/EFTA nationals require employer sponsorship and can take 2-4 months. Start applications 3-6 months before planned relocation. Complete documentation and employer support significantly speed up the process.",
-  },
-];
+// 2. We will inject phases right before `// Define the steps for the how-to guide`
+let newFrontmatter = originalFile.replace(/\/\/ Define the steps for the how-to guide/, phasesCode + '\n\n// Define the steps for the how-to guide');
 
-// Support resources and tools
-const tools = [
-  {
-    name: "SEM Website",
-    description:
-      "Official State Secretariat for Migration website for visa information",
-  },
-  {
-    name: "ReloFinder.ch",
-    description:
-      "Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner",
-  },
-  {
-    name: "Prime Relocation",
-    description:
-      "Comprehensive relocation services across Switzerland. Specialization: individualized, hands-on support for private clients. Core region Zurich & Zug",
-  },
-  {
-    name: "Rental platforms",
-    description:
-      "Websites like ImmoScout24, Homegate, and Comparis for housing search",
-  },
-  {
-    name: "Offlist.ch",
-    description:
-      "Access off-market properties - register anonymously and receive direct contact from agencies and private owners who prefer discretion over public advertising",
-  },
-  {
-    name: "Ch.ch",
-    description: "Official Swiss portal with information for new residents",
-  },
-];
+// 3. Extract Hero, Timeline, FAQ, Trust Bar, and CTA bounds from timeline
+const heroStart = timelineFile.indexOf('<!-- Premium Hero Section -->');
+const heroCode = timelineFile.slice(heroStart); // grabs everything to the end
 
-// Supply items needed
-const supplies = [
-  "Valid passport with at least 6 months validity",
-  "Birth certificates and marriage certificates (if applicable)",
-  "Employment contract and work permit (if applicable)",
-  "Educational and professional qualifications",
-  "Financial documentation (bank statements, proof of funds)",
-  "Insurance documentation from home country",
-  "Medical records and prescriptions (if relevant)",
-  "Driving license and vehicle documentation (if bringing a car)",
-];
+// Let's build the new Body Content
+// We want:
+// - <Layout> and <Schema> from original
+// - Premium Hero
+// - Modern Timeline Container
+// - The 14 Steps Container (Styled)
+// - Key Facts (Styled)
+// - High-Convert FAQ Section (Iterating over original FAQS)
+// - Trust Bar
+// - Epic Final CTA
+// - <style> tags from timeline
 
-// Common challenges and solutions
-const challengesSolutions = [
-  {
-    challenge: "Finding accommodation in competitive markets",
-    solution:
-      "Start your search early, be prepared with all documentation, consider temporary accommodation initially, and potentially engage a relocation agency for assistance. Request custom proposals using the [Swiss relocation matching platform](https://relofinder.ch), Switzerland's leading network to instantly connect with your ideal relocation partner, or consider Prime Relocation for comprehensive services across Switzerland with specialized support in Zurich & Zug. For off-market properties, register on Offlist.ch - expats and international professionals can access exclusive listings that never appear on public platforms.",
-  },
-  {
-    challenge: "Language barriers during the relocation process",
-    solution:
-      "Use translation services when needed, learn basic phrases in the local language, seek assistance from English-speaking relocation specialists, and consider language courses upon arrival.",
-  },
-  {
-    challenge: "Understanding Swiss insurance requirements",
-    solution:
-      "Contact Expat Savvy for expert guidance on mandatory health insurance and other essential coverages. Our advisors can explain options in English and help you find the right providers.",
-  },
-  {
-    challenge: "Navigating visa and permit processes",
-    solution:
-      "Research requirements thoroughly, apply well in advance, ensure all documentation is complete and properly translated, and consider professional immigration assistance for complex cases.",
-  },
-  {
-    challenge: "Cultural adjustment and integration",
-    solution:
-      "Join expat groups and local community activities, respect Swiss customs regarding noise, recycling, and punctuality, and consider cultural integration courses.",
-  },
-];
+// We will construct this manually to ensure it's perfect.
 
-// Regional considerations
-const regionalConsiderations = [
-  {
-    region: "Zurich",
-    language: "Swiss German",
-    housingMarket:
-      "Highly competitive with low vacancy rates, especially in city center",
-    specialConsiderations:
-      "Financial hub with high cost of living but excellent international community",
-  },
-  {
-    region: "Geneva",
-    language: "French",
-    housingMarket:
-      "Very tight market with high prices due to international organizations",
-    specialConsiderations:
-      "Strong international atmosphere, proximity to France for shopping/housing options",
-  },
-  {
-    region: "Basel",
-    language: "Swiss German",
-    housingMarket: "More reasonable than Zurich/Geneva but still competitive",
-    specialConsiderations:
-      "Pharmaceutical industry hub, tri-border location (Germany, France) offers options",
-  },
-  {
-    region: "Zug",
-    language: "Swiss German",
-    housingMarket:
-      "Expensive due to low-tax environment attracting wealthy expats and corporations",
-    specialConsiderations:
-      "Business-friendly environment, small but international community",
-  },
-];
-
-// Pre-arrival checklist
-const preArrivalChecklist = [
-  "Research visa requirements and begin application process",
-  "Secure employment contract or proof of financial self-sufficiency",
-  "Research housing options in target canton/city",
-  "Research Swiss health insurance providers and requirements",
-  "Arrange for shipping of belongings or storage if needed",
-  "Notify current landlord, utility providers, and financial institutions",
-  "Gather and organize all necessary documentation",
-  "Consider temporary accommodation for initial arrival period",
-  "Research local schools if relocating with children",
-  "Check if professional qualifications need validation in Switzerland",
-];
-
-// Post-arrival checklist
-const postArrivalChecklist = [
-  "Register with local commune within 14 days of arrival",
-  "Secure permanent accommodation",
-  "Set up Swiss bank account",
-  "Obtain Swiss mobile phone number",
-  "Register for health insurance (within 3 months of arrival)",
-  "Register children in schools (if applicable)",
-  "Convert driving license (if needed)",
-  "Learn about local recycling and noise regulations",
-  "Explore public transportation options",
-  "Find local medical providers (GP, dentist)",
-];
----
-
-<Layout
-  title="Relocate to Switzerland Checklist | Expert Guide 2026"
-  description="Learn how to relocate to Switzerland step-by-step. Independent FINMA-certified advice for expats — complete checklist."
-  image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
->
-  <!-- Add schema markup using our components -->
-  <HowToSchema
-    name="How to Relocate to Switzerland: A Step-by-Step Checklist"
-    description="Learn how to relocate to Switzerland step-by-step. Independent FINMA-certified advice for expats — complete checklist."
-    totalTime="PT90D"
-    dateModified="2026-01-14"
-    steps={steps}
-    tools={tools}
-    supply={supplies}
-    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
-  />
-
-  <!-- FAQ Schema Component -->
-  <FAQSchema faqs={faqs} />
-
-
+const finalBody = `
   <!-- Premium Hero Section -->
   <section class="relative bg-slate-900 pt-24 pb-32 overflow-hidden">
     <div class="absolute inset-0 opacity-20 pointer-events-none">
@@ -418,7 +91,7 @@ const postArrivalChecklist = [
 
               <div class="space-y-16">
                 {phase.steps.map((step, stepIdx) => (
-                  <div class={`flex flex-col md:flex-row gap-8 md:gap-16 items-start ${stepIdx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                  <div class={\`flex flex-col md:flex-row gap-8 md:gap-16 items-start \${stepIdx % 2 !== 0 ? 'md:flex-row-reverse' : ''}\`}>
                     <div class="w-full md:w-1/2 bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all relative">
                       <div class="absolute -top-4 -left-4 w-12 h-12 rounded-2xl bg-primary-500 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-primary-500/30">
                         {stepIdx + 1}
@@ -448,7 +121,7 @@ const postArrivalChecklist = [
                         <div class="space-y-6 pt-6 border-t border-slate-100">
                            <div>
                               <div class="flex items-center gap-2 mb-2">
-                                <span class={`w-2 h-2 rounded-full ${step.cta.type === 'expat-savvy' ? 'bg-primary-500' : 'bg-slate-900'}`}></span>
+                                <span class={\`w-2 h-2 rounded-full \${step.cta.type === 'expat-savvy' ? 'bg-primary-500' : 'bg-slate-900'}\`}></span>
                                 <h4 class="font-black text-slate-900 text-lg leading-none">{step.cta.title}</h4>
                               </div>
                               <p class="text-slate-500 text-sm font-medium leading-relaxed">{step.cta.text}</p>
@@ -707,3 +380,16 @@ const postArrivalChecklist = [
     animation: fade-in 0.6s ease-out forwards;
   }
 </style>
+`;
+
+// Find where to splice the body
+const oldBodyStartString = "  <!-- Hero Section -->";
+const stopIndex = newFrontmatter.indexOf(oldBodyStartString);
+
+if (stopIndex !== -1) {
+    const finalFileContent = newFrontmatter.substring(0, stopIndex) + finalBody;
+    fs.writeFileSync('src/pages/guides/how-to/relocate-to-switzerland-step-by-step-checklist.astro', finalFileContent);
+    console.log("Successfully replaced the file content.");
+} else {
+    console.error("Could not find the start of the Hero Section to replace.");
+}
