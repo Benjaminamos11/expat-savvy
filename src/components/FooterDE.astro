@@ -1,7 +1,4 @@
 ---
-import VAG45Modal from "./VAG45Modal.astro";
-import PrivacyPolicyModal from "./PrivacyPolicyModal.astro";
-import TermsOfServiceModal from "./TermsOfServiceModal.astro";
 import { ensureTrailingSlash } from "@/lib/utils";
 ---
 
@@ -193,41 +190,38 @@ import { ensureTrailingSlash } from "@/lib/utils";
                 <div
                     class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-sm"
                 >
-                    <button
-                        onclick="showPrivacyPolicyModal()"
+                    <a
+                        href={ensureTrailingSlash("/privacy")}
                         class="text-gray-400 hover:text-white transition-colors"
                     >
                         Datenschutz
-                    </button>
-                    <button
-                        onclick="showTermsOfServiceModal()"
+                    </a>
+                    <a
+                        href={ensureTrailingSlash("/terms")}
                         class="text-gray-400 hover:text-white transition-colors"
                     >
                         AGB
-                    </button>
+                    </a>
                     <a
                         href={ensureTrailingSlash("/imprint")}
                         class="text-gray-400 hover:text-white transition-colors"
                     >
                         Impressum
                     </a>
-                    <button
-                        onclick="showVAG45Modal()"
+                    <a
+                        href={ensureTrailingSlash("/vag-45")}
                         class="text-gray-400 hover:text-white transition-colors"
                     >
                         VAG 45
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Copyright (Right) -->
                 <p class="text-sm text-gray-400 text-center md:text-right">
-                    © {new Date().getFullYear()} Expat-Savvy. Alle Rechte vorbehalten.
+                    © {new Date().getFullYear()} Expat Digital Group LLC. Alle Rechte
+                    vorbehalten.
                 </p>
             </div>
         </div>
     </div>
 </footer>
-
-<VAG45Modal />
-<PrivacyPolicyModal />
-<TermsOfServiceModal />
