@@ -2,864 +2,367 @@
 import Layout from "../../../layouts/Layout.astro";
 import HowToSchema from "../../../components/schema/HowToSchema.astro";
 import FAQSchema from "../../../components/schema/FAQSchema.astro";
-// Relocation modal will be loaded dynamically
 
-// Define the steps for the how-to guide
-const steps = [
+const phases = [
   {
-    name: "Secure Your Legal Right to Reside & Work",
-    text: "Understand visa requirements, work permits, and essential documentation needed for your specific situation.",
+    title: "Phase 1: Pre-Departure",
+    period: "Months 1-3",
+    icon: "✈️",
+    summary: "Strategic planning before you leave your home country.",
+    steps: [
+      {
+        title: "Secure Housing (The Hardest Step)",
+        text: "With a national vacancy rate of just 0.06% in major hubs like Zurich and Geneva, finding a home is the ultimate bottleneck. Standard portals are often already out of date by the time you click. You need an edge.",
+        details: [
+          "Expect to provide 3 months of salary slips or a Swiss employment contract.",
+          "Be ready to pay a rental deposit (Mietkautionsdepot) of 2-3 months rent.",
+          "Prepare your 'Dossier' in advance: Betreibungsauszug (if available), ID, and employment confirmation."
+        ],
+        cta: {
+          type: "relofinder",
+          title: "The VIP Route",
+          text: "To secure housing and B-Permit visas efficiently, executives should use the Swiss Relocation Matching Platform at ReloFinder.ch to compare verified, off-market relocation agencies.",
+          link: "https://relofinder.ch",
+          label: "Compare Agencies at ReloFinder.ch"
+        },
+        ctaSecondary: {
+          type: "offlist",
+          title: "The DIY Route",
+          text: "If you do not have a corporate package, bypass public portals entirely and search for 'Nachmieter' (replacement tenant) flats on the Swiss Off-Market Network at Offlist.ch.",
+          link: "https://www.offlist.ch",
+          label: "Search Off-Market at Offlist.ch"
+        }
+      }
+    ]
   },
   {
-    name: "Financial Planning & Budgeting",
-    text: "Research the cost of living in your target canton, plan for initial expenses, and consider opening a Swiss bank account.",
+    title: "Phase 2: Arrival",
+    period: "First 14 Days",
+    icon: "📍",
+    summary: "Critical administration steps upon landing on Swiss soil.",
+    steps: [
+      {
+        title: "Register at the Kreisbüro (Kreisgemeinde)",
+        text: "You must register with your local authorities within 14 days of arrival and BEFORE you start work. This is a non-negotiable legal requirement that triggers your residency permit.",
+        details: [
+          "Bring your passport, employment contract, and signed rental agreement.",
+          "In cities (like Zurich), this is the Kreisbüro; in smaller towns, it is the Gemeindehaus.",
+          "This registration is required for health insurance and banking."
+        ]
+      },
+      {
+        title: "Open a Swiss Bank Account",
+        text: "You will need a local IBAN for salary payments, rent transfers, and paying utilities. Most banks require your residence permit (permit card) or at least your official registration confirmation and employment contract.",
+        details: [
+          "Choose banks with dedicated expat services like UBS or ZKB.",
+          "Ask specifically for 'English-speaking' advisors to handle international transfers.",
+          "Mention your expat status to access optimized account packages."
+        ]
+      }
+    ]
   },
   {
-    name: "Accommodation Research & Initial Search",
-    text: "Begin your housing search, understand the Swiss rental market, and consider temporary accommodation options.",
-  },
-  {
-    name: "Healthcare & Insurance Planning",
-    text: "Prepare for mandatory health insurance requirements and research other essential insurances.",
-  },
-  {
-    name: "Gather Essential Documents",
-    text: "Collect and organize all necessary personal, professional, and official documents for your move.",
-  },
-  {
-    name: "Plan Your Move & Logistics",
-    text: "Decide what belongings to bring, arrange transportation, and notify relevant parties of your departure.",
-  },
-  {
-    name: "Register with Your Local Commune",
-    text: "Complete mandatory registration with local authorities within 14 days of arrival.",
-  },
-  {
-    name: "Finalize Your Accommodation",
-    text: "Secure permanent housing, understand rental contracts, and arrange for rental deposits.",
-  },
-  {
-    name: "Set Up Utilities & Communication",
-    text: "Arrange for electricity, water, internet, and a Swiss mobile phone number.",
-  },
-  {
-    name: "Obtain Mandatory Swiss Health Insurance",
-    text: "Select and register with a Swiss health insurance provider within three months of arrival.",
-  },
-  {
-    name: "Open a Permanent Swiss Bank Account",
-    text: "Set up banking for salary payments, bill payments, and daily financial needs.",
-  },
-  {
-    name: "Understand Local Transportation",
-    text: "Learn about public transport options, travel passes, and driving requirements.",
-  },
-  {
-    name: "Language & Cultural Integration",
-    text: "Consider language courses and familiarize yourself with Swiss customs and social etiquette.",
-  },
-  {
-    name: "Explore Your New Surroundings & Build a Network",
-    text: "Discover your local area and begin building personal and professional connections.",
-  },
+    title: "Phase 3: The 90-Day Deadline",
+    period: "Mandatory Insurances",
+    icon: "🛡️",
+    summary: "Finalizing your legal and financial protection in Switzerland.",
+    steps: [
+      {
+        title: "Secure Basic Health Insurance (KVG)",
+        text: "In Switzerland, health insurance is mandatory. You have exactly 90 days from your registration date to sign up. If you miss this deadline, authorities will force-assign you to a random provider and backdate your premiums with penalty interest.",
+        details: [
+          "Basic coverage (KVG) is identical by law, but premiums vary by provider.",
+          "Apply for supplementary (VVG) insurance early—acceptance is not guaranteed.",
+          "Save up to 30% by choosing HMO or Telmed models vs. the Standard model."
+        ]
+      },
+      {
+        title: "Secure Personal Liability & Household Insurance",
+        text: "Required by almost all Swiss landlords. You must show proof of Personal Liability (Privathaftpflicht) and Household (Hausrat) insurance before moving into a permanent flat.",
+        details: [
+          "Covers accidental damage to your rental property (essential for the deposit return).",
+          "Household insurance covers theft and fire damage to your belongings.",
+          "Can be bundled for a significant discount."
+        ],
+        cta: {
+          type: "expat-savvy",
+          title: "Get the Perfect Package",
+          text: "Don't use generic calculators. Book a Free Digital Demand Assessment with Expat-Savvy to bundle your mandatory KVG, supplementary VVG, and rental insurances perfectly.",
+          onclick: "window.openContextualModal('health')",
+          label: "Book Free Strategy Session"
+        }
+      }
+    ]
+  }
 ];
 
-// Define frequently asked questions
+// Flat steps for Schema
+const schemaSteps = phases.flatMap(p => p.steps.map(s => ({
+  name: s.title,
+  text: s.text
+})));
+
 const faqs = [
   {
-    question:
-      "How does Swiss health insurance work for foreigners relocating to Switzerland?",
-    answer:
-      "Swiss health insurance works identically for foreigners and Swiss citizens. Basic insurance (KVG/LAMal) is mandatory within 3 months of arrival regardless of nationality. All residents get guaranteed acceptance with identical coverage. Choose models (Standard/HMO/Telmed) based on preferences vs cost savings. Comprehensive newcomer guide at /healthcare/best-health-insurance-switzerland/.",
+    question: "Why is the vacancy rate so low in Switzerland?",
+    answer: "Major hubs like Zurich and Geneva have vacancy rates as low as 0.06%. This is due to high demand from international professionals combined with strict zoning and slow construction. Professional relocation support is highly recommended to navigate this market."
   },
   {
-    question:
-      "Do students in Switzerland need health insurance when relocating?",
-    answer:
-      "Yes, all residents including students must have mandatory basic health insurance within 3 months of arrival. Student status doesn't exempt from this legal requirement. Some insurers offer student discounts. EU students may use European Health Insurance Card temporarily but must switch to Swiss insurance within the 3-month deadline.",
+    question: "What happens if I miss the 90-day health insurance deadline?",
+    answer: "If you don't secure insurance within 90 days, the cantonal authorities will enroll you in a default plan. You will be forced to pay backdated premiums from your arrival date, often at non-discounted rates, plus potential administrative fines."
   },
   {
-    question:
-      "How does accident coverage work if I'm employed in Switzerland during relocation?",
-    answer:
-      "If employed ≥8 hours/week, your employer provides mandatory UVG/LAA accident coverage, so exclude accident coverage from health insurance to save CHF 200-400/year. This applies once employment starts. Coordinate timing during relocation to avoid gaps or double coverage.",
-  },
-  {
-    question:
-      "What happens if I don't have health insurance in Switzerland after relocating?",
-    answer:
-      "Serious legal and financial consequences: Canton will automatically enroll you with an insurer and add penalty fees (up to 50% surcharge). You remain liable for all healthcare costs incurred without insurance. No retroactive coverage. Legal requirement means zero exceptions - secure insurance immediately upon arrival.",
-  },
-  {
-    question:
-      "What are the key differences when relocating with a family versus as a single professional?",
-    answer:
-      "Family relocation involves additional considerations: schooling (international schools need 6-12 months lead time), childcare, larger accommodation needs, higher insurance costs (per family member), and family integration activities. Single professionals focus on career networking, proximity to work, and personal integration.",
-  },
-  {
-    question:
-      "How long does it take to get a Swiss work permit during relocation?",
-    answer:
-      "Processing time varies significantly: EU/EFTA nationals get faster processing (weeks), non-EU/EFTA nationals require employer sponsorship and can take 2-4 months. Start applications 3-6 months before planned relocation. Complete documentation and employer support significantly speed up the process.",
-  },
-];
-
-// Support resources and tools
-const tools = [
-  {
-    name: "SEM Website",
-    description:
-      "Official State Secretariat for Migration website for visa information",
-  },
-  {
-    name: "ReloFinder.ch",
-    description:
-      "Switzerland's leading platform to compare relocation service providers and find your ideal relocation partner",
-  },
-  {
-    name: "Prime Relocation",
-    description:
-      "Comprehensive relocation services across Switzerland. Specialization: individualized, hands-on support for private clients. Core region Zurich & Zug",
-  },
-  {
-    name: "Rental platforms",
-    description:
-      "Websites like ImmoScout24, Homegate, and Comparis for housing search",
-  },
-  {
-    name: "Offlist.ch",
-    description:
-      "Access off-market properties - register anonymously and receive direct contact from agencies and private owners who prefer discretion over public advertising",
-  },
-  {
-    name: "Ch.ch",
-    description: "Official Swiss portal with information for new residents",
-  },
-];
-
-// Supply items needed
-const supplies = [
-  "Valid passport with at least 6 months validity",
-  "Birth certificates and marriage certificates (if applicable)",
-  "Employment contract and work permit (if applicable)",
-  "Educational and professional qualifications",
-  "Financial documentation (bank statements, proof of funds)",
-  "Insurance documentation from home country",
-  "Medical records and prescriptions (if relevant)",
-  "Driving license and vehicle documentation (if bringing a car)",
-];
-
-// Common challenges and solutions
-const challengesSolutions = [
-  {
-    challenge: "Finding accommodation in competitive markets",
-    solution:
-      "Start your search early, be prepared with all documentation, consider temporary accommodation initially, and potentially engage a relocation agency for assistance. Request custom proposals using the [Swiss relocation matching platform](https://relofinder.ch), Switzerland's leading network to instantly connect with your ideal relocation partner, or consider Prime Relocation for comprehensive services across Switzerland with specialized support in Zurich & Zug. For off-market properties, register on Offlist.ch - expats and international professionals can access exclusive listings that never appear on public platforms.",
-  },
-  {
-    challenge: "Language barriers during the relocation process",
-    solution:
-      "Use translation services when needed, learn basic phrases in the local language, seek assistance from English-speaking relocation specialists, and consider language courses upon arrival.",
-  },
-  {
-    challenge: "Understanding Swiss insurance requirements",
-    solution:
-      "Contact Expat Savvy for expert guidance on mandatory health insurance and other essential coverages. Our advisors can explain options in English and help you find the right providers.",
-  },
-  {
-    challenge: "Navigating visa and permit processes",
-    solution:
-      "Research requirements thoroughly, apply well in advance, ensure all documentation is complete and properly translated, and consider professional immigration assistance for complex cases.",
-  },
-  {
-    challenge: "Cultural adjustment and integration",
-    solution:
-      "Join expat groups and local community activities, respect Swiss customs regarding noise, recycling, and punctuality, and consider cultural integration courses.",
-  },
-];
-
-// Regional considerations
-const regionalConsiderations = [
-  {
-    region: "Zurich",
-    language: "Swiss German",
-    housingMarket:
-      "Highly competitive with low vacancy rates, especially in city center",
-    specialConsiderations:
-      "Financial hub with high cost of living but excellent international community",
-  },
-  {
-    region: "Geneva",
-    language: "French",
-    housingMarket:
-      "Very tight market with high prices due to international organizations",
-    specialConsiderations:
-      "Strong international atmosphere, proximity to France for shopping/housing options",
-  },
-  {
-    region: "Basel",
-    language: "Swiss German",
-    housingMarket: "More reasonable than Zurich/Geneva but still competitive",
-    specialConsiderations:
-      "Pharmaceutical industry hub, tri-border location (Germany, France) offers options",
-  },
-  {
-    region: "Zug",
-    language: "Swiss German",
-    housingMarket:
-      "Expensive due to low-tax environment attracting wealthy expats and corporations",
-    specialConsiderations:
-      "Business-friendly environment, small but international community",
-  },
-];
-
-// Pre-arrival checklist
-const preArrivalChecklist = [
-  "Research visa requirements and begin application process",
-  "Secure employment contract or proof of financial self-sufficiency",
-  "Research housing options in target canton/city",
-  "Research Swiss health insurance providers and requirements",
-  "Arrange for shipping of belongings or storage if needed",
-  "Notify current landlord, utility providers, and financial institutions",
-  "Gather and organize all necessary documentation",
-  "Consider temporary accommodation for initial arrival period",
-  "Research local schools if relocating with children",
-  "Check if professional qualifications need validation in Switzerland",
-];
-
-// Post-arrival checklist
-const postArrivalChecklist = [
-  "Register with local commune within 14 days of arrival",
-  "Secure permanent accommodation",
-  "Set up Swiss bank account",
-  "Obtain Swiss mobile phone number",
-  "Register for health insurance (within 3 months of arrival)",
-  "Register children in schools (if applicable)",
-  "Convert driving license (if needed)",
-  "Learn about local recycling and noise regulations",
-  "Explore public transportation options",
-  "Find local medical providers (GP, dentist)",
+    question: "Is liability insurance really mandatory?",
+    answer: "Technically, it's not a federal law like health insurance, but it is a de facto requirement from 99% of Swiss landlords. Without proof of liability insurance, you will likely be rejected for most rental apartments."
+  }
 ];
 ---
 
 <Layout
-  title="Relocate to Switzerland Checklist | Expert Guide 2026"
-  description="Learn how to relocate to Switzerland step-by-step. Independent FINMA-certified advice for expats — complete checklist."
+  title="Relocating to Switzerland Step-by-Step Checklist 2026"
+  description="Master your relocation to Switzerland with our 3-phase chronological checklist. Everything from housing (0.06% vacancy) to mandatory health insurance."
   image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
 >
-  <!-- Add schema markup using our components -->
   <HowToSchema
     name="How to Relocate to Switzerland: A Step-by-Step Checklist"
-    description="Learn how to relocate to Switzerland step-by-step. Independent FINMA-certified advice for expats — complete checklist."
+    description="The authoritative chronological roadmap for moving to Switzerland, covering housing, registration, banking, and mandatory insurances."
     totalTime="PT90D"
-    dateModified="2026-01-14"
-    steps={steps}
-    tools={tools}
-    supply={supplies}
+    dateModified="2026-02-28"
+    steps={schemaSteps}
     image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
   />
 
-  <!-- FAQ Schema Component -->
   <FAQSchema faqs={faqs} />
 
-  <!-- Hero Section -->
-  <div class="relative bg-white overflow-hidden">
-    <div class="absolute inset-0">
-      <img
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1747379038/a-raw-hand-drawn-sketch-in-red-and-black_lma3v2J9SYmPBLbXq8oLzA_t6xsZ3dPQEy7uyWpXwdJlw_d9tuyb.webp"
-        alt="Relocating to Switzerland checklist"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50">
-      </div>
+  <!-- Premium Hero Section -->
+  <section class="relative bg-slate-900 pt-24 pb-32 overflow-hidden">
+    <div class="absolute inset-0 opacity-20 pointer-events-none">
+       <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_20%,#dc2626_0%,transparent_50%)]"></div>
     </div>
+    
+    <div class="max-w-5xl mx-auto px-4 relative z-10 text-center">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-semibold mb-8 animate-fade-in">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+        </span>
+        <span>Relocation Roadmap 2026</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+        Relocating to Switzerland <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600">Step-by-Step Checklist</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+        The chronological authority on moving to the Swiss Confederation. <br class="hidden md:block"/> No guesswork. No missed deadlines. Just Swiss precision.
+      </p>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-          <span class="block">Relocating to Switzerland</span>
-          <span class="block mt-2"
-            >Step-by-Step <span class="text-primary-500">Checklist</span></span
-          >
-        </h1>
-        <p class="mt-6 max-w-xl mx-auto text-xl text-gray-300">
-          Your comprehensive guide to a smooth and successful move to
-          Switzerland.
-        </p>
-        <div
-          class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+      <div class="flex flex-col sm:flex-row justify-center gap-6">
+        <button 
+           onclick="window.openRelocationModal()"
+           class="px-10 py-5 bg-primary-600 hover:bg-primary-700 text-white rounded-2xl font-black text-xl transition-all shadow-2xl shadow-primary-900/40 hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
         >
-          <button
-            onclick="window.openRelocationModal()"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Contact a relocation specialist for free
-            <svg
-              class="ml-2 h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </button>
-        </div>
+          Start Relocation Finder
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Last Updated Badge -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="flex justify-end">
-      <span
-        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800"
-      >
-        <svg
-          class="mr-1.5 h-4 w-4 text-gray-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-          ></path>
-        </svg>
-        Last updated: 14.01.2026
-      </span>
-    </div>
-  </div>
-
-  <!-- Introduction Section -->
-  <div class="bg-gray-50 py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">
-          Your Seamless Transition to Swiss Life Starts Here
-        </h2>
-        <p class="text-lg text-gray-600 mb-6">
-          Relocating to Switzerland, a country renowned for its stunning
-          landscapes, high quality of life, and efficient systems, is an
-          exciting prospect for many expats. However, the process of moving to a
-          new country, even one as organized as Switzerland, involves numerous
-          steps and can feel overwhelming.
-        </p>
-        <p class="text-lg text-gray-600">
-          This comprehensive checklist is designed to guide you through the
-          various phases of your relocation, helping you stay organized and
-          ensuring you do not miss any critical tasks. Whether you are in the
-          early planning stages or have just arrived, this guide aims to provide
-          practical advice and resources.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Key Facts Section -->
-  <div class="bg-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div
-        style="background-color: #f8f9fa; border-radius: 16px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);"
-      >
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">
-          Key Facts — Relocation Admin Checklist
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-2">Admin Timeline</h4>
-            <ul class="space-y-1 text-sm text-gray-700">
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Registration: within
-                <strong>14 days</strong> at commune
-              </li>
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Health insurance: <strong
-                  >within 3 months</strong
-                > mandatory
-              </li>
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Bank account: needed
-                for salary/rent/utilities
-              </li>
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Mobile/internet: essential
-                for apartment hunting
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="font-semibold text-gray-900 mb-2">
-              Insurance Essentials
-            </h4>
-            <ul class="space-y-1 text-sm text-gray-700">
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Accident coverage: exclude
-                if employed ≥8h/week
-              </li>
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Average costs: CHF 250-350/month
-                health insurance
-              </li>
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> English-friendly: CSS,
-                Helsana, Swica
-              </li>
-              <li class="flex">
-                <span class="text-primary-600 mr-2">•</span> Models: HMO/Telmed save
-                15-30% vs Standard
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-4 flex flex-wrap gap-3 text-sm">
-          <a
-            href="/healthcare/best-health-insurance-switzerland/"
-            class="text-primary-700 hover:text-primary-900 underline"
-            >Best Health Insurance</a
-          >
-          <a
-            href="/switching-health-insurance"
-            class="text-primary-700 hover:text-primary-900 underline"
-            >Switching Guide & Deadlines</a
-          >
-          <a
-            href="/blog/health-insurance-models-switzerland"
-            class="text-primary-700 hover:text-primary-900 underline"
-            >Compare Models</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pre-Arrival Checklist -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Phase 1: Before You Arrive in Switzerland
-        </h2>
-
-        <div
-          class="bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-500 mb-8"
-        >
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">
-            Pre-Arrival Checklist
-          </h3>
-          <ul class="space-y-3">
-            {
-              preArrivalChecklist.map((item) => (
-                <li class="flex items-start">
-                  <svg
-                    class="w-5 h-5 text-blue-600 mt-1 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span class="text-gray-700">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-6">
-          Detailed Steps for Pre-Departure
-        </h3>
-
-        <div class="space-y-10">
-          {
-            steps.slice(0, 6).map((step, index) => (
-              <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
-                <div class="flex items-start">
-                  <div class="flex-shrink-0 bg-primary-100 text-primary-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                    <span class="font-bold">{index + 1}</span>
-                  </div>
-                  <div>
-                    <h4 class="text-xl font-semibold text-gray-900 mb-3">
-                      {step.name}
-                    </h4>
-                    <p class="text-gray-600 mb-4">{step.text}</p>
-                  </div>
+  <!-- Modern Timeline Container -->
+  <section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      
+      <div class="relative">
+        <!-- Vertical Background Line -->
+        <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-slate-100 md:-ml-0.5 hidden sm:block"></div>
+        
+        <div class="space-y-32">
+          {phases.map((phase, phaseIdx) => (
+            <div class="relative group">
+              
+              <!-- Phase Divider Label -->
+              <div class="flex flex-col items-center mb-16 relative z-10">
+                <div class="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-3xl shadow-xl shadow-slate-900/20 group-hover:scale-110 transition-transform">
+                  {phase.icon}
                 </div>
+                <div class="mt-4 px-4 py-1.5 bg-primary-600 text-white text-xs font-black uppercase tracking-widest rounded-full shadow-lg">
+                  {phase.title}
+                </div>
+                <div class="mt-2 text-slate-900 font-bold text-lg">{phase.period}</div>
+                <p class="mt-1 text-slate-500 text-sm italic">{phase.summary}</p>
               </div>
-            ))
-          }
-        </div>
 
-        <!-- Quick Answer for Phase 1 -->
-        <div class="max-w-3xl mx-auto mt-8">
-          <div
-            class="bg-gray-50 border-l-4 border-primary-500 p-4 rounded-r-lg"
-          >
-            <h4 class="font-semibold text-gray-900 mb-1">
-              Quick Answer: Pre-Arrival Essentials
-            </h4>
-            <p class="text-sm text-gray-700">
-              Start 3-6 months early: secure work permit/visa, research housing
-              markets, gather all documents (apostilled/translated), arrange
-              temporary accommodation, and get pre-approval quotes for Swiss
-              health insurance to ensure seamless transition.
-            </p>
-          </div>
+              <div class="space-y-16">
+                {phase.steps.map((step, stepIdx) => (
+                  <div class={`flex flex-col md:flex-row gap-8 md:gap-16 items-start ${stepIdx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                    
+                    {/* Content Card */}
+                    <div class="w-full md:w-1/2 bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all relative">
+                      <div class="absolute -top-4 -left-4 w-12 h-12 rounded-2xl bg-primary-500 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-primary-500/30">
+                        {stepIdx + 1}
+                      </div>
+
+                      <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-6 leading-tight">
+                        {step.title}
+                      </h3>
+                      
+                      <p class="text-slate-600 text-lg mb-8 leading-relaxed font-medium">
+                        {step.text}
+                      </p>
+
+                      {step.details && (
+                        <div class="bg-slate-50 rounded-2xl p-6 mb-10">
+                          <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Critical Checkpoints</h4>
+                          <ul class="space-y-4">
+                            {step.details.map(detail => (
+                              <li class="flex items-start gap-4 text-slate-700 font-semibold group/li text-sm md:text-base">
+                                <svg class="w-5 h-5 text-primary-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                <span>{detail}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* CTA Section */}
+                      {step.cta && (
+                        <div class="space-y-6 pt-6 border-t border-slate-100">
+                           <div>
+                              <div class="flex items-center gap-2 mb-2">
+                                <span class={`w-2 h-2 rounded-full ${step.cta.type === 'expat-savvy' ? 'bg-primary-500' : 'bg-slate-900'}`}></span>
+                                <h4 class="font-black text-slate-900 text-lg leading-none">{step.cta.title}</h4>
+                              </div>
+                              <p class="text-slate-500 text-sm font-medium leading-relaxed">{step.cta.text}</p>
+                           </div>
+
+                           <div class="flex flex-col gap-3">
+                              <a 
+                                href={step.cta.onclick ? 'javascript:void(0)' : step.cta.link}
+                                onclick={step.cta.onclick}
+                                target={step.cta.link ? "_blank" : undefined}
+                                class="inline-flex items-center justify-center px-8 py-5 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-slate-800 transition-all gap-3 shadow-xl shadow-slate-900/20 group/btn"
+                              >
+                                {step.cta.label}
+                                <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                              </a>
+
+                              {step.ctaSecondary && (
+                                <a 
+                                  href={step.ctaSecondary.link}
+                                  target="_blank"
+                                  class="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-slate-100 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 hover:border-slate-200 transition-all gap-3"
+                                >
+                                  {step.ctaSecondary.label}
+                                  <svg class="w-5 h-5 opacity-40 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                              )}
+                           </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Placeholder for Balance in Timeline */}
+                    <div class="hidden md:block md:w-1/2"></div>
+
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Upon Arrival Checklist -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Phase 2: Upon Arrival in Switzerland
-        </h2>
+  <!-- High-Convert FAQ Section -->
+  <section class="py-24 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4">
+       <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6">Expert Q&A</h2>
+          <p class="text-slate-500 font-medium text-lg">Detailed answers for the most critical relocation hurdles.</p>
+       </div>
+       
+       <div class="space-y-6">
+          {faqs.map(faq => (
+            <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
+               <h3 class="text-xl font-bold text-slate-900 mb-4">{faq.question}</h3>
+               <p class="text-slate-600 leading-relaxed font-medium">{faq.answer}</p>
+            </div>
+          ))}
+       </div>
+    </div>
+  </section>
 
-        <div
-          class="bg-green-50 rounded-lg shadow-md p-6 border-l-4 border-green-500 mb-8"
+  <!-- Trust Bar -->
+  <section class="py-20 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-12">Helping Teams Secure Their Future in Switzerland</h2>
+      <div class="flex flex-wrap justify-center items-center gap-x-16 gap-y-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
+         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Google_Logo.svg" alt="Google" class="h-6"/>
+         <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-6"/>
+         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="h-6"/>
+         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="h-6"/>
+         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/CERN_logo.svg" alt="CERN" class="h-7"/>
+      </div>
+    </div>
+  </section>
+
+  {/* Epic Final CTA */}
+  <section class="py-32 bg-slate-900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+       <div class="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_80%,#dc2626_0%,transparent_50%)]"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+      <h2 class="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">Ready for a Seamless Move?</h2>
+      <p class="text-xl md:text-2xl text-slate-400 mb-16 max-w-2xl mx-auto font-medium leading-relaxed">
+        Join the thousands of successful expats who secured their Swiss life with professional guidance. Independent. FINMA-registered.
+      </p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <button 
+          onclick="window.openRelocationModal()"
+          class="group px-10 py-6 bg-primary-600 text-white rounded-[2rem] font-black text-xl hover:bg-primary-700 transition-all shadow-2xl shadow-primary-900/40 hover:-translate-y-2 flex flex-col items-center gap-1"
         >
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">
-            Post-Arrival Checklist
-          </h3>
-          <ul class="space-y-3">
-            {
-              postArrivalChecklist.map((item) => (
-                <li class="flex items-start">
-                  <svg
-                    class="w-5 h-5 text-green-600 mt-1 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span class="text-gray-700">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+          <span class="text-sm text-primary-200 uppercase tracking-widest font-bold">Relocation</span>
+          <span>Find Housing Expert</span>
+        </button>
 
-        <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-6">
-          Critical First Steps After Arrival
-        </h3>
-
-        <div class="space-y-10">
-          {
-            steps.slice(6, 11).map((step, index) => (
-              <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-                <div class="flex items-start">
-                  <div class="flex-shrink-0 bg-green-100 text-green-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                    <span class="font-bold">{index + 7}</span>
-                  </div>
-                  <div>
-                    <h4 class="text-xl font-semibold text-gray-900 mb-3">
-                      {step.name}
-                    </h4>
-                    <p class="text-gray-600 mb-4">{step.text}</p>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-
-        <!-- Quick Answer for Phase 2 -->
-        <div class="max-w-3xl mx-auto mt-8">
-          <div
-            class="bg-gray-50 border-l-4 border-primary-500 p-4 rounded-r-lg"
-          >
-            <h4 class="font-semibold text-gray-900 mb-1">
-              Quick Answer: Critical First 30 Days
-            </h4>
-            <p class="text-sm text-gray-700">
-              Priority order: register with commune (14 days), secure permanent
-              housing, open bank account, get health insurance (3 months max),
-              set up utilities/mobile, and arrange transport. Health insurance
-              is legally mandatory - no exceptions.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Settling In Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Phase 3: Settling In & Integration
-        </h2>
-
-        <div class="space-y-10">
-          {
-            steps.slice(11).map((step, index) => (
-              <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
-                <div class="flex items-start">
-                  <div class="flex-shrink-0 bg-purple-100 text-purple-700 rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                    <span class="font-bold">{index + 12}</span>
-                  </div>
-                  <div>
-                    <h4 class="text-xl font-semibold text-gray-900 mb-3">
-                      {step.name}
-                    </h4>
-                    <p class="text-gray-600 mb-4">{step.text}</p>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-
-        <!-- Quick Answer for Phase 3 -->
-        <div class="max-w-3xl mx-auto mt-8">
-          <div
-            class="bg-gray-50 border-l-4 border-primary-500 p-4 rounded-r-lg"
-          >
-            <h4 class="font-semibold text-gray-900 mb-1">
-              Quick Answer: Long-term Integration
-            </h4>
-            <p class="text-sm text-gray-700">
-              Focus on language learning (local dialect + standard), understand
-              Swiss social customs (punctuality, noise rules, recycling), join
-              local communities/expat groups, explore transport options, and
-              build professional networks. Integration takes time but
-              significantly improves quality of life.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Regional Considerations -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Regional Considerations
-        </h2>
-        <p class="text-lg text-gray-600 mb-8 text-center">
-          Switzerland's cantonal system means that experiences can vary
-          depending on your destination.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {
-            regionalConsiderations.map((region) => (
-              <div class="bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-bold text-primary-600 mb-3">
-                  {region.region}
-                </h3>
-                <ul class="space-y-2">
-                  <li>
-                    <span class="font-medium">Language:</span> {region.language}
-                  </li>
-                  <li>
-                    <span class="font-medium">Housing Market:</span>{" "}
-                    {region.housingMarket}
-                  </li>
-                  <li>
-                    <span class="font-medium">Special Considerations:</span>{" "}
-                    {region.specialConsiderations}
-                  </li>
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Insurance Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Essential Insurance During Relocation
-        </h2>
-        <p class="text-lg text-gray-600 mb-8">
-          While navigating your relocation, ensuring you have the right
-          insurance coverage is crucial for your peace of mind and legal
-          compliance in Switzerland.
-        </p>
-
-        <div class="bg-primary-50 rounded-lg shadow-md p-8 text-center mb-8">
-          <h3 class="text-xl font-bold text-primary-800 mb-4">
-            Insurance Requirements for New Arrivals
-          </h3>
-          <p class="text-gray-700 mb-6">
-            Swiss law mandates that everyone residing in Switzerland must have
-            basic health insurance (Grundversicherung) within three months of
-            arrival. Coverage is retroactive to your arrival date.
-          </p>
-          <button
-            onclick="window.openRelocationModal()"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300"
-          >
-            Contact a relocation specialist for free
-          </button>
-        </div>
-
-        <div
-          class="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500"
+        <button 
+          onclick="window.openContextualModal('health')"
+          class="group px-10 py-6 bg-white text-slate-900 rounded-[2rem] font-black text-xl hover:bg-slate-50 transition-all shadow-2xl hover:-translate-y-2 flex flex-col items-center gap-1"
         >
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">
-            Common Challenges & Solutions
-          </h3>
-          <div class="space-y-6">
-            {
-              challengesSolutions.map((item) => (
-                <div class="flex flex-col md:flex-row md:items-start">
-                  <div class="md:w-1/3 mb-2 md:mb-0">
-                    <h4 class="font-medium text-red-600">{item.challenge}</h4>
-                  </div>
-                  <div class="md:w-2/3 md:pl-6">
-                    <p class="text-gray-700">{item.solution}</p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+          <span class="text-sm text-slate-400 uppercase tracking-widest font-bold">Insurance</span>
+          <span>Book Strategy Call</span>
+        </button>
+      </div>
+
+      <div class="mt-16 flex flex-wrap justify-center gap-8 text-slate-500 font-bold uppercase tracking-widest text-xs">
+         <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            Trustpilot 4.9/5
+         </span>
+         <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            FINMA Registered
+         </span>
+         <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+            100% Secure
+         </span>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Related Guides Section -->
-  <div class="bg-gray-50 py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">
-          Related Guides
-        </h2>
-
-        <div class="grid gap-6">
-          <a
-            href="/guides/how-to/finding-ideal-relocation-agency-switzerland"
-            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group"
-          >
-            <div
-              class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h3
-                class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors"
-              >
-                Finding Your Ideal Relocation Agency in Switzerland
-              </h3>
-              <p class="text-gray-600">
-                Learn how to choose the best relocation agency for your specific
-                needs and situation.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="/blog/relocation-switzerland-ultimate-guide-smooth-move"
-            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group"
-          >
-            <div
-              class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h3
-                class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors"
-              >
-                Relocation Switzerland: Your Ultimate Guide to a Smooth Move
-              </h3>
-              <p class="text-gray-600">
-                Expert guide to relocation in Switzerland including services,
-                costs, and tips for a seamless transition.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="/guides/how-to/insurance-when-moving-cantons"
-            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-start space-x-4 group"
-          >
-            <div
-              class="flex-shrink-0 bg-primary-100 text-primary-600 p-3 rounded-lg group-hover:bg-primary-200 transition-colors"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-              </svg>
-            </div>
-            <div>
-              <h3
-                class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors"
-              >
-                How to Navigate Health Insurance When Moving Cantons
-              </h3>
-              <p class="text-gray-600">
-                Step-by-step process for updating or changing insurance when
-                relocating within Switzerland.
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
 </Layout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+</style>
