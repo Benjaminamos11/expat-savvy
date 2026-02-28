@@ -1,6 +1,6 @@
 ---
-title: "Maternity & Newborn Insurance Switzerland: What's Covered and What to Do"
-description: "No deductible/co-payment for standard maternity services, what basic vs supplementary covers, newborn registration, and an annual seasonal checklist (letters in Oct, cancel by 30 Nov for 1 Jan the following year)."
+title: "Swiss Maternity & Newborn Insurance: The Prenatal Deadline"
+description: "Don't risk your baby's coverage. Learn why the 'Vorgeburtliche Anmeldung' (Prenatal Registration) is legally required to guarantee Swiss supplementary insurance."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["maternity insurance", "newborn coverage", "swiss healthcare", "family planning", "annual change season"]
@@ -27,7 +27,17 @@ image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746850776/a-delicate
 • **Benefits**: Private rooms, choice of hospital/OB, extra services  
 
 #### Next Step
-📋 [Review family model options](/blog/health-insurance-models-switzerland/) or [book consultation](/free-consultation) for personalized family coverage planning.
+📋 [Start Prenatal Registration (Free Assessment)](/free-consultation) for personalized family coverage planning.
+
+</div>
+
+<div style="background-color: #fff5f5; border: 2px solid #feb2b2; border-radius: 16px; padding: 24px; margin: 32px 0;">
+
+### CRITICAL: The Prenatal Registration Rule (Vorgeburtliche Anmeldung)
+
+The biggest mistake expat parents make is waiting until after birth to insure their baby. If your baby is born with any complications, Swiss insurers can legally reject them for Supplementary Insurance (VVG). By doing a **'Vorgeburtliche Anmeldung'** before birth, the insurer is legally forced to accept your baby without a health questionnaire, guaranteeing them private coverage. Do not miss this window.
+
+[Start Prenatal Registration (Free Assessment)](/free-consultation)
 
 </div>
 
