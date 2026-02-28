@@ -152,6 +152,7 @@
           image:
             "https://res.cloudinary.com/dphbnwjtx/image/upload/w_250,h_250,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
           calLink: "https://cal.com/robertkolar/expat-savvy",
+          calSlug: "robertkolar/expat-savvy",
         },
         hans: {
           id: "hans",
@@ -168,6 +169,7 @@
           image:
             "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_250,h_250,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
           calLink: "https://cal.com/expat-savvy/hans-steiner",
+          calSlug: "expat-savvy/hans-steiner",
         },
       };
 
@@ -197,6 +199,8 @@
             language: "en",
             source: window.location.href,
             flow: "consultation_modal",
+            url: window.location.href,
+            device: window.innerWidth <= 768 ? "mobile" : "desktop",
             notes: {
               selected_topics: topics,
               timeline: timeline,
@@ -726,10 +730,7 @@
             el.dataset.calInitialized = "true";
 
             const isMobile = window.innerWidth <= 640;
-            const calLink = activeExpert.calLink.replace(
-              "https://cal.com/",
-              "",
-            );
+            const calLink = activeExpert.calSlug;
             const calUrl = activeExpert.calLink;
 
             if (isMobile) {
@@ -741,7 +742,7 @@
                 '<h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Choose an appointment</h3>' +
                 '<p style="color:#6b7280;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.5;">Choose a suitable time for your free 45-minute consultation via Zoom.</p>' +
                 '<a href="' +
-                calUrl +
+                activeExpert.calLink +
                 "?name=" +
                 encodeURIComponent(formData.name) +
                 "&email=" +

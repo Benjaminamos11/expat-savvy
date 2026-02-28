@@ -152,9 +152,13 @@
                         topic: "Relocation Request (ReloFinder)",
                         language: "en",
                         source: window.location.href,
-                        notes: `Destination: ${destination || "Not Specified"}
-Timeline: ${timeline || "Not Specified"}
-Services Requested: ${topics.join(", ") || "None Selected"}`,
+                        url: window.location.href,
+                        device: window.innerWidth <= 768 ? "mobile" : "desktop",
+                        notes: {
+                            destination: destination || "Not Specified",
+                            timeline: timeline || "Not Specified",
+                            services_requested: topics || [],
+                        },
                     };
 
                     const response = await fetch("/api/lead", {

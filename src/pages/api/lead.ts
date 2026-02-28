@@ -28,8 +28,27 @@ export const POST: APIRoute = async ({ request }) => {
             start_date,
             priorities,
             stage,
-            flow
+            flow,
+            url,     // Exact URL from frontend
+            device   // Mobile/Desktop from frontend
         } = data;
+
+        // Extract IP address from common headers (Netlify/Proxy)
+        const ip = request.headers.get('x-nf-client-connection-ip') ||
+            request.headers.get('x-forwarded-for')?.split(',')[0] ||
+            request.headers.get('client-ip') ||
+            'unknown';
+
+        // Prepare metadata for notes
+        const enrichedNotes = {
+            ...(notes || {}),
+            meta: {
+                url: url || 'N/A',
+                ip: ip,
+                device: device || 'unknown',
+                userAgent: request.headers.get('user-agent') || 'N/A'
+            }
+        };
 
         // 1. Save to Supabase (if configured)
         let leadId = `fallback-${Date.now()}`;
@@ -46,7 +65,7 @@ export const POST: APIRoute = async ({ request }) => {
                             message: message || '',
                             stage: stage || 'new',
                             flow: flow || 'website_form',
-                            notes: notes || {},
+                            notes: enrichedNotes,
                             consent_marketing: true // Assuming consent is given implicitly by filling out out contact forms
                         }
                     ])
@@ -68,9 +87,10 @@ export const POST: APIRoute = async ({ request }) => {
         if (resend) {
             // Build a clean HTML structure of the submitted dynamic notes/priorities
             let additionalDetailsHtml = '';
-            if (notes && typeof notes === 'object') {
+            if (enrichedNotes && typeof enrichedNotes === 'object') {
                 additionalDetailsHtml = '<ul>';
-                for (const [key, value] of Object.entries(notes)) {
+                for (const [key, value] of Object.entries(enrichedNotes)) {
+                    if (key === 'meta') continue; // Handle meta separately for cleaner email
                     if (Array.isArray(value)) {
                         additionalDetailsHtml += `<li><strong>${key}:</strong> ${value.join(', ')}</li>`;
                     } else {
@@ -78,6 +98,16 @@ export const POST: APIRoute = async ({ request }) => {
                     }
                 }
                 additionalDetailsHtml += '</ul>';
+
+                // Add Meta info at the bottom
+                additionalDetailsHtml += `
+                    <h3>Tracking Info</h3>
+                    <ul>
+                        <li><strong>Source URL:</strong> ${enrichedNotes.meta.url}</li>
+                        <li><strong>IP Address:</strong> ${enrichedNotes.meta.ip}</li>
+                        <li><strong>Device:</strong> ${enrichedNotes.meta.device}</li>
+                    </ul>
+                 `;
             }
 
             try {
