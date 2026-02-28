@@ -238,22 +238,22 @@ const faqs = [
 
                            <div class="flex flex-col gap-3">
                               <a 
-                                href={step.cta.onclick ? 'javascript:void(0)' : step.cta.link}
-                                onclick={step.cta.onclick}
-                                target={step.cta.link ? "_blank" : undefined}
+                                href={(step.cta as any).onclick ? 'javascript:void(0)' : (step.cta as any).link}
+                                onclick={(step.cta as any).onclick}
+                                target={(step.cta as any).link ? "_blank" : undefined}
                                 class="inline-flex items-center justify-center px-8 py-5 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-slate-800 transition-all gap-3 shadow-xl shadow-slate-900/20 group/btn"
                               >
                                 {step.cta.label}
                                 <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                               </a>
 
-                              {step.ctaSecondary && (
+                              {(step as any).ctaSecondary && (
                                 <a 
-                                  href={step.ctaSecondary.link}
+                                  href={(step as any).ctaSecondary.link}
                                   target="_blank"
                                   class="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-slate-100 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 hover:border-slate-200 transition-all gap-3"
                                 >
-                                  {step.ctaSecondary.label}
+                                  {(step as any).ctaSecondary.label}
                                   <svg class="w-5 h-5 opacity-40 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                 </a>
                               )}
