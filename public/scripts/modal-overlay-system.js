@@ -58,7 +58,7 @@ class ModalOverlaySystem {
 
     // Create global functions
     window.openModalOverlay = this.openModalOverlay.bind(this);
-    window.openRelocationModal = this.openRelocationModal.bind(this);
+    // window.openRelocationModal = this.openRelocationModal.bind(this); // Handled by RelocationModal.astro
     // window.openHealthModal is now handled by the new unified ConsultationModal.astro
     // window.openHealthModal = this.openHealthModal.bind(this);
     window.openOtherModal = this.openOtherModal.bind(this);
@@ -492,6 +492,17 @@ class ModalOverlaySystem {
   // Specific modal functions
   openRelocationModal(source = 'unknown', intent = 'unknown') {
     console.log('🚀 openRelocationModal called');
+
+    // REDIRECT TO MODERN MODAL IF AVAILABLE
+    // We check if it's a function and NOT the one we might have accidentally bound
+    if (typeof window.openRelocationModal === 'function' &&
+      window.openRelocationModal !== this.openRelocationModal.bind(this)) {
+      console.log('🔄 Redirecting to modern Relocation Modal...');
+      window.openRelocationModal();
+      return;
+    }
+
+    console.log('⚠️ Modern Relocation Modal not found, falling back to legacy overlay');
     this.openModalOverlay('/relocation-modal.html', {
       source,
       intent,

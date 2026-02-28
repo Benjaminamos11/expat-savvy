@@ -836,9 +836,18 @@
             renderModal();
         };
 
-        // Global override
-        window.openRelocationModal = openModal;
-        window.closeRelocationModal = closeModal;
+        // Global override - explicit and reinforced
+        const reinforceOverride = () => {
+            console.log("🛠️ Reinforcing Relocation Modal global override");
+            window.openRelocationModal = openModal;
+            window.openRelocationModal.isModern = true; // Flag for other scripts
+            window.closeRelocationModal = closeModal;
+        };
+
+        reinforceOverride();
+
+        // Also listen for a custom event in case we need to re-bind
+        window.addEventListener("relo-modal-rebind", reinforceOverride);
 
         // First render
         renderModal();
