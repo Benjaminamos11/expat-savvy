@@ -23,14 +23,14 @@ const insurers = defineCollection({
   schema: z.object({
     // Required fields
     name: z.string(),
-    
+
     // Hero section
     hero: z.object({
       title: z.string(),
       subtitle: z.string(),
       backgroundUrl: z.string()
     }),
-    
+
     // Facts table data
     brandUrl: z.string().optional(),
     founded: z.string(),
@@ -50,7 +50,7 @@ const insurers = defineCollection({
     }),
     premiumTrend: z.string(),
     claimsRating: z.string(),
-    
+
     // Expert section
     expert: z.object({
       quote: z.string(),
@@ -60,13 +60,13 @@ const insurers = defineCollection({
       languages: z.string(),
       experience: z.string()
     }),
-    
+
     // Comparison links
     internalCompareLinks: z.array(z.object({
       label: z.string(),
       href: z.string()
     })),
-    
+
     // Optional highlights and special features
     highlights: z.array(z.string()).optional(),
     special: z.object({
@@ -77,15 +77,25 @@ const insurers = defineCollection({
       notableProducts: z.array(z.string()).optional(),
       englishSupportLevel: z.string().optional()
     }).optional(),
-    
+
     // FAQ
     faq: z.array(z.object({
       q: z.string(),
       a: z.string()
     })),
-    
+
     // SEO
-    metaDescription: z.string().optional()
+    metaDescription: z.string().optional(),
+    seoTitle: z.string().optional(),
+
+    // Product specific injection
+    productSpecific: z.object({
+      title: z.string(),
+      products: z.array(z.object({
+        name: z.string(),
+        description: z.string()
+      }))
+    }).optional()
   })
 });
 
@@ -99,10 +109,6 @@ const blogCollection = defineCollection({
     image: z.string().optional().nullable(),
     tags: z.array(z.string()).optional().nullable(),
   }),
-  // Exclude archived files from being processed
-  ignore: {
-    pattern: '_archived/**'
-  }
 });
 
 export const collections = {

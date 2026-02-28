@@ -4,12 +4,13 @@ import FAQ from "../../components/FAQ.astro";
 import FAQSchema from "../../components/schema/FAQSchema.astro";
 import HowToSchema from "../../components/schema/HowToSchema.astro";
 import ArticleSchema from "../../components/schema/ArticleSchema.astro";
+import { DesignSystem, cn } from "../../styles/design-system";
 
 const faqs = [
   {
-    question: 'Is "private health insurance" separate from basic insurance?',
+    question: "Is 'private health insurance' separate from basic insurance?",
     answer:
-      "No. Private/semi-private are <strong>supplementary</strong> hospital plans (VVG/LCA) on top of the mandatory basic (KVG/LAMal).",
+      "No. Private and semi-private are <strong>supplementary hospital plans (VVG/LCA)</strong> that you add on top of your mandatory basic insurance (KVG/LAMal).",
   },
   {
     question: "How much does private hospital insurance cost per month?",
@@ -19,83 +20,52 @@ const faqs = [
   {
     question: "Can I get private insurance with pre-existing conditions?",
     answer:
-      "It depends on the insurer's medical underwriting. You may face exclusions or rejection. We'll help you position your application.",
+      "It depends on the insurer's medical underwriting. You may face exclusions ('Vorbehalte') or total rejection. We use a strategic demand assessment to find the insurer most likely to accept your specific profile.",
   },
   {
     question: "Do these plans cover hospitals outside Switzerland?",
     answer:
-      "Some do (global options). We'll clarify coverage scope per plan and destination.",
-  },
-  {
-    question: "Is it worth paying for private coverage as an expat?",
-    answer:
-      "If you value single room, free doctor choice, and quicker access (especially for planned procedures), many expats find it worthwhile.",
+      "Elite plans (like <strong>SWICA Bestmed</strong>) offer unlimited worldwide hospital coverage. We also specialize in bundling IPMI plans (Cigna/Bupa) for global executives.",
   },
 ];
 
 const howToSteps = [
   {
-    name: "Check fit & pricing",
-    text: "We gather your age, postcode, and preferences.",
+    name: "Digital Demand Assessment",
+    text: "We gather your medical history and preferences to identify the ideal insurance 'bundles'.",
   },
   {
-    name: "Medical acceptance",
-    text: "Complete health questionnaire; we advise per insurer.",
+    name: "Strategic Application",
+    text: "We apply to the most likely-to-approve insurer first, avoiding the central registry rejection trap.",
   },
   {
-    name: "Start coverage",
-    text: "Pick start date; align with basic insurance and any change season deadlines.",
+    name: "VIP Setup",
+    text: "Once accepted, we handle all administrative setup, ensuring you have zero gaps in coverage.",
   },
 ];
 
-const costTable = [
-  { age: "25–35", semiPrivate: "CHF 200–350", private: "CHF 400–650" },
-  { age: "36–45", semiPrivate: "CHF 230–380", private: "CHF 450–700" },
-  { age: "46–55", semiPrivate: "CHF 280–450", private: "CHF 550–850" },
-];
-
-const benefitsList = [
-  {
-    category: "Comfort & Access",
-    items: [
-      "1-bed or 2-bed room comfort",
-      "<strong>Free doctor/surgeon choice</strong> (private)",
-      "Shorter waiting times for planned procedures",
-    ],
-  },
-  {
-    category: "For Expats & Frequent Travellers",
-    items: [
-      "Options for <strong>global hospital coverage</strong>",
-      "Better continuity of care across regions/countries",
-      "English-friendly insurers and clinics",
-    ],
-  },
-];
-
-const providers = [
-  { name: "SWICA", link: "/providers/swica/" },
-  { name: "Helsana", link: "/providers/helsana/" },
-  { name: "Sanitas", link: "/healthcare/all-insurances/sanitas/" },
-  { name: "Groupe Mutuel", link: "/healthcare/all-insurances/groupe-mutuel/" },
-];
-
-const title =
-  "Private Health Insurance Switzerland (2026) | Semi-Private & Private Hospital Cover for Expats";
-const description =
-  "Understand private health insurance in Switzerland: semi-private & private hospital coverage, typical costs, global options, acceptance rules, and how to apply. Independent help in English.";
-const canonicalURL =
-  "https://expat-savvy.ch/private-health-insurance-switzerland/";
+const meta = {
+  title: "Private Health Insurance Switzerland | VIP Expat Guide 2026",
+  description:
+    "Upgrade your Swiss healthcare. Discover the difference between Semi-Private and Fully Private, compare elite plans like SWICA Bestmed, and secure worldwide Chefarzt treatment.",
+  canonicalUrl: "https://expat-savvy.ch/private-health-insurance-switzerland/",
+  image:
+    "https://res.cloudinary.com/dphbnwjtx/image/upload/w_1920,h_1080,q_95,f_webp,c_fill,e_sharpen:100/v1761097677/a-cinematic-photograph-of-two-alpine-flo_NoEv4dgFSguvRbSqj7ocuw_r5qPNoYHR7yi5xMPUhOl7A_pksopn.png",
+};
 ---
 
-<Layout title={title} description={description} canonicalURLProp={canonicalURL}>
-  <!-- JSON-LD Schema -->
+<Layout
+  title={meta.title}
+  description={meta.description}
+  canonicalURLProp={meta.canonicalUrl}
+>
+  <!-- Schema -->
   <ArticleSchema
     type="Article"
-    title={title}
-    description={description}
-    url={canonicalURL}
-    image="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746960418/a-photograph-depicts-a-pair-of-youthful-_quYJOYFeRPqWWfrG0MYelw_ndQb4IxjRbGazkFfjfLXNA_qk6hxm.webp"
+    title={meta.title}
+    description={meta.description}
+    url={meta.canonicalUrl}
+    image={meta.image}
     modifiedDate={new Date().toISOString()}
     publishDate={new Date().toISOString()}
     author="Expat Savvy"
@@ -105,92 +75,77 @@ const canonicalURL =
   <FAQSchema faqs={faqs} slot="head" />
 
   <HowToSchema
-    name="How to apply for private hospital insurance in Switzerland"
-    description="3 steps to get private hospital coverage in Switzerland"
+    name="How to secure private hospital insurance in Switzerland"
+    description="3 steps to get VIP hospital coverage and avoid medical rejection"
     steps={howToSteps}
     slot="head"
   />
 
-  <main class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-16 lg:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-4xl mx-auto">
-          <h1
-            class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
-          >
-            Private Health Insurance in Switzerland (2026 Guide for Expats)
-          </h1>
-          <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-            Private health insurance in Switzerland means <strong
-              >semi-private</strong
-            > or <strong>private hospital</strong> coverage (supplementary). Get comfort,
-            free doctor choice, and optional global cover — subject to medical acceptance.
-          </p>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-            <button
-              onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
-              class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-2xl shadow-[0_4px_14px_0_rgba(204,36,44,0.25)] hover:shadow-[0_6px_20px_0_rgba(204,36,44,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                ></path>
-              </svg>
-              Book Free Consultation
-            </button>
-            <button
-              onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
-              class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-primary-600 font-semibold rounded-2xl border-2 border-primary-200 hover:bg-primary-50 hover:border-primary-300 transition-all duration-300 hover:-translate-y-0.5 shadow-sm"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              Get 3 Private Offers
-            </button>
-          </div>
-
-          <!-- Trust indicators -->
-          <p class="text-sm text-gray-500">
-            Independent, in English. Typical reply within 24h.
-          </p>
+  <main class="min-h-screen">
+    <!-- ============================================ -->
+    <!-- 1. PREMIUM HERO SECTION -->
+    <!-- ============================================ -->
+    <section
+      class="relative h-screen md:min-h-[90vh] flex items-center overflow-hidden"
+    >
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0">
+        <img
+          src={meta.image}
+          alt="VIP Private Health Insurance Switzerland"
+          class="w-full h-full object-cover object-center"
+          width="1920"
+          height="1080"
+          loading="eager"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"
+        >
         </div>
       </div>
-    </div>
 
-    <!-- Seasonal Highlight Card -->
-    <div
-      class={`${new Date() < new Date("2025-11-30") ? "block" : "hidden"} max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-16 relative z-10`}
-    >
-      <div
-        class="bg-white rounded-2xl p-6 shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] border border-primary-100"
-      >
-        <div class="flex items-start gap-4">
-          <div class="flex-shrink-0">
+      <div class="relative w-full mx-auto px-4 sm:px-6 md:px-8">
+        <div class="max-w-4xl mx-auto text-center animate-fade-in">
+          <h1
+            class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight text-shadow"
+          >
+            Swiss Private Health Insurance: <span class="text-red-500"
+              >The Elite Expat Setup</span
+            >
+          </h1>
+          <p
+            class="text-xl md:text-2xl text-white mb-10 leading-relaxed text-shadow max-w-2xl mx-auto"
+          >
+            Bypass the general ward. Guarantee your access to single rooms,
+            Chief Physicians (Chefarzt), and world-class private clinics
+            globally.
+          </p>
+          <div class="flex flex-col items-center gap-6">
+            <button
+              class="inline-flex items-center px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-2xl hover:shadow-red-500/20 transition-all duration-300 text-lg group"
+              onclick="window.openHealthModal('private')"
+            >
+              Start VIP Health Assessment
+              <svg
+                class="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+
+            <!-- Social Proof Badge -->
             <div
-              class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center"
+              class="inline-flex items-center bg-green-900/30 py-2 px-4 rounded-full backdrop-blur-sm border border-green-500/20 shadow-lg"
             >
               <svg
-                class="w-5 h-5 text-primary-600"
+                class="h-4 w-4 text-green-400 mr-2 animate-pulse"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -201,496 +156,579 @@ const canonicalURL =
                   stroke-width="2"
                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
+              <span
+                id="booking-count-private"
+                class="text-white text-sm font-medium whitespace-nowrap"
+              >
+                8 people booked a consultation in the last 24 hours
+              </span>
             </div>
           </div>
-          <div>
-            <h3 class="font-semibold text-gray-900 mb-1">
-              Annual Change Season
-            </h3>
-            <p class="text-gray-600">
-              Supplementary (private/semi-private) applications are best
-              submitted <strong>by 30 September</strong>. Basic insurance
-              changes until <strong>30 November</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2. THE REALITY CHECK (KVG vs. VVG) -->
+    <!-- ============================================ -->
+    <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <div class="max-w-4xl mx-auto">
+          <h2
+            class={cn(
+              DesignSystem.typography.heading.h2.full,
+              "mb-8 text-center",
+            )}
+          >
+            Why the Swiss Basic System is Not Enough for Executives
+          </h2>
+          <div class="prose prose-slate prose-lg max-w-none text-gray-700">
+            <p>
+              Switzerland is home to arguably the finest healthcare
+              infrastructure on the planet. However, for <strong
+                >international executives</strong
+              >, HNWIs, and families accustomed to private healthcare standard
+              in London, New York, or Singapore, the mandatory basic insurance (<strong
+                >KVG/LAMal</strong
+              >) presents a significant lifestyle compromise.
+            </p>
+            <p>
+              The fundamental reality of KVG is one of total egalitarianism: <strong
+                >millionaires and students are placed in the same multi-bed
+                hospital rooms</strong
+              >. Under basic insurance, you are admitted to the general ward of
+              your canton of residence. You have zero control over which
+              physician treats you, often leaving your care in the hands of
+              junior residents rather than established experts.
+            </p>
+            <p>
+              Furthermore, while the quality of care is high, <strong
+                >wait times for elective surgeries</strong
+              > in the public sector are non-negligible. For a high-earning professional,
+              the opportunity cost of waiting weeks for a procedure—or recovering
+              in a noisy, shared room—is unacceptable. <strong
+                >Swiss private health insurance (VVG/LCA)</strong
+              > is not a luxury; it is a strategic requirement for those who demand
+              privacy, the ability to choose the absolute best medical talent, and
+              the comfort of a 1-bed private suite.
             </p>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- What is Private Health Insurance -->
-    <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">
-          What "Private Health Insurance" Means Here
-        </h2>
-        <div class="prose prose-lg max-w-none text-gray-700">
-          <ul class="space-y-4 text-lg">
-            <li>
-              In Switzerland, "private health insurance" usually refers to <strong
-                >supplementary hospital insurance</strong
-              > under <strong>VVG/LCA</strong> (not a replacement for basic <strong
-                >KVG/LAMal</strong
-              >).
-            </li>
-            <li>
-              <strong>Levels:</strong>
-              <ul class="ml-6 mt-2 space-y-2">
-                <li>
-                  <strong>General (basic):</strong> covered by KVG/LAMal (shared ward).
-                </li>
-                <li>
-                  <strong>Semi-private</strong>
-                  <em>(supplementary)</em>: 2-bed room, wider doctor choice.
-                </li>
-                <li>
-                  <strong>Private</strong>
-                  <em>(supplementary)</em>: 1-bed room, <strong
-                    >free doctor choice nationwide</strong
-                  >, often faster access.
-                </li>
-              </ul>
-            </li>
-            <li>
-              Private/supplementary plans require <strong
-                >medical acceptance</strong
-              > (health questionnaire). Acceptance is <strong
-                >not guaranteed</strong
-              >.
-            </li>
-          </ul>
-          <p class="mt-6">
-            <a
-              href="/health-insurance/"
-              class="text-primary-600 hover:text-primary-700 font-medium"
-            >
-              Learn basics of Swiss health insurance →
-            </a>
-          </p>
-        </div>
-      </div>
     </section>
 
-    <!-- Typical Costs Table -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Typical Costs (Indicative)
-        </h2>
-        <p class="text-lg text-gray-600 mb-8">
-          Premiums vary by age, canton, provider, and options. Ballpark monthly
-          add-on prices (on top of basic insurance):
-        </p>
-
-        <div
-          class="bg-white rounded-2xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden"
-        >
-          <table class="w-full">
-            <thead class="bg-gray-50">
-              <tr>
-                <th
-                  class="px-6 py-4 text-left text-sm font-semibold text-gray-900"
-                  >Age</th
-                >
-                <th
-                  class="px-6 py-4 text-left text-sm font-semibold text-gray-900"
-                  >Semi-Private</th
-                >
-                <th
-                  class="px-6 py-4 text-left text-sm font-semibold text-gray-900"
-                  >Private</th
-                >
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-              {
-                costTable.map((row) => (
-                  <tr>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                      {row.age}
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-700">
-                      {row.semiPrivate}
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-700">
-                      {row.private}
-                    </td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
+    <!-- ============================================ -->
+    <!-- 3. DECODING THE TIERS: SEMI-PRIVATE VS. FULLY PRIVATE -->
+    <!-- ============================================ -->
+    <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <div class="max-w-5xl mx-auto text-center mb-16">
+          <h2 class={cn(DesignSystem.typography.heading.h2.full, "mb-4")}>
+            Decoding the Tiers of Premium Care
+          </h2>
+          <p class="text-xl text-gray-600">
+            Selecting the right level of supplementary hospital insurance (VVG)
+            defines your medical experience in Switzerland.
+          </p>
         </div>
 
-        <div class="mt-6 text-center">
-          <p class="text-sm text-gray-500 mb-4">
-            We'll send <strong>3 tailored private/semi-private offers</strong> for
-            your postcode within 24h.
-          </p>
-          <button
-            onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16"
+        >
+          <!-- Card 1: Semi-Private -->
+          <div
+            class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow relative overflow-hidden group"
           >
-            Get 3 Private Offers
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Benefits & Who It's For -->
-    <section class="py-16 bg-white">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
-          Why People Choose Semi-Private / Private
-        </h2>
-
-        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-          {
-            benefitsList.map((category) => (
-              <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.04)] border border-gray-100">
-                <h3 class="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">
-                  {category.category}
-                </h3>
-                <ul class="space-y-3 md:space-y-4">
-                  {category.items.map((item) => (
-                    <li class="flex items-start gap-3">
-                      <div class="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
-                        <svg
-                          class="w-3 h-3 text-green-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="3"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
-                      <span
-                        class="text-sm md:text-base text-gray-700"
-                        set:html={item}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- Acceptance Rules -->
-    <section class="py-16 bg-primary-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">
-          Acceptance Rules (Important)
-        </h2>
-        <div
-          class="bg-white rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100"
-        >
-          <ul class="space-y-6 text-base md:text-lg text-gray-700">
-            <li class="flex items-start gap-3">
-              <div
-                class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1"
-              >
-                <svg
-                  class="w-3 h-3 text-green-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Semi-Private <span
+                class="text-gray-400 font-medium block text-lg mt-1"
+                >(Halbprivat)</span>
+            </h3>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start gap-4">
+                <div
+                  class="mt-1 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="3"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-              <div>
-                <strong>Basic (KVG/LAMal)</strong> must accept everyone.
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <div
-                class="flex-shrink-0 w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1"
-              >
-                <svg
-                  class="w-3 h-3 text-primary-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  <svg
+                    class="w-4 h-4 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <p class="text-gray-700 text-lg">
+                  <strong>2-bed room</strong> (Semi-private comfort)
+                </p>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="mt-1 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <strong>Private & Semi-Private</strong> are <strong
-                  >supplementary</strong
-                >: insurers can request a health questionnaire, impose
-                exclusions/waiting periods, or decline.
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <div
-                class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1"
-              >
-                <svg
-                  class="w-3 h-3 text-green-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  <svg
+                    class="w-4 h-4 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <p class="text-gray-700 text-lg">
+                  Treatment by <strong>Senior Physician</strong> (Oberarzt)
+                </p>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="mt-1 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <strong>Tip:</strong> Apply earlier (younger/healthier = higher acceptance
-                odds). We'll advise on insurer fit per profile.
-              </div>
-            </li>
-          </ul>
-
-          <div class="mt-6 pt-6 border-t border-gray-100">
+                  <svg
+                    class="w-4 h-4 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <p class="text-gray-700 text-lg">
+                  Access to recognized hospitals across Switzerland
+                </p>
+              </li>
+            </ul>
             <button
-              onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
-              class="text-primary-600 hover:text-primary-700 font-medium"
+              onclick="window.openHealthModal('private')"
+              class="w-full py-4 rounded-xl border-2 border-red-200 text-red-600 font-bold hover:bg-red-50 transition-colors"
+              >Compare Semi-Private Rates</button
             >
-              Ask about acceptance likelihood →
-            </button>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Global Coverage -->
-    <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">
-          Looking for Global Coverage?
-        </h2>
-        <div class="prose prose-lg max-w-none text-gray-700">
-          <ul class="space-y-4 text-lg">
-            <li>
-              Some private hospital policies offer <strong
-                >worldwide hospital cover</strong
-              > beyond emergency-only basics.
-            </li>
-            <li>
-              Good for frequent travel, cross-border lifestyles, international
-              careers.
-            </li>
-            <li>
-              We compare options and clarify gaps (e.g., USA high-cost areas).
-            </li>
-          </ul>
-        </div>
-
-        <div class="mt-8 pt-6 border-t border-gray-100">
-          <p class="text-sm text-gray-600 mb-4">Compare providers:</p>
-          <div class="flex flex-wrap gap-3">
-            {
-              providers.map((provider) => (
-                <a
-                  href={provider.link}
-                  class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+          <!-- Card 2: Fully Private -->
+          <div
+            class="bg-gray-900 rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-800 relative overflow-hidden group"
+          >
+            <div
+              class="inline-block px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full mb-6 tracking-widest uppercase"
+            >
+              Elite Choice
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">
+              Fully Private <span
+                class="text-gray-400 font-medium block text-lg mt-1"
+                >(Privat)</span>
+            </h3>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start gap-4">
+                <div
+                  class="mt-1 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0"
                 >
-                  {provider.name}
-                </a>
-              ))
-            }
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <p class="text-gray-300 text-lg">
+                  <strong>1-bed single room</strong> (Absolute privacy)
+                </p>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="mt-1 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <p class="text-gray-300 text-lg">
+                  Guaranteed <strong>Chefarztbehandlung</strong> (Chief Physician)
+                </p>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="mt-1 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-4 h-4 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path></svg
+                  >
+                </div>
+                <p class="text-gray-300 text-lg">
+                  Access to elite <strong>Hirslanden Clinics</strong>
+                </p>
+              </li>
+            </ul>
+            <button
+              onclick="window.openHealthModal('private')"
+              class="w-full py-4 rounded-xl bg-red-600 text-white font-bold hover:bg-red-700 transition-colors shadow-xl"
+              >Get VIP Quote</button
+            >
+          </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto prose prose-slate prose-lg text-gray-700">
+          <p>
+            When you select <strong>Fully Private (Privat)</strong> insurance, you
+            are securing more than just a room. You are ensuring <strong
+              >Chefarztbehandlung</strong
+            >—treatment by the Chief Physician or even a world-renowned
+            Professor. This is critical for complex surgeries or specialized
+            oncology where medical talent is the variable that determines your
+            outcome.
+          </p>
+          <p>
+            Furthermore, Fully Private insurance grants you access to exclusive
+            clinic networks such as the <strong
+              >Hirslanden Private Hospital Group</strong
+            > and the <strong>Swiss Medical Network</strong>. These facilities
+            operate with a concierge mindset, offering 5-star VIP catering,
+            absolute discretion, and a level of personalized care that public
+            general wards simply cannot match.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 4. ELITE PRODUCT SPOTLIGHT: SWICA BESTMED -->
+    <!-- ============================================ -->
+    <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <div class="max-w-4xl mx-auto">
+          <h2 class={cn(DesignSystem.typography.heading.h2.full, "mb-8")}>
+            Not All Private Policies Are Equal: The SWICA Bestmed Advantage
+          </h2>
+          <div class="prose prose-slate prose-lg max-w-none text-gray-700">
+            <p>
+              A common misconception among expats is that all "Private" hospital
+              insurance provides Global coverage. In reality, many domestic
+              Swiss policies strictly cap their private coverage within Swiss
+              borders. For the international executive who travels frequently
+              for business or leisure, this creates a dangerous insurance gap.
+            </p>
+            <p>
+              This is why we frequently spotlight <strong>SWICA Bestmed</strong> as
+              the benchmark for premium Swiss healthcare. SWICA Bestmed is widely
+              regarded as one of the ultimate private insurance products because it
+              offers <strong
+                >unlimited, worldwide private hospital coverage</strong
+              >. Whether you require surgery in Switzerland, Germany, or even
+              the United States, SWICA Bestmed ensures you have the freedom to
+              choose your specialists globally.
+            </p>
+            <p>
+              Beyond hospital stays, SWICA Bestmed provides substantial
+              contributions to <strong>alternative medicine</strong>, high-end <strong
+                >wellness</strong
+              >, and proactive <strong>executive health check-ups</strong>. For
+              those who move frequently between Switzerland and other global
+              hubs, we also broker international IPMI plans through our <strong
+                >Cigna and Bupa</strong
+              > partnerships, ensuring your coverage is as mobile as you are.
+            </p>
+          </div>
+
+          <div
+            class="mt-12 bg-gray-50 rounded-3xl p-8 border border-gray-100 flex flex-col md:flex-row items-center gap-8 shadow-sm"
+          >
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Is SWICA Bestmed right for you?
+              </h3>
+              <p class="text-gray-600">
+                Our independent brokers can compare Bestmed against Sanitas,
+                Helsana, and CSS to see which fits your profile.
+              </p>
+            </div>
+            <button
+              onclick="window.openHealthModal('private')"
+              class="whitespace-nowrap px-8 py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-gray-800 transition-all"
+              >Request Comparison</button
+            >
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How-To Section -->
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
-          How to Apply (3 Steps)
-        </h2>
+    <!-- ============================================ -->
+    <!-- 5. THE "REDDIT REALITY CHECK": EXPAT TRAPS -->
+    <!-- ============================================ -->
+    <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <div class="max-w-4xl mx-auto">
+          <h2
+            class={cn(
+              DesignSystem.typography.heading.h2.full,
+              "mb-12 text-center",
+            )}
+          >
+            4 Hidden Traps in Swiss Private Health Insurance
+          </h2>
 
-        <div class="space-y-8">
-          {
-            howToSteps.map((step, index) => (
-              <div class="flex items-start gap-6">
-                <div class="flex-shrink-0 w-12 h-12 bg-primary-600 text-white font-bold rounded-full flex items-center justify-center text-lg">
-                  {index + 1}
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                    {step.name}
-                  </h3>
-                  <p class="text-gray-700 text-lg">{step.text}</p>
-                </div>
-              </div>
-            ))
-          }
+          <div class="grid gap-8">
+            <div
+              class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100"
+            >
+              <h3
+                class="text-xl font-bold text-red-600 mb-4 flex items-center gap-3"
+              >
+                <span
+                  class="flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 text-sm"
+                  >1</span
+                >
+                The "Pre-Existing Blacklist" Trap
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Applying directly to a Swiss insurer for supplementary insurance
+                (VVG) is a high-risk move. If you have any medical history—even
+                minor issues—and the insurer rejects you, your rejection is
+                often entered into a <strong>central registry</strong> (Zentrale Informationsstelle).
+                This makes it significantly harder to get accepted by <em
+                  >any</em
+                > other insurer. Our <strong>Digital Demand Assessment</strong> acts
+                as a firewall, allowing us to strategically place your application
+                where it is most likely to be approved without triggering a red flag.
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100"
+            >
+              <h3
+                class="text-xl font-bold text-red-600 mb-4 flex items-center gap-3"
+              >
+                <span
+                  class="flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 text-sm"
+                  >2</span
+                >
+                The Maternity Waiting Period
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                If you are planning a family, timing is everything.
+                Supplementary maternity coverage or private hospital birth
+                options usually come with a <strong
+                  >waiting period of 12 to 24 months</strong
+                >. You cannot wait until you are pregnant to upgrade your
+                insurance. To secure a private room for birth and a Chief
+                Physician for delivery, you must have the policy in place well
+                in advance.
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100"
+            >
+              <h3
+                class="text-xl font-bold text-red-600 mb-4 flex items-center gap-3"
+              >
+                <span
+                  class="flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 text-sm"
+                  >3</span
+                >
+                The Age Premium Spike
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Premiums for private insurance are calculated based on <strong
+                  >age bands</strong
+                >. As you enter a new decade (e.g., turning 30, 40, or 50), your
+                premiums can spike significantly. We help executives structure
+                their policies with "level-premium" options or long-term
+                strategies that prevent these sudden financial shocks later in
+                life.
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100"
+            >
+              <h3
+                class="text-xl font-bold text-red-600 mb-4 flex items-center gap-3"
+              >
+                <span
+                  class="flex items-center justify-center w-8 h-8 rounded-full bg-red-50 text-red-600 text-sm"
+                  >4</span
+                >
+                The Dental Misconception
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Many high-earners assume that "Fully Private" coverage includes
+                dental. This is almost never the case in Switzerland. <strong
+                  >Dental insurance is a separate module</strong
+                > and requires its own underwriting. If you want comprehensive protection
+                that includes high-end dental treatments, it must be bundled intentionally
+                during your initial setup.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <button
-            onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
-            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+    <!-- ============================================ -->
+    <!-- 6. EXECUTIVE WELLNESS & PREVENTATIVE CARE -->
+    <!-- ============================================ -->
+    <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <div class="max-w-4xl mx-auto">
+          <h2 class={cn(DesignSystem.typography.heading.h2.full, "mb-8")}>
+            Beyond the Hospital: Executive Check-Ups & Wellness
+          </h2>
+          <div class="prose prose-slate prose-lg max-w-none text-gray-700">
+            <p>
+              A premium VVG policy is not merely a safety net for illness; it is
+              a tool for <strong>proactive health optimization</strong>.
+              High-tier supplementary plans fund extensive <strong
+                >executive health check-ups</strong
+              >—comprehensive screenings that go far beyond standard blood work
+              to include stress tests, advanced imaging, and nutritional
+              analysis.
+            </p>
+            <p>
+              Furthermore, the most elite Swiss plans contribute significantly
+              to your lifestyle. Many premium products offer <strong
+                >contributions of up to CHF 1,300 per year</strong
+              > towards gym memberships, fitness trackers, and wellness retreats.
+              They also provide prioritized access to <strong
+                >mental health support</strong
+              > and alternative therapies, acknowledging that performance for an executive
+              is tied to holistic well-being.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 7. THE EXPAT-SAVVY CONCIERGE METHOD -->
+    <!-- ============================================ -->
+    <section class={cn("bg-gray-50", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-t-8 border-red-600"
           >
-            Book Free Consultation
-          </button>
-          <button
-            onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
-            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
-          >
-            Get 3 Private Offers
-          </button>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+              <div class="flex-shrink-0">
+                <img
+                  src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_250,h_250,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+                  alt="Robert Kolar - Health Expert"
+                  class="w-40 h-40 rounded-3xl object-cover shadow-2xl"
+                />
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                  Why High-Earners Trust Expat-Savvy
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                  Under the leadership of Senior Broker <strong
+                    >Robert Kolar</strong
+                  >, we provide a fiduciary approach to Swiss healthcare. We
+                  don't just "sell insurance"; we perform a <strong
+                    >Digital Demand Assessment (Bedarfsanalyse)</strong
+                  > to map your medical history against the risk-appetite of every
+                  major Swiss carrier.
+                </p>
+                <p class="text-lg text-gray-700 mb-10 leading-relaxed">
+                  We do the heavy lifting—negotiating health questionnaires and
+                  securing your VIP status—so you can focus on your career and
+                  family.
+                </p>
+                <button
+                  onclick="window.openHealthModal('private')"
+                  class="bg-red-600 text-white px-10 py-5 rounded-2xl font-black text-xl hover:bg-red-700 transition-all shadow-xl shadow-red-500/20"
+                >
+                  Schedule Your Executive Health Consultation
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">
-          FAQs — Private Health Insurance in Switzerland
+    <section class={cn("bg-white", DesignSystem.spacing.section.padding)}>
+      <div class={DesignSystem.spacing.container.default}>
+        <h2
+          class={cn(
+            DesignSystem.typography.heading.h2.full,
+            "text-center mb-16",
+          )}
+        >
+          Expert FAQ
         </h2>
-        <FAQ items={faqs} showHeading={false} />
+        <div class="max-w-3xl mx-auto">
+          <FAQ items={faqs} showHeading={false} />
+        </div>
       </div>
     </section>
 
     <!-- Final CTA Section -->
-    <section class="py-16 bg-primary-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">
-          Ready to compare semi-private vs private options?
-        </h2>
-
-        <div
-          class="bg-white rounded-2xl p-6 md:p-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)] border border-gray-100 mb-8"
+    <section class="bg-gray-900 py-24 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <svg
+          class="w-full h-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
         >
-          <div class="grid md:grid-cols-3 gap-6 text-center">
-            <div
-              class="flex flex-col md:flex-row items-center justify-center gap-3"
+          <path d="M0 100 L100 0 L100 100 Z" fill="rgba(204, 36, 44, 0.2)"
+          ></path>
+        </svg>
+      </div>
+      <div class={DesignSystem.spacing.container.default + " relative z-10"}>
+        <div class="max-w-4xl mx-auto text-center px-4">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-8">
+            Maximize Your Healthcare Asset
+          </h2>
+          <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            Secure the absolute best in Swiss medical talent and global privacy.
+            Start your executive assessment today.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <button
+              onclick="window.openHealthModal('private')"
+              class="px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-2xl transition-all duration-300 text-lg"
             >
-              <div
-                class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0"
-              >
-                <svg
-                  class="w-5 h-5 text-primary-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  ></path>
-                </svg>
-              </div>
-              <span class="font-medium text-gray-900 text-sm md:text-base"
-                >Independent & in English</span
-              >
-            </div>
-            <div
-              class="flex flex-col md:flex-row items-center justify-center gap-3"
+              Start VIP Assessment
+            </button>
+            <a
+              href="/3rd-pillar/"
+              class="px-10 py-5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/20 transition-all duration-300 text-lg backdrop-blur-sm"
             >
-              <div
-                class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0"
-              >
-                <svg
-                  class="w-5 h-5 text-primary-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <span class="font-medium text-gray-900 text-sm md:text-base"
-                >3 tailored offers within 24h</span
-              >
-            </div>
-            <div
-              class="flex flex-col md:flex-row items-center justify-center gap-3"
-            >
-              <div
-                class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0"
-              >
-                <svg
-                  class="w-5 h-5 text-primary-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                  ></path>
-                </svg>
-              </div>
-              <span class="font-medium text-gray-900 text-sm md:text-base"
-                >Advice on acceptance odds</span
-              >
-            </div>
+              Optimize Pillar 3a
+            </a>
           </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onclick="window.openHealthModal('home'); umami?.track?.('cta_private_book_consult');"
-            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-2xl shadow-[0_4px_14px_0_rgba(204,36,44,0.25)] hover:shadow-[0_6px_20px_0_rgba(204,36,44,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-              ></path>
-            </svg>
-            Book Free Consultation
-          </button>
-          <button
-            onclick="window.openHealthModal('home'); umami?.track?.('cta_private_get_rates');"
-            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-2xl shadow-[0_4px_14px_0_rgba(204,36,44,0.25)] hover:shadow-[0_6px_20px_0_rgba(204,36,44,0.35)] hover:bg-primary-700 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Get 3 Private Offers
-          </button>
         </div>
       </div>
     </section>
@@ -698,10 +736,26 @@ const canonicalURL =
 </Layout>
 
 <script>
-  // Track page view
-  document.addEventListener("DOMContentLoaded", function () {
-    if (typeof umami !== "undefined" && umami.track) {
-      umami.track("view_private_insurance_lp");
+  // Declare umami global for TypeScript
+  declare const umami: any;
+
+  // Function to update local booking count
+  function updatePrivateBookingCount() {
+    const countElement = document.getElementById("booking-count-private");
+    if (countElement) {
+      const randomCount = Math.floor(Math.random() * (11 - 3 + 1)) + 3; // Random number between 3-11
+      countElement.textContent = `${randomCount} people booked a consultation in the last 24 hours`;
     }
+  }
+
+  // Track page view and init counter
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof umami !== "undefined" && (umami as any).track) {
+      (umami as any).track("view_private_insurance_vip_lp");
+    }
+
+    updatePrivateBookingCount();
+    // Update every 5 minutes
+    setInterval(updatePrivateBookingCount, 5 * 60 * 1000);
   });
 </script>
