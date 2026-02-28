@@ -82,7 +82,7 @@ export const POST: APIRoute = async ({ request }) => {
 
             try {
                 await resend.emails.send({
-                    from: 'Expat Savvy Platform <onboarding@resend.dev>', // Update to your verified domain e.g., leads@expat-savvy.ch later if needed
+                    from: 'Expat Savvy Platform <notification@expat-savvy.ch>',
                     to: 'bw@expat-savvy.ch',
                     subject: `🎯 New Lead: ${name || 'Website User'}`,
                     html: `

@@ -8,11 +8,11 @@
 <!-- React and ReactDOM from CDN (deferred to avoid render-blocking) -->
 <script
   defer
-  crossorigin
+  crossorigin="anonymous"
   src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script
   defer
-  crossorigin
+  crossorigin="anonymous"
   src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
 <script is:inline>
@@ -186,6 +186,36 @@
           ...prev,
           [e.target.name]: e.target.value,
         }));
+
+      const submitToBackend = async () => {
+        try {
+          const payload = {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            topic: "Consultation Strategy Session",
+            language: "en",
+            source: window.location.href,
+            flow: "consultation_modal",
+            notes: {
+              selected_topics: topics,
+              timeline: timeline,
+              expert_assigned: activeExpert.name,
+            },
+          };
+
+          // Fire and forget, don't block UI transition to calendar
+          fetch("/api/lead", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }).catch((err) => console.error("Lead submission error:", err));
+        } catch (error) {
+          console.error("Error preparing lead submission:", error);
+        }
+      };
 
       useEffect(() => {
         if (isOpen) {
@@ -625,7 +655,10 @@
           {
             type: "button",
             disabled: !formData.name || !formData.email,
-            onClick: () => setStep(3),
+            onClick: () => {
+              submitToBackend();
+              setStep(3);
+            },
             className:
               "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
               (formData.name && formData.email
@@ -700,6 +733,8 @@
             const calUrl = activeExpert.calLink;
 
             if (isMobile) {
+              const notesStr =
+                "Topics: " + topics.join(", ") + " | Status: " + timeline;
               el.innerHTML =
                 '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:2rem 1.5rem;text-align:center;">' +
                 '<svg style="width:64px;height:64px;color:#dc2626;margin-bottom:1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
@@ -711,6 +746,8 @@
                 encodeURIComponent(formData.name) +
                 "&email=" +
                 encodeURIComponent(formData.email) +
+                "&notes=" +
+                encodeURIComponent(notesStr) +
                 '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:1rem 2rem;background:#dc2626;color:white;font-weight:700;font-size:1.1rem;border-radius:1rem;text-decoration:none;box-shadow:0 4px 14px rgba(220,38,38,0.3);">' +
                 '<svg style="width:24px;height:24px;margin-right:0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
                 "Open Calendar</a>" +
@@ -729,6 +766,11 @@
                     config: {
                       name: formData.name || undefined,
                       email: formData.email || undefined,
+                      notes:
+                        "Topics: " +
+                        topics.join(", ") +
+                        " | Status: " +
+                        timeline,
                       hideEventTypeDetails: true,
                       theme: "light",
                       layout: "month_view",
