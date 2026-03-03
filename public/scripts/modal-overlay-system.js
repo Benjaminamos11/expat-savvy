@@ -62,8 +62,10 @@ class ModalOverlaySystem {
     // window.openHealthModal is now handled by the new unified ConsultationModal.astro
     // window.openHealthModal = this.openHealthModal.bind(this);
     window.openOtherModal = this.openOtherModal.bind(this);
-    window.openLifePensionModal = this.openLifePensionModal.bind(this);
-    window.openFinancialModal = this.openLifePensionModal.bind(this); // Alias for new name
+    // window.openLifePensionModal is now handled by the unified modals
+    // window.openLifePensionModal = this.openLifePensionModal.bind(this);
+    // window.openFinancialModal is now handled by the unified modals
+    // window.openFinancialModal = this.openLifePensionModal.bind(this); // Alias for new name
     // window.openContextualModal = this.openContextualModal.bind(this); // New smart router
     window.closeModalOverlay = this.closeModalOverlay.bind(this);
     window.initializeCalComManually = this.initializeCalComManually.bind(this);

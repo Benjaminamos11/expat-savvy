@@ -916,11 +916,22 @@
         };
 
         const openModal = (e) => {
-            let topic = "health";
-            if (e && e.detail && e.detail.topic) topic = e.detail.topic;
-            else if (typeof e === "string") topic = e;
+            let rawTopic = "health";
+            if (e && e.detail && e.detail.topic) rawTopic = e.detail.topic;
+            else if (typeof e === "string") rawTopic = e;
 
-            initialTopic = topic;
+            const topicMap = {
+                home: "health",
+                health: "health",
+                life: "wealth",
+                wealth: "wealth",
+                relocation: "other",
+                liability: "other",
+                family: "family",
+                other: "other",
+            };
+
+            initialTopic = topicMap[rawTopic] || "health";
             isModalOpen = true;
             renderModal();
         };
@@ -940,6 +951,10 @@
         window.openOffersModal = openModal;
         window.openConsultationModal = openModal;
         window.showConsultationModal = openModal;
+
+        // Wire up 3rd Pillar queries to open with 'wealth' topic preset
+        window.openLifePensionModal = () => openModal("wealth");
+        window.openFinancialModal = () => openModal("wealth");
 
         // Re-render once on init state in case it missed early calls
         renderModal();
