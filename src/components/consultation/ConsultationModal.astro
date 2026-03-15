@@ -52,8 +52,8 @@
   waitForReact(() => {
     const { useState, useEffect, useCallback, createElement: h } = React;
 
-    // ── Checkbox item component ──
-    const CheckboxCard = ({ label, value, checked, onChange }) => {
+    // ── Radio card item component (for single select) ──
+    const RadioCard = ({ label, value, checked, onChange, emphasized }) => {
       return h(
         "label",
         {
@@ -61,10 +61,13 @@
             "flex items-center gap-3 p-3 md:p-4 rounded-xl border-2 cursor-pointer transition-all " +
             (checked
               ? "border-red-500 bg-red-50 shadow-sm"
-              : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"),
+              : emphasized 
+                ? "border-red-100 bg-white hover:border-red-200 hover:bg-gray-50"
+                : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"),
         },
         h("input", {
-          type: "checkbox",
+          type: "radio",
+          name: "modal-intent",
           checked: checked,
           onChange: () => onChange(value),
           className: "sr-only",
@@ -73,26 +76,17 @@
           "span",
           {
             className:
-              "w-5 h-5 flex-shrink-0 rounded border-2 flex items-center justify-center transition-colors " +
+              "w-5 h-5 flex-shrink-0 rounded-full border-2 flex items-center justify-center transition-colors " +
               (checked
                 ? "bg-red-600 border-red-600"
                 : "border-gray-300 bg-white"),
           },
           checked &&
             h(
-              "svg",
+              "div",
               {
-                className: "w-3.5 h-3.5 text-white",
-                fill: "none",
-                stroke: "currentColor",
-                viewBox: "0 0 24 24",
-              },
-              h("path", {
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-                strokeWidth: "3",
-                d: "M5 13l4 4L19 7",
-              }),
+                className: "w-2 h-2 rounded-full bg-white",
+              }
             ),
         ),
         h(
@@ -127,13 +121,15 @@
     // ── Main Modal Component ──
     const ConsultationModal = ({ isOpen, onClose, initialTopic }) => {
       const [step, setStep] = useState(1);
-      const [topics, setTopics] = useState([initialTopic || "health"]);
+      const [mainTopic, setMainTopic] = useState(initialTopic || "health");
       const [timeline, setTimeline] = useState("");
       const [calKey, setCalKey] = useState(0);
       const [formData, setFormData] = useState({
         name: "",
         email: "",
         phone: "",
+        message: "",
+        preferred_language: "English",
       });
 
       const experts = {
@@ -143,11 +139,12 @@
           title: "Senior Health Insurance Expert",
           subtitle: "Expat Specialist · DE/EN",
           valueProp:
-            "Health setup. Secure your premium standard in Switzerland. Free of charge and without obligation.",
+            "Advice tailored for expats in English and German. Switzerland-based and independent.",
           badges: [
-            "Many years of industry experience",
-            "Independent advice. All health insurance companies in Switzerland.",
-            "100% Digital & Transparent",
+            "Independent comparison across Swiss insurers",
+            "Expat specialist · Advisor in English/German",
+            "Free and without obligation",
+            "1000+ happy clients advised",
           ],
           image:
             "https://res.cloudinary.com/dphbnwjtx/image/upload/w_250,h_250,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
@@ -160,11 +157,12 @@
           title: "Certified Financial Planner IAF",
           subtitle: "Expat Specialist · DE/EN/FR",
           valueProp:
-            "Exclusive financial planning. Tailor-made strategies for taxes and pensions. Free of charge and without obligation.",
+            "Independent advice for expats — free and without obligation.",
           badges: [
-            "FINMA-registered",
-            "1000+ advised expats",
-            "Swiss Data Protection",
+            "Independent comparison across Swiss insurers",
+            "Expat specialist · Advisor in English/German/French",
+            "Free and without obligation",
+            "Switzerland-based company",
           ],
           image:
             "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_250,h_250,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
@@ -173,7 +171,7 @@
         },
       };
 
-      const activeExpert = topics.includes("wealth")
+      const activeExpert = mainTopic === "wealth"
         ? experts.hans
         : experts.robert;
 
@@ -202,9 +200,10 @@
             url: window.location.href,
             device: window.innerWidth <= 768 ? "mobile" : "desktop",
             notes: {
-              selected_topics: topics,
+              selected_topic: mainTopic,
               timeline: timeline,
               expert_assigned: activeExpert.name,
+              message: formData.message,
             },
           };
 
@@ -224,9 +223,9 @@
       useEffect(() => {
         if (isOpen) {
           setStep(1);
-          setTopics([initialTopic || "health"]);
+          setMainTopic(initialTopic || "health");
           setTimeline("");
-          setFormData({ name: "", email: "", phone: "" });
+          setFormData({ name: "", email: "", phone: "", message: "", preferred_language: "English" });
           setCalKey((prev) => prev + 1);
           document.body.style.overflow = "hidden";
         } else {
@@ -387,7 +386,7 @@
               className:
                 "text-2xl md:text-3xl font-extrabold text-gray-900 !mb-1 !mt-0 !font-sans !leading-tight",
             },
-            "How can we optimize your Swiss setup?",
+            "Book your free Swiss insurance consultation",
           ),
           h(
             "p",
@@ -395,41 +394,11 @@
               className:
                 "text-gray-500 text-sm !m-0 !mt-2 !font-sans !leading-normal",
             },
-            "Your personal strategy session. Free of charge & without obligation.",
+            "Free online consultation for expats moving to or living in Switzerland. Independent advice in English or German.",
           ),
         ),
 
-        // Topic checkboxes
-        h(
-          "div",
-          { className: "space-y-2 md:space-y-3 mb-4 md:mb-6" },
-          h(CheckboxCard, {
-            label: "Health Insurance (KVG/VVG)",
-            value: "health",
-            checked: topics.includes("health"),
-            onChange: toggleTopic,
-          }),
-          h(CheckboxCard, {
-            label: "Tax Optimization & Pillar 3a",
-            value: "wealth",
-            checked: topics.includes("wealth"),
-            onChange: toggleTopic,
-          }),
-          h(CheckboxCard, {
-            label: "Personal Liability & Household",
-            value: "everyday",
-            checked: topics.includes("everyday"),
-            onChange: toggleTopic,
-          }),
-          h(CheckboxCard, {
-            label: "Family Planning & Maternity",
-            value: "family",
-            checked: topics.includes("family"),
-            onChange: toggleTopic,
-          }),
-        ),
-
-        // Timeline
+        // Question 1
         h(
           "div",
           { className: "mb-4 md:mb-6" },
@@ -438,7 +407,43 @@
             {
               className: "block text-sm font-semibold text-gray-700 mb-3",
             },
-            "Your current status",
+            "What do you need help with most right now?",
+          ),
+          h(
+            "div",
+            { className: "space-y-2 md:space-y-3" },
+            h(RadioCard, {
+              label: "Health insurance",
+              value: "health",
+              checked: mainTopic === "health",
+              onChange: setMainTopic,
+              emphasized: true
+            }),
+            h(RadioCard, {
+              label: "Tax optimization / Pillar 3a",
+              value: "wealth",
+              checked: mainTopic === "wealth",
+              onChange: setMainTopic,
+            }),
+            h(RadioCard, {
+              label: "Other Swiss setup questions",
+              value: "other",
+              checked: mainTopic === "other",
+              onChange: setMainTopic,
+            }),
+          ),
+        ),
+
+        // Question 2
+        h(
+          "div",
+          { className: "mb-4 md:mb-6" },
+          h(
+            "label",
+            {
+              className: "block text-sm font-semibold text-gray-700 mb-3",
+            },
+            "Where are you in your move to Switzerland?",
           ),
           h(
             "div",
@@ -446,19 +451,19 @@
               className: "flex flex-wrap gap-2",
             },
             h(TimelinePill, {
-              label: "Moving to Switzerland soon",
+              label: "Moving soon",
               value: "pre-move",
               selected: timeline === "pre-move",
               onSelect: setTimeline,
             }),
             h(TimelinePill, {
-              label: "Arrived < 90 days ago",
+              label: "Recently arrived",
               value: "under-3m",
               selected: timeline === "under-3m",
               onSelect: setTimeline,
             }),
             h(TimelinePill, {
-              label: "Arrived > 90 days ago",
+              label: "Already living in Switzerland",
               value: "over-3m",
               selected: timeline === "over-3m",
               onSelect: setTimeline,
@@ -466,20 +471,20 @@
           ),
         ),
 
-        // WEITER button
+        // Continue button
         h(
           "button",
           {
             type: "button",
-            disabled: topics.length === 0,
+            disabled: !mainTopic || !timeline,
             onClick: () => setStep(2),
             className:
               "w-full flex items-center justify-center py-4 px-8 rounded-2xl shadow-lg text-lg font-bold text-white transition-all transform " +
-              (topics.length > 0
+              (mainTopic && timeline
                 ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
                 : "bg-gray-300 cursor-not-allowed"),
           },
-          "NEXT: CONTACT DETAILS",
+          "Continue",
           h(
             "svg",
             {
@@ -525,12 +530,12 @@
               className:
                 "text-2xl md:text-3xl font-extrabold text-gray-900 mb-1",
             },
-            "Your Contact Details",
+            "Your details for the free consultation",
           ),
           h(
             "p",
             { className: "text-gray-500 text-sm" },
-            "So we can confirm your appointment",
+            "We’ll use these details to confirm and prepare your free online consultation. No obligation.",
           ),
         ),
 
@@ -548,13 +553,13 @@
                 htmlFor: "en-name",
                 className: "block text-sm font-semibold text-gray-700 mb-1.5",
               },
-              "Full Name",
+              "First Name",
             ),
             h("input", {
               type: "text",
               id: "en-name",
               name: "name",
-              placeholder: "e.g. John Doe",
+              placeholder: "e.g. John",
               value: formData.name,
               onChange: handleInputChange,
               required: true,
@@ -578,7 +583,7 @@
               type: "email",
               id: "en-email",
               name: "email",
-              placeholder: "john@company.com",
+              placeholder: "john@example.com",
               value: formData.email,
               onChange: handleInputChange,
               required: true,
@@ -586,74 +591,32 @@
                 "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
             }),
           ),
-          // Phone
+          // Message
           h(
             "div",
             {},
             h(
               "label",
               {
-                htmlFor: "en-phone",
+                htmlFor: "en-message",
                 className: "block text-sm font-semibold text-gray-700 mb-1.5",
               },
-              "Phone number (optional)",
-            ),
-            h("input", {
-              type: "tel",
-              id: "en-phone",
-              name: "phone",
-              placeholder: "+41 79 000 00 00",
-              value: formData.phone,
+              "What would you like to discuss in the consultation? (optional)",
+          ),
+            h("textarea", {
+              id: "en-message",
+              name: "message",
+              placeholder: "e.g. I have a family of 4, I'm self-employed...",
+              value: formData.message,
               onChange: handleInputChange,
+              rows: 2,
               className:
-                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors",
+                "w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white placeholder-gray-400 transition-colors resize-none",
             }),
           ),
         ),
 
-        // Trust message box
-        h(
-          "div",
-          {
-            className:
-              "flex items-start gap-3 bg-sky-50 border border-sky-200 rounded-xl p-3 md:p-4 mb-4 md:mb-6",
-          },
-          h(
-            "svg",
-            {
-              className: "w-6 h-6 text-sky-600 flex-shrink-0 mt-0.5",
-              fill: "none",
-              stroke: "currentColor",
-              viewBox: "0 0 24 24",
-            },
-            h("path", {
-              strokeLinecap: "round",
-              strokeLinejoin: "round",
-              strokeWidth: "2",
-              d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-            }),
-          ),
-          h(
-            "div",
-            {},
-            h(
-              "p",
-              {
-                className: "text-sm font-bold text-sky-900 mb-1",
-              },
-              "What happens next?",
-            ),
-            h(
-              "p",
-              {
-                className: "text-xs text-sky-700 leading-relaxed",
-              },
-              "After booking your time, you will receive an email linking to our secure Digital Demand Intake. This allows our experts to prepare a highly customized strategy prior to your Zoom call.",
-            ),
-          ),
-        ),
-
-        // WEITER button
+        // Get my free check button
         h(
           "button",
           {
@@ -669,7 +632,7 @@
                 ? "bg-red-600 hover:bg-red-700 shadow-red-500/30 hover:-translate-y-0.5 cursor-pointer"
                 : "bg-gray-300 cursor-not-allowed"),
           },
-          "NEXT: CHOOSE A TIME",
+          "See available times",
           h(
             "svg",
             {
@@ -686,19 +649,28 @@
             }),
           ),
         ),
-        h(
-          "p",
-          {
-            className: "text-center text-sm text-gray-500 mt-3",
-          },
-          "No credit card required",
-        ),
       );
 
       // ── STEP 3: Kalender ──
       const step3Content = h(
         "div",
         { className: "h-full flex flex-col modal-fadeIn" },
+        h(
+          "div",
+          { className: "mb-4 text-center md:text-left" },
+          h(
+            "h2",
+            {
+              className: "text-2xl md:text-3xl font-extrabold text-gray-900 mb-1",
+            },
+            "Choose a time for your free online consultation"
+          ),
+          h(
+            "p",
+            { className: "text-gray-500 text-sm" },
+            "The consultation is free, online, and without obligation."
+          )
+        ),
         h(
           "div",
           { className: "mb-3" },
@@ -735,12 +707,12 @@
 
             if (isMobile) {
               const notesStr =
-                "Topics: " + topics.join(", ") + " | Status: " + timeline;
+                "Topic: " + mainTopic + " | Status: " + timeline + " | Message: " + formData.message;
               el.innerHTML =
                 '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:2rem 1.5rem;text-align:center;">' +
-                '<svg style="width:64px;height:64px;color:#dc2626;margin-bottom:1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
-                '<h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Choose an appointment</h3>' +
-                '<p style="color:#6b7280;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.5;">Choose a suitable time for your free 45-minute consultation via Zoom.</p>' +
+                '<svg style="width:64px;height:64px;color:#dc2626;margin-bottom:1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2-2 0 002-2V7a2-2 0 00-2-2H5a2-2 0 00-2 2v12a2-2 0 002 2z" /></svg>' +
+                '<h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:0.75rem;">Choose a time for your consultation</h3>' +
+                '<p style="color:#6b7280;margin-bottom:1.5rem;font-size:0.95rem;line-height:1.5;">The consultation is free, online, and without obligation.</p>' +
                 '<a href="' +
                 activeExpert.calLink +
                 "?name=" +
@@ -750,7 +722,7 @@
                 "&notes=" +
                 encodeURIComponent(notesStr) +
                 '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;padding:1rem 2rem;background:#dc2626;color:white;font-weight:700;font-size:1.1rem;border-radius:1rem;text-decoration:none;box-shadow:0 4px 14px rgba(220,38,38,0.3);">' +
-                '<svg style="width:24px;height:24px;margin-right:0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' +
+                '<svg style="width:24px;height:24px;margin-right:0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2-2 0 002-2V7a2-2 0 00-2-2H5a2-2 0 00-2 2v12a2-2 0 002 2z" /></svg>' +
                 "Open Calendar</a>" +
                 '<p style="color:#9ca3af;font-size:0.8rem;margin-top:1rem;">Opens in a new tab</p>' +
                 "</div>";
@@ -763,15 +735,16 @@
                   Cal("inline", {
                     elementOrSelector: "#english-cal-embed-" + calKey,
                     calLink: calLink,
-                    layout: "month_view",
                     config: {
                       name: formData.name || undefined,
                       email: formData.email || undefined,
                       notes:
-                        "Topics: " +
-                        topics.join(", ") +
+                        "Topic: " +
+                        mainTopic +
                         " | Status: " +
-                        timeline,
+                        timeline +
+                        " | Message: " +
+                        formData.message,
                       hideEventTypeDetails: true,
                       theme: "light",
                       layout: "month_view",
