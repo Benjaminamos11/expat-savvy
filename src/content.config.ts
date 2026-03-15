@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const providers = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/providers" }),
   schema: z.object({
     name: z.string(),
     logo: z.string(),
@@ -19,7 +20,7 @@ const providers = defineCollection({
 });
 
 const insurers = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/insurers" }),
   schema: z.object({
     // Required fields
     name: z.string(),
@@ -100,7 +101,7 @@ const insurers = defineCollection({
 });
 
 const blogCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string().optional().nullable(),
     date: z.union([z.date(), z.string(), z.null()]).optional(),

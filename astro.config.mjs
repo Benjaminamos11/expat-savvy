@@ -27,8 +27,6 @@ export default defineConfig({
       },
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
-      outFile: 'sitemap-auto.xml' // Generate to a different file
     }),
     mdx()
   ],

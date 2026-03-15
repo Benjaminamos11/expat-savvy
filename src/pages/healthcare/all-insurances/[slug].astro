@@ -8,8 +8,8 @@ export const prerender = true;
 export async function getStaticPaths() {
   const insurers = await getCollection("insurers");
   return insurers.map((insurer) => ({
-    params: { slug: insurer.slug },
-    props: { insurerData: insurer.data, slug: insurer.slug },
+    params: { slug: insurer.id },
+    props: { insurerData: insurer.data, slug: insurer.id },
   }));
 }
 

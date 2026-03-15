@@ -5,4 +5,7 @@ interface Window {
   Cal?: any;
   closeConsultationModal?: () => void;
   openConsultationModal?: () => void;
+  showConsultationModal?: () => void;
+  showAIChatModal?: () => void;
+  trackMetaEvent?: (eventName: string, props?: any) => void;
 }
