@@ -122,7 +122,8 @@ const initialPosts = getRandomPosts(validPosts, 3);
 
 // Pass all valid posts to the client for rotation
 const allPostsForRotation = validPosts.map((post) => ({
-  slug: post.id,
+  id: post.id,
+  slug: post.id, // Fallback for legacy code
   title: post.data.title,
   description: post.data.description,
   image: post.data.image,
@@ -1370,7 +1371,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
           {
             getRandomPosts(validPosts, 3).map((post) => (
               <div class="bg-white rounded-xl overflow-hidden blog-post-card">
-                <a href={`/blog/${post.slug}`} class="block">
+                <a href={`/blog/${post.id}`} class="block">
                   <div class="h-48 bg-gray-100">
                     <img
                       src={post.data.image || defaultBlogImage}
@@ -1563,6 +1564,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
     }
 
     let allPosts: Array<{
+      id: string;
       slug: string;
       title: string;
       description: string;
@@ -1599,7 +1601,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
 
       // Find posts that are not currently visible
       const availablePosts = allPosts.filter(
-        (post: any) => !currentlyVisible.includes(post.slug),
+        (post: any) => !currentlyVisible.includes(post.slug || post.id),
       );
 
       if (availablePosts.length === 0) {
@@ -1648,7 +1650,7 @@ const formatDate = (date: Date | string | undefined | null): string => {
         image.alt = `Illustration for ${newPost.title || "Expat Savvy Article"}`;
 
         // Update link
-        link.href = `/blog/${newPost.slug}`;
+        link.href = `/blog/${newPost.slug || newPost.id}`;
 
         // Update date
         if (dateEl && newPost.date) {
