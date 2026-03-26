@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Testimonials from "../components/Testimonials.astro";
 import { getCollection } from "astro:content";
+import HeroBookingCard from "../components/HeroBookingCard.astro";
 
 const stats = [
   { number: "1000+", label: "Happy Clients" },
@@ -165,10 +166,9 @@ const formatDate = (date: Date | string | undefined | null): string => {
   description="Find the best Swiss health insurance for expats. Independent FINMA-certified experts help you compare and choose — get expert help."
 >
   <!-- Hero Section -->
-  <div
-    class="relative min-h-[50vh] md:min-h-[90vh] flex items-center overflow-hidden hero-section"
-  >
-    <div class="absolute inset-0">
+  <div class="relative min-h-[90vh] flex items-center overflow-hidden pt-24 pb-16">
+    <!-- Background Image -->
+    <div class="absolute inset-0 pointer-events-none">
       <img
         src="https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto:good,w_1920/v1760890750/a-cinematic-photograph-of-a-sleek-passen_zKS_uxq9SF-xqPSKAGnnoQ_3r9qjw1LR6qa6ndDMUZHIA_gly53k.png"
         alt="Swiss mountains"
@@ -178,130 +178,77 @@ const formatDate = (date: Date | string | undefined | null): string => {
         width="1920"
         height="1080"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30">
-      </div>
+      <!-- Dark overlay to ensure text readability while showing image -->
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/50 to-slate-900/30 pointer-events-none"></div>
     </div>
 
-    <!-- Mobile layout (centered) -->
-    <div class="relative w-full mx-auto px-4 sm:px-6 md:hidden py-8">
-      <div class="text-center">
-        <h1
-          class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow leading-tight"
-        >
-          Your Trusted Health Insurance Partner in Switzerland
-        </h1>
-        <p
-          class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow"
-        >
-          Same basic cover everywhere—what differs is price, service, and perks.
-          We match you to the insurer that fits your life, not just your
-          postcode.
-        </p>
-        <div class="mt-6 flex flex-col items-center gap-3 animate-slide-up">
-          <button
-            class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-            onclick="window.openHealthModal('home')"
-          >
-            Book Free Consultation
-            <svg
-              class="ml-2 h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </button>
-          <div
-            class="flex items-center justify-center text-sm text-white mt-2 w-full"
-          >
-            <div
-              class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm"
-            >
-              <svg
-                class="h-4 w-4 text-green-400 mr-2 animate-pulse"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span id="booking-count" class="whitespace-nowrap"
-                >8 people booked a consultation in the last 24 hours</span
-              >
-            </div>
+    <!-- Main Content Grid -->
+    <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-[1440px]">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Copy & Trust -->
+        <div class="lg:col-span-6 lg:pr-8 space-y-8">
+          <div class="inline-flex items-center space-x-2 bg-slate-800/60 rounded-full px-4 py-1.5 border border-slate-600/50 backdrop-blur-sm">
+            <svg class="w-4 h-4 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span class="text-xs font-medium tracking-wide text-slate-200 uppercase">FINMA Registered Broker</span>
           </div>
-        </div>
-      </div>
-    </div>
+          
+          <h1 class="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white mb-6 text-shadow break-words uppercase font-heading">
+            1,000+ Expats Made the Savvy Choice.
+          </h1>
 
-    <!-- Desktop layout (left aligned) -->
-    <div class="relative w-full mx-auto hidden md:block">
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-6 col-start-2 flex items-center justify-center">
-          <div class="text-left max-w-xl">
-            <h2
-              class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow leading-tight"
-            >
-              Your Trusted Health Insurance Partner in Switzerland
-            </h2>
-            <p class="mt-6 text-xl text-white animate-slide-up text-shadow">
-              Same basic cover everywhere—what differs is price, service, and
-              perks. We match you to the insurer that fits your life, not just
-              your postcode.
-            </p>
-            <div class="mt-10 flex flex-col items-start gap-4 animate-slide-up">
-              <button
-                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
-                onclick="window.openHealthModal('home')"
-              >
-                Book Free Consultation
-                <svg
-                  class="ml-2 h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-              </button>
-              <div class="flex items-center text-sm text-white">
-                <div
-                  class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm"
-                >
-                  <svg
-                    class="h-4 w-4 text-green-400 mr-2 animate-pulse"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                  <span id="booking-count-desktop" class="whitespace-nowrap"
-                    >8 people booked a consultation in the last 24 hours</span
-                  >
-                </div>
+          <p class="text-base sm:text-xl text-slate-200 max-w-full lg:max-w-xl leading-relaxed text-shadow mb-8">
+            Health insurance, 3rd pillar, tax optimization — our experts have guided thousands of expats to better coverage and lower costs. Free, independent, and always in your corner.
+          </p>
+
+          <button id="hero-cta" class="hidden w-full sm:w-auto px-8 py-5 rounded-3xl bg-red-600 text-white font-black text-xl shadow-2xl shadow-red-600/30 hover:bg-red-700 transition-all flex items-center justify-center gap-4 active:scale-95 border-b-4 border-red-800 group">
+            Schedule Free Consultation
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          
+          <!-- Trust Cards -->
+          <div class="space-y-4 max-w-md hidden sm:block">
+            <!-- Card 1 -->
+            <div class="flex items-start p-5 rounded-2xl bg-slate-900/60 border border-slate-700/60 backdrop-blur-md">
+              <div class="bg-primary-500/10 p-2.5 rounded-lg mr-4 shrink-0 mt-1">
+                <svg class="w-6 h-6 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a2.12 2.12 0 1 0 3-3L15 9l-1-1 4-4a2.12 2.12 0 1 0-3-3l-4 4-1-1L5 8l2.5 2.5a2.12 2.12 0 1 0-3 3L7 16l-3 3a2.12 2.12 0 1 0 3 3l3-3"/><path d="m9 13.5 1.5 1.5"/><path d="m9 9 1.5 1.5"/><path d="m13.5 15 1.5 1.5"/><path d="m15 10.5 1.5 1.5"/></svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-white mb-1">100% Free Advisory</h3>
+                <p class="text-sm text-slate-300">We are compensated by providers, ensuring our consultation remains free for you.</p>
+              </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="flex items-start p-5 rounded-2xl bg-slate-900/60 border border-slate-700/60 backdrop-blur-md">
+              <div class="bg-primary-500/10 p-2.5 rounded-lg mr-4 shrink-0 mt-1">
+                <svg class="w-6 h-6 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-white mb-1">No Obligation</h3>
+                <p class="text-sm text-slate-300">Review your options with zero pressure to switch or sign anything today.</p>
               </div>
             </div>
           </div>
+          
+          <!-- Testimonial (Mobile stays visible, desktop has cards) -->
+          <div class="mt-8 pt-6 border-t border-slate-700/50">
+            <div class="flex space-x-1 mb-2">
+              <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="text-sm text-slate-200 italic mb-2">"The consultation saved me over CHF 1,200 annually on my basic health insurance. Professional and very efficient."</p>
+            <p class="text-xs font-semibold text-white">— Marc-Andre, Zürich</p>
+          </div>
         </div>
-        <div class="col-span-6"></div>
+        
+        <!-- Right Column: Compact Booking Card -->
+        <div class="lg:col-span-6 lg:pl-4 hidden lg:flex justify-center items-start">
+          <HeroBookingCard />
+        </div>
       </div>
     </div>
   </div>
@@ -420,240 +367,98 @@ const formatDate = (date: Date | string | undefined | null): string => {
     </div>
   </div>
 
-  <!-- How We Help - Our Process -->
-  <div class="bg-white py-20 md:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <span
-          class="text-primary-600 font-semibold text-sm uppercase tracking-wider"
-          >How We Help</span
-        >
-        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-          Why Schedule a Personal Consultation?
+  <!-- The Savvy Difference -->
+  <div class="bg-slate-50 py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="text-center mb-16">
+        <p class="text-red-600 font-bold text-sm tracking-widest uppercase mb-3">Why 1,000+ expats chose us</p>
+        <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-5 leading-tight">
+          The Savvy Difference
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          We don't just show you generic rates—we build a custom solution for
-          YOUR situation.
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          Other brokers give you a quote. We give you a strategy — tailored to your life, your budget, and your goals.
         </p>
       </div>
 
-      <!-- Value Propositions Grid -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto"
-      >
-        <!-- Benefit 1: Pre-Existing Conditions -->
-        <div
-          class="bg-white rounded-2xl p-8 border-2 border-red-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-        >
-          <div class="flex items-start gap-4">
-            <div
-              class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-full flex items-center justify-center"
-            >
-              <svg
-                class="h-6 w-6 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Pre-Existing Conditions Expertise
-              </h3>
-              <p class="text-gray-600">
-                We navigate supplementary insurance applications for diabetes,
-                chronic conditions, pregnancies—situations where standard quotes
-                don't work.
-              </p>
-            </div>
+      <!-- 3 benefit cards -->
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+
+        <!-- Card 1: Tailored to you -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-200/80">
+          <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+            </svg>
           </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Built Around You</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            No templates. We analyze your health situation, family, preferred doctors, and budget — then present 2-3 options that actually fit.
+          </p>
         </div>
 
-        <!-- Benefit 2: Exact Coverage Fit -->
-        <div
-          class="bg-white rounded-2xl p-8 border-2 border-red-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-        >
-          <div class="flex items-start gap-4">
-            <div
-              class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-full flex items-center justify-center"
-            >
-              <svg
-                class="h-6 w-6 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Exactly What You Need, Nothing More
-              </h3>
-              <p class="text-gray-600">
-                No cookie-cutter packages. We customize coverage based on YOUR
-                health situation, family needs, and preferred doctors.
-              </p>
-            </div>
+        <!-- Card 2: Exclusive rates -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-200/80">
+          <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
           </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Rates You Can't Get Alone</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            As FINMA-registered brokers, we unlock group discounts and exclusive supplementary rates that aren't available when you apply directly.
+          </p>
         </div>
 
-        <!-- Benefit 3: Broker-Only Discounts -->
-        <div
-          class="bg-white rounded-2xl p-8 border-2 border-red-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-        >
-          <div class="flex items-start gap-4">
-            <div
-              class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-full flex items-center justify-center"
-            >
-              <svg
-                class="h-6 w-6 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Broker-Only Group Discounts
-              </h3>
-              <p class="text-gray-600">
-                Access exclusive supplementary insurance rates you can't get by
-                going direct. Pay less than booking yourself.
-              </p>
-            </div>
+        <!-- Card 3: Full service -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-slate-200/80">
+          <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
           </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">We Handle Everything</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            From comparison to paperwork to switching — we manage the entire process in English so you don't have to deal with Swiss bureaucracy.
+          </p>
         </div>
+      </div>
 
-        <!-- Benefit 4: Personal Assessment -->
-        <div
-          class="bg-white rounded-2xl p-8 border-2 border-red-600 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-        >
-          <div class="flex items-start gap-4">
-            <div
-              class="flex-shrink-0 h-12 w-12 bg-red-100 rounded-full flex items-center justify-center"
-            >
-              <svg
-                class="h-6 w-6 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Personalized Intake Assessment
-              </h3>
-              <p class="text-gray-600">
-                We send you a detailed questionnaire to understand your unique
-                situation, then prepare individual rates tailored to YOU.
-              </p>
-            </div>
+      <!-- How it works — compact -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-8 md:p-10 max-w-4xl mx-auto mb-12">
+        <h3 class="text-xl font-bold text-slate-900 text-center mb-8">How it works</h3>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          <div>
+            <div class="w-9 h-9 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm mx-auto mb-3">1</div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Book a Free Call</h4>
+            <p class="text-slate-500 text-xs">Pick a time, tell us what you need. Takes 2 minutes.</p>
+          </div>
+          <div>
+            <div class="w-9 h-9 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm mx-auto mb-3">2</div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Get Your Savvy Analysis</h4>
+            <p class="text-slate-500 text-xs">We compare all providers and prepare tailored recommendations.</p>
+          </div>
+          <div>
+            <div class="w-9 h-9 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm mx-auto mb-3">3</div>
+            <h4 class="font-bold text-slate-900 text-sm mb-1">Choose & We Set Up</h4>
+            <p class="text-slate-500 text-xs">Pick your option — we handle paperwork, switching, everything.</p>
           </div>
         </div>
       </div>
 
-      <!-- Process Flow -->
-      <div
-        class="bg-gradient-to-r from-red-50 to-white rounded-2xl p-8 md:p-12 max-w-4xl mx-auto mb-12"
-      >
-        <h3 class="text-2xl font-bold text-gray-900 text-center mb-8">
-          Our 2-Step Process
-        </h3>
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="flex items-start gap-4">
-            <div
-              class="flex-shrink-0 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center font-bold"
-            >
-              1
-            </div>
-            <div>
-              <h4 class="font-bold text-gray-900 mb-2">
-                Schedule Your Free Consultation
-              </h4>
-              <p class="text-gray-600 text-sm">
-                15-minute call to understand your situation. We'll send you a
-                personalized intake form to capture all details.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div
-              class="flex-shrink-0 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center font-bold"
-            >
-              2
-            </div>
-            <div>
-              <h4 class="font-bold text-gray-900 mb-2">
-                Receive Custom Options & We Handle Setup
-              </h4>
-              <p class="text-gray-600 text-sm">
-                We prepare 2-3 tailored recommendations, explain each option,
-                and handle all paperwork—all in English, all for free.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA Section -->
+      <!-- CTA -->
       <div class="text-center">
-        <p class="text-lg text-gray-700 mb-6 font-semibold">
-          👉 Recommended: Schedule a personal consultation
-        </p>
         <button
-          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all mb-4"
+          class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-2xl shadow-lg shadow-red-200 hover:shadow-xl transition-all"
           onclick="window.openHealthModal('home')"
         >
-          Schedule Free Consultation
-          <svg
-            class="ml-2 h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            ></path>
+          Get Your Free Savvy Consultation
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>
         </button>
-        <p class="text-sm text-gray-600">
-          ✓ 100% free ✓ No obligations ✓ Personal assessment ✓ Broker-only
-          discounts
-        </p>
-        <p class="text-xs text-gray-500 mt-3">
-          (Self-service comparison available in modal, but personal consultation
-          gets you better rates)
-        </p>
+        <p class="text-sm text-slate-500 mt-4">100% free &middot; No obligations &middot; Exclusive broker rates</p>
       </div>
     </div>
   </div>
@@ -1848,6 +1653,25 @@ const formatDate = (date: Date | string | undefined | null): string => {
     .hero-section button {
       padding: 0.5rem 1rem;
     }
+  }
+</style>
+
+  <!-- Bottom CTA (Mobile Only) -->
+  <div class="lg:hidden fixed bottom-6 left-6 right-6 z-40 animate-in slide-in-from-bottom-8 duration-500">
+    <button 
+      onclick="window.openBookingModal()" 
+      class="w-full py-5 rounded-[2rem] bg-red-600 text-white font-black text-xl shadow-2xl shadow-red-600/30 flex items-center justify-center gap-4 active:scale-95 border-b-4 border-red-800"
+    >
+      Schedule Free Call
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+</Layout>
+
+<style is:global>
+  /* Ensure backdrop is above everything except the widget */
+  #modal-backdrop {
+    pointer-events: auto !important;
   }
 </style>
 

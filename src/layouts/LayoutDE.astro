@@ -5,6 +5,7 @@ import VAG45Modal from "../components/VAG45Modal.astro";
 import PrivacyPolicyModal from "../components/PrivacyPolicyModal.astro";
 import TermsOfServiceModal from "../components/TermsOfServiceModal.astro";
 import GermanConsultationModal from "../components/de/GermanConsultationModal.astro";
+import FloatingBookingCTADE from "../components/de/FloatingBookingCTADE.astro";
 import SocialMediaImage from "../components/SocialMediaImage.astro";
 
 // Analytics Components - Consent Mode v2 compliant (loaded at end of body for performance)
@@ -80,6 +81,32 @@ const logoLight = `${cdnBaseUrl}image/upload/v1740080076/logo_light_expatsavvy_o
 const logoDark = `${cdnBaseUrl}image/upload/v1740080077/logoexpatsavvy_sykutm.svg`;
 const favicon =
     "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
+
+// Expert detection for FloatingBookingCTADE (mobile)
+const pageUrl = Astro.url.pathname.toLowerCase();
+const pageExpertType =
+  pageUrl.includes("steuern-vorsorge")
+    ? "wealth"
+    : "health";
+
+const expertConfigs = {
+  health: {
+    name: "Robert Kolar",
+    title: "Versicherungsexperte",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    eventTypeId: 5135911,
+    apiKey: "cal_live_02d332e8841c6f13b371ee6dd3ca7ca8",
+  },
+  wealth: {
+    name: "Hans Steiner",
+    title: "Finanzplaner IAF",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_200,h_200,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
+    eventTypeId: 5135911,
+    apiKey: "cal_live_02d332e8841c6f13b371ee6dd3ca7ca8",
+  },
+};
+
+const activeExpertConfig = expertConfigs[pageExpertType] || expertConfigs.health;
 ---
 
 <!doctype html>
@@ -88,7 +115,7 @@ const favicon =
         <meta charset="UTF-8" />
         <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
         />
 
         <!-- Preconnect to critical domains only -->
@@ -211,6 +238,13 @@ const favicon =
         <FooterDE />
 
         <!-- Modals -->
+        <FloatingBookingCTADE
+          expertName={activeExpertConfig.name}
+          expertTitle={activeExpertConfig.title}
+          expertImg={activeExpertConfig.img}
+          eventTypeId={activeExpertConfig.eventTypeId}
+          apiKey={activeExpertConfig.apiKey}
+        />
         <GermanConsultationModal />
         <VAG45Modal />
         <PrivacyPolicyModal />

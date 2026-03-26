@@ -1,0 +1,457 @@
+---
+// InlineBookingCard.astro — Sticky bottom-right desktop booking widget
+// Collapsed: expert photo + "Book consultation" button
+// Expanded: date pills + time slots + form, books via Cal.com v2 API
+// Desktop only (mobile has FloatingBookingCTA)
+
+interface Props {
+  expertName: string;
+  expertTitle: string;
+  expertImg: string;
+  eventTypeId: number;
+  apiKey: string;
+  topic?: string;
+}
+
+const {
+  expertName,
+  expertTitle,
+  expertImg,
+  eventTypeId,
+  apiKey,
+  topic = 'health',
+} = Astro.props;
+---
+
+<!-- Sticky desktop booking widget -->
+<div
+  id="sticky-booking"
+  class="hidden lg:block fixed bottom-6 right-6 z-40"
+  data-event-type-id={eventTypeId}
+  data-api-key={apiKey}
+  data-topic={topic}
+>
+  <!-- Collapsed pill (hidden by default — starts expanded) -->
+  <button
+    id="sb-collapsed"
+    type="button"
+    class="hidden flex items-center gap-3 bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 px-4 py-3 hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer group"
+  >
+    <img
+      src={expertImg}
+      alt={expertName}
+      class="w-10 h-10 rounded-full object-cover border-2 border-red-100"
+      width="40" height="40"
+    />
+    <div class="text-left">
+      <p class="text-sm font-bold text-slate-900 leading-tight">{expertName}</p>
+      <p class="text-[11px] text-slate-500">{expertTitle}</p>
+    </div>
+    <div class="ml-2 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl group-hover:bg-red-700 transition-colors whitespace-nowrap">
+      Book free call
+    </div>
+  </button>
+
+  <!-- Expanded card -->
+  <div
+    id="sb-expanded"
+    class="w-[380px] bg-white rounded-2xl shadow-2xl shadow-slate-300/50 border border-slate-100 overflow-hidden"
+    style="max-height: calc(100vh - 120px);"
+  >
+    <!-- Scrollable content -->
+    <div class="overflow-y-auto" style="max-height: calc(100vh - 120px); scrollbar-width: thin;">
+      <!-- Header with close button -->
+      <div class="px-5 pt-4 pb-3 border-b border-slate-100 sticky top-0 bg-white z-10">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2.5">
+            <img
+              src={expertImg}
+              alt={expertName}
+              class="w-10 h-10 rounded-full object-cover border-2 border-slate-100"
+              width="40" height="40"
+            />
+            <div>
+              <p class="font-bold text-slate-900 text-sm">{expertName}</p>
+              <p class="text-[11px] text-slate-500">{expertTitle}</p>
+            </div>
+          </div>
+          <button id="sb-close" type="button" class="text-slate-300 hover:text-slate-500 transition-colors p-1 -mr-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <h3 class="text-base font-extrabold text-slate-900 leading-tight">Book your free consultation</h3>
+        <p class="text-[11px] text-slate-500 mt-0.5">Free, online, no obligation &middot; up to 60 min</p>
+      </div>
+
+      <!-- Date pills -->
+      <div class="px-5 pt-3 pb-2" data-role="dates">
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Select a date</label>
+          <div class="flex items-center gap-1">
+            <svg class="w-3 h-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span data-role="tz-label" class="text-[10px] text-red-600 font-medium cursor-pointer hover:text-red-800 transition-colors"></span>
+            <select data-role="tz-select" class="hidden text-[10px] text-slate-500 bg-white border border-slate-200 rounded px-1 py-0.5 focus:outline-none focus:border-red-400"></select>
+          </div>
+        </div>
+        <div data-role="date-pills" class="flex gap-1.5 overflow-x-auto pb-1" style="scrollbar-width: none;"></div>
+      </div>
+
+      <!-- Time slots -->
+      <div data-role="times" class="px-5 pb-2 hidden">
+        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Available times</label>
+        <div data-role="time-pills" class="grid grid-cols-4 gap-1.5"></div>
+        <div data-role="times-loading" class="hidden flex items-center justify-center py-3">
+          <div class="w-4 h-4 border-2 border-red-200 border-t-red-600 rounded-full animate-spin mr-2"></div>
+          <span class="text-xs text-slate-500">Loading...</span>
+        </div>
+        <p data-role="no-times" class="hidden text-xs text-slate-400 text-center py-3 italic">No availability — try another date</p>
+      </div>
+
+      <!-- Form (hidden until time selected) -->
+      <div data-role="form-section" class="px-5 pb-2 hidden">
+        <div class="flex items-center justify-between mb-2">
+          <button data-role="back-times" type="button" class="text-xs text-slate-400 hover:text-slate-600 font-medium flex items-center gap-1 transition-colors">
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Change time
+          </button>
+          <span data-role="slot-label" class="text-xs font-bold text-red-600"></span>
+        </div>
+        <form data-role="form" class="space-y-2">
+          <input data-role="name" type="text" required placeholder="Name *"
+            class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors" />
+          <input data-role="email" type="email" required placeholder="Email *"
+            class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors" />
+          <input data-role="phone" type="tel" placeholder="Phone (optional)"
+            class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors" />
+          <textarea data-role="notes" rows="2" placeholder="Anything we should know? (optional)"
+            class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors resize-none"></textarea>
+          <button data-role="submit" type="submit"
+            class="w-full py-2.5 bg-red-600 text-white rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-lg shadow-red-200 flex items-center justify-center gap-2">
+            <span data-role="submit-text">Confirm Booking</span>
+            <span data-role="submit-loading" class="hidden flex items-center gap-2">
+              <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              Booking...
+            </span>
+          </button>
+        </form>
+        <p data-role="error" class="hidden text-red-500 text-xs text-center mt-2"></p>
+      </div>
+
+      <!-- Success -->
+      <div data-role="done" class="hidden px-5 py-6 text-center">
+        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+          <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <p class="font-extrabold text-slate-900 text-base">Booking Confirmed!</p>
+        <p data-role="done-details" class="text-sm text-slate-500 mt-1"></p>
+      </div>
+
+      <!-- Footer -->
+      <div data-role="footer" class="px-5 py-2.5 border-t border-slate-100 text-center">
+        <button data-role="msg-toggle" type="button" class="text-[10px] text-slate-400 hover:text-slate-600 transition-colors underline">
+          Not ready to book? Send us a message
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function() {
+  var root = document.getElementById('sticky-booking');
+  if (!root) return;
+
+  var collapsed = document.getElementById('sb-collapsed');
+  var expanded = document.getElementById('sb-expanded');
+  var closeBtn = document.getElementById('sb-close');
+
+  var API_BASE = 'https://api.cal.com/v2';
+  var EVENT_TYPE_ID = parseInt(root.getAttribute('data-event-type-id'), 10);
+  var API_KEY = root.getAttribute('data-api-key');
+  var topic = root.getAttribute('data-topic');
+  var timeZone = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'Europe/Zurich';
+
+  // Timezone picker
+  var commonTZ = ['Europe/Zurich','Europe/Berlin','Europe/Vienna','Europe/London','Europe/Paris','Europe/Amsterdam','Europe/Rome','Europe/Madrid','Europe/Stockholm','Europe/Warsaw','America/New_York','America/Chicago','America/Denver','America/Los_Angeles','America/Toronto','Asia/Dubai','Asia/Singapore','Asia/Tokyo','Asia/Hong_Kong','Australia/Sydney','Pacific/Auckland'];
+  var tzLabel = expanded.querySelector('[data-role="tz-label"]');
+  var tzSelect = expanded.querySelector('[data-role="tz-select"]');
+  function shortTZ(tz) { return tz.replace(/_/g,' ').split('/').pop(); }
+  tzLabel.textContent = shortTZ(timeZone) + ' ▾';
+  commonTZ.forEach(function(tz) {
+    var opt = document.createElement('option');
+    opt.value = tz; opt.textContent = tz.replace(/_/g,' ');
+    if (tz === timeZone) opt.selected = true;
+    tzSelect.appendChild(opt);
+  });
+  if (commonTZ.indexOf(timeZone) === -1) {
+    var opt = document.createElement('option');
+    opt.value = timeZone; opt.textContent = timeZone.replace(/_/g,' '); opt.selected = true;
+    tzSelect.insertBefore(opt, tzSelect.firstChild);
+  }
+  tzLabel.addEventListener('click', function() { tzLabel.classList.add('hidden'); tzSelect.classList.remove('hidden'); tzSelect.focus(); });
+  tzSelect.addEventListener('change', function() {
+    timeZone = tzSelect.value; slotsCache = {};
+    tzLabel.textContent = shortTZ(timeZone) + ' ▾';
+    tzLabel.classList.remove('hidden'); tzSelect.classList.add('hidden');
+    if (selectedDate) fetchSlots();
+  });
+  tzSelect.addEventListener('blur', function() { tzLabel.classList.remove('hidden'); tzSelect.classList.add('hidden'); });
+
+  var selectedDate = null;
+  var selectedSlot = null;
+  var slotsCache = {};
+
+  // Scoped querySelector
+  function q(role) { return expanded.querySelector('[data-role="' + role + '"]'); }
+
+  var timesSection = q('times');
+  var formSection = q('form-section');
+  var doneSection = q('done');
+  var footerSection = q('footer');
+
+  // Toggle collapsed ↔ expanded
+  collapsed.addEventListener('click', function() {
+    collapsed.classList.add('hidden');
+    expanded.classList.remove('hidden');
+  });
+
+  closeBtn.addEventListener('click', function() {
+    expanded.classList.add('hidden');
+    collapsed.classList.remove('hidden');
+  });
+
+  function showSection(name) {
+    timesSection.classList.toggle('hidden', name === 'done');
+    formSection.classList.toggle('hidden', name !== 'form' && name !== 'msg');
+    doneSection.classList.toggle('hidden', name !== 'done');
+    if (name === 'done') footerSection.classList.add('hidden');
+  }
+
+  // Generate date pills
+  var pillContainer = q('date-pills');
+  var today = new Date();
+  var businessDays = [];
+  for (var i = 0; businessDays.length < 10; i++) {
+    var d = new Date(today);
+    d.setDate(today.getDate() + i);
+    if (d.getDay() !== 0 && d.getDay() !== 6) businessDays.push(d);
+  }
+
+  businessDays.forEach(function(date) {
+    var iso = date.toISOString().split('T')[0];
+    var dayName = date.toLocaleDateString('en', { weekday: 'short' });
+    var dayNum = date.getDate();
+    var monthName = date.toLocaleDateString('en', { month: 'short' });
+
+    var pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = 'sb-date-pill flex-shrink-0 px-2.5 py-1.5 text-center rounded-xl border-2 border-slate-100 bg-white hover:border-slate-300 cursor-pointer transition-all';
+    pill.dataset.date = iso;
+    pill.innerHTML = '<div class="text-[9px] uppercase text-slate-400 leading-none">' + dayName + '</div>' +
+      '<div class="text-sm font-extrabold text-slate-900 leading-tight">' + dayNum + '</div>' +
+      '<div class="text-[9px] text-slate-400 leading-none">' + monthName + '</div>';
+    pill.addEventListener('click', function() { selectDate(iso); });
+    pillContainer.appendChild(pill);
+  });
+
+  function selectDate(dateStr) {
+    selectedDate = dateStr;
+    selectedSlot = null;
+    formSection.classList.add('hidden');
+
+    var pills = expanded.querySelectorAll('.sb-date-pill');
+    for (var i = 0; i < pills.length; i++) {
+      pills[i].classList.remove('border-red-500', 'bg-red-50');
+      pills[i].classList.add('border-slate-100', 'bg-white');
+    }
+    var active = expanded.querySelector('.sb-date-pill[data-date="' + dateStr + '"]');
+    if (active) {
+      active.classList.remove('border-slate-100', 'bg-white');
+      active.classList.add('border-red-500', 'bg-red-50');
+    }
+
+    fetchSlots();
+  }
+
+  function fetchSlots() {
+    timesSection.classList.remove('hidden');
+    var loading = q('times-loading');
+    var noTimes = q('no-times');
+    var container = q('time-pills');
+
+    loading.classList.remove('hidden');
+    noTimes.classList.add('hidden');
+    container.innerHTML = '';
+
+    var cacheKey = EVENT_TYPE_ID + '-' + selectedDate;
+    if (slotsCache[cacheKey] && Date.now() - slotsCache[cacheKey].ts < 60000) {
+      loading.classList.add('hidden');
+      renderTimes(slotsCache[cacheKey].data);
+      return;
+    }
+
+    var params = new URLSearchParams({
+      eventTypeId: EVENT_TYPE_ID.toString(),
+      startTime: selectedDate + 'T00:00:00Z',
+      endTime: selectedDate + 'T23:59:59Z',
+      timeZone: timeZone,
+    });
+
+    fetch(API_BASE + '/slots/available?' + params.toString(), {
+      headers: {
+        'Authorization': 'Bearer ' + API_KEY,
+        'cal-api-version': '2024-08-13',
+      },
+    })
+      .then(function(res) { return res.json(); })
+      .then(function(json) {
+        var slots = (json.data && json.data.slots && json.data.slots[selectedDate]) || [];
+        slotsCache[cacheKey] = { data: slots, ts: Date.now() };
+        loading.classList.add('hidden');
+        renderTimes(slots);
+      })
+      .catch(function() {
+        loading.classList.add('hidden');
+        noTimes.classList.remove('hidden');
+      });
+  }
+
+  function renderTimes(slots) {
+    var container = q('time-pills');
+    var noTimes = q('no-times');
+
+    if (!slots.length) {
+      noTimes.classList.remove('hidden');
+      return;
+    }
+
+    container.innerHTML = '';
+    slots.forEach(function(slot) {
+      var display = new Date(slot.time).toLocaleTimeString('en', {
+        hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timeZone,
+      });
+
+      var pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'px-2 py-1.5 rounded-xl border-2 border-slate-100 text-xs font-bold text-slate-700 bg-white hover:border-red-300 hover:text-red-600 transition-all';
+      pill.textContent = display;
+      pill.addEventListener('click', function() {
+        selectedSlot = slot.time;
+
+        var dd = new Date(selectedDate + 'T12:00:00');
+        var dateLabel = dd.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' });
+        q('slot-label').textContent = dateLabel + ' at ' + display;
+        formSection.classList.remove('hidden');
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+      container.appendChild(pill);
+    });
+  }
+
+  // Back to times
+  q('back-times').addEventListener('click', function() {
+    formSection.classList.add('hidden');
+    selectedSlot = null;
+  });
+
+  // Form submit
+  q('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name = q('name').value.trim();
+    var email = q('email').value.trim();
+    var phone = q('phone').value.trim();
+    var notes = q('notes').value.trim();
+    var errorEl = q('error');
+    var submitText = q('submit-text');
+    var submitLoading = q('submit-loading');
+    var submitBtn = q('submit');
+
+    if (!name || !email) {
+      errorEl.textContent = 'Name and email required.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    errorEl.classList.add('hidden');
+    submitText.classList.add('hidden');
+    submitLoading.classList.remove('hidden');
+    submitBtn.disabled = true;
+
+    var calPayload = {
+      eventTypeId: EVENT_TYPE_ID,
+      start: selectedSlot,
+      attendee: { name: name, email: email, timeZone: timeZone, language: 'en' },
+    };
+    if (phone || notes) {
+      calPayload.metadata = {};
+      if (phone) calPayload.metadata.phone = phone;
+      if (notes) calPayload.metadata.notes = notes;
+    }
+
+    // Lead capture
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name, email: email, phone: phone, message: notes,
+        topic: topic, language: 'en',
+        source: window.location.href, flow: 'sticky_booking_card',
+        url: window.location.href,
+        notes: { booked_slot: selectedSlot, booked_date: selectedDate },
+      }),
+    }).catch(function() {});
+
+    // Book via Cal.com v2
+    fetch(API_BASE + '/bookings', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + API_KEY,
+        'Content-Type': 'application/json',
+        'cal-api-version': '2024-08-13',
+      },
+      body: JSON.stringify(calPayload),
+    })
+      .then(function(res) {
+        if (!res.ok) {
+          return res.json().catch(function() { return {}; }).then(function(err) {
+            throw new Error(err.message || 'Booking failed');
+          });
+        }
+        return res.json();
+      })
+      .then(function() {
+        var time = new Date(selectedSlot);
+        var details = time.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric', timeZone: timeZone }) +
+          ' at ' + time.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timeZone });
+        q('done-details').textContent = details;
+        showSection('done');
+      })
+      .catch(function(err) {
+        errorEl.textContent = err.message || 'Booking failed. Try again.';
+        errorEl.classList.remove('hidden');
+      })
+      .finally(function() {
+        submitText.classList.remove('hidden');
+        submitLoading.classList.add('hidden');
+        submitBtn.disabled = false;
+      });
+  });
+
+  // Escape to message modal
+  q('msg-toggle').addEventListener('click', function() {
+    if (typeof window.openConsultationModal === 'function') {
+      window.openConsultationModal(topic);
+    }
+  });
+
+  // Hide on homepage (has HeroBookingCard already)
+  if (window.location.pathname === '/' || window.location.pathname === '/en/') {
+    root.style.display = 'none';
+  }
+})();
+</script>

@@ -1,0 +1,442 @@
+---
+interface Props {
+  expertName: string;
+  expertTitle: string;
+  expertImg: string;
+  eventTypeId: number;
+  apiKey: string;
+}
+
+const { expertName, expertTitle, expertImg, eventTypeId, apiKey } = Astro.props;
+---
+
+<!-- Fixed bottom booking bar (mobile only) -->
+<div
+  id="fctade-bar"
+  class="fixed left-0 right-0 z-50 lg:hidden bg-white shadow-xl"
+  style="bottom: env(safe-area-inset-bottom, 0px); border-top: 2px solid #cf202d;"
+  data-event-type-id={eventTypeId}
+  data-api-key={apiKey}
+  data-expert-name={expertName}
+  data-expert-title={expertTitle}
+  data-expert-img={expertImg}
+>
+  <!-- Collapsed: date pills row -->
+  <div id="fctade-dates-row" class="px-3 pt-3 pb-3">
+    <div class="flex items-center justify-between mb-2 px-1">
+      <p class="text-[10px] font-bold uppercase tracking-widest text-primary-600">Kostenlose Beratung buchen</p>
+      <div class="flex items-center gap-1">
+        <svg class="w-2.5 h-2.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="fctade-tz-label" class="text-[9px] text-red-600 font-medium cursor-pointer hover:text-red-800 transition-colors"></span>
+        <select id="fctade-tz-select" class="hidden text-[9px] text-gray-500 bg-white border border-gray-200 rounded px-1 py-0 focus:outline-none"></select>
+      </div>
+    </div>
+    <div id="fctade-date-pills" class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width: none; -ms-overflow-style: none;"></div>
+    <button id="fctade-msg-link" type="button" class="text-[9px] text-gray-400 hover:text-gray-600 mt-1 px-1 underline transition-colors">Nicht bereit? Nachricht senden</button>
+  </div>
+
+  <!-- Message-only form (hidden by default) -->
+  <div id="fctade-msg-row" class="hidden px-3 pt-3 pb-3">
+    <div class="flex items-center justify-between mb-2">
+      <button id="fctade-back-msg" class="text-xs text-gray-500 hover:text-primary-600 transition-colors flex items-center gap-1 font-medium">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Zur&uuml;ck
+      </button>
+      <span class="text-xs font-bold text-gray-500">Nachricht senden</span>
+    </div>
+    <form id="fctade-msg-form" class="space-y-2">
+      <input id="fctade-msg-name" type="text" required placeholder="Name *"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500" />
+      <input id="fctade-msg-email" type="email" required placeholder="E-Mail *"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500" />
+      <textarea id="fctade-msg-text" rows="2" required placeholder="Wobei k&ouml;nnen wir Ihnen helfen? *"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500 resize-none"></textarea>
+      <button type="submit"
+        class="w-full py-3 bg-gray-700 text-white rounded-lg font-bold text-sm hover:bg-gray-800 transition-all">
+        Nachricht senden
+      </button>
+    </form>
+    <p id="fctade-msg-error" class="hidden text-red-500 text-[10px] mt-1 text-center font-medium"></p>
+  </div>
+
+  <!-- Expanded: time slots (hidden by default) -->
+  <div id="fctade-times-row" class="hidden px-3 pt-3 pb-2">
+    <div class="flex items-center justify-between mb-2">
+      <button id="fctade-back-dates" class="text-xs text-gray-500 hover:text-primary-600 transition-colors flex items-center gap-1 font-medium">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        <span id="fctade-selected-date-label" class="font-bold"></span>
+      </button>
+    </div>
+    <div id="fctade-time-pills" class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width: none; -ms-overflow-style: none;"></div>
+    <div id="fctade-times-loading" class="hidden py-3 text-center">
+      <div class="flex items-center justify-center gap-2">
+        <div class="w-3.5 h-3.5 border-2 border-primary-200 border-t-primary-600 rounded-full animate-spin"></div>
+        <span class="text-xs text-gray-500 font-medium">Laden...</span>
+      </div>
+    </div>
+    <div id="fctade-no-times" class="hidden py-2 text-center">
+      <p class="text-xs text-gray-500 font-medium">Keine Zeiten verf&uuml;gbar</p>
+    </div>
+  </div>
+
+  <!-- Expanded: booking form (hidden by default) -->
+  <div id="fctade-form-row" class="hidden px-3 pt-3 pb-3">
+    <div class="flex items-center justify-between mb-2">
+      <button id="fctade-back-times" class="text-xs text-gray-500 hover:text-primary-600 transition-colors flex items-center gap-1 font-medium">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Zur&uuml;ck
+      </button>
+      <span id="fctade-slot-label" class="text-xs font-bold text-primary-600"></span>
+    </div>
+    <div class="flex items-center gap-2 mb-3">
+      <img id="fctade-expert-img" class="w-8 h-8 rounded-full object-cover" src={expertImg} alt={expertName} width="32" height="32" loading="lazy" />
+      <div>
+        <p class="text-xs font-bold">{expertName}</p>
+        <p class="text-[10px] text-gray-500">{expertTitle} · bis zu 60 Min</p>
+      </div>
+    </div>
+    <form id="fctade-form" class="space-y-2">
+      <input id="fctade-name" type="text" required placeholder="Name *"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500" />
+      <input id="fctade-email" type="email" required placeholder="E-Mail *"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500" />
+      <input id="fctade-phone" type="tel" placeholder="Telefon (optional)"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500" />
+      <textarea id="fctade-notes" rows="2" placeholder="M&ouml;chten Sie uns etwas mitteilen? (optional)"
+        class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-primary-500 resize-none"></textarea>
+      <button id="fctade-submit" type="submit"
+        class="w-full py-3 bg-primary-600 text-white rounded-lg font-bold text-sm hover:bg-primary-700 transition-all flex items-center justify-center gap-2">
+        <span id="fctade-submit-text">Buchung best&auml;tigen</span>
+        <span id="fctade-submit-loading" class="hidden">
+          <svg class="animate-spin inline h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          Wird gebucht...
+        </span>
+      </button>
+    </form>
+    <p id="fctade-error" class="hidden text-red-500 text-[10px] mt-1 text-center font-medium"></p>
+  </div>
+
+  <!-- Confirmation (hidden by default) -->
+  <div id="fctade-done-row" class="hidden px-3 py-4 text-center">
+    <div class="flex items-center justify-center gap-2">
+      <svg class="w-5 h-5 text-green-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      <span class="font-bold text-sm">Buchung best&auml;tigt!</span>
+    </div>
+    <p id="fctade-confirmed-details" class="text-[10px] text-gray-500 mt-1 font-medium"></p>
+  </div>
+</div>
+
+<!-- Spacer so content isn't hidden behind fixed bar -->
+<div class="h-28 lg:hidden" aria-hidden="true"></div>
+
+<script is:inline>
+function initFloatingBookingCTADE() {
+  const bar = document.getElementById('fctade-bar');
+  if (!bar) return;
+
+  const API_BASE = 'https://api.cal.com/v2';
+  const config = {
+    eventTypeId: parseInt(bar.dataset.eventTypeId),
+    apiKey: bar.dataset.apiKey,
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Zurich',
+  };
+
+  // Zeitzone-Auswahl
+  const commonTZ = ['Europe/Zurich','Europe/Berlin','Europe/Vienna','Europe/London','Europe/Paris','Europe/Amsterdam','Europe/Rome','Europe/Madrid','Europe/Stockholm','Europe/Warsaw','America/New_York','America/Chicago','America/Denver','America/Los_Angeles','America/Toronto','Asia/Dubai','Asia/Singapore','Asia/Tokyo','Asia/Hong_Kong','Australia/Sydney','Pacific/Auckland'];
+  const deTzLabel = document.getElementById('fctade-tz-label');
+  const deTzSelect = document.getElementById('fctade-tz-select');
+  const shortTZ = (tz) => tz.replace(/_/g,' ').split('/').pop();
+  deTzLabel.textContent = shortTZ(config.timeZone) + ' ▾';
+  commonTZ.forEach(tz => {
+    const opt = document.createElement('option');
+    opt.value = tz; opt.textContent = tz.replace(/_/g,' ');
+    if (tz === config.timeZone) opt.selected = true;
+    deTzSelect.appendChild(opt);
+  });
+  if (!commonTZ.includes(config.timeZone)) {
+    const opt = document.createElement('option');
+    opt.value = config.timeZone; opt.textContent = config.timeZone.replace(/_/g,' '); opt.selected = true;
+    deTzSelect.insertBefore(opt, deTzSelect.firstChild);
+  }
+  deTzLabel.addEventListener('click', () => { deTzLabel.classList.add('hidden'); deTzSelect.classList.remove('hidden'); deTzSelect.focus(); });
+  deTzSelect.addEventListener('change', () => {
+    config.timeZone = deTzSelect.value; slotsCache = {};
+    deTzLabel.textContent = shortTZ(config.timeZone) + ' ▾';
+    deTzLabel.classList.remove('hidden'); deTzSelect.classList.add('hidden');
+    if (selectedDate) fetchSlots();
+  });
+  deTzSelect.addEventListener('blur', () => { deTzLabel.classList.remove('hidden'); deTzSelect.classList.add('hidden'); });
+
+  let selectedDate = null;
+  let selectedSlot = null;
+  let slotsCache = {};
+
+  // --- Rows ---
+  const rows = {
+    dates: document.getElementById('fctade-dates-row'),
+    times: document.getElementById('fctade-times-row'),
+    form: document.getElementById('fctade-form-row'),
+    done: document.getElementById('fctade-done-row'),
+    msg: document.getElementById('fctade-msg-row'),
+  };
+
+  function showRow(name) {
+    Object.entries(rows).forEach(([k, el]) => {
+      if (el) el.classList.toggle('hidden', k !== name);
+    });
+  }
+
+  // --- Generate date pills ---
+  const pillContainer = document.getElementById('fctade-date-pills');
+  if (pillContainer) {
+    const today = new Date();
+    for (let i = 0; i < 15; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      if (date.getDay() === 0 || date.getDay() === 6) continue;
+
+      const dayName = date.toLocaleDateString('de', { weekday: 'short' });
+      const dayNum = date.getDate();
+      const iso = date.toISOString().split('T')[0];
+
+      const pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'fctade-date-pill flex-shrink-0 px-3 py-2 text-center rounded-lg border border-gray-200 hover:border-primary-500 cursor-pointer transition-all bg-white active:scale-95';
+      pill.dataset.date = iso;
+      pill.innerHTML = `<div class="text-[9px] uppercase text-gray-500 leading-none">${dayName}</div><div class="text-sm font-bold text-gray-900 leading-tight">${dayNum}</div>`;
+      pill.addEventListener('click', () => selectDate(pill));
+      pillContainer.appendChild(pill);
+    }
+  }
+
+  function selectDate(pill) {
+    document.querySelectorAll('.fctade-date-pill').forEach(p => {
+      p.classList.remove('border-primary-500', 'bg-red-50');
+      p.classList.add('border-gray-200', 'bg-white');
+    });
+    pill.classList.remove('border-gray-200', 'bg-white');
+    pill.classList.add('border-primary-500', 'bg-red-50');
+
+    selectedDate = pill.dataset.date;
+    selectedSlot = null;
+
+    const d = new Date(selectedDate + 'T12:00:00');
+    const label = d.toLocaleDateString('de', { weekday: 'short', month: 'short', day: 'numeric' });
+    const dateLabel = document.getElementById('fctade-selected-date-label');
+    if (dateLabel) dateLabel.textContent = label;
+
+    fetchSlots();
+  }
+
+  async function fetchSlots() {
+    showRow('times');
+    const loading = document.getElementById('fctade-times-loading');
+    const noTimes = document.getElementById('fctade-no-times');
+    const timePills = document.getElementById('fctade-time-pills');
+
+    loading?.classList.remove('hidden');
+    noTimes?.classList.add('hidden');
+    if (timePills) timePills.innerHTML = '';
+
+    const cacheKey = `${config.eventTypeId}-${selectedDate}`;
+    if (slotsCache[cacheKey] && Date.now() - slotsCache[cacheKey].ts < 60000) {
+      loading?.classList.add('hidden');
+      renderTimes(slotsCache[cacheKey].data);
+      return;
+    }
+
+    try {
+      const params = new URLSearchParams({
+        eventTypeId: config.eventTypeId.toString(),
+        startTime: `${selectedDate}T00:00:00Z`,
+        endTime: `${selectedDate}T23:59:59Z`,
+        timeZone: config.timeZone,
+      });
+
+      const res = await fetch(`${API_BASE}/slots/available?${params}`, {
+        headers: {
+          'Authorization': `Bearer ${config.apiKey}`,
+          'cal-api-version': '2024-08-13',
+        },
+      });
+
+      if (!res.ok) throw new Error(`API ${res.status}`);
+      const json = await res.json();
+      const slots = json.data?.slots?.[selectedDate] || [];
+      slotsCache[cacheKey] = { data: slots, ts: Date.now() };
+
+      loading?.classList.add('hidden');
+      renderTimes(slots);
+    } catch (err) {
+      console.error('Slot fetch error:', err);
+      loading?.classList.add('hidden');
+      noTimes?.classList.remove('hidden');
+    }
+  }
+
+  function renderTimes(slots) {
+    const container = document.getElementById('fctade-time-pills');
+    if (!container) return;
+
+    if (!slots.length) {
+      document.getElementById('fctade-no-times')?.classList.remove('hidden');
+      return;
+    }
+
+    container.innerHTML = '';
+    slots.forEach(slot => {
+      const time = new Date(slot.time);
+      const display = time.toLocaleTimeString('de', {
+        hour: '2-digit', minute: '2-digit', hour12: false, timeZone: config.timeZone,
+      });
+
+      const pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'flex-shrink-0 px-4 py-2 bg-white border border-gray-200 text-gray-900 rounded-lg text-xs font-bold hover:border-primary-500 hover:text-primary-600 transition-all active:scale-95';
+      pill.textContent = display;
+      pill.addEventListener('click', () => {
+        selectedSlot = slot.time;
+
+        const d = new Date(selectedDate + 'T12:00:00');
+        const dateStr = d.toLocaleDateString('de', { weekday: 'short', month: 'short', day: 'numeric' });
+        const slotLabel = document.getElementById('fctade-slot-label');
+        if (slotLabel) slotLabel.textContent = `${dateStr} um ${display}`;
+
+        showRow('form');
+      });
+      container.appendChild(pill);
+    });
+  }
+
+  // --- Back buttons ---
+  document.getElementById('fctade-back-dates')?.addEventListener('click', () => showRow('dates'));
+  document.getElementById('fctade-back-times')?.addEventListener('click', () => showRow('times'));
+
+  // --- Message-only flow ---
+  document.getElementById('fctade-msg-link')?.addEventListener('click', () => showRow('msg'));
+  document.getElementById('fctade-back-msg')?.addEventListener('click', () => showRow('dates'));
+  document.getElementById('fctade-msg-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('fctade-msg-name')?.value?.trim();
+    const email = document.getElementById('fctade-msg-email')?.value?.trim();
+    const msg = document.getElementById('fctade-msg-text')?.value?.trim();
+    const errEl = document.getElementById('fctade-msg-error');
+    if (!name || !email || !msg) {
+      if (errEl) { errEl.textContent = 'Alle Felder sind erforderlich.'; errEl.classList.remove('hidden'); }
+      return;
+    }
+    errEl?.classList.add('hidden');
+    try {
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email, message: msg,
+          topic: 'Consultation Strategy Session',
+          language: 'de',
+          source: window.location.href,
+          flow: 'floating_cta_message_only_de',
+          url: window.location.href,
+          device: 'mobile',
+        }),
+      });
+      const confirmedEl = document.getElementById('fctade-confirmed-details');
+      if (confirmedEl) confirmedEl.textContent = 'Wir melden uns in K\u00fcrze bei Ihnen.';
+      const doneLabel = document.querySelector('#fctade-done-row .font-bold');
+      if (doneLabel) doneLabel.textContent = 'Nachricht gesendet!';
+      showRow('done');
+    } catch (err) {
+      if (errEl) { errEl.textContent = 'Senden fehlgeschlagen. Bitte erneut versuchen.'; errEl.classList.remove('hidden'); }
+    }
+  });
+
+  // --- Form ---
+  document.getElementById('fctade-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nameVal = document.getElementById('fctade-name')?.value?.trim();
+    const emailVal = document.getElementById('fctade-email')?.value?.trim();
+    const phoneVal = document.getElementById('fctade-phone')?.value?.trim() || '';
+    const notesVal = document.getElementById('fctade-notes')?.value?.trim() || '';
+    const submitBtn = document.getElementById('fctade-submit');
+    const submitText = document.getElementById('fctade-submit-text');
+    const submitLoading = document.getElementById('fctade-submit-loading');
+    const errorEl = document.getElementById('fctade-error');
+
+    if (!nameVal || !emailVal) {
+      if (errorEl) { errorEl.textContent = 'Name und E-Mail erforderlich.'; errorEl.classList.remove('hidden'); }
+      return;
+    }
+
+    errorEl?.classList.add('hidden');
+    submitBtn?.setAttribute('disabled', 'true');
+    submitText?.classList.add('hidden');
+    submitLoading?.classList.remove('hidden');
+
+    try {
+      const payload = {
+        eventTypeId: config.eventTypeId,
+        start: selectedSlot,
+        attendee: { name: nameVal, email: emailVal, timeZone: config.timeZone, language: 'de' },
+      };
+      if (phoneVal || notesVal) {
+        payload.metadata = {};
+        if (phoneVal) payload.metadata.phone = phoneVal;
+        if (notesVal) payload.metadata.notes = notesVal;
+      }
+
+      // Lead capture
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nameVal, email: emailVal, phone: phoneVal, notes: notesVal,
+          topic: 'Consultation Strategy Session',
+          language: 'de',
+          source: window.location.href,
+          flow: 'floating_cta_de',
+          url: window.location.href,
+          device: 'mobile',
+          slot: selectedSlot,
+        }),
+      }).catch(() => {});
+
+      const res = await fetch(`${API_BASE}/bookings`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${config.apiKey}`,
+          'Content-Type': 'application/json',
+          'cal-api-version': '2024-08-13',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || `Failed (${res.status})`);
+      }
+
+      const time = new Date(selectedSlot);
+      const details = `${time.toLocaleDateString('de', { weekday: 'long', month: 'long', day: 'numeric', timeZone: config.timeZone })} um ${time.toLocaleTimeString('de', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: config.timeZone })}`;
+      const confirmedEl = document.getElementById('fctade-confirmed-details');
+      if (confirmedEl) confirmedEl.textContent = details;
+
+      showRow('done');
+    } catch (err) {
+      console.error('Booking error:', err);
+      if (errorEl) { errorEl.textContent = err.message || 'Buchung fehlgeschlagen.'; errorEl.classList.remove('hidden'); }
+    } finally {
+      submitBtn?.removeAttribute('disabled');
+      submitText?.classList.remove('hidden');
+      submitLoading?.classList.add('hidden');
+    }
+  });
+}
+
+// Run immediately if DOM is ready, otherwise wait
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFloatingBookingCTADE);
+} else {
+  initFloatingBookingCTADE();
+}
+</script>

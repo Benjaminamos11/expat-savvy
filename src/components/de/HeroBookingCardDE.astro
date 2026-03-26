@@ -1,0 +1,371 @@
+---
+// HeroBookingCardDE.astro — Compact calendar card for hero section (desktop only) — German version
+// Shows expert + date pills + time slots, books via Cal.com v2 API
+---
+
+<div id="hero-card-de" class="w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100/50">
+  <!-- Expert header -->
+  <div class="px-7 pt-7 pb-5 border-b border-slate-100">
+    <div class="flex items-center gap-3.5 mb-3">
+      <img
+        src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_80,h_80,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp"
+        alt="Robert Kolar"
+        class="w-14 h-14 rounded-full object-cover border-2 border-slate-100"
+        width="56" height="56"
+      />
+      <div>
+        <p class="font-bold text-slate-900 text-base">Robert Kolar</p>
+        <p class="text-sm text-slate-500">Versicherungsexperte · DE/EN</p>
+      </div>
+    </div>
+    <h3 class="text-xl font-extrabold text-slate-900 leading-tight">Buchen Sie Ihre kostenlose Beratung</h3>
+    <p class="text-sm text-slate-500 mt-1">Kostenlos, online, unverbindlich · bis zu 60 Min</p>
+  </div>
+
+  <!-- Date pills -->
+  <div id="hcde-dates" class="px-7 pt-5 pb-2">
+    <div class="flex items-center justify-between mb-2">
+      <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Datum wählen</label>
+      <div class="flex items-center gap-1">
+        <svg class="w-3 h-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="hcde-tz-label" class="text-[10px] text-red-600 font-medium cursor-pointer hover:text-red-800 transition-colors"></span>
+        <select id="hcde-tz-select" class="hidden text-[10px] text-slate-500 bg-white border border-slate-200 rounded px-1 py-0.5 focus:outline-none focus:border-red-400"></select>
+      </div>
+    </div>
+    <div id="hcde-date-pills" class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width: none;"></div>
+  </div>
+
+  <!-- Time slots -->
+  <div id="hcde-times" class="px-7 pb-2 hidden">
+    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Verfügbare Zeiten</label>
+    <div id="hcde-time-pills" class="grid grid-cols-4 gap-2"></div>
+    <div id="hcde-times-loading" class="hidden flex items-center justify-center py-4">
+      <div class="w-4 h-4 border-2 border-red-200 border-t-red-600 rounded-full animate-spin mr-2"></div>
+      <span class="text-xs text-slate-500">Laden...</span>
+    </div>
+    <p id="hcde-no-times" class="hidden text-xs text-slate-400 text-center py-4 italic">Keine Verfügbarkeit — versuchen Sie einen anderen Tag</p>
+  </div>
+
+  <!-- Form (hidden until time selected) -->
+  <div id="hcde-form-section" class="px-7 pb-2 hidden">
+    <div class="flex items-center justify-between mb-2">
+      <button id="hcde-back-times" class="text-xs text-slate-400 hover:text-slate-600 font-medium flex items-center gap-1 transition-colors">
+        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Zeit ändern
+      </button>
+      <span id="hcde-slot-label" class="text-xs font-bold text-red-600"></span>
+    </div>
+    <form id="hcde-form" class="space-y-2">
+      <input id="hcde-name" type="text" required placeholder="Name *"
+        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors" />
+      <input id="hcde-email" type="email" required placeholder="E-Mail *"
+        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors" />
+      <input id="hcde-phone" type="tel" placeholder="Telefon (optional)"
+        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors" />
+      <textarea id="hcde-notes" rows="2" placeholder="Möchten Sie uns etwas mitteilen? (optional)"
+        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-red-100 focus:border-red-500 transition-colors resize-none"></textarea>
+      <button id="hcde-submit" type="submit"
+        class="w-full py-3 bg-red-600 text-white rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-lg shadow-red-200 flex items-center justify-center gap-2">
+        <span id="hcde-submit-text">Buchung bestätigen</span>
+        <span id="hcde-submit-loading" class="hidden flex items-center gap-2">
+          <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          Wird gebucht...
+        </span>
+      </button>
+    </form>
+    <p id="hcde-error" class="hidden text-red-500 text-xs text-center mt-2"></p>
+  </div>
+
+  <!-- Success -->
+  <div id="hcde-done" class="hidden px-6 py-8 text-center">
+    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+      <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </div>
+    <p class="font-extrabold text-slate-900 text-lg">Buchung bestätigt!</p>
+    <p id="hcde-done-details" class="text-sm text-slate-500 mt-1"></p>
+  </div>
+
+  <!-- Footer: escape link -->
+  <div id="hcde-footer" class="px-7 py-3 border-t border-slate-100 text-center">
+    <button id="hcde-msg-toggle" type="button" class="text-[10px] text-slate-400 hover:text-slate-600 transition-colors underline">
+      Nicht bereit zu buchen? Senden Sie uns eine Nachricht
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+(function() {
+  var card = document.getElementById('hero-card-de');
+  if (!card) return;
+
+  var API_BASE = 'https://api.cal.com/v2';
+  var EVENT_TYPE_ID = 5135911;
+  var API_KEY = 'cal_live_02d332e8841c6f13b371ee6dd3ca7ca8';
+  var timeZone = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'Europe/Zurich';
+
+  // Zeitzone-Auswahl
+  var commonTZ = ['Europe/Zurich','Europe/Berlin','Europe/Vienna','Europe/London','Europe/Paris','Europe/Amsterdam','Europe/Rome','Europe/Madrid','Europe/Stockholm','Europe/Warsaw','America/New_York','America/Chicago','America/Denver','America/Los_Angeles','America/Toronto','Asia/Dubai','Asia/Singapore','Asia/Tokyo','Asia/Hong_Kong','Australia/Sydney','Pacific/Auckland'];
+  var tzLabel = document.getElementById('hcde-tz-label');
+  var tzSelect = document.getElementById('hcde-tz-select');
+  function shortTZ(tz) { return tz.replace(/_/g,' ').split('/').pop(); }
+  tzLabel.textContent = shortTZ(timeZone) + ' ▾';
+  commonTZ.forEach(function(tz) {
+    var opt = document.createElement('option');
+    opt.value = tz; opt.textContent = tz.replace(/_/g,' ');
+    if (tz === timeZone) opt.selected = true;
+    tzSelect.appendChild(opt);
+  });
+  if (commonTZ.indexOf(timeZone) === -1) {
+    var opt = document.createElement('option');
+    opt.value = timeZone; opt.textContent = timeZone.replace(/_/g,' '); opt.selected = true;
+    tzSelect.insertBefore(opt, tzSelect.firstChild);
+  }
+  tzLabel.addEventListener('click', function() { tzLabel.classList.add('hidden'); tzSelect.classList.remove('hidden'); tzSelect.focus(); });
+  tzSelect.addEventListener('change', function() {
+    timeZone = tzSelect.value; slotsCache = {};
+    tzLabel.textContent = shortTZ(timeZone) + ' ▾';
+    tzLabel.classList.remove('hidden'); tzSelect.classList.add('hidden');
+    if (selectedDate) fetchSlots();
+  });
+  tzSelect.addEventListener('blur', function() { tzLabel.classList.remove('hidden'); tzSelect.classList.add('hidden'); });
+
+  var selectedDate = null;
+  var selectedSlot = null;
+  var slotsCache = {};
+
+  // Sections
+  var timesSection = document.getElementById('hcde-times');
+  var formSection = document.getElementById('hcde-form-section');
+  var doneSection = document.getElementById('hcde-done');
+  var footerSection = document.getElementById('hcde-footer');
+
+  function showSection(name) {
+    timesSection.classList.toggle('hidden', name === 'done');
+    formSection.classList.toggle('hidden', name !== 'form' && name !== 'msg');
+    doneSection.classList.toggle('hidden', name !== 'done');
+    if (name === 'done') footerSection.classList.add('hidden');
+  }
+
+  // Generate date pills
+  var pillContainer = document.getElementById('hcde-date-pills');
+  var today = new Date();
+  var businessDays = [];
+  for (var i = 0; businessDays.length < 10; i++) {
+    var d = new Date(today);
+    d.setDate(today.getDate() + i);
+    if (d.getDay() !== 0 && d.getDay() !== 6) businessDays.push(d);
+  }
+
+  businessDays.forEach(function(date) {
+    var iso = date.toISOString().split('T')[0];
+    var dayName = date.toLocaleDateString('de', { weekday: 'short' });
+    var dayNum = date.getDate();
+    var monthName = date.toLocaleDateString('de', { month: 'short' });
+
+    var pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = 'hcde-date-pill flex-shrink-0 px-3.5 py-2.5 text-center rounded-xl border-2 border-slate-100 bg-white hover:border-slate-300 cursor-pointer transition-all';
+    pill.dataset.date = iso;
+    pill.innerHTML = '<div class="text-[10px] uppercase text-slate-400 leading-none">' + dayName + '</div>' +
+      '<div class="text-lg font-extrabold text-slate-900 leading-tight">' + dayNum + '</div>' +
+      '<div class="text-[10px] text-slate-400 leading-none">' + monthName + '</div>';
+    pill.addEventListener('click', function() { selectDate(iso); });
+    pillContainer.appendChild(pill);
+  });
+
+  function selectDate(dateStr) {
+    selectedDate = dateStr;
+    selectedSlot = null;
+    formSection.classList.add('hidden');
+
+    // Highlight
+    document.querySelectorAll('.hcde-date-pill').forEach(function(p) {
+      p.classList.remove('border-red-500', 'bg-red-50');
+      p.classList.add('border-slate-100', 'bg-white');
+    });
+    var active = document.querySelector('.hcde-date-pill[data-date="' + dateStr + '"]');
+    if (active) {
+      active.classList.remove('border-slate-100', 'bg-white');
+      active.classList.add('border-red-500', 'bg-red-50');
+    }
+
+    fetchSlots();
+  }
+
+  function fetchSlots() {
+    timesSection.classList.remove('hidden');
+    var loading = document.getElementById('hcde-times-loading');
+    var noTimes = document.getElementById('hcde-no-times');
+    var container = document.getElementById('hcde-time-pills');
+
+    loading.classList.remove('hidden');
+    noTimes.classList.add('hidden');
+    container.innerHTML = '';
+
+    var cacheKey = EVENT_TYPE_ID + '-' + selectedDate;
+    if (slotsCache[cacheKey] && Date.now() - slotsCache[cacheKey].ts < 60000) {
+      loading.classList.add('hidden');
+      renderTimes(slotsCache[cacheKey].data);
+      return;
+    }
+
+    var params = new URLSearchParams({
+      eventTypeId: EVENT_TYPE_ID.toString(),
+      startTime: selectedDate + 'T00:00:00Z',
+      endTime: selectedDate + 'T23:59:59Z',
+      timeZone: timeZone,
+    });
+
+    fetch(API_BASE + '/slots/available?' + params.toString(), {
+      headers: {
+        'Authorization': 'Bearer ' + API_KEY,
+        'cal-api-version': '2024-08-13',
+      },
+    })
+      .then(function(res) { return res.json(); })
+      .then(function(json) {
+        var slots = (json.data && json.data.slots && json.data.slots[selectedDate]) || [];
+        slotsCache[cacheKey] = { data: slots, ts: Date.now() };
+        loading.classList.add('hidden');
+        renderTimes(slots);
+      })
+      .catch(function() {
+        loading.classList.add('hidden');
+        noTimes.classList.remove('hidden');
+      });
+  }
+
+  function renderTimes(slots) {
+    var container = document.getElementById('hcde-time-pills');
+    var noTimes = document.getElementById('hcde-no-times');
+
+    if (!slots.length) {
+      noTimes.classList.remove('hidden');
+      return;
+    }
+
+    container.innerHTML = '';
+    slots.forEach(function(slot) {
+      var display = new Date(slot.time).toLocaleTimeString('de', {
+        hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timeZone,
+      });
+
+      var pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'px-2 py-2 rounded-xl border-2 border-slate-100 text-xs font-bold text-slate-700 bg-white hover:border-red-300 hover:text-red-600 transition-all';
+      pill.textContent = display;
+      pill.addEventListener('click', function() {
+        selectedSlot = slot.time;
+
+        // Show form
+        var d = new Date(selectedDate + 'T12:00:00');
+        var dateStr = d.toLocaleDateString('de', { weekday: 'short', month: 'short', day: 'numeric' });
+        document.getElementById('hcde-slot-label').textContent = dateStr + ' um ' + display;
+        formSection.classList.remove('hidden');
+
+        // Scroll form into view within the card
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+      container.appendChild(pill);
+    });
+  }
+
+  // Back to times
+  document.getElementById('hcde-back-times').addEventListener('click', function() {
+    formSection.classList.add('hidden');
+    selectedSlot = null;
+  });
+
+  // Form submit
+  document.getElementById('hcde-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name = document.getElementById('hcde-name').value.trim();
+    var email = document.getElementById('hcde-email').value.trim();
+    var phone = document.getElementById('hcde-phone').value.trim();
+    var notes = document.getElementById('hcde-notes').value.trim();
+    var errorEl = document.getElementById('hcde-error');
+    var submitText = document.getElementById('hcde-submit-text');
+    var submitLoading = document.getElementById('hcde-submit-loading');
+
+    if (!name || !email) {
+      errorEl.textContent = 'Name und E-Mail erforderlich.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    errorEl.classList.add('hidden');
+    submitText.classList.add('hidden');
+    submitLoading.classList.remove('hidden');
+    document.getElementById('hcde-submit').disabled = true;
+
+    var calPayload = {
+      eventTypeId: EVENT_TYPE_ID,
+      start: selectedSlot,
+      attendee: { name: name, email: email, timeZone: timeZone, language: 'de' },
+    };
+    if (phone || notes) {
+      calPayload.metadata = {};
+      if (phone) calPayload.metadata.phone = phone;
+      if (notes) calPayload.metadata.notes = notes;
+    }
+
+    // Lead capture (fire and forget)
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name, email: email, phone: phone, message: notes,
+        topic: 'Consultation Strategy Session', language: 'de',
+        source: window.location.href, flow: 'hero_booking_card_de',
+        url: window.location.href, device: 'desktop',
+        notes: { booked_slot: selectedSlot, booked_date: selectedDate },
+      }),
+    }).catch(function() {});
+
+    // Book via Cal.com v2
+    fetch(API_BASE + '/bookings', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + API_KEY,
+        'Content-Type': 'application/json',
+        'cal-api-version': '2024-08-13',
+      },
+      body: JSON.stringify(calPayload),
+    })
+      .then(function(res) {
+        if (!res.ok) {
+          return res.json().catch(function() { return {}; }).then(function(err) {
+            throw new Error(err.message || 'Buchung fehlgeschlagen');
+          });
+        }
+        return res.json();
+      })
+      .then(function() {
+        var time = new Date(selectedSlot);
+        var details = time.toLocaleDateString('de', { weekday: 'long', month: 'long', day: 'numeric', timeZone: timeZone }) +
+          ' um ' + time.toLocaleTimeString('de', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timeZone });
+        document.getElementById('hcde-done-details').textContent = details;
+        showSection('done');
+      })
+      .catch(function(err) {
+        errorEl.textContent = err.message || 'Buchung fehlgeschlagen. Bitte versuchen Sie es erneut.';
+        errorEl.classList.remove('hidden');
+      })
+      .finally(function() {
+        submitText.classList.remove('hidden');
+        submitLoading.classList.add('hidden');
+        document.getElementById('hcde-submit').disabled = false;
+      });
+  });
+
+  // "Send message" escape — opens the German consultation modal in message mode
+  document.getElementById('hcde-msg-toggle').addEventListener('click', function() {
+    if (typeof window.openGermanModal === 'function') {
+      window.openGermanModal('health');
+    }
+  });
+})();
+</script>

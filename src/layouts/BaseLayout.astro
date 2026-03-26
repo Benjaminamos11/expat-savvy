@@ -6,6 +6,8 @@ import ProfessionalSmartModal from "../components/ProfessionalSmartModal.astro";
 import ConsultationModal from "../components/consultation/ConsultationModal.astro";
 import RelocationModal from "../components/consultation/RelocationModal.astro";
 import SocialMediaImage from "../components/SocialMediaImage.astro";
+import FloatingBookingCTA from "../components/FloatingBookingCTA.astro";
+import InlineBookingCard from "../components/InlineBookingCard.astro";
 
 // Analytics Components - Consent Mode v2 compliant
 import GoogleTag from "../components/analytics/GoogleTag.astro";
@@ -80,6 +82,41 @@ const canonicalURL =
 // Define optimized favicon URL with automatic WebP delivery
 const favicon =
   "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto/v1740666308/expat_savvy_logo-1_qbkfl2_1_efj2bj.png";
+
+// Expert detection for FloatingBookingCTA (mobile)
+const pageUrl = Astro.url.pathname.toLowerCase();
+const pageExpertType =
+  pageUrl.includes("relocation")
+    ? "relocation"
+    : pageUrl.includes("pillar") || pageUrl.includes("pension") || pageUrl.includes("3rd-pillar")
+      ? "wealth"
+      : "health";
+
+const expertConfigs = {
+  health: {
+    name: "Robert Kolar",
+    title: "Insurance Expert",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    eventTypeId: 5135911,
+    apiKey: "cal_live_02d332e8841c6f13b371ee6dd3ca7ca8",
+  },
+  wealth: {
+    name: "Hans Steiner",
+    title: "Financial Planner IAF",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_200,h_200,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
+    eventTypeId: 5135911,
+    apiKey: "cal_live_02d332e8841c6f13b371ee6dd3ca7ca8",
+  },
+  relocation: {
+    name: "Kai Witt",
+    title: "Relocation Specialist",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    eventTypeId: 5134442,
+    apiKey: "cal_live_87e73f620f52768f61c2c7e99c89f4d1",
+  },
+};
+
+const activeExpertConfig = expertConfigs[pageExpertType] || expertConfigs.health;
 ---
 
 <!doctype html>
@@ -88,7 +125,7 @@ const favicon =
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
     />
 
     <!-- Favicon -->
@@ -239,6 +276,26 @@ const favicon =
       <slot />
     </main>
     <Footer />
+
+    <!-- Mobile floating booking CTA (site-wide) -->
+    <FloatingBookingCTA
+      expertName={activeExpertConfig.name}
+      expertTitle={activeExpertConfig.title}
+      expertImg={activeExpertConfig.img}
+      eventTypeId={activeExpertConfig.eventTypeId}
+      apiKey={activeExpertConfig.apiKey}
+    />
+
+    <!-- Sticky desktop booking card (site-wide, hides on homepage) -->
+    <InlineBookingCard
+      expertName={activeExpertConfig.name}
+      expertTitle={activeExpertConfig.title}
+      expertImg={activeExpertConfig.img}
+      eventTypeId={activeExpertConfig.eventTypeId}
+      apiKey={activeExpertConfig.apiKey}
+      topic={pageExpertType}
+    />
+
     <!-- Professional Smart Modal with complete 4-step flow -->
     <ProfessionalSmartModal />
     <ConsultationModal />

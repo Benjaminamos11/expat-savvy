@@ -15,6 +15,8 @@ import CookieBanner from "../components/analytics/CookieBanner.astro";
 
 import ConsultationModal from "../components/consultation/ConsultationModal.astro";
 import RelocationModal from "../components/consultation/RelocationModal.astro";
+import FloatingBookingCTA from "../components/FloatingBookingCTA.astro";
+import InlineBookingCard from "../components/InlineBookingCard.astro";
 
 interface Props {
   title: string;
@@ -68,6 +70,41 @@ const finalCanonicalURL = canonicalURL.endsWith("/")
   ? canonicalURL
   : canonicalURL + "/";
 
+// Expert detection for booking components
+const pageUrl = Astro.url.pathname.toLowerCase();
+const pageExpertType =
+  pageUrl.includes("relocation")
+    ? "relocation"
+    : pageUrl.includes("pillar") || pageUrl.includes("pension") || pageUrl.includes("3rd-pillar")
+      ? "wealth"
+      : "health";
+
+const expertConfigs = {
+  health: {
+    name: "Robert Kolar",
+    title: "Insurance Expert",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    eventTypeId: 5135911,
+    apiKey: "cal_live_02d332e8841c6f13b371ee6dd3ca7ca8",
+  },
+  wealth: {
+    name: "Hans Steiner",
+    title: "Financial Planner IAF",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_200,h_200,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
+    eventTypeId: 5135911,
+    apiKey: "cal_live_02d332e8841c6f13b371ee6dd3ca7ca8",
+  },
+  relocation: {
+    name: "Kai Witt",
+    title: "Relocation Specialist",
+    img: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    eventTypeId: 5134442,
+    apiKey: "cal_live_87e73f620f52768f61c2c7e99c89f4d1",
+  },
+};
+
+const activeExpertConfig = expertConfigs[pageExpertType] || expertConfigs.health;
+
 // Define CDN URLs
 const cdnBaseUrl = "https://res.cloudinary.com/dphbnwjtx/";
 const logoLight = `${cdnBaseUrl}image/upload/v1740080076/logo_light_expatsavvy_o8iaky.svg`;
@@ -106,7 +143,8 @@ const favicon =
       (function () {
         const hostname = window.location.hostname;
         const isIP = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(hostname);
-        if (isIP) {
+        const isLocal = hostname === 'localhost' || hostname === '0.0.0.0' || hostname.startsWith('127.0.0.');
+        if (isIP && !isLocal) {
           window.location.replace(
             "https://expat-savvy.ch" +
               window.location.pathname +
@@ -182,6 +220,25 @@ const favicon =
       <slot />
     </main>
     <Footer />
+
+    <!-- Mobile floating booking CTA -->
+    <FloatingBookingCTA
+      expertName={activeExpertConfig.name}
+      expertTitle={activeExpertConfig.title}
+      expertImg={activeExpertConfig.img}
+      eventTypeId={activeExpertConfig.eventTypeId}
+      apiKey={activeExpertConfig.apiKey}
+    />
+
+    <!-- Sticky desktop booking card -->
+    <InlineBookingCard
+      expertName={activeExpertConfig.name}
+      expertTitle={activeExpertConfig.title}
+      expertImg={activeExpertConfig.img}
+      eventTypeId={activeExpertConfig.eventTypeId}
+      apiKey={activeExpertConfig.apiKey}
+      topic={pageExpertType}
+    />
 
     <!-- Modals -->
     <VAG45Modal />

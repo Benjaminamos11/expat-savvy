@@ -1,6 +1,7 @@
 ---
 import LayoutDE from "../../layouts/LayoutDE.astro";
 import TestimonialsDE from "../../components/TestimonialsDE.astro";
+import HeroBookingCardDE from "../../components/de/HeroBookingCardDE.astro";
 
 const stats = [
     { number: "1000+", label: "Betreute Zuwanderer" },
@@ -53,135 +54,88 @@ const valuePoints = [
     title="Schweizer Versicherungs-Concierge für deutsche Zuwanderer | Expat-Savvy"
     description="Das Premium-Setup für deutsche Fach- und Führungskräfte. Sichern Sie sich Ihren PKV-Standard und optimieren Sie Ihre Quellensteuer in der Schweiz."
 >
-    <!-- Section 2: Hero Section -->
-    <div
-        class="relative min-h-[50vh] md:min-h-[90vh] flex items-center overflow-hidden hero-section"
-    >
-        <div class="absolute inset-0">
+    <!-- Hero Section -->
+    <div class="relative min-h-[90vh] flex items-center overflow-hidden pt-24 pb-16">
+        <!-- Background Image -->
+        <div class="absolute inset-0 pointer-events-none">
             <img
                 src="https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto:good,w_1920/v1760890750/a-cinematic-photograph-of-a-sleek-passen_zKS_uxq9SF-xqPSKAGnnoQ_3r9qjw1LR6qa6ndDMUZHIA_gly53k.png"
-                alt="Swiss mountains"
+                alt="Schweizer Berge"
                 class="w-full h-full object-cover object-top"
                 fetchpriority="high"
                 decoding="async"
                 width="1920"
                 height="1080"
             />
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30"
-            >
-            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/75 via-slate-900/50 to-slate-900/30 pointer-events-none"></div>
         </div>
 
-        <!-- Mobile layout -->
-        <div class="relative w-full mx-auto px-4 sm:px-6 md:hidden py-8">
-            <div class="text-center">
-                <h1
-                    class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow leading-tight"
-                >
-                    Ihr Schweizer Versicherungs-Concierge für deutsche Fach- und
-                    Führungskräfte.
-                </h1>
-                <p
-                    class="mt-3 text-base sm:text-lg text-white animate-slide-up text-shadow"
-                >
-                    Sichern Sie sich Ihren deutschen PKV-Standard, optimieren
-                    Sie Ihre Quellensteuer und buchen Sie Ihre digitale
-                    Bedarfsanalyse – auch bequem nach 19 Uhr.
-                </p>
-                <div
-                    class="mt-6 flex flex-col items-center gap-3 animate-slide-up"
-                >
-                    <button
-                        class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                        onclick="window.dispatchEvent(new CustomEvent('openGermanModal', { detail: { topic: 'health' } }))"
-                    >
-                        Digitale Beratung buchen
-                        <svg
-                            class="ml-2 h-5 w-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            ><path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
-                        >
-                    </button>
-                    <div
-                        class="flex items-center justify-center text-sm text-white mt-2 w-full"
-                    >
-                        <div
-                            class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm max-w-[90vw]"
-                        >
-                            <span id="booking-count" class="text-xs text-center"
-                                >8 Personen haben kürzlich eine Beratung gebucht</span
-                            >
-                        </div>
+        <!-- Main Content Grid -->
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 max-w-[1440px]">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Left Column: Copy & Trust -->
+                <div class="lg:col-span-6 lg:pr-8 space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-slate-800/60 rounded-full px-4 py-1.5 border border-slate-600/50 backdrop-blur-sm">
+                        <svg class="w-4 h-4 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span class="text-xs font-medium tracking-wide text-slate-200 uppercase">FINMA-registrierter Broker</span>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Desktop layout -->
-        <div class="relative w-full mx-auto hidden md:block">
-            <div class="grid grid-cols-12 gap-4">
-                <div
-                    class="col-span-6 col-start-2 flex items-center justify-center"
-                >
-                    <div class="text-left max-w-xl">
-                        <h1
-                            class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in text-shadow leading-tight"
-                        >
-                            Ihr Schweizer Versicherungs-Concierge für deutsche
-                            Fach- und Führungskräfte.
-                        </h1>
-                        <p
-                            class="mt-6 text-xl text-white animate-slide-up text-shadow"
-                        >
-                            Sichern Sie sich Ihren deutschen PKV-Standard,
-                            optimieren Sie Ihre Quellensteuer und buchen Sie
-                            Ihre digitale Bedarfsanalyse – auch bequem nach 19
-                            Uhr.
-                        </p>
-                        <div
-                            class="mt-10 flex flex-col items-start gap-4 animate-slide-up"
-                        >
-                            <button
-                                class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg"
-                                onclick="window.dispatchEvent(new CustomEvent('openGermanModal', { detail: { topic: 'health' } }))"
-                            >
-                                Digitale Beratung buchen
-                                <svg
-                                    class="ml-2 h-5 w-5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    ><path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                    ></path></svg
-                                >
-                            </button>
-                            <div class="flex items-center text-sm text-white">
-                                <div
-                                    class="inline-flex items-center bg-green-900/30 py-1 px-3 rounded-full backdrop-blur-sm"
-                                >
-                                    <span
-                                        id="booking-count-desktop"
-                                        class="whitespace-nowrap"
-                                        >8 Personen haben in den letzten 24
-                                        Stunden eine Beratung gebucht</span
-                                    >
-                                </div>
+                    <h1 class="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white mb-6 text-shadow break-words uppercase font-heading">
+                        1.000+ Expats vertrauen auf Savvy-Beratung.
+                    </h1>
+
+                    <p class="text-base sm:text-xl text-slate-200 max-w-full lg:max-w-xl leading-relaxed text-shadow mb-8">
+                        Krankenversicherung, 3. Säule, Steueroptimierung — unsere Experten haben Tausende Expats zu besserem Schutz und tieferen Kosten beraten. Kostenlos, unabhängig und immer an Ihrer Seite.
+                    </p>
+
+                    <button class="hidden w-full sm:w-auto px-8 py-5 rounded-3xl bg-red-600 text-white font-black text-xl shadow-2xl shadow-red-600/30 hover:bg-red-700 transition-all flex items-center justify-center gap-4 active:scale-95 border-b-4 border-red-800 group"
+                        onclick="window.dispatchEvent(new CustomEvent('openGermanModal', { detail: { topic: 'health' } }))">
+                        Kostenlose Beratung buchen
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </button>
+
+                    <!-- Trust Cards -->
+                    <div class="space-y-4 max-w-md hidden sm:block">
+                        <div class="flex items-start p-5 rounded-2xl bg-slate-900/60 border border-slate-700/60 backdrop-blur-md">
+                            <div class="bg-primary-500/10 p-2.5 rounded-lg mr-4 shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a2.12 2.12 0 1 0 3-3L15 9l-1-1 4-4a2.12 2.12 0 1 0-3-3l-4 4-1-1L5 8l2.5 2.5a2.12 2.12 0 1 0-3 3L7 16l-3 3a2.12 2.12 0 1 0 3 3l3-3"/><path d="m9 13.5 1.5 1.5"/><path d="m9 9 1.5 1.5"/><path d="m13.5 15 1.5 1.5"/><path d="m15 10.5 1.5 1.5"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-1">100% Kostenlose Beratung</h3>
+                                <p class="text-sm text-slate-300">Wir werden von den Anbietern vergütet — Ihre Beratung bleibt immer kostenlos.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start p-5 rounded-2xl bg-slate-900/60 border border-slate-700/60 backdrop-blur-md">
+                            <div class="bg-primary-500/10 p-2.5 rounded-lg mr-4 shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-primary-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-1">Unverbindlich</h3>
+                                <p class="text-sm text-slate-300">Alle Optionen in Ruhe prüfen — kein Druck, keine Verpflichtung.</p>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Testimonial -->
+                    <div class="mt-8 pt-6 border-t border-slate-700/50">
+                        <div class="flex space-x-1 mb-2">
+                            <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg class="w-4 h-4 text-yellow-500 fill-yellow-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="text-sm text-slate-200 italic mb-2">"Die Beratung hat mir über CHF 1.200 jährlich bei der Grundversicherung gespart. Professionell und sehr effizient."</p>
+                        <p class="text-xs font-semibold text-white">— Marc-Andre, Zürich</p>
+                    </div>
                 </div>
-                <div class="col-span-6"></div>
+
+                <!-- Right Column: Booking Card (Desktop) -->
+                <div class="lg:col-span-6 lg:pl-4 hidden lg:flex justify-center items-start">
+                    <HeroBookingCardDE />
+                </div>
             </div>
         </div>
     </div>
