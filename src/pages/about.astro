@@ -3,118 +3,73 @@ import Layout from '../layouts/Layout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 
 const stats = [
-  { number: "1000+", label: "Happy Clients" },
-  { number: "100%", label: "English Support" },
-  { number: "Independent", label: "Insurance Broker" },
-  { number: "11+", label: "Years Experience" }
+  { number: "1,000+", label: "Expats Helped" },
+  { number: "11+", label: "Years Experience" },
+  { number: "100%", label: "Independent" },
+  { number: "3", label: "Languages" }
 ];
 
 const teamMembers = [
   {
-    name: "Benjamin Amos Wagner",
-    role: "Founder & Partner, Digital Strategy",
-    description: "With over two decades of experience in Swiss insurance and expat services, Benjamin combines technical expertise with deep industry knowledge to create innovative digital solutions that simplify insurance decisions. His focus is on making information accessible and processes smoother for every expat.",
-    expertise: ["Digital Innovation", "Insurance Technology", "Process Optimization", "Expat Journey Simplification"],
-    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/e_improve,e_sharpen/v1746960732/profilebild2_tar0si_qp4ybc.webp",
-    linkedin: "https://www.linkedin.com/in/benjamin-amos-wagner-5a7888a5/"
-  },
-  {
     name: "Robert Kolar",
-    role: "Partner, Senior Consultant - Education & Insurance Partnerships",
-    description: "With extensive experience in Swiss insurance and a background in teaching, Robert specializes in making complex insurance topics understandable for expats. He is responsible for developing educational resources and fostering strong partnerships with insurance providers to ensure our clients have access to the best options. His expertise in customer service ensures every client receives personalized, clear guidance.",
-    expertise: ["Swiss Health Insurance", "Pension Planning", "Expat Insurance Needs", "Insurance Education & Training", "Provider Relations"],
-    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_150,h_150,q_95,f_webp,c_fill,g_face,e_sharpen:100/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    role: "Health Insurance Expert",
+    description: "Robert specializes in making Swiss health insurance understandable. He guides expats through every step — from choosing the right provider to optimizing coverage.",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,e_sharpen:60,w_400,a_hflip/v1774375416/Generated_Image_March_24_2026_-_9_02PM_rbjaw1.jpg",
     linkedin: "https://www.linkedin.com/in/robert-kolar-9bb889152/"
+  },
+  {
+    name: "Hans Steiner",
+    role: "Life Insurance & Financial Planning",
+    description: "Hans is a certified Financial Planner IAF specializing in life insurance, 3rd pillar, and pension planning for expats. He provides independent advice in English, German, and French.",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_400,h_400,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
+    linkedin: ""
+  },
+  {
+    name: "Benjamin Amos Wagner",
+    role: "Founder & Digital Strategy",
+    description: "Benjamin founded Expat Savvy to bridge the gap between complex Swiss insurance systems and the international community. He drives the digital experience and partnerships.",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_400,e_improve,e_sharpen/v1746960732/profilebild2_tar0si_qp4ybc.webp",
+    linkedin: "https://www.linkedin.com/in/benjamin-amos-wagner-5a7888a5/"
   }
 ];
 
-const supportTeam = [
-  {
-    name: "Karina Ilina",
-    role: "Marketing & Social Media Lead",
-    description: "Karina is the creative force behind Expat Savvy's voice and visual presence. With a keen eye for detail and a passion for connecting with the expat community, she ensures our message of support and clarity reaches those who need it most. Karina manages our social media channels, creates insightful content, and works to build a vibrant online community where expats can find valuable information and feel understood. She's dedicated to making sure Expat Savvy is not just a service, but a welcoming resource."
-  },
-  {
-    name: "Maksim Wagner",
-    role: "Junior Consultant",
-    description: "Maksim is an enthusiastic and dedicated member of our consulting team, eager to support expats on their Swiss journey. He assists our senior consultants, helps clients with their queries, and is quickly developing a strong understanding of the intricacies of Swiss insurance. Maksim brings a fresh perspective and a genuine desire to help, ensuring our clients receive prompt and friendly assistance. He is committed to learning and growing within the field to provide the best possible support."
-  }
-];
-
-const premiumPartners = [
-  {
-    name: "Prime Relocation",
-    logo: "https://cdn.prod.website-files.com/6718b88a9ad8ce0f3ec5e7a6/672df357ed71370900ec04cb_output-onlinepngtools-p-800.png",
-    url: "https://primerelocation.ch",
-    description: "Expert relocation services for expats moving to Switzerland"
-  },
+const insurancePartners = [
   {
     name: "Lang Partner",
     logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746957117/download_1_zvevoy.webp",
     url: "#",
-    description: "Insurance services partner"
+    invert: true
   },
   {
-    name: "Unterwaldner",
-    logo: "https://cdn.prod.website-files.com/670399972bf5fa97ae3c3673/677ed5bf9dc7dfee71627384_logo-unterwaldner.png",
-    url: "#",
-    description: "Insurance and financial services"
-  },
-  {
-    name: "Howden",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746957117/howden-logo_u0qt9q.webp",
-    url: "https://www.howdengroup.com/",
-    description: "Global insurance solutions"
+    name: "SIP Medical Family Office",
+    logo: "https://www.sip.ch/wp-content/uploads/2024/10/SIP_medical_family_office-white_600px.png",
+    url: "https://www.sip.ch",
+    invert: true
   }
 ];
 
-const values = [
-  {
-    title: "Real Talk",
-    description: "We speak your language (literally – our team is multilingual!) and we explain things clearly, without the confusing jargon.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-    </svg>`
-  },
-  {
-    title: "Your Needs First",
-    description: "We're independent. That means our advice is always about what's best for you, not for any particular insurance company.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>`
-  },
-  {
-    title: "Empathy in Action",
-    description: "We understand the expat journey because many of us have lived it. We know the questions you have before you even ask them.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-    </svg>`
-  },
-  {
-    title: "Building Connections",
-    description: "We want to be more than just your insurance advisors. We want to be a trusted resource you can turn to, helping you feel more connected and confident in your new Swiss life.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>`
-  }
+const strategicPartners = [
+  { name: "holistiq", logo: "https://www.holistiq.ch/wp-content/uploads/2023/11/holistiq_logo_rgb_blue-1.svg", url: "https://www.holistiq.ch" },
+  { name: "OFFLIST", url: "https://www.offlist.ch", text: true },
+  { name: "relofinder.ch", url: "https://relofinder.ch", text: true },
+  { name: "expat-services.ch", url: "https://www.expat-services.ch", text: true },
+  { name: "insurance-guide.ch", url: "https://www.insurance-guide.ch", text: true },
+  { name: "Primai", logo: "https://cdn.prod.website-files.com/670399972bf5fa97ae3c3673/670d2f8db17cbef11aecb233_Untitled%20design%20(26)-p-500.png", url: "https://primai.ch" },
+  { name: "KillBill", logo: "https://killbill.ch/footer_logo_sticker.webp", url: "https://killbill.ch" },
 ];
 
-const testimonials = [
-  {
-    text: "Moving to Switzerland was overwhelming, but Expat Savvy made insurance so simple. They saved me over 2000 CHF annually!",
-    author: "Sarah T.",
-    role: "Software Engineer from UK"
-  },
-  {
-    text: "Their holistic approach helped me understand exactly what coverage I needed. Best decision I made after moving to Zürich.",
-    author: "Marco R.",
-    role: "Finance Professional from Italy"
-  },
-  {
-    text: "As a family of four, we needed comprehensive coverage. They found us the perfect balance of protection and cost.",
-    author: "Jennifer C.",
-    role: "Research Scientist from Singapore"
-  }
+const relocationPartners = [
+  { name: "Prime Relocation", logo: "https://cdn.prod.website-files.com/6718b88a9ad8ce0f3ec5e7a6/672df357ed71370900ec04cb_output-onlinepngtools-p-800.png", url: "https://primerelocation.ch", darken: true },
+  { name: "Lifestyle Managers", logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_400/v1774170519/Logo-LSM-black_uojfuu.avif", url: "https://lifestylemanagers.ch" },
+  { name: "Welcome Service", logo: "https://www.welcome-service.ch/wp-content/uploads/2016/01/logo_welcome_service.gif.gif", url: "https://www.welcome-service.ch" },
+  { name: "ReloNest", logo: "https://static.wixstatic.com/media/ce89dd_216a795ccb9745079cd192d82bc2b121~mv2.png/v1/crop/x_0,y_0,w_2895,h_812/fill/w_580,h_163,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Logo%20ReloNest%20v1.png", url: "https://www.relonest.com" },
+  { name: "Lodge Relocation", logo: "https://www.lodge-relocation.com/wp-content/uploads/2025/10/Logo-Lodge-relocation-1-1-150x150.png", url: "https://www.lodge-relocation.com" },
+  { name: "JustRelocated", logo: "https://img1.wsimg.com/isteam/ip/c24fc830-fa4d-4aa5-998f-dd9c3bb449a4/web%20site%20ia%CC%81in%20yatay.png/:/rs=w:987,h:150,cg:true,m/cr=w:987,h:150/qt=q:95", url: "#" },
+];
+
+const techPartners = [
+  { name: "OpenHermit", logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/e_background_removal/f_auto,q_auto/v1772955454/IMG_0667_mcncry.png", url: "https://openhermit.com", desc: "AI Agent Ready" },
+  { name: "vibestudio.ch", url: "https://vibestudio.ch", text: true, desc: "Development & Technology" },
 ];
 ---
 
@@ -122,7 +77,6 @@ const testimonials = [
   title="About Expat Savvy | Swiss Insurance Experts"
   canonicalURLProp="https://expat-savvy.ch/about/"
 >
-  <!-- Schema.org markup -->
   <script type="application/ld+json" slot="head">
     {
       "@context": "https://schema.org",
@@ -151,405 +105,204 @@ const testimonials = [
       "employee": [
         {
           "@type": "Person",
-          "name": "Benjamin Amos Wagner",
-          "jobTitle": "Founder & Partner, Digital Strategy",
-          "sameAs": "https://www.linkedin.com/in/benjamin-amos-wagner-5a7888a5/"
+          "name": "Robert Kolar",
+          "jobTitle": "Health Insurance Expert",
+          "sameAs": "https://www.linkedin.com/in/robert-kolar-9bb889152/"
         },
         {
           "@type": "Person",
-          "name": "Robert Kolar",
-          "jobTitle": "Partner, Senior Consultant - Education & Insurance Partnerships",
-          "sameAs": "https://www.linkedin.com/in/robert-kolar-9bb889152/"
+          "name": "Hans Steiner",
+          "jobTitle": "Life Insurance & Financial Planning"
+        },
+        {
+          "@type": "Person",
+          "name": "Benjamin Amos Wagner",
+          "jobTitle": "Founder & Digital Strategy",
+          "sameAs": "https://www.linkedin.com/in/benjamin-amos-wagner-5a7888a5/"
         }
       ]
     }
   </script>
 
-  <!-- Hero Section -->
-  <div class="relative bg-white overflow-hidden">
-    <div class="absolute inset-0">
-      <img 
-        src="https://res.cloudinary.com/dphbnwjtx/image/upload/v1746955727/a-photograph-of-a-pair-of-weathered-hand_VtrAh5xzQTyf2G3A5waPuw_JX12TClHSTyC9fW-makmfw_jutsp1.webp"
-        alt="Swiss landscape"
-        class="w-full h-full object-cover"
-        width="1920"
-        height="1080"
-      />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
-    </div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-          <span class="block">More Than Just Insurance:</span>
-          <span class="block mt-2">It's About Your <span class="text-primary-500">Swiss Adventure</span></span>
-        </h1>
-      </div>
-    </div>
-  </div>
-
-  <!-- Our Story Section - Redesigned as one cohesive section -->
-  <div class="bg-gray-50 py-16 relative">
-    <!-- Background pattern -->
-    <div class="absolute inset-0 pattern-diagonal-noise opacity-30 pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Our Story</h2>
-        
-        <div class="bg-white p-8 rounded-lg shadow-lg border border-primary-400/30 mb-12 relative z-10">
-          <p class="text-lg text-gray-700 mb-6">
-            Hey there! I'm Benjamin, and if you're reading this, chances are you're either planning a move to Switzerland or you've recently arrived and are trying to make sense of it all. Believe me, I get it. More than you might think.
-          </p>
-          
-          <p class="text-lg text-gray-700 mb-6">
-            For years, I've lived what many call a 'digital nomad' lifestyle. I've packed my bags and landed in more new countries than I can count on both hands – each with its own unique charm, its own set of rules, and yes, its own bewildering bureaucracy. It's not always the straightforward 'expat' assignment; often it's been about diving headfirst into the unknown, figuring things out as I go. That feeling of being 'new,' where everything from the language on the street signs to the way you buy a train ticket is an adventure (and sometimes a challenge!), is something I know intimately.
-          </p>
-          
-          <p class="text-lg text-gray-700 mb-10">
-            And through all these travels and transitions, one thing became crystal clear: when you're trying to build a life or even just settle in for a while, the last thing you want to be bogged down by is confusing paperwork and systems you don't understand. Especially when it comes to something as vital as your health and security.
-          </p>
-          
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Why Expat Savvy? Because Helping Feels Good.</h3>
-          
-          <p class="text-lg text-gray-700 mb-6">
-            With over 20 years of experience as an insurance consultant, I've seen the ins and outs of the industry. I've seen how complex it can be, but also how crucial the right protection is. When I started focusing more on Switzerland, a country I deeply admire for its quality of life and stunning beauty, I saw a gap. So many international folks were arriving, full of hope and excitement, only to hit a wall of confusion when it came to Swiss insurance.
-          </p>
-          
-          <p class="text-lg text-gray-700 mb-6">
-            I wanted to change that. Honestly? Because nothing gives back more than genuinely helping someone navigate a tricky situation and seeing that look of relief on their face. It's about taking that burden off your shoulders so you can actually enjoy the incredible experience of living in Switzerland.
-          </p>
-          
-          <p class="text-lg text-gray-700 mb-10">
-            Expat Savvy was born from this desire: to be that down-to-earth, straightforward guide for expats and global minds. We're not about stuffy corporate talk or pushing products. We're about listening to your story, understanding your needs, and finding the simplest, clearest path to getting you properly set up and feeling secure. We're here to translate the complex into the understandable, to be your friendly advisors who've got your back.
-          </p>
-          
-          <h3 class="text-xl font-bold text-gray-900 mb-6">Our Approach: Human, Honest, and Here for You</h3>
-          
-          <p class="text-lg text-gray-700 mb-6">We believe in a few simple things:</p>
-          
-          <div class="grid grid-cols-2 gap-4 mb-10">
-            {values.map(value => (
-              <div class="flex items-start bg-gray-50 p-4 rounded-md">
-                <div class="text-primary-600 mr-3 mt-1">
-                  <Fragment set:html={value.icon} />
-                </div>
-                <div>
-                  <h4 class="text-base font-bold text-gray-900 mb-1">{value.title}</h4>
-                  <p class="text-sm text-gray-600">{value.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <p class="text-lg text-gray-700 mb-4">
-            This isn't just a business for me, or for our team. It's a passion. It's about making a real difference for people embarking on one of life's big adventures.
-          </p>
-          
-          <p class="text-lg text-gray-700 mb-10">
-            So, whether you're just starting to plan your move or you're already here and feeling a bit overwhelmed, reach out. Let's chat. Let's figure it out together. Welcome to Switzerland – we're thrilled to help you make it home.
-          </p>
-          
-          <p class="text-lg font-medium text-gray-900">
-            Warmly,<br>
-            Benjamin Amos Wagner
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Our Values Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Values</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Expertise & Experience Value -->
-        <div class="bg-white rounded-lg p-8 shadow-md border border-gray-100">
-          <div class="text-primary-600 mb-4">
-            <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Expertise & Experience</h3>
-          <p class="text-gray-600">
-            Our team combines deep knowledge of Swiss insurance with years of experience serving expats. We understand both the technical aspects of insurance and the unique challenges faced by international residents.
-          </p>
-        </div>
-        
-        <!-- Independence & Transparency Value -->
-        <div class="bg-white rounded-lg p-8 shadow-md border border-gray-100">
-          <div class="text-primary-600 mb-4">
-            <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Independence & Transparency</h3>
-          <p class="text-gray-600">
-            As an independent broker, we're not tied to any insurance company. This allows us to provide unbiased advice and find the best solutions for our clients, always with full transparency about costs and benefits.
-          </p>
-        </div>
-        
-        <!-- Client-Centric Approach Value -->
-        <div class="bg-white rounded-lg p-8 shadow-md border border-gray-100">
-          <div class="text-primary-600 mb-4">
-            <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Client-Centric Approach</h3>
-          <p class="text-gray-600">
-            Every client's situation is unique. We take the time to understand your specific needs and circumstances to provide personalized recommendations that truly work for you.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Team Section -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Our Team</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {teamMembers.map(member => (
-          <div class="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">
-            <div class="p-8 flex-1 flex flex-col">
-              <div class="flex flex-col items-center mb-8">
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  srcset={member.image.includes('webp') ? 
-                    `${member.image.replace('/e_improve,e_sharpen/', '/c_scale,w_200,e_improve,e_sharpen/')} 200w,
-                     ${member.image.replace('/e_improve,e_sharpen/', '/c_scale,w_300,e_improve,e_sharpen/')} 300w,
-                     ${member.image.replace('/e_improve,e_sharpen/', '/c_scale,w_400,e_improve,e_sharpen/')} 400w` : ''}
-                  sizes="(max-width: 640px) 200px, (max-width: 1024px) 300px, 400px"
-                  class="h-48 w-48 rounded-full object-cover mb-4"
-                  width="400"
-                  height="400"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="text-center">
-                  <h3 class="text-2xl font-bold text-gray-900">{member.name}</h3>
-                  <p class="text-primary-600">{member.role}</p>
-                </div>
-              </div>
-              <p class="text-gray-600 mb-6 flex-grow">{member.description}</p>
-              <div class="space-y-4 mb-8">
-                <h4 class="font-semibold text-gray-900">Areas of Expertise:</h4>
-                <ul class="space-y-3">
-                  {member.expertise.map(item => (
-                    <li class="flex items-start text-gray-600">
-                      <svg class="h-5 w-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span class="leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div class="mt-auto pt-6 border-t border-gray-100">
-                <a 
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center w-full px-4 py-2 border border-primary-600 text-sm font-medium rounded-md text-primary-600 bg-white hover:bg-primary-600 hover:text-white transition-colors duration-200"
-                >
-                  <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                  </svg>
-                  Connect with me
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <!-- Supporting Team Members -->
-      <div class="max-w-3xl mx-auto mt-16">
-        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Our Supporting Team</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {supportTeam.map(member => (
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <h4 class="text-xl font-bold text-gray-900 mb-2">{member.name}</h4>
-              <p class="text-primary-600 mb-4">{member.role}</p>
-              <p class="text-gray-600">{member.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      <!-- Open Positions Button -->
-      <div class="text-center mt-12">
-        <a 
-          href="/careers" 
-          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 shadow-md transition-colors"
-        >
-          View Open Positions
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Premium Partners Section -->
-  <div class="bg-gray-900 py-16 text-white relative">
-    <!-- Background pattern -->
-    <div class="absolute inset-0 pattern-black-twill opacity-40 pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <h2 class="text-3xl font-extrabold text-center mb-12">Our Partners</h2>
-      <p class="text-gray-300 max-w-3xl mx-auto text-center mb-12">
-        Beyond our core team, we believe in the power of collaboration. We work closely with a trusted network of freelance specialists and partner companies in various fields – from relocation services to legal advice and tax consultancy. This allows us to provide you with comprehensive support that goes beyond just insurance, ensuring you have access to the expertise you need for a smooth transition into Swiss life.
+  <!-- Hero -->
+  <div class="bg-white py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-red-500 font-bold text-sm tracking-widest uppercase mb-4">About Us</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-5">
+        Insurance Guidance That's Actually <span class="text-red-400">Savvy</span>.
+      </h1>
+      <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-12">
+        Independent advice for expats in Switzerland. No jargon, no bias — just clear answers.
       </p>
-      
-      <h3 class="text-2xl font-bold text-center mb-8">Premium Partners</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {premiumPartners.map(partner => (
-          <a 
-            href={partner.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col items-center justify-center transform transition-transform hover:scale-105 h-40 border border-gray-700 hover:border-primary-500/50"
-          >
-            <img 
-              src={partner.logo} 
-              alt={partner.name}
-              class="h-16 object-contain mb-4"
-              width="200"
-              height="64"
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {stats.map(stat => (
+          <div class="text-center">
+            <div class="text-2xl md:text-3xl font-black text-slate-900">{stat.number}</div>
+            <div class="w-8 h-0.5 bg-red-500 mx-auto mt-2 mb-2"></div>
+            <div class="text-sm text-slate-500 font-medium">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Who We Are -->
+  <div class="bg-slate-50 py-16 md:py-20 border-t border-slate-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6 text-center">Who We Are</h2>
+      <div class="space-y-5 text-slate-600 text-lg leading-relaxed">
+        <p>
+          Expat Savvy is an independent insurance brokerage based in Zürich, built specifically for the international community in Switzerland. We're not tied to any insurer — our only commitment is to you.
+        </p>
+        <p>
+          Swiss insurance is complex. Between mandatory health coverage, supplementary plans, pension pillars, and life insurance, it's easy to feel lost. We cut through the noise and give you clear, honest recommendations based on your actual situation.
+        </p>
+        <p>
+          Whether you just arrived or you've been here for years, we help you find the right coverage at the right price — and we handle the paperwork so you don't have to.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="bg-white py-16 md:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-red-500 font-bold text-sm tracking-widest uppercase mb-3">Our Team</p>
+        <h2 class="text-3xl font-bold text-slate-900">The People Behind Expat Savvy</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {teamMembers.map(member => (
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-8 text-center">
+            <img
+              src={member.image}
+              alt={member.name}
+              class="w-28 h-28 rounded-lg object-cover mx-auto mb-5"
+              width="112"
+              height="112"
+              loading="lazy"
+              decoding="async"
             />
-            <p class="text-gray-300 text-center text-sm">{partner.description}</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
+            <p class="text-red-500 font-medium text-sm mb-4">{member.role}</p>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">{member.description}</p>
+            {member.linkedin && (
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-red-500 transition-colors"
+              >
+                <svg class="h-4 w-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Partners -->
+  <div class="bg-slate-50 py-16 md:py-20 border-t border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-red-500 font-bold text-sm tracking-widest uppercase mb-3">Network</p>
+        <h2 class="text-3xl font-bold text-slate-900 mb-3">Trusted by Leading Partners</h2>
+        <p class="text-slate-500 max-w-xl mx-auto">We work with trusted partners in relocation, insurance, and financial services.</p>
+      </div>
+
+      <!-- Strategic Partners -->
+      <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Strategic Partners</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-10">
+        {strategicPartners.map(partner => (
+          <a href={partner.url} target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg border border-slate-200 hover:border-red-300 transition-all p-5 flex items-center justify-center h-20">
+            {partner.text ? (
+              <span class="text-sm font-bold text-slate-700 tracking-tight">{partner.name}</span>
+            ) : (
+              <img src={partner.logo} alt={partner.name} class="h-8 object-contain max-w-[140px]" width="140" height="32" loading="lazy" />
+            )}
           </a>
         ))}
       </div>
-      
-      <div class="mt-16 text-center">
-        <h3 class="text-2xl font-bold mb-4">Interested in Partnering with Us?</h3>
-        <p class="text-gray-300 max-w-2xl mx-auto mb-8">
-          We are always happy to connect with new partners who share our commitment to helping expats thrive in Switzerland. If you believe our services align and we can help each other get forward, we'd love to hear from you.
-        </p>
-        <a 
-          href="mailto:hello@expat-savvy.ch?subject=Partnership Inquiry" 
-          class="inline-flex items-center justify-center px-6 py-3 border border-primary-400 text-base font-medium rounded-md text-white bg-primary-600/80 hover:bg-primary-500 transition-colors shadow-md"
+
+      <!-- Insurance Partners -->
+      <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Insurance & Financial</h3>
+      <div class="grid grid-cols-2 gap-3 mb-10">
+        {insurancePartners.map(partner => (
+          <a href={partner.url} target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg border border-slate-200 hover:border-red-300 transition-all p-5 flex items-center justify-center h-20">
+            <img src={partner.logo} alt={partner.name} class={`h-8 object-contain max-w-[140px] ${partner.invert ? 'invert' : ''}`} width="140" height="32" loading="lazy" />
+          </a>
+        ))}
+      </div>
+
+      <!-- Relocation Partners -->
+      <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Relocation Network</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 mb-10">
+        {relocationPartners.map(partner => (
+          <a href={partner.url} target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg border border-slate-200 hover:border-red-300 transition-all p-5 flex items-center justify-center h-20">
+            <img src={partner.logo} alt={partner.name} class={`h-8 object-contain max-w-[140px] ${partner.darken ? 'brightness-[0.3]' : ''}`} width="140" height="32" loading="lazy" />
+          </a>
+        ))}
+      </div>
+
+      <!-- Technology -->
+      <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Technology & Innovation</h3>
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        {techPartners.map(partner => (
+          <a href={partner.url} target="_blank" rel="noopener noreferrer" class="bg-white rounded-lg border border-slate-200 hover:border-red-300 transition-all p-5 flex items-center justify-center h-20 gap-3">
+            {partner.text ? (
+              <span class="text-sm font-bold text-slate-700 tracking-tight">{partner.name}</span>
+            ) : (
+              <img src={partner.logo} alt={partner.name} class="h-8 object-contain max-w-[100px]" width="100" height="32" loading="lazy" />
+            )}
+            <span class="text-xs text-slate-400">{partner.desc}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a
+          href="mailto:hello@expat-savvy.ch?subject=Partnership Inquiry"
+          class="text-sm font-medium text-slate-500 hover:text-red-500 transition-colors"
         >
-          Get in Touch to Discuss Partnership Opportunities
+          Interested in partnering? Get in touch →
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Why Choose Us Section -->
-  <div class="bg-white py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">Why Choose Expat Savvy? Your Journey, Simplified.</h2>
-        <p class="text-lg text-gray-700 mb-6">
-          Navigating a new country's systems can feel like a maze. Here's how we help you find the clear path:
-        </p>
-        <ul class="space-y-4">
-          <li class="flex items-start">
-            <svg class="h-6 w-6 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <div>
-              <span class="font-bold text-gray-900">We Get Expats:</span>
-              <span class="text-gray-700"> We specialize in the unique needs of the international community. We've been there, or we work closely with those who have.</span>
-            </div>
-          </li>
-          <li class="flex items-start">
-            <svg class="h-6 w-6 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <div>
-              <span class="font-bold text-gray-900">Advice You Can Trust:</span>
-              <span class="text-gray-700"> As independent advisors, our recommendations are always unbiased and tailored to your specific situation.</span>
-            </div>
-          </li>
-          <li class="flex items-start">
-            <svg class="h-6 w-6 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <div>
-              <span class="font-bold text-gray-900">Clarity is Key:</span>
-              <span class="text-gray-700"> No more confusing insurance-speak. We explain everything in plain, simple terms.</span>
-            </div>
-          </li>
-          <li class="flex items-start">
-            <svg class="h-6 w-6 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <div>
-              <span class="font-bold text-gray-900">Personalized Support, Every Step:</span>
-              <span class="text-gray-700"> From your first question to ongoing policy management, we're here for you.</span>
-            </div>
-          </li>
-          <li class="flex items-start">
-            <svg class="h-6 w-6 text-primary-500 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <div>
-              <span class="font-bold text-gray-900">Save Time & Reduce Stress:</span>
-              <span class="text-gray-700"> Let us handle the complexities so you can focus on settling in and enjoying Switzerland.</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Final CTA Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Ready to Chat? Let's Make Your Swiss Start a Great One.</h2>
-        <p class="text-lg text-gray-700 mb-8">
-          Whether you have a quick question or need a full insurance review, we're here to help. We love connecting with fellow global minds and helping them feel secure and at home in Switzerland.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onclick="window.openHealthModal('home')"
-            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-md"
-          >
-            Contact Us Today for a Free Consultation
-          </button>
-          
-          <a
-            href="/contact"
-            class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors shadow-sm"
-          >
-            Get In Touch
-          </a>
-        </div>
+  <!-- CTA -->
+  <div class="bg-white py-16 md:py-20 border-t border-slate-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4">
+        Ready to Make the <span class="text-red-400">Savvy</span> Choice?
+      </h2>
+      <p class="text-lg text-slate-500 mb-8">
+        Book a free consultation and get clear, independent advice tailored to your situation.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button
+          onclick="window.openHealthModal('home')"
+          class="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 shadow-lg shadow-red-200 transition-all"
+        >
+          Book Free Consultation
+        </button>
+        <a
+          href="https://wa.me/41763648888"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all"
+        >
+          <svg class="h-5 w-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp
+        </a>
       </div>
     </div>
   </div>
 
 </Layout>
-
-<style>
-  /* Fix container alignment issue */
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Responsive adjustments for values grid */
-  @media (max-width: 640px) {
-    .grid-cols-2 {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Black twill pattern background */
-  .pattern-black-twill {
-    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/black_twill.png');
-    background-repeat: repeat;
-  }
-
-  /* Diagonal noise pattern from Subtle Patterns */
-  .pattern-diagonal-noise {
-    background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/diagonal-noise.png');
-    background-repeat: repeat;
-    background-size: 250px 250px;
-  }
-</style>
