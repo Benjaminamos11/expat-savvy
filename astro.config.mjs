@@ -9,8 +9,8 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [
-    tailwind(),
     react(),
+    tailwind(),
     sitemap({
       filter: (page) => {
         // Exclude 404 page from sitemap
@@ -32,4 +32,7 @@ export default defineConfig({
   ],
   site: 'https://expat-savvy.ch',
   compressHTML: true,
+  build: {
+    inlineStylesheets: 'always',
+  },
 });

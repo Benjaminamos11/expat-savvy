@@ -1,0 +1,295 @@
+---
+// SavvyAIChat.astro — Full-screen vanilla JS chat component
+---
+
+<!-- Header -->
+<header style="position:fixed;top:0;left:0;right:0;height:56px;background:#1e293b;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:50;">
+  <a href="/" style="color:#94a3b8;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px;">
+    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div style="width:28px;height:28px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+    </div>
+    <span style="color:#fff;font-weight:700;font-size:16px;">Savvy AI</span>
+  </div>
+  <div style="width:48px;"></div>
+</header>
+
+<!-- Messages area -->
+<main id="chat-messages" style="position:fixed;top:56px;left:0;right:0;bottom:64px;overflow-y:auto;padding:16px;background:#f8fafc;">
+  <!-- Welcome state -->
+  <div id="chat-welcome" style="max-width:480px;margin:0 auto;padding-top:40px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="width:56px;height:56px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+      </div>
+      <h1 style="font-size:22px;font-weight:800;color:#1e293b;margin:0 0 8px;">Hi, I'm Savvy AI</h1>
+      <p style="font-size:15px;color:#64748b;margin:0;line-height:1.5;">Your Swiss insurance assistant. Ask me anything about health insurance, 3rd pillar, or book a free consultation.</p>
+    </div>
+    <div id="chat-chips" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"></div>
+  </div>
+</main>
+
+<!-- Input bar -->
+<footer style="position:fixed;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:1px solid #e2e8f0;display:flex;align-items:center;padding:0 12px;gap:8px;">
+  <textarea id="chat-input" rows="1" placeholder="Type your message..."
+    style="flex:1;resize:none;border:1px solid #e2e8f0;border-radius:12px;padding:10px 14px;font-size:15px;font-family:inherit;outline:none;max-height:100px;line-height:1.4;background:#f8fafc;"
+  ></textarea>
+  <button id="chat-send" type="button"
+    style="width:40px;height:40px;background:#ef4444;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.15s;"
+  >
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+  </button>
+</footer>
+
+<script>
+(function() {
+  // State
+  var messages = [];
+  var isLoading = false;
+
+  // Elements
+  var messagesEl = document.getElementById('chat-messages');
+  var welcomeEl = document.getElementById('chat-welcome');
+  var chipsEl = document.getElementById('chat-chips');
+  var inputEl = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+
+  // Quick prompt chips
+  var chips = [
+    'How does Swiss health insurance work?',
+    'Help me choose a deductible',
+    '3rd pillar tax savings',
+    'Book a free consultation',
+  ];
+
+  chips.forEach(function(text) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = text;
+    btn.style.cssText = 'padding:8px 16px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;color:#475569;font-size:13px;cursor:pointer;transition:all 0.15s;font-family:inherit;';
+    btn.addEventListener('mouseenter', function() { btn.style.borderColor = '#fca5a5'; btn.style.color = '#ef4444'; });
+    btn.addEventListener('mouseleave', function() { btn.style.borderColor = '#e2e8f0'; btn.style.color = '#475569'; });
+    btn.addEventListener('click', function() { sendMessage(text); });
+    chipsEl.appendChild(btn);
+  });
+
+  // Auto-resize textarea
+  inputEl.addEventListener('input', function() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
+  });
+
+  // Enter to send, Shift+Enter for newline
+  inputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(inputEl.value.trim());
+    }
+  });
+
+  sendBtn.addEventListener('click', function() {
+    sendMessage(inputEl.value.trim());
+  });
+
+  function sendMessage(text) {
+    if (!text || isLoading) return;
+
+    // Hide welcome
+    if (welcomeEl) welcomeEl.style.display = 'none';
+
+    // Add user message
+    messages.push({ role: 'user', content: text });
+    appendBubble('user', text);
+
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+
+    // Show loading
+    isLoading = true;
+    sendBtn.style.opacity = '0.5';
+    var loadingId = appendBubble('loading', '');
+
+    // Call API
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages }),
+    })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        // Remove loading
+        var loadingEl = document.getElementById(loadingId);
+        if (loadingEl) loadingEl.remove();
+
+        if (data.error) {
+          appendBubble('bot', 'Sorry, something went wrong. Please try again.');
+        } else {
+          var response = data.response || 'I\'m not sure how to respond to that.';
+          messages.push({ role: 'assistant', content: response });
+          appendBubble('bot', response);
+
+          // Render slot picker if available
+          if (data.toolData && data.toolData.slots) {
+            renderSlotPicker(data.toolData.slots, data.toolData.consultant);
+          }
+        }
+      })
+      .catch(function() {
+        var loadingEl = document.getElementById(loadingId);
+        if (loadingEl) loadingEl.remove();
+        appendBubble('bot', 'Connection error. Please check your internet and try again.');
+      })
+      .finally(function() {
+        isLoading = false;
+        sendBtn.style.opacity = '1';
+      });
+  }
+
+  function appendBubble(type, text) {
+    var id = 'msg-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+    var wrapper = document.createElement('div');
+    wrapper.id = id;
+    wrapper.style.cssText = 'display:flex;margin-bottom:12px;max-width:600px;' +
+      (type === 'user' ? 'margin-left:auto;justify-content:flex-end;' : 'margin-right:auto;');
+
+    if (type === 'loading') {
+      // Bot avatar + animated dots
+      wrapper.innerHTML =
+        '<div style="width:32px;height:32px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:8px;margin-top:4px;">' +
+          '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>' +
+        '</div>' +
+        '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;border-top-left-radius:4px;padding:12px 16px;">' +
+          '<div class="savvy-dots"><span></span><span></span><span></span></div>' +
+        '</div>';
+    } else if (type === 'user') {
+      wrapper.innerHTML =
+        '<div style="background:#ef4444;color:#fff;border-radius:16px;border-top-right-radius:4px;padding:10px 16px;font-size:15px;line-height:1.5;word-break:break-word;">' +
+          escapeHtml(text) +
+        '</div>';
+    } else {
+      // Bot message
+      wrapper.innerHTML =
+        '<div style="width:32px;height:32px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:8px;margin-top:4px;">' +
+          '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>' +
+        '</div>' +
+        '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;border-top-left-radius:4px;padding:10px 16px;font-size:15px;line-height:1.6;color:#334155;word-break:break-word;">' +
+          parseMarkdown(text) +
+        '</div>';
+    }
+
+    messagesEl.appendChild(wrapper);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return id;
+  }
+
+  function renderSlotPicker(slots, consultant) {
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;margin-bottom:12px;max-width:600px;margin-right:auto;';
+
+    var content = '<div style="width:32px;flex-shrink:0;margin-right:8px;"></div>' +
+      '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px;width:100%;">' +
+      '<p style="font-size:13px;font-weight:700;color:#1e293b;margin:0 0 12px;">Available times:</p>';
+
+    var dates = Object.keys(slots).sort().slice(0, 5);
+    dates.forEach(function(date) {
+      var d = new Date(date + 'T12:00:00');
+      var label = d.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' });
+      content += '<p style="font-size:12px;font-weight:600;color:#64748b;margin:12px 0 6px;">' + label + '</p>';
+      content += '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+
+      var daySlots = slots[date].slice(0, 6);
+      daySlots.forEach(function(slot) {
+        var time = new Date(slot).toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Zurich' });
+        content += '<button type="button" data-slot="' + escapeHtml(slot) + '" data-consultant="' + escapeHtml(consultant) + '" class="savvy-slot-btn" ' +
+          'style="padding:6px 12px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;color:#475569;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.15s;">' +
+          time + '</button>';
+      });
+      content += '</div>';
+    });
+
+    content += '</div>';
+    wrapper.innerHTML = content;
+    messagesEl.appendChild(wrapper);
+
+    // Bind slot buttons
+    wrapper.querySelectorAll('.savvy-slot-btn').forEach(function(btn) {
+      btn.addEventListener('mouseenter', function() { btn.style.borderColor = '#ef4444'; btn.style.color = '#ef4444'; });
+      btn.addEventListener('mouseleave', function() { btn.style.borderColor = '#e2e8f0'; btn.style.color = '#475569'; });
+      btn.addEventListener('click', function() {
+        var slot = btn.getAttribute('data-slot');
+        var time = btn.textContent;
+        var d = new Date(slot);
+        var dateLabel = d.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric' });
+        sendMessage('I\'d like to book ' + dateLabel + ' at ' + time);
+      });
+    });
+
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  // Basic markdown parser
+  function parseMarkdown(text) {
+    return escapeHtml(text)
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#ef4444;text-decoration:underline;">$1</a>')
+      .replace(/^- (.+)$/gm, '<li style="margin-left:16px;">$1</li>')
+      .replace(/\n/g, '<br>');
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+})();
+</script>
+
+<style>
+  /* Loading dots animation */
+  .savvy-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: 20px;
+  }
+  .savvy-dots span {
+    width: 7px;
+    height: 7px;
+    background: #94a3b8;
+    border-radius: 50%;
+    animation: savvy-bounce 1.2s infinite ease-in-out;
+  }
+  .savvy-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .savvy-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes savvy-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* Hide scrollbar but keep scrolling */
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+  /* Mobile keyboard handling */
+  @supports (height: 100dvh) {
+    header { top: 0; }
+    #chat-messages { bottom: 64px; }
+    footer { bottom: 0; }
+  }
+
+  /* Input focus */
+  #chat-input:focus {
+    border-color: #ef4444;
+    background: #fff;
+  }
+
+  /* Safe area for notched phones */
+  footer {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+</style>
