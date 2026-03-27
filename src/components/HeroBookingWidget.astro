@@ -1,0 +1,418 @@
+---
+// HeroBookingWidget.astro
+// Vanilla JS version for maximum stability: Inline on Desktop, Modal Drawer on Mobile.
+---
+
+<div 
+  id="hero-booking-widget" 
+  class="lg:relative lg:block lg:opacity-100 lg:pointer-events-auto lg:z-0 lg:p-0 fixed inset-0 z-[100] hidden opacity-0 transition-opacity duration-300 flex items-end lg:items-center justify-center pointer-events-none"
+>
+  <!-- Backdrop (Mobile Only) -->
+  <div id="modal-backdrop" class="lg:hidden absolute inset-0 bg-slate-900/40 backdrop-blur-md opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+
+  <!-- Main Widget Card -->
+  <div 
+    id="widget-container"
+    class="relative w-full max-w-2xl bg-white/95 backdrop-blur-xl shadow-2xl transition-transform duration-500 ease-out translate-y-full lg:translate-y-0 lg:transition-none flex flex-col overflow-hidden h-[94dvh] lg:h-[780px] rounded-t-[3rem] lg:rounded-[2.5rem] border border-slate-100/50 pointer-events-auto"
+  >
+    <!-- Header / Stepper -->
+    <div id="widget-header" class="px-4 sm:px-8 py-3 sm:py-4 border-b border-slate-100/50 flex items-center justify-between sticky top-0 bg-white/80 backdrop-blur-xl z-30">
+      <div class="flex items-center gap-4 flex-1">
+        <div class="flex flex-col">
+          <span class="text-[10px] font-black text-red-600 uppercase tracking-[0.2em] mb-1">Savvy Consultation</span>
+          <div class="flex items-center gap-3">
+             <div class="flex items-center gap-2">
+                <div id="step-progress-1" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] sm:text-xs font-black shadow-lg shadow-red-200">1</div>
+                <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest hidden xs:block">Selection</span>
+             </div>
+             <div class="w-8 h-px bg-slate-200"></div>
+             <div class="flex items-center gap-2">
+                <div id="step-2-indicator" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-50 text-slate-300 flex items-center justify-center text-[10px] sm:text-xs font-black border border-slate-100">2</div>
+                <span id="step-2-label" class="text-[10px] font-black text-slate-300 uppercase tracking-widest hidden xs:block">Details</span>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Timezone Selector -->
+        <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-50 rounded-full border border-slate-100">
+           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-400"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+           <select id="timezone-selector" class="bg-transparent text-[10px] font-bold text-slate-600 focus:outline-none uppercase tracking-tighter cursor-pointer appearance-none">
+             <option value="Europe/Zurich">Zurich (CET)</option>
+             <option value="Europe/London">London (GMT)</option>
+             <option value="America/New_York">New York (EST)</option>
+             <option value="Asia/Singapore">Singapore (SGT)</option>
+           </select>
+        </div>
+        
+        <button id="close-widget-btn" class="lg:hidden p-2 hover:bg-slate-50 rounded-full text-slate-400 transition-colors" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex-1 p-4 sm:p-6 overflow-y-auto custom-scrollbar bg-slate-50/30">
+      <!-- Step 1: Selection Phase -->
+      <div id="step-1-content" class="space-y-6 animate-in fade-in duration-300">
+        <section>
+          <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 px-1">Choose Topic</h3>
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
+            <button data-topic="health" class="topic-btn relative p-3 sm:p-5 rounded-2xl sm:rounded-[2rem] border-2 border-red-600 bg-white shadow-xl shadow-red-600/5 text-left transition-all duration-300 scale-[1.02] z-10">
+              <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center mb-3 bg-red-600 text-white shadow-lg shadow-red-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <h4 class="font-bold text-xs sm:text-base text-slate-900 mb-1 leading-tight">Health Insurance</h4>
+              <p class="text-[10px] text-slate-500 leading-tight font-medium opacity-80">Compare premiums for basic & supplementary coverage.</p>
+            </button>
+            <button data-topic="life" class="topic-btn relative p-3 sm:p-5 rounded-2xl sm:rounded-[2rem] border-2 border-slate-100 bg-white hover:border-slate-200 text-left transition-all duration-300">
+              <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center mb-3 bg-slate-100 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c.5 0 1 .5 1 1v12c0 .5-.5 1-1 1H5c-.5 0-1-.5-1-1V6c0-.5.5-1 1-1h14Z"/><path d="M12 12v.01"/><path d="M7 15h10"/><path d="M12 9V5"/></svg>
+              </div>
+              <h4 class="font-bold text-xs sm:text-base text-slate-900 mb-1 leading-tight">Life / 3rd Pillar</h4>
+              <p class="text-[10px] text-slate-500 leading-tight font-medium opacity-80">Optimize pension planning and tax savings.</p>
+            </button>
+          </div>
+        </section>
+
+        <section>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-0">Select Date</h3>
+            <div id="next-available-tag" class="text-[10px] font-bold text-red-600 bg-red-600/10 border border-red-600/20 rounded-md px-2 py-0.5 animate-pulse hidden">Next: 2:00 PM</div>
+          </div>
+          <div id="day-selector" class="flex gap-2.5 overflow-x-auto pb-4 scrollbar-hide snap-x px-1">
+            <!-- Days injected here -->
+          </div>
+        </section>
+
+        <section>
+          <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Select Time</h3>
+          <div class="relative">
+            <div id="slots-loading" class="hidden absolute inset-0 flex flex-col items-center justify-center bg-white/50 rounded-2xl z-20">
+              <div class="w-6 h-6 border-3 border-red-600/20 border-t-red-600 rounded-full animate-spin"></div>
+            </div>
+            <div id="slots-container" class="flex gap-2.5 overflow-x-auto pb-4 scrollbar-hide snap-x px-1 min-h-[60px]">
+              <!-- Slots injected here -->
+            </div>
+            <div id="no-slots" class="hidden bg-slate-50/50 rounded-2xl border border-dashed border-slate-200 p-8 text-center">
+              <p class="text-slate-400 text-xs font-bold italic uppercase tracking-tighter">No availability today.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Step 2: Form -->
+      <div id="step-2-content" class="hidden space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
+        <h2 class="text-2xl font-black text-slate-900 tracking-tight">One last thing...</h2>
+        <div class="grid grid-cols-1 gap-4">
+          <div class="space-y-1.5">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+            <input id="form-name" required type="text" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-red-100/30 focus:border-red-600 transition-all font-bold text-sm" placeholder="John Doe" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+            <input id="form-email" required type="email" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-red-100/30 focus:border-red-600 transition-all font-bold text-sm" placeholder="john@example.com" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Phone Number</label>
+            <input id="form-phone" required type="tel" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-red-100/30 focus:border-red-600 transition-all font-bold text-sm" placeholder="+41 7x xxx xx xx" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Message (Optional)</label>
+            <textarea id="form-message" rows="2" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-red-100/30 focus:border-red-600 transition-all font-bold text-sm resize-none" placeholder="Anything specific?"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div id="step-3-content" class="hidden h-full flex flex-col items-center justify-center text-center space-y-4 py-12">
+        <div class="w-20 h-20 bg-green-500/10 text-green-600 rounded-full flex items-center justify-center shadow-inner mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h2 class="text-3xl font-black text-slate-900 tracking-tight uppercase">Confirmed!</h2>
+        <p class="text-slate-500 font-bold max-w-[280px]">Check your email for details. See you soon!</p>
+        <button onclick="window.location.reload()" class="mt-8 text-sm font-black text-red-600 hover:text-red-700 underline underline-offset-8 decoration-2 uppercase tracking-widest">Book another</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="widget-footer" class="p-6 border-t border-slate-100/50 bg-white/80 backdrop-blur-xl mt-auto sticky bottom-0 z-30">
+      <div id="step-1-footer" class="space-y-4">
+        <div class="flex items-center justify-center">
+            <div class="inline-flex items-center gap-2 py-1.5 px-3 bg-slate-900 rounded-full animate-in zoom-in-95 duration-500">
+              <div class="flex -space-x-1.5">
+                <div class="w-4 h-4 rounded-full border border-slate-900 bg-slate-700 overflow-hidden"><img src="https://i.pravatar.cc/100?u=1" alt="" /></div>
+                <div class="w-4 h-4 rounded-full border border-slate-900 bg-slate-700 overflow-hidden"><img src="https://i.pravatar.cc/100?u=2" alt="" /></div>
+                <div class="w-4 h-4 rounded-full border border-slate-900 bg-slate-700 overflow-hidden"><img src="https://i.pravatar.cc/100?u=3" alt="" /></div>
+              </div>
+              <span class="text-[9px] font-black text-white tracking-widest uppercase"><span id="live-counter" class="text-red-500 tabular-nums">7</span> people booked in 24h</span>
+            </div>
+        </div>
+        <button id="next-btn" disabled class="w-full py-4 rounded-full font-black text-base shadow-lg transition-all flex items-center justify-center gap-3 cursor-not-allowed opacity-50 bg-slate-200 text-slate-400 uppercase tracking-widest">
+          Confirm Choice
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div id="step-2-footer" class="hidden grid grid-cols-5 gap-3">
+        <button id="back-btn" class="col-span-1 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center hover:bg-white hover:text-slate-600 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button id="submit-btn" class="col-span-4 py-4 rounded-full bg-red-600 text-white font-black text-base shadow-xl shadow-red-100 hover:bg-red-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 uppercase tracking-widest">
+          <span id="submit-text">Complete Booking 🚀</span>
+          <div id="submit-spinner" class="hidden w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    // --- Config ---
+    const TOPICS = {
+      health: { eventTypeId: 1894802, apiKey: 'cal_live_02d332e8841c6f13b371ee6dd3ca7ca8' },
+      life: { eventTypeId: 4550098, apiKey: 'cal_live_8cb1d91e956c64fd591ca700ff9bc523' }
+    };
+    
+    // --- State ---
+    let state = {
+      step: 1,
+      topic: 'health',
+      date: '',
+      slot: '',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Zurich'
+    };
+
+    // --- Elements ---
+    const widget = document.getElementById('hero-booking-widget');
+    const container = document.getElementById('widget-container');
+    const backdrop = document.getElementById('modal-backdrop');
+    const nextBtn = document.getElementById('next-btn');
+    const daySelector = document.getElementById('day-selector');
+    const slotsContainer = document.getElementById('slots-container');
+    const topicBtns = document.querySelectorAll('.topic-btn');
+
+    const isDesktop = () => window.innerWidth >= 1024;
+
+    function init() {
+      if (!widget || !container || !backdrop) {
+        // If elements aren't found yet (race condition), retry shortly
+        console.warn('HeroBookingWidget: Elements not found, retrying...');
+        setTimeout(() => {
+          const w = document.getElementById('hero-booking-widget');
+          const c = document.getElementById('widget-container');
+          const b = document.getElementById('modal-backdrop');
+          if (w && c && b) init();
+        }, 50);
+        return;
+      }
+
+      renderDays();
+      setupListeners();
+      
+      // Auto-init if desktop
+      if (isDesktop()) {
+        widget.classList.replace('hidden', 'block');
+        setTimeout(() => widget.classList.remove('opacity-0'), 100);
+      }
+    }
+
+    function setupListeners() {
+      // Global triggers
+      window.openBookingModal = (topicId) => {
+        if (isDesktop()) {
+           if (topicId) selectTopic(topicId);
+           widget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+           return;
+        }
+
+        // Mobile Modal logic
+        if (widget.parentElement !== document.body) document.body.appendChild(widget);
+        widget.classList.remove('hidden');
+        if (topicId) selectTopic(topicId);
+
+        setTimeout(() => {
+          widget.classList.add('opacity-100', 'pointer-events-auto');
+          backdrop.classList.add('opacity-100', 'pointer-events-auto');
+          container.classList.remove('translate-y-full');
+          document.body.style.overflow = 'hidden';
+        }, 10);
+      };
+
+      window.closeBookingModal = () => {
+        if (isDesktop()) return;
+        container.classList.add('translate-y-full');
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        widget.classList.remove('opacity-100');
+        setTimeout(() => {
+          widget.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 500);
+      };
+
+      // Close events
+      document.getElementById('close-widget-btn').onclick = window.closeBookingModal;
+      backdrop.onclick = window.closeBookingModal;
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && window.closeBookingModal());
+
+      // Navigation
+      nextBtn.onclick = () => { state.step = 2; updateUI(); };
+      document.getElementById('back-btn').onclick = () => { state.step = 1; updateUI(); };
+      document.getElementById('submit-btn').onclick = handleSubmit;
+
+      // Topic buttons
+      topicBtns.forEach(btn => {
+        btn.onclick = () => selectTopic(btn.dataset.topic);
+      });
+
+      // Timezone
+      document.getElementById('timezone-selector').onchange = (e) => {
+        state.timezone = e.target.value;
+        fetchSlots();
+      };
+    }
+
+    function selectTopic(id) {
+      if (!id) return;
+      state.topic = id;
+      state.slot = '';
+      topicBtns.forEach(btn => {
+        const active = btn.dataset.topic === id;
+        btn.classList.toggle('border-red-600', active);
+        btn.classList.toggle('scale-[1.02]', active);
+        btn.classList.toggle('z-10', active);
+        const icon = btn.querySelector('.rounded-xl');
+        if (icon) {
+          icon.classList.toggle('bg-red-600', active);
+          icon.classList.toggle('text-white', active);
+        }
+      });
+      fetchSlots();
+      updateUI();
+    }
+
+    function renderDays() {
+      const now = new Date();
+      for (let i = 0; i < 14; i++) {
+        const d = new Date(now); d.setDate(now.getDate() + i);
+        const iso = d.toISOString().split('T')[0];
+        const btn = document.createElement('button');
+        btn.className = `day-btn shrink-0 snap-center flex flex-col items-center justify-center w-16 sm:w-20 py-3 sm:py-4 rounded-2xl border-2 transition-all cursor-pointer bg-white text-slate-900 border-slate-100`;
+        btn.innerHTML = `<span class="text-[8px] font-black opacity-40 uppercase mb-1 pointer-events-none">${d.toLocaleDateString('en-US',{weekday:'short'})}</span><span class="text-base sm:text-lg font-black pointer-events-none">${d.getDate()}</span>`;
+        btn.onclick = () => selectDate(iso, btn);
+        daySelector.appendChild(btn);
+        if (i === 0) selectDate(iso, btn);
+      }
+    }
+
+    function selectDate(date, btn) {
+      state.date = date;
+      state.slot = '';
+      document.querySelectorAll('.day-btn').forEach(b => {
+        b.classList.remove('bg-red-600','text-white','border-red-600','shadow-lg','scale-105');
+        b.classList.add('bg-white', 'text-slate-900', 'border-slate-100');
+      });
+      btn.classList.remove('bg-white', 'text-slate-900', 'border-slate-100');
+      btn.classList.add('bg-red-600','text-white','border-red-600','shadow-lg','scale-105');
+      fetchSlots();
+      updateUI();
+    }
+
+    async function fetchSlots() {
+      const loading = document.getElementById('slots-loading');
+      const noSlots = document.getElementById('no-slots');
+      loading.classList.remove('hidden');
+      slotsContainer.innerHTML = '';
+      noSlots.classList.add('hidden');
+      
+      try {
+        const topicConfig = TOPICS[state.topic];
+        const res = await fetch(`https://api.cal.com/v2/slots/available?eventTypeId=${topicConfig.eventTypeId}&startTime=${state.date}T00:00:00Z&endTime=${state.date}T23:59:59Z&timeZone=${state.timezone}`, {
+          headers: { 'Authorization': `Bearer ${topicConfig.apiKey}` }
+        });
+        const data = await res.json();
+        const slots = data.data?.slots?.[state.date] || [];
+        
+        if (!slots.length) noSlots.classList.remove('hidden');
+        slots.forEach(s => {
+          const time = new Date(s.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+          const btn = document.createElement('button');
+          btn.className = 'slot-btn shrink-0 py-3 px-5 rounded-2xl border-2 border-slate-50 font-black text-xs transition-all bg-white text-slate-600 hover:border-red-200';
+          btn.textContent = time;
+          btn.onclick = () => { 
+            state.slot = s.time;
+            document.querySelectorAll('.slot-btn').forEach(sb => {
+              sb.classList.remove('bg-red-600','text-white','border-red-600','scale-105');
+              sb.classList.add('bg-white', 'text-slate-600', 'border-slate-50');
+            });
+            btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-50');
+            btn.classList.add('bg-red-600','text-white','border-red-600','scale-105');
+            updateUI();
+          };
+          slotsContainer.appendChild(btn);
+        });
+      } finally { loading.classList.add('hidden'); }
+    }
+
+    function updateUI() {
+      document.getElementById('step-1-content').classList.toggle('hidden', state.step !== 1);
+      document.getElementById('step-2-content').classList.toggle('hidden', state.step !== 2);
+      document.getElementById('step-1-footer').classList.toggle('hidden', state.step !== 1);
+      document.getElementById('step-2-footer').classList.toggle('hidden', state.step !== 2);
+      
+      document.getElementById('step-progress-1').style.opacity = state.step === 1 ? '1' : '0.5';
+      document.getElementById('step-2-indicator').className = state.step === 2 ? 'w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-[10px] sm:text-xs font-black' : 'w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-50 text-slate-300 border flex items-center justify-center text-[10px] sm:text-xs font-black';
+
+      nextBtn.disabled = !state.slot;
+      nextBtn.classList.toggle('opacity-50', !state.slot);
+      nextBtn.classList.toggle('bg-slate-200', !state.slot);
+      nextBtn.classList.toggle('text-slate-400', !state.slot);
+      nextBtn.classList.toggle('cursor-not-allowed', !state.slot);
+      
+      nextBtn.classList.toggle('bg-red-600', !!state.slot);
+      nextBtn.classList.toggle('text-white', !!state.slot);
+      nextBtn.classList.toggle('shadow-red-200', !!state.slot);
+    }
+
+    async function handleSubmit() {
+      const btn = document.getElementById('submit-btn');
+      const name = document.getElementById('form-name').value;
+      const email = document.getElementById('form-email').value;
+      const phone = document.getElementById('form-phone').value;
+      if (!name || !email || !phone) return alert('Fill required fields');
+      
+      btn.disabled = true;
+      document.getElementById('submit-text').textContent = 'Booking...';
+      
+      try {
+        const bookingConfig = TOPICS[state.topic];
+        const res = await fetch(`https://api.cal.com/v2/bookings`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + bookingConfig.apiKey, 'cal-api-version': '2024-08-13' },
+          body: JSON.stringify({
+            eventTypeId: bookingConfig.eventTypeId,
+            start: state.slot,
+            responses: { name, email, location: phone, notes: document.getElementById('form-message').value, purpose: state.topic, language: 'en' },
+            timeZone: state.timezone, language: 'en'
+          })
+        });
+        if (res.ok) {
+           document.getElementById('widget-header').classList.add('hidden');
+           document.getElementById('widget-footer').classList.add('hidden');
+           document.getElementById('step-2-content').classList.add('hidden');
+           document.getElementById('step-3-content').classList.remove('hidden');
+        } else alert('Booking failed. Try again.');
+      } catch(e) { alert('Network error'); }
+      finally { btn.disabled = false; document.getElementById('submit-text').textContent = 'Complete Booking 🚀'; }
+    }
+
+    init();
+  })();
+</script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #f1f5f9; border-radius: 10px; }
+</style>
