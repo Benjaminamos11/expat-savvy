@@ -327,16 +327,13 @@ function initFloatingBookingCTA() {
     }
     errEl?.classList.add('hidden');
     try {
-      await fetch('/api/lead', {
+      await fetch('/api/message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name, email, message: msg,
-          topic: 'Consultation Strategy Session',
-          language: 'en',
           source: window.location.href,
-          flow: 'floating_cta_message_only',
-          url: window.location.href,
+          language: 'en',
           device: 'mobile',
         }),
       });

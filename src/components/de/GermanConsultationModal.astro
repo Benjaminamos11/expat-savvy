@@ -710,7 +710,28 @@
                 setBooking(true);
                 setBookingError("");
 
-                // Lead capture (fire and forget)
+                if (messageMode) {
+                    // Message-only: save to messages table
+                    fetch("/api/message", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            name: formData.name,
+                            email: formData.email,
+                            phone: formData.phone,
+                            message: formData.message,
+                            source: window.location.href,
+                            language: "de",
+                            device: window.innerWidth <= 768 ? "mobile" : "desktop",
+                        }),
+                    }).catch(() => {});
+                    setBookingDone(true);
+                    setBookingDetails("Wir melden uns in Kürze bei Ihnen.");
+                    setBooking(false);
+                    return;
+                }
+
+                // Lead capture for bookings (fire and forget)
                 fetch("/api/lead", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -718,24 +739,13 @@
                         name: formData.name,
                         email: formData.email,
                         phone: formData.phone,
-                        message: messageMode ? formData.message : formData.notes,
-                        topic: topics.join(", ") || "Consultation",
-                        language: "de",
-                        source: window.location.href,
-                        flow: messageMode ? "german_modal_message" : "german_modal_booking",
+                        message: formData.notes,
+                        flow: "german_modal_booking",
                         url: window.location.href,
                         device: window.innerWidth <= 768 ? "mobile" : "desktop",
-                        notes: messageMode ? {} : { booked_slot: selectedSlot, booked_date: selectedDate, timeline: timeline },
+                        notes: { booked_slot: selectedSlot, booked_date: selectedDate, timeline: timeline },
                     }),
                 }).catch(() => {});
-
-                if (messageMode) {
-                    // Message-only: just lead capture, no Cal booking
-                    setBookingDone(true);
-                    setBookingDetails("Wir melden uns in Kürze bei Ihnen.");
-                    setBooking(false);
-                    return;
-                }
 
                 // Book via Cal.com v2
                 try {

@@ -705,9 +705,9 @@
               disabled: !formData.name || !formData.email || bookingLoading || (isMessageOnly && !formData.message),
               onClick: function() {
                 if (isMessageOnly) {
-                  // Message-only: just send lead
+                  // Message-only: save to messages table
                   setBookingLoading(true);
-                  fetch("/api/lead", {
+                  fetch("/api/message", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -715,13 +715,9 @@
                       email: formData.email,
                       phone: formData.phone,
                       message: formData.message,
-                      topic: "Consultation Strategy Session",
-                      language: "en",
                       source: window.location.href,
-                      flow: "consultation_modal_message_only",
-                      url: window.location.href,
+                      language: "en",
                       device: window.innerWidth <= 768 ? "mobile" : "desktop",
-                      notes: { selected_topic: mainTopic, timeline: timeline, expert_assigned: activeExpert.name, message: formData.message },
                     }),
                   })
                     .then(function() { setBookingDone(true); setBookingLoading(false); })
