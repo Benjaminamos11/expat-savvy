@@ -1,88 +1,131 @@
 ---
-// SavvyAIChat.astro — Full-screen vanilla JS chat component
+// SavvyAIChat.astro — Chat UI with sidebar, rich markdown, flex layout
+// Designed to sit inside BaseLayout (Header above, Footer below)
 ---
 
-<!-- Header -->
-<header style="position:fixed;top:0;left:0;right:0;height:56px;background:#1e293b;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:50;">
-  <a href="/" style="color:#94a3b8;text-decoration:none;font-size:14px;display:flex;align-items:center;gap:6px;">
-    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-    Back
-  </a>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <div style="width:28px;height:28px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;">
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
-    </div>
-    <span style="color:#fff;font-weight:700;font-size:16px;">Savvy AI</span>
-  </div>
-  <div style="width:48px;"></div>
-</header>
-
-<!-- Messages area -->
-<main id="chat-messages" style="position:fixed;top:56px;left:0;right:0;bottom:64px;overflow-y:auto;padding:16px;background:#f8fafc;">
-  <!-- Welcome state -->
-  <div id="chat-welcome" style="max-width:480px;margin:0 auto;padding-top:40px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <div style="width:56px;height:56px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+<div id="savvy-chat-app">
+  <!-- Sidebar (desktop) -->
+  <aside id="chat-sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
       </div>
-      <h1 style="font-size:22px;font-weight:800;color:#1e293b;margin:0 0 8px;">Hi, I'm Savvy AI</h1>
-      <p style="font-size:15px;color:#64748b;margin:0;line-height:1.5;">Your Swiss insurance assistant. Ask me anything about health insurance, 3rd pillar, or book a free consultation.</p>
+      <div>
+        <h2 class="sidebar-title">Savvy AI</h2>
+        <p class="sidebar-subtitle">Swiss Insurance Assistant</p>
+      </div>
     </div>
-    <div id="chat-chips" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"></div>
-  </div>
-</main>
+    <nav id="sidebar-actions"></nav>
+    <div class="sidebar-footer">
+      <p>Powered by Expat Savvy</p>
+      <p>Independent · FINMA-certified experts</p>
+    </div>
+  </aside>
 
-<!-- Input bar -->
-<footer style="position:fixed;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:1px solid #e2e8f0;display:flex;align-items:center;padding:0 12px;gap:8px;">
-  <textarea id="chat-input" rows="1" placeholder="Type your message..."
-    style="flex:1;resize:none;border:1px solid #e2e8f0;border-radius:12px;padding:10px 14px;font-size:15px;font-family:inherit;outline:none;max-height:100px;line-height:1.4;background:#f8fafc;"
-  ></textarea>
-  <button id="chat-send" type="button"
-    style="width:40px;height:40px;background:#ef4444;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.15s;"
-  >
-    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
-  </button>
-</footer>
+  <!-- Mobile sidebar overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay" style="display:none;"></div>
+
+  <!-- Main chat area -->
+  <div id="chat-main">
+    <!-- Mobile sidebar toggle -->
+    <button id="sidebar-toggle" type="button" aria-label="Menu">
+      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <!-- Messages area -->
+    <div id="chat-messages">
+      <!-- Welcome state -->
+      <div id="chat-welcome">
+        <div class="welcome-icon">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+        </div>
+        <h1 class="welcome-title">Hi, I'm Savvy AI</h1>
+        <p class="welcome-text">Your Swiss insurance assistant. I can compare health insurance premiums, explain deductibles, create a newcomer insurance checklist, or book you a free consultation.</p>
+        <div id="chat-chips"></div>
+      </div>
+    </div>
+
+    <!-- Input bar -->
+    <div id="chat-input-bar">
+      <textarea id="chat-input" rows="1" placeholder="Type your message..."></textarea>
+      <button id="chat-send" type="button" aria-label="Send">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function() {
-  // State
   var messages = [];
   var isLoading = false;
 
-  // Elements
   var messagesEl = document.getElementById('chat-messages');
   var welcomeEl = document.getElementById('chat-welcome');
   var chipsEl = document.getElementById('chat-chips');
   var inputEl = document.getElementById('chat-input');
   var sendBtn = document.getElementById('chat-send');
+  var sidebarEl = document.getElementById('chat-sidebar');
+  var overlayEl = document.getElementById('sidebar-overlay');
+  var toggleBtn = document.getElementById('sidebar-toggle');
+  var actionsNav = document.getElementById('sidebar-actions');
 
-  // Quick prompt chips
-  var chips = [
-    'How does Swiss health insurance work?',
-    'Help me choose a deductible',
-    '3rd pillar tax savings',
-    'Book a free consultation',
+  // Sidebar actions
+  var actions = [
+    { icon: '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25v-.008zM12 10.5h.008v.008H12v-.008zm0 2.25h.008v.008H12v-.008zm0 2.25h.008v.008H12v-.008zm0 2.25h.008v.008H12v-.008zm3.75-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008v-.008z"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>', title: 'Calculate Premium', desc: 'Compare basic insurance prices', msg: 'Compare health insurance premiums for me' },
+    { icon: '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>', title: 'Insurance Checklist', desc: 'What you need as a newcomer', msg: 'Show me the insurance checklist for newcomers to Switzerland' },
+    { icon: '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>', title: 'Book Consultation', desc: 'Free, no obligation', msg: 'I want to book a free consultation' },
+    { icon: '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"/></svg>', title: 'Compare Deductibles', desc: 'Find your optimal franchise', msg: 'Help me understand deductible options and which one is best for me' },
+    { icon: '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>', title: 'Insurance Review', desc: 'Are you overpaying?', msg: 'What does a health insurance review cover and how can I get one?' },
+    { icon: '<svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/></svg>', title: '3rd Pillar Guide', desc: 'Tax-advantaged savings', msg: 'Explain 3rd pillar tax savings and how to get started' },
   ];
 
+  // Render sidebar actions
+  actions.forEach(function(action) {
+    var card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'sidebar-card';
+    card.innerHTML = '<span class="sidebar-card-icon">' + action.icon + '</span>' +
+      '<div><div class="sidebar-card-title">' + action.title + '</div>' +
+      '<div class="sidebar-card-desc">' + action.desc + '</div></div>';
+    card.addEventListener('click', function() { closeSidebar(); sendMessage(action.msg); });
+    actionsNav.appendChild(card);
+  });
+
+  // Quick prompt chips (welcome state)
+  var chips = [
+    'Compare health insurance premiums',
+    'Insurance checklist for newcomers',
+    'Help me choose a deductible',
+    'Book a free consultation',
+  ];
   chips.forEach(function(text) {
     var btn = document.createElement('button');
     btn.type = 'button';
+    btn.className = 'chat-chip';
     btn.textContent = text;
-    btn.style.cssText = 'padding:8px 16px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;color:#475569;font-size:13px;cursor:pointer;transition:all 0.15s;font-family:inherit;';
-    btn.addEventListener('mouseenter', function() { btn.style.borderColor = '#fca5a5'; btn.style.color = '#ef4444'; });
-    btn.addEventListener('mouseleave', function() { btn.style.borderColor = '#e2e8f0'; btn.style.color = '#475569'; });
     btn.addEventListener('click', function() { sendMessage(text); });
     chipsEl.appendChild(btn);
   });
 
+  // Sidebar toggle (mobile)
+  toggleBtn.addEventListener('click', function() {
+    sidebarEl.classList.toggle('sidebar-open');
+    overlayEl.style.display = sidebarEl.classList.contains('sidebar-open') ? 'block' : 'none';
+  });
+  overlayEl.addEventListener('click', closeSidebar);
+
+  function closeSidebar() {
+    sidebarEl.classList.remove('sidebar-open');
+    overlayEl.style.display = 'none';
+  }
+
   // Auto-resize textarea
   inputEl.addEventListener('input', function() {
     inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
   });
 
-  // Enter to send, Shift+Enter for newline
   inputEl.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -96,23 +139,18 @@
 
   function sendMessage(text) {
     if (!text || isLoading) return;
-
-    // Hide welcome
     if (welcomeEl) welcomeEl.style.display = 'none';
 
-    // Add user message
     messages.push({ role: 'user', content: text });
     appendBubble('user', text);
 
     inputEl.value = '';
     inputEl.style.height = 'auto';
 
-    // Show loading
     isLoading = true;
     sendBtn.style.opacity = '0.5';
     var loadingId = appendBubble('loading', '');
 
-    // Call API
     fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -120,7 +158,6 @@
     })
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        // Remove loading
         var loadingEl = document.getElementById(loadingId);
         if (loadingEl) loadingEl.remove();
 
@@ -131,7 +168,6 @@
           messages.push({ role: 'assistant', content: response });
           appendBubble('bot', response);
 
-          // Render slot picker if available
           if (data.toolData && data.toolData.slots) {
             renderSlotPicker(data.toolData.slots, data.toolData.consultant);
           }
@@ -152,32 +188,19 @@
     var id = 'msg-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5);
     var wrapper = document.createElement('div');
     wrapper.id = id;
-    wrapper.style.cssText = 'display:flex;margin-bottom:12px;max-width:600px;' +
-      (type === 'user' ? 'margin-left:auto;justify-content:flex-end;' : 'margin-right:auto;');
+    wrapper.className = 'msg-row' + (type === 'user' ? ' msg-user' : ' msg-bot');
 
     if (type === 'loading') {
-      // Bot avatar + animated dots
+      wrapper.className = 'msg-row msg-bot';
       wrapper.innerHTML =
-        '<div style="width:32px;height:32px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:8px;margin-top:4px;">' +
-          '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>' +
-        '</div>' +
-        '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;border-top-left-radius:4px;padding:12px 16px;">' +
-          '<div class="savvy-dots"><span></span><span></span><span></span></div>' +
-        '</div>';
+        '<div class="bot-avatar"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg></div>' +
+        '<div class="bubble bubble-bot"><div class="savvy-dots"><span></span><span></span><span></span></div></div>';
     } else if (type === 'user') {
-      wrapper.innerHTML =
-        '<div style="background:#ef4444;color:#fff;border-radius:16px;border-top-right-radius:4px;padding:10px 16px;font-size:15px;line-height:1.5;word-break:break-word;">' +
-          escapeHtml(text) +
-        '</div>';
+      wrapper.innerHTML = '<div class="bubble bubble-user">' + escapeHtml(text) + '</div>';
     } else {
-      // Bot message
       wrapper.innerHTML =
-        '<div style="width:32px;height:32px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:8px;margin-top:4px;">' +
-          '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>' +
-        '</div>' +
-        '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;border-top-left-radius:4px;padding:10px 16px;font-size:15px;line-height:1.6;color:#334155;word-break:break-word;">' +
-          parseMarkdown(text) +
-        '</div>';
+        '<div class="bot-avatar"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg></div>' +
+        '<div class="bubble bubble-bot">' + parseMarkdown(text) + '</div>';
     }
 
     messagesEl.appendChild(wrapper);
@@ -187,37 +210,29 @@
 
   function renderSlotPicker(slots, consultant) {
     var wrapper = document.createElement('div');
-    wrapper.style.cssText = 'display:flex;margin-bottom:12px;max-width:600px;margin-right:auto;';
+    wrapper.className = 'msg-row msg-bot';
 
-    var content = '<div style="width:32px;flex-shrink:0;margin-right:8px;"></div>' +
-      '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px;width:100%;">' +
-      '<p style="font-size:13px;font-weight:700;color:#1e293b;margin:0 0 12px;">Available times:</p>';
+    var content = '<div class="bot-avatar-spacer"></div>' +
+      '<div class="slot-picker">' +
+      '<p class="slot-picker-title">Available times:</p>';
 
     var dates = Object.keys(slots).sort().slice(0, 5);
     dates.forEach(function(date) {
       var d = new Date(date + 'T12:00:00');
       var label = d.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' });
-      content += '<p style="font-size:12px;font-weight:600;color:#64748b;margin:12px 0 6px;">' + label + '</p>';
-      content += '<div style="display:flex;flex-wrap:wrap;gap:6px;">';
-
-      var daySlots = slots[date].slice(0, 6);
-      daySlots.forEach(function(slot) {
+      content += '<p class="slot-date">' + label + '</p>';
+      content += '<div class="slot-buttons">';
+      slots[date].slice(0, 6).forEach(function(slot) {
         var time = new Date(slot).toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Zurich' });
-        content += '<button type="button" data-slot="' + escapeHtml(slot) + '" data-consultant="' + escapeHtml(consultant) + '" class="savvy-slot-btn" ' +
-          'style="padding:6px 12px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;color:#475569;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.15s;">' +
-          time + '</button>';
+        content += '<button type="button" data-slot="' + escapeHtml(slot) + '" class="slot-btn">' + time + '</button>';
       });
       content += '</div>';
     });
-
     content += '</div>';
     wrapper.innerHTML = content;
     messagesEl.appendChild(wrapper);
 
-    // Bind slot buttons
-    wrapper.querySelectorAll('.savvy-slot-btn').forEach(function(btn) {
-      btn.addEventListener('mouseenter', function() { btn.style.borderColor = '#ef4444'; btn.style.color = '#ef4444'; });
-      btn.addEventListener('mouseleave', function() { btn.style.borderColor = '#e2e8f0'; btn.style.color = '#475569'; });
+    wrapper.querySelectorAll('.slot-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var slot = btn.getAttribute('data-slot');
         var time = btn.textContent;
@@ -230,14 +245,104 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  // Basic markdown parser
+  // ─── Rich Markdown Parser ───
+
   function parseMarkdown(text) {
-    return escapeHtml(text)
+    var lines = escapeHtml(text).split('\n');
+    var html = [];
+    var i = 0;
+
+    while (i < lines.length) {
+      var line = lines[i];
+
+      // Table detection
+      if (line.indexOf('|') === 0 || (line.indexOf('|') > -1 && i + 1 < lines.length && /^\|?\s*[-:]+/.test(lines[i + 1]))) {
+        var tableLines = [];
+        while (i < lines.length && lines[i].indexOf('|') > -1) {
+          tableLines.push(lines[i]);
+          i++;
+        }
+        html.push(renderTable(tableLines));
+        continue;
+      }
+
+      // Headings
+      if (/^#{3}\s+(.+)$/.test(line)) {
+        html.push('<h3 class="md-h3">' + inlineFormat(line.replace(/^#{3}\s+/, '')) + '</h3>');
+        i++; continue;
+      }
+      if (/^#{2}\s+(.+)$/.test(line)) {
+        html.push('<h2 class="md-h2">' + inlineFormat(line.replace(/^#{2}\s+/, '')) + '</h2>');
+        i++; continue;
+      }
+      if (/^#{1}\s+(.+)$/.test(line)) {
+        html.push('<h1 class="md-h1">' + inlineFormat(line.replace(/^#{1}\s+/, '')) + '</h1>');
+        i++; continue;
+      }
+
+      // Numbered list
+      if (/^\d+\.\s+(.+)$/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^\d+\.\s+(.+)$/.test(lines[i])) {
+          items.push('<li>' + inlineFormat(lines[i].replace(/^\d+\.\s+/, '')) + '</li>');
+          i++;
+        }
+        html.push('<ol class="md-ol">' + items.join('') + '</ol>');
+        continue;
+      }
+
+      // Bullet list
+      if (/^[-*]\s+(.+)$/.test(line)) {
+        var bullets = [];
+        while (i < lines.length && /^[-*]\s+(.+)$/.test(lines[i])) {
+          bullets.push('<li>' + inlineFormat(lines[i].replace(/^[-*]\s+/, '')) + '</li>');
+          i++;
+        }
+        html.push('<ul class="md-ul">' + bullets.join('') + '</ul>');
+        continue;
+      }
+
+      // Empty line
+      if (line.trim() === '') { i++; continue; }
+
+      // Regular paragraph
+      html.push('<p>' + inlineFormat(line) + '</p>');
+      i++;
+    }
+
+    return html.join('');
+  }
+
+  function renderTable(tableLines) {
+    // Filter out separator rows
+    var rows = tableLines.map(function(l) {
+      return l.split('|').map(function(c) { return c.trim(); }).filter(function(c) { return c !== ''; });
+    });
+    var separator = -1;
+    for (var r = 0; r < rows.length; r++) {
+      if (tableLines[r].replace(/[|\s:-]/g, '') === '') { separator = r; break; }
+    }
+
+    var headerRow = rows[0];
+    var dataRows = separator > -1 ? rows.slice(separator + 1) : rows.slice(1);
+
+    var t = '<div class="table-wrap"><table class="md-table"><thead><tr>';
+    headerRow.forEach(function(h) { t += '<th>' + inlineFormat(h) + '</th>'; });
+    t += '</tr></thead><tbody>';
+    dataRows.forEach(function(row, idx) {
+      t += '<tr' + (idx % 2 === 1 ? ' class="alt-row"' : '') + '>';
+      row.forEach(function(c) { t += '<td>' + inlineFormat(c) + '</td>'; });
+      t += '</tr>';
+    });
+    t += '</tbody></table></div>';
+    return t;
+  }
+
+  function inlineFormat(text) {
+    return text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#ef4444;text-decoration:underline;">$1</a>')
-      .replace(/^- (.+)$/gm, '<li style="margin-left:16px;">$1</li>')
-      .replace(/\n/g, '<br>');
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener" class="md-link">$1</a>');
   }
 
   function escapeHtml(str) {
@@ -249,47 +354,291 @@
 </script>
 
 <style>
-  /* Loading dots animation */
-  .savvy-dots {
+  /* ─── Layout ─── */
+  #savvy-chat-app {
     display: flex;
-    gap: 4px;
-    align-items: center;
-    height: 20px;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    background: #f8fafc;
   }
+
+  /* ─── Sidebar ─── */
+  #chat-sidebar {
+    width: 280px;
+    background: #0f172a;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 16px 12px;
+    border-bottom: 1px solid #1e293b;
+  }
+  .sidebar-logo {
+    width: 36px; height: 36px;
+    background: #ef4444;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .sidebar-title { color: #fff; font-size: 16px; font-weight: 700; margin: 0; }
+  .sidebar-subtitle { color: #64748b; font-size: 12px; margin: 0; }
+  #sidebar-actions { padding: 12px 12px; flex: 1; }
+  .sidebar-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    color: #cbd5e1;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .sidebar-card:hover { background: #1e293b; color: #fff; }
+  .sidebar-card-icon {
+    width: 32px; height: 32px;
+    background: #1e293b;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+  .sidebar-card:hover .sidebar-card-icon { background: #334155; }
+  .sidebar-card-title { font-size: 13px; font-weight: 600; }
+  .sidebar-card-desc { font-size: 11px; color: #64748b; margin-top: 1px; }
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid #1e293b;
+    text-align: center;
+  }
+  .sidebar-footer p { color: #475569; font-size: 11px; margin: 0; }
+  .sidebar-footer p:first-child { font-weight: 600; color: #64748b; }
+
+  /* ─── Mobile sidebar ─── */
+  @media (max-width: 767px) {
+    #chat-sidebar {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      bottom: 0;
+      z-index: 45;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      width: 280px;
+    }
+    #chat-sidebar.sidebar-open { transform: translateX(0); }
+    .sidebar-overlay {
+      position: fixed; top: 80px; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5); z-index: 44;
+    }
+    #sidebar-toggle { display: flex; }
+  }
+  @media (min-width: 768px) {
+    #sidebar-toggle { display: none; }
+    .sidebar-overlay { display: none !important; }
+  }
+
+  /* ─── Main chat area ─── */
+  #chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+  }
+  #sidebar-toggle {
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 10;
+    width: 36px; height: 36px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+  }
+  #sidebar-toggle:hover { background: #f1f5f9; }
+
+  /* ─── Messages ─── */
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+  .msg-row { display: flex; margin-bottom: 12px; max-width: 700px; }
+  .msg-user { margin-left: auto; justify-content: flex-end; }
+  .msg-bot { margin-right: auto; }
+
+  .bot-avatar {
+    width: 32px; height: 32px;
+    background: #ef4444;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-right: 8px; margin-top: 4px;
+  }
+  .bot-avatar-spacer { width: 32px; flex-shrink: 0; margin-right: 8px; }
+
+  .bubble { padding: 10px 16px; font-size: 15px; line-height: 1.6; word-break: break-word; }
+  .bubble-user {
+    background: #ef4444; color: #fff;
+    border-radius: 16px 16px 4px 16px;
+  }
+  .bubble-bot {
+    background: #fff; color: #334155;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px 16px 16px 4px;
+  }
+
+  /* ─── Welcome ─── */
+  #chat-welcome {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 60px;
+    text-align: center;
+  }
+  .welcome-icon {
+    width: 64px; height: 64px;
+    background: #ef4444;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .welcome-title { font-size: 24px; font-weight: 800; color: #1e293b; margin: 0 0 8px; }
+  .welcome-text { font-size: 15px; color: #64748b; line-height: 1.5; margin: 0 0 24px; }
+  #chat-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .chat-chip {
+    padding: 8px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    background: #fff;
+    color: #475569;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .chat-chip:hover { border-color: #fca5a5; color: #ef4444; }
+
+  /* ─── Input bar ─── */
+  #chat-input-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+  }
+  #chat-input {
+    flex: 1;
+    resize: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    max-height: 120px;
+    line-height: 1.4;
+    background: #f8fafc;
+  }
+  #chat-input:focus { border-color: #ef4444; background: #fff; }
+  #chat-send {
+    width: 40px; height: 40px;
+    background: #ef4444;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  #chat-send:hover { opacity: 0.9; }
+
+  /* ─── Slot picker ─── */
+  .slot-picker {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px;
+    width: 100%;
+  }
+  .slot-picker-title { font-size: 13px; font-weight: 700; color: #1e293b; margin: 0 0 12px; }
+  .slot-date { font-size: 12px; font-weight: 600; color: #64748b; margin: 12px 0 6px; }
+  .slot-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+  .slot-btn {
+    padding: 6px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .slot-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+  /* ─── Loading dots ─── */
+  .savvy-dots { display: flex; gap: 4px; align-items: center; height: 20px; }
   .savvy-dots span {
-    width: 7px;
-    height: 7px;
+    width: 7px; height: 7px;
     background: #94a3b8;
     border-radius: 50%;
     animation: savvy-bounce 1.2s infinite ease-in-out;
   }
   .savvy-dots span:nth-child(2) { animation-delay: 0.2s; }
   .savvy-dots span:nth-child(3) { animation-delay: 0.4s; }
-
   @keyframes savvy-bounce {
     0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
     30% { transform: translateY(-6px); opacity: 1; }
   }
 
-  /* Hide scrollbar but keep scrolling */
-  #chat-messages::-webkit-scrollbar { width: 4px; }
-  #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  /* ─── Rich Markdown styles ─── */
+  .bubble-bot p { margin: 0 0 8px; }
+  .bubble-bot p:last-child { margin: 0; }
+  .md-h1 { font-size: 18px; font-weight: 800; color: #1e293b; margin: 16px 0 8px; }
+  .md-h2 { font-size: 16px; font-weight: 700; color: #1e293b; margin: 14px 0 6px; }
+  .md-h3 { font-size: 15px; font-weight: 700; color: #1e293b; margin: 12px 0 6px; }
+  .md-ol, .md-ul { margin: 8px 0; padding-left: 20px; }
+  .md-ol li, .md-ul li { margin-bottom: 4px; }
+  .md-link { color: #ef4444; text-decoration: underline; }
 
-  /* Mobile keyboard handling */
-  @supports (height: 100dvh) {
-    header { top: 0; }
-    #chat-messages { bottom: 64px; }
-    footer { bottom: 0; }
+  .table-wrap { overflow-x: auto; margin: 10px 0; }
+  .md-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
   }
+  .md-table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .md-table td {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+  }
+  .md-table .alt-row { background: #f8fafc; }
 
-  /* Input focus */
-  #chat-input:focus {
-    border-color: #ef4444;
-    background: #fff;
-  }
-
-  /* Safe area for notched phones */
-  footer {
-    padding-bottom: max(0px, env(safe-area-inset-bottom));
-  }
+  /* ─── Safe area ─── */
+  #chat-input-bar { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 </style>

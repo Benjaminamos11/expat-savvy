@@ -1,6 +1,6 @@
 /**
  * /api/chat — Savvy AI Chat endpoint
- * Claude agent loop with tool use for leads, booking, email
+ * Claude agent loop with tool use for leads, booking, email, premium calc
  */
 
 import type { APIRoute } from 'astro';
@@ -14,6 +14,13 @@ import {
   handleGetAvailableSlots,
   handleCreateBooking,
   handleSendSummaryEmail,
+  handleCalculatePremium,
+  handleGetInsuranceModels,
+  handleGetDeductibles,
+  handleResolveRegion,
+  handleGetInsuranceChecklist,
+  handleExplainDeductibleChange,
+  handleGetInsuranceReviewInfo,
 } from '../../lib/chat-tools';
 
 const SYSTEM_PROMPT = `You are Savvy AI, the AI assistant for Expat Savvy — a Swiss insurance advisory company helping expats navigate the Swiss insurance landscape.
@@ -34,8 +41,23 @@ const SYSTEM_PROMPT = `You are Savvy AI, the AI assistant for Expat Savvy — a 
 - Robert Kolar → Health insurance (KVG/VVG), household, liability consultations
 - Hans Steiner → Life insurance, 3rd pillar, pension planning, financial advisory
 
+**Premium calculator (PrimAI API):**
+- You can compare KVG/OKP basic health insurance premiums using calculate_premium
+- ALWAYS clarify: these are mandatory basic insurance (KVG/OKP) premiums only — supplementary insurance (VVG) is separate and requires a personal consultation
+- To compare premiums you need: postal code (PLZ), age, and deductible amount
+- If the user doesn't specify all three, ask for the missing information
+- Use get_deductibles to show deductible options if the user is unsure
+- Use get_insurance_models to explain model differences (Standard, HMO, Telmed, Hausarzt)
+- Present results in a **markdown table** with columns: Insurer | Model | Monthly Premium (CHF)
+- After showing premiums, ALWAYS suggest booking a free consultation to discuss supplementary coverage and optimize their overall insurance setup
+
+**Insurance knowledge tools:**
+- Use get_insurance_checklist when someone is new to Switzerland or asks what insurance they need
+- Use explain_deductible_change when someone asks about changing their deductible, switching deadlines, or model options
+- Use get_insurance_review_info when someone asks about reviewing or optimizing their existing insurance
+
 **Key rules:**
-- Never promise specific premiums or savings — these depend on individual circumstances
+- Never promise specific savings — actual premiums depend on individual circumstances
 - Only collect contact info when the user explicitly wants to book a consultation or be contacted
 - Don't be pushy with lead capture — provide value first
 - If unsure about a specific regulation, say so and offer to have a specialist follow up
@@ -78,9 +100,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  // Limit conversation length
   const messages = body.messages.slice(-20);
-
   const client = new Anthropic({ apiKey });
 
   try {
@@ -96,7 +116,7 @@ export const POST: APIRoute = async ({ request }) => {
 
       const response = await client.messages.create({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
+        max_tokens: 2048,
         system: SYSTEM_PROMPT,
         tools: TOOL_DEFINITIONS as any,
         messages: currentMessages as any,
@@ -110,7 +130,6 @@ export const POST: APIRoute = async ({ request }) => {
         break;
       }
 
-      // Process tool calls
       currentMessages.push({ role: 'assistant', content: response.content as any });
 
       const toolResults: Array<{ type: 'tool_result'; tool_use_id: string; content: string }> = [];
@@ -137,14 +156,37 @@ export const POST: APIRoute = async ({ request }) => {
             case 'send_summary_email':
               result = await handleSendSummaryEmail(toolInput);
               break;
+            case 'calculate_premium':
+              result = await handleCalculatePremium(toolInput);
+              break;
+            case 'get_insurance_models':
+              result = await handleGetInsuranceModels();
+              break;
+            case 'get_deductibles':
+              result = await handleGetDeductibles(toolInput);
+              break;
+            case 'resolve_region':
+              result = await handleResolveRegion(toolInput);
+              break;
+            case 'get_insurance_checklist':
+              result = handleGetInsuranceChecklist();
+              break;
+            case 'explain_deductible_change':
+              result = handleExplainDeductibleChange();
+              break;
+            case 'get_insurance_review_info':
+              result = handleGetInsuranceReviewInfo();
+              break;
             default:
               result = { error: `Unknown tool: ${toolName}` };
           }
 
-          // Store structured data for frontend
           if (toolName === 'get_available_slots' && result?.slots) {
             toolData.slots = result.slots;
             toolData.consultant = toolInput.consultant;
+          }
+          if (toolName === 'calculate_premium' && result?.offers) {
+            toolData.premiums = result.offers;
           }
         } catch (toolErr) {
           console.error(`Tool ${toolName} error:`, toolErr);

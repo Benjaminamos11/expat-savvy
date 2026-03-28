@@ -97,6 +97,87 @@ export const TOOL_DEFINITIONS = [
       required: ['email', 'name', 'summary'],
     },
   },
+  // ─── PrimAI Premium Calculator Tools ───
+  {
+    name: 'calculate_premium',
+    description:
+      'Compare KVG/OKP basic health insurance premiums across insurers. Returns cheapest offers. This is ONLY for mandatory basic insurance — supplementary insurance requires a personal consultation. Always suggest booking a consultation after showing results.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        plz: { type: 'string' as const, description: 'Swiss postal code (e.g. 8001)' },
+        age: { type: 'number' as const, description: 'Age of the insured person' },
+        deductible: { type: 'number' as const, description: 'Deductible/franchise in CHF (300, 500, 1000, 1500, 2000, or 2500)' },
+        model: { type: 'string' as const, description: 'Insurance model filter (optional): standard, hmo, telmed, hausarzt' },
+      },
+      required: ['plz', 'age', 'deductible'],
+    },
+  },
+  {
+    name: 'get_insurance_models',
+    description:
+      'List available health insurance models (Standard, HMO, Telmed, Hausarzt) with explanations. Use when the user asks about model differences.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
+  {
+    name: 'get_deductibles',
+    description:
+      'List available deductible/franchise options for a given age. Adults and children have different ranges.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        age: { type: 'number' as const, description: 'Age of the insured person' },
+      },
+      required: ['age'],
+    },
+  },
+  {
+    name: 'resolve_region',
+    description:
+      'Resolve a Swiss postal code (PLZ) to its premium region. Useful for explaining why premiums vary by location.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        plz: { type: 'string' as const, description: 'Swiss postal code (4 digits)' },
+      },
+      required: ['plz'],
+    },
+  },
+  // ─── Knowledge-Based Insurance Tools ───
+  {
+    name: 'get_insurance_checklist',
+    description:
+      'Return a structured checklist for newcomers to Switzerland — what insurance to get, deadlines, and steps. Use when someone asks about insurance as a new arrival.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
+  {
+    name: 'explain_deductible_change',
+    description:
+      'Explain how and when to change health insurance deductible, deadline rules (Nov 30 / Dec 31), model options, and savings potential.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
+  {
+    name: 'get_insurance_review_info',
+    description:
+      'Explain what a health insurance review covers, why it matters, and how to book one with Expat Savvy. Use when someone asks about reviewing or optimizing their insurance.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
 ];
 
 // ─── Tool Handlers ───
@@ -321,4 +402,128 @@ export async function handleSendSummaryEmail(input: {
     const msg = err instanceof Error ? err.message : 'Unknown error';
     return { success: false, message: msg };
   }
+}
+
+// ─── PrimAI Premium Calculator Handlers ───
+
+const PRIMAI_BASE = 'https://api.primai.ch';
+
+export async function handleCalculatePremium(input: {
+  plz: string;
+  age: number;
+  deductible: number;
+  model?: string;
+}): Promise<{ success: boolean; offers?: any[]; message?: string; note?: string }> {
+  const params = new URLSearchParams({
+    plz: input.plz,
+    age: input.age.toString(),
+    deductible: input.deductible.toString(),
+    limit: '5',
+  });
+  if (input.model) params.set('model', input.model);
+
+  try {
+    const res = await fetch(`${PRIMAI_BASE}/v1/compare?${params}`, {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return { success: false, message: `Premium API error: ${res.status}` };
+    const data = await res.json();
+    return {
+      success: true,
+      offers: data.offers || data.results || data,
+      note: 'These are KVG/OKP basic insurance premiums only. Supplementary insurance (VVG) requires a personal consultation.',
+    };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Unknown error';
+    return { success: false, message: `Could not fetch premiums: ${msg}` };
+  }
+}
+
+export async function handleGetInsuranceModels(): Promise<{ success: boolean; models?: any; message?: string }> {
+  try {
+    const res = await fetch(`${PRIMAI_BASE}/v1/models`, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) return { success: false, message: `API error: ${res.status}` };
+    return { success: true, models: await res.json() };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Unknown error';
+    return { success: false, message: msg };
+  }
+}
+
+export async function handleGetDeductibles(input: { age: number }): Promise<{ success: boolean; deductibles?: any; message?: string }> {
+  try {
+    const res = await fetch(`${PRIMAI_BASE}/v1/deductibles?age=${input.age}`, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) return { success: false, message: `API error: ${res.status}` };
+    return { success: true, deductibles: await res.json() };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Unknown error';
+    return { success: false, message: msg };
+  }
+}
+
+export async function handleResolveRegion(input: { plz: string }): Promise<{ success: boolean; region?: any; message?: string }> {
+  try {
+    const res = await fetch(`${PRIMAI_BASE}/v1/regions/resolve?plz=${input.plz}`, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) return { success: false, message: `API error: ${res.status}` };
+    return { success: true, region: await res.json() };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Unknown error';
+    return { success: false, message: msg };
+  }
+}
+
+// ─── Knowledge-Based Insurance Handlers ───
+
+export function handleGetInsuranceChecklist() {
+  return {
+    title: 'Insurance Checklist for Newcomers to Switzerland',
+    deadline: 'You must register for basic health insurance within 3 months of arriving. Coverage is retroactive to your arrival date.',
+    steps: [
+      { step: 1, title: 'Basic Health Insurance (KVG)', description: 'Mandatory for all residents. Compare premiums, choose deductible (300-2500 CHF) and model (Standard/HMO/Telmed/Hausarzt).', deadline: 'Within 3 months of arrival', priority: 'required' },
+      { step: 2, title: 'Supplementary Insurance (VVG)', description: 'Optional but recommended. Covers dental, alternative medicine, private hospital rooms, international coverage.', deadline: 'Apply when healthy — medical questionnaire required', priority: 'recommended' },
+      { step: 3, title: 'Personal Liability Insurance', description: 'Covers damage you cause to others or their property. Very affordable (50-100 CHF/year).', priority: 'highly recommended' },
+      { step: 4, title: 'Household Insurance (Hausrat)', description: 'Covers your belongings against theft, fire, water damage. Often bundled with liability.', priority: 'highly recommended' },
+      { step: 5, title: '3rd Pillar (Säule 3a)', description: 'Tax-advantaged retirement savings. Max ~7,056 CHF/year for employees. Start as soon as you have a Swiss salary.', priority: 'recommended' },
+      { step: 6, title: 'Life Insurance', description: 'Important if you have dependents or a mortgage. Term life is most cost-effective.', priority: 'situational' },
+    ],
+  };
+}
+
+export function handleExplainDeductibleChange() {
+  return {
+    title: 'Changing Your Health Insurance Deductible',
+    key_facts: [
+      'To INCREASE your deductible (e.g. 300→2500): notify your insurer by November 30 for the following year.',
+      'To DECREASE your deductible (e.g. 2500→300): notify by December 31.',
+      'You can switch insurers entirely by November 30 (standard deadline).',
+      'If your insurer raises premiums mid-year, you may get an additional switching window by March 31.',
+    ],
+    deductible_options: {
+      adults: [300, 500, 1000, 1500, 2000, 2500],
+      children: [0, 100, 200, 300, 400, 500, 600],
+    },
+    savings_note: 'Higher deductible = lower monthly premium. A healthy adult who rarely visits the doctor can save 1,000-2,000 CHF/year with a 2,500 CHF deductible vs 300 CHF.',
+    models: {
+      Standard: 'Free choice of any doctor. Most expensive option.',
+      HMO: 'Must visit HMO center first. Typically 10-20% cheaper.',
+      Telmed: 'Call a health hotline before visiting a doctor. 10-15% cheaper.',
+      Hausarzt: 'Choose a family doctor as gatekeeper. 10-15% cheaper.',
+    },
+  };
+}
+
+export function handleGetInsuranceReviewInfo() {
+  return {
+    title: 'Health Insurance Review',
+    what_it_covers: [
+      'Analysis of your current basic insurance premium vs. market alternatives',
+      'Deductible optimization based on your health profile and usage',
+      'Model recommendation (Standard/HMO/Telmed/Hausarzt)',
+      'Supplementary insurance gap analysis',
+      'Potential annual savings calculation',
+    ],
+    why_important: 'Most expats overpay by 500-2,000 CHF/year because they don\'t compare annually or chose a suboptimal deductible/model combination.',
+    how_to_book: 'Book a free consultation with Robert Kolar (health insurance specialist) through this chat or at expat-savvy.ch.',
+    cost: 'Free — no obligation.',
+  };
 }

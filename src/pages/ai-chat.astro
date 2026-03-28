@@ -1,21 +1,22 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import SavvyAIChat from '../components/SavvyAIChat.astro';
 export const prerender = false;
 ---
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Savvy AI | Swiss Insurance Assistant</title>
-  <meta name="description" content="Chat with Savvy AI — your Swiss insurance expert. Get answers about health insurance, 3rd pillar, deductibles, and book free consultations." />
-  <link rel="icon" href="/favicon.svg" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-  </style>
-</head>
-<body>
+<BaseLayout title="Savvy AI" description="Chat with Savvy AI — your Swiss insurance expert. Compare premiums, get insurance checklists, and book free consultations.">
   <SavvyAIChat />
-</body>
-</html>
+</BaseLayout>
+
+<style is:global>
+  /* Hide floating CTAs on chat page */
+  #fcta-bar, #sticky-booking { display: none !important; }
+  /* Chat fills available space — no footer scroll on this page */
+  body { overflow: hidden; }
+  main.flex-grow {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+  }
+  footer { display: none; }
+</style>
