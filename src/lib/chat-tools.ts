@@ -161,7 +161,7 @@ export const TOOL_DEFINITIONS = [
   {
     name: 'explain_deductible_change',
     description:
-      'Explain how and when to change health insurance deductible, deadline rules (Nov 30 / Dec 31), model options, and savings potential.',
+      'Compare deductible/franchise options and show savings potential. ALWAYS use this when a user asks about deductibles, franchises, choosing or changing their deductible, or comparing costs. Triggers an interactive calculator widget. Also covers deadline rules (Nov 30 / Dec 31) and model options.',
     input_schema: {
       type: 'object' as const,
       properties: {},
