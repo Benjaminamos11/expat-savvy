@@ -350,6 +350,16 @@
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
+
+  // iOS keyboard: adjust chat height when virtual keyboard opens
+  if (window.visualViewport) {
+    var appEl = document.getElementById('savvy-chat-app');
+    window.visualViewport.addEventListener('resize', function() {
+      var headerH = 80;
+      var vpH = window.visualViewport.height;
+      appEl.style.height = (vpH - headerH) + 'px';
+    });
+  }
 })();
 </script>
 
@@ -358,6 +368,7 @@
   #savvy-chat-app {
     display: flex;
     height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
     overflow: hidden;
     background: #f8fafc;
   }
@@ -480,9 +491,24 @@
   #chat-messages::-webkit-scrollbar { width: 4px; }
   #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
-  .msg-row { display: flex; margin-bottom: 12px; max-width: 700px; }
+  .msg-row { display: flex; margin-bottom: 12px; max-width: 700px; width: 100%; }
   .msg-user { margin-left: auto; justify-content: flex-end; }
   .msg-bot { margin-right: auto; }
+
+  @media (max-width: 767px) {
+    .msg-row { max-width: 100%; }
+    #chat-welcome { padding-top: 30px; }
+    .welcome-title { font-size: 20px; }
+    .welcome-text { font-size: 14px; }
+    #chat-messages { padding: 12px 10px; }
+    #chat-input-bar { padding: 8px 10px; }
+    .bubble { padding: 8px 12px; font-size: 14px; }
+    .bot-avatar { width: 28px; height: 28px; margin-right: 6px; }
+    .bot-avatar svg { width: 14px; height: 14px; }
+    .bot-avatar-spacer { width: 28px; margin-right: 6px; }
+    .md-table { font-size: 12px; }
+    .md-table th, .md-table td { padding: 6px 8px; }
+  }
 
   .bot-avatar {
     width: 32px; height: 32px;
