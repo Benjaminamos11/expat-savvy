@@ -1,0 +1,276 @@
+---
+// DeductibleCalculatorWidget.astro — Standalone deductible/franchise calculator
+// Pure vanilla JS, no React. Embeddable on any page.
+---
+
+<div class="dcw-wrapper">
+  <div class="dcw-calc">
+    <div class="dcw-header">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"/></svg>
+      <span>Deductible Calculator</span>
+    </div>
+    <p class="dcw-label">Your estimated annual medical costs (CHF)</p>
+    <div class="dcw-slider-wrap">
+      <input type="range" min="0" max="10000" step="100" value="1500" class="dcw-slider">
+      <div class="dcw-slider-labels">
+        <span>CHF 0</span>
+        <span class="dcw-slider-val">CHF 1,500</span>
+        <span>CHF 10,000</span>
+      </div>
+    </div>
+    <p class="dcw-hint">Includes doctor visits, prescriptions, dentist, hospital stays</p>
+    <div class="dcw-results"></div>
+    <div class="dcw-info">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+      <span>You pay: deductible + 10% of remaining bills (max CHF 700/year) + monthly premiums</span>
+    </div>
+    <div class="dcw-cta">
+      <p>Want help optimizing your deductible? Book a free consultation with our insurance experts.</p>
+      <button type="button" onclick="window.openHealthModal && window.openHealthModal('home')" class="dcw-cta-btn">Book free consultation</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dcw-wrapper').forEach(function(widget) {
+    if (widget.dataset.init) return;
+    widget.dataset.init = '1';
+
+    var premiumSavings = { 300: 0, 500: 15, 1000: 45, 1500: 70, 2000: 95, 2500: 125 };
+    var deductibles = [300, 500, 1000, 1500, 2000, 2500];
+    var maxCopay = 700;
+
+    var slider = widget.querySelector('.dcw-slider');
+    var valDisplay = widget.querySelector('.dcw-slider-val');
+    var resultsEl = widget.querySelector('.dcw-results');
+    if (!slider || !resultsEl) return;
+
+    function calcCosts(medicalBills) {
+      var results = [];
+      deductibles.forEach(function(ded) {
+        var dedPaid = Math.min(ded, medicalBills);
+        var remaining = Math.max(0, medicalBills - ded);
+        var copay = Math.min(remaining * 0.1, maxCopay);
+        var annualSaving = premiumSavings[ded] * 12;
+        var outOfPocket = dedPaid + copay;
+        results.push({
+          deductible: ded,
+          dedPaid: dedPaid,
+          copay: Math.round(copay),
+          outOfPocket: Math.round(outOfPocket),
+          premiumSaving: annualSaving,
+          netCost: Math.round(outOfPocket - annualSaving),
+        });
+      });
+      var minNet = Infinity;
+      var bestIdx = 0;
+      results.forEach(function(r, idx) {
+        if (r.netCost < minNet) { minNet = r.netCost; bestIdx = idx; }
+      });
+      results[bestIdx].best = true;
+      return results;
+    }
+
+    function renderResults() {
+      var bills = parseInt(slider.value);
+      valDisplay.textContent = 'CHF ' + bills.toLocaleString();
+      var results = calcCosts(bills);
+
+      var html = '<table class="dcw-table"><thead><tr>' +
+        '<th>Deductible</th><th>You pay</th><th>10% co-pay</th><th>Premium saving</th><th>Net cost</th>' +
+        '</tr></thead><tbody>';
+
+      results.forEach(function(r) {
+        html += '<tr' + (r.best ? ' class="dcw-best"' : '') + '>' +
+          '<td><strong>CHF ' + r.deductible.toLocaleString() + '</strong></td>' +
+          '<td>CHF ' + r.dedPaid.toLocaleString() + '</td>' +
+          '<td>CHF ' + r.copay.toLocaleString() + '</td>' +
+          '<td class="dcw-saving">\u2212CHF ' + r.premiumSaving.toLocaleString() + '</td>' +
+          '<td><strong>CHF ' + r.netCost.toLocaleString() + '</strong>' +
+            (r.best ? ' <span class="dcw-badge">Best</span>' : '') + '</td>' +
+          '</tr>';
+      });
+
+      html += '</tbody></table>';
+
+      var bestResult = results.find(function(r) { return r.best; });
+      if (bestResult) {
+        var savingsVs300 = results[0].netCost - bestResult.netCost;
+        if (savingsVs300 > 0) {
+          html += '<p class="dcw-summary">With CHF ' + bills.toLocaleString() + ' in medical costs, the <strong>CHF ' +
+            bestResult.deductible.toLocaleString() + ' deductible</strong> saves you <strong>CHF ' +
+            savingsVs300.toLocaleString() + '/year</strong> vs. CHF 300.</p>';
+        } else {
+          html += '<p class="dcw-summary">With CHF ' + bills.toLocaleString() + ' in medical costs, the <strong>CHF 300 deductible</strong> is your best option \u2014 you\'ll use the full coverage.</p>';
+        }
+      }
+
+      resultsEl.innerHTML = html;
+    }
+
+    slider.addEventListener('input', renderResults);
+    renderResults();
+  });
+});
+</script>
+
+<style is:global>
+  .dcw-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .dcw-calc {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .dcw-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 20px;
+  }
+  .dcw-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin: 0 0 10px;
+  }
+  .dcw-hint {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 6px 0 20px;
+  }
+  .dcw-slider-wrap { padding: 0 4px; }
+  .dcw-slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e8f0;
+    border-radius: 3px;
+    outline: none;
+  }
+  .dcw-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px; height: 24px;
+    background: #ef4444;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(239,68,68,0.3);
+  }
+  .dcw-slider::-moz-range-thumb {
+    width: 24px; height: 24px;
+    background: #ef4444;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .dcw-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 6px;
+  }
+  .dcw-slider-val {
+    font-weight: 700;
+    color: #ef4444;
+    font-size: 15px;
+  }
+  .dcw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .dcw-table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.3px;
+  }
+  .dcw-table td {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+  }
+  .dcw-best {
+    background: #fef2f2 !important;
+  }
+  .dcw-best td { color: #1e293b; }
+  .dcw-saving { color: #16a34a; font-weight: 600; }
+  .dcw-badge {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .dcw-summary {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.5;
+    margin: 0 0 14px;
+    padding: 12px 14px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    border: 1px solid #bbf7d0;
+  }
+  .dcw-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+  .dcw-info svg { flex-shrink: 0; margin-top: 1px; }
+  .dcw-cta {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+  }
+  .dcw-cta p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+  .dcw-cta-btn {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .dcw-cta-btn:hover { opacity: 0.9; color: #fff; }
+
+  @media (max-width: 767px) {
+    .dcw-calc { padding: 16px; }
+    .dcw-table { font-size: 12px; }
+    .dcw-table th, .dcw-table td { padding: 7px 8px; }
+    .dcw-table th { font-size: 10px; }
+  }
+</style>

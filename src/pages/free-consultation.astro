@@ -1,354 +1,615 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationModal from '../components/consultation/ConsultationModal.astro';
 
-// Map insurance types to Cal.com links for direct embedding
-const calendarLinks = {
-  health: "robertkolar/expat-savvy",
-  "new-health": "robertkolar/setting-up-health-insurance-in-switzerland",
-  pension: "robertkolar/third-pillar-pension-solutions",
-  liability: "robertkolar/household-liability-insurance",
-  household: "robertkolar/household-liability-insurance"
+export const prerender = false;
+
+// Expert configuration
+const experts = {
+  robert: {
+    name: "Robert Kolar",
+    role: "Senior Health Insurance Expert",
+    subtitle: "Expat Specialist · DE/EN",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+    specialties: ["KVG/VVG health insurance", "Supplementary coverage", "Household & liability", "Insurance switching"],
+  },
+  hans: {
+    name: "Hans Steiner",
+    role: "Certified Financial Planner IAF",
+    subtitle: "Expat Specialist · DE/EN/FR",
+    image: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_auto,q_auto,w_200,h_200,c_fill,g_face/v1772294525/WhatsApp_Image_2026-02-28_at_10.33.38_pd2of6.jpg",
+    specialties: ["3rd pillar (Säule 3a)", "Tax optimization", "Life insurance", "Pension planning"],
+  },
 };
 
-// Get the query parameters to determine the consultation type
-const searchParams = Astro.url.searchParams;
-const insuranceType = searchParams.get('type') || 'health';
-const providerName = searchParams.get('provider') || '';
-const consultationType = searchParams.get('consultation') || '';
-
-// Validate insurance type before using as index
-const validTypes = ['health', 'new-health', 'pension', 'liability', 'household'] as const;
-type InsuranceType = typeof validTypes[number];
-
-// Determine the Cal.com link based on insurance type
-const calLink = validTypes.includes(insuranceType as InsuranceType) 
-  ? calendarLinks[insuranceType as InsuranceType] 
-  : calendarLinks.health;
-
-// Set appropriate page title based on parameters
-let pageTitle = "Book Your Free Insurance Consultation | Expat Savvy";
-let pageDescription = "Schedule a free consultation with our Swiss insurance experts. Get personalized advice and find the perfect coverage for your needs.";
-
-if (providerName) {
-  pageTitle = `${providerName} Insurance Consultation | Expat Savvy`;
-  pageDescription = `Get expert advice about ${providerName} insurance options in Switzerland. Free consultation with our registered brokers.`;
-} else if (insuranceType === 'new-health') {
-  pageTitle = "Setting Up Health Insurance in Switzerland | Expat Savvy";
-  pageDescription = "Get expert guidance on setting up your first health insurance in Switzerland. Free consultation with our insurance specialists.";
-} else if (insuranceType === 'pension') {
-  pageTitle = "3rd Pillar Pension Consultation | Expat Savvy";
-  pageDescription = "Get expert advice on pension planning and 3rd pillar solutions in Switzerland. Free consultation with our specialists.";
-} else if (insuranceType === 'liability' || insuranceType === 'household') {
-  pageTitle = "Home & Liability Insurance Consultation | Expat Savvy";
-  pageDescription = "Get expert advice on household and liability insurance in Switzerland. Free consultation with our specialists.";
-}
-
-const benefits = [
-  {
-    title: "Expert Guidance",
-    description: "Get personalized advice from licensed and registered brokers with deep knowledge of Swiss insurance.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>`
-  },
-  {
-    title: "Personalized Analysis",
-    description: "We'll review your current situation and budget to recommend coverage that matches your unique needs.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-    </svg>`
-  },
-  {
-    title: "Clear Communication",
-    description: "We explain Swiss insurance essentials in plain English—no jargon, no confusion.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-    </svg>`
-  },
-  {
-    title: "Tailored Recommendations",
-    description: "After our call, receive individualized insurer and premium options to compare at a glance.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>`
-  }
+const stats = [
+  { value: "1,000+", label: "Expats advised" },
+  { value: "100%", label: "Free & independent" },
+  { value: "15+", label: "Swiss insurers compared" },
+  { value: "4.9/5", label: "Client satisfaction" },
 ];
 
-const steps = [
+const faqs = [
   {
-    number: 1,
-    title: "Schedule Your Call",
-    description: "Choose a convenient date and time for your free consultation.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-    </svg>`
+    question: "Is the consultation really free?",
+    answer: "Yes, 100% free with no obligation. We are compensated by insurance providers when you choose to sign up through us. This means you get unbiased, expert advice at no cost."
   },
   {
-    number: 2,
-    title: "Meet Online",
-    description: "Join our secure video call for a personal consultation.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-    </svg>`
+    question: "What happens during the consultation?",
+    answer: "We'll review your current situation, compare options from 15+ Swiss insurers, and give you a personalized recommendation. A typical call takes 20–30 minutes via video or phone."
   },
   {
-    number: 3,
-    title: "Get Recommendations",
-    description: "Receive personalized insurance options and clear next steps.",
-    icon: `<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>`
-  }
+    question: "Do I need to prepare anything?",
+    answer: "No preparation required. It helps if you have your current insurance policy details handy, but it's not mandatory. We'll guide you through everything."
+  },
+  {
+    question: "Can you help me switch insurers?",
+    answer: "Absolutely. We handle the entire switching process — from comparing premiums to submitting cancellation letters and signing up with the new insurer. The deadline to switch basic insurance is November 30."
+  },
+  {
+    question: "Do you speak English?",
+    answer: "Yes. Our advisors speak fluent English and German. Hans Steiner also speaks French. We specialize in helping expats who are new to the Swiss insurance system."
+  },
+  {
+    question: "Which insurance types do you cover?",
+    answer: "We cover all major Swiss insurance types: KVG basic health insurance, VVG supplementary insurance, 3rd pillar pension (Säule 3a), life insurance, household insurance (Hausrat), and personal liability (Privathaftpflicht)."
+  },
 ];
-
-// Get consultation topic based on type
-let consultationTopic = "General Insurance Consultation";
-if (providerName) {
-  consultationTopic = `${providerName} Insurance Consultation`;
-} else if (insuranceType === 'new-health') {
-  consultationTopic = "Setting Up Health Insurance";
-} else if (insuranceType === 'pension') {
-  consultationTopic = "3rd Pillar & Pension Planning";
-} else if (insuranceType === 'liability' || insuranceType === 'household') {
-  consultationTopic = "Home & Liability Insurance";
-}
 ---
 
-<Layout
-  title={pageTitle}
-  description={pageDescription}
+<BaseLayout
+  title="Free Insurance Consultation Switzerland — Expert Advice for Expats | Expat Savvy"
+  description="Book a free insurance consultation with certified Swiss insurance experts. Compare health insurance premiums, optimize your deductible, set up 3rd pillar pension — independent advice for expats in English."
 >
-  <!-- Hero Section -->
-  <div class="relative bg-white">
-    <div class="absolute inset-0">
-      <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2">
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div class="max-w-lg mx-auto">
-          <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">Free Insurance Consultation — Expat Savvy</h1>
-          <p class="mt-6 text-xl text-gray-500">
-            Get expert guidance on your Swiss insurance options—completely free. Our online consultation helps you clarify coverage, understand costs, and feel confident in your decisions.
+  <!-- JSON-LD: LocalBusiness + FAQPage -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Expat Savvy — Free Insurance Consultation",
+    "description": "Free, independent insurance consultation for expats in Switzerland. Compare health insurance, optimize deductibles, set up 3rd pillar pension savings.",
+    "url": "https://expat-savvy.ch/free-consultation/",
+    "telephone": "+41-76-364-8888",
+    "priceRange": "Free",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Talacker 41",
+      "addressLocality": "Zürich",
+      "postalCode": "8001",
+      "addressCountry": "CH"
+    },
+    "areaServed": "CH",
+    "availableLanguage": ["English", "German", "French"],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CHF",
+      "description": "Free 30-minute insurance consultation via video call"
+    }
+  })} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Hero -->
+  <section class="bg-gray-900 text-white py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-red-400 font-semibold text-sm uppercase tracking-wider mb-3">Free & independent</p>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Swiss Insurance Consultation for Expats</h1>
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+            Get personalized advice from certified insurance experts — completely free. We compare 15+ Swiss insurers to find the best coverage and premiums for your situation.
           </p>
-          <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <a href="#booking-calendar" 
-              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl">
-              Schedule Your Free Call
-              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-            <a href="https://wa.me/41791552570?text=Hello%2C%20I'd%20like%20to%20schedule%20a%20consultation%20about%20{encodeURIComponent(consultationTopic)}" 
-              target="_blank"
-              class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#075E54] hover:bg-[#064740] transition-colors duration-300 shadow-lg hover:shadow-xl">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="window.openHealthModal && window.openHealthModal('home')"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg hover:shadow-xl"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Book free consultation
+            </button>
+            <a href="https://wa.me/41763648888?text=Hello%2C%20I'd%20like%20to%20schedule%20a%20free%20insurance%20consultation"
+              target="_blank" rel="noopener"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-[#25D366] hover:bg-[#1fb855] transition-colors shadow-lg"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
               Chat on WhatsApp
-              <svg class="ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
-              </svg>
             </a>
           </div>
-        </div>
-      </div>
-      <div class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 bg-primary-600">
-        <div class="max-w-lg mx-auto">
-          <h2 class="text-3xl font-extrabold text-white">Why choose our consultation?</h2>
-          <div class="mt-8 space-y-6">
-            {benefits.map(benefit => (
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-primary-600">
-                    <Fragment set:html={benefit.icon} />
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <h3 class="text-xl font-medium text-white">{benefit.title}</h3>
-                  <p class="mt-2 text-base text-primary-100">{benefit.description}</p>
-                </div>
+          <!-- Stats -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-8 border-t border-gray-700">
+            {stats.map(stat => (
+              <div>
+                <div class="text-2xl font-bold text-white">{stat.value}</div>
+                <div class="text-sm text-gray-400">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Calendar Section -->
-  <div id="booking-calendar" class="bg-white py-16 sm:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-gray-900">Schedule Your Free Consultation</h2>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-          Choose a time that works for your schedule
-        </p>
-      </div>
-      
-      <div class="calendar-container max-w-6xl mx-auto px-4">
-        <!-- Pure HTML direct embed approach - most reliable -->
-        <div id="my-cal-inline" class="relative h-[650px] border rounded-lg shadow-md bg-white overflow-hidden">
-          <!-- Static HTML embed - no JavaScript needed -->
-          <div id="calendar-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-20">
-            <div class="w-16 h-16 border-4 border-gray-200 border-t-red-600 rounded-full animate-spin mb-4"></div>
-            <h3 class="text-xl font-medium text-gray-900 mb-2">Loading your calendar...</h3>
-            <p class="text-gray-500 text-center max-w-md mb-4">Setting up your consultation calendar</p>
-            
-            <!-- Fallback link (hidden initially, shown after timeout) -->
-            <p id="calendar-fallback" class="text-sm text-gray-600 text-center mt-4" style="display: none;">
-              Don't see the calendar? 
-              <a href="https://expat-savvy.ch/free-consultation/" 
-                 class="text-red-600 hover:text-red-700 underline font-medium transition-colors"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                Click here to open in a new window
-              </a>
-            </p>
-          </div>
-          
-          <iframe 
-            id="cal-iframe"
-            src="https://cal.com/robertkolar/expat-savvy?layout=month_view&embed=true&primaryColor=%23dc2626&hideEventTypeDetails=false&theme=light"
-            width="100%" 
-            height="100%" 
-            frameborder="0" 
-            title="Free Insurance Consultation | Expat Savvy"
-            allow="camera; microphone; fullscreen; payment">
-          </iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- How It Works Section -->
-  <div class="bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-gray-900">How It Works</h2>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-          Three simple steps to get personalized insurance guidance
-        </p>
-      </div>
-
-      <div class="mt-16">
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {steps.map((step) => (
-            <div class="relative">
-              <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white">
-                <Fragment set:html={step.icon} />
-              </div>
-              <div class="ml-16 pt-1">
-                <p class="text-xl font-bold text-gray-900">Step {step.number}</p>
-                <h3 class="mt-2 text-xl font-medium text-gray-900">{step.title}</h3>
-                <p class="mt-2 text-base text-gray-500">{step.description}</p>
+        <!-- Expert cards -->
+        <div class="space-y-6">
+          {Object.values(experts).map(expert => (
+            <div class="bg-gray-800 rounded-2xl p-6 flex items-start gap-5 border border-gray-700">
+              <img src={expert.image} alt={expert.name} width="80" height="80" class="rounded-xl object-cover flex-shrink-0" loading="lazy" />
+              <div>
+                <h3 class="text-lg font-bold text-white">{expert.name}</h3>
+                <p class="text-red-400 text-sm font-medium">{expert.role}</p>
+                <p class="text-gray-400 text-sm mb-3">{expert.subtitle}</p>
+                <div class="flex flex-wrap gap-2">
+                  {expert.specialties.map(s => (
+                    <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full">{s}</span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Our Service is Free Section -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-gray-900">Our Service is Free</h2>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-          We're compensated by insurance providers when you choose to sign up through us, ensuring you get unbiased advice at no cost to you.
-        </p>
-        <div class="mt-8">
-          <a href="#booking-calendar"
-            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            Book Your Free Consultation
-          </a>
+  <!-- What we cover -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">What Our Free Consultation Covers</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Whether you're new to Switzerland or reviewing existing coverage, we help with all major insurance types.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Health Insurance (KVG)</h3>
+          <p class="text-gray-600 text-sm">Compare mandatory basic insurance premiums across all Swiss providers. Find the best deductible and model for your situation.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Supplementary Insurance (VVG)</h3>
+          <p class="text-gray-600 text-sm">Hospital upgrades, dental, alternative medicine, international coverage — we explain what's worth it and what's not.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">3rd Pillar Pension (Säule 3a)</h3>
+          <p class="text-gray-600 text-sm">Maximize your tax savings with the right 3a provider. We compare banks vs. insurance solutions for your goals.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Household Insurance</h3>
+          <p class="text-gray-600 text-sm">Protect your belongings with the right Hausratversicherung. We help you choose appropriate coverage limits.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Personal Liability</h3>
+          <p class="text-gray-600 text-sm">Essential coverage for accidental damage. Typically CHF 5-10/month for CHF 5M+ coverage — we find the best deal.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Insurance Review</h3>
+          <p class="text-gray-600 text-sm">Already insured? We review your existing policies and identify savings — many clients save CHF 1,000+/year.</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <ConsultationModal />
-</Layout>
+  <!-- How it works -->
+  <section class="py-16 md:py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">How It Works</h2>
+        <p class="text-lg text-gray-600">Three simple steps to expert insurance advice</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">1</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Book your call</h3>
+          <p class="text-gray-600">Pick a time that works for you. Takes 30 seconds.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">2</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Meet your expert</h3>
+          <p class="text-gray-600">20–30 min video call. We review your needs and compare options.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">3</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Get your recommendation</h3>
+          <p class="text-gray-600">Receive a personalized comparison with clear next steps.</p>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <button
+          onclick="window.openHealthModal && window.openHealthModal('home')"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg"
+        >
+          Schedule your free call
+        </button>
+      </div>
+    </div>
+  </section>
 
-<!-- Basic script for calendar loading and navigation -->
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Handle loading indicator
-    const iframe = document.getElementById('cal-iframe');
-    const loader = document.getElementById('calendar-loading');
-    
-    if (iframe && loader) {
-      // Hide loader when iframe loads
-      iframe.onload = function() {
-        loader.style.display = 'none';
-      };
-      
-      // Show fallback link if calendar is still loading after 3 seconds
-      setTimeout(() => {
-        if (loader && loader.style.display !== 'none') {
-          const fallbackLink = document.getElementById('calendar-fallback');
-          if (fallbackLink) {
-            fallbackLink.style.display = 'block';
-            console.log('📅 Showing calendar fallback link');
-          }
-        }
-      }, 3000); // Show fallback link after 3 seconds
-      
-      // Show complete fallback if loading takes very long
-      setTimeout(() => {
-        if (loader && loader.style.display !== 'none') {
-          showFallbackContent();
-        }
-      }, 8000); // Keep existing 8 second timeout for full fallback
-      
-      // Handle iframe errors
-      iframe.onerror = showFallbackContent;
+  <!-- Inline Calendar Booking -->
+  <section id="booking-calendar" class="py-16 md:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Schedule Your Free Consultation</h2>
+        <p class="text-lg text-gray-600">Choose a date and time — we'll confirm your booking instantly.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <!-- Step 1: Pick a date -->
+        <div id="cal-step-dates" class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-900">Pick a date</h3>
+            <div class="flex items-center gap-2">
+              <img src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" alt="Robert Kolar" width="32" height="32" class="rounded-full" />
+              <span class="text-sm text-gray-600">Robert Kolar</span>
+            </div>
+          </div>
+          <div id="cal-date-pills" class="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1"></div>
+        </div>
+
+        <!-- Step 2: Pick a time -->
+        <div id="cal-step-times" class="p-6 border-t border-gray-100" style="display:none;">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <button type="button" id="cal-back-dates" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <h3 class="text-lg font-bold text-gray-900">Pick a time</h3>
+            </div>
+            <span id="cal-date-label" class="text-sm text-gray-500"></span>
+          </div>
+          <div id="cal-times-loading" class="text-center py-6 text-gray-400">
+            <div class="w-6 h-6 border-2 border-gray-200 border-t-red-500 rounded-full animate-spin mx-auto mb-2"></div>
+            Loading available times...
+          </div>
+          <div id="cal-no-times" class="text-center py-6 text-gray-500 hidden">No available times on this date. Try another day.</div>
+          <div id="cal-time-pills" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
+        </div>
+
+        <!-- Step 3: Your details -->
+        <div id="cal-step-form" class="p-6 border-t border-gray-100" style="display:none;">
+          <div class="flex items-center gap-2 mb-1">
+            <button type="button" id="cal-back-times" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <h3 class="text-lg font-bold text-gray-900">Your details</h3>
+          </div>
+          <p id="cal-slot-label" class="text-sm text-red-500 font-medium mb-4 ml-7"></p>
+          <form id="cal-form" class="space-y-4 ml-7">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                <input type="text" id="cal-name" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Your full name" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <input type="email" id="cal-email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
+              <input type="tel" id="cal-phone" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="+41..." />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+              <textarea id="cal-notes" rows="2" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="What would you like to discuss?"></textarea>
+            </div>
+            <p id="cal-error" class="text-red-500 text-sm hidden"></p>
+            <button type="submit" id="cal-submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition-colors">
+              <span id="cal-submit-text">Confirm booking</span>
+              <span id="cal-submit-loading" class="hidden">
+                <svg class="w-5 h-5 animate-spin inline mr-1" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                Booking...
+              </span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 4: Done -->
+        <div id="cal-step-done" class="p-8 text-center" style="display:none;">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Consultation Booked!</h3>
+          <p id="cal-confirmed-details" class="text-gray-600 mb-2"></p>
+          <p class="text-sm text-gray-500">Check your email for a calendar invitation and meeting link.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+  (function() {
+    var API_BASE = 'https://api.cal.com/v2';
+    var EVENT_TYPE_ID = 1894802;
+    var API_KEY = 'cal_live_02d332e8841c6f13b371ee6dd3ca7ca8';
+    var TZ = (typeof Intl !== 'undefined' && Intl.DateTimeFormat)
+      ? Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Zurich'
+      : 'Europe/Zurich';
+    var selectedDate = null;
+    var selectedSlot = null;
+    var slotsCache = {};
+
+    function showStep(name) {
+      ['dates', 'times', 'form', 'done'].forEach(function(s) {
+        var el = document.getElementById('cal-step-' + s);
+        if (el) el.style.display = s === name ? '' : 'none';
+      });
     }
-    
-    // Smooth scroll to calendar
-    document.querySelectorAll('a[href="#booking-calendar"]').forEach(function(anchor) {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
+
+    // Generate date pills (next 15 business days)
+    var pillContainer = document.getElementById('cal-date-pills');
+    if (!pillContainer) return;
+    var today = new Date();
+    var count = 0;
+    for (var i = 0; i < 30 && count < 10; i++) {
+      var date = new Date(today);
+      date.setDate(today.getDate() + i);
+      if (date.getDay() === 0 || date.getDay() === 6) continue;
+      count++;
+      var dayName = date.toLocaleDateString('en', { weekday: 'short' });
+      var dayNum = date.getDate();
+      var monthName = date.toLocaleDateString('en', { month: 'short' });
+      var iso = date.toISOString().split('T')[0];
+
+      var pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'cal-date-pill flex-shrink-0 px-4 py-3 text-center rounded-xl border-2 border-gray-200 hover:border-red-400 cursor-pointer transition-all bg-white';
+      pill.dataset.date = iso;
+      pill.innerHTML = '<div class="text-xs uppercase text-gray-400 leading-none">' + dayName + '</div>' +
+        '<div class="text-lg font-bold text-gray-900 leading-tight">' + dayNum + '</div>' +
+        '<div class="text-xs text-gray-400">' + monthName + '</div>';
+      pill.addEventListener('click', function() { selectDate(this); });
+      pillContainer.appendChild(pill);
+    }
+
+    function selectDate(pill) {
+      document.querySelectorAll('.cal-date-pill').forEach(function(p) {
+        p.classList.remove('border-red-500', 'bg-red-50');
+        p.classList.add('border-gray-200', 'bg-white');
+      });
+      pill.classList.remove('border-gray-200', 'bg-white');
+      pill.classList.add('border-red-500', 'bg-red-50');
+
+      selectedDate = pill.dataset.date;
+      selectedSlot = null;
+
+      var d = new Date(selectedDate + 'T12:00:00');
+      var label = d.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric' });
+      var dateLabel = document.getElementById('cal-date-label');
+      if (dateLabel) dateLabel.textContent = label;
+
+      fetchSlots();
+    }
+
+    function fetchSlots() {
+      showStep('times');
+      var loading = document.getElementById('cal-times-loading');
+      var noTimes = document.getElementById('cal-no-times');
+      var timePills = document.getElementById('cal-time-pills');
+
+      if (loading) loading.style.display = '';
+      if (noTimes) noTimes.classList.add('hidden');
+      if (timePills) timePills.innerHTML = '';
+
+      var cacheKey = selectedDate;
+      if (slotsCache[cacheKey] && Date.now() - slotsCache[cacheKey].ts < 60000) {
+        if (loading) loading.style.display = 'none';
+        renderTimes(slotsCache[cacheKey].data);
+        return;
+      }
+
+      var params = new URLSearchParams({
+        eventTypeId: EVENT_TYPE_ID.toString(),
+        startTime: selectedDate + 'T00:00:00Z',
+        endTime: selectedDate + 'T23:59:59Z',
+        timeZone: TZ,
+      });
+
+      fetch(API_BASE + '/slots/available?' + params.toString(), {
+        headers: {
+          'Authorization': 'Bearer ' + API_KEY,
+          'cal-api-version': '2024-08-13',
+        },
+      })
+      .then(function(res) { if (!res.ok) throw new Error('API ' + res.status); return res.json(); })
+      .then(function(json) {
+        var slots = (json.data && json.data.slots && json.data.slots[selectedDate]) || [];
+        slotsCache[cacheKey] = { data: slots, ts: Date.now() };
+        if (loading) loading.style.display = 'none';
+        renderTimes(slots);
+      })
+      .catch(function(err) {
+        console.error('Slot fetch error:', err);
+        if (loading) loading.style.display = 'none';
+        if (noTimes) noTimes.classList.remove('hidden');
+      });
+    }
+
+    function renderTimes(slots) {
+      var container = document.getElementById('cal-time-pills');
+      if (!container) return;
+      if (!slots.length) {
+        var noTimes = document.getElementById('cal-no-times');
+        if (noTimes) noTimes.classList.remove('hidden');
+        return;
+      }
+      container.innerHTML = '';
+      slots.forEach(function(slot) {
+        var time = new Date(slot.time);
+        var display = time.toLocaleTimeString('en', {
+          hour: '2-digit', minute: '2-digit', hour12: false, timeZone: TZ,
+        });
+        var pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = 'px-4 py-2.5 bg-white border-2 border-gray-200 text-gray-900 rounded-xl text-sm font-semibold hover:border-red-400 transition-all';
+        pill.textContent = display;
+        pill.addEventListener('click', function() {
+          selectedSlot = slot.time;
+          var d = new Date(selectedDate + 'T12:00:00');
+          var dateStr = d.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' });
+          var slotLabel = document.getElementById('cal-slot-label');
+          if (slotLabel) slotLabel.textContent = dateStr + ' at ' + display;
+          showStep('form');
+        });
+        container.appendChild(pill);
+      });
+    }
+
+    // Back buttons
+    var backDates = document.getElementById('cal-back-dates');
+    if (backDates) backDates.addEventListener('click', function() { showStep('dates'); });
+    var backTimes = document.getElementById('cal-back-times');
+    if (backTimes) backTimes.addEventListener('click', function() { showStep('times'); });
+
+    // Form submit
+    var form = document.getElementById('cal-form');
+    if (form) form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var nameVal = document.getElementById('cal-name').value.trim();
+      var emailVal = document.getElementById('cal-email').value.trim();
+      var phoneVal = (document.getElementById('cal-phone').value || '').trim();
+      var notesVal = (document.getElementById('cal-notes').value || '').trim();
+      var errorEl = document.getElementById('cal-error');
+      var submitBtn = document.getElementById('cal-submit');
+      var submitText = document.getElementById('cal-submit-text');
+      var submitLoading = document.getElementById('cal-submit-loading');
+
+      if (!nameVal || !emailVal) {
+        if (errorEl) { errorEl.textContent = 'Name and email are required.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.classList.add('hidden');
+      if (submitLoading) submitLoading.classList.remove('hidden');
+
+      var payload = {
+        eventTypeId: EVENT_TYPE_ID,
+        start: selectedSlot,
+        attendee: { name: nameVal, email: emailVal, timeZone: TZ, language: 'en' },
+      };
+      if (phoneVal || notesVal) {
+        payload.metadata = {};
+        if (phoneVal) payload.metadata.phone = phoneVal;
+        if (notesVal) payload.metadata.notes = notesVal;
+      }
+
+      fetch(API_BASE + '/bookings', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + API_KEY,
+          'Content-Type': 'application/json',
+          'cal-api-version': '2024-08-13',
+        },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(err) { throw new Error(err.message || 'Failed'); });
+        return res.json();
+      })
+      .then(function() {
+        var time = new Date(selectedSlot);
+        var details = time.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric', timeZone: TZ }) +
+          ' at ' + time.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: TZ });
+        var confirmedEl = document.getElementById('cal-confirmed-details');
+        if (confirmedEl) confirmedEl.textContent = details;
+        showStep('done');
+
+        // Also capture lead
+        fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameVal, email: emailVal, phone: phoneVal,
+            source: 'free-consultation-page', language: 'en',
+            insuranceType: 'consultation',
+          }),
+        }).catch(function() {});
+      })
+      .catch(function(err) {
+        console.error('Booking error:', err);
+        if (errorEl) { errorEl.textContent = err.message || 'Booking failed. Please try again.'; errorEl.classList.remove('hidden'); }
+      })
+      .finally(function() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.classList.remove('hidden');
+        if (submitLoading) submitLoading.classList.add('hidden');
       });
     });
-  });
-  
-  // Show fallback content if calendar fails to load
-  function showFallbackContent() {
-    const calContainer = document.getElementById('my-cal-inline');
-    if (calContainer) {
-      calContainer.innerHTML = `
-        <div class="flex flex-col items-center justify-center h-full bg-white p-8">
-          <h3 class="text-xl font-medium text-gray-900 mb-4">Unable to load calendar</h3>
-          <p class="text-gray-500 text-center max-w-md mb-6">
-            Please contact us directly to schedule your consultation.
-          </p>
-          <a href="https://wa.me/41791552570" target="_blank" 
-            class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#075E54] hover:bg-[#064740] transition-colors">
-            Contact via WhatsApp
-          </a>
-        </div>
-      `;
-    }
-  }
-</script>
+  })();
+  </script>
 
-<style>
-  #my-cal-inline {
-    width: 100%;
-    min-height: 650px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background-color: #ffffff;
-    overflow: hidden;
-  }
-  
-  @media (max-width: 640px) {
-    #my-cal-inline {
-      min-height: 600px;
-    }
-  }
+  <!-- FAQ -->
+  <section class="py-16 md:py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Frequently Asked Questions</h2>
+      </div>
+      <div class="space-y-6">
+        {faqs.map(faq => (
+          <div class="border border-gray-200 rounded-xl p-6">
+            <h3 class="font-bold text-lg text-gray-900 mb-3">{faq.question}</h3>
+            <p class="text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 md:py-20 bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold mb-4">Ready to optimize your Swiss insurance?</h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Join 1,000+ expats who saved money and stress with a free consultation. No obligation, no hidden fees.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button
+          onclick="window.openHealthModal && window.openHealthModal('home')"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg"
+        >
+          Book free consultation
+        </button>
+        <a href="https://wa.me/41763648888?text=Hello%2C%20I'd%20like%20to%20schedule%20a%20free%20insurance%20consultation"
+          target="_blank" rel="noopener"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white border-2 border-gray-600 hover:border-gray-400 transition-colors"
+        >
+          Or chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ConsultationModal />
+</BaseLayout>
+
+<style is:global>
+  #fcta-bar, #sticky-booking { display: none !important; }
 </style>

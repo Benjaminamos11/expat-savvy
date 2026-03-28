@@ -3,7 +3,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SavvyAIChat from '../components/SavvyAIChat.astro';
 export const prerender = false;
 ---
-<BaseLayout title="Savvy AI" description="Chat with Savvy AI — your Swiss insurance expert. Compare premiums, get insurance checklists, and book free consultations.">
+<BaseLayout title="AI Insurance Assistant — Compare Swiss Health Insurance Premiums | Expat Savvy" description="Chat with Savvy AI to compare Swiss health insurance premiums, find your optimal deductible, get a newcomer insurance checklist, and book free expert consultations.">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How can I compare Swiss health insurance premiums?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use our free AI assistant to compare KVG/OKP basic health insurance premiums. Just provide your postal code, age, and preferred deductible to see prices from all major Swiss insurers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What deductible should I choose for Swiss health insurance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The optimal deductible depends on your expected medical costs. Our interactive calculator shows the total cost for each deductible level (CHF 300–2,500), including the 10% co-payment capped at CHF 700/year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What insurance do I need as a newcomer to Switzerland?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At minimum, you need KVG basic health insurance within 3 months of arriving. We recommend also considering supplementary health insurance (VVG), personal liability, household insurance, and 3rd pillar pension savings."
+        }
+      }
+    ]
+  })} />
   <SavvyAIChat />
 </BaseLayout>
 

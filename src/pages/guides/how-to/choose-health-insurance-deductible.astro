@@ -3,6 +3,8 @@ import Layout from '../../../layouts/Layout.astro';
 import HowToSchema from '../../../components/schema/HowToSchema.astro';
 import FAQSchema from '../../../components/schema/FAQSchema.astro';
 import ConsultationModal from '../../../components/consultation/ConsultationModal.astro';
+import DeductibleCalculatorWidget from '../../../components/calculators/DeductibleCalculatorWidget.astro';
+import AskAICTA from '../../../components/AskAICTA.astro';
 
 // Define the steps for the how-to guide
 const steps = [
@@ -458,129 +460,10 @@ const supplies = [
   <div id="calculator" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Deductible Decision Tool</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Use this simplified guide to help determine which deductible level might be right for your situation.</p>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Deductible Calculator</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Estimate your annual medical costs and find which deductible saves you the most money.</p>
       </div>
-      
-      <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-        <div class="bg-primary-600 text-white p-4">
-          <h3 class="text-xl font-bold">Which Deductible Might Be Right For You?</h3>
-        </div>
-        
-        <div class="p-6">
-          <div class="space-y-8">
-            <div class="bg-gray-50 p-6 rounded-lg">
-              <h4 class="text-lg font-semibold text-gray-900 mb-4">Low Deductible (CHF 300-500) May Be Best If:</h4>
-              <ul class="space-y-2">
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You visit doctors frequently (more than 4-5 times per year)</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You have a chronic condition requiring regular treatment</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You take multiple prescription medications regularly</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You have planned medical procedures in the coming year</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-green-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You prefer predictable monthly costs over potentially high one-time expenses</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="bg-gray-50 p-6 rounded-lg">
-              <h4 class="text-lg font-semibold text-gray-900 mb-4">Medium Deductible (CHF 1,000-1,500) May Be Best If:</h4>
-              <ul class="space-y-2">
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You visit doctors occasionally (2-3 times per year)</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You take some medications but not on a continuous basis</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You have some savings to cover potential out-of-pocket costs</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You're looking for a balance between monthly premiums and potential out-of-pocket expenses</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="bg-gray-50 p-6 rounded-lg">
-              <h4 class="text-lg font-semibold text-gray-900 mb-4">High Deductible (CHF 2,000-2,500) May Be Best If:</h4>
-              <ul class="space-y-2">
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You rarely visit doctors (0-1 times per year)</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You don't take any prescription medications regularly</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You have substantial savings to cover potential out-of-pocket costs</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You're comfortable with financial risk and prioritize lower monthly premiums</span>
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-5 h-5 text-purple-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span>You're generally healthy with no anticipated medical procedures</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="mt-8">
-            <div class="bg-yellow-50 p-4 rounded-lg">
-              <p class="text-sm text-yellow-800">
-                <span class="font-bold">Important Note:</span> This is a general guide only. Your specific healthcare needs, financial situation, and risk tolerance should all be carefully considered when making this decision.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DeductibleCalculatorWidget />
     </div>
   </div>
 
@@ -617,6 +500,7 @@ const supplies = [
             </button>
           </div>
         </div>
+        <AskAICTA />
       </div>
     </div>
   </div>
