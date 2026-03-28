@@ -188,6 +188,9 @@ export const POST: APIRoute = async ({ request }) => {
           if (toolName === 'calculate_premium' && result?.offers) {
             toolData.premiums = result.offers;
           }
+          if (toolName === 'explain_deductible_change') {
+            toolData.deductibleCalc = true;
+          }
         } catch (toolErr) {
           console.error(`Tool ${toolName} error:`, toolErr);
           result = { success: false, error: `Tool failed: ${toolErr instanceof Error ? toolErr.message : 'Unknown error'}` };

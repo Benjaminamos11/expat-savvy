@@ -171,6 +171,9 @@
           if (data.toolData && data.toolData.slots) {
             renderSlotPicker(data.toolData.slots, data.toolData.consultant);
           }
+          if (data.toolData && data.toolData.deductibleCalc) {
+            renderDeductibleCalculator();
+          }
         }
       })
       .catch(function() {
@@ -240,6 +243,125 @@
         var dateLabel = d.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric' });
         sendMessage('I\'d like to book ' + dateLabel + ' at ' + time);
       });
+    });
+
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  // ─── Deductible Calculator Widget ───
+
+  function renderDeductibleCalculator() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'msg-row msg-bot';
+
+    // Average monthly premium savings vs. 300 CHF deductible (approximate Swiss averages)
+    var premiumSavings = { 300: 0, 500: 15, 1000: 45, 1500: 70, 2000: 95, 2500: 125 };
+    var deductibles = [300, 500, 1000, 1500, 2000, 2500];
+    var maxCopay = 700; // 10% co-payment capped at 700 CHF/year
+
+    wrapper.innerHTML =
+      '<div class="bot-avatar-spacer"></div>' +
+      '<div class="ded-calc">' +
+        '<div class="ded-calc-header">' +
+          '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"/></svg>' +
+          '<span>Deductible Calculator</span>' +
+        '</div>' +
+        '<p class="ded-calc-label">Your estimated annual medical costs (CHF)</p>' +
+        '<div class="ded-slider-wrap">' +
+          '<input type="range" id="ded-slider" min="0" max="10000" step="100" value="1500" class="ded-slider">' +
+          '<div class="ded-slider-labels"><span>CHF 0</span><span id="ded-slider-val" class="ded-slider-val">CHF 1,500</span><span>CHF 10,000</span></div>' +
+        '</div>' +
+        '<p class="ded-calc-hint">Includes doctor visits, prescriptions, dentist, hospital stays</p>' +
+        '<div id="ded-results"></div>' +
+        '<div class="ded-calc-info">' +
+          '<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>' +
+          '<span>You pay: deductible + 10% of remaining bills (max CHF 700/year) + monthly premiums</span>' +
+        '</div>' +
+        '<div class="ded-cta">' +
+          '<p>Want to change your deductible? If you\'re an Expat Savvy client, we handle it for you.</p>' +
+          '<button type="button" id="ded-change-btn" class="ded-change-btn">Help me change my deductible</button>' +
+        '</div>' +
+      '</div>';
+
+    messagesEl.appendChild(wrapper);
+
+    var slider = wrapper.querySelector('#ded-slider');
+    var valDisplay = wrapper.querySelector('#ded-slider-val');
+    var resultsEl = wrapper.querySelector('#ded-results');
+    var changeBtn = wrapper.querySelector('#ded-change-btn');
+
+    function calcCosts(medicalBills) {
+      var results = [];
+      deductibles.forEach(function(ded) {
+        var dedPaid = Math.min(ded, medicalBills);
+        var remaining = Math.max(0, medicalBills - ded);
+        var copay = Math.min(remaining * 0.1, maxCopay);
+        var premiumSaving = premiumSavings[ded];
+        var annualPremiumCost = (premiumSavings[300] - premiumSaving) * 0; // base is 300
+        var annualSaving = premiumSaving * 12; // savings vs 300 deductible
+        var outOfPocket = dedPaid + copay;
+        var totalCost = outOfPocket - annualSaving; // relative to 300 baseline
+        results.push({
+          deductible: ded,
+          dedPaid: dedPaid,
+          copay: Math.round(copay),
+          outOfPocket: Math.round(outOfPocket),
+          premiumSaving: annualSaving,
+          netCost: Math.round(outOfPocket - annualSaving),
+        });
+      });
+      // Find best option (lowest net cost)
+      var minNet = Infinity;
+      var bestIdx = 0;
+      results.forEach(function(r, idx) {
+        if (r.netCost < minNet) { minNet = r.netCost; bestIdx = idx; }
+      });
+      results[bestIdx].best = true;
+      return results;
+    }
+
+    function renderResults() {
+      var bills = parseInt(slider.value);
+      valDisplay.textContent = 'CHF ' + bills.toLocaleString();
+      var results = calcCosts(bills);
+
+      var html = '<table class="ded-table"><thead><tr>' +
+        '<th>Deductible</th><th>You pay</th><th>10% co-pay</th><th>Premium saving</th><th>Net cost</th>' +
+        '</tr></thead><tbody>';
+
+      results.forEach(function(r) {
+        html += '<tr' + (r.best ? ' class="ded-best"' : '') + '>' +
+          '<td><strong>CHF ' + r.deductible.toLocaleString() + '</strong></td>' +
+          '<td>CHF ' + r.dedPaid.toLocaleString() + '</td>' +
+          '<td>CHF ' + r.copay.toLocaleString() + '</td>' +
+          '<td class="ded-saving">−CHF ' + r.premiumSaving.toLocaleString() + '</td>' +
+          '<td><strong>CHF ' + r.netCost.toLocaleString() + '</strong>' +
+            (r.best ? ' <span class="ded-badge">Best</span>' : '') + '</td>' +
+          '</tr>';
+      });
+
+      html += '</tbody></table>';
+
+      var bestResult = results.find(function(r) { return r.best; });
+      if (bestResult) {
+        var savingsVs300 = results[0].netCost - bestResult.netCost;
+        if (savingsVs300 > 0) {
+          html += '<p class="ded-summary">With CHF ' + bills.toLocaleString() + ' in medical costs, the <strong>CHF ' +
+            bestResult.deductible.toLocaleString() + ' deductible</strong> saves you <strong>CHF ' +
+            savingsVs300.toLocaleString() + '/year</strong> vs. CHF 300.</p>';
+        } else {
+          html += '<p class="ded-summary">With CHF ' + bills.toLocaleString() + ' in medical costs, the <strong>CHF 300 deductible</strong> is your best option — you\'ll use the full coverage.</p>';
+        }
+      }
+
+      resultsEl.innerHTML = html;
+    }
+
+    slider.addEventListener('input', renderResults);
+    renderResults();
+
+    changeBtn.addEventListener('click', function() {
+      sendMessage('I want to change my deductible. Can you help me with that?');
     });
 
     messagesEl.scrollTop = messagesEl.scrollHeight;
@@ -664,6 +786,162 @@
     border: 1px solid #e2e8f0;
   }
   .md-table .alt-row { background: #f8fafc; }
+
+  /* ─── Deductible Calculator ─── */
+  .ded-calc {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 620px;
+  }
+  .ded-calc-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 16px;
+  }
+  .ded-calc-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin: 0 0 8px;
+  }
+  .ded-calc-hint {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: 4px 0 16px;
+  }
+  .ded-slider-wrap { padding: 0 4px; }
+  .ded-slider {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e8f0;
+    border-radius: 3px;
+    outline: none;
+  }
+  .ded-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    background: #ef4444;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(239,68,68,0.3);
+  }
+  .ded-slider::-moz-range-thumb {
+    width: 22px; height: 22px;
+    background: #ef4444;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .ded-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+  }
+  .ded-slider-val {
+    font-weight: 700;
+    color: #ef4444;
+    font-size: 14px;
+  }
+  .ded-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .ded-table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    padding: 8px 10px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.3px;
+  }
+  .ded-table td {
+    padding: 8px 10px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+  }
+  .ded-best {
+    background: #fef2f2 !important;
+  }
+  .ded-best td { color: #1e293b; }
+  .ded-saving { color: #16a34a; font-weight: 600; }
+  .ded-badge {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .ded-summary {
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.5;
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    border: 1px solid #bbf7d0;
+  }
+  .ded-calc-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .ded-calc-info svg { flex-shrink: 0; margin-top: 1px; }
+  .ded-cta {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 14px;
+  }
+  .ded-cta p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+  .ded-change-btn {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+  }
+  .ded-change-btn:hover { opacity: 0.9; }
+
+  @media (max-width: 767px) {
+    .ded-calc { padding: 14px; }
+    .ded-table { font-size: 11px; }
+    .ded-table th, .ded-table td { padding: 6px 6px; }
+    .ded-table th { font-size: 10px; }
+  }
 
   /* ─── Safe area ─── */
   #chat-input-bar { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
