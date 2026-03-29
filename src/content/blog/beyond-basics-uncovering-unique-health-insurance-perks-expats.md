@@ -1,234 +1,231 @@
 ---
-title: "Beyond the Basics: Uncovering Unique Health Insurance Perks for Expats in Switzerland"
-description: "Discover hidden benefits in Swiss health insurance that most expats overlook, including telemedicine services, international emergency coverage, wellness programs, and specialized expat assistance services."
+title: "Swiss Health Insurance Perks Most Expats Never Claim (2026 List)"
+description: "Gym rebates, alt-medicine, mental health, activity bonuses — Swiss insurers offer CHF 200–800/year in perks most expats don't know about. Here's what each insurer actually covers."
 author: "Benjamin Amos Wagner"
-date: 2025-05-10
-tags: ["swiss health insurance", "expat guide", "insurance perks", "switzerland", "wellness programs", "telemedicine", "international coverage", "expat benefits"]
+date: 2026-03-29
+tags: ["swiss health insurance", "expat guide", "insurance perks", "switzerland", "wellness programs", "supplementary insurance", "gym rebate", "alternative medicine", "2026 guide"]
 image: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1747075365/a-stylized-hand-drawn-sketch-in-red-and-_0X-QLYauSvagbqHWT_YNQg_mxoIrEg6QS6ES0zn0FS9Qw_hlo3lx.webp"
 ---
 
-## Beyond the Basics: Uncovering Unique Health Insurance Perks for Expats in Switzerland
+## Key Facts — Hidden Insurance Perks (2026)
 
-As an expat in Switzerland, you've likely already navigated the essentials of the Swiss healthcare system – securing your mandatory basic insurance (KVG/LAMal) and perhaps some supplementary coverage (VVG/LCA). But beyond these foundations lies a world of unique perks and benefits that many international residents overlook. These specialized services can significantly enhance your healthcare experience, save you money, and address the distinct challenges expats face. This guide unveils those hidden gems and explains how to maximize them, ensuring you're getting the most value from your Swiss health insurance.
+- Most supplementary plans include CHF 200–800/year in wellness & prevention benefits
+- Gym/fitness contributions: up to CHF 300–800/year depending on insurer and plan
+- Alternative medicine: 75–90% covered with the right supplementary plan
+- Activity bonuses: CSS myStep, Helsana+, Swica Benevita — earn discounts by staying active
+- Mental health: increasingly covered, but varies wildly between insurers
 
-## 1. Telemedicine and Digital Health Services
+## You're Probably Leaving Money on the Table
 
-The digital transformation of healthcare has accelerated tremendously, and Swiss insurers are at the forefront of this evolution.
+If you have Swiss supplementary health insurance (VVG), you're likely paying for benefits you've never claimed. Most expats focus on the basics — doctor visits, prescriptions, maybe a hospital upgrade — and never dig into the prevention and wellness benefits buried in their policy terms.
 
-### Virtual Doctor Consultations
+We reviewed what Switzerland's major insurers actually offer in 2026. Here's what you might be missing.
 
-Many Swiss health insurers now offer robust telemedicine services that can be particularly beneficial for expats:
+> **Important:** These perks are part of **supplementary insurance** (VVG/LCA), not basic mandatory insurance (KVG/OKP). Basic insurance coverage is identical regardless of insurer.
 
-- **24/7 Multilingual Access**: Services like Sanitas's "Medgate" and Swica's "santé24" provide round-the-clock medical consultations in multiple languages, including English, eliminating language barriers that expats often face.
+## Fitness & Gym Contributions
 
-- **Cost-Saving Advantage**: Virtual consultations are typically more affordable than in-person visits and may not count toward your deductible if part of a Telmed insurance model.
+Most supplementary plans contribute toward gym memberships, fitness classes, or sports club fees. The amounts and conditions vary significantly.
 
-- **Location Independence**: Whether you're traveling within Switzerland or abroad, you can access medical advice from your insurance-approved physicians, maintaining continuity of care.
+| Insurer | Annual Fitness Contribution | Plan Required | Notes |
+|---------|---------------------------|---------------|-------|
+| **Swica** | Up to CHF 800 | Completa Praeventa | Broadest coverage — gym, yoga, swimming, martial arts |
+| **CSS** | Up to CHF 200 | myFlex Balance | Fitness center memberships |
+| **Helsana** | Up to CHF 200 | Completa / TOP | Fitness, sports courses |
+| **Sanitas** | Up to CHF 300 | Classic / Family | Gym and fitness classes |
+| **Concordia** | Up to CHF 200 | Diversa Plus | Fitness contributions |
+| **Visana** | Up to CHF 200 | Ambulant III | Gym memberships |
+| **KPT** | Up to CHF 200 | Krankenpflege Plus | Health-promoting activities |
 
-**Provider Spotlight**: 
-- **Swica** offers one of the most comprehensive telemedicine services with their santé24 platform, available in English, German, French, and Italian.
-- **Helsana's** partnership with Medi24 provides video consultations with specialists, particularly valuable for expats seeking second opinions.
+**How to claim:** Submit your gym receipt (annual membership, not per-visit) to your insurer. Most accept online submissions through their app. Some require the gym to be on an approved list — check before signing a contract.
 
-### Smart Apps for Health Management
+> **Deep dive:** See our full [guide to gym reimbursement by insurer](/blog/gym-coverage-swiss-insurance-revised) for exact conditions and how to maximize your claim.
 
-Swiss insurers have developed sophisticated mobile applications that go beyond basic policy management:
+## Activity & Wellness Bonus Programs
 
-- **Digital Health Records**: Apps like "mySwica" allow you to store and manage your health data securely, making it easier to share medical information when changing doctors—a common scenario for expats.
+Three insurers offer meaningful rewards for staying physically active:
 
-- **Medication Management**: Some apps include features that remind you to take medications and provide information on equivalent medicines available in Switzerland—helpful when transitioning from medications prescribed in your home country.
+### Helsana+ App
+- Track steps, sleep, and mindfulness activities
+- Earn points redeemable for premium discounts or partner offers
+- CHF 75/year in potential rewards (with consistent usage)
+- Works with Apple Health, Google Fit, Fitbit, Garmin
 
-- **Symptom Checkers**: AI-powered symptom assessment tools are available through apps like CSS's "myCSS" and Groupe Mutuel's "GMapp," providing preliminary guidance in multiple languages.
+### CSS myStep Program
+- Connect a step tracker to the CSS app
+- Average 10,000 steps/day → up to 15% premium reduction on supplementary insurance
+- One of the few programs that directly reduces what you pay
 
-**Provider Spotlight**: 
-- **Sanitas** consistently wins awards for its digital services and app usability, with strong English-language support.
-- **CSS** offers an innovative health coach feature within its app that provides personalized health recommendations.
+### Swica Benevita
+- Points for health activities (exercise, nutrition tracking, sleep)
+- Redeemable for up to 15% bonus on Swica supplementary premiums
+- Integrates with major fitness trackers
+- Combined with Completa Praeventa, this is the most generous wellness ecosystem in Swiss insurance
 
-## 2. International and Cross-Border Coverage Extensions
+**Expat tip:** These programs work well for people already using fitness trackers. If you're paying for supplementary insurance anyway, activating the app takes 5 minutes and can save you CHF 100–200/year.
 
-For expats who maintain connections to their home countries or travel frequently, international coverage extensions are invaluable but often underutilized.
+## Alternative & Complementary Medicine
 
-### Enhanced Worldwide Emergency Coverage
+Switzerland is unusually progressive about complementary medicine. Five methods are covered under basic insurance when provided by a certified physician:
+1. Acupuncture
+2. Traditional Chinese Medicine (TCM)
+3. Homeopathy
+4. Anthroposophic medicine
+5. Phytotherapy (herbal medicine)
 
-While basic insurance provides limited emergency coverage abroad, supplementary plans can offer much more:
+But supplementary insurance dramatically expands what's covered:
 
-- **Higher Reimbursement Limits**: Premium supplementary plans can cover up to 100% of treatment costs worldwide, compared to the standard double-rate limitation in basic insurance.
+### What Supplementary Plans Add
+- **Non-physician practitioners:** Naturopaths, osteopaths, TCM therapists without MD
+- **Higher reimbursement:** 75–90% of costs (vs. basic insurance limitations)
+- **More modalities:** Shiatsu, reflexology, craniosacral therapy, Ayurveda, nutritional counseling
+- **Annual budgets:** CHF 1,000–5,000/year depending on plan
 
-- **Extended Treatment Duration**: Some plans cover not just immediate emergency care but continued treatment until you're fit to return to Switzerland.
+### Best Insurers for Alternative Medicine
 
-- **Medical Evacuation and Repatriation**: Comprehensive travel insurance modules can cover the costs of medical transport back to Switzerland or even to your home country if medically necessary.
+| Insurer | Annual Alt-Med Budget | Coverage Rate | Notable Modalities |
+|---------|----------------------|---------------|-------------------|
+| **Swica** | Up to CHF 5,000 | 75% | Widest range including Ayurveda |
+| **Helsana** | Up to CHF 3,000 | 75% | TCM, osteopathy well covered |
+| **CSS** | Up to CHF 3,000 | 75% | Good naturopathy coverage |
+| **Concordia** | Up to CHF 3,000 | 75–90% | Strong osteopathy |
+| **Sanitas** | Up to CHF 2,000 | 75% | Popular modalities covered |
 
-**Provider Spotlight**: 
-- **Concordia's** "Diversa" supplementary insurance includes their "Mondial" option offering excellent global coverage.
-- **Swica's** "Hospita" hospital insurance with the "Global" extension provides full coverage in hospitals worldwide.
+**Catch:** Practitioners must be registered with a recognized Swiss association (ASCA, EMR, or similar). Ask your practitioner before your first visit whether they're recognized by your insurer.
 
-### Cross-Border Worker Benefits
+## Mental Health Coverage
 
-For expats living near borders or with family in neighboring countries:
+This is where Swiss insurance is improving rapidly, but coverage still varies. Here's what's available in 2026:
 
-- **EU/EFTA Network Integration**: Some insurers have special arrangements with provider networks in neighboring countries, allowing for seamless care in Germany, France, Italy, or Austria.
+### Under Basic Insurance (KVG)
+- Psychiatrist visits (MD): fully covered after franchise
+- Psychologist visits: covered since 2023 (requires psychiatrist referral for first 15 sessions, then insurer approval)
+- No annual session limit for psychiatrists
 
-- **Cross-Border Doctor Choice**: Supplementary plans may allow you to choose doctors in bordering countries, which can be particularly valuable if you prefer treatment in your native language.
+### What Supplementary Plans Add
+- **Psychologists without referral:** Some plans cover sessions without needing the psychiatrist referral
+- **Higher session limits:** Additional sessions beyond basic insurance limits
+- **Coaching & prevention:** Stress management, burnout prevention, life coaching
+- **Online therapy:** Coverage for digital mental health platforms
 
-**Provider Spotlight**: 
-- **Groupe Mutuel** offers specific cross-border options for those living near France or Germany.
-- **Visana** has tailored packages for international commuters and frontier workers.
+### Expat-Relevant Mental Health Resources
+- **Sanitas:** Covers online therapy platforms, mental health coaching
+- **Swica:** santé24 offers psychological first aid in multiple languages, 24/7
+- **CSS:** Health coaching includes mental wellness components
+- **Helsana:** Contributions to stress management courses (including English-language options)
 
-## 3. Wellness and Preventive Programs with Expat Appeal
+**Expat tip:** Adjustment disorders and relocation stress are legitimate medical concerns. If you're struggling with the transition, this is exactly what your insurance is for. Most major cities have English-speaking psychiatrists and psychologists.
 
-Swiss insurers increasingly emphasize prevention and holistic wellness through programs that can be especially relevant to expats adjusting to a new lifestyle.
+## Telemedicine & Digital Health
 
-### Fitness and Activity Incentives
+Every major Swiss insurer now offers telemedicine. For expats, the key differentiator is **language availability**.
 
-Beyond the standard gym contributions that many expats know about:
+### English-Language Telemedicine Access
 
-- **Activity Tracking Rewards**: Insurers like Helsana and CSS offer bonus programs where tracking daily activity through apps or wearables earns points redeemable for premium discounts or additional services.
+| Service | Insurers | English | Available |
+|---------|----------|---------|-----------|
+| **santé24** | Swica | Yes | 24/7 |
+| **Medgate** | Multiple insurers | Yes | Extended hours |
+| **Medi24** | Helsana, others | Yes | 24/7 |
+| **eedoctors** | Multiple insurers | Yes | Extended hours |
 
-- **Winter Sports Coverage**: Given Switzerland's alpine environment, some supplementary plans offer enhanced coverage for winter sports injuries and even contributions to ski passes as part of wellness promotion.
+**Why this matters for expats:**
+- Medical advice at 2 AM when you're not sure if it's an emergency
+- No need to navigate the Swiss system for minor issues
+- Prescription renewals without an in-person visit
+- Triage advice that can save you a CHF 200+ doctor visit
 
-- **Hiking and Alpine Activities**: Some insurers contribute to guided alpine activities, which can be a great way for expats to experience Swiss culture while staying active.
+### Best Health Apps for Expats
 
-**Provider Spotlight**: 
-- **Swica's** Benevita program combined with their Completa Praeventa supplementary insurance can provide up to CHF 800 annually for fitness activities.
-- **CSS** offers premium reductions of up to 15% through their myStep activity program.
+- **mySwica:** Best overall — clean interface, English, stores health records, tracks benefits usage
+- **myCSS:** Strong symptom checker, medication reminders, digital insurance card
+- **Helsana+ app:** Best activity tracking integration
+- **Sanitas app:** Good English support, easy claims submission
 
-### Stress Management and Mental Health Support
+## International Coverage Extensions
 
-Adapting to life in a new country can be challenging. Some insurers recognize this with targeted support:
+Basic insurance covers emergencies abroad at double the Swiss tariff rate — which can leave you with huge gaps in countries like the US. Supplementary plans fix this.
 
-- **Expatriate Psychological Support**: Specialized counseling services in multiple languages, sometimes with therapists who specialize in expatriate adjustment issues.
+### Key Features to Look For
 
-- **Stress Reduction Programs**: Contributions to mindfulness courses, stress management workshops, and resilience training.
+- **Worldwide emergency coverage:** 100% of costs, not just double Swiss rates
+- **Extended duration:** Coverage for treatment until medically fit to travel, not just 90 days
+- **Medical evacuation:** Transport back to Switzerland (can cost CHF 50,000+ without coverage)
+- **Non-emergency care abroad:** Some plans cover planned treatments in other countries
 
-- **Digital Mental Health Tools**: Access to apps like "MindDoc" or "Deprexis" that provide cognitive behavioral therapy and mood tracking in multiple languages.
+### Best for Frequent Travelers
 
-**Provider Spotlight**: 
-- **Sanitas** offers mental health coaching through their digital platforms.
-- **Helsana** provides contributions to a wide range of stress management courses, including those conducted in English.
+- **Swica Hospita Global:** Full hospital coverage worldwide
+- **Concordia Diversa Mondial:** Excellent global coverage
+- **Helsana TOP:** Strong international package
+- **CSS Mylex Mundo:** Good worldwide coverage extension
 
-## 4. Expat-Specific Assistance Services
+**Expat tip:** If you travel home regularly, check whether your supplementary plan covers non-emergency treatments there. Some expats use home trips for dental work or elective procedures — covered supplementary insurance makes this viable.
 
-Beyond standard health coverage, some insurers offer services specifically designed to help expats navigate the Swiss healthcare landscape.
+## Prevention & Screening Benefits
 
-### Cultural and Linguistic Mediation
+Most expats don't know their supplementary insurance covers preventive screenings beyond what basic insurance provides:
 
-- **Healthcare System Navigation**: Personalized assistance in understanding how the Swiss healthcare system works, including help with claims, finding appropriate specialists, and understanding bills.
+### Commonly Covered Preventive Services
 
-- **Translation Services**: Some premium plans include medical translation services for doctor appointments or help with translating medical documents.
+- **Check-ups:** Annual health check-ups (CHF 200–500 contribution)
+- **Vaccinations:** Travel vaccines, flu shots, tick-borne encephalitis
+- **Cancer screenings:** Mammography, colonoscopy, skin checks (often before the age thresholds in basic insurance)
+- **Eye exams:** Vision screening and contributions to glasses/contacts
+- **Dental check-ups:** Some plans include annual dental hygiene
 
-- **Cultural Mediators**: Access to advisors who can explain cultural differences in healthcare approaches between Switzerland and your home country.
+### Glasses & Contact Lenses
 
-**Provider Spotlight**: 
-- **Groupe Mutuel's** international desk provides multilingual support specifically for expats.
-- **Swica** offers personal health consultants who can provide guidance in English throughout your healthcare journey.
+Basic insurance: CHF 0 for adults (only covers children).
 
-### Administrative Support for Newcomers
+Supplementary insurance: CHF 150–300/year toward glasses or contacts, depending on plan. Some plans cover the full cost of new lenses every 2–3 years.
 
-- **Registration Assistance**: Help with the initial healthcare system registration and selecting appropriate insurance models.
+| Insurer | Annual Optical Contribution | Plan |
+|---------|-----------------------------|------|
+| **Swica** | Up to CHF 300 | Completa Praeventa |
+| **CSS** | Up to CHF 300 | myFlex Balance |
+| **Helsana** | Up to CHF 150 | Completa |
+| **Sanitas** | Up to CHF 200 | Classic |
 
-- **Physician Finding Services**: Assistance in locating English-speaking doctors or specialists familiar with international patients.
+## How to Check What You're Entitled To
 
-- **Documentation Coordination**: Support with gathering and organizing medical records from your home country and having them appropriately translated and integrated into your Swiss healthcare records.
+1. **Log into your insurer's app or portal** — most have a "benefits overview" showing what you've used and what's remaining
+2. **Download your policy conditions** (Allgemeine Versicherungsbedingungen / AVB) — the detailed document listing every covered service
+3. **Call your insurer** — ask specifically: "What prevention and wellness benefits am I not using?" Most are happy to walk you through it
+4. **Book a review with us** — we audit your current coverage and identify unused benefits
 
-**Provider Spotlight**: 
-- **Sanitas** has dedicated expat advisors for new international clients.
-- **CSS** provides specialized onboarding support for corporate clients relocating employees to Switzerland.
+## FAQ
 
-## 5. Family-Focused Benefits with International Perspectives
+**Q: Do I need to ask permission before using these benefits?**
+Not usually. Most wellness and prevention benefits work on a reimbursement basis — you pay, submit the receipt, and get reimbursed. Some require pre-approval (e.g., certain alternative medicine treatments). Check your policy conditions.
 
-For expat families, certain insurers offer benefits designed to address the unique needs of raising children in a new country.
+**Q: Can I switch supplementary insurance to get better perks?**
+Yes, but unlike basic insurance, supplementary insurers can reject your application based on health history. Apply to the new insurer first, get accepted, then cancel your current plan. Never cancel before you have written acceptance.
 
-### International Pediatric Networks
+**Q: Are these benefits per person or per family?**
+Per person. Each insured family member has their own annual budget for fitness, alternative medicine, etc.
 
-- **Multilingual Pediatricians**: Networks of child specialists who speak multiple languages, making healthcare more accessible for expat children.
+**Q: I've had my insurance for years and never used these. Can I claim retroactively?**
+No. Wellness budgets reset annually. If you didn't claim your CHF 300 gym benefit last year, it's gone. Start claiming from today.
 
-- **Developmental Assessment Considerations**: Some insurers acknowledge that developmental milestones may be assessed differently across cultures and offer more culturally sensitive pediatric care options.
+**Q: Which supplementary insurance has the best overall perks package?**
+Swica Completa Praeventa is generally the most comprehensive — highest fitness contribution, broadest alternative medicine coverage, and strong prevention benefits. But it's also one of the more expensive options. The best value depends on which benefits you'll actually use.
 
-**Provider Spotlight**: 
-- **Concordia** has strong family-focused offerings with multilingual pediatric support.
-- **KPT** offers family packages with good coverage for children's specific needs.
+---
 
-### Educational Health Programs
+### Related Guides
 
-- **School Health Integration**: Assistance with navigating school health requirements and examinations, which may differ from those in your home country.
+- [Gym Reimbursement: Which Insurer Pays Your Fitness?](/blog/gym-coverage-swiss-insurance-revised)
+- [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
+- [Swiss Health Insurance Franchise: CHF 300 vs 2500](/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models)
+- [Complete Guide to Swiss Health Insurance](/health-insurance)
 
-- **Multilingual Health Education**: Access to health education materials in various languages to help children understand healthcare procedures.
+## Get a Perks Audit for Your Current Plan
 
-**Provider Spotlight**: 
-- **Helsana** provides extensive educational materials for families in multiple languages.
-- **Visana** offers specific programs helping expat families integrate into the Swiss healthcare system.
+Most expats are underusing their supplementary insurance by CHF 200–500/year. Our advisors can review your current coverage, identify benefits you're not claiming, and recommend adjustments if your plan doesn't match your lifestyle.
 
-## 6. Alternative and Complementary Medicine from Global Traditions
-
-Switzerland embraces a wide range of complementary medicine approaches, and for expats, this can mean access to both familiar traditional medicines from their home regions and new therapeutic options.
-
-### Global Healing Traditions
-
-- **Traditional Chinese Medicine (TCM)**: Comprehensive coverage for acupuncture, herbal medicine, and other TCM approaches through supplementary insurance.
-
-- **Ayurvedic Treatments**: Some insurers cover consultations and treatments based on this traditional Indian medical system.
-
-- **Homeopathy and Naturopathy**: These are well-established in Switzerland and often covered more comprehensively than in other countries.
-
-**Provider Spotlight**: 
-- **Swica** is known for its extensive alternative medicine coverage across multiple traditions.
-- **Sympany** offers good coverage for diverse complementary medicine approaches.
-
-### Integration of Home Country Practices
-
-- **Cultural Health Practices**: Some supplementary plans recognize and reimburse for traditional health practices from various cultures, which can be particularly meaningful for expats.
-
-- **Herbal and Traditional Remedies**: Coverage for consultations regarding the safe integration of traditional remedies from your home country with conventional Western medicine.
-
-**Provider Spotlight**: 
-- **Groupe Mutuel** offers flexible complementary medicine packages that can be tailored to include diverse cultural approaches.
-- **Atupri** provides good coverage for a wide spectrum of alternative therapies.
-
-## 7. How to Discover and Maximize These Unique Benefits
-
-Uncovering these specialized perks requires a proactive approach:
-
-### Research and Comparison Strategies
-
-- **Ask Targeted Questions**: When evaluating insurers, specifically inquire about services for international residents. Many representatives can provide information about expat-friendly benefits not prominently advertised.
-
-- **Connect with Expat Communities**: Fellow expatriates can share their experiences with different insurers and highlight benefits they've found particularly valuable.
-
-- **Request English Documentation**: Ask for detailed benefit descriptions in English to ensure you fully understand all available perks.
-
-### Maximization Tips
-
-- **Annual Benefit Reviews**: Schedule a yearly review of your benefits, ideally with an English-speaking representative, to ensure you're utilizing all available services.
-
-- **Tracking Benefit Usage**: Keep records of which benefits you've used and which are still available within your annual allowances.
-
-- **Combining Benefits Strategically**: Some perks can be combined for enhanced value—for example, using telemedicine consultation first, then an in-person specialist visit if recommended, potentially saving on your deductible.
-
-## 8. Conclusion: The Expat Advantage in Swiss Health Insurance
-
-While navigating health insurance in a new country can initially seem daunting, expats in Switzerland have the opportunity to benefit from one of the world's most comprehensive healthcare systems, enhanced by increasingly internationalized services. By looking beyond basic coverage to these specialized perks and programs, you can transform your Swiss healthcare experience from merely adequate to truly exceptional.
-
-The key is knowing these benefits exist and actively incorporating them into your healthcare strategy. Whether it's utilizing digital health tools, maximizing international coverage, or taking advantage of culturally sensitive services, these perks can significantly enhance your quality of life while potentially reducing your overall healthcare costs.
-
-For personalized advice on finding insurance plans with the best expat-friendly perks for your specific situation, [contact us](/contact) at Expat Savvy.
-
-## 9. Frequently Asked Questions (FAQ)
-
-**Q1: Are these special expat perks available with basic insurance or only with supplementary coverage?**
-
-A1: Most of the unique benefits described in this article are available through supplementary (VVG/LCA) insurance plans. Basic insurance (KVG/LAMal) is standardized by law and offers the same coverage regardless of provider. To access expat-specific perks like enhanced international coverage, telemedicine in multiple languages, or cultural mediation services, you typically need appropriately selected supplementary insurance.
-
-**Q2: How do I find out exactly which expat-friendly perks are included in my current insurance plan?**
-
-A2: The best approach is to schedule a detailed policy review with your insurer's customer service team, specifically requesting information about services for international residents. Ask for this information in writing, preferably in English or your preferred language. Alternatively, an independent insurance advisor specializing in expat coverage can review your policies and identify available benefits you might be overlooking.
-
-**Q3: If I travel frequently between Switzerland and my home country, which insurance benefits should I prioritize?**
-
-A3: Focus on plans with strong international emergency coverage extensions, ideally those that cover non-emergency care in your home country as well. Look for benefits like medical evacuation and repatriation, teleconsultations available from abroad, and simplified claims processes for international medical bills. Also valuable are plans that help coordinate care between Swiss providers and doctors in your home country.
-
-**Q4: Can I find Swiss health insurance that covers treatments from my home country's traditional medicine system?**
-
-A4: Yes, many supplementary insurance plans in Switzerland offer coverage for diverse traditional medicine systems from around the world. The comprehensiveness varies by insurer, but providers like Swica, Groupe Mutuel, and Sympany are known for their broad alternative medicine coverage. When evaluating plans, specifically ask about coverage for your particular traditional medicine system and whether practitioners need specific Swiss certifications for the treatments to be eligible for reimbursement.
-
-**Q5: How do digital health services benefit expats specifically?**
-
-A5: Digital health services offer multiple advantages for expats: they often provide care in multiple languages, eliminating communication barriers; they're accessible regardless of location, which benefits mobile expats; they typically offer extended hours, accommodating calls to family doctors in different time zones; and they can provide continuity of care when traveling between Switzerland and your home country. Additionally, digital health records make it easier to share your medical history with new providers – a common need for expats who may change doctors more frequently. 
+<div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
+  <h3 class="text-primary-800 text-xl font-bold mb-3">Are You Using All Your Insurance Benefits?</h3>
+  <p class="mb-4">Get a free review of your supplementary insurance — we'll identify unused perks and recommend optimizations.</p>
+  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Book Your Free Insurance Review</a>
+</div>
