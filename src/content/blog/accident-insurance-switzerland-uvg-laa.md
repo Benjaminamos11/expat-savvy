@@ -203,10 +203,10 @@ No. If you work ≥8h/week, NBU coverage is mandatory. Your employer cannot opt 
 - [Complete Guide to Swiss Health Insurance](/health-insurance)
 - [Legal Protection Insurance — From CHF 15/Month](/blog/legal-protection-insurance-switzerland-complete-guide)
 
-<div class="not-prose my-12 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 p-8 sm:p-10 text-center shadow-sm">
-  <h3 class="text-primary-900 text-2xl font-bold mb-3">Not Sure If You're Double-Covered?</h3>
+<div class="not-prose my-12 rounded-2xl bg-slate-50 border border-slate-200 p-8 sm:p-10 text-center">
+  <h3 class="text-slate-900 text-2xl font-bold mb-3">Not Sure If You're Double-Covered?</h3>
   <p class="text-gray-600 mb-6 max-w-lg mx-auto">Our advisors check your UVG status, identify duplicate coverage, and help you stop paying twice — in one free call.</p>
-  <button onclick="window.openHealthModal('blog')" class="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-lg font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+  <button onclick="window.openHealthModal('blog')" class="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-lg font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
     Get Your Free Insurance Check
   </button>
