@@ -360,6 +360,11 @@ The key is matching each tool to its strength: 3rd pillar for accumulation and g
 
 ---
 
-### Additional Resources
+### Related Guides
 
-- [Expat Services Finance Guide](https://expat-services.ch/finance) - Comprehensive financial planning resources for expats in Switzerland
+- [Best 3rd Pillar Providers 2026: VIAC vs Frankly vs finpension](/blog/best-3rd-pillar-providers-switzerland/)
+- [3rd Pillar Tax Savings 2026](/blog/third-pillar-maximize-2025-tax-benefits)
+- [Complete 3rd Pillar Guide](/3rd-pillar)
+- [New Job Insurance Checklist](/blog/new-job-switzerland-insurance-checklist)
+- [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
+- [Understanding Swiss Health Insurance](/health-insurance)

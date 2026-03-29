@@ -180,10 +180,10 @@ Looking for more ways to optimize your Swiss finances? Make sure you aren't fall
 
 ## Related Articles
 
-- [Best Health Insurance Switzerland 2026 for Expats](/blog/best-health-insurance-switzerland/) — Complete newcomer guide including supplementary options
-- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines for base and supplementary policy changes
-- [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — Base models that work well with dental add-ons
+- [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/) — Compare all Swiss insurers
+- [Private Hospital Insurance Cost 2026](/blog/private-hospital-insurance-cost-switzerland-2026) — Supplementary premiums compared
+- [Helsana TOP & Primeo Review](/blog/helsana-top-primeo-review) — Premium supplementary plan breakdown
+- [Are You Overpaying for Health Insurance?](/blog/review-health-insurance-switzerland-overpaying) — Quick self-check
+- [Insurance Perks Most Expats Never Claim](/blog/beyond-basics-uncovering-unique-health-insurance-perks-expats) — Wellness benefits you're missing
 - [Health Insurance Hub](/health-insurance) — Calculator, costs, and coverage overview
-- [Provider Comparisons](/compare-providers/) — Compare insurers offering dental supplementary coverage
-- [Maternity Insurance for Expats](/blog/maternity-newborn-insurance-switzerland/) — Dental care during pregnancy and for newborns
 - [Legal Protection Insurance](/blog/legal-protection-insurance-switzerland-complete-guide/) — Additional coverage for expat protection

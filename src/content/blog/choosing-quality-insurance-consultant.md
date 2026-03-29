@@ -91,10 +91,13 @@ Choosing an insurance consultant in Switzerland is about finding a partner commi
 
 ### Related Guides
 
+- [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
+- [Are You Overpaying for Health Insurance?](/blog/review-health-insurance-switzerland-overpaying)
+- [Unhappy With Your Insurance? Here's What You Can Do](/blog/unhappy-health-insurance-switzerland-what-to-do)
+- [New Job Insurance Checklist](/blog/new-job-switzerland-insurance-checklist)
+- [International Health Insurance Options](/blog/international-health-insurance-switzerland)
 - [Understanding Mandatory Swiss Health Insurance](/health-insurance)
-- [Key Insurance Policies for Expats in Switzerland](/insurance-guides)
-- [Comparing Insurance Providers in Switzerland](/compare-providers)
-- [Insurance Consultant Directory](https://expat-services.ch/guide/health-insurance-consultants-switzerland-2025) - Browse vetted insurance professionals in Switzerland
+- [3rd Pillar Guide](/3rd-pillar)
 
 ## Frequently Asked Questions (FAQ)
 

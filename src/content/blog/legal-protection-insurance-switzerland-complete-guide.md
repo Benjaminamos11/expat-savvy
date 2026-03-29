@@ -796,13 +796,13 @@ Legal protection insurance works best as part of a comprehensive insurance portf
 
 ### Related Guides
 
-- [Best Health Insurance Switzerland 2026 for Expats](/blog/best-health-insurance-switzerland) — Mandatory LAMal coverage and supplementary options
-- [Dental Insurance Switzerland for Expats](/blog/dental-insurance-expats-switzerland) — Protect against CHF 3,000-6,000 dental costs
-- [Household Insurance Switzerland: Complete Protection Guide](/blog/household-insurance-switzerland-comprehensive-guide)
-- [Personal Liability Insurance for Expats in Switzerland](/insurance-guides/personal-liability)
-- [Complete Guide to Swiss Insurance for Newcomers](/insurance-guides/new-arrivals-checklist)
-- [3rd Pillar Insurance Switzerland: Complete Guide to Tax-Advantaged Savings](/blog/third-pillar-insurance-switzerland-comprehensive-guide)
-- [Expat Services Legal Guide](https://expat-services.ch/legal) - Additional legal resources and service providers for expats
+- [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/) — Compare all Swiss insurers
+- [New Job Insurance Checklist](/blog/new-job-switzerland-insurance-checklist) — Employment changes and insurance obligations
+- [Dental Insurance for Expats](/blog/dental-insurance-expats-switzerland) — Supplementary dental coverage
+- [Household Insurance Switzerland](/blog/household-insurance-switzerland-comprehensive-guide) — Contents and liability protection
+- [Personal Liability Insurance](/insurance-guides/personal-liability) — Extended liability coverage
+- [New Arrivals Insurance Checklist](/insurance-guides/new-arrivals-checklist) — Complete setup guide
+- [3rd Pillar Guide](/3rd-pillar) — Tax-advantaged retirement savings
 
 ---
 

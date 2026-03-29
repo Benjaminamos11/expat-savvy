@@ -457,14 +457,14 @@ Our AI calculator uses the same official Swiss Federal Office data to show your 
 
 ## Related Articles
 
-- [Best Health Insurance Switzerland 2026 for Expats](/blog/best-health-insurance-switzerland/) — Complete comparison including service quality
+- [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/) — Complete comparison including service quality
+- [Are You Overpaying for Health Insurance?](/blog/review-health-insurance-switzerland-overpaying) — Quick self-check
+- [Swiss Health Insurance Franchise Guide](/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models) — CHF 300 vs 2500
 - [Health Insurance Switzerland Hub](/health-insurance) — Models, deductibles, and premium optimization
-- [Compare Swiss Health Insurance Providers](/compare-providers/) — Detailed provider comparisons beyond just price
-- [Health Insurance Models Switzerland](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard model guide
+- [Unhappy With Your Insurance?](/blog/unhappy-health-insurance-switzerland-what-to-do) — How to switch
+- [Private Hospital Insurance Cost 2026](/blog/private-hospital-insurance-cost-switzerland-2026) — Supplementary premiums compared
+- [Dental Insurance for Expats](/blog/dental-insurance-expats-switzerland/) — Supplementary dental coverage
 - [Swiss Health Insurance Premium Subsidies](/guides/how-to/apply-premium-subsidies) — Financial assistance for lower incomes
-- [Dental Insurance Switzerland for Expats](/blog/dental-insurance-expats-switzerland/) — Supplementary coverage for dental costs
-- [Legal Insurance Switzerland](/blog/legal-protection-insurance-switzerland-complete-guide/) — Additional protection for expats
-- [Best Health Insurance Switzerland 2026](https://expat-services.ch/guide/best-health-insurance-switzerland-2026) — Comprehensive guide on Expat Services
 
 ---
 
