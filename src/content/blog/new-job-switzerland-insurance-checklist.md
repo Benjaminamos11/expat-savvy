@@ -193,8 +193,12 @@ If you're working fewer than 3 months and have equivalent coverage from your hom
 - [3rd Pillar Providers Compared](/blog/best-3rd-pillar-providers-switzerland/)
 - [Household Insurance Guide](/blog/household-insurance-switzerland-comprehensive-guide)
 
-<div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
-  <h3 class="text-primary-800 text-xl font-bold mb-3">Starting a New Job? Get Everything Set Up Right</h3>
-  <p class="mb-4">One free call with our advisor covers all your insurance needs — health, supplementary, 3rd pillar, household. We compare all providers and handle the paperwork.</p>
-  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Book Your Free Setup Consultation</a>
+<div class="not-prose my-12 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 p-8 sm:p-10 text-center shadow-sm">
+  <h3 class="text-primary-900 text-2xl font-bold mb-3">Starting a New Job? Get Everything Set Up Right</h3>
+  <p class="text-gray-600 mb-6 max-w-lg mx-auto">One free call with our advisor covers all your insurance needs — health, supplementary, 3rd pillar, household. We compare all providers and handle the paperwork.</p>
+  <button onclick="window.openHealthModal('blog')" class="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-lg font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+    Book Your Free Setup Consultation
+  </button>
+  <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>

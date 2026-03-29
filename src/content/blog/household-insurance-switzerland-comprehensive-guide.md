@@ -238,8 +238,12 @@ Most policies have a minimum term (usually 1 year) and renew annually. You can c
 - [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
 - [Complete Swiss Insurance Checklist for Newcomers](/insurance-guides/new-arrivals-checklist)
 
-<div class="cta-box bg-primary-50 border-primary-500 p-6 my-8 rounded-lg text-center">
-  <h3 class="text-primary-800 text-xl font-bold mb-3">Get Your Household Insurance Sorted</h3>
-  <p class="mb-4">We compare household insurance across all major Swiss providers and find the best coverage for your situation — free of charge.</p>
-  <a href="/free-consultation" class="btn btn-primary px-6 py-2 rounded-md font-medium">Get Your Free Insurance Quote</a>
+<div class="not-prose my-12 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 p-8 sm:p-10 text-center shadow-sm">
+  <h3 class="text-primary-900 text-2xl font-bold mb-3">Get Your Household Insurance Sorted</h3>
+  <p class="text-gray-600 mb-6 max-w-lg mx-auto">We compare household insurance across all major Swiss providers and find the best coverage for your situation — free of charge.</p>
+  <button onclick="window.openHealthModal('blog')" class="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white text-lg font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+    Get Your Free Insurance Quote
+  </button>
+  <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
