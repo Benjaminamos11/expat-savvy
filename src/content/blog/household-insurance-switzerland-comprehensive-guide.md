@@ -1,6 +1,6 @@
 ---
-title: "Household Insurance Switzerland: Complete Protection Guide (2026)"
-description: "Everything expats need to know about Swiss household insurance: coverage, best providers, claims process, and tips for protecting your home and belongings."
+title: "Household Insurance Switzerland — Do You Actually Need It? (2026 Guide)"
+description: "Most Swiss landlords require Hausratversicherung, but are you overpaying? Compare the best providers from CHF 5/month, learn what's covered (and what's not), and avoid common expat mistakes."
 author: "Benjamin Amos Wagner"
 date: 2025-05-15
 tags: ["household insurance", "swiss insurance", "expat", "switzerland", "property insurance", "home insurance", "2025 guide"]

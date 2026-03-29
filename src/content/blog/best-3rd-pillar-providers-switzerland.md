@@ -1,6 +1,6 @@
 ---
-title: "Best 3rd Pillar Providers in Switzerland: Complete 2026 Comparison"
-description: "Compare the best Swiss 3rd pillar providers for 2026. Bank vs insurance solutions, fees, investment options, and recommendations for different investor profiles."
+title: "Best 3rd Pillar Providers Switzerland 2026 — Bank vs Insurance (Don't Get Trapped)"
+description: "Compare VIAC, Frankly, finpension, and traditional providers. Why 80% of expats choose the wrong 3a product — and how to avoid the insurance trap that locks your money for 10+ years."
 publishDate: "2026-08-13"
 lastUpdated: "2026-08-13"
 category: "Financial Planning"

@@ -1,6 +1,6 @@
 ---
-title: "Legal Protection Insurance in Switzerland for Expats (Tenant, Work & Traffic)"
-description: "Expats in Switzerland can cover legal costs for tenant disputes, work issues, or traffic fines. Learn how legal protection insurance works in 2026."
+title: "Legal Protection Insurance Switzerland — From CHF 15/Month (Tenant, Work, Traffic)"
+description: "Swiss lawyers cost CHF 300–500/hour. One tenant dispute can cost CHF 10,000+. Compare legal protection insurance from CHF 15/month covering rental, employment, and traffic disputes."
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["legal insurance Switzerland", "legal protection insurance", "expat rights", "tenant disputes", "work conflicts", "traffic violations", "rechtschutzversicherung", "2026 guide"]

@@ -1,6 +1,6 @@
 ---
-title: "Swiss Health Insurance & Gym Memberships 2026: Get Fit, Save Money with Qualitop/Qualicert Benefits"
-description: "Your detailed 2026 guide to Swiss supplementary health insurance gym contributions. Learn how insurers like Atupri, AXA, CSS, Sanitas, Helsana, Swica & more cover Qualitop/Qualicert certified gyms."
+title: "Which Swiss Insurers Pay for Your Gym? Up to CHF 1,300/Year Back (2026)"
+description: "SWICA pays CHF 800, Helsana up to CHF 1,300, CSS CHF 300. Full 2026 comparison of gym reimbursements by insurer. Your gym must be Qualitop/Qualicert certified — here's how to check and claim."
 author: "Benjamin Amos Wagner"
 date: 2026-05-09
 tags: ["health insurance", "expat", "switzerland", "gym", "fitness", "savings", "Qualitop", "Qualicert", "CSS", "Sanitas", "Helsana", "Swica", "Atupri", "AXA", "Groupe Mutuel", "Visana"]

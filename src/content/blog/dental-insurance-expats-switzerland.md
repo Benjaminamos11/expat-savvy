@@ -1,6 +1,6 @@
 ---
-title: "Swiss Dental Insurance for Expats: Costs & Is It Worth It?"
-description: "Swiss dentists are expensive, but standard KVG doesn't cover it. Compare 2026 dental insurance costs and learn how expats bundle VVG to save thousands."
+title: "Dental Insurance Switzerland — A CHF 3,000 Filling Without It (2026 Costs)"
+description: "Swiss KVG doesn't cover dental. A root canal costs CHF 1,500–3,000 out of pocket. Compare 2026 dental insurance plans from CHF 20/month and learn which VVG add-ons actually pay off for expats."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["dental insurance Switzerland", "swiss dental costs", "dental insurance expats", "supplementary insurance", "2026 guide", "dentist costs Switzerland"]

@@ -1,6 +1,6 @@
 ---
-title: "Accident Insurance in Switzerland (UVG/LAA) — Guide for Employees"
-description: "Understand BU vs NBU, who pays, and how to stay covered between jobs. Seasonal tip: if you work >8h/week, exclude accident from health insurance to avoid double coverage."
+title: "Accident Insurance Switzerland (UVG) — Are You Paying Double Without Knowing?"
+description: "If you work 8+ hours/week, you're likely paying for accident coverage twice. Learn how UVG/LAA works, what BU vs NBU means, and how to exclude accident from KVG to save CHF 100+/year."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["swiss accident insurance", "UVG", "LAA", "occupational", "non‑occupational", "annual change season"]
