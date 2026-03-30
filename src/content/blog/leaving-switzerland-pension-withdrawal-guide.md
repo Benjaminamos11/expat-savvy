@@ -111,7 +111,7 @@ Withdrawal tax varies enormously by canton. The tax is charged based on **where 
 
 **Savings from canton optimization on CHF 400,000 total withdrawal:** Up to **CHF 28,000** (Geneva vs Schwyz).
 
-### How to Transfer to a Low-Tax Canton
+**The wrong withdrawal timing can cost CHF 10,000+.** [Book a free review](/free-consultation/) — we map your optimal withdrawal sequence across years and cantons, coordinate staggering across all your 3a accounts, and handle the paperwork for your departure.
 
 Both VIAC and finpension are domiciled in Schwyz — the lowest-tax canton for withdrawals. If your 3a is currently with a Zurich or Geneva-based provider:
 
@@ -144,6 +144,8 @@ vs. withdrawing everything in one year from a Zurich-based provider: **~CHF 16,0
 **Savings: CHF 9,000–11,000.**
 
 If you haven't set up multiple accounts yet, do it now. Even 12 months of staggering structure is better than none.
+
+**EU vs non-EU rules change everything — get it right the first time.** [Book a free review](/free-consultation/) — we identify your exact withdrawal rights (obligatory vs surobligatory), optimize tax treaty treatment, and ensure you don't lose money to double taxation or withdrawal penalties.
 
 ## Double Taxation: What Happens in Your New Country
 

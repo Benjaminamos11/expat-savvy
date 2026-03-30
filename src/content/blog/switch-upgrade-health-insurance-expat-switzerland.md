@@ -89,6 +89,8 @@ Already have supplementary insurance but want to change providers? This is trick
 
 **Our advice:** Only switch supplementary insurance if the savings are significant (CHF 100+/month) or if you need coverage your current insurer doesn't offer. The switching friction is higher than for basic insurance.
 
+**One rejected health declaration and you're stuck for years.** [Book a free review](/free-consultation/) — we complete your health questionnaire strategy, submit to insurers with the highest acceptance rates for your profile, and handle all switching paperwork.
+
 For more on the switching process, see our [complete switching guide](/healthcare/switching-health-insurance/) and [step-by-step change guide](/blog/how-to-change-swiss-health-insurance-2026/).
 
 ## The Annual Switching Calendar
@@ -102,6 +104,8 @@ For more on the switching process, see our [complete switching guide](/healthcar
 | **By November 30** | Send cancellation to current basic insurer (registered mail) |
 | **December** | Receive new insurance cards. Confirm supplementary acceptance if applicable. |
 | **January 1** | New coverage begins. Old coverage ends automatically. |
+
+**We handle the entire switching process — including the health questionnaire strategy.** [Book a free review](/free-consultation/) — we compare all insurers for your situation, submit to multiple carriers simultaneously, and manage all deadlines and documentation for you.
 
 ## When NOT to Switch
 

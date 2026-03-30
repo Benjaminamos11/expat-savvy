@@ -119,6 +119,8 @@ For some self-employed persons — particularly those with high incomes and exis
 
 This calculation is specific to your income, canton, age, and risk profile. It's the single most valuable question to bring to a professional consultation.
 
+**Your BVG decision alone could be worth CHF 100K+ over your career.** [Book a free review](/free-consultation/) — we calculate whether voluntary BVG or maximum 3a is optimal for your income trajectory and retirement timeline.
+
 ## Best Providers for Large Contributions
 
 When you're contributing CHF 20,000–35,280 per year, small fee differences compound massively. Here's how the top providers compare at self-employed contribution levels:
@@ -136,6 +138,8 @@ When you're contributing CHF 20,000–35,280 per year, small fee differences com
 **Our recommendation for self-employed:** Start with finpension for its lowest fees — the 0.05% difference versus VIAC compounds to CHF 5,000–10,000 over 20 years at self-employed contribution levels. Open VIAC and Frankly as your 2nd and 3rd accounts for staggering.
 
 For the full provider comparison, see our [best 3a providers 2026 guide](/blog/best-3rd-pillar-providers-switzerland/).
+
+**CHF 35,280 is life-changing money — but the rules are different for self-employed.** [Book a free review](/free-consultation/) — we set up the optimal account structure, confirm your contribution limit, and map your withdrawal strategy to maximize tax efficiency.
 
 ## When to Get Professional Advice
 

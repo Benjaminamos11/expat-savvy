@@ -53,6 +53,8 @@ Fees are the most important factor for long-term returns. Here's how the 0.05–
 
 Important: all three are dramatically cheaper than insurance-based 3a (1.5–2.5% TER) or traditional bank 3a accounts (0.8–1.2%). Choosing any of these three over an insurance product saves CHF 50,000–100,000. See our [bank vs insurance comparison](/3rd-pillar/bank-vs-insurance/) for details.
 
+**If your 3a balance exceeds CHF 100K, the stakes are too high for guesswork.** [Book a free review](/free-consultation/) — we analyze your withdrawal timeline, recommend the best provider mix, and set up staggering across multiple accounts to minimize withdrawal taxes.
+
 ## Investment Options
 
 ### Equity Allocation
@@ -132,6 +134,8 @@ The [staggering strategy](/blog/third-pillar-maximize-2026-tax-benefits/) — ha
 By using all three providers, you also **diversify custodian risk** (different banks hold your assets) and avoid platform lock-in.
 
 For a broader view of all 3a options including traditional banks, see our [best 3a providers 2026 guide](/blog/best-3rd-pillar-providers-switzerland/).
+
+**The provider matters less than the withdrawal strategy.** [Book a free review](/free-consultation/) — we design a staggering plan across multiple accounts that saves CHF 5,000–15,000 in withdrawal taxes, regardless of which providers you choose.
 
 ## What About Traditional Bank 3a?
 

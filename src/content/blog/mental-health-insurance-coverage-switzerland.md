@@ -71,6 +71,8 @@ For many expats, the gaps in basic coverage are significant:
 
 **Alternative approaches are excluded.** EMDR, somatic experiencing, body-oriented therapy, and other approaches that can be highly effective for certain conditions are often not covered unless prescribed by a psychiatrist.
 
+**Not sure what your policy actually covers for therapy? We check for free.** [Book a free review](/free-consultation/) — we audit your current coverage, identify gaps in mental health support, and recommend supplementary plans that match your therapy needs and budget.
+
 ## Supplementary Insurance for Mental Health
 
 The right supplementary insurance can significantly expand your mental health coverage. Here's how the main plans compare:
@@ -147,6 +149,8 @@ If you already have a mental health condition when you apply for supplementary i
 If you already have a supplementary plan, **don't switch** unless you're sure the new insurer will accept you without mental health exclusions. Your existing coverage is grandfathered — a new application starts the assessment from scratch.
 
 For more on the application process, see our [new to Switzerland guide](/healthcare/new-health-insurance/) and [best health insurance comparison](/healthcare/best-health-insurance-switzerland/).
+
+**The difference between psychiatrist and psychologist coverage can cost you CHF 200/session.** [Book a free review](/free-consultation/) — we ensure your insurance covers the type of therapy you need, identify specialized plans for mental health, and secure the best rates for your situation.
 
 ## Practical Steps: Starting Therapy in Switzerland
 

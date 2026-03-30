@@ -183,6 +183,8 @@ Insurers handle pre-existing conditions in three ways:
 
 If you have a complex health history, apply to multiple insurers simultaneously. Acceptance criteria vary — one insurer's rejection doesn't mean all will reject you.
 
+**The health declaration is where most self-applications fail.** [Book a free review](/free-consultation/) — we complete your health questionnaire strategically, submit to the right insurers for your profile, and maximize your chances of acceptance without exclusions.
+
 ## When Private Insurance Is Worth It
 
 ### Income-Based Decision Framework
@@ -227,6 +229,8 @@ Supplementary insurance cancellation rules differ from basic insurance. Most VVG
 Your basic insurer and supplementary insurer don't need to be the same company. Often, the cheapest basic insurer + the best supplementary insurer from a different company is optimal. But some insurers offer bundle discounts — worth checking.
 
 For guidance on setting up your complete insurance package as a new arrival, see our [new to Switzerland insurance guide](/healthcare/new-health-insurance/).
+
+**Your employer coverage has gaps you probably don't know about.** [Book a free review](/free-consultation/) — we audit your current plan, compare all available options, and identify coverage gaps that could cost you thousands in unexpected medical bills.
 
 ---
 

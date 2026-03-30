@@ -140,6 +140,8 @@ HR handles insurance. Tax optimization handles itself (or doesn't). Nobody coord
 
 Your 3a contribution, BVG buy-in potential, and life insurance needs are all interconnected. A CHF 100,000 BVG buy-in might make life insurance less necessary. A higher 3a contribution might make a BVG buy-in unnecessary. These trade-offs require holistic planning.
 
+**Don't arrive in Switzerland without insurance sorted — the 3-month deadline is real.** [Book a free review](/free-consultation/) — we build your complete insurance stack within 90 days, coordinate all pension and tax optimization, and ensure you don't miss critical application windows.
+
 ## The 90-Day Window
 
 Your first 90 days in Switzerland are the most important for insurance setup:
@@ -152,6 +154,8 @@ Your first 90 days in Switzerland are the most important for insurance setup:
 | **Month 1–2** | Open 3a account, begin contributions | Tax deduction applies from year 1 |
 | **Month 2–3** | Review BVG pension certificate, assess buy-in potential | Buy-in timing affects 3a strategy |
 | **Month 3** | Set up legal protection, life insurance | Complete the stack before the 90-day window closes |
+
+**We set up executives from day one — health, supplementary, 3rd pillar, all in one call.** [Book a free review](/free-consultation/) — we complete your entire insurance stack within the critical 90-day window, optimizing for taxes, coverage gaps, and long-term wealth protection.
 
 ## Cost Comparison: Default vs Optimized
 

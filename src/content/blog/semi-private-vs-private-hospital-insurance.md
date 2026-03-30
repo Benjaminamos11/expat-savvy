@@ -76,6 +76,8 @@ The premium difference compounds significantly:
 
 Over 20 years, the upgrade from semi-private to private costs approximately **CHF 60,000 more**. The question is whether guaranteed single rooms and chief physician access is worth CHF 60,000 to you.
 
+**Your health history determines which insurers will accept you — we know which ones.** [Book a free review](/free-consultation/) — we identify which insurers accept your health profile at each coverage level, negotiate the best rates, and recommend semi-private vs private based on your medical needs and budget.
+
 ## When Private Is Worth It
 
 ### Strong Cases for Private
@@ -119,6 +121,8 @@ If you've been healthy, upgrading is straightforward. If you've developed any co
 ### Downgrading (Private → Semi-Private)
 
 **Always possible.** No health checks required. You simply notify your insurer per your contract terms (usually 3-6 months' notice). Your coverage level drops, your premium drops, and any existing conditions remain covered at the semi-private level.
+
+**The price difference between semi-private and private is smaller than you think.** [Book a free review](/free-consultation/) — we compare your options across all insurers, model the actual price difference over your timeline, and help you choose the right level for your situation.
 
 ## Our Recommendation
 
