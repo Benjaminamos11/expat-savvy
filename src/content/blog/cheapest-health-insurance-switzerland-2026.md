@@ -396,6 +396,8 @@ Many insurers offer premium calculators in their apps:
 
 **Expat Savvy offers**: Free consultations to help you find the optimal balance of cost savings and service quality for your specific situation. [Book consultation here](/free-consultation).
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ## Frequently Asked Questions — Cheapest Swiss Health Insurance 2026
 
 **Which is the cheapest health insurance in Switzerland for 2026?**

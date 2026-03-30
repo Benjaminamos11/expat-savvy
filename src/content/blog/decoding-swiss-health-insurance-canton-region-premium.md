@@ -65,6 +65,8 @@ The process of setting health insurance premiums for each **KVG premium region**
 
 This is why premiums are announced each autumn for the following year, allowing time to compare and switch.
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ## Quick FAQs
 
 - **Why does my premium change if I move canton?** Your registered commune maps to a different premium region with different average costs.

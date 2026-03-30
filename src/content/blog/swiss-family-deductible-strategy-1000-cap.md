@@ -156,6 +156,8 @@ Deductible optimization is one component of comprehensive family health insuranc
 
 The CHF 1,000 family deductible cap provides one of the most powerful cost optimization tools available to Swiss families. Take advantage of this opportunity to reduce your healthcare costs while maintaining comprehensive coverage for all family members.
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ---
 
 *This guide provides general information about Swiss family deductible strategies and should not be considered as personalized insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.* 

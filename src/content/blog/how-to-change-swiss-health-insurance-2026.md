@@ -251,6 +251,8 @@ Secure new coverage first, use registered mail for cancellation, include all req
 
 **Ready to make the switch?** [Book a free consultation](/free-consultation) with our experts to create your personalized 2026 switching strategy.
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ## Conclusion
 
 Changing Swiss health insurance for 2026 requires careful planning and precise timing, but following this step-by-step guide ensures a smooth transition. Remember the critical 30 November deadline, always secure new coverage before cancelling, and use registered mail for all official communications.

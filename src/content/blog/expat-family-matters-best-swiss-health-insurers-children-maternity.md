@@ -198,6 +198,8 @@ This guide provides the foundation for understanding Swiss family health insuran
 
 The investment in understanding and optimizing Swiss family health insurance pays dividends that extend far beyond immediate cost savings, providing families with comprehensive healthcare access, financial predictability, and peace of mind that their insurance arrangements will serve their needs effectively throughout their time in Switzerland.
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ---
 
-*This guide provides general information about Swiss family health insurance and should not be considered as personalized financial or insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.* 
+*This guide provides general information about Swiss family health insurance and should not be considered as personalized financial or insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.*

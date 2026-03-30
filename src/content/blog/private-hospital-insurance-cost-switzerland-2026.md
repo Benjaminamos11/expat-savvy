@@ -178,6 +178,8 @@ Once you have a diagnosis, getting hospital insurance becomes difficult or impos
 3. Choose the insurer with the best terms
 4. Only cancel existing coverage after new acceptance is confirmed
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ## FAQ
 
 **Q: Can I have hospital insurance with a different insurer than my basic insurance?**

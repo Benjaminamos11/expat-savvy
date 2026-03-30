@@ -194,6 +194,8 @@ Supplementary insurance: CHF 150–300/year toward glasses or contacts, dependin
 3. **Call your insurer** — ask specifically: "What prevention and wellness benefits am I not using?" Most are happy to walk you through it
 4. **Book a review with us** — we audit your current coverage and identify unused benefits
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ## FAQ
 
 **Q: Do I need to ask permission before using these benefits?**

@@ -196,6 +196,8 @@ Family discount optimization is one component of comprehensive family health ins
 
 Family discount consolidation can provide substantial savings and administrative benefits for Swiss families willing to evaluate their options strategically. Take advantage of these opportunities to reduce your healthcare costs while maintaining comprehensive coverage for all family members.
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ---
 
-*This guide provides general information about Swiss health insurance family discounts and should not be considered as personalized insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.* 
+*This guide provides general information about Swiss health insurance family discounts and should not be considered as personalized insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.*

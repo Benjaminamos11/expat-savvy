@@ -186,6 +186,8 @@ Insurance model selection is one component of comprehensive family health insura
 
 The right insurance model can provide significant cost savings while ensuring appropriate healthcare access for your children. Take time to evaluate your options carefully and choose the model that best serves your family's unique circumstances and needs.
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ---
 
-*This guide provides general information about Swiss health insurance models for children and should not be considered as personalized insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.* 
+*This guide provides general information about Swiss health insurance models for children and should not be considered as personalized insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.*

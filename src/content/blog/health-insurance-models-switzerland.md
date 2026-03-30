@@ -165,6 +165,8 @@ For further guidance or to compare specific insurance plans and their suitabilit
 - [Swica vs Helsana Comparison](/compare-providers/swica-vs-helsana/) — Popular provider comparison for model differences
 - [Accident Insurance in Switzerland](/blog/accident-insurance-switzerland-uvg-laa) — UVG/LAA coverage and employment exclusions
 
+**Already sorted your health insurance?** The next biggest savings opportunity for expats in Switzerland is your [3rd pillar tax optimization](/guides/how-to/save-taxes-with-3a-pillar/). Most expats leave CHF 2,000–11,000 per year on the table. [Book a free review](/free-consultation/) to see what you're missing.
+
 ## Frequently Asked Questions — Swiss Health Insurance Models
 
 **What is the difference between Standard, HMO, Family Doctor, and Telmed models?**

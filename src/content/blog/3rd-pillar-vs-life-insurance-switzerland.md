@@ -1,6 +1,6 @@
 ---
-title: "3rd Pillar vs Life Insurance — Which Fits Your Situation? Complete Guide"
-description: "Compare 3rd pillar vs life insurance in Switzerland. Tax treatment, costs, flexibility, and which option suits different family situations and financial goals."
+title: "3rd Pillar: Bank vs Insurance — Which Costs You More?"
+description: "Insurance-based 3a has surrender penalties up to 40% in early years. Bank-based has lower fees but no coverage. We help you pick the right one. Free consultation."
 publishDate: "2025-08-13"
 lastUpdated: "2025-08-13"
 category: "Financial Planning"

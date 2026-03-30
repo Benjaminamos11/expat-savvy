@@ -435,4 +435,10 @@ The key is matching provider strengths to your specific needs. Conservative inve
 
 Remember that you can use multiple providers to diversify your approach and optimize different aspects of your retirement planning. Regular review and potential switching ensure your provider choice continues to serve your evolving needs.
 
-**Need personalized provider recommendations?** [Contact our experts](/free-consultation) for tailored guidance on selecting the optimal 3rd pillar provider for your specific situation and financial goals.
+**Need personalized provider recommendations?** [Contact our experts](/free-consultation/) for tailored guidance on selecting the optimal 3rd pillar provider for your specific situation and financial goals.
+
+### Related Guides
+
+- **[VIAC vs Frankly vs finpension — Head-to-Head Comparison](/blog/viac-vs-frankly-vs-finpension-comparison/)**: Detailed fee breakdowns, investment options, and the withdrawal question nobody asks.
+- **[Leaving Switzerland? Pension Withdrawal Guide](/blog/leaving-switzerland-pension-withdrawal-guide/)**: What happens to your 3a when you leave — tax traps, staggering strategies, and the 5 mistakes that cost thousands.
+- **[Self-Employed 3rd Pillar Guide](/blog/3rd-pillar-self-employed-switzerland/)**: Save up to CHF 35,280/year tax-free — the rules are different for self-employed expats.

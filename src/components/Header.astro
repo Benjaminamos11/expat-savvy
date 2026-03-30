@@ -1,78 +1,136 @@
 ---
 import { ensureTrailingSlash } from "@/lib/utils";
 
-const mainNavItems = [
+const navDropdowns = [
   {
-    name: "New to Switzerland",
-    href: "/healthcare/new-health-insurance",
-  },
-  {
-    name: "Already Insured?",
-    href: "/healthcare/switching-health-insurance",
-  },
-  {
-    name: "More",
-    dropdown: true,
+    name: "Health Insurance",
     sections: [
       {
-        title: "Learn",
+        title: "Get Started",
         items: [
+          { name: "New to Switzerland", href: "/healthcare/new-health-insurance" },
+          { name: "Switch Your Insurance", href: "/healthcare/switching-health-insurance" },
+          { name: "Best Insurance 2026", href: "/healthcare/best-health-insurance-switzerland" },
           { name: "How Swiss Insurance Works", href: "/healthcare-system" },
-          {
-            name: "Insurance Models",
-            href: "/blog/health-insurance-models-switzerland",
-          },
-          {
-            name: "Best Health Insurance Guide",
-            href: "/healthcare/best-health-insurance-switzerland",
-          },
-          { name: "How-To Guides", href: "/guides/how-to" },
-          { name: "Blog & Guides", href: "/blog" },
         ],
       },
       {
-        title: "Special Situations",
+        title: "By Location",
         items: [
-          {
-            name: "Pre-existing Conditions",
-            href: "/guides/how-to/pre-existing-conditions-health-insurance",
-          },
-          {
-            name: "Family & Maternity",
-            href: "/insurance-guides/family-insurance-planning",
-          },
-          { name: "Students", href: "/insurance-guides/student-insurance" },
+          { name: "Zurich", href: "/health-insurance/zurich" },
+          { name: "Geneva", href: "/health-insurance/geneva" },
+          { name: "Basel", href: "/health-insurance/basel" },
+          { name: "Zug", href: "/health-insurance/zug" },
+          { name: "All Locations", href: "/health-insurance" },
+        ],
+      },
+      {
+        title: "Compare",
+        items: [
+          { name: "Helsana vs SWICA", href: "/compare-providers/helsana-vs-swica" },
+          { name: "CSS vs Sanitas", href: "/compare-providers/css-vs-sanitas" },
+          { name: "All Comparisons", href: "/compare-providers" },
+          { name: "All Insurance Providers", href: "/insurance-providers" },
+        ],
+      },
+      {
+        title: "Guides",
+        items: [
+          { name: "How-To Guides", href: "/guides/how-to" },
+          { name: "Blog & News", href: "/blog" },
+          { name: "Insurance Glossary", href: "/healthcare/best-health-insurance-switzerland" },
+          { name: "Premium Calculator (AI)", href: "/ai-chat" },
+        ],
+      },
+    ],
+    gridCols: "grid-cols-4",
+    width: "w-[700px]",
+  },
+  {
+    name: "Private & Supplementary",
+    sections: [
+      {
+        title: "Coverage Types",
+        items: [
+          { name: "Semi-Private vs Private", href: "/blog/semi-private-vs-private-hospital-insurance" },
+          { name: "Best Private Insurance 2026", href: "/blog/best-private-health-insurance-expats-switzerland" },
+          { name: "Private Hospital Costs", href: "/blog/private-hospital-insurance-cost-switzerland-2026" },
+          { name: "Mental Health Coverage", href: "/blog/mental-health-insurance-coverage-switzerland" },
+        ],
+      },
+      {
+        title: "By Insurer",
+        items: [
+          { name: "SWICA COMPLETA & Bestmed", href: "/blog/swica-completa-bestmed-review" },
+          { name: "Helsana TOP & Primeo", href: "/blog/helsana-top-primeo-review" },
+          { name: "Compare All Products", href: "/blog/private-hospital-insurance-cost-switzerland-2026" },
         ],
       },
       {
         title: "Other Insurance",
         items: [
-          {
-            name: "Household Insurance",
-            href: "/insurance/household-insurance",
-          },
-          {
-            name: "Personal Liability",
-            href: "/insurance/personal-liability-insurance",
-          },
-          { name: "3rd Pillar & Pension", href: "/3rd-pillar" },
-          { name: "All Insurance Types", href: "/insurance" },
-        ],
-      },
-      {
-        title: "About & Tools",
-        items: [
-          { name: "About Expat-Savvy", href: "/about" },
-          { name: "Contact", href: "/contact" },
-          { name: "Premium Calculator (AI)", href: "/ai-chat" },
-          { name: "Insurance Providers", href: "/insurance-providers" },
-          {
-            name: "Insurance Glossary",
-            href: "/healthcare/best-health-insurance-switzerland/",
-          },
+          { name: "Household Insurance", href: "/insurance/household-insurance" },
+          { name: "Personal Liability", href: "/insurance/personal-liability-insurance" },
+          { name: "Legal Protection", href: "/insurance/legal-protection-insurance" },
+          { name: "Life Insurance", href: "/life-insurance" },
+          { name: "International Insurance", href: "/blog/international-health-insurance-switzerland" },
         ],
       },
     ],
+    gridCols: "grid-cols-3",
+    width: "w-[560px]",
+  },
+  {
+    name: "3rd Pillar & Tax",
+    sections: [
+      {
+        title: "Tax Optimization",
+        items: [
+          { name: "Tax Savings Guide", href: "/guides/how-to/save-taxes-with-3a-pillar" },
+          { name: "Tax Savings 2026", href: "/blog/third-pillar-maximize-2026-tax-benefits" },
+          { name: "Canton Tax Comparison", href: "/blog/swiss-cantonal-taxes-3rd-pillar-savings" },
+          { name: "Self-Employed Guide", href: "/blog/3rd-pillar-self-employed-switzerland" },
+        ],
+      },
+      {
+        title: "Providers & Products",
+        items: [
+          { name: "Best 3a Providers 2026", href: "/blog/best-3rd-pillar-providers-switzerland" },
+          { name: "VIAC vs Frankly vs finpension", href: "/blog/viac-vs-frankly-vs-finpension-comparison" },
+          { name: "Bank vs Insurance 3a", href: "/3rd-pillar/bank-vs-insurance" },
+          { name: "3a vs 3b Comparison", href: "/3rd-pillar/3a-vs-3b" },
+        ],
+      },
+      {
+        title: "Planning",
+        items: [
+          { name: "Leaving Switzerland Guide", href: "/blog/leaving-switzerland-pension-withdrawal-guide" },
+          { name: "Withdrawal Guide", href: "/3rd-pillar/withdrawal-guide" },
+          { name: "3rd Pillar Overview", href: "/3rd-pillar" },
+          { name: "Pension Planning", href: "/pension-planning" },
+        ],
+      },
+    ],
+    gridCols: "grid-cols-3",
+    width: "w-[560px]",
+  },
+];
+
+const mobileNavSections = [
+  {
+    icon: `<svg class="h-5 w-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>`,
+    name: "Health Insurance",
+    items: navDropdowns[0].sections.flatMap(s => s.items),
+  },
+  {
+    icon: `<svg class="h-5 w-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>`,
+    name: "Private & Supplementary",
+    items: navDropdowns[1].sections.flatMap(s => s.items),
+  },
+  {
+    icon: `<svg class="h-5 w-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+    name: "3rd Pillar & Tax",
+    items: navDropdowns[2].sections.flatMap(s => s.items),
   },
 ];
 ---
@@ -95,77 +153,65 @@ const mainNavItems = [
 
       <!-- Desktop Menu -->
       <div
-        class="desktop-menu hidden md:flex md:items-center md:space-x-8 md:flex-1 md:justify-center"
+        class="desktop-menu hidden md:flex md:items-center md:space-x-6 md:flex-1 md:justify-center"
       >
         <style>
           @media (min-width: 768px) {
             .desktop-menu {
               display: flex !important;
               align-items: center;
-              gap: 2rem;
+              gap: 1.5rem;
             }
           }
         </style>
         {
-          mainNavItems.map((item) => (
+          navDropdowns.map((dropdown) => (
             <div class="relative group">
-              {item.href ? (
-                <a
-                  href={ensureTrailingSlash(item.href)}
-                  class="text-gray-700 hover:text-red-600 py-2 px-2 font-medium transition-colors"
+              <button class="text-gray-700 hover:text-red-600 flex items-center py-2 px-2 font-medium transition-colors">
+                {dropdown.name}
+                <svg
+                  class="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  {item.name}
-                </a>
-              ) : (
-                <button class="text-gray-700 hover:text-red-600 flex items-center py-2 px-2 font-medium transition-colors">
-                  {item.name}
-                  <svg
-                    class="ml-2 h-5 w-5 transition-transform duration-200 group-hover:rotate-180"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-              )}
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
 
-              {/* More Dropdown with Sections */}
-              {item.dropdown && item.sections && (
-                <div class="absolute left-1/2 -translate-x-1/2 pt-2 w-[600px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                  <div class="bg-white rounded-xl shadow-2xl p-6 border border-gray-100">
-                    <div class="grid grid-cols-4 gap-4">
-                      {item.sections.map((section) => (
-                        <div>
-                          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 pb-2 border-b border-gray-100">
-                            {section.title}
-                          </h3>
-                          <ul class="space-y-2">
-                            {section.items.map((subItem) => (
-                              <li>
-                                <a
-                                  href={ensureTrailingSlash(subItem.href)}
-                                  class="group/item block text-sm text-gray-600 hover:text-red-600 transition-colors"
-                                >
-                                  <span class="relative">
-                                    {subItem.name}
-                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 transition-transform duration-200 group-hover/item:scale-x-100" />
-                                  </span>
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
+              <div class={`absolute left-1/2 -translate-x-1/2 pt-2 ${dropdown.width} opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50`}>
+                <div class="bg-white rounded-xl shadow-2xl p-6 border border-gray-100">
+                  <div class={`grid ${dropdown.gridCols} gap-4`}>
+                    {dropdown.sections.map((section) => (
+                      <div>
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 pb-2 border-b border-gray-100">
+                          {section.title}
+                        </h3>
+                        <ul class="space-y-2">
+                          {section.items.map((subItem) => (
+                            <li>
+                              <a
+                                href={ensureTrailingSlash(subItem.href)}
+                                class="group/item block text-sm text-gray-600 hover:text-red-600 transition-colors"
+                              >
+                                <span class="relative">
+                                  {subItem.name}
+                                  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 transform scale-x-0 transition-transform duration-200 group-hover/item:scale-x-100" />
+                                </span>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           ))
         }
@@ -235,243 +281,47 @@ const mainNavItems = [
       </div>
 
       <div class="px-2 py-3">
-        <!-- Primary Actions -->
-        <a
-          href={ensureTrailingSlash("/healthcare/new-health-insurance")}
-          class="block w-full text-left px-4 py-3 text-base font-semibold text-gray-900 hover:bg-gray-50 rounded-lg mb-2 flex items-center gap-3"
-        >
-          <svg
-            class="h-5 w-5 text-red-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-          </svg>
-          New to Switzerland
-        </a>
-
-        <a
-          href={ensureTrailingSlash("/healthcare/switching-health-insurance")}
-          class="block w-full text-left px-4 py-3 text-base font-semibold text-gray-900 hover:bg-gray-50 rounded-lg mb-4 flex items-center gap-3"
-        >
-          <svg
-            class="h-5 w-5 text-red-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-          </svg>
-          Already Insured?
-        </a>
-
-        <div class="border-t border-gray-200 my-4"></div>
-
         <!-- Expandable Sections -->
-        <details class="group mb-2">
-          <summary
-            class="font-semibold text-gray-900 py-3 px-4 cursor-pointer list-none hover:bg-gray-50 rounded-lg flex items-center justify-between gap-3"
-          >
-            <span class="flex items-center gap-3">
-              <svg
-                class="h-5 w-5 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        {
+          mobileNavSections.map((section) => (
+            <details class="group mb-2">
+              <summary
+                class="font-semibold text-gray-900 py-3 px-4 cursor-pointer list-none hover:bg-gray-50 rounded-lg flex items-center justify-between gap-3"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                ></path>
-              </svg>
-              Learn
-            </span>
-            <svg
-              class="h-5 w-5 transition-transform duration-200 group-open:rotate-180"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <div class="pl-4 space-y-1 mt-2">
-            <a
-              href={ensureTrailingSlash("/healthcare-system")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              How Swiss Insurance Works
-            </a>
-            <a
-              href={ensureTrailingSlash(
-                "/blog/health-insurance-models-switzerland",
-              )}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Insurance Models
-            </a>
-            <a
-              href={ensureTrailingSlash(
-                "/healthcare/best-health-insurance-switzerland",
-              )}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Best Health Insurance Guide
-            </a>
-            <a
-              href={ensureTrailingSlash("/guides/how-to")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              How-To Guides
-            </a>
-            <a
-              href={ensureTrailingSlash("/blog")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Blog & Guides
-            </a>
-          </div>
-        </details>
-
-        <details class="group mb-2">
-          <summary
-            class="font-semibold text-gray-900 py-3 px-4 cursor-pointer list-none hover:bg-gray-50 rounded-lg flex items-center justify-between gap-3"
-          >
-            <span class="flex items-center gap-3">
-              <svg
-                class="h-5 w-5 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                ></path>
-              </svg>
-              Special Situations
-            </span>
-            <svg
-              class="h-5 w-5 transition-transform duration-200 group-open:rotate-180"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <div class="pl-4 space-y-1 mt-2">
-            <a
-              href={ensureTrailingSlash(
-                "/guides/how-to/pre-existing-conditions-health-insurance",
-              )}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Pre-existing Conditions
-            </a>
-            <a
-              href={ensureTrailingSlash(
-                "/insurance-guides/family-insurance-planning",
-              )}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Family & Maternity
-            </a>
-            <a
-              href={ensureTrailingSlash("/insurance-guides/student-insurance")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Students
-            </a>
-          </div>
-        </details>
-
-        <details class="group mb-2">
-          <summary
-            class="font-semibold text-gray-900 py-3 px-4 cursor-pointer list-none hover:bg-gray-50 rounded-lg flex items-center justify-between gap-3"
-          >
-            <span class="flex items-center gap-3">
-              <svg
-                class="h-5 w-5 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                ></path>
-              </svg>
-              Other Insurance
-            </span>
-            <svg
-              class="h-5 w-5 transition-transform duration-200 group-open:rotate-180"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <div class="pl-4 space-y-1 mt-2">
-            <a
-              href={ensureTrailingSlash("/insurance/household-insurance")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Household Insurance
-            </a>
-            <a
-              href={ensureTrailingSlash(
-                "/insurance/personal-liability-insurance",
-              )}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              Personal Liability
-            </a>
-            <a
-              href={ensureTrailingSlash("/3rd-pillar")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              3rd Pillar & Pension
-            </a>
-            <a
-              href={ensureTrailingSlash("/insurance")}
-              class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
-            >
-              All Insurance Types
-            </a>
-          </div>
-        </details>
+                <span class="flex items-center gap-3">
+                  <Fragment set:html={section.icon} />
+                  {section.name}
+                </span>
+                <svg
+                  class="h-5 w-5 transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <div class="pl-4 space-y-1 mt-2">
+                {section.items.map((item) => (
+                  <a
+                    href={ensureTrailingSlash(item.href)}
+                    class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ))
+        }
 
         <div class="border-t border-gray-200 my-4"></div>
 
+        <!-- Quick Links -->
         <a
           href={ensureTrailingSlash("/about")}
           class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg"
@@ -480,17 +330,17 @@ const mainNavItems = [
         </a>
 
         <a
-          href={ensureTrailingSlash("/insurance-providers")}
+          href={ensureTrailingSlash("/ai-chat")}
           class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg"
         >
-          Insurance Providers
+          Premium Calculator (AI)
         </a>
 
         <a
-          href={ensureTrailingSlash("/ai-chat")}
-          class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg text-sm"
+          href={ensureTrailingSlash("/blog")}
+          class="block text-gray-700 py-2 px-4 hover:bg-gray-50 rounded-lg"
         >
-          Premium Calculator
+          Blog
         </a>
 
         <!-- Mobile CTA -->
