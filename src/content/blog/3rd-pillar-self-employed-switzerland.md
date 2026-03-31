@@ -1,6 +1,6 @@
 ---
 title: "Self-Employed 3rd Pillar Guide 2026"
-description: "Self-employed in Switzerland without a 2nd pillar? You can shelter up to CHF 35,280/year tax-free in pillar 3a. Here's how to maximize the opportunity — and the 4 mistakes that cost thousands."
+description: "Self-employed without a 2nd pillar? Contribute up to CHF 35,280/year tax-free. The 4 mistakes that cost self-employed expats thousands."
 author: "Expat Savvy Team"
 date: 2026-03-28
 tags: ["3rd pillar self-employed", "pillar 3a self-employed", "self-employed tax savings switzerland", "säule 3a selbständig"]

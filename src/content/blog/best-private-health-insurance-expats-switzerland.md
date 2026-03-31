@@ -1,6 +1,6 @@
 ---
 title: "Best Private Insurance for Expats"
-description: "Semi-private vs private, which insurers accept expats, what it actually costs, and whether it's worth it. Honest comparison from FINMA-certified advisors who see 500+ expat cases per year."
+description: "Semi-private vs private, which insurers accept expats, what it costs, and whether it's worth it. Honest comparison from FINMA-certified advisors."
 author: "Expat Savvy Team"
 date: 2026-03-29
 tags: ["private health insurance switzerland", "best private insurance expats", "semi-private insurance switzerland", "supplementary health insurance"]

@@ -1,6 +1,6 @@
 ---
 title: "Leaving Switzerland Pension Guide"
-description: "The order you withdraw pillar 2 and 3a, the canton you withdraw from, and when you deregister determines whether you save or waste CHF 10,000+. Step-by-step withdrawal plan for departing expats."
+description: "Withdrawal order, canton choice, and deregistration timing determine whether you save or waste CHF 10,000+. Step-by-step exit plan."
 author: "Expat Savvy Team"
 date: 2026-03-26
 tags: ["leaving switzerland pension", "withdraw pillar 3a leaving", "pension withdrawal guide", "expat leaving switzerland"]

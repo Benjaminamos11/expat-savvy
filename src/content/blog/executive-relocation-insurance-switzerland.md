@@ -1,6 +1,6 @@
 ---
 title: "Executive Relocation Insurance"
-description: "You earn CHF 200K+, you're relocating to Switzerland, and your company's HR gave you a list of insurers. Here's what they missed — and what it costs you over 5 years."
+description: "Earning CHF 200K+ and relocating to Switzerland? Here's what HR's insurer list missed — and what it costs you over 5 years."
 author: "Expat Savvy Team"
 date: 2026-03-24
 tags: ["executive relocation switzerland", "expat insurance package", "high earner insurance switzerland", "relocation insurance guide"]

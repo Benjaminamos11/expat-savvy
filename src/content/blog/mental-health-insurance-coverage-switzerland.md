@@ -1,6 +1,6 @@
 ---
 title: "Mental Health Insurance Switzerland"
-description: "Swiss basic insurance covers psychiatry but limits psychology sessions. Supplementary insurance fills the gap — if you choose the right plan. Here's what expats need to know about mental health coverage."
+description: "Swiss basic insurance covers psychiatry but limits psychology. Supplementary fills the gap — if you choose the right plan. What expats need to know."
 author: "Expat Savvy Team"
 date: 2026-03-23
 tags: ["mental health insurance switzerland", "therapy coverage switzerland", "psychology insurance swiss", "mental health expats switzerland"]

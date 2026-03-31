@@ -1,6 +1,6 @@
 ---
 title: "Semi-Private vs Private Insurance"
-description: "Is the upgrade from semi-private to private worth CHF 150-300/month more? We break down the real differences in rooms, doctors, hospitals, and outcomes — so you can decide based on facts, not marketing."
+description: "Is private worth CHF 150-300/month more than semi-private? Real differences in rooms, doctors, and outcomes — facts, not marketing."
 author: "Expat Savvy Team"
 date: 2026-03-22
 tags: ["semi-private vs private", "hospital insurance switzerland", "private hospital insurance", "supplementary insurance comparison"]
