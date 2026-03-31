@@ -70,6 +70,19 @@ const finalCanonicalURL = canonicalURL.endsWith("/")
   ? canonicalURL
   : canonicalURL + "/";
 
+// Hreflang: map English pages to their German equivalents
+const englishToGerman: Record<string, string> = {
+  "/": "/de/",
+  "/health-insurance/": "/de/krankenversicherung/",
+  "/3rd-pillar/": "/de/steuern-vorsorge/",
+  "/about/": "/de/ueber-uns/",
+};
+const normalizedPath = finalPath.endsWith("/") ? finalPath : finalPath + "/";
+const germanEquivalent = englishToGerman[normalizedPath] || null;
+const germanURL = germanEquivalent
+  ? new URL(germanEquivalent, "https://expat-savvy.ch").toString()
+  : null;
+
 // Expert detection for booking components
 const pageUrl = Astro.url.pathname.toLowerCase();
 const pageExpertType =
@@ -134,6 +147,16 @@ const favicon =
 
     <!-- Canonical and metadata -->
     <link rel="canonical" href={finalCanonicalURL} />
+
+    <!-- Hreflang for multilingual pages -->
+    {germanURL && (
+      <>
+        <link rel="alternate" hreflang="en" href={finalCanonicalURL} />
+        <link rel="alternate" hreflang="x-default" href={finalCanonicalURL} />
+        <link rel="alternate" hreflang="de-CH" href={germanURL} />
+        <link rel="alternate" hreflang="de-DE" href={germanURL} />
+      </>
+    )}
 
     <!-- Redirect if accessed via IP address -->
     <script is:inline>
