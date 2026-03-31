@@ -1,6 +1,6 @@
 ---
 title: "Swiss Family Health Insurance Guide 2026: Complete Guide for Expats"
-description: "The definitive guide to navigating health insurance for families in Switzerland, covering everything from prenatal registration to cost optimization strategies for expat families."
+description: "Family health insurance guide: prenatal registration, discounts, deductibles. Optimize costs."
 author: "Benjamin Amos Wagner"
 date: 2026-05-20
 tags: ["swiss family insurance", "family health insurance switzerland", "expat families", "prenatal registration", "family deductible", "children health insurance", "family discounts", "dental insurance"]

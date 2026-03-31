@@ -1,6 +1,6 @@
 ---
-title: "The Rise of Telemedicine in Switzerland: Digital Healthcare for Expats"
-description: "Discover how telemedicine models (Telmed) are transforming Swiss healthcare for expats. Explore innovative digital clinics like Holistiq.ch for seamless, English-friendly medical care."
+title: "Telemedicine in Switzerland"
+description: "Telemedicine in Switzerland: digital healthcare models, coverage, cost. Access care from anywhere."
 author: "Benjamin Amos Wagner"
 date: 2025-05-18
 tags: ["telemedicine", "digital healthcare", "health insurance models", "holistiq", "expat healthcare", "swiss telmed"]

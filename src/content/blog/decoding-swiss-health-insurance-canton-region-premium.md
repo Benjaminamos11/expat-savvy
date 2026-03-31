@@ -1,6 +1,6 @@
 ---
-title: "Canton & Region Premiums: How Location Changes Your Swiss Insurance Price"
-description: "Understand Swiss KVG premium regions and why Zurich, Geneva or Basel differ. Seasonal update: premium letters in Oct, cancel by 30 Nov to switch for 1 Jan the following year. Save with model/deductible choice."
+title: "Canton Premiums & Location Cost"
+description: "Understand canton premiums: why Zurich costs more. Switch by Nov 30. Find the best rates."
 pubDate: "2025-05-15"
 category: "Health Insurance"
 author: "Expat Savvy Team"

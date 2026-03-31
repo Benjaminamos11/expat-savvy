@@ -1,6 +1,6 @@
 ---
 title: "Swiss Health Insurance Models: Standard vs HMO vs GP vs Telmed"
-description: "Understand model trade‑offs and savings. Which fits your budget and habits? Seasonal note: premium letters in Oct, cancel by 30 Nov for changes effective 1 Jan the following year."
+description: "Swiss health insurance models: Standard vs HMO vs GP vs Telmed. Find your best fit."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["swiss health insurance", "HMO", "Telmed", "Standard", "insurance models", "annual change season"]

@@ -1,6 +1,6 @@
 ---
-title: "Relocating to Zug: The Insider's Guide to Switzerland's Business Paradise (2026)"
-description: "Comprehensive guide for expatriates relocating to Zug. Expert advice on neighborhoods, housing, tax advantages, visa requirements, healthcare, education options, and cultural integration. Discover how to make your Swiss transition seamless."
+title: "Relocating to Zug"
+description: "Relocate to Zug: insider tips on housing, taxes, visas, healthcare. Start your Swiss adventure with expert guidance."
 author: "Benjamin Amos Wagner"
 date: 2025-05-06
 tags: ["relocation", "zug", "switzerland", "expat", "housing", "tax", "visa", "healthcare", "education", "business paradise"]

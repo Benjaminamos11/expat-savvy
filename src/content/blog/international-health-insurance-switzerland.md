@@ -1,5 +1,5 @@
 ---
-title: "International Health Insurance Switzerland 2026: When Swiss KVG Isn't Enough"
+title: "International Health Insurance"
 description: "Swiss basic insurance has limits for global professionals. We compare IPMI plans (Cigna, Allianz, Bupa) vs Swiss Zusatzversicherung. Free expert consultation."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

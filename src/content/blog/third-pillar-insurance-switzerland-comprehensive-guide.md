@@ -1,6 +1,6 @@
 ---
-title: "3rd Pillar Insurance Switzerland: Complete Guide to Tax-Advantaged Savings (2026)"
-description: "Expert guide to 3rd pillar insurance in Switzerland. Compare providers, understand tax benefits, and maximize your pension savings. Get personalized advice from Swiss insurance specialists."
+title: "3rd Pillar: Tax-Advantaged Savings"
+description: "3rd pillar guide: tax-advantaged savings, insurance vs banks. Maximize your pension."
 author: "Benjamin Amos Wagner"
 date: 2025-01-20
 tags: ["3rd pillar", "pension", "insurance", "tax optimization", "retirement planning", "switzerland"]

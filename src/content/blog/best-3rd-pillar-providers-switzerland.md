@@ -1,5 +1,5 @@
 ---
-title: "Best 3rd Pillar Switzerland 2026: VIAC vs Frankly vs finpension (Don't Get Locked In)"
+title: "3rd Pillar 2026: VIAC vs Frankly"
 description: "80% of expats choose the wrong 3a product. Bank apps beat insurance on fees & flexibility. But there are exceptions. Free expert comparison available."
 publishDate: "2026-08-13"
 lastUpdated: "2026-08-13"

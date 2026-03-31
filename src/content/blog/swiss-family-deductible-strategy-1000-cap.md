@@ -1,6 +1,6 @@
 ---
 title: "Swiss Family Deductible Strategy: CHF 1,000 Cap Explained 2026"
-description: "Master the CHF 1,000 family deductible cap to optimize your Swiss health insurance costs and save thousands annually. Complete guide to deductible strategies for families with children."
+description: "Family deductible strategy: CHF 1,000 cap. Save thousands on health insurance costs."
 author: "Benjamin Amos Wagner"
 date: 2026-05-20
 tags: ["family deductible", "swiss health insurance", "deductible cap", "family insurance", "cost optimization", "children insurance", "health insurance savings"]

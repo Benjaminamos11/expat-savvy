@@ -1,6 +1,6 @@
 ---
 title: "Swiss Health Insurance Family Discounts: Maximize Your Savings 2026"
-description: "Complete guide to family discount strategies and savings opportunities in Swiss health insurance. Learn how to save thousands annually through strategic consolidation with Helsana, Concordia, Swica, and CSS."
+description: "Save thousands with Swiss family health insurance discounts. Strategic consolidation guide."
 author: "Benjamin Amos Wagner"
 date: 2026-05-20
 tags: ["family discounts", "swiss health insurance", "family insurance", "insurance savings", "helsana", "concordia", "swica", "css", "cost optimization"]

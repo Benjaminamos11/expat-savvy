@@ -1,6 +1,6 @@
 ---
 title: "Does Swiss Health Insurance Cover Alternative & Functional Medicine?"
-description: "A complete expat guide to alternative and functional medicine coverage in Switzerland. Learn how to cover costs for innovative clinics like Holistiq.ch with the right supplementary insurance."
+description: "Alternative medicine coverage in Switzerland: which plans cover acupuncture, homeopathy. Get the right insurance."
 author: "Benjamin Amos Wagner"
 date: 2025-05-15
 tags: ["alternative medicine", "functional medicine", "swiss healthcare", "supplementary insurance", "holistiq", "expat wellness"]

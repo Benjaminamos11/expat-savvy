@@ -1,6 +1,6 @@
 ---
 title: "ProLife vs Traditional Dental Insurance: Swiss Family Guide 2026"
-description: "Complete comparison of ProLife dental insurance versus traditional plans for Swiss families with children. Understand costs, benefits, orthodontic coverage, and which option provides the best value."
+description: "ProLife vs traditional dental: costs, orthodontic coverage, family savings. Choose your best option."
 author: "Benjamin Amos Wagner"
 date: 2026-05-20
 tags: ["prolife dental insurance", "dental insurance switzerland", "orthodontic coverage", "children dental insurance", "family dental insurance", "helsana", "dental coverage comparison"]

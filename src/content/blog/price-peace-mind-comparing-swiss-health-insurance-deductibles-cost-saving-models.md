@@ -1,5 +1,5 @@
 ---
-title: "Swiss Health Insurance Franchise 2026: CHF 300 vs 2500 — Which Saves You More?"
+title: "Insurance Franchise: 300 vs 2500"
 description: "We calculate exact costs for every deductible level (CHF 300–2,500) + HMO, Telmed & GP models. Real 2026 premium data shows when high franchise actually costs MORE."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

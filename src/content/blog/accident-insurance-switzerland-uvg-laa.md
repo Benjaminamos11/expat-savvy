@@ -1,6 +1,6 @@
 ---
-title: "Accident Insurance Switzerland: The Weekend Gap Most Expats Miss (UVG 2026)"
-description: "If you work 8+ hours/week, you're likely paying for accident coverage twice. Learn how UVG/LAA works, what BU vs NBU means, and how to exclude accident from KVG to save CHF 100+/year."
+title: "Accident Insurance (UVG)"
+description: "Accident insurance (UVG): understand coverage, BU vs NBU. Avoid double-paying for coverage."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29
 tags: ["swiss accident insurance", "UVG", "LAA", "occupational", "non-occupational", "expat guide", "2026 guide"]

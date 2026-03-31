@@ -1,6 +1,6 @@
 ---
-title: "Mental Wellness in Switzerland: An Expat's Guide to Accessing Mental Health Services and Insurance Coverage"
-description: "A guide for expats in Switzerland on accessing mental health services, understanding insurance coverage for psychotherapy, and finding English-speaking therapists."
+title: "Mental Health for Expats"
+description: "Mental health in Switzerland: psychotherapy costs, insurance coverage, English-speaking therapists."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["mental health", "expat guide", "switzerland", "psychotherapy", "insurance coverage", "wellness", "mental wellness", "expat support", "counseling"]

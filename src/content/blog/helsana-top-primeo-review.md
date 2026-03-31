@@ -1,5 +1,5 @@
 ---
-title: "Helsana TOP & Primeo 2026: Are These Premium Plans Worth the Extra Cost?"
+title: "Helsana TOP & Primeo Review"
 description: "TOP and Primeo are popular but confusing. We break down coverage, real costs by age, and whether SWICA COMPLETA or CSS is a better deal."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

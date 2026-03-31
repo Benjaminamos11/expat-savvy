@@ -1,6 +1,6 @@
 ---
-title: "Legal Protection Insurance Switzerland — From CHF 15/Month (Tenant, Work, Traffic)"
-description: "Swiss lawyers cost CHF 300–500/hour. One tenant dispute can cost CHF 10,000+. Compare legal protection insurance from CHF 15/month covering rental, employment, and traffic disputes."
+title: "Legal Protection Insurance"
+description: "Legal protection insurance: cover lawyer costs CHF 300-500/hour. Compare plans from CHF 15/month."
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["legal insurance Switzerland", "legal protection insurance", "expat rights", "tenant disputes", "work conflicts", "traffic violations", "rechtschutzversicherung", "2026 guide"]

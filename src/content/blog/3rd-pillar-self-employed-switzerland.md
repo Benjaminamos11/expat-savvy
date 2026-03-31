@@ -1,6 +1,6 @@
 ---
 title: "Self-Employed 3rd Pillar Guide 2026"
-description: "Self-employed without a 2nd pillar? Contribute up to CHF 35,280/year tax-free. The 4 mistakes that cost self-employed expats thousands."
+description: "Self-employed 3rd pillar: save CHF 35,280/year tax-free. Avoid costly mistakes."
 author: "Expat Savvy Team"
 date: 2026-03-28
 tags: ["3rd pillar self-employed", "pillar 3a self-employed", "self-employed tax savings switzerland", "säule 3a selbständig"]

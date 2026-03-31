@@ -1,6 +1,6 @@
 ---
-title: "Relocation Zurich: The Expat's Ultimate Guide to Switzerland's Financial Hub (2026)"
-description: "Comprehensive guide for expatriates relocating to Zurich. Expert advice on neighborhoods, housing, visa requirements, healthcare, education options, and cultural integration. Discover how to make your Swiss transition seamless."
+title: "Relocating to Zurich"
+description: "Relocate to Zurich: insider guide to housing, visas, healthcare, education. Master your Swiss move."
 author: "Benjamin Amos Wagner"
 date: 2025-05-05
 tags: ["relocation", "zurich", "switzerland", "expat", "housing", "visa", "healthcare", "education", "financial hub"]

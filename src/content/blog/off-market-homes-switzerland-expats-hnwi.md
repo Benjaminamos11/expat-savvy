@@ -1,6 +1,6 @@
 ---
-title: "How to Access Off-Market Homes in Switzerland: The Insider Strategy for Expats and HNWIs"
-description: "Discover how international professionals, expats, and high-net-worth individuals access exclusive off-market properties in Zurich, Zug, Geneva, and Basel. Anonymous registration, direct landlord contact, no competition."
+title: "Off-Market Homes in Switzerland"
+description: "Access exclusive off-market homes in Zurich, Zug, Geneva. Direct landlord contact, no competition. Premium listings."
 author: "Expat Savvy Team"
 date: 2025-08-14
 lastUpdated: 2025-08-14

@@ -1,6 +1,6 @@
 ---
 title: "HMO vs Family Doctor vs Standard: Best Models for Swiss Children 2026"
-description: "Complete guide to choosing the optimal health insurance model for children in Switzerland. Compare HMO, Family Doctor, Standard, and Telmed models for pediatric care access and costs."
+description: "Health insurance for children: HMO, Family Doctor, Standard models. Choose the best fit."
 author: "Benjamin Amos Wagner"
 date: 2026-05-20
 tags: ["insurance models", "children health insurance", "HMO", "family doctor", "standard model", "telmed", "pediatric care", "swiss health insurance"]

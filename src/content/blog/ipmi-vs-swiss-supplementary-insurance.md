@@ -1,5 +1,5 @@
 ---
-title: "IPMI vs Swiss Zusatzversicherung: Which Premium Path? (2026 Comparison)"
+title: "IPMI vs Swiss Supplementary"
 description: "International Private Medical Insurance or Swiss supplementary — which gives better coverage for the money? Costs, coverage, portability compared side by side."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

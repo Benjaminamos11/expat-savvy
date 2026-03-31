@@ -1,6 +1,6 @@
 ---
 title: "Swiss Health Insurance Prenatal Registration: Complete Guide 2026"
-description: "Everything you need to know about registering your baby for health insurance before birth in Switzerland. Secure guaranteed coverage, avoid medical exams, and optimize your family's insurance strategy."
+description: "Register baby for Swiss health insurance before birth: guaranteed coverage, no medical exams."
 author: "Benjamin Amos Wagner"
 date: 2026-05-20
 tags: ["prenatal registration", "swiss health insurance", "baby insurance", "pregnancy switzerland", "supplementary insurance", "family insurance", "expat families"]

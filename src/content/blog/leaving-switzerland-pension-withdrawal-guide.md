@@ -1,6 +1,6 @@
 ---
 title: "Leaving Switzerland Pension Guide"
-description: "Withdrawal order, canton choice, and deregistration timing determine whether you save or waste CHF 10,000+. Step-by-step exit plan."
+description: "Leaving Switzerland: pension withdrawal guide, tax strategy, deregistration plan. Save CHF 10,000+."
 author: "Expat Savvy Team"
 date: 2026-03-26
 tags: ["leaving switzerland pension", "withdraw pillar 3a leaving", "pension withdrawal guide", "expat leaving switzerland"]
