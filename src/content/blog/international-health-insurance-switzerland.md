@@ -224,6 +224,7 @@ If you were exempt from KVG and your circumstances change (e.g., you leave your 
 
 ### Related Guides
 
+- [Cross-Border Insurance Guide](/insurance-guides/cross-border-insurance/) — Insurance options for cross-border workers
 - [IPMI vs Swiss Supplementary: Detailed Comparison](/blog/ipmi-vs-swiss-supplementary-insurance)
 - [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
 - [Private Hospital Insurance Cost 2026](/blog/private-hospital-insurance-cost-switzerland-2026)

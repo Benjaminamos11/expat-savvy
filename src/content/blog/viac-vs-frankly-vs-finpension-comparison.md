@@ -172,6 +172,7 @@ For a complete tax savings strategy beyond just provider choice, read our [3rd p
 - [Self-Employed 3rd Pillar Guide](/blog/3rd-pillar-self-employed-switzerland/)
 - [Complete 3rd Pillar Guide](/blog/third-pillar-insurance-switzerland-comprehensive-guide/) — Full overview of pillar 3a vs 3b
 - [Understanding the Swiss 3-Pillar System](/blog/understanding-swiss-3-pillar-pension-system/) — How pillars 1, 2, and 3 work together
+- [3rd Pillar for Young Professionals](/3rd-pillar/for-young-professionals/) — Why starting early maximizes compound interest
 - [Bank vs Insurance 3a](/3rd-pillar/bank-vs-insurance/)
 - [3rd Pillar Overview](/3rd-pillar/)
 

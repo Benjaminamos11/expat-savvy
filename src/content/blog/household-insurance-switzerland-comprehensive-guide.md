@@ -233,6 +233,8 @@ Most policies have a minimum term (usually 1 year) and renew annually. You can c
 
 ### Related Guides
 
+- [Contents & Liability Insurance Guide](/guides/contents-liability-insurance-switzerland/) — Detailed coverage comparison and provider tips
+- [Contents & Liability Insurance Guide](/guides/contents-liability-insurance-switzerland/) — Detailed coverage breakdown and provider comparison
 - [Personal Liability Insurance for Expats](/insurance-guides/personal-liability)
 - [Legal Protection Insurance — From CHF 15/Month](/blog/legal-protection-insurance-switzerland-complete-guide)
 - [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)

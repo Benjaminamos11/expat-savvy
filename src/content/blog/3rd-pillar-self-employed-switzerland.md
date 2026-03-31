@@ -168,6 +168,8 @@ For the complete 3rd pillar overview, visit our [3rd pillar hub page](/3rd-pilla
 
 ### Related Guides
 
+- [Self-Employed Insurance Guide](/insurance-guides/self-employed-insurance/) — Full insurance checklist for freelancers and business owners
+- [3rd Pillar for Self-Employed](/3rd-pillar/for-self-employed/) — Special rules and higher contribution limits
 - [3rd Pillar Tax Savings 2026](/blog/third-pillar-maximize-2026-tax-benefits/)
 - [Best 3rd Pillar Providers 2026](/blog/best-3rd-pillar-providers-switzerland/)
 - [VIAC vs Frankly vs finpension](/blog/viac-vs-frankly-vs-finpension-comparison/)

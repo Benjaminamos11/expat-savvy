@@ -202,4 +202,12 @@ The investment in understanding and optimizing Swiss family health insurance pay
 
 ---
 
+### Related Guides
+
+- [Family Insurance Planning Guide](/insurance-guides/family-insurance-planning/) — Complete family coverage strategy
+- [Add Family Members to Insurance](/guides/how-to/add-family-health-insurance/) — Step-by-step process
+- [Student Insurance Guide](/insurance-guides/student-insurance/) — Affordable options for students in Switzerland
+- [Family Deductible Strategy](/blog/swiss-family-deductible-strategy-1000-cap/) — CHF 1,000 cap and optimization tips
+- [Children's Insurance Models](/blog/health-insurance-models-children-switzerland/) — Best models for kids
+
 *This guide provides general information about Swiss family health insurance and should not be considered as personalized financial or insurance advice. Families should consult with qualified professionals for guidance tailored to their specific circumstances and needs.*

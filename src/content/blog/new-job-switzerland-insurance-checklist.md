@@ -187,6 +187,7 @@ If you're working fewer than 3 months and have equivalent coverage from your hom
 
 ### Related Guides
 
+- [Legal Requirements & Deadlines](/guides/how-to/legal-requirements-health-insurance-deadlines/) — Key deadlines you must meet
 - [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
 - [Swiss Health Insurance Franchise Guide](/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models)
 - [Accident Insurance: Don't Pay Double](/blog/accident-insurance-switzerland-uvg-laa)

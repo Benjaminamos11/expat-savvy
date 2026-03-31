@@ -796,10 +796,12 @@ Legal protection insurance works best as part of a comprehensive insurance portf
 
 ### Related Guides
 
+- [Legal Protection Insurance Guide](/guides/legal-protection-insurance-switzerland/) — Quick-reference guide with provider comparison
 - [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/) — Compare all Swiss insurers
 - [New Job Insurance Checklist](/blog/new-job-switzerland-insurance-checklist) — Employment changes and insurance obligations
 - [Dental Insurance for Expats](/blog/dental-insurance-expats-switzerland) — Supplementary dental coverage
 - [Household Insurance Switzerland](/blog/household-insurance-switzerland-comprehensive-guide) — Contents and liability protection
+- [Contents & Liability Guide](/guides/contents-liability-insurance-switzerland/) — Detailed household and liability coverage
 - [Personal Liability Insurance](/insurance-guides/personal-liability) — Extended liability coverage
 - [New Arrivals Insurance Checklist](/insurance-guides/new-arrivals-checklist) — Complete setup guide
 - [3rd Pillar Guide](/3rd-pillar) — Tax-advantaged retirement savings

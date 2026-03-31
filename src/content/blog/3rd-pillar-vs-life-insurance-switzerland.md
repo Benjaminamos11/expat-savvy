@@ -362,6 +362,7 @@ The key is matching each tool to its strength: 3rd pillar for accumulation and g
 
 ### Related Guides
 
+- [Life Insurance Guide Switzerland](/guides/life-insurance-switzerland/) — When and why you need life insurance
 - [Best 3rd Pillar Providers 2026: VIAC vs Frankly vs finpension](/blog/best-3rd-pillar-providers-switzerland/)
 - [3rd Pillar Tax Savings 2026](/blog/third-pillar-maximize-2025-tax-benefits)
 - [Complete 3rd Pillar Guide](/3rd-pillar)
