@@ -19,6 +19,7 @@ interface Props {
     type?: string;
     image?: string;
     canonicalURLProp?: string | null;
+    englishURL?: string | null;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
     type = "website",
     image = "https://res.cloudinary.com/dphbnwjtx/image/upload/v1746960418/a-photograph-depicts-a-pair-of-youthful-_quYJOYFeRPqWWfrG0MYelw_ndQb4IxjRbGazkFfjfLXNA_qk6hxm.webp",
     canonicalURLProp = null,
+    englishURL = null,
 } = Astro.props;
 
 // Ensure canonical URL is absolute and standardized
@@ -65,12 +67,14 @@ const finalCanonicalURL = canonicalURL.endsWith("/")
     ? canonicalURL
     : canonicalURL + "/";
 
-// Compute English equivalent URL for hreflang (strip /de/ prefix)
-const currentPathForHreflang = finalPath.replace(/^\/de(\/|$)/, "/");
-const englishEquivalentURL = new URL(
-    currentPathForHreflang === "/" ? "/" : currentPathForHreflang,
-    "https://expat-savvy.ch",
-).toString();
+// Compute English equivalent URL for hreflang (use override or strip /de/ prefix)
+const computedEnglishPath = finalPath.replace(/^\/de(\/|$)/, "/");
+const englishEquivalentURL = englishURL
+    ? new URL(englishURL, "https://expat-savvy.ch").toString()
+    : new URL(
+        computedEnglishPath === "/" ? "/" : computedEnglishPath,
+        "https://expat-savvy.ch",
+    ).toString();
 const finalEnglishURL = englishEquivalentURL.endsWith("/")
     ? englishEquivalentURL
     : englishEquivalentURL + "/";

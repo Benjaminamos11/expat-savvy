@@ -1,6 +1,6 @@
 ---
 title: "Swiss Maternity & Newborn Insurance: The Prenatal Deadline"
-description: "Don't risk your baby's coverage. Learn why the 'Vorgeburtliche Anmeldung' (Prenatal Registration) is legally required to guarantee Swiss supplementary insurance."
+description: "Prenatal registration required for baby's Swiss supplementary insurance. Learn the deadline, coverage, and how to register before birth."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["maternity insurance", "newborn coverage", "swiss healthcare", "family planning", "annual change season"]

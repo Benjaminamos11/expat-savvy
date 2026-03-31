@@ -1255,9 +1255,18 @@
   force = true
 
 # ===========================================
-# 3rd Pillar trailing slash redirects — REMOVED
-# These caused ERR_TOO_MANY_REDIRECTS with Astro SSR (output: 'server')
-# Astro SSR handles routing natively; force=true redirects conflict with it
+# 3rd Pillar trailing slash redirects — REMOVED (caused ERR_TOO_MANY_REDIRECTS with Astro SSR)
+
+# Fix wrong internal link: pillar-3a-vs-3b → 3a-vs-3b
+[[redirects]]
+  from = "/3rd-pillar/pillar-3a-vs-3b"
+  to = "/3rd-pillar/3a-vs-3b/"
+  status = 301
+
+[[redirects]]
+  from = "/3rd-pillar/pillar-3a-vs-3b/"
+  to = "/3rd-pillar/3a-vs-3b/"
+  status = 301
 
 # Old tax benefits post redirect to new 2026 version
 [[redirects]]

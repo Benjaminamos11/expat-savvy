@@ -1,6 +1,6 @@
 ---
 title: "Relocation to Zurich & Insurance Guide: Complete 2026 Guide"
-description: "Complete guide to relocating to Zurich with insurance considerations. Health insurance costs, premium bands, relocation services, and English-speaker resources for Zurich moves."
+description: "Guide to relocating to Zurich: health insurance costs, premium bands, relocation services, and resources for English-speaking expats."
 slug: "relocation-zurich-insurance-guide"
 category: "relocation"
 tags: ["zurich", "relocation", "health-insurance", "moving", "expats", "insurance-costs"]

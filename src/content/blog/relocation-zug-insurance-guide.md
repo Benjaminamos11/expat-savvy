@@ -1,6 +1,6 @@
 ---
 title: "Relocation to Zug & Insurance Guide: Tax Haven Benefits 2026"
-description: "Complete guide to relocating to Zug with insurance benefits. Low tax rates, health insurance costs, premium variations, and relocation services for Switzerland's crypto valley."
+description: "Guide to relocating to Zug: low tax rates, health insurance costs, premium variations, and relocation services for Switzerland's crypto valley."
 slug: "relocation-zug-insurance-guide"
 category: "relocation"
 tags: ["zug", "relocation", "health-insurance", "crypto-valley", "tax-benefits", "expats"]
