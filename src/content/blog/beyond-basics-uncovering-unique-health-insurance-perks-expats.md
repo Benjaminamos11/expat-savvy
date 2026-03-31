@@ -218,6 +218,8 @@ Swica Completa Praeventa is generally the most comprehensive — highest fitness
 ### Related Guides
 
 - [Gym Reimbursement: Which Insurer Pays Your Fitness?](/blog/gym-coverage-swiss-insurance-revised)
+- [Telemedicine in Switzerland](/blog/telemedicine-switzerland-expats-digital-healthcare/) — Digital healthcare options for expats
+- [Alternative & Functional Medicine](/blog/alternative-functional-medicine-swiss-health-insurance/) — Complementary therapy coverage
 - [Best Health Insurance Switzerland 2026](/healthcare/best-health-insurance-switzerland/)
 - [Swiss Health Insurance Franchise: CHF 300 vs 2500](/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models)
 - [Complete Guide to Swiss Health Insurance](/health-insurance)

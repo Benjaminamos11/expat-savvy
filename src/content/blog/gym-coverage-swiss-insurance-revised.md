@@ -215,6 +215,7 @@ Remember, investing in your health is one of the best investments you can make. 
 
 ### Related Guides
 
+- [Alternative & Functional Medicine Coverage](/blog/alternative-functional-medicine-swiss-health-insurance/) — Complementary therapy insurance
 - [Understanding Swiss Health Insurance](/health-insurance)
 - [How to Compare Health Insurance Providers](/compare-providers)
-- [Tips for New Arrivals in Switzerland](/insurance-guides/new-arrivals-checklist) 
+- [Tips for New Arrivals in Switzerland](/insurance-guides/new-arrivals-checklist)

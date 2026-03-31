@@ -167,6 +167,8 @@ If you're in crisis, call the **Dargebotene Hand** (Die Dargebotene Hand) at **1
 
 ### Related Guides
 
+- [Mental Health Services for Expats](/blog/mental-health-services-switzerland/) — Finding English-speaking therapists and support
+- [Alternative & Functional Medicine Coverage](/blog/alternative-functional-medicine-swiss-health-insurance/) — Complementary therapy insurance options
 - [Best Private Health Insurance for Expats](/blog/best-private-health-insurance-expats-switzerland/)
 - [SWICA COMPLETA & Bestmed Review](/blog/swica-completa-bestmed-review/)
 - [Helsana TOP & Primeo Review](/blog/helsana-top-primeo-review/)

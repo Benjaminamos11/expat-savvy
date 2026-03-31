@@ -242,6 +242,7 @@ For guidance on setting up your complete insurance package as a new arrival, see
 - [SWICA COMPLETA & Bestmed Review](/blog/swica-completa-bestmed-review/)
 - [Helsana TOP & Primeo Review](/blog/helsana-top-primeo-review/)
 - [Mental Health Insurance Coverage](/blog/mental-health-insurance-coverage-switzerland/)
+- [Mental Health Services for Expats](/blog/mental-health-services-switzerland/) — Finding English-speaking therapists
 - [Best Health Insurance 2026](/healthcare/best-health-insurance-switzerland/)
 
 <div class="not-prose my-12 rounded-2xl bg-slate-50 border border-slate-200 p-8 sm:p-10 text-center">

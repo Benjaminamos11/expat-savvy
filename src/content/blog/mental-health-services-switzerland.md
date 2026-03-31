@@ -111,6 +111,8 @@ If you are struggling or simply wish to explore support options, do not hesitate
 
 ### Related Guides
 
+- [Mental Health Insurance Coverage](/blog/mental-health-insurance-coverage-switzerland/) — Which plans cover therapy and psychiatry
+- [Alternative Medicine Coverage](/blog/alternative-functional-medicine-swiss-health-insurance/) — Complementary therapy options
 - [Swiss Health Insurance Basics](/health-insurance)
 - [Supplementary Insurance Options](/healthcare/glossary/supplementary-insurance)
 - [New Arrivals Insurance Checklist](/insurance-guides/new-arrivals-checklist)

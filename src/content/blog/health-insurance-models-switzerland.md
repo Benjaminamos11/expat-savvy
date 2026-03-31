@@ -159,6 +159,7 @@ For further guidance or to compare specific insurance plans and their suitabilit
 
 ### Related Guides
 
+- [Telemedicine in Switzerland](/blog/telemedicine-switzerland-expats-digital-healthcare/) — How Telmed works and which providers offer it
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland) — Complete guide and provider comparison
 - [Switching Health Insurance](/insurance-change-2025-2026/) — Deadlines, switching process, and seasonal tips
 - [Are You Overpaying?](/blog/review-health-insurance-switzerland-overpaying/) — Quick self-check to see if you're paying too much

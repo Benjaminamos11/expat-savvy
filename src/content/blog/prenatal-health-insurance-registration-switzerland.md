@@ -120,6 +120,7 @@ Prenatal health insurance registration in Switzerland provides irreplaceable adv
 Prenatal registration is just one component of comprehensive family health insurance planning in Switzerland. For complete guidance on optimizing your family's coverage strategy, explore our comprehensive resources:
 
 ### **Essential Family Planning**
+- **[Maternity & Newborn Insurance Guide](/blog/maternity-newborn-insurance-switzerland/)** - Coverage timelines and what's included from day one
 - **[Swiss Family Health Insurance Guide 2026](/blog/expat-family-matters-best-swiss-health-insurers-children-maternity/)** - Complete hub for family insurance optimization
 - **[Swiss Family Deductible Strategy: CHF 1,000 Cap](/blog/swiss-family-deductible-strategy-1000-cap/)** - Maximize savings with strategic deductible planning
 

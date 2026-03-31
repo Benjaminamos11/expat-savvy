@@ -120,5 +120,6 @@ Relocating to a new country is a significant undertaking, but with careful plann
 
 - [Zurich Insurance Setup Guide](/blog/relocation-zurich-insurance-guide/) — Health, liability, and household insurance for Zurich
 - [Zug Insurance Setup Guide](/blog/relocation-zug-insurance-guide/) — Insurance essentials for Zug arrivals
+- [Geneva Insurance & Relocation Guide](/blog/relocation-geneva-insurance-guide/) — Insurance setup for Geneva arrivals
 - [Swiss Relocation Timeline 2026](/blog/swiss-relocation-timeline-checklist-2026/) — Month-by-month checklist from visa to move-in
 - [Best Health Insurance Switzerland](/healthcare/best-health-insurance-switzerland/) — Complete provider comparison

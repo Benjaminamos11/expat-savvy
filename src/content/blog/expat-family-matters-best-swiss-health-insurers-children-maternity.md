@@ -204,6 +204,7 @@ The investment in understanding and optimizing Swiss family health insurance pay
 
 ### Related Guides
 
+- [Maternity & Newborn Insurance](/blog/maternity-newborn-insurance-switzerland/) — Prenatal registration deadlines and coverage
 - [Family Insurance Planning Guide](/insurance-guides/family-insurance-planning/) — Complete family coverage strategy
 - [Add Family Members to Insurance](/guides/how-to/add-family-health-insurance/) — Step-by-step process
 - [Student Insurance Guide](/insurance-guides/student-insurance/) — Affordable options for students in Switzerland

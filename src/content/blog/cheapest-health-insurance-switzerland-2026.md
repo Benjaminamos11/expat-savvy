@@ -463,6 +463,7 @@ Our AI calculator uses the same official Swiss Federal Office data to show your 
 - [Are You Overpaying for Health Insurance?](/blog/review-health-insurance-switzerland-overpaying) — Quick self-check
 - [Cancellation Deadline November 2025](/blog/swiss-health-insurance-cancellation-deadline-2025/) — Key dates you can't afford to miss
 - [Swiss Health Insurance Franchise Guide](/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models) — CHF 300 vs 2500
+- [Telemedicine in Switzerland](/blog/telemedicine-switzerland-expats-digital-healthcare/) — How Telmed models save you the most
 - [Health Insurance Switzerland Hub](/health-insurance) — Models, deductibles, and premium optimization
 - [Unhappy With Your Insurance?](/blog/unhappy-health-insurance-switzerland-what-to-do) — How to switch
 - [Private Hospital Insurance Cost 2026](/blog/private-hospital-insurance-cost-switzerland-2026) — Supplementary premiums compared
