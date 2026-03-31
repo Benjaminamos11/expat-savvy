@@ -161,6 +161,8 @@ For further guidance or to compare specific insurance plans and their suitabilit
 
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland) — Complete guide and provider comparison
 - [Switching Health Insurance](/insurance-change-2025-2026/) — Deadlines, switching process, and seasonal tips
+- [Are You Overpaying?](/blog/review-health-insurance-switzerland-overpaying/) — Quick self-check to see if you're paying too much
+- [How to Switch or Upgrade](/blog/switch-upgrade-health-insurance-expat-switzerland/) — Step-by-step guide to changing your plan
 - [Swiss Health Insurance Basics](/health-insurance) — Calculator, costs, and coverage overview
 - [Swica vs Helsana Comparison](/compare-providers/swica-vs-helsana/) — Popular provider comparison for model differences
 - [Accident Insurance in Switzerland](/blog/accident-insurance-switzerland-uvg-laa) — UVG/LAA coverage and employment exclusions

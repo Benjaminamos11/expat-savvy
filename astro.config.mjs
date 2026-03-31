@@ -29,6 +29,7 @@ export default defineConfig({
           '/guides/how-to/switch-health-insurance-providers',
           '/guides/how-to/relocate-to-switzerland-step-by-step-checklist.timeline',
           '/guides/how-to/relocate-to-switzerland-step-by-step-checklist.original',
+          '/careers',
         ];
         if (redirectedSlugs.some(slug => page.includes(slug))) return false;
 

@@ -135,6 +135,7 @@ Welcome to Switzerland! We hope this guide helps you embark on your Swiss journe
 
 ### Related Guides
 
+- [Swiss Relocation Timeline 2026](/blog/swiss-relocation-timeline-checklist-2026/) — Month-by-month checklist from visa to move-in
 - [Best Health Insurance Switzerland](/healthcare/best-health-insurance-switzerland/) — Complete guide for new arrivals
 - [Switching Health Insurance](/switching-health-insurance/) — Seasonal switching deadlines and optimization
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard comparison

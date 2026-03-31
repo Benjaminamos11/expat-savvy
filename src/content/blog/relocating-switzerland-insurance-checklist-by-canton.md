@@ -112,4 +112,13 @@ Relocating to a new country is a significant undertaking, but with careful plann
 
 **Keywords:** Expat insurance checklist Switzerland.
 
-**Ready to tick off your insurance checklist and ensure you have the right coverage for your new life in Switzerland?** [Get personalized advice and schedule Your Free Consultation Today!](/free-consultation/) 
+**Ready to tick off your insurance checklist and ensure you have the right coverage for your new life in Switzerland?** [Get personalized advice and schedule Your Free Consultation Today!](/free-consultation/)
+
+---
+
+### Related Guides
+
+- [Zurich Insurance Setup Guide](/blog/relocation-zurich-insurance-guide/) — Health, liability, and household insurance for Zurich
+- [Zug Insurance Setup Guide](/blog/relocation-zug-insurance-guide/) — Insurance essentials for Zug arrivals
+- [Swiss Relocation Timeline 2026](/blog/swiss-relocation-timeline-checklist-2026/) — Month-by-month checklist from visa to move-in
+- [Best Health Insurance Switzerland](/healthcare/best-health-insurance-switzerland/) — Complete provider comparison

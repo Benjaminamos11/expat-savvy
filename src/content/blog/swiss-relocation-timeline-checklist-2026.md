@@ -52,3 +52,12 @@ Once your housing is settled, your most critical outstanding requirement is your
 **While your relocation agent handles your housing, Swiss law dictates you have exactly 90 days from your arrival date to secure [mandatory Swiss health insurance for expats](https://expat-savvy.ch).** 
 
 Do not miss this deadline, or you will be assigned to a default, high-premium plan. Because your coverage will be backdated to your first day in Switzerland anyway, there is no financial advantage to delaying your application. Compare basic (KVG/LAMal) and supplementary (VVG/LCA) models immediately so you are fully protected in your new home.
+
+---
+
+### Related Guides
+
+- [Best Relocators in Zurich 2026](/blog/best-relocators-zurich-switzerland-2026/) — Top-rated agencies for your move
+- [DIY vs Hiring a Relocation Agency](/blog/diy-vs-hiring-swiss-relocation-agency-2026/) — Cost comparison and when an agent pays for itself
+- [Relocating to Switzerland Checklist](/blog/relocating-to-switzerland-checklist/) — Complete expat insurance and admin checklist
+- [Zurich Relocation Guide](/blog/relocation-zurich-ultimate-guide-financial-hub/) — Comprehensive guide to Switzerland's financial hub

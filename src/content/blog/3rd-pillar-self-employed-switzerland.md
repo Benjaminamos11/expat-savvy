@@ -172,6 +172,7 @@ For the complete 3rd pillar overview, visit our [3rd pillar hub page](/3rd-pilla
 - [Best 3rd Pillar Providers 2026](/blog/best-3rd-pillar-providers-switzerland/)
 - [VIAC vs Frankly vs finpension](/blog/viac-vs-frankly-vs-finpension-comparison/)
 - [Leaving Switzerland Pension Guide](/blog/leaving-switzerland-pension-withdrawal-guide/)
+- [Complete 3rd Pillar Guide for Expats](/blog/third-pillar-insurance-switzerland-comprehensive-guide/) — Insurance vs bank, contribution limits, and tax benefits explained
 - [3rd Pillar Overview](/3rd-pillar/)
 
 <div class="not-prose my-12 rounded-2xl bg-slate-50 border border-slate-200 p-8 sm:p-10 text-center">

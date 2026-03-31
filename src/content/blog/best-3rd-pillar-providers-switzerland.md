@@ -442,3 +442,4 @@ Remember that you can use multiple providers to diversify your approach and opti
 - **[VIAC vs Frankly vs finpension — Head-to-Head Comparison](/blog/viac-vs-frankly-vs-finpension-comparison/)**: Detailed fee breakdowns, investment options, and the withdrawal question nobody asks.
 - **[Leaving Switzerland? Pension Withdrawal Guide](/blog/leaving-switzerland-pension-withdrawal-guide/)**: What happens to your 3a when you leave — tax traps, staggering strategies, and the 5 mistakes that cost thousands.
 - **[Self-Employed 3rd Pillar Guide](/blog/3rd-pillar-self-employed-switzerland/)**: Save up to CHF 35,280/year tax-free — the rules are different for self-employed expats.
+- **[Understanding the Swiss 3-Pillar System](/blog/understanding-swiss-3-pillar-pension-system/)**: How AHV, BVG, and pillar 3a work together — the foundation every expat needs to understand.

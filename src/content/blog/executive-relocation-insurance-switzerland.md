@@ -182,6 +182,7 @@ Start with the [90-day action plan](#the-90-day-window) above. If you want someo
 
 ### Related Guides
 
+- [IPMI vs Swiss Supplementary Insurance](/blog/ipmi-vs-swiss-supplementary-insurance/) — International plans vs local supplementary compared
 - [New to Switzerland Insurance Guide](/healthcare/new-health-insurance/)
 - [Best Private Insurance for Expats](/blog/best-private-health-insurance-expats-switzerland/)
 - [3rd Pillar Tax Savings 2026](/blog/third-pillar-maximize-2026-tax-benefits/)

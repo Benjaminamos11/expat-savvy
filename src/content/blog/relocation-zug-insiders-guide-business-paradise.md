@@ -732,8 +732,9 @@ Zug offers all Swiss health insurance models optimized for business professional
 
 ### Related Guides
 
+- [Zug Insurance Setup Guide](/blog/relocation-zug-insurance-guide/) — Health, liability, and household insurance for Zug arrivals
 - [Best Health Insurance Switzerland 2025/2026](/healthcare/best-health-insurance-switzerland/) — Complete guide with Zug-specific considerations
-- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines and tax-optimized switching strategies  
+- [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines and tax-optimized switching strategies
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard for Zug business professionals
 - [Relocating to Switzerland: Step-by-Step Checklist](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Complete admin and insurance timeline
 - [Ultimate Guide to Switzerland Relocation](/blog/relocation-switzerland-ultimate-guide-smooth-move/) — Comprehensive relocation planning

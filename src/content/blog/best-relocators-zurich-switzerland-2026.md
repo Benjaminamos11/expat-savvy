@@ -51,3 +51,12 @@ While securing an exceptional relocation agency will profoundly simplify your ho
 Even the most comprehensive relocation packages rarely handle the final selection and execution of your Swiss health insurance policy. Under Swiss law, every resident must secure basic health insurance (KVG/LAMal) within 90 days of their official arrival date. Failure to meet this deadline results in automatic assignment to an insurer by your local canton, often leading to unfavorable premiums and penalty fees.
 
 Therefore, parallel to your housing search, it is imperative to secure appropriate coverage. You can explore your options, compare models, and find the optimal policy for your needs by visiting Expat-Savvy's comprehensive [Health Insurance Comparison](/health-insurance) guide. Ensure your transition is fully compliant and financially optimized from day one.
+
+---
+
+### Related Guides
+
+- [DIY vs Hiring a Relocation Agency](/blog/diy-vs-hiring-swiss-relocation-agency-2026/) — Cost comparison and when an agent pays for itself
+- [Swiss Relocation Timeline 2026](/blog/swiss-relocation-timeline-checklist-2026/) — Month-by-month checklist from visa to move-in
+- [Zurich Insurance Setup Guide](/blog/relocation-zurich-insurance-guide/) — Health, liability, and household insurance for Zurich arrivals
+- [Relocating to Switzerland Checklist](/blog/relocating-to-switzerland-checklist/) — Complete expat checklist

@@ -61,3 +61,12 @@ If you decide to hire a professional, never just pick the first agency you find 
 While your newly hired agency will secure your dream home, manage your lease, and handle your municipal registration, practically no agency in Switzerland is legally authorized to execute your health insurance contract. 
 
 You remain strictly liable for securing [Swiss expat health insurance](https://expat-savvy.ch) within exactly 90 days of arriving in the country. Since your coverage is retroactively applied to your first day, delaying your policy only results in a massive lump-sum back-payment. Secure your permanent housing with a top-rated agent, but immediately lock in your mandatory health coverage to ensure your transition is 100% compliant.
+
+---
+
+### Related Guides
+
+- [Best Relocators in Zurich 2026](/blog/best-relocators-zurich-switzerland-2026/) — Top-rated agencies if you decide to hire
+- [Swiss Relocation Timeline 2026](/blog/swiss-relocation-timeline-checklist-2026/) — Month-by-month checklist from visa to move-in
+- [Relocating to Switzerland Checklist](/blog/relocating-to-switzerland-checklist/) — Complete expat insurance and admin checklist
+- [Health Insurance Comparison](/health-insurance) — Compare basic and supplementary models

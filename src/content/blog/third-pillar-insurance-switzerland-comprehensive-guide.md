@@ -247,8 +247,8 @@ A: Pillar 3a is "tied" with contribution limits and restricted access but offers
 
 - [How to Choose the Best 3rd Pillar Provider](/guides/how-to/find-best-third-pillar)
 - [Tax Optimization with 3rd Pillar Insurance](/guides/how-to/save-taxes-with-3a-pillar)
-- [Complete Guide to Swiss Pension Planning](/blog/swiss-pension-system-complete-guide)
-- [Retirement Planning for Expats in Switzerland](/blog/retirement-planning-expats-switzerland)
+- [Understanding the Swiss 3-Pillar Pension System](/blog/understanding-swiss-3-pillar-pension-system/) — How pillars 1, 2, and 3 fit together
+- [VIAC vs Frankly vs finpension 2026](/blog/viac-vs-frankly-vs-finpension-comparison/) — Detailed provider comparison
 - [Pillar 3a Guide 2026](https://expat-services.ch/guide/pillar-3a-switzerland-2026) - Updated contribution limits and strategies
 
 

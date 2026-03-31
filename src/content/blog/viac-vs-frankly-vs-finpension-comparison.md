@@ -170,6 +170,8 @@ For a complete tax savings strategy beyond just provider choice, read our [3rd p
 - [Best 3rd Pillar Providers 2026](/blog/best-3rd-pillar-providers-switzerland/)
 - [3rd Pillar Tax Savings 2026](/blog/third-pillar-maximize-2026-tax-benefits/)
 - [Self-Employed 3rd Pillar Guide](/blog/3rd-pillar-self-employed-switzerland/)
+- [Complete 3rd Pillar Guide](/blog/third-pillar-insurance-switzerland-comprehensive-guide/) — Full overview of pillar 3a vs 3b
+- [Understanding the Swiss 3-Pillar System](/blog/understanding-swiss-3-pillar-pension-system/) — How pillars 1, 2, and 3 work together
 - [Bank vs Insurance 3a](/3rd-pillar/bank-vs-insurance/)
 - [3rd Pillar Overview](/3rd-pillar/)
 

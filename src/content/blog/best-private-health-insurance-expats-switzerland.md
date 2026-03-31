@@ -236,6 +236,7 @@ For guidance on setting up your complete insurance package as a new arrival, see
 
 ### Related Guides
 
+- [IPMI vs Swiss Supplementary Insurance](/blog/ipmi-vs-swiss-supplementary-insurance/) — International plans vs local top-ups compared
 - [Semi-Private vs Private Hospital Insurance](/blog/semi-private-vs-private-hospital-insurance/)
 - [Private Hospital Insurance Costs 2026](/blog/private-hospital-insurance-cost-switzerland-2026/)
 - [SWICA COMPLETA & Bestmed Review](/blog/swica-completa-bestmed-review/)

@@ -215,6 +215,7 @@ For a full overview of the 3rd pillar system, visit our [3rd pillar hub page](/3
 - [Best 3rd Pillar Providers 2026](/blog/best-3rd-pillar-providers-switzerland/)
 - [Canton Tax Comparison](/blog/swiss-cantonal-taxes-3rd-pillar-savings/)
 - [Self-Employed 3rd Pillar Guide](/blog/3rd-pillar-self-employed-switzerland/)
+- [Complete 3rd Pillar Guide](/blog/third-pillar-insurance-switzerland-comprehensive-guide/) — Everything expats need to know about pillar 3a
 - [3rd Pillar Overview](/3rd-pillar/)
 
 <div class="not-prose my-12 rounded-2xl bg-slate-50 border border-slate-200 p-8 sm:p-10 text-center">

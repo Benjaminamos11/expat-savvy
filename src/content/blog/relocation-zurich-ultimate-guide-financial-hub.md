@@ -511,10 +511,13 @@ Basic health insurance: Yes, guaranteed acceptance within 3 months of arrival. S
 
 ### Related Guides
 
+- [Best Relocators in Zurich 2026](/blog/best-relocators-zurich-switzerland-2026/) — Top-rated agencies for your Zurich move
+- [Zurich Insurance Setup Guide](/blog/relocation-zurich-insurance-guide/) — Health, liability, and household insurance for Zurich arrivals
+- [Swiss Relocation Timeline 2026](/blog/swiss-relocation-timeline-checklist-2026/) — Month-by-month checklist from visa to move-in
+- [DIY vs Hiring a Relocation Agency](/blog/diy-vs-hiring-swiss-relocation-agency-2026/) — Cost comparison and when an agent pays for itself
 - [Best Health Insurance Switzerland 2025/2026](/blog/best-health-insurance-switzerland/) — Complete guide with Zurich-specific considerations
 - [Switching Health Insurance](/switching-health-insurance/) — Seasonal deadlines and switching strategies
 - [Swiss Health Insurance Models](/blog/health-insurance-models-switzerland/) — HMO vs Telmed vs Standard for Zurich expats
 - [Relocating to Switzerland: Step-by-Step Checklist](/guides/how-to/relocate-to-switzerland-step-by-step-checklist) — Complete admin and insurance timeline
-- [Ultimate Guide to Switzerland Relocation](/blog/relocation-switzerland-ultimate-guide-smooth-move/) — Comprehensive relocation planning
 
 

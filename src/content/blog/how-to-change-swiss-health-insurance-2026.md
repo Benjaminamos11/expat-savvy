@@ -266,3 +266,6 @@ The key to success is starting early, comparing options thoroughly, and getting 
 ### Additional Resources
 
 - [Best Health Insurance Switzerland 2026](https://expat-services.ch/guide/best-health-insurance-switzerland-2026) - Comprehensive guide on Expat Services
+- [Are You Overpaying for Health Insurance?](/blog/review-health-insurance-switzerland-overpaying/) — Quick self-check before switching
+- [How to Switch or Upgrade Your Insurance](/blog/switch-upgrade-health-insurance-expat-switzerland/) — Step-by-step switching and upgrade guide
+- [Cancellation Deadline November 2025](/blog/swiss-health-insurance-cancellation-deadline-2025/) — Key dates and what happens if you miss them
