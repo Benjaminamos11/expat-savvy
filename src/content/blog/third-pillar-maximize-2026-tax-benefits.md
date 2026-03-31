@@ -1,5 +1,5 @@
 ---
-title: "3rd Pillar Tax Savings 2026: What Expats Get Wrong"
+title: "3rd Pillar Tax Savings 2026"
 description: "CHF 7,056 max contribution, but the real savings come from strategy — staggering, canton timing, BVG coordination. See the 5 traps and what they cost you."
 author: "Expat Savvy Team"
 date: 2026-03-30
@@ -203,52 +203,3 @@ Yes. You can contribute the full CHF 7,056 regardless of when you started workin
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the maximum 3rd pillar contribution for 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For 2026, employed persons with a 2nd pillar can contribute up to CHF 7,056 to pillar 3a. Self-employed individuals without a 2nd pillar can contribute up to 20% of net income, maximum CHF 35,280."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much tax can I save with 3rd pillar contributions in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tax savings depend on your income and canton. Typical savings range from CHF 1,500-2,000 for middle-income earners in Zurich, CHF 2,000-2,800 for higher earners, and up to CHF 7,000 for self-employed without 2nd pillar making maximum contributions."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "When is the deadline for 2026 3rd pillar contributions?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The deadline is 31 December 2026. Contributions must be received by your provider by this date. Process contributions by mid-December to avoid delays."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I choose a bank or insurance 3rd pillar?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Bank solutions (VIAC, Frankly, finpension) are better for most people — lower fees (0.39-0.44% vs 1-2%), higher flexibility, and better long-term returns. Insurance solutions only make sense if you need built-in death/disability coverage and don't have it elsewhere."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How many 3rd pillar accounts should I have?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ideally 4-5 accounts. The staggering strategy — withdrawing from separate accounts across different tax years — can save CHF 5,000-15,000 in withdrawal taxes. Start with one account and add more over time."
-      }
-    }
-  ]
-}
-</script>

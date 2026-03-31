@@ -1,5 +1,5 @@
 ---
-title: "Leaving Switzerland? Your Pension Withdrawal Guide (2026)"
+title: "Leaving Switzerland Pension Guide"
 description: "The order you withdraw pillar 2 and 3a, the canton you withdraw from, and when you deregister determines whether you save or waste CHF 10,000+. Step-by-step withdrawal plan for departing expats."
 author: "Expat Savvy Team"
 date: 2026-03-26
@@ -226,44 +226,3 @@ For a full overview of the 3rd pillar system, visit our [3rd pillar hub page](/3
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Can I withdraw my 3rd pillar when leaving Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. When you permanently leave Switzerland, you can withdraw all pillar 3a funds. If moving within the EU/EFTA, you can withdraw the surobligatory portion of pillar 2 immediately, but the obligatory portion stays in a vested benefits account until retirement age (unless leaving the EU/EFTA entirely)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What tax do I pay on pension withdrawal when leaving?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Withdrawal tax is based on the canton where your 3a provider or vested benefits account is domiciled — not where you live. Rates range from 3.5% (Schwyz) to 9%+ (Geneva). Choosing the right canton saves thousands."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "When should I start planning my pension withdrawal?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ideally 2-3 years before departure. This gives you time to open multiple 3a accounts (staggering), transfer accounts to low-tax cantons, and plan the withdrawal sequence across tax years."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need to deregister before withdrawing my pension?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No — and you shouldn't. Withdraw pillar 3a accounts first while still registered, then deregister, then withdraw vested benefits accounts. This sequence optimizes your tax position."
-      }
-    }
-  ]
-}
-</script>

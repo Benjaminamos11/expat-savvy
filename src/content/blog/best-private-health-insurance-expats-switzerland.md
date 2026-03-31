@@ -1,5 +1,5 @@
 ---
-title: "Best Private Health Insurance for Expats in Switzerland (2026)"
+title: "Best Private Insurance for Expats"
 description: "Semi-private vs private, which insurers accept expats, what it actually costs, and whether it's worth it. Honest comparison from FINMA-certified advisors who see 500+ expat cases per year."
 author: "Expat Savvy Team"
 date: 2026-03-29
@@ -252,52 +252,3 @@ For guidance on setting up your complete insurance package as a new arrival, see
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What's the difference between semi-private and private hospital insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Semi-private covers a 2-bed room and choice of senior doctor. Private covers a single room and free choice of any doctor (including the chief physician). Private premiums are typically 40-60% higher than semi-private for similar coverage levels."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much does private health insurance cost in Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Semi-private premiums range from CHF 200-500/month depending on age and insurer. Full private ranges from CHF 350-800/month. These are supplementary premiums on top of your mandatory basic insurance (KVG)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can expats get private health insurance in Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but with conditions. Unlike basic insurance (KVG), supplementary insurers can reject applications based on health history. Apply within the first 3 months of arrival for best acceptance rates. Pre-existing conditions may be excluded."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is private health insurance worth it for expats?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It depends on your priorities and budget. For expats earning CHF 150K+, the tax deductibility, shorter wait times, and English-speaking doctor access often justify the cost. For younger, healthy expats on tighter budgets, a good basic plan with outpatient supplementary may be sufficient."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which is the best private health insurer for expats?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "SWICA (COMPLETA TOP + Bestmed 24) for best overall coverage and expat-friendliness. Helsana (TOP + Primeo) for premium hospital networks. CSS for value-conscious semi-private coverage. The best choice depends on your health profile and budget."
-      }
-    }
-  ]
-}
-</script>

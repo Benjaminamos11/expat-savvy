@@ -1,5 +1,5 @@
 ---
-title: "Semi-Private vs Private Hospital Insurance in Switzerland (2026)"
+title: "Semi-Private vs Private Insurance"
 description: "Is the upgrade from semi-private to private worth CHF 150-300/month more? We break down the real differences in rooms, doctors, hospitals, and outcomes — so you can decide based on facts, not marketing."
 author: "Expat Savvy Team"
 date: 2026-03-22
@@ -158,44 +158,3 @@ Want to see what each level costs for your specific age, canton, and family situ
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the difference between semi-private and private hospital insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Semi-private gives you a 2-bed room and choice of senior physician. Private guarantees a single room and free choice of any doctor including the chief physician. Both give you access to the private ward of hospitals — the main difference is room privacy and doctor seniority."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much more does private cost than semi-private?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Private premiums are typically 40-60% higher than semi-private. For a 35-year-old, semi-private costs CHF 200-500/month while private costs CHF 350-800/month, depending on the insurer and canton."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is private hospital insurance worth the extra cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For most expats, semi-private offers the best value. The medical care quality is essentially the same — you're paying extra for a guaranteed single room and slightly broader doctor choice. Private makes sense for executives with employer contributions, families wanting maximum comfort during childbirth, or those with specific specialist needs."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I upgrade from semi-private to private later?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but you'll need to pass a new health questionnaire. Any conditions developed since your original application may be excluded or cause rejection. It's generally easier to start with private if you think you'll want it — downgrading is always possible without health checks."
-      }
-    }
-  ]
-}
-</script>

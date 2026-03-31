@@ -1,5 +1,5 @@
 ---
-title: "VIAC vs Frankly vs finpension — Which 3a Is Actually Best? (2026)"
+title: "VIAC vs Frankly vs finpension 2026"
 description: "We compared fees, returns, equity allocation, and UX across all three top 3a apps. The winner depends on your situation — here's our honest breakdown."
 author: "Expat Savvy Team"
 date: 2026-03-27
@@ -182,44 +182,3 @@ For a complete tax savings strategy beyond just provider choice, read our [3rd p
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Which 3a app has the lowest fees?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "finpension at 0.39% total cost (TER), followed by VIAC at 0.44% and Frankly at 0.45%. Over 30 years on maximum contributions, the fee difference between finpension and Frankly is approximately CHF 3,000-5,000."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which 3a app has the highest equity allocation?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "finpension allows up to 99% equities, VIAC up to 97%, and Frankly up to 95%. For long investment horizons (15+ years), higher equity allocation historically delivers better returns."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I have accounts with multiple 3a providers?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, and it's recommended. Having 4-5 accounts across providers enables the staggering withdrawal strategy, saving CHF 5,000-15,000 in taxes. You can split your annual CHF 7,056 contribution across providers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which 3a provider is best for expats?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "All three work well for expats. VIAC has the best English-language support, finpension has the lowest fees, and Frankly (backed by ZKB) offers the strongest banking relationship. Choose based on your priority: cost, UX, or banking integration."
-      }
-    }
-  ]
-}
-</script>

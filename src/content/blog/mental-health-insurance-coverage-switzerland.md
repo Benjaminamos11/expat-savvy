@@ -1,5 +1,5 @@
 ---
-title: "Mental Health Insurance Coverage in Switzerland: What's Actually Covered (2026)"
+title: "Mental Health Insurance Switzerland"
 description: "Swiss basic insurance covers psychiatry but limits psychology sessions. Supplementary insurance fills the gap — if you choose the right plan. Here's what expats need to know about mental health coverage."
 author: "Expat Savvy Team"
 date: 2026-03-23
@@ -182,44 +182,3 @@ If you're in crisis, call the **Dargebotene Hand** (Die Dargebotene Hand) at **1
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Does Swiss basic insurance cover therapy?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but with conditions. Since 2023, psychologists can bill basic insurance directly (Anordnungsmodell) with a doctor's referral. Basic insurance covers up to 15 sessions initially, extendable with justification. Psychiatrists (medical doctors) are covered without session limits under basic insurance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much does therapy cost with insurance in Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "With basic insurance: you pay your deductible (CHF 300-2,500) plus 10% co-pay up to CHF 700/year. A typical psychology session costs CHF 150-200. With supplementary insurance, many plans cover additional sessions or practitioners not covered by basic insurance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I see an English-speaking therapist with Swiss insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, if the therapist is a recognized provider. Many psychologists and psychiatrists in Zurich, Geneva, Basel, and other expat hubs offer sessions in English. Check with your insurer's provider directory or ask us for recommendations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does supplementary insurance cover mental health?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Some plans do. SWICA COMPLETA covers CHF 2,000-6,000/year for complementary therapy including coaching and counseling. Helsana TOP covers alternative practitioners. Not all supplementary plans include mental health — check before signing up."
-      }
-    }
-  ]
-}
-</script>

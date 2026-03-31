@@ -1,5 +1,5 @@
 ---
-title: "SWICA COMPLETA & Bestmed Review: Best Supplementary for Expats? (2026)"
+title: "SWICA COMPLETA & Bestmed Review"
 description: "SWICA's COMPLETA + Bestmed combo is the most popular supplementary choice among expats in Switzerland. Here's what it actually covers, what it costs, and whether it's worth it for your situation."
 author: "Expat Savvy Team"
 date: 2026-03-21
@@ -207,44 +207,3 @@ For a comparison with Helsana's equivalent products, see our [Helsana TOP & Prim
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What does SWICA COMPLETA cover?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "SWICA COMPLETA is an outpatient supplementary insurance covering alternative medicine (up to CHF 6,000/year on TOP tier), dental check-ups, glasses/contacts, worldwide emergency coverage, prevention and wellness programs, fitness contributions, and non-emergency transport. It does NOT cover hospital stays — that's Bestmed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does SWICA Bestmed cover?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Bestmed is SWICA's hospital supplementary insurance. It covers semi-private or private hospital stays across Switzerland (and worldwide for emergencies), with free choice of doctor at the chosen level. Bestmed 24 includes worldwide hospital coverage."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much does SWICA COMPLETA + Bestmed cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For a 35-year-old: COMPLETA TOP costs approximately CHF 50-70/month, Bestmed semi-private CHF 250-400/month, Bestmed private CHF 400-600/month. Total for COMPLETA TOP + Bestmed semi-private: approximately CHF 300-470/month."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is SWICA good for expats?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "SWICA is consistently rated the best insurer for expat-friendliness in Switzerland. They offer excellent English-language support, a dedicated international team, the most generous wellness benefits in the market, and high customer satisfaction scores. The main downside is that premiums are mid-to-high range."
-      }
-    }
-  ]
-}
-</script>

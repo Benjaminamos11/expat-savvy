@@ -1,5 +1,5 @@
 ---
-title: "Executive Relocation Insurance Package: What CHF 200K+ Earners Need"
+title: "Executive Relocation Insurance"
 description: "You earn CHF 200K+, you're relocating to Switzerland, and your company's HR gave you a list of insurers. Here's what they missed — and what it costs you over 5 years."
 author: "Expat Savvy Team"
 date: 2026-03-24
@@ -198,44 +198,3 @@ Start with the [90-day action plan](#the-90-day-window) above. If you want someo
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What insurance do executives need when relocating to Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "At minimum: basic health insurance (KVG, mandatory), private/semi-private supplementary, household insurance, personal liability, and a 3rd pillar pension plan. Executives should also consider legal protection, international health insurance for frequent travel, and life insurance for family protection."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I use my company's recommended insurance broker?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Company brokers often have limited mandates — they may only compare 3-5 insurers instead of all 50+. An independent FINMA-certified broker compares the full market and optimizes for your specific family situation, not your employer's convenience."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much should I budget for insurance in Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For a family of 4 with executive-level coverage: CHF 2,500-4,000/month total (basic + private supplementary + other insurance). This varies significantly by canton, age, and coverage choices. A proper review typically saves CHF 500-1,000/month vs. the defaults HR suggests."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's the biggest insurance mistake executives make in Switzerland?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Not applying for supplementary insurance within the first 3 months. After this window, health questionnaire acceptance rates drop significantly, and pre-existing conditions are more likely to be excluded or result in rejection."
-      }
-    }
-  ]
-}
-</script>

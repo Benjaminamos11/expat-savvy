@@ -1,5 +1,5 @@
 ---
-title: "Self-Employed 3rd Pillar: CHF 35,280 Tax-Free (2026 Guide)"
+title: "Self-Employed 3rd Pillar Guide 2026"
 description: "Self-employed in Switzerland without a 2nd pillar? You can shelter up to CHF 35,280/year tax-free in pillar 3a. Here's how to maximize the opportunity — and the 4 mistakes that cost thousands."
 author: "Expat Savvy Team"
 date: 2026-03-28
@@ -183,44 +183,3 @@ For the complete 3rd pillar overview, visit our [3rd pillar hub page](/3rd-pilla
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much can self-employed contribute to 3rd pillar?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Self-employed without a 2nd pillar can contribute up to 20% of net earned income, maximum CHF 35,280 for 2026. With a 2nd pillar, the limit is CHF 7,056 — the same as employed persons."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can self-employed open multiple 3a accounts?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, and you should. The staggering strategy — 4-5 accounts withdrawn in different tax years — saves CHF 5,000-15,000 in withdrawal taxes. This is even more valuable for self-employed given higher balances."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which 3a provider is best for self-employed?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "finpension (0.39% fees) and VIAC (0.44%) are top choices. For large contributions, finpension's slightly lower fee compounds to significant savings. Both offer 97-99% equity allocations for long horizons."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I deduct 3a contributions if I'm self-employed part of the year?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, but the 20% limit applies to your net self-employment income for the year. If you switched from employed to self-employed mid-year, the calculation gets complex — consult a tax advisor."
-      }
-    }
-  ]
-}
-</script>

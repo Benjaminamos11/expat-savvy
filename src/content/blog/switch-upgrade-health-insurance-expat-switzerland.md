@@ -1,5 +1,5 @@
 ---
-title: "How to Switch or Upgrade Your Swiss Health Insurance (2026 Guide)"
+title: "Switch Your Swiss Health Insurance"
 description: "Switching basic insurance is free and easy — but timing is everything. Upgrading to private requires health checks and strategy. Here's exactly when and how to do both."
 author: "Expat Savvy Team"
 date: 2026-03-25
@@ -147,44 +147,3 @@ The service is free — insurers pay us a commission, which doesn't affect your 
   </button>
   <p class="text-sm text-gray-400 mt-4">No commitment · Takes 2 minutes · FINMA-certified advisors</p>
 </div>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "When is the deadline to switch Swiss health insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For basic insurance (KVG): November 30 for a January 1 switch. For supplementary insurance (VVG): varies by policy — typically 3 months' notice, some require 6 months. Check your specific contract terms."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I switch to a different insurer mid-year?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For basic insurance: only if your premium increases (extraordinary switching right) or if you change canton. For supplementary insurance: only at the contract renewal date per your policy terms."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will I lose coverage when switching?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Never cancel your old basic insurance before receiving written confirmation from the new insurer. For supplementary: secure acceptance from the new insurer first, as they can reject you based on health."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does switching health insurance cost anything?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Switching basic insurance is completely free — no fees, no penalties, no gaps in coverage. Supplementary insurance may have waiting periods with the new insurer for certain benefits."
-      }
-    }
-  ]
-}
-</script>
