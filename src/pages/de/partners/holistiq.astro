@@ -315,13 +315,14 @@ const faqs = [
       .then(function() {
         document.getElementById('lead-form-container').classList.add('hidden');
         document.getElementById('lead-success').classList.remove('hidden');
+        // Pre-fill calendar form with lead data
+        var calName = document.getElementById('cal-name');
+        var calEmail = document.getElementById('cal-email');
+        if (calName) calName.value = firstName + ' ' + lastName;
+        if (calEmail) calEmail.value = email;
+        // Scroll to calendar
         var calSection = document.getElementById('booking-calendar');
         if (calSection) {
-          calSection.style.display = '';
-          var calName = document.getElementById('cal-name');
-          var calEmail = document.getElementById('cal-email');
-          if (calName) calName.value = firstName + ' ' + lastName;
-          if (calEmail) calEmail.value = email;
           setTimeout(function() {
             calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 300);
@@ -340,12 +341,12 @@ const faqs = [
   })();
   </script>
 
-  <!-- Inline Calendar (hidden until lead form submitted) -->
-  <section id="booking-calendar" class="py-16 md:py-20 bg-gray-50" style="display:none;">
+  <!-- Inline Calendar -->
+  <section id="booking-calendar" class="py-16 md:py-20 bg-gray-50">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Möchten Sie sofort mit einem Experten sprechen?</h2>
-        <p class="text-lg text-gray-600">Buchen Sie ein kostenloses 30-Minuten-Gespräch mit Robert Kolar — wählen Sie unten Datum und Uhrzeit.</p>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Oder buchen Sie direkt ein kostenloses Gespräch</h2>
+        <p class="text-lg text-gray-600">Lieber direkt mit einem Experten sprechen? Buchen Sie ein kostenloses 30-Minuten-Gespräch mit Robert Kolar.</p>
       </div>
 
       <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">

@@ -308,15 +308,14 @@ const faqs = [
         // Show success, reveal calendar
         document.getElementById('lead-form-container').classList.add('hidden');
         document.getElementById('lead-success').classList.remove('hidden');
+        // Pre-fill calendar form with lead data
+        var calName = document.getElementById('cal-name');
+        var calEmail = document.getElementById('cal-email');
+        if (calName) calName.value = firstName + ' ' + lastName;
+        if (calEmail) calEmail.value = email;
+        // Scroll to calendar
         var calSection = document.getElementById('booking-calendar');
         if (calSection) {
-          calSection.style.display = '';
-          // Pre-fill calendar form
-          var calName = document.getElementById('cal-name');
-          var calEmail = document.getElementById('cal-email');
-          if (calName) calName.value = firstName + ' ' + lastName;
-          if (calEmail) calEmail.value = email;
-          // Smooth scroll to calendar
           setTimeout(function() {
             calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 300);
@@ -335,12 +334,12 @@ const faqs = [
   })();
   </script>
 
-  <!-- Inline Calendar (hidden until lead form submitted) -->
-  <section id="booking-calendar" class="py-16 md:py-20 bg-gray-50" style="display:none;">
+  <!-- Inline Calendar -->
+  <section id="booking-calendar" class="py-16 md:py-20 bg-gray-50">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Want to speak with an expert right away?</h2>
-        <p class="text-lg text-gray-600">Book a free 30-minute call with Robert Kolar — choose a date and time below.</p>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Or book a free call directly</h2>
+        <p class="text-lg text-gray-600">Prefer to speak with an expert? Book a free 30-minute call with Robert Kolar.</p>
       </div>
 
       <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
