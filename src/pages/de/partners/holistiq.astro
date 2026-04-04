@@ -1,0 +1,687 @@
+---
+import LayoutDE from '../../../layouts/LayoutDE.astro';
+
+export const prerender = false;
+
+const expert = {
+  name: "Robert Kolar",
+  role: "Senior Krankenversicherungsexperte",
+  subtitle: "Expat-Spezialist · DE/EN",
+  image: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+};
+
+const treatments = [
+  { name: "Akupunktur", desc: "Von den meisten Zusatzversicherungen mit zertifizierten Therapeuten gedeckt" },
+  { name: "TCM (Traditionelle Chinesische Medizin)", desc: "Kräutermedizin, Schröpfen, Moxibustion — weithin anerkannt" },
+  { name: "Naturheilkunde", desc: "Ganzheitliche Gesundheitsbewertung und natürliche Behandlungspläne" },
+  { name: "Osteopathie", desc: "Bis CHF 1'500–3'000/Jahr von führenden Versicherern gedeckt" },
+  { name: "Homöopathie", desc: "In den meisten Alternativmedizin-Zusatzpaketen enthalten" },
+  { name: "Massage-Therapie", desc: "Medizinische Massage mit zertifizierten Therapeuten, in der Regel 60–80% gedeckt" },
+  { name: "Ayurveda", desc: "Ausgewählte Versicherer decken ayurvedische Beratungen und Behandlungen" },
+  { name: "Reflexologie", desc: "Fuss- und Handreflexologie unter Komplementärmedizin gedeckt" },
+];
+
+const categories = [
+  "Krankenversicherung",
+  "Lebensversicherung & Vorsorge / Tierversicherung",
+  "3. Säule & Steueroptimierung",
+  "Haftpflicht- / Hausratversicherung",
+  "Fahrzeugversicherung",
+];
+
+const categoryMapping = {
+  "Krankenversicherung": "Health Insurance",
+  "Lebensversicherung & Vorsorge / Tierversicherung": "Life Insurance & Pension / Pet Insurance",
+  "3. Säule & Steueroptimierung": "3rd Pillar & Tax Optimization",
+  "Haftpflicht- / Hausratversicherung": "Liability / Household Insurance",
+  "Fahrzeugversicherung": "Vehicle Insurance",
+};
+
+const faqs = [
+  {
+    question: "Deckt die Schweizer Versicherung ganzheitliche Behandlungen?",
+    answer: "Ja — die Schweizer Zusatzversicherung (VVG) kann eine breite Palette an komplementären und alternativen Therapien abdecken. Dazu gehören Akupunktur, TCM, Osteopathie, Naturheilkunde, Homöopathie und mehr. Die Deckung hängt vom jeweiligen Plan und Versicherer ab."
+  },
+  {
+    question: "Welche Zusatzversicherungen decken Alternativmedizin?",
+    answer: "Die meisten grossen Schweizer Versicherer (Helsana, Swica, CSS, Sanitas, Groupe Mutuel) bieten Zusatzversicherungen mit Alternativmedizin-Deckung an. Swica und Helsana sind für besonders grosszügige Komplementärmedizin-Leistungen bekannt. Wir vergleichen alle Optionen."
+  },
+  {
+    question: "Brauche ich eine ärztliche Überweisung?",
+    answer: "In den meisten Fällen ist keine Überweisung für die Zusatzversicherungsdeckung nötig. Der Therapeut muss jedoch zertifiziert und vom Versicherer anerkannt sein. Wir helfen Ihnen zu verstehen, welche Therapeuten unter Ihrem Plan gedeckt sind."
+  },
+  {
+    question: "Kann ich eine Zusatzversicherung zu meiner bestehenden KVG hinzufügen?",
+    answer: "Absolut. Die Zusatzversicherung (VVG) ist von der obligatorischen Grundversicherung (KVG) getrennt. Sie können jeden Versicherer für Ihre Zusatzversicherung wählen — es muss nicht derselbe wie bei der Grundversicherung sein."
+  },
+  {
+    question: "Ist die Beratung kostenlos?",
+    answer: "Ja, 100% kostenlos und unverbindlich. Wir werden von den Versicherungsanbietern vergütet, wenn Sie sich über uns anmelden. Das bedeutet, Sie erhalten unabhängige Expertenberatung ohne Kosten."
+  },
+  {
+    question: "Was kostet eine Zusatzversicherung?",
+    answer: "Zusatzversicherungen mit Alternativmedizin-Deckung kosten typischerweise CHF 30–80/Monat, je nach Umfang, Alter und Kanton. Wir vergleichen alle Optionen, um das beste Preis-Leistungs-Verhältnis zu finden."
+  },
+];
+---
+
+<LayoutDE
+  title="Versicherung für ganzheitliche Behandlungen — Holistiq x Expat Savvy"
+  description="Lassen Sie Ihre ganzheitlichen und komplementären Therapien von der Schweizer Zusatzversicherung decken. Kostenlose Beratung — wir vergleichen 15+ Versicherer."
+>
+  <!-- JSON-LD -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Expat Savvy — Holistiq Zusatzversicherungs-Beratung",
+    "description": "Kostenlose Zusatzversicherungs-Beratung für Holistiq-Kunden. Ganzheitliche Behandlungen durch Schweizer VVG-Versicherung abdecken.",
+    "url": "https://expat-savvy.ch/de/partners/holistiq/",
+    "telephone": "+41-76-364-8888",
+    "priceRange": "Kostenlos",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Talacker 41",
+      "addressLocality": "Zürich",
+      "postalCode": "8001",
+      "addressCountry": "CH"
+    },
+    "areaServed": "CH",
+    "availableLanguage": ["Deutsch", "Englisch"],
+  })} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+    }))
+  })} />
+
+  <!-- Hero -->
+  <section class="bg-gray-900 text-white py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-sm font-medium text-gray-400">In Partnerschaft mit</span>
+            <img src="/images/holistiq-logo.png" alt="Holistiq.ch" class="h-8 object-contain" loading="eager" />
+          </div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Ihre ganzheitlichen Behandlungen von der Schweizer Versicherung decken lassen</h1>
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+            Die Schweizer Zusatzversicherung (VVG) deckt Akupunktur, Naturheilkunde, TCM, Osteopathie, Homöopathie und mehr. Wir vergleichen 15+ Versicherer, um den besten Plan für Ihre Bedürfnisse zu finden — völlig kostenlos.
+          </p>
+          <a href="#lead-form"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg hover:shadow-xl"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Kostenlose Beratung erhalten
+          </a>
+        </div>
+        <!-- Expert card -->
+        <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+          <div class="flex items-start gap-5 mb-5">
+            <img src={expert.image} alt={expert.name} width="80" height="80" class="rounded-xl object-cover flex-shrink-0" loading="lazy" />
+            <div>
+              <h3 class="text-lg font-bold text-white">{expert.name}</h3>
+              <p class="text-red-400 text-sm font-medium">{expert.role}</p>
+              <p class="text-gray-400 text-sm">{expert.subtitle}</p>
+            </div>
+          </div>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            «Viele Expats wissen nicht, dass ihre ganzheitlichen Behandlungen von der Schweizer Versicherung gedeckt werden können. Ich helfe Holistiq-Kunden, die richtige Zusatzversicherung zu finden — damit sie sich auf ihre Gesundheit konzentrieren können.»
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            {["VVG Zusatzversicherung", "Alternativmedizin", "Komplementärtherapien"].map(tag => (
+              <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Covered -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Von der Schweizer Zusatzversicherung gedeckte Behandlungen</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Schweizer VVG-Pläne decken eine breite Palette ganzheitlicher und komplementärer Therapien. Diese Behandlungen können erstattet werden.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {treatments.map(t => (
+          <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
+            <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h3 class="text-base font-bold text-gray-900 mb-1">{t.name}</h3>
+            <p class="text-gray-600 text-sm">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-16 md:py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">So funktioniert's</h2>
+        <p class="text-lg text-gray-600">Drei einfache Schritte zur Deckung Ihrer ganzheitlichen Behandlungen</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">1</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Erzählen Sie uns von sich</h3>
+          <p class="text-gray-600">Füllen Sie das kurze Formular unten aus. Dauert nur 30 Sekunden.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">2</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Wir vergleichen Pläne</h3>
+          <p class="text-gray-600">Unser Experte vergleicht Zusatzversicherungen von 15+ Schweizer Versicherern für Ihre Bedürfnisse.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">3</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Versichert & erstattet</h3>
+          <p class="text-gray-600">Melden Sie sich für den besten Plan an und beginnen Sie, Ihre Behandlungen erstatten zu lassen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section id="lead-form" class="py-16 md:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Kostenlose Versicherungsbewertung erhalten</h2>
+        <p class="text-lg text-gray-600">Teilen Sie uns Ihre Bedürfnisse mit und wir empfehlen den besten Zusatzversicherungsplan für Ihre ganzheitlichen Behandlungen.</p>
+      </div>
+
+      <div id="lead-form-container" class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8">
+        <form id="holistiq-lead-form" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Vorname *</label>
+              <input type="text" id="lead-firstName" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Jane" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Nachname *</label>
+              <input type="text" id="lead-lastName" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">E-Mail *</label>
+              <input type="email" id="lead-email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="jane@beispiel.ch" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+              <input type="tel" id="lead-phone" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="+41 79 123 45 67" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Stadt / Kanton</label>
+            <input type="text" id="lead-address" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Zürich, Kanton Zürich" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Wofür interessieren Sie sich?</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {categories.map((cat, i) => (
+                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                  <input type="checkbox" name="categories" value={Object.values(categoryMapping)[i]} checked={i === 0} class="rounded border-gray-300 text-red-500 focus:ring-red-500" />
+                  {cat}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Anmerkungen (optional)</label>
+            <textarea id="lead-notes" rows="2" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Z.B. Ich benötige hauptsächlich Deckung für Akupunktur und TCM-Sitzungen"></textarea>
+          </div>
+          <p id="lead-error" class="text-red-500 text-sm hidden"></p>
+          <button type="submit" id="lead-submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition-colors">
+            <span id="lead-submit-text">Absenden — Kostenlose Bewertung erhalten</span>
+            <span id="lead-submit-loading" class="hidden">
+              <svg class="w-5 h-5 animate-spin inline mr-1" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+              Wird gesendet...
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success state -->
+      <div id="lead-success" class="hidden bg-green-50 rounded-2xl shadow-lg border border-green-200 p-8 text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Wir haben Ihre Angaben erhalten!</h3>
+        <p class="text-gray-600 mb-1">Unser Experte Robert Kolar wird Ihre Bedürfnisse prüfen und sich in Kürze bei Ihnen melden.</p>
+        <p class="text-gray-500 text-sm">Möchten Sie sofort mit ihm sprechen? Buchen Sie unten einen Anruf.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead form script -->
+  <script is:inline>
+  (function() {
+    var form = document.getElementById('holistiq-lead-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var firstName = document.getElementById('lead-firstName').value.trim();
+      var lastName = document.getElementById('lead-lastName').value.trim();
+      var email = document.getElementById('lead-email').value.trim();
+      var phone = (document.getElementById('lead-phone').value || '').trim();
+      var address = (document.getElementById('lead-address').value || '').trim();
+      var notes = (document.getElementById('lead-notes').value || '').trim();
+      var errorEl = document.getElementById('lead-error');
+      var submitBtn = document.getElementById('lead-submit');
+      var submitText = document.getElementById('lead-submit-text');
+      var submitLoading = document.getElementById('lead-submit-loading');
+
+      var checked = form.querySelectorAll('input[name="categories"]:checked');
+      var cats = [];
+      checked.forEach(function(cb) { cats.push(cb.value); });
+
+      if (!firstName || !lastName || !email) {
+        if (errorEl) { errorEl.textContent = 'Vorname, Nachname und E-Mail sind erforderlich.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.classList.add('hidden');
+      if (submitLoading) submitLoading.classList.remove('hidden');
+
+      var payload = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      };
+      if (phone) payload.phone = phone;
+      if (address) payload.address = address;
+      if (notes) payload.notes = notes;
+      if (cats.length) payload.categories = cats;
+
+      fetch('https://app.expat-savvy.ch/api/partner/leads/holistiq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(err) { throw new Error(err.message || 'Übermittlung fehlgeschlagen'); });
+        return res.json();
+      })
+      .then(function() {
+        document.getElementById('lead-form-container').classList.add('hidden');
+        document.getElementById('lead-success').classList.remove('hidden');
+        var calSection = document.getElementById('booking-calendar');
+        if (calSection) {
+          calSection.style.display = '';
+          var calName = document.getElementById('cal-name');
+          var calEmail = document.getElementById('cal-email');
+          if (calName) calName.value = firstName + ' ' + lastName;
+          if (calEmail) calEmail.value = email;
+          setTimeout(function() {
+            calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      })
+      .catch(function(err) {
+        console.error('Lead submission error:', err);
+        if (errorEl) { errorEl.textContent = err.message || 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.'; errorEl.classList.remove('hidden'); }
+      })
+      .finally(function() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.classList.remove('hidden');
+        if (submitLoading) submitLoading.classList.add('hidden');
+      });
+    });
+  })();
+  </script>
+
+  <!-- Inline Calendar (hidden until lead form submitted) -->
+  <section id="booking-calendar" class="py-16 md:py-20 bg-gray-50" style="display:none;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Möchten Sie sofort mit einem Experten sprechen?</h2>
+        <p class="text-lg text-gray-600">Buchen Sie ein kostenloses 30-Minuten-Gespräch mit Robert Kolar — wählen Sie unten Datum und Uhrzeit.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <!-- Step 1: Datum wählen -->
+        <div id="cal-step-dates" class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-900">Datum wählen</h3>
+            <div class="flex items-center gap-2">
+              <img src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" alt="Robert Kolar" width="32" height="32" class="rounded-full" />
+              <span class="text-sm text-gray-600">Robert Kolar</span>
+            </div>
+          </div>
+          <div id="cal-date-pills" class="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1"></div>
+        </div>
+
+        <!-- Step 2: Uhrzeit wählen -->
+        <div id="cal-step-times" class="p-6 border-t border-gray-100" style="display:none;">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <button type="button" id="cal-back-dates" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <h3 class="text-lg font-bold text-gray-900">Uhrzeit wählen</h3>
+            </div>
+            <span id="cal-date-label" class="text-sm text-gray-500"></span>
+          </div>
+          <div id="cal-times-loading" class="text-center py-6 text-gray-400">
+            <div class="w-6 h-6 border-2 border-gray-200 border-t-red-500 rounded-full animate-spin mx-auto mb-2"></div>
+            Verfügbare Zeiten werden geladen...
+          </div>
+          <div id="cal-no-times" class="text-center py-6 text-gray-500 hidden">Keine verfügbaren Zeiten an diesem Tag. Versuchen Sie einen anderen Tag.</div>
+          <div id="cal-time-pills" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
+        </div>
+
+        <!-- Step 3: Ihre Angaben -->
+        <div id="cal-step-form" class="p-6 border-t border-gray-100" style="display:none;">
+          <div class="flex items-center gap-2 mb-1">
+            <button type="button" id="cal-back-times" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <h3 class="text-lg font-bold text-gray-900">Ihre Angaben</h3>
+          </div>
+          <p id="cal-slot-label" class="text-sm text-red-500 font-medium mb-4 ml-7"></p>
+          <form id="cal-form" class="space-y-4 ml-7">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                <input type="text" id="cal-name" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Ihr vollständiger Name" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">E-Mail *</label>
+                <input type="email" id="cal-email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="sie@beispiel.ch" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Telefon (optional)</label>
+              <input type="tel" id="cal-phone" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="+41..." />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Anmerkungen (optional)</label>
+              <textarea id="cal-notes" rows="2" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Was möchten Sie besprechen?"></textarea>
+            </div>
+            <p id="cal-error" class="text-red-500 text-sm hidden"></p>
+            <button type="submit" id="cal-submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition-colors">
+              <span id="cal-submit-text">Buchung bestätigen</span>
+              <span id="cal-submit-loading" class="hidden">
+                <svg class="w-5 h-5 animate-spin inline mr-1" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                Wird gebucht...
+              </span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 4: Fertig -->
+        <div id="cal-step-done" class="p-8 text-center" style="display:none;">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Beratung gebucht!</h3>
+          <p id="cal-confirmed-details" class="text-gray-600 mb-2"></p>
+          <p class="text-sm text-gray-500">Prüfen Sie Ihre E-Mail für eine Kalendereinladung und den Meeting-Link.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar script -->
+  <script is:inline>
+  (function() {
+    var API_BASE = 'https://api.cal.com/v2';
+    var EVENT_TYPE_ID = 5254510;
+    var API_KEY = 'cal_live_02d332e8841c6f13b371ee6dd3ca7ca8';
+    var TZ = (typeof Intl !== 'undefined' && Intl.DateTimeFormat)
+      ? Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Zurich'
+      : 'Europe/Zurich';
+    var selectedDate = null;
+    var selectedSlot = null;
+    var slotsCache = {};
+
+    function showStep(name) {
+      ['dates', 'times', 'form', 'done'].forEach(function(s) {
+        var el = document.getElementById('cal-step-' + s);
+        if (el) el.style.display = s === name ? '' : 'none';
+      });
+    }
+
+    var pillContainer = document.getElementById('cal-date-pills');
+    if (!pillContainer) return;
+    var today = new Date();
+    var count = 0;
+    for (var i = 0; i < 30 && count < 10; i++) {
+      var date = new Date(today);
+      date.setDate(today.getDate() + i);
+      if (date.getDay() === 0 || date.getDay() === 6) continue;
+      count++;
+      var dayName = date.toLocaleDateString('de', { weekday: 'short' });
+      var dayNum = date.getDate();
+      var monthName = date.toLocaleDateString('de', { month: 'short' });
+      var iso = date.toISOString().split('T')[0];
+
+      var pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'cal-date-pill flex-shrink-0 px-4 py-3 text-center rounded-xl border-2 border-gray-200 hover:border-red-400 cursor-pointer transition-all bg-white';
+      pill.dataset.date = iso;
+      pill.innerHTML = '<div class="text-xs uppercase text-gray-400 leading-none">' + dayName + '</div>' +
+        '<div class="text-lg font-bold text-gray-900 leading-tight">' + dayNum + '</div>' +
+        '<div class="text-xs text-gray-400">' + monthName + '</div>';
+      pill.addEventListener('click', function() { selectDate(this); });
+      pillContainer.appendChild(pill);
+    }
+
+    function selectDate(pill) {
+      document.querySelectorAll('.cal-date-pill').forEach(function(p) {
+        p.classList.remove('border-red-500', 'bg-red-50');
+        p.classList.add('border-gray-200', 'bg-white');
+      });
+      pill.classList.remove('border-gray-200', 'bg-white');
+      pill.classList.add('border-red-500', 'bg-red-50');
+
+      selectedDate = pill.dataset.date;
+      selectedSlot = null;
+
+      var d = new Date(selectedDate + 'T12:00:00');
+      var label = d.toLocaleDateString('de', { weekday: 'long', day: 'numeric', month: 'long' });
+      var dateLabel = document.getElementById('cal-date-label');
+      if (dateLabel) dateLabel.textContent = label;
+
+      fetchSlots();
+    }
+
+    function fetchSlots() {
+      showStep('times');
+      var loading = document.getElementById('cal-times-loading');
+      var noTimes = document.getElementById('cal-no-times');
+      var timePills = document.getElementById('cal-time-pills');
+
+      if (loading) loading.style.display = '';
+      if (noTimes) noTimes.classList.add('hidden');
+      if (timePills) timePills.innerHTML = '';
+
+      var cacheKey = selectedDate;
+      if (slotsCache[cacheKey] && Date.now() - slotsCache[cacheKey].ts < 60000) {
+        if (loading) loading.style.display = 'none';
+        renderTimes(slotsCache[cacheKey].data);
+        return;
+      }
+
+      var params = new URLSearchParams({
+        eventTypeId: EVENT_TYPE_ID.toString(),
+        startTime: selectedDate + 'T00:00:00Z',
+        endTime: selectedDate + 'T23:59:59Z',
+        timeZone: TZ,
+      });
+
+      fetch(API_BASE + '/slots/available?' + params.toString(), {
+        headers: {
+          'Authorization': 'Bearer ' + API_KEY,
+          'cal-api-version': '2024-08-13',
+        },
+      })
+      .then(function(res) { if (!res.ok) throw new Error('API ' + res.status); return res.json(); })
+      .then(function(json) {
+        var slots = (json.data && json.data.slots && json.data.slots[selectedDate]) || [];
+        slotsCache[cacheKey] = { data: slots, ts: Date.now() };
+        if (loading) loading.style.display = 'none';
+        renderTimes(slots);
+      })
+      .catch(function(err) {
+        console.error('Slot fetch error:', err);
+        if (loading) loading.style.display = 'none';
+        if (noTimes) noTimes.classList.remove('hidden');
+      });
+    }
+
+    function renderTimes(slots) {
+      var container = document.getElementById('cal-time-pills');
+      if (!container) return;
+      if (!slots.length) {
+        var noTimes = document.getElementById('cal-no-times');
+        if (noTimes) noTimes.classList.remove('hidden');
+        return;
+      }
+      container.innerHTML = '';
+      slots.forEach(function(slot) {
+        var time = new Date(slot.time);
+        var display = time.toLocaleTimeString('de', {
+          hour: '2-digit', minute: '2-digit', hour12: false, timeZone: TZ,
+        });
+        var pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = 'px-4 py-2.5 bg-white border-2 border-gray-200 text-gray-900 rounded-xl text-sm font-semibold hover:border-red-400 transition-all';
+        pill.textContent = display;
+        pill.addEventListener('click', function() {
+          selectedSlot = slot.time;
+          var d = new Date(selectedDate + 'T12:00:00');
+          var dateStr = d.toLocaleDateString('de', { weekday: 'short', day: 'numeric', month: 'short' });
+          var slotLabel = document.getElementById('cal-slot-label');
+          if (slotLabel) slotLabel.textContent = dateStr + ' um ' + display;
+          showStep('form');
+        });
+        container.appendChild(pill);
+      });
+    }
+
+    var backDates = document.getElementById('cal-back-dates');
+    if (backDates) backDates.addEventListener('click', function() { showStep('dates'); });
+    var backTimes = document.getElementById('cal-back-times');
+    if (backTimes) backTimes.addEventListener('click', function() { showStep('times'); });
+
+    var form = document.getElementById('cal-form');
+    if (form) form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var nameVal = document.getElementById('cal-name').value.trim();
+      var emailVal = document.getElementById('cal-email').value.trim();
+      var phoneVal = (document.getElementById('cal-phone').value || '').trim();
+      var notesVal = (document.getElementById('cal-notes').value || '').trim();
+      var errorEl = document.getElementById('cal-error');
+      var submitBtn = document.getElementById('cal-submit');
+      var submitText = document.getElementById('cal-submit-text');
+      var submitLoading = document.getElementById('cal-submit-loading');
+
+      if (!nameVal || !emailVal) {
+        if (errorEl) { errorEl.textContent = 'Name und E-Mail sind erforderlich.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.classList.add('hidden');
+      if (submitLoading) submitLoading.classList.remove('hidden');
+
+      var payload = {
+        eventTypeId: EVENT_TYPE_ID,
+        start: selectedSlot,
+        attendee: { name: nameVal, email: emailVal, timeZone: TZ, language: 'de' },
+      };
+      if (phoneVal || notesVal) {
+        payload.metadata = {};
+        if (phoneVal) payload.metadata.phone = phoneVal;
+        if (notesVal) payload.metadata.notes = notesVal;
+      }
+
+      fetch(API_BASE + '/bookings', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + API_KEY,
+          'Content-Type': 'application/json',
+          'cal-api-version': '2024-08-13',
+        },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(err) { throw new Error(err.message || 'Fehlgeschlagen'); });
+        return res.json();
+      })
+      .then(function() {
+        var time = new Date(selectedSlot);
+        var details = time.toLocaleDateString('de', { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ }) +
+          ' um ' + time.toLocaleTimeString('de', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: TZ });
+        var confirmedEl = document.getElementById('cal-confirmed-details');
+        if (confirmedEl) confirmedEl.textContent = details;
+        showStep('done');
+      })
+      .catch(function(err) {
+        console.error('Booking error:', err);
+        if (errorEl) { errorEl.textContent = err.message || 'Buchung fehlgeschlagen. Bitte versuchen Sie es erneut.'; errorEl.classList.remove('hidden'); }
+      })
+      .finally(function() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.classList.remove('hidden');
+        if (submitLoading) submitLoading.classList.add('hidden');
+      });
+    });
+  })();
+  </script>
+
+  <!-- FAQ -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Häufig gestellte Fragen</h2>
+      </div>
+      <div class="space-y-6">
+        {faqs.map(faq => (
+          <div class="border border-gray-200 rounded-xl p-6">
+            <h3 class="font-bold text-lg text-gray-900 mb-3">{faq.question}</h3>
+            <p class="text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 md:py-20 bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold mb-4">Bereit, Ihre ganzheitlichen Behandlungen versichern zu lassen?</h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Zahlen Sie nicht aus eigener Tasche für Behandlungen, die die Schweizer Versicherung decken kann. Holen Sie sich heute eine kostenlose Bewertung.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#lead-form"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg"
+        >
+          Kostenlose Bewertung erhalten
+        </a>
+        <a href="https://wa.me/41791552570?text=Hallo%2C%20ich%20bin%20Holistiq-Kunde%20und%20brauche%20Hilfe%20mit%20der%20Zusatzversicherung"
+          target="_blank" rel="noopener"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white border-2 border-gray-600 hover:border-gray-400 transition-colors"
+        >
+          Oder per WhatsApp schreiben
+        </a>
+      </div>
+    </div>
+  </section>
+</LayoutDE>
+
+<style is:global>
+  #fcta-bar, #sticky-booking { display: none !important; }
+</style>

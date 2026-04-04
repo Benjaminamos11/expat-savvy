@@ -1,0 +1,682 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+const expert = {
+  name: "Robert Kolar",
+  role: "Senior Health Insurance Expert",
+  subtitle: "Expat Specialist · DE/EN",
+  image: "https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp",
+};
+
+const treatments = [
+  { name: "Acupuncture", desc: "Covered by most supplementary plans with certified practitioners" },
+  { name: "TCM (Traditional Chinese Medicine)", desc: "Herbal medicine, cupping, moxibustion — widely recognized" },
+  { name: "Naturopathy", desc: "Holistic health assessment and natural treatment plans" },
+  { name: "Osteopathy", desc: "Covered up to CHF 1,500–3,000/year by leading insurers" },
+  { name: "Homeopathy", desc: "Included in most alternative medicine supplementary packages" },
+  { name: "Massage Therapy", desc: "Medical massage with certified therapists, typically 60–80% covered" },
+  { name: "Ayurveda", desc: "Selected insurers cover Ayurvedic consultations and treatments" },
+  { name: "Reflexology", desc: "Foot and hand reflexology covered under complementary medicine" },
+];
+
+const categories = [
+  "Health Insurance",
+  "Life Insurance & Pension / Pet Insurance",
+  "3rd Pillar & Tax Optimization",
+  "Liability / Household Insurance",
+  "Vehicle Insurance",
+];
+
+const faqs = [
+  {
+    question: "Does Swiss insurance cover holistic treatments?",
+    answer: "Yes — Swiss supplementary insurance (VVG) can cover a wide range of complementary and alternative therapies. This includes acupuncture, TCM, osteopathy, naturopathy, homeopathy, and more. Coverage depends on the specific plan and insurer."
+  },
+  {
+    question: "Which supplementary plans cover alternative medicine?",
+    answer: "Most major Swiss insurers (Helsana, Swica, CSS, Sanitas, Groupe Mutuel) offer supplementary plans with alternative medicine coverage. Swica and Helsana are known for particularly generous complementary medicine benefits. We compare all options to find the best fit."
+  },
+  {
+    question: "Do I need a doctor's referral?",
+    answer: "In most cases, no referral is needed for supplementary insurance coverage. However, the practitioner must be certified and recognized by the insurer. We'll help you understand which practitioners are covered under your plan."
+  },
+  {
+    question: "Can I add supplementary insurance to my existing KVG?",
+    answer: "Absolutely. Supplementary insurance (VVG) is separate from your mandatory basic insurance (KVG). You can choose any insurer for your supplementary plan — it doesn't have to be the same as your basic insurance provider."
+  },
+  {
+    question: "Is the consultation free?",
+    answer: "Yes, 100% free with no obligation. We are compensated by insurance providers when you choose to sign up through us. This means you get unbiased, expert advice at no cost to you."
+  },
+  {
+    question: "How much does supplementary insurance cost?",
+    answer: "Supplementary plans with alternative medicine coverage typically cost CHF 30–80/month depending on the scope of coverage, your age, and canton. We compare all options to find the best value."
+  },
+];
+---
+
+<BaseLayout
+  title="Holistic Treatment Insurance — Holistiq x Expat Savvy"
+  description="Get your holistic and complementary therapies covered by Swiss supplementary insurance. Free consultation — we compare 15+ insurers for the best coverage."
+>
+  <!-- JSON-LD -->
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Expat Savvy — Holistiq Supplementary Insurance Consultation",
+    "description": "Free supplementary insurance consultation for Holistiq clients. Get holistic treatments covered by Swiss VVG insurance.",
+    "url": "https://expat-savvy.ch/partners/holistiq/",
+    "telephone": "+41-76-364-8888",
+    "priceRange": "Free",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Talacker 41",
+      "addressLocality": "Zürich",
+      "postalCode": "8001",
+      "addressCountry": "CH"
+    },
+    "areaServed": "CH",
+    "availableLanguage": ["English", "German"],
+  })} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+    }))
+  })} />
+
+  <!-- Hero -->
+  <section class="bg-gray-900 text-white py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-sm font-medium text-gray-400">In partnership with</span>
+            <img src="/images/holistiq-logo.png" alt="Holistiq.ch" class="h-8 object-contain" loading="eager" />
+          </div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Get Your Holistic Treatments Covered by Swiss Insurance</h1>
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+            Swiss supplementary insurance (VVG) covers acupuncture, naturopathy, TCM, osteopathy, homeopathy and more. We compare 15+ insurers to find the best plan for your holistic health needs — completely free.
+          </p>
+          <a href="#lead-form"
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg hover:shadow-xl"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            Get your free consultation
+          </a>
+        </div>
+        <!-- Expert card -->
+        <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+          <div class="flex items-start gap-5 mb-5">
+            <img src={expert.image} alt={expert.name} width="80" height="80" class="rounded-xl object-cover flex-shrink-0" loading="lazy" />
+            <div>
+              <h3 class="text-lg font-bold text-white">{expert.name}</h3>
+              <p class="text-red-400 text-sm font-medium">{expert.role}</p>
+              <p class="text-gray-400 text-sm">{expert.subtitle}</p>
+            </div>
+          </div>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            "Many expats don't realize their holistic treatments can be covered by Swiss insurance. I help Holistiq clients find the right supplementary plan so they can focus on their health — not paperwork."
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            {["VVG supplementary", "Alternative medicine", "Complementary therapies"].map(tag => (
+              <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Covered -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Treatments Covered by Swiss Supplementary Insurance</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Swiss VVG plans cover a wide range of holistic and complementary therapies. Here's what you can get reimbursed for.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {treatments.map(t => (
+          <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
+            <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center mb-3">
+              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h3 class="text-base font-bold text-gray-900 mb-1">{t.name}</h3>
+            <p class="text-gray-600 text-sm">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-16 md:py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">How It Works</h2>
+        <p class="text-lg text-gray-600">Three simple steps to get your holistic treatments covered</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">1</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Tell us about yourself</h3>
+          <p class="text-gray-600">Fill in the quick form below. Takes 30 seconds.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">2</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">We compare plans</h3>
+          <p class="text-gray-600">Our expert compares supplementary plans from 15+ Swiss insurers for your needs.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-bold">3</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Get covered & claim</h3>
+          <p class="text-gray-600">Sign up for the best plan and start getting your treatments reimbursed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section id="lead-form" class="py-16 md:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Get Your Free Insurance Assessment</h2>
+        <p class="text-lg text-gray-600">Tell us about your needs and we'll recommend the best supplementary plan for your holistic treatments.</p>
+      </div>
+
+      <div id="lead-form-container" class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8">
+        <form id="holistiq-lead-form" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+              <input type="text" id="lead-firstName" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Jane" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+              <input type="text" id="lead-lastName" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+              <input type="email" id="lead-email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="jane@example.com" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+              <input type="tel" id="lead-phone" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="+41 79 123 45 67" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">City / Canton</label>
+            <input type="text" id="lead-address" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Zurich, Canton Zurich" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">What are you interested in?</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {categories.map((cat, i) => (
+                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                  <input type="checkbox" name="categories" value={cat} checked={i === 0} class="rounded border-gray-300 text-red-500 focus:ring-red-500" />
+                  {cat}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+            <textarea id="lead-notes" rows="2" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="E.g. I mainly need coverage for acupuncture and TCM sessions"></textarea>
+          </div>
+          <p id="lead-error" class="text-red-500 text-sm hidden"></p>
+          <button type="submit" id="lead-submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition-colors">
+            <span id="lead-submit-text">Submit — Get Free Assessment</span>
+            <span id="lead-submit-loading" class="hidden">
+              <svg class="w-5 h-5 animate-spin inline mr-1" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+              Submitting...
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success state (replaces form) -->
+      <div id="lead-success" class="hidden bg-green-50 rounded-2xl shadow-lg border border-green-200 p-8 text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">We've received your details!</h3>
+        <p class="text-gray-600 mb-1">Our expert Robert Kolar will review your needs and get back to you shortly.</p>
+        <p class="text-gray-500 text-sm">Want to speak with him right away? Book a call below.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead form script -->
+  <script is:inline>
+  (function() {
+    var form = document.getElementById('holistiq-lead-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var firstName = document.getElementById('lead-firstName').value.trim();
+      var lastName = document.getElementById('lead-lastName').value.trim();
+      var email = document.getElementById('lead-email').value.trim();
+      var phone = (document.getElementById('lead-phone').value || '').trim();
+      var address = (document.getElementById('lead-address').value || '').trim();
+      var notes = (document.getElementById('lead-notes').value || '').trim();
+      var errorEl = document.getElementById('lead-error');
+      var submitBtn = document.getElementById('lead-submit');
+      var submitText = document.getElementById('lead-submit-text');
+      var submitLoading = document.getElementById('lead-submit-loading');
+
+      var checked = form.querySelectorAll('input[name="categories"]:checked');
+      var cats = [];
+      checked.forEach(function(cb) { cats.push(cb.value); });
+
+      if (!firstName || !lastName || !email) {
+        if (errorEl) { errorEl.textContent = 'First name, last name and email are required.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.classList.add('hidden');
+      if (submitLoading) submitLoading.classList.remove('hidden');
+
+      var payload = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      };
+      if (phone) payload.phone = phone;
+      if (address) payload.address = address;
+      if (notes) payload.notes = notes;
+      if (cats.length) payload.categories = cats;
+
+      fetch('https://app.expat-savvy.ch/api/partner/leads/holistiq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(err) { throw new Error(err.message || 'Submission failed'); });
+        return res.json();
+      })
+      .then(function() {
+        // Show success, reveal calendar
+        document.getElementById('lead-form-container').classList.add('hidden');
+        document.getElementById('lead-success').classList.remove('hidden');
+        var calSection = document.getElementById('booking-calendar');
+        if (calSection) {
+          calSection.style.display = '';
+          // Pre-fill calendar form
+          var calName = document.getElementById('cal-name');
+          var calEmail = document.getElementById('cal-email');
+          if (calName) calName.value = firstName + ' ' + lastName;
+          if (calEmail) calEmail.value = email;
+          // Smooth scroll to calendar
+          setTimeout(function() {
+            calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      })
+      .catch(function(err) {
+        console.error('Lead submission error:', err);
+        if (errorEl) { errorEl.textContent = err.message || 'Something went wrong. Please try again.'; errorEl.classList.remove('hidden'); }
+      })
+      .finally(function() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.classList.remove('hidden');
+        if (submitLoading) submitLoading.classList.add('hidden');
+      });
+    });
+  })();
+  </script>
+
+  <!-- Inline Calendar (hidden until lead form submitted) -->
+  <section id="booking-calendar" class="py-16 md:py-20 bg-gray-50" style="display:none;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Want to speak with an expert right away?</h2>
+        <p class="text-lg text-gray-600">Book a free 30-minute call with Robert Kolar — choose a date and time below.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+        <!-- Step 1: Pick a date -->
+        <div id="cal-step-dates" class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-900">Pick a date</h3>
+            <div class="flex items-center gap-2">
+              <img src="https://res.cloudinary.com/dphbnwjtx/image/upload/w_200,h_200,q_95,f_webp,c_fill,g_face/v1757251477/Generated_Image_September_07_2025_-_9_20PM_uuse1r.webp" alt="Robert Kolar" width="32" height="32" class="rounded-full" />
+              <span class="text-sm text-gray-600">Robert Kolar</span>
+            </div>
+          </div>
+          <div id="cal-date-pills" class="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1"></div>
+        </div>
+
+        <!-- Step 2: Pick a time -->
+        <div id="cal-step-times" class="p-6 border-t border-gray-100" style="display:none;">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <button type="button" id="cal-back-dates" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <h3 class="text-lg font-bold text-gray-900">Pick a time</h3>
+            </div>
+            <span id="cal-date-label" class="text-sm text-gray-500"></span>
+          </div>
+          <div id="cal-times-loading" class="text-center py-6 text-gray-400">
+            <div class="w-6 h-6 border-2 border-gray-200 border-t-red-500 rounded-full animate-spin mx-auto mb-2"></div>
+            Loading available times...
+          </div>
+          <div id="cal-no-times" class="text-center py-6 text-gray-500 hidden">No available times on this date. Try another day.</div>
+          <div id="cal-time-pills" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
+        </div>
+
+        <!-- Step 3: Your details -->
+        <div id="cal-step-form" class="p-6 border-t border-gray-100" style="display:none;">
+          <div class="flex items-center gap-2 mb-1">
+            <button type="button" id="cal-back-times" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <h3 class="text-lg font-bold text-gray-900">Your details</h3>
+          </div>
+          <p id="cal-slot-label" class="text-sm text-red-500 font-medium mb-4 ml-7"></p>
+          <form id="cal-form" class="space-y-4 ml-7">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                <input type="text" id="cal-name" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="Your full name" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <input type="email" id="cal-email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
+              <input type="tel" id="cal-phone" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="+41..." />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+              <textarea id="cal-notes" rows="2" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none" placeholder="What would you like to discuss?"></textarea>
+            </div>
+            <p id="cal-error" class="text-red-500 text-sm hidden"></p>
+            <button type="submit" id="cal-submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition-colors">
+              <span id="cal-submit-text">Confirm booking</span>
+              <span id="cal-submit-loading" class="hidden">
+                <svg class="w-5 h-5 animate-spin inline mr-1" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                Booking...
+              </span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 4: Done -->
+        <div id="cal-step-done" class="p-8 text-center" style="display:none;">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Consultation Booked!</h3>
+          <p id="cal-confirmed-details" class="text-gray-600 mb-2"></p>
+          <p class="text-sm text-gray-500">Check your email for a calendar invitation and meeting link.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar script -->
+  <script is:inline>
+  (function() {
+    var API_BASE = 'https://api.cal.com/v2';
+    var EVENT_TYPE_ID = 5254510;
+    var API_KEY = 'cal_live_02d332e8841c6f13b371ee6dd3ca7ca8';
+    var TZ = (typeof Intl !== 'undefined' && Intl.DateTimeFormat)
+      ? Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Zurich'
+      : 'Europe/Zurich';
+    var selectedDate = null;
+    var selectedSlot = null;
+    var slotsCache = {};
+
+    function showStep(name) {
+      ['dates', 'times', 'form', 'done'].forEach(function(s) {
+        var el = document.getElementById('cal-step-' + s);
+        if (el) el.style.display = s === name ? '' : 'none';
+      });
+    }
+
+    var pillContainer = document.getElementById('cal-date-pills');
+    if (!pillContainer) return;
+    var today = new Date();
+    var count = 0;
+    for (var i = 0; i < 30 && count < 10; i++) {
+      var date = new Date(today);
+      date.setDate(today.getDate() + i);
+      if (date.getDay() === 0 || date.getDay() === 6) continue;
+      count++;
+      var dayName = date.toLocaleDateString('en', { weekday: 'short' });
+      var dayNum = date.getDate();
+      var monthName = date.toLocaleDateString('en', { month: 'short' });
+      var iso = date.toISOString().split('T')[0];
+
+      var pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'cal-date-pill flex-shrink-0 px-4 py-3 text-center rounded-xl border-2 border-gray-200 hover:border-red-400 cursor-pointer transition-all bg-white';
+      pill.dataset.date = iso;
+      pill.innerHTML = '<div class="text-xs uppercase text-gray-400 leading-none">' + dayName + '</div>' +
+        '<div class="text-lg font-bold text-gray-900 leading-tight">' + dayNum + '</div>' +
+        '<div class="text-xs text-gray-400">' + monthName + '</div>';
+      pill.addEventListener('click', function() { selectDate(this); });
+      pillContainer.appendChild(pill);
+    }
+
+    function selectDate(pill) {
+      document.querySelectorAll('.cal-date-pill').forEach(function(p) {
+        p.classList.remove('border-red-500', 'bg-red-50');
+        p.classList.add('border-gray-200', 'bg-white');
+      });
+      pill.classList.remove('border-gray-200', 'bg-white');
+      pill.classList.add('border-red-500', 'bg-red-50');
+
+      selectedDate = pill.dataset.date;
+      selectedSlot = null;
+
+      var d = new Date(selectedDate + 'T12:00:00');
+      var label = d.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric' });
+      var dateLabel = document.getElementById('cal-date-label');
+      if (dateLabel) dateLabel.textContent = label;
+
+      fetchSlots();
+    }
+
+    function fetchSlots() {
+      showStep('times');
+      var loading = document.getElementById('cal-times-loading');
+      var noTimes = document.getElementById('cal-no-times');
+      var timePills = document.getElementById('cal-time-pills');
+
+      if (loading) loading.style.display = '';
+      if (noTimes) noTimes.classList.add('hidden');
+      if (timePills) timePills.innerHTML = '';
+
+      var cacheKey = selectedDate;
+      if (slotsCache[cacheKey] && Date.now() - slotsCache[cacheKey].ts < 60000) {
+        if (loading) loading.style.display = 'none';
+        renderTimes(slotsCache[cacheKey].data);
+        return;
+      }
+
+      var params = new URLSearchParams({
+        eventTypeId: EVENT_TYPE_ID.toString(),
+        startTime: selectedDate + 'T00:00:00Z',
+        endTime: selectedDate + 'T23:59:59Z',
+        timeZone: TZ,
+      });
+
+      fetch(API_BASE + '/slots/available?' + params.toString(), {
+        headers: {
+          'Authorization': 'Bearer ' + API_KEY,
+          'cal-api-version': '2024-08-13',
+        },
+      })
+      .then(function(res) { if (!res.ok) throw new Error('API ' + res.status); return res.json(); })
+      .then(function(json) {
+        var slots = (json.data && json.data.slots && json.data.slots[selectedDate]) || [];
+        slotsCache[cacheKey] = { data: slots, ts: Date.now() };
+        if (loading) loading.style.display = 'none';
+        renderTimes(slots);
+      })
+      .catch(function(err) {
+        console.error('Slot fetch error:', err);
+        if (loading) loading.style.display = 'none';
+        if (noTimes) noTimes.classList.remove('hidden');
+      });
+    }
+
+    function renderTimes(slots) {
+      var container = document.getElementById('cal-time-pills');
+      if (!container) return;
+      if (!slots.length) {
+        var noTimes = document.getElementById('cal-no-times');
+        if (noTimes) noTimes.classList.remove('hidden');
+        return;
+      }
+      container.innerHTML = '';
+      slots.forEach(function(slot) {
+        var time = new Date(slot.time);
+        var display = time.toLocaleTimeString('en', {
+          hour: '2-digit', minute: '2-digit', hour12: false, timeZone: TZ,
+        });
+        var pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = 'px-4 py-2.5 bg-white border-2 border-gray-200 text-gray-900 rounded-xl text-sm font-semibold hover:border-red-400 transition-all';
+        pill.textContent = display;
+        pill.addEventListener('click', function() {
+          selectedSlot = slot.time;
+          var d = new Date(selectedDate + 'T12:00:00');
+          var dateStr = d.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' });
+          var slotLabel = document.getElementById('cal-slot-label');
+          if (slotLabel) slotLabel.textContent = dateStr + ' at ' + display;
+          showStep('form');
+        });
+        container.appendChild(pill);
+      });
+    }
+
+    var backDates = document.getElementById('cal-back-dates');
+    if (backDates) backDates.addEventListener('click', function() { showStep('dates'); });
+    var backTimes = document.getElementById('cal-back-times');
+    if (backTimes) backTimes.addEventListener('click', function() { showStep('times'); });
+
+    var form = document.getElementById('cal-form');
+    if (form) form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var nameVal = document.getElementById('cal-name').value.trim();
+      var emailVal = document.getElementById('cal-email').value.trim();
+      var phoneVal = (document.getElementById('cal-phone').value || '').trim();
+      var notesVal = (document.getElementById('cal-notes').value || '').trim();
+      var errorEl = document.getElementById('cal-error');
+      var submitBtn = document.getElementById('cal-submit');
+      var submitText = document.getElementById('cal-submit-text');
+      var submitLoading = document.getElementById('cal-submit-loading');
+
+      if (!nameVal || !emailVal) {
+        if (errorEl) { errorEl.textContent = 'Name and email are required.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.classList.add('hidden');
+      if (submitLoading) submitLoading.classList.remove('hidden');
+
+      var payload = {
+        eventTypeId: EVENT_TYPE_ID,
+        start: selectedSlot,
+        attendee: { name: nameVal, email: emailVal, timeZone: TZ, language: 'en' },
+      };
+      if (phoneVal || notesVal) {
+        payload.metadata = {};
+        if (phoneVal) payload.metadata.phone = phoneVal;
+        if (notesVal) payload.metadata.notes = notesVal;
+      }
+
+      fetch(API_BASE + '/bookings', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + API_KEY,
+          'Content-Type': 'application/json',
+          'cal-api-version': '2024-08-13',
+        },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(err) { throw new Error(err.message || 'Failed'); });
+        return res.json();
+      })
+      .then(function() {
+        var time = new Date(selectedSlot);
+        var details = time.toLocaleDateString('en', { weekday: 'long', month: 'long', day: 'numeric', timeZone: TZ }) +
+          ' at ' + time.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: TZ });
+        var confirmedEl = document.getElementById('cal-confirmed-details');
+        if (confirmedEl) confirmedEl.textContent = details;
+        showStep('done');
+      })
+      .catch(function(err) {
+        console.error('Booking error:', err);
+        if (errorEl) { errorEl.textContent = err.message || 'Booking failed. Please try again.'; errorEl.classList.remove('hidden'); }
+      })
+      .finally(function() {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.classList.remove('hidden');
+        if (submitLoading) submitLoading.classList.add('hidden');
+      });
+    });
+  })();
+  </script>
+
+  <!-- FAQ -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Frequently Asked Questions</h2>
+      </div>
+      <div class="space-y-6">
+        {faqs.map(faq => (
+          <div class="border border-gray-200 rounded-xl p-6">
+            <h3 class="font-bold text-lg text-gray-900 mb-3">{faq.question}</h3>
+            <p class="text-gray-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 md:py-20 bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-extrabold mb-4">Ready to get your holistic treatments covered?</h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Don't pay out of pocket for treatments Swiss insurance can cover. Get a free assessment today.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#lead-form"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-500 hover:bg-red-600 transition-colors shadow-lg"
+        >
+          Get free assessment
+        </a>
+        <a href="https://wa.me/41791552570?text=Hello%2C%20I'm%20a%20Holistiq%20client%20and%20I'd%20like%20help%20with%20supplementary%20insurance"
+          target="_blank" rel="noopener"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-xl text-white border-2 border-gray-600 hover:border-gray-400 transition-colors"
+        >
+          Or chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  #fcta-bar, #sticky-booking { display: none !important; }
+</style>
