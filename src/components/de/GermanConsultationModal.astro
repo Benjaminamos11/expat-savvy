@@ -718,6 +718,7 @@
                     setBookingDone(true);
                     setBookingDetails("Wir melden uns in Kürze bei Ihnen.");
                     setBooking(false);
+                    if (typeof window.fireFormSubmitConversion === 'function') window.fireFormSubmitConversion('consultation_message_de');
                     return;
                 }
 
@@ -772,6 +773,8 @@
 
                     setBookingDone(true);
                     setBookingDetails(selectedTimeDisplay);
+                    if (typeof window.fireBookingConversion === 'function') window.fireBookingConversion('german_consultation_modal');
+                    if (typeof window.fireFormSubmitConversion === 'function') window.fireFormSubmitConversion('consultation_booking_de');
                 } catch (err) {
                     setBookingError(err.message || "Buchung fehlgeschlagen. Bitte versuchen Sie es erneut.");
                 } finally {

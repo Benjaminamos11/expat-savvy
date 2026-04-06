@@ -380,6 +380,9 @@
           .then(function() {
             setBookingDone(true);
             setBookingLoading(false);
+            // Fire conversion events
+            if (typeof window.fireBookingConversion === 'function') window.fireBookingConversion('consultation_modal');
+            if (typeof window.fireFormSubmitConversion === 'function') window.fireFormSubmitConversion('consultation_booking', { expert: activeExpert.name, topic: mainTopic });
           })
           .catch(function(err) {
             console.error("Booking error:", err);
@@ -710,7 +713,10 @@
                       device: window.innerWidth <= 768 ? "mobile" : "desktop",
                     }),
                   })
-                    .then(function() { setBookingDone(true); setBookingLoading(false); })
+                    .then(function() {
+                      setBookingDone(true); setBookingLoading(false);
+                      if (typeof window.fireFormSubmitConversion === 'function') window.fireFormSubmitConversion('consultation_message', { expert: activeExpert.name });
+                    })
                     .catch(function(err) { setErrorMsg("Failed to send. Please try again."); setBookingLoading(false); });
                 } else {
                   handleBooking();

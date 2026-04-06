@@ -170,6 +170,7 @@
                 } finally {
                     setIsSubmitting(false);
                     setStep(3); // Go to success screen
+                    if (typeof window.fireFormSubmitConversion === 'function') window.fireFormSubmitConversion('relocation_consultation', { destination: destination, services: topics.join(',') });
                 }
             };
 
