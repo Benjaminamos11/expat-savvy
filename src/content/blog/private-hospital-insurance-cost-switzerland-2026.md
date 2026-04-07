@@ -1,5 +1,5 @@
 ---
-title: "Hospital Insurance Costs 2026"
+title: "Private Hospital Insurance Switzerland 2026 | Real Costs Compared"
 description: "What does semi-private/private hospital insurance ACTUALLY cost? We compared SWICA, Helsana, CSS, Sanitas & Concordia by age and canton. Real 2026 numbers."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

@@ -1,6 +1,6 @@
 ---
-title: "Canton Premiums & Location Cost"
-description: "Understand canton premiums: why Zurich costs more. Switch by Nov 30. Find the best rates."
+title: "Swiss Health Insurance Premiums by Canton | Regional Guide 2026"
+description: "Swiss KVG premium regions explained: why Zurich, Geneva and Basel differ. Switch by Nov 30 deadline. Expert guidance on optimizing your coverage."
 pubDate: "2025-05-15"
 category: "Health Insurance"
 author: "Expat Savvy Team"

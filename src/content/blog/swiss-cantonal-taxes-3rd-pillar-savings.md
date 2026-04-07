@@ -1,6 +1,6 @@
 ---
-title: "3rd Pillar Tax Savings by Canton"
-description: "Cantonal taxes & 3rd pillar: optimize tax deductions in Zurich, Geneva, Zug. Maximize savings."
+title: "3rd Pillar Tax Savings by Canton | Zurich, Geneva, Zug Compared"
+description: "How Swiss cantonal taxes impact your 3rd pillar savings. Optimize Pillar 3a & 3b deductions in Zurich, Geneva, Zug and other cantons. Expert analysis."
 publishDate: "2025-05-16"
 category: "Financial Planning"
 author: "Expat Savvy Team"

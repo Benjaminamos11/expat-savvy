@@ -1,5 +1,5 @@
 ---
-title: "Leaving Switzerland Pension Guide"
+title: "Leaving Switzerland | Pension Withdrawal & Tax Strategy Guide"
 description: "Leaving Switzerland: pension withdrawal guide, tax strategy, deregistration plan. Save CHF 10,000+."
 author: "Expat Savvy Team"
 date: 2026-03-26

@@ -1,6 +1,6 @@
 ---
-title: "SWICA COMPLETA & Bestmed"
-description: "SWICA COMPLETA + Bestmed: popular supplementary insurance. Coverage, costs, and value analyzed."
+title: "SWICA COMPLETA & Bestmed Review | Worth It for Expats?"
+description: "SWICA's COMPLETA + Bestmed is the most popular supplementary combo for expats. Coverage details, expert analysis, and whether it's the right choice for you."
 author: "Expat Savvy Team"
 date: 2026-03-21
 tags: ["swica completa review", "swica bestmed", "swica supplementary insurance", "best supplementary insurance expats"]

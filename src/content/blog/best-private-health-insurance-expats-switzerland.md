@@ -1,6 +1,6 @@
 ---
-title: "Best Private Insurance for Expats"
-description: "Best private health insurance for expats: semi-private vs private, costs, acceptance rates."
+title: "Best Private Health Insurance for Expats in Switzerland 2026"
+description: "Semi-private vs private hospital insurance compared for expats. Coverage, acceptance criteria, and expert recommendations from FINMA-certified advisors."
 author: "Expat Savvy Team"
 date: 2026-03-29
 tags: ["private health insurance switzerland", "best private insurance expats", "semi-private insurance switzerland", "supplementary health insurance"]

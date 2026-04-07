@@ -1,5 +1,5 @@
 ---
-title: "3rd Pillar Tax Savings 2026"
+title: "Maximize 3rd Pillar Tax Benefits 2026 | Expert Strategies"
 description: "CHF 7,056 max contribution, but the real savings come from strategy — staggering, canton timing, BVG coordination. See the 5 traps and what they cost you."
 author: "Expat Savvy Team"
 date: 2026-03-30
