@@ -1,6 +1,6 @@
 ---
-title: "Accident Insurance (UVG)"
-description: "Accident insurance (UVG): understand coverage, BU vs NBU. Avoid double-paying for coverage."
+title: "Accident Insurance Switzerland (UVG/LAA) | What Expats Must Know"
+description: "Swiss accident insurance (UVG) explained: BU vs NBU coverage, employer obligations, and how to avoid double-paying. Essential guide for expats in Switzerland."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29
 tags: ["swiss accident insurance", "UVG", "LAA", "occupational", "non-occupational", "expat guide", "2026 guide"]

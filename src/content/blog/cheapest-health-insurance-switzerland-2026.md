@@ -1,6 +1,6 @@
 ---
-title: "Cheapest Health Insurance 2026"
-description: "2026 cheapest health insurance by canton: Concordia CHF 191-438/month. Official Federal data."
+title: "Cheapest Health Insurance Switzerland 2026 | Official Canton Data"
+description: "Official 2026 Swiss health insurance premiums by canton compared. Find the best value KVG plans with real Federal Office data. Expert analysis included."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 lastUpdated: 2025-09-25

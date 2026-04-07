@@ -1,5 +1,5 @@
 ---
-title: "Household Insurance in Switzerland"
+title: "Household Insurance Switzerland | Hausratversicherung Guide 2026"
 description: "95% of Swiss households have Hausratversicherung. Without it, theft, fire or water damage hits your pocket. Best options for expats from CHF 8/month."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

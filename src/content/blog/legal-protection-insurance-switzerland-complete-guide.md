@@ -1,6 +1,6 @@
 ---
-title: "Legal Protection Insurance"
-description: "Legal protection insurance: cover lawyer costs CHF 300-500/hour. Compare plans from CHF 15/month."
+title: "Legal Protection Insurance Switzerland | Complete Expat Guide"
+description: "Legal protection insurance in Switzerland explained for expats: what it covers, best providers, and how to choose the right plan. Independent expert advice."
 author: "Benjamin Amos Wagner"
 date: 2025-05-20
 tags: ["legal insurance Switzerland", "legal protection insurance", "expat rights", "tenant disputes", "work conflicts", "traffic violations", "rechtschutzversicherung", "2026 guide"]
