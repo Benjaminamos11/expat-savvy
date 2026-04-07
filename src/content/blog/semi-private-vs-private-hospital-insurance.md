@@ -1,6 +1,6 @@
 ---
-title: "Semi-Private vs Private Insurance"
-description: "Semi-private vs private: is premium worth it? Compare rooms, doctors, costs. Facts for your choice."
+title: "Semi-Private vs Private Hospital Insurance Switzerland | Honest Comparison"
+description: "Is private worth it over semi-private? Compare rooms, doctor access, coverage differences, and real outcomes — facts, not marketing. Expert analysis."
 author: "Expat Savvy Team"
 date: 2026-03-22
 tags: ["semi-private vs private", "hospital insurance switzerland", "private hospital insurance", "supplementary insurance comparison"]

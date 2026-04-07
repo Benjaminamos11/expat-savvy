@@ -1,5 +1,5 @@
 ---
-title: "New Job Insurance Checklist"
+title: "New Job in Switzerland? Insurance Checklist (90-Day Deadline)"
 description: "Starting a new job in Switzerland? You have 90 days for health insurance, plus pension, accident, household to sort. What your employer WON'T tell you."
 author: "Benjamin Amos Wagner"
 date: 2026-03-29

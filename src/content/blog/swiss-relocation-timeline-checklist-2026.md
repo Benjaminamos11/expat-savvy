@@ -1,5 +1,5 @@
 ---
-title: "Relocation Timeline & Checklist"
+title: "Swiss Relocation Timeline 2026 | When to Hire an Agent & Find Housing"
 description: "Master your 2026 relocation to Switzerland with our definitive timeline checklist. Learn exactly when to hire an agent, start your housing search, and organize your visa."
 author: "Expat Savvy Team"
 date: 2025-06-15

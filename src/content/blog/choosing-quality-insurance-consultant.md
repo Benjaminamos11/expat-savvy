@@ -1,6 +1,6 @@
 ---
-title: "Choosing an Insurance Consultant"
-description: "Choose an insurance consultant: expertise, FINMA-certified, independent advice. Avoid conflicts."
+title: "Choosing an Insurance Consultant in Switzerland | Expat Guide"
+description: "How to select a quality insurance consultant in Switzerland. Focus on FINMA certification, independence, and expertise. Avoid conflicts of interest."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10
 tags: ["insurance consultant", "expat", "switzerland", "financial advice", "FINMA", "insurance broker", "quality service"]

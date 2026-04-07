@@ -1,5 +1,5 @@
 ---
-title: "Off-Market Homes in Switzerland"
+title: "Off-Market Homes in Switzerland | Insider Access for Expats"
 description: "Access exclusive off-market homes in Zurich, Zug, Geneva. Direct landlord contact, no competition. Premium listings."
 author: "Expat Savvy Team"
 date: 2025-08-14

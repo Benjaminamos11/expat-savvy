@@ -1,5 +1,5 @@
 ---
-title: "Pre-Existing Conditions Insurance"
+title: "Pre-Existing Conditions & Swiss Health Insurance | Expat Guide"
 description: "Understand how Swiss health insurance (basic and supplementary) works for expats with pre-existing conditions. Learn about new options from insurers like Sanitas and CSS."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10

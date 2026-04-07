@@ -1,5 +1,5 @@
 ---
-title: "Switch Your Swiss Health Insurance"
+title: "Switch or Upgrade Your Swiss Health Insurance | Expert Strategy"
 description: "Switching basic insurance is free — but timing is everything. Upgrading to private requires health checks and strategy. When and how to do both."
 author: "Expat Savvy Team"
 date: 2026-03-25

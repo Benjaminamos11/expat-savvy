@@ -1,5 +1,5 @@
 ---
-title: "VIAC vs Frankly vs finpension 2026"
+title: "VIAC vs Frankly vs Finpension 2026 | Honest 3a App Comparison"
 description: "We compared fees, returns, equity allocation, and UX across all three top 3a apps. The winner depends on your situation — here's our honest breakdown."
 author: "Expat Savvy Team"
 date: 2026-03-27

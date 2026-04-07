@@ -1,5 +1,5 @@
 ---
-title: "3-Pillar Pension System Explained"
+title: "Switzerland's 3-Pillar Pension System | Expert Guide for Expats"
 description: "An expat's guide to the Swiss 3-pillar pension system (AHV, BVG, Pillar 3a/3b), focusing on how to plan for retirement and optimize savings in Switzerland."
 author: "Benjamin Amos Wagner"
 date: 2025-05-10

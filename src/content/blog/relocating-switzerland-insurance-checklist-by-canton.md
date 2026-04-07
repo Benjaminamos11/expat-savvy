@@ -1,6 +1,6 @@
 ---
-title: "Relocation Insurance Checklist"
-description: "Moving to Switzerland: insurance checklist by canton. Health, liability, essentials. Start here."
+title: "Swiss Relocation Insurance Checklist by Canton | Expert Guide"
+description: "Moving to Switzerland? Essential insurance checklist by canton — health, liability, household & more. Canton-specific guidance for Zurich, Geneva and beyond."
 pubDate: "2025-05-17"
 category: "Relocation"
 author: "Expat Savvy Team"
