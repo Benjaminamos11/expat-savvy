@@ -51,6 +51,7 @@ export default defineConfig({
     mdx()
   ],
   site: 'https://expat-savvy.ch',
+  trailingSlash: 'always',
   compressHTML: true,
   build: {
     inlineStylesheets: 'always',

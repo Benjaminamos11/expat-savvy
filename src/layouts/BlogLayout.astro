@@ -13,6 +13,9 @@ const getShareUrls = (url: string, title: string) => ({
 });
 
 const currentUrl = Astro.url.href;
+// Normalize canonical: always use trailing slash to prevent duplicate indexing
+let canonicalUrl = new URL(Astro.url.pathname, Astro.site || "https://expat-savvy.ch").toString();
+if (!canonicalUrl.endsWith("/")) canonicalUrl += "/";
 const shareUrls = getShareUrls(currentUrl, frontmatter.title);
 
 // Determine modal type based on URL and title
@@ -44,7 +47,7 @@ const modalType =
   description={frontmatter.description}
   type="article"
   publishDate={frontmatter.date}
-  canonicalURLProp={currentUrl}
+  canonicalURLProp={canonicalUrl}
 >
   <article class="max-w-5xl mx-auto px-4 py-8">
     <!-- Hero Image -->

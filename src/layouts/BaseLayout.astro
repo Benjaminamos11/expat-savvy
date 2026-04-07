@@ -75,9 +75,11 @@ if (finalPath !== "/" && !finalPath.endsWith("/")) {
 }
 
 // Construct the full canonical URL, using prop value if provided
-const canonicalURL =
+// Always ensure trailing slash for consistency
+let canonicalURL =
   canonicalURLProp ||
   new URL(finalPath, Astro.site || "https://expat-savvy.ch").toString();
+if (!canonicalURL.endsWith("/")) canonicalURL += "/";
 
 // Define optimized favicon URL with automatic WebP delivery
 const favicon =
