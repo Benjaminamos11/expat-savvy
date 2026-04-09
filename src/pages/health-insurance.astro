@@ -1,148 +1,129 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ConsultationModal from '../components/consultation/ConsultationModal.astro';
-import AskAICTA from '../components/AskAICTA.astro';
 
-const insuranceModels = [
-  {
-    name: "Standard Model",
-    description: "Free choice of doctors throughout Switzerland",
-    savings: "0%",
-    bestFor: ["Maximum flexibility", "Direct specialist access", "No restrictions"]
-  },
-  {
-    name: "Family Doctor",
-    description: "Choose a designated family doctor as first point of contact",
-    savings: "Up to 15%",
-    bestFor: ["Coordinated care", "Lower premiums", "Personal relationship"]
-  },
-  {
-    name: "HMO",
-    description: "Use specific health centers as first point of contact",
-    savings: "Up to 20%",
-    bestFor: ["Significant savings", "Integrated care", "Urban areas"]
-  },
-  {
-    name: "Telmed",
-    description: "Call medical hotline before visiting doctor",
-    savings: "Up to 15%",
-    bestFor: ["Convenience", "Lower premiums", "Simple conditions"]
-  }
-];
+export const prerender = true;
 
 const providers = [
   {
-    name: "Assura",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406940/assura-logo-png_seeklogo-462524_zlvevx.png",
-    link: "/healthcare/all-insurances/assura",
-    description: "Known for competitive premiums"
-  },
-  {
-    name: "CSS",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740414664/css-logo_yvxvxr.png",
-    link: "/healthcare/all-insurances/css",
-    description: "Switzerland's largest health insurer"
-  },
-  {
-    name: "Groupe Mutuel",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740508835/gm-logo_fznr7i.png",
-    link: "/healthcare/all-insurances/groupe-mutuel",
-    description: "Comprehensive coverage options"
-  },
-  {
     name: "Helsana",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740406933/helsana-old8485.logowik.com_xc1tcn.webp",
     link: "/healthcare/all-insurances/helsana",
-    description: "Digital innovation leader"
   },
   {
     name: "Swica",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/swica_logo_yvxvxr.png",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740406933/swica_logo_yvxvxr.png",
     link: "/healthcare/all-insurances/swica",
-    description: "Top-rated customer service"
+  },
+  {
+    name: "CSS",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740414664/css-logo_yvxvxr.png",
+    link: "/healthcare/all-insurances/css",
   },
   {
     name: "Sanitas",
-    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/v1740406933/sanitas_logo_yvxvxr.png",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740406933/sanitas_logo_yvxvxr.png",
     link: "/healthcare/all-insurances/sanitas",
-    description: "Modern insurance solutions"
-  }
+  },
+  {
+    name: "Concordia",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1760874780/concordia_logo_j8m2wl.webp",
+    link: "/healthcare/all-insurances/concordia",
+  },
+  {
+    name: "Assura",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740406940/assura-logo-png_seeklogo-462524_zlvevx.png",
+    link: "/healthcare/all-insurances/assura",
+  },
+  {
+    name: "Groupe Mutuel",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740508835/gm-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/groupe-mutuel",
+  },
+  {
+    name: "Sympany",
+    logo: "https://res.cloudinary.com/dphbnwjtx/image/upload/f_webp,q_auto,w_150/v1740508835/sympany-logo_fznr7i.png",
+    link: "/healthcare/all-insurances/sympany",
+  },
 ];
 
-const premiumRegions = [
+const hubCards = [
   {
-    name: "Major Cities",
-    description: "Premium Region 1 (urban centers)",
-    examples: "Zurich, Geneva, Basel",
-    premiumRange: "CHF 350–550"
+    title: "Best Health Insurance 2026",
+    description: "Side-by-side comparison of Switzerland's top 6 insurers for expats.",
+    href: "/healthcare/best-health-insurance-switzerland/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
   },
   {
-    name: "Suburban Areas",
-    description: "Premium Region 2 (suburban belts)",
-    examples: "City outskirts, larger towns",
-    premiumRange: "CHF 300–450"
+    title: "Set Up Health Insurance",
+    description: "New to Switzerland? Documents, deadlines, and step-by-step registration.",
+    href: "/guides/how-to/set-up-health-insurance/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
   },
   {
-    name: "Rural Areas",
-    description: "Premium Region 3 (rural/low-cost zones)",
-    examples: "Countryside, small communities",
-    premiumRange: "CHF 280–400"
-  }
+    title: "Choose Your Deductible",
+    description: "Find your break-even point and decide between CHF 300 and CHF 2,500.",
+    href: "/guides/how-to/choose-health-insurance-deductible/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  },
+  {
+    title: "Compare Insurance Models",
+    description: "Standard vs HMO vs GP vs Telmed — which saves money without losing quality?",
+    href: "/guides/how-to/change-insurance-models/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+  },
+  {
+    title: "Switch Your Insurer",
+    description: "Deadlines, cancellation letters, and a smooth handover checklist.",
+    href: "/healthcare/switching-health-insurance/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
+  },
+  {
+    title: "Insurance by City",
+    description: "Canton-specific premiums and recommendations for Zurich, Basel, Geneva, and more.",
+    href: "/health-insurance/zurich/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  },
+  {
+    title: "Compare Providers Head-to-Head",
+    description: "Swica vs Helsana, CSS vs Sanitas — pick any two and see how they stack up.",
+    href: "/compare-providers/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="12" y1="4" x2="12" y2="20"/></svg>`,
+  },
+  {
+    title: "Premium Subsidies",
+    description: "Check your eligibility and learn how to apply for Pr\u00E4mienverbilligung.",
+    href: "/guides/how-to/apply-premium-subsidies/",
+    icon: `<svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>`,
+  },
 ];
 
 const faqs = [
   {
-    question: "When do I need to get health insurance in Switzerland?",
-    answer: "You must obtain health insurance within 3 months of arrival in Switzerland or registering with your local commune. Coverage is retroactive to your arrival date."
+    question: "Who must have health insurance in Switzerland?",
+    answer: "Every person living in Switzerland — including expats, students, newborns, and most cross-border workers — must have basic health insurance (KVG/LAMal). You have 3 months from your arrival or registration date. Coverage is retroactive to day one."
   },
   {
-    question: "What documents do I need to apply for health insurance?",
-    answer: "You'll need your residence permit (or application confirmation), passport, Swiss address, and bank details. Some insurers may require additional documentation."
+    question: "What happens if I miss the 3-month registration deadline?",
+    answer: "Your canton will assign you to an insurer, often at higher premiums. You may also face retroactive premium payments and penalties. Register as soon as possible after arriving to avoid unnecessary costs."
   },
   {
-    question: "How do I choose between different insurance models?",
-    answer: "Consider factors like premium costs, preferred doctors, and flexibility needs. Standard models offer full choice but cost more, while restricted models (family doctor, telemedicine) offer savings."
+    question: "What is the difference between basic and supplementary insurance?",
+    answer: "Basic insurance (KVG) is mandatory and covers doctor visits, hospital stays, medications, and maternity. Coverage is identical across all insurers — only premiums differ. Supplementary insurance (VVG) is optional and covers extras like dental, private rooms, and alternative medicine. Insurers can reject VVG applications."
   },
   {
-    question: "Can insurers reject my application for basic insurance?",
-    answer: "No, insurers must accept all applicants for basic insurance regardless of age, health status, or pre-existing conditions. This is mandated by Swiss law."
+    question: "How can I reduce my health insurance premiums?",
+    answer: "Choose a higher deductible (up to CHF 2,500), select an alternative model (HMO, Telmed, or GP), exclude accident coverage if employed 8+ hours/week, and compare providers annually. Combining strategies can save 20-30% on premiums."
   },
   {
-    question: "What happens if I miss the 3-month deadline?",
-    answer: "Missing the deadline can result in being automatically assigned to an insurer by your canton, potentially with higher premiums. You may also face penalties."
+    question: "When is the deadline to switch health insurers?",
+    answer: "For basic insurance, submit your cancellation letter by 30 November for coverage starting 1 January. Some insurers also allow a mid-year switch on 1 July with a 3-month notice period. Supplementary insurance deadlines vary by provider."
   },
-  {
-    question: "Which Swiss insurer offers the best English support?",
-    answer: "Swica, CSS, and Helsana all provide excellent English-speaking customer service and documentation. Swica is particularly noted for customer satisfaction among expats."
-  },
-  {
-    question: "Can expats switch Krankenkasse in 2026?",
-    answer: "Yes, you can switch basic insurance annually by canceling your current policy by 30 November 2025 for coverage starting 1 January 2026. Compare 2026 premiums when they're published in October."
-  },
-  {
-    question: "What's the cheapest insurance option for foreigners?",
-    answer: "Telmed and HMO models typically offer 15-25% savings compared to Standard models. Higher deductibles (CHF 2,500) also reduce monthly premiums. The cheapest option depends on your canton and health usage."
-  }
 ];
-
-// SSR fallback data for deductible calculator
-const ssrPremiumByDeductible = {300: 500, 500: 470, 1000: 430, 1500: 390, 2000: 360, 2500: 320};
-const ssrDeductibles = [300, 500, 1000, 1500, 2000, 2500];
-const ssrEstCosts = 600;
-const ssrCoPay = (amount: number) => Math.min(Math.max(amount, 0) * 0.10, 700);
-function ssrComputeTotal(deductible: number, estCosts: number) {
-  const monthly = ssrPremiumByDeductible[deductible] ?? 400;
-  const annualPremium = monthly * 12;
-  const outOfPocket = Math.min(estCosts, deductible) + ssrCoPay(estCosts - deductible);
-  return { monthly, total: annualPremium + outOfPocket };
-}
-const ssrRows = ssrDeductibles.map((d) => ({ deductible: d, ...ssrComputeTotal(d, ssrEstCosts) }));
-const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), { deductible: 0, total: Infinity, monthly: 0 });
 ---
 
 <Layout
-  title="Health Insurance Switzerland 2026 | Expert Comparison for Expats"
-  description="Compare Swiss health insurance plans with independent, FINMA-certified experts. Basic KVG, supplementary & private options explained. Free consultation."
+  title="Swiss Health Insurance for Expats | Complete Guide 2026"
+  description="Everything expats need to know about Swiss health insurance — how it works, what it costs, how to choose, and when to switch. FINMA-certified guidance in English."
 >
   <!-- Breadcrumb JSON-LD -->
   <script type="application/ld+json" slot="head">
@@ -151,802 +132,237 @@ const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), {
     "@type": "BreadcrumbList",
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://expat-savvy.ch/"},
-      {"@type": "ListItem", "position": 2, "name": "Health Insurance", "item": "https://expat-savvy.ch/health-insurance"}
+      {"@type": "ListItem", "position": 2, "name": "Health Insurance", "item": "https://expat-savvy.ch/health-insurance/"}
     ]
   }
   </script>
 
-  <!-- FAQ JSON-LD from page data -->
+  <!-- FAQ JSON-LD -->
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': (faqs || []).map((f) => ({
+    'mainEntity': faqs.map((f) => ({
       '@type': 'Question',
       'name': f.question,
       'acceptedAnswer': { '@type': 'Answer', 'text': f.answer }
     }))
   })} />
-  
-  <!-- Service Schema for Expats -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Swiss Health Insurance for Expats",
-    "description": "Complete health insurance guidance for expats moving to Switzerland. Compare Helsana, Swica, CSS, and other top providers.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "url": "https://expat-savvy.ch"
-    },
-    "areaServed": "Switzerland",
-    "audience": "Expatriates and foreigners in Switzerland",
-    "serviceType": "Insurance Consultation"
-  }
-  </script>
-  <!-- Hero Section (clean, no background image) -->
+
+  <!-- =============================== -->
+  <!-- SECTION 1: HERO                 -->
+  <!-- =============================== -->
   <section class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      <div class="text-center">
-        <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6">
-          Swiss Health Insurance for <span class="text-primary-600">Expats</span> (2026 Guide)
-        </h1>
-        <p class="max-w-3xl mx-auto text-xl text-gray-600 mb-8">
-          If you've just moved to Switzerland, health insurance is mandatory. Expats must register within 3 months under LAMal. This guide is tailored for English-speaking newcomers and explains your 2026 options step-by-step.
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6">
+        Swiss Health Insurance for Expats
+      </h1>
+      <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+        Your complete guide to mandatory insurance, choosing the right plan, and saving money — written for English-speaking residents.
+      </p>
+      <button
+        onclick="window.openHealthModal('home')"
+        class="inline-flex items-center px-8 py-4 text-lg font-semibold rounded-xl text-white bg-red-600 hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl"
+      >
+        Get Your Free Comparison
+        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+      <p class="mt-4 text-gray-500">
+        <a href="#explore" class="hover:text-gray-700 transition-colors">Or explore our guides below &darr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- =============================== -->
+  <!-- SECTION 2: HOW IT WORKS (brief) -->
+  <!-- =============================== -->
+  <section class="bg-gray-50 py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">How Swiss Health Insurance Works</h2>
+
+      <div class="prose prose-lg text-gray-700">
+        <p>
+          Switzerland requires every resident to have basic health insurance (<strong>KVG/LAMal</strong>). The coverage is identical no matter which insurer you choose — what differs are premiums, customer service, and digital tools. You must register within <strong>3 months of arriving</strong> in Switzerland.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onclick="window.openHealthModal('home')"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            Start Free Assessment
-            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </button>
-          <a
-            href="#compare"
-            class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-primary-700 bg-white hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            Compare Providers
+        <p>
+          Beyond the mandatory plan, you can add <strong>supplementary insurance (VVG)</strong> for extras like dental, private hospital rooms, or alternative medicine. Unlike basic insurance, supplementary plans vary between insurers and acceptance isn't guaranteed.
+        </p>
+        <p>
+          New to Switzerland?
+          <a href="/guides/how-to/set-up-health-insurance/" class="text-red-600 font-medium hover:underline">Read our step-by-step setup guide</a>. Interested in supplementary coverage?
+          <a href="/private-health-insurance-switzerland/" class="text-red-600 font-medium hover:underline">See our private insurance overview</a>.
+        </p>
+      </div>
+
+      <!-- Fix 6: prominent in-content link with keyword-rich anchor text -->
+      <div class="mt-8 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+        <p class="text-lg text-gray-800">
+          Not sure which insurer to pick? See our
+          <a href="/healthcare/best-health-insurance-switzerland/" class="text-red-600 font-semibold hover:underline">
+            expert comparison of the best health insurers in Switzerland for 2026
           </a>
-        </div>
+          — with side-by-side analysis of the top 6 providers and personalized recommendations.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Value props / benefits -->
-  <section class="bg-white py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <!-- Lucide Globe -->
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900">Expat-Focused Expertise</h3>
-          <p class="mt-2 text-gray-600">We understand the unique challenges of navigating Swiss insurance as an international resident.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <!-- Lucide PiggyBank -->
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-2.52a8 8 0 0 0-12.45 2H3a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h1v2a6 6 0 0 0 6 6h5a6 6 0 0 0 6-6v-4a2 2 0 0 0-2-2Z"></path><path d="M16 3h3v3"></path><path d="M16 11h.01"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900">Save Time and Money</h3>
-          <p class="mt-2 text-gray-600">Access the best rates and avoid costly mistakes with our comprehensive market knowledge.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <!-- Lucide ShieldCheck -->
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900">Full Compliance Support</h3>
-          <p class="mt-2 text-gray-600">Meet all legal requirements and deadlines with our step‑by‑step guidance.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Provider Comparison Table -->
-  <section class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- =============================== -->
+  <!-- SECTION 3: EXPLORE BY TOPIC      -->
+  <!-- =============================== -->
+  <section id="explore" class="bg-white py-16 md:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Top Health Insurance Providers for Expats</h2>
-        <p class="text-lg text-gray-600">Compare the strengths and specialties of Switzerland's leading insurers</p>
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Explore by Topic</h2>
+        <p class="text-lg text-gray-600">Find the right guide for your situation.</p>
       </div>
-      
-      <div class="overflow-x-auto">
-        <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
-          <thead class="bg-primary-600 text-white">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {hubCards.map((card) => (
+          <a
+            href={card.href}
+            class="group bg-white border border-gray-200 rounded-xl p-6 hover:border-red-300 hover:shadow-md transition-all"
+          >
+            <div class="h-10 w-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors">
+              <Fragment set:html={card.icon} />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">{card.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{card.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================== -->
+  <!-- SECTION 4: QUICK COST OVERVIEW   -->
+  <!-- =============================== -->
+  <section class="bg-gray-50 py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Quick Cost Overview</h2>
+      <p class="text-gray-600 mb-8">
+        Health insurance premiums vary by canton, age, deductible, and model. Here are typical 2026 ranges:
+      </p>
+
+      <div class="overflow-x-auto bg-white rounded-xl border border-gray-200 shadow-sm">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th class="px-6 py-4 text-left text-sm font-semibold">Provider</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold">Strengths</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold">Best For</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Category</th>
+              <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Range (2026)</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4">
-                <div class="font-semibold text-gray-900">Helsana</div>
-                <div class="text-sm text-gray-500">Digital tools, cross-border support</div>
-              </td>
-              <td class="px-6 py-4 text-sm text-gray-700">Digital tools, cross-border support</td>
-              <td class="px-6 py-4 text-sm text-gray-700">Expats near DE/FR border</td>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Adults (Zurich, standard model)</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">CHF 340 &ndash; 460 / month</td>
             </tr>
-            <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4">
-                <div class="font-semibold text-gray-900">Swica</div>
-                <div class="text-sm text-gray-500">Top-rated customer service</div>
-              </td>
-              <td class="px-6 py-4 text-sm text-gray-700">Fitness benefits, English support</td>
-              <td class="px-6 py-4 text-sm text-gray-700">Active singles & families</td>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Children</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">CHF 100 &ndash; 150 / month</td>
             </tr>
-            <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4">
-                <div class="font-semibold text-gray-900">CSS</div>
-                <div class="text-sm text-gray-500">Switzerland's largest health insurer</div>
-              </td>
-              <td class="px-6 py-4 text-sm text-gray-700">Largest network, competitive premiums</td>
-              <td class="px-6 py-4 text-sm text-gray-700">Students, newcomers</td>
-            </tr>
-            <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4">
-                <div class="font-semibold text-gray-900">Sanitas</div>
-                <div class="text-sm text-gray-500">Modern insurance solutions</div>
-              </td>
-              <td class="px-6 py-4 text-sm text-gray-700">Strong apps, flexible add-ons</td>
-              <td class="px-6 py-4 text-sm text-gray-700">Young professionals</td>
-            </tr>
-            <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4">
-                <div class="font-semibold text-gray-900">Concordia</div>
-                <div class="text-sm text-gray-500">High customer satisfaction</div>
-              </td>
-              <td class="px-6 py-4 text-sm text-gray-700">Family-focused, good maternity support</td>
-              <td class="px-6 py-4 text-sm text-gray-700">Parents with children</td>
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-900">Supplementary insurance</td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">CHF 50 &ndash; 300+ / month</td>
             </tr>
           </tbody>
         </table>
       </div>
-      
-      <div class="mt-8 text-center p-6 bg-primary-50 rounded-lg border border-primary-200">
-        <p class="text-primary-700 mb-4">💡 <em>Not sure which insurer is best for you? Try our free insurance calculator or book a free consultation today. Deadline: 30 Nov 2025.</em></p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="/ai-chat" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 transition-colors">
-            AI Calculator
-          </a>
-          <button
-            onclick="window.openHealthModal('home')"
-            class="inline-flex items-center px-6 py-3 border border-primary-600 text-sm font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors"
+
+      <div class="mt-6 text-center">
+        <button
+          onclick="window.openHealthModal('home')"
+          class="inline-flex items-center px-6 py-3 text-sm font-semibold rounded-lg text-white bg-red-600 hover:bg-red-700 transition-colors shadow"
+        >
+          Get an exact quote for your canton
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================== -->
+  <!-- SECTION 5: BROWSE ALL INSURERS   -->
+  <!-- =============================== -->
+  <section class="bg-white py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Browse All Insurers</h2>
+        <p class="text-gray-600">Click any provider to read our full review.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+        {providers.map((p) => (
+          <a
+            href={p.link + "/"}
+            class="flex flex-col items-center gap-2 group"
+            title={p.name}
           >
-            Get Recommendations
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What is Swiss Health Insurance / Who must have -->
-  <section class="bg-white py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="sr-only">What is Swiss Health Insurance and Who Needs It?</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Left card -->
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <div class="flex items-center mb-4">
-            <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mr-3">📄</div>
-            <h3 class="text-2xl font-bold text-gray-900">What is Health Insurance in Switzerland?</h3>
-          </div>
-          <p class="text-gray-700 mb-4">Swiss health insurance consists of two main components:</p>
-          <div class="space-y-6">
-            <div class="bg-white rounded-xl border border-gray-200 p-4">
-              <h4 class="text-lg font-semibold text-gray-900">Basic Health Insurance (KVG/LAMal)</h4>
-              <p class="text-gray-700 mt-1">Mandatory coverage with identical legal benefits across all insurers. Premiums vary by canton, age, model, and deductible.</p>
-              <div class="mt-3 text-sm bg-red-50 text-red-800 rounded-md p-3">Example: Doctor visits, hospital stays, prescribed medications, emergency care, and maternity services are covered.</div>
+            <div class="h-16 w-24 flex items-center justify-center grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all">
+              <img
+                src={p.logo}
+                alt={p.name}
+                class="max-h-12 w-auto"
+                loading="lazy"
+                width="120"
+                height="48"
+              />
             </div>
-            <div class="bg-white rounded-xl border border-gray-200 p-4">
-              <h4 class="text-lg font-semibold text-gray-900">Supplementary Health Insurance (VVG)</h4>
-              <p class="text-gray-700 mt-1">Optional private add‑ons for dental, alternative medicine, private rooms, and worldwide coverage.</p>
-              <div class="mt-3 text-sm bg-red-50 text-red-800 rounded-md p-3">Example: Dental treatment, private hospital rooms, gym reimbursement, and extended cover abroad.</div>
-            </div>
-          </div>
-        </div>
-        <!-- Right card -->
-        <div class="bg-red-50 rounded-2xl shadow-md p-6 border border-red-100">
-          <div class="flex items-center mb-4">
-            <div class="h-10 w-10 rounded-xl bg-white text-primary-700 flex items-center justify-center mr-3">👥</div>
-            <h3 class="text-2xl font-bold text-gray-900">Who Must Have Health Insurance?</h3>
-          </div>
-          <ul class="space-y-3 text-gray-800">
-            <li class="flex items-start"><span class="text-primary-600 mr-2">✔</span> All residents, regardless of nationality</li>
-            <li class="flex items-start"><span class="text-primary-600 mr-2">✔</span> Expats with B, C, L, or G permits</li>
-            <li class="flex items-start"><span class="text-primary-600 mr-2">✔</span> Students and au pairs staying over 3 months</li>
-            <li class="flex items-start"><span class="text-primary-600 mr-2">✔</span> Newborns (insure within 3 months)</li>
-            <li class="flex items-start"><span class="text-primary-600 mr-2">✔</span> Most cross‑border workers</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Critical timeline card -->
-  <section class="bg-white py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="rounded-2xl bg-red-600 text-white p-6 shadow-xl">
-        <h3 class="text-2xl font-bold mb-3">Critical Timeline for New Residents</h3>
-        <div class="bg-red-500/40 rounded-xl p-4">
-          <div class="font-semibold mb-1">⚠️ 3‑Month Rule</div>
-          <p>Obtain basic insurance within 3 months of arrival. Coverage and premiums are retroactive to your arrival date. Still looking for an apartment to register your address? Use the [Swiss Relocation Matching Platform at ReloFinder.ch](https://relofinder.ch) to find verified off-market agents.</p>
-          <div class="mt-3 bg-red-500/40 rounded-md p-3 text-sm">Example: Arrive in January, sign up in March → you still pay for January and February.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Expert Advisor Bio Section -->
-  <section class="bg-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8 shadow-sm flex flex-col md:flex-row items-center gap-8">
-        <div class="flex-shrink-0">
-          <div class="h-24 w-24 md:h-32 md:w-32 rounded-full border-4 border-red-500 p-1 shadow-lg bg-white overflow-hidden">
-             <!-- Profile Image / Placeholder -->
-             <div class="w-full h-full bg-gray-100 rounded-full flex items-center justify-center text-red-500">
-               <svg class="w-12 h-12 md:w-16 md:h-16" fill="currentColor" viewBox="0 0 24 24">
-                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-               </svg>
-             </div>
-          </div>
-        </div>
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Expert Advice, Not Just Calculators</h2>
-          <p class="text-lg text-gray-700 leading-relaxed max-w-3xl">
-            The Swiss health insurance system is complex. Led by industry veteran <strong>Robert Kolar</strong>, our advisory team goes beyond generic tables. We conduct a fully digital demand assessment to structure the perfect KVG and VVG setup for your specific medical needs and timeline.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Costs heading -->
-  <section class="bg-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-2">How Much Does Health Insurance Cost in Switzerland?</h2>
-      <p class="text-center text-gray-600 max-w-3xl mx-auto">Premiums depend on canton and premium region, age, chosen model (Standard, GP, HMO, Telmed), and deductible (CHF 300–2’500). Use our comparison and request a tailored quote.</p>
-    </div>
-  </section>
-  <!-- Insurance Models -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Insurance Models</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <a href="/guides/how-to/set-up-health-insurance" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Set up health insurance</h3>
-          <p class="text-gray-600">New arrivals: what to prepare, deadlines, and how to choose quickly.</p>
-        </a>
-        <a href="/guides/how-to/choose-health-insurance-deductible" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Choose your deductible</h3>
-          <p class="text-gray-600">Find your break-even and save with the right franchise.</p>
-        </a>
-        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Choose a cheaper model</h3>
-          <p class="text-gray-600">GP, HMO, or Telmed to reduce premiums without losing care.</p>
-        </a>
-        <a href="/guides/how-to/apply-premium-subsidies" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Apply for premium subsidies</h3>
-          <p class="text-gray-600">Check eligibility by canton and submit correctly.</p>
-        </a>
-        <a href="/guides/how-to/insurance-when-moving-cantons" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Moving cantons</h3>
-          <p class="text-gray-600">What changes, special rights, and tips to avoid surprises.</p>
-        </a>
-        <a href="/guides/how-to/change-health-insurance" class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Switch provider</h3>
-          <p class="text-gray-600">Deadlines, required letters, and a clean handover checklist.</p>
-        </a>
-      </div>
-      <!-- Savings strategies -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">How Can You Get Cheaper Health Insurance?</h3>
-          <ul class="mt-2 space-y-3 text-gray-700">
-            <li><span class="font-semibold">Choose the right deductible:</span> CHF 2’500 often lowers premiums the most if you rarely need care.</li>
-            <li><span class="font-semibold">Select an alternative model:</span> GP/HMO/Telmed can reduce premiums by 10–25%.</li>
-            <li><span class="font-semibold">Exclude accident coverage:</span> If employed >8h/week, you’re covered by UVG—remove the duplicate.</li>
-            <li><span class="font-semibold">Compare and switch annually:</span> Review in November; switching is straightforward.</li>
-          </ul>
-          <div class="mt-4 text-sm text-primary-700 bg-primary-50 rounded-md p-3">Pro tip: Combine strategies (e.g., CHF 2’500 + HMO + no accident) for maximum savings.</div>
-        </div>
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">Deep Dives</h3>
-          <ul class="list-disc pl-5 space-y-2 text-primary-700">
-            <li><a href="/guides/how-to/choose-health-insurance-deductible" class="hover:underline">How to choose your deductible</a></li>
-            <li><a href="/guides/how-to/change-insurance-models" class="hover:underline">Compare insurance models (Standard vs GP vs HMO vs Telmed)</a></li>
-            <li><a href="/healthcare/new-health-insurance" class="hover:underline">Set up health insurance (new arrivals)</a></li>
-            <li><a href="/healthcare/switching-health-insurance" class="hover:underline">How to switch provider</a></li>
-            <li><a href="/compare-providers" class="hover:underline">Compare providers</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {insuranceModels.map(model => (
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{model.name}</h3>
-            <p class="text-gray-600 mb-4">{model.description}</p>
-            <div class="inline-block px-3 py-1 mb-4 text-sm font-semibold text-primary-700 bg-primary-100 rounded-full">
-              Premium Savings: {model.savings}
-            </div>
-            <h4 class="font-medium text-gray-900 mb-2">Best For:</h4>
-            <ul class="space-y-2">
-              {model.bestFor.map(item => (
-                <li class="flex items-center text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-primary-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  <!-- Insurance Providers (icons, no logos) -->
-  <div id="compare" class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Compare Top Swiss Health Insurers</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-        {providers.map(p => (
-          <a href={p.link} class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-            <div class="h-10 w-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center mx-auto mb-3">
-              <!-- Lucide Building / Shield icon -->
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M4 21V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"></path></svg>
-            </div>
-            <h3 class="text-center text-sm font-semibold text-gray-900">{p.name}</h3>
-            <p class="mt-1 text-xs text-center text-gray-500">{p.description}</p>
+            <span class="text-xs text-gray-500 group-hover:text-red-600 transition-colors font-medium">{p.name}</span>
           </a>
         ))}
       </div>
-    </div>
-  </div>
 
-  <!-- Deductible & Cost Calculator -->
-  <section class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-6">Find Your Best Deductible</h2>
-      <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Estimate your yearly medical spending and compare total annual cost across deductibles. We include co‑payment (10% after deductible, max CHF 700).</p>
-
-      <div id="deductible-calculator" class="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          <!-- Controls -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Estimated yearly medical costs (CHF)</label>
-            <input id="est-costs" type="number" min="0" step="50" value="600" class="w-full rounded-md border-gray-300 focus:border-primary-500 focus:ring-primary-500" />
-
-            <label class="block text-sm font-medium text-gray-700 mt-6 mb-2">Choose a deductible</label>
-            <input id="deductible-range" type="range" min="0" max="5" step="1" value="5" class="w-full accent-primary-600" />
-            <div class="flex justify-between text-xs text-gray-500 mt-1">
-              <span>CHF 300</span><span>500</span><span>1’000</span><span>1’500</span><span>2’000</span><span>2’500</span>
-            </div>
-            <div class="mt-2 text-sm">Selected: <span id="deductible-current" class="font-semibold">CHF 2’500</span></div>
-            <div class="mt-4 text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-md p-3">
-              How it works: Total yearly cost = 12×monthly premium + your out‑of‑pocket (up to your deductible) + 10% co‑payment after deductible (max CHF 700).
-            </div>
-          </div>
-
-          <!-- Results table -->
-          <div class="lg:col-span-2">
-            <div class="overflow-x-auto rounded-lg border border-gray-200">
-              <table class="min-w-full divide-y divide-gray-200" id="results-table">
-                <thead class="bg-gray-50">
-                  <tr>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Deductible</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Est. Monthly Premium</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Total Yearly Cost</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Recommendation</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200" id="results-body">
-                  {ssrRows.map((r) => (
-                    <tr>
-                      <td class="px-4 py-3 text-sm text-gray-900">CHF {r.deductible}</td>
-                      <td class="px-4 py-3 text-sm text-gray-700">CHF {r.monthly.toFixed(0)}/mo</td>
-                      <td class="px-4 py-3 text-sm text-gray-900">CHF {r.total.toFixed(0)}/yr <span class="text-gray-500">(incl. out‑of‑pocket)</span></td>
-                      <td class="px-4 py-3 text-sm"></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div id="recommendation" class="mt-4 text-sm text-gray-700">Best estimate: <span class="font-semibold">CHF {ssrBest.deductible}</span> for your inputs (total ~ CHF {ssrBest.total.toFixed(0)}/yr). For an exact quote, click Get Expert Help.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Related Guides and Blogs -->
-  <section class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">Related Guides and Blogs</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a href="/guides/how-to/choose-health-insurance-deductible" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Choose the Right Deductible</h3>
-          <p class="text-gray-600">Break-even logic, examples, and when CHF 2’500 makes sense.</p>
-        </a>
-        <a href="/guides/how-to/change-insurance-models" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M6 20V10"/><path d="M18 20V4"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Compare Insurance Models</h3>
-          <p class="text-gray-600">Standard vs GP vs HMO vs Telmed — savings vs flexibility.</p>
-        </a>
-        <a href="/guides/how-to/set-up-health-insurance" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Set Up Health Insurance</h3>
-          <p class="text-gray-600">Documents, deadlines, and fast steps for new arrivals.</p>
-        </a>
-        <a href="/guides/how-to/change-health-insurance" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.67-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.67 3.36L1 14"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Switch Provider</h3>
-          <p class="text-gray-600">Deadlines, templates, and smooth handover checklist.</p>
-        </a>
-        <a href="/guides/how-to/apply-premium-subsidies" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H15a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Premium Subsidies</h3>
-          <p class="text-gray-600">Eligibility by canton and how to apply correctly.</p>
-        </a>
-        <a href="/guides/how-to/find-best-health-insurance" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Find the Best Insurance</h3>
-          <p class="text-gray-600">Step-by-step comparison framework and pitfalls.</p>
-        </a>
-        <a href="/healthcare/best-health-insurance-switzerland/" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H7a4 4 0 1 1 0-8h10a4 4 0 0 1 4 4Z"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Best Health Insurance</h3>
-          <p class="text-gray-600">Key facts, seasonal checklist, and provider insights.</p>
-        </a>
-        <a href="/blog/decoding-swiss-health-insurance-canton-region-premium" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M19 9a4 4 0 0 0-7.87 1.5"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Canton & Region Premiums</h3>
-          <p class="text-gray-600">Why prices vary and how to optimize by location.</p>
-        </a>
-        <a href="/blog/health-insurance-models-switzerland" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Insurance Models Explained</h3>
-          <p class="text-gray-600">Pros/cons and who each model suits best.</p>
-        </a>
-        <a href="/blog/price-peace-mind-comparing-swiss-health-insurance-deductibles-cost-saving-models" class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors">
-          <div class="h-10 w-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center mb-4">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-1">Deductibles & Saving Models</h3>
-          <p class="text-gray-600">Cost comparison examples and switching window.</p>
+      <div class="mt-8 text-center">
+        <a href="/insurance-providers/" class="text-red-600 font-medium hover:underline text-sm">
+          View all insurance providers &rarr;
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Premium Regions -->
-  <div class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Understanding Premium Regions</h2>
-        <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-200">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Region</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Description</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Examples</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Typical Premiums</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-              {premiumRegions.map(r => (
-                <tr>
-                  <td class="px-4 py-3 text-sm text-gray-900">{r.name}</td>
-                  <td class="px-4 py-3 text-sm text-gray-700">{r.description}</td>
-                  <td class="px-4 py-3 text-sm text-gray-700">{r.examples}</td>
-                  <td class="px-4 py-3 text-sm text-gray-900">{r.premiumRange}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="mt-4 text-sm text-gray-500">Not all cantons use all three regions; some have 1–2 zones only.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Next Step: Wealth & Tax Optimization -->
-  <section class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-       <div class="bg-red-50 border-2 border-dashed border-red-200 rounded-2xl p-10 text-center">
-         <h3 class="text-3xl font-extrabold text-gray-900 mb-4">Next Step: Wealth & Tax Optimization</h3>
-         <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-           Health insurance is just the beginning. High-earning expats can save thousands on their withholding tax (Quellensteuer) through strategic pension planning. <a href="/3rd-pillar/" class="text-red-600 font-bold hover:underline">Book a digital pension gap analysis</a> with our certified wealth planner, Hans Steiner (IAF).
-         </p>
-       </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Frequently Asked Questions</h2>
-      <div class="max-w-3xl mx-auto">
-        <dl class="space-y-8">
-          {faqs.map(faq => (
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <dt class="text-lg font-semibold text-gray-900 mb-2">{faq.question}</dt>
-              <dd class="text-gray-600">{faq.answer}</dd>
-            </div>
-          ))}
-        </dl>
-        <AskAICTA />
-      </div>
-    </div>
-  </div>
-
-  <!-- Situation-Specific Guides -->
-  <section class="bg-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Insurance Guides by Situation</h2>
-      <p class="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">Find the right coverage based on your specific circumstances in Switzerland.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <a href="/insurance-guides/new-arrivals-checklist/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">New Arrivals Checklist</h3>
-          <p class="text-sm text-gray-600">Essential insurance steps for newcomers to Switzerland.</p>
-        </a>
-        <a href="/insurance-guides/cross-border-insurance/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Cross-Border Workers</h3>
-          <p class="text-sm text-gray-600">Insurance options for Grenzgänger and cross-border commuters.</p>
-        </a>
-        <a href="/insurance-guides/self-employed-insurance/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Self-Employed Insurance</h3>
-          <p class="text-sm text-gray-600">Coverage essentials for freelancers and business owners.</p>
-        </a>
-        <a href="/insurance-guides/student-insurance/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Student Insurance</h3>
-          <p class="text-sm text-gray-600">Affordable health insurance options for students in Switzerland.</p>
-        </a>
-      </div>
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <a href="/guides/contents-liability-insurance-switzerland/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Contents & Liability Insurance</h3>
-          <p class="text-sm text-gray-600">Household contents and personal liability coverage guide.</p>
-        </a>
-        <a href="/guides/legal-protection-insurance-switzerland/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Legal Protection Insurance</h3>
-          <p class="text-sm text-gray-600">When and why legal insurance matters for expats.</p>
-        </a>
-        <a href="/plan-healthcare/" class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all border border-gray-200 hover:border-primary-500">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Plan Your Healthcare</h3>
-          <p class="text-sm text-gray-600">Interactive tool to build your personalized insurance plan.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Related Articles Section -->
-  <div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Related Articles</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <a href="/blog/revised-pre-existing-conditions-article" class="group">
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors h-full">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">Pre-Existing Conditions Guide</h3>
-            <p class="text-gray-600 mb-4">
-              Navigate Swiss health insurance with pre-existing conditions - complete guide for expats.
-            </p>
-            <span class="text-primary-600 font-medium inline-flex items-center">
-              Read article
-              <svg class="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+  <!-- =============================== -->
+  <!-- SECTION 6: FAQ                   -->
+  <!-- =============================== -->
+  <section class="bg-gray-50 py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+      <dl class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="group bg-white rounded-xl border border-gray-200 shadow-sm">
+            <summary class="flex items-center justify-between cursor-pointer px-6 py-5 text-lg font-medium text-gray-900 list-none">
+              {faq.question}
+              <svg class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </span>
-          </div>
-        </a>
-        
-        <a href="/blog/gym-coverage-swiss-insurance-revised" class="group">
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors h-full">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">Gym Coverage Benefits</h3>
-            <p class="text-gray-600 mb-4">
-              Get fit and save money with Qualitop/Qualicert benefits from Swiss health insurance.
-            </p>
-            <span class="text-primary-600 font-medium inline-flex items-center">
-              Read article
-              <svg class="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </div>
-        </a>
-        
-        <a href="/blog/beyond-basics-uncovering-unique-health-insurance-perks-expats" class="group">
-          <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-primary-500 transition-colors h-full">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">Unique Insurance Perks</h3>
-            <p class="text-gray-600 mb-4">
-              Discover hidden benefits and unique perks available with Swiss health insurance for expats.
-            </p>
-            <span class="text-primary-600 font-medium inline-flex items-center">
-              Read article
-              <svg class="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </div>
-        </a>
-      </div>
+            </summary>
+            <dd class="px-6 pb-5 text-gray-600 leading-relaxed">{faq.answer}</dd>
+          </details>
+        ))}
+      </dl>
     </div>
-  </div>
+  </section>
 
-  <!-- CTA Section -->
-  <div class="bg-primary-600">
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-          Need help with your insurance?
-        </h2>
-        <p class="mt-4 text-xl text-primary-100">
-          Get expert guidance to find the right coverage
-        </p>
-        <div class="mt-8">
-          <button
-            onclick="window.openHealthModal('home')"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 transition-colors duration-300"
-          >
-            Get Your Best Options
-          </button>
-        </div>
-      </div>
+  <!-- =============================== -->
+  <!-- SECTION 7: CTA FOOTER            -->
+  <!-- =============================== -->
+  <section class="bg-red-600 py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        Need help choosing?
+      </h2>
+      <p class="text-xl text-red-100 mb-8">
+        Get your free, independent comparison from our FINMA-certified team.
+      </p>
+      <button
+        onclick="window.openHealthModal('home')"
+        class="inline-flex items-center px-8 py-4 text-lg font-semibold rounded-xl text-red-600 bg-white hover:bg-red-50 transition-colors shadow-lg"
+      >
+        Book Free Consultation
+      </button>
     </div>
-  </div>
-
-  <ConsultationModal />
-
-  <!-- Service Schema -->
-  <script type="application/ld+json" slot="head">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Swiss Health Insurance Comparison & Advisory",
-    "description": "Independent health insurance comparison for expats in Switzerland. We compare KVG basic insurance, VVG supplementary plans, and private options across 15+ Swiss insurers to find the best coverage and premiums for your situation.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Expat Savvy",
-      "url": "https://expat-savvy.ch"
-    },
-    "serviceType": "Health Insurance Advisory",
-    "areaServed": {
-      "@type": "Country",
-      "name": "Switzerland"
-    },
-    "audience": {
-      "@type": "Audience",
-      "audienceType": "Expatriates in Switzerland"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Health Insurance Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "KVG Basic Insurance Comparison"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "VVG Supplementary Insurance Advisory"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Insurance Switching Support"
-          }
-        }
-      ]
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "CHF",
-      "description": "Free initial consultation"
-    }
-  }
-  </script>
+  </section>
 </Layout>
-
-<script is:inline>
-  // Simple deductible calculator with illustrative premiums
-  // Illustrative monthly premiums (adult, region 2, GP/HMO model) from common market ranges
-  const premiumByDeductible = {
-    300: 500,
-    500: 470,
-    1000: 430,
-    1500: 390,
-    2000: 360,
-    2500: 320
-  };
-
-  const deductibleSteps = [300,500,1000,1500,2000,2500];
-  function selectedDeductible() {
-    const el = document.getElementById('deductible-range') || { value: '5' };
-    const idx = Number((el as any).value || '5');
-    return deductibleSteps[idx] || 2500;
-  }
-  function updateDeductibleLabel() {
-    const label = document.getElementById('deductible-current');
-    if (label) label.textContent = `CHF ${selectedDeductible().toLocaleString('de-CH')}`;
-  }
-
-  function coPay(amount) {
-    return Math.min(Math.max(amount,0) * 0.10, 700);
-  }
-
-  function computeTotal(deductible, estCosts) {
-    const monthly = premiumByDeductible[deductible] ?? 400;
-    const annualPremium = monthly * 12;
-    const outOfPocket = Math.min(estCosts, deductible) + coPay(estCosts - deductible);
-    return { monthly, annualPremium, outOfPocket, total: annualPremium + outOfPocket };
-  }
-
-  function renderTable() {
-    const estEl = document.getElementById('est-costs');
-    const est = Number(estEl && 'value' in estEl ? (estEl).value : 0) || 0;
-    const tbody = document.getElementById('results-body');
-    const rec = document.getElementById('recommendation');
-    if (!tbody || !rec) return;
-    tbody.innerHTML = '';
-    let best = {ded: 0, total: Infinity};
-    Object.keys(premiumByDeductible).map(Number).sort((a,b)=>a-b).forEach((d: number) => {
-      const r = computeTotal(d, est);
-      if (r.total < best.total) best = {ded: d, total: r.total};
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="px-4 py-3 text-sm text-gray-900">CHF ${d}</td>
-        <td class="px-4 py-3 text-sm text-gray-700">CHF ${r.monthly.toFixed(0)}/mo</td>
-        <td class="px-4 py-3 text-sm text-gray-900">CHF ${r.total.toFixed(0)}/yr <span class="text-gray-500">(incl. out‑of‑pocket)</span></td>
-        <td class="px-4 py-3 text-sm">${d === selectedDeductible() ? '<span class="text-primary-700 font-medium">Selected</span>' : ''}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-    rec.innerHTML = `Best estimate: <span class="font-semibold">CHF ${best.ded}</span> for your inputs (total ~ CHF ${best.total.toFixed(0)}/yr). For an exact quote, click Get Expert Help.`;
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    updateDeductibleLabel();
-    const range = document.getElementById('deductible-range');
-    if (range) range.addEventListener('input', () => { updateDeductibleLabel(); renderTable(); });
-    const est = document.getElementById('est-costs');
-    if (est) est.addEventListener('input', renderTable);
-    // Initial paint after DOM is ready ensures table exists
-    setTimeout(renderTable, 0);
-  });
-</script>
