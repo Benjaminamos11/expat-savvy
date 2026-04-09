@@ -824,6 +824,63 @@ const ssrBest = ssrRows.reduce((best, r) => (r.total < best.total ? r : best), {
   </div>
 
   <ConsultationModal />
+
+  <!-- Service Schema -->
+  <script type="application/ld+json" slot="head">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Swiss Health Insurance Comparison & Advisory",
+    "description": "Independent health insurance comparison for expats in Switzerland. We compare KVG basic insurance, VVG supplementary plans, and private options across 15+ Swiss insurers to find the best coverage and premiums for your situation.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Expat Savvy",
+      "url": "https://expat-savvy.ch"
+    },
+    "serviceType": "Health Insurance Advisory",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Switzerland"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Expatriates in Switzerland"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Health Insurance Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "KVG Basic Insurance Comparison"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "VVG Supplementary Insurance Advisory"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Insurance Switching Support"
+          }
+        }
+      ]
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CHF",
+      "description": "Free initial consultation"
+    }
+  }
+  </script>
 </Layout>
 
 <script is:inline>

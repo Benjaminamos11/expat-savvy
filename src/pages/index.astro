@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Testimonials from "../components/Testimonials.astro";
 import { getCollection } from "astro:content";
 import HeroBookingCard from "../components/HeroBookingCard.astro";
+import AggregateRatingSchema from "../components/schema/AggregateRatingSchema.astro";
 
 const stats = [
   { number: "1000+", label: "Happy Clients" },
@@ -165,6 +166,14 @@ const formatDate = (date: Date | string | undefined | null): string => {
   title="Expat Savvy | Swiss Health Insurance Experts for Expats"
   description="Independent, FINMA-certified health insurance experts for expats in Switzerland. Expert guidance on basic, supplementary & private coverage. Free consultation."
 >
+  <AggregateRatingSchema
+    type="Organization"
+    itemName="Expat Savvy"
+    itemUrl="https://expat-savvy.ch"
+    ratingValue="4.9"
+    reviewCount="180"
+    description="Independent insurance advisory for expats in Switzerland"
+  />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

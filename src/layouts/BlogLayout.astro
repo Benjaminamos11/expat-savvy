@@ -2,7 +2,40 @@
 import BaseLayout from "./BaseLayout.astro";
 import FAQ from "../components/FAQ.astro";
 import AskAICTA from "../components/AskAICTA.astro";
+import RelatedArticles from "../components/content/RelatedArticles.astro";
+import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
+
+// Fetch related articles based on matching tags, then category, then recent
+const allPosts = await getCollection("blog");
+const currentSlug = Astro.url.pathname.replace(/^\/blog\//, "").replace(/\/$/, "");
+const currentTags = (frontmatter.tags || []) as string[];
+const currentCategory = (frontmatter as any).category || "";
+
+const otherPosts = allPosts.filter((p) => p.id.replace(/\.mdx?$/, "") !== currentSlug);
+
+// Score posts by relevance: shared tags + category match
+const scored = otherPosts.map((p) => {
+  const pTags = (p.data.tags || []) as string[];
+  const tagOverlap = currentTags.filter((t) => pTags.includes(t)).length;
+  const catMatch = currentCategory && (p.data as any).category === currentCategory ? 2 : 0;
+  return { post: p, score: tagOverlap + catMatch };
+});
+
+// Sort by score desc, then by date desc
+scored.sort((a, b) => {
+  if (b.score !== a.score) return b.score - a.score;
+  const dateA = a.post.data.date ? new Date(a.post.data.date).getTime() : 0;
+  const dateB = b.post.data.date ? new Date(b.post.data.date).getTime() : 0;
+  return dateB - dateA;
+});
+
+const relatedArticles = scored.slice(0, 3).map((s) => ({
+  title: s.post.data.title || "Untitled",
+  description: s.post.data.description || "",
+  url: `/blog/${s.post.id.replace(/\.mdx?$/, "")}/`,
+  image: s.post.data.image || undefined,
+}));
 
 // Function to generate social sharing URLs
 const getShareUrls = (url: string, title: string) => ({
@@ -170,6 +203,11 @@ const modalType =
     <div class="mt-8">
       <AskAICTA />
     </div>
+
+    <!-- Related Articles -->
+    {relatedArticles.length > 0 && (
+      <RelatedArticles articles={relatedArticles} />
+    )}
 
     <!-- Rating System -->
     <div class="mt-12 pt-8 border-t border-gray-200">
