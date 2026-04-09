@@ -18,7 +18,7 @@ const {
   title, 
   description, 
   image, 
-  author = "Expat Savvy Team", 
+  author = "Benjamin Amos Wagner",
   publishDate, 
   modifiedDate = publishDate,
   url = Astro.url.href,
@@ -26,7 +26,7 @@ const {
 } = Astro.props;
 
 // Extract author name correctly
-const authorName = typeof author === 'object' && author !== null ? author.name || "Expat Savvy Team" : author;
+const authorName = typeof author === 'object' && author !== null ? author.name || "Benjamin Amos Wagner" : author;
 
 // Build the BlogPosting schema
 const schema = {
@@ -41,7 +41,14 @@ const schema = {
   "image": image,
   "author": {
     "@type": "Person",
-    "name": authorName
+    "name": authorName,
+    "url": "https://benjaminwagner.ch",
+    "jobTitle": "Founder & Insurance Advisor",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Expat Savvy Switzerland",
+      "url": "https://expat-savvy.ch"
+    }
   },
   "publisher": {
     "@type": "Organization",
